@@ -30,17 +30,18 @@ include_directories(${com.esri.prt.util_INCLUDE_PATH})
 ### build target
 
 if(WIN32)
-	SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DCODECS_EXPORTS")
+	SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DCODECS_MAYA_EXPORTS")
 else()
-	### hacky maya api integration
-	SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DUSEMAYA")
+	### hacky maya api integration, todo: write cmake module
 	include_directories("/usr/autodesk/maya2012-x64/include")
 	link_directories("/usr/autodesk/maya2012-x64/lib")
+
+	SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D_BOOL")
 endif()
 
-list(APPEND SOURCES codecs.cpp)
+list(APPEND SOURCES codecs_maya.cpp)
 
-list(APPEND SOURCES codecs.h)						# msvc sln
+list(APPEND SOURCES codecs_maya.h)						# msvc sln
 SOURCE_GROUP(src REGULAR_EXPRESSION ".*.[h|cpp]")	# msvc sln
 
 #add_subdirectory_source_group(util)

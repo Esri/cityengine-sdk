@@ -5,8 +5,6 @@
  *      Author: shaegler
  */
 
-#ifdef USEMAYA
-
 #include <iostream>
 #include <sstream>
 
@@ -23,9 +21,18 @@
 
 #include "util/StringUtils.h"
 
-#define _BOOL // gcc hack
-#include "maya/MFnMesh.h"
-#include "maya/MFnMeshData.h"
+#include "maya/MDataHandle.h"
+#include "maya/MStatus.h"
+#include "maya/MObject.h"
+#include "maya/MDoubleArray.h"
+#include "maya/MPointArray.h"
+#include "maya/MPoint.h"
+#include "maya/MString.h"
+#include "maya/MFileIO.h"
+#include "maya/MLibrary.h"
+#include "maya/MIOStream.h"
+#include "maya/MGlobal.h"
+#include "maya/MStringArray.h"
 #include "maya/MFloatPoint.h"
 #include "maya/MFloatPointArray.h"
 #include "maya/MDataBlock.h"
@@ -34,11 +41,18 @@
 #include "maya/MDoubleArray.h"
 #include "maya/MLibrary.h"
 #include "maya/MPlug.h"
+#include "maya/MDGModifier.h"
+#include "maya/MSelectionList.h"
+#include "maya/MDagPath.h"
+#include "maya/MFileObject.h"
+
+#include "maya/MFnNurbsSurface.h"
+#include "maya/MFnMesh.h"
+#include "maya/MFnMeshData.h"
 #include "maya/MFnLambertShader.h"
 #include "maya/MFnTransform.h"
 #include "maya/MFnSet.h"
-#include "maya/MDGModifier.h"
-#include "maya/MSelectionList.h"
+#include "maya/MFnPartition.h"
 
 #include "encoder/MayaEncoder.h"
 
@@ -78,7 +92,7 @@ void MayaEncoder::encode(prtspi::IOutputStream* stream, const prtspi::InitialSha
 void MayaEncoder::convertGeometry(prtspi::IOutputStream* stream, prtspi::IContentArray* geometries) {
 	prtspi::Log::trace("--- MayaEncoder::convertGeometry begin");
 
-//	MStatus stat = MLibrary::initialize("MayaEncoder");
+	// maya api tutorial: http://ewertb.soundlinker.com/maya.php
 
 	MFloatPointArray mayaVertices;
 	MIntArray mayaCounts;
@@ -117,48 +131,36 @@ void MayaEncoder::convertGeometry(prtspi::IOutputStream* stream, prtspi::IConten
 //	MFnTransform fnTransform;
 //	MObject oParent = fnTransform.create();
 
-
 	MFnMesh fnMesh;
 	MObject outMesh = fnMesh.create(mayaVertices.length(), mayaCounts.length(), mayaVertices, mayaCounts, mayaConnects, MObject::kNullObj, &returnStatus);
 	prtspi::Log::trace("    created maya output mesh object, error message = %s", returnStatus.errorString().asChar());
 
 	MSelectionList selList;
-	MString toMatch ("initialShadingGroup");
-	MStatus status = selList.add(toMatch );
+	MGlobal::getSelectionListByName( MString( "initialShadingGroup" ), selList );
+	MObject initialSG;
+	selList.getDependNode( 0, initialSG );
 
-	MFnSet fnSet;
-	MObject oSet = fnSet.create((const MSelectionList)selList, MFnSet::kNone, NULL);
-	fnSet.addMember(outMesh);
+	MDagPath meshPath;
+	MDagPath::getAPathTo(outMesh, meshPath);
+	meshPath.extendToShape();
+
+	MFnSet fnSG(initialSG);
+	fnSG.addMember(meshPath);
 
 	MFnLambertShader fnLambert;
 	MObject oLambert = fnLambert.create();
+	MFnLambertShader lambertRed(oLambert);
+	lambertRed.setColor(MColor(1.0, 0.0, 0.0));
 
-	MPlug ss = fnSet.findPlug("ss");
-	MPlug oc = fnLambert.findPlug("outColor");
+	// FIXME: does not yet correctly attach the red material to the poly shape
+	MPlug ss = fnSG.findPlug("ss");
+	MPlug oc = lambertRed.findPlug("outColor");
 	MDGModifier mod;
 	mod.connect(oc,ss);
 	mod.doIt();
 
-	//	MPlug plug = outMesh.findPlug(outMesh.attribute("instObjGroups"), false);
-//	prtspi::Log::trace("    found plug: %s", plug.name().asChar());
-
-//	MObjectArray shaders;
-//	MIntArray indices;
-//	outMesh.getConnectedShaders(0, shaders, indices);
-
-
-
-//	MDataHandle dataHandle;
-//	dataHandle.
-//	dataHandle.set(newOutputData);
-
-	//MFileIO::
-
-	//stream->write((const char*)dataHandle.asAddr(), sizeof(void*));
-
-//	MLibrary::cleanup();
+	MString fullPath = meshPath.fullPathName();
+	stream->write(fullPath.asChar(), fullPath.length());
 
 	prtspi::Log::trace("--- MayaEncoder::convertGeometry done");
 }
-
-#endif

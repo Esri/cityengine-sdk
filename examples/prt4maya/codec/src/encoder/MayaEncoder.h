@@ -5,7 +5,6 @@
  *      Author: shaegler
  */
 
-#ifdef USEMAYA
 #ifndef MAYAENCODER_H_
 #define MAYAENCODER_H_
 
@@ -43,7 +42,5 @@ class MayaEncoderFactory : public prtspi::ExtensionFactory {
 public:
 	MayaEncoder* create(const wchar_t**, const size_t&, const wchar_t**, const size_t&) { return new MayaEncoder(); }
 };
-
-#endif
 
 #endif /* MAYAENCODER_H_ */
