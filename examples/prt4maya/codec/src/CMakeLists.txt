@@ -30,6 +30,10 @@ include_directories(${com.esri.prt.util_INCLUDE_PATH})
 ### build target
 
 if(WIN32)
+    ### hacky maya api integration, todo: write cmake module
+    include_directories("C:/Program Files/Autodesk/Maya2012/include")
+    link_directories("C:/Program Files/Autodesk/Maya2012/lib")
+
 	SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DCODECS_MAYA_EXPORTS")
 else()
 	### hacky maya api integration, todo: write cmake module
