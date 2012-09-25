@@ -65,13 +65,13 @@ MayaEncoder::~MayaEncoder() {
 }
 
 
-void MayaEncoder::encode(prtspi::IOutputStream* stream, const prtspi::InitialShape** initialShapes, size_t initialShapeCount, prtapi::Attributable* options) {
+void MayaEncoder::encode(prtspi::IOutputStream* stream, const prtspi::InitialShape** initialShapes, size_t initialShapeCount, prtspi::AbstractResolveMapPtr am, prtapi::Attributable* options) {
 	prtspi::Log::trace("MayaEncoder:encode: #initial shapes = %d", initialShapeCount);
 
 	prtspi::EncodePreparator* encPrep = prtspi::EncodePreparator::create();
 	for (size_t i = 0; i < initialShapeCount; ++i) {
 		prtspi::IGeometry** occluders = 0;
-		prtspi::ILeafIterator* li = prtspi::ILeafIterator::create(initialShapes[i], occluders, 0);
+		prtspi::ILeafIterator* li = prtspi::ILeafIterator::create(initialShapes[i], am, occluders, 0);
 		for (const prtspi::IShape* shape = li->getNext(); shape != 0; shape = li->getNext()) {
 			encPrep->add(initialShapes[i], shape);
 			prtspi::Log::trace(L"encode leaf shape mat: %ls", shape->getMaterial()->getString(L"name"));
@@ -135,6 +135,7 @@ void MayaEncoder::convertGeometry(prtspi::IOutputStream* stream, prtspi::IConten
 	MObject outMesh = fnMesh.create(mayaVertices.length(), mayaCounts.length(), mayaVertices, mayaCounts, mayaConnects, MObject::kNullObj, &returnStatus);
 	prtspi::Log::trace("    created maya output mesh object, error message = %s", returnStatus.errorString().asChar());
 
+	/*
 	MSelectionList selList;
 	MGlobal::getSelectionListByName( MString( "initialShadingGroup" ), selList );
 	MObject initialSG;
@@ -163,4 +164,7 @@ void MayaEncoder::convertGeometry(prtspi::IOutputStream* stream, prtspi::IConten
 	stream->write(fullPath.asChar(), fullPath.length());
 
 	prtspi::Log::trace("--- MayaEncoder::convertGeometry done");
+	*/
+	MObject* result = new MObject(outMesh);
+	stream->write((uint8_t*)&result, sizeof(result));
 }

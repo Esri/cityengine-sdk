@@ -34,7 +34,7 @@ if(WIN32)
     include_directories("C:/Program Files/Autodesk/Maya2012/include")
     link_directories("C:/Program Files/Autodesk/Maya2012/lib")
 
-	SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DCODECS_MAYA_EXPORTS")
+	SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DCODECS_MAYA_EXPORTS -DNT_PLUGIN")
 else()
 	### hacky maya api integration, todo: write cmake module
 	include_directories("/usr/autodesk/maya2012-x64/include")
@@ -55,7 +55,7 @@ add_subdirectory_source_group(encoder)
 add_library(${PROJECT} SHARED ${SOURCES})
 
 if(WIN32)
-	target_link_libraries(${PROJECT} IPHlpApi Psapi DbgHelp)
+	target_link_libraries(${PROJECT} Foundation)
 endif()
 
 target_link_libraries(${PROJECT} ${PRT_UTIL_LIBRARY} ${PRT_CORE_LIBRARY} ${Boost_LIBRARIES} ${GDAL_LIBRARIES} OpenMaya)
