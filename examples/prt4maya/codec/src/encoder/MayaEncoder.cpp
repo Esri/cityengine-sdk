@@ -57,6 +57,8 @@
 #include "encoder/MayaEncoder.h"
 
 
+#include "util/Timer.h"
+
 MayaEncoder::MayaEncoder() {
 }
 
@@ -66,6 +68,7 @@ MayaEncoder::~MayaEncoder() {
 
 
 void MayaEncoder::encode(prtspi::IOutputStream* stream, const prtspi::InitialShape** initialShapes, size_t initialShapeCount, prtspi::AbstractResolveMapPtr am, prtapi::Attributable* options) {
+	Timer tim;
 	prtspi::Log::trace("MayaEncoder:encode: #initial shapes = %d", initialShapeCount);
 
 	prtspi::EncodePreparator* encPrep = prtspi::EncodePreparator::create();
@@ -78,12 +81,18 @@ void MayaEncoder::encode(prtspi::IOutputStream* stream, const prtspi::InitialSha
 		}
 	}
 
+	const float t1 = tim.stop();
+	tim.start();
+
 	prtspi::IContentArray* geometries = prtspi::IContentArray::create();
 	encPrep->createEncodableGeometries(geometries);
 	convertGeometry(stream, geometries);
 	geometries->destroy();
 
 	encPrep->destroy();
+
+	const float t2 = tim.stop();
+	prtspi::Log::info("MayaEncoder::encode() : preparator %f s, encoding %f s, total %f s", t1, t2, t1+t2);
 
 	prtspi::Log::trace("MayaEncoder::encode done.");
 }
