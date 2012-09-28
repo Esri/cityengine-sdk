@@ -103,9 +103,11 @@ void MayaEncoder::convertGeometry(prtspi::IOutputStream* stream, prtspi::IConten
 
 	// maya api tutorial: http://ewertb.soundlinker.com/maya.php
 
-	MFloatPointArray mayaVertices;
-	MIntArray mayaCounts;
-	MIntArray mayaConnects;
+	MayaData mdata;
+	mdata.vertices = new MFloatPointArray();
+	mdata.counts   = new MIntArray();
+	mdata.connects = new MIntArray();
+	mdata.destroy  = MayaEncoder::destroyMayaData;
 
 	uint32_t base = 0;
 	for (size_t gi = 0, size = geometries->size(); gi < size; ++gi) {
@@ -115,65 +117,30 @@ void MayaEncoder::convertGeometry(prtspi::IOutputStream* stream, prtspi::IConten
 		const double* verts = geo->getVertices();
 		const size_t vertsCount = geo->getVertexCount();
 
-		for (size_t i = 0; i < vertsCount; ++i) {
-			mayaVertices.append(MFloatPoint(verts[3*i], verts[3*i+1], verts[3*i+2]));
-		}
+		for (size_t i = 0; i < vertsCount; ++i)
+			mdata.vertices->append(MFloatPoint(verts[3*i], verts[3*i+1], verts[3*i+2]));
 
 		for (size_t fi = 0; fi < geo->getFaceCount(); ++fi) {
 			const prtspi::IFace* face = geo->getFace(fi);
-			mayaCounts.append(face->getIndexCount());
+			mdata.counts->append(face->getIndexCount());
 
 			const uint32_t* indices = face->getVertexIndices();
 			for (size_t vi = 0; vi < face->getIndexCount(); ++vi)
-				mayaConnects.append(base + indices[vi]);
+				mdata.connects->append(base + indices[vi]);
 		}
 
-		base = mayaVertices.length();
+		base = mdata.vertices->length();
 	}
 
-	prtspi::Log::trace("    mayaVertices.length = %d", mayaVertices.length());
-	prtspi::Log::trace("    mayaCounts.length = %d", mayaCounts.length());
-	prtspi::Log::trace("    mayaConnects.length = %d", mayaConnects.length());
+	prtspi::Log::trace("    mayaVertices.length = %d", mdata.vertices->length());
+	prtspi::Log::trace("    mayaCounts.length   = %d", mdata.counts->length());
+	prtspi::Log::trace("    mayaConnects.length = %d", mdata.connects->length());
 
-	MStatus returnStatus;
+	stream->write((uint8_t*)&mdata, sizeof(MayaData));
+}
 
-//	MFnTransform fnTransform;
-//	MObject oParent = fnTransform.create();
-
-	MFnMesh fnMesh;
-	MObject outMesh = fnMesh.create(mayaVertices.length(), mayaCounts.length(), mayaVertices, mayaCounts, mayaConnects, MObject::kNullObj, &returnStatus);
-	prtspi::Log::trace("    created maya output mesh object, error message = %s", returnStatus.errorString().asChar());
-
-	/*
-	MSelectionList selList;
-	MGlobal::getSelectionListByName( MString( "initialShadingGroup" ), selList );
-	MObject initialSG;
-	selList.getDependNode( 0, initialSG );
-
-	MDagPath meshPath;
-	MDagPath::getAPathTo(outMesh, meshPath);
-	meshPath.extendToShape();
-
-	MFnSet fnSG(initialSG);
-	fnSG.addMember(meshPath);
-
-	MFnLambertShader fnLambert;
-	MObject oLambert = fnLambert.create();
-	MFnLambertShader lambertRed(oLambert);
-	lambertRed.setColor(MColor(1.0, 0.0, 0.0));
-
-	// FIXME: does not yet correctly attach the red material to the poly shape
-	MPlug ss = fnSG.findPlug("ss");
-	MPlug oc = lambertRed.findPlug("outColor");
-	MDGModifier mod;
-	mod.connect(oc,ss);
-	mod.doIt();
-
-	MString fullPath = meshPath.fullPathName();
-	stream->write(fullPath.asChar(), fullPath.length());
-
-	prtspi::Log::trace("--- MayaEncoder::convertGeometry done");
-	*/
-	MObject* result = new MObject(outMesh);
-	stream->write((uint8_t*)&result, sizeof(result));
+void MayaEncoder::destroyMayaData(struct MayaData* mdata) {
+	delete mdata->vertices;
+	delete mdata->counts;
+	delete mdata->connects;
 }

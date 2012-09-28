@@ -16,6 +16,7 @@
 #include "spi/codec/IEncoder.h"
 
 #include "util.h"
+#include "maya_codec.h"
 
 
 class MayaEncoder : public prtspi::IEncoder {
@@ -32,6 +33,7 @@ public:
 	virtual ContentType getContentType() const { return CT_GEOMETRY; }
 	virtual ExtensionType getExtensionType() const { return ET_ENCODER; }
 
+	static void destroyMayaData(struct MayaData* mayaData);
 private:
 	void convertGeometry(prtspi::IOutputStream* stream, prtspi::IContentArray* geometries);
 

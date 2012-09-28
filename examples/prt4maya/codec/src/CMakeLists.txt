@@ -45,7 +45,7 @@ endif()
 
 list(APPEND SOURCES codecs_maya.cpp)
 
-list(APPEND SOURCES codecs_maya.h)						# msvc sln
+list(APPEND SOURCES codecs_maya.h)				    # msvc sln
 SOURCE_GROUP(src REGULAR_EXPRESSION ".*.[h|cpp]")	# msvc sln
 
 #add_subdirectory_source_group(util)
@@ -70,3 +70,5 @@ install(CODE "MESSAGE(\"wiping installation dir\")")
 install(CODE "file(REMOVE_RECURSE ${CMAKE_INSTALL_PREFIX}/lib)")
 
 install(TARGETS ${PROJECT} DESTINATION lib)
+
+install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/maya_codec.h DESTINATION include)
