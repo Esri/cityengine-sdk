@@ -67,7 +67,7 @@ MayaEncoder::~MayaEncoder() {
 }
 
 
-void MayaEncoder::encode(prtspi::IOutputStream* stream, const prtspi::InitialShape** initialShapes, size_t initialShapeCount, prtspi::AbstractResolveMapPtr am, prtapi::Attributable* options) {
+void MayaEncoder::encode(prtspi::IOutputStream* stream, const prtspi::InitialShape** initialShapes, size_t initialShapeCount, prtspi::AbstractResolveMapPtr am, prt::Attributable* options) {
 	Timer tim;
 	prtspi::Log::trace("MayaEncoder:encode: #initial shapes = %d", initialShapeCount);
 
@@ -112,13 +112,12 @@ void MayaEncoder::convertGeometry(prtspi::IOutputStream* stream, prtspi::IConten
 	uint32_t base = 0;
 	for (size_t gi = 0, size = geometries->size(); gi < size; ++gi) {
 		prtspi::IGeometry* geo = (prtspi::IGeometry*)geometries->get(gi);
-		prtspi::Log::trace("    working on geometry %s", geo->getName());
 
 		const double* verts = geo->getVertices();
 		const size_t vertsCount = geo->getVertexCount();
 
 		for (size_t i = 0; i < vertsCount; ++i)
-			mdata.vertices->append(MFloatPoint(verts[3*i], verts[3*i+1], verts[3*i+2]));
+			mdata.vertices->append((float)verts[3*i], (float)verts[3*i+1], (float)verts[3*i+2]);
 
 		for (size_t fi = 0; fi < geo->getFaceCount(); ++fi) {
 			const prtspi::IFace* face = geo->getFace(fi);
