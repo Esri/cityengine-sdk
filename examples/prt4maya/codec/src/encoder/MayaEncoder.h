@@ -25,8 +25,11 @@ public:
 	virtual ~MayaEncoder();
 
 public:
-	virtual void encode(prtspi::IOutputStream* stream, const prtspi::InitialShape** initialShapes, size_t initialShapeCount, prtspi::AbstractResolveMapPtr am, prt::Attributable* options);
-	virtual void encodeContent(prtspi::IOutputStream* stream, const prtspi::IContentArray* content) { UNUSED(stream); UNUSED(content); throw std::runtime_error("not implemented"); }
+	virtual void encode(prtspi::IOutputStream* stream, const prtspi::InitialShape** initialShapes, size_t initialShapeCount,
+			prtspi::AbstractResolveMapPtr am, const prt::Attributable* options);
+	virtual void encodeContent(prtspi::IOutputStream* stream, const prtspi::IContentArray* content) {
+		UNUSED(stream); UNUSED(content); throw std::runtime_error("not implemented");
+	}
 
 public:
 	virtual const wchar_t* getID() const { return L"com.esri.prt.codecs.maya.MayaEncoder"; }

@@ -13,7 +13,7 @@
 #include "maya/MFloatArray.h"
 
 struct MayaMatData {
-	std::string texName;
+	char* texName;
 	int faceCount;
 	bool hasUVs;
 };

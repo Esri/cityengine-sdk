@@ -68,7 +68,9 @@ MayaEncoder::~MayaEncoder() {
 }
 
 
-void MayaEncoder::encode(prtspi::IOutputStream* stream, const prtspi::InitialShape** initialShapes, size_t initialShapeCount, prtspi::AbstractResolveMapPtr am, prt::Attributable* options) {
+void MayaEncoder::encode(prtspi::IOutputStream* stream, const prtspi::InitialShape** initialShapes, size_t initialShapeCount,
+		prtspi::AbstractResolveMapPtr am, const prt::Attributable* options)
+{
 	Timer tim;
 	prtspi::Log::trace("MayaEncoder:encode: #initial shapes = %d", initialShapeCount);
 
@@ -157,10 +159,16 @@ void MayaEncoder::convertGeometry(prtspi::IOutputStream* stream, prtspi::IConten
 
 		mdata.materials[gi].faceCount = geo->getFaceCount();
 		mdata.materials[gi].hasUVs    = tcsCount > 0;
+		mdata.materials[gi].texName   = 0;
 
 		prtspi::IMaterial* mat = geo->getMaterial();
 		if(mat->getTextureArray(L"diffuseMap")->size() > 0) {
-			mdata.materials[gi].texName = StringUtils::toOSNarrowFromOSWide(mat->getTextureArray(L"diffuseMap")->get(0)->getName());
+			prtspi::Log::trace(L"Material %d : name '%s'", gi, mat->getTextureArray(L"diffuseMap")->get(0)->getName());
+//			mdata.materials[gi].texName = StringUtils::toOSNarrowFromOSWide(mat->getTextureArray(L"diffuseMap")->get(0)->getName());
+			mdata.materials[gi].texName = strdup(StringUtils::toOSNarrowFromOSWide(mat->getTextureArray(L"diffuseMap")->get(0)->getName()).c_str());
+		}
+		else {
+			mdata.materials[gi].texName = strdup("");
 		}
 
 		base = mdata.vertices->length();
@@ -231,9 +239,12 @@ void MayaEncoder::convertGeometry(prtspi::IOutputStream* stream, prtspi::IConten
 
 */
 
-//	prtspi::Log::trace("    mayaVertices.length = %d", mdata.vertices->length());
-//	prtspi::Log::trace("    mayaCounts.length   = %d", mdata.counts->length());
-//	prtspi::Log::trace("    mayaConnects.length = %d", mdata.connects->length());
+	prtspi::Log::trace("    mayaVertices.length = %d", mdata.vertices->length());
+	prtspi::Log::trace("    mayaCounts.length   = %d", mdata.counts->length());
+	prtspi::Log::trace("    mayaConnects.length = %d", mdata.connects->length());
+
+
+	prtspi::Log::trace("MayaData: size = %d bytes.",  sizeof(MayaData));
 
 	stream->write((uint8_t*)&mdata, sizeof(MayaData));
 }
@@ -245,6 +256,9 @@ void MayaEncoder::destroyMayaData(struct MayaData* mdata) {
 	delete mdata->tcsU;
 	delete mdata->tcsV;
 	delete mdata->tcConnects;
+
+	for(int i=0; i<mdata->materialCount; i++)
+		free(mdata->materials[i].texName);
 
 	delete[] mdata->materials;
 }
