@@ -10,11 +10,24 @@
 
 #include "maya/MFloatPointArray.h"
 #include "maya/MIntArray.h"
+#include "maya/MFloatArray.h"
+
+struct MayaMatData {
+	std::string texName;
+	int faceCount;
+	bool hasUVs;
+};
 
 struct MayaData {
 	MFloatPointArray* vertices;
 	MIntArray*        counts;
 	MIntArray*        connects;
+	MFloatArray*      tcsU;
+	MFloatArray*      tcsV;
+	MIntArray*        tcConnects;
+
+	MayaMatData*      materials;
+	int               materialCount;
 	void (*destroy)(struct MayaData *);
 };
 
