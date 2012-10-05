@@ -59,6 +59,69 @@
 
 
 #include "util/Timer.h"
+#include "util/Exception.h"
+
+
+#define M_CHECK3(_stat_) {if(MS::kSuccess != _stat_) {throw std::runtime_error(StringUtils::printToString("err:%s %d\n", _stat_.errorString().asChar(), _stat_.statusCode()));}}
+
+// experimental dec shit
+//namespace {
+//	MString findConnectedMeshName(MPlug& plug) {
+//		MStatus stat;
+//		MObject attr = plug.attribute(&stat);
+//		M_CHECK2(stat);
+//
+//		{
+//			MObject mesh = plug.node(&stat);
+//			M_CHECK2(stat);
+//			MFnDependencyNode nodeFn( mesh );
+//			DBG("checking node '%s'\n", nodeFn.name().asChar());
+//		}
+//
+//
+//		MFnTypedAttribute fnTAttr(attr);
+//
+//		DBG("Attr type is %d\n", fnTAttr.attrType());
+//
+//		if(fnTAttr.attrType() == MFnData::kMesh) {
+//			MObject mesh = plug.node(&stat);
+//			M_CHECK2(stat);
+//			MFnDependencyNode nodeFn( mesh );
+//			return nodeFn.name();
+//		}
+//
+//		MPlugArray plugs;
+//		bool isConnected = plug.connectedTo(plugs, false, true, &stat);
+//		M_CHECK2(stat);
+//		DBG("plug is connected: %d; %d plugs\n", isConnected, plugs.length());
+//		for(int i=0; i<plugs.length(); i++) {
+//			MString res = findConnectedMeshName(plugs[i]);
+//			if(res.length() > 0) return res;
+//		}
+//
+//		{
+//			MObject mesh = plug.node(&stat);
+//			M_CHECK2(stat);
+//			MFnDependencyNode nodeFn( mesh );
+//			DBG("plug has %d attributes\n",  nodeFn.attributeCount());
+//			MObject outGeo = nodeFn.attribute("outputGeometry", &stat);
+//			M_CHECK2(stat);
+//			DBG("outputGeometry = 0x%p\n", outGeo);
+//			MFnDependencyNode geoNodeFn( outGeo );
+//			M_CHECK2(stat);
+//			DBG("points to '%s'\n", geoNodeFn.name().asChar());
+//
+//		}
+//
+//
+//		DBG("NO MESH FOUND!\n");
+//		return MString();
+//	}
+//}
+
+
+
+
 
 MayaEncoder::MayaEncoder() {
 }
@@ -69,8 +132,10 @@ MayaEncoder::~MayaEncoder() {
 
 
 void MayaEncoder::encode(prtspi::IOutputStream* stream, const prtspi::InitialShape** initialShapes, size_t initialShapeCount,
-		prtspi::AbstractResolveMapPtr am, const prt::Attributable* options)
+		prtspi::AbstractResolveMapPtr am, const prt::Attributable* options, void* encCxt)
 {
+	if(encCxt == 0) throw(RuntimeErrorST(L"encCtxt null!"));
+
 	Timer tim;
 	prtspi::Log::trace("MayaEncoder:encode: #initial shapes = %d", initialShapeCount);
 
@@ -89,7 +154,7 @@ void MayaEncoder::encode(prtspi::IOutputStream* stream, const prtspi::InitialSha
 
 	prtspi::IContentArray* geometries = prtspi::IContentArray::create();
 	encPrep->createEncodableGeometries(geometries);
-	convertGeometry(stream, geometries);
+	convertGeometry(stream, geometries, *((MayaData*)encCxt));
 	geometries->destroy();
 
 	encPrep->destroy();
@@ -101,26 +166,22 @@ void MayaEncoder::encode(prtspi::IOutputStream* stream, const prtspi::InitialSha
 }
 
 
-void MayaEncoder::convertGeometry(prtspi::IOutputStream* stream, prtspi::IContentArray* geometries) {
+void MayaEncoder::convertGeometry(prtspi::IOutputStream* stream, prtspi::IContentArray* geometries, MayaData& mdata)
+{
+	static bool SETUPMATERIALS = false;
+
 	prtspi::Log::trace("--- MayaEncoder::convertGeometry begin");
 
 	// maya api tutorial: http://ewertb.soundlinker.com/maya.php
 
-	MayaData mdata;
-	mdata.materialCount = geometries->size();
-	mdata.materials     = new MayaMatData[mdata.materialCount];
 
-	mdata.vertices = new MFloatPointArray();
-	mdata.counts   = new MIntArray();
-	mdata.connects = new MIntArray();
+	MFloatPointArray vertices;
+	MIntArray        counts;
+	MIntArray        connects;
 
-	mdata.tcsU       = new MFloatArray();
-	mdata.tcsV       = new MFloatArray();
-	mdata.tcConnects = new MIntArray();
-
-
-	mdata.destroy  = MayaEncoder::destroyMayaData;
-
+	MFloatArray      tcsU;
+	MFloatArray      tcsV;
+	MIntArray        tcConnects;
 
 	uint32_t base = 0;
 	uint32_t tcBase = 0;
@@ -130,135 +191,144 @@ void MayaEncoder::convertGeometry(prtspi::IOutputStream* stream, prtspi::IConten
 		const double* verts = geo->getVertices();
 		const size_t vertsCount = geo->getVertexCount();
 
-		for (size_t i = 0; i < vertsCount; ++i)
-			mdata.vertices->append((float)verts[3*i], (float)verts[3*i+1], (float)verts[3*i+2]);
+		for(size_t i = 0; i < vertsCount; ++i)
+			vertices.append((float)verts[3*i], (float)verts[3*i+1], (float)verts[3*i+2]);
 
-
-		const size_t  tcsCount = geo->getUVCount();
+		const size_t tcsCount = geo->getUVCount();
 		if(tcsCount > 0) {
-			const double* tcs      = geo->getUVs();
+			const double* tcs = geo->getUVs();
 			for(size_t i=0; i<tcsCount; i++) {
-				mdata.tcsU->append(tcs[i*2]);
-				mdata.tcsV->append(tcs[i*2+1]);
+				tcsU.append((float)tcs[i*2]);
+				tcsV.append((float)tcs[i*2+1]);
 			}
 		}
 
-		for (size_t fi = 0; fi < geo->getFaceCount(); ++fi) {
+		for(size_t fi = 0; fi < geo->getFaceCount(); ++fi) {
 			const prtspi::IFace* face = geo->getFace(fi);
-			mdata.counts->append(face->getIndexCount());
+			counts.append((int)face->getIndexCount());
 
 			const uint32_t* indices = face->getVertexIndices();
 			for(size_t vi = 0; vi < face->getIndexCount(); ++vi)
-				mdata.connects->append(base + indices[vi]);
+				connects.append(base + indices[vi]);
 
 			if(face->getUVIndexCount() > 0) {
 				for(size_t vi = 0; vi < face->getIndexCount(); ++vi)
-					mdata.tcConnects->append(tcBase + face->getUVIndices()[vi]);
+					tcConnects.append(tcBase + face->getUVIndices()[vi]);
 			}
 		}
 
-		mdata.materials[gi].faceCount = geo->getFaceCount();
-		mdata.materials[gi].hasUVs    = tcsCount > 0;
-		mdata.materials[gi].texName   = 0;
-
-		prtspi::IMaterial* mat = geo->getMaterial();
-		if(mat->getTextureArray(L"diffuseMap")->size() > 0) {
-			prtspi::Log::trace(L"Material %d : name '%s'", gi, mat->getTextureArray(L"diffuseMap")->get(0)->getName());
-//			mdata.materials[gi].texName = StringUtils::toOSNarrowFromOSWide(mat->getTextureArray(L"diffuseMap")->get(0)->getName());
-			mdata.materials[gi].texName = strdup(StringUtils::toOSNarrowFromOSWide(mat->getTextureArray(L"diffuseMap")->get(0)->getName()).c_str());
-		}
-		else {
-			mdata.materials[gi].texName = strdup("");
-		}
-
-		base = mdata.vertices->length();
-		tcBase = mdata.tcsU->length();
+		base   = vertices.length();
+		tcBase = tcsU.length();
 	}
 
+	// setup mesh
+	MStatus stat;
+	MDataHandle outputHandle = mdata.mData->outputValue(*mdata.mPlug, &stat);
+	M_CHECK3(stat);
+	MObject oMesh = outputHandle.asMesh();
 
+	MFnMeshData dataCreator;
+	MObject newOutputData = dataCreator.create(&stat);
+	M_CHECK3(stat);
 
+	MFnMesh meshFn;
+	oMesh = meshFn.create(
+		vertices.length(),
+		counts.length(),
+		vertices,
+		counts,
+		connects,
+		newOutputData,
+		&stat);
+	M_CHECK3(stat);
 
+	if(SETUPMATERIALS) {
+		// find output mesh name
+		MPlugArray plugs;
+		bool isConnected = mdata.mPlug->connectedTo(plugs, false, true, &stat);
+		M_CHECK3(stat);
+		prtspi::Log::trace("plug is connected: %d; %d plugs\n", isConnected, plugs.length());
+		if(plugs.length() > 0) {
+			//					MString meshName = findConnectedMeshName(plugs[0]);
+			MString meshName = "prtShape1";
 
+			// setup uvs + shader connections
+			if(tcConnects.length() > 0) {
+				MString layerName = "map1";
+				stat = meshFn.setUVs(tcsU, tcsV, &layerName);
+				M_CHECK3(stat);
 
+				prtspi::Log::trace("tcConnect has size %d",  tcConnects.length());
 
+				int uvInd = 0;
+				int curFace = 0;
+				for(size_t gi = 0, size = geometries->size(); gi < size; ++gi) {
+					prtspi::IGeometry* geo = (prtspi::IGeometry*)geometries->get(gi);
 
+					std::string texName;
 
+					prtspi::IMaterial* mat = geo->getMaterial();
+					if(mat->getTextureArray(L"diffuseMap")->size() > 0) {
+						texName = StringUtils::toOSNarrowFromOSWide(mat->getTextureArray(L"diffuseMap")->get(0)->getName());
+					}
 
+					const int faceCount  = geo->getFaceCount();
+					const size_t tcsCount = geo->getUVCount();
+					const bool hasUVs    = tcsCount > 0;
 
+					prtspi::Log::trace("Material %d : hasUVs = %d, faceCount = %d, texName = '%s'\n", gi, hasUVs, faceCount, texName.c_str());
 
+					int startFace = curFace;
 
-/*
+					if(hasUVs) {
+						for(int i=0; i<faceCount; i++) {
+							for(int j=0; j<counts[curFace]; j++) {
+								stat = meshFn.assignUV(curFace, j,  tcConnects[uvInd++], &layerName);
+								M_CHECK3(stat);
+							}
+							curFace++;
+						}
+					}
+					else curFace += faceCount;
 
+					std::string cmd = "createShadingGroup(\"";
+					cmd += texName;
+					cmd += "\")";
+					MString result = MGlobal::executeCommandStringResult(MString(cmd.c_str()), false, false, &stat);
+					prtspi::Log::trace("mel cmd '%s' executed, result = '%s'", cmd.c_str(), result.asChar());
+					M_CHECK3(stat);
 
+					char numbBuf[64];
 
-	for (size_t gi = 0, size = geometries->size(); gi < size; ++gi) {
-		MayaMeshEntry& mEntry = mdata.meshEntries[gi];
-
-		mEntry.vertices   = new MFloatPointArray();
-		mEntry.counts     = new MIntArray();
-		mEntry.connects   = new MIntArray();
-
-		mEntry.tcsU       = new MFloatArray();
-		mEntry.tcsV       = new MFloatArray();
-		mEntry.tcConnects = new MIntArray();
-
-
-
-		prtspi::IGeometry* geo = (prtspi::IGeometry*)geometries->get(gi);
-//		prtspi::Log::trace("    working on geometry %s", geo->getName());
-
-
-		const double* verts = geo->getVertices();
-		const size_t vertsCount = geo->getVertexCount();
-
-		for (size_t i = 0; i < vertsCount; ++i)
-			mEntry.vertices->append(MFloatPoint(verts[3*i], verts[3*i+1], verts[3*i+2]));
-
-
-		const double* tcs      = geo->getUVs();
-		const size_t  tcsCount = geo->getUVCount();
-		for(size_t i=0; i<tcsCount; i++) {
-			mEntry.tcsU->append(tcs[i*2]);
-			mEntry.tcsV->append(tcs[i*2+1]);
-		}
-
-		for (size_t fi = 0; fi < geo->getFaceCount(); ++fi) {
-			const prtspi::IFace* face = geo->getFace(fi);
-			mEntry.counts->append(face->getIndexCount());
-
-			const uint32_t* indices = face->getVertexIndices();
-			for (size_t vi = 0; vi < face->getIndexCount(); ++vi)
-				mEntry.connects->append(indices[vi]);
-
-			if(face->getUVIndexCount() > 0) {
-				for (size_t vi = 0; vi < face->getIndexCount(); ++vi)
-					mEntry.tcConnects->append(face->getUVIndices()[vi]);
+					cmd = "sets -forceElement ";
+					cmd += result.asChar();
+					cmd += " ";
+					//							cmd += nodeFn.name().asChar();
+					cmd += meshName.asChar();
+					cmd += ".f[";
+					cmd += itoa(startFace, numbBuf, 10);
+					cmd += ":";
+					cmd += itoa((curFace-1), numbBuf, 10);
+					cmd +="];";
+					stat = MGlobal::executeCommandOnIdle(MString(cmd.c_str()));
+					prtspi::Log::trace("mel cmd '%s' scheduled", cmd.c_str());
+					M_CHECK3(stat);
+				}
 			}
-		}
-	}
-
-*/
-
-	prtspi::Log::trace("    mayaVertices.length = %d", mdata.vertices->length());
-	prtspi::Log::trace("    mayaCounts.length   = %d", mdata.counts->length());
-	prtspi::Log::trace("    mayaConnects.length = %d", mdata.connects->length());
+		} // if > 0 connections
+	} // if SETUPMATERIALS
 
 
-	prtspi::Log::trace("MayaData: size = %d bytes.",  sizeof(MayaData));
+	stat = outputHandle.set(newOutputData);
+	M_CHECK3(stat);
 
-	stream->write((uint8_t*)&mdata, sizeof(MayaData));
+
+	prtspi::Log::trace("    mayaVertices.length = %d", vertices.length());
+	prtspi::Log::trace("    mayaCounts.length   = %d", counts.length());
+	prtspi::Log::trace("    mayaConnects.length = %d", connects.length());
+
+
+
+//	stream->write((uint8_t*)&mdata, sizeof(MayaData));
 }
 
-void MayaEncoder::destroyMayaData(struct MayaData* mdata) {
-	delete mdata->vertices;
-	delete mdata->counts;
-	delete mdata->connects;
-	delete mdata->tcsU;
-	delete mdata->tcsV;
-	delete mdata->tcConnects;
-
-	for(int i=0; i<mdata->materialCount; i++)
-		free(mdata->materials[i].texName);
-
-	delete[] mdata->materials;
-}

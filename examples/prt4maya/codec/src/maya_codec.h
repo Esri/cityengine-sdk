@@ -8,27 +8,12 @@
 #ifndef MAYA_CODEC_H_
 #define MAYA_CODEC_H_
 
-#include "maya/MFloatPointArray.h"
-#include "maya/MIntArray.h"
-#include "maya/MFloatArray.h"
-
-struct MayaMatData {
-	char* texName;
-	int faceCount;
-	bool hasUVs;
-};
+class MPlug;
+class MDataBlock;
 
 struct MayaData {
-	MFloatPointArray* vertices;
-	MIntArray*        counts;
-	MIntArray*        connects;
-	MFloatArray*      tcsU;
-	MFloatArray*      tcsV;
-	MIntArray*        tcConnects;
-
-	MayaMatData*      materials;
-	int               materialCount;
-	void (*destroy)(struct MayaData *);
+	const MPlug*  mPlug;
+	MDataBlock*   mData;
 };
 
 #endif /* MAYA_CODEC_H_ */

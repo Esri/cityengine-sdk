@@ -26,7 +26,8 @@ public:
 
 public:
 	virtual void encode(prtspi::IOutputStream* stream, const prtspi::InitialShape** initialShapes, size_t initialShapeCount,
-			prtspi::AbstractResolveMapPtr am, const prt::Attributable* options);
+			prtspi::AbstractResolveMapPtr am, const prt::Attributable* options, void* encCxt);
+
 	virtual void encodeContent(prtspi::IOutputStream* stream, const prtspi::IContentArray* content) {
 		UNUSED(stream); UNUSED(content); throw std::runtime_error("not implemented");
 	}
@@ -38,7 +39,7 @@ public:
 
 	static void destroyMayaData(struct MayaData* mayaData);
 private:
-	void convertGeometry(prtspi::IOutputStream* stream, prtspi::IContentArray* geometries);
+	void convertGeometry(prtspi::IOutputStream* stream, prtspi::IContentArray* geometries, MayaData& mdata);
 
 };
 

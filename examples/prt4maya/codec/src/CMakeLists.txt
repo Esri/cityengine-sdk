@@ -55,7 +55,7 @@ add_subdirectory_source_group(encoder)
 add_library(${PROJECT} SHARED ${SOURCES})
 
 if(WIN32)
-	target_link_libraries(${PROJECT} Foundation)
+	target_link_libraries(${PROJECT} Foundation IPHlpApi Psapi DbgHelp)
 endif()
 
 target_link_libraries(${PROJECT} ${PRT_UTIL_LIBRARY} ${PRT_CORE_LIBRARY} ${Boost_LIBRARIES} ${GDAL_LIBRARIES} OpenMaya)
