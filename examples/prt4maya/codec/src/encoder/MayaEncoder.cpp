@@ -168,7 +168,7 @@ void MayaEncoder::encode(prtspi::IOutputStream* stream, const prtspi::InitialSha
 
 void MayaEncoder::convertGeometry(prtspi::IOutputStream* stream, prtspi::IContentArray* geometries, MayaData& mdata)
 {
-	static bool SETUPMATERIALS = false;
+	static bool SETUPMATERIALS = true;
 
 	prtspi::Log::trace("--- MayaEncoder::convertGeometry begin");
 
