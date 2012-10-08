@@ -298,20 +298,14 @@ void MayaEncoder::convertGeometry(prtspi::IOutputStream* stream, prtspi::IConten
 					prtspi::Log::trace("mel cmd '%s' executed, result = '%s'", cmd.c_str(), result.asChar());
 					M_CHECK3(stat);
 
-					char numbBuf[64];
+					std::ostringstream cmd2;
 
-					cmd = "sets -forceElement ";
-					cmd += result.asChar();
-					cmd += " ";
+					cmd2 << "sets -forceElement " << result.asChar() << " ";
 					//							cmd += nodeFn.name().asChar();
-					cmd += meshName.asChar();
-					cmd += ".f[";
-					cmd += itoa(startFace, numbBuf, 10);
-					cmd += ":";
-					cmd += itoa((curFace-1), numbBuf, 10);
-					cmd +="];";
-					stat = MGlobal::executeCommandOnIdle(MString(cmd.c_str()));
-					prtspi::Log::trace("mel cmd '%s' scheduled", cmd.c_str());
+					cmd2 << meshName.asChar();
+					cmd2 << ".f[" << startFace << ":" << (curFace-1) << "];";
+					stat = MGlobal::executeCommandOnIdle(MString(cmd2.str().c_str()));
+					prtspi::Log::trace("mel cmd '%s' scheduled", cmd2.str().c_str());
 					M_CHECK3(stat);
 				}
 			}
