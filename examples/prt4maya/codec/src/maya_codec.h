@@ -8,12 +8,17 @@
 #ifndef MAYA_CODEC_H_
 #define MAYA_CODEC_H_
 
-class MPlug;
-class MDataBlock;
+#include "maya/MIntArray.h"
+#include "maya/MStringArray.h"
+#include "maya/MPlug.h"
+#include "maya/MDataBlock.h"
+
 
 struct MayaData {
 	const MPlug*  mPlug;
 	MDataBlock*   mData;
+	MStringArray* mShadingGroups;
+	MIntArray*    mShadingRanges;
 };
 
 #endif /* MAYA_CODEC_H_ */

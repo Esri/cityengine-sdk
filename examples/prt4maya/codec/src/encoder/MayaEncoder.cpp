@@ -243,6 +243,9 @@ void MayaEncoder::convertGeometry(prtspi::IOutputStream* stream, prtspi::IConten
 	M_CHECK3(stat);
 
 	if(SETUPMATERIALS) {
+		mdata.mShadingGroups->clear();
+		mdata.mShadingRanges->clear();
+
 		// find output mesh name
 		MPlugArray plugs;
 		bool isConnected = mdata.mPlug->connectedTo(plugs, false, true, &stat);
@@ -296,16 +299,11 @@ void MayaEncoder::convertGeometry(prtspi::IOutputStream* stream, prtspi::IConten
 					cmd += "\")";
 					MString result = MGlobal::executeCommandStringResult(MString(cmd.c_str()), false, false, &stat);
 					prtspi::Log::trace("mel cmd '%s' executed, result = '%s'", cmd.c_str(), result.asChar());
-					M_CHECK3(stat);
 
-					std::ostringstream cmd2;
+					mdata.mShadingGroups->append(result);
+					mdata.mShadingRanges->append(startFace);
+					mdata.mShadingRanges->append(curFace -1);
 
-					cmd2 << "sets -forceElement " << result.asChar() << " ";
-					//							cmd += nodeFn.name().asChar();
-					cmd2 << meshName.asChar();
-					cmd2 << ".f[" << startFace << ":" << (curFace-1) << "];";
-					stat = MGlobal::executeCommandOnIdle(MString(cmd2.str().c_str()));
-					prtspi::Log::trace("mel cmd '%s' scheduled", cmd2.str().c_str());
 					M_CHECK3(stat);
 				}
 			}
