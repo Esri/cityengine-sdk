@@ -59,6 +59,7 @@
 
 
 #include "util/Timer.h"
+#include "util/URIUtils.h"
 #include "util/Exception.h"
 
 
@@ -132,8 +133,9 @@ MayaEncoder::~MayaEncoder() {
 
 
 void MayaEncoder::encode(prtspi::IOutputStream* stream, const prtspi::InitialShape** initialShapes, size_t initialShapeCount,
-		prtspi::AbstractResolveMapPtr am, const prt::Attributable* options, void* encCxt)
-{
+		prtspi::AbstractResolveMapPtr am_, const prt::Attributable* options, void* encCxt) {
+	prtspi::AbstractResolveMapPtr am = am_; // ->toFileURIs();
+
 	if(encCxt == 0) throw(RuntimeErrorST(L"encCtxt null!"));
 
 	Timer tim;
@@ -154,7 +156,7 @@ void MayaEncoder::encode(prtspi::IOutputStream* stream, const prtspi::InitialSha
 
 	prtspi::IContentArray* geometries = prtspi::IContentArray::create();
 	encPrep->createEncodableGeometries(geometries);
-	convertGeometry(stream, geometries, *((MayaData*)encCxt));
+	convertGeometry(am, stream, geometries, *((MayaData*)encCxt));
 	geometries->destroy();
 
 	encPrep->destroy();
@@ -166,7 +168,7 @@ void MayaEncoder::encode(prtspi::IOutputStream* stream, const prtspi::InitialSha
 }
 
 
-void MayaEncoder::convertGeometry(prtspi::IOutputStream* stream, prtspi::IContentArray* geometries, MayaData& mdata)
+void MayaEncoder::convertGeometry(prtspi::AbstractResolveMapPtr am, prtspi::IOutputStream* stream, prtspi::IContentArray* geometries, MayaData& mdata)
 {
 	static bool SETUPMATERIALS = true;
 
@@ -246,15 +248,11 @@ void MayaEncoder::convertGeometry(prtspi::IOutputStream* stream, prtspi::IConten
 		mdata.mShadingGroups->clear();
 		mdata.mShadingRanges->clear();
 
-		// find output mesh name
 		MPlugArray plugs;
 		bool isConnected = mdata.mPlug->connectedTo(plugs, false, true, &stat);
 		M_CHECK3(stat);
 		prtspi::Log::trace("plug is connected: %d; %d plugs\n", isConnected, plugs.length());
 		if(plugs.length() > 0) {
-			//					MString meshName = findConnectedMeshName(plugs[0]);
-			MString meshName = "prtShape1";
-
 			// setup uvs + shader connections
 			if(tcConnects.length() > 0) {
 				MString layerName = "map1";
@@ -268,18 +266,19 @@ void MayaEncoder::convertGeometry(prtspi::IOutputStream* stream, prtspi::IConten
 				for(size_t gi = 0, size = geometries->size(); gi < size; ++gi) {
 					prtspi::IGeometry* geo = (prtspi::IGeometry*)geometries->get(gi);
 
-					std::string texName;
+					MString texName;
 
 					prtspi::IMaterial* mat = geo->getMaterial();
 					if(mat->getTextureArray(L"diffuseMap")->size() > 0) {
-						texName = StringUtils::toOSNarrowFromOSWide(mat->getTextureArray(L"diffuseMap")->get(0)->getName());
+						std::wstring uri(mat->getTextureArray(L"diffuseMap")->get(0)->getName());
+						texName = MString(uri.substr(wcslen(URIUtils::SCHEME_FILE)).c_str());
 					}
 
-					const int faceCount  = geo->getFaceCount();
+					const int faceCount   = (int)geo->getFaceCount();
 					const size_t tcsCount = geo->getUVCount();
-					const bool hasUVs    = tcsCount > 0;
+					const bool hasUVs     = tcsCount > 0;
 
-					prtspi::Log::trace("Material %d : hasUVs = %d, faceCount = %d, texName = '%s'\n", gi, hasUVs, faceCount, texName.c_str());
+					prtspi::Log::trace("Material %d : hasUVs = %d, faceCount = %d, texName = '%s'\n", gi, hasUVs, faceCount, texName.asChar());
 
 					int startFace = curFace;
 
@@ -294,15 +293,17 @@ void MayaEncoder::convertGeometry(prtspi::IOutputStream* stream, prtspi::IConten
 					}
 					else curFace += faceCount;
 
-					std::string cmd = "createShadingGroup(\"";
-					cmd += texName;
-					cmd += "\")";
-					MString result = MGlobal::executeCommandStringResult(MString(cmd.c_str()), false, false, &stat);
-					prtspi::Log::trace("mel cmd '%s' executed, result = '%s'", cmd.c_str(), result.asChar());
+					if(curFace - 1 > startFace) {
+						MString cmd("createShadingGroup(\"");
+						cmd += texName;
+						cmd += "\")";
+						MString result = MGlobal::executeCommandStringResult(cmd, false, false, &stat);
+						prtspi::Log::trace("mel cmd '%s' executed, result = '%s'", cmd.asChar(), result.asChar());
 
-					mdata.mShadingGroups->append(result);
-					mdata.mShadingRanges->append(startFace);
-					mdata.mShadingRanges->append(curFace -1);
+						mdata.mShadingGroups->append(result);
+						mdata.mShadingRanges->append(startFace);
+						mdata.mShadingRanges->append(curFace - 1);
+					}
 
 					M_CHECK3(stat);
 				}
@@ -318,9 +319,9 @@ void MayaEncoder::convertGeometry(prtspi::IOutputStream* stream, prtspi::IConten
 	prtspi::Log::trace("    mayaVertices.length = %d", vertices.length());
 	prtspi::Log::trace("    mayaCounts.length   = %d", counts.length());
 	prtspi::Log::trace("    mayaConnects.length = %d", connects.length());
+}
 
+void MayaEncoder::unpackRPK(std::wstring rpkPath) {
 
-
-//	stream->write((uint8_t*)&mdata, sizeof(MayaData));
 }
 
