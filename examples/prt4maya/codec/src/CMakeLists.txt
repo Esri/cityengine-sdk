@@ -1,13 +1,13 @@
 cmake_minimum_required(VERSION 2.8)
 cmake_policy(SET CMP0015 NEW)
 
-include(../../com.esri.prt.core/cmake/common.cmake)
-
 
 ### project definition
 
 set(PROJECT com.esri.prt.codecs.maya)
 project(${PROJECT})
+
+include(../../com.esri.prt.core/cmake/common.cmake)
 
 
 ### external dependencies
