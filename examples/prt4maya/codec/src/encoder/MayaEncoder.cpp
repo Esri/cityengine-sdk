@@ -66,65 +66,6 @@
 
 #define M_CHECK3(_stat_) {if(MS::kSuccess != _stat_) {throw std::runtime_error(StringUtils::printToString("err:%s %d\n", _stat_.errorString().asChar(), _stat_.statusCode()));}}
 
-// experimental dec shit
-//namespace {
-//	MString findConnectedMeshName(MPlug& plug) {
-//		MStatus stat;
-//		MObject attr = plug.attribute(&stat);
-//		M_CHECK2(stat);
-//
-//		{
-//			MObject mesh = plug.node(&stat);
-//			M_CHECK2(stat);
-//			MFnDependencyNode nodeFn( mesh );
-//			DBG("checking node '%s'\n", nodeFn.name().asChar());
-//		}
-//
-//
-//		MFnTypedAttribute fnTAttr(attr);
-//
-//		DBG("Attr type is %d\n", fnTAttr.attrType());
-//
-//		if(fnTAttr.attrType() == MFnData::kMesh) {
-//			MObject mesh = plug.node(&stat);
-//			M_CHECK2(stat);
-//			MFnDependencyNode nodeFn( mesh );
-//			return nodeFn.name();
-//		}
-//
-//		MPlugArray plugs;
-//		bool isConnected = plug.connectedTo(plugs, false, true, &stat);
-//		M_CHECK2(stat);
-//		DBG("plug is connected: %d; %d plugs\n", isConnected, plugs.length());
-//		for(int i=0; i<plugs.length(); i++) {
-//			MString res = findConnectedMeshName(plugs[i]);
-//			if(res.length() > 0) return res;
-//		}
-//
-//		{
-//			MObject mesh = plug.node(&stat);
-//			M_CHECK2(stat);
-//			MFnDependencyNode nodeFn( mesh );
-//			DBG("plug has %d attributes\n",  nodeFn.attributeCount());
-//			MObject outGeo = nodeFn.attribute("outputGeometry", &stat);
-//			M_CHECK2(stat);
-//			DBG("outputGeometry = 0x%p\n", outGeo);
-//			MFnDependencyNode geoNodeFn( outGeo );
-//			M_CHECK2(stat);
-//			DBG("points to '%s'\n", geoNodeFn.name().asChar());
-//
-//		}
-//
-//
-//		DBG("NO MESH FOUND!\n");
-//		return MString();
-//	}
-//}
-
-
-
-
-
 MayaEncoder::MayaEncoder() {
 }
 
@@ -132,10 +73,9 @@ MayaEncoder::MayaEncoder() {
 MayaEncoder::~MayaEncoder() {
 }
 
-
 void MayaEncoder::encode(prtspi::IOutputStream* stream, const prtspi::InitialShape** initialShapes, size_t initialShapeCount,
 		prtspi::AbstractResolveMapPtr am, const prt::Attributable* options, void* encCxt) {
-	am = am->toFileURIs();
+	//am = am->toFileURIs();
 
 	if(encCxt == 0) throw(RuntimeErrorST(L"encCtxt null!"));
 
