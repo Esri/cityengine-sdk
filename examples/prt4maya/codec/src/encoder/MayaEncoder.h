@@ -36,8 +36,11 @@ public:
 	virtual const wchar_t* getID() const { return L"com.esri.prt.codecs.maya.MayaEncoder"; }
 	virtual ContentType getContentType() const { return CT_GEOMETRY; }
 	virtual ExtensionType getExtensionType() const { return ET_ENCODER; }
+	virtual const wchar_t* getMIMEType() const { return L"geometry/maya"; }
+
 
 	static void destroyMayaData(struct MayaData* mayaData);
+
 private:
 	void convertGeometry(prtspi::AbstractResolveMapPtr am, prtspi::IOutputStream* stream, prtspi::IContentArray* geometries, MayaData& mdata);
 	void unpackRPK(std::wstring rpkPath);
@@ -46,6 +49,7 @@ private:
 
 class MayaEncoderFactory : public prtspi::ExtensionFactory {
 public:
+	virtual const wchar_t* getMIMEType() const { return L"geometry/maya"; }
 	MayaEncoder* create(const wchar_t**, const size_t&, const wchar_t**, const size_t&) { return new MayaEncoder(); }
 };
 

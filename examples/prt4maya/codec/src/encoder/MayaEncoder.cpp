@@ -74,7 +74,8 @@ MayaEncoder::~MayaEncoder() {
 }
 
 void MayaEncoder::encode(prtspi::IOutputStream* stream, const prtspi::InitialShape** initialShapes, size_t initialShapeCount,
-		prtspi::AbstractResolveMapPtr am, const prt::Attributable* options, void* encCxt) {
+		prtspi::AbstractResolveMapPtr am, const prt::Attributable* options, void* encCxt)
+{
 	//am = am->toFileURIs();
 
 	if(encCxt == 0) throw(RuntimeErrorST(L"encCtxt null!"));
