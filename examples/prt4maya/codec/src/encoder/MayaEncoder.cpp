@@ -12,8 +12,9 @@
 #include <boost/filesystem/operations.hpp>
 #include <boost/filesystem/path.hpp>
 
-#include "api/prtapi.h"
 #include "spi/base/Log.h"
+
+#include "api/prtapi.h"
 #include "spi/base/IGeometry.h"
 #include "spi/base/IShape.h"
 #include "spi/base/ILeafIterator.h"
@@ -81,7 +82,7 @@ void MayaEncoder::encode(prtspi::IOutputStream* stream, const prtspi::InitialSha
 	if(encCxt == 0) throw(RuntimeErrorST(L"encCtxt null!"));
 
 	Timer tim;
-	prtspi::Log::trace("MayaEncoder:encode: #initial shapes = %d", initialShapeCount);
+	log_trace("MayaEncoder:encode: #initial shapes = %d", initialShapeCount);
 
 	prtspi::EncodePreparator* encPrep = prtspi::EncodePreparator::create();
 	for (size_t i = 0; i < initialShapeCount; ++i) {
@@ -89,7 +90,7 @@ void MayaEncoder::encode(prtspi::IOutputStream* stream, const prtspi::InitialSha
 		prtspi::ILeafIterator* li = prtspi::ILeafIterator::create(initialShapes[i], am, occluders, 0);
 		for (const prtspi::IShape* shape = li->getNext(); shape != 0; shape = li->getNext()) {
 			encPrep->add(initialShapes[i], shape);
-//			prtspi::Log::trace(L"encode leaf shape mat: %ls", shape->getMaterial()->getString(L"name"));
+//			log_trace(L"encode leaf shape mat: %ls", shape->getMaterial()->getString(L"name"));
 		}
 	}
 
@@ -104,9 +105,9 @@ void MayaEncoder::encode(prtspi::IOutputStream* stream, const prtspi::InitialSha
 	encPrep->destroy();
 
 	const float t2 = tim.stop();
-	prtspi::Log::info("MayaEncoder::encode() : preparator %f s, encoding %f s, total %f s", t1, t2, t1+t2);
+	log_info("MayaEncoder::encode() : preparator %f s, encoding %f s, total %f s", t1, t2, t1+t2);
 
-	prtspi::Log::trace("MayaEncoder::encode done.");
+	log_trace("MayaEncoder::encode done.");
 }
 
 
@@ -114,7 +115,7 @@ void MayaEncoder::convertGeometry(prtspi::AbstractResolveMapPtr am, prtspi::IOut
 {
 	static bool SETUPMATERIALS = true;
 
-	prtspi::Log::trace("--- MayaEncoder::convertGeometry begin");
+	log_trace("--- MayaEncoder::convertGeometry begin");
 
 	// maya api tutorial: http://ewertb.soundlinker.com/maya.php
 
@@ -193,7 +194,7 @@ void MayaEncoder::convertGeometry(prtspi::AbstractResolveMapPtr am, prtspi::IOut
 		MPlugArray plugs;
 		bool isConnected = mdata.mPlug->connectedTo(plugs, false, true, &stat);
 		M_CHECK3(stat);
-		prtspi::Log::trace("plug is connected: %d; %d plugs\n", isConnected, plugs.length());
+		log_trace("plug is connected: %d; %d plugs\n", isConnected, plugs.length());
 		if(plugs.length() > 0) {
 			// setup uvs + shader connections
 			if(tcConnects.length() > 0) {
@@ -201,7 +202,7 @@ void MayaEncoder::convertGeometry(prtspi::AbstractResolveMapPtr am, prtspi::IOut
 				stat = meshFn.setUVs(tcsU, tcsV, &layerName);
 				M_CHECK3(stat);
 
-				prtspi::Log::trace("tcConnect has size %d",  tcConnects.length());
+				log_trace("tcConnect has size %d",  tcConnects.length());
 
 				int uvInd = 0;
 				int curFace = 0;
@@ -220,7 +221,7 @@ void MayaEncoder::convertGeometry(prtspi::AbstractResolveMapPtr am, prtspi::IOut
 					const size_t tcsCount = geo->getUVCount();
 					const bool hasUVs     = tcsCount > 0;
 
-					prtspi::Log::trace("Material %d : hasUVs = %d, faceCount = %d, texName = '%s'\n", gi, hasUVs, faceCount, texName.asChar());
+					log_trace("Material %d : hasUVs = %d, faceCount = %d, texName = '%s'\n", gi, hasUVs, faceCount, texName.asChar());
 
 					int startFace = curFace;
 
@@ -240,7 +241,7 @@ void MayaEncoder::convertGeometry(prtspi::AbstractResolveMapPtr am, prtspi::IOut
 						cmd += texName;
 						cmd += "\")";
 						MString result = MGlobal::executeCommandStringResult(cmd, false, false, &stat);
-						prtspi::Log::trace("mel cmd '%s' executed, result = '%s'", cmd.asChar(), result.asChar());
+						log_trace("mel cmd '%s' executed, result = '%s'", cmd.asChar(), result.asChar());
 
 						mdata.mShadingGroups->append(result);
 						mdata.mShadingRanges->append(startFace);
@@ -258,9 +259,9 @@ void MayaEncoder::convertGeometry(prtspi::AbstractResolveMapPtr am, prtspi::IOut
 	M_CHECK3(stat);
 
 
-	prtspi::Log::trace("    mayaVertices.length = %d", vertices.length());
-	prtspi::Log::trace("    mayaCounts.length   = %d", counts.length());
-	prtspi::Log::trace("    mayaConnects.length = %d", connects.length());
+	log_trace("    mayaVertices.length = %d", vertices.length());
+	log_trace("    mayaCounts.length   = %d", counts.length());
+	log_trace("    mayaConnects.length = %d", connects.length());
 }
 
 void MayaEncoder::unpackRPK(std::wstring rpkPath) {

@@ -15,9 +15,9 @@ extern "C" {
 
 
 CODECS_MAYA_EXPORTS_API void registerExtensionFactories(prtspi::IExtensionManager* manager) {
-	prtspi::Log::trace("codecs maya library: registerExtensionFactories begin");
+	log_trace("codecs maya library: registerExtensionFactories begin");
 	manager->addFactory(new MayaEncoderFactory());
-	prtspi::Log::trace("codecs maya library: registerExtensionFactories done");
+	log_trace("codecs maya library: registerExtensionFactories done");
 }
 
 
