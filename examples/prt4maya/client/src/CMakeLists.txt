@@ -13,6 +13,7 @@ set(CMAKE_MODULE_PATH
 	"${CMAKE_CURRENT_SOURCE_DIR}/../../com.esri.prt.core/cmake"
 	"${CMAKE_CURRENT_SOURCE_DIR}/../../com.esri.prt.codecs/cmake"
 	"${CMAKE_CURRENT_SOURCE_DIR}/../../com.esri.prt.codecs.maya/cmake"
+	"${CMAKE_CURRENT_SOURCE_DIR}/../../com.esri.prt.adaptors.fs/cmake"
 	${CMAKE_MODULE_PATH}
 )
 
@@ -24,6 +25,9 @@ include_directories(${com.esri.prt.codecs_INCLUDE_PATH})
 
 find_package(com.esri.prt.codecs.maya)
 include_directories(${com.esri.prt.codecs.maya_INCLUDE_PATH})
+
+find_package(com.esri.prt.adaptors.fs)
+include_directories(${com.esri.prt.adaptors.fs_INCLUDE_PATH})
 
 # hacky maya api integration, todo: write cmake module
 if(WIN32)
