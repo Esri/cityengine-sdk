@@ -11,12 +11,13 @@
 #include <iostream>
 #include <stdexcept>
 
+#include "util.h"
+
 #include "spi/base/IStream.h"
 #include "spi/extension/ExtensionFactory.h"
 #include "spi/codec/IEncoder.h"
 
-#include "util.h"
-#include "maya_codec.h"
+#include "IMayaData.h"
 
 
 class MayaEncoder : public prtspi::IEncoder {
@@ -40,7 +41,7 @@ public:
 	static void destroyMayaData(struct MayaData* mayaData);
 
 private:
-	void convertGeometry(prtspi::AbstractResolveMapPtr am, prtspi::IOutputStream* stream, prtspi::IContentArray* geometries, MayaData& mdata);
+	void convertGeometry(prtspi::AbstractResolveMapPtr am, prtspi::IOutputStream* stream, prtspi::IContentArray* geometries, IMayaData* mdata);
 	void unpackRPK(std::wstring rpkPath);
 };
 

@@ -29,20 +29,6 @@ include_directories(${com.esri.prt.util_INCLUDE_PATH})
 
 ### build target
 
-if(WIN32)
-    ### hacky maya api integration, todo: write cmake module
-    include_directories("C:/Program Files/Autodesk/Maya2012/include")
-    link_directories("C:/Program Files/Autodesk/Maya2012/lib")
-
-	SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DCODECS_MAYA_EXPORTS -DNT_PLUGIN")
-else()
-	### hacky maya api integration, todo: write cmake module
-	include_directories("/usr/autodesk/maya2012-x64/include")
-	link_directories("/usr/autodesk/maya2012-x64/lib")
-
-	SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D_BOOL")
-endif()
-
 list(APPEND SOURCES codecs_maya.cpp)
 
 list(APPEND SOURCES codecs_maya.h)				    # msvc sln
@@ -58,7 +44,7 @@ if(WIN32)
 	target_link_libraries(${PROJECT} Foundation IPHlpApi Psapi DbgHelp)
 endif()
 
-target_link_libraries(${PROJECT} ${PRT_UTIL_LIBRARY} ${PRT_CORE_LIBRARY} ${Boost_LIBRARIES} ${GDAL_LIBRARIES} OpenMaya)
+target_link_libraries(${PROJECT} ${PRT_UTIL_LIBRARY} ${PRT_CORE_LIBRARY} ${Boost_LIBRARIES} ${GDAL_LIBRARIES})
 
 #set_target_properties(${PROJECT} PROPERTIES VERSION 1.0.0 SOVERSION 1)
 set_target_properties(${PROJECT} PROPERTIES LINKER_LANGUAGE CXX)
@@ -71,4 +57,4 @@ install(CODE "file(REMOVE_RECURSE ${CMAKE_INSTALL_PREFIX}/lib)")
 
 install(TARGETS ${PROJECT} DESTINATION lib)
 
-install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/maya_codec.h DESTINATION include)
+install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/encoder/IMayaData.h DESTINATION include)

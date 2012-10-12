@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include <sstream>
+#include <vector>
 
 #define BOOST_FILESYSTEM_VERSION 3
 #include <boost/filesystem/operations.hpp>
@@ -22,50 +23,14 @@
 #include "spi/extension/ExtensionManager.h"
 
 #include "util/StringUtils.h"
-
-#include "maya/MDataHandle.h"
-#include "maya/MStatus.h"
-#include "maya/MObject.h"
-#include "maya/MDoubleArray.h"
-#include "maya/MPointArray.h"
-#include "maya/MPoint.h"
-#include "maya/MString.h"
-#include "maya/MFileIO.h"
-#include "maya/MLibrary.h"
-#include "maya/MIOStream.h"
-#include "maya/MGlobal.h"
-#include "maya/MStringArray.h"
-#include "maya/MFloatArray.h"
-#include "maya/MFloatPoint.h"
-#include "maya/MFloatPointArray.h"
-#include "maya/MDataBlock.h"
-#include "maya/MDataHandle.h"
-#include "maya/MIntArray.h"
-#include "maya/MDoubleArray.h"
-#include "maya/MLibrary.h"
-#include "maya/MPlug.h"
-#include "maya/MDGModifier.h"
-#include "maya/MSelectionList.h"
-#include "maya/MDagPath.h"
-#include "maya/MFileObject.h"
-
-#include "maya/MFnNurbsSurface.h"
-#include "maya/MFnMesh.h"
-#include "maya/MFnMeshData.h"
-#include "maya/MFnLambertShader.h"
-#include "maya/MFnTransform.h"
-#include "maya/MFnSet.h"
-#include "maya/MFnPartition.h"
-
-#include "encoder/MayaEncoder.h"
-
-
 #include "util/Timer.h"
 #include "util/URIUtils.h"
 #include "util/Exception.h"
 
+#include "IMayaData.h"
 
-#define M_CHECK3(_stat_) {if(MS::kSuccess != _stat_) {throw std::runtime_error(StringUtils::printToString("err:%s %d\n", _stat_.errorString().asChar(), _stat_.statusCode()));}}
+#include "encoder/MayaEncoder.h"
+
 
 MayaEncoder::MayaEncoder() {
 }
@@ -74,9 +39,9 @@ MayaEncoder::MayaEncoder() {
 MayaEncoder::~MayaEncoder() {
 }
 
+
 void MayaEncoder::encode(prtspi::IOutputStream* stream, const prtspi::InitialShape** initialShapes, size_t initialShapeCount,
-		prtspi::AbstractResolveMapPtr am, const prt::Attributable* options, void* encCxt)
-{
+		prtspi::AbstractResolveMapPtr am, const prt::Attributable* options, void* encCxt) {
 	am = am->toFileURIs();
 
 	if(encCxt == 0) throw(RuntimeErrorST(L"encCtxt null!"));
@@ -99,7 +64,7 @@ void MayaEncoder::encode(prtspi::IOutputStream* stream, const prtspi::InitialSha
 
 	prtspi::IContentArray* geometries = prtspi::IContentArray::create();
 	encPrep->createEncodableGeometries(geometries);
-	convertGeometry(am, stream, geometries, *((MayaData*)encCxt));
+	convertGeometry(am, stream, geometries, ((IMayaData*)encCxt));
 	geometries->destroy();
 
 	encPrep->destroy();
@@ -111,22 +76,13 @@ void MayaEncoder::encode(prtspi::IOutputStream* stream, const prtspi::InitialSha
 }
 
 
-void MayaEncoder::convertGeometry(prtspi::AbstractResolveMapPtr am, prtspi::IOutputStream* stream, prtspi::IContentArray* geometries, MayaData& mdata)
-{
-	static bool SETUPMATERIALS = true;
+void MayaEncoder::convertGeometry(prtspi::AbstractResolveMapPtr am, prtspi::IOutputStream* stream, prtspi::IContentArray* geometries, IMayaData* mdata) {
+	std::vector<double> vertices;
+	std::vector<int> counts;
+	std::vector<int> connects;
 
-	log_trace("--- MayaEncoder::convertGeometry begin");
-
-	// maya api tutorial: http://ewertb.soundlinker.com/maya.php
-
-
-	MFloatPointArray vertices;
-	MIntArray        counts;
-	MIntArray        connects;
-
-	MFloatArray      tcsU;
-	MFloatArray      tcsV;
-	MIntArray        tcConnects;
+	std::vector<float> tcsU, tcsV;
+	std::vector<int> tcConnects;
 
 	uint32_t base = 0;
 	uint32_t tcBase = 0;
@@ -136,133 +92,41 @@ void MayaEncoder::convertGeometry(prtspi::AbstractResolveMapPtr am, prtspi::IOut
 		const double* verts = geo->getVertices();
 		const size_t vertsCount = geo->getVertexCount();
 
-		for(size_t i = 0; i < vertsCount; ++i)
-			vertices.append((float)verts[3*i], (float)verts[3*i+1], (float)verts[3*i+2]);
+		for(size_t i = 0; i < vertsCount*3; ++i)
+			vertices.push_back(verts[i]);
 
 		const size_t tcsCount = geo->getUVCount();
 		if(tcsCount > 0) {
 			const double* tcs = geo->getUVs();
 			for(size_t i=0; i<tcsCount; i++) {
-				tcsU.append((float)tcs[i*2]);
-				tcsV.append((float)tcs[i*2+1]);
+				tcsU.push_back((float)tcs[i*2]);
+				tcsV.push_back((float)tcs[i*2+1]);
 			}
 		}
 
 		for(size_t fi = 0; fi < geo->getFaceCount(); ++fi) {
 			const prtspi::IFace* face = geo->getFace(fi);
-			counts.append((int)face->getIndexCount());
+			counts.push_back(face->getIndexCount());
 
 			const uint32_t* indices = face->getVertexIndices();
 			for(size_t vi = 0; vi < face->getIndexCount(); ++vi)
-				connects.append(base + indices[vi]);
+				connects.push_back(base + indices[vi]);
 
 			if(face->getUVIndexCount() > 0) {
 				for(size_t vi = 0; vi < face->getIndexCount(); ++vi)
-					tcConnects.append(tcBase + face->getUVIndices()[vi]);
+					tcConnects.push_back(tcBase + face->getUVIndices()[vi]);
 			}
 		}
 
-		base   = vertices.length();
-		tcBase = tcsU.length();
+		base   = vertices.size() / 3;
+		tcBase = tcsU.size();
 	}
 
-	// setup mesh
-	MStatus stat;
-	MDataHandle outputHandle = mdata.mData->outputValue(*mdata.mPlug, &stat);
-	M_CHECK3(stat);
-	MObject oMesh = outputHandle.asMesh();
-
-	MFnMeshData dataCreator;
-	MObject newOutputData = dataCreator.create(&stat);
-	M_CHECK3(stat);
-
-	MFnMesh meshFn;
-	oMesh = meshFn.create(
-		vertices.length(),
-		counts.length(),
-		vertices,
-		counts,
-		connects,
-		newOutputData,
-		&stat);
-	M_CHECK3(stat);
-
-	if(SETUPMATERIALS) {
-		mdata.mShadingGroups->clear();
-		mdata.mShadingRanges->clear();
-
-		MPlugArray plugs;
-		bool isConnected = mdata.mPlug->connectedTo(plugs, false, true, &stat);
-		M_CHECK3(stat);
-		log_trace("plug is connected: %d; %d plugs\n", isConnected, plugs.length());
-		if(plugs.length() > 0) {
-			// setup uvs + shader connections
-			if(tcConnects.length() > 0) {
-				MString layerName = "map1";
-				stat = meshFn.setUVs(tcsU, tcsV, &layerName);
-				M_CHECK3(stat);
-
-				log_trace("tcConnect has size %d",  tcConnects.length());
-
-				int uvInd = 0;
-				int curFace = 0;
-				for(size_t gi = 0, size = geometries->size(); gi < size; ++gi) {
-					prtspi::IGeometry* geo = (prtspi::IGeometry*)geometries->get(gi);
-
-					MString texName;
-
-					prtspi::IMaterial* mat = geo->getMaterial();
-					if(mat->getTextureArray(L"diffuseMap")->size() > 0) {
-						std::wstring uri(mat->getTextureArray(L"diffuseMap")->get(0)->getName());
-						texName = MString(uri.substr(wcslen(URIUtils::SCHEME_FILE)).c_str());
-					}
-
-					const int faceCount   = (int)geo->getFaceCount();
-					const size_t tcsCount = geo->getUVCount();
-					const bool hasUVs     = tcsCount > 0;
-
-					log_trace("Material %d : hasUVs = %d, faceCount = %d, texName = '%s'\n", gi, hasUVs, faceCount, texName.asChar());
-
-					int startFace = curFace;
-
-					if(hasUVs) {
-						for(int i=0; i<faceCount; i++) {
-							for(int j=0; j<counts[curFace]; j++) {
-								stat = meshFn.assignUV(curFace, j,  tcConnects[uvInd++], &layerName);
-								M_CHECK3(stat);
-							}
-							curFace++;
-						}
-					}
-					else curFace += faceCount;
-
-					if(curFace - 1 > startFace) {
-						MString cmd("createShadingGroup(\"");
-						cmd += texName;
-						cmd += "\")";
-						MString result = MGlobal::executeCommandStringResult(cmd, false, false, &stat);
-						log_trace("mel cmd '%s' executed, result = '%s'", cmd.asChar(), result.asChar());
-
-						mdata.mShadingGroups->append(result);
-						mdata.mShadingRanges->append(startFace);
-						mdata.mShadingRanges->append(curFace - 1);
-					}
-
-					M_CHECK3(stat);
-				}
-			}
-		} // if > 0 connections
-	} // if SETUPMATERIALS
-
-
-	stat = outputHandle.set(newOutputData);
-	M_CHECK3(stat);
-
-
-	log_trace("    mayaVertices.length = %d", vertices.length());
-	log_trace("    mayaCounts.length   = %d", counts.length());
-	log_trace("    mayaConnects.length = %d", connects.length());
+	mdata->setVertices(&vertices[0], vertices.size());
+	mdata->setFaces(&counts[0], counts.size(), &connects[0], connects.size(), 0, 0);
+	mdata->createMesh();
 }
+
 
 void MayaEncoder::unpackRPK(std::wstring rpkPath) {
 
