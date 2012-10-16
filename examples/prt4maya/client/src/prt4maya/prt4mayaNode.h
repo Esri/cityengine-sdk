@@ -14,7 +14,6 @@
 #include <maya/MPlug.h>
 #include <maya/MDataBlock.h>
 #include <maya/MDataHandle.h>
-#include <maya/MFnPlugin.h>
 #include <maya/MAngle.h>
 #include <maya/MFnUnitAttribute.h>
 #include <maya/MFnStringData.h>
@@ -47,7 +46,7 @@
 #include <WinNT.h>
 #endif
 
-#define PRT_TYPE_ID 0x8000b
+#define PRT_TYPE_ID 0x8666b
 
 static const MString  NAME_RULE_PKG("Rule_Package");
 static const MString  NAME_RULE_FILE("Rule_File");

@@ -45,14 +45,11 @@ if(WIN32)
   # todo
 else()
     # build settings required by maya
-    # NOTE: make sure to compile with gcc 4.1.2 (for maya 2012)
-#    ADD_DEFINITIONS(-D_BOOL)
-#	ADD_DEFINITIONS(-DREQUIRE_IOSTREAM)
-	
+    # NOTE: make sure to compile the maya plugin with gcc 4.1.2 (for maya 2012/2013)
 	set(CMAKE_C_FLAGS "-Wall -Wextra -DBits64_ -m64 -DUNIX -D_BOOL -DLINUX -DFUNCPROTO -D_GNU_SOURCE -DLINUX_64 -fPIC -fno-strict-aliasing -DREQUIRE_IOSTREAM -Wno-deprecated -O3 -Wall -Wno-multichar -Wno-comment -Wno-sign-compare -funsigned-char -Wno-reorder -fno-gnu-keywords -ftemplate-depth-25 -pthread")
     set(CMAKE_CXX_FLAGS "${CMAKE_C_FLAGS} -Wno-deprecated -fno-gnu-keywords")
-	set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,-Bsymbolic -shared")
-	set(CMAKE_MODULE_LINKER_FLAGS "${CMAKE_MODULE_LINKER_FLAGS} -Wl,-Bsymbolic -shared")
+	set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Bsymbolic -Bsymbolic-functions")
+	set(CMAKE_MODULE_LINKER_FLAGS "${CMAKE_MODULE_LINKER_FLAGS} -Bsymbolic -Bsymbolic-functions")
 endif()
 
 
@@ -97,14 +94,16 @@ endfunction()
 # --- build target ------------------------------------------------------------
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
-SET(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
+set(CMAKE_INSTALL_RPATH_USE_LINK_PATH FALSE)
+set(CMAKE_SKIP_RPATH FALSE)
+set(CMAKE_INSTALL_RPATH ".")
 
 SOURCE_GROUP(src REGULAR_EXPRESSION ".*.[h|cpp]")	# msvc sln
 add_subdirectory_source_group(prt4maya)
 add_subdirectory_source_group(wrapper)
 
 add_library(${PROJECT} SHARED ${SOURCES})
-target_link_libraries(${PROJECT} ${PRT_CORE_LIBRARIES} OpenMaya Foundation)
+target_link_libraries(${PROJECT} Foundation OpenMaya ${PRT_CORE_LIBRARIES} )
 
 set_target_properties(${PROJECT} PROPERTIES LINKER_LANGUAGE CXX)
 
