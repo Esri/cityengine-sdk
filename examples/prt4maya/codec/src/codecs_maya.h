@@ -11,7 +11,7 @@
 #ifdef _WIN32
 #define CODECS_MAYA_EXPORTS_API __declspec(dllexport)
 #else
-#define CODECS_MAYA_EXPORTS_API
+#define CODECS_MAYA_EXPORTS_API __attribute__ ((visibility ("default")))
 #endif
 
 #endif /* CODECS_MAYA_H_ */
