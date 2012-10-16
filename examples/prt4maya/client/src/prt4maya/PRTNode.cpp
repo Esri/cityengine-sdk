@@ -1,5 +1,7 @@
 #include <sstream>
 
+#include <maya/MFnPlugin.h>
+
 #include <maya/MFnTransform.h>
 #include <maya/MFnSet.h>
 #include <maya/MFnPhongShader.h>
@@ -113,7 +115,7 @@ MStatus PRTNode::compute( const MPlug& plug, MDataBlock& data ) {
 }
 
 void* PRTNode::creator() {
-	std::cout << "god damn it" << std::endl;
+	std::cout << "creating prt node..." << std::endl;
 	return new PRTNode();
 }
 
@@ -123,24 +125,24 @@ const wchar_t SEPERATOR = L'\\';
 const wchar_t SEPERATOR = L'/';
 #endif
 
-#ifndef _MSC_VER
-#include <dlfcn.h>
-#include <cstdio>
-
-// HACK
-std::wstring libPath;
-
-__attribute__((constructor))
-void on_load(void) {
-	Dl_info dl_info;
-	dladdr((void *)on_load, &dl_info);
-	fprintf(stderr, "prt4maya: module %s loaded\n", dl_info.dli_fname);
-
-	std::string tmp(dl_info.dli_fname);
-	libPath = std::wstring(tmp.length(), L' ');
-	std::copy(tmp.begin(), tmp.end(), libPath.begin());
-}
-#endif
+//#ifndef _MSC_VER
+//#include <dlfcn.h>
+//#include <cstdio>
+//
+//// HACK
+//std::wstring libPath;
+//
+//__attribute__((constructor))
+//void on_load(void) {
+//	Dl_info dl_info;
+//	dladdr((void *)on_load, &dl_info);
+//	fprintf(stderr, "prt4maya: module %s loaded\n", dl_info.dli_fname);
+//
+//	std::string tmp(dl_info.dli_fname);
+//	libPath = std::wstring(tmp.length(), L' ');
+//	std::copy(tmp.begin(), tmp.end(), libPath.begin());
+//}
+//#endif
 
 std::wstring getPluginRoot() {
 #ifdef _MSC_VER
@@ -163,7 +165,7 @@ std::wstring getPluginRoot() {
 
 	return root;
 #else
-	return libPath.substr(0, libPath.find_last_of(SEPERATOR));
+	return std::wstring(L"/fasthome/shaegler/runtimeapi/com.esri.prt.clients.maya/install"); //libPath.substr(0, libPath.find_last_of(SEPERATOR));
 #endif
 }
 
@@ -384,8 +386,9 @@ MStatus initializePlugin( MObject obj ){
 MStatus uninitializePlugin( MObject obj) {
 	MFnPlugin plugin( obj );
 
-	M_CHECK(plugin.deregisterNode(PRTNode::id));
+	M_CHECK(plugin.deregisterCommand("prtMateirals"));
 	M_CHECK(plugin.deregisterCommand("prtAttrs"));
+	M_CHECK(plugin.deregisterNode(PRTNode::id));
 
 	return MS::kSuccess;
 }

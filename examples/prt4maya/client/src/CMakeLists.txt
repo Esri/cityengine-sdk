@@ -96,7 +96,7 @@ endfunction()
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_INSTALL_RPATH_USE_LINK_PATH FALSE)
 set(CMAKE_SKIP_RPATH FALSE)
-set(CMAKE_INSTALL_RPATH ".")
+SET(CMAKE_INSTALL_RPATH "\$ORIGIN/")
 
 SOURCE_GROUP(src REGULAR_EXPRESSION ".*.[h|cpp]")	# msvc sln
 add_subdirectory_source_group(prt4maya)
