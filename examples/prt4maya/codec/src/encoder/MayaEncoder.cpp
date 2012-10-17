@@ -39,9 +39,9 @@ MayaEncoder::MayaEncoder() {
 MayaEncoder::~MayaEncoder() {
 }
 
-
-void MayaEncoder::encode(prtspi::IOutputStream* stream, const prtspi::InitialShape** initialShapes, size_t initialShapeCount,
-		prtspi::AbstractResolveMapPtr am, const prt::Attributable* options, void* encCxt) {
+void MayaEncoder::encode(prtspi::IOutputStream* stream, const prt::InitialShape** initialShapes, size_t initialShapeCount,
+		prtspi::AbstractResolveMapPtr am, const prt::Attributable* options, void* encCxt)
+{
 	am = am->toFileURIs();
 
 	if(encCxt == 0) throw(RuntimeErrorST(L"encCtxt null!"));
@@ -54,7 +54,7 @@ void MayaEncoder::encode(prtspi::IOutputStream* stream, const prtspi::InitialSha
 		prtspi::IGeometry** occluders = 0;
 		prtspi::ILeafIterator* li = prtspi::ILeafIterator::create(initialShapes[i], am, occluders, 0);
 		for (const prtspi::IShape* shape = li->getNext(); shape != 0; shape = li->getNext()) {
-			encPrep->add(initialShapes[i], shape);
+			encPrep->add(/*initialShapes[i],*/ shape);
 //			log_trace(L"encode leaf shape mat: %ls", shape->getMaterial()->getString(L"name"));
 		}
 	}

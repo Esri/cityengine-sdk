@@ -11,6 +11,7 @@
 #include <iostream>
 #include <stdexcept>
 
+#include "api/APIInitialShape.h"
 #include "util.h"
 
 #include "spi/base/IStream.h"
@@ -26,7 +27,7 @@ public:
 	virtual ~MayaEncoder();
 
 public:
-	virtual void encode(prtspi::IOutputStream* stream, const prtspi::InitialShape** initialShapes, size_t initialShapeCount,
+	virtual void encode(prtspi::IOutputStream* stream, const prt::InitialShape** initialShapes, size_t initialShapeCount,
 			prtspi::AbstractResolveMapPtr am, const prt::Attributable* options, void* encCxt);
 
 	virtual void encodeContent(prtspi::IOutputStream* stream, const prtspi::IContentArray* content) {
