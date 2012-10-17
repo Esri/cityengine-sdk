@@ -238,9 +238,9 @@ MStatus PRTAttrs::updateRuleFiles(MFnDependencyNode & node, MString & rulePkg) {
 	prtNode->destroyEnums();
 
 	MStringArray ruleFiles;
-	if(prt::ProceduralRT::getResolveMap(path.c_str(), &prtNode->resolveMap) == prt::PRT_OK) {
-		const wchar_t** keys   = prtNode->resolveMap->getKeys();
-		const size_t    nKeys  = prtNode->resolveMap->getKeysSize();
+	if(prt::ProceduralRT::getResolveMap(path.c_str(), &prtNode->resolveMap) == prt::STATUS_OK) {
+		size_t nKeys;
+		const wchar_t** keys   = prtNode->resolveMap->getKeys(&nKeys);
 		std::wstring    sClass(L".class");
 		std::wstring    sCGB(L".cgb");
 		for(size_t k = 0; k < nKeys; k++) {
@@ -273,7 +273,7 @@ MStatus PRTAttrs::updateStartRules(MFnDependencyNode & node, MStringArray & rule
 	std::vector<const prt::Entry*> noArgRules;
 
 	const prt::RuleFileInfo* info = 0;
-	if(prt::ProceduralRT::createRuleFileInfo(prtNode->resolveMap->getString(ruleFiles[0].asWChar()), &info) == prt::PRT_OK) {
+	if(prt::ProceduralRT::createRuleFileInfo(prtNode->resolveMap->getString(ruleFiles[0].asWChar()), &info) == prt::STATUS_OK) {
 		for(size_t r = 0; r < info->getNumRules(); r++) {
 			if(info->getRule(r)->getNumParameters() > 0) continue;
 			bool startRule = false;
@@ -308,14 +308,14 @@ MStatus PRTAttrs::updateStartRules(MFnDependencyNode & node, MStringArray & rule
 			prtNode->generateAttrs = 0;
 		}
 
-		prt::AttributableBuilder* aBuilder = prt::AttributableBuilder::create();
+		prt::AttributeMapBuilder* aBuilder = prt::AttributeMapBuilder::create();
 
 		aBuilder->setString(L"ruleFile",  ruleFiles[0].asWChar());
 		aBuilder->setString(L"startRule", startRuleList[0].asWChar());
 
 		updateAttributes(node, aBuilder, info);
 
-		prtNode->generateAttrs = aBuilder->createAttributable();
+		prtNode->generateAttrs = aBuilder->createAttributeMap();
 		aBuilder->destroy();
 	}
 
@@ -374,7 +374,7 @@ static const size_t 	UnitQuad_indexCount      = 4;
 static const uint32_t	UnitQuad_faceCounts[]    = { 4 };
 static const size_t 	UnitQuad_faceCountsCount = 1;
 
-MStatus PRTAttrs::updateAttributes(MFnDependencyNode & node, prt::AttributableBuilder* aBuilder, const prt::RuleFileInfo* info) {
+MStatus PRTAttrs::updateAttributes(MFnDependencyNode & node, prt::AttributeMapBuilder* aBuilder, const prt::RuleFileInfo* info) {
 	MStatus           stat;
 	MStatus           stat2;
 	MFnNumericData    numericData;
@@ -382,8 +382,8 @@ MStatus PRTAttrs::updateAttributes(MFnDependencyNode & node, prt::AttributableBu
 	MFnStringData     attrDefaultStr;
 	PRTNode*          prtNode = (PRTNode*)node.userNode();
 
-	prt::Attributable* attrs = aBuilder->createAttributable();
-	prt::InitialShape* shape = prt::InitialShape::create(
+	prt::AttributeMap* attrs = aBuilder->createAttributeMap();
+	const prt::InitialShape* shape = prt::InitialShape::create(
 			UnitQuad_vertices, 
 			UnitQuad_vertexCount, 
 			UnitQuad_indices, 
@@ -404,8 +404,7 @@ MStatus PRTAttrs::updateAttributes(MFnDependencyNode & node, prt::AttributableBu
 					if(!(wcscmp(an->getName(), L"@Range")))
 						e = new PRTEnum(prtNode, an);
 				}
-				bool value;
-				prt::ProceduralRT::evalBool(shape, prtNode->resolveMap, info->getAttribute(i)->getName(), &value);
+				bool value = prt::ProceduralRT::evalBool(shape, prtNode->resolveMap, info->getAttribute(i)->getName());
 
 				if(e) {
 					M_CHECK(addEnumParameter(node, attr, name, value, e));
@@ -427,8 +426,7 @@ MStatus PRTAttrs::updateAttributes(MFnDependencyNode & node, prt::AttributableBu
 							e = new PRTEnum(prtNode, an);
 					}
 				}
-				double value;
-				prt::ProceduralRT::evalFloat(shape, prtNode->resolveMap, info->getAttribute(i)->getName(), &value);
+				double value = prt::ProceduralRT::evalFloat(shape, prtNode->resolveMap, info->getAttribute(i)->getName());
 
 				if(e) {
 					M_CHECK(addEnumParameter(node, attr, name, value, e));
@@ -462,8 +460,9 @@ MStatus PRTAttrs::updateAttributes(MFnDependencyNode & node, prt::AttributableBu
 						}
 					}
 				}
+				size_t valueSize = 4095;
 				wchar_t* value = new wchar_t[4096];
-				prt::ProceduralRT::evalStr(shape, prtNode->resolveMap, info->getAttribute(i)->getName(), value, 4095);
+				value = prt::ProceduralRT::evalStr(shape, prtNode->resolveMap, info->getAttribute(i)->getName(), value, &valueSize);
 
 				MString mvalue(value);
 				if(e) {

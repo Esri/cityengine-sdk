@@ -108,9 +108,9 @@ public:
 	MObject         startRule;
 
 	std::wstring       lRulePkg;
-	prt::Attributable* resolveMap;
-	prt::Attributable* generateAttrs;
-	prt::Attributable* generateOpts;
+	prt::AttributeMap* resolveMap;
+	prt::AttributeMap* generateAttrs;
+	prt::AttributeMap* generateOpts;
 
 	void                  destroyEnums();
 	const PRTEnum *       findEnum(const MObject & attr) const;
@@ -145,7 +145,7 @@ private:
 	MStatus         addParameter(MFnDependencyNode & node, MObject & attr ,  MFnAttribute& tAttr);
 	MStatus         updateRuleFiles(MFnDependencyNode & node, MString & rulePkg);
 	MStatus         updateStartRules(MFnDependencyNode & node, MStringArray & ruleFiles);
-	MStatus         updateAttributes(MFnDependencyNode & node, prt::AttributableBuilder* aBuilder, const prt::RuleFileInfo* info);
+	MStatus         updateAttributes(MFnDependencyNode & node, prt::AttributeMapBuilder* aBuilder, const prt::RuleFileInfo* info);
 	static MString  longName(const MString & attrName);
 	static MString  briefName(const MString & attrName);
 };

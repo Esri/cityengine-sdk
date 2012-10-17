@@ -33,12 +33,11 @@ void MayaData::setFaces(int* counts, size_t countsSize, int* connects, size_t co
 		mConnects.append(connects[i]);
 }
 
+// maya api tutorial: http://ewertb.soundlinker.com/maya.php
 void MayaData::createMesh() {
 	static bool SETUPMATERIALS = false;
 
-//	prtspi::Log::trace("--- MayaEncoder::convertGeometry begin");
-
-	// maya api tutorial: http://ewertb.soundlinker.com/maya.php
+	std::cout << "--- MayaData::convertGeometry begin" << std::endl;
 
 	// setup mesh
 	MStatus stat;
@@ -61,9 +60,9 @@ void MayaData::createMesh() {
 		&stat);
 	//M_CHECK3(stat);
 
-//	if(SETUPMATERIALS) {
-//		mShadingGroups->clear();
-//		mShadingRanges->clear();
+	if(SETUPMATERIALS) {
+		mShadingGroups->clear();
+		mShadingRanges->clear();
 //
 //		MPlugArray plugs;
 //		bool isConnected = mPlug->connectedTo(plugs, false, true, &stat);
@@ -126,15 +125,15 @@ void MayaData::createMesh() {
 //				}
 //			}
 //		} // if > 0 connections
-//	} // if SETUPMATERIALS
+	} // if SETUPMATERIALS
 
 
 	stat = outputHandle.set(newOutputData);
 	//M_CHECK3(stat);
 
 
-//	prtspi::Log::trace("    mayaVertices.length = %d", vertices.length());
-//	prtspi::Log::trace("    mayaCounts.length   = %d", counts.length());
-//	prtspi::Log::trace("    mayaConnects.length = %d", connects.length());
+	printf("    mayaVertices.length = %d", mVertices.length());
+	printf("    mayaCounts.length   = %d", mCounts.length());
+	printf("    mayaConnects.length = %d", mConnects.length());
 }
 

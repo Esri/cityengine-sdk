@@ -23,8 +23,8 @@ const char* filename(const char* path) {
 MTypeId PRTNode::id(PRT_TYPE_ID);
 
 PRTNode::PRTNode() :  resolveMap(0), generateAttrs(0), generateOpts(0), enums(0), hasMaterials(false) {
-	prt::AttributableBuilder* oBuilder = prt::AttributableBuilder::create();
-	generateOpts  = oBuilder->createAttributable();
+	prt::AttributeMapBuilder* oBuilder = prt::AttributeMapBuilder::create();
+	generateOpts  = oBuilder->createAttributeMap();
 	oBuilder->destroy();
 }
 
@@ -91,7 +91,7 @@ MStatus PRTNode::compute( const MPlug& plug, MDataBlock& data ) {
 		MayaData mdata(&plug, &data, &shadingGroups, &shadingRanges);
 
 		prtspi::BufferOutputStream* out   = prtspi::BufferOutputStream::create(L"-");
-		prt::InitialShape*          shape = prt::InitialShape::create(va, vertices.length() * 3, ia, pconnect.length(), ca, pcounts.length(), generateAttrs);
+		const prt::InitialShape*          shape = prt::InitialShape::create(va, vertices.length() * 3, ia, pconnect.length(), ca, pcounts.length(), generateAttrs);
 		prt::ProceduralRT::generate(out, &shape, 1, resolveMap, L"com.esri.prt.codecs.maya.MayaEncoder", generateOpts, &mdata);
 
 		// TODO: Error handling
@@ -184,11 +184,11 @@ MStatus PRTNode::initialize() {
 	configFiles[0] = config.c_str();
 	DBGL("Config file: %ls\n", configFiles[0]);
 
-	prt::PRTResult result = prt::ProceduralRT::init(root.c_str(), configFiles, 1, prt::LOG_TRACE);
+	prt::PRTStatus status = prt::ProceduralRT::init(root.c_str(), configFiles, 1, prt::LOG_WARNING);
 
 	delete [] configFiles;
 
-	if(result != prt::PRT_OK)
+	if(status != prt::STATUS_OK)
 		return MS::kFailure;
 
 	MFnTypedAttribute   typedFn;
@@ -270,7 +270,7 @@ MStatus PRTNode::updateAttributes() {
 	int count = (int)fNode.attributeCount(&stat);
 	M_CHECK(stat);
 
-	prt::AttributableBuilder* aBuilder = prt::AttributableBuilder::create();
+	prt::AttributeMapBuilder* aBuilder = prt::AttributeMapBuilder::create();
 
 	for(int i = 0; i < count; i++) {
 		MObject attr = fNode.attribute(i, &stat);
@@ -345,7 +345,7 @@ MStatus PRTNode::updateAttributes() {
 	aBuilder->setString(L"startRule", getStrParameter(startRule, dummy).asWChar());
 
 	generateAttrs->destroy();
-	generateAttrs = aBuilder->createAttributable();
+	generateAttrs = aBuilder->createAttributeMap();
 
 	aBuilder->destroy();
 
