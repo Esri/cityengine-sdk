@@ -40,7 +40,7 @@ MayaEncoder::~MayaEncoder() {
 }
 
 void MayaEncoder::encode(prtspi::IOutputStream* stream, const prt::InitialShape** initialShapes, size_t initialShapeCount,
-		prtspi::AbstractResolveMapPtr am, const prt::Attributable* options, void* encCxt)
+		prtspi::AbstractResolveMapPtr am, const prt::AttributeMap* options, void* encCxt)
 {
 	am = am->toFileURIs();
 
