@@ -27,8 +27,8 @@ public:
 	virtual ~MayaEncoder();
 
 public:
-	virtual void encode(prtspi::IOutputStream* stream, const prt::InitialShape** initialShapes, size_t initialShapeCount,
-			prtspi::AbstractResolveMapPtr am, const prt::AttributeMap* options, void* encCxt);
+	virtual void encode(const prt::InitialShape** initialShapes, size_t initialShapeCount, prtspi::AbstractResolveMapPtr am,
+			const prt::AttributeMap* options, prt::OutputHandler* const outputHandler);
 
 	virtual void encodeContent(prtspi::IOutputStream* stream, const prtspi::IContentArray* content) {
 		UNUSED(stream); UNUSED(content); throw std::runtime_error("not implemented");
@@ -42,7 +42,7 @@ public:
 	static void destroyMayaData(struct MayaData* mayaData);
 
 private:
-	void convertGeometry(prtspi::AbstractResolveMapPtr am, prtspi::IOutputStream* stream, prtspi::IContentArray* geometries, IMayaData* mdata);
+	void convertGeometry(prtspi::AbstractResolveMapPtr am, prtspi::IContentArray* geometries, IMayaData* mdata);
 	void unpackRPK(std::wstring rpkPath);
 };
 

@@ -30,7 +30,7 @@
 #include "IMayaData.h"
 
 #include "encoder/MayaEncoder.h"
-
+#include "spi/base/SPIException.h"
 
 MayaEncoder::MayaEncoder() {
 }
@@ -39,12 +39,13 @@ MayaEncoder::MayaEncoder() {
 MayaEncoder::~MayaEncoder() {
 }
 
-void MayaEncoder::encode(prtspi::IOutputStream* stream, const prt::InitialShape** initialShapes, size_t initialShapeCount,
-		prtspi::AbstractResolveMapPtr am, const prt::AttributeMap* options, void* encCxt)
+void MayaEncoder::encode(const prt::InitialShape** initialShapes, size_t initialShapeCount,
+		prtspi::AbstractResolveMapPtr am, const prt::AttributeMap* options, prt::OutputHandler* const outputHandler)
 {
 	am = am->toFileURIs();
 
-	if(encCxt == 0) throw(RuntimeErrorST(L"encCtxt null!"));
+	IMayaData* oh = dynamic_cast<IMayaData*>(outputHandler);
+	if(oh == 0) throw(prtspi::StatusException(prt::STATUS_ILLEGAL_OUTPUT_HANDLER));
 
 	Timer tim;
 	log_trace("MayaEncoder:encode: #initial shapes = %d", initialShapeCount);
@@ -64,7 +65,7 @@ void MayaEncoder::encode(prtspi::IOutputStream* stream, const prt::InitialShape*
 
 	prtspi::IContentArray* geometries = prtspi::IContentArray::create();
 	encPrep->createEncodableGeometries(geometries);
-	convertGeometry(am, stream, geometries, ((IMayaData*)encCxt));
+	convertGeometry(am, geometries, oh);
 	geometries->destroy();
 
 	encPrep->destroy();
@@ -76,7 +77,7 @@ void MayaEncoder::encode(prtspi::IOutputStream* stream, const prt::InitialShape*
 }
 
 
-void MayaEncoder::convertGeometry(prtspi::AbstractResolveMapPtr am, prtspi::IOutputStream* stream, prtspi::IContentArray* geometries, IMayaData* mdata) {
+void MayaEncoder::convertGeometry(prtspi::AbstractResolveMapPtr am, prtspi::IContentArray* geometries, IMayaData* mdata) {
 	std::vector<double> vertices;
 	std::vector<int> counts;
 	std::vector<int> connects;

@@ -1,7 +1,9 @@
 #ifndef IMAYA_DATA_H_
 #define IMAYA_DATA_H_
 
-class IMayaData {
+#include "api/OutputHandler.h"
+
+class IMayaData : public prt::OutputHandler {
 public:
 	virtual ~IMayaData() { }
 
