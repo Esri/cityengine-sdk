@@ -1,9 +1,0 @@
-eclipse.preferences.version=1
-environment/project/cdt.managedbuild.config.gnu.exe.debug.1559539930/CC/delimiter=\:
-environment/project/cdt.managedbuild.config.gnu.exe.debug.1559539930/CC/operation=append
-environment/project/cdt.managedbuild.config.gnu.exe.debug.1559539930/CC/value=/opt/gcc412/bin/gcc412
-environment/project/cdt.managedbuild.config.gnu.exe.debug.1559539930/CXX/delimiter=\:
-environment/project/cdt.managedbuild.config.gnu.exe.debug.1559539930/CXX/operation=append
-environment/project/cdt.managedbuild.config.gnu.exe.debug.1559539930/CXX/value=/opt/gcc412/bin/g++412
-environment/project/cdt.managedbuild.config.gnu.exe.debug.1559539930/append=true
-environment/project/cdt.managedbuild.config.gnu.exe.debug.1559539930/appendContributed=true
