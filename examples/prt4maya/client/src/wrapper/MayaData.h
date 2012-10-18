@@ -47,7 +47,6 @@
 
 class MayaData : public IMayaData {
 public:
-	MayaData() { }
 	MayaData(const MPlug* plug, MDataBlock* data, MStringArray* shadingGroups, MIntArray* shadingRanges) : mPlug(plug), mData(data), mShadingGroups(shadingGroups), mShadingRanges(shadingRanges) { }
 	virtual ~MayaData() { }
 
@@ -73,6 +72,10 @@ public: // FIXME
 	MFloatArray			mU;
 	MFloatArray			mV;
 	MIntArray			mUVConnects;
+
+private:
+	// must not be called
+	MayaData() : mPlug(0), mData(0), mShadingGroups(0), mShadingRanges(0) { }
 };
 
 

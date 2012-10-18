@@ -97,9 +97,8 @@ MStatus PRTNode::compute( const MPlug& plug, MDataBlock& data ) {
 
 
 
-		MayaData md;
 		const prt::InitialShape*          shape = prt::InitialShape::create(va, vertices.length() * 3, ia, pconnect.length(), ca, pcounts.length(), generateAttrs);
-		prt::ProceduralRT::generate(&shape, 1, resolveMap, L"com.esri.prt.codecs.maya.MayaEncoder", generateOpts, &md);
+		prt::ProceduralRT::generate(&shape, 1, resolveMap, L"com.esri.prt.codecs.maya.MayaEncoder", generateOpts, &mdata);
 
 
 		// TODO: Error handling
