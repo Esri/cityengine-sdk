@@ -20,9 +20,6 @@ set(CMAKE_MODULE_PATH
 find_package(com.esri.prt.core)
 include_directories(${com.esri.prt.core_INCLUDE_PATH})
 
-message("applying dirty lib hack")
-set(PRT_CORE_LIBRARIES "C:/fst/dec/ce_server_ws/com.esri.prt.core/install/lib/com.esri.prt.core.lib")
-
 find_package(com.esri.prt.codecs)
 include_directories(${com.esri.prt.codecs_INCLUDE_PATH})
 
@@ -112,7 +109,7 @@ add_subdirectory_source_group(prt4maya)
 add_subdirectory_source_group(wrapper)
 
 add_library(${PROJECT} SHARED ${SOURCES})
-target_link_libraries(${PROJECT} Foundation OpenMaya ${PRT_CORE_LIBRARIES} )
+target_link_libraries(${PROJECT} Foundation OpenMaya ${PRT_CORE_LIBRARY} )
 
 set_target_properties(${PROJECT} PROPERTIES LINKER_LANGUAGE CXX)
 
