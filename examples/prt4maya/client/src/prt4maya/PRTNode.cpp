@@ -90,15 +90,22 @@ MStatus PRTNode::compute( const MPlug& plug, MDataBlock& data ) {
 
 		MayaData mdata(&plug, &data, &shadingGroups, &shadingRanges);
 
-		prtspi::BufferOutputStream* out   = prtspi::BufferOutputStream::create(L"-");
+//		prtspi::BufferOutputStream* out   = prtspi::BufferOutputStream::create(L"-");
+//		const prt::InitialShape*          shape = prt::InitialShape::create(va, vertices.length() * 3, ia, pconnect.length(), ca, pcounts.length(), generateAttrs);
+//		prt::ProceduralRT::generate(out, &shape, 1, resolveMap, L"com.esri.prt.codecs.maya.MayaEncoder", generateOpts, &mdata);
+//		out->destroy();
+
+
+
+		MayaData md;
 		const prt::InitialShape*          shape = prt::InitialShape::create(va, vertices.length() * 3, ia, pconnect.length(), ca, pcounts.length(), generateAttrs);
-		prt::ProceduralRT::generate(out, &shape, 1, resolveMap, L"com.esri.prt.codecs.maya.MayaEncoder", generateOpts, &mdata);
+		prt::ProceduralRT::generate(&shape, 1, resolveMap, L"com.esri.prt.codecs.maya.MayaEncoder", generateOpts, &md);
+
 
 		// TODO: Error handling
 		// TODO: check return value from stream
 
 		shape->destroy();
-		out->destroy();
 
 		delete[] ca;
 		delete[] ia;

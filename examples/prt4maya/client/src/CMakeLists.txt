@@ -20,6 +20,9 @@ set(CMAKE_MODULE_PATH
 find_package(com.esri.prt.core)
 include_directories(${com.esri.prt.core_INCLUDE_PATH})
 
+message("applying dirty lib hack")
+set(PRT_CORE_LIBRARIES "C:/fst/dec/ce_server_ws/com.esri.prt.core/install/lib/com.esri.prt.core.lib")
+
 find_package(com.esri.prt.codecs)
 include_directories(${com.esri.prt.codecs_INCLUDE_PATH})
 
@@ -42,7 +45,13 @@ endif()
 # --- compiler flags ----------------------------------------------------------
 
 if(WIN32)
-  # todo
+	set(CMAKE_C_FLAGS "")
+	set(CMAKE_CXX_FLAGS "")
+	set(CMAKE_CXX_FLAGS_DEBUG "/Zi /nologo /W3 /WX- /Od -DWIN32 -D_DEBUG -D_WINDOWS -D_AFXDLL -D_MBCS -DNT_PLUGIN -DREQUIRE_IOSTREAM -DBits64_ -D_WINDLL /Gm- /EHsc /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Gd /errorReport:queue")
+#	set(CMAKE_CXX_FLAGS_RELEASE "/Zi /nologo /W3 /WX- /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_AFXDLL" /D "_MBCS" /D "NT_PLUGIN" /D "REQUIRE_IOSTREAM" /D "Bits64_" /D "_WINDLL" /Gm- /EHsc /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fp"Release/prt4maya.pch" /Fa"Release\" /Fo"Release\" /Fd"Release\vc100.pdb" /Gd /errorReport:queue")
+
+#	SET( CMAKE_SHARED_LINKER_FLAGS_DEBUG "/ALLOWISOLATION /MANIFESTUAC:\"level='asInvoker' uiAccess='false'\" /TLBID:1 /DYNAMICBASE:NO /MACHINE:X64 /ERRORREPORT:QUEUE")
+	SET( CMAKE_SHARED_LINKER_FLAGS_DEBUG "/MANIFESTUAC:\"level='asInvoker' uiAccess='false'\" /TLBID:1 /DYNAMICBASE:NO /MACHINE:X64 /ERRORREPORT:QUEUE")
 else()
     # build settings required by maya
     # NOTE: make sure to compile the maya plugin with gcc 4.1.2 (for maya 2012/2013)
