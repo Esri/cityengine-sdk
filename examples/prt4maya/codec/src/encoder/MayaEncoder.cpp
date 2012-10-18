@@ -124,7 +124,8 @@ void MayaEncoder::convertGeometry(prtspi::AbstractResolveMapPtr am, prtspi::ICon
 	}
 
 	mdata->setVertices(&vertices[0], vertices.size());
-	mdata->setFaces(&counts[0], counts.size(), &connects[0], connects.size(), 0, 0);
+	mdata->setUVs(&tcsU[0], &tcsV[0], tcsU.size());
+	mdata->setFaces(&counts[0], counts.size(), &connects[0], connects.size(), &tcConnects[0], tcConnects.size());
 	mdata->createMesh();
 }
 
