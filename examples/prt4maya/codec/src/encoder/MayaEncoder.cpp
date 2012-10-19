@@ -132,6 +132,7 @@ void MayaEncoder::convertGeometry(prtspi::AbstractResolveMapPtr am, prtspi::ICon
 	mdata->setFaces(&counts[0], counts.size(), &connects[0], connects.size(), &uvCounts[0], uvCounts.size(), &uvConnects[0], uvConnects.size());
 	mdata->createMesh();
 
+#if 0
 	int startFace = 0;
 	for(size_t gi = 0, size = geometries->size(); gi < size; ++gi) {
 		prtspi::IGeometry* geo = (prtspi::IGeometry*)geometries->get(gi);
@@ -151,6 +152,7 @@ void MayaEncoder::convertGeometry(prtspi::AbstractResolveMapPtr am, prtspi::ICon
 
 		startFace += faceCount;
 	}
+#endif
 
 	mdata->finishMesh();
 }
