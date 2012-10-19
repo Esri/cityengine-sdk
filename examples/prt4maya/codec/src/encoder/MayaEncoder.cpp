@@ -8,14 +8,16 @@
 #include <iostream>
 #include <sstream>
 #include <vector>
+#include <numeric>
 
 #define BOOST_FILESYSTEM_VERSION 3
 #include <boost/filesystem/operations.hpp>
 #include <boost/filesystem/path.hpp>
 
-#include "spi/base/Log.h"
-
 #include "api/prtapi.h"
+
+#include "spi/base/SPIException.h"
+#include "spi/base/Log.h"
 #include "spi/base/IGeometry.h"
 #include "spi/base/IShape.h"
 #include "spi/base/ILeafIterator.h"
@@ -27,10 +29,8 @@
 #include "util/URIUtils.h"
 #include "util/Exception.h"
 
-#include "IMayaData.h"
-
 #include "encoder/MayaEncoder.h"
-#include "spi/base/SPIException.h"
+
 
 MayaEncoder::MayaEncoder() {
 }
@@ -39,12 +39,11 @@ MayaEncoder::MayaEncoder() {
 MayaEncoder::~MayaEncoder() {
 }
 
-void MayaEncoder::encode(const prt::InitialShape** initialShapes, size_t initialShapeCount,
-		prtspi::AbstractResolveMapPtr am, const prt::AttributeMap* options, prt::OutputHandler* const outputHandler)
-{
+
+void MayaEncoder::encode(const prt::InitialShape** initialShapes, size_t initialShapeCount, prtspi::AbstractResolveMapPtr am, const prt::AttributeMap* options, prt::OutputHandler* const outputHandler) {
 	am = am->toFileURIs();
 
-	IMayaData* oh = dynamic_cast<IMayaData*>(outputHandler);
+	IMayaOutputHandler* oh = dynamic_cast<IMayaOutputHandler*>(outputHandler);
 	if(oh == 0) throw(prtspi::StatusException(prt::STATUS_ILLEGAL_OUTPUT_HANDLER));
 
 	Timer tim;
@@ -56,7 +55,7 @@ void MayaEncoder::encode(const prt::InitialShape** initialShapes, size_t initial
 		prtspi::ILeafIterator* li = prtspi::ILeafIterator::create(initialShapes[i], am, occluders, 0);
 		for (const prtspi::IShape* shape = li->getNext(); shape != 0; shape = li->getNext()) {
 			encPrep->add(/*initialShapes[i],*/ shape);
-//			log_trace(L"encode leaf shape mat: %ls", shape->getMaterial()->getString(L"name"));
+			//			log_trace(L"encode leaf shape mat: %ls", shape->getMaterial()->getString(L"name"));
 		}
 	}
 
@@ -77,13 +76,14 @@ void MayaEncoder::encode(const prt::InitialShape** initialShapes, size_t initial
 }
 
 
-void MayaEncoder::convertGeometry(prtspi::AbstractResolveMapPtr am, prtspi::IContentArray* geometries, IMayaData* mdata) {
+void MayaEncoder::convertGeometry(prtspi::AbstractResolveMapPtr am, prtspi::IContentArray* geometries, IMayaOutputHandler* mdata) {
 	std::vector<double> vertices;
 	std::vector<int> counts;
 	std::vector<int> connects;
 
 	std::vector<float> tcsU, tcsV;
-	std::vector<int> tcConnects;
+	std::vector<int> uvCounts;
+	std::vector<int> uvConnects;
 
 	uint32_t base = 0;
 	uint32_t tcBase = 0;
@@ -113,20 +113,46 @@ void MayaEncoder::convertGeometry(prtspi::AbstractResolveMapPtr am, prtspi::ICon
 			for(size_t vi = 0; vi < face->getIndexCount(); ++vi)
 				connects.push_back(base + indices[vi]);
 
-			if(face->getUVIndexCount() > 0) {
-				for(size_t vi = 0; vi < face->getIndexCount(); ++vi)
-					tcConnects.push_back(tcBase + face->getUVIndices()[vi]);
-			}
+			uvCounts.push_back(face->getUVIndexCount());
+			for(size_t vi = 0; vi < face->getUVIndexCount(); ++vi)
+				uvConnects.push_back(tcBase + face->getUVIndices()[vi]);
 		}
 
 		base   = vertices.size() / 3;
 		tcBase = tcsU.size();
 	}
 
+//	std::cout << "uvCounts: " << uvCounts << std::endl;
+//	std::cout << "uvConnects: " << uvConnects << std::endl;
+//	std::cout << "uvCounts sum:" << std::accumulate(uvCounts.begin(), uvCounts.end(), 0) << std::endl;
+//	std::cout << "tcsU size = " << tcsU.size() << std::endl;
+
 	mdata->setVertices(&vertices[0], vertices.size());
 	mdata->setUVs(&tcsU[0], &tcsV[0], tcsU.size());
-	mdata->setFaces(&counts[0], counts.size(), &connects[0], connects.size(), &tcConnects[0], tcConnects.size());
+	mdata->setFaces(&counts[0], counts.size(), &connects[0], connects.size(), &uvCounts[0], uvCounts.size(), &uvConnects[0], uvConnects.size());
 	mdata->createMesh();
+
+	int startFace = 0;
+	for(size_t gi = 0, size = geometries->size(); gi < size; ++gi) {
+		prtspi::IGeometry* geo = (prtspi::IGeometry*)geometries->get(gi);
+		prtspi::IMaterial* mat = geo->getMaterial();
+		const int faceCount   = (int)geo->getFaceCount();
+
+		std::wcout << L"creating material: '" << mat->getString(L"name") << L"'" << std::endl;
+
+		int mh = mdata->matCreate(mat->getString(L"name").c_str(), startFace, faceCount);
+
+		std::wstring tex;
+		if(mat->getTextureArray(L"diffuseMap")->size() > 0) {
+			std::wstring uri(mat->getTextureArray(L"diffuseMap")->get(0)->getName());
+			tex = uri.substr(wcslen(URIUtils::SCHEME_FILE));
+			mdata->matSetDiffuseTexture(mh, tex.c_str());
+		}
+
+		startFace += faceCount;
+	}
+
+	mdata->finishMesh();
 }
 
 

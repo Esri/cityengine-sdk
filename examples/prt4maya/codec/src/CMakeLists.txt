@@ -53,8 +53,8 @@ set_target_properties(${PROJECT} PROPERTIES LINKER_LANGUAGE CXX)
 ### install target
 
 install(CODE "MESSAGE(\"wiping installation dir\")")
-install(CODE "file(REMOVE_RECURSE ${CMAKE_INSTALL_PREFIX}/lib)")
+install(CODE "file(REMOVE_RECURSE ${CMAKE_INSTALL_PREFIX})")
 
 install(TARGETS ${PROJECT} DESTINATION lib)
 
-install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/encoder/IMayaData.h DESTINATION include)
+install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/encoder/IMayaOutputHandler.h DESTINATION include)

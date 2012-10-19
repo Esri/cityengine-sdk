@@ -18,7 +18,7 @@
 #include "spi/extension/ExtensionFactory.h"
 #include "spi/codec/IEncoder.h"
 
-#include "IMayaData.h"
+#include "encoder/IMayaOutputHandler.h"
 
 
 class MayaEncoder : public prtspi::IEncoder {
@@ -39,10 +39,10 @@ public:
 	virtual ContentType getContentType() const { return CT_GEOMETRY; }
 	virtual ExtensionType getExtensionType() const { return ET_ENCODER; }
 
-	static void destroyMayaData(struct MayaData* mayaData);
+	static void destroyMayaData(struct MayaOutputHandler* mayaData);
 
 private:
-	void convertGeometry(prtspi::AbstractResolveMapPtr am, prtspi::IContentArray* geometries, IMayaData* mdata);
+	void convertGeometry(prtspi::AbstractResolveMapPtr am, prtspi::IContentArray* geometries, IMayaOutputHandler* mdata);
 	void unpackRPK(std::wstring rpkPath);
 };
 
