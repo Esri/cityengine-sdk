@@ -5,8 +5,8 @@
  *      Author: shaegler
  */
 
-#ifndef MAYADATA_H_
-#define MAYADATA_H_
+#ifndef MAYA_OUTPUT_HANDLER_H_
+#define MAYA_OUTPUT_HANDLER_H_
 
 #include "maya/MDataHandle.h"
 #include "maya/MStatus.h"
@@ -42,28 +42,33 @@
 #include "maya/MFnSet.h"
 #include "maya/MFnPartition.h"
 
-#include "IMayaData.h"
+#include "IMayaOutputHandler.h"
 
 
-class MayaData : public IMayaData {
+class MayaOutputHandler : public IMayaOutputHandler {
 public:
-	MayaData(const MPlug* plug, MDataBlock* data, MStringArray* shadingGroups, MIntArray* shadingRanges) : mPlug(plug), mData(data), mShadingGroups(shadingGroups), mShadingRanges(shadingRanges) { }
-	virtual ~MayaData() { }
+	MayaOutputHandler(const MPlug* plug, MDataBlock* data, MStringArray* shadingGroups, MIntArray* shadingRanges) : mPlug(plug), mData(data), mShadingGroups(shadingGroups), mShadingRanges(shadingRanges) { }
+	virtual ~MayaOutputHandler() { }
 
 public:
 	virtual void setVertices(double* vtx, size_t size);
 	virtual void setNormals(double* nrm, size_t size);
 	virtual void setUVs(float* u, float* v, size_t size);
 
-	virtual void setFaces(int* counts, size_t countsSize, int* connects, size_t connectsSize, int* tcConnects, size_t tcConnectsSize);
+	virtual void setFaces(int* counts, size_t countsSize, int* connects, size_t connectsSize, int* uvCounts, size_t uvCountsSize, int* uvConnects, size_t uvConnectsSize);
 	virtual void createMesh();
+	virtual void finishMesh();
+
+	virtual int  matCreate(const wchar_t* name, int start, int count);
+	virtual void matSetColor(int mh, float r, float g, float b);
+	virtual void matSetDiffuseTexture(int mh, const wchar_t* tex);
 
 public: // FIXME
 	const MPlug*		mPlug;
 	MDataBlock*			mData;
 	MStringArray*		mShadingGroups;
 	MIntArray*			mShadingRanges;
-
+	MFnMesh*			mFnMesh;
 
 	MFloatPointArray	mVertices;
 	MIntArray			mCounts;
@@ -71,12 +76,13 @@ public: // FIXME
 
 	MFloatArray			mU;
 	MFloatArray			mV;
+	MIntArray			mUVCounts;
 	MIntArray			mUVConnects;
 
 private:
 	// must not be called
-	MayaData() : mPlug(0), mData(0), mShadingGroups(0), mShadingRanges(0) { }
+	MayaOutputHandler() : mPlug(0), mData(0), mShadingGroups(0), mShadingRanges(0) { }
 };
 
 
-#endif /* MAYADATA_H_ */
+#endif /* MAYA_OUTPUT_HANDLER_H_ */

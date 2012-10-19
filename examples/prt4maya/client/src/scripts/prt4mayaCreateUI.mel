@@ -100,7 +100,7 @@ global proc string fileNameFromPath(string $filePath) {
 	return $buffer[$nTok-1];
 }
 	
-global proc string createShadingGroup(string $texFilePath) {
+global proc string createShadingGroup2(string $texFilePath) {
 	if(size($texFilePath) == 0) {
 		return "initialShadingGroup";
 	}
@@ -130,4 +130,21 @@ global proc string createShadingGroup(string $texFilePath) {
 
 	return $sgName;
 }
+
+global proc string createShadingGroup(string $name) {
+	string $sgName = "prtSG_" + $name;
+	string $shName = "prtSH_" + $name;
+
+	// if group with that name exists already: use it
+	string $allSets[] = `ls -sets`;
+	string $se;
+	for($se in $allSets) {
+		if($se == $sgName) return $sgName;
+	}
 	
+	shadingNode -asShader lambert -n $shName;
+	sets -renderable true -noSurfaceShader true -empty -name $sgName;
+	connectAttr -f ($shName + ".outColor") ($sgName + ".surfaceShader");
+	
+	return $sgName;
+}

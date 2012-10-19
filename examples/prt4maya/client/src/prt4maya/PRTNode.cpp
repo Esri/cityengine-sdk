@@ -10,7 +10,7 @@
 #include <maya/MDagPath.h>
 #include <maya/MItDependencyNodes.h>
 
-#include "wrapper/MayaData.h"
+#include "wrapper/MayaOutputHandler.h"
 
 #include "prt4maya/prt4mayaNode.h"
 
@@ -88,21 +88,11 @@ MStatus PRTNode::compute( const MPlug& plug, MDataBlock& data ) {
 		DBG("%s\n", generateAttrs->toXML(tmp, &size));
 		delete[] tmp;
 
-		MayaData mdata(&plug, &data, &shadingGroups, &shadingRanges);
-
-//		prtspi::BufferOutputStream* out   = prtspi::BufferOutputStream::create(L"-");
-//		const prt::InitialShape*          shape = prt::InitialShape::create(va, vertices.length() * 3, ia, pconnect.length(), ca, pcounts.length(), generateAttrs);
-//		prt::ProceduralRT::generate(out, &shape, 1, resolveMap, L"com.esri.prt.codecs.maya.MayaEncoder", generateOpts, &mdata);
-//		out->destroy();
-
-
-
+		MayaOutputHandler mdata(&plug, &data, &shadingGroups, &shadingRanges);
 		const prt::InitialShape*          shape = prt::InitialShape::create(va, vertices.length() * 3, ia, pconnect.length(), ca, pcounts.length(), generateAttrs);
 		prt::ProceduralRT::generate(&shape, 1, resolveMap, L"com.esri.prt.codecs.maya.MayaEncoder", generateOpts, &mdata);
 
-
 		// TODO: Error handling
-		// TODO: check return value from stream
 
 		shape->destroy();
 
@@ -115,13 +105,12 @@ MStatus PRTNode::compute( const MPlug& plug, MDataBlock& data ) {
 		MString cmd;
 		cmd.format("prtMaterials ^1s", name());
 		MGlobal::executeCommandOnIdle(cmd);
-	}   
+	}
 
 	return MS::kSuccess;
 }
 
 void* PRTNode::creator() {
-	std::cout << "creating prt node..." << std::endl;
 	return new PRTNode();
 }
 
@@ -131,24 +120,24 @@ const wchar_t SEPERATOR = L'\\';
 const wchar_t SEPERATOR = L'/';
 #endif
 
-//#ifndef _MSC_VER
-//#include <dlfcn.h>
-//#include <cstdio>
-//
-//// HACK
-//std::wstring libPath;
-//
-//__attribute__((constructor))
-//void on_load(void) {
-//	Dl_info dl_info;
-//	dladdr((void *)on_load, &dl_info);
-//	fprintf(stderr, "prt4maya: module %s loaded\n", dl_info.dli_fname);
-//
-//	std::string tmp(dl_info.dli_fname);
-//	libPath = std::wstring(tmp.length(), L' ');
-//	std::copy(tmp.begin(), tmp.end(), libPath.begin());
-//}
-//#endif
+#ifndef _MSC_VER
+#include <dlfcn.h>
+#include <cstdio>
+
+// HACK
+std::wstring libPath;
+
+__attribute__((constructor))
+void on_load(void) {
+	Dl_info dl_info;
+	dladdr((void *)on_load, &dl_info);
+	fprintf(stderr, "prt4maya: module %s loaded\n", dl_info.dli_fname);
+
+	std::string tmp(dl_info.dli_fname);
+	libPath = std::wstring(tmp.length(), L' ');
+	std::copy(tmp.begin(), tmp.end(), libPath.begin());
+}
+#endif
 
 std::wstring getPluginRoot() {
 #ifdef _MSC_VER
@@ -171,7 +160,7 @@ std::wstring getPluginRoot() {
 
 	return root;
 #else
-	return std::wstring(L"/fasthome/shaegler/runtimeapi/com.esri.prt.clients.maya/install"); //libPath.substr(0, libPath.find_last_of(SEPERATOR));
+	return libPath.substr(0, libPath.find_last_of(SEPERATOR));
 #endif
 }
 
