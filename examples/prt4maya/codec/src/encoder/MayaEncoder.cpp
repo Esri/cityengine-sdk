@@ -76,7 +76,7 @@ void MayaEncoder::encode(const prt::InitialShape** initialShapes, size_t initial
 }
 
 
-void MayaEncoder::convertGeometry(prtspi::AbstractResolveMapPtr am, prtspi::IContentArray* geometries, IMayaOutputHandler* mdata) {
+void MayaEncoder::convertGeometry(prtspi::AbstractResolveMapPtr am, prtspi::IContentArray* geometries, IMayaOutputHandler* mayaOutput) {
 	std::vector<double> vertices;
 	std::vector<int> counts;
 	std::vector<int> connects;
@@ -127,34 +127,36 @@ void MayaEncoder::convertGeometry(prtspi::AbstractResolveMapPtr am, prtspi::ICon
 //	std::cout << "uvCounts sum:" << std::accumulate(uvCounts.begin(), uvCounts.end(), 0) << std::endl;
 //	std::cout << "tcsU size = " << tcsU.size() << std::endl;
 
-	mdata->setVertices(&vertices[0], vertices.size());
-	mdata->setUVs(&tcsU[0], &tcsV[0], tcsU.size());
-	mdata->setFaces(&counts[0], counts.size(), &connects[0], connects.size(), &uvCounts[0], uvCounts.size(), &uvConnects[0], uvConnects.size());
-	mdata->createMesh();
+	mayaOutput->setVertices(&vertices[0], vertices.size());
+	mayaOutput->setUVs(&tcsU[0], &tcsV[0], tcsU.size());
+	mayaOutput->setFaces(&counts[0], counts.size(), &connects[0], connects.size(), &uvCounts[0], uvCounts.size(), &uvConnects[0], uvConnects.size());
+	mayaOutput->createMesh();
 
-#if 0
 	int startFace = 0;
 	for(size_t gi = 0, size = geometries->size(); gi < size; ++gi) {
 		prtspi::IGeometry* geo = (prtspi::IGeometry*)geometries->get(gi);
 		prtspi::IMaterial* mat = geo->getMaterial();
 		const int faceCount   = (int)geo->getFaceCount();
 
-		std::wcout << L"creating material: '" << mat->getString(L"name") << L"'" << std::endl;
+		std::wostringstream matName;
+		matName << "material" << gi;
 
-		int mh = mdata->matCreate(mat->getString(L"name").c_str(), startFace, faceCount);
+		std::wcout << L"creating material: '" << matName.str() << L"'" << std::endl;
+
+		int mh = mayaOutput->matCreate(matName.str().c_str(), startFace, faceCount);
 
 		std::wstring tex;
 		if(mat->getTextureArray(L"diffuseMap")->size() > 0) {
 			std::wstring uri(mat->getTextureArray(L"diffuseMap")->get(0)->getName());
+			log_trace("trying to set texture uri: %ls", uri.c_str());
 			tex = uri.substr(wcslen(URIUtils::SCHEME_FILE));
-			mdata->matSetDiffuseTexture(mh, tex.c_str());
+			mayaOutput->matSetDiffuseTexture(mh, tex.c_str());
 		}
 
 		startFace += faceCount;
 	}
-#endif
 
-	mdata->finishMesh();
+	mayaOutput->finishMesh();
 }
 
 
