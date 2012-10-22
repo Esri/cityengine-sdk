@@ -61,14 +61,12 @@ void MayaOutputHandler::createMesh() {
 	MDataHandle outputHandle = mData->outputValue(*mPlug, &stat);
 	MCHECK(stat);
 
-	MObject oMesh = outputHandle.asMesh();
-
 	MFnMeshData dataCreator;
 	MObject newOutputData = dataCreator.create(&stat);
 	MCHECK(stat);
 
 	mFnMesh = new MFnMesh();
-	oMesh = mFnMesh->create(mVertices.length(), mCounts.length(), mVertices, mCounts, mConnects, newOutputData, &stat);
+	MObject oMesh = mFnMesh->create(mVertices.length(), mCounts.length(), mVertices, mCounts, mConnects, newOutputData, &stat);
 	MCHECK(stat);
 
 	MPlugArray plugs;
@@ -117,7 +115,13 @@ int MayaOutputHandler::matCreate(const wchar_t* name, int start, int count) {
 
 
 void MayaOutputHandler::matSetDiffuseTexture(int mh, const wchar_t* tex) {
+	MStatus stat;
 
+	MString sg = (*mShadingGroups)[mh];
+	MString cmd("prtSetDiffuseTexture(\"");
+	cmd += sg + "\", \"" + tex + "\", \"map1\")";
+	MString result = MGlobal::executeCommandStringResult(cmd, false, false, &stat);
+	printf("mel cmd '%s' executed, result = '%s'", cmd.asChar(), result.asChar());
 }
 
 

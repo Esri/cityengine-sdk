@@ -213,6 +213,7 @@ MStatus PRTNode::initialize() {
 	M_CHECK(fAttr.setUsedAsFilename(true));
 	M_CHECK(fAttr.setCached    (true));
 	M_CHECK(fAttr.setStorable  (true));
+	M_CHECK(fAttr.setNiceNameOverride(MString("Rule Package(*.rpk)")));
 	M_CHECK(addAttribute(rulePkg));
 	M_CHECK(attributeAffects( rulePkg, outMesh ));
 

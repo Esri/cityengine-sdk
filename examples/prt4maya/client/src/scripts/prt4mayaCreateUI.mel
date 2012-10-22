@@ -1,11 +1,16 @@
 global proc string[] createPrtNode() {
+	string $result[];
+	string $select[] = `ls -sl`;
+	
+	if(!(size($select))) {
+		confirmDialog -title "Missing selection" -message "Please select a polygon first in order to apply a rule." -button "OK";
+		return $result;
+	}
+
 	$filters = "Rule Package (*.rpk);;All Files (*.*)";
 	string $rulePackage[] = `fileDialog2 -fm 1 -cap "Select Rule Package" -ff $filters`;
-	string $result[];
 	
-	if(size($rulePackage)) {
-		string $select[] = `ls -sl`;
-		
+	if(size($rulePackage)) {		
 		for ( $node in $select ) {
 			string $prtName = "<ignored>";
 			if(`nodeType $node` == "prt") {
@@ -83,23 +88,17 @@ global proc createPrtMenu() {
 }
 
 global proc prt4mayaCreateUI() {
-	//if ( !`pluginInfo -query -loaded prt4maya.mll` ) {
-    //	loadPlugin "prt4maya.mll";
-    //}    
-    
-    print "prt4mayaCreateUI here we go...";
-    
  	createPrtMenu();
 }
 
 // --- shader setup helpers
-	
-global proc string fileNameFromPath(string $filePath) {
+
+proc string fileNameFromPath(string $filePath) {
 	string $buffer[];
 	int $nTok = `tokenize $filePath "/" $buffer`;
 	return $buffer[$nTok-1];
 }
-	
+
 global proc string createShadingGroup2(string $texFilePath) {
 	if(size($texFilePath) == 0) {
 		return "initialShadingGroup";
@@ -125,7 +124,6 @@ global proc string createShadingGroup2(string $texFilePath) {
 
 	shadingNode -asTexture file -n $fnName;
 	connectAttr -force ($fnName + ".outColor") ($shName + ".color");
-
 	setAttr ($fnName + ".fileTextureName") -type "string" $texFilePath;
 
 	return $sgName;
@@ -148,3 +146,18 @@ global proc string createShadingGroup(string $name) {
 	
 	return $sgName;
 }
+
+global proc prtSetDiffuseTexture(string $sgName, string $texturePath, string $uvSet) {
+	$shaderPlug = `connectionInfo -sfd ($sgName + ".surfaceShader")`;
+	$shName = `plugNode $shaderPlug`;
+
+	string $fileName = fileNameFromPath($texturePath); 			// might not be unique!
+	$fileName = substituteAllString($fileName, ".", "_");		// '.' seems to be illegal
+
+	string $fnName = "prtFile_" + $fileName;
+
+	shadingNode -asTexture file -n $fnName;
+	connectAttr -force ($fnName + ".outColor") ($shName + ".color");
+	setAttr ($fnName + ".fileTextureName") -type "string" $texturePath;
+}
+

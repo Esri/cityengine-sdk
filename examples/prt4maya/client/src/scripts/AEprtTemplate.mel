@@ -1,51 +1,144 @@
-global proc fileBrowse(string $attr){
-	setUITemplate -pst attributeEditorTemplate;
-	rowLayout -nc 3;  
-	text -label $attr;  
-	textField  -fileName `getAttr $attr` LocationText;  
-	symbolButton -image "navButtonBrowse.xpm" -c ("showFileDialog(\"" + $attr + "\")");  
-	setParent ..;
-	setUITemplate -ppt; 
-	fileBrowseAgain($attr);
+proc string prtNode(string $attr) {
+	return `match "^[^\.]*" $attr`;
+}
+
+proc string prtPlug(string $attr) {
+	return `substitute "^[^.]*\\." $attr ""`;  
+}
+
+proc string prtControlName(string $attr) {
+	return substituteAllString(`prtPlug($attr)`, ".", "_");
+}
+  
+proc string prtAttrName(string $attr) {
+	return `substitute "^[^.]*\\." $attr ""`;
 }  
   
-global proc fileBrowseAgain(string $attr){  
-	textField -e -fileName `getAttr $attr` LocationText;  
-}  
+global proc int prtRPKChange(string $attr, string $varname) {
+	$varname = prtPlug($varname);
+	$oldpkg  = eval("$tmp=$" + $varname);
+	$node    = prtNode($attr);
+	$newpkg  = `getAttr ($node + ".Rule_Package")`;
 
-global proc showFileDialog(string $attr) {
-	string $file[] = `fileDialog2 -fm 1 -cap "Select Rule Package" -ff "*.rpk"`;  
+	return $oldpkg == $newpkg;
+}
+  
+global proc prtShowFileDialog(string $attr) {
+	$node    = prtNode($attr);
+	$plug    = prtPlug($attr);  
+	$filters = `attributeQuery -n $node -nn $plug`;
+
+	string $file[];
+	
+	if(startsWith($filters, "@Directory")) {
+		$file = `fileDialog2 -fm 3 -cap "Select Directory" -okc "Select"`;
+	} else {
+		$file = `fileDialog2 -fm 1 -cap "Select File" -ff $filters`;
+	}
 
 	if(size($file)) {  
 		setAttr -type "string" $attr $file[0];  
-		textField -e -fileName `getAttr $attr` LocationText;  
+		if($attr == "Rule_Package") {
+			evalDeferred "refreshEditorTemplates()";
+		}
 	}  
 }  
 
-global proc AEprtTemplate( string $nodeName ) {
+global proc prtFileBrowse(string $attr, string $varname){
+	$varname = prtPlug($varname);
+
+	print ("### prtFileBrowse " + $attr + "," + $varname + "\n");
+
+	setUITemplate -pst attributeEditorTemplate;
+	rowLayout -nc 3;  
+	text -label `prtAttrName($attr)`;
+	string $control = prtControlName($attr);
+	textField -fileName `getAttr $attr` $control;  	
+	connectControl -fileName $control $attr;
+	symbolButton -image "navButtonBrowse.xpm" -c ("prtShowFileDialog(\"" + $attr + "\")") ($control + "_browse");
+	setParent ..;
+	setUITemplate -ppt; 
+}  
+  
+global proc prtFileBrowseReplace(string $attr, string $varname){
+	print ("### prtFileBrowseReplace " + $attr + "\n");
+
+	if(prtRPKChange($attr, $varname)) {	
+		string $control = prtControlName($attr);
+		connectControl $control $attr;
+		symbolButton -edit -c ("prtShowFileDialog(\"" + $attr + "\")") ($control + "_browse");
+	}
+}
+
+global proc prtFileBrowseReplaceRPK(string $attr, string $varname){
+	print ("### prtFileBrowseReplaceRPK " + $attr + "," + $varname + "\n");
+
+	if(prtRPKChange($attr, $varname)) {
+		print ("### NO REFRESH ####\n");
+		prtFileBrowseReplace($attr, $varname);
+	} else {
+		print ("### REFRESH ####\n");
+		$varname = prtPlug($varname);
+		$newpkg  = `getAttr $attr`;
+		evalDeferred ("$" + $varname + "=\"" + $newpkg + "\"; refreshEditorTemplates();");
+	}
+}
+
+global proc prtColorChooser(string $attr, string $varname) {
+	print ("### prtColorChooser " + $attr + "," + $varname + "\n");
+ 
+	setUITemplate -pst attributeEditorTemplate;
+	string $control = prtControlName($attr);
+	colorSliderGrp -label `prtAttrName($attr)` $control;
+	connectControl $control $attr;
+	setParent ..;
+	setUITemplate -ppt; 
+}  
+
+global proc prtColorChooserReplace(string $attr, string $varname){
+	print ("### prtColorChooserReplace " + $attr + "," + $varname + "\n");
+
+	if(prtRPKChange($attr, $varname)) {
+		string $control = prtControlName($attr);
+		connectControl $control $attr;
+	}
+}
+
+global proc AEprtTemplate(string $node) {
+	print ("### AEprtTemplate " + $node + "\n");
+
 	editorTemplate -suppress "caching"; 
 	editorTemplate -suppress "nodeState";
 
     editorTemplate -beginScrollLayout;
      
 	editorTemplate -beginLayout "CGA Rules" -collapse 0;
-	//editorTemplate -callCustom "fileBrowse" "fileBrowseAgain" "Rule_Package";
-	editorTemplate -l "Rule_Package" -adc "Rule_Package";
+	string $varname = ("AEprtTemplate_" + $node);
+	eval ("global string $" + $varname + "=\"" + `getAttr ($node + ".Rule_Package")` + "\"");
+	editorTemplate -callCustom "prtFileBrowse" "prtFileBrowseReplaceRPK" "Rule_Package" $varname;
+		
+	string $attrs[] = `listAttr -ud $node`;
 	
-	string $attrs[] = `listAttr -ud $nodeName`;
-	
-	for($attribute in $attrs) {
-//		if(`addAttr -q  -uaf ($nodeName + "." + $attribute) `) {
-//			editorTemplate -callCustom "fileBrowse" "fileBrowseAgain" $attribute;
-//		} else {
-			editorTemplate -l $attribute -adc $attribute;
-//		}
-		if($attribute == "Start_Rule") {
+	$skip = 0;
+	for($attr in $attrs) {
+		if($skip-- > 0) continue;
+		
+		if(`addAttr -q  -uaf ($node + "." + $attr) `) {
+			editorTemplate -callCustom "prtFileBrowse" "prtFileBrowseReplace" $attr $varname;
+		} else if(`addAttr -q  -uac ($node + "." + $attr) `) {
+			editorTemplate -callCustom "prtColorChooser" "prtColorChooserReplace" $attr $varname;
+			$skip = 3;
+		} else {
+			print `editorTemplate -l $attr -adc $attr`;
+		}
+		if($attr == "Start_Rule") {
 			editorTemplate -endLayout;
 			editorTemplate -beginLayout "CGA Attributes" -collapse 0;
 		}
 	}
 	editorTemplate -endLayout;
  
+ 	editorTemplate -aec;
+
     editorTemplate -endScrollLayout;
 }

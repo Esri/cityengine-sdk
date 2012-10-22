@@ -124,11 +124,12 @@ MStatus PRTAttrs::addFileParameter(MFnDependencyNode & node, MObject & attr, con
 	MFnStringData		  stringData;
 	MFnTypedAttribute sAttr;
 
-	attr = sAttr.create(longName(name), briefName(name), MFnData::kString, stringData.create(value, &stat2), &stat );
+	attr = sAttr.create(longName(name), briefName(name), MFnData::kString, stringData.create("", &stat2), &stat );
 	M_CHECK(stat2);
 	M_CHECK(stat);
 	M_CHECK(sAttr.setUsedAsFilename(true));
 	M_CHECK(addParameter(node, attr, sAttr));
+	M_CHECK(sAttr.setNiceNameOverride(value));
 
 	MPlug plug(node.object(), attr);
 	M_CHECK(plug.setValue(MString()));
@@ -383,7 +384,7 @@ MStatus PRTAttrs::updateAttributes(MFnDependencyNode & node, prt::AttributeMapBu
 	PRTNode*          prtNode = (PRTNode*)node.userNode();
 
 	prt::AttributeMap* attrs = aBuilder->createAttributeMap();
-	const prt::InitialShape* shape = prt::InitialShape::create(
+	prt::InitialShape* shape = prt::InitialShape::create(
 			UnitQuad_vertices, 
 			UnitQuad_vertexCount, 
 			UnitQuad_indices, 
@@ -404,7 +405,8 @@ MStatus PRTAttrs::updateAttributes(MFnDependencyNode & node, prt::AttributeMapBu
 					if(!(wcscmp(an->getName(), L"@Range")))
 						e = new PRTEnum(prtNode, an);
 				}
-				bool value = prt::ProceduralRT::evalBool(shape, prtNode->resolveMap, info->getAttribute(i)->getName());
+				prt::PRTStatus evalStat;
+				bool value = prt::ProceduralRT::evalBool(shape, prtNode->resolveMap, info->getAttribute(i)->getName(), &evalStat);
 
 				if(e) {
 					M_CHECK(addEnumParameter(node, attr, name, value, e));
@@ -426,7 +428,8 @@ MStatus PRTAttrs::updateAttributes(MFnDependencyNode & node, prt::AttributeMapBu
 							e = new PRTEnum(prtNode, an);
 					}
 				}
-				double value = prt::ProceduralRT::evalFloat(shape, prtNode->resolveMap, info->getAttribute(i)->getName());
+				prt::PRTStatus evalStat;
+				double value = prt::ProceduralRT::evalFloat(shape, prtNode->resolveMap, info->getAttribute(i)->getName(), &evalStat);
 
 				if(e) {
 					M_CHECK(addEnumParameter(node, attr, name, value, e));
@@ -460,9 +463,9 @@ MStatus PRTAttrs::updateAttributes(MFnDependencyNode & node, prt::AttributeMapBu
 						}
 					}
 				}
-				size_t valueSize = 4095;
-				wchar_t* value = new wchar_t[4096];
-				value = prt::ProceduralRT::evalStr(shape, prtNode->resolveMap, info->getAttribute(i)->getName(), value, &valueSize);
+				size_t valueLen = 4096;
+				wchar_t* value = new wchar_t[valueLen];
+				prt::ProceduralRT::evalStr(shape, prtNode->resolveMap, info->getAttribute(i)->getName(), value, &valueLen);
 
 				MString mvalue(value);
 				if(e) {
@@ -517,6 +520,8 @@ MStatus PRTAttrs::doIt(const MArgList& args) {
 
 	MString sRulePkg;
 	updateRuleFiles(fNode, getStringParameter(prtNode, ((PRTNode*)fNode.userNode())->rulePkg, sRulePkg));
+
+	MGlobal::executeCommand(MString("refreshEditorTemplates"));
 
 	return MS::kSuccess;
 }
