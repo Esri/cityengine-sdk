@@ -64,25 +64,15 @@ global proc string[] createPrtNode() {
 
 global proc createPrtMenu() {
 	global string $gMainWindow;
-	
 	global string $gPrtMenu = "prtMenu"; 
 
 	setParent $gMainWindow;
-	
 	if (`isTrue "BaseMayaExists"`) { 
-		menu -l "PRT" -aob true -to true
-		-postMenuCommandOnce true
-		$gPrtMenu; 
+		menu -l "PRT" -aob true -to true -postMenuCommandOnce true $gPrtMenu;
 		setParent -m ..; 
-		
 		setParent -m $gPrtMenu;
-		
 		menuItem -divider true;
-		
-		menuItem -label "Attach Rule..."  -c "createPrtNode"  
-		
-		-annotation "Attach a CGA rule package to a geometry";
-				
+		menuItem -label "Attach Rule..."  -c "createPrtNode" -annotation "Attach a CGA rule package to a geometry";
 		setParent -m ..;
 	}
 }

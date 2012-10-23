@@ -382,7 +382,7 @@ MStatus initializePlugin( MObject obj ){
 MStatus uninitializePlugin( MObject obj) {
 	MFnPlugin plugin( obj );
 
-	M_CHECK(plugin.deregisterCommand("prtMateirals"));
+	M_CHECK(plugin.deregisterCommand("prtMaterials"));
 	M_CHECK(plugin.deregisterCommand("prtAttrs"));
 	M_CHECK(plugin.deregisterNode(PRTNode::id));
 
