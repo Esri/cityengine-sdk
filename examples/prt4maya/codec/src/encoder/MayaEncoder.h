@@ -21,16 +21,16 @@
 #include "encoder/IMayaOutputHandler.h"
 
 
-class MayaEncoder : public prtspi::IEncoder {
+class MayaEncoder : public prtx::IEncoder {
 public:
 	MayaEncoder();
 	virtual ~MayaEncoder();
 
 public:
-	virtual void encode(const prt::InitialShape** initialShapes, size_t initialShapeCount, prtspi::AbstractResolveMapPtr am,
+	virtual void encode(const prt::InitialShape** initialShapes, size_t initialShapeCount, prtx::AbstractResolveMapPtr am,
 			const prt::AttributeMap* options, prt::OutputHandler* const outputHandler);
 
-	virtual void encodeContent(prtspi::IOutputStream* stream, const prtspi::IContentArray* content) {
+	virtual void encodeContent(prtx::IOutputStream* stream, const prtx::IContentArray* content) {
 		UNUSED(stream); UNUSED(content); throw std::runtime_error("not implemented");
 	}
 
@@ -42,12 +42,12 @@ public:
 	static void destroyMayaData(struct MayaOutputHandler* mayaData);
 
 private:
-	void convertGeometry(prtspi::AbstractResolveMapPtr am, prtspi::IContentArray* geometries, IMayaOutputHandler* mayaOutput);
+	void convertGeometry(prtx::AbstractResolveMapPtr am, prtx::IContentArray* geometries, IMayaOutputHandler* mayaOutput);
 	void unpackRPK(std::wstring rpkPath);
 };
 
 
-class MayaEncoderFactory : public prtspi::ExtensionFactory {
+class MayaEncoderFactory : public prtx::ExtensionFactory {
 public:
 	MayaEncoder* create(const wchar_t**, const size_t&, const wchar_t**, const size_t&) { return new MayaEncoder(); }
 };

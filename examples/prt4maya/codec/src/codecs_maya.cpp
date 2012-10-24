@@ -14,7 +14,7 @@ static const int MINIMAL_VERSION_BUILD = 0;
 extern "C" {
 
 
-CODECS_MAYA_EXPORTS_API void registerExtensionFactories(prtspi::IExtensionManager* manager) {
+CODECS_MAYA_EXPORTS_API void registerExtensionFactories(prtx::IExtensionManager* manager) {
 	log_trace("codecs maya library: registerExtensionFactories begin");
 	manager->addFactory(new MayaEncoderFactory());
 	log_trace("codecs maya library: registerExtensionFactories done");

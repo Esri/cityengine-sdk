@@ -40,20 +40,20 @@ MayaEncoder::~MayaEncoder() {
 }
 
 
-void MayaEncoder::encode(const prt::InitialShape** initialShapes, size_t initialShapeCount, prtspi::AbstractResolveMapPtr am, const prt::AttributeMap* options, prt::OutputHandler* const outputHandler) {
+void MayaEncoder::encode(const prt::InitialShape** initialShapes, size_t initialShapeCount, prtx::AbstractResolveMapPtr am, const prt::AttributeMap* options, prt::OutputHandler* const outputHandler) {
 	am = am->toFileURIs();
 
 	IMayaOutputHandler* oh = dynamic_cast<IMayaOutputHandler*>(outputHandler);
-	if(oh == 0) throw(prtspi::StatusException(prt::STATUS_ILLEGAL_OUTPUT_HANDLER));
+	if(oh == 0) throw(prtx::StatusException(prt::STATUS_ILLEGAL_OUTPUT_HANDLER));
 
 	Timer tim;
 	log_trace("MayaEncoder:encode: #initial shapes = %d", initialShapeCount);
 
-	prtspi::EncodePreparator* encPrep = prtspi::EncodePreparator::create();
+	prtx::EncodePreparator* encPrep = prtx::EncodePreparator::create();
 	for (size_t i = 0; i < initialShapeCount; ++i) {
-		prtspi::IGeometry** occluders = 0;
-		prtspi::ILeafIterator* li = prtspi::ILeafIterator::create(initialShapes[i], am, occluders, 0);
-		for (const prtspi::IShape* shape = li->getNext(); shape != 0; shape = li->getNext()) {
+		prtx::IGeometry** occluders = 0;
+		prtx::ILeafIterator* li = prtx::ILeafIterator::create(initialShapes[i], am, occluders, 0);
+		for (const prtx::IShape* shape = li->getNext(); shape != 0; shape = li->getNext()) {
 			encPrep->add(/*initialShapes[i],*/ shape);
 			//			log_trace(L"encode leaf shape mat: %ls", shape->getMaterial()->getString(L"name"));
 		}
@@ -62,7 +62,7 @@ void MayaEncoder::encode(const prt::InitialShape** initialShapes, size_t initial
 	const float t1 = tim.stop();
 	tim.start();
 
-	prtspi::IContentArray* geometries = prtspi::IContentArray::create();
+	prtx::IContentArray* geometries = prtx::IContentArray::create();
 	encPrep->createEncodableGeometries(geometries);
 	convertGeometry(am, geometries, oh);
 	geometries->destroy();
@@ -76,7 +76,7 @@ void MayaEncoder::encode(const prt::InitialShape** initialShapes, size_t initial
 }
 
 
-void MayaEncoder::convertGeometry(prtspi::AbstractResolveMapPtr am, prtspi::IContentArray* geometries, IMayaOutputHandler* mayaOutput) {
+void MayaEncoder::convertGeometry(prtx::AbstractResolveMapPtr am, prtx::IContentArray* geometries, IMayaOutputHandler* mayaOutput) {
 	std::vector<double> vertices;
 	std::vector<int> counts;
 	std::vector<int> connects;
@@ -88,7 +88,7 @@ void MayaEncoder::convertGeometry(prtspi::AbstractResolveMapPtr am, prtspi::ICon
 	uint32_t base = 0;
 	uint32_t tcBase = 0;
 	for(size_t gi = 0, size = geometries->size(); gi < size; ++gi) {
-		prtspi::IGeometry* geo = (prtspi::IGeometry*)geometries->get(gi);
+		prtx::IGeometry* geo = (prtx::IGeometry*)geometries->get(gi);
 
 		const double* verts = geo->getVertices();
 		const size_t vertsCount = geo->getVertexCount();
@@ -106,7 +106,7 @@ void MayaEncoder::convertGeometry(prtspi::AbstractResolveMapPtr am, prtspi::ICon
 		}
 
 		for(size_t fi = 0; fi < geo->getFaceCount(); ++fi) {
-			const prtspi::IFace* face = geo->getFace(fi);
+			const prtx::IFace* face = geo->getFace(fi);
 			counts.push_back(face->getIndexCount());
 
 			const uint32_t* indices = face->getVertexIndices();
@@ -134,8 +134,8 @@ void MayaEncoder::convertGeometry(prtspi::AbstractResolveMapPtr am, prtspi::ICon
 
 	int startFace = 0;
 	for(size_t gi = 0, size = geometries->size(); gi < size; ++gi) {
-		prtspi::IGeometry* geo = (prtspi::IGeometry*)geometries->get(gi);
-		prtspi::IMaterial* mat = geo->getMaterial();
+		prtx::IGeometry* geo = (prtx::IGeometry*)geometries->get(gi);
+		prtx::IMaterial* mat = geo->getMaterial();
 		const int faceCount   = (int)geo->getFaceCount();
 
 		std::wostringstream matName;
