@@ -167,7 +167,7 @@ std::wstring getPluginRoot() {
 
 MStatus PRTNode::initialize() {
 	std::wstring root = getPluginRoot();
-	DBGL("prt dir %ls\n", root.c_str());
+	//DBGL("prt dir %ls\n", root.c_str());
 
 	std::wstring config = root;
 	config += SEPERATOR;
@@ -177,9 +177,9 @@ MStatus PRTNode::initialize() {
 
 	const wchar_t** configFiles = new const wchar_t*[1];
 	configFiles[0] = config.c_str();
-	DBGL("Config file: %ls\n", configFiles[0]);
+	//DBGL("Config file: %ls\n", configFiles[0]);
 
-	prt::PRTStatus status = prt::ProceduralRT::init(root.c_str(), configFiles, 1, prt::LOG_WARNING);
+	prt::PRTStatus status = prt::ProceduralRT::init(root.c_str(), configFiles, 1, prt::LOG_TRACE);
 
 	delete [] configFiles;
 

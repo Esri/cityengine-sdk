@@ -19,7 +19,9 @@ void MayaOutputHandler::setVertices(double* vtx, size_t size) {
 
 
 void MayaOutputHandler::setNormals(double* nrm, size_t size) {
-
+	mNormals.clear();
+	for (size_t i = 0; i < size; i += 3)
+		mNormals.append(nrm[i], nrm[i+1], nrm[i+2]);
 }
 
 
@@ -33,7 +35,7 @@ void MayaOutputHandler::setUVs(float* u, float* v, size_t size) {
 }
 
 
-void MayaOutputHandler::setFaces(int* counts, size_t countsSize, int* connects, size_t connectsSize, int* uvCounts, size_t uvCountsSize, int* uvConnects, size_t uvConnectsSize) {
+void MayaOutputHandler::setFaces(int* counts, size_t countsSize, int* connects, size_t connectsSize, int* normalConnects, size_t normalConnectsSize, int* uvCounts, size_t uvCountsSize, int* uvConnects, size_t uvConnectsSize) {
 	mCounts.clear();
 	for (size_t i = 0; i < countsSize; ++i)
 		mCounts.append(counts[i]);
@@ -41,6 +43,10 @@ void MayaOutputHandler::setFaces(int* counts, size_t countsSize, int* connects, 
 	mConnects.clear();
 	for (size_t i = 0; i < connectsSize; ++i)
 		mConnects.append(connects[i]);
+
+	mNormalConnects.clear();
+	for (size_t i = 0; i < normalConnectsSize; ++i)
+		mNormalConnects.append(normalConnects[i]);
 
 	mUVCounts.clear();
 	for (size_t i = 0; i < uvCountsSize; ++i)
@@ -68,6 +74,14 @@ void MayaOutputHandler::createMesh() {
 	mFnMesh = new MFnMesh();
 	MObject oMesh = mFnMesh->create(mVertices.length(), mCounts.length(), mVertices, mCounts, mConnects, newOutputData, &stat);
 	MCHECK(stat);
+
+	int c = 0;
+	for (int fi = 0; fi < mCounts.length(); ++fi) {
+		for (int vi = 0; vi < mCounts[fi]; ++vi) {
+			MVector nrm(mNormals[mNormalConnects[c++]]);
+			mFnMesh->setFaceVertexNormal(nrm, fi, vi);
+		}
+	}
 
 	MPlugArray plugs;
 	bool isConnected = mPlug->connectedTo(plugs, false, true, &stat);

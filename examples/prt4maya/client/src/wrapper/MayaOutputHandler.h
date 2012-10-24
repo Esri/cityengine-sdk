@@ -55,7 +55,7 @@ public:
 	virtual void setNormals(double* nrm, size_t size);
 	virtual void setUVs(float* u, float* v, size_t size);
 
-	virtual void setFaces(int* counts, size_t countsSize, int* connects, size_t connectsSize, int* uvCounts, size_t uvCountsSize, int* uvConnects, size_t uvConnectsSize);
+	virtual void setFaces(int* counts, size_t countsSize, int* connects, size_t connectsSize, int* normalConnects, size_t normalConnectsSize, int* uvCounts, size_t uvCountsSize, int* uvConnects, size_t uvConnectsSize);
 	virtual void createMesh();
 	virtual void finishMesh();
 
@@ -71,8 +71,10 @@ public: // FIXME
 	MFnMesh*			mFnMesh;
 
 	MFloatPointArray	mVertices;
+	MFloatPointArray	mNormals;
 	MIntArray			mCounts;
 	MIntArray			mConnects;
+	MIntArray			mNormalConnects;
 
 	MFloatArray			mU;
 	MFloatArray			mV;

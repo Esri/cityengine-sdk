@@ -38,8 +38,8 @@
 #include <maya/MFnSet.h>
 #include <maya/MItMeshPolygon.h>
 
-#include <api/prtapi.h>
-#include <api/RuleFileInfo.h>
+#include "prt/prtapi.h"
+#include "prt/RuleFileInfo.h"
 
 
 #ifdef _MSC_VER
@@ -169,7 +169,7 @@ const char* filename(const char* path);
 		fflush(0);}
 
 #define DBGL(fmt, ...) {\
-		printf("%s:%d ", filename(__FILE__) , __LINE__); \
+		printf("%ls:%d ", filename(__FILE__) , __LINE__); \
 		wprintf(L##fmt, ## __VA_ARGS__); \
 		fflush(0);}
 
