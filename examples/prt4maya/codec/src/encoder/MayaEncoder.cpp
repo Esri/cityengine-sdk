@@ -14,15 +14,15 @@
 #include <boost/filesystem/operations.hpp>
 #include <boost/filesystem/path.hpp>
 
-#include "api/prtapi.h"
+#include "prt/prtapi.h"
 
-#include "spi/base/SPIException.h"
-#include "spi/base/Log.h"
-#include "spi/base/IGeometry.h"
-#include "spi/base/IShape.h"
-#include "spi/base/ILeafIterator.h"
-#include "spi/codec/EncodePreparator.h"
-#include "spi/extension/ExtensionManager.h"
+#include "prtx/base/SPIException.h"
+#include "prtx/base/Log.h"
+#include "prtx/base/IGeometry.h"
+#include "prtx/base/IShape.h"
+#include "prtx/base/ILeafIterator.h"
+#include "prtx/codec/EncodePreparator.h"
+#include "prtx/extension/ExtensionManager.h"
 
 #include "util/StringUtils.h"
 #include "util/Timer.h"
@@ -78,8 +78,11 @@ void MayaEncoder::encode(const prt::InitialShape** initialShapes, size_t initial
 
 void MayaEncoder::convertGeometry(prtx::AbstractResolveMapPtr am, prtx::IContentArray* geometries, IMayaOutputHandler* mayaOutput) {
 	std::vector<double> vertices;
+	std::vector<double> normals;
+
 	std::vector<int> counts;
 	std::vector<int> connects;
+	std::vector<int> normalConnects;
 
 	std::vector<float> tcsU, tcsV;
 	std::vector<int> uvCounts;
@@ -92,9 +95,14 @@ void MayaEncoder::convertGeometry(prtx::AbstractResolveMapPtr am, prtx::IContent
 
 		const double* verts = geo->getVertices();
 		const size_t vertsCount = geo->getVertexCount();
+		const double* norms = geo->getNormals();
+		const size_t normsCount = geo->getNormalCount();
 
 		for(size_t i = 0; i < vertsCount*3; ++i)
 			vertices.push_back(verts[i]);
+
+		for(size_t i = 0; i < normsCount*3; ++i)
+			normals.push_back((norms[i]));
 
 		const size_t tcsCount = geo->getUVCount();
 		if(tcsCount > 0) {
@@ -113,6 +121,10 @@ void MayaEncoder::convertGeometry(prtx::AbstractResolveMapPtr am, prtx::IContent
 			for(size_t vi = 0; vi < face->getIndexCount(); ++vi)
 				connects.push_back(base + indices[vi]);
 
+			const uint32_t* normalIndices = face->getNormalIndices();
+			for(size_t ni = 0; ni < face->getIndexCount(); ++ni)
+				normalConnects.push_back(base + normalIndices[ni]);
+
 			uvCounts.push_back(face->getUVIndexCount());
 			for(size_t vi = 0; vi < face->getUVIndexCount(); ++vi)
 				uvConnects.push_back(tcBase + face->getUVIndices()[vi]);
@@ -129,7 +141,8 @@ void MayaEncoder::convertGeometry(prtx::AbstractResolveMapPtr am, prtx::IContent
 
 	mayaOutput->setVertices(&vertices[0], vertices.size());
 	mayaOutput->setUVs(&tcsU[0], &tcsV[0], tcsU.size());
-	mayaOutput->setFaces(&counts[0], counts.size(), &connects[0], connects.size(), &uvCounts[0], uvCounts.size(), &uvConnects[0], uvConnects.size());
+	mayaOutput->setNormals(&normals[0], normals.size());
+	mayaOutput->setFaces(&counts[0], counts.size(), &connects[0], connects.size(), &normalConnects[0], normalConnects.size(), &uvCounts[0], uvCounts.size(), &uvConnects[0], uvConnects.size());
 	mayaOutput->createMesh();
 
 	int startFace = 0;
@@ -137,6 +150,8 @@ void MayaEncoder::convertGeometry(prtx::AbstractResolveMapPtr am, prtx::IContent
 		prtx::IGeometry* geo = (prtx::IGeometry*)geometries->get(gi);
 		prtx::IMaterial* mat = geo->getMaterial();
 		const int faceCount   = (int)geo->getFaceCount();
+
+		mat->dump();
 
 		std::wostringstream matName;
 		matName << "material" << gi;
@@ -146,7 +161,7 @@ void MayaEncoder::convertGeometry(prtx::AbstractResolveMapPtr am, prtx::IContent
 		int mh = mayaOutput->matCreate(matName.str().c_str(), startFace, faceCount);
 
 		std::wstring tex;
-		if(mat->getTextureArray(L"diffuseMap")->size() > 0) {
+		if(mat->getTextureArray(L"diffuseMap")->size() == 1) {
 			std::wstring uri(mat->getTextureArray(L"diffuseMap")->get(0)->getName());
 			log_trace("trying to set texture uri: %ls", uri.c_str());
 			tex = uri.substr(wcslen(URIUtils::SCHEME_FILE));

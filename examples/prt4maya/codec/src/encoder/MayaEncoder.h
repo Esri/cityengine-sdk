@@ -11,12 +11,12 @@
 #include <iostream>
 #include <stdexcept>
 
-#include "api/APIInitialShape.h"
+#include "prt/APIInitialShape.h"
 #include "util.h"
 
-#include "spi/base/IStream.h"
-#include "spi/extension/ExtensionFactory.h"
-#include "spi/codec/IEncoder.h"
+#include "prtx/base/IStream.h"
+#include "prtx/extension/ExtensionFactory.h"
+#include "prtx/codec/IEncoder.h"
 
 #include "encoder/IMayaOutputHandler.h"
 

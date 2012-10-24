@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "spi/prtspi.h"
+#include "prtx/prtspi.h"
 #include "encoder/MayaEncoder.h"
 
 #include "codecs_maya.h"
