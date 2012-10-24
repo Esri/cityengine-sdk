@@ -179,7 +179,7 @@ MStatus PRTNode::initialize() {
 	configFiles[0] = config.c_str();
 	//DBGL("Config file: %ls\n", configFiles[0]);
 
-	prt::PRTStatus status = prt::ProceduralRT::init(root.c_str(), configFiles, 1, prt::LOG_TRACE);
+	prt::Status status = prt::ProceduralRT::init(root.c_str(), configFiles, 1, prt::LOG_TRACE);
 
 	delete [] configFiles;
 

@@ -405,7 +405,7 @@ MStatus PRTAttrs::updateAttributes(MFnDependencyNode & node, prt::AttributeMapBu
 					if(!(wcscmp(an->getName(), L"@Range")))
 						e = new PRTEnum(prtNode, an);
 				}
-				prt::PRTStatus evalStat;
+				prt::Status evalStat;
 				bool value = prt::ProceduralRT::evalBool(shape, prtNode->resolveMap, info->getAttribute(i)->getName(), &evalStat);
 
 				if(e) {
@@ -428,7 +428,7 @@ MStatus PRTAttrs::updateAttributes(MFnDependencyNode & node, prt::AttributeMapBu
 							e = new PRTEnum(prtNode, an);
 					}
 				}
-				prt::PRTStatus evalStat;
+				prt::Status evalStat;
 				double value = prt::ProceduralRT::evalFloat(shape, prtNode->resolveMap, info->getAttribute(i)->getName(), &evalStat);
 
 				if(e) {
