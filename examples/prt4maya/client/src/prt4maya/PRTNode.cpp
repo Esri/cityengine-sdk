@@ -179,13 +179,9 @@ MStatus PRTNode::initialize() {
 	configFiles[0] = config.c_str();
 	//DBGL("Config file: %ls\n", configFiles[0]);
 
-	prt::ConsoleLogHandler* logHandler = prt::ConsoleLogHandler::create(); // FIXME: MEM LEAK
-	prt::ProceduralRT::setLogHandler(prt::LOG_FATAL, logHandler);
-	prt::ProceduralRT::setLogHandler(prt::LOG_ERROR, logHandler);
-	prt::ProceduralRT::setLogHandler(prt::LOG_WARNING, logHandler);
-	prt::ProceduralRT::setLogHandler(prt::LOG_INFO, logHandler);
-	prt::ProceduralRT::setLogHandler(prt::LOG_DEBUG, logHandler);
-	prt::ProceduralRT::setLogHandler(prt::LOG_TRACE, logHandler);
+	prt::LogLevel logLevels[6] = {prt::LOG_FATAL, prt::LOG_ERROR, prt::LOG_WARNING, prt::LOG_INFO, prt::LOG_DEBUG, prt::LOG_TRACE};
+	prt::ConsoleLogHandler* logHandler = prt::ConsoleLogHandler::create(&logLevels[0], (size_t)6); // FIXME: MEM LEAK
+	prt::ProceduralRT::addLogHandler(logHandler);
 
 	prt::Status status = prt::ProceduralRT::init(root.c_str(), configFiles, 1, prt::LOG_TRACE);
 
