@@ -46,7 +46,7 @@ void MayaEncoder::encode(const prt::InitialShape** initialShapes, size_t initial
 	IMayaOutputHandler* oh = dynamic_cast<IMayaOutputHandler*>(outputHandler);
 	if(oh == 0) throw(prtx::StatusException(prt::STATUS_ILLEGAL_OUTPUT_HANDLER));
 
-	Timer tim;
+	util::Timer tim;
 	log_trace("MayaEncoder:encode: #initial shapes = %d", initialShapeCount);
 
 	prtx::EncodePreparator* encPrep = prtx::EncodePreparator::create();
@@ -164,7 +164,7 @@ void MayaEncoder::convertGeometry(prtx::AbstractResolveMapPtr am, prtx::IContent
 		if(mat->getTextureArray(L"diffuseMap")->size() == 1) {
 			std::wstring uri(mat->getTextureArray(L"diffuseMap")->get(0)->getName());
 			log_trace("trying to set texture uri: %ls", uri.c_str());
-			tex = uri.substr(wcslen(URIUtils::SCHEME_FILE));
+			tex = uri.substr(wcslen(util::URIUtils::SCHEME_FILE));
 			mayaOutput->matSetDiffuseTexture(mh, tex.c_str());
 		}
 
