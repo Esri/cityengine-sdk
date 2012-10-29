@@ -179,10 +179,6 @@ MStatus PRTNode::initialize() {
 	configFiles[0] = config.c_str();
 	//DBGL("Config file: %ls\n", configFiles[0]);
 
-	prt::LogLevel logLevels[6] = {prt::LOG_FATAL, prt::LOG_ERROR, prt::LOG_WARNING, prt::LOG_INFO, prt::LOG_DEBUG, prt::LOG_TRACE};
-	prt::ConsoleLogHandler* logHandler = prt::ConsoleLogHandler::create(&logLevels[0], (size_t)6); // FIXME: MEM LEAK
-	prt::ProceduralRT::addLogHandler(logHandler);
-
 	prt::Status status = prt::ProceduralRT::init(root.c_str(), configFiles, 1, prt::LOG_TRACE);
 
 	delete [] configFiles;
@@ -370,9 +366,24 @@ const PRTEnum * PRTNode::findEnum(const MObject & attr) const {
 	return 0;
 }
 
+
+void PRTNode::initLogger() {
+	prt::LogLevel logLevels[6] = {prt::LOG_FATAL, prt::LOG_ERROR, prt::LOG_WARNING, prt::LOG_INFO, prt::LOG_DEBUG, prt::LOG_TRACE};
+	logHandler = prt::ConsoleLogHandler::create(&logLevels[0], (size_t)6);
+	prt::ProceduralRT::addLogHandler(logHandler);
+}
+
+
+void PRTNode::clearLogger() {
+	prt::ProceduralRT::removeLogHandler(logHandler);
+	logHandler->destroy();
+}
+
 // Plug-in Initialization //
 
-MStatus initializePlugin( MObject obj ){ 
+MStatus initializePlugin( MObject obj ){
+	PRTNode::initLogger();
+
 	MFnPlugin plugin( obj, "Esri", "0.9", "Any");
 
 	M_CHECK(plugin.registerNode("prt", PRTNode::id, &PRTNode::creator, &PRTNode::initialize, MPxNode::kDependNode));
@@ -390,6 +401,8 @@ MStatus uninitializePlugin( MObject obj) {
 	M_CHECK(plugin.deregisterCommand("prtAttrs"));
 	M_CHECK(plugin.deregisterNode(PRTNode::id));
 
+	PRTNode::clearLogger();
+
 	return MS::kSuccess;
 }
 
@@ -405,3 +418,5 @@ MObject PRTNode::inMesh;
 //
 MObject PRTNode::outMesh;
 
+
+prt::ConsoleLogHandler* PRTNode::logHandler = 0;

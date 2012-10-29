@@ -116,11 +116,16 @@ public:
 	const PRTEnum *       findEnum(const MObject & attr) const;
 	MStatus               attachMaterials();
 
+	static void initLogger();
+	static void clearLogger();
+
 private:
 	PRTEnum*          enums;
 	bool              hasMaterials;
 	MStringArray      shadingGroups;
 	MIntArray         shadingRanges;
+
+	static prt::ConsoleLogHandler* logHandler;
 
 	MString&          getStrParameter(MObject & attr, MString & value);
 	MStatus           updateAttributes();
