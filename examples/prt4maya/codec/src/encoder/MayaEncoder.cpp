@@ -77,6 +77,8 @@ void MayaEncoder::encode(const prt::InitialShape** initialShapes, size_t initial
 
 
 void MayaEncoder::convertGeometry(prtx::AbstractResolveMapPtr am, prtx::IContentArray* geometries, IMayaOutputHandler* mayaOutput) {
+	log_trace("MayaEncoder::convertGeometry: begin");
+
 	std::vector<double> vertices;
 	std::vector<double> normals;
 
@@ -90,6 +92,7 @@ void MayaEncoder::convertGeometry(prtx::AbstractResolveMapPtr am, prtx::IContent
 
 	uint32_t base = 0;
 	uint32_t tcBase = 0;
+	uint32_t nrmBase = 0;
 	for(size_t gi = 0, size = geometries->size(); gi < size; ++gi) {
 		prtx::IGeometry* geo = (prtx::IGeometry*)geometries->get(gi);
 
@@ -122,8 +125,8 @@ void MayaEncoder::convertGeometry(prtx::AbstractResolveMapPtr am, prtx::IContent
 				connects.push_back(base + indices[vi]);
 
 			const uint32_t* normalIndices = face->getNormalIndices();
-			for(size_t ni = 0; ni < face->getIndexCount(); ++ni)
-				normalConnects.push_back(base + normalIndices[ni]);
+			for(size_t ni = 0; ni < face->getNormalIndexCount(); ++ni)
+				normalConnects.push_back(nrmBase + normalIndices[ni]);
 
 			uvCounts.push_back(face->getUVIndexCount());
 			for(size_t vi = 0; vi < face->getUVIndexCount(); ++vi)
@@ -132,7 +135,11 @@ void MayaEncoder::convertGeometry(prtx::AbstractResolveMapPtr am, prtx::IContent
 
 		base   = vertices.size() / 3;
 		tcBase = tcsU.size();
+		nrmBase = normals.size() / 3;
 	}
+
+	log_trace("    added %d normal float values", normals.size());
+	//log_trace("    normal indices: %s", util::StringUtils::)
 
 //	std::cout << "uvCounts: " << uvCounts << std::endl;
 //	std::cout << "uvConnects: " << uvConnects << std::endl;
@@ -149,7 +156,7 @@ void MayaEncoder::convertGeometry(prtx::AbstractResolveMapPtr am, prtx::IContent
 	for(size_t gi = 0, size = geometries->size(); gi < size; ++gi) {
 		prtx::IGeometry* geo = (prtx::IGeometry*)geometries->get(gi);
 		prtx::IMaterial* mat = geo->getMaterial();
-		const int faceCount   = (int)geo->getFaceCount();
+		const int faceCount  = (int)geo->getFaceCount();
 
 		mat->dump();
 
@@ -162,7 +169,7 @@ void MayaEncoder::convertGeometry(prtx::AbstractResolveMapPtr am, prtx::IContent
 
 		std::wstring tex;
 		if(mat->getTextureArray(L"diffuseMap")->size() == 1) {
-			std::wstring uri(mat->getTextureArray(L"diffuseMap")->get(0)->getName());
+			std::wstring uri(mat->getTextureArray(L"colorMap")->get(0)->getName());
 			log_trace("trying to set texture uri: %ls", uri.c_str());
 			tex = uri.substr(wcslen(util::URIUtils::SCHEME_FILE));
 			mayaOutput->matSetDiffuseTexture(mh, tex.c_str());
