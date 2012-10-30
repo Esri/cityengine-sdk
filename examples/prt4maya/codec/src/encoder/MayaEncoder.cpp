@@ -80,10 +80,11 @@ void MayaEncoder::convertGeometry(prtx::AbstractResolveMapPtr am, prtx::IContent
 	log_trace("MayaEncoder::convertGeometry: begin");
 
 	std::vector<double> vertices;
-	std::vector<double> normals;
-
 	std::vector<int> counts;
 	std::vector<int> connects;
+
+	std::vector<double> normals;
+	std::vector<int> normalCounts;
 	std::vector<int> normalConnects;
 
 	std::vector<float> tcsU, tcsV;
@@ -91,65 +92,73 @@ void MayaEncoder::convertGeometry(prtx::AbstractResolveMapPtr am, prtx::IContent
 	std::vector<int> uvConnects;
 
 	uint32_t base = 0;
-	uint32_t tcBase = 0;
 	uint32_t nrmBase = 0;
+	uint32_t uvBase = 0;
 	for(size_t gi = 0, size = geometries->size(); gi < size; ++gi) {
 		prtx::IGeometry* geo = (prtx::IGeometry*)geometries->get(gi);
 
+		const size_t& faceCount = geo->getFaceCount();
 		const double* verts = geo->getVertices();
 		const size_t vertsCount = geo->getVertexCount();
 		const double* norms = geo->getNormals();
 		const size_t normsCount = geo->getNormalCount();
+		const double* uvs = geo->getUVs();
+		const size_t uvCount = geo->getUVCount();
+
+		vertices.reserve(vertices.size() + vertsCount*3);
+		normals.reserve(normals.size() + normsCount*3);
+		tcsU.reserve(tcsU.size() + uvCount);
+		tcsV.reserve(tcsV.size() + uvCount);
+		counts.reserve(counts.size() + faceCount);
+		normalCounts.reserve(normalCounts.size() + faceCount);
+		uvCounts.reserve(uvCounts.size() + faceCount);
 
 		for(size_t i = 0; i < vertsCount*3; ++i)
 			vertices.push_back(verts[i]);
 
 		for(size_t i = 0; i < normsCount*3; ++i)
-			normals.push_back((norms[i]));
+			normals.push_back(norms[i]);
 
-		const size_t tcsCount = geo->getUVCount();
-		if(tcsCount > 0) {
-			const double* tcs = geo->getUVs();
-			for(size_t i=0; i<tcsCount; i++) {
-				tcsU.push_back((float)tcs[i*2]);
-				tcsV.push_back((float)tcs[i*2+1]);
-			}
+		for(size_t i = 0; i < uvCount; ++i) {
+			tcsU.push_back((float)uvs[i*2]);
+			tcsV.push_back((float)uvs[i*2+1]);
 		}
 
-		for(size_t fi = 0; fi < geo->getFaceCount(); ++fi) {
+		for(size_t fi = 0; fi < faceCount; ++fi) {
 			const prtx::IFace* face = geo->getFace(fi);
-			counts.push_back(face->getIndexCount());
 
+			log_trace("    -- face %d", fi);
+			log_trace("       vtx index count: %d", face->getIndexCount());
+			log_trace("       nrm index count: %d", face->getNormalIndexCount());
+
+			const uint32_t vertexIndexCount = face->getIndexCount();
+			counts.push_back(vertexIndexCount);
 			const uint32_t* indices = face->getVertexIndices();
-			for(size_t vi = 0; vi < face->getIndexCount(); ++vi)
+			for(size_t vi = 0; vi < vertexIndexCount; ++vi)
 				connects.push_back(base + indices[vi]);
 
+			const uint32_t normalIndexCount = face->getNormalIndexCount();
+			normalCounts.push_back(normalIndexCount);
 			const uint32_t* normalIndices = face->getNormalIndices();
-			for(size_t ni = 0; ni < face->getNormalIndexCount(); ++ni)
+			for(size_t ni = 0; ni < normalIndexCount; ++ni) {
 				normalConnects.push_back(nrmBase + normalIndices[ni]);
+			}
 
 			uvCounts.push_back(face->getUVIndexCount());
+			const uint32_t* uvIndices = face->getUVIndices();
 			for(size_t vi = 0; vi < face->getUVIndexCount(); ++vi)
-				uvConnects.push_back(tcBase + face->getUVIndices()[vi]);
+				uvConnects.push_back(uvBase + uvIndices[vi]);
 		}
 
-		base   = vertices.size() / 3;
-		tcBase = tcsU.size();
-		nrmBase = normals.size() / 3;
+		base	+= vertsCount;
+		nrmBase	+= normsCount;
+		uvBase	+= uvCount;
 	}
-
-	log_trace("    added %d normal float values", normals.size());
-	//log_trace("    normal indices: %s", util::StringUtils::)
-
-//	std::cout << "uvCounts: " << uvCounts << std::endl;
-//	std::cout << "uvConnects: " << uvConnects << std::endl;
-//	std::cout << "uvCounts sum:" << std::accumulate(uvCounts.begin(), uvCounts.end(), 0) << std::endl;
-//	std::cout << "tcsU size = " << tcsU.size() << std::endl;
 
 	mayaOutput->setVertices(&vertices[0], vertices.size());
 	mayaOutput->setUVs(&tcsU[0], &tcsV[0], tcsU.size());
 	mayaOutput->setNormals(&normals[0], normals.size());
-	mayaOutput->setFaces(&counts[0], counts.size(), &connects[0], connects.size(), &normalConnects[0], normalConnects.size(), &uvCounts[0], uvCounts.size(), &uvConnects[0], uvConnects.size());
+	mayaOutput->setFaces(&counts[0], counts.size(), &connects[0], connects.size(), &normalCounts[0], normalCounts.size(), &normalConnects[0], normalConnects.size(), &uvCounts[0], uvCounts.size(), &uvConnects[0], uvConnects.size());
 	mayaOutput->createMesh();
 
 	int startFace = 0;
@@ -163,7 +172,7 @@ void MayaEncoder::convertGeometry(prtx::AbstractResolveMapPtr am, prtx::IContent
 		std::wostringstream matName;
 		matName << "material" << gi;
 
-		std::wcout << L"creating material: '" << matName.str() << L"'" << std::endl;
+		log_trace(L"creating material: '%ls'", matName.str().c_str());
 
 		int mh = mayaOutput->matCreate(matName.str().c_str(), startFace, faceCount);
 
