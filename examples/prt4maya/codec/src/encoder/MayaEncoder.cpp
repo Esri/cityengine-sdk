@@ -164,7 +164,7 @@ void MayaEncoder::convertGeometry(prtx::AbstractResolveMapPtr am, prtx::IContent
 	int startFace = 0;
 	for(size_t gi = 0, size = geometries->size(); gi < size; ++gi) {
 		prtx::IGeometry* geo = (prtx::IGeometry*)geometries->get(gi);
-		prtx::IMaterial* mat = geo->getMaterial();
+		prtx::Material* mat = geo->getMaterial();
 		const int faceCount  = (int)geo->getFaceCount();
 
 		mat->dump();
