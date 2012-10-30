@@ -5,10 +5,14 @@
  *      Author: shaegler
  */
 
+#include <cassert>
+
+#include "maya/MItMeshPolygon.h"
+
 #include "wrapper/MayaOutputHandler.h"
 
 
-#define MCHECK(_stat_) {if(MS::kSuccess != _stat_) {printf("maya err:%s %d\n", _stat_.errorString().asChar(), _stat_.statusCode());}}
+#define MCHECK(_stat_) {if(MS::kSuccess != _stat_) {printf("maya err at line %d: %s %d\n", __LINE__, _stat_.errorString().asChar(), _stat_.statusCode());}}
 
 
 void MayaOutputHandler::setVertices(double* vtx, size_t size) {
@@ -35,7 +39,7 @@ void MayaOutputHandler::setUVs(float* u, float* v, size_t size) {
 }
 
 
-void MayaOutputHandler::setFaces(int* counts, size_t countsSize, int* connects, size_t connectsSize, int* normalConnects, size_t normalConnectsSize, int* uvCounts, size_t uvCountsSize, int* uvConnects, size_t uvConnectsSize) {
+void MayaOutputHandler::setFaces(int* counts, size_t countsSize, int* connects, size_t connectsSize, int* normalCounts, size_t normalCountsSize, int* normalConnects, size_t normalConnectsSize, int* uvCounts, size_t uvCountsSize, int* uvConnects, size_t uvConnectsSize) {
 	mCounts.clear();
 	for (size_t i = 0; i < countsSize; ++i)
 		mCounts.append(counts[i]);
@@ -43,6 +47,10 @@ void MayaOutputHandler::setFaces(int* counts, size_t countsSize, int* connects, 
 	mConnects.clear();
 	for (size_t i = 0; i < connectsSize; ++i)
 		mConnects.append(connects[i]);
+
+	mNormalCounts.clear();
+	for (size_t i = 0; i < normalCountsSize; ++i)
+		mNormalCounts.append(normalCounts[i]);
 
 	mNormalConnects.clear();
 	for (size_t i = 0; i < normalConnectsSize; ++i)
@@ -55,6 +63,9 @@ void MayaOutputHandler::setFaces(int* counts, size_t countsSize, int* connects, 
 	mUVConnects.clear();
 	for (size_t i = 0; i < uvConnectsSize; ++i)
 		mUVConnects.append(uvConnects[i]);
+
+	assert(mCounts.length() == mNormalCounts.length());
+	assert(mCounts.length() == mUVCounts.length());
 }
 
 
@@ -75,12 +86,19 @@ void MayaOutputHandler::createMesh() {
 	MObject oMesh = mFnMesh->create(mVertices.length(), mCounts.length(), mVertices, mCounts, mConnects, newOutputData, &stat);
 	MCHECK(stat);
 
-	int c = 0;
+	int ni = 0;
+	int vi = 0;
 	for (int fi = 0; fi < mCounts.length(); ++fi) {
-		for (int vi = 0; vi < mCounts[fi]; ++vi) {
-			MVector nrm(mNormals[mNormalConnects[c++]]);
-			mFnMesh->setFaceVertexNormal(nrm, fi, vi);
+		if (mNormalCounts[fi] > 0) {
+			for (int v = 0; v < mNormalCounts[fi]; ++v, ++ni, ++vi) {
+				MVector nrm(mNormals[mNormalConnects[ni]]);
+				std::cout << "fi = " << fi << ", v = " << v << ", vtx index = " << mConnects[vi] << ", nrm index = " << mNormalConnects[ni] << ", nrm = " << nrm << std::endl;
+				stat = mFnMesh->setFaceVertexNormal(nrm, fi, mConnects[vi]);
+				MCHECK(stat);
+			}
 		}
+		else
+			vi += mCounts[fi];
 	}
 
 	MPlugArray plugs;
