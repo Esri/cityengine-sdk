@@ -38,8 +38,10 @@
 #include <maya/MFnSet.h>
 #include <maya/MItMeshPolygon.h>
 
-#include "prt/prtapi.h"
 #include "prt/RuleFileInfo.h"
+#include "prt/AttributeMap.h"
+#include "prt/LogHandler.h"
+#include "prt/ProceduralRT.h"
 
 
 #ifdef _MSC_VER
