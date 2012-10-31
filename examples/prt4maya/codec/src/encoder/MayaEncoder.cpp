@@ -14,11 +14,12 @@
 #include <boost/filesystem/operations.hpp>
 #include <boost/filesystem/path.hpp>
 
-#include "prt/prtapi.h"
+#include "prt/prt.h"
 
 #include "prtx/base/SPIException.h"
 #include "prtx/base/Log.h"
 #include "prtx/base/IGeometry.h"
+#include "prtx/base/Material.h"
 #include "prtx/base/IShape.h"
 #include "prtx/base/ILeafIterator.h"
 #include "prtx/codec/EncodePreparator.h"

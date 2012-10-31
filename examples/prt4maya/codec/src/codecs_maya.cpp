@@ -1,6 +1,9 @@
 #include <iostream>
 
-#include "prtx/prtspi.h"
+#include "prtx/prtx.h"
+#include "prtx/extension/ExtensionManager.h"
+#include "prtx/base/Log.h"
+
 #include "encoder/MayaEncoder.h"
 
 #include "codecs_maya.h"
