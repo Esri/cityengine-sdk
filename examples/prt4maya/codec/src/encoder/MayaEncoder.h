@@ -12,7 +12,6 @@
 #include <stdexcept>
 
 #include "prt/APIInitialShape.h"
-#include "util.h"
 
 #include "prtx/base/IStream.h"
 #include "prtx/extension/ExtensionFactory.h"
@@ -31,7 +30,7 @@ public:
 			const prt::AttributeMap* options, prt::OutputHandler* const outputHandler);
 
 	virtual void encodeContent(prtx::IOutputStream* stream, const prtx::IContentArray* content) {
-		UNUSED(stream); UNUSED(content); throw std::runtime_error("not implemented");
+		throw std::runtime_error("not implemented");
 	}
 
 public:

@@ -16,7 +16,7 @@
 
 #include "prt/prt.h"
 
-#include "prtx/base/SPIException.h"
+#include "prtx/base/Exception.h"
 #include "prtx/base/Log.h"
 #include "prtx/base/IGeometry.h"
 #include "prtx/base/Material.h"
