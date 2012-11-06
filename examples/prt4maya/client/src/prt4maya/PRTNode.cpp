@@ -90,7 +90,9 @@ MStatus PRTNode::compute( const MPlug& plug, MDataBlock& data ) {
 
 		MayaOutputHandler mdata(&plug, &data, &shadingGroups, &shadingRanges);
 		const prt::InitialShape*          shape = prt::InitialShape::create(va, vertices.length() * 3, ia, pconnect.length(), ca, pcounts.length(), generateAttrs);
-		prt::ProceduralRT::generate(&shape, 1, resolveMap, L"com.esri.prt.codecs.maya.MayaEncoder", generateOpts, &mdata);
+
+		const wchar_t* encoders[] = { L"com.esri.prt.codecs.maya.MayaEncoder" };
+		prt::ProceduralRT::generate(&shape, 1, resolveMap, encoders, 1, generateOpts, &mdata);
 
 		// TODO: Error handling
 
