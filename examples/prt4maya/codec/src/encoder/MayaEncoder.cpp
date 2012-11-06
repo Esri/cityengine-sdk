@@ -63,10 +63,9 @@ void MayaEncoder::encode(const prt::InitialShape** initialShapes, size_t initial
 	const float t1 = tim.stop();
 	tim.start();
 
-	prtx::IContentArray* geometries = prtx::IContentArray::create();
+	prtx::ContentPtrVector geometries;
 	encPrep->createEncodableGeometries(geometries);
 	convertGeometry(am, geometries, oh);
-	geometries->destroy();
 
 	encPrep->destroy();
 
@@ -77,7 +76,7 @@ void MayaEncoder::encode(const prt::InitialShape** initialShapes, size_t initial
 }
 
 
-void MayaEncoder::convertGeometry(prtx::AbstractResolveMapPtr am, prtx::IContentArray* geometries, IMayaOutputHandler* mayaOutput) {
+void MayaEncoder::convertGeometry(prtx::AbstractResolveMapPtr am, prtx::ContentPtrVector& geometries, IMayaOutputHandler* mayaOutput) {
 	log_trace("MayaEncoder::convertGeometry: begin");
 
 	std::vector<double> vertices;
@@ -95,8 +94,8 @@ void MayaEncoder::convertGeometry(prtx::AbstractResolveMapPtr am, prtx::IContent
 	uint32_t base = 0;
 	uint32_t nrmBase = 0;
 	uint32_t uvBase = 0;
-	for(size_t gi = 0, size = geometries->size(); gi < size; ++gi) {
-		prtx::IGeometry* geo = (prtx::IGeometry*)geometries->get(gi);
+	for(size_t gi = 0, size = geometries.size(); gi < size; ++gi) {
+		prtx::IGeometry* geo = (prtx::IGeometry*)geometries[gi].get();
 
 		const size_t& faceCount = geo->getFaceCount();
 		const double* verts = geo->getVertices();
@@ -126,7 +125,7 @@ void MayaEncoder::convertGeometry(prtx::AbstractResolveMapPtr am, prtx::IContent
 		}
 
 		for(size_t fi = 0; fi < faceCount; ++fi) {
-			const prtx::IFace* face = geo->getFace(fi);
+			const prtx::Face* face = geo->getFace(fi).get();
 
 			log_trace("    -- face %d", fi);
 			log_trace("       vtx index count: %d", face->getIndexCount());
@@ -163,8 +162,8 @@ void MayaEncoder::convertGeometry(prtx::AbstractResolveMapPtr am, prtx::IContent
 	mayaOutput->createMesh();
 
 	int startFace = 0;
-	for(size_t gi = 0, size = geometries->size(); gi < size; ++gi) {
-		prtx::IGeometry* geo = (prtx::IGeometry*)geometries->get(gi);
+	for(size_t gi = 0, size = geometries.size(); gi < size; ++gi) {
+		prtx::IGeometry* geo = (prtx::IGeometry*)geometries[gi].get();
 		prtx::Material* mat = geo->getMaterial();
 		const int faceCount  = (int)geo->getFaceCount();
 
@@ -178,8 +177,8 @@ void MayaEncoder::convertGeometry(prtx::AbstractResolveMapPtr am, prtx::IContent
 		int mh = mayaOutput->matCreate(matName.str().c_str(), startFace, faceCount);
 
 		std::wstring tex;
-		if(mat->getTextureArray(L"diffuseMap")->size() == 1) {
-			std::wstring uri(mat->getTextureArray(L"colorMap")->get(0)->getName());
+		if(mat->getTextureArray(L"diffuseMap").size() == 1) {
+			std::wstring uri(mat->getTextureArray(L"colorMap").front()->getName());
 			log_trace("trying to set texture uri: %ls", uri.c_str());
 			tex = uri.substr(wcslen(util::URIUtils::SCHEME_FILE));
 			mayaOutput->matSetDiffuseTexture(mh, tex.c_str());
