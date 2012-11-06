@@ -18,6 +18,7 @@
 #include "prtx/codec/IEncoder.h"
 
 #include "encoder/IMayaOutputHandler.h"
+#include "prt/ContentType.h"
 
 
 class MayaEncoder : public prtx::IEncoder {
@@ -35,7 +36,7 @@ public:
 
 public:
 	virtual const wchar_t* getID() const { return L"com.esri.prt.codecs.maya.MayaEncoder"; }
-	virtual ContentType getContentType() const { return CT_GEOMETRY; }
+	virtual prt::ContentType getContentType() const { return prt::CT_GEOMETRY; }
 	virtual ExtensionType getExtensionType() const { return ET_ENCODER; }
 
 	static void destroyMayaData(struct MayaOutputHandler* mayaData);
