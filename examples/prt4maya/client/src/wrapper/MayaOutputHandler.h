@@ -51,7 +51,7 @@ public:
 	virtual ~MayaOutputHandler() { }
 
 	virtual prt::Status cgaError(size_t isIndex, int32_t shapeID, prt::OutputHandler::CGAErrorLevel level, int32_t methodId, int32_t pc, const wchar_t* message) { throw std::runtime_error("Not implemented yet"); }
-	virtual prt::Status cgaPrint(size_t isIndex, int32_t shapeID, const wchar_t* fmt, ...) { throw std::runtime_error("Not implemented yet"); }
+	virtual prt::Status cgaPrint(size_t isIndex, int32_t shapeID, const wchar_t* txt) { throw std::runtime_error("Not implemented yet"); }
 	virtual prt::Status cgaReportBool(size_t isIndex, int32_t shapeID, const wchar_t* key, bool value) { throw std::runtime_error("Not implemented yet"); }
 	virtual prt::Status cgaReportFloat(size_t isIndex, int32_t shapeID, const wchar_t* key, double value) { throw std::runtime_error("Not implemented yet"); }
 	virtual prt::Status cgaReportString(size_t isIndex, int32_t shapeID, const wchar_t* key, const wchar_t* value) { throw std::runtime_error("Not implemented yet"); }
