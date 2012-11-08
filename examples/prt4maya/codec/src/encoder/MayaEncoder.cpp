@@ -14,21 +14,21 @@
 #include <boost/filesystem/operations.hpp>
 #include <boost/filesystem/path.hpp>
 
-#include "prt/prt.h"
-
-#include "prtx/base/Exception.h"
-#include "prtx/base/Log.h"
-#include "prtx/base/IGeometry.h"
-#include "prtx/base/Material.h"
-#include "prtx/base/IShape.h"
-#include "prtx/base/ILeafIterator.h"
-#include "prtx/codec/EncodePreparator.h"
-#include "prtx/extension/ExtensionManager.h"
-
 #include "util/StringUtils.h"
 #include "util/Timer.h"
 #include "util/URIUtils.h"
 #include "util/Exception.h"
+
+#include "prt/prt.h"
+
+#include "prtx/Exception.h"
+#include "prtx/Log.h"
+#include "prtx/IGeometry.h"
+#include "prtx/Material.h"
+#include "prtx/IShape.h"
+#include "prtx/ILeafIterator.h"
+#include "prtx/EncodePreparator.h"
+#include "prtx/ExtensionManager.h"
 
 #include "encoder/MayaEncoder.h"
 

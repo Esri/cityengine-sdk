@@ -1,8 +1,8 @@
 #include <iostream>
 
 #include "prtx/prtx.h"
-#include "prtx/extension/ExtensionManager.h"
-#include "prtx/base/Log.h"
+#include "prtx/ExtensionManager.h"
+#include "prtx/Log.h"
 
 #include "encoder/MayaEncoder.h"
 

@@ -11,14 +11,14 @@
 #include <iostream>
 #include <stdexcept>
 
+#include "prt/ContentType.h"
 #include "prt/APIInitialShape.h"
 
-#include "prtx/base/IStream.h"
-#include "prtx/extension/ExtensionFactory.h"
-#include "prtx/codec/IEncoder.h"
+#include "prtx/IStream.h"
+#include "prtx/ExtensionFactory.h"
+#include "prtx/IEncoder.h"
 
 #include "encoder/IMayaOutputHandler.h"
-#include "prt/ContentType.h"
 
 
 class MayaEncoder : public prtx::IEncoder {
