@@ -10,8 +10,6 @@
 #include <vector>
 #include <numeric>
 
-#define BOOST_FILESYSTEM_VERSION 3
-#include <boost/filesystem/operations.hpp>
 #include <boost/filesystem/path.hpp>
 
 #include "util/StringUtils.h"
