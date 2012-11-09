@@ -12,7 +12,7 @@
 #include <stdexcept>
 
 #include "prt/ContentType.h"
-#include "prt/APIInitialShape.h"
+#include "prt/InitialShape.h"
 
 #include "prtx/IStream.h"
 #include "prtx/ExtensionFactory.h"
