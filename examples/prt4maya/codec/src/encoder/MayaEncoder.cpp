@@ -29,6 +29,7 @@
 #include "prtx/ExtensionManager.h"
 
 #include "encoder/MayaEncoder.h"
+#include "prtx/IGenerateContext.h"
 
 
 MayaEncoder::MayaEncoder() {
@@ -39,23 +40,20 @@ MayaEncoder::~MayaEncoder() {
 }
 
 
-void MayaEncoder::encode(const prt::InitialShape** initialShapes, size_t initialShapeCount, prtx::AbstractResolveMapPtr am, const prt::AttributeMap* options, prt::OutputHandler* const outputHandler) {
-	am = am->toFileURIs();
+void MayaEncoder::encode(prtx::IGenerateContext& context, size_t initialShapeIndex) {
+	prtx::AbstractResolveMapPtr am = context.getResolveMap()->toFileURIs();
+	context.setResolveMap(am);		// !! changes context!!
 
-	IMayaOutputHandler* oh = dynamic_cast<IMayaOutputHandler*>(outputHandler);
+	IMayaOutputHandler* oh = dynamic_cast<IMayaOutputHandler*>(&context.getOutputHandler());
 	if(oh == 0) throw(prtx::StatusException(prt::STATUS_ILLEGAL_OUTPUT_HANDLER));
 
 	util::Timer tim;
-	log_trace("MayaEncoder:encode: #initial shapes = %d", initialShapeCount);
 
 	prtx::EncodePreparator* encPrep = prtx::EncodePreparator::create();
-	for (size_t i = 0; i < initialShapeCount; ++i) {
-		prtx::IGeometry** occluders = 0;
-		prtx::ILeafIterator* li = prtx::ILeafIterator::create(initialShapes[i], am, occluders, 0);
-		for (const prtx::IShape* shape = li->getNext(); shape != 0; shape = li->getNext()) {
-			encPrep->add(/*initialShapes[i],*/ shape);
-			//			log_trace(L"encode leaf shape mat: %ls", shape->getMaterial()->getString(L"name"));
-		}
+	prtx::LeafIterator* li = prtx::LeafIterator::create(context, initialShapeIndex);
+	for (const prtx::IShape* shape = li->getNext(); shape != 0; shape = li->getNext()) {
+		encPrep->add(/*initialShapes[i],*/ shape);
+		//			log_trace(L"encode leaf shape mat: %ls", shape->getMaterial()->getString(L"name"));
 	}
 
 	const float t1 = tim.stop();

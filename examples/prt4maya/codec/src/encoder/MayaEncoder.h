@@ -27,8 +27,7 @@ public:
 	virtual ~MayaEncoder();
 
 public:
-	virtual void encode(const prt::InitialShape** initialShapes, size_t initialShapeCount, prtx::AbstractResolveMapPtr am,
-			const prt::AttributeMap* options, prt::OutputHandler* const outputHandler);
+	virtual void encode(prtx::IGenerateContext& context, size_t initialShapeIndex);
 
 	virtual void encodeContent(prtx::IOutputStream* stream, const prtx::ContentPtrVector& content) {
 		throw std::runtime_error("not implemented");
