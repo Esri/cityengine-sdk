@@ -24,7 +24,7 @@
 #include "prtx/IGeometry.h"
 #include "prtx/Material.h"
 #include "prtx/IShape.h"
-#include "prtx/ILeafIterator.h"
+#include "prtx/ShapeIterator.h"
 #include "prtx/EncodePreparator.h"
 #include "prtx/ExtensionManager.h"
 
