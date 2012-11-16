@@ -40,7 +40,7 @@ add_subdirectory_source_group(encoder)
 
 add_library(${PROJECT} SHARED ${SOURCES})
 
-if(WIN32)
+if(PRT_WINDOWS)
 	target_link_libraries(${PROJECT} IPHlpApi Psapi DbgHelp)
 endif()
 
