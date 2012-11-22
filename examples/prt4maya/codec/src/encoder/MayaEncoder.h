@@ -41,7 +41,7 @@ public:
 	static void destroyMayaData(struct MayaOutputHandler* mayaData);
 
 private:
-	void convertGeometry(prtx::AbstractResolveMapPtr am, prtx::ContentPtrVector& geometries, IMayaOutputHandler* mayaOutput);
+	void convertGeometry(prtx::AbstractResolveMapPtr am, prtx::GeometryPtrVector& geometries, IMayaOutputHandler* mayaOutput);
 	void unpackRPK(std::wstring rpkPath);
 };
 

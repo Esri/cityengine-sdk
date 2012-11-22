@@ -49,8 +49,8 @@ void MayaEncoder::encode(prtx::IGenerateContext& context, size_t initialShapeInd
 
 	util::Timer tim;
 
-	prtx::EncodePreparator* encPrep = prtx::EncodePreparator::create();
-	prtx::LeafIterator* li = prtx::LeafIterator::create(context, initialShapeIndex);
+	prtx::EncodePreparatorPtr encPrep = prtx::EncodePreparator::create();
+	prtx::LeafIteratorPtr li = prtx::LeafIterator::create(context, initialShapeIndex);
 	for (const prtx::IShape* shape = li->getNext(); shape != 0; shape = li->getNext()) {
 		encPrep->add(/*initialShapes[i],*/ shape);
 		//			log_trace(L"encode leaf shape mat: %ls", shape->getMaterial()->getString(L"name"));
@@ -59,11 +59,9 @@ void MayaEncoder::encode(prtx::IGenerateContext& context, size_t initialShapeInd
 	const float t1 = tim.stop();
 	tim.start();
 
-	prtx::ContentPtrVector geometries;
+	prtx::GeometryPtrVector geometries;
 	encPrep->createEncodableGeometries(geometries);
 	convertGeometry(am, geometries, oh);
-
-	encPrep->destroy();
 
 	const float t2 = tim.stop();
 	log_info("MayaEncoder::encode() : preparator %f s, encoding %f s, total %f s", t1, t2, t1+t2);
@@ -72,7 +70,7 @@ void MayaEncoder::encode(prtx::IGenerateContext& context, size_t initialShapeInd
 }
 
 
-void MayaEncoder::convertGeometry(prtx::AbstractResolveMapPtr am, prtx::ContentPtrVector& geometries, IMayaOutputHandler* mayaOutput) {
+void MayaEncoder::convertGeometry(prtx::AbstractResolveMapPtr am, prtx::GeometryPtrVector& geometries, IMayaOutputHandler* mayaOutput) {
 	log_trace("MayaEncoder::convertGeometry: begin");
 
 	std::vector<double> vertices;
