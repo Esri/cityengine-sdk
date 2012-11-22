@@ -10,10 +10,10 @@ project(${PROJECT})
 # --- dependencies ------------------------------------------------------------
 
 set(CMAKE_MODULE_PATH
-	"${CMAKE_CURRENT_SOURCE_DIR}/../../com.esri.prt.core/cmake"
-	"${CMAKE_CURRENT_SOURCE_DIR}/../../com.esri.prt.codecs/cmake"
-	"${CMAKE_CURRENT_SOURCE_DIR}/../../com.esri.prt.codecs.maya/cmake"
-	"${CMAKE_CURRENT_SOURCE_DIR}/../../com.esri.prt.adaptors.fs/cmake"
+	"${PROJECT_SOURCE_DIR}/../../com.esri.prt.core/cmake"
+	"${PROJECT_SOURCE_DIR}/../../com.esri.prt.codecs/cmake"
+	"${PROJECT_SOURCE_DIR}/../../com.esri.prt.codecs.maya/cmake"
+	"${PROJECT_SOURCE_DIR}/../../com.esri.prt.adaptors.fs/cmake"
 	${CMAKE_MODULE_PATH}
 )
 
