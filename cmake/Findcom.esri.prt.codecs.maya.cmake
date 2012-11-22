@@ -1,11 +1,6 @@
 set(PRT_CODECS_MAYA_PROJECT com.esri.prt.codecs.maya)
 
-# in order to find the directory for this project we need to list all possible relative paths from the various
-# start CMakeLists to the project directory
-find_path(	PRT_CODECS_MAYA_PREFIX "cmake/Find${PRT_CODECS_MAYA_PROJECT}.cmake" 
-			${CMAKE_CURRENT_SOURCE_DIR}/../../../${PRT_CODECS_MAYA_PROJECT}	# for tests sources
-			${CMAKE_CURRENT_SOURCE_DIR}/../../${PRT_CODECS_MAYA_PROJECT}		# for normal sources
-)
+find_path(PRT_CODECS_MAYA_PREFIX "cmake/Find${PRT_CODECS_MAYA_PROJECT}.cmake" ${PROJECT_SOURCE_DIR}/../../${PRT_CODECS_MAYA_PROJECT})
 
 set(${PRT_CODECS_MAYA_PROJECT}_INCLUDE_PATH ${PRT_CODECS_MAYA_PREFIX}/install/include)
 

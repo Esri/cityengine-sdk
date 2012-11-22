@@ -7,7 +7,7 @@ cmake_policy(SET CMP0015 NEW)
 set(PROJECT com.esri.prt.codecs.maya)
 project(${PROJECT})
 
-include(../../com.esri.prt.core/cmake/common.cmake)
+include(${PROJECT_SOURCE_DIR}/../../com.esri.prt.core/cmake/common.cmake)
 
 
 ### external dependencies
