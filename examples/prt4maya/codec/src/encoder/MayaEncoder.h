@@ -15,7 +15,7 @@
 #include "prt/InitialShape.h"
 
 #include "prtx/IStream.h"
-#include "prtx/ExtensionFactory.h"
+#include "prtx/EncoderFactory.h"
 #include "prtx/IEncoder.h"
 
 #include "encoder/IMayaOutputHandler.h"
@@ -23,15 +23,16 @@
 
 class MayaEncoder : public prtx::IEncoder {
 public:
-	MayaEncoder();
+	MayaEncoder(const prt::AttributeMap* options);
 	virtual ~MayaEncoder();
 
 public:
+	virtual void init(prtx::IGenerateContext& context) { }
 	virtual void encode(prtx::IGenerateContext& context, size_t initialShapeIndex);
-
 	virtual void encodeContent(prtx::IOutputStream* stream, const prtx::ContentPtrVector& content) {
 		throw std::runtime_error("not implemented");
 	}
+	virtual void finish(prtx::IGenerateContext& context) { }
 
 public:
 	virtual const wchar_t* getID() const { return L"com.esri.prt.codecs.maya.MayaEncoder"; }
@@ -46,9 +47,11 @@ private:
 };
 
 
-class MayaEncoderFactory : public prtx::ExtensionFactory {
+class MayaEncoderFactory : public prtx::EncoderFactory {
 public:
-	MayaEncoder* create(const wchar_t**, const size_t&, const wchar_t**, const size_t&) { return new MayaEncoder(); }
+	MayaEncoder* create(const wchar_t**, const size_t&, const wchar_t**, const size_t&, const prt::AttributeMap* attributes) {
+		return new MayaEncoder(attributes);
+	}
 };
 
 #endif /* MAYAENCODER_H_ */

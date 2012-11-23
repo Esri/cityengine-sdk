@@ -32,7 +32,7 @@
 #include "prtx/IGenerateContext.h"
 
 
-MayaEncoder::MayaEncoder() {
+MayaEncoder::MayaEncoder(const prt::AttributeMap* options) : prtx::IEncoder(options) {
 }
 
 
