@@ -29,7 +29,7 @@ public:
 public:
 	virtual void init(prtx::IGenerateContext& context) { }
 	virtual void encode(prtx::IGenerateContext& context, size_t initialShapeIndex);
-	virtual void encodeContent(prtx::IOutputStream* stream, const prtx::ContentPtrVector& content) {
+	virtual void encodeContent(prtx::IGenerateContext& context, size_t initialShapeIndex, const prtx::ContentPtrVector& content) {
 		throw std::runtime_error("not implemented");
 	}
 	virtual void finish(prtx::IGenerateContext& context) { }
