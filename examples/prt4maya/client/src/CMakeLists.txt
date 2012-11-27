@@ -13,7 +13,7 @@ set(CMAKE_MODULE_PATH
 	"${PROJECT_SOURCE_DIR}/../../com.esri.prt.core/cmake"
 	"${PROJECT_SOURCE_DIR}/../../com.esri.prt.codecs/cmake"
 	"${PROJECT_SOURCE_DIR}/../../com.esri.prt.codecs.maya/cmake"
-	"${PROJECT_SOURCE_DIR}/../../com.esri.prt.adaptors.fs/cmake"
+	"${PROJECT_SOURCE_DIR}/../../com.esri.prt.adaptors/cmake"
 	${CMAKE_MODULE_PATH}
 )
 
@@ -26,8 +26,8 @@ include_directories(${com.esri.prt.codecs_INCLUDE_PATH})
 find_package(com.esri.prt.codecs.maya)
 include_directories(${com.esri.prt.codecs.maya_INCLUDE_PATH})
 
-find_package(com.esri.prt.adaptors.fs)
-include_directories(${com.esri.prt.adaptors.fs_INCLUDE_PATH})
+find_package(com.esri.prt.adaptors)
+include_directories(${com.esri.prt.adaptors_INCLUDE_PATH})
 
 # hacky maya api integration, todo: write cmake module
 if(WIN32)
@@ -123,7 +123,7 @@ install(TARGETS ${PROJECT} DESTINATION .)
 
 install(FILES ${PRT_CORE_LIBRARIES} DESTINATION .)
 install(FILES ${PRT_CODECS_LIBRARIES} DESTINATION prt_lib)
-install(FILES ${PRT_FS_LIBRARIES} DESTINATION prt_lib)
+install(FILES ${PRT_ADAPTORS_LIBRARIES} DESTINATION prt_lib)
 install(FILES ${PRT_CODECS_MAYA_LIBRARIES} DESTINATION prt_lib)
 install(FILES conf/prt_config.xml DESTINATION prt_lib)
 

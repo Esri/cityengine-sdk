@@ -333,19 +333,19 @@ MStatus PRTEnum::fill() {
 		for(size_t arg = 0; arg < annot->getNumArguments(); arg++) {
 			switch(annot->getArgument(arg)->getType()) {
 				keys.append(MString(annot->getArgument(arg)->getKey()));
-				case prt::CGA_BOOL:
+				case prt::AAT_BOOL:
 					M_CHECK(eAttr.addField(MString(annot->getArgument(arg)->getKey()), bVals.length()));
 					bVals.append(annot->getArgument(arg)->getBool());
 					fVals.append(std::numeric_limits<double>::quiet_NaN());
 					sVals.append("");
 					break;
-				case prt::CGA_FLOAT:
+				case prt::AAT_FLOAT:
 					M_CHECK(eAttr.addField(MString(annot->getArgument(arg)->getKey()), fVals.length()));
 					bVals.append(false);
 					fVals.append(annot->getArgument(arg)->getFloat());
 					sVals.append("");
 					break;
-				case prt::CGA_STR:
+				case prt::AAT_STR:
 					M_CHECK(eAttr.addField(MString(annot->getArgument(arg)->getKey()), sVals.length()));
 					bVals.append(false);
 					fVals.append(std::numeric_limits<double>::quiet_NaN());
@@ -399,7 +399,7 @@ MStatus PRTAttrs::updateAttributes(MFnDependencyNode & node, prt::AttributeMapBu
 		const MString  name       = MString(info->getAttribute(i)->getName());
 		MObject  attr;
 		switch(info->getAttribute(i)->getReturnType()) {
-		case prt::CGA_BOOL: {
+		case prt::AAT_BOOL: {
 				for(size_t a = 0; a < info->getAttribute(i)->getNumAnnotations(); a++) {
 					const prt::Annotation* an = info->getAttribute(i)->getAnnotation(a);
 					if(!(wcscmp(an->getName(), L"@Range")))
@@ -415,13 +415,13 @@ MStatus PRTAttrs::updateAttributes(MFnDependencyNode & node, prt::AttributeMapBu
 				}
 			break;
 			}
-		case prt::CGA_FLOAT: {
+		case prt::AAT_FLOAT: {
 				double min = std::numeric_limits<double>::quiet_NaN();
 				double max = std::numeric_limits<double>::quiet_NaN();
 				for(size_t a = 0; a < info->getAttribute(i)->getNumAnnotations(); a++) {
 					const prt::Annotation* an = info->getAttribute(i)->getAnnotation(a);
 					if(!(wcscmp(an->getName(), L"@Range"))) {
-						if(an->getNumArguments() == 2 && an->getArgument(0)->getType() == prt::CGA_FLOAT && an->getArgument(1)->getType() == prt::CGA_FLOAT) {
+						if(an->getNumArguments() == 2 && an->getArgument(0)->getType() == prt::AAT_FLOAT && an->getArgument(1)->getType() == prt::AAT_FLOAT) {
 							min = an->getArgument(0)->getFloat();
 							max = an->getArgument(1)->getFloat();
 						} else
@@ -438,7 +438,7 @@ MStatus PRTAttrs::updateAttributes(MFnDependencyNode & node, prt::AttributeMapBu
 				}
 				break;
 			}
-		case prt::CGA_STR: {
+		case prt::AAT_STR: {
 				MString exts;
 				bool    asFile  = false;
 				bool    asColor = false;
@@ -454,7 +454,7 @@ MStatus PRTAttrs::updateAttributes(MFnDependencyNode & node, prt::AttributeMapBu
 					} else if(!(wcscmp(an->getName(), L"@File"))) {
 						asFile = true;
 						for(size_t arg = 0; arg < an->getNumArguments(); arg++) {
-							if(an->getArgument(arg)->getType() == prt::CGA_STR) {
+							if(an->getArgument(arg)->getType() == prt::AAT_STR) {
 								exts += MString(an->getArgument(arg)->getStr());
 								exts += " (*.";
 								exts += MString(an->getArgument(arg)->getStr());
@@ -489,7 +489,7 @@ MStatus PRTAttrs::updateAttributes(MFnDependencyNode & node, prt::AttributeMapBu
 			if(!(wcscmp(an->getName(), L"@Group"))) {
 				MFnAttribute fAttr(attr);
 				for(size_t arg = 0; arg < an->getNumArguments(); arg++) {
-					if(an->getArgument(arg)->getType() == prt::CGA_STR)
+					if(an->getArgument(arg)->getType() == prt::AAT_STR)
 						M_CHECK(fAttr.addToCategory(MString(an->getArgument(arg)->getStr())));
 				}
 			}
