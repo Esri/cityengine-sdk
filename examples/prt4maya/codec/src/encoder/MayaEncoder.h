@@ -24,7 +24,7 @@
 
 class MayaEncoder : public prtx::IEncoder {
 public:
-	MayaEncoder(const prt::AttributeMap* options);
+	MayaEncoder();
 	virtual ~MayaEncoder();
 
 public:
@@ -50,8 +50,8 @@ private:
 
 class MayaEncoderFactory : public prtx::EncoderFactory {
 public:
-	MayaEncoder* create(const wchar_t**, const size_t&, const wchar_t**, const size_t&, const prt::AttributeMap* attributes) {
-		return new MayaEncoder(attributes);
+	MayaEncoder* create(const wchar_t**, size_t) {
+		return new MayaEncoder();
 	}
 };
 
