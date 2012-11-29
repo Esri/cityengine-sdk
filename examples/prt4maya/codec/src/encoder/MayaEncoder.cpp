@@ -174,7 +174,7 @@ void MayaEncoder::convertGeometry(prtx::AbstractResolveMapPtr am, prtx::Geometry
 		if(mat->getTextureArray(L"diffuseMap").size() == 1) {
 			std::wstring uri(mat->getTextureArray(L"colorMap").front()->getName());
 			log_trace("trying to set texture uri: %ls", uri.c_str());
-			tex = uri.substr(wcslen(util::URIUtils::SCHEME_FILE));
+			tex = uri.substr(util::URIUtils::SCHEME_FILE.size());
 			mayaOutput->matSetDiffuseTexture(mh, tex.c_str());
 		}
 
