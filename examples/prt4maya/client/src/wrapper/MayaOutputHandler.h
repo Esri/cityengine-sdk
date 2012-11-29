@@ -56,6 +56,9 @@ public:
 	virtual prt::Status cgaReportFloat(size_t isIndex, int32_t shapeID, const wchar_t* key, double value) { throw std::runtime_error("Not implemented yet"); }
 	virtual prt::Status cgaReportString(size_t isIndex, int32_t shapeID, const wchar_t* key, const wchar_t* value) { throw std::runtime_error("Not implemented yet"); }
 
+	virtual prt::Status openCGAError() { throw std::runtime_error("Not implemented yet"); }
+	virtual prt::Status openCGAPrint() { throw std::runtime_error("Not implemented yet"); }
+	virtual prt::Status openCGAReport() { throw std::runtime_error("Not implemented yet"); }
 	virtual prt::Status closeCGAError() { throw std::runtime_error("Not implemented yet"); }
 	virtual prt::Status closeCGAPrint() { throw std::runtime_error("Not implemented yet"); }
 	virtual prt::Status closeCGAReport() { throw std::runtime_error("Not implemented yet"); }
