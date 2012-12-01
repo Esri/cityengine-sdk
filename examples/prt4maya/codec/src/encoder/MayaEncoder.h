@@ -14,7 +14,6 @@
 #include "prt/ContentType.h"
 #include "prt/InitialShape.h"
 
-#include "prtx/IStream.h"
 #include "prtx/EncoderFactory.h"
 #include "prtx/IExtension.h"
 #include "prtx/IEncoder.h"
