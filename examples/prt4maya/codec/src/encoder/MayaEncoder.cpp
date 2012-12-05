@@ -21,7 +21,7 @@
 
 #include "prtx/Exception.h"
 #include "prtx/Log.h"
-#include "prtx/IGeometry.h"
+#include "prtx/Geometry.h"
 #include "prtx/Material.h"
 #include "prtx/IShape.h"
 #include "prtx/ShapeIterator.h"
@@ -71,8 +71,8 @@ void MayaEncoder::encode(prtx::IGenerateContext& context, size_t initialShapeInd
 
 
 void MayaEncoder::convertGeometry(prtx::AbstractResolveMapPtr am, prtx::GeometryPtrVector& geometries, IMayaOutputHandler* mayaOutput) {
+#if 0
 	log_trace("MayaEncoder::convertGeometry: begin");
-
 	std::vector<double> vertices;
 	std::vector<int> counts;
 	std::vector<int> connects;
@@ -89,7 +89,8 @@ void MayaEncoder::convertGeometry(prtx::AbstractResolveMapPtr am, prtx::Geometry
 	uint32_t nrmBase = 0;
 	uint32_t uvBase = 0;
 	for(size_t gi = 0, size = geometries.size(); gi < size; ++gi) {
-		prtx::IGeometry* geo = (prtx::IGeometry*)geometries[gi].get();
+		prtx::Geometry* geo = (prtx::Geometry*)geometries[gi].get();
+
 
 		const size_t& faceCount = geo->getFaceCount();
 		const double* verts = geo->getVertices();
@@ -182,6 +183,7 @@ void MayaEncoder::convertGeometry(prtx::AbstractResolveMapPtr am, prtx::Geometry
 	}
 
 	mayaOutput->finishMesh();
+#endif
 }
 
 

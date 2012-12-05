@@ -49,9 +49,7 @@ private:
 
 class MayaEncoderFactory : public prtx::EncoderFactory {
 public:
-	MayaEncoder* create(const wchar_t**, size_t) {
-		return new MayaEncoder();
-	}
+	MayaEncoder* create() { return new MayaEncoder(); }
 };
 
 #endif /* MAYAENCODER_H_ */
