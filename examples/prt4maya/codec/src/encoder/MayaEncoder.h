@@ -35,11 +35,16 @@ public:
 	virtual void finish(prtx::IGenerateContext& context) { }
 
 public:
-	virtual const wchar_t* getID() const { return L"com.esri.prt.codecs.maya.MayaEncoder"; }
+	virtual const wchar_t* getID() const { return ID.c_str(); }
 	virtual prt::ContentType getContentType() const { return prt::CT_GEOMETRY; }
 	virtual ExtensionType getExtensionType() const { return ET_ENCODER; }
 
 	static void destroyMayaData(struct MayaOutputHandler* mayaData);
+
+public:
+	static const std::wstring ID;
+	static const std::wstring NAME;
+	static const std::wstring DESCRIPTION;
 
 private:
 	void convertGeometry(prtx::AbstractResolveMapPtr am, prtx::GeometryPtrVector& geometries, IMayaOutputHandler* mayaOutput);
@@ -50,6 +55,10 @@ private:
 class MayaEncoderFactory : public prtx::EncoderFactory {
 public:
 	MayaEncoder* create() { return new MayaEncoder(); }
+
+	virtual const std::wstring& getID() const { return MayaEncoder::ID; }
+	virtual const std::wstring& getName() const { return MayaEncoder::NAME; }
+	virtual const std::wstring& getDescription() const { return MayaEncoder::DESCRIPTION; }
 };
 
 #endif /* MAYAENCODER_H_ */

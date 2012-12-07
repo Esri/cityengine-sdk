@@ -32,6 +32,11 @@
 #include "prtx/IGenerateContext.h"
 
 
+const std::wstring MayaEncoder::ID			= L"com.esri.prt.codecs.maya.MayaEncoder";
+const std::wstring MayaEncoder::NAME		= L"Autodesk(tm) Maya(tm) Encoder";
+const std::wstring MayaEncoder::DESCRIPTION	= L"Encodes geometry into Autodesk Maya format.";
+
+
 MayaEncoder::MayaEncoder() {
 }
 
