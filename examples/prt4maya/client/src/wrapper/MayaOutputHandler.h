@@ -50,6 +50,7 @@ public:
 	MayaOutputHandler(const MPlug* plug, MDataBlock* data, MStringArray* shadingGroups, MIntArray* shadingRanges) : mPlug(plug), mData(data), mShadingGroups(shadingGroups), mShadingRanges(shadingRanges) { }
 	virtual ~MayaOutputHandler() { }
 
+	virtual prt::Status assetError(size_t isIndex, prt::CGAErrorLevel level, const wchar_t* key, const wchar_t* uri, const wchar_t* message) { throw std::runtime_error("Not implemented yet"); }
 	virtual prt::Status cgaError(size_t isIndex, int32_t shapeID, prt::CGAErrorLevel level, int32_t methodId, int32_t pc, const wchar_t* message) { throw std::runtime_error("Not implemented yet"); }
 	virtual prt::Status cgaPrint(size_t isIndex, int32_t shapeID, const wchar_t* txt) { throw std::runtime_error("Not implemented yet"); }
 	virtual prt::Status cgaReportBool(size_t isIndex, int32_t shapeID, const wchar_t* key, bool value) { throw std::runtime_error("Not implemented yet"); }

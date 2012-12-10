@@ -172,19 +172,7 @@ MStatus PRTNode::initialize() {
 	std::wstring root = getPluginRoot();
 	//DBGL("prt dir %ls\n", root.c_str());
 
-	std::wstring config = root;
-	config += SEPERATOR;
-	config += L"prt_lib";
-	config += SEPERATOR;
-	config += L"prt_config.xml";
-
-	const wchar_t** configFiles = new const wchar_t*[1];
-	configFiles[0] = config.c_str();
-	//DBGL("Config file: %ls\n", configFiles[0]);
-
-	prt::Status status = prt::ProceduralRT::init(root.c_str(), configFiles, 1, prt::LOG_TRACE);
-
-	delete [] configFiles;
+	prt::Status status = prt::ProceduralRT::init(root.c_str(), prt::LOG_TRACE);
 
 	if(status != prt::STATUS_OK)
 		return MS::kFailure;
