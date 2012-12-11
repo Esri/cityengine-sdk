@@ -45,7 +45,7 @@ MayaEncoder::~MayaEncoder() {
 }
 
 
-void MayaEncoder::encode(prtx::IGenerateContext& context, size_t initialShapeIndex) {
+void MayaEncoder::encode(prtx::IGenerateContext& context, size_t initialShapeIndex, const prtx::ContentPtrVectorVariant* content) {
 	prtx::AbstractResolveMapPtr am = context.getResolveMap()->toFileURIs();
 	context.setResolveMap(am);		// !! changes context!!
 

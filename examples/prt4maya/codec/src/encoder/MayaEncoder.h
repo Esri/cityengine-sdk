@@ -15,8 +15,7 @@
 #include "prt/InitialShape.h"
 
 #include "prtx/EncoderFactory.h"
-#include "prtx/IExtension.h"
-#include "prtx/IEncoder.h"
+#include "prtx/Encoder.h"
 
 #include "encoder/IMayaOutputHandler.h"
 
@@ -28,16 +27,12 @@ public:
 
 public:
 	virtual void init(prtx::IGenerateContext& context) { }
-	virtual void encode(prtx::IGenerateContext& context, size_t initialShapeIndex);
-	virtual void encodeContent(prtx::IGenerateContext& context, size_t initialShapeIndex, const prtx::ContentPtrVectorVariant& content) {
-		throw std::runtime_error("not implemented");
-	}
+	virtual void encode(prtx::IGenerateContext& context, size_t initialShapeIndex, const prtx::ContentPtrVectorVariant* content = 0);
 	virtual void finish(prtx::IGenerateContext& context) { }
 
 public:
 	virtual const wchar_t* getID() const { return ID.c_str(); }
 	virtual prt::ContentType getContentType() const { return prt::CT_GEOMETRY; }
-	virtual ExtensionType getExtensionType() const { return ET_ENCODER; }
 
 	static void destroyMayaData(struct MayaOutputHandler* mayaData);
 
