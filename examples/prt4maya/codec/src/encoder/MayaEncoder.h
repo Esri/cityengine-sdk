@@ -27,9 +27,7 @@ public:
 	virtual ~MayaEncoder();
 
 public:
-	virtual void init(prtx::IGenerateContext& context) { }
-	virtual void encode(prtx::IGenerateContext& context, size_t initialShapeIndex, const prtx::ContentPtrVectorVariant* content = 0);
-	virtual void finish(prtx::IGenerateContext& context) { }
+	virtual void encode(prtx::IGenerateContext& context, size_t initialShapeIndex);
 
 public:
 	virtual const wchar_t* getID() const { return ID.c_str(); }

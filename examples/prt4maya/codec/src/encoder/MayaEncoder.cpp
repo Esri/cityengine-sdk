@@ -45,11 +45,11 @@ MayaEncoder::~MayaEncoder() {
 }
 
 
-void MayaEncoder::encode(prtx::IGenerateContext& context, size_t initialShapeIndex, const prtx::ContentPtrVectorVariant* content) {
+void MayaEncoder::encode(prtx::IGenerateContext& context, size_t initialShapeIndex) {
 	prtx::AbstractResolveMapPtr am = context.getResolveMap()->toFileURIs();
 	context.setResolveMap(am);		// !! changes context!!
 
-	IMayaOutputHandler* oh = dynamic_cast<IMayaOutputHandler*>(&context.getOutputHandler());
+	IMayaOutputHandler* oh = dynamic_cast<IMayaOutputHandler*>(getOutputHandler());
 	if(oh == 0) throw(prtx::StatusException(prt::STATUS_ILLEGAL_OUTPUT_HANDLER));
 
 	util::Timer tim;
