@@ -89,7 +89,14 @@ MStatus PRTNode::compute( const MPlug& plug, MDataBlock& data ) {
 		delete[] tmp;
 
 		MayaOutputHandler mdata(&plug, &data, &shadingGroups, &shadingRanges);
-		const prt::InitialShape*          shape = prt::InitialShape::create(va, vertices.length() * 3, ia, pconnect.length(), ca, pcounts.length(), generateAttrs);
+		const prt::InitialShape* shape = prt::InitialShape::create(va, vertices.length() * 3, ia, pconnect.length(), ca, pcounts.length(),
+				// hacky
+				generateAttrs->getString(L"ruleFile"),
+				generateAttrs->getString(L"startRule"),
+				666,
+				L"",
+
+				generateAttrs);
 
 		const wchar_t* encoders[] = { L"com.esri.prt.codecs.maya.MayaEncoder" };
 		const prt::AttributeMap* encOpts[] = { generateOpts };

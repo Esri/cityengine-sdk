@@ -391,6 +391,13 @@ MStatus PRTAttrs::updateAttributes(MFnDependencyNode & node, prt::AttributeMapBu
 			UnitQuad_indexCount,
 			UnitQuad_faceCounts, 
 			UnitQuad_faceCountsCount,
+
+			// hacky
+			attrs->getString(L"ruleFile"),
+			attrs->getString(L"startRule"),
+			666,
+			L"",
+
 			attrs);						
 
 	for(size_t i = 0; i < info->getNumAttributes(); i++) {
