@@ -384,12 +384,12 @@ MStatus PRTAttrs::updateAttributes(MFnDependencyNode & node, prt::AttributeMapBu
 	PRTNode*          prtNode = (PRTNode*)node.userNode();
 
 	prt::AttributeMap* attrs = aBuilder->createAttributeMap();
-	prt::InitialShape* shape = prt::InitialShape::create(
+	prt::InitialShape* shape = prt::InitialShapeBuilder::create(
 			UnitQuad_vertices, 
 			UnitQuad_vertexCount, 
 			UnitQuad_indices, 
 			UnitQuad_indexCount,
-			UnitQuad_faceCounts, 
+			UnitQuad_faceCounts,
 			UnitQuad_faceCountsCount,
 
 			// hacky

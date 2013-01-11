@@ -89,7 +89,7 @@ MStatus PRTNode::compute( const MPlug& plug, MDataBlock& data ) {
 		delete[] tmp;
 
 		MayaOutputHandler mdata(&plug, &data, &shadingGroups, &shadingRanges);
-		const prt::InitialShape* shape = prt::InitialShape::create(va, vertices.length() * 3, ia, pconnect.length(), ca, pcounts.length(),
+		const prt::InitialShape* shape = prt::InitialShapeBuilder::create(va, vertices.length() * 3, ia, pconnect.length(), ca, pcounts.length(),
 				// hacky
 				generateAttrs->getString(L"ruleFile"),
 				generateAttrs->getString(L"startRule"),
