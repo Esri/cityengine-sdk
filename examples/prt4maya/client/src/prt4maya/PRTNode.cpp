@@ -179,7 +179,8 @@ MStatus PRTNode::initialize() {
 	std::wstring root = getPluginRoot();
 	//DBGL("prt dir %ls\n", root.c_str());
 
-	prt::Status status = prt::ProceduralRT::init(root.c_str(), prt::LOG_TRACE);
+	const wchar_t* rootPath = root.c_str();
+	prt::Status status = prt::ProceduralRT::init(&rootPath, 1, prt::LOG_TRACE);
 
 	if(status != prt::STATUS_OK)
 		return MS::kFailure;
