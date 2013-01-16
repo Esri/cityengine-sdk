@@ -56,7 +56,7 @@ void MayaEncoder::encode(prtx::IGenerateContext& context, size_t initialShapeInd
 
 	prtx::EncodePreparatorPtr encPrep = prtx::EncodePreparator::create();
 	prtx::LeafIteratorPtr li = prtx::LeafIterator::create(context, initialShapeIndex);
-	for (const prtx::IShape* shape = li->getNext(); shape != 0; shape = li->getNext()) {
+	for (prtx::IShapePtr shape = li->getNext(); shape != 0; shape = li->getNext()) {
 		encPrep->add(/*initialShapes[i],*/ shape);
 		//			log_trace(L"encode leaf shape mat: %ls", shape->getMaterial()->getString(L"name"));
 	}
