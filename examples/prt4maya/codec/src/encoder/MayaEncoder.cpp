@@ -65,7 +65,8 @@ void MayaEncoder::encode(prtx::IGenerateContext& context, size_t initialShapeInd
 	tim.start();
 
 	prtx::GeometryPtrVector geometries;
-	encPrep->createEncodableGeometries(geometries);
+	prtx::MaterialPtrVector mat;
+	encPrep->createEncodableGeometriesAndMaterials(geometries, mat);
 	convertGeometry(am, geometries, oh);
 
 	const float t2 = tim.stop();
