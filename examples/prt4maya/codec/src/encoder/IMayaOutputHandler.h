@@ -1,9 +1,9 @@
 #ifndef IMAYA_OUTPUT_HANDLER_H_
 #define IMAYA_OUTPUT_HANDLER_H_
 
-#include "prt/OutputHandler.h"
+#include "prt/Callbacks.h"
 
-class IMayaOutputHandler : public prt::OutputHandler {
+class IMayaOutputHandler : public prt::Callbacks {
 public:
 	virtual ~IMayaOutputHandler() { }
 
