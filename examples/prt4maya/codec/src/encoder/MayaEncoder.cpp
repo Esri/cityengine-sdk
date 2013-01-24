@@ -50,7 +50,7 @@ void MayaEncoder::encode(prtx::IGenerateContext& context, size_t initialShapeInd
 	context.setResolveMap(am);		// !! changes context!!
 
 	IMayaOutputHandler* oh = dynamic_cast<IMayaOutputHandler*>(getOutputHandler());
-	if(oh == 0) throw(prtx::StatusException(prt::STATUS_ILLEGAL_OUTPUT_HANDLER));
+	if(oh == 0) throw(prtx::StatusException(prt::STATUS_ILLEGAL_CALLBACK_OBJECT));
 
 	util::Timer tim;
 
