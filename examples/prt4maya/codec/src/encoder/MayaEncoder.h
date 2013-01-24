@@ -30,7 +30,7 @@ public:
 	virtual void encode(prtx::IGenerateContext& context, size_t initialShapeIndex);
 
 public:
-	virtual const wchar_t* getID() const { return ID.c_str(); }
+//	virtual const wchar_t* getID() const { return ID.c_str(); }
 	virtual prt::ContentType getContentType() const { return prt::CT_GEOMETRY; }
 
 	static void destroyMayaData(struct MayaOutputHandler* mayaData);
