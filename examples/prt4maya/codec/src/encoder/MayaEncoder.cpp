@@ -49,7 +49,7 @@ void MayaEncoder::encode(prtx::IGenerateContext& context, size_t initialShapeInd
 	prtx::AbstractResolveMapPtr am = context.getResolveMap()->toFileURIs();
 	context.setResolveMap(am);		// !! changes context!!
 
-	IMayaOutputHandler* oh = dynamic_cast<IMayaOutputHandler*>(getOutputHandler());
+	IMayaOutputHandler* oh = dynamic_cast<IMayaOutputHandler*>(getCallbacks());
 	if(oh == 0) throw(prtx::StatusException(prt::STATUS_ILLEGAL_CALLBACK_OBJECT));
 
 	util::Timer tim;
