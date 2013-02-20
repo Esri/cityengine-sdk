@@ -10,7 +10,7 @@
 #include <vector>
 #include <numeric>
 
-#include <boost/filesystem/path.hpp>
+#include "boost/filesystem/path.hpp"
 
 #include "util/StringUtils.h"
 #include "util/Timer.h"
@@ -70,7 +70,7 @@ void MayaEncoder::encode(prtx::IGenerateContext& context, size_t initialShapeInd
 	convertGeometry(am, geometries, oh);
 
 	const float t2 = tim.stop();
-	log_info("MayaEncoder::encode() : preparator %f s, encoding %f s, total %f s", t1, t2, t1+t2);
+	log_info("MayaEncoder::encode() : preparator %f s, encoding %f s, total %f s") % t1 % t2 % (t1+t2);
 
 	log_trace("MayaEncoder::encode done.");
 }
