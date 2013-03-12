@@ -8,24 +8,23 @@
 #include <cassert>
 
 #include "maya/MItMeshPolygon.h"
-
 #include "wrapper/MayaOutputHandler.h"
+#include "prt4mayaNode.h"
 
-
-#define MCHECK(_stat_) {if(MS::kSuccess != _stat_) {printf("maya err at line %d: %s %d\n", __LINE__, _stat_.errorString().asChar(), _stat_.statusCode());}}
+#define MCHECK(_stat_) {if(MS::kSuccess != _stat_) {DBG("maya err at line %d: %s %d\n", __LINE__, _stat_.errorString().asChar(), _stat_.statusCode());}}
 
 
 void MayaOutputHandler::setVertices(double* vtx, size_t size) {
 	mVertices.clear();
 	for (size_t i = 0; i < size; i += 3)
-		mVertices.append(vtx[i], vtx[i+1], vtx[i+2]);
+		mVertices.append((float)vtx[i], (float)vtx[i+1], (float)vtx[i+2]);
 }
 
 
 void MayaOutputHandler::setNormals(double* nrm, size_t size) {
 	mNormals.clear();
 	for (size_t i = 0; i < size; i += 3)
-		mNormals.append(nrm[i], nrm[i+1], nrm[i+2]);
+		mNormals.append((float)nrm[i], (float)nrm[i+1], (float)nrm[i+2]);
 }
 
 
@@ -75,6 +74,8 @@ void MayaOutputHandler::createMesh() {
 
 	std::cout << "--- MayaData::createMesh begin" << std::endl;
 
+	if(mPlug == 0 || mData == 0) return;
+
 	MDataHandle outputHandle = mData->outputValue(*mPlug, &stat);
 	MCHECK(stat);
 
@@ -88,7 +89,7 @@ void MayaOutputHandler::createMesh() {
 
 	int ni = 0;
 	int vi = 0;
-	for (int fi = 0; fi < mCounts.length(); ++fi) {
+	for(unsigned int fi = 0; fi < mCounts.length(); ++fi) {
 		if (mNormalCounts[fi] > 0) {
 			for (int v = 0; v < mNormalCounts[fi]; ++v, ++ni, ++vi) {
 				MVector nrm(mNormals[mNormalConnects[ni]]);
@@ -104,7 +105,7 @@ void MayaOutputHandler::createMesh() {
 	MPlugArray plugs;
 	bool isConnected = mPlug->connectedTo(plugs, false, true, &stat);
 	MCHECK(stat);
-	printf("    plug is connected: %d; %d plugs\n", isConnected, plugs.length());
+	DBG("    plug is connected: %d; %d plugs\n", isConnected, plugs.length());
 	if (plugs.length() > 0) {
 		if(mUVConnects.length() > 0) {
 			MString uvSet = "map1";
@@ -123,9 +124,9 @@ void MayaOutputHandler::createMesh() {
 	stat = outputHandle.set(newOutputData);
 	MCHECK(stat);
 
-	printf("    mayaVertices.length = %d", mVertices.length());
-	printf("    mayaCounts.length   = %d", mCounts.length());
-	printf("    mayaConnects.length = %d", mConnects.length());
+	DBG("    mayaVertices.length = %d", mVertices.length());
+	DBG("    mayaCounts.length   = %d", mCounts.length());
+	DBG("    mayaConnects.length = %d", mConnects.length());
 }
 
 
@@ -136,7 +137,7 @@ int MayaOutputHandler::matCreate(const wchar_t* name, int start, int count) {
 	cmd += name;
 	cmd += "\")";
 	MString result = MGlobal::executeCommandStringResult(cmd, false, false, &stat);
-	printf("mel cmd '%s' executed, result = '%s'", cmd.asChar(), result.asChar());
+	DBG("mel cmd '%s' executed, result = '%s'", cmd.asChar(), result.asChar());
 
 	mShadingGroups->append(result);
 	mShadingRanges->append(start);
@@ -153,7 +154,7 @@ void MayaOutputHandler::matSetDiffuseTexture(int mh, const wchar_t* tex) {
 	MString cmd("prtSetDiffuseTexture(\"");
 	cmd += sg + "\", \"" + tex + "\", \"map1\")";
 	MString result = MGlobal::executeCommandStringResult(cmd, false, false, &stat);
-	printf("mel cmd '%s' executed, result = '%s'", cmd.asChar(), result.asChar());
+	DBG("mel cmd '%s' executed, result = '%s'", cmd.asChar(), result.asChar());
 }
 
 

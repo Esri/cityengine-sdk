@@ -24,7 +24,7 @@ MTypeId PRTNode::id(PRT_TYPE_ID);
 
 PRTNode::PRTNode() :  resolveMap(0), generateAttrs(0), generateOpts(0), enums(0), hasMaterials(false) {
 	prt::AttributeMapBuilder* oBuilder = prt::AttributeMapBuilder::create();
-	generateOpts  = oBuilder->createAttributeMap();
+	generateOpts                       = oBuilder->createAttributeMap();
 	oBuilder->destroy();
 }
 
@@ -88,19 +88,18 @@ MStatus PRTNode::compute( const MPlug& plug, MDataBlock& data ) {
 		DBG("%s\n", generateAttrs->toXML(tmp, &size));
 		delete[] tmp;
 
-		MayaOutputHandler mdata(&plug, &data, &shadingGroups, &shadingRanges);
+		MayaOutputHandler* outputHandler = createOutputHandler(&plug, &data);
+		MString            dummy;
 		const prt::InitialShape* shape = prt::InitialShapeBuilder::create(va, vertices.length() * 3, ia, pconnect.length(), ca, pcounts.length(),
-				// hacky
-				generateAttrs->getString(L"ruleFile"),
-				generateAttrs->getString(L"startRule"),
+				getStrParameter(ruleFile,  dummy).asWChar(),
+				getStrParameter(startRule, dummy).asWChar(),
 				666,
 				L"",
-
 				generateAttrs);
 
 		const wchar_t* encoders[] = { L"com.esri.prt.codecs.maya.MayaEncoder" };
 		const prt::AttributeMap* encOpts[] = { generateOpts };
-		prt::ProceduralRT::generate(&shape, 1, resolveMap, encoders, 1, encOpts, &mdata);
+		prt::ProceduralRT::generate(&shape, 1, resolveMap, encoders, 1, encOpts, outputHandler);
 
 		// TODO: Error handling
 
@@ -109,6 +108,7 @@ MStatus PRTNode::compute( const MPlug& plug, MDataBlock& data ) {
 		delete[] ca;
 		delete[] ia;
 		delete[] va;
+		delete outputHandler;
 
 		data.setClean( plug );
 
@@ -167,6 +167,7 @@ std::wstring getPluginRoot() {
 
 	std::wstring root = drive;
 	root += dir;
+	root +=  + L"prt_lib";
 
 	return root;
 #else
@@ -177,10 +178,10 @@ std::wstring getPluginRoot() {
 
 MStatus PRTNode::initialize() {
 	std::wstring root = getPluginRoot();
-	//DBGL("prt dir %ls\n", root.c_str());
+	DBGL("prt plugins at %ls\n", root.c_str());
 
 	const wchar_t* rootPath = root.c_str();
-	prt::Status status = prt::ProceduralRT::init(&rootPath, 1, prt::LOG_TRACE);
+	prt::Status status = prt::ProceduralRT::init(&rootPath, 1, prt::LOG_WARNING);
 
 	if(status != prt::STATUS_OK)
 		return MS::kFailure;
@@ -335,10 +336,6 @@ MStatus PRTNode::updateAttributes() {
 		}
 	}
 
-	MString dummy;
-	aBuilder->setString(L"ruleFile",  getStrParameter(ruleFile,  dummy).asWChar());
-	aBuilder->setString(L"startRule", getStrParameter(startRule, dummy).asWChar());
-
 	generateAttrs->destroy();
 	generateAttrs = aBuilder->createAttributeMap();
 
@@ -365,6 +362,9 @@ const PRTEnum * PRTNode::findEnum(const MObject & attr) const {
 	return 0;
 }
 
+MayaOutputHandler* PRTNode::createOutputHandler(const MPlug* plug, MDataBlock* data) {
+	return new MayaOutputHandler(plug, data, &shadingGroups, &shadingRanges);
+}
 
 void PRTNode::initLogger() {
 	prt::LogLevel logLevels[6] = {prt::LOG_FATAL, prt::LOG_ERROR, prt::LOG_WARNING, prt::LOG_INFO, prt::LOG_DEBUG, prt::LOG_TRACE};

@@ -1,12 +1,18 @@
 #define MNoPluginEntry
 #define MNoVersionString
 #include "prt4mayaNode.h"
+#include "wrapper/MayaOutputHandler.h"
 #include <limits>
 
 inline MString & PRTAttrs::getStringParameter(MObject & node, MObject & attr, MString & value) {
 	MPlug plug(node, attr);
 	plug.getValue(value);
 	return value;
+}
+
+inline MStatus PRTAttrs::setStringParameter(MObject & node, MObject & attr, MString & value) {
+	MPlug plug(node, attr);
+	return plug.setValue(value);
 }
 
 MStatus PRTAttrs::addParameter(MFnDependencyNode & node, MObject & attr, MFnAttribute& tAttr) {
@@ -310,12 +316,7 @@ MStatus PRTAttrs::updateStartRules(MFnDependencyNode & node, MStringArray & rule
 		}
 
 		prt::AttributeMapBuilder* aBuilder = prt::AttributeMapBuilder::create();
-
-		aBuilder->setString(L"ruleFile",  ruleFiles[0].asWChar());
-		aBuilder->setString(L"startRule", startRuleList[0].asWChar());
-
-		updateAttributes(node, aBuilder, info);
-
+		updateAttributes(node, ruleFiles[0], startRuleList[0], aBuilder, info);
 		prtNode->generateAttrs = aBuilder->createAttributeMap();
 		aBuilder->destroy();
 	}
@@ -375,35 +376,37 @@ static const size_t 	UnitQuad_indexCount      = 4;
 static const uint32_t	UnitQuad_faceCounts[]    = { 4 };
 static const size_t 	UnitQuad_faceCountsCount = 1;
 
-MStatus PRTAttrs::updateAttributes(MFnDependencyNode & node, prt::AttributeMapBuilder* aBuilder, const prt::RuleFileInfo* info) {
+MStatus PRTAttrs::updateAttributes(MFnDependencyNode & node, MString & ruleFile, MString & startRule, prt::AttributeMapBuilder* aBuilder, const prt::RuleFileInfo* info) {
 	MStatus           stat;
 	MStatus           stat2;
 	MFnNumericData    numericData;
 	MFnTypedAttribute tAttr;
 	MFnStringData     attrDefaultStr;
 	PRTNode*          prtNode = (PRTNode*)node.userNode();
+	MString           dummy;
 
-	prt::AttributeMap* attrs = aBuilder->createAttributeMap();
-	prt::InitialShape* shape = prt::InitialShapeBuilder::create(
+	MayaOutputHandler* outputHandler = prtNode->createOutputHandler(0, 0);
+	prt::AttributeMap* attrs         = aBuilder->createAttributeMap();
+	prt::InitialShape* shape         = prt::InitialShapeBuilder::create(
 			UnitQuad_vertices, 
 			UnitQuad_vertexCount, 
 			UnitQuad_indices, 
 			UnitQuad_indexCount,
 			UnitQuad_faceCounts,
 			UnitQuad_faceCountsCount,
-
-			// hacky
-			attrs->getString(L"ruleFile"),
-			attrs->getString(L"startRule"),
+			ruleFile.asWChar(),
+			startRule.asWChar(),
 			666,
 			L"",
-
 			attrs);						
+
+	size_t size = 4096;
+	DBG("%s", shape->toXML((char*)malloc(size), &size));
 
 	for(size_t i = 0; i < info->getNumAttributes(); i++) {
 		PRTEnum* e          = 0;
 		bool     createAttr = false;
-		const MString  name       = MString(info->getAttribute(i)->getName());
+		const MString  name = MString(info->getAttribute(i)->getName());
 		MObject  attr;
 		switch(info->getAttribute(i)->getReturnType()) {
 		case prt::AAT_BOOL: {
@@ -413,7 +416,7 @@ MStatus PRTAttrs::updateAttributes(MFnDependencyNode & node, prt::AttributeMapBu
 						e = new PRTEnum(prtNode, an);
 				}
 				prt::Status evalStat;
-				bool value = prt::ProceduralRT::evalBool(shape, prtNode->resolveMap, info->getAttribute(i)->getName(), &evalStat);
+				bool value = prt::ProceduralRT::evalBool(shape, prtNode->resolveMap, outputHandler, info->getAttribute(i)->getName(), &evalStat);
 
 				if(e) {
 					M_CHECK(addEnumParameter(node, attr, name, value, e));
@@ -436,7 +439,7 @@ MStatus PRTAttrs::updateAttributes(MFnDependencyNode & node, prt::AttributeMapBu
 					}
 				}
 				prt::Status evalStat;
-				double value = prt::ProceduralRT::evalFloat(shape, prtNode->resolveMap, info->getAttribute(i)->getName(), &evalStat);
+				double value = prt::ProceduralRT::evalFloat(shape, prtNode->resolveMap, outputHandler, info->getAttribute(i)->getName(), &evalStat);
 
 				if(e) {
 					M_CHECK(addEnumParameter(node, attr, name, value, e));
@@ -472,7 +475,7 @@ MStatus PRTAttrs::updateAttributes(MFnDependencyNode & node, prt::AttributeMapBu
 				}
 				size_t valueLen = 4096;
 				wchar_t* value = new wchar_t[valueLen];
-				prt::ProceduralRT::evalStr(shape, prtNode->resolveMap, info->getAttribute(i)->getName(), value, &valueLen);
+				prt::ProceduralRT::evalStr(shape, prtNode->resolveMap, outputHandler, info->getAttribute(i)->getName(), value, &valueLen);
 
 				MString mvalue(value);
 				if(e) {
@@ -505,6 +508,7 @@ MStatus PRTAttrs::updateAttributes(MFnDependencyNode & node, prt::AttributeMapBu
 
 	shape->destroy();
 	attrs->destroy();
+	delete outputHandler;
 
 	return MS::kSuccess;
 }

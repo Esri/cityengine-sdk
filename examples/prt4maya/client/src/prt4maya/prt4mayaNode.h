@@ -42,7 +42,7 @@
 #include "prt/AttributeMap.h"
 #include "prt/LogHandler.h"
 #include "prt/ProceduralRT.h"
-
+#include "wrapper/MayaOutputHandler.h"
 
 #ifdef _MSC_VER
 #include <WinNT.h>
@@ -54,7 +54,7 @@ static const MString  NAME_RULE_PKG("Rule_Package");
 static const MString  NAME_RULE_FILE("Rule_File");
 static const MString  NAME_START_RULE("Start_Rule");
 static const MString  NAME_RPK("CGA_Rule_Package");
-static const wchar_t* RPK_PREFIX = L"jar:file://";
+static const wchar_t* RPK_PREFIX = L"rpk:file://";
 
 class PRTNode;
 
@@ -106,8 +106,8 @@ public:
 	//
 	static  MObject outMesh;
 
-	MObject         ruleFile;
-	MObject         startRule;
+	MObject            ruleFile;
+	MObject            startRule;
 
 	std::wstring       lRulePkg;
 	prt::AttributeMap* resolveMap;
@@ -121,6 +121,7 @@ public:
 	static void initLogger();
 	static void clearLogger();
 
+	MayaOutputHandler* createOutputHandler(const MPlug* plug, MDataBlock* data);
 private:
 	PRTEnum*          enums;
 	bool              hasMaterials;
@@ -140,6 +141,7 @@ public:
 	static void* creator();
 private:
 	static MString& getStringParameter(MObject & node, MObject & attr, MString & value);
+	static MStatus  setStringParameter(MObject & node, MObject & attr, MString & value);
 	MStatus         addBoolParameter(MFnDependencyNode & node, MObject & attr, const MString & name, bool val);
 	MStatus         addFloatParameter(MFnDependencyNode & node,  MObject & attr, const MString & name, double val, double min, double max);
 	MStatus         addStrParameter(MFnDependencyNode & node,  MObject & attr, const MString & name, MString & attrDefault);
@@ -152,7 +154,7 @@ private:
 	MStatus         addParameter(MFnDependencyNode & node, MObject & attr ,  MFnAttribute& tAttr);
 	MStatus         updateRuleFiles(MFnDependencyNode & node, MString & rulePkg);
 	MStatus         updateStartRules(MFnDependencyNode & node, MStringArray & ruleFiles);
-	MStatus         updateAttributes(MFnDependencyNode & node, prt::AttributeMapBuilder* aBuilder, const prt::RuleFileInfo* info);
+	MStatus         updateAttributes(MFnDependencyNode & node, MString & ruleFile, MString & startRule, prt::AttributeMapBuilder* aBuilder, const prt::RuleFileInfo* info);
 	static MString  longName(const MString & attrName);
 	static MString  briefName(const MString & attrName);
 };

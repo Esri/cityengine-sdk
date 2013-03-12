@@ -78,29 +78,30 @@ public:
 	virtual void matSetColor(int mh, float r, float g, float b);
 	virtual void matSetDiffuseTexture(int mh, const wchar_t* tex);
 
-public: // FIXME
-	const MPlug*		mPlug;
-	MDataBlock*			mData;
-	MStringArray*		mShadingGroups;
-	MIntArray*			mShadingRanges;
-	MFnMesh*			mFnMesh;
+public:
+	MFnMesh*			    mFnMesh;
 
 	MFloatPointArray	mVertices;
-	MIntArray			mCounts;
-	MIntArray			mConnects;
+	MIntArray			    mCounts;
+	MIntArray			    mConnects;
 
 	MFloatPointArray	mNormals;
-	MIntArray			mNormalCounts;
-	MIntArray			mNormalConnects;
+	MIntArray			    mNormalCounts;
+	MIntArray			    mNormalConnects;
 
-	MFloatArray			mU;
-	MFloatArray			mV;
-	MIntArray			mUVCounts;
-	MIntArray			mUVConnects;
+	MFloatArray			  mU;
+	MFloatArray			  mV;
+	MIntArray			    mUVCounts;
+	MIntArray			    mUVConnects;
 
 private:
 	// must not be called
 	MayaOutputHandler() : mPlug(0), mData(0), mShadingGroups(0), mShadingRanges(0) { }
+
+	const MPlug*		  mPlug;
+	MDataBlock*			  mData;
+	MStringArray*		  mShadingGroups;
+	MIntArray*		    mShadingRanges;
 };
 
 
