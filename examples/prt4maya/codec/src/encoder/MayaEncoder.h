@@ -48,6 +48,15 @@ private:
 
 class MayaEncoderFactory : public prtx::EncoderFactory {
 public:
+	MayaEncoderFactory() {
+		setInfo(MayaEncoder::ID, MayaEncoder::NAME, MayaEncoder::DESCRIPTION);
+		prt::AttributeMapBuilder* defaultOptions = prt::AttributeMapBuilder::create();
+		setDefaultOptions(defaultOptions->createAttributeMap());
+		defaultOptions->destroy();
+	}
+
+	virtual ~MayaEncoderFactory() {}
+
 	MayaEncoder* create() { return new MayaEncoder(); }
 
 	virtual const std::wstring& getID() const { return MayaEncoder::ID; }
