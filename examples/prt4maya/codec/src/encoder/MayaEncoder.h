@@ -27,6 +27,8 @@ public:
 	virtual ~MayaEncoder();
 
 public:
+	virtual void init(prtx::IGenerateContext& /*context*/);
+	virtual void finish(prtx::IGenerateContext& /*context*/);
 	virtual void encode(prtx::IGenerateContext& context, size_t initialShapeIndex);
 
 public:
@@ -41,7 +43,7 @@ public:
 	static const std::wstring DESCRIPTION;
 
 private:
-	void convertGeometry(prtx::AbstractResolveMapPtr am, prtx::GeometryPtrVector& geometries, IMayaOutputHandler* mayaOutput);
+	void convertGeometry(const prtx::AbstractResolveMapPtr am, const prtx::GeometryPtrVector& geometries, const prtx::MaterialPtrVector& mat, IMayaOutputHandler* mayaOutput);
 	void unpackRPK(std::wstring rpkPath);
 };
 

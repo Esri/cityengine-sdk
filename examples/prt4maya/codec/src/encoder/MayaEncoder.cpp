@@ -32,8 +32,8 @@
 #include "prtx/IGenerateContext.h"
 
 
-const std::wstring MayaEncoder::ID			= L"com.esri.prt.codecs.maya.MayaEncoder";
-const std::wstring MayaEncoder::NAME		= L"Autodesk(tm) Maya(tm) Encoder";
+const std::wstring MayaEncoder::ID          = L"com.esri.prt.codecs.maya.MayaEncoder";
+const std::wstring MayaEncoder::NAME        = L"Autodesk(tm) Maya(tm) Encoder";
 const std::wstring MayaEncoder::DESCRIPTION	= L"Encodes geometry into Autodesk Maya format.";
 
 
@@ -67,7 +67,7 @@ void MayaEncoder::encode(prtx::IGenerateContext& context, size_t initialShapeInd
 	prtx::GeometryPtrVector geometries;
 	prtx::MaterialPtrVector mat;
 	encPrep->createEncodableGeometriesAndMaterialsAndReset(geometries, mat);
-	convertGeometry(am, geometries, oh);
+	convertGeometry(am, geometries, mat, oh);
 
 	const float t2 = tim.stop();
 	log_info("MayaEncoder::encode() : preparator %f s, encoding %f s, total %f s") % t1 % t2 % (t1+t2);
@@ -76,84 +76,81 @@ void MayaEncoder::encode(prtx::IGenerateContext& context, size_t initialShapeInd
 }
 
 
-void MayaEncoder::convertGeometry(prtx::AbstractResolveMapPtr am, prtx::GeometryPtrVector& geometries, IMayaOutputHandler* mayaOutput) {
-#if 0
+void MayaEncoder::convertGeometry(const prtx::AbstractResolveMapPtr am, const prtx::GeometryPtrVector& geometries, const prtx::MaterialPtrVector& mats, IMayaOutputHandler* mayaOutput) {
 	log_trace("MayaEncoder::convertGeometry: begin");
 	std::vector<double> vertices;
-	std::vector<int> counts;
-	std::vector<int> connects;
+	std::vector<int>    counts;
+	std::vector<int>    connects;
 
 	std::vector<double> normals;
-	std::vector<int> normalCounts;
-	std::vector<int> normalConnects;
+	std::vector<int>    normalCounts;
+	std::vector<int>    normalConnects;
 
-	std::vector<float> tcsU, tcsV;
-	std::vector<int> uvCounts;
-	std::vector<int> uvConnects;
+	std::vector<float>  tcsU, tcsV;
+	std::vector<int>    uvCounts;
+	std::vector<int>    uvConnects;
 
-	uint32_t base = 0;
-	uint32_t nrmBase = 0;
-	uint32_t uvBase = 0;
-	for(size_t gi = 0, size = geometries.size(); gi < size; ++gi) {
-		prtx::Geometry* geo = (prtx::Geometry*)geometries[gi].get();
+	int base    = 0;
+	int nrmBase = 0;
+	int uvBase  = 0;
+	for(size_t gi = 0, geoCount = geometries.size(); gi < geoCount; ++gi) {
+		prtx::Geometry* geo = geometries[gi].get();
 
+		const prtx::MeshPtrVector& meshes = geo->getMeshes();
+		for(size_t mi = 0, meshCount = meshes.size(); mi < meshCount; mi++) {
+			prtx::Mesh* mesh = meshes[mi].get();
 
-		const size_t& faceCount = geo->getFaceCount();
-		const double* verts = geo->getVertices();
-		const size_t vertsCount = geo->getVertexCount();
-		const double* norms = geo->getNormals();
-		const size_t normsCount = geo->getNormalCount();
-		const double* uvs = geo->getUVs();
-		const size_t uvCount = geo->getUVCount();
+			const prtx::FacePtrVector& faces = mesh->getFaces();
+			const prtx::DoubleVector&  verts = mesh->getVertexCoords();
+			const prtx::DoubleVector&  norms = mesh->getVertexNormalsCoords();
+			const prtx::DoubleVector&  uvs   = mesh->getUVCoords(0);
 
-		vertices.reserve(vertices.size() + vertsCount*3);
-		normals.reserve(normals.size() + normsCount*3);
-		tcsU.reserve(tcsU.size() + uvCount);
-		tcsV.reserve(tcsV.size() + uvCount);
-		counts.reserve(counts.size() + faceCount);
-		normalCounts.reserve(normalCounts.size() + faceCount);
-		uvCounts.reserve(uvCounts.size() + faceCount);
+			vertices.reserve(    vertices.size()     + verts.size() * 3);
+			normals.reserve(     normals.size()      + norms.size() * 3);
+			tcsU.reserve(        tcsU.size()         + uvs.size());
+			tcsV.reserve(        tcsV.size()         + uvs.size());
+			counts.reserve(      counts.size()       + faces.size());
+			normalCounts.reserve(normalCounts.size() + faces.size());
+			uvCounts.reserve(    uvCounts.size()     + faces.size());
 
-		for(size_t i = 0; i < vertsCount*3; ++i)
-			vertices.push_back(verts[i]);
+			for(size_t i = 0, size = verts.size() * 3; i < size; ++i)
+				vertices.push_back(verts[i]);
 
-		for(size_t i = 0; i < normsCount*3; ++i)
-			normals.push_back(norms[i]);
+			for(size_t i = 0, size = normals.size() * 3; i < size; ++i)
+				normals.push_back(norms[i]);
 
-		for(size_t i = 0; i < uvCount; ++i) {
-			tcsU.push_back((float)uvs[i*2]);
-			tcsV.push_back((float)uvs[i*2+1]);
-		}
-
-		for(size_t fi = 0; fi < faceCount; ++fi) {
-			const prtx::Face* face = geo->getFace(fi).get();
-
-			log_trace("    -- face %d", fi);
-			log_trace("       vtx index count: %d", face->getIndexCount());
-			log_trace("       nrm index count: %d", face->getNormalIndexCount());
-
-			const uint32_t vertexIndexCount = face->getIndexCount();
-			counts.push_back(vertexIndexCount);
-			const uint32_t* indices = face->getVertexIndices();
-			for(size_t vi = 0; vi < vertexIndexCount; ++vi)
-				connects.push_back(base + indices[vi]);
-
-			const uint32_t normalIndexCount = face->getNormalIndexCount();
-			normalCounts.push_back(normalIndexCount);
-			const uint32_t* normalIndices = face->getNormalIndices();
-			for(size_t ni = 0; ni < normalIndexCount; ++ni) {
-				normalConnects.push_back(nrmBase + normalIndices[ni]);
+			for(size_t i = 0, size = uvs.size() * 3; i < size; ++i) {
+				tcsU.push_back((float)uvs[i*2]);
+				tcsV.push_back((float)uvs[i*2+1]);
 			}
 
-			uvCounts.push_back(face->getUVIndexCount());
-			const uint32_t* uvIndices = face->getUVIndices();
-			for(size_t vi = 0; vi < face->getUVIndexCount(); ++vi)
-				uvConnects.push_back(uvBase + uvIndices[vi]);
-		}
+			for(size_t fi = 0, faceCount = faces.size(); fi < faceCount; ++fi) {
+				const prtx::FacePtr face = faces[fi];
 
-		base	+= vertsCount;
-		nrmBase	+= normsCount;
-		uvBase	+= uvCount;
+				log_trace("    -- face %d") % fi;
+				log_trace("       vtx index count: %d") % face->getVertexIndices().size();
+				log_trace("       nrm index count: %d") % face->getVertexNormalsIndices().size();
+
+				const prtx::IndexVector&	vidxs = face->getVertexIndices();
+				counts.push_back((int)vidxs.size());
+				for(size_t vi = 0, size = vidxs.size(); vi < size; ++vi)
+					connects.push_back(base + vidxs[vi]);
+
+				const prtx::IndexVector&	nidxs = face->getVertexNormalsIndices();
+				normalCounts.push_back((int)nidxs.size());
+				for(size_t ni = 0, size = nidxs.size(); ni < size; ++ni)
+					normalConnects.push_back(nrmBase + nidxs[ni]);
+
+				const prtx::IndexVector&	uvidxs = face->getUVIndices(0);
+				uvCounts.push_back((int)uvidxs.size());
+				for(size_t vi = 0, size = uvidxs.size(); vi < size; ++vi)
+					uvConnects.push_back(uvBase + uvidxs[vi]);
+			}
+
+			base	+= (int)verts.size();
+			nrmBase	+= (int)norms.size();
+			uvBase	+= (int)uvs.size();
+		}
 	}
 
 	mayaOutput->setVertices(&vertices[0], vertices.size());
@@ -163,24 +160,27 @@ void MayaEncoder::convertGeometry(prtx::AbstractResolveMapPtr am, prtx::Geometry
 	mayaOutput->createMesh();
 
 	int startFace = 0;
-	for(size_t gi = 0, size = geometries.size(); gi < size; ++gi) {
-		prtx::IGeometry* geo = (prtx::IGeometry*)geometries[gi].get();
-		prtx::Material* mat = geo->getMaterial();
-		const int faceCount  = (int)geo->getFaceCount();
+	for(size_t gi = 0, geoCount = geometries.size(); gi < geoCount; ++gi) {
+		prtx::Geometry* geo = geometries[gi].get();
 
-		mat->dump();
+		prtx::MaterialPtr mat = mats[gi];
 
 		std::wostringstream matName;
 		matName << "material" << gi;
 
-		log_trace(L"creating material: '%ls'", matName.str().c_str());
+		log_wtrace(L"creating material: '%ls'") % matName.str().c_str();
+
+		int faceCount = 0;
+		const prtx::MeshPtrVector& meshes = geo->getMeshes();
+		for(size_t mi = 0, meshCount = meshes.size(); mi < meshCount; mi++)
+			faceCount += (int)meshes[mi]->getFaces().size();
 
 		int mh = mayaOutput->matCreate(matName.str().c_str(), startFace, faceCount);
 
 		std::wstring tex;
 		if(mat->getTextureArray(L"diffuseMap").size() == 1) {
 			std::wstring uri(mat->getTextureArray(L"colorMap").front()->getName());
-			log_trace("trying to set texture uri: %ls", uri.c_str());
+			log_trace("trying to set texture uri: %ls") % uri.c_str();
 			tex = uri.substr(util::URIUtils::SCHEME_FILE.size());
 			mayaOutput->matSetDiffuseTexture(mh, tex.c_str());
 		}
@@ -189,11 +189,12 @@ void MayaEncoder::convertGeometry(prtx::AbstractResolveMapPtr am, prtx::Geometry
 	}
 
 	mayaOutput->finishMesh();
-#endif
 }
 
-
-void MayaEncoder::unpackRPK(std::wstring rpkPath) {
-
+void MayaEncoder::init(prtx::IGenerateContext& /*context*/) {
 }
+
+void MayaEncoder::finish(prtx::IGenerateContext& /*context*/) {
+}
+
 
