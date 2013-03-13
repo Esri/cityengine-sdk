@@ -37,7 +37,6 @@ void MayaOutputHandler::setUVs(float* u, float* v, size_t size) {
 	}
 }
 
-
 void MayaOutputHandler::setFaces(int* counts, size_t countsSize, int* connects, size_t connectsSize, int* normalCounts, size_t normalCountsSize, int* normalConnects, size_t normalConnectsSize, int* uvCounts, size_t uvCountsSize, int* uvConnects, size_t uvConnectsSize) {
 	mCounts.clear();
 	for (size_t i = 0; i < countsSize; ++i)
@@ -62,9 +61,6 @@ void MayaOutputHandler::setFaces(int* counts, size_t countsSize, int* connects, 
 	mUVConnects.clear();
 	for (size_t i = 0; i < uvConnectsSize; ++i)
 		mUVConnects.append(uvConnects[i]);
-
-	assert(mCounts.length() == mNormalCounts.length());
-	assert(mCounts.length() == mUVCounts.length());
 }
 
 
@@ -110,11 +106,14 @@ void MayaOutputHandler::createMesh() {
 		if(mUVConnects.length() > 0) {
 			MString uvSet = "map1";
 
-			stat = mFnMesh->setUVs(mU, mV, &uvSet);
-			MCHECK(stat);
+			MCHECK(mFnMesh->setUVs(mU, mV, &uvSet));
 
-			stat = mFnMesh->assignUVs(mUVCounts, mUVConnects, &uvSet);
-			MCHECK(stat);
+			DBG("    mU.length          = %d", mU.length());
+			DBG("    mV.length          = %d", mV.length());	
+			DBG("    mUVCounts.length   = %d", mUVCounts.length());	
+			DBG("    mUVConnects.length = %d", mUVConnects.length());
+
+			MCHECK(mFnMesh->assignUVs(mUVCounts, mUVConnects, &uvSet));
 		}
 	}
 

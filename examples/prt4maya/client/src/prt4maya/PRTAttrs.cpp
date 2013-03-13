@@ -404,10 +404,12 @@ MStatus PRTAttrs::updateAttributes(MFnDependencyNode & node, MString & ruleFile,
 	DBG("%s", shape->toXML((char*)malloc(size), &size));
 
 	for(size_t i = 0; i < info->getNumAttributes(); i++) {
-		PRTEnum* e          = 0;
-		bool     createAttr = false;
-		const MString  name = MString(info->getAttribute(i)->getName());
-		MObject  attr;
+		PRTEnum*       e          = 0;
+		bool           createAttr = false;
+		const MString  name      = MString(info->getAttribute(i)->getName());
+		MObject        attr;
+
+		if(info->getAttribute(i)->getNumParameters() != 0) continue;
 
 		switch(info->getAttribute(i)->getReturnType()) {
 		case prt::AAT_BOOL: {
@@ -417,7 +419,7 @@ MStatus PRTAttrs::updateAttributes(MFnDependencyNode & node, MString & ruleFile,
 						e = new PRTEnum(prtNode, an);
 				}
 				prt::Status evalStat;
-				bool value = false; // prt::ProceduralRT::evalBool(shape, prtNode->resolveMap, outputHandler, info->getAttribute(i)->getName(), &evalStat);
+				bool value = prt::ProceduralRT::evalBool(shape, prtNode->resolveMap, outputHandler, info->getAttribute(i)->getName(), &evalStat);
 
 				if(e) {
 					M_CHECK(addEnumParameter(node, attr, name, value, e));
@@ -440,7 +442,7 @@ MStatus PRTAttrs::updateAttributes(MFnDependencyNode & node, MString & ruleFile,
 					}
 				}
 				prt::Status evalStat;
-				double value = 10; // prt::ProceduralRT::evalFloat(shape, prtNode->resolveMap, outputHandler, info->getAttribute(i)->getName(), &evalStat);
+				double value = prt::ProceduralRT::evalFloat(shape, prtNode->resolveMap, outputHandler, info->getAttribute(i)->getName(), &evalStat);
 
 				if(e) {
 					M_CHECK(addEnumParameter(node, attr, name, value, e));
@@ -476,7 +478,7 @@ MStatus PRTAttrs::updateAttributes(MFnDependencyNode & node, MString & ruleFile,
 				}
 				size_t valueLen = 4096;
 				wchar_t* value = new wchar_t[valueLen];
-				// prt::ProceduralRT::evalStr(shape, prtNode->resolveMap, outputHandler, info->getAttribute(i)->getName(), value, &valueLen);
+				prt::ProceduralRT::evalStr(shape, prtNode->resolveMap, outputHandler, info->getAttribute(i)->getName(), value, &valueLen);
 				value[0] = 0;
 
 				MString mvalue(value);
