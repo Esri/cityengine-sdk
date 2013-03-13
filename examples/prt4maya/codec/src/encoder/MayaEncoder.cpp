@@ -67,7 +67,26 @@ void MayaEncoder::encode(prtx::IGenerateContext& context, size_t initialShapeInd
 	prtx::GeometryPtrVector geometries;
 	prtx::MaterialPtrVector mat;
 	encPrep->createEncodableGeometriesAndMaterialsAndReset(geometries, mat);
-	convertGeometry(am, geometries, mat, oh);
+	const prtx::InitialShape& ishape = context.getInitialShape(initialShapeIndex);
+	size_t   start = 0;
+	size_t   end   = 0;
+	wchar_t* ruleFile = wcsdup(ishape.getRuleFile());
+	for(size_t i = 0; ruleFile[i]; i++) {
+		switch(ruleFile[i]) {
+		case '\\':
+		case '/':
+			start = i + 1;
+			break;
+		case '.':
+			ruleFile[i] = '_';
+			end = i;
+			break;
+		}
+	}
+	ruleFile[end] = 0;
+	std::wstring cgbName = std::wstring(&ruleFile[start]);
+	free(ruleFile);
+	convertGeometry(cgbName, am, geometries, mat, oh);
 
 	const float t2 = tim.stop();
 	log_info("MayaEncoder::encode() : preparator %f s, encoding %f s, total %f s") % t1 % t2 % (t1+t2);
@@ -76,7 +95,7 @@ void MayaEncoder::encode(prtx::IGenerateContext& context, size_t initialShapeInd
 }
 
 
-void MayaEncoder::convertGeometry(const prtx::AbstractResolveMapPtr am, const prtx::GeometryPtrVector& geometries, const prtx::MaterialPtrVector& mats, IMayaOutputHandler* mayaOutput) {
+void MayaEncoder::convertGeometry(const std::wstring& cgbName, const prtx::AbstractResolveMapPtr am, const prtx::GeometryPtrVector& geometries, const prtx::MaterialPtrVector& mats, IMayaOutputHandler* mayaOutput) {
 	log_trace("MayaEncoder::convertGeometry: begin");
 	std::vector<double> vertices;
 	std::vector<int>    counts;
@@ -134,9 +153,11 @@ void MayaEncoder::convertGeometry(const prtx::AbstractResolveMapPtr am, const pr
 			for(size_t fi = 0, faceCount = faces.size(); fi < faceCount; ++fi) {
 				const prtx::FacePtr face = faces[fi];
 
+				/*
 				log_trace("    -- face %d") % fi;
 				log_trace("       vtx index count: %d") % face->getVertexIndices().size();
 				log_trace("       nrm index count: %d") % face->getVertexNormalsIndices().size();
+				*/
 
 				const prtx::IndexVector&	vidxs = face->getVertexIndices();
 				counts.push_back((int)vidxs.size());
@@ -153,7 +174,8 @@ void MayaEncoder::convertGeometry(const prtx::AbstractResolveMapPtr am, const pr
 					uvCounts.push_back((int)uvidxs.size());
 					for(size_t vi = 0, size = uvidxs.size(); vi < size; ++vi)
 						uvConnects.push_back(uvBase + uvidxs[vi]);
-				}
+				} else
+					uvCounts.push_back(0);
 			}
 
 			base	  += (int)verts.size() / 3;
@@ -178,9 +200,9 @@ void MayaEncoder::convertGeometry(const prtx::AbstractResolveMapPtr am, const pr
 		prtx::MaterialPtr mat = mats[gi];
 
 		std::wostringstream matName;
-		matName << "material" << gi;
+		matName << "m" << cgbName << gi;
 
-		log_wtrace(L"creating material: '%ls'") % matName.str().c_str();
+		log_wtrace(L"creating material: '%s'") % matName.str();
 
 		int faceCount = 0;
 		const prtx::MeshPtrVector& meshes = geo->getMeshes();
@@ -190,8 +212,8 @@ void MayaEncoder::convertGeometry(const prtx::AbstractResolveMapPtr am, const pr
 		int mh = mayaOutput->matCreate(matName.str().c_str(), startFace, faceCount);
 
 		std::wstring tex;
-		if(mat->getTextureArray(L"diffuseMap").size() == 1) {
-			std::wstring uri(mat->getTextureArray(L"colorMap").front()->getName());
+		if(mat->diffuseMap().size() > 0 && mat->diffuseMap()[0]->isValid()) {
+			std::wstring uri(mat->diffuseMap()[0]->getName());
 			log_trace("trying to set texture uri: %ls") % uri.c_str();
 			tex = uri.substr(util::URIUtils::SCHEME_FILE.size());
 			mayaOutput->matSetDiffuseTexture(mh, tex.c_str());

@@ -43,8 +43,7 @@ public:
 	static const std::wstring DESCRIPTION;
 
 private:
-	void convertGeometry(const prtx::AbstractResolveMapPtr am, const prtx::GeometryPtrVector& geometries, const prtx::MaterialPtrVector& mat, IMayaOutputHandler* mayaOutput);
-	void unpackRPK(std::wstring rpkPath);
+	void convertGeometry(const std::wstring& cgbName, const prtx::AbstractResolveMapPtr am, const prtx::GeometryPtrVector& geometries, const prtx::MaterialPtrVector& mat, IMayaOutputHandler* mayaOutput);
 };
 
 
