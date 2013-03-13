@@ -9,7 +9,7 @@
 
 #include "maya/MItMeshPolygon.h"
 #include "wrapper/MayaOutputHandler.h"
-#include "prt4mayaNode.h"
+#include "prt4maya/prt4mayaNode.h"
 
 #define MCHECK(_stat_) {if(MS::kSuccess != _stat_) {DBG("maya err at line %d: %s %d\n", __LINE__, _stat_.errorString().asChar(), _stat_.statusCode());}}
 
