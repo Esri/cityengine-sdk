@@ -169,17 +169,17 @@ private:
 
 const char* filename(const char* path);
 
-#define DO_DBG
+// #define DO_DBG
 
 #ifdef DO_DBG
 #define DBG(fmt, ...) {\
 		printf("%s:%d ", filename(__FILE__) , __LINE__); \
-		printf(fmt, ## __VA_ARGS__); \
+		printf(fmt##"\n", ## __VA_ARGS__); \
 		fflush(0);}
 
 #define DBGL(fmt, ...) {\
 		printf("%ls:%d ", filename(__FILE__) , __LINE__); \
-		wprintf(L##fmt, ## __VA_ARGS__); \
+		wprintf(L##fmt##L"\n", ## __VA_ARGS__); \
 		fflush(0);}
 
 #else

@@ -68,7 +68,7 @@ void MayaOutputHandler::setFaces(int* counts, size_t countsSize, int* connects, 
 void MayaOutputHandler::createMesh() {
 	MStatus stat;
 
-	std::cout << "--- MayaData::createMesh begin" << std::endl;
+	DBG("--- MayaData::createMesh begin");
 
 	if(mPlug == 0 || mData == 0) return;
 
@@ -89,7 +89,6 @@ void MayaOutputHandler::createMesh() {
 		if (mNormalCounts[fi] > 0) {
 			for (int v = 0; v < mNormalCounts[fi]; ++v, ++ni, ++vi) {
 				MVector nrm(mNormals[mNormalConnects[ni]]);
-				std::cout << "fi = " << fi << ", v = " << v << ", vtx index = " << mConnects[vi] << ", nrm index = " << mNormalConnects[ni] << ", nrm = " << nrm << std::endl;
 				stat = mFnMesh->setFaceVertexNormal(nrm, fi, mConnects[vi]);
 				MCHECK(stat);
 			}
@@ -101,7 +100,7 @@ void MayaOutputHandler::createMesh() {
 	MPlugArray plugs;
 	bool isConnected = mPlug->connectedTo(plugs, false, true, &stat);
 	MCHECK(stat);
-	DBG("    plug is connected: %d; %d plugs\n", isConnected, plugs.length());
+	DBG("    plug is connected: %d; %d plugs", isConnected, plugs.length());
 	if (plugs.length() > 0) {
 		if(mUVConnects.length() > 0) {
 			MString uvSet = "map1";
