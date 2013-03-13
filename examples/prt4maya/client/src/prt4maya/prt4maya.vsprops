@@ -6,7 +6,7 @@
 	>
 	<UserMacro
 		Name="workspace_loc"
-		Value="G:\prt_workspace.x64"
+		Value="..\..\.."
 		PerformEnvironmentSet="true"
 	/>
 	<UserMacro
