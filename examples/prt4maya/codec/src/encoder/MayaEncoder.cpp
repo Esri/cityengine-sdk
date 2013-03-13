@@ -100,28 +100,35 @@ void MayaEncoder::convertGeometry(const prtx::AbstractResolveMapPtr am, const pr
 		for(size_t mi = 0, meshCount = meshes.size(); mi < meshCount; mi++) {
 			prtx::Mesh* mesh = meshes[mi].get();
 
-			const prtx::FacePtrVector& faces = mesh->getFaces();
-			const prtx::DoubleVector&  verts = mesh->getVertexCoords();
-			const prtx::DoubleVector&  norms = mesh->getVertexNormalsCoords();
-			const prtx::DoubleVector&  uvs   = mesh->getUVCoords(0);
+			const prtx::FacePtrVector& faces    = mesh->getFaces();
+			const prtx::DoubleVector&  verts    = mesh->getVertexCoords();
+			const prtx::DoubleVector&  norms    = mesh->getVertexNormalsCoords();
+			bool                       hasUVS   = mesh->getUVCoords().size() > 0;
+			size_t                     uvsCount = 0;
 
-			vertices.reserve(    vertices.size()     + verts.size() * 3);
-			normals.reserve(     normals.size()      + norms.size() * 3);
-			tcsU.reserve(        tcsU.size()         + uvs.size());
-			tcsV.reserve(        tcsV.size()         + uvs.size());
+			vertices.reserve(    vertices.size()     + verts.size());
+			normals.reserve(     normals.size()      + norms.size());
 			counts.reserve(      counts.size()       + faces.size());
 			normalCounts.reserve(normalCounts.size() + faces.size());
 			uvCounts.reserve(    uvCounts.size()     + faces.size());
 
-			for(size_t i = 0, size = verts.size() * 3; i < size; ++i)
+			for(size_t i = 0, size = verts.size(); i < size; ++i)
 				vertices.push_back(verts[i]);
 
-			for(size_t i = 0, size = normals.size() * 3; i < size; ++i)
+			for(size_t i = 0, size = norms.size(); i < size; ++i)
 				normals.push_back(norms[i]);
 
-			for(size_t i = 0, size = uvs.size() * 3; i < size; ++i) {
-				tcsU.push_back((float)uvs[i*2]);
-				tcsV.push_back((float)uvs[i*2+1]);
+			if(hasUVS) {
+				const prtx::DoubleVector& uvs = mesh->getUVCoords(0);
+				uvsCount                      = uvs.size();
+
+				tcsU.reserve(tcsU.size() + uvsCount / 2);
+				tcsV.reserve(tcsV.size() + uvsCount / 2);
+
+				for(size_t i = 0, size = uvsCount; i < size; i += 2) {
+					tcsU.push_back((float)uvs[i+0]);
+					tcsV.push_back((float)uvs[i+1]);
+				}
 			}
 
 			for(size_t fi = 0, faceCount = faces.size(); fi < faceCount; ++fi) {
@@ -141,22 +148,27 @@ void MayaEncoder::convertGeometry(const prtx::AbstractResolveMapPtr am, const pr
 				for(size_t ni = 0, size = nidxs.size(); ni < size; ++ni)
 					normalConnects.push_back(nrmBase + nidxs[ni]);
 
-				const prtx::IndexVector&	uvidxs = face->getUVIndices(0);
-				uvCounts.push_back((int)uvidxs.size());
-				for(size_t vi = 0, size = uvidxs.size(); vi < size; ++vi)
-					uvConnects.push_back(uvBase + uvidxs[vi]);
+				if(hasUVS) {
+					const prtx::IndexVector& uvidxs = face->getUVIndices(0);
+					uvCounts.push_back((int)uvidxs.size());
+					for(size_t vi = 0, size = uvidxs.size(); vi < size; ++vi)
+						uvConnects.push_back(uvBase + uvidxs[vi]);
+				}
 			}
 
-			base	+= (int)verts.size();
-			nrmBase	+= (int)norms.size();
-			uvBase	+= (int)uvs.size();
+			base	  += (int)verts.size() / 3;
+			nrmBase	+= (int)norms.size() / 3;
+			uvBase  += (int)uvsCount     / 2;
 		}
 	}
 
+	bool hasUVS     = tcsU.size() > 0;
+	bool hasNormals = normals.size() > 0;
+
 	mayaOutput->setVertices(&vertices[0], vertices.size());
-	mayaOutput->setUVs(&tcsU[0], &tcsV[0], tcsU.size());
-	mayaOutput->setNormals(&normals[0], normals.size());
-	mayaOutput->setFaces(&counts[0], counts.size(), &connects[0], connects.size(), &normalCounts[0], normalCounts.size(), &normalConnects[0], normalConnects.size(), &uvCounts[0], uvCounts.size(), &uvConnects[0], uvConnects.size());
+	mayaOutput->setUVs(hasUVS ? &tcsU[0] : 0, hasUVS ? &tcsV[0] : 0, tcsU.size());
+	mayaOutput->setNormals(hasNormals ? &normals[0] : 0, normals.size());
+	mayaOutput->setFaces(&counts[0], counts.size(), &connects[0], connects.size(), hasNormals ? &normalCounts[0] : 0, normalCounts.size(), hasNormals ? &normalConnects[0] : 0, normalConnects.size(), hasUVS ? &uvCounts[0] : 0, uvCounts.size(), hasUVS ? &uvConnects[0] : 0, uvConnects.size());
 	mayaOutput->createMesh();
 
 	int startFace = 0;
