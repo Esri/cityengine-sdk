@@ -85,7 +85,7 @@ void MayaOutputHandler::createMesh() {
 
 	int ni = 0;
 	int vi = 0;
-	for(unsigned int fi = 0; fi < mCounts.length(); ++fi) {
+	for(unsigned int fi = 0; fi < mNormalCounts.length(); ++fi) {
 		if (mNormalCounts[fi] > 0) {
 			for (int v = 0; v < mNormalCounts[fi]; ++v, ++ni, ++vi) {
 				MVector nrm(mNormals[mNormalConnects[ni]]);

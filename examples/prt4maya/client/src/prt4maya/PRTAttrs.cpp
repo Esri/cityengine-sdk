@@ -245,7 +245,7 @@ MStatus PRTAttrs::updateRuleFiles(MFnDependencyNode & node, MString & rulePkg) {
 	prtNode->destroyEnums();
 
 	MStringArray ruleFiles;
-	if(prt::ProceduralRT::getResolveMap(path.c_str(), &prtNode->resolveMap) == prt::STATUS_OK) {
+	if(prt::ProceduralRT::getResolveMap(path.c_str(), &prtNode->resolveMap, true) == prt::STATUS_OK) {
 		size_t nKeys;
 		const wchar_t** keys   = prtNode->resolveMap->getKeys(&nKeys);
 		std::wstring    sClass(L".class");
