@@ -14,7 +14,6 @@
 
 #include "util/StringUtils.h"
 #include "util/Timer.h"
-#include "util/URIUtils.h"
 #include "util/Exception.h"
 
 #include "prt/prt.h"
@@ -231,10 +230,9 @@ void MayaEncoder::convertGeometry(const std::wstring& cgbName, const prtx::Abstr
 
 		std::wstring tex;
 		if(mat->diffuseMap().size() > 0 && mat->diffuseMap()[0]->isValid()) {
-			std::wstring uri(mat->diffuseMap()[0]->getName());
-			log_trace("trying to set texture uri: %ls") % uri.c_str();
-			tex = uri.substr(util::URIUtils::SCHEME_FILE.size());
-			mayaOutput->matSetDiffuseTexture(mh, tex.c_str());
+			prtx::URI texURI = mat->diffuseMap()[0]->getURI();
+			log_wtrace(L"trying to set texture uri: %s") % texURI;
+			mayaOutput->matSetDiffuseTexture(mh, texURI.getPath().wstring().c_str());
 		}
 
 		startFace += faceCount;
