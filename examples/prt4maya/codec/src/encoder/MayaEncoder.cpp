@@ -232,7 +232,8 @@ void MayaEncoder::convertGeometry(const std::wstring& cgbName, const prtx::Abstr
 		if(mat->diffuseMap().size() > 0 && mat->diffuseMap()[0]->isValid()) {
 			prtx::URI texURI = mat->diffuseMap()[0]->getURI();
 			log_wtrace(L"trying to set texture uri: %s") % texURI;
-			mayaOutput->matSetDiffuseTexture(mh, texURI.getPath().c_str());
+			std::wstring texPath = texURI.getPath().wstring();
+			mayaOutput->matSetDiffuseTexture(mh, texPath.c_str());
 		}
 
 		startFace += faceCount;
