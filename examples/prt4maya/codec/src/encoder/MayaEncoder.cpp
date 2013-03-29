@@ -92,7 +92,7 @@ void MayaEncoder::encode(prtx::IGenerateContext& context, size_t initialShapeInd
 	log_trace("MayaEncoder::encode done.");
 }
 
-#define USE_NORMALS
+// #define USE_NORMALS
 
 void MayaEncoder::convertGeometry(const std::wstring& cgbName, const prtx::AbstractResolveMapPtr am, const prtx::GeometryPtrVector& geometries, const prtx::MaterialPtrVector& mats, IMayaOutputHandler* mayaOutput) {
 	log_trace("MayaEncoder::convertGeometry: begin");
