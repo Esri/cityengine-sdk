@@ -83,7 +83,7 @@ void MayaOutputHandler::createMesh() {
 	MObject oMesh = mFnMesh->create(mVertices.length(), mCounts.length(), mVertices, mCounts, mConnects, newOutputData, &stat);
 	MCHECK(stat);
 
-	int ni = 0;
+/*	int ni = 0;
 	int vi = 0;
 	for(unsigned int fi = 0; fi < mNormalCounts.length(); ++fi) {
 		if (mNormalCounts[fi] > 0) {
@@ -96,6 +96,7 @@ void MayaOutputHandler::createMesh() {
 		else
 			vi += mCounts[fi];
 	}
+*/
 
 	MPlugArray plugs;
 	bool isConnected = mPlug->connectedTo(plugs, false, true, &stat);
