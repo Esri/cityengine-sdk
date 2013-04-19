@@ -230,9 +230,9 @@ void MayaEncoder::convertGeometry(const std::wstring& cgbName, const prtx::Abstr
 
 		std::wstring tex;
 		if(mat->diffuseMap().size() > 0 && mat->diffuseMap()[0]->isValid()) {
-			prtx::URI texURI = mat->diffuseMap()[0]->getURI();
-			log_wtrace(L"trying to set texture uri: %s") % texURI;
-			std::wstring texPath = texURI.getPath().wstring();
+			prtx::URIPtr texURI = mat->diffuseMap()[0]->getURI();
+			log_wtrace(L"trying to set texture uri: %s") % texURI->wstring();
+			std::wstring texPath = texURI->getPath();
 			mayaOutput->matSetDiffuseTexture(mh, texPath.c_str());
 		}
 
