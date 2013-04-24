@@ -50,7 +50,7 @@ private:
 class MayaEncoderFactory : public prtx::EncoderFactory {
 public:
 	MayaEncoderFactory() {
-		setInfo(getContentType(), getID(), getName(), getDescription());
+		setInfo(getContentType(), getID(), getName(), getDescription(), L"");
 		prt::AttributeMapBuilder* defaultOptions = prt::AttributeMapBuilder::create();
 		setDefaultOptions(defaultOptions->createAttributeMap());
 		defaultOptions->destroy();
