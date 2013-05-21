@@ -125,7 +125,6 @@ install(FILES ${PRT_CORE_LIBRARIES} DESTINATION .)
 install(FILES ${PRT_CODECS_LIBRARIES} DESTINATION prt_lib)
 install(FILES ${PRT_ADAPTORS_LIBRARIES} DESTINATION prt_lib)
 install(FILES ${PRT_CODECS_MAYA_LIBRARIES} DESTINATION prt_lib)
-install(FILES conf/prt_config.xml DESTINATION prt_lib)
 
 install(FILES scripts/AEprtTemplate.mel DESTINATION .)
 install(FILES scripts/prt4mayaCreateUI.mel DESTINATION .)

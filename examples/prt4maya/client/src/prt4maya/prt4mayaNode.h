@@ -110,9 +110,9 @@ public:
 	MObject            startRule;
 
 	std::wstring       lRulePkg;
-	prt::AttributeMap* resolveMap;
-	prt::AttributeMap* generateAttrs;
-	prt::AttributeMap* generateOpts;
+	const prt::AttributeMap* resolveMap;
+	const prt::AttributeMap* generateAttrs;
+	const prt::AttributeMap* generateOpts;
 
 	void                  destroyEnums();
 	const PRTEnum *       findEnum(const MObject & attr) const;

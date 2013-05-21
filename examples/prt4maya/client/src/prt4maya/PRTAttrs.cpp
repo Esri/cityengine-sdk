@@ -245,7 +245,7 @@ MStatus PRTAttrs::updateRuleFiles(MFnDependencyNode & node, MString & rulePkg) {
 	prtNode->destroyEnums();
 
 	MStringArray ruleFiles;
-	if(prt::ProceduralRT::getResolveMap(path.c_str(), &prtNode->resolveMap, true) == prt::STATUS_OK) {
+	if(prt::ProceduralRT::createResolveMap(path.c_str(), &prtNode->resolveMap, true) == prt::STATUS_OK) {
 		size_t nKeys;
 		const wchar_t** keys   = prtNode->resolveMap->getKeys(&nKeys);
 		std::wstring    sClass(L".class");
@@ -386,7 +386,7 @@ MStatus PRTAttrs::updateAttributes(MFnDependencyNode & node, MString & ruleFile,
 	MString           dummy;
 
 	MayaOutputHandler* outputHandler = prtNode->createOutputHandler(0, 0);
-	prt::AttributeMap* attrs         = aBuilder->createAttributeMap();
+	const prt::AttributeMap* attrs         = aBuilder->createAttributeMap();
 	prt::InitialShape* shape         = prt::InitialShapeBuilder::create(
 			UnitQuad_vertices, 
 			UnitQuad_vertexCount, 

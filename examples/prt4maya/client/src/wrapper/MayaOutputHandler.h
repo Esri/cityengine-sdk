@@ -55,6 +55,7 @@ public:
 	}
 
 	virtual prt::Status assetError(size_t isIndex, prt::CGAErrorLevel level, const wchar_t* key, const wchar_t* uri, const wchar_t* message) { throw std::runtime_error("Not implemented yet"); }
+	virtual prt::Status generateError(size_t /*isIndex*/, const wchar_t* /* message*/) { throw std::runtime_error("Not implemented yet"); }
 	virtual prt::Status cgaError(size_t isIndex, int32_t shapeID, prt::CGAErrorLevel level, int32_t methodId, int32_t pc, const wchar_t* message) { throw std::runtime_error("Not implemented yet"); }
 	virtual prt::Status cgaPrint(size_t isIndex, int32_t shapeID, const wchar_t* txt) { throw std::runtime_error("Not implemented yet"); }
 	virtual prt::Status cgaReportBool(size_t isIndex, int32_t shapeID, const wchar_t* key, bool value) { throw std::runtime_error("Not implemented yet"); }
@@ -68,20 +69,26 @@ public:
 	virtual prt::Status closeCGAPrint() { throw std::runtime_error("Not implemented yet"); }
 	virtual prt::Status closeCGAReport() { throw std::runtime_error("Not implemented yet"); }
 
-	virtual const void* lookupTransient(const wchar_t* uri) {
-		return mCache->lookupTransient(uri);
+	virtual const void* getTransientBlob(prt::ContentType type, const wchar_t* key) {
+		return mCache->getTransientBlob(type, key);
 	}
-	virtual const void* insertTransient(const wchar_t* uri, const void* data, size_t size, const void** referencedDataBlocks, size_t dataBlockCount) {
-		return mCache->insertTransient(uri, data, size, referencedDataBlocks, dataBlockCount);
+	virtual const void* insertTransientBlob(prt::ContentType type, const wchar_t* key, const void* ptr) {
+		return mCache->insertTransientBlob(type, key, ptr);
 	}
-	virtual const void* lookupDataBlockAndLock(const wchar_t* uri, CacheEntryType type) {
-		return mCache->lookupDataBlockAndLock(uri, type);
+	virtual bool tryLockPersistentBlobs(prt::ContentType type, const wchar_t* key) {
+		return mCache->tryLockPersistentBlobs(type, key);
 	}
-	virtual const void* insertDataBlockAndLock(CacheEntryType type, const void* data, size_t size) {
-		return mCache->insertDataBlockAndLock(type, data, size);
+	virtual void insertPersistentBlobAndLock(PersistentBlobType type, const wchar_t* key, const void* data, size_t size) {
+		mCache->insertPersistentBlobAndLock(type, key, data, size);
 	}
-	virtual void unlockDataBlock(const void* ptr) {
-		mCache->unlockDataBlock(ptr);
+	virtual const void* getPersistentBlob(PersistentBlobType type, const wchar_t* key, size_t* size) {
+		return mCache->getPersistentBlob(type, key, size);
+	}
+	virtual void releasePersistentBlob(PersistentBlobType type, const wchar_t* key) {
+		mCache->releasePersistentBlob(type, key);
+	}
+	virtual void unlockPersistentBlob(PersistentBlobType type, const wchar_t* key) {
+		mCache->unlockPersistentBlob(type, key);
 	}
 
 
