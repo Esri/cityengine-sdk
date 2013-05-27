@@ -17,6 +17,7 @@
 
 #include "prtx/EncoderFactory.h"
 #include "prtx/Encoder.h"
+#include "prtx/ResolveMap.h"
 
 #include "encoder/IMayaOutputHandler.h"
 
@@ -43,7 +44,7 @@ public:
 	static const std::wstring DESCRIPTION;
 
 private:
-	void convertGeometry(const std::wstring& cgbName, const prtx::AbstractResolveMapPtr am, const prtx::GeometryPtrVector& geometries, const prtx::MaterialPtrVector& mat, IMayaOutputHandler* mayaOutput);
+	void convertGeometry(const std::wstring& cgbName, const prtx::ConstResolveMapPtr am, const prtx::GeometryPtrVector& geometries, const prtx::MaterialPtrVector& mat, IMayaOutputHandler* mayaOutput);
 };
 
 
