@@ -47,7 +47,7 @@ MayaEncoder::~MayaEncoder() {
 void MayaEncoder::encode(prtx::IGenerateContext& context, size_t initialShapeIndex) {
 	const prtx::InitialShape& ishape = context.getInitialShape(initialShapeIndex);
 
-	prtx::ConstResolveMapPtr am = ishape.getPRTXResolveMap();
+	prt::ResolveMap const* am = ishape.getResolveMap();
 
 	IMayaOutputHandler* oh = dynamic_cast<IMayaOutputHandler*>(getCallbacks());
 	if(oh == 0) throw(prtx::StatusException(prt::STATUS_ILLEGAL_CALLBACK_OBJECT));
@@ -85,7 +85,7 @@ void MayaEncoder::encode(prtx::IGenerateContext& context, size_t initialShapeInd
 	ruleFile[end] = 0;
 	std::wstring cgbName = std::wstring(&ruleFile[start]);
 	free(ruleFile);
-	convertGeometry(cgbName, am, geometries, mat, oh);
+	convertGeometry(cgbName, geometries, mat, oh);
 
 	const float t2 = tim.stop();
 	log_info("MayaEncoder::encode() : preparator %f s, encoding %f s, total %f s") % t1 % t2 % (t1+t2);
@@ -95,7 +95,7 @@ void MayaEncoder::encode(prtx::IGenerateContext& context, size_t initialShapeInd
 
 // #define USE_NORMALS
 
-void MayaEncoder::convertGeometry(const std::wstring& cgbName, const prtx::ConstResolveMapPtr am, const prtx::GeometryPtrVector& geometries, const prtx::MaterialPtrVector& mats, IMayaOutputHandler* mayaOutput) {
+void MayaEncoder::convertGeometry(const std::wstring& cgbName, const prtx::GeometryPtrVector& geometries, const prtx::MaterialPtrVector& mats, IMayaOutputHandler* mayaOutput) {
 	log_trace("MayaEncoder::convertGeometry: begin");
 	std::vector<double> vertices;
 	std::vector<int>    counts;
