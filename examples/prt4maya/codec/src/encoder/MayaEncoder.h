@@ -58,7 +58,7 @@ public:
 
 	virtual ~MayaEncoderFactory() {}
 
-	MayaEncoder* create() { return new MayaEncoder(); }
+	virtual MayaEncoder* create() { return new MayaEncoder(); }
 
 	virtual const std::wstring& getID() const { return MayaEncoder::ID; }
 	virtual const std::wstring& getName() const { return MayaEncoder::NAME; }
