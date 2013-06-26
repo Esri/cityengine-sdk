@@ -58,3 +58,8 @@ install(CODE "file(REMOVE_RECURSE ${CMAKE_INSTALL_PREFIX})")
 install(TARGETS ${PROJECT} DESTINATION lib)
 
 install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/encoder/IMayaOutputHandler.h DESTINATION include)
+
+
+### print final configuration
+
+prt_print_build_flags()
