@@ -44,7 +44,12 @@ public:
 	static const std::wstring DESCRIPTION;
 
 private:
-	void convertGeometry(const std::wstring& cgbName, const prtx::GeometryPtrVector& geometries, const prtx::MaterialPtrVector& mat, IMayaOutputHandler* mayaOutput);
+	void convertGeometry(
+			const std::wstring& cgbName,
+			const prtx::GeometryPtrVector& geometries,
+			const std::vector<prtx::MaterialPtrVector>& mat,
+			IMayaOutputHandler* mayaOutput
+	);
 };
 
 

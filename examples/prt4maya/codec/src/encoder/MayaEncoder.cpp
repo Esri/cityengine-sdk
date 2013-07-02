@@ -54,19 +54,20 @@ void MayaEncoder::encode(prtx::IGenerateContext& context, size_t initialShapeInd
 
 	util::Timer tim;
 
-	prtx::EncodePreparatorPtr encPrep = prtx::EncodePreparator::create();
+	prtx::EncodePreparatorPtr encPrep = prtx::EncodePreparator::create(true);
 	prtx::LeafIteratorPtr li = prtx::LeafIterator::create(context, initialShapeIndex);
 	for (prtx::IShapePtr shape = li->getNext(); shape != 0; shape = li->getNext()) {
-		encPrep->add(/*initialShapes[i],*/ shape);
-		//			log_trace(L"encode leaf shape mat: %ls", shape->getMaterial()->getString(L"name"));
+		encPrep->add(getCallbacks(), shape);
 	}
 
 	const float t1 = tim.stop();
 	tim.start();
 
 	prtx::GeometryPtrVector geometries;
-	prtx::MaterialPtrVector mat;
-	encPrep->createEncodableGeometriesAndMaterialsAndReset(geometries, mat);
+	std::vector<prtx::DoubleVector> trafos;
+	prtx::MeshPtrVector meshes;
+	std::vector<prtx::MaterialPtrVector> materials;
+	encPrep->createGeometriesAndReset(geometries, trafos, materials);
 	size_t   start = 0;
 	size_t   end   = 0;
 	wchar_t* ruleFile = wcsdup(ishape.getRuleFile());
@@ -85,7 +86,7 @@ void MayaEncoder::encode(prtx::IGenerateContext& context, size_t initialShapeInd
 	ruleFile[end] = 0;
 	std::wstring cgbName = std::wstring(&ruleFile[start]);
 	free(ruleFile);
-	convertGeometry(cgbName, geometries, mat, oh);
+	convertGeometry(cgbName, geometries, materials, oh);
 
 	const float t2 = tim.stop();
 	log_info("MayaEncoder::encode() : preparator %f s, encoding %f s, total %f s") % t1 % t2 % (t1+t2);
@@ -95,7 +96,7 @@ void MayaEncoder::encode(prtx::IGenerateContext& context, size_t initialShapeInd
 
 // #define USE_NORMALS
 
-void MayaEncoder::convertGeometry(const std::wstring& cgbName, const prtx::GeometryPtrVector& geometries, const prtx::MaterialPtrVector& mats, IMayaOutputHandler* mayaOutput) {
+void MayaEncoder::convertGeometry(const std::wstring& cgbName, const prtx::GeometryPtrVector& geometries, const std::vector<prtx::MaterialPtrVector>& mats, IMayaOutputHandler* mayaOutput) {
 	log_trace("MayaEncoder::convertGeometry: begin");
 	std::vector<double> vertices;
 	std::vector<int>    counts;
@@ -216,7 +217,7 @@ void MayaEncoder::convertGeometry(const std::wstring& cgbName, const prtx::Geome
 	for(size_t gi = 0, geoCount = geometries.size(); gi < geoCount; ++gi) {
 		prtx::Geometry* geo = geometries[gi].get();
 
-		prtx::MaterialPtr mat = mats[gi];
+		prtx::MaterialPtr mat = mats[gi].front(); // FIXME
 
 		std::wostringstream matName;
 		matName << "m" << cgbName << gi;
