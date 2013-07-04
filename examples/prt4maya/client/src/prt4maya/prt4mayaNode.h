@@ -110,7 +110,7 @@ public:
 	MObject            startRule;
 
 	std::wstring       lRulePkg;
-	const prt::AttributeMap* resolveMap;
+	const prt::ResolveMap* resolveMap;
 	const prt::AttributeMap* generateAttrs;
 	const prt::AttributeMap* generateOpts;
 

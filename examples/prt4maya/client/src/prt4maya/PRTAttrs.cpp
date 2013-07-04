@@ -245,7 +245,9 @@ MStatus PRTAttrs::updateRuleFiles(MFnDependencyNode & node, MString & rulePkg) {
 	prtNode->destroyEnums();
 
 	MStringArray ruleFiles;
-	if(prt::ProceduralRT::createResolveMap(path.c_str(), &prtNode->resolveMap, true) == prt::STATUS_OK) {
+	prt::Status resolveMapStatus = prt::STATUS_UNSPECIFIED_ERROR;
+	prtNode->resolveMap = prt::ProceduralRT::createResolveMap(path.c_str(), true, &resolveMapStatus);
+	if(resolveMapStatus == prt::STATUS_OK) {
 		size_t nKeys;
 		const wchar_t** keys   = prtNode->resolveMap->getKeys(&nKeys);
 		std::wstring    sClass(L".class");
@@ -279,8 +281,9 @@ MStatus PRTAttrs::updateStartRules(MFnDependencyNode & node, MStringArray & rule
 	std::vector<const prt::Entry*> annotStartRules;
 	std::vector<const prt::Entry*> noArgRules;
 
-	const prt::RuleFileInfo* info = 0;
-	if(prt::ProceduralRT::createRuleFileInfo(prtNode->resolveMap->getString(ruleFiles[0].asWChar()), &info) == prt::STATUS_OK) {
+	prt::Status infoStatus = prt::STATUS_UNSPECIFIED_ERROR;
+	const prt::RuleFileInfo* info = prt::ProceduralRT::createRuleFileInfo(prtNode->resolveMap->getString(ruleFiles[0].asWChar()), 0, &infoStatus); // TODO: callback???
+	if (infoStatus == prt::STATUS_OK) {
 		for(size_t r = 0; r < info->getNumRules(); r++) {
 			if(info->getRule(r)->getNumParameters() > 0) continue;
 			bool startRule = false;
@@ -387,18 +390,21 @@ MStatus PRTAttrs::updateAttributes(MFnDependencyNode & node, MString & ruleFile,
 
 	MayaOutputHandler* outputHandler = prtNode->createOutputHandler(0, 0);
 	const prt::AttributeMap* attrs         = aBuilder->createAttributeMap();
-	prt::InitialShape* shape         = prt::InitialShapeBuilder::create(
+	const prt::InitialShape* shape         = prt::InitialShapeBuilder::create(
 			UnitQuad_vertices, 
 			UnitQuad_vertexCount, 
 			UnitQuad_indices, 
 			UnitQuad_indexCount,
 			UnitQuad_faceCounts,
 			UnitQuad_faceCountsCount,
+			0,
+			0,
 			ruleFile.asWChar(),
 			startRule.asWChar(),
 			666,
 			L"",
-			attrs);						
+			attrs,
+			prtNode->resolveMap);						
 
 	size_t size = 4096;
 	DBG("%s", shape->toXML((char*)malloc(size), &size));
