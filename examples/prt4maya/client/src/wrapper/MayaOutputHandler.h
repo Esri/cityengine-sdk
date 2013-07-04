@@ -8,6 +8,8 @@
 #ifndef MAYA_OUTPUT_HANDLER_H_
 #define MAYA_OUTPUT_HANDLER_H_
 
+#include <stdexcept>
+
 #include "maya/MDataHandle.h"
 #include "maya/MStatus.h"
 #include "maya/MObject.h"
@@ -44,23 +46,46 @@
 
 #include "IMayaOutputHandler.h"
 
+class PRTAttrs;
 
 class MayaOutputHandler : public IMayaOutputHandler {
 public:
-	MayaOutputHandler(const MPlug* plug, MDataBlock* data, MStringArray* shadingGroups, MIntArray* shadingRanges) :
-		mPlug(plug), mData(data), mShadingGroups(shadingGroups), mShadingRanges(shadingRanges), mCache(prt::CacheBuilder::createCache(prt::CacheBuilder::CACHE_TYPE_DEFAULT))
+	MayaOutputHandler(const MPlug* plug, MDataBlock* data, MStringArray* shadingGroups, MIntArray* shadingRanges, PRTAttrs* prtAttrs) :
+		mPlug(plug), mData(data), mShadingGroups(shadingGroups), mShadingRanges(shadingRanges), mPRTAttrs(prtAttrs), mCache(prt::CacheBuilder::createCache(prt::CacheBuilder::CACHE_TYPE_DEFAULT))
 	{ }
 	virtual ~MayaOutputHandler() {
 		if(mCache) mCache->destroy();
 	}
 
-	virtual prt::Status assetError(size_t isIndex, prt::CGAErrorLevel level, const wchar_t* key, const wchar_t* uri, const wchar_t* message) { throw std::runtime_error("Not implemented yet"); return prt::STATUS_OK; }
-	virtual prt::Status generateError(size_t /*isIndex*/, const wchar_t* /* message*/) { throw std::runtime_error("Not implemented yet"); return prt::STATUS_OK; }
-	virtual prt::Status cgaError(size_t isIndex, int32_t shapeID, prt::CGAErrorLevel level, int32_t methodId, int32_t pc, const wchar_t* message) { throw std::runtime_error("Not implemented yet"); return prt::STATUS_OK; }
-	virtual prt::Status cgaPrint(size_t isIndex, int32_t shapeID, const wchar_t* txt) { throw std::runtime_error("Not implemented yet"); return prt::STATUS_OK; }
-	virtual prt::Status cgaReportBool(size_t isIndex, int32_t shapeID, const wchar_t* key, bool value) { throw std::runtime_error("Not implemented yet"); return prt::STATUS_OK; }
-	virtual prt::Status cgaReportFloat(size_t isIndex, int32_t shapeID, const wchar_t* key, double value) { throw std::runtime_error("Not implemented yet"); return prt::STATUS_OK; }
-	virtual prt::Status cgaReportString(size_t isIndex, int32_t shapeID, const wchar_t* key, const wchar_t* value) { throw std::runtime_error("Not implemented yet"); return prt::STATUS_OK; }
+	// prt::Callbacks interface
+	virtual prt::Status generateError(size_t /*isIndex*/, const wchar_t* message) {
+		std::wcout << "GENERATE ERROR: " << message << std::endl;
+		return prt::STATUS_OK;
+	}
+	virtual prt::Status assetError(size_t /*isIndex*/, prt::CGAErrorLevel /*level*/, const wchar_t* /*key*/, const wchar_t* /*uri*/, const wchar_t* message) {
+		std::wcout << "ASSET ERROR: " << message << std::endl;
+		return prt::STATUS_OK;
+	}
+	virtual prt::Status cgaError(size_t /*isIndex*/, int32_t /*shapeID*/, prt::CGAErrorLevel /*level*/, int32_t /*methodId*/, int32_t /*pc*/, const wchar_t* message) {
+		std::wcout << "CGA ERROR: " << message << std::endl;
+		return prt::STATUS_OK;
+	}
+	virtual prt::Status cgaPrint(size_t /*isIndex*/, int32_t /*shapeID*/, const wchar_t* /*txt*/) {
+		return prt::STATUS_OK;
+	}
+	virtual prt::Status cgaReportBool(size_t /*isIndex*/, int32_t /*shapeID*/, const wchar_t* /*key*/, bool /*value*/) {
+		return prt::STATUS_OK;
+	}
+	virtual prt::Status cgaReportFloat(size_t /*isIndex*/, int32_t /*shapeID*/, const wchar_t* /*key*/, double /*value*/) {
+		return prt::STATUS_OK;
+	}
+	virtual prt::Status cgaReportString(size_t /*isIndex*/, int32_t /*shapeID*/, const wchar_t* /*key*/, const wchar_t* /*value*/) {
+		return prt::STATUS_OK;
+	}
+
+	virtual prt::Status evalBool(size_t /*isIndex*/, int32_t /*shapeID*/, const wchar_t* /*key*/, bool /*value*/);
+	virtual prt::Status evalFloat(size_t /*isIndex*/, int32_t /*shapeID*/, const wchar_t* /*key*/, double /*value*/);
+	virtual prt::Status evalString(size_t /*isIndex*/, int32_t /*shapeID*/, const wchar_t* /*key*/, const wchar_t* /*value*/);
 
 	virtual prt::Status openCGAError() { throw std::runtime_error("Not implemented yet"); return prt::STATUS_OK; }
 	virtual prt::Status openCGAPrint() { throw std::runtime_error("Not implemented yet"); return prt::STATUS_OK; }
@@ -129,6 +154,8 @@ private:
 	MDataBlock*			  mData;
 	MStringArray*		  mShadingGroups;
 	MIntArray*		      mShadingRanges;
+
+	PRTAttrs*			  mPRTAttrs;
 
 	prt::Cache*			  mCache;
 };

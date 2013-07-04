@@ -48,6 +48,7 @@
 #include <WinNT.h>
 #endif
 
+
 #define PRT_TYPE_ID 0x8666b
 
 static const MString  NAME_RULE_PKG("Rule_Package");
@@ -121,7 +122,7 @@ public:
 	static void initLogger();
 	static void clearLogger();
 
-	MayaOutputHandler* createOutputHandler(const MPlug* plug, MDataBlock* data);
+	MayaOutputHandler* createOutputHandler(const MPlug* plug, MDataBlock* data, PRTAttrs* prtAttrs);
 private:
 	PRTEnum*          enums;
 	bool              hasMaterials;
@@ -134,8 +135,7 @@ private:
 	MStatus           updateAttributes();
 };
 
-class PRTAttrs : public MPxCommand
-{
+class PRTAttrs : public MPxCommand {
 public:
 	MStatus doIt( const MArgList& args );
 	static void* creator();
@@ -169,22 +169,6 @@ private:
 
 const char* filename(const char* path);
 
-// #define DO_DBG
-
-#ifdef DO_DBG
-#define DBG(fmt, ...) {\
-		printf("%s:%d ", filename(__FILE__) , __LINE__); \
-		printf(fmt##"\n", ## __VA_ARGS__); \
-		fflush(0);}
-
-#define DBGL(fmt, ...) {\
-		printf("%ls:%d ", filename(__FILE__) , __LINE__); \
-		wprintf(L##fmt##L"\n", ## __VA_ARGS__); \
-		fflush(0);}
-
-#else
-#define DBG(fmt, ...) {}
-#define DBGL(fmt, ...) {}
-#endif
-
-#define M_CHECK(__stat__) {MStatus _stat_ = (__stat__); if(MS::kSuccess != _stat_) {DBG("err:%s %d\n", _stat_.errorString().asChar(), _stat_.statusCode()); return _stat_;}}
+void M_CHECK(MStatus stat);
+void DBG(const char* fmt, ...);
+void DBGL(const wchar_t* fmt, ...);

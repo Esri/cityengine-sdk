@@ -388,27 +388,40 @@ MStatus PRTAttrs::updateAttributes(MFnDependencyNode & node, MString & ruleFile,
 	PRTNode*          prtNode = (PRTNode*)node.userNode();
 	MString           dummy;
 
-	MayaOutputHandler* outputHandler = prtNode->createOutputHandler(0, 0);
-	const prt::AttributeMap* attrs         = aBuilder->createAttributeMap();
-	const prt::InitialShape* shape         = prt::InitialShapeBuilder::create(
+	MayaOutputHandler* outputHandler = prtNode->createOutputHandler(0, 0, this);
+	const prt::AttributeMap* attrs   = aBuilder->createAttributeMap();
+
+	prt::InitialShapeBuilder* isb = prt::InitialShapeBuilder::create();
+	isb->setGeometry(
 			UnitQuad_vertices, 
 			UnitQuad_vertexCount, 
 			UnitQuad_indices, 
 			UnitQuad_indexCount,
 			UnitQuad_faceCounts,
-			UnitQuad_faceCountsCount,
-			0,
-			0,
+			UnitQuad_faceCountsCount
+	);
+	isb->setAttributes(
 			ruleFile.asWChar(),
 			startRule.asWChar(),
 			666,
 			L"",
 			attrs,
-			prtNode->resolveMap);						
+			prtNode->resolveMap
+	);
+	const prt::InitialShape* shape = isb->createInitialShapeAndReset();
 
 	size_t size = 4096;
 	DBG("%s", shape->toXML((char*)malloc(size), &size));
 
+
+	const wchar_t* encoders[] = { L"com.esri.prt.core.AttributeEvalEncoder" };
+	prt::EncoderInfo const* encInfo = prt::ProceduralRT::createEncoderInfo(encoders[0]);
+	prt::AttributeMap const* encOpts = encInfo->createValidatedOptions();
+	prt::Status generateStatus = prt::ProceduralRT::generate(&shape, 1, encoders, 1, &encOpts, outputHandler);
+	encOpts->destroy();
+	encInfo->destroy();
+
+/*
 	for(size_t i = 0; i < info->getNumAttributes(); i++) {
 		PRTEnum*       e          = 0;
 		bool           createAttr = false;
@@ -424,8 +437,10 @@ MStatus PRTAttrs::updateAttributes(MFnDependencyNode & node, MString & ruleFile,
 					if(!(wcscmp(an->getName(), L"@Range")))
 						e = new PRTEnum(prtNode, an);
 				}
-				prt::Status evalStat;
-				bool value = prt::ProceduralRT::evalBool(shape, prtNode->resolveMap, outputHandler, info->getAttribute(i)->getName(), &evalStat);
+
+
+
+				//bool value = prt::ProceduralRT::evalBool(shape, prtNode->resolveMap, outputHandler, info->getAttribute(i)->getName(), &evalStat);
 
 				if(e) {
 					M_CHECK(addEnumParameter(node, attr, name, value, e));
@@ -515,6 +530,7 @@ MStatus PRTAttrs::updateAttributes(MFnDependencyNode & node, MString & ruleFile,
 			}
 		}
 	}
+*/
 
 	shape->destroy();
 	attrs->destroy();

@@ -15,6 +15,9 @@
 #include "prt4maya/prt4mayaNode.h"
 
 
+#define DO_DBG 1
+
+
 const char* filename(const char* path) {
 	while(*(--path) != '\\');
 	return path + 1;
@@ -40,6 +43,7 @@ MStatus PRTNode::setDependentsDirty(const MPlug &plugBeingDirtied, MPlugArray &a
 }
 
 MStatus PRTNode::compute( const MPlug& plug, MDataBlock& data ) {
+	std::cout << "PRTNode::compute" << std::endl;
 	MStatus stat;
 	hasMaterials = false;
 
@@ -88,21 +92,38 @@ MStatus PRTNode::compute( const MPlug& plug, MDataBlock& data ) {
 		DBG("%s\n", generateAttrs->toXML(tmp, &size));
 		delete[] tmp;
 
-		MayaOutputHandler* outputHandler = createOutputHandler(&plug, &data);
+		MayaOutputHandler* outputHandler = createOutputHandler(&plug, &data, 0);
 		MString            dummy;
-		const prt::InitialShape* shape = prt::InitialShapeBuilder::create(va, vertices.length() * 3, ia, pconnect.length(), ca, pcounts.length(),
+
+		prt::InitialShapeBuilder* isb = prt::InitialShapeBuilder::create();
+		prt::Status setGeoStatus = isb->setGeometry(
+				va,
+				vertices.length()*3,
+				ia,
+				pconnect.length(),
+				ca,
+				pcounts.length()
+		);
+		if (setGeoStatus != prt::STATUS_OK)
+			std::cerr << "InitialShapeBuilder setGeometry failed status = " << prt::ProceduralRT::getStatusDescription(setGeoStatus) << std::endl;
+
+		isb->setAttributes(
 				getStrParameter(ruleFile,  dummy).asWChar(),
 				getStrParameter(startRule, dummy).asWChar(),
 				666,
 				L"",
-				generateAttrs);
+				generateAttrs,
+				resolveMap
+		);
+
+		const prt::InitialShape* shape = isb->createInitialShapeAndReset();
+		isb->destroy();
 
 		const wchar_t* encoders[] = { L"com.esri.prt.codecs.maya.MayaEncoder" };
 		const prt::AttributeMap* encOpts[] = { generateOpts };
-		prt::ProceduralRT::generate(&shape, 1, resolveMap, encoders, 1, encOpts, outputHandler);
-
-		// TODO: Error handling
-
+		prt::Status generateStatus = prt::ProceduralRT::generate(&shape, 1, encoders, 1, encOpts, outputHandler);
+		if (generateStatus != prt::STATUS_OK)
+			std::cerr << "prt generate failed: " << prt::ProceduralRT::getStatusDescription(generateStatus) << std::endl;
 		shape->destroy();
 
 		delete[] ca;
@@ -141,11 +162,13 @@ __attribute__((constructor))
 void on_load(void) {
 	Dl_info dl_info;
 	dladdr((void *)on_load, &dl_info);
-	fprintf(stderr, "prt4maya: module %s loaded\n", dl_info.dli_fname);
+	//fprintf(stderr, "prt4maya: module %s loaded\n", dl_info.dli_fname);
 
 	std::string tmp(dl_info.dli_fname);
 	libPath = std::wstring(tmp.length(), L' ');
 	std::copy(tmp.begin(), tmp.end(), libPath.begin());
+
+	std::cout << "prt4maya: module loaded: " << dl_info.dli_fname << std::endl;
 }
 #endif
 
@@ -171,17 +194,19 @@ std::wstring getPluginRoot() {
 
 	return root;
 #else
-	return libPath.substr(0, libPath.find_last_of(SEPERATOR));
+	std::wstring pluginPath = libPath.substr(0, libPath.find_last_of(SEPERATOR)) + L"/prt_lib";
+	std::wcout << L"prt pluginPath = " << pluginPath << std::endl;
+	return pluginPath;
 #endif
 }
 
 
 MStatus PRTNode::initialize() {
 	std::wstring root = getPluginRoot();
-	DBGL("prt plugins at %ls\n", root.c_str());
+	DBGL(L"prt plugins at %ls\n", root.c_str());
 
 	const wchar_t* rootPath = root.c_str();
-	prt::Status status = prt::ProceduralRT::init(&rootPath, 1, prt::LOG_WARNING);
+	prt::Status status = prt::ProceduralRT::init(&rootPath, 1, prt::LOG_TRACE);
 
 	if(status != prt::STATUS_OK)
 		return MS::kFailure;
@@ -204,7 +229,7 @@ MStatus PRTNode::initialize() {
 	M_CHECK(attributeAffects(inMesh, outMesh));
 
 	MStatus           stat2;
-	MFnStringData		  stringData;
+	MFnStringData	  stringData;
 	MFnTypedAttribute fAttr;
 
 	rulePkg = fAttr.create( NAME_RULE_PKG, "rulePkg", MFnData::kString, stringData.create(&stat2), &stat );
@@ -362,8 +387,8 @@ const PRTEnum * PRTNode::findEnum(const MObject & attr) const {
 	return 0;
 }
 
-MayaOutputHandler* PRTNode::createOutputHandler(const MPlug* plug, MDataBlock* data) {
-	return new MayaOutputHandler(plug, data, &shadingGroups, &shadingRanges);
+MayaOutputHandler* PRTNode::createOutputHandler(const MPlug* plug, MDataBlock* data, PRTAttrs* prtAttrs) {
+	return new MayaOutputHandler(plug, data, &shadingGroups, &shadingRanges, prtAttrs);
 }
 
 void PRTNode::initLogger() {
@@ -419,3 +444,35 @@ MObject PRTNode::outMesh;
 
 
 prt::ConsoleLogHandler* PRTNode::logHandler = 0;
+
+
+
+
+#if DO_DBG == 1
+
+void M_CHECK(MStatus stat) {
+	if(MS::kSuccess != stat) {
+		std::wcerr << L"err: " << stat.errorString().asWChar() << L" (code: " << stat.statusCode() << L")" << std::endl;
+		throw stat;
+	}
+}
+
+void DBG(const char* fmt, ...) {
+	va_list args;
+	//printf("%s:%d ", filename(__FILE__) , __LINE__);
+	printf(fmt, args);
+	fflush(0);
+}
+
+void DBGL(const wchar_t* fmt, ...) {
+	va_list args;
+	//printf(L"%ls:%d ", filename(__FILE__) , __LINE__);
+	wprintf(fmt, args);
+	fflush(0);
+}
+
+#else
+void M_CHECK(MStatus stat) { }
+void DBG(const char* fmt, ...) { }
+void DBGL(const wchar_t* fmt, ...) { }
+#endif

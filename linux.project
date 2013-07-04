@@ -3,16 +3,11 @@
 	<name>com.esri.prt.clients.maya</name>
 	<comment></comment>
 	<projects>
-		<project>com.esri.prt.adaptors.fs</project>
-		<project>com.esri.prt.codecs</project>
-		<project>com.esri.prt.codecs.maya</project>
-		<project>com.esri.prt.core</project>
-		<project>com.esri.prt.util</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
 			<name>org.eclipse.cdt.managedbuilder.core.genmakebuilder</name>
-			<triggers></triggers>
+			<triggers>clean,full,incremental,</triggers>
 			<arguments>
 				<dictionary>
 					<key>?name?</key>

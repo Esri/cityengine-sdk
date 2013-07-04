@@ -165,3 +165,27 @@ void MayaOutputHandler::matSetColor(int mh, float r, float g, float b) {
 void MayaOutputHandler::finishMesh() {
 	delete mFnMesh;
 }
+
+
+prt::Status MayaOutputHandler::evalBool(
+		size_t isIndex,
+		int32_t shapeID,
+		const wchar_t* key,
+		bool value
+) {
+	//mPRTAttrs->addBoolParameter()
+	std::wcout << L"evalBool: " << key << L" = " << value << std::endl;
+	return prt::STATUS_OK;
+}
+
+
+prt::Status MayaOutputHandler::evalFloat(size_t isIndex, int32_t shapeID, const wchar_t* key, double value) {
+	std::wcout << L"evalFloat: " << key << L" = " << value << std::endl;
+	return prt::STATUS_OK;
+}
+
+
+prt::Status MayaOutputHandler::evalString(size_t isIndex, int32_t shapeID, const wchar_t* key, const wchar_t* value) {
+	std::wcout << L"evalString: " << key << L" = " << value << std::endl;
+	return prt::STATUS_OK;
+}
