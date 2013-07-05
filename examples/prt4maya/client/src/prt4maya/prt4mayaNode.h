@@ -122,7 +122,7 @@ public:
 	static void initLogger();
 	static void clearLogger();
 
-	MayaOutputHandler* createOutputHandler(const MPlug* plug, MDataBlock* data, PRTAttrs* prtAttrs);
+	MayaOutputHandler* createOutputHandler(const MPlug* plug, MDataBlock* data);
 private:
 	PRTEnum*          enums;
 	bool              hasMaterials;

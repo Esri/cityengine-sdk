@@ -24,7 +24,7 @@ void MayaOutputHandler::setVertices(double* vtx, size_t size) {
 void MayaOutputHandler::setNormals(double* nrm, size_t size) {
 	mNormals.clear();
 	for (size_t i = 0; i < size; i += 3)
-		mNormals.append((float)nrm[i], (float)nrm[i+1], (float)nrm[i+2]);
+		mNormals.append(MVector((float)nrm[i], (float)nrm[i+1], (float)nrm[i+2]));
 }
 
 
@@ -120,6 +120,16 @@ void MayaOutputHandler::createMesh() {
 	mShadingGroups->clear();
 	mShadingRanges->clear();
 
+	mFnMesh->setFaceVertexNormals(mNormals, mNormalCounts, mNormalConnects);
+	//mFnMesh->setEdgeSmoothing()
+
+	MMeshSmoothOptions smoothOpts;
+	smoothOpts.setSmoothness(0.0f);
+	smoothOpts.setKeepHardEdge(true);
+	smoothOpts.setPropEdgeHardness(true);
+	smoothOpts.setKeepBorderEdge(true);
+	mFnMesh->setSmoothMeshDisplayOptions(smoothOpts);
+
 	stat = outputHandle.set(newOutputData);
 	MCHECK(stat);
 
@@ -168,24 +178,36 @@ void MayaOutputHandler::finishMesh() {
 
 
 prt::Status MayaOutputHandler::evalBool(
-		size_t isIndex,
-		int32_t shapeID,
+		size_t /*isIndex*/,
+		int32_t /*shapeID*/,
 		const wchar_t* key,
 		bool value
 ) {
-	//mPRTAttrs->addBoolParameter()
+	mAttrs[key].mBool = value;
 	std::wcout << L"evalBool: " << key << L" = " << value << std::endl;
 	return prt::STATUS_OK;
 }
 
 
-prt::Status MayaOutputHandler::evalFloat(size_t isIndex, int32_t shapeID, const wchar_t* key, double value) {
+prt::Status MayaOutputHandler::evalFloat(
+		size_t /*isIndex*/,
+		int32_t /*shapeID*/,
+		const wchar_t* key,
+		double value
+) {
+	mAttrs[key].mFloat = value;
 	std::wcout << L"evalFloat: " << key << L" = " << value << std::endl;
 	return prt::STATUS_OK;
 }
 
 
-prt::Status MayaOutputHandler::evalString(size_t isIndex, int32_t shapeID, const wchar_t* key, const wchar_t* value) {
+prt::Status MayaOutputHandler::evalString(
+		size_t /*isIndex*/,
+		int32_t /*shapeID*/,
+		const wchar_t* key,
+		const wchar_t* value
+) {
+	mAttrs[key].mString = value;
 	std::wcout << L"evalString: " << key << L" = " << value << std::endl;
 	return prt::STATUS_OK;
 }

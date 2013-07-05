@@ -9,6 +9,7 @@
 #define MAYA_OUTPUT_HANDLER_H_
 
 #include <stdexcept>
+#include <map>
 
 #include "maya/MDataHandle.h"
 #include "maya/MStatus.h"
@@ -47,12 +48,21 @@
 #include "IMayaOutputHandler.h"
 
 
-class PRTAttrs;
-
 class MayaOutputHandler : public IMayaOutputHandler {
 public:
-	MayaOutputHandler(const MPlug* plug, MDataBlock* data, MStringArray* shadingGroups, MIntArray* shadingRanges, PRTAttrs* prtAttrs) :
-		mPlug(plug), mData(data), mShadingGroups(shadingGroups), mShadingRanges(shadingRanges), mPRTAttrs(prtAttrs), mCache(prt::CacheBuilder::createCache(prt::CacheBuilder::CACHE_TYPE_DEFAULT))
+	class AttributeHolder { // FIXME: optimize
+	public:
+		AttributeHolder() { }
+		AttributeHolder(bool b, double d, std::wstring s) : mBool(b), mFloat(d), mString(s) { }
+		virtual ~AttributeHolder() {  }
+		bool mBool;
+		double mFloat;
+		std::wstring mString;
+	};
+
+public:
+	MayaOutputHandler(const MPlug* plug, MDataBlock* data, MStringArray* shadingGroups, MIntArray* shadingRanges) :
+		mPlug(plug), mData(data), mShadingGroups(shadingGroups), mShadingRanges(shadingRanges), mCache(prt::CacheBuilder::createCache(prt::CacheBuilder::CACHE_TYPE_DEFAULT))
 	{ }
 	virtual ~MayaOutputHandler() {
 		if(mCache) mCache->destroy();
@@ -115,7 +125,20 @@ public:
 	virtual void setNormals(double* nrm, size_t size);
 	virtual void setUVs(float* u, float* v, size_t size);
 
-	virtual void setFaces(int* counts, size_t countsSize, int* connects, size_t connectsSize, int* normalCounts, size_t normalCountsSize, int* normalConnects, size_t normalConnectsSize, int* uvCounts, size_t uvCountsSize, int* uvConnects, size_t uvConnectsSize);
+	virtual void setFaces(
+			int* 	counts,
+			size_t	countsSize,
+			int*	connects,
+			size_t	connectsSize,
+			int*	normalCounts,
+			size_t	normalCountsSize,
+			int*	normalConnects,
+			size_t	normalConnectsSize,
+			int*	uvCounts,
+			size_t	uvCountsSize,
+			int*	uvConnects,
+			size_t	uvConnectsSize
+	);
 	virtual void createMesh();
 	virtual void finishMesh();
 
@@ -124,13 +147,17 @@ public:
 	virtual void matSetDiffuseTexture(int mh, const wchar_t* tex);
 
 public:
+	const std::map<std::wstring, AttributeHolder>& getAttrs() const { return mAttrs; }
+
+public:
 	MFnMesh*			    mFnMesh;
 
 	MFloatPointArray	mVertices;
 	MIntArray			    mCounts;
 	MIntArray			    mConnects;
 
-	MFloatPointArray	mNormals;
+	//MFloatPointArray	mNormals;
+	MVectorArray			mNormals;
 	MIntArray			    mNormalCounts;
 	MIntArray			    mNormalConnects;
 
@@ -141,14 +168,14 @@ public:
 
 private:
 	// must not be called
-	MayaOutputHandler() : mPlug(0), mData(0), mShadingGroups(0), mShadingRanges(0) { }
+	MayaOutputHandler() : mPlug(0), mData(0), mShadingGroups(0), mShadingRanges(0), mCache(0) { }
 
 	const MPlug*		  mPlug;
 	MDataBlock*			  mData;
 	MStringArray*		  mShadingGroups;
 	MIntArray*		      mShadingRanges;
 
-	PRTAttrs*			  mPRTAttrs;
+	std::map<std::wstring, AttributeHolder> mAttrs;
 
 	prt::Cache*			  mCache;
 };

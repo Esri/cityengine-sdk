@@ -254,6 +254,7 @@ MStatus PRTAttrs::updateRuleFiles(MFnDependencyNode & node, MString & rulePkg) {
 		std::wstring    sCGB(L".cgb");
 		for(size_t k = 0; k < nKeys; k++) {
 			std::wstring key = std::wstring(keys[k]);
+			std::wcout << L"key = " << key << L" -> " << prtNode->resolveMap->getString(keys[k]) << std::endl;
 			if(    std::equal(sClass.rbegin(), sClass.rend(), key.rbegin())
 				|| std::equal(sCGB.rbegin(),   sCGB.rend(),   key.rbegin()))
 				ruleFiles.append(MString(key.c_str()));
@@ -388,7 +389,7 @@ MStatus PRTAttrs::updateAttributes(MFnDependencyNode & node, MString & ruleFile,
 	PRTNode*          prtNode = (PRTNode*)node.userNode();
 	MString           dummy;
 
-	MayaOutputHandler* outputHandler = prtNode->createOutputHandler(0, 0, this);
+	MayaOutputHandler* outputHandler = prtNode->createOutputHandler(0, 0);
 	const prt::AttributeMap* attrs   = aBuilder->createAttributeMap();
 
 	prt::InitialShapeBuilder* isb = prt::InitialShapeBuilder::create();
@@ -410,9 +411,8 @@ MStatus PRTAttrs::updateAttributes(MFnDependencyNode & node, MString & ruleFile,
 	);
 	const prt::InitialShape* shape = isb->createInitialShapeAndReset();
 
-	size_t size = 4096;
-	DBG("%s", shape->toXML((char*)malloc(size), &size));
-
+//	size_t size = 4096;
+//	DBG("%s", shape->toXML((char*)malloc(size), &size));
 
 	const wchar_t* encoders[] = { L"com.esri.prt.core.AttributeEvalEncoder" };
 	prt::EncoderInfo const* encInfo = prt::ProceduralRT::createEncoderInfo(encoders[0]);
@@ -421,12 +421,18 @@ MStatus PRTAttrs::updateAttributes(MFnDependencyNode & node, MString & ruleFile,
 	encOpts->destroy();
 	encInfo->destroy();
 
-/*
+	const std::map<std::wstring, MayaOutputHandler::AttributeHolder>& evalAttrs = outputHandler->getAttrs();
+
+	static const std::wstring STYLE = L"Default$"; // currently hardcoded to default style
 	for(size_t i = 0; i < info->getNumAttributes(); i++) {
 		PRTEnum*       e          = 0;
 		bool           createAttr = false;
-		const MString  name      = MString(info->getAttribute(i)->getName());
+
+		std::wstring styledAttributeName(info->getAttribute(i)->getName());
+		const MString  name      = MString(styledAttributeName.substr(STYLE.length()).c_str()); // FIXME
 		MObject        attr;
+
+		std::wcout << L"param " << name.asWChar() << std::endl;
 
 		if(info->getAttribute(i)->getNumParameters() != 0) continue;
 
@@ -438,9 +444,8 @@ MStatus PRTAttrs::updateAttributes(MFnDependencyNode & node, MString & ruleFile,
 						e = new PRTEnum(prtNode, an);
 				}
 
-
-
-				//bool value = prt::ProceduralRT::evalBool(shape, prtNode->resolveMap, outputHandler, info->getAttribute(i)->getName(), &evalStat);
+				bool value = evalAttrs.find(name.asWChar())->second.mBool;
+				std::wcout << L"   --> bool: " << value << std::endl;
 
 				if(e) {
 					M_CHECK(addEnumParameter(node, attr, name, value, e));
@@ -462,8 +467,9 @@ MStatus PRTAttrs::updateAttributes(MFnDependencyNode & node, MString & ruleFile,
 							e = new PRTEnum(prtNode, an);
 					}
 				}
-				prt::Status evalStat;
-				double value = prt::ProceduralRT::evalFloat(shape, prtNode->resolveMap, outputHandler, info->getAttribute(i)->getName(), &evalStat);
+
+				double value = evalAttrs.find(name.asWChar())->second.mFloat;
+				std::wcout << L"   --> float: " << value << std::endl;
 
 				if(e) {
 					M_CHECK(addEnumParameter(node, attr, name, value, e));
@@ -492,17 +498,16 @@ MStatus PRTAttrs::updateAttributes(MFnDependencyNode & node, MString & ruleFile,
 								exts += MString(an->getArgument(arg)->getStr());
 								exts += " (*.";
 								exts += MString(an->getArgument(arg)->getStr());
-								exts += ");;";
+								exts += ");";
 							}
 						}
 					}
 				}
-				size_t valueLen = 4096;
-				wchar_t* value = new wchar_t[valueLen];
-				prt::ProceduralRT::evalStr(shape, prtNode->resolveMap, outputHandler, info->getAttribute(i)->getName(), value, &valueLen);
-				value[0] = 0;
 
-				MString mvalue(value);
+				std::wstring value = evalAttrs.find(name.asWChar())->second.mString;
+				std::wcout << L"   --> string: " << value << std::endl;
+
+				MString mvalue(value.c_str());
 				if(e) {
 					M_CHECK(addEnumParameter(node, attr, name, mvalue, e));
 				} else if(asFile) {
@@ -514,7 +519,6 @@ MStatus PRTAttrs::updateAttributes(MFnDependencyNode & node, MString & ruleFile,
 					M_CHECK(addStrParameter(node, attr, name, mvalue));
 				}
 
-				delete[] value;
 				break;
 			}
 		}
@@ -530,7 +534,6 @@ MStatus PRTAttrs::updateAttributes(MFnDependencyNode & node, MString & ruleFile,
 			}
 		}
 	}
-*/
 
 	shape->destroy();
 	attrs->destroy();

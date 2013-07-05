@@ -92,7 +92,7 @@ MStatus PRTNode::compute( const MPlug& plug, MDataBlock& data ) {
 //		DBG("%s\n", generateAttrs->toXML(tmp, &size));
 //		delete[] tmp;
 
-		MayaOutputHandler* outputHandler = createOutputHandler(&plug, &data, 0);
+		MayaOutputHandler* outputHandler = createOutputHandler(&plug, &data);
 		MString            dummy;
 
 		prt::InitialShapeBuilder* isb = prt::InitialShapeBuilder::create();
@@ -206,7 +206,7 @@ MStatus PRTNode::initialize() {
 	DBGL(L"prt plugins at %ls\n", root.c_str());
 
 	const wchar_t* rootPath = root.c_str();
-	prt::Status status = prt::ProceduralRT::init(&rootPath, 1, prt::LOG_TRACE);
+	prt::Status status = prt::ProceduralRT::init(&rootPath, 1, prt::LOG_DEBUG);
 
 	if(status != prt::STATUS_OK)
 		return MS::kFailure;
@@ -387,8 +387,8 @@ const PRTEnum * PRTNode::findEnum(const MObject & attr) const {
 	return 0;
 }
 
-MayaOutputHandler* PRTNode::createOutputHandler(const MPlug* plug, MDataBlock* data, PRTAttrs* prtAttrs) {
-	return new MayaOutputHandler(plug, data, &shadingGroups, &shadingRanges, prtAttrs);
+MayaOutputHandler* PRTNode::createOutputHandler(const MPlug* plug, MDataBlock* data) {
+	return new MayaOutputHandler(plug, data, &shadingGroups, &shadingRanges);
 }
 
 void PRTNode::initLogger() {
