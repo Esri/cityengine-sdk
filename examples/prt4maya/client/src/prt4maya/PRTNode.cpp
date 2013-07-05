@@ -47,7 +47,7 @@ MStatus PRTNode::compute( const MPlug& plug, MDataBlock& data ) {
 	MStatus stat;
 	hasMaterials = false;
 
-	std::wstring path(RPK_PREFIX);
+	std::wstring path(FILE_PREFIX);
 	MString dummy;
 	path.append(getStrParameter(rulePkg, dummy).asWChar());
 
@@ -86,11 +86,11 @@ MStatus PRTNode::compute( const MPlug& plug, MDataBlock& data ) {
 		pconnect.get((int*)ia);
 		pcounts.get((int*)ca);
 
-		size_t size = 8192;
-		char* tmp = new char[size];
-		tmp[0] = 0;
-		DBG("%s\n", generateAttrs->toXML(tmp, &size));
-		delete[] tmp;
+//		size_t size = 8192;
+//		char* tmp = new char[size];
+//		tmp[0] = 0;
+//		DBG("%s\n", generateAttrs->toXML(tmp, &size));
+//		delete[] tmp;
 
 		MayaOutputHandler* outputHandler = createOutputHandler(&plug, &data, 0);
 		MString            dummy;
@@ -406,6 +406,13 @@ void PRTNode::clearLogger() {
 // Plug-in Initialization //
 
 MStatus initializePlugin( MObject obj ){
+#ifdef __linux__
+	// maya opens plugins with RTLD_LOCAL, which leads to type lookup problems
+	// on objects created in the prt extension libraries
+	// also see http://ubuntuforums.org/showthread.php?t=1717953
+	dlopen("libprt4maya.so", RTLD_LAZY | RTLD_NOLOAD | RTLD_GLOBAL);
+#endif
+
 	PRTNode::initLogger();
 
 	MFnPlugin plugin( obj, "Esri", "0.9", "Any");

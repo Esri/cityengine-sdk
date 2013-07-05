@@ -55,7 +55,7 @@ static const MString  NAME_RULE_PKG("Rule_Package");
 static const MString  NAME_RULE_FILE("Rule_File");
 static const MString  NAME_START_RULE("Start_Rule");
 static const MString  NAME_RPK("CGA_Rule_Package");
-static const wchar_t* RPK_PREFIX = L"rpk:file://";
+static const wchar_t* FILE_PREFIX = L"file://";
 
 class PRTNode;
 

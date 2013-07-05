@@ -46,6 +46,7 @@
 
 #include "IMayaOutputHandler.h"
 
+
 class PRTAttrs;
 
 class MayaOutputHandler : public IMayaOutputHandler {
@@ -82,17 +83,9 @@ public:
 	virtual prt::Status cgaReportString(size_t /*isIndex*/, int32_t /*shapeID*/, const wchar_t* /*key*/, const wchar_t* /*value*/) {
 		return prt::STATUS_OK;
 	}
-
 	virtual prt::Status evalBool(size_t /*isIndex*/, int32_t /*shapeID*/, const wchar_t* /*key*/, bool /*value*/);
 	virtual prt::Status evalFloat(size_t /*isIndex*/, int32_t /*shapeID*/, const wchar_t* /*key*/, double /*value*/);
 	virtual prt::Status evalString(size_t /*isIndex*/, int32_t /*shapeID*/, const wchar_t* /*key*/, const wchar_t* /*value*/);
-
-	virtual prt::Status openCGAError() { throw std::runtime_error("Not implemented yet"); return prt::STATUS_OK; }
-	virtual prt::Status openCGAPrint() { throw std::runtime_error("Not implemented yet"); return prt::STATUS_OK; }
-	virtual prt::Status openCGAReport() { throw std::runtime_error("Not implemented yet"); return prt::STATUS_OK; }
-	virtual prt::Status closeCGAError() { throw std::runtime_error("Not implemented yet"); return prt::STATUS_OK; }
-	virtual prt::Status closeCGAPrint() { throw std::runtime_error("Not implemented yet"); return prt::STATUS_OK; }
-	virtual prt::Status closeCGAReport() { throw std::runtime_error("Not implemented yet"); return prt::STATUS_OK; }
 
 	virtual const void* getTransientBlob(prt::ContentType type, const wchar_t* key) {
 		return mCache->getTransientBlob(type, key);

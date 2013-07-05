@@ -215,7 +215,7 @@ MStatus PRTAttrs::updateRuleFiles(MFnDependencyNode & node, MString & rulePkg) {
 	PRTNode* prtNode = (PRTNode*)node.userNode();
 	MStatus  stat;
 
-	std::wstring path(RPK_PREFIX);
+	std::wstring path(FILE_PREFIX);
 	path.append(rulePkg.asWChar());
 
 	prtNode->lRulePkg = path;
