@@ -9,8 +9,8 @@
 #include "codecs_maya.h"
 
 
-static const int MINIMAL_VERSION_MAJOR = 2012;
-static const int MINIMAL_VERSION_MINOR = 1;
+static const int MINIMAL_VERSION_MAJOR = 0;
+static const int MINIMAL_VERSION_MINOR = 9;
 static const int MINIMAL_VERSION_BUILD = 0;
 
 

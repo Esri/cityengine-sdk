@@ -19,29 +19,26 @@
 #include "prtx/Encoder.h"
 #include "prtx/ResolveMap.h"
 
-#include "encoder/IMayaOutputHandler.h"
 
+class IMayaOutputHandler;
 
-class MayaEncoder : public prtx::IEncoder {
+class MayaEncoder : public prtx::GeometryEncoder {
+public:
+	static const std::wstring ID;
+	static const std::wstring NAME;
+	static const std::wstring DESCRIPTION;
+
 public:
 	MayaEncoder();
 	virtual ~MayaEncoder();
 
 public:
 	virtual void init(prtx::IGenerateContext& /*context*/);
-	virtual void finish(prtx::IGenerateContext& /*context*/);
 	virtual void encode(prtx::IGenerateContext& context, size_t initialShapeIndex);
+	virtual void finish(prtx::IGenerateContext& /*context*/);
 
-public:
-//	virtual const wchar_t* getID() const { return ID.c_str(); }
-	virtual prt::ContentType getContentType() const { return prt::CT_GEOMETRY; }
-
-	static void destroyMayaData(struct MayaOutputHandler* mayaData);
-
-public:
-	static const std::wstring ID;
-	static const std::wstring NAME;
-	static const std::wstring DESCRIPTION;
+//public:
+//	static void destroyMayaData(struct MayaOutputHandler* mayaData);
 
 private:
 	void convertGeometry(
@@ -53,22 +50,11 @@ private:
 };
 
 
-class MayaEncoderFactory : public prtx::EncoderFactory {
+class MayaEncoderFactory : public prtx::GeometryEncoderFactory {
 public:
-	MayaEncoderFactory() : prtx::EncoderFactory(getContentType(), getID(), getName(), getDescription()) {
-		prt::AttributeMapBuilder* defaultOptions = prt::AttributeMapBuilder::create();
-		setDefaultOptions(defaultOptions->createAttributeMap());
-		defaultOptions->destroy();
-	}
-
-	virtual ~MayaEncoderFactory() {}
-
-	virtual MayaEncoder* create() { return new MayaEncoder(); }
-
-	virtual const std::wstring& getID() const { return MayaEncoder::ID; }
-	virtual const std::wstring& getName() const { return MayaEncoder::NAME; }
-	virtual const std::wstring& getDescription() const { return MayaEncoder::DESCRIPTION; }
-	virtual prt::ContentType getContentType() const { return prt::CT_GEOMETRY; }
+	MayaEncoderFactory();
+	virtual ~MayaEncoderFactory();
+	virtual MayaEncoder* create();
 };
 
 #endif /* MAYAENCODER_H_ */

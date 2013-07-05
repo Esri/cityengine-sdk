@@ -26,14 +26,15 @@
 #include "prtx/ShapeIterator.h"
 #include "prtx/EncodePreparator.h"
 #include "prtx/ExtensionManager.h"
-
-#include "encoder/MayaEncoder.h"
+#include "prtx/Utils.h"
 #include "prtx/IGenerateContext.h"
 
+#include "encoder/IMayaOutputHandler.h"
+#include "encoder/MayaEncoder.h"
 
 const std::wstring MayaEncoder::ID          = L"com.esri.prt.codecs.maya.MayaEncoder";
 const std::wstring MayaEncoder::NAME        = L"Autodesk(tm) Maya(tm) Encoder";
-const std::wstring MayaEncoder::DESCRIPTION	= L"Encodes geometry into Autodesk Maya format.";
+const std::wstring MayaEncoder::DESCRIPTION	= L"Encodes geometry into Autodesk(tm) Maya(tm) format.";
 
 
 MayaEncoder::MayaEncoder() {
@@ -44,13 +45,21 @@ MayaEncoder::~MayaEncoder() {
 }
 
 
+void MayaEncoder::init(prtx::IGenerateContext& /*context*/) {
+	prt::Callbacks* cb = getCallbacks();
+	log_trace("MayaEncoder::init: cb = %x") % cb;
+	IMayaOutputHandler* oh = dynamic_cast<IMayaOutputHandler*>(cb);
+	log_trace("                   oh = %x") % oh;
+	if(oh == 0) throw(prtx::StatusException(prt::STATUS_ILLEGAL_CALLBACK_OBJECT));
+}
+
+
 void MayaEncoder::encode(prtx::IGenerateContext& context, size_t initialShapeIndex) {
 	const prtx::InitialShape& ishape = context.getInitialShape(initialShapeIndex);
 
 	prt::ResolveMap const* am = ishape.getResolveMap();
 
 	IMayaOutputHandler* oh = dynamic_cast<IMayaOutputHandler*>(getCallbacks());
-	if(oh == 0) throw(prtx::StatusException(prt::STATUS_ILLEGAL_CALLBACK_OBJECT));
 
 	util::Timer tim;
 
@@ -242,13 +251,21 @@ void MayaEncoder::convertGeometry(const std::wstring& cgbName, const prtx::Geome
 		startFace += faceCount;
 	}
 
+
 	mayaOutput->finishMesh();
 }
 
-void MayaEncoder::init(prtx::IGenerateContext& /*context*/) {
-}
 
 void MayaEncoder::finish(prtx::IGenerateContext& /*context*/) {
 }
 
+
+MayaEncoderFactory::MayaEncoderFactory()
+: prtx::GeometryEncoderFactory(MayaEncoder::ID, MayaEncoder::NAME, MayaEncoder::DESCRIPTION)
+{
+	prtx::PRTAttributeMapBuilderPtr defOptsBld(prt::AttributeMapBuilder::create());
+	setDefaultOptions(defOptsBld->createAttributeMap());
+}
+MayaEncoderFactory::~MayaEncoderFactory() {}
+ MayaEncoder* MayaEncoderFactory::create() { return new MayaEncoder(); }
 

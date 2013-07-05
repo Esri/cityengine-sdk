@@ -3,6 +3,7 @@
 
 #include "prt/Callbacks.h"
 
+
 class IMayaOutputHandler : public prt::Callbacks {
 public:
 	virtual ~IMayaOutputHandler() { }
