@@ -20,11 +20,13 @@ find_package(gdal NO_MODULE)
 include_directories(${GDAL_INCLUDE_DIR})
 link_directories(${GDAL_LIBRARY_DIR})
 
-find_package(com.esri.prt.core)
-include_directories(${com.esri.prt.core_INCLUDE_PATH})
+### internal dependencies
 
-find_package(com.esri.prt.util)
-include_directories(${com.esri.prt.util_INCLUDE_PATH})
+find_package(com.esri.prt.util CONFIG)
+include_directories(${PRT_UTIL_INCLUDE_PATH})
+
+find_package(com.esri.prt.core CONFIG)
+include_directories(${PRT_CORE_INCLUDE_PATH})
 
 
 ### build target
@@ -53,9 +55,15 @@ set_target_properties(${PROJECT} PROPERTIES LINKER_LANGUAGE CXX)
 
 install(CODE "MESSAGE(\"wiping installation dir\")")
 install(CODE "file(REMOVE_RECURSE ${CMAKE_INSTALL_PREFIX})")
-
-install(TARGETS ${PROJECT} DESTINATION lib)
+install(TARGETS ${PROJECT} DESTINATION lib EXPORT "${PROJECT}Targets")
 install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/encoder/IMayaOutputHandler.h DESTINATION include)
+
+
+### install config file and export target
+
+install(EXPORT "${PROJECT}Targets" DESTINATION "cmake")
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/exportConfig.cmake.in ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT}Config.cmake COPYONLY)
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT}Config.cmake DESTINATION cmake)
 
 
 ### print final configuration
