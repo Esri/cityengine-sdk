@@ -103,7 +103,7 @@ void MayaEncoder::encode(prtx::IGenerateContext& context, size_t initialShapeInd
 	log_trace("MayaEncoder::encode done.");
 }
 
-#define USE_NORMALS 1
+#define USE_NORMALS 0
 
 void MayaEncoder::convertGeometry(const std::wstring& cgbName, const prtx::GeometryPtrVector& geometries, const std::vector<prtx::MaterialPtrVector>& mats, IMayaOutputHandler* mayaOutput) {
 	log_trace("MayaEncoder::convertGeometry: begin");
@@ -125,10 +125,12 @@ void MayaEncoder::convertGeometry(const std::wstring& cgbName, const prtx::Geome
 	int uvBase  = 0;
 
 	for(size_t gi = 0, geoCount = geometries.size(); gi < geoCount; ++gi) {
+		log_trace("    geometry: %d") % gi;
 		prtx::Geometry* geo = geometries[gi].get();
 
 		const prtx::MeshPtrVector& meshes = geo->getMeshes();
 		for(size_t mi = 0, meshCount = meshes.size(); mi < meshCount; mi++) {
+			log_trace("      mesh %d") % mi;
 			prtx::MeshPtr mesh = meshes[mi];
 
 			const prtx::DoubleVector&  verts    = mesh->getVertexCoords();
@@ -167,6 +169,7 @@ void MayaEncoder::convertGeometry(const std::wstring& cgbName, const prtx::Geome
 //					log_debug("uvs[%d] = (%f,%f)") % i % uvs[i] % uvs[i+1];
 				}
 			}
+			log_trace("      copied vertex attributes");
 
 			for(size_t fi = 0, faceCount = mesh->getFaceCount(); fi < faceCount; ++fi) {
 //				log_debug("    -- face %d") % fi;
@@ -190,7 +193,7 @@ void MayaEncoder::convertGeometry(const std::wstring& cgbName, const prtx::Geome
 					normalConnects.push_back(nrmBase + nidxs[ni]);
 #endif
 
-				if(mesh->getUVSetsCount() > 0 && mesh->getFaceUVCount(fi, 0) > 0) {
+				if(hasUVs && mesh->getFaceUVCount(fi, 0) > 0) {
 						//log_debug("    faceuvcount(%d, 0) = %d") % fi % mesh->getFaceUVCount(fi, 0);
 						//log_debug("    getFaceVertexCount(%d) = %d") % fi % mesh->getFaceVertexCount(fi);
 						assert(mesh->getFaceUVCount(fi, 0) == mesh->getFaceVertexCount(fi));
@@ -201,7 +204,8 @@ void MayaEncoder::convertGeometry(const std::wstring& cgbName, const prtx::Geome
 							//log_debug("       vi = %d, uvBase = %d, uv0Idx[vi] = %d") % vi % uvBase % uv0Idx[vi];
 							uvConnects.push_back(uvBase + uv0Idx[vi]);
 						}
-				} else
+				}
+				else
 					uvCounts.push_back(0);
 			}
 
@@ -210,6 +214,8 @@ void MayaEncoder::convertGeometry(const std::wstring& cgbName, const prtx::Geome
 			nrmBase	+= (int)norms.size() / 3;
 #endif
 			uvBase  += (int)uvsCount     / 2;
+
+			log_trace("copied face attributes");
 		}
 	}
 
@@ -219,11 +225,22 @@ void MayaEncoder::convertGeometry(const std::wstring& cgbName, const prtx::Geome
 #endif
 
 	mayaOutput->setVertices(&vertices[0], vertices.size());
+	log_trace("    set vertices");
 	mayaOutput->setUVs(hasUVS ? &tcsU[0] : 0, hasUVS ? &tcsV[0] : 0, tcsU.size());
-#if USE_NORMALS == 1
+	log_trace("    set uvs");
+
+	#if USE_NORMALS == 1
 	mayaOutput->setNormals(hasNormals ? &normals[0] : 0, normals.size());
-	mayaOutput->setFaces(&counts[0], counts.size(), &connects[0], connects.size(), hasNormals ? &normalCounts[0] : 0, normalCounts.size(), hasNormals ? &normalConnects[0] : 0, normalConnects.size(), hasUVS ? &uvCounts[0] : 0, uvCounts.size(), hasUVS ? &uvConnects[0] : 0, uvConnects.size());
+	mayaOutput->setFaces(
+			&counts[0], counts.size(),
+			&connects[0], connects.size(),
+			hasNormals ? &normalCounts[0] : 0, normalCounts.size(),
+			hasNormals ? &normalConnects[0] : 0, normalConnects.size(),
+			hasUVS ? &uvCounts[0] : 0, uvCounts.size(),
+			hasUVS ? &uvConnects[0] : 0, uvConnects.size()
+	);
 #else
+	log_trace("uvCounts.size() = %d, uvConnects.size() = %d") % uvCounts.size() % uvConnects.size();
 	mayaOutput->setFaces(
 			&counts[0], counts.size(),
 			&connects[0], connects.size(),
@@ -233,7 +250,10 @@ void MayaEncoder::convertGeometry(const std::wstring& cgbName, const prtx::Geome
 			hasUVS ? &uvConnects[0] : 0, uvConnects.size()
 	);
 #endif
+	log_trace("set faces");
+
 	mayaOutput->createMesh();
+	log_trace("    maya output: created mesh");
 
 	int startFace = 0;
 	for(size_t gi = 0, geoCount = geometries.size(); gi < geoCount; ++gi) {
@@ -264,6 +284,8 @@ void MayaEncoder::convertGeometry(const std::wstring& cgbName, const prtx::Geome
 		startFace += faceCount;
 	}
 	mayaOutput->finishMesh();
+
+	log_trace("MayaEncoder::convertGeometry: end");
 }
 
 
