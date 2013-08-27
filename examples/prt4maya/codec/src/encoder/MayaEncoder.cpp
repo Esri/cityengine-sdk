@@ -66,7 +66,7 @@ void MayaEncoder::encode(prtx::IGenerateContext& context, size_t initialShapeInd
 	prtx::EncodePreparatorPtr encPrep = prtx::EncodePreparator::create(true);
 	prtx::LeafIteratorPtr li = prtx::LeafIterator::create(context, initialShapeIndex);
 	for (prtx::IShapePtr shape = li->getNext(); shape != 0; shape = li->getNext()) {
-		encPrep->add(getCallbacks(), shape);
+		encPrep->add(context.getCache(), shape);
 	}
 
 	const float t1 = tim.stop();
