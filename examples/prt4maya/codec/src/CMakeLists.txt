@@ -32,11 +32,7 @@ include_directories(${PRT_CORE_INCLUDE_PATH})
 ### build target
 
 list(APPEND SOURCES codecs_maya.cpp)
-list(APPEND SOURCES codecs_maya.h)				    # msvc sln
-SOURCE_GROUP(src REGULAR_EXPRESSION ".*.[h|cpp]")	# msvc sln
-
-add_subdirectory_source_group(encoder)
-
+list(APPEND SOURCES encoder/MayaEncoder.cpp)
 add_library(${PROJECT} SHARED ${SOURCES})
 
 if(PRT_WINDOWS)
