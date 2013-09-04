@@ -55,9 +55,9 @@ void MayaEncoder::init(prtx::IGenerateContext& /*context*/) {
 
 
 void MayaEncoder::encode(prtx::IGenerateContext& context, size_t initialShapeIndex) {
-	const prtx::InitialShape& ishape = context.getInitialShape(initialShapeIndex);
+	const prtx::InitialShape* ishape = context.getInitialShape(initialShapeIndex);
 
-	prt::ResolveMap const* am = ishape.getResolveMap();
+	prt::ResolveMap const* am = ishape->getResolveMap();
 
 	IMayaOutputHandler* oh = dynamic_cast<IMayaOutputHandler*>(getCallbacks());
 
@@ -79,7 +79,7 @@ void MayaEncoder::encode(prtx::IGenerateContext& context, size_t initialShapeInd
 	encPrep->createGeometriesAndReset(geometries, trafos, materials, false, true, false, true, true, true);
 	size_t   start = 0;
 	size_t   end   = 0;
-	wchar_t* ruleFile = wcsdup(ishape.getRuleFile());
+	wchar_t* ruleFile = wcsdup(ishape->getRuleFile());
 	for(size_t i = 0; ruleFile[i]; i++) {
 		switch(ruleFile[i]) {
 			case '\\':
