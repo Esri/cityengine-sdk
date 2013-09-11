@@ -47,9 +47,9 @@ MayaEncoder::~MayaEncoder() {
 
 void MayaEncoder::init(prtx::IGenerateContext& /*context*/) {
 	prt::Callbacks* cb = getCallbacks();
-	log_trace("MayaEncoder::init: cb = %x") % cb;
+	log_trace("MayaEncoder::init: cb = %x") % (size_t)cb;
 	IMayaOutputHandler* oh = dynamic_cast<IMayaOutputHandler*>(cb);
-	log_trace("                   oh = %x") % oh;
+	log_trace("                   oh = %x") % (size_t)oh;
 	if(oh == 0) throw(prtx::StatusException(prt::STATUS_ILLEGAL_CALLBACK_OBJECT));
 }
 
