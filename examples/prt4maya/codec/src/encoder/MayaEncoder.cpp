@@ -11,6 +11,7 @@
 #include <numeric>
 
 #include "boost/filesystem/path.hpp"
+#include "boost/foreach.hpp"
 
 #include "util/StringUtils.h"
 #include "util/Timer.h"
@@ -63,7 +64,7 @@ void MayaEncoder::encode(prtx::IGenerateContext& context, size_t initialShapeInd
 
 	util::Timer tim;
 
-	prtx::EncodePreparatorPtr encPrep; // TODO = prtx::EncodePreparator::create(true);
+	prtx::EncodePreparatorPtr encPrep; // = prtx::EncodePreparator::create(true);
 	prtx::LeafIteratorPtr li = prtx::LeafIterator::create(context, initialShapeIndex);
 	for (prtx::IShapePtr shape = li->getNext(); shape != 0; shape = li->getNext()) {
 		encPrep->add(context.getCache(), shape);
@@ -76,7 +77,24 @@ void MayaEncoder::encode(prtx::IGenerateContext& context, size_t initialShapeInd
 	std::vector<prtx::DoubleVector> trafos;
 	prtx::MeshPtrVector meshes;
 	std::vector<prtx::MaterialPtrVector> materials;
-	encPrep->createGeometriesAndReset(geometries, trafos, materials, false, true, false, true, true, true);
+
+	prtx::EncodePreparator::PreparationFlags prepFlags;
+	prepFlags.instancing(false);
+	prepFlags.mergeByMaterial(true);
+	prepFlags.triangulate(false);
+	prepFlags.mergeVertices(true);
+	prepFlags.cleanupVertexNormals(true);
+	prepFlags.cleanupUVs(true);
+	prepFlags.processVertexNormals(prtx::VertexNormalProcessor::SET_MISSING_TO_FACE_NORMALS);
+
+	std::vector<prtx::EncodePreparator::FinalizedInstance> finalizedInstances;
+	encPrep->fetchFinalizedInstances(finalizedInstances, prepFlags);
+	BOOST_FOREACH(prtx::EncodePreparator::FinalizedInstance& instance, finalizedInstances) {
+		geometries.push_back(instance.getGeometry());
+		trafos.push_back(instance.getTransformation());
+		materials.push_back(instance.getMaterials());
+	}
+
 	size_t   start = 0;
 	size_t   end   = 0;
 	wchar_t* ruleFile = wcsdup(ishape->getRuleFile());
