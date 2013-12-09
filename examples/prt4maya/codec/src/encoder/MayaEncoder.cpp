@@ -310,13 +310,3 @@ void MayaEncoder::convertGeometry(const std::wstring& cgbName, const prtx::Geome
 void MayaEncoder::finish(prtx::IGenerateContext& /*context*/) {
 }
 
-
-MayaEncoderFactory::MayaEncoderFactory()
-: prtx::GeometryEncoderFactory(MayaEncoder::ID, MayaEncoder::NAME, MayaEncoder::DESCRIPTION)
-{
-	prtx::PRTAttributeMapBuilderPtr defOptsBld(prt::AttributeMapBuilder::create());
-	setDefaultOptions(defOptsBld->createAttributeMap());
-}
-MayaEncoderFactory::~MayaEncoderFactory() {}
- MayaEncoder* MayaEncoderFactory::create() { return new MayaEncoder(); }
-

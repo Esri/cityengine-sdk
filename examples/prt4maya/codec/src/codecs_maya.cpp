@@ -19,12 +19,12 @@ extern "C" {
 
 CODECS_MAYA_EXPORTS_API void registerExtensionFactories(prtx::ExtensionManager* manager) {
 	log_trace("codecs maya library: registerExtensionFactories begin");
-	manager->addFactory(new MayaEncoderFactory());
+	manager->addFactory(MayaEncoderFactory::createSingleton());
 	log_trace("codecs maya library: registerExtensionFactories done");
 }
 
 
-CODECS_MAYA_EXPORTS_API void unregisterExtensionFactories(prtx::ExtensionManager* manager) {
+CODECS_MAYA_EXPORTS_API void unregisterExtensionFactories(prtx::ExtensionManager* /*manager*/) {
 }
 
 
