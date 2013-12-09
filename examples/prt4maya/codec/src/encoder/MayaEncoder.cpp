@@ -23,7 +23,7 @@
 #include "prtx/Log.h"
 #include "prtx/Geometry.h"
 #include "prtx/Material.h"
-#include "prtx/IShape.h"
+#include "prtx/Shape.h"
 #include "prtx/ShapeIterator.h"
 #include "prtx/EncodePreparator.h"
 #include "prtx/ExtensionManager.h"
@@ -66,7 +66,7 @@ void MayaEncoder::encode(prtx::IGenerateContext& context, size_t initialShapeInd
 
 	prtx::EncodePreparatorPtr encPrep; // = prtx::EncodePreparator::create(true);
 	prtx::LeafIteratorPtr li = prtx::LeafIterator::create(context, initialShapeIndex);
-	for (prtx::IShapePtr shape = li->getNext(); shape != 0; shape = li->getNext()) {
+	for (prtx::ShapePtr shape = li->getNext(); shape != 0; shape = li->getNext()) {
 		encPrep->add(context.getCache(), shape);
 	}
 
