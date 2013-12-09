@@ -41,7 +41,7 @@
 #include "prt/RuleFileInfo.h"
 #include "prt/AttributeMap.h"
 #include "prt/LogHandler.h"
-#include "prt/ProceduralRT.h"
+#include "prt/API.h"
 #include "wrapper/MayaOutputHandler.h"
 
 #ifdef _MSC_VER
