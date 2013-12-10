@@ -34,9 +34,9 @@ public:
 	virtual ~MayaEncoder();
 
 public:
-	virtual void init(prtx::IGenerateContext& /*context*/);
-	virtual void encode(prtx::IGenerateContext& context, size_t initialShapeIndex);
-	virtual void finish(prtx::IGenerateContext& /*context*/);
+	virtual void init(prtx::GenerateContext& /*context*/);
+	virtual void encode(prtx::GenerateContext& context, size_t initialShapeIndex);
+	virtual void finish(prtx::GenerateContext& /*context*/);
 
 //public:
 //	static void destroyMayaData(struct MayaOutputHandler* mayaData);
@@ -53,7 +53,7 @@ private:
 
 class MayaEncoderFactory : public prtx::EncoderFactory, public prtx::Singleton<MayaEncoderFactory> {
 public:
-	static MayaEncoderFactory* createSingleton() {
+	static MayaEncoderFactory* createInstance() {
 		prtx::EncoderInfoBuilder encoderInfoBuilder;
 
 		encoderInfoBuilder.setID(MayaEncoder::ID);

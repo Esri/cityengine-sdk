@@ -28,7 +28,7 @@
 #include "prtx/EncodePreparator.h"
 #include "prtx/ExtensionManager.h"
 #include "prtx/Utils.h"
-#include "prtx/IGenerateContext.h"
+#include "prtx/GenerateContext.h"
 
 #include "encoder/IMayaOutputHandler.h"
 #include "encoder/MayaEncoder.h"
@@ -46,7 +46,7 @@ MayaEncoder::~MayaEncoder() {
 }
 
 
-void MayaEncoder::init(prtx::IGenerateContext& /*context*/) {
+void MayaEncoder::init(prtx::GenerateContext& /*context*/) {
 	prt::Callbacks* cb = getCallbacks();
 	log_trace("MayaEncoder::init: cb = %x") % (size_t)cb;
 	IMayaOutputHandler* oh = dynamic_cast<IMayaOutputHandler*>(cb);
@@ -55,7 +55,7 @@ void MayaEncoder::init(prtx::IGenerateContext& /*context*/) {
 }
 
 
-void MayaEncoder::encode(prtx::IGenerateContext& context, size_t initialShapeIndex) {
+void MayaEncoder::encode(prtx::GenerateContext& context, size_t initialShapeIndex) {
 	const prtx::InitialShape* ishape = context.getInitialShape(initialShapeIndex);
 
 	prt::ResolveMap const* am = ishape->getResolveMap();
@@ -307,6 +307,6 @@ void MayaEncoder::convertGeometry(const std::wstring& cgbName, const prtx::Geome
 }
 
 
-void MayaEncoder::finish(prtx::IGenerateContext& /*context*/) {
+void MayaEncoder::finish(prtx::GenerateContext& /*context*/) {
 }
 
