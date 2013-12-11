@@ -38,7 +38,9 @@ const std::wstring MayaEncoder::NAME        = L"Autodesk(tm) Maya(tm) Encoder";
 const std::wstring MayaEncoder::DESCRIPTION	= L"Encodes geometry into Autodesk(tm) Maya(tm) format.";
 
 
-MayaEncoder::MayaEncoder() {
+MayaEncoder::MayaEncoder(const std::wstring& id, const prt::AttributeMap* defaultOptions, prt::Callbacks* callbacks)
+: prtx::GeometryEncoder(id, defaultOptions, callbacks)
+{
 }
 
 

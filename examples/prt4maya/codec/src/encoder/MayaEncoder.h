@@ -30,7 +30,7 @@ public:
 	static const std::wstring DESCRIPTION;
 
 public:
-	MayaEncoder();
+	MayaEncoder(const std::wstring& id, const prt::AttributeMap* defaultOptions, prt::Callbacks* callbacks);
 	virtual ~MayaEncoder();
 
 public:
@@ -66,7 +66,10 @@ public:
 
 	MayaEncoderFactory(const prt::EncoderInfo* info) : prtx::EncoderFactory(info) { }
 	virtual ~MayaEncoderFactory() { }
-	virtual MayaEncoder* create() { return new MayaEncoder(); }
+
+	virtual MayaEncoder* create(const prt::AttributeMap* defaultOptions, prt::Callbacks* callbacks) const {
+		return new MayaEncoder(getID(), defaultOptions, callbacks);
+	}
 };
 
 
