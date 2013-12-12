@@ -27,7 +27,6 @@
 #include "prtx/ShapeIterator.h"
 #include "prtx/EncodePreparator.h"
 #include "prtx/ExtensionManager.h"
-#include "prtx/Utils.h"
 #include "prtx/GenerateContext.h"
 
 #include "encoder/IMayaOutputHandler.h"
