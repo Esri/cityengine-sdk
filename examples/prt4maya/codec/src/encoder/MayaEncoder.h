@@ -19,7 +19,8 @@
 #include "prtx/Encoder.h"
 #include "prtx/EncoderFactory.h"
 #include "prtx/EncoderInfoBuilder.h"
-#include "prtx/ClassUtils.h"
+#include "prtx/PRTUtils.h"
+#include "prtx/Singleton.h"
 
 
 class IMayaOutputHandler;
@@ -52,7 +53,7 @@ private:
 };
 
 
-class MayaEncoderFactory : public prtx::EncoderFactory, public prtx::ClassUtils::Singleton<MayaEncoderFactory> {
+class MayaEncoderFactory : public prtx::EncoderFactory, public prtx::Singleton<MayaEncoderFactory> {
 public:
 	static MayaEncoderFactory* createInstance() {
 		prtx::EncoderInfoBuilder encoderInfoBuilder;
