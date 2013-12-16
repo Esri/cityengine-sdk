@@ -63,7 +63,7 @@ public:
 		encoderInfoBuilder.setDescription(MayaEncoder::DESCRIPTION);
 		encoderInfoBuilder.setType(prt::CT_GEOMETRY);
 
-		return new MayaEncoderFactory(encoderInfoBuilder.createInfo());
+		return new MayaEncoderFactory(encoderInfoBuilder.create());
 	}
 
 	MayaEncoderFactory(const prt::EncoderInfo* info) : prtx::EncoderFactory(info) { }
