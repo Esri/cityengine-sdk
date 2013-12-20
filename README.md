@@ -70,6 +70,7 @@ bin/prt4cmd \
 	-g data/candler_lot.obj \
 ```
 
+![myhouse62.png](../myhouse62.png "Building with height=62.0")
 
 #### Generate the building with a different height
 By adding the line "-a height:float=30" we change the height of the building from its default value of 62.0 to 30.0:
@@ -85,6 +86,8 @@ bin/prt4cmd \
 	-z baseName:string=myhouse \
 	-g data/candler_lot.obj
 ```
+
+![myhouse30.png](../myhouse30.png "Building with height=30.0")
 
 ## Resources
 
