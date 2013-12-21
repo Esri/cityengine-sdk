@@ -11,7 +11,7 @@ The Esri CityEngine 2013 is based on the procedural runtime, which is the underl
 * CityEngine 2013 License
 * C++ Compiler (MSVC 10.0 or later / GCC 4.1.2 or later / Clang 3.0 or later)
 * Linux/OSX: GNU Make 3.82 or later
-* Windows: NMake (part of Visual Studio [Express]) or JOM (http://qt-project.org/wiki/jom)
+* Windows: NMake 10.0 or later (part of Visual Studio [Express]) or JOM (latest, http://qt-project.org/wiki/jom)
 * CMake 2.8.10 or later (http://www.cmake.org)
 * boost 1.34 or later (http://www.boost.org)
 
