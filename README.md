@@ -65,7 +65,7 @@ The "-s" argument is only needed for the network license types.
 ```
 bin/prt4cmd \
 	-f CityEngAdvFx \
-	-s 27000@<your.flexnet.server.com>
+	-s 27000@example.com
 ```
 
 For simplicity, the license arguments have been omitted in the below examples.
