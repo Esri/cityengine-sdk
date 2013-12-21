@@ -22,11 +22,26 @@ The SDK is installed by simply downloading and unzipping an archive from the Rel
 The bundled prt4cmd project is a comprehensive example of the PRT API. It allows you to apply a rule package onto a initial shape and write the resulting geometry to disk. We encourage you to modify and play with this example source code in order to fully explore the possibilities of the CityEngine SDK.
 
 ### Building the CLI example
-Note to windows users: please substitute "make" with "nmake" or "jom" in the instructions below.
+1. cd into the examples/prt4cmd directory
+2. Create an empty "build" directory in parallel to the src directory of the CLI example and cd into it
+3. Generate the make files:
+  * on Linux/OSX: `cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release ../src`
+  * on Windows: `cmake -G "NMake Makefiles" -DCMAKE_BUILD_TYPE=Release ../src`
+4. Build and install:
+  * on Linux/OSX: `make install`
+  * on Windows: `nmake install` or `jom install`
 
-1. Create an empty "build" directory in parallel to the src directory of the CLI example and cd into it
-2. Type "cmake -DCMAKE_BUILD_TYPE=Release ../src" to generate the makefiles
-3. Type "make install" to build and install. This will create a ready-to-run installation of prt4cmd in the "install" directory in parallel to the src and build directories.
+This will create a ready-to-run installation of prt4cmd in the "install" directory in parallel to the src and build directories.
+
+BOOST NOTE: if you do not have boost installed on a system path, please extend the cmake call in step 3 like this:
+```
+cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release \
+	-DBOOST_INCLUDEDIR=xxx \
+	-DBOOST_LIBRARYDIR=XXX \
+	-DBoost_USE_STATIC_LIBS=ON \
+	../src 
+```
+
 
 ### Running the CLI example
 Note: all examples below assume that your current working directory is the "install" directory from above.
