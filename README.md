@@ -82,7 +82,7 @@ bin/prt4cmd \
 	-a startRule:string=Default\$Lot \
 	-e com.esri.prt.codecs.OBJEncoder \
 	-z baseName:string=myhouse \
-	-g data/candler_lot.obj \
+	-g data/candler_lot.obj
 ```
 
 ![myhouse62.png](images/myhouse62.png "Building with height=62.0")
