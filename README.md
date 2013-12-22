@@ -11,7 +11,7 @@ The Esri CityEngine 2013 is based on the procedural runtime, which is the underl
 * CityEngine 2013 License
 * C++ Compiler (MSVC 10.0 or later / GCC 4.1.2 or later / Clang 3.0 or later)
 * Linux/OSX: GNU Make 3.82 or later
-* Windows: NMake 10.0 or later (part of Visual Studio [Express]) or JOM (latest, http://qt-project.org/wiki/jom)
+* Windows: NMake 10.0 or later (part of Visual Studio [Express])
 * CMake 2.8.10 or later (http://www.cmake.org)
 * boost 1.34 or later (http://www.boost.org)
 
@@ -29,7 +29,7 @@ The bundled prt4cmd project is a comprehensive example of the PRT API. It allows
   * on Windows: `cmake -G "NMake Makefiles" -DCMAKE_BUILD_TYPE=Release ../src`
 4. Build and install:
   * on Linux/OSX: `make install`
-  * on Windows: `nmake install` or `jom install`
+  * on Windows: `nmake install`
 
 This will create a ready-to-run installation of prt4cmd in the "install" directory in parallel to the src and build directories.
 
