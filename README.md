@@ -15,8 +15,8 @@ The Esri CityEngine 2013 is based on the procedural runtime, which is the underl
 * CMake 2.8.10 or later (http://www.cmake.org)
 * boost 1.34 or later (http://www.boost.org)
 
-## Installation Instructions
-The SDK is installed by simply downloading and unzipping an archive from the Releases/Tags page. For more convenience and easy updates you may also want to directly clone this repository (there is one branch per platform).
+## Download & Installation Instructions
+The SDK is installed by simply downloading and unzipping an archive from the Releases/Tags (https://github.com/ArcGIS/esri-cityengine-sdk/releases) page. For more convenience and easy updates you may also want to directly clone this repository (there is one branch per platform).
 
 ## The prt4cmd CLI example
 The bundled prt4cmd project is a comprehensive example of the PRT API. It allows you to apply a rule package onto a initial shape and write the resulting geometry to disk. We encourage you to modify and play with this example source code in order to fully explore the possibilities of the CityEngine SDK.
