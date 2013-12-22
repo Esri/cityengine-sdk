@@ -84,6 +84,7 @@ bin/prt4cmd \
 	-z baseName:string=myhouse \
 	-g data/candler_lot.obj
 ```
+Upon completion you should find an wavefront obj file inside the install/output folder with mtl and textures.
 
 ![myhouse62.png](images/myhouse62.png "Building with height=62.0")
 
