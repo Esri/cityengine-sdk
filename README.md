@@ -120,5 +120,4 @@ Anyone and everyone is welcome to contribute.
 
 ## Licensing
 
-Copyright © 2013 Esri R&D Center Zurich AG. All rights reserved.
-This work is protected by copyright law and international treaties.
+Binaries and Header files are Copyright © 2013 Esri R&D Center Zurich AG. All rights reserved. This work is protected by copyright law and international treaties. The included example code may be freely used as basis for other projects.
