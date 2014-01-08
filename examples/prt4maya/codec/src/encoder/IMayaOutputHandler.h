@@ -1,3 +1,12 @@
+/**
+ * Esri CityEngine SDK Maya Plugin Example
+ *
+ * This example demonstrates the main functionality of the Procedural Runtime API.
+ * Esri R&D Center Zurich, Switzerland
+ *
+ * See http://github.com/ArcGIS/esri-cityengine-sdk for instructions.
+ */
+
 #ifndef IMAYA_OUTPUT_HANDLER_H_
 #define IMAYA_OUTPUT_HANDLER_H_
 

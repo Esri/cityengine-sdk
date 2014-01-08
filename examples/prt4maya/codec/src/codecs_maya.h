@@ -1,8 +1,10 @@
-/*
- * codecs_maya.h
+/**
+ * Esri CityEngine SDK Maya Plugin Example
  *
- *  Created on: 23 Feb 2012
- *      Author: dec
+ * This example demonstrates the main functionality of the Procedural Runtime API.
+ * Esri R&D Center Zurich, Switzerland
+ *
+ * See http://github.com/ArcGIS/esri-cityengine-sdk for instructions.
  */
 
 #ifndef CODECS_MAYA_H_

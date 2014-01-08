@@ -1,8 +1,10 @@
-/*
- * MayaEncoder.h
+/**
+ * Esri CityEngine SDK Maya Plugin Example
  *
- *  Created on: Sep 11, 2012
- *      Author: shaegler
+ * This example demonstrates the main functionality of the Procedural Runtime API.
+ * Esri R&D Center Zurich, Switzerland
+ *
+ * See http://github.com/ArcGIS/esri-cityengine-sdk for instructions.
  */
 
 #ifndef MAYAENCODER_H_
