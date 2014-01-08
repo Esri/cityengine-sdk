@@ -120,4 +120,6 @@ Anyone and everyone is welcome to contribute.
 
 ## Licensing
 
-Copyright 2013 Esri
+The CityEngine SDK is covered by two licenses:
+(1) All content of all directories *except "examples"* is licensed under the CityEngine EULA, see license/EULA.pdf.
+(2) All content in the "examples" directory tree is licensed under the APACHE 2.0 license, see license/APACHE-LICENSE-2.0.txt.
