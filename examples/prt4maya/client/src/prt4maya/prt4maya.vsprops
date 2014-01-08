@@ -15,6 +15,10 @@
 		PerformEnvironmentSet="true"
 	/>
 	<UserMacro
+		Name="prt_loader"
+		Value="$(workspace_loc)\com.esri.prt.loader.flexnet\install"
+	/>
+	<UserMacro
 		Name="prt_codecs"
 		Value="$(workspace_loc)\com.esri.prt.codecs\install"
 		PerformEnvironmentSet="true"
@@ -28,24 +32,20 @@
 		Name="prt_codecs_maya"
 		Value="$(workspace_loc)\com.esri.prt.codecs.maya\install"
 	/>
-   <UserMacro
-        Name="maya"
-        Value="C:\Program Files\Autodesk\Maya2012"
-    />
-
-   <UserMacro
-        Name="maya_bin"
-        Value="$(maya)\bin"
-    />
-
-   <UserMacro
-        Name="maya_plugins"
-        Value="$(maya_bin)\plug-ins"
-    />
-
-   <UserMacro
-        Name="maya_scripts"
-        Value="$(maya)\scripts\startup"
-    />
-	
+	<UserMacro
+		Name="maya"
+		Value="C:\Program Files\Autodesk\Maya2012"
+	/>
+	<UserMacro
+		Name="maya_bin"
+		Value="$(maya)\bin"
+	/>
+	<UserMacro
+		Name="maya_plugins"
+		Value="$(maya_bin)\plug-ins"
+	/>
+	<UserMacro
+		Name="maya_scripts"
+		Value="$(maya)\scripts\startup"
+	/>
 </VisualStudioPropertySheet>

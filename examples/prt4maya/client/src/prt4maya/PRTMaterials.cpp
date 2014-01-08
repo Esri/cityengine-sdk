@@ -9,6 +9,8 @@
 
 #define MNoPluginEntry
 #define MNoVersionString
+
+#include "Utilities.h"
 #include "prt4mayaNode.h"
 #include <limits>
 

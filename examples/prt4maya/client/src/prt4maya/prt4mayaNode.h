@@ -7,6 +7,10 @@
  * See http://github.com/ArcGIS/esri-cityengine-sdk for instructions.
  */
 
+
+#ifndef PRT4MAYA_NODE_H_
+#define PRT4MAYA_NODE_H_
+
 #include <cmath>
 
 #include <cstdlib>
@@ -179,34 +183,4 @@ public:
 private:
 };
 
-const char* filename(const char* path);
-
-void M_CHECK(MStatus stat);
-void DBG(const char* fmt, ...);
-void DBGL(const wchar_t* fmt, ...);
-
-std::wstring getSharedLibraryPrefix() {
-#if defined(_WIN32)
-	return L"";
-#elif defined(__APPLE__)
-	return L"lib";
-#elif defined(linux)
-	return L"lib";
-#else
-#	error unsupported build platform
-#endif
-}
-
-
-std::wstring getSharedLibrarySuffix() {
-#if defined(_WIN32)
-	return L".dll";
-#elif defined(__APPLE__)
-	return L".dylib";
-#elif defined(linux)
-	return L".so";
-#else
-#	error unsupported build platform
-#endif
-}
-
+#endif /* PRT4MAYA_NODE_H_ */

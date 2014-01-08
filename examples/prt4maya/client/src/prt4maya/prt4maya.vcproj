@@ -27,9 +27,9 @@
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
-				CommandLine="mkdir  $(OutDir)&#x0D;&#x0A;copy $(OutDir)\*.mll &quot;$(maya_plugins)&quot;&#x0D;&#x0A;copy $(prt_core)\lib\*.dll &quot;$(maya_bin)&quot;&#x0D;&#x0A;mkdir  &quot;$(maya_plugins)\prt_lib&quot;&#x0D;&#x0A;copy $(prt_adaptors)\lib\*.dll &quot;$(maya_plugins)\prt_lib&quot;&#x0D;&#x0A;copy $(prt_codecs)\lib\*.dll &quot;$(maya_plugins)\prt_lib&quot;&#x0D;&#x0A;copy $(prt_codecs_maya)\lib\*.dll &quot;$(maya_plugins)\prt_lib&quot;&#x0D;&#x0A;copy ..\scripts\*.mel &quot;$(maya_scripts)&quot;&#x0D;&#x0A;"
-				AdditionalDependencies="$(prt_core)\lib\com.esri.prt.core.dll;$(prt_adaptors)\lib\com.esri.prt.adaptors.dll;$(prt_codecs)\lib\com.esri.prt.codecs.dll;$(prt_codecs)\lib\com.esri.prt.codecs.maya.dll"
-				Outputs="$(OutDir)\lib\com.esri.prt.core.dll;$(OutDir)\lib\com.esri.prt.adaptors.dll;$(OutDir)\lib\com.esri.prt.codecs.dll;$(OutDir)\lib\com.esri.prt.codecs.maya.dll"
+				CommandLine="mkdir  $(OutDir)&#x0D;&#x0A;copy $(OutDir)\*.mll &quot;$(maya_plugins)&quot;&#x0D;&#x0A;copy $(prt_core)\bin\*.dll &quot;$(maya_bin)&quot;&#x0D;&#x0A;copy $(prt_loader)\bin\*.dll &quot;$(maya_bin)&quot;&#x0D;&#x0A;mkdir  &quot;$(maya_plugins)\prt_lib&quot;&#x0D;&#x0A;copy $(prt_adaptors)\lib\*.dll &quot;$(maya_plugins)\prt_lib&quot;&#x0D;&#x0A;copy $(prt_codecs)\lib\*.dll &quot;$(maya_plugins)\prt_lib&quot;&#x0D;&#x0A;copy $(prt_codecs_maya)\lib\*.dll &quot;$(maya_plugins)\prt_lib&quot;&#x0D;&#x0A;copy ..\scripts\*.mel &quot;$(maya_scripts)&quot;&#x0D;&#x0A;"
+				AdditionalDependencies="$(prt_core)\bin\com.esri.prt.core.dll;$(prt_loader)\bin\com.esri.prt.loader.dll;$(prt_adaptors)\lib\com.esri.prt.adaptors.dll;$(prt_codecs)\lib\com.esri.prt.codecs.dll;$(prt_codecs)\lib\com.esri.prt.codecs.maya.dll"
+				Outputs="$(OutDir)\bin\com.esri.prt.core.dll;$(OutDir)\bin\com.esri.prt.loader.dll;$(OutDir)\lib\com.esri.prt.adaptors.dll;$(OutDir)\lib\com.esri.prt.codecs.dll;$(OutDir)\lib\com.esri.prt.codecs.maya.dll"
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"
@@ -64,7 +64,7 @@
 				AdditionalOptions="/subsystem:windows /dll /incremental:yes /debug /export:initializePlugin /export:uninitializePlugin"
 				AdditionalDependencies="Foundation.lib OpenMaya.lib OpenMayaUI.lib com.esri.prt.core.lib"
 				OutputFile="Debug\prt4maya.mll"
-				AdditionalLibraryDirectories="&quot;C:\Program Files\Autodesk\Maya2012\lib&quot;;&quot;$(prt_core)\lib&quot;"
+				AdditionalLibraryDirectories="&quot;C:\Program Files\Autodesk\Maya2012\lib&quot;;&quot;$(prt_core)\bin&quot;"
 				ProgramDatabaseFile="Debug/prt4maya.pdb"
 				RandomizedBaseAddress="1"
 				DataExecutionPrevention="0"
@@ -104,8 +104,8 @@
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
-				CommandLine="mkdir  $(OutDir)&#x0D;&#x0A;copy $(OutDir)\*.mll &quot;$(maya_plugins)&quot;&#x0D;&#x0A;copy $(prt_core)\lib\*.dll &quot;$(maya_bin)&quot;&#x0D;&#x0A;mkdir  &quot;$(maya_plugins)\prt_lib&quot;&#x0D;&#x0A;copy $(prt_adaptors)\lib\*.dll &quot;$(maya_plugins)\prt_lib&quot;&#x0D;&#x0A;copy $(prt_codecs)\lib\*.dll &quot;$(maya_plugins)\prt_lib&quot;&#x0D;&#x0A;copy $(prt_codecs_maya)\lib\*.dll &quot;$(maya_plugins)\prt_lib&quot;&#x0D;&#x0A;copy ..\scripts\*.mel &quot;$(maya_scripts)&quot;&#x0D;&#x0A;"
-				AdditionalDependencies="$(prt_core)\lib\com.esri.prt.core.dll;$(prt_adaptors)\lib\com.esri.prt.adaptors.dll;$(prt_codecs)\lib\com.esri.prt.codecs.dll;$(prt_codecs)\lib\com.esri.prt.codecs.maya.dll"
+				CommandLine="mkdir  $(OutDir)&#x0D;&#x0A;copy $(OutDir)\*.mll &quot;$(maya_plugins)&quot;&#x0D;&#x0A;copy $(prt_core)\bin\*.dll &quot;$(maya_bin)&quot;&#x0D;&#x0A;copy $(prt_loader)\bin\*.dll &quot;$(maya_bin)&quot;&#x0D;&#x0A;mkdir  &quot;$(maya_plugins)\prt_lib&quot;&#x0D;&#x0A;copy $(prt_adaptors)\lib\*.dll &quot;$(maya_plugins)\prt_lib&quot;&#x0D;&#x0A;copy $(prt_codecs)\lib\*.dll &quot;$(maya_plugins)\prt_lib&quot;&#x0D;&#x0A;copy $(prt_codecs_maya)\lib\*.dll &quot;$(maya_plugins)\prt_lib&quot;&#x0D;&#x0A;copy ..\scripts\*.mel &quot;$(maya_scripts)&quot;&#x0D;&#x0A;"
+				AdditionalDependencies="$(prt_core)\bin\com.esri.prt.core.dll;$(prt_loader)\bin\com.esri.prt.loader.dll;$(prt_adaptors)\lib\com.esri.prt.adaptors.dll;$(prt_codecs)\lib\com.esri.prt.codecs.dll;$(prt_codecs)\lib\com.esri.prt.codecs.maya.dll"
 				Outputs="$(OutDir)\lib\com.esri.prt.core.dll;$(OutDir)\lib\com.esri.prt.adaptors.dll;$(OutDir)\lib\com.esri.prt.codecs.dll;$(OutDir)\lib\com.esri.prt.codecs.maya.dll"
 			/>
 			<Tool
@@ -141,7 +141,7 @@
 				AdditionalOptions="/subsystem:windows /incremental:no /export:initializePlugin /export:uninitializePlugin"
 				AdditionalDependencies="Foundation.lib OpenMaya.lib OpenMayaUI.lib com.esri.prt.core.lib"
 				OutputFile="Release\prt4maya.mll"
-				AdditionalLibraryDirectories="&quot;C:\Program Files\Autodesk\Maya2012\lib&quot;;&quot;$(prt_core)\lib&quot;"
+				AdditionalLibraryDirectories="&quot;C:\Program Files\Autodesk\Maya2012\lib&quot;;&quot;$(prt_core)\bin&quot;"
 				ProgramDatabaseFile="Release/prt4maya.pdb"
 				RandomizedBaseAddress="1"
 				DataExecutionPrevention="0"
@@ -193,6 +193,10 @@
 				RelativePath=".\PRTNode.cpp"
 				>
 			</File>
+			<File
+				RelativePath=".\Utilities.cpp"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -204,6 +208,10 @@
 			</File>
 			<File
 				RelativePath=".\prt4mayaNode.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Utilities.h"
 				>
 			</File>
 		</Filter>

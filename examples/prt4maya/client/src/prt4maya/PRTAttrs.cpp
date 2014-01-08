@@ -9,6 +9,7 @@
 
 #define MNoPluginEntry
 #define MNoVersionString
+#include "Utilities.h"
 #include "prt4mayaNode.h"
 #include "wrapper/MayaOutputHandler.h"
 #include <limits>

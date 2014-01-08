@@ -7,6 +7,8 @@
  * See http://github.com/ArcGIS/esri-cityengine-sdk for instructions.
  */
 
+#include "Utilities.h"
+
 #include <sstream>
 
 #include <maya/MFnPlugin.h>
@@ -24,15 +26,6 @@
 #include "prt4maya/prt4mayaNode.h"
 
 #include "prt/FlexLicParams.h"
-
-
-#define DO_DBG 1
-
-
-const char* filename(const char* path) {
-	while(*(--path) != '\\');
-	return path + 1;
-}
 
 MTypeId PRTNode::id(PRT_TYPE_ID);
 
@@ -201,7 +194,6 @@ std::wstring getPluginRoot() {
 
 	std::wstring root = drive;
 	root += dir;
-	root +=  + L"prt_lib";
 
 	return root;
 #else
@@ -213,22 +205,25 @@ std::wstring getPluginRoot() {
 
 
 MStatus PRTNode::initialize() {
-	std::wstring root = getPluginRoot();
-	DBGL(L"prt plugins at %ls\n", root.c_str());
+	std::wstring root   = getPluginRoot();
+	std::wstring prtLib = root + L"prt_lib";
 
-	const wchar_t* rootPath = root.c_str();
+	DBGL(L"prt plugins at %ls\n", prtLib.c_str());
+
+	const wchar_t* prtLibPath = prtLib.c_str();
 
 	std::wstring libfile = getSharedLibraryPrefix() + FLEXNET_LIB + getSharedLibrarySuffix();
-	MString      flexLib = MString(rootPath);
+	MString      flexLib = MString(root.c_str());
+	flexLib             += MString("..\\");
 	flexLib             += MString(libfile.c_str());
 
 	prt::FlexLicParams flp;
-	flp.mActLibPath    = flexLib.asUTF8();
+	flp.mActLibPath    = "C:\\Program Files\\Autodesk\\Maya2012\\bin\\flexnet_prt.dll"; // flexLib.asUTF8();
 	flp.mFeature       = "CityEngAdvFx";
 	flp.mHostName      = "";
 	prt::Status status;
 
-	mLicHandle = prt::init(&rootPath, 1, prt::LOG_DEBUG, &flp, &status);
+	mLicHandle = prt::init(&prtLibPath, 1, prt::LOG_DEBUG, &flp, &status);
 
 	if(status != prt::STATUS_OK)
 		return MS::kFailure;
@@ -472,37 +467,8 @@ MObject PRTNode::inMesh;
 //
 MObject PRTNode::outMesh;
 
+// statics
 
 prt::ConsoleLogHandler* PRTNode::logHandler = 0;
+const prt::Object*     PRTNode::mLicHandle = 0;
 
-
-
-
-#if DO_DBG == 1
-
-void M_CHECK(MStatus stat) {
-	if(MS::kSuccess != stat) {
-		std::wcerr << L"err: " << stat.errorString().asWChar() << L" (code: " << stat.statusCode() << L")" << std::endl;
-		throw stat;
-	}
-}
-
-void DBG(const char* fmt, ...) {
-	va_list args;
-	//printf("%s:%d ", filename(__FILE__) , __LINE__);
-	printf(fmt, args);
-	fflush(0);
-}
-
-void DBGL(const wchar_t* fmt, ...) {
-	va_list args;
-	//printf(L"%ls:%d ", filename(__FILE__) , __LINE__);
-	wprintf(fmt, args);
-	fflush(0);
-}
-
-#else
-void M_CHECK(MStatus stat) { }
-void DBG(const char* fmt, ...) { }
-void DBGL(const wchar_t* fmt, ...) { }
-#endif
