@@ -1,3 +1,12 @@
+/**
+ * Esri CityEngine SDK Maya Plugin Example
+ *
+ * This example demonstrates the main functionality of the Procedural Runtime API.
+ * Esri R&D Center Zurich, Switzerland
+ *
+ * See http://github.com/ArcGIS/esri-cityengine-sdk for instructions.
+ */
+
 #define MNoPluginEntry
 #define MNoVersionString
 #include "prt4mayaNode.h"
@@ -246,7 +255,7 @@ MStatus PRTAttrs::updateRuleFiles(MFnDependencyNode & node, MString & rulePkg) {
 
 	MStringArray ruleFiles;
 	prt::Status resolveMapStatus = prt::STATUS_UNSPECIFIED_ERROR;
-	prtNode->resolveMap = prt::ProceduralRT::createResolveMap(path.c_str(), true, &resolveMapStatus);
+	prtNode->resolveMap = prt::createResolveMap(path.c_str(), true, &resolveMapStatus);
 	if(resolveMapStatus == prt::STATUS_OK) {
 		size_t nKeys;
 		const wchar_t** keys   = prtNode->resolveMap->getKeys(&nKeys);
@@ -254,7 +263,7 @@ MStatus PRTAttrs::updateRuleFiles(MFnDependencyNode & node, MString & rulePkg) {
 		std::wstring    sCGB(L".cgb");
 		for(size_t k = 0; k < nKeys; k++) {
 			std::wstring key = std::wstring(keys[k]);
-			std::wcout << L"key = " << key << L" -> " << prtNode->resolveMap->getString(keys[k]) << std::endl;
+			std::wcout << L"key = " << keys[k] << L" -> " << prtNode->resolveMap->getString(keys[k]) << std::endl;
 			if(    std::equal(sClass.rbegin(), sClass.rend(), key.rbegin())
 				|| std::equal(sCGB.rbegin(),   sCGB.rend(),   key.rbegin()))
 				ruleFiles.append(MString(key.c_str()));
@@ -279,11 +288,11 @@ MStatus PRTAttrs::updateStartRules(MFnDependencyNode & node, MStringArray & rule
 
 	M_CHECK(addEnumParameter(node, prtNode->ruleFile, NAME_RULE_FILE, ruleFiles[0], eRuleFiles));
 
-	std::vector<const prt::Entry*> annotStartRules;
-	std::vector<const prt::Entry*> noArgRules;
+	std::vector<const prt::RuleFileInfo::Entry*> annotStartRules;
+	std::vector<const prt::RuleFileInfo::Entry*> noArgRules;
 
 	prt::Status infoStatus = prt::STATUS_UNSPECIFIED_ERROR;
-	const prt::RuleFileInfo* info = prt::ProceduralRT::createRuleFileInfo(prtNode->resolveMap->getString(ruleFiles[0].asWChar()), 0, &infoStatus); // TODO: callback???
+	const prt::RuleFileInfo* info = prt::createRuleFileInfo(prtNode->resolveMap->getString(ruleFiles[0].asWChar()), 0, &infoStatus); // TODO: callback???
 	if (infoStatus == prt::STATUS_OK) {
 		for(size_t r = 0; r < info->getNumRules(); r++) {
 			if(info->getRule(r)->getNumParameters() > 0) continue;
@@ -299,7 +308,7 @@ MStatus PRTAttrs::updateStartRules(MFnDependencyNode & node, MStringArray & rule
 		}
 	}
 
-	std::vector<const prt::Entry*> startRules = annotStartRules.size() > 0 ? annotStartRules : noArgRules;
+	std::vector<const prt::RuleFileInfo::Entry*> startRules = annotStartRules.size() > 0 ? annotStartRules : noArgRules;
 
 	MStringArray startRuleList;
 
@@ -415,9 +424,10 @@ MStatus PRTAttrs::updateAttributes(MFnDependencyNode & node, MString & ruleFile,
 //	DBG("%s", shape->toXML((char*)malloc(size), &size));
 
 	const wchar_t* encoders[] = { L"com.esri.prt.core.AttributeEvalEncoder" };
-	prt::EncoderInfo const* encInfo = prt::ProceduralRT::createEncoderInfo(encoders[0]);
-	prt::AttributeMap const* encOpts = encInfo->createValidatedOptions();
-	prt::Status generateStatus = prt::ProceduralRT::generate(&shape, 1, encoders, 1, &encOpts, outputHandler);
+	prt::EncoderInfo  const* encInfo = prt::createEncoderInfo(encoders[0]);
+	const prt::AttributeMap* encOpts = 0;
+	encInfo->createValidatedOptionsAndStates(0, &encOpts, 0);
+	prt::Status generateStatus = prt::generate(&shape, 1, 0, encoders, 1, &encOpts, outputHandler, outputHandler->mCache, 0);
 	encOpts->destroy();
 	encInfo->destroy();
 
@@ -505,7 +515,7 @@ MStatus PRTAttrs::updateAttributes(MFnDependencyNode & node, MString & ruleFile,
 				}
 
 				std::wstring value = evalAttrs.find(name.asWChar())->second.mString;
-				std::wcout << L"   --> string: " << value << std::endl;
+				std::wcout << L"   --> string: " << value.c_str() << std::endl;
 
 				MString mvalue(value.c_str());
 				if(e) {

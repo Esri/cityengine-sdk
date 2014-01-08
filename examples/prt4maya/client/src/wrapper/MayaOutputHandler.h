@@ -1,8 +1,10 @@
-/*
- * MayaData.h
+/**
+ * Esri CityEngine SDK Maya Plugin Example
  *
- *  Created on: Oct 12, 2012
- *      Author: shaegler
+ * This example demonstrates the main functionality of the Procedural Runtime API.
+ * Esri R&D Center Zurich, Switzerland
+ *
+ * See http://github.com/ArcGIS/esri-cityengine-sdk for instructions.
  */
 
 #ifndef MAYA_OUTPUT_HANDLER_H_
@@ -10,6 +12,7 @@
 
 #include <stdexcept>
 #include <map>
+#include <string>
 
 #include "maya/MDataHandle.h"
 #include "maya/MStatus.h"
@@ -46,7 +49,7 @@
 #include "maya/MFnPartition.h"
 
 #include "IMayaOutputHandler.h"
-
+#include "prt/Cache.h"
 
 class MayaOutputHandler : public IMayaOutputHandler {
 public:
@@ -62,14 +65,14 @@ public:
 
 public:
 	MayaOutputHandler(const MPlug* plug, MDataBlock* data, MStringArray* shadingGroups, MIntArray* shadingRanges) :
-		mPlug(plug), mData(data), mShadingGroups(shadingGroups), mShadingRanges(shadingRanges), mCache(prt::CacheBuilder::createCache(prt::CacheBuilder::CACHE_TYPE_DEFAULT))
+		mPlug(plug), mData(data), mShadingGroups(shadingGroups), mShadingRanges(shadingRanges), mCache(prt::CacheObject::create(prt::CacheObject::CACHE_TYPE_DEFAULT))
 	{ }
 	virtual ~MayaOutputHandler() {
 		if(mCache) mCache->destroy();
 	}
 
 	// prt::Callbacks interface
-	virtual prt::Status generateError(size_t /*isIndex*/, const wchar_t* message) {
+	virtual prt::Status generateError(size_t /*isIndex*/, prt::Status /*status*/, const wchar_t* message) {
 		std::wcout << "GENERATE ERROR: " << message << std::endl;
 		return prt::STATUS_OK;
 	}
@@ -93,9 +96,9 @@ public:
 	virtual prt::Status cgaReportString(size_t /*isIndex*/, int32_t /*shapeID*/, const wchar_t* /*key*/, const wchar_t* /*value*/) {
 		return prt::STATUS_OK;
 	}
-	virtual prt::Status evalBool(size_t /*isIndex*/, int32_t /*shapeID*/, const wchar_t* /*key*/, bool /*value*/);
-	virtual prt::Status evalFloat(size_t /*isIndex*/, int32_t /*shapeID*/, const wchar_t* /*key*/, double /*value*/);
-	virtual prt::Status evalString(size_t /*isIndex*/, int32_t /*shapeID*/, const wchar_t* /*key*/, const wchar_t* /*value*/);
+	virtual prt::Status attrBool(size_t /*isIndex*/, int32_t /*shapeID*/, const wchar_t* /*key*/, bool /*value*/);
+	virtual prt::Status attrFloat(size_t /*isIndex*/, int32_t /*shapeID*/, const wchar_t* /*key*/, double /*value*/);
+	virtual prt::Status attrString(size_t /*isIndex*/, int32_t /*shapeID*/, const wchar_t* /*key*/, const wchar_t* /*value*/);
 
 	virtual const void* getTransientBlob(prt::ContentType type, const wchar_t* key) {
 		return mCache->getTransientBlob(type, key);
@@ -106,16 +109,16 @@ public:
 	virtual bool tryLockPersistentBlobs(prt::ContentType type, const wchar_t* key) {
 		return mCache->tryLockPersistentBlobs(type, key);
 	}
-	virtual void insertPersistentBlobAndLock(PersistentBlobType type, const wchar_t* key, const void* data, size_t size) {
+	virtual void insertPersistentBlobAndLock(prt::Cache::PersistentBlobType type, const wchar_t* key, const void* data, size_t size) {
 		mCache->insertPersistentBlobAndLock(type, key, data, size);
 	}
-	virtual const void* getPersistentBlob(PersistentBlobType type, const wchar_t* key, size_t* size) {
+	virtual const void* getPersistentBlob(prt::Cache::PersistentBlobType type, const wchar_t* key, size_t* size) {
 		return mCache->getPersistentBlob(type, key, size);
 	}
-	virtual void releasePersistentBlob(PersistentBlobType type, const wchar_t* key) {
+	virtual void releasePersistentBlob(prt::Cache::PersistentBlobType type, const wchar_t* key) {
 		mCache->releasePersistentBlob(type, key);
 	}
-	virtual void unlockPersistentBlob(PersistentBlobType type, const wchar_t* key) {
+	virtual void unlockPersistentBlob(prt::Cache::PersistentBlobType type, const wchar_t* key) {
 		mCache->unlockPersistentBlob(type, key);
 	}
 
@@ -166,6 +169,9 @@ public:
 	MIntArray			    mUVCounts;
 	MIntArray			    mUVConnects;
 
+	
+	prt::CacheObject*  mCache;
+
 private:
 	// must not be called
 	MayaOutputHandler() : mPlug(0), mData(0), mShadingGroups(0), mShadingRanges(0), mCache(0) { }
@@ -173,11 +179,9 @@ private:
 	const MPlug*		  mPlug;
 	MDataBlock*			  mData;
 	MStringArray*		  mShadingGroups;
-	MIntArray*		      mShadingRanges;
+	MIntArray*		    mShadingRanges;
 
 	std::map<std::wstring, AttributeHolder> mAttrs;
-
-	prt::Cache*			  mCache;
 };
 
 

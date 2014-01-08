@@ -1,3 +1,12 @@
+/**
+ * Esri CityEngine SDK Maya Plugin Example
+ *
+ * This example demonstrates the main functionality of the Procedural Runtime API.
+ * Esri R&D Center Zurich, Switzerland
+ *
+ * See http://github.com/ArcGIS/esri-cityengine-sdk for instructions.
+ */
+
 #include <cmath>
 
 #include <cstdlib>
@@ -56,6 +65,7 @@ static const MString  NAME_RULE_FILE("Rule_File");
 static const MString  NAME_START_RULE("Start_Rule");
 static const MString  NAME_RPK("CGA_Rule_Package");
 static const wchar_t* FILE_PREFIX = L"file://";
+static const wchar_t* FLEXNET_LIB	= L"flexnet_prt";
 
 class PRTNode;
 
@@ -120,7 +130,7 @@ public:
 	MStatus               attachMaterials();
 
 	static void initLogger();
-	static void clearLogger();
+	static void uninitialize();
 
 	MayaOutputHandler* createOutputHandler(const MPlug* plug, MDataBlock* data);
 private:
@@ -130,9 +140,11 @@ private:
 	MIntArray         shadingRanges;
 
 	static prt::ConsoleLogHandler* logHandler;
+	static const prt::Object*      mLicHandle;
 
 	MString&          getStrParameter(MObject & attr, MString & value);
 	MStatus           updateAttributes();
+
 };
 
 class PRTAttrs : public MPxCommand {
@@ -172,3 +184,29 @@ const char* filename(const char* path);
 void M_CHECK(MStatus stat);
 void DBG(const char* fmt, ...);
 void DBGL(const wchar_t* fmt, ...);
+
+std::wstring getSharedLibraryPrefix() {
+#if defined(_WIN32)
+	return L"";
+#elif defined(__APPLE__)
+	return L"lib";
+#elif defined(linux)
+	return L"lib";
+#else
+#	error unsupported build platform
+#endif
+}
+
+
+std::wstring getSharedLibrarySuffix() {
+#if defined(_WIN32)
+	return L".dll";
+#elif defined(__APPLE__)
+	return L".dylib";
+#elif defined(linux)
+	return L".so";
+#else
+#	error unsupported build platform
+#endif
+}
+

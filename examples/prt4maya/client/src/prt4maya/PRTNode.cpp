@@ -1,3 +1,12 @@
+/**
+ * Esri CityEngine SDK Maya Plugin Example
+ *
+ * This example demonstrates the main functionality of the Procedural Runtime API.
+ * Esri R&D Center Zurich, Switzerland
+ *
+ * See http://github.com/ArcGIS/esri-cityengine-sdk for instructions.
+ */
+
 #include <sstream>
 
 #include <maya/MFnPlugin.h>
@@ -13,6 +22,8 @@
 #include "wrapper/MayaOutputHandler.h"
 
 #include "prt4maya/prt4mayaNode.h"
+
+#include "prt/FlexLicParams.h"
 
 
 #define DO_DBG 1
@@ -105,7 +116,7 @@ MStatus PRTNode::compute( const MPlug& plug, MDataBlock& data ) {
 				pcounts.length()
 		);
 		if (setGeoStatus != prt::STATUS_OK)
-			std::cerr << "InitialShapeBuilder setGeometry failed status = " << prt::ProceduralRT::getStatusDescription(setGeoStatus) << std::endl;
+			std::cerr << "InitialShapeBuilder setGeometry failed status = " << prt::getStatusDescription(setGeoStatus) << std::endl;
 
 		isb->setAttributes(
 				getStrParameter(ruleFile,  dummy).asWChar(),
@@ -121,9 +132,9 @@ MStatus PRTNode::compute( const MPlug& plug, MDataBlock& data ) {
 
 		const wchar_t* encoders[] = { L"com.esri.prt.codecs.maya.MayaEncoder" };
 		const prt::AttributeMap* encOpts[] = { generateOpts };
-		prt::Status generateStatus = prt::ProceduralRT::generate(&shape, 1, encoders, 1, encOpts, outputHandler);
+		prt::Status generateStatus = prt::generate(&shape, 1, 0, encoders, 1, encOpts, outputHandler, outputHandler->mCache, 0);
 		if (generateStatus != prt::STATUS_OK)
-			std::cerr << "prt generate failed: " << prt::ProceduralRT::getStatusDescription(generateStatus) << std::endl;
+			std::cerr << "prt generate failed: " << prt::getStatusDescription(generateStatus) << std::endl;
 		shape->destroy();
 
 		delete[] ca;
@@ -206,7 +217,18 @@ MStatus PRTNode::initialize() {
 	DBGL(L"prt plugins at %ls\n", root.c_str());
 
 	const wchar_t* rootPath = root.c_str();
-	prt::Status status = prt::ProceduralRT::init(&rootPath, 1, prt::LOG_DEBUG);
+
+	std::wstring libfile = getSharedLibraryPrefix() + FLEXNET_LIB + getSharedLibrarySuffix();
+	MString      flexLib = MString(rootPath);
+	flexLib             += MString(libfile.c_str());
+
+	prt::FlexLicParams flp;
+	flp.mActLibPath    = flexLib.asUTF8();
+	flp.mFeature       = "CityEngAdvFx";
+	flp.mHostName      = "";
+	prt::Status status;
+
+	mLicHandle = prt::init(&rootPath, 1, prt::LOG_DEBUG, &flp, &status);
 
 	if(status != prt::STATUS_OK)
 		return MS::kFailure;
@@ -229,7 +251,7 @@ MStatus PRTNode::initialize() {
 	M_CHECK(attributeAffects(inMesh, outMesh));
 
 	MStatus           stat2;
-	MFnStringData	  stringData;
+	MFnStringData  	  stringData;
 	MFnTypedAttribute fAttr;
 
 	rulePkg = fAttr.create( NAME_RULE_PKG, "rulePkg", MFnData::kString, stringData.create(&stat2), &stat );
@@ -394,13 +416,14 @@ MayaOutputHandler* PRTNode::createOutputHandler(const MPlug* plug, MDataBlock* d
 void PRTNode::initLogger() {
 	prt::LogLevel logLevels[6] = {prt::LOG_FATAL, prt::LOG_ERROR, prt::LOG_WARNING, prt::LOG_INFO, prt::LOG_DEBUG, prt::LOG_TRACE};
 	logHandler = prt::ConsoleLogHandler::create(&logLevels[0], (size_t)6);
-	prt::ProceduralRT::addLogHandler(logHandler);
+	prt::addLogHandler(logHandler);
 }
 
 
-void PRTNode::clearLogger() {
-	prt::ProceduralRT::removeLogHandler(logHandler);
+void PRTNode::uninitialize() {
+	prt::removeLogHandler(logHandler);
 	logHandler->destroy();
+	mLicHandle->destroy();
 }
 
 // Plug-in Initialization //
@@ -432,7 +455,7 @@ MStatus uninitializePlugin( MObject obj) {
 	M_CHECK(plugin.deregisterCommand("prtAttrs"));
 	M_CHECK(plugin.deregisterNode(PRTNode::id));
 
-	PRTNode::clearLogger();
+	PRTNode::uninitialize();
 
 	return MS::kSuccess;
 }

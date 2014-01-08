@@ -1,8 +1,10 @@
-/*
- * MayaData.cpp
+/**
+ * Esri CityEngine SDK Maya Plugin Example
  *
- *  Created on: Oct 12, 2012
- *      Author: shaegler
+ * This example demonstrates the main functionality of the Procedural Runtime API.
+ * Esri R&D Center Zurich, Switzerland
+ *
+ * See http://github.com/ArcGIS/esri-cityengine-sdk for instructions.
  */
 
 #include <cassert>
@@ -177,7 +179,7 @@ void MayaOutputHandler::finishMesh() {
 }
 
 
-prt::Status MayaOutputHandler::evalBool(
+prt::Status MayaOutputHandler::attrBool(
 		size_t /*isIndex*/,
 		int32_t /*shapeID*/,
 		const wchar_t* key,
@@ -189,7 +191,7 @@ prt::Status MayaOutputHandler::evalBool(
 }
 
 
-prt::Status MayaOutputHandler::evalFloat(
+prt::Status MayaOutputHandler::attrFloat(
 		size_t /*isIndex*/,
 		int32_t /*shapeID*/,
 		const wchar_t* key,
@@ -201,7 +203,7 @@ prt::Status MayaOutputHandler::evalFloat(
 }
 
 
-prt::Status MayaOutputHandler::evalString(
+prt::Status MayaOutputHandler::attrString(
 		size_t /*isIndex*/,
 		int32_t /*shapeID*/,
 		const wchar_t* key,
