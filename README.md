@@ -121,5 +121,5 @@ Anyone and everyone is welcome to contribute.
 ## Licensing
 
 The CityEngine SDK is covered by two licenses:
-(1) All content of all directories *except "examples"* is licensed under the CityEngine EULA, see license/EULA.pdf.
-(2) All content in the "examples" directory tree is licensed under the APACHE 2.0 license, see license/APACHE-LICENSE-2.0.txt.
+  1. All content of all directories **except "examples"** is licensed under the CityEngine EULA, see [license/EULA.pdf](license/EULA.pdf).
+  2. All content in the "examples" directory tree is licensed under the APACHE 2.0 license, see [license/APACHE-LICENSE-2.0.txt](license/APACHE-LICENSE-2.0.txt).
