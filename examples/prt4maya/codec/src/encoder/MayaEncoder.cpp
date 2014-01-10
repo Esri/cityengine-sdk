@@ -67,11 +67,16 @@ void MayaEncoder::encode(prtx::GenerateContext& context, size_t initialShapeInde
 
 	util::Timer tim;
 
-	prtx::EncodePreparatorPtr encPrep; // = prtx::EncodePreparator::create(true);
+	prtx::DefaultNamePreparator        namePrep;
+	prtx::NamePreparator::NamespacePtr nsMesh     = namePrep.newNamespace();
+	prtx::NamePreparator::NamespacePtr nsMaterial = namePrep.newNamespace();
+
+	// create the preparator
+	prtx::EncodePreparatorPtr encPrep = prtx::EncodePreparator::create(true, namePrep, nsMesh, nsMaterial);
+
 	prtx::LeafIteratorPtr li = prtx::LeafIterator::create(context, initialShapeIndex);
-	for (prtx::ShapePtr shape = li->getNext(); shape != 0; shape = li->getNext()) {
+	for (prtx::ShapePtr shape = li->getNext(); shape != 0; shape = li->getNext())
 		encPrep->add(context.getCache(), shape);
-	}
 
 	const float t1 = tim.stop();
 	tim.start();
