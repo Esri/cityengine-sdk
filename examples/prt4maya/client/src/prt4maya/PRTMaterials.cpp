@@ -11,7 +11,7 @@
 #define MNoVersionString
 
 #include "Utilities.h"
-#include "prt4mayaNode.h"
+#include "PRTNode.h"
 #include <limits>
 
 const MString OUTPUT_GEOMETRY = MString("og");
@@ -57,8 +57,8 @@ MStatus PRTNode::attachMaterials() {
 		if(meshFound) {
 			if(1) {
 				char  buf[256];
-				for(unsigned int i = 0; i < shadingGroups.length(); i++) {
-					sprintf(buf, "sets -forceElement %s %s.f[%d:%d]", shadingGroups[i].asChar(), meshName.asChar(), shadingRanges[i * 2], shadingRanges[i * 2 + 1]);
+				for(unsigned int i = 0; i < mShadingGroups.length(); i++) {
+					sprintf(buf, "sets -forceElement %s %s.f[%d:%d]", mShadingGroups[i].asChar(), meshName.asChar(), mShadingRanges[i * 2], mShadingRanges[i * 2 + 1]);
 					M_CHECK(MGlobal::executeCommand(MString(buf)));
 				}
 			} else {
@@ -68,8 +68,8 @@ MStatus PRTNode::attachMaterials() {
 				MObject        component;
 				MPlug          pOutMesh(thisMObject(), outMesh);
 
-				for(unsigned int i = 0; i < shadingGroups.length(); i++) {
-					MGlobal::getSelectionListByName(shadingGroups[i], selList);
+				for(unsigned int i = 0; i < mShadingGroups.length(); i++) {
+					MGlobal::getSelectionListByName(mShadingGroups[i], selList);
 					selList.getDependNode(0, shadingGroup);
 
 					MFnSet fSG(shadingGroup, &stat);
@@ -83,8 +83,8 @@ MStatus PRTNode::attachMaterials() {
 					MItMeshPolygon iFaces(mesh, &stat);
 					M_CHECK(stat);
 
-					int low  = shadingRanges[i * 2 + 0];
-					int high = shadingRanges[i * 2 + 1];
+					int low  = mShadingRanges[i * 2 + 0];
+					int high = mShadingRanges[i * 2 + 1];
 
 					for(; !(iFaces.isDone()) && (int)iFaces.index() < high; iFaces.next() ) {
 						if((int)iFaces.index() >= low)
@@ -96,7 +96,7 @@ MStatus PRTNode::attachMaterials() {
 			}
 		}
 
-		hasMaterials = true;
+		mHasMaterials = true;
 
 	} catch (MStatus& ms) {
 		return ms;

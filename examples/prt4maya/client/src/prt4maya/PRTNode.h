@@ -61,15 +61,22 @@
 #include <WinNT.h>
 #endif
 
-
 #define PRT_TYPE_ID 0x8666b
 
 static const MString  NAME_RULE_PKG("Rule_Package");
 static const MString  NAME_RULE_FILE("Rule_File");
 static const MString  NAME_START_RULE("Start_Rule");
 static const MString  NAME_RPK("CGA_Rule_Package");
-static const wchar_t* FILE_PREFIX = L"file://";
-static const wchar_t* FLEXNET_LIB	= L"flexnet_prt";
+static const wchar_t* FILE_PREFIX      = L"file://";
+static const wchar_t* FLEXNET_LIB      = L"flexnet_prt";
+static const wchar_t* ANNOT_START_RULE = L"@StartRule";
+static const wchar_t* ANNOT_RANGE      = L"@Range";
+static const wchar_t* ANNOT_COLOR      = L"@Color";
+static const wchar_t* ANNOT_DIR        = L"@Directory";
+static const wchar_t* ANNOT_FILE       = L"@File";
+static const wchar_t* ANNOT_GROUP      = L"@Group";
+static const wchar_t* ENC_MAYA         = L"com.esri.prt.codecs.maya.MayaEncoder";
+static const wchar_t* ENC_ATTR         = L"com.esri.prt.core.AttributeEvalEncoder";
 
 class PRTNode;
 
@@ -77,20 +84,21 @@ class PRTEnum {
 	friend class PRTAttrs;
 	friend class PRTNode;
 public:
-	PRTEnum*         next;
-	MFnEnumAttribute eAttr;
 
 	PRTEnum(PRTNode * node, const prt::Annotation* annot = 0);
 	~PRTEnum() {}; 
 
 	void    add(const MString & key, const MString & value);
 	MStatus fill();
+
+	PRTEnum*               mNext;
+	MFnEnumAttribute       mAttr;
 private:
-	const prt::Annotation*    annot;
-	MStringArray              keys;
-	MStringArray              sVals;
-	MDoubleArray              fVals;
-	MIntArray                 bVals;
+	const prt::Annotation* mAnnot;
+	MStringArray           mKeys;
+	MStringArray           mSVals;
+	MDoubleArray           mFVals;
+	MIntArray              mBVals;
 };
 
 class PRTNode : public MPxNode {
@@ -106,49 +114,38 @@ public:
 	static  MStatus         initialize();
 
 public: 
-	static  MTypeId         id;
-
-	// Node attributes
-	// ---------------
-
-	static  MObject rulePkg;        // Rule pacakge path
-
-	// Input mesh
-	//
-	static  MObject inMesh;
-
-	// Output mesh
-	//
-	static  MObject outMesh;
-
-	MObject            ruleFile;
-	MObject            startRule;
-
-	std::wstring       lRulePkg;
-	const prt::ResolveMap* resolveMap;
-	const prt::AttributeMap* generateAttrs;
-	const prt::AttributeMap* generateOpts;
-
-	void                  destroyEnums();
-	const PRTEnum *       findEnum(const MObject & attr) const;
-	MStatus               attachMaterials();
-
-	static void initLogger();
-	static void uninitialize();
-
+	void               destroyEnums();
+	const PRTEnum *    findEnum(const MObject & attr) const;
+	MStatus            attachMaterials();
+	static void        initLogger();
+	static void        uninitialize();
 	MayaOutputHandler* createOutputHandler(const MPlug* plug, MDataBlock* data);
+
+	MObject                       mRuleFile;
+	MObject                       mStartRule;
+
+	std::wstring                  mLRulePkg;
+	const prt::ResolveMap*        mResolveMap;
+	const prt::AttributeMap*      mGenerateAttrs;
+	const prt::AttributeMap*      mMayaEncOpts;
+	const prt::AttributeMap*      mAttrEncOpts;
+
+	static  MTypeId               theID;
+	static  MObject               theRulePkg;
+	static  MObject               inMesh;
+	static  MObject               outMesh;
+	static prt::CacheObject*      theCache;
 private:
-	PRTEnum*          enums;
-	bool              hasMaterials;
-	MStringArray      shadingGroups;
-	MIntArray         shadingRanges;
+	PRTEnum*                       mEnums;
+	bool                           mHasMaterials;
+	MStringArray                   mShadingGroups;
+	MIntArray                      mShadingRanges;
 
-	static prt::ConsoleLogHandler* logHandler;
-	static const prt::Object*      mLicHandle;
+	static prt::ConsoleLogHandler* theLogHandler;
+	static const prt::Object*      theLicHandle;
 
-	MString&          getStrParameter(MObject & attr, MString & value);
-	MStatus           updateAttributes();
-
+	MString& getStrParameter(MObject & attr, MString & value);
+	MStatus  updateAttributes();
 };
 
 class PRTAttrs : public MPxCommand {

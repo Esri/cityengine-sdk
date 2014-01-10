@@ -14,10 +14,7 @@
 #include <maya/MItMeshPolygon.h>
 #include <wrapper/MayaOutputHandler.h>
 
-#include "prt4maya/prt4mayaNode.h"
-
-#define MCHECK(_stat_) {if(MS::kSuccess != _stat_) {DBG("maya err at line %d: %s %d\n", __LINE__, _stat_.errorString().asChar(), _stat_.statusCode());}}
-
+#include "PRTNode.h"
 
 void MayaOutputHandler::setVertices(double* vtx, size_t size) {
 	mVertices.clear();
@@ -182,37 +179,19 @@ void MayaOutputHandler::finishMesh() {
 }
 
 
-prt::Status MayaOutputHandler::attrBool(
-		size_t /*isIndex*/,
-		int32_t /*shapeID*/,
-		const wchar_t* key,
-		bool value
-) {
-	mAttrs[key].mBool = value;
-	std::wcout << L"evalBool: " << key << L" = " << value << std::endl;
+prt::Status MayaOutputHandler::attrBool(size_t /*isIndex*/, int32_t /*shapeID*/, const wchar_t* key, bool value) {
+	mAttrs[stripStyle(key)].mBool = value;
 	return prt::STATUS_OK;
 }
 
 
-prt::Status MayaOutputHandler::attrFloat(
-		size_t /*isIndex*/,
-		int32_t /*shapeID*/,
-		const wchar_t* key,
-		double value
-) {
-	mAttrs[key].mFloat = value;
-	std::wcout << L"evalFloat: " << key << L" = " << value << std::endl;
+prt::Status MayaOutputHandler::attrFloat(size_t /*isIndex*/, int32_t /*shapeID*/, const wchar_t* key, double value) {
+	mAttrs[stripStyle(key)].mFloat = value;
 	return prt::STATUS_OK;
 }
 
 
-prt::Status MayaOutputHandler::attrString(
-		size_t /*isIndex*/,
-		int32_t /*shapeID*/,
-		const wchar_t* key,
-		const wchar_t* value
-) {
-	mAttrs[key].mString = value;
-	std::wcout << L"evalString: " << key << L" = " << value << std::endl;
+prt::Status MayaOutputHandler::attrString(size_t /*isIndex*/, int32_t /*shapeID*/, const wchar_t* key, const wchar_t* value) {
+	mAttrs[stripStyle(key)].mString = value;
 	return prt::STATUS_OK;
 }

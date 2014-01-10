@@ -53,23 +53,21 @@
 
 class MayaOutputHandler : public IMayaOutputHandler {
 public:
-	class AttributeHolder { // FIXME: optimize
+	class AttributeHolder {
 	public:
 		AttributeHolder() { }
 		AttributeHolder(bool b, double d, std::wstring s) : mBool(b), mFloat(d), mString(s) { }
 		virtual ~AttributeHolder() {  }
-		bool mBool;
-		double mFloat;
+		bool         mBool;
+		double       mFloat;
 		std::wstring mString;
 	};
 
 public:
 	MayaOutputHandler(const MPlug* plug, MDataBlock* data, MStringArray* shadingGroups, MIntArray* shadingRanges) :
-		mPlug(plug), mData(data), mShadingGroups(shadingGroups), mShadingRanges(shadingRanges), mCache(prt::CacheObject::create(prt::CacheObject::CACHE_TYPE_DEFAULT))
+		mPlug(plug), mData(data), mShadingGroups(shadingGroups), mShadingRanges(shadingRanges)
 	{ }
-	virtual ~MayaOutputHandler() {
-		if(mCache) mCache->destroy();
-	}
+	virtual ~MayaOutputHandler() {}
 
 	// prt::Callbacks interface
 	virtual prt::Status generateError(size_t /*isIndex*/, prt::Status /*status*/, const wchar_t* message) {
@@ -100,47 +98,24 @@ public:
 	virtual prt::Status attrFloat(size_t /*isIndex*/, int32_t /*shapeID*/, const wchar_t* /*key*/, double /*value*/);
 	virtual prt::Status attrString(size_t /*isIndex*/, int32_t /*shapeID*/, const wchar_t* /*key*/, const wchar_t* /*value*/);
 
-	virtual const void* getTransientBlob(prt::ContentType type, const wchar_t* key) {
-		return mCache->getTransientBlob(type, key);
-	}
-	virtual const void* insertTransientBlob(prt::ContentType type, const wchar_t* key, const void* ptr) {
-		return mCache->insertTransientBlob(type, key, ptr);
-	}
-	virtual bool tryLockPersistentBlobs(prt::ContentType type, const wchar_t* key) {
-		return mCache->tryLockPersistentBlobs(type, key);
-	}
-	virtual void insertPersistentBlobAndLock(prt::Cache::PersistentBlobType type, const wchar_t* key, const void* data, size_t size) {
-		mCache->insertPersistentBlobAndLock(type, key, data, size);
-	}
-	virtual const void* getPersistentBlob(prt::Cache::PersistentBlobType type, const wchar_t* key, size_t* size) {
-		return mCache->getPersistentBlob(type, key, size);
-	}
-	virtual void releasePersistentBlob(prt::Cache::PersistentBlobType type, const wchar_t* key) {
-		mCache->releasePersistentBlob(type, key);
-	}
-	virtual void unlockPersistentBlob(prt::Cache::PersistentBlobType type, const wchar_t* key) {
-		mCache->unlockPersistentBlob(type, key);
-	}
-
-
 public:
 	virtual void setVertices(double* vtx, size_t size);
 	virtual void setNormals(double* nrm, size_t size);
 	virtual void setUVs(float* u, float* v, size_t size);
 
 	virtual void setFaces(
-			int* 	counts,
-			size_t	countsSize,
-			int*	connects,
-			size_t	connectsSize,
-			int*	normalCounts,
-			size_t	normalCountsSize,
-			int*	normalConnects,
-			size_t	normalConnectsSize,
-			int*	uvCounts,
-			size_t	uvCountsSize,
-			int*	uvConnects,
-			size_t	uvConnectsSize
+			int* 	 counts,
+			size_t countsSize,
+			int*	 connects,
+			size_t connectsSize,
+			int*	 normalCounts,
+			size_t normalCountsSize,
+			int*   normalConnects,
+			size_t normalConnectsSize,
+			int*   uvCounts,
+			size_t uvCountsSize,
+			int*   uvConnects,
+			size_t uvConnectsSize
 	);
 	virtual void createMesh();
 	virtual void finishMesh();
@@ -159,7 +134,6 @@ public:
 	MIntArray			    mCounts;
 	MIntArray			    mConnects;
 
-	//MFloatPointArray	mNormals;
 	MVectorArray			mNormals;
 	MIntArray			    mNormalCounts;
 	MIntArray			    mNormalConnects;
@@ -169,12 +143,9 @@ public:
 	MIntArray			    mUVCounts;
 	MIntArray			    mUVConnects;
 
-	
-	prt::CacheObject*  mCache;
-
 private:
 	// must not be called
-	MayaOutputHandler() : mPlug(0), mData(0), mShadingGroups(0), mShadingRanges(0), mCache(0) { }
+	MayaOutputHandler() : mPlug(0), mData(0), mShadingGroups(0), mShadingRanges(0) { }
 
 	const MPlug*		  mPlug;
 	MDataBlock*			  mData;

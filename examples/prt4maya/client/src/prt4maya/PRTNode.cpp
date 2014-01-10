@@ -23,16 +23,29 @@
 
 #include "wrapper/MayaOutputHandler.h"
 
-#include "prt4maya/prt4mayaNode.h"
+#include "prt4maya/PRTNode.h"
 
 #include "prt/FlexLicParams.h"
 
-MTypeId PRTNode::id(PRT_TYPE_ID);
+MTypeId PRTNode::theID(PRT_TYPE_ID);
 
-PRTNode::PRTNode() :  resolveMap(0), generateAttrs(0), generateOpts(0), enums(0), hasMaterials(false) {
-	prt::AttributeMapBuilder* oBuilder = prt::AttributeMapBuilder::create();
-	generateOpts                       = oBuilder->createAttributeMap();
-	oBuilder->destroy();
+PRTNode::PRTNode() : mResolveMap(0), mGenerateAttrs(0), mMayaEncOpts(0), mAttrEncOpts(0), mEnums(0), mHasMaterials(false) {
+	prt::AttributeMapBuilder* b = prt::AttributeMapBuilder::create();
+	mMayaEncOpts                = b->createAttributeMap();
+	mAttrEncOpts                = b->createAttributeMap();
+	b->destroy();
+
+	{
+		prt::EncoderInfo  const* encInfo = prt::createEncoderInfo(ENC_MAYA);	
+		encInfo->createValidatedOptionsAndStates(0, &mMayaEncOpts, 0);
+		encInfo->destroy();
+	}
+
+	{
+		prt::EncoderInfo  const* encInfo = prt::createEncoderInfo(ENC_ATTR);	
+		encInfo->createValidatedOptionsAndStates(0, &mAttrEncOpts, 0);
+		encInfo->destroy();
+	}
 }
 
 PRTNode::~PRTNode() {
@@ -49,20 +62,20 @@ MStatus PRTNode::setDependentsDirty(const MPlug &plugBeingDirtied, MPlugArray &a
 MStatus PRTNode::compute( const MPlug& plug, MDataBlock& data ) {
 	std::cout << "PRTNode::compute" << std::endl;
 	MStatus stat;
-	hasMaterials = false;
+	mHasMaterials = false;
 
 	std::wstring path(FILE_PREFIX);
 	MString dummy;
-	path.append(getStrParameter(rulePkg, dummy).asWChar());
+	path.append(getStrParameter(theRulePkg, dummy).asWChar());
 
-	if(lRulePkg.compare(path)) {
+	if(mLRulePkg.compare(path)) {
 		MString cmd;
 		cmd.format("prtAttrs ^1s", name());
 		MGlobal::executeCommandOnIdle(cmd);
 		return MS::kSuccess;
 	}
 
-	if(plug == outMesh && generateAttrs) {
+	if(plug == outMesh && mGenerateAttrs) {
 		MDataHandle inputHandle = data.inputValue(inMesh, &stat);
 		M_CHECK(stat);
 		MObject iMesh = inputHandle.asMeshTransformed();
@@ -90,11 +103,13 @@ MStatus PRTNode::compute( const MPlug& plug, MDataBlock& data ) {
 		pconnect.get((int*)ia);
 		pcounts.get((int*)ca);
 
-//		size_t size = 8192;
-//		char* tmp = new char[size];
-//		tmp[0] = 0;
-//		DBG("%s\n", generateAttrs->toXML(tmp, &size));
-//		delete[] tmp;
+		/*
+		size_t size = 8192;
+		char* tmp = new char[size];
+		tmp[0] = 0;
+		DBG("%s\n", generateAttrs->toXML(tmp, &size));
+		delete[] tmp;
+		*/
 
 		MayaOutputHandler* outputHandler = createOutputHandler(&plug, &data);
 		MString            dummy;
@@ -112,20 +127,20 @@ MStatus PRTNode::compute( const MPlug& plug, MDataBlock& data ) {
 			std::cerr << "InitialShapeBuilder setGeometry failed status = " << prt::getStatusDescription(setGeoStatus) << std::endl;
 
 		isb->setAttributes(
-				getStrParameter(ruleFile,  dummy).asWChar(),
-				getStrParameter(startRule, dummy).asWChar(),
-				666,
+				getStrParameter(mRuleFile,  dummy).asWChar(),
+				getStrParameter(mStartRule, dummy).asWChar(),
+				isb->computeSeed(),
 				L"",
-				generateAttrs,
-				resolveMap
+				mGenerateAttrs,
+				mResolveMap
 		);
 
 		const prt::InitialShape* shape = isb->createInitialShapeAndReset();
 		isb->destroy();
 
-		const wchar_t* encoders[] = { L"com.esri.prt.codecs.maya.MayaEncoder" };
-		const prt::AttributeMap* encOpts[] = { generateOpts };
-		prt::Status generateStatus = prt::generate(&shape, 1, 0, encoders, 1, encOpts, outputHandler, outputHandler->mCache, 0);
+		const wchar_t*           encoders[]     = {ENC_MAYA,     ENC_ATTR};
+		const prt::AttributeMap* encOpts[]      = {mMayaEncOpts, mAttrEncOpts };
+		prt::Status              generateStatus = prt::generate(&shape, 1, 0, encoders, 2, encOpts, outputHandler, PRTNode::theCache, 0);
 		if (generateStatus != prt::STATUS_OK)
 			std::cerr << "prt generate failed: " << prt::getStatusDescription(generateStatus) << std::endl;
 		shape->destroy();
@@ -218,15 +233,17 @@ MStatus PRTNode::initialize() {
 	flexLib             += MString(libfile.c_str());
 
 	prt::FlexLicParams flp;
-	flp.mActLibPath    = "C:\\Program Files\\Autodesk\\Maya2012\\bin\\flexnet_prt.dll"; // flexLib.asUTF8();
+	flp.mActLibPath    = flexLib.asUTF8();
 	flp.mFeature       = "CityEngAdvFx";
 	flp.mHostName      = "";
 	prt::Status status;
 
-	mLicHandle = prt::init(&prtLibPath, 1, prt::LOG_DEBUG, &flp, &status);
+	theLicHandle = prt::init(&prtLibPath, 1, prt::LOG_DEBUG, &flp, &status);
 
 	if(status != prt::STATUS_OK)
 		return MS::kFailure;
+
+	theCache = prt::CacheObject::create(prt::CacheObject::CACHE_TYPE_DEFAULT);
 
 	MFnTypedAttribute   typedFn;
 	MStatus             stat;
@@ -249,15 +266,15 @@ MStatus PRTNode::initialize() {
 	MFnStringData  	  stringData;
 	MFnTypedAttribute fAttr;
 
-	rulePkg = fAttr.create( NAME_RULE_PKG, "rulePkg", MFnData::kString, stringData.create(&stat2), &stat );
+	theRulePkg = fAttr.create( NAME_RULE_PKG, "rulePkg", MFnData::kString, stringData.create(&stat2), &stat );
 	M_CHECK(stat2);
 	M_CHECK(stat);
 	M_CHECK(fAttr.setUsedAsFilename(true));
 	M_CHECK(fAttr.setCached    (true));
 	M_CHECK(fAttr.setStorable  (true));
 	M_CHECK(fAttr.setNiceNameOverride(MString("Rule Package(*.rpk)")));
-	M_CHECK(addAttribute(rulePkg));
-	M_CHECK(attributeAffects( rulePkg, outMesh ));
+	M_CHECK(addAttribute(theRulePkg));
+	M_CHECK(attributeAffects(theRulePkg, outMesh ));
 
 	return MS::kSuccess;
 }
@@ -276,7 +293,7 @@ inline MString & PRTNode::getStrParameter(MObject & attr, MString & value) {
 		const PRTEnum* e = findEnum(attr);
 		if(e) {
 			plug.getValue(eValue);
-			value = e->sVals[eValue];
+			value = e->mSVals[eValue];
 		}
 	}
 	return value;
@@ -298,7 +315,7 @@ void toHex(wchar_t * color, double r, double g, double b) {
 }
 
 MStatus PRTNode::updateAttributes() {
-	if(!(generateAttrs)) return MS::kSuccess; 
+	if(!(mGenerateAttrs)) return MS::kSuccess; 
 
 	MStatus           stat;
 	MObject           node = thisMObject();
@@ -378,8 +395,8 @@ MStatus PRTNode::updateAttributes() {
 		}
 	}
 
-	generateAttrs->destroy();
-	generateAttrs = aBuilder->createAttributeMap();
+	mGenerateAttrs->destroy();
+	mGenerateAttrs = aBuilder->createAttributeMap();
 
 	aBuilder->destroy();
 
@@ -387,38 +404,39 @@ MStatus PRTNode::updateAttributes() {
 }
 
 void PRTNode::destroyEnums() {
-	for(PRTEnum * e = enums; e;) {
-		PRTEnum * tmp = e->next;
+	for(PRTEnum* e = mEnums; e;) {
+		PRTEnum * tmp = e->mNext;
 		delete e;
 		e = tmp;
 	}
 
-	enums = 0;
+	mEnums = 0;
 }
 
-const PRTEnum * PRTNode::findEnum(const MObject & attr) const {
-	for(PRTEnum * e = enums; e; e = e->next) {
-		if(e->eAttr.object() == attr)
+const PRTEnum* PRTNode::findEnum(const MObject & attr) const {
+	for(PRTEnum* e = mEnums; e; e = e->mNext) {
+		if(e->mAttr.object() == attr)
 			return e;
 	}
 	return 0;
 }
 
 MayaOutputHandler* PRTNode::createOutputHandler(const MPlug* plug, MDataBlock* data) {
-	return new MayaOutputHandler(plug, data, &shadingGroups, &shadingRanges);
+	return new MayaOutputHandler(plug, data, &mShadingGroups, &mShadingRanges);
 }
 
 void PRTNode::initLogger() {
 	prt::LogLevel logLevels[6] = {prt::LOG_FATAL, prt::LOG_ERROR, prt::LOG_WARNING, prt::LOG_INFO, prt::LOG_DEBUG, prt::LOG_TRACE};
-	logHandler = prt::ConsoleLogHandler::create(&logLevels[0], (size_t)6);
-	prt::addLogHandler(logHandler);
+	theLogHandler = prt::ConsoleLogHandler::create(&logLevels[0], (size_t)6);
+	prt::addLogHandler(theLogHandler);
 }
 
 
 void PRTNode::uninitialize() {
-	prt::removeLogHandler(logHandler);
-	logHandler->destroy();
-	mLicHandle->destroy();
+	prt::removeLogHandler(theLogHandler);
+	theLogHandler->destroy();
+	theLicHandle->destroy();
+	theCache->destroy();
 }
 
 // Plug-in Initialization //
@@ -433,9 +451,9 @@ MStatus initializePlugin( MObject obj ){
 
 	PRTNode::initLogger();
 
-	MFnPlugin plugin( obj, "Esri", "0.9", "Any");
+	MFnPlugin plugin( obj, "Esri", "1.0", "Any");
 
-	M_CHECK(plugin.registerNode("prt", PRTNode::id, &PRTNode::creator, &PRTNode::initialize, MPxNode::kDependNode));
+	M_CHECK(plugin.registerNode("prt", PRTNode::theID, &PRTNode::creator, &PRTNode::initialize, MPxNode::kDependNode));
 	M_CHECK(plugin.registerUI("prt4mayaCreateUI", "prt4mayaDeleteUI"));
 	M_CHECK(plugin.registerCommand("prtAttrs",     PRTAttrs::creator));
 	M_CHECK(plugin.registerCommand("prtMaterials", PRTMaterials::creator));
@@ -448,7 +466,7 @@ MStatus uninitializePlugin( MObject obj) {
 
 	M_CHECK(plugin.deregisterCommand("prtMaterials"));
 	M_CHECK(plugin.deregisterCommand("prtAttrs"));
-	M_CHECK(plugin.deregisterNode(PRTNode::id));
+	M_CHECK(plugin.deregisterNode(PRTNode::theID));
 
 	PRTNode::uninitialize();
 
@@ -457,7 +475,7 @@ MStatus uninitializePlugin( MObject obj) {
 
 // Main shape parameters
 //
-MObject PRTNode::rulePkg; 
+MObject PRTNode::theRulePkg; 
 
 // Input mesh
 //
@@ -469,6 +487,6 @@ MObject PRTNode::outMesh;
 
 // statics
 
-prt::ConsoleLogHandler* PRTNode::logHandler = 0;
-const prt::Object*     PRTNode::mLicHandle = 0;
-
+prt::ConsoleLogHandler* PRTNode::theLogHandler = 0;
+const prt::Object*      PRTNode::theLicHandle = 0;
+prt::CacheObject*       PRTNode::theCache = 0;

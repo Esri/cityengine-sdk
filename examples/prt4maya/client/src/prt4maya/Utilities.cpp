@@ -40,6 +40,13 @@ std::wstring getSharedLibrarySuffix() {
 #endif
 }
 
+const wchar_t* stripStyle(const wchar_t* attr) {
+	for(;*attr != '\0'; attr++)
+		if(*attr == '$') 
+			return attr + 1;
+	return attr;
+}
+
 #if DO_DBG == 1
 
 void M_CHECK(MStatus stat) {
