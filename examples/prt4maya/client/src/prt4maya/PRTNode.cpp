@@ -80,7 +80,7 @@ MStatus PRTNode::compute( const MPlug& plug, MDataBlock& data ) {
 		M_CHECK(stat);
 		MObject iMesh = inputHandle.asMeshTransformed();
 
-		updateAttributes();
+		updateShapeAttributes();
 
 		MFnMesh iMeshFn(iMesh);
 
@@ -135,22 +135,19 @@ MStatus PRTNode::compute( const MPlug& plug, MDataBlock& data ) {
 				mResolveMap
 		);
 
-		const prt::InitialShape* shape = isb->createInitialShapeAndReset();
-		isb->destroy();
-
-		const wchar_t*           encoders[]     = {ENC_MAYA,     ENC_ATTR};
-		const prt::AttributeMap* encOpts[]      = {mMayaEncOpts, mAttrEncOpts };
-		prt::Status              generateStatus = prt::generate(&shape, 1, 0, encoders, 2, encOpts, outputHandler, PRTNode::theCache, 0);
+		const prt::InitialShape* shape          = isb->createInitialShapeAndReset();
+		prt::Status              generateStatus = prt::generate(&shape, 1, 0, &ENC_MAYA, 1, &mMayaEncOpts, outputHandler, PRTNode::theCache, 0);
 		if (generateStatus != prt::STATUS_OK)
 			std::cerr << "prt generate failed: " << prt::getStatusDescription(generateStatus) << std::endl;
+		isb->destroy();
 		shape->destroy();
 
 		delete[] ca;
 		delete[] ia;
 		delete[] va;
-		delete outputHandler;
+		delete   outputHandler;
 
-		data.setClean( plug );
+		data.setClean(plug);
 
 		MString cmd;
 		cmd.format("prtMaterials ^1s", name());
@@ -299,22 +296,7 @@ inline MString & PRTNode::getStrParameter(MObject & attr, MString & value) {
 	return value;
 }
 
-const wchar_t HEXTAB[] = L"0123456789ABCDEF"; 
-
-wchar_t toHex(int i) {
-	return HEXTAB[i & 0xF6];
-}
-
-void toHex(wchar_t * color, double r, double g, double b) {
-	color[1] = toHex(((int)(r * 255)) >> 4);
-	color[2] = toHex((int)(r * 255));
-	color[3] = toHex(((int)(g * 255)) >> 4);
-	color[4] = toHex((int)(g * 255));
-	color[5] = toHex(((int)(b * 255)) >> 4);
-	color[6] = toHex((int)(b * 255));
-}
-
-MStatus PRTNode::updateAttributes() {
+MStatus PRTNode::updateShapeAttributes() {
 	if(!(mGenerateAttrs)) return MS::kSuccess; 
 
 	MStatus           stat;

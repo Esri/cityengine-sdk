@@ -40,13 +40,13 @@ void MayaOutputHandler::setUVs(float* u, float* v, size_t size) {
 }
 
 void MayaOutputHandler::setFaces(int* counts, size_t countsSize, int* connects, size_t connectsSize, int* normalCounts, size_t normalCountsSize, int* normalConnects, size_t normalConnectsSize, int* uvCounts, size_t uvCountsSize, int* uvConnects, size_t uvConnectsSize) {
-	mCounts.clear();
+	mVerticesCounts.clear();
 	for (size_t i = 0; i < countsSize; ++i)
-		mCounts.append(counts[i]);
+		mVerticesCounts.append(counts[i]);
 
-	mConnects.clear();
+	mVerticesConnects.clear();
 	for (size_t i = 0; i < connectsSize; ++i)
-		mConnects.append(connects[i]);
+		mVerticesConnects.append(connects[i]);
 
 	mNormalCounts.clear();
 	for (size_t i = 0; i < normalCountsSize; ++i)
@@ -81,24 +81,13 @@ void MayaOutputHandler::createMesh() {
 	MObject newOutputData = dataCreator.create(&stat);
 	MCHECK(stat);
 
-	mFnMesh = new MFnMesh();
-	MObject oMesh = mFnMesh->create(mVertices.length(), mCounts.length(), mVertices, mCounts, mConnects, newOutputData, &stat);
-	MCHECK(stat);
+	DBG("    mVertices.length         = %d", mVertices.length());
+	DBG("    mVerticesCounts.length   = %d", mVerticesCounts.length());	
+	DBG("    mVerticesConnects.length = %d", mVerticesConnects.length());
 
-/*	int ni = 0;
-	int vi = 0;
-	for(unsigned int fi = 0; fi < mNormalCounts.length(); ++fi) {
-		if (mNormalCounts[fi] > 0) {
-			for (int v = 0; v < mNormalCounts[fi]; ++v, ++ni, ++vi) {
-				MVector nrm(mNormals[mNormalConnects[ni]]);
-				stat = mFnMesh->setFaceVertexNormal(nrm, fi, mConnects[vi]);
-				MCHECK(stat);
-			}
-		}
-		else
-			vi += mCounts[fi];
-	}
-*/
+	mFnMesh = new MFnMesh();
+	MObject oMesh = mFnMesh->create(mVertices.length(), mVerticesCounts.length(), mVertices, mVerticesCounts, mVerticesConnects, newOutputData, &stat);
+	MCHECK(stat);
 
 	MPlugArray plugs;
 	bool isConnected = mPlug->connectedTo(plugs, false, true, &stat);
@@ -122,8 +111,12 @@ void MayaOutputHandler::createMesh() {
 	mShadingGroups->clear();
 	mShadingRanges->clear();
 
-	mFnMesh->setFaceVertexNormals(mNormals, mNormalCounts, mNormalConnects);
-	//mFnMesh->setEdgeSmoothing()
+	if(mNormalConnects.length() > 0) {
+			DBG("    mNormals.length        = %d", mNormals.length());
+			DBG("    mNormalCounts.length   = %d", mNormalCounts.length());	
+			DBG("    mNormalConnects.length = %d", mNormalConnects.length());
+			MCHECK(mFnMesh->setNormals(mNormals));
+	}
 
 	MMeshSmoothOptions smoothOpts;
 	smoothOpts.setSmoothness(0.0f);
@@ -134,10 +127,6 @@ void MayaOutputHandler::createMesh() {
 
 	stat = outputHandle.set(newOutputData);
 	MCHECK(stat);
-
-	DBG("    mayaVertices.length = %d", mVertices.length());
-	DBG("    mayaCounts.length   = %d", mCounts.length());
-	DBG("    mayaConnects.length = %d", mConnects.length());
 }
 
 
@@ -163,14 +152,20 @@ void MayaOutputHandler::matSetDiffuseTexture(int mh, const wchar_t* tex) {
 
 	MString sg = (*mShadingGroups)[mh];
 	MString cmd("prtSetDiffuseTexture(\"");
-	cmd += sg + "\", \"" + tex + "\", \"map1\")";
+	cmd += sg + "\",\"" + tex + "\",\"map1\")";
 	MString result = MGlobal::executeCommandStringResult(cmd, false, false, &stat);
 	DBG("mel cmd '%s' executed, result = '%s'", cmd.asChar(), result.asChar());
 }
 
 
 void MayaOutputHandler::matSetColor(int mh, float r, float g, float b) {
+	MStatus stat;
 
+	MString sg = (*mShadingGroups)[mh];
+	MString cmd("prtSetColor(\"");
+	cmd += sg + "\"," + r + "," + g + "," + b + ")";
+	MString result = MGlobal::executeCommandStringResult(cmd, false, false, &stat);
+	DBG("mel cmd '%s' executed, result = '%s'", cmd.asChar(), result.asChar());
 }
 
 

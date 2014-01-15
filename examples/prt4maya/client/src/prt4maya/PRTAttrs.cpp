@@ -154,21 +154,6 @@ MStatus PRTAttrs::addFileParameter(MFnDependencyNode & node, MObject & attr, con
 	return MS::kSuccess;
 }
 
-int fromHex(wchar_t c) {
-	switch(c) {
-	case '0': return 0;	case '1': return 1;	case '2': return 2;	case '3': return 3;	case '4': return 4;
-	case '5': return 5;	case '6': return 6;	case '7': return 7;	case '8': return 8;	case '9': return 9;
-	case 'a': case 'A': return 0xa;
-	case 'b': case 'B': return 0xb;
-	case 'c': case 'C': return 0xc;
-	case 'd': case 'D': return 0xd;
-	case 'e': case 'E': return 0xe;
-	case 'f': case 'F': return 0xf;
-	default: 
-		return 0;
-	}
-}
-
 MStatus PRTAttrs::addColorParameter(MFnDependencyNode & node, MObject & attr, const MString & name, MString & value ) {
 	MStatus             stat;
 	MFnNumericAttribute nAttr;
@@ -328,7 +313,7 @@ MStatus PRTAttrs::updateStartRules(MFnDependencyNode & node, MStringArray & rule
 		}
 
 		prt::AttributeMapBuilder* aBuilder = prt::AttributeMapBuilder::create();
-		updateAttributes(node, ruleFiles[0], startRuleList[0], aBuilder, info);
+		createAttributes(node, ruleFiles[0], startRuleList[0], aBuilder, info);
 		prtNode->mGenerateAttrs = aBuilder->createAttributeMap();
 		aBuilder->destroy();
 	}
@@ -388,7 +373,7 @@ static const size_t 	UnitQuad_indexCount      = 4;
 static const uint32_t	UnitQuad_faceCounts[]    = { 4 };
 static const size_t 	UnitQuad_faceCountsCount = 1;
 
-MStatus PRTAttrs::updateAttributes(MFnDependencyNode & node, MString & ruleFile, MString & startRule, prt::AttributeMapBuilder* aBuilder, const prt::RuleFileInfo* info) {
+MStatus PRTAttrs::createAttributes(MFnDependencyNode & node, MString & ruleFile, MString & startRule, prt::AttributeMapBuilder* aBuilder, const prt::RuleFileInfo* info) {
 	MStatus           stat;
 	MStatus           stat2;
 	MFnNumericData    numericData;
@@ -412,7 +397,7 @@ MStatus PRTAttrs::updateAttributes(MFnDependencyNode & node, MString & ruleFile,
 	isb->setAttributes(
 			ruleFile.asWChar(),
 			startRule.asWChar(),
-			666,
+			isb->computeSeed(),
 			L"",
 			attrs,
 			prtNode->mResolveMap

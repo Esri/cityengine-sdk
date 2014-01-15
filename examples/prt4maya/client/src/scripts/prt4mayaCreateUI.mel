@@ -152,10 +152,22 @@ global proc prtSetDiffuseTexture(string $sgName, string $texturePath, string $uv
 	string $fileName = fileNameFromPath($texturePath); 			// might not be unique!
 	$fileName = substituteAllString($fileName, ".", "_");		// '.' seems to be illegal
 
-	string $fnName = "prtFile_" + $fileName;
+	string $nodeName = "prtFile_" + $fileName;
 
-	shadingNode -asTexture file -n $fnName;
-	connectAttr -force ($fnName + ".outColor") ($shName + ".color");
-	setAttr ($fnName + ".fileTextureName") -type "string" $texturePath;
+	shadingNode -asTexture file -n $nodeName;
+	connectAttr -force ($nodeName + ".outColor") ($shName + ".color");
+	setAttr ($nodeName + ".fileTextureName") -type "string" $texturePath;
+}
+
+global proc prtSetColor(string $sgName, float $r, float $g, float $b) {
+	$shaderPlug = `connectionInfo -sfd ($sgName + ".surfaceShader")`;
+	$shName = `plugNode $shaderPlug`;
+
+	string $nodeName = "prtColor_" + $r + "_" + $g + "_" + $b;
+	$nodeName = substituteAllString($nodeName, ".", "_");
+
+	shadingNode -asShader blinn -n $nodeName;
+	setAttr ($nodeName + ".color") -type "double3" $r $g $b;
+	connectAttr -force ($nodeName + ".outColor") ($shName + ".color");
 }
 

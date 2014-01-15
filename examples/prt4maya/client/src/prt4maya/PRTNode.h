@@ -63,10 +63,10 @@
 
 #define PRT_TYPE_ID 0x8666b
 
-static const MString  NAME_RULE_PKG("Rule_Package");
-static const MString  NAME_RULE_FILE("Rule_File");
-static const MString  NAME_START_RULE("Start_Rule");
-static const MString  NAME_RPK("CGA_Rule_Package");
+static const MString  NAME_RULE_PKG      ("Rule_Package");
+static const MString  NAME_RULE_FILE     ("Rule_File");
+static const MString  NAME_START_RULE    ("Start_Rule");
+static const MString  NAME_RPK           ("CGA_Rule_Package");
 static const wchar_t* FILE_PREFIX      = L"file://";
 static const wchar_t* FLEXNET_LIB      = L"flexnet_prt";
 static const wchar_t* ANNOT_START_RULE = L"@StartRule";
@@ -121,20 +121,20 @@ public:
 	static void        uninitialize();
 	MayaOutputHandler* createOutputHandler(const MPlug* plug, MDataBlock* data);
 
-	MObject                       mRuleFile;
-	MObject                       mStartRule;
+	MObject                        mRuleFile;
+	MObject                        mStartRule;
 
-	std::wstring                  mLRulePkg;
-	const prt::ResolveMap*        mResolveMap;
-	const prt::AttributeMap*      mGenerateAttrs;
-	const prt::AttributeMap*      mMayaEncOpts;
-	const prt::AttributeMap*      mAttrEncOpts;
+	std::wstring                   mLRulePkg;
+	const prt::ResolveMap*         mResolveMap;
+	const prt::AttributeMap*       mGenerateAttrs;
+	const prt::AttributeMap*       mMayaEncOpts;
+	const prt::AttributeMap*       mAttrEncOpts;
 
-	static  MTypeId               theID;
-	static  MObject               theRulePkg;
-	static  MObject               inMesh;
-	static  MObject               outMesh;
-	static prt::CacheObject*      theCache;
+	static  MTypeId                theID;
+	static  MObject                theRulePkg;
+	static  MObject                inMesh;
+	static  MObject                outMesh;
+	static prt::CacheObject*       theCache;
 private:
 	PRTEnum*                       mEnums;
 	bool                           mHasMaterials;
@@ -145,7 +145,7 @@ private:
 	static const prt::Object*      theLicHandle;
 
 	MString& getStrParameter(MObject & attr, MString & value);
-	MStatus  updateAttributes();
+	MStatus  updateShapeAttributes();
 };
 
 class PRTAttrs : public MPxCommand {
@@ -167,7 +167,7 @@ private:
 	MStatus         addParameter(MFnDependencyNode & node, MObject & attr ,  MFnAttribute& tAttr);
 	MStatus         updateRuleFiles(MFnDependencyNode & node, MString & rulePkg);
 	MStatus         updateStartRules(MFnDependencyNode & node, MStringArray & ruleFiles);
-	MStatus         updateAttributes(MFnDependencyNode & node, MString & ruleFile, MString & startRule, prt::AttributeMapBuilder* aBuilder, const prt::RuleFileInfo* info);
+	MStatus         createAttributes(MFnDependencyNode & node, MString & ruleFile, MString & startRule, prt::AttributeMapBuilder* aBuilder, const prt::RuleFileInfo* info);
 	static MString  longName(const MString & attrName);
 	static MString  briefName(const MString & attrName);
 };

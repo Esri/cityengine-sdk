@@ -131,10 +131,10 @@ public:
 	MFnMesh*			    mFnMesh;
 
 	MFloatPointArray	mVertices;
-	MIntArray			    mCounts;
-	MIntArray			    mConnects;
+	MIntArray			    mVerticesCounts;
+	MIntArray			    mVerticesConnects;
 
-	MVectorArray			mNormals;
+	MFloatVectorArray	mNormals;
 	MIntArray			    mNormalCounts;
 	MIntArray			    mNormalConnects;
 
