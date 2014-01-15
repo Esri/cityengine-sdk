@@ -90,10 +90,11 @@ void MayaEncoder::encode(prtx::GenerateContext& context, size_t initialShapeInde
 	prepFlags.instancing(false);
 	prepFlags.mergeByMaterial(true);
 	prepFlags.triangulate(false);
-	prepFlags.mergeVertices(true);
-	prepFlags.cleanupVertexNormals(true);
-	prepFlags.cleanupUVs(true);
-	prepFlags.processVertexNormals(prtx::VertexNormalProcessor::SET_MISSING_TO_FACE_NORMALS);
+	prepFlags.mergeVertices(false);
+	prepFlags.cleanupVertexNormals(false);
+	prepFlags.cleanupUVs(false);
+	prepFlags.processVertexNormals(prtx::VertexNormalProcessor::SET_ALL_TO_FACE_NORMALS);
+	prepFlags.indexSharing(prtx::EncodePreparator::PreparationFlags::INDICES_SAME_FOR_VERTICES_AND_NORMALS);
 
 	std::vector<prtx::EncodePreparator::FinalizedInstance> finalizedInstances;
 	encPrep->fetchFinalizedInstances(finalizedInstances, prepFlags);
@@ -129,8 +130,6 @@ void MayaEncoder::encode(prtx::GenerateContext& context, size_t initialShapeInde
 	log_trace("MayaEncoder::encode done.");
 }
 
-#define USE_NORMALS 0
-
 void MayaEncoder::convertGeometry(const std::wstring& cgbName, const prtx::GeometryPtrVector& geometries, const std::vector<prtx::MaterialPtrVector>& mats, IMayaOutputHandler* mayaOutput) {
 	log_trace("MayaEncoder::convertGeometry: begin");
 	std::vector<double> vertices;
@@ -138,12 +137,10 @@ void MayaEncoder::convertGeometry(const std::wstring& cgbName, const prtx::Geome
 	std::vector<int>    connects;
 	int base    = 0;
 
-#if USE_NORMALS == 1
 	std::vector<double> normals;
 	std::vector<int>    normalCounts;
 	std::vector<int>    normalConnects;
 	int nrmBase = 0;
-#endif
 
 	std::vector<float>  tcsU, tcsV;
 	std::vector<int>    uvCounts;
@@ -160,27 +157,21 @@ void MayaEncoder::convertGeometry(const std::wstring& cgbName, const prtx::Geome
 			prtx::MeshPtr mesh = meshes[mi];
 
 			const prtx::DoubleVector&  verts    = mesh->getVertexCoords();
-#if USE_NORMALS == 1
 			const prtx::DoubleVector&  norms    = mesh->getVertexNormalsCoords();
-#endif
 			bool                       hasUVs   = mesh->getUVSetsCount() > 0;
 			size_t                     uvsCount = 0;
 
 			vertices.reserve(    vertices.size()     + verts.size());
-#if USE_NORMALS == 1
 			normals.reserve(     normals.size()      + norms.size());
 			normalCounts.reserve(normalCounts.size() + mesh->getFaceCount());
-#endif
 			counts.reserve(      counts.size()       + mesh->getFaceCount());
 			uvCounts.reserve(    uvCounts.size()     + mesh->getFaceCount());
 
 			for(size_t i = 0, size = verts.size(); i < size; ++i)
 				vertices.push_back(verts[i]);
 
-#if USE_NORMALS == 1
 			for(size_t i = 0, size = norms.size(); i < size; ++i)
 				normals.push_back(norms[i]);
-#endif
 
 			if(hasUVs) {
 				const prtx::DoubleVector& uvs = mesh->getUVCoords(0);
@@ -192,18 +183,11 @@ void MayaEncoder::convertGeometry(const std::wstring& cgbName, const prtx::Geome
 				for(size_t i = 0, size = uvsCount; i < size; i += 2) {
 					tcsU.push_back((float)uvs[i+0]);
 					tcsV.push_back((float)uvs[i+1]);
-//					log_debug("uvs[%d] = (%f,%f)") % i % uvs[i] % uvs[i+1];
 				}
 			}
 			log_trace("      copied vertex attributes");
 
 			for(size_t fi = 0, faceCount = mesh->getFaceCount(); fi < faceCount; ++fi) {
-//				log_debug("    -- face %d") % fi;
-//				log_debug("       vtx index count: %d") % mesh->getFaceVertexCount(fi);
-//				log_debug("       nrm index count: %d") % mesh->getFaceVertexNormalCount(fi);
-//				if (mesh->getUVSetsCount() > 0)
-//					log_debug("       uvs index count: %d") % mesh->getFaceUVCount(fi, 0);
-
 				const uint32_t* vtxIdx = mesh->getFaceVertexIndices(fi);
 				prtx::IndexVector vidxs(vtxIdx, vtxIdx + mesh->getFaceVertexCount(fi));
 
@@ -211,14 +195,11 @@ void MayaEncoder::convertGeometry(const std::wstring& cgbName, const prtx::Geome
 				for(size_t vi = 0, size = vidxs.size(); vi < size; ++vi)
 					connects.push_back(base + vidxs[vi]);
 
-#if USE_NORMALS == 1
 				const uint32_t*	nidxs = mesh->getFaceVertexNormalIndices(fi);
 				uint32_t faceVertexNormalCount = mesh->getFaceVertexNormalCount(fi);
 				normalCounts.push_back((int)faceVertexNormalCount);
 				for(size_t ni = 0, size = faceVertexNormalCount; ni < size; ++ni)
 					normalConnects.push_back(nrmBase + nidxs[ni]);
-#endif
-
 				if(hasUVs && mesh->getFaceUVCount(fi, 0) > 0) {
 						//log_debug("    faceuvcount(%d, 0) = %d") % fi % mesh->getFaceUVCount(fi, 0);
 						//log_debug("    getFaceVertexCount(%d) = %d") % fi % mesh->getFaceVertexCount(fi);
@@ -236,9 +217,7 @@ void MayaEncoder::convertGeometry(const std::wstring& cgbName, const prtx::Geome
 			}
 
 			base	  += (int)verts.size() / 3;
-#if USE_NORMALS == 1
 			nrmBase	+= (int)norms.size() / 3;
-#endif
 			uvBase  += (int)uvsCount     / 2;
 
 			log_trace("copied face attributes");
@@ -246,16 +225,13 @@ void MayaEncoder::convertGeometry(const std::wstring& cgbName, const prtx::Geome
 	}
 
 	bool hasUVS     = tcsU.size() > 0;
-#if USE_NORMALS == 1
 	bool hasNormals = normals.size() > 0;
-#endif
 
 	mayaOutput->setVertices(&vertices[0], vertices.size());
 	log_trace("    set vertices");
 	mayaOutput->setUVs(hasUVS ? &tcsU[0] : 0, hasUVS ? &tcsV[0] : 0, tcsU.size());
 	log_trace("    set uvs");
 
-	#if USE_NORMALS == 1
 	mayaOutput->setNormals(hasNormals ? &normals[0] : 0, normals.size());
 	mayaOutput->setFaces(
 			&counts[0], counts.size(),
@@ -265,17 +241,6 @@ void MayaEncoder::convertGeometry(const std::wstring& cgbName, const prtx::Geome
 			hasUVS ? &uvCounts[0] : 0, uvCounts.size(),
 			hasUVS ? &uvConnects[0] : 0, uvConnects.size()
 	);
-#else
-	log_trace("uvCounts.size() = %d, uvConnects.size() = %d") % uvCounts.size() % uvConnects.size();
-	mayaOutput->setFaces(
-			&counts[0], counts.size(),
-			&connects[0], connects.size(),
-			0, 0,
-			0, 0,
-			hasUVS ? &uvCounts[0] : 0, uvCounts.size(),
-			hasUVS ? &uvConnects[0] : 0, uvConnects.size()
-	);
-#endif
 	log_trace("set faces");
 
 	mayaOutput->createMesh();
@@ -305,6 +270,8 @@ void MayaEncoder::convertGeometry(const std::wstring& cgbName, const prtx::Geome
 			log_wtrace(L"trying to set texture uri: %s") % texURI->wstring();
 			std::wstring texPath = texURI->getPath();
 			mayaOutput->matSetDiffuseTexture(mh, texPath.c_str());
+		} else {
+			mayaOutput->matSetColor(mh, mat->color_r(), mat->color_g(), mat->color_b());
 		}
 
 		startFace += faceCount;
