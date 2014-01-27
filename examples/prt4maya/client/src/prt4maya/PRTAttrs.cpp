@@ -27,12 +27,7 @@ inline MStatus PRTAttrs::setStringParameter(MObject & node, MObject & attr, MStr
 
 MStatus PRTAttrs::addParameter(MFnDependencyNode & node, MObject & attr, MFnAttribute& tAttr) {
 	M_CHECK(tAttr.setKeyable (true));
-	//	M_CHECK(tAttr.setCached  (true));
-	//	M_CHECK(tAttr.setStorable(true));
 	M_CHECK(tAttr.setHidden(false));
-	//	M_CHECK(tAttr.setAffectsAppearance(true));
-	//	M_CHECK(tAttr.setIndeterminant(true));
-	//	M_CHECK(tAttr.setChannelBox(true));
 	M_CHECK(node.addAttribute(attr, MFnDependencyNode::kLocalDynamicAttr));
 
 	return MS::kSuccess;
@@ -248,7 +243,6 @@ MStatus PRTAttrs::updateRuleFiles(MFnDependencyNode & node, MString & rulePkg) {
 		std::wstring    sCGB(L".cgb");
 		for(size_t k = 0; k < nKeys; k++) {
 			std::wstring key = std::wstring(keys[k]);
-			std::wcout << L"key = " << keys[k] << L" -> " << prtNode->mResolveMap->getString(keys[k]) << std::endl;
 			if(std::equal(sCGB.rbegin(), sCGB.rend(), key.rbegin()))
 				ruleFiles.append(MString(key.c_str()));
 		}
@@ -420,8 +414,6 @@ MStatus PRTAttrs::createAttributes(MFnDependencyNode & node, MString & ruleFile,
 		const MString  name      = MString(styledAttributeName.substr(STYLE.length()).c_str()); // FIXME
 		MObject        attr;
 
-		std::wcout << L"param " << name.asWChar() << std::endl;
-
 		if(info->getAttribute(i)->getNumParameters() != 0) continue;
 
 		switch(info->getAttribute(i)->getReturnType()) {
@@ -433,7 +425,6 @@ MStatus PRTAttrs::createAttributes(MFnDependencyNode & node, MString & ruleFile,
 				}
 
 				bool value = evalAttrs.find(name.asWChar())->second.mBool;
-				std::wcout << L"   --> bool: " << value << std::endl;
 
 				if(e) {
 					M_CHECK(addEnumParameter(node, attr, name, value, e));
@@ -457,7 +448,6 @@ MStatus PRTAttrs::createAttributes(MFnDependencyNode & node, MString & ruleFile,
 				}
 
 				double value = evalAttrs.find(name.asWChar())->second.mFloat;
-				std::wcout << L"   --> float: " << value << std::endl;
 
 				if(e) {
 					M_CHECK(addEnumParameter(node, attr, name, value, e));
@@ -493,7 +483,6 @@ MStatus PRTAttrs::createAttributes(MFnDependencyNode & node, MString & ruleFile,
 				}
 
 				std::wstring value = evalAttrs.find(name.asWChar())->second.mString;
-				std::wcout << L"   --> string: " << value.c_str() << std::endl;
 
 				MString mvalue(value.c_str());
 				if(e) {

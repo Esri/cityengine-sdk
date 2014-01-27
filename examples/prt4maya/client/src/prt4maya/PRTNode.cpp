@@ -60,7 +60,6 @@ MStatus PRTNode::setDependentsDirty(const MPlug &plugBeingDirtied, MPlugArray &a
 }
 
 MStatus PRTNode::compute( const MPlug& plug, MDataBlock& data ) {
-	std::cout << "PRTNode::compute" << std::endl;
 	MStatus stat;
 	mHasMaterials = false;
 
@@ -102,14 +101,6 @@ MStatus PRTNode::compute( const MPlug& plug, MDataBlock& data ) {
 		}
 		pconnect.get((int*)ia);
 		pcounts.get((int*)ca);
-
-		/*
-		size_t size = 8192;
-		char* tmp = new char[size];
-		tmp[0] = 0;
-		DBG("%s\n", generateAttrs->toXML(tmp, &size));
-		delete[] tmp;
-		*/
 
 		MayaOutputHandler* outputHandler = createOutputHandler(&plug, &data);
 		MString            dummy;
@@ -171,20 +162,16 @@ const wchar_t SEPERATOR = L'/';
 #include <dlfcn.h>
 #include <cstdio>
 
-// HACK
 std::wstring libPath;
 
 __attribute__((constructor))
 void on_load(void) {
 	Dl_info dl_info;
 	dladdr((void *)on_load, &dl_info);
-	//fprintf(stderr, "prt4maya: module %s loaded\n", dl_info.dli_fname);
 
 	std::string tmp(dl_info.dli_fname);
 	libPath = std::wstring(tmp.length(), L' ');
 	std::copy(tmp.begin(), tmp.end(), libPath.begin());
-
-	std::cout << "prt4maya: module loaded: " << dl_info.dli_fname << std::endl;
 }
 #endif
 
@@ -209,9 +196,7 @@ std::wstring getPluginRoot() {
 
 	return root;
 #else
-	std::wstring pluginPath = libPath.substr(0, libPath.find_last_of(SEPERATOR)) + L"/prt_lib";
-	std::wcout << L"prt pluginPath = " << pluginPath << std::endl;
-	return pluginPath;
+	return libPath.substr(0, libPath.find_last_of(SEPERATOR)) + L"/prt_lib";
 #endif
 }
 
@@ -339,7 +324,6 @@ MStatus PRTNode::updateShapeAttributes() {
 				double r, dr = 0.0;
 				double g, dg = 0.0;
 				double b, db = 0.0;
-				//M_CHECK(nAttr.getDefault(dr, dg, db));
 
 				wchar_t dcolor[] = L"#000000";
 				toHex(dcolor, dr, dg, db);
@@ -421,13 +405,8 @@ void PRTNode::uninitialize() {
 	theCache->destroy();
 }
 
-// Plug-in Initialization //
-
 MStatus initializePlugin( MObject obj ){
 #ifdef __linux__
-	// maya opens plugins with RTLD_LOCAL, which leads to type lookup problems
-	// on objects created in the prt extension libraries
-	// also see http://ubuntuforums.org/showthread.php?t=1717953
 	dlopen("libprt4maya.so", RTLD_LAZY | RTLD_NOLOAD | RTLD_GLOBAL);
 #endif
 
