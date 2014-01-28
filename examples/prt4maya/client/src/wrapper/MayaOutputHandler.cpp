@@ -8,15 +8,29 @@
  */
 
 #include <cassert>
+#include <sstream>
+#include <ostream>
 
-#include "Utilities.h"
+#include "maya/MItMeshPolygon.h"
 
-#include <maya/MItMeshPolygon.h>
-#include <wrapper/MayaOutputHandler.h>
+#include "wrapper/MayaOutputHandler.h"
 
-#include "PRTNode.h"
+#include "prt4maya/Utilities.h"
+#include "prt4maya/PRTNode.h"
+
+namespace {
+static const bool TRACE = false;
+void prtTrace(const std::wstring& arg1, std::size_t arg2) {
+	if (TRACE) {
+		std::wostringstream wostr;
+		wostr << L"[MOH] "<< arg1 << arg2;
+		prt::log(wostr.str().c_str(), prt::LOG_TRACE);
+	}
+}
+}
 
 void MayaOutputHandler::setVertices(double* vtx, size_t size) {
+	prtTrace(L"setVertices: size = ", size);
 	mVertices.clear();
 	for (size_t i = 0; i < size; i += 3)
 		mVertices.append((float)vtx[i], (float)vtx[i+1], (float)vtx[i+2]);
@@ -24,6 +38,7 @@ void MayaOutputHandler::setVertices(double* vtx, size_t size) {
 
 
 void MayaOutputHandler::setNormals(double* nrm, size_t size) {
+	prtTrace(L"setNormals: size = ", size);
 	mNormals.clear();
 	for (size_t i = 0; i < size; i += 3)
 		mNormals.append(MVector((float)nrm[i], (float)nrm[i+1], (float)nrm[i+2]));
@@ -43,18 +58,22 @@ void MayaOutputHandler::setFaces(int* counts, size_t countsSize, int* connects, 
 	mVerticesCounts.clear();
 	for (size_t i = 0; i < countsSize; ++i)
 		mVerticesCounts.append(counts[i]);
+	prtTrace(L"countsSize = ", countsSize);
 
 	mVerticesConnects.clear();
 	for (size_t i = 0; i < connectsSize; ++i)
 		mVerticesConnects.append(connects[i]);
+	prtTrace(L"connectsSize = ", connectsSize);
 
 	mNormalCounts.clear();
 	for (size_t i = 0; i < normalCountsSize; ++i)
 		mNormalCounts.append(normalCounts[i]);
+	prtTrace(L"normalCountsSize = ", normalCountsSize);
 
 	mNormalConnects.clear();
 	for (size_t i = 0; i < normalConnectsSize; ++i)
 		mNormalConnects.append(normalConnects[i]);
+	prtTrace(L"normalConnectsSize = ", normalConnectsSize);
 
 	mUVCounts.clear();
 	for (size_t i = 0; i < uvCountsSize; ++i)
@@ -112,10 +131,11 @@ void MayaOutputHandler::createMesh() {
 	mShadingRanges->clear();
 
 	if(mNormalConnects.length() > 0) {
-			DBG("    mNormals.length        = %d", mNormals.length());
-			DBG("    mNormalCounts.length   = %d", mNormalCounts.length());	
-			DBG("    mNormalConnects.length = %d", mNormalConnects.length());
-			MCHECK(mFnMesh->setNormals(mNormals));
+		DBG("    mNormals.length        = %d", mNormals.length());
+		DBG("    mNormalCounts.length   = %d", mNormalCounts.length());
+		DBG("    mNormalConnects.length = %d", mNormalConnects.length());
+		//			MCHECK(mFnMesh->setNormals(mNormals));
+		MCHECK(mFnMesh->setFaceVertexNormals(mNormals, mNormalCounts, mVerticesConnects));
 	}
 
 	MMeshSmoothOptions smoothOpts;

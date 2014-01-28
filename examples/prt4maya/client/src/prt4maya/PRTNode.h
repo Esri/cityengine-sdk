@@ -142,6 +142,7 @@ private:
 	MIntArray                      mShadingRanges;
 
 	static prt::ConsoleLogHandler* theLogHandler;
+	static prt::FileLogHandler* theFileLogHandler;
 	static const prt::Object*      theLicHandle;
 
 	MString& getStrParameter(MObject & attr, MString & value);

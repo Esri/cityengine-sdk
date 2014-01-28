@@ -9,25 +9,22 @@ project(${PROJECT})
 
 # --- dependencies ------------------------------------------------------------
 
-set(CMAKE_MODULE_PATH
-	"${PROJECT_SOURCE_DIR}/../../com.esri.prt.core/cmake"
-	"${PROJECT_SOURCE_DIR}/../../com.esri.prt.codecs/cmake"
-	"${PROJECT_SOURCE_DIR}/../../com.esri.prt.codecs.maya/cmake"
-	"${PROJECT_SOURCE_DIR}/../../com.esri.prt.adaptors/cmake"
-	${CMAKE_MODULE_PATH}
-)
+# TODO: add dependency check for final prt distro (see prt4cmd)
+
+set(com.esri.prt.core_DIR "${PROJECT_SOURCE_DIR}/../../com.esri.prt.core/install/cmake")
+set(com.esri.prt.loader_DIR "${PROJECT_SOURCE_DIR}/../../com.esri.prt.loader.flexnet/install/cmake")
+set(com.esri.prt.codecs_DIR "${PROJECT_SOURCE_DIR}/../../com.esri.prt.codecs/install/cmake")
+set(com.esri.prt.adaptors_DIR "${PROJECT_SOURCE_DIR}/../../com.esri.prt.adaptors/install/cmake")
+set(com.esri.prt.codecs.maya_DIR "${PROJECT_SOURCE_DIR}/../../com.esri.prt.codecs.maya/install/cmake")
 
 find_package(com.esri.prt.core)
-include_directories(${com.esri.prt.core_INCLUDE_PATH})
-
+find_package(com.esri.prt.loader)
 find_package(com.esri.prt.codecs)
-include_directories(${com.esri.prt.codecs_INCLUDE_PATH})
-
-find_package(com.esri.prt.codecs.maya)
-include_directories(${com.esri.prt.codecs.maya_INCLUDE_PATH})
-
 find_package(com.esri.prt.adaptors)
-include_directories(${com.esri.prt.adaptors_INCLUDE_PATH})
+find_package(com.esri.prt.codecs.maya)
+
+include_directories(${PRT_CORE_INCLUDE_PATH})
+include_directories(${PRT_CODECS_MAYA_INCLUDE_PATH})
 
 # hacky maya api integration, todo: write cmake module
 if(WIN32)
@@ -46,7 +43,6 @@ if(WIN32)
 	set(CMAKE_CXX_FLAGS "")
 	set(CMAKE_CXX_FLAGS_DEBUG "/Zi /nologo /W3 /WX- /Od -DWIN32 -D_DEBUG -D_WINDOWS -D_AFXDLL -D_MBCS -DNT_PLUGIN -DREQUIRE_IOSTREAM -DBits64_ -D_WINDLL /Gm- /EHsc /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Gd /errorReport:queue")
 #	set(CMAKE_CXX_FLAGS_RELEASE "/Zi /nologo /W3 /WX- /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_AFXDLL" /D "_MBCS" /D "NT_PLUGIN" /D "REQUIRE_IOSTREAM" /D "Bits64_" /D "_WINDLL" /Gm- /EHsc /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fp"Release/prt4maya.pch" /Fa"Release\" /Fo"Release\" /Fd"Release\vc100.pdb" /Gd /errorReport:queue")
-
 #	SET( CMAKE_SHARED_LINKER_FLAGS_DEBUG "/ALLOWISOLATION /MANIFESTUAC:\"level='asInvoker' uiAccess='false'\" /TLBID:1 /DYNAMICBASE:NO /MACHINE:X64 /ERRORREPORT:QUEUE")
 	SET( CMAKE_SHARED_LINKER_FLAGS_DEBUG "/subsystem:windows /dll /debug /export:initializePlugin /export:uninitializePlugin /MANIFESTUAC:\"level='asInvoker' uiAccess='false'\" /TLBID:1 /DYNAMICBASE:NO /MACHINE:X64 /ERRORREPORT:QUEUE")
 else()
@@ -109,7 +105,7 @@ add_subdirectory_source_group(prt4maya)
 add_subdirectory_source_group(wrapper)
 
 add_library(${PROJECT} SHARED ${SOURCES})
-target_link_libraries(${PROJECT} Foundation OpenMaya ${PRT_CORE_LIBRARY} )
+target_link_libraries(${PROJECT} Foundation OpenMaya ${PRT_CORE_LIBRARY} ${PRT_LOADER_LIBRARY})
 
 set_target_properties(${PROJECT} PROPERTIES LINKER_LANGUAGE CXX)
 
@@ -122,6 +118,7 @@ install(CODE "file(REMOVE_RECURSE ${CMAKE_INSTALL_PREFIX})" )
 install(TARGETS ${PROJECT} DESTINATION .)
 
 install(FILES ${PRT_CORE_LIBRARIES} DESTINATION .)
+install(FILES ${PRT_LOADER_LIBRARIES} DESTINATION . OPTIONAL)
 install(FILES ${PRT_CODECS_LIBRARIES} DESTINATION prt_lib)
 install(FILES ${PRT_ADAPTORS_LIBRARIES} DESTINATION prt_lib)
 install(FILES ${PRT_CODECS_MAYA_LIBRARIES} DESTINATION prt_lib)

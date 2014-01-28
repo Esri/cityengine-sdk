@@ -134,7 +134,7 @@ public:
 	MIntArray			    mVerticesCounts;
 	MIntArray			    mVerticesConnects;
 
-	MFloatVectorArray	mNormals;
+	MVectorArray	mNormals;
 	MIntArray			    mNormalCounts;
 	MIntArray			    mNormalConnects;
 

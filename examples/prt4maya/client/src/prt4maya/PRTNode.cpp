@@ -27,6 +27,13 @@
 
 #include "prt/FlexLicParams.h"
 
+
+namespace {
+static const bool ENABLE_LOG_CONSOLE	= true;
+static const bool ENABLE_LOG_FILE		= false;
+}
+
+
 MTypeId PRTNode::theID(PRT_TYPE_ID);
 
 PRTNode::PRTNode() : mResolveMap(0), mGenerateAttrs(0), mMayaEncOpts(0), mAttrEncOpts(0), mEnums(0), mHasMaterials(false) {
@@ -52,7 +59,7 @@ PRTNode::~PRTNode() {
 	DBG("PRTNode disposed\n");
 }
 
-MStatus PRTNode::setDependentsDirty(const MPlug &plugBeingDirtied, MPlugArray &affectedPlugs ) {
+MStatus PRTNode::setDependentsDirty(const MPlug& /*plugBeingDirtied*/, MPlugArray& affectedPlugs) {
 	MObject thisNode = thisMObject();
 	MPlug   pOutMesh(thisNode, outMesh);
 	affectedPlugs.append(pOutMesh);
@@ -196,14 +203,14 @@ std::wstring getPluginRoot() {
 
 	return root;
 #else
-	return libPath.substr(0, libPath.find_last_of(SEPERATOR)) + L"/prt_lib";
+	return libPath.substr(0, libPath.find_last_of(SEPERATOR));
 #endif
 }
 
 
 MStatus PRTNode::initialize() {
 	std::wstring root   = getPluginRoot();
-	std::wstring prtLib = root + L"prt_lib";
+	std::wstring prtLib = root + SEPERATOR + L"prt_lib";
 
 	DBGL(L"prt plugins at %ls\n", prtLib.c_str());
 
@@ -220,7 +227,7 @@ MStatus PRTNode::initialize() {
 	flp.mHostName      = "";
 	prt::Status status;
 
-	theLicHandle = prt::init(&prtLibPath, 1, prt::LOG_DEBUG, &flp, &status);
+	theLicHandle = prt::init(&prtLibPath, 1, prt::LOG_TRACE, &flp, &status);
 
 	if(status != prt::STATUS_OK)
 		return MS::kFailure;
@@ -392,15 +399,28 @@ MayaOutputHandler* PRTNode::createOutputHandler(const MPlug* plug, MDataBlock* d
 }
 
 void PRTNode::initLogger() {
-	prt::LogLevel logLevels[6] = {prt::LOG_FATAL, prt::LOG_ERROR, prt::LOG_WARNING, prt::LOG_INFO, prt::LOG_DEBUG, prt::LOG_TRACE};
-	theLogHandler = prt::ConsoleLogHandler::create(&logLevels[0], (size_t)6);
-	prt::addLogHandler(theLogHandler);
+	if (ENABLE_LOG_CONSOLE) {
+		theLogHandler = prt::ConsoleLogHandler::create(prt::LogHandler::ALL, prt::LogHandler::ALL_COUNT);
+		prt::addLogHandler(theLogHandler);
+	}
+
+	if (ENABLE_LOG_FILE) {
+		std::wstring logPath   = getPluginRoot() + SEPERATOR + L"prt4maya.log";
+		theFileLogHandler = prt::FileLogHandler::create(prt::LogHandler::ALL, prt::LogHandler::ALL_COUNT, logPath.c_str());
+		prt::addLogHandler(theFileLogHandler);
+	}
 }
 
 
 void PRTNode::uninitialize() {
-	prt::removeLogHandler(theLogHandler);
-	theLogHandler->destroy();
+	if (ENABLE_LOG_CONSOLE) {
+		prt::removeLogHandler(theLogHandler);
+		theLogHandler->destroy();
+	}
+	if (ENABLE_LOG_FILE) {
+		prt::removeLogHandler(theFileLogHandler);
+		theFileLogHandler->destroy();
+	}
 	theLicHandle->destroy();
 	theCache->destroy();
 }
@@ -448,6 +468,7 @@ MObject PRTNode::outMesh;
 
 // statics
 
-prt::ConsoleLogHandler* PRTNode::theLogHandler = 0;
+prt::ConsoleLogHandler*	PRTNode::theLogHandler = 0;
+prt::FileLogHandler*	PRTNode::theFileLogHandler = 0;
 const prt::Object*      PRTNode::theLicHandle = 0;
 prt::CacheObject*       PRTNode::theCache = 0;
