@@ -90,10 +90,10 @@ void MayaEncoder::encode(prtx::GenerateContext& context, size_t initialShapeInde
 	prepFlags.instancing(false);
 	prepFlags.mergeByMaterial(true);
 	prepFlags.triangulate(false);
-	prepFlags.mergeVertices(false);
-	prepFlags.cleanupVertexNormals(false);
-	prepFlags.cleanupUVs(false);
-	prepFlags.processVertexNormals(prtx::VertexNormalProcessor::SET_ALL_TO_FACE_NORMALS);
+	prepFlags.mergeVertices(true);
+	prepFlags.cleanupVertexNormals(true);
+	prepFlags.cleanupUVs(true);
+	prepFlags.processVertexNormals(prtx::VertexNormalProcessor::SET_MISSING_TO_FACE_NORMALS);
 	prepFlags.indexSharing(prtx::EncodePreparator::PreparationFlags::INDICES_SAME_FOR_VERTICES_AND_NORMALS);
 
 	std::vector<prtx::EncodePreparator::FinalizedInstance> finalizedInstances;
