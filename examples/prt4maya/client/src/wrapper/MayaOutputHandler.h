@@ -130,16 +130,16 @@ public:
 public:
 	MFnMesh*			    mFnMesh;
 
-	MFloatPointArray	mVertices;
+	MFloatPointArray		mVertices;
 	MIntArray			    mVerticesCounts;
 	MIntArray			    mVerticesConnects;
 
-	MVectorArray	mNormals;
-	MIntArray			    mNormalCounts;
-	MIntArray			    mNormalConnects;
+	MFloatVectorArray		mNormals;
+	MIntArray			    mNormalCounts; // not actually necessary, as the encoder ensures same indexing for vertices and vertex normals
+	MIntArray			    mNormalConnects; // not actually necessary, as the encoder ensures same indexing for vertices and vertex normals
 
-	MFloatArray			  mU;
-	MFloatArray			  mV;
+	MFloatArray			  	mU;
+	MFloatArray			  	mV;
 	MIntArray			    mUVCounts;
 	MIntArray			    mUVConnects;
 

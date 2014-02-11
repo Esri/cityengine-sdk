@@ -13,7 +13,7 @@
 #include <maya/MStatus.h>
 
 #define DO_DBG 1
-#define MCHECK(_stat_) {if(MS::kSuccess != _stat_) {DBG("maya err at line %d: %s %d\n", __LINE__, _stat_.errorString().asChar(), _stat_.statusCode());}}
+#define MCHECK(_stat_) {if(MS::kSuccess != _stat_) {DBGL(L"maya err at line %d: %s %d\n", __LINE__, _stat_.errorString().asChar(), _stat_.statusCode());}}
 
 const char* filename(const char* path);
 
