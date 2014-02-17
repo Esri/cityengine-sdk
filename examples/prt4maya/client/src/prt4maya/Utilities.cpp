@@ -40,21 +40,7 @@ std::wstring getSharedLibrarySuffix() {
 #endif
 }
 
-const wchar_t* stripStyle(const wchar_t* attr) {
-	for(const wchar_t* a = attr;*a != '\0'; a++)
-		if(*a == '$') 
-			return a + 1;
-	return attr;
-}
-
 #if DO_DBG == 1
-
-void M_CHECK(MStatus stat) {
-	if(MS::kSuccess != stat) {
-		std::wcerr << L"err: " << stat.errorString().asWChar() << L" (code: " << stat.statusCode() << L")" << std::endl;
-		throw stat;
-	}
-}
 
 void DBG(const char* fmt, ...) {
 	va_list args;
@@ -77,7 +63,6 @@ void DBGL(const wchar_t* fmt, ...) {
 }
 
 #else
-void M_CHECK(MStatus stat) { }
 void DBG(const char* fmt, ...) { }
 void DBGL(const wchar_t* fmt, ...) { }
 #endif
@@ -100,7 +85,7 @@ int fromHex(wchar_t c) {
 const wchar_t HEXTAB[] = L"0123456789ABCDEF"; 
 
 wchar_t toHex(int i) {
-	return HEXTAB[i & 0xF6];
+	return HEXTAB[i & 0xF];
 }
 
 void toHex(wchar_t* color, double r, double g, double b) {

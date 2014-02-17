@@ -26,7 +26,7 @@ MStatus PRTNode::attachMaterials() {
 		for(MPlug plug(thisMObject(), outMesh); !(meshFound); ) {
 			MPlugArray plugs;
 			if(plug.connectedTo(plugs, false, true, &stat)) {
-				M_CHECK(stat);
+				MCHECK(stat);
 				for(unsigned int p = 0; p < plugs.length(); p++) {
 					MFnDependencyNode node(plugs[p].node(), &stat);
 					if(node.object().hasFn(MFn::kMesh)) {
@@ -35,10 +35,10 @@ MStatus PRTNode::attachMaterials() {
 						meshFound = true;
 						break;
 					}
-					M_CHECK(stat);
+					MCHECK(stat);
 					for(int pOut = (int)node.attributeCount(); --pOut >= 0 ;) {
 						MObject attr = node.attribute(pOut, &stat);
-						M_CHECK(stat);
+						MCHECK(stat);
 						if(attr.apiType() == MFn::kGenericAttribute) {
 							MPlug oPlug(node.object(), attr);
 							if(oPlug.isSource() && OUTPUT_GEOMETRY == oPlug.partialName()) {
@@ -55,45 +55,13 @@ MStatus PRTNode::attachMaterials() {
 		}
 
 		if(meshFound) {
-			if(1) {
-				char  buf[256];
-				for(unsigned int i = 0; i < mShadingGroups.length(); i++) {
-					sprintf(buf, "sets -forceElement %s %s.f[%d:%d]", mShadingGroups[i].asChar(), meshName.asChar(), mShadingRanges[i * 2], mShadingRanges[i * 2 + 1]);
-					M_CHECK(MGlobal::executeCommand(MString(buf)));
-				}
-			} else {
-				MSelectionList selList;
-				MObject        shadingGroup;
-				MDagPath       dagPath;
-				MObject        component;
-				MPlug          pOutMesh(thisMObject(), outMesh);
-
-				for(unsigned int i = 0; i < mShadingGroups.length(); i++) {
-					MGlobal::getSelectionListByName(mShadingGroups[i], selList);
-					selList.getDependNode(0, shadingGroup);
-
-					MFnSet fSG(shadingGroup, &stat);
-					M_CHECK(stat);
-
-					if(fSG.restriction() != MFnSet::kRenderableOnly)
-						return MS::kFailure;
-
-					MSelectionList faces;
-
-					MItMeshPolygon iFaces(mesh, &stat);
-					M_CHECK(stat);
-
-					int low  = mShadingRanges[i * 2 + 0];
-					int high = mShadingRanges[i * 2 + 1];
-
-					for(; !(iFaces.isDone()) && (int)iFaces.index() < high; iFaces.next() ) {
-						if((int)iFaces.index() >= low)
-							faces.add(iFaces.currentItem(&stat));
-					}
-
-					M_CHECK(fSG.addMembers(faces));
-				}
+			MString cmd;
+			char buf[256];
+			for(unsigned int i = 0; i < mShadingGroups.length(); i++) {
+				sprintf(buf, "sets -forceElement %s %s.f[%d:%d];\n", mShadingGroups[i].asChar(), meshName.asChar(), mShadingRanges[i * 2], mShadingRanges[i * 2 + 1]);
+				cmd += buf;
 			}
+			MCHECK(MGlobal::executeCommand(cmd, true, false));
 		}
 
 		mHasMaterials = true;
@@ -108,14 +76,14 @@ MStatus PRTMaterials::doIt(const MArgList& args) {
 	MStatus stat;
 
 	MString prtNodeName = args.asString(0, &stat);
-	M_CHECK(stat);
+	MCHECK(stat);
 
 	MSelectionList tempList;
 	tempList.add(prtNodeName);
 	MObject prtNode;
-	M_CHECK(tempList.getDependNode(0, prtNode));
+	MCHECK(tempList.getDependNode(0, prtNode));
 	MFnDependencyNode fNode(prtNode, &stat);
-	M_CHECK(stat);
+	MCHECK(stat);
 
 	if(fNode.typeId().id() != PRT_TYPE_ID)
 		return MS::kFailure;

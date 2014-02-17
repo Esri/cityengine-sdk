@@ -45,7 +45,7 @@ global proc string[] createPrtNode() {
 							}
 						}
 					} else {
-						$prtName = `createNode prt`;
+						$prtName = `prtCreate`;
 						$prtName = `rename $prtName "prt#"`;
 						setAttr -type "string" ($prtName + ".Rule_Package") $rulePackage[0];
 						string $parent[]  = `listRelatives -parent $node`;
@@ -91,68 +91,20 @@ global proc prt4mayaCreateUI() {
 
 // --- shader setup helpers
 
-proc string fileNameFromPath(string $filePath) {
-	string $buffer[];
-	int $nTok = `tokenize $filePath "/" $buffer`;
-	return $buffer[$nTok-1];
-}
-
-global proc string createShadingGroup2(string $texFilePath) {
-	if(size($texFilePath) == 0) {
-		return "initialShadingGroup";
-	}
-
-	string $fileName = fileNameFromPath($texFilePath); 			// might not be unique!
-	$fileName        = substituteAllString($fileName, ".", "_");		// '.' seems to be illegal	
-	string $sgName   = "prtShadingGroup_" + $fileName;
-	
-	// if group with that name exists already: use it
-	string $allSets[] = `ls -sets`;
-	string $se;
-	for($se in $allSets) {
-		if($se == $sgName) return $sgName;
-	}
-		
-	string $shName = "prtShader_" + $fileName;		
-	string $fnName = "prtFile_" + $fileName;		
-
-	shadingNode -asShader lambert -n $shName;
-	sets -renderable true -noSurfaceShader true -empty -name $sgName;
-	connectAttr -f ($shName + ".outColor") ($sgName + ".surfaceShader");
-
-	shadingNode -asTexture file -n $fnName;
-	connectAttr -force ($fnName + ".outColor") ($shName + ".color");
-	setAttr ($fnName + ".fileTextureName") -type "string" $texFilePath;
-
-	return $sgName;
-}
-
-global proc string createShadingGroup(string $name) {
-	string $sgName = "prtSG_" + $name;
-	string $shName = "prtSH_" + $name;
-
-	// if group with that name exists already: use it
-	string $allSets[] = `ls -sets`;
-	string $se;
-	for($se in $allSets) {
-		if($se == $sgName) return $sgName;
-	}
+global proc createShadingGroup(string $name) {
+	string $sgName = $name;
+	string $shName = $name + "H";
 	
 	shadingNode -asShader lambert -n $shName;
 	sets -renderable true -noSurfaceShader true -empty -name $sgName;
 	connectAttr -f ($shName + ".outColor") ($sgName + ".surfaceShader");
-	
-	return $sgName;
 }
 
 global proc prtSetDiffuseTexture(string $sgName, string $texturePath, string $uvSet) {
 	$shaderPlug = `connectionInfo -sfd ($sgName + ".surfaceShader")`;
 	$shName = `plugNode $shaderPlug`;
 
-	string $fileName = fileNameFromPath($texturePath); 			// might not be unique!
-	$fileName = substituteAllString($fileName, ".", "_");		// '.' seems to be illegal
-
-	string $nodeName = "prtFile_" + $fileName;
+	string $nodeName = $sgName + "F";
 
 	shadingNode -asTexture file -n $nodeName;
 	connectAttr -force ($nodeName + ".outColor") ($shName + ".color");
@@ -163,8 +115,7 @@ global proc prtSetColor(string $sgName, float $r, float $g, float $b) {
 	$shaderPlug = `connectionInfo -sfd ($sgName + ".surfaceShader")`;
 	$shName = `plugNode $shaderPlug`;
 
-	string $nodeName = "prtColor_" + $r + "_" + $g + "_" + $b;
-	$nodeName = substituteAllString($nodeName, ".", "_");
+	string $nodeName = "prtColor_" + $sgName;
 
 	shadingNode -asShader blinn -n $nodeName;
 	setAttr ($nodeName + ".color") -type "double3" $r $g $b;

@@ -36,7 +36,8 @@ static const bool ENABLE_LOG_FILE		= false;
 
 MTypeId PRTNode::theID(PRT_TYPE_ID);
 
-PRTNode::PRTNode() : mResolveMap(0), mGenerateAttrs(0), mMayaEncOpts(0), mAttrEncOpts(0), mEnums(0), mHasMaterials(false) {
+PRTNode::PRTNode() : mResolveMap(0), mGenerateAttrs(0), mMayaEncOpts(0), mAttrEncOpts(0), mEnums(0), mHasMaterials(false), mCreatedInteractively(false) {
+	theNodeCount++;
 	prt::AttributeMapBuilder* b = prt::AttributeMapBuilder::create();
 	mMayaEncOpts                = b->createAttributeMap();
 	mAttrEncOpts                = b->createAttributeMap();
@@ -56,6 +57,16 @@ PRTNode::PRTNode() : mResolveMap(0), mGenerateAttrs(0), mMayaEncOpts(0), mAttrEn
 }
 
 PRTNode::~PRTNode() {
+	if(mResolveMap)    {mResolveMap->destroy();    mResolveMap    = 0;}
+	if(mGenerateAttrs) {mGenerateAttrs->destroy(); mGenerateAttrs = 0;}
+	if(mMayaEncOpts)   {mMayaEncOpts->destroy();   mMayaEncOpts   = 0;}
+	if(mAttrEncOpts)   {mAttrEncOpts->destroy();   mAttrEncOpts   = 0;}
+	if(mEnums)         {destroyEnums();}
+
+	if(--theNodeCount == 0) {
+		theShadingGroups.clear();
+	}
+
 	DBG("PRTNode disposed\n");
 }
 
@@ -66,92 +77,120 @@ MStatus PRTNode::setDependentsDirty(const MPlug& /*plugBeingDirtied*/, MPlugArra
 	return MS::kSuccess;
 }
 
-MStatus PRTNode::compute( const MPlug& plug, MDataBlock& data ) {
+MStatus PRTNode::compute(const MPlug& plug, MDataBlock& data ) {
 	MStatus stat;
 	mHasMaterials = false;
 
 	std::wstring path(FILE_PREFIX);
 	MString dummy;
-	path.append(getStrParameter(theRulePkg, dummy).asWChar());
+	path.append(getStrParameter(rulePkg, dummy).asWChar());
 
-	if(mLRulePkg.compare(path)) {
-		MString cmd;
-		cmd.format("prtAttrs ^1s", name());
-		MGlobal::executeCommandOnIdle(cmd);
-		return MS::kSuccess;
+	if(mCreatedInteractively) {
+		if(mLRulePkg.compare(path)) {
+			MString cmd;
+			cmd.format("prtAttrs ^1s", name());
+			MGlobal::executeCommandOnIdle(cmd);
+			return MS::kSuccess;
+			mLRulePkg = path;
+		}
+	} else {
+			MFnDependencyNode fNode(thisMObject(), &stat);
+			MCHECK(stat);
+			PRTAttrs::updateRuleFiles(fNode, getStrParameter(rulePkg, dummy));
 	}
 
 	if(plug == outMesh && mGenerateAttrs) {
 		MDataHandle inputHandle = data.inputValue(inMesh, &stat);
-		M_CHECK(stat);
+		MCHECK(stat);
 		MObject iMesh = inputHandle.asMeshTransformed();
 
 		updateShapeAttributes();
 
-		MFnMesh iMeshFn(iMesh);
+		if(getBoolParameter(mGenerate)) {
+			MFnMesh iMeshFn(iMesh);
 
-		MFloatPointArray vertices;
-		MIntArray        pcounts;
-		MIntArray        pconnect;
+			MFloatPointArray vertices;
+			MIntArray        pcounts;
+			MIntArray        pconnect;
 
-		iMeshFn.getPoints(vertices);
-		iMeshFn.getVertices(pcounts, pconnect);
+			iMeshFn.getPoints(vertices);
+			iMeshFn.getVertices(pcounts, pconnect);
 
-		double*   va = new double[vertices.length() * 3];
-		uint32_t* ia = new uint32_t[pconnect.length()];
-		uint32_t* ca = new uint32_t[pcounts.length()];
+			double*   va = new double[vertices.length() * 3];
+			uint32_t* ia = new uint32_t[pconnect.length()];
+			uint32_t* ca = new uint32_t[pcounts.length()];
 
-		for(int i = vertices.length(); --i >= 0;) {
-			va[i * 3 + 0] = vertices[i].x;
-			va[i * 3 + 1] = vertices[i].y;
-			va[i * 3 + 2] = vertices[i].z;
+			for(int i = vertices.length(); --i >= 0;) {
+				va[i * 3 + 0] = vertices[i].x;
+				va[i * 3 + 1] = vertices[i].y;
+				va[i * 3 + 2] = vertices[i].z;
+			}
+			pconnect.get((int*)ia);
+			pcounts.get((int*)ca);
+
+			MayaOutputHandler* outputHandler = createOutputHandler(&plug, &data);
+			MString            dummy;
+
+			prt::InitialShapeBuilder* isb = prt::InitialShapeBuilder::create();
+			prt::Status setGeoStatus = isb->setGeometry(
+					va,
+					vertices.length()*3,
+					ia,
+					pconnect.length(),
+					ca,
+					pcounts.length()
+			);
+			if (setGeoStatus != prt::STATUS_OK)
+				std::cerr << "InitialShapeBuilder setGeometry failed status = " << prt::getStatusDescription(setGeoStatus) << std::endl;
+
+			isb->setAttributes(
+					getStrParameter(mRuleFile,  dummy).asWChar(),
+					getStrParameter(mStartRule, dummy).asWChar(),
+					isb->computeSeed(),
+					L"",
+					mGenerateAttrs,
+					mResolveMap
+			);
+
+			const prt::InitialShape* shape          = isb->createInitialShapeAndReset();
+			prt::Status              generateStatus = prt::generate(&shape, 1, 0, &ENC_MAYA, 1, &mMayaEncOpts, outputHandler, PRTNode::theCache, 0);
+			if (generateStatus != prt::STATUS_OK)
+				std::cerr << "prt generate failed: " << prt::getStatusDescription(generateStatus) << std::endl;
+			isb->destroy();
+			shape->destroy();
+
+			delete[] ca;
+			delete[] ia;
+			delete[] va;
+			delete   outputHandler;
+		} else {
+				MStatus stat;
+
+				MDataHandle outputHandle = data.outputValue(plug, &stat);
+				MCHECK(stat);
+
+				MFnMeshData dataCreator;
+				MObject newOutputData = dataCreator.create(&stat);
+				MCHECK(stat);
+
+				MFnMesh fnMesh;
+				MObject oMesh = fnMesh.create(0, 0, MFloatPointArray(), MIntArray(), MIntArray(), newOutputData, &stat);
+				MCHECK(stat);
+
+				MCHECK(outputHandle.set(newOutputData));
 		}
-		pconnect.get((int*)ia);
-		pcounts.get((int*)ca);
-
-		MayaOutputHandler* outputHandler = createOutputHandler(&plug, &data);
-		MString            dummy;
-
-		prt::InitialShapeBuilder* isb = prt::InitialShapeBuilder::create();
-		prt::Status setGeoStatus = isb->setGeometry(
-				va,
-				vertices.length()*3,
-				ia,
-				pconnect.length(),
-				ca,
-				pcounts.length()
-		);
-		if (setGeoStatus != prt::STATUS_OK)
-			std::cerr << "InitialShapeBuilder setGeometry failed status = " << prt::getStatusDescription(setGeoStatus) << std::endl;
-
-		isb->setAttributes(
-				getStrParameter(mRuleFile,  dummy).asWChar(),
-				getStrParameter(mStartRule, dummy).asWChar(),
-				isb->computeSeed(),
-				L"",
-				mGenerateAttrs,
-				mResolveMap
-		);
-
-		const prt::InitialShape* shape          = isb->createInitialShapeAndReset();
-		prt::Status              generateStatus = prt::generate(&shape, 1, 0, &ENC_MAYA, 1, &mMayaEncOpts, outputHandler, PRTNode::theCache, 0);
-		if (generateStatus != prt::STATUS_OK)
-			std::cerr << "prt generate failed: " << prt::getStatusDescription(generateStatus) << std::endl;
-		isb->destroy();
-		shape->destroy();
-
-		delete[] ca;
-		delete[] ia;
-		delete[] va;
-		delete   outputHandler;
 
 		data.setClean(plug);
 
-		MString cmd;
-		cmd.format("prtMaterials ^1s", name());
-		MGlobal::executeCommandOnIdle(cmd);
+		if(mCreatedInteractively) {
+			MGlobal::executeCommand(mShadingCmd, true, false);
+			MString cmd;
+			cmd.format("prtMaterials ^1s", name());
+			MGlobal::executeCommandOnIdle(cmd, true);
+		}
 	}
 
+	mCreatedInteractively = true;
 	return MS::kSuccess;
 }
 
@@ -159,11 +198,167 @@ void* PRTNode::creator() {
 	return new PRTNode();
 }
 
-#ifdef _MSC_VER
-const wchar_t SEPERATOR = L'\\';
-#else
-const wchar_t SEPERATOR = L'/';
-#endif
+
+inline bool PRTNode::getBoolParameter(MObject & attr) {
+	MPlug plug(thisMObject(), attr);
+	if(attr.hasFn(MFn::kNumericAttribute)) {
+		bool result;
+		plug.getValue(result);
+		return result;
+	}
+	return false;
+}
+
+inline MString & PRTNode::getStrParameter(MObject & attr, MString& value) {
+	MPlug plug(thisMObject(), attr);
+
+	if(attr.hasFn(MFn::kNumericAttribute)) {
+		double fValue;
+		plug.getValue(fValue);
+		value.set(fValue);
+	} else if(attr.hasFn(MFn::kTypedAttribute)) {
+		plug.getValue(value);
+	} else if(attr.hasFn(MFn::kEnumAttribute)) {
+		short eValue;
+		const PRTEnum* e = findEnum(attr);
+		if(e) {
+			plug.getValue(eValue);
+			value = e->mSVals[eValue];
+		}
+	}
+	return value;
+}
+
+MStatus PRTNode::updateShapeAttributes() {
+	if(!(mGenerateAttrs)) return MS::kSuccess; 
+
+	MStatus           stat;
+	MObject           node = thisMObject();
+	MFnDependencyNode fNode(node, &stat);
+	MCHECK(stat);
+
+	int count = (int)fNode.attributeCount(&stat);
+	MCHECK(stat);
+
+	prt::AttributeMapBuilder* aBuilder = prt::AttributeMapBuilder::create();
+
+	for(int i = 0; i < count; i++) {
+		MObject attr = fNode.attribute(i, &stat);
+		if(stat != MS::kSuccess) continue;
+
+		MPlug plug(node, attr);
+		if(!(plug.isDynamic())) continue;
+
+		MString       briefName = plug.partialName();
+		std::wstring  name      = mBriefName2prtAttr[briefName.asWChar()];
+
+		if(attr.hasFn(MFn::kNumericAttribute)) {
+			MFnNumericAttribute nAttr(attr);
+
+			if(nAttr.unitType() == MFnNumericData::kBoolean) {
+				bool b, db; 
+				nAttr.getDefault(db);
+				MCHECK(plug.getValue(b));
+				if(b != db)
+					aBuilder->setBool(name.c_str(), b);
+			} else if(nAttr.unitType() == MFnNumericData::kDouble) {
+				double d, dd; 
+				nAttr.getDefault(dd);
+				MCHECK(plug.getValue(d));
+				if(d != dd)
+					aBuilder->setFloat(name.c_str(), d);
+			} else if(nAttr.isUsedAsColor()) {
+				float r;
+				float g;
+				float b;
+
+				nAttr.getDefault(r, g, b);
+				wchar_t dcolor[]  = L"#000000";
+				toHex(dcolor, r, g, b);
+
+				MObject rgb;
+				MCHECK(plug.getValue(rgb));
+
+				MFnNumericData fRGB(rgb);
+				MCHECK(fRGB.getData(r, g, b));
+
+				wchar_t color[]  = L"#000000";
+				toHex(color, r, g, b);
+
+				if(wcscmp(dcolor, color))
+					aBuilder->setString(name.c_str(), color);
+			}
+
+		} else if(attr.hasFn(MFn::kTypedAttribute)) {
+			MFnTypedAttribute tAttr(attr);
+			MString       s;
+			MFnStringData dsd;
+			MObject       dso = dsd.create(&stat);
+			MCHECK(stat);
+			MCHECK(tAttr.getDefault(dso));
+
+			MFnStringData fDs(dso, &stat);
+			MCHECK(stat);
+
+			MCHECK(plug.getValue(s));
+			if(s != fDs.string(&stat)) {
+				MCHECK(stat);
+				aBuilder->setString(name.c_str(), s.asWChar());
+			}
+		} else if(attr.hasFn(MFn::kEnumAttribute)) {
+			MFnEnumAttribute eAttr(attr);
+
+			short di;
+			short i;
+			MCHECK(eAttr.getDefault(di));
+			MCHECK(plug.getValue(i));
+			if(i != di)
+				aBuilder->setString(name.c_str(), eAttr.fieldName(i).asWChar());
+		}
+	}
+
+	mGenerateAttrs->destroy();
+	mGenerateAttrs = aBuilder->createAttributeMap();
+
+	aBuilder->destroy();
+
+	return MS::kSuccess;
+}
+
+void PRTNode::destroyEnums() {
+	for(PRTEnum* e = mEnums; e;) {
+		PRTEnum * tmp = e->mNext;
+		delete e;
+		e = tmp;
+	}
+
+	mEnums = 0;
+}
+
+const PRTEnum* PRTNode::findEnum(const MObject & attr) const {
+	for(PRTEnum* e = mEnums; e; e = e->mNext) {
+		if(e->mAttr.object() == attr)
+			return e;
+	}
+	return 0;
+}
+
+MayaOutputHandler* PRTNode::createOutputHandler(const MPlug* plug, MDataBlock* data) {
+	return new MayaOutputHandler(plug, data, &mShadingGroups, &mShadingRanges, &mShadingCmd);
+}
+
+void PRTNode::initLogger() {
+	if (ENABLE_LOG_CONSOLE) {
+		theLogHandler = prt::ConsoleLogHandler::create(prt::LogHandler::ALL, prt::LogHandler::ALL_COUNT);
+		prt::addLogHandler(theLogHandler);
+	}
+
+	if (ENABLE_LOG_FILE) {
+		std::wstring logPath   = getPluginRoot() + SEPERATOR + L"prt4maya.log";
+		theFileLogHandler = prt::FileLogHandler::create(prt::LogHandler::ALL, prt::LogHandler::ALL_COUNT, logPath.c_str());
+		prt::addLogHandler(theFileLogHandler);
+	}
+}
 
 #ifndef _MSC_VER
 #include <dlfcn.h>
@@ -182,7 +377,7 @@ void on_load(void) {
 }
 #endif
 
-std::wstring getPluginRoot() {
+std::wstring PRTNode::getPluginRoot() {
 #ifdef _MSC_VER
 	wchar_t*  dllPath = new wchar_t[_MAX_PATH];
 	wchar_t*  drive   = new wchar_t[8];
@@ -238,179 +433,35 @@ MStatus PRTNode::initialize() {
 	MStatus             stat;
 
 	outMesh = typedFn.create( "outMesh", "om", MFnData::kMesh, &stat ); 
-	M_CHECK(stat);  
+	MCHECK(stat);  
 	typedFn.setStorable(false);
 	typedFn.setWritable(false);
 	stat = addAttribute( outMesh );
-	M_CHECK(stat);  
+	MCHECK(stat);  
 
 	inMesh = typedFn.create( "inMesh", "im", MFnData::kMesh, &stat ); 
-	M_CHECK(stat);  
+	MCHECK(stat);  
 	typedFn.setStorable(false);
 	typedFn.setHidden(true);
-	M_CHECK(addAttribute(inMesh));
-	M_CHECK(attributeAffects(inMesh, outMesh));
+	MCHECK(addAttribute(inMesh));
+	MCHECK(attributeAffects(inMesh, outMesh));
 
 	MStatus           stat2;
 	MFnStringData  	  stringData;
 	MFnTypedAttribute fAttr;
 
-	theRulePkg = fAttr.create( NAME_RULE_PKG, "rulePkg", MFnData::kString, stringData.create(&stat2), &stat );
-	M_CHECK(stat2);
-	M_CHECK(stat);
-	M_CHECK(fAttr.setUsedAsFilename(true));
-	M_CHECK(fAttr.setCached    (true));
-	M_CHECK(fAttr.setStorable  (true));
-	M_CHECK(fAttr.setNiceNameOverride(MString("Rule Package(*.rpk)")));
-	M_CHECK(addAttribute(theRulePkg));
-	M_CHECK(attributeAffects(theRulePkg, outMesh ));
+	rulePkg = fAttr.create( NAME_RULE_PKG, "rulePkg", MFnData::kString, stringData.create(&stat2), &stat );
+	MCHECK(stat2);
+	MCHECK(stat);
+	MCHECK(fAttr.setUsedAsFilename(true));
+	MCHECK(fAttr.setCached    (true));
+	MCHECK(fAttr.setStorable  (true));
+	MCHECK(fAttr.setNiceNameOverride(MString("Rule Package(*.rpk)")));
+	MCHECK(addAttribute(rulePkg));
+	MCHECK(attributeAffects(rulePkg, outMesh ));
 
 	return MS::kSuccess;
 }
-
-inline MString & PRTNode::getStrParameter(MObject & attr, MString & value) {
-	MPlug plug(thisMObject(), attr);
-
-	if(attr.hasFn(MFn::kNumericAttribute)) {
-		double fValue;
-		plug.getValue(fValue);
-		value.set(fValue);
-	} else if(attr.hasFn(MFn::kTypedAttribute)) {
-		plug.getValue(value);
-	} else if(attr.hasFn(MFn::kEnumAttribute)) {
-		short eValue;
-		const PRTEnum* e = findEnum(attr);
-		if(e) {
-			plug.getValue(eValue);
-			value = e->mSVals[eValue];
-		}
-	}
-	return value;
-}
-
-MStatus PRTNode::updateShapeAttributes() {
-	if(!(mGenerateAttrs)) return MS::kSuccess; 
-
-	MStatus           stat;
-	MObject           node = thisMObject();
-	MFnDependencyNode fNode(node, &stat);
-	M_CHECK(stat);
-
-	int count = (int)fNode.attributeCount(&stat);
-	M_CHECK(stat);
-
-	prt::AttributeMapBuilder* aBuilder = prt::AttributeMapBuilder::create();
-
-	for(int i = 0; i < count; i++) {
-		MObject attr = fNode.attribute(i, &stat);
-		if(stat != MS::kSuccess) continue;
-
-		MPlug plug(node, attr);
-		if(!(plug.isDynamic())) continue;
-
-		MString name = plug.partialName();
-		name = name.substring(name.index('$') + 1, name.length());
-
-		if(attr.hasFn(MFn::kNumericAttribute)) {
-			MFnNumericAttribute nAttr(attr);
-
-			if(nAttr.unitType() == MFnNumericData::kBoolean) {
-				bool b, db; 
-				nAttr.getDefault(db);
-				M_CHECK(plug.getValue(b));
-				if(b != db)
-					aBuilder->setBool(name.asWChar(), b);
-			} else if(nAttr.unitType() == MFnNumericData::kDouble) {
-				double d, dd; 
-				nAttr.getDefault(dd);
-				M_CHECK(plug.getValue(d));
-				if(d != dd) {
-					aBuilder->setFloat(name.asWChar(), d);
-				}
-			} else if(nAttr.isUsedAsColor()) {
-				double r, dr = 0.0;
-				double g, dg = 0.0;
-				double b, db = 0.0;
-
-				wchar_t dcolor[] = L"#000000";
-				toHex(dcolor, dr, dg, db);
-
-				MObject rgb;
-				plug.getValue(rgb);
-				MFnNumericData fRGB(rgb);
-				fRGB.getData(r, g, b);
-
-				wchar_t color[]  = L"#000000";
-				toHex(color, r, g, b);
-
-				if(wcscmp(color, dcolor))
-					aBuilder->setString(name.asWChar(), color);
-			}
-
-		} else if(attr.hasFn(MFn::kTypedAttribute)) {
-			MFnTypedAttribute tAttr(attr);
-			MString       s;
-			MFnStringData dsd;
-			MObject       dso = dsd.create(&stat);
-			M_CHECK(stat);
-			M_CHECK(tAttr.getDefault(dso));
-
-			MFnStringData fDs(dso, &stat);
-			M_CHECK(stat);
-
-			M_CHECK(plug.getValue(s));
-			if(s != fDs.string(&stat)) {
-				M_CHECK(stat);
-				aBuilder->setString(name.asWChar(), s.asWChar());
-			}
-		} else if(attr.hasFn(MFn::kEnumAttribute)) {
-			MFnEnumAttribute eAttr(attr);
-		}
-	}
-
-	mGenerateAttrs->destroy();
-	mGenerateAttrs = aBuilder->createAttributeMap();
-
-	aBuilder->destroy();
-
-	return MS::kSuccess;
-}
-
-void PRTNode::destroyEnums() {
-	for(PRTEnum* e = mEnums; e;) {
-		PRTEnum * tmp = e->mNext;
-		delete e;
-		e = tmp;
-	}
-
-	mEnums = 0;
-}
-
-const PRTEnum* PRTNode::findEnum(const MObject & attr) const {
-	for(PRTEnum* e = mEnums; e; e = e->mNext) {
-		if(e->mAttr.object() == attr)
-			return e;
-	}
-	return 0;
-}
-
-MayaOutputHandler* PRTNode::createOutputHandler(const MPlug* plug, MDataBlock* data) {
-	return new MayaOutputHandler(plug, data, &mShadingGroups, &mShadingRanges);
-}
-
-void PRTNode::initLogger() {
-	if (ENABLE_LOG_CONSOLE) {
-		theLogHandler = prt::ConsoleLogHandler::create(prt::LogHandler::ALL, prt::LogHandler::ALL_COUNT);
-		prt::addLogHandler(theLogHandler);
-	}
-
-	if (ENABLE_LOG_FILE) {
-		std::wstring logPath   = getPluginRoot() + SEPERATOR + L"prt4maya.log";
-		theFileLogHandler = prt::FileLogHandler::create(prt::LogHandler::ALL, prt::LogHandler::ALL_COUNT, logPath.c_str());
-		prt::addLogHandler(theFileLogHandler);
-	}
-}
-
 
 void PRTNode::uninitialize() {
 	if (ENABLE_LOG_CONSOLE) {
@@ -434,10 +485,11 @@ MStatus initializePlugin( MObject obj ){
 
 	MFnPlugin plugin( obj, "Esri", "1.0", "Any");
 
-	M_CHECK(plugin.registerNode("prt", PRTNode::theID, &PRTNode::creator, &PRTNode::initialize, MPxNode::kDependNode));
-	M_CHECK(plugin.registerUI("prt4mayaCreateUI", "prt4mayaDeleteUI"));
-	M_CHECK(plugin.registerCommand("prtAttrs",     PRTAttrs::creator));
-	M_CHECK(plugin.registerCommand("prtMaterials", PRTMaterials::creator));
+	MCHECK(plugin.registerNode("prt", PRTNode::theID, &PRTNode::creator, &PRTNode::initialize, MPxNode::kDependNode));
+	MCHECK(plugin.registerUI("prt4mayaCreateUI", "prt4mayaDeleteUI"));
+	MCHECK(plugin.registerCommand("prtAttrs",     PRTAttrs::creator));
+	MCHECK(plugin.registerCommand("prtMaterials", PRTMaterials::creator));
+	MCHECK(plugin.registerCommand("prtCreate",    PRTCreate::creator));
 
 	return MS::kSuccess;
 }
@@ -445,9 +497,10 @@ MStatus initializePlugin( MObject obj ){
 MStatus uninitializePlugin( MObject obj) {
 	MFnPlugin plugin( obj );
 
-	M_CHECK(plugin.deregisterCommand("prtMaterials"));
-	M_CHECK(plugin.deregisterCommand("prtAttrs"));
-	M_CHECK(plugin.deregisterNode(PRTNode::theID));
+	MCHECK(plugin.deregisterCommand("prtMaterials"));
+	MCHECK(plugin.deregisterCommand("prtAttrs"));
+	MCHECK(plugin.deregisterCommand("prtCreate"));
+	MCHECK(plugin.deregisterNode(PRTNode::theID));
 
 	PRTNode::uninitialize();
 
@@ -456,7 +509,7 @@ MStatus uninitializePlugin( MObject obj) {
 
 // Main shape parameters
 //
-MObject PRTNode::theRulePkg; 
+MObject PRTNode::rulePkg; 
 
 // Input mesh
 //
@@ -468,7 +521,9 @@ MObject PRTNode::outMesh;
 
 // statics
 
-prt::ConsoleLogHandler*	PRTNode::theLogHandler = 0;
-prt::FileLogHandler*	PRTNode::theFileLogHandler = 0;
-const prt::Object*      PRTNode::theLicHandle = 0;
-prt::CacheObject*       PRTNode::theCache = 0;
+prt::ConsoleLogHandler*	PRTNode::theLogHandler     = 0;
+prt::FileLogHandler*	  PRTNode::theFileLogHandler = 0;
+const prt::Object*      PRTNode::theLicHandle      = 0;
+prt::CacheObject*       PRTNode::theCache          = 0;
+int                     PRTNode::theNodeCount      = 0;
+MStringArray            PRTNode::theShadingGroups;

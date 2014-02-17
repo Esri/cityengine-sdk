@@ -64,8 +64,8 @@ public:
 	};
 
 public:
-	MayaOutputHandler(const MPlug* plug, MDataBlock* data, MStringArray* shadingGroups, MIntArray* shadingRanges) :
-		mPlug(plug), mData(data), mShadingGroups(shadingGroups), mShadingRanges(shadingRanges)
+	MayaOutputHandler(const MPlug* plug, MDataBlock* data, MStringArray* shadingGroups, MIntArray* shadingRanges, MString* shadingCmd) :
+		mPlug(plug), mData(data), mShadingGroups(shadingGroups), mShadingRanges(shadingRanges), mShadingCmd(shadingCmd)
 	{ }
 	virtual ~MayaOutputHandler() {}
 
@@ -108,10 +108,6 @@ public:
 			size_t countsSize,
 			int*	 connects,
 			size_t connectsSize,
-			int*	 normalCounts,
-			size_t normalCountsSize,
-			int*   normalConnects,
-			size_t normalConnectsSize,
 			int*   uvCounts,
 			size_t uvCountsSize,
 			int*   uvConnects,
@@ -120,9 +116,9 @@ public:
 	virtual void createMesh();
 	virtual void finishMesh();
 
-	virtual int  matCreate(const wchar_t* name, int start, int count);
-	virtual void matSetColor(int mh, float r, float g, float b);
-	virtual void matSetDiffuseTexture(int mh, const wchar_t* tex);
+	virtual MString matCreate(int start, int count, const wchar_t* name);
+	virtual void    matSetColor(int start, int count, float r, float g, float b);
+	virtual void    matSetDiffuseTexture(int start, int count, const wchar_t* tex);
 
 public:
 	const std::map<std::wstring, AttributeHolder>& getAttrs() const { return mAttrs; }
@@ -130,27 +126,26 @@ public:
 public:
 	MFnMesh*			    mFnMesh;
 
-	MFloatPointArray		mVertices;
+	MFloatPointArray	mVertices;
 	MIntArray			    mVerticesCounts;
 	MIntArray			    mVerticesConnects;
 
-	MFloatVectorArray		mNormals;
-	MIntArray			    mNormalCounts; // not actually necessary, as the encoder ensures same indexing for vertices and vertex normals
-	MIntArray			    mNormalConnects; // not actually necessary, as the encoder ensures same indexing for vertices and vertex normals
+	MFloatVectorArray mNormals;
 
-	MFloatArray			  	mU;
-	MFloatArray			  	mV;
+	MFloatArray			 	mU;
+	MFloatArray			 	mV;
 	MIntArray			    mUVCounts;
 	MIntArray			    mUVConnects;
 
 private:
 	// must not be called
-	MayaOutputHandler() : mPlug(0), mData(0), mShadingGroups(0), mShadingRanges(0) { }
+	MayaOutputHandler() : mPlug(0), mData(0), mShadingGroups(0), mShadingRanges(0), mShadingCmd(0) { }
 
 	const MPlug*		  mPlug;
 	MDataBlock*			  mData;
 	MStringArray*		  mShadingGroups;
 	MIntArray*		    mShadingRanges;
+	MString*          mShadingCmd;
 
 	std::map<std::wstring, AttributeHolder> mAttrs;
 };

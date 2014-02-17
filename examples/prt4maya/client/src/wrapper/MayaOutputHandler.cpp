@@ -41,7 +41,7 @@ void MayaOutputHandler::setNormals(double* nrm, size_t size) {
 	prtTrace(L"setNormals: size = ", size);
 	mNormals.clear();
 	for (size_t i = 0; i < size; i += 3)
-		mNormals.append(MVector((float)nrm[i], (float)nrm[i+1], (float)nrm[i+2]));
+		mNormals.append(MVector(nrm[i], nrm[i+1], nrm[i+2]));
 }
 
 
@@ -54,7 +54,7 @@ void MayaOutputHandler::setUVs(float* u, float* v, size_t size) {
 	}
 }
 
-void MayaOutputHandler::setFaces(int* counts, size_t countsSize, int* connects, size_t connectsSize, int* normalCounts, size_t normalCountsSize, int* normalConnects, size_t normalConnectsSize, int* uvCounts, size_t uvCountsSize, int* uvConnects, size_t uvConnectsSize) {
+void MayaOutputHandler::setFaces(int* counts, size_t countsSize, int* connects, size_t connectsSize, int* uvCounts, size_t uvCountsSize, int* uvConnects, size_t uvConnectsSize) {
 	mVerticesCounts.clear();
 	for (size_t i = 0; i < countsSize; ++i)
 		mVerticesCounts.append(counts[i]);
@@ -64,16 +64,6 @@ void MayaOutputHandler::setFaces(int* counts, size_t countsSize, int* connects, 
 	for (size_t i = 0; i < connectsSize; ++i)
 		mVerticesConnects.append(connects[i]);
 	prtTrace(L"connectsSize = ", connectsSize);
-
-	mNormalCounts.clear();
-	for (size_t i = 0; i < normalCountsSize; ++i)
-		mNormalCounts.append(normalCounts[i]);
-	prtTrace(L"normalCountsSize = ", normalCountsSize);
-
-	mNormalConnects.clear();
-	for (size_t i = 0; i < normalConnectsSize; ++i)
-		mNormalConnects.append(normalConnects[i]);
-	prtTrace(L"normalConnectsSize = ", normalConnectsSize);
 
 	mUVCounts.clear();
 	for (size_t i = 0; i < uvCountsSize; ++i)
@@ -86,11 +76,10 @@ void MayaOutputHandler::setFaces(int* counts, size_t countsSize, int* connects, 
 
 #define VERBOSE_NORMALS 0
 
-// maya api tutorial: http://ewertb.soundlinker.com/maya.php
 void MayaOutputHandler::createMesh() {
 	MStatus stat;
 
-	DBGL(L"--- MayaData::createMesh begin");
+	DBG("--- MayaData::createMesh begin");
 
 	if(mPlug == 0 || mData == 0) return;
 
@@ -101,9 +90,10 @@ void MayaOutputHandler::createMesh() {
 	MObject newOutputData = dataCreator.create(&stat);
 	MCHECK(stat);
 
-	DBGL(L"    mVertices.length         = %d", mVertices.length());
-	DBGL(L"    mVerticesCounts.length   = %d", mVerticesCounts.length());
-	DBGL(L"    mVerticesConnects.length = %d", mVerticesConnects.length());
+	DBG("    mVertices.length         = %d", mVertices.length());
+	DBG("    mVerticesCounts.length   = %d", mVerticesCounts.length());
+	DBG("    mVerticesConnects.length = %d", mVerticesConnects.length());
+	DBG("    mNormals.length          = %d", mNormals.length());
 
 	mFnMesh = new MFnMesh();
 	MObject oMesh = mFnMesh->create(mVertices.length(), mVerticesCounts.length(), mVertices, mVerticesCounts, mVerticesConnects, newOutputData, &stat);
@@ -112,17 +102,16 @@ void MayaOutputHandler::createMesh() {
 	MPlugArray plugs;
 	bool isConnected = mPlug->connectedTo(plugs, false, true, &stat);
 	MCHECK(stat);
-	DBGL(L"    plug is connected: %d; %d plugs", isConnected, plugs.length());
 	if (plugs.length() > 0) {
 		if(mUVConnects.length() > 0) {
 			MString uvSet = "map1";
 
 			MCHECK(mFnMesh->setUVs(mU, mV, &uvSet));
 
-			DBGL(L"    mU.length          = %d", mU.length());
-			DBGL(L"    mV.length          = %d", mV.length());
-			DBGL(L"    mUVCounts.length   = %d", mUVCounts.length());
-			DBGL(L"    mUVConnects.length = %d", mUVConnects.length());
+			DBG("    mU.length          = %d", mU.length());
+			DBG("    mV.length          = %d", mV.length());
+			DBG("    mUVCounts.length   = %d", mUVCounts.length());
+			DBG("    mUVConnects.length = %d", mUVConnects.length());
 
 			MCHECK(mFnMesh->assignUVs(mUVCounts, mUVConnects, &uvSet));
 		}
@@ -130,127 +119,103 @@ void MayaOutputHandler::createMesh() {
 
 	mShadingGroups->clear();
 	mShadingRanges->clear();
+	mShadingCmd->clear();
 
 	if(mNormals.length() > 0) {
-		DBGL(L"    mNormals.length        = %d", mNormals.length());
-		DBGL(L"    mNormalCounts.length   = %d", mNormalCounts.length());
-		DBGL(L"    mNormalConnects.length = %d", mNormalConnects.length());
-
-#if VERBOSE_NORMALS == 1
-		{
-			size_t nc = 0;
-			for (size_t i = 0; i < mNormalCounts.length(); i++) {
-				DBGL(L"    face %d: #vtx = %d", i, mNormalCounts[i]);
-				for (size_t ni = 0; ni < mNormalCounts[i]; ni++) {
-					size_t vidx = mVerticesConnects[nc];
-					size_t nidx = mNormalConnects[nc++];
-					DBGL(L"      vidx = %d; mNormals[%d] = (%f, %f, %f)", vidx, nidx, mNormals[nidx].x, mNormals[nidx].y, mNormals[nidx].z);
-				}
-			}
-		}
-
-		{
-			MFloatVectorArray exNormals;
-			MCHECK(mFnMesh->getNormals(exNormals));
-			DBGL(L"    exNormals.length = %d", exNormals.length());
-
-			MIntArray exVertexIds, exVertexIdCounts;
-			MCHECK(mFnMesh->getVertices(exVertexIdCounts, exVertexIds));
-
-			MIntArray exNormalIds, exNormalIdCnts;
-			MCHECK(mFnMesh->getNormalIds(exNormalIdCnts, exNormalIds));
-
-			size_t nc = 0;
-			for (size_t i = 0; i < exNormalIdCnts.length(); i++) {
-				DBGL(L"    ex face %d: #vtx = %d", i, exNormalIdCnts[i]);
-				for (size_t ni = 0; ni < exNormalIdCnts[i]; ni++) {
-					size_t vidx = exVertexIds[nc];
-					size_t nidx = exNormalIds[nc++];
-					DBGL(L"      vidx = %d; exNormals[%d] = (%f, %f, %f)", vidx, nidx, exNormals[nidx].x, exNormals[nidx].y, exNormals[nidx].z);
-				}
-			}
-		}
-#endif
+		DBG("    mNormals.length        = %d", mNormals.length());
 
 		// NOTE: this expects that vertices and vertex normals use the same index domain (-> maya encoder)
 		MVectorArray expandedNormals(mVerticesConnects.length());
-		for (size_t i = 0; i < mVerticesConnects.length(); i++) {
+		for (size_t i = 0; i < mVerticesConnects.length(); i++)
 			expandedNormals[i] = mNormals[mVerticesConnects[i]];
-		}
-		DBGL(L"    expandedNormals.length = %d", expandedNormals.length());
+		
+		DBG("    expandedNormals.length = %d", expandedNormals.length());
 
 		MCHECK(mFnMesh->setVertexNormals(expandedNormals, mVerticesConnects));
-	} // hasNormals?
+	}
 
-	MMeshSmoothOptions smoothOpts;
-	smoothOpts.setSmoothness(0.0f);
-	smoothOpts.setKeepHardEdge(true);
-	smoothOpts.setPropEdgeHardness(true);
-	smoothOpts.setKeepBorderEdge(true);
-	mFnMesh->setSmoothMeshDisplayOptions(smoothOpts);
-
-	stat = outputHandle.set(newOutputData);
-	MCHECK(stat);
+	MCHECK(outputHandle.set(newOutputData));
 }
 
+MString getGroupName(const wchar_t* name) {
+	MString matName(name);
+	int len = matName.numChars();
+	matName = matName.substringW(matName.rindexW('/') + 1, len);
+	len = matName.numChars();
+	const wchar_t* matNameW = matName.asWChar();
+	char* matNameC = (char*)malloc(len + 1);
+	for(int i = len; --i >= 0;) {
+		wchar_t c = matNameW[i];
+		if((c >= L'0' && c <= L'9') ||
+		 	 (c >= L'A' && c <= L'Z') ||
+			 (c >= L'a' && c <= L'z'))
+			matNameC[i] = (char)c;
+		else
+		  matNameC[i] = '_';
+	}
+  matNameC[len] = '\0';
 
-int MayaOutputHandler::matCreate(const wchar_t* name, int start, int count) {
-	MStatus stat;
+	MString result = "prtSG_";
+	result        += matNameC;
+	free(matNameC);
 
-	MString cmd("createShadingGroup(\"");
-	cmd += name;
-	cmd += "\")";
-	MString result = MGlobal::executeCommandStringResult(cmd, false, false, &stat);
-	DBGL(L"mel cmd '%s' executed, result = '%s'", cmd.asChar(), result.asChar());
+	return result;
+}
 
-	mShadingGroups->append(result);
+MString MayaOutputHandler::matCreate(int start, int count, const wchar_t* name) {
+  MString groupName = getGroupName(name);
+
+	bool createGroup = true;
+	for(int i = PRTNode::theShadingGroups.length(); --i >= 0;)
+		if(PRTNode::theShadingGroups[i] == groupName)  {
+			createGroup = false;
+			break;
+		}
+	
+	if(createGroup) {
+		PRTNode::theShadingGroups.append(groupName);
+		*mShadingCmd += "createShadingGroup(\"" + groupName + "\");\n";
+	}
+
+	mShadingGroups->append(groupName);
 	mShadingRanges->append(start);
 	mShadingRanges->append(start + count - 1);
 
-	return mShadingGroups->length() - 1;
+	return createGroup ? groupName : MString();
 }
 
 
-void MayaOutputHandler::matSetDiffuseTexture(int mh, const wchar_t* tex) {
-	MStatus stat;
+void MayaOutputHandler::matSetDiffuseTexture(int start, int count, const wchar_t* tex) {
+	MString matName = matCreate(start, count, tex);
+	if(matName.numChars() == 0) return;
 
-	MString sg = (*mShadingGroups)[mh];
-	MString cmd("prtSetDiffuseTexture(\"");
-	cmd += sg + "\",\"" + tex + "\",\"map1\")";
-	MString result = MGlobal::executeCommandStringResult(cmd, false, false, &stat);
-	DBGL(L"mel cmd '%s' executed, result = '%s'", cmd.asChar(), result.asChar());
+	*mShadingCmd += "prtSetDiffuseTexture(\"" + matName + "\",\"" + tex + "\",\"map1\");\n";
 }
 
+void MayaOutputHandler::matSetColor(int start, int count, float r, float g, float b) {
+	wchar_t name[16];
+	swprintf(name, L"%02X%02X%02X", (int)(r * 255.0), (int)(g * 255.0), (int)(b * 255.0), 15);
+	MString matName = matCreate(start, count, name);
+	if(matName.numChars() == 0) return;
 
-void MayaOutputHandler::matSetColor(int mh, float r, float g, float b) {
-	MStatus stat;
-
-	MString sg = (*mShadingGroups)[mh];
-	MString cmd("prtSetColor(\"");
-	cmd += sg + "\"," + r + "," + g + "," + b + ")";
-	MString result = MGlobal::executeCommandStringResult(cmd, false, false, &stat);
-	DBGL(L"mel cmd '%s' executed, result = '%s'", cmd.asChar(), result.asChar());
+	*mShadingCmd += "prtSetColor(\"" + matName + "\"," + r + "," + g + "," + b + ");\n";
 }
-
 
 void MayaOutputHandler::finishMesh() {
 	delete mFnMesh;
 }
 
-
 prt::Status MayaOutputHandler::attrBool(size_t /*isIndex*/, int32_t /*shapeID*/, const wchar_t* key, bool value) {
-	mAttrs[stripStyle(key)].mBool = value;
+	mAttrs[key].mBool = value;
 	return prt::STATUS_OK;
 }
-
 
 prt::Status MayaOutputHandler::attrFloat(size_t /*isIndex*/, int32_t /*shapeID*/, const wchar_t* key, double value) {
-	mAttrs[stripStyle(key)].mFloat = value;
+	mAttrs[key].mFloat = value;
 	return prt::STATUS_OK;
 }
 
-
 prt::Status MayaOutputHandler::attrString(size_t /*isIndex*/, int32_t /*shapeID*/, const wchar_t* key, const wchar_t* value) {
-	mAttrs[stripStyle(key)].mString = value;
+	mAttrs[key].mString = value;
 	return prt::STATUS_OK;
 }

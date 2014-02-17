@@ -26,19 +26,38 @@ inline MStatus PRTAttrs::setStringParameter(MObject & node, MObject & attr, MStr
 }
 
 MStatus PRTAttrs::addParameter(MFnDependencyNode & node, MObject & attr, MFnAttribute& tAttr) {
-	M_CHECK(tAttr.setKeyable (true));
-	M_CHECK(tAttr.setHidden(false));
-	M_CHECK(node.addAttribute(attr, MFnDependencyNode::kLocalDynamicAttr));
-
+	if(!(node.hasAttribute(tAttr.shortName()))) {
+		MCHECK(tAttr.setKeyable (true));
+		MCHECK(tAttr.setHidden(false));
+		MCHECK(tAttr.setStorable(true));
+		MCHECK(node.addAttribute(attr));
+	}
 	return MS::kSuccess;
 }
 
-MString PRTAttrs::longName(const MString & attrName) {
-	return attrName.substring(attrName.index('$') + 1, attrName.length());
+MString PRTAttrs::clean(const MString& name) {
+	int      len   = name.numChars();
+	wchar_t* wname = new wchar_t[len + 1];
+	wcscpy(wname, name.asWChar());
+	for(int i = 0; i < len; i++) {
+		wchar_t c = wname[i];
+		if((c >= '0' && c <= '9') ||
+			 (c >= 'A' && c <= 'Z') ||
+			 (c >= 'a' && c <= 'z')) 
+			continue;
+		wname[i] = '_';
+	}
+	MString result(wname);
+	delete[] wname;
+	return result;
+}
+
+MString PRTAttrs::longName(const MString& attrName) {
+	return clean(attrName.substring(attrName.index('$') + 1, attrName.length()));
 }
 
 MString PRTAttrs::briefName(const MString & attrName) {
-	return attrName;
+	return clean(attrName);
 }
 
 MStatus PRTAttrs::addBoolParameter(MFnDependencyNode & node, MObject & attr, const MString & name, bool value) {
@@ -47,10 +66,10 @@ MStatus PRTAttrs::addBoolParameter(MFnDependencyNode & node, MObject & attr, con
 	attr = nAttr.create(longName(name), briefName(name), MFnNumericData::kBoolean, value, &stat);
 	if ( stat != MS::kSuccess ) throw stat;
 
-	M_CHECK(addParameter(node, attr, nAttr));
+	MCHECK(addParameter(node, attr, nAttr));
 
 	MPlug plug(node.object(), attr);
-	M_CHECK(plug.setValue(value));
+	MCHECK(plug.setValue(value));
 
 	return MS::kSuccess;
 }
@@ -62,17 +81,17 @@ MStatus PRTAttrs::addFloatParameter(MFnDependencyNode & node, MObject & attr, co
 	if ( stat != MS::kSuccess ) throw stat;
 
 	if(!isnan(min)) {
-		M_CHECK(nAttr.setMin(min));
+		MCHECK(nAttr.setMin(min));
 	}
 
 	if(!isnan(max)) {
-		M_CHECK(nAttr.setMax( max ));
+		MCHECK(nAttr.setMax( max ));
 	}
 
-	M_CHECK(addParameter(node, attr, nAttr));
+	MCHECK(addParameter(node, attr, nAttr));
 
 	MPlug plug(node.object(), attr);
-	M_CHECK(plug.setValue(value));
+	MCHECK(plug.setValue(value));
 
 	return MS::kSuccess;
 }
@@ -114,17 +133,19 @@ MStatus PRTAttrs::addEnumParameter(MFnDependencyNode & node, MObject & attr, con
 }
 
 MStatus PRTAttrs::addEnumParameter(MFnDependencyNode & node, MObject & attr, const MString & name, short value, PRTEnum * e) {
+
+
 	MStatus stat;
 
 	attr = e->mAttr.create(longName(name), briefName(name), value, &stat);
-	M_CHECK(stat);
+	MCHECK(stat);
 
-	M_CHECK(e->fill());
+	MCHECK(e->fill());
 
-	M_CHECK(addParameter(node, attr, e->mAttr));
+	MCHECK(addParameter(node, attr, e->mAttr));
 
 	MPlug plug(node.object(), attr);
-	M_CHECK(plug.setValue(value));
+	MCHECK(plug.setValue(value));
 
 	return MS::kSuccess;
 }
@@ -136,14 +157,14 @@ MStatus PRTAttrs::addFileParameter(MFnDependencyNode & node, MObject & attr, con
 	MFnTypedAttribute sAttr;
 
 	attr = sAttr.create(longName(name), briefName(name), MFnData::kString, stringData.create("", &stat2), &stat );
-	M_CHECK(stat2);
-	M_CHECK(stat);
-	M_CHECK(sAttr.setUsedAsFilename(true));
-	M_CHECK(addParameter(node, attr, sAttr));
-	M_CHECK(sAttr.setNiceNameOverride(value));
+	MCHECK(stat2);
+	MCHECK(stat);
+	MCHECK(sAttr.setUsedAsFilename(true));
+	MCHECK(addParameter(node, attr, sAttr));
+	MCHECK(sAttr.setNiceNameOverride(value));
 
 	MPlug plug(node.object(), attr);
-	M_CHECK(plug.setValue(MString()));
+	MCHECK(plug.setValue(MString()));
 
 
 	return MS::kSuccess;
@@ -156,7 +177,7 @@ MStatus PRTAttrs::addColorParameter(MFnDependencyNode & node, MObject & attr, co
 	const wchar_t* s = value.asWChar();
 
 	attr = nAttr.createColor(longName(name), briefName(name), &stat );
-	M_CHECK(stat);
+	MCHECK(stat);
 
 	double r = 0.0;
 	double g = 0.0;
@@ -170,15 +191,15 @@ MStatus PRTAttrs::addColorParameter(MFnDependencyNode & node, MObject & attr, co
 		nAttr.setDefault(r, g, b);
 	}
 
-	M_CHECK(addParameter(node, attr, nAttr));
+	MCHECK(addParameter(node, attr, nAttr));
 
 	MFnNumericData fnData;
 	MObject        rgb = fnData.create(MFnNumericData::k3Double, &stat);
-	M_CHECK(stat);
+	MCHECK(stat);
 
 	fnData.setData(r, g, b);
 	MPlug plug(node.object(), attr);
-	M_CHECK(plug.setValue(rgb));
+	MCHECK(plug.setValue(rgb));
 
 	return MS::kSuccess;
 }
@@ -191,12 +212,12 @@ MStatus PRTAttrs::addStrParameter(MFnDependencyNode & node, MObject & attr, cons
 	MFnTypedAttribute sAttr;
 
 	attr = sAttr.create(longName(name), briefName(name), MFnData::kString, stringData.create(value, &stat2), &stat );
-	M_CHECK(stat2);
-	M_CHECK(stat);
-	M_CHECK(addParameter(node, attr, sAttr));
+	MCHECK(stat2);
+	MCHECK(stat);
+	MCHECK(addParameter(node, attr, sAttr));
 
 	MPlug plug(node.object(), attr);
-	M_CHECK(plug.setValue(value));
+	MCHECK(plug.setValue(value));
 
 	return MS::kSuccess;
 }
@@ -210,29 +231,34 @@ MStatus PRTAttrs::updateRuleFiles(MFnDependencyNode & node, MString & rulePkg) {
 
 	prtNode->mLRulePkg = path;
 
-	int count = (int)node.attributeCount(&stat);
-	M_CHECK(stat);
+	if(prtNode->mCreatedInteractively) {
+		int count = (int)node.attributeCount(&stat);
+		MCHECK(stat);
 
-	MObjectArray attrs;
+		MObjectArray attrs;
 
-	for(int i = 0; i < count; i++) {
-		MObject attr = node.attribute(i, &stat);
-		if(stat != MS::kSuccess) continue;
-		attrs.append(attr);
-	}
-
-	for(unsigned int i = 0; i < attrs.length(); i++) {
-		MPlug   plug(node.object(), attrs[i]);
-		MString name = plug.partialName();
-		if(name.index('$') >= 0) {
-			node.removeAttribute(attrs[i]);
-		}	else if(name == NAME_RULE_FILE) {
-			node.removeAttribute(attrs[i]);
-		} else if(name == NAME_START_RULE) {
-			node.removeAttribute(attrs[i]);
+		for(int i = 0; i < count; i++) {
+			MObject attr = node.attribute(i, &stat);
+			if(stat != MS::kSuccess) continue;
+			attrs.append(attr);
 		}
+
+		for(unsigned int i = 0; i < attrs.length(); i++) {
+			MPlug   plug(node.object(), attrs[i]);
+			MString name = plug.partialName();
+			
+			if(prtNode->mBriefName2prtAttr.count(name.asWChar()))
+				node.removeAttribute(attrs[i]);
+		}
+		prtNode->destroyEnums();
+	} else {
+		node.removeAttribute(node.attribute(NAME_RULE_FILE, &stat));
+		MCHECK(stat);
+		node.removeAttribute(node.attribute(NAME_START_RULE, &stat));
+		MCHECK(stat);
+		node.removeAttribute(node.attribute(NAME_GENERATE, &stat));
+		MCHECK(stat);
 	}
-	prtNode->destroyEnums();
 
 	MStringArray ruleFiles;
 	prt::Status resolveMapStatus = prt::STATUS_UNSPECIFIED_ERROR;
@@ -264,7 +290,7 @@ MStatus PRTAttrs::updateStartRules(MFnDependencyNode & node, MStringArray & rule
 	for(unsigned int i = 0; i < ruleFiles.length(); i++)
 		eRuleFiles->add(ruleFiles[i].substring(ruleFiles[i].index('/') + 1, ruleFiles[i].rindex('.') - 1), ruleFiles[i]);
 
-	M_CHECK(addEnumParameter(node, prtNode->mRuleFile, NAME_RULE_FILE, ruleFiles[0], eRuleFiles));
+	MCHECK(addEnumParameter(node, prtNode->mRuleFile, NAME_RULE_FILE, ruleFiles[0], eRuleFiles));
 
 	std::vector<const prt::RuleFileInfo::Entry*> annotStartRules;
 	std::vector<const prt::RuleFileInfo::Entry*> noArgRules;
@@ -299,7 +325,8 @@ MStatus PRTAttrs::updateStartRules(MFnDependencyNode & node, MStringArray & rule
 		for(size_t r = 0; r < startRules.size(); r++)
 			eStartRule->add(longName(MString(startRules[r]->getName())), startRules[r]->getName());
 
-		M_CHECK(addEnumParameter(node, prtNode->mStartRule, NAME_START_RULE, startRuleList[0], eStartRule));
+		MCHECK(addEnumParameter(node, prtNode->mStartRule, NAME_START_RULE, startRuleList[0], eStartRule));
+		MCHECK(addBoolParameter(node, prtNode->mGenerate,  NAME_GENERATE, true));
 
 		if(prtNode->mGenerateAttrs) {
 			prtNode->mGenerateAttrs->destroy();
@@ -323,22 +350,25 @@ MStatus PRTEnum::fill() {
 	if(mAnnot) {
 		MStatus stat;
 		for(size_t arg = 0; arg < mAnnot->getNumArguments(); arg++) {
+			const wchar_t* key = mAnnot->getArgument(arg)->getKey();
+			if(!(wcscmp(key, NULL_KEY)))
+				key = mAnnot->getArgument(arg)->getStr();
 			switch(mAnnot->getArgument(arg)->getType()) {
 				mKeys.append(MString(mAnnot->getArgument(arg)->getKey()));
 				case prt::AAT_BOOL:
-					M_CHECK(mAttr.addField(MString(mAnnot->getArgument(arg)->getKey()), mBVals.length()));
+					MCHECK(mAttr.addField(MString(key), mBVals.length()));
 					mBVals.append(mAnnot->getArgument(arg)->getBool());
 					mFVals.append(std::numeric_limits<double>::quiet_NaN());
 					mSVals.append("");
 					break;
 				case prt::AAT_FLOAT:
-					M_CHECK(mAttr.addField(MString(mAnnot->getArgument(arg)->getKey()), mFVals.length()));
+					MCHECK(mAttr.addField(MString(key), mFVals.length()));
 					mBVals.append(false);
 					mFVals.append(mAnnot->getArgument(arg)->getFloat());
 					mSVals.append("");
 					break;
 				case prt::AAT_STR:
-					M_CHECK(mAttr.addField(MString(mAnnot->getArgument(arg)->getKey()), mSVals.length()));
+					MCHECK(mAttr.addField(MString(key), mSVals.length()));
 					mBVals.append(false);
 					mFVals.append(std::numeric_limits<double>::quiet_NaN());
 					mSVals.append(MString(mAnnot->getArgument(arg)->getStr()));
@@ -398,23 +428,24 @@ MStatus PRTAttrs::createAttributes(MFnDependencyNode & node, MString & ruleFile,
 	);
 	const prt::InitialShape* shape = isb->createInitialShapeAndReset();
 
-//	size_t size = 4096;
-//	DBG("%s", shape->toXML((char*)malloc(size), &size));
-
 	prt::Status generateStatus = prt::generate(&shape, 1, 0, &ENC_ATTR, 1, &prtNode->mAttrEncOpts, outputHandler, PRTNode::theCache, 0);
 
 	const std::map<std::wstring, MayaOutputHandler::AttributeHolder>& evalAttrs = outputHandler->getAttrs();
 
-	static const std::wstring STYLE = L"Default$"; // currently hardcoded to default style
+	prtNode->mBriefName2prtAttr[NAME_RULE_FILE.asWChar()]  = NAME_RULE_FILE.asWChar();
+	prtNode->mBriefName2prtAttr[NAME_START_RULE.asWChar()] = NAME_START_RULE.asWChar();
+	prtNode->mBriefName2prtAttr[NAME_GENERATE.asWChar()]   = NAME_GENERATE.asWChar();
+
 	for(size_t i = 0; i < info->getNumAttributes(); i++) {
 		PRTEnum*       e          = 0;
 		bool           createAttr = false;
 
-		std::wstring styledAttributeName(info->getAttribute(i)->getName());
-		const MString  name      = MString(styledAttributeName.substr(STYLE.length()).c_str()); // FIXME
+		const MString  name       = MString(info->getAttribute(i)->getName());
 		MObject        attr;
 
 		if(info->getAttribute(i)->getNumParameters() != 0) continue;
+
+		prtNode->mBriefName2prtAttr[PRTAttrs::clean(name).asWChar()] = name.asWChar();
 
 		switch(info->getAttribute(i)->getReturnType()) {
 		case prt::AAT_BOOL: {
@@ -423,13 +454,13 @@ MStatus PRTAttrs::createAttributes(MFnDependencyNode & node, MString & ruleFile,
 					if(!(wcscmp(an->getName(), ANNOT_RANGE)))
 						e = new PRTEnum(prtNode, an);
 				}
-
+ 
 				bool value = evalAttrs.find(name.asWChar())->second.mBool;
 
 				if(e) {
-					M_CHECK(addEnumParameter(node, attr, name, value, e));
+					MCHECK(addEnumParameter(node, attr, name, value, e));
 				} else {
-					M_CHECK(addBoolParameter(node, attr, name, value));
+					MCHECK(addBoolParameter(node, attr, name, value));
 				}
 			break;
 			}
@@ -450,9 +481,9 @@ MStatus PRTAttrs::createAttributes(MFnDependencyNode & node, MString & ruleFile,
 				double value = evalAttrs.find(name.asWChar())->second.mFloat;
 
 				if(e) {
-					M_CHECK(addEnumParameter(node, attr, name, value, e));
+					MCHECK(addEnumParameter(node, attr, name, value, e));
 				} else {
-					M_CHECK(addFloatParameter(node, attr, name, value, min, max));
+					MCHECK(addFloatParameter(node, attr, name, value, min, max));
 				}
 				break;
 			}
@@ -483,17 +514,19 @@ MStatus PRTAttrs::createAttributes(MFnDependencyNode & node, MString & ruleFile,
 				}
 
 				std::wstring value = evalAttrs.find(name.asWChar())->second.mString;
-
 				MString mvalue(value.c_str());
+				if(!(asColor) && mvalue.length() == 7 && value[0] == L'#')
+					asColor = true;
+
 				if(e) {
-					M_CHECK(addEnumParameter(node, attr, name, mvalue, e));
+					MCHECK(addEnumParameter(node, attr, name, mvalue, e));
 				} else if(asFile) {
 					exts += "All Files (*.*)";
-					M_CHECK(addFileParameter(node, attr, name, exts));
+					MCHECK(addFileParameter(node, attr, name, exts));
 				} else if(asColor) {
-					M_CHECK(addColorParameter(node, attr, name, mvalue));
+					MCHECK(addColorParameter(node, attr, name, mvalue));
 				} else {
-					M_CHECK(addStrParameter(node, attr, name, mvalue));
+					MCHECK(addStrParameter(node, attr, name, mvalue));
 				}
 
 				break;
@@ -506,7 +539,7 @@ MStatus PRTAttrs::createAttributes(MFnDependencyNode & node, MString & ruleFile,
 				MFnAttribute fAttr(attr);
 				for(size_t arg = 0; arg < an->getNumArguments(); arg++) {
 					if(an->getArgument(arg)->getType() == prt::AAT_STR)
-						M_CHECK(fAttr.addToCategory(MString(an->getArgument(arg)->getStr())));
+						MCHECK(fAttr.addToCategory(MString(an->getArgument(arg)->getStr())));
 				}
 			}
 		}
@@ -523,20 +556,20 @@ MStatus PRTAttrs::doIt(const MArgList& args) {
 	MStatus stat;
 
 	MString prtNodeName = args.asString(0, &stat);
-	M_CHECK(stat);
+	MCHECK(stat);
 
 	MSelectionList tempList;
 	tempList.add(prtNodeName);
 	MObject prtNode;
-	M_CHECK(tempList.getDependNode(0, prtNode));
+	MCHECK(tempList.getDependNode(0, prtNode));
 	MFnDependencyNode fNode(prtNode, &stat);
-	M_CHECK(stat);
+	MCHECK(stat);
 
 	if(fNode.typeId().id() != PRT_TYPE_ID)
 		return MS::kFailure;
 
 	MString sRulePkg;
-	updateRuleFiles(fNode, getStringParameter(prtNode, ((PRTNode*)fNode.userNode())->theRulePkg, sRulePkg));
+	updateRuleFiles(fNode, getStringParameter(prtNode, ((PRTNode*)fNode.userNode())->rulePkg, sRulePkg));
 
 	MGlobal::executeCommand(MString("refreshEditorTemplates"));
 

@@ -186,6 +186,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\PRTCreate.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\PRTMaterials.cpp"
 				>
 			</File>

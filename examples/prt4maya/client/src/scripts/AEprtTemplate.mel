@@ -54,9 +54,6 @@ global proc prtShowFileDialog(string $attr) {
 
 global proc prtFileBrowse(string $attr, string $varname){
 	$varname = prtPlug($varname);
-
-	print ("### prtFileBrowse " + $attr + "," + $varname + "\n");
-
 	setUITemplate -pst attributeEditorTemplate;
 	rowLayout -nc 3;  
 	text -label `prtAttrName($attr)`;
@@ -69,8 +66,6 @@ global proc prtFileBrowse(string $attr, string $varname){
 }  
   
 global proc prtFileBrowseReplace(string $attr, string $varname){
-	print ("### prtFileBrowseReplace " + $attr + "\n");
-
 	if(prtRPKChange($attr, $varname)) {	
 		string $control = prtControlName($attr);
 		connectControl $control $attr;
@@ -79,13 +74,9 @@ global proc prtFileBrowseReplace(string $attr, string $varname){
 }
 
 global proc prtFileBrowseReplaceRPK(string $attr, string $varname){
-	print ("### prtFileBrowseReplaceRPK " + $attr + "," + $varname + "\n");
-
 	if(prtRPKChange($attr, $varname)) {
-		print ("### NO REFRESH ####\n");
 		prtFileBrowseReplace($attr, $varname);
 	} else {
-		print ("### REFRESH ####\n");
 		$varname = prtPlug($varname);
 		$newpkg  = `getAttr $attr`;
 		evalDeferred ("$" + $varname + "=\"" + $newpkg + "\"; refreshEditorTemplates();");
@@ -93,8 +84,6 @@ global proc prtFileBrowseReplaceRPK(string $attr, string $varname){
 }
 
 global proc prtColorChooser(string $attr, string $varname) {
-	print ("### prtColorChooser " + $attr + "," + $varname + "\n");
- 
 	setUITemplate -pst attributeEditorTemplate;
 	string $control = prtControlName($attr);
 	colorSliderGrp -label `prtAttrName($attr)` $control;
@@ -104,8 +93,6 @@ global proc prtColorChooser(string $attr, string $varname) {
 }  
 
 global proc prtColorChooserReplace(string $attr, string $varname){
-	print ("### prtColorChooserReplace " + $attr + "," + $varname + "\n");
-
 	if(prtRPKChange($attr, $varname)) {
 		string $control = prtControlName($attr);
 		connectControl $control $attr;
@@ -113,8 +100,6 @@ global proc prtColorChooserReplace(string $attr, string $varname){
 }
 
 global proc AEprtTemplate(string $node) {
-	print ("### AEprtTemplate " + $node + "\n");
-
 	editorTemplate -suppress "caching"; 
 	editorTemplate -suppress "nodeState";
 
@@ -124,11 +109,21 @@ global proc AEprtTemplate(string $node) {
 	string $varname = ("AEprtTemplate_" + $node);
 	eval ("global string $" + $varname + "=\"" + `getAttr ($node + ".Rule_Package")` + "\"");
 	editorTemplate -callCustom "prtFileBrowse" "prtFileBrowseReplaceRPK" "Rule_Package" $varname;
+
+	editorTemplate -l "Rule_File" -adc "Rule_File";
+	editorTemplate -l "Start_Rule" -adc "Start_Rule";
+	editorTemplate -l "Generate_Model" -adc "Generate_Model";
+	
+	editorTemplate -endLayout;
+	editorTemplate -beginLayout "CGA Attributes" -collapse 0;
 		
 	string $attrs[] = `listAttr -ud $node`;
 	
 	$skip = 0;
 	for($attr in $attrs) {
+		if($attr == "Start_Rule" || $attr == "Rule_File")
+			$skip = 1;
+		
 		if($skip-- > 0) continue;
 		
 		if(`addAttr -q  -uaf ($node + "." + $attr) `) {
@@ -137,11 +132,7 @@ global proc AEprtTemplate(string $node) {
 			editorTemplate -callCustom "prtColorChooser" "prtColorChooserReplace" $attr $varname;
 			$skip = 3;
 		} else {
-			print `editorTemplate -l $attr -adc $attr`;
-		}
-		if($attr == "Start_Rule") {
-			editorTemplate -endLayout;
-			editorTemplate -beginLayout "CGA Attributes" -collapse 0;
+			editorTemplate -l $attr -adc $attr;
 		}
 	}
 	editorTemplate -endLayout;
