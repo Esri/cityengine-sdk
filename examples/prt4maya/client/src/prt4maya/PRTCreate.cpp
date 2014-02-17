@@ -1,6 +1,8 @@
 #include "Utilities.h"
 #include "prt4maya/PRTNode.h"
 
+using namespace prtUtils;
+
 void* PRTCreate::creator() {
 	return new PRTCreate;
 }

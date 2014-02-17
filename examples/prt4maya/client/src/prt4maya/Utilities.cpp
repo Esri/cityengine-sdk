@@ -10,6 +10,8 @@
 #include "Utilities.h"
 #include <maya/MString.h>
 
+namespace prtUtils {
+
 const char* filename(const char* path) {
 	while(*(--path) != '\\');
 	return path + 1;
@@ -97,3 +99,24 @@ void toHex(wchar_t* color, double r, double g, double b) {
 	color[6] = toHex((int)(b * 255));
 }
 
+
+MString toCleanId(const MString& name) {
+	int            len    = name.numChars();
+	const wchar_t* wname  = name.asWChar();
+	wchar_t*       dst    = new wchar_t[len + 1];
+	for(int i = 0; i < len; i++) {
+		wchar_t c = wname[i];
+		if((c >= '0' && c <= '9') ||
+			 (c >= 'A' && c <= 'Z') ||
+			 (c >= 'a' && c <= 'z')) 
+			dst[i] = c;
+		else
+			dst[i] = '_';
+	}
+	dst[len] = L'\0';
+	MString result(dst);
+	delete[] dst;
+	return result;
+}
+
+}

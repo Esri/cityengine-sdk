@@ -14,6 +14,8 @@
 #include "PRTNode.h"
 #include <limits>
 
+using namespace prtUtils;
+
 const MString OUTPUT_GEOMETRY = MString("og");
 
 MStatus PRTNode::attachMaterials() {

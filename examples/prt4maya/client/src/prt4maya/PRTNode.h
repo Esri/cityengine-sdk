@@ -186,7 +186,6 @@ private:
 	static MStatus  createAttributes(MFnDependencyNode & node, MString & ruleFile, MString & startRule, prt::AttributeMapBuilder* aBuilder, const prt::RuleFileInfo* info);
 	static MString  longName(const MString & attrName);
 	static MString  briefName(const MString & attrName);
-	static MString  clean(const MString& name);
 };
 
 class PRTMaterials : public MPxCommand

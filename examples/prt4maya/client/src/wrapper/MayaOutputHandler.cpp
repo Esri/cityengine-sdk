@@ -18,6 +18,8 @@
 #include "prt4maya/Utilities.h"
 #include "prt4maya/PRTNode.h"
 
+using namespace prtUtils;
+
 namespace {
 static const bool TRACE = false;
 void prtTrace(const std::wstring& arg1, std::size_t arg2) {
@@ -139,26 +141,9 @@ void MayaOutputHandler::createMesh() {
 
 MString getGroupName(const wchar_t* name) {
 	MString matName(name);
-	int len = matName.numChars();
-	matName = matName.substringW(matName.rindexW('/') + 1, len);
-	len = matName.numChars();
-	const wchar_t* matNameW = matName.asWChar();
-	char* matNameC = (char*)malloc(len + 1);
-	for(int i = len; --i >= 0;) {
-		wchar_t c = matNameW[i];
-		if((c >= L'0' && c <= L'9') ||
-		 	 (c >= L'A' && c <= L'Z') ||
-			 (c >= L'a' && c <= L'z'))
-			matNameC[i] = (char)c;
-		else
-		  matNameC[i] = '_';
-	}
-  matNameC[len] = '\0';
-
+	int     len   = matName.numChars();
 	MString result = "prtSG_";
-	result        += matNameC;
-	free(matNameC);
-
+	result        += toCleanId(matName.substringW(matName.rindexW('/') + 1, len));
 	return result;
 }
 

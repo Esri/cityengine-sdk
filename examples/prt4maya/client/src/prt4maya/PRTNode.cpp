@@ -27,6 +27,7 @@
 
 #include "prt/FlexLicParams.h"
 
+using namespace prtUtils;
 
 namespace {
 static const bool ENABLE_LOG_CONSOLE	= true;
@@ -71,8 +72,7 @@ PRTNode::~PRTNode() {
 }
 
 MStatus PRTNode::setDependentsDirty(const MPlug& /*plugBeingDirtied*/, MPlugArray& affectedPlugs) {
-	MObject thisNode = thisMObject();
-	MPlug   pOutMesh(thisNode, outMesh);
+	MPlug   pOutMesh(thisMObject(), outMesh);
 	affectedPlugs.append(pOutMesh);
 	return MS::kSuccess;
 }
@@ -100,6 +100,11 @@ MStatus PRTNode::compute(const MPlug& plug, MDataBlock& data ) {
 	}
 
 	if(plug == outMesh && mGenerateAttrs) {
+		bool connected = plug.isNetworked(&stat);
+		MCHECK(stat);
+		if(!connected)
+			return MS::kFailure;
+
 		MDataHandle inputHandle = data.inputValue(inMesh, &stat);
 		MCHECK(stat);
 		MObject iMesh = inputHandle.asMeshTransformed();
@@ -432,14 +437,14 @@ MStatus PRTNode::initialize() {
 	MFnTypedAttribute   typedFn;
 	MStatus             stat;
 
-	outMesh = typedFn.create( "outMesh", "om", MFnData::kMesh, &stat ); 
+	outMesh = typedFn.create( "outMesh", "outMesh", MFnData::kMesh, &stat ); 
 	MCHECK(stat);  
 	typedFn.setStorable(false);
 	typedFn.setWritable(false);
 	stat = addAttribute( outMesh );
 	MCHECK(stat);  
 
-	inMesh = typedFn.create( "inMesh", "im", MFnData::kMesh, &stat ); 
+	inMesh = typedFn.create( "inMesh", "inMesh", MFnData::kMesh, &stat ); 
 	MCHECK(stat);  
 	typedFn.setStorable(false);
 	typedFn.setHidden(true);

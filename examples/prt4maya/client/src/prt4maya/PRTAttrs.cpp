@@ -14,6 +14,8 @@
 #include "wrapper/MayaOutputHandler.h"
 #include <limits>
 
+using namespace prtUtils;
+
 inline MString & PRTAttrs::getStringParameter(MObject & node, MObject & attr, MString & value) {
 	MPlug plug(node, attr);
 	plug.getValue(value);
@@ -35,29 +37,12 @@ MStatus PRTAttrs::addParameter(MFnDependencyNode & node, MObject & attr, MFnAttr
 	return MS::kSuccess;
 }
 
-MString PRTAttrs::clean(const MString& name) {
-	int      len   = name.numChars();
-	wchar_t* wname = new wchar_t[len + 1];
-	wcscpy(wname, name.asWChar());
-	for(int i = 0; i < len; i++) {
-		wchar_t c = wname[i];
-		if((c >= '0' && c <= '9') ||
-			 (c >= 'A' && c <= 'Z') ||
-			 (c >= 'a' && c <= 'z')) 
-			continue;
-		wname[i] = '_';
-	}
-	MString result(wname);
-	delete[] wname;
-	return result;
-}
-
 MString PRTAttrs::longName(const MString& attrName) {
-	return clean(attrName.substring(attrName.index('$') + 1, attrName.length()));
+	return toCleanId(attrName.substring(attrName.index('$') + 1, attrName.length()));
 }
 
 MString PRTAttrs::briefName(const MString & attrName) {
-	return clean(attrName);
+	return toCleanId(attrName);
 }
 
 MStatus PRTAttrs::addBoolParameter(MFnDependencyNode & node, MObject & attr, const MString & name, bool value) {
@@ -445,7 +430,7 @@ MStatus PRTAttrs::createAttributes(MFnDependencyNode & node, MString & ruleFile,
 
 		if(info->getAttribute(i)->getNumParameters() != 0) continue;
 
-		prtNode->mBriefName2prtAttr[PRTAttrs::clean(name).asWChar()] = name.asWChar();
+		prtNode->mBriefName2prtAttr[toCleanId(name).asWChar()] = name.asWChar();
 
 		switch(info->getAttribute(i)->getReturnType()) {
 		case prt::AAT_BOOL: {
