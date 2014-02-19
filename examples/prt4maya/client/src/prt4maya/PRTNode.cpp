@@ -187,6 +187,12 @@ MStatus PRTNode::compute(const MPlug& plug, MDataBlock& data ) {
 		if(mCreatedInteractively) {
 			MGlobal::executeCommand(mShadingCmd, DO_DBG, false);
 			MGlobal::executeCommandOnIdle(MString("prtMaterials " + name()), DO_DBG);
+		} else {
+			MPlug pState(thisMObject(), state);
+			pState.setValue(0);
+
+			MPlug pHist(thisMObject(), isHistoricallyInteresting);
+			pHist.setValue(2);
 		}
 	}
 
