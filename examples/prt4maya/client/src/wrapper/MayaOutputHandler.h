@@ -65,7 +65,7 @@ public:
 
 public:
 	MayaOutputHandler(const MPlug* plug, MDataBlock* data, MStringArray* shadingGroups, MIntArray* shadingRanges, MString* shadingCmd) :
-		mPlug(plug), mData(data), mShadingGroups(shadingGroups), mShadingRanges(shadingRanges), mShadingCmd(shadingCmd)
+			mPlug(plug), mData(data), mShadingGroups(shadingGroups), mShadingRanges(shadingRanges), mShadingCmd(shadingCmd)
 	{ }
 	virtual ~MayaOutputHandler() {}
 

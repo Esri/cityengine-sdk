@@ -128,7 +128,7 @@ void MayaOutputHandler::createMesh() {
 
 		// NOTE: this expects that vertices and vertex normals use the same index domain (-> maya encoder)
 		MVectorArray expandedNormals(mVerticesConnects.length());
-		for (size_t i = 0; i < mVerticesConnects.length(); i++)
+		for (unsigned int i = 0; i < mVerticesConnects.length(); i++)
 			expandedNormals[i] = mNormals[mVerticesConnects[i]];
 		
 		DBG("    expandedNormals.length = %d", expandedNormals.length());
@@ -141,9 +141,10 @@ void MayaOutputHandler::createMesh() {
 
 MString getGroupName(const wchar_t* name) {
 	MString matName(name);
-	int     len   = matName.numChars();
-	MString result = "prtSG_";
+	int     len    = matName.numChars();
+	MString result = "prtmat";
 	result        += toCleanId(matName.substringW(matName.rindexW('/') + 1, len));
+	result        += "SG";
 	return result;
 }
 
@@ -159,7 +160,7 @@ MString MayaOutputHandler::matCreate(int start, int count, const wchar_t* name) 
 	
 	if(createGroup) {
 		PRTNode::theShadingGroups.append(groupName);
-		*mShadingCmd += "createShadingGroup(\"" + groupName + "\");\n";
+		*mShadingCmd += "sets -renderable true -noSurfaceShader true -empty -name (\"" + groupName + "\");\n";
 	}
 
 	mShadingGroups->append(groupName);
@@ -178,8 +179,8 @@ void MayaOutputHandler::matSetDiffuseTexture(int start, int count, const wchar_t
 }
 
 void MayaOutputHandler::matSetColor(int start, int count, float r, float g, float b) {
-	wchar_t name[16];
-	swprintf(name, L"%02X%02X%02X", (int)(r * 255.0), (int)(g * 255.0), (int)(b * 255.0), 15);
+	wchar_t name[8];
+	swprintf(name, 7, L"%02X%02X%02X", (int)(r * 255.0), (int)(g * 255.0), (int)(b * 255.0));
 	MString matName = matCreate(start, count, name);
 	if(matName.numChars() == 0) return;
 

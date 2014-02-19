@@ -89,20 +89,12 @@ global proc prt4mayaCreateUI() {
  	createPrtMenu();
 }
 
-// --- shader setup helpers
-
-global proc createShadingGroup(string $name) {
-	string $sgName = $name;
-	string $shName = $name + "H";
-	
-	shadingNode -asShader lambert -n $shName;
-	sets -renderable true -noSurfaceShader true -empty -name $sgName;
-	connectAttr -f ($shName + ".outColor") ($sgName + ".surfaceShader");
-}
+// --- material helpers
 
 global proc prtSetDiffuseTexture(string $sgName, string $texturePath, string $uvSet) {
-	$shaderPlug = `connectionInfo -sfd ($sgName + ".surfaceShader")`;
-	$shName = `plugNode $shaderPlug`;
+	string $shName = $sgName + "H";
+	shadingNode -asShader lambert -n $shName;
+	connectAttr -f ($shName + ".outColor") ($sgName + ".surfaceShader");
 
 	string $nodeName = $sgName + "F";
 
@@ -119,6 +111,6 @@ global proc prtSetColor(string $sgName, float $r, float $g, float $b) {
 
 	shadingNode -asShader blinn -n $nodeName;
 	setAttr ($nodeName + ".color") -type "double3" $r $g $b;
-	connectAttr -force ($nodeName + ".outColor") ($shName + ".color");
+	connectAttr -force ($nodeName + ".outColor") ($sgName + ".surfaceShader");
 }
 

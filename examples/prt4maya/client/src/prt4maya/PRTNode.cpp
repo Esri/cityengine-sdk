@@ -187,12 +187,12 @@ MStatus PRTNode::compute(const MPlug& plug, MDataBlock& data ) {
 
 		data.setClean(plug);
 
-		if(mCreatedInteractively) {
-			MGlobal::executeCommand(mShadingCmd, true, false);
-			MString cmd;
-			cmd.format("prtMaterials ^1s", name());
-			MGlobal::executeCommandOnIdle(cmd, true);
-		}
+		if(mCreatedInteractively)
+			MGlobal::executeCommand(mShadingCmd, DO_DBG, false);
+
+		MString cmd;
+		cmd.format("prtMaterials ^1s", name());
+		MGlobal::executeCommandOnIdle(cmd, DO_DBG);
 	}
 
 	mCreatedInteractively = true;
@@ -469,6 +469,9 @@ MStatus PRTNode::initialize() {
 }
 
 void PRTNode::uninitialize() {
+	theCache->destroy();
+	theLicHandle->destroy();
+
 	if (ENABLE_LOG_CONSOLE) {
 		prt::removeLogHandler(theLogHandler);
 		theLogHandler->destroy();
@@ -477,8 +480,6 @@ void PRTNode::uninitialize() {
 		prt::removeLogHandler(theFileLogHandler);
 		theFileLogHandler->destroy();
 	}
-	theLicHandle->destroy();
-	theCache->destroy();
 }
 
 MStatus initializePlugin( MObject obj ){
@@ -500,14 +501,14 @@ MStatus initializePlugin( MObject obj ){
 }
 
 MStatus uninitializePlugin( MObject obj) {
+	PRTNode::uninitialize();
+
 	MFnPlugin plugin( obj );
 
 	MCHECK(plugin.deregisterCommand("prtMaterials"));
 	MCHECK(plugin.deregisterCommand("prtAttrs"));
 	MCHECK(plugin.deregisterCommand("prtCreate"));
 	MCHECK(plugin.deregisterNode(PRTNode::theID));
-
-	PRTNode::uninitialize();
 
 	return MS::kSuccess;
 }

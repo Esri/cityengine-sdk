@@ -245,9 +245,11 @@ MStatus PRTAttrs::updateRuleFiles(MFnDependencyNode & node, MString & rulePkg) {
 		MCHECK(stat);
 	}
 
+	MString      unpackDir       = MGlobal::executeCommandStringResult("workspace -q -fullName");
+	unpackDir += "/assets";
 	MStringArray ruleFiles;
 	prt::Status resolveMapStatus = prt::STATUS_UNSPECIFIED_ERROR;
-	prtNode->mResolveMap = prt::createResolveMap(path.c_str(), true, &resolveMapStatus);
+	prtNode->mResolveMap = prt::createResolveMap(path.c_str(), unpackDir.asWChar(), &resolveMapStatus);
 	if(resolveMapStatus == prt::STATUS_OK) {
 		size_t nKeys;
 		const wchar_t** keys   = prtNode->mResolveMap->getKeys(&nKeys);

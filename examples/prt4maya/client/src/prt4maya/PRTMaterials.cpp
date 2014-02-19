@@ -58,12 +58,13 @@ MStatus PRTNode::attachMaterials() {
 
 		if(meshFound) {
 			MString cmd;
-			char buf[256];
+			wchar_t* buf = new wchar_t[512];
 			for(unsigned int i = 0; i < mShadingGroups.length(); i++) {
-				sprintf(buf, "sets -forceElement %s %s.f[%d:%d];\n", mShadingGroups[i].asChar(), meshName.asChar(), mShadingRanges[i * 2], mShadingRanges[i * 2 + 1]);
+				swprintf(buf, 511, L"sets -e -forceElement %s %s.f[%d:%d];\n", mShadingGroups[i].asWChar(), meshName.asWChar(), mShadingRanges[i * 2], mShadingRanges[i * 2 + 1]);
 				cmd += buf;
 			}
-			MCHECK(MGlobal::executeCommand(cmd, true, false));
+			delete[] buf;
+			MCHECK(MGlobal::executeCommand(cmd, DO_DBG, false));
 		}
 
 		mHasMaterials = true;
