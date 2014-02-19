@@ -64,8 +64,6 @@
 #define PRT_TYPE_ID 0x8666b
 
 static const MString  NAME_RULE_PKG      ("Rule_Package");
-static const MString  NAME_RULE_FILE     ("Rule_File");
-static const MString  NAME_START_RULE    ("Start_Rule");
 static const MString  NAME_GENERATE      ("Generate_Model");
 static const wchar_t* FILE_PREFIX      = L"file:///";
 static const wchar_t* FLEXNET_LIB      = L"flexnet_prt";
@@ -118,6 +116,7 @@ public:
 
 	static  void *                 creator();
 	static  MStatus                initialize();
+	static std::wstring            getPluginRoot();
 
 	const PRTEnum *                findEnum(const MObject & attr) const;
 	void                           destroyEnums();
@@ -126,8 +125,8 @@ public:
 	static void                    uninitialize();
 	MayaOutputHandler*             createOutputHandler(const MPlug* plug, MDataBlock* data);
 
-	MObject                        mRuleFile;
-	MObject                        mStartRule;
+	std::wstring                   mRuleFile;
+	std::wstring                   mStartRule;
 	MObject                        mGenerate;
 	bool                           mCreatedInteractively;
 
@@ -143,6 +142,7 @@ public:
 	static MObject                 rulePkg;
 	static MObject                 inMesh;
 	static MObject                 outMesh;
+	static const prt::Object*      theLicHandle;
 	static prt::CacheObject*       theCache;
 	static MStringArray            theShadingGroups;
 
@@ -155,13 +155,11 @@ private:
 
 	static prt::ConsoleLogHandler* theLogHandler;
 	static prt::FileLogHandler*    theFileLogHandler;
-	static const prt::Object*      theLicHandle;
 	static int                     theNodeCount;
 
 	MString&            getStrParameter(MObject & attr, MString & value);
 	bool                getBoolParameter(MObject & attr);
 	MStatus             updateShapeAttributes();
-	static std::wstring getPluginRoot();
 };
 
 class PRTAttrs : public MPxCommand {
@@ -182,8 +180,8 @@ private:
 	static MStatus  addEnumParameter(MFnDependencyNode & node,  MObject & attr, const MString & name, short value, PRTEnum * e);
 	static MStatus  addColorParameter(MFnDependencyNode & node,  MObject & attr, const MString & name, MString& attrDefault);
 	static MStatus  addParameter(MFnDependencyNode & node, MObject & attr ,  MFnAttribute& tAttr);
-	static MStatus  updateStartRules(MFnDependencyNode & node, MStringArray & ruleFiles);
-	static MStatus  createAttributes(MFnDependencyNode & node, MString & ruleFile, MString & startRule, prt::AttributeMapBuilder* aBuilder, const prt::RuleFileInfo* info);
+	static MStatus  updateStartRules(MFnDependencyNode & node);
+	static MStatus  createAttributes(MFnDependencyNode & node, const std::wstring & ruleFile, const std::wstring & startRule, prt::AttributeMapBuilder* aBuilder, const prt::RuleFileInfo* info);
 	static MString  longName(const MString & attrName);
 	static MString  briefName(const MString & attrName);
 };

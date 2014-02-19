@@ -237,17 +237,15 @@ MStatus PRTAttrs::updateRuleFiles(MFnDependencyNode & node, MString & rulePkg) {
 		}
 		prtNode->destroyEnums();
 	} else {
-		node.removeAttribute(node.attribute(NAME_RULE_FILE, &stat));
-		MCHECK(stat);
-		node.removeAttribute(node.attribute(NAME_START_RULE, &stat));
-		MCHECK(stat);
 		node.removeAttribute(node.attribute(NAME_GENERATE, &stat));
 		MCHECK(stat);
 	}
 
+	prtNode->mRuleFile.clear();
+	prtNode->mStartRule.clear();
+
 	MString      unpackDir       = MGlobal::executeCommandStringResult("workspace -q -fullName");
 	unpackDir += "/assets";
-	MStringArray ruleFiles;
 	prt::Status resolveMapStatus = prt::STATUS_UNSPECIFIED_ERROR;
 	prtNode->mResolveMap = prt::createResolveMap(path.c_str(), unpackDir.asWChar(), &resolveMapStatus);
 	if(resolveMapStatus == prt::STATUS_OK) {
@@ -256,63 +254,42 @@ MStatus PRTAttrs::updateRuleFiles(MFnDependencyNode & node, MString & rulePkg) {
 		std::wstring    sCGB(L".cgb");
 		for(size_t k = 0; k < nKeys; k++) {
 			std::wstring key = std::wstring(keys[k]);
-			if(std::equal(sCGB.rbegin(), sCGB.rend(), key.rbegin()))
-				ruleFiles.append(MString(key.c_str()));
+			if(std::equal(sCGB.rbegin(), sCGB.rend(), key.rbegin())) {
+				prtNode->mRuleFile = key;
+				break;
+			}
 		}
 	} else {
 		prtNode->mResolveMap = 0;
 	}
 
-	if(ruleFiles.length() > 0)
-		updateStartRules(node, ruleFiles);
+	if(prtNode->mRuleFile.length() > 0)
+		updateStartRules(node);
 
 	return MS::kSuccess;
 }
 
-MStatus PRTAttrs::updateStartRules(MFnDependencyNode & node, MStringArray & ruleFiles) {
+MStatus PRTAttrs::updateStartRules(MFnDependencyNode & node) {
 	PRTNode* prtNode = (PRTNode*)node.userNode();
 
-	PRTEnum * eRuleFiles = new PRTEnum(prtNode);
-
-	for(unsigned int i = 0; i < ruleFiles.length(); i++)
-		eRuleFiles->add(ruleFiles[i].substring(ruleFiles[i].index('/') + 1, ruleFiles[i].rindex('.') - 1), ruleFiles[i]);
-
-	MCHECK(addEnumParameter(node, prtNode->mRuleFile, NAME_RULE_FILE, ruleFiles[0], eRuleFiles));
-
-	std::vector<const prt::RuleFileInfo::Entry*> annotStartRules;
-	std::vector<const prt::RuleFileInfo::Entry*> noArgRules;
+	const prt::RuleFileInfo::Entry* startRule = 0;
 
 	prt::Status infoStatus = prt::STATUS_UNSPECIFIED_ERROR;
-	const prt::RuleFileInfo* info = prt::createRuleFileInfo(prtNode->mResolveMap->getString(ruleFiles[0].asWChar()), 0, &infoStatus); // TODO: callback???
+	const prt::RuleFileInfo* info = prt::createRuleFileInfo(prtNode->mResolveMap->getString(prtNode->mRuleFile.c_str()), 0, &infoStatus);
 	if (infoStatus == prt::STATUS_OK) {
 		for(size_t r = 0; r < info->getNumRules(); r++) {
 			if(info->getRule(r)->getNumParameters() > 0) continue;
-			bool startRule = false;
 			for(size_t a = 0; a < info->getRule(r)->getNumAnnotations(); a++) {
 				if(!(wcscmp(info->getRule(r)->getAnnotation(a)->getName(), ANNOT_START_RULE))) {
-					annotStartRules.push_back(info->getRule(r));
-					startRule = true;
+					startRule = info->getRule(r);
+					break;
 				}
 			}
-			if(!startRule)
-				noArgRules.push_back(info->getRule(r));
 		}
 	}
+	if(startRule) {
+		prtNode->mStartRule = startRule->getName();
 
-	std::vector<const prt::RuleFileInfo::Entry*> startRules = annotStartRules.size() > 0 ? annotStartRules : noArgRules;
-
-	MStringArray startRuleList;
-
-	for(size_t r = 0; r < startRules.size(); r++)
-		startRuleList.append(startRules[r]->getName());
-
-	if(startRuleList.length() > 0) {
-		PRTEnum* eStartRule = new PRTEnum(prtNode);
-		
-		for(size_t r = 0; r < startRules.size(); r++)
-			eStartRule->add(longName(MString(startRules[r]->getName())), startRules[r]->getName());
-
-		MCHECK(addEnumParameter(node, prtNode->mStartRule, NAME_START_RULE, startRuleList[0], eStartRule));
 		MCHECK(addBoolParameter(node, prtNode->mGenerate,  NAME_GENERATE, true));
 
 		if(prtNode->mGenerateAttrs) {
@@ -321,10 +298,13 @@ MStatus PRTAttrs::updateStartRules(MFnDependencyNode & node, MStringArray & rule
 		}
 
 		prt::AttributeMapBuilder* aBuilder = prt::AttributeMapBuilder::create();
-		createAttributes(node, ruleFiles[0], startRuleList[0], aBuilder, info);
+		createAttributes(node, prtNode->mRuleFile, prtNode->mStartRule, aBuilder, info);
 		prtNode->mGenerateAttrs = aBuilder->createAttributeMap();
 		aBuilder->destroy();
 	}
+
+  if(info)
+		info->destroy();
 
 	return MS::kSuccess;
 }
@@ -384,7 +364,7 @@ static const size_t 	UnitQuad_indexCount      = 4;
 static const uint32_t	UnitQuad_faceCounts[]    = { 4 };
 static const size_t 	UnitQuad_faceCountsCount = 1;
 
-MStatus PRTAttrs::createAttributes(MFnDependencyNode & node, MString & ruleFile, MString & startRule, prt::AttributeMapBuilder* aBuilder, const prt::RuleFileInfo* info) {
+MStatus PRTAttrs::createAttributes(MFnDependencyNode & node, const std::wstring & ruleFile, const std::wstring & startRule, prt::AttributeMapBuilder* aBuilder, const prt::RuleFileInfo* info) {
 	MStatus           stat;
 	MStatus           stat2;
 	MFnNumericData    numericData;
@@ -406,8 +386,8 @@ MStatus PRTAttrs::createAttributes(MFnDependencyNode & node, MString & ruleFile,
 			UnitQuad_faceCountsCount
 	);
 	isb->setAttributes(
-			ruleFile.asWChar(),
-			startRule.asWChar(),
+			ruleFile.c_str(),
+			startRule.c_str(),
 			isb->computeSeed(),
 			L"",
 			attrs,
@@ -419,9 +399,7 @@ MStatus PRTAttrs::createAttributes(MFnDependencyNode & node, MString & ruleFile,
 
 	const std::map<std::wstring, MayaOutputHandler::AttributeHolder>& evalAttrs = outputHandler->getAttrs();
 
-	prtNode->mBriefName2prtAttr[NAME_RULE_FILE.asWChar()]  = NAME_RULE_FILE.asWChar();
-	prtNode->mBriefName2prtAttr[NAME_START_RULE.asWChar()] = NAME_START_RULE.asWChar();
-	prtNode->mBriefName2prtAttr[NAME_GENERATE.asWChar()]   = NAME_GENERATE.asWChar();
+	prtNode->mBriefName2prtAttr[NAME_GENERATE.asWChar()] = NAME_GENERATE.asWChar();
 
 	for(size_t i = 0; i < info->getNumAttributes(); i++) {
 		PRTEnum*       e          = 0;

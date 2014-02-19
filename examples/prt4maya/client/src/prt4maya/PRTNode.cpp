@@ -87,9 +87,7 @@ MStatus PRTNode::compute(const MPlug& plug, MDataBlock& data ) {
 
 	if(mCreatedInteractively) {
 		if(mLRulePkg.compare(path)) {
-			MString cmd;
-			cmd.format("prtAttrs ^1s", name());
-			MGlobal::executeCommandOnIdle(cmd);
+			MGlobal::executeCommandOnIdle(MString("prtAttrs " + name()));
 			return MS::kSuccess;
 			mLRulePkg = path;
 		}
@@ -134,7 +132,6 @@ MStatus PRTNode::compute(const MPlug& plug, MDataBlock& data ) {
 			pcounts.get((int*)ca);
 
 			MayaOutputHandler* outputHandler = createOutputHandler(&plug, &data);
-			MString            dummy;
 
 			prt::InitialShapeBuilder* isb = prt::InitialShapeBuilder::create();
 			prt::Status setGeoStatus = isb->setGeometry(
@@ -149,8 +146,8 @@ MStatus PRTNode::compute(const MPlug& plug, MDataBlock& data ) {
 				std::cerr << "InitialShapeBuilder setGeometry failed status = " << prt::getStatusDescription(setGeoStatus) << std::endl;
 
 			isb->setAttributes(
-					getStrParameter(mRuleFile,  dummy).asWChar(),
-					getStrParameter(mStartRule, dummy).asWChar(),
+					mRuleFile.c_str(),
+					mStartRule.c_str(),
 					isb->computeSeed(),
 					L"",
 					mGenerateAttrs,
@@ -187,12 +184,10 @@ MStatus PRTNode::compute(const MPlug& plug, MDataBlock& data ) {
 
 		data.setClean(plug);
 
-		if(mCreatedInteractively)
+		if(mCreatedInteractively) {
 			MGlobal::executeCommand(mShadingCmd, DO_DBG, false);
-
-		MString cmd;
-		cmd.format("prtMaterials ^1s", name());
-		MGlobal::executeCommandOnIdle(cmd, DO_DBG);
+			MGlobal::executeCommandOnIdle(MString("prtMaterials " + name()), DO_DBG);
+		}
 	}
 
 	mCreatedInteractively = true;
@@ -384,19 +379,17 @@ void on_load(void) {
 
 std::wstring PRTNode::getPluginRoot() {
 #ifdef _MSC_VER
-	wchar_t*  dllPath = new wchar_t[_MAX_PATH];
-	wchar_t*  drive   = new wchar_t[8];
-	wchar_t*  dir     = new wchar_t[_MAX_PATH];
-	wchar_t*  fname   = new wchar_t[_MAX_PATH];
-	wchar_t*  ext     = new wchar_t[_MAX_PATH];
-	HMODULE   hModule = 0;
+	wchar_t dllPath[_MAX_PATH];
+	wchar_t drive[8];
+	wchar_t dir[_MAX_PATH];
+	HMODULE hModule = 0;
 
 	GetModuleHandleEx(GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS | GET_MODULE_HANDLE_EX_FLAG_UNCHANGED_REFCOUNT, (LPCSTR)PRTNode::creator, &hModule);
 
 	if(!::GetModuleFileNameW(hModule, (LPWCH)dllPath, _MAX_PATH))
 		return L"<error>";
 
-	_wsplitpath_s(dllPath, drive, 8, dir, _MAX_PATH, fname, _MAX_PATH, ext, _MAX_PATH);
+	_wsplitpath_s(dllPath, drive, 8, dir, _MAX_PATH, 0, 0, 0, 0);
 
 	std::wstring root = drive;
 	root += dir;
@@ -409,31 +402,6 @@ std::wstring PRTNode::getPluginRoot() {
 
 
 MStatus PRTNode::initialize() {
-	std::wstring root   = getPluginRoot();
-	std::wstring prtLib = root + SEPERATOR + L"prt_lib";
-
-	DBGL(L"prt plugins at %ls\n", prtLib.c_str());
-
-	const wchar_t* prtLibPath = prtLib.c_str();
-
-	std::wstring libfile = getSharedLibraryPrefix() + FLEXNET_LIB + getSharedLibrarySuffix();
-	MString      flexLib = MString(root.c_str());
-	flexLib             += MString("..\\");
-	flexLib             += MString(libfile.c_str());
-
-	prt::FlexLicParams flp;
-	flp.mActLibPath    = flexLib.asUTF8();
-	flp.mFeature       = "CityEngAdvFx";
-	flp.mHostName      = "";
-	prt::Status status;
-
-	theLicHandle = prt::init(&prtLibPath, 1, prt::LOG_TRACE, &flp, &status);
-
-	if(status != prt::STATUS_OK)
-		return MS::kFailure;
-
-	theCache = prt::CacheObject::create(prt::CacheObject::CACHE_TYPE_DEFAULT);
-
 	MFnTypedAttribute   typedFn;
 	MStatus             stat;
 
@@ -488,6 +456,32 @@ MStatus initializePlugin( MObject obj ){
 #endif
 
 	PRTNode::initLogger();
+
+	std::wstring root   = PRTNode::getPluginRoot();
+	std::wstring prtLib = root + SEPERATOR + L"prt_lib";
+
+	DBGL(L"prt plugins at %ls\n", prtLib.c_str());
+
+	const wchar_t* prtLibPath = prtLib.c_str();
+
+	std::wstring libfile = getSharedLibraryPrefix() + FLEXNET_LIB + getSharedLibrarySuffix();
+	MString      flexLib = MString(root.c_str());
+	flexLib             += MString("..\\");
+	flexLib             += MString(libfile.c_str());
+
+	prt::FlexLicParams flp;
+	flp.mActLibPath    = flexLib.asUTF8();
+	flp.mFeature       = "CityEngAdvFx";
+	flp.mHostName      = "";
+	prt::Status status;
+
+	PRTNode::theLicHandle = prt::init(&prtLibPath, 1, prt::LOG_TRACE, &flp, &status);
+
+	if(status != prt::STATUS_OK)
+		return MS::kFailure;
+
+	PRTNode::theCache = prt::CacheObject::create(prt::CacheObject::CACHE_TYPE_DEFAULT);
+
 
 	MFnPlugin plugin( obj, "Esri", "1.0", "Any");
 

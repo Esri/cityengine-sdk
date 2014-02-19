@@ -113,4 +113,3 @@ global proc prtSetColor(string $sgName, float $r, float $g, float $b) {
 	setAttr ($nodeName + ".color") -type "double3" $r $g $b;
 	connectAttr -force ($nodeName + ".outColor") ($sgName + ".surfaceShader");
 }
-
