@@ -105,7 +105,7 @@ MStatus PRTNode::compute(const MPlug& plug, MDataBlock& data ) {
 
 		MDataHandle inputHandle = data.inputValue(inMesh, &stat);
 		MCHECK(stat);
-		MObject iMesh = inputHandle.asMeshTransformed();
+		MObject iMesh = inputHandle.asMesh();
 
 		updateShapeAttributes();
 
@@ -189,10 +189,15 @@ MStatus PRTNode::compute(const MPlug& plug, MDataBlock& data ) {
 			MGlobal::executeCommandOnIdle(MString("prtMaterials " + name()), DO_DBG);
 		} else {
 			MPlug pState(thisMObject(), state);
-			pState.setValue(0);
+			int value;
+			pState.getValue(value);
+			if(value)
+				pState.setValue(0);
 
 			MPlug pHist(thisMObject(), isHistoricallyInteresting);
-			pHist.setValue(2);
+			pState.getValue(value);
+			if(value != 2)
+				pHist.setValue(2);
 		}
 	}
 
@@ -472,7 +477,11 @@ MStatus initializePlugin( MObject obj ){
 
 	std::wstring libfile = getSharedLibraryPrefix() + FLEXNET_LIB + getSharedLibrarySuffix();
 	MString      flexLib = MString(root.c_str());
-	flexLib             += MString("..\\");
+#ifdef _WIN32
+		flexLib             += MString("..\\");
+#else
+		flexLib             += MString("../");
+#endif
 	flexLib             += MString(libfile.c_str());
 
 	prt::FlexLicParams flp;
@@ -481,7 +490,11 @@ MStatus initializePlugin( MObject obj ){
 	flp.mHostName      = "";
 	prt::Status status;
 
-	PRTNode::theLicHandle = prt::init(&prtLibPath, 1, prt::LOG_TRACE, &flp, &status);
+#if(DO_DBG)
+		PRTNode::theLicHandle = prt::init(&prtLibPath, 1, prt::LOG_TRACE, &flp, &status);
+#else
+		PRTNode::theLicHandle = prt::init(&prtLibPath, 1, prt::LOG_WARNING, &flp, &status);
+#endif
 
 	if(status != prt::STATUS_OK)
 		return MS::kFailure;
@@ -505,9 +518,9 @@ MStatus uninitializePlugin( MObject obj) {
 
 	MFnPlugin plugin( obj );
 
+	MCHECK(plugin.deregisterCommand("prtCreate"));
 	MCHECK(plugin.deregisterCommand("prtMaterials"));
 	MCHECK(plugin.deregisterCommand("prtAttrs"));
-	MCHECK(plugin.deregisterCommand("prtCreate"));
 	MCHECK(plugin.deregisterNode(PRTNode::theID));
 
 	return MS::kSuccess;

@@ -6,68 +6,66 @@
 //
 // See http://github.com/ArcGIS/esri-cityengine-sdk for instructions.
 
-global proc string[] createPrtNode() {
+proc string[] appendAarray(string $a0[], string $a1[]) {
+	string $result[] = $a0;
+	for($e in $a1)
+		$result[size($result)] = $e;
+	return $result;
+}
+
+proc string[] collectInitialShapes(string $nodes[], string $rulePackage) {
 	string $result[];
+	for($node in $nodes) {
+	    string $type = `nodeType $node`;
+		if($type == "mesh") {
+			string $dsts[] = `connectionInfo -dfs ($node + ".outMesh")`;
+			if(size($dsts)) {
+				for($dst in $dsts) {
+					string $dstNode = `match "[^.]*" $dst`;
+					if(`nodeType $dstNode` == "prt") {
+						setAttr -type "string" ($dstNode + ".Rule_Package") $rulePackage;
+						return $result;
+					}
+				}
+			}
+			$result = appendAarray($result, {$node});
+		} else if($type == "transform") {
+			string $tmp[] = collectInitialShapes(`listRelatives -ni -pa -children $node`, $rulePackage);
+			$result = appendAarray($result, $tmp);
+		}
+	}
+	return $result;	  
+}
+
+global proc createPrtNode() {
 	string $select[] = `ls -sl`;
 	
 	if(!(size($select))) {
 		confirmDialog -title "Missing selection" -message "Please select a polygon first in order to apply a rule." -button "OK";
-		return $result;
 	}
 
 	$filters = "Rule Package (*.rpk);;All Files (*.*)";
 	string $rulePackage[] = `fileDialog2 -fm 1 -cap "Select Rule Package" -ff $filters`;
 	
-	if(size($rulePackage)) {		
-		for ( $node in $select ) {
-			string $prtName = "<ignored>";
-			if(`nodeType $node` == "prt") {
-				setAttr -type "string" ($node + ".Rule_Package") $rulePackage[0];
-				$prtName = $node;
+	if(size($rulePackage)) {
+		string $initialShapes[] = collectInitialShapes($select, $rulePackage[0]);
+		for($node in $initialShapes) {
+			$prtName = `prtCreate`;
+			$prtName = `rename $prtName "prt#"`;
+			setAttr -type "string" ($prtName + ".Rule_Package") $rulePackage;
+			string $parent[]  = `listRelatives -parent $node`;
+			string $meshName;
+			if(size($parent)) {
+				$meshName = `createNode -parent $parent[0] mesh`;
 			} else {
-				if(`nodeType $node` == "transform") {
-					string $children[] = `listRelatives -children $node`;
-					for($child in $children) {
-						if(`nodeType $child` == "mesh") {
-							$node = $child;
-							break;
-						}
-					}
-				}
-
-				if(`nodeType $node` == "mesh") {
-					string $dsts[] = `connectionInfo -dfs ($node + ".outMesh")`;
-					if(size($dsts)) {
-						for($dst in $dsts) {
-							string $dstNode = `match "[^.]*" $dst`;
-							if(`nodeType $dstNode` == "prt") {
-								setAttr -type "string" ($dstNode + ".Rule_Package") $rulePackage[0];
-							}
-						}
-					} else {
-						$prtName = `prtCreate`;
-						$prtName = `rename $prtName "prt#"`;
-						setAttr -type "string" ($prtName + ".Rule_Package") $rulePackage[0];
-						string $parent[]  = `listRelatives -parent $node`;
-						string $meshName;
-						if(size($parent)) {
-							$meshName = `createNode -parent $parent[0] mesh`;
-						} else {
-							$meshName = `createNode -parent $node mesh`;
-						}
-						$meshName = `rename $meshName "prtShape#"`;
-						connectAttr ( ( $prtName + ".outMesh" ), ( $meshName + ".inMesh" ) );
-						connectAttr ( ( $node + ".outMesh" ), ( $prtName + ".inMesh" ) );
-						sets -addElement initialShadingGroup $meshName;
-					}
-				}
+				$meshName = `createNode -parent $node mesh`;
 			}
-			$result[size($result)] = $node;
-			$result[size($result)] = $prtName;
+			$meshName = `rename $meshName "prtShape#"`;
+			connectAttr ( ( $prtName + ".outMesh" ), ( $meshName + ".inMesh" ) );
+			connectAttr ( ( $node + ".outMesh" ), ( $prtName + ".inMesh" ) );
+			sets -addElement initialShadingGroup $meshName;
 		}
 	}
-	    
-    return $result;
 }
 
 global proc createPrtMenu() {
