@@ -173,7 +173,7 @@ private:
 	static MStatus  addBoolParameter(MFnDependencyNode & node, MObject & attr, const MString & name, bool val);
 	static MStatus  addFloatParameter(MFnDependencyNode & node,  MObject & attr, const MString & name, double val, double min, double max);
 	static MStatus  addStrParameter(MFnDependencyNode & node,  MObject & attr, const MString & name, MString & attrDefault);
-	static MStatus  addFileParameter(MFnDependencyNode & node,  MObject & attr, const MString & name, MString & attrDefault);
+	static MStatus  addFileParameter(MFnDependencyNode & node,  MObject & attr, const MString & name, const MString & attrDefault, MString & ext);
 	static MStatus  addEnumParameter(MFnDependencyNode & node,  MObject & attr, const MString & name, bool value, PRTEnum * e);
 	static MStatus  addEnumParameter(MFnDependencyNode & node,  MObject & attr, const MString & name, double value, PRTEnum * e);
 	static MStatus  addEnumParameter(MFnDependencyNode & node,  MObject & attr, const MString & name, MString value, PRTEnum * e);

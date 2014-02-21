@@ -135,7 +135,7 @@ MStatus PRTAttrs::addEnumParameter(MFnDependencyNode & node, MObject & attr, con
 	return MS::kSuccess;
 }
 
-MStatus PRTAttrs::addFileParameter(MFnDependencyNode & node, MObject & attr, const MString & name, MString & value ) {
+MStatus PRTAttrs::addFileParameter(MFnDependencyNode & node, MObject & attr, const MString & name, const MString & value, MString & exts ) {
 	MStatus           stat;
 	MStatus           stat2;
 	MFnStringData		  stringData;
@@ -146,10 +146,10 @@ MStatus PRTAttrs::addFileParameter(MFnDependencyNode & node, MObject & attr, con
 	MCHECK(stat);
 	MCHECK(sAttr.setUsedAsFilename(true));
 	MCHECK(addParameter(node, attr, sAttr));
-	MCHECK(sAttr.setNiceNameOverride(value));
+	MCHECK(sAttr.setNiceNameOverride(exts));
 
 	MPlug plug(node.object(), attr);
-	MCHECK(plug.setValue(MString()));
+	MCHECK(plug.setValue(value));
 
 
 	return MS::kSuccess;
@@ -472,9 +472,10 @@ MStatus PRTAttrs::createAttributes(MFnDependencyNode & node, const std::wstring 
 								exts += MString(an->getArgument(arg)->getStr());
 								exts += " (*.";
 								exts += MString(an->getArgument(arg)->getStr());
-								exts += ");";
+								exts += ");;";
 							}
 						}
+						exts += "All Files (*.*)";
 					}
 				}
 
@@ -486,8 +487,7 @@ MStatus PRTAttrs::createAttributes(MFnDependencyNode & node, const std::wstring 
 				if(e) {
 					MCHECK(addEnumParameter(node, attr, name, mvalue, e));
 				} else if(asFile) {
-					exts += "All Files (*.*)";
-					MCHECK(addFileParameter(node, attr, name, exts));
+					MCHECK(addFileParameter(node, attr, name, mvalue, exts));
 				} else if(asColor) {
 					MCHECK(addColorParameter(node, attr, name, mvalue));
 				} else {
