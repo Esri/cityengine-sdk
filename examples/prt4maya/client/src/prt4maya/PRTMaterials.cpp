@@ -60,7 +60,7 @@ MStatus PRTNode::attachMaterials() {
 			MString cmd;
 			wchar_t* buf = new wchar_t[512];
 			for(unsigned int i = 0; i < mShadingGroups.length(); i++) {
-				swprintf(buf, 511, L"sets -e -forceElement %s %s.f[%d:%d];\n", mShadingGroups[i].asWChar(), meshName.asWChar(), mShadingRanges[i * 2], mShadingRanges[i * 2 + 1]);
+				swprintf(buf, 511, L"sets -e -forceElement %ls %ls.f[%d:%d];\n", mShadingGroups[i].asWChar(), meshName.asWChar(), mShadingRanges[i * 2], mShadingRanges[i * 2 + 1]);
 				cmd += buf;
 			}
 			delete[] buf;
