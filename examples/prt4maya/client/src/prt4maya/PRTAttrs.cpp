@@ -250,8 +250,8 @@ MStatus PRTAttrs::updateRuleFiles(MFnDependencyNode & node, MString & rulePkg) {
 	prtNode->mResolveMap = prt::createResolveMap(path.c_str(), unpackDir.asWChar(), &resolveMapStatus);
 	if(resolveMapStatus == prt::STATUS_OK) {
 		size_t nKeys;
-		const wchar_t** keys   = prtNode->mResolveMap->getKeys(&nKeys);
-		std::wstring    sCGB(L".cgb");
+		const wchar_t * const* keys   = prtNode->mResolveMap->getKeys(&nKeys);
+		std::wstring           sCGB(L".cgb");
 		for(size_t k = 0; k < nKeys; k++) {
 			std::wstring key = std::wstring(keys[k]);
 			if(std::equal(sCGB.rbegin(), sCGB.rend(), key.rbegin())) {
