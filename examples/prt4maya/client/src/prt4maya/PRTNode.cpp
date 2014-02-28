@@ -39,10 +39,6 @@ MTypeId PRTNode::theID(PRT_TYPE_ID);
 
 PRTNode::PRTNode() : mResolveMap(0), mGenerateAttrs(0), mMayaEncOpts(0), mAttrEncOpts(0), mEnums(0), mHasMaterials(false), mCreatedInteractively(false) {
 	theNodeCount++;
-	prt::AttributeMapBuilder* b = prt::AttributeMapBuilder::create();
-	mMayaEncOpts                = b->createAttributeMap();
-	mAttrEncOpts                = b->createAttributeMap();
-	b->destroy();
 
 	{
 		prt::EncoderInfo  const* encInfo = prt::createEncoderInfo(ENC_MAYA);	
