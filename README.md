@@ -34,8 +34,7 @@ This document explains how to install the CityEngine SDK and how to build the in
 * boost 1.34 or later (http://www.boost.org)
 
 ## Installation Instructions
-* The Simple Way: The SDK is installed by simply downloading and unzipping an archive from the Releases/Tags page.
-* The Advanced Way: For more convenience and easy updates you may want to directly clone this repository (there is one branch per platform).
+TODO
 
 ## Examples
 The SDK contains a (growing) number of examples with source code. Foremost, the prt4cmd example is a comprehensive example of the PRT API. It allows you to apply a rule package onto a initial shape and write the resulting geometry to disk. We encourage you to modify and play with this example source code in order to fully explore the possibilities of the CityEngine SDK.
