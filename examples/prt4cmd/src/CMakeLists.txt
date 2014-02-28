@@ -8,20 +8,14 @@ set(PROJECT prt4cmd)
 project(${PROJECT})
 
 
-### external dependencies
+### dependencies
 
 find_package(Boost COMPONENTS program_options filesystem)
 include_directories(${Boost_INCLUDE_DIR})
 link_directories(${Boost_LIBRARY_DIRS})
 add_definitions(-DBOOST_MINOR_VERSION=${Boost_MINOR_VERSION})
 
-
-### prt dependencies
-
-# if not specified on command line, assume default layout of CityEngine SDK 
-if(NOT prt_DIR)
-	set(prt_DIR "${PROJECT_SOURCE_DIR}/../../../cmake")
-endif()
+include(../../prt.cmake)
 find_package(prt CONFIG)
 
 
@@ -50,7 +44,7 @@ endif()
 
 set(CMAKE_INSTALL_PREFIX "${PROJECT_SOURCE_DIR}/../install" CACHE PATH "default install prefix" FORCE) 
 
-install(CODE "file(REMOVE_RECURSE ${CMAKE_INSTALL_PREFIX})")
+install(CODE "file(REMOVE_RECURSE ${CMAKE_INSTALL_PREFIX}/*)")
 install(PROGRAMS ${CMAKE_BINARY_DIR}/prt4cmd${CMAKE_EXECUTABLE_SUFFIX} DESTINATION bin)
 install(FILES ${PRT_LIBRARIES} DESTINATION bin OPTIONAL)
 install(FILES ${PRT_EXT_LIBRARIES} DESTINATION lib)

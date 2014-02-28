@@ -133,7 +133,6 @@ int main (int argc, char *argv[]) {
 	std::wstring cppExtPath = toStr<wchar_t>(extPath);
 	const wchar_t* cExtPath = cppExtPath.c_str();
 	boost::filesystem::path fsFlexLib = rootPath / "bin" / (getSharedLibraryPrefix() + FILE_FLEXNET_LIB + getSharedLibrarySuffix());
-	assert(boost::filesystem::exists(fsFlexLib));
 	std::string flexLib = fsFlexLib.string();
 
 	// -- setup the licensing information
@@ -169,9 +168,9 @@ int main (int argc, char *argv[]) {
 		if (!inputArgs.mRulePackage.empty()) {
 			if (inputArgs.mLogLevel <= prt::LOG_INFO) std::wcout << L"Using rule package " << inputArgs.mRulePackage << std::endl;
 
-			std::wstring rpkURI = toFileURI<wchar_t>(inputArgs.mWorkDir / toOSNarrowFromOSWide(inputArgs.mRulePackage)); // legacy workaround for old boost
+			std::wstring rpkURI = toFileURI<wchar_t>(/*inputArgs.mWorkDir / */ inputArgs.mRulePackage); // legacy workaround for old boost
 			prt::Status status = prt::STATUS_UNSPECIFIED_ERROR;
-			assetsMap = prt::createResolveMap(rpkURI.c_str(), false, &status);
+			assetsMap = prt::createResolveMap(rpkURI.c_str(), 0, &status);
 			if(status != prt::STATUS_OK) {
 				std::wcerr << L"getting resolve map from '" << inputArgs.mRulePackage << L"' failed, aborting." << std::endl;
 				exit(1);
