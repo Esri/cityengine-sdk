@@ -81,7 +81,7 @@ The "-f" argument specifies the type of license:
 The "-s" argument is only needed for the network license types. 
 
 ```
-bin/prt4cmd -f CityEngAdvFx -s 27000@example.com
+bin/prt4cmd -f CityEngAdv -s 27000@example.com
 ```
 
 For simplicity, the license arguments have been omitted in the below examples.
