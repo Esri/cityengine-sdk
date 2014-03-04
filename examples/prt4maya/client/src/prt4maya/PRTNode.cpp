@@ -7,12 +7,17 @@
  * See http://github.com/ArcGIS/esri-cityengine-sdk for instructions.
  */
 
-#include "Utilities.h"
+#include "prt4maya/PRTNode.h"
+#include "prt4maya/Utilities.h"
 
 #include <sstream>
 
-#include <maya/MFnPlugin.h>
+#ifndef _MSC_VER
+#include <dlfcn.h>
+#include <cstdio>
+#endif
 
+#include <maya/MFnPlugin.h>
 #include <maya/MFnTransform.h>
 #include <maya/MFnSet.h>
 #include <maya/MFnPhongShader.h>
@@ -23,15 +28,13 @@
 
 #include "wrapper/MayaOutputHandler.h"
 
-#include "prt4maya/PRTNode.h"
-
 #include "prt/FlexLicParams.h"
 
-using namespace prtUtils;
 
 namespace {
-static const bool ENABLE_LOG_CONSOLE	= true;
-static const bool ENABLE_LOG_FILE		= false;
+	const prt::LogLevel	PRT_LOG_LEVEL		= prt::LOG_WARNING;
+	const bool			ENABLE_LOG_CONSOLE	= true;
+	const bool			ENABLE_LOG_FILE		= false;
 }
 
 
@@ -64,7 +67,7 @@ PRTNode::~PRTNode() {
 		theShadingGroups.clear();
 	}
 
-	DBG("PRTNode disposed\n");
+	prtu::dbg("PRTNode disposed\n");
 }
 
 MStatus PRTNode::setDependentsDirty(const MPlug& /*plugBeingDirtied*/, MPlugArray& affectedPlugs) {
@@ -281,7 +284,7 @@ MStatus PRTNode::updateShapeAttributes() {
 
 				nAttr.getDefault(r, g, b);
 				wchar_t dcolor[]  = L"#000000";
-				toHex(dcolor, r, g, b);
+				prtu::toHex(dcolor, r, g, b);
 
 				MObject rgb;
 				MCHECK(plug.getValue(rgb));
@@ -290,7 +293,7 @@ MStatus PRTNode::updateShapeAttributes() {
 				MCHECK(fRGB.getData(r, g, b));
 
 				wchar_t color[]  = L"#000000";
-				toHex(color, r, g, b);
+				prtu::toHex(color, r, g, b);
 
 				if(wcscmp(dcolor, color))
 					aBuilder->setString(name.c_str(), color);
@@ -361,52 +364,44 @@ void PRTNode::initLogger() {
 	}
 
 	if (ENABLE_LOG_FILE) {
-		std::wstring logPath   = getPluginRoot() + SEPERATOR + L"prt4maya.log";
-		theFileLogHandler = prt::FileLogHandler::create(prt::LogHandler::ALL, prt::LogHandler::ALL_COUNT, logPath.c_str());
+		std::string logPath = getPluginRoot() + prtu::getDirSeparator<char>() + "prt4maya.log";
+		std::wstring wLogPath(logPath.length(), L' ');
+		std::copy(logPath.begin(), logPath.end(), wLogPath.begin());
+		theFileLogHandler = prt::FileLogHandler::create(prt::LogHandler::ALL, prt::LogHandler::ALL_COUNT, wLogPath.c_str());
 		prt::addLogHandler(theFileLogHandler);
 	}
 }
 
-#ifndef _MSC_VER
-#include <dlfcn.h>
-#include <cstdio>
-
-std::wstring libPath;
-
-__attribute__((constructor))
-void on_load(void) {
-	Dl_info dl_info;
-	dladdr((void *)on_load, &dl_info);
-
-	std::string tmp(dl_info.dli_fname);
-	libPath = std::wstring(tmp.length(), L' ');
-	std::copy(tmp.begin(), tmp.end(), libPath.begin());
-}
-#endif
-
-std::wstring PRTNode::getPluginRoot() {
+// plugin root = location of prt4maya shared library
+const std::string& PRTNode::getPluginRoot() {
+	static std::string* rootPath = 0;
+	if (rootPath == 0) {
 #ifdef _MSC_VER
-	wchar_t dllPath[_MAX_PATH];
-	wchar_t drive[8];
-	wchar_t dir[_MAX_PATH];
-	HMODULE hModule = 0;
+		char dllPath[_MAX_PATH];
+		char drive[8];
+		char dir[_MAX_PATH];
+		HMODULE hModule = 0;
 
-	GetModuleHandleEx(GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS | GET_MODULE_HANDLE_EX_FLAG_UNCHANGED_REFCOUNT, (LPCSTR)PRTNode::creator, &hModule);
-
-	if(!::GetModuleFileNameW(hModule, (LPWCH)dllPath, _MAX_PATH))
-		return L"<error>";
-
-	_wsplitpath_s(dllPath, drive, 8, dir, _MAX_PATH, 0, 0, 0, 0);
-
-	std::wstring root = drive;
-	root += dir;
-
-	return root;
+		GetModuleHandleEx(GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS | GET_MODULE_HANDLE_EX_FLAG_UNCHANGED_REFCOUNT, (LPCSTR)PRTNode::creator, &hModule);
+		DWORD res = ::GetModuleFileName(hModule, (LPWCH)dllPath, _MAX_PATH);
+		if (res == 0) {
+			// TODO DWORD e = ::GetLastError();
+			throw std::runtime_error("failed to get plugin location");
+		}
+	
+		_splitpath_s(dllPath, drive, 8, dir, _MAX_PATH, 0, 0, 0, 0);
+		rootPath = new std::string(drive + dir); // accepted mem leak
 #else
-	return libPath.substr(0, libPath.find_last_of(SEPERATOR));
+		Dl_info dl_info;
+		dladdr((void *)getPluginRoot, &dl_info);
+		std::string tmp(dl_info.dli_fname);
+		rootPath = new std::string(tmp.substr(0, tmp.find_last_of(prtu::getDirSeparator<char>()))); // accepted mem leak
 #endif
+		if (*rootPath->rbegin() != prtu::getDirSeparator<char>())
+			rootPath->append(1, prtu::getDirSeparator<char>());
+	}
+	return *rootPath;
 }
-
 
 MStatus PRTNode::initialize() {
 	MFnTypedAttribute   typedFn;
@@ -458,40 +453,40 @@ void PRTNode::uninitialize() {
 }
 
 MStatus initializePlugin( MObject obj ){
-#ifdef __linux__
-	dlopen("libprt4maya.so", RTLD_LAZY | RTLD_NOLOAD | RTLD_GLOBAL);
-#endif
-
 	PRTNode::initLogger();
+	prt::log(L"initialized prt logger", prt::LOG_DEBUG);
+	
+	const std::string& pluginRoot   = PRTNode::getPluginRoot();
+	std::wstring wPluginRoot(pluginRoot.length(), L' ');
+	std::copy(pluginRoot.begin(), pluginRoot.end(), wPluginRoot.begin());
 
-	std::wstring root   = PRTNode::getPluginRoot();
-	std::wstring prtLib = root + SEPERATOR + L"prt_lib";
+	const std::wstring prtExtPath = wPluginRoot + PRT_EXT_SUBDIR;
+	prt::log((L"looking for prt extensions at " + prtExtPath).c_str(), prt::LOG_DEBUG);
 
-	DBGL(L"prt plugins at %ls\n", prtLib.c_str());
-
-	const wchar_t* prtLibPath = prtLib.c_str();
-
-	std::wstring libfile = getSharedLibraryPrefix() + FLEXNET_LIB + getSharedLibrarySuffix();
-	MString      flexLib = MString(root.c_str());
+	const std::string flexLibName = prtu::getSharedLibraryPrefix<char>() + std::string(FLEXNET_LIB) + prtu::getSharedLibrarySuffix<char>();
+	prtu::dbg("flexLibName = %s", flexLibName.c_str());
+	std::string flexLibPath = pluginRoot;
 #ifdef _WIN32
-		flexLib             += MString("..\\");
-#else
-		flexLib             += MString("../");
+		flexLibPath.append("..\\"); // windows: we install core + license libraries alongside maya.exe instead of the plugin folder
 #endif
-	flexLib             += MString(libfile.c_str());
+	flexLibPath.append(flexLibName);
 
+	prtu::dbg("flexLibPath = %s", flexLibPath.c_str());
+	
 	prt::FlexLicParams flp;
-	flp.mActLibPath    = flexLib.asUTF8();
+	flp.mActLibPath    = flexLibPath.c_str();
 	flp.mFeature       = "CityEngAdvFx";
 	flp.mHostName      = "";
-	prt::Status status;
-
-#if(DO_DBG)
-		PRTNode::theLicHandle = prt::init(&prtLibPath, 1, prt::LOG_TRACE, &flp, &status);
-#else
-		PRTNode::theLicHandle = prt::init(&prtLibPath, 1, prt::LOG_WARNING, &flp, &status);
-#endif
-
+	
+	prt::Status status = prt::STATUS_UNSPECIFIED_ERROR;
+	{
+		const wchar_t* prtExtPathPOD = prtExtPath.c_str();
+		PRTNode::theLicHandle = prt::init(&prtExtPathPOD, 1, PRT_LOG_LEVEL, &flp, &status);
+	}
+	
+	if (PRTNode::theLicHandle == 0)
+	  return MS::kFailure;
+		
 	if(status != prt::STATUS_OK)
 		return MS::kFailure;
 

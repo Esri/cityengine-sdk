@@ -12,13 +12,6 @@
 #include <vector>
 #include <numeric>
 
-#include "boost/filesystem/path.hpp"
-#include "boost/foreach.hpp"
-
-#include "util/StringUtils.h"
-#include "util/Timer.h"
-#include "util/Exception.h"
-
 #include "prt/prt.h"
 
 #include "prtx/Exception.h"
@@ -34,8 +27,8 @@
 #include "encoder/IMayaOutputHandler.h"
 #include "encoder/MayaEncoder.h"
 
-const std::wstring MayaEncoder::ID          = L"com.esri.prt.codecs.maya.MayaEncoder";
-const std::wstring MayaEncoder::NAME        = L"Autodesk(tm) Maya(tm) Encoder";
+const std::wstring MayaEncoder::ID          	= L"MayaEncoder"; // todo: define in common header
+const std::wstring MayaEncoder::NAME        	= L"Autodesk(tm) Maya(tm) Encoder";
 const std::wstring MayaEncoder::DESCRIPTION	= L"Encodes geometry into Autodesk(tm) Maya(tm) format.";
 
 
@@ -51,9 +44,9 @@ MayaEncoder::~MayaEncoder() {
 
 void MayaEncoder::init(prtx::GenerateContext& /*context*/) {
 	prt::Callbacks* cb = getCallbacks();
-	log_trace("MayaEncoder::init: cb = %x") % (size_t)cb;
+	log_debug("MayaEncoder::init: cb = %x") % (size_t)cb;
 	IMayaOutputHandler* oh = dynamic_cast<IMayaOutputHandler*>(cb);
-	log_trace("                   oh = %x") % (size_t)oh;
+	log_debug("                   oh = %x") % (size_t)oh;
 	if(oh == 0) throw(prtx::StatusException(prt::STATUS_ILLEGAL_CALLBACK_OBJECT));
 }
 
@@ -62,8 +55,6 @@ void MayaEncoder::encode(prtx::GenerateContext& context, size_t initialShapeInde
 	const prtx::InitialShape* ishape = context.getInitialShape(initialShapeIndex);
 
 	IMayaOutputHandler* oh = dynamic_cast<IMayaOutputHandler*>(getCallbacks());
-
-	util::Timer tim;
 
 	prtx::DefaultNamePreparator        namePrep;
 	prtx::NamePreparator::NamespacePtr nsMesh     = namePrep.newNamespace();
@@ -75,9 +66,6 @@ void MayaEncoder::encode(prtx::GenerateContext& context, size_t initialShapeInde
 	prtx::LeafIteratorPtr li = prtx::LeafIterator::create(context, initialShapeIndex);
 	for (prtx::ShapePtr shape = li->getNext(); shape != 0; shape = li->getNext())
 		encPrep->add(context.getCache(), shape);
-
-	const float t1 = tim.stop();
-	tim.start();
 
 	prtx::GeometryPtrVector geometries;
 	std::vector<prtx::DoubleVector> trafos;
@@ -94,12 +82,12 @@ void MayaEncoder::encode(prtx::GenerateContext& context, size_t initialShapeInde
 	prepFlags.processVertexNormals(prtx::VertexNormalProcessor::SET_MISSING_TO_FACE_NORMALS);
 	prepFlags.indexSharing(prtx::EncodePreparator::PreparationFlags::INDICES_SAME_FOR_VERTICES_AND_NORMALS);
 
-	std::vector<prtx::EncodePreparator::FinalizedInstance> finalizedInstances;
+	prtx::EncodePreparator::InstanceVector finalizedInstances;
 	encPrep->fetchFinalizedInstances(finalizedInstances, prepFlags);
-	BOOST_FOREACH(prtx::EncodePreparator::FinalizedInstance& instance, finalizedInstances) {
-		geometries.push_back(instance.getGeometry());
-		trafos.push_back(instance.getTransformation());
-		materials.push_back(instance.getMaterials());
+	for (prtx::EncodePreparator::InstanceVector::const_iterator instIt = finalizedInstances.begin(); instIt != finalizedInstances.end(); ++instIt) {
+		geometries.push_back(instIt->getGeometry());
+		trafos.push_back(instIt->getTransformation());
+		materials.push_back(instIt->getMaterials());
 	}
 
 	size_t   start = 0;
@@ -121,15 +109,9 @@ void MayaEncoder::encode(prtx::GenerateContext& context, size_t initialShapeInde
 	std::wstring cgbName = std::wstring(&ruleFile[start]);
 	free(ruleFile);
 	convertGeometry(cgbName, geometries, materials, oh);
-
-	const float t2 = tim.stop();
-	log_info("MayaEncoder::encode() : preparator %f s, encoding %f s, total %f s") % t1 % t2 % (t1+t2);
-
-	log_trace("MayaEncoder::encode done.");
 }
 
 void MayaEncoder::convertGeometry(const std::wstring& cgbName, const prtx::GeometryPtrVector& geometries, const std::vector<prtx::MaterialPtrVector>& mats, IMayaOutputHandler* mayaOutput) {
-	log_trace("MayaEncoder::convertGeometry: begin");
 	std::vector<double> vertices;
 	std::vector<int>    counts;
 	std::vector<int>    connects;
@@ -143,12 +125,10 @@ void MayaEncoder::convertGeometry(const std::wstring& cgbName, const prtx::Geome
 	int uvBase  = 0;
 
 	for(size_t gi = 0, geoCount = geometries.size(); gi < geoCount; ++gi) {
-		log_trace("    geometry: %d") % gi;
 		prtx::Geometry* geo = geometries[gi].get();
 
 		const prtx::MeshPtrVector& meshes = geo->getMeshes();
 		for(size_t mi = 0, meshCount = meshes.size(); mi < meshCount; mi++) {
-			log_trace("      mesh %d") % mi;
 			prtx::MeshPtr mesh = meshes[mi];
 
 			const prtx::DoubleVector&  verts    = mesh->getVertexCoords();

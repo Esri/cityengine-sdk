@@ -12,21 +12,37 @@
 
 #include <maya/MStatus.h>
 
-#define DO_DBG 1
-#define MCHECK(_stat_) {if(MS::kSuccess != _stat_) {DBG("maya err at %s:%d: %s %d\n", __FILE__, __LINE__, _stat_.errorString().asChar(), _stat_.statusCode());}}
+#define DO_DBG 0
+#define MCHECK(_stat_) {if(MS::kSuccess != _stat_) { prtu::dbg("maya err at %s:%d: %s %d\n", __FILE__, __LINE__, _stat_.errorString().asChar(), _stat_.statusCode());}}
 
-namespace prtUtils {
-	const char* filename(const char* path);
 
-	void DBG(const char* fmt, ...);
-	void DBGL(const wchar_t* fmt, ...);
+namespace prtu {
+	
 
-	std::wstring getSharedLibraryPrefix();
-	std::wstring getSharedLibrarySuffix();
-	int fromHex(wchar_t c);
-	wchar_t toHex(int i);
-	void toHex(wchar_t* color, double r, double g, double b);
-	MString toCleanId(const MString& name);
-}
+const char* filename(const char* path);
+
+void dbg(const char* fmt, ...);
+void wdbg(const wchar_t* fmt, ...);
+
+template<typename C> C getDirSeparator();
+template<> char getDirSeparator();
+template<> wchar_t getDirSeparator();
+	
+template<typename C> const std::basic_string<C>& getSharedLibraryPrefix();
+template<> const std::wstring& getSharedLibraryPrefix();
+template<> const std::string& getSharedLibraryPrefix();
+
+template<typename C> const std::basic_string<C>& getSharedLibrarySuffix();
+template<> const std::wstring& getSharedLibrarySuffix();
+template<> const std::string& getSharedLibrarySuffix();
+	
+int fromHex(wchar_t c);
+wchar_t toHex(int i);
+void toHex(wchar_t* color, double r, double g, double b);
+MString toCleanId(const MString& name);
+
+
+} // namespace prtu
+
 
 #endif /* UTILITIES_H_ */

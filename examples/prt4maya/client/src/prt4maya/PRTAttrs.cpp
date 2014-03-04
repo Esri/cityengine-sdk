@@ -9,12 +9,18 @@
 
 #define MNoPluginEntry
 #define MNoVersionString
-#include "Utilities.h"
+
 #include "PRTNode.h"
+
+#include "prt/prt.h"
+
+#include "Utilities.h"
 #include "wrapper/MayaOutputHandler.h"
+
+#include "prt/Status.h"
+
 #include <limits>
 
-using namespace prtUtils;
 
 inline MString & PRTAttrs::getStringParameter(MObject & node, MObject & attr, MString & value) {
 	MPlug plug(node, attr);
@@ -38,11 +44,11 @@ MStatus PRTAttrs::addParameter(MFnDependencyNode & node, MObject & attr, MFnAttr
 }
 
 MString PRTAttrs::longName(const MString& attrName) {
-	return toCleanId(attrName.substring(attrName.index('$') + 1, attrName.length()));
+	return prtu::toCleanId(attrName.substring(attrName.index('$') + 1, attrName.length()));
 }
 
 MString PRTAttrs::briefName(const MString & attrName) {
-	return toCleanId(attrName);
+	return prtu::toCleanId(attrName);
 }
 
 MStatus PRTAttrs::addBoolParameter(MFnDependencyNode & node, MObject & attr, const MString & name, bool value) {
@@ -169,9 +175,9 @@ MStatus PRTAttrs::addColorParameter(MFnDependencyNode & node, MObject & attr, co
 	double b = 0.0;
 
 	if (s[0] == '#' && wcslen(s) >= 7) {
-		r = (double)((fromHex(s[1]) << 4) + fromHex(s[2])) / 255.0;
-		g = (double)((fromHex(s[3]) << 4) + fromHex(s[4])) / 255.0;
-		b = (double)((fromHex(s[5]) << 4) + fromHex(s[6])) / 255.0;
+		r = (double)((prtu::fromHex(s[1]) << 4) + prtu::fromHex(s[2])) / 255.0;
+		g = (double)((prtu::fromHex(s[3]) << 4) + prtu::fromHex(s[4])) / 255.0;
+		b = (double)((prtu::fromHex(s[5]) << 4) + prtu::fromHex(s[6])) / 255.0;
 
 		nAttr.setDefault(r, g, b);
 	}
@@ -410,7 +416,7 @@ MStatus PRTAttrs::createAttributes(MFnDependencyNode & node, const std::wstring 
 
 		if(info->getAttribute(i)->getNumParameters() != 0) continue;
 
-		prtNode->mBriefName2prtAttr[toCleanId(name).asWChar()] = name.asWChar();
+		prtNode->mBriefName2prtAttr[prtu::toCleanId(name).asWChar()] = name.asWChar();
 
 		switch(info->getAttribute(i)->getReturnType()) {
 		case prt::AAT_BOOL: {
@@ -495,17 +501,6 @@ MStatus PRTAttrs::createAttributes(MFnDependencyNode & node, const std::wstring 
 				}
 
 				break;
-			}
-		}
-
-		for(size_t a = 0; a < info->getAttribute(i)->getNumAnnotations(); a++) {
-			const prt::Annotation* an = info->getAttribute(i)->getAnnotation(a);
-			if(!(wcscmp(an->getName(), ANNOT_GROUP))) {
-				MFnAttribute fAttr(attr);
-				for(size_t arg = 0; arg < an->getNumArguments(); arg++) {
-					if(an->getArgument(arg)->getType() == prt::AAT_STR)
-						MCHECK(fAttr.addToCategory(MString(an->getArgument(arg)->getStr())));
-				}
 			}
 		}
 	}

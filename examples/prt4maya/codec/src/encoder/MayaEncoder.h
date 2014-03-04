@@ -42,9 +42,6 @@ public:
 	virtual void encode(prtx::GenerateContext& context, size_t initialShapeIndex);
 	virtual void finish(prtx::GenerateContext& /*context*/);
 
-//public:
-//	static void destroyMayaData(struct MayaOutputHandler* mayaData);
-
 private:
 	void convertGeometry(
 			const std::wstring& cgbName,

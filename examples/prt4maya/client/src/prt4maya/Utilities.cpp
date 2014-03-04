@@ -7,44 +7,112 @@
  * See http://github.com/ArcGIS/esri-cityengine-sdk for instructions.
  */
 
-#include "Utilities.h"
+#include "prt4maya/Utilities.h"
+
 #include <maya/MString.h>
 
-namespace prtUtils {
+#include <cstdio>
+#include <cstdarg>
 
+
+namespace prtu {
+
+	
 const char* filename(const char* path) {
 	while(*(--path) != '\\');
 	return path + 1;
 }
 
-std::wstring getSharedLibraryPrefix() {
+
+template<> char getDirSeparator() {
+#ifdef _MSC_VER
+	static const char SEPARATOR = '\\';
+#else
+	static const char SEPARATOR = '/';
+#endif
+	return SEPARATOR;
+}
+
+
+template<> wchar_t getDirSeparator() {
+#ifdef _MSC_VER
+	static const wchar_t SEPARATOR = L'\\';
+#else
+	static const wchar_t SEPARATOR = L'/';
+#endif
+	return SEPARATOR;
+}
+
+
+namespace {
+const std::string	STR_EMPTY	= "";
+const std::wstring	WSTR_EMPTY	= L"";
+const std::string	STR_LIB		= "lib";
+const std::wstring	WSTR_LIB	= L"lib";
+const std::string	STR_DLL		= ".dll";
+const std::wstring	WSTR_DLL	= L".dll";
+const std::string	STR_SO		= ".so";
+const std::wstring	WSTR_SO		= L".so";
+const std::string	STR_DYLIB	= ".dylib";
+const std::wstring	WSTR_DYLIB	= L".dylib";
+}
+
+
+template<> const std::wstring& getSharedLibraryPrefix() {
 #if defined(_WIN32)
-	return L"";
+	return WSTR_EMPTY;
 #elif defined(__APPLE__)
-	return L"lib";
+	return WSTR_LIB;
 #elif defined(linux)
-	return L"lib";
+	return WSTR_LIB;
 #else
 #	error unsupported build platform
 #endif
 }
 
 
-std::wstring getSharedLibrarySuffix() {
+template<> const std::string& getSharedLibraryPrefix() {
 #if defined(_WIN32)
-	return L".dll";
+	return STR_EMPTY;
 #elif defined(__APPLE__)
-	return L".dylib";
+	return STR_LIB;
 #elif defined(linux)
-	return L".so";
+	return STR_LIB;
 #else
 #	error unsupported build platform
 #endif
 }
+
+
+template<> const std::wstring& getSharedLibrarySuffix() {
+#if defined(_WIN32)
+	return WSTR_DLL;
+#elif defined(__APPLE__)
+	return WSTR_DYLIB;
+#elif defined(linux)
+	return WSTR_SO;
+#else
+#	error unsupported build platform
+#endif
+}
+
+
+template<> const std::string& getSharedLibrarySuffix() {
+#if defined(_WIN32)
+	return STR_DLL;
+#elif defined(__APPLE__)
+	return STR_DYLIB;
+#elif defined(linux)
+	return STR_SO;
+#else
+#	error unsupported build platform
+#endif
+}
+
 
 #if DO_DBG == 1
 
-void DBG(const char* fmt, ...) {
+void dbg(const char* fmt, ...) {
 	va_list args;
 
 	va_start(args, fmt);
@@ -54,20 +122,20 @@ void DBG(const char* fmt, ...) {
 	fflush(0);
 }
 
-void DBGL(const wchar_t* fmt, ...) {
+void wdbg(const wchar_t* fmt, ...) {
 	va_list args;
 
 	va_start(args, fmt);
 	vwprintf(fmt, args);
   va_end(args); 
-  printf("\n");
+  wprintf(L"\n");
 	fflush(0);
 }
 
-#else
-void DBG(const char* fmt, ...) { }
-void DBGL(const wchar_t* fmt, ...) { }
-#endif
+ #else
+ void dbg(const char* fmt, ...) { }
+ void wdbg(const wchar_t* fmt, ...) { }
+ #endif
 
 int fromHex(wchar_t c) {
 	switch(c) {

@@ -1,4 +1,4 @@
-file(GLOB SRC "*.cpp")
+list(APPEND SRC
+	${CMAKE_CURRENT_SOURCE_DIR}/MayaOutputHandler.cpp
+)
 add_sources(${SRC})
-
-add_sf_sources() 	# msvc sln

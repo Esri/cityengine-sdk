@@ -7,13 +7,13 @@
  * See http://github.com/ArcGIS/esri-cityengine-sdk for instructions.
  */
 
-#ifndef CODECS_MAYA_H_
-#define CODECS_MAYA_H_
+#ifndef PRT4MAYA_CODEC_H_
+#define PRT4MAYA_CODEC_H_
 
 #ifdef _WIN32
-#	define CODECS_MAYA_EXPORTS_API __declspec(dllexport)
+#	define PRT4MAYA_CODEC_EXPORTS_API __declspec(dllexport)
 #else
-#	define CODECS_MAYA_EXPORTS_API __attribute__ ((visibility ("default")))
+#	define PRT4MAYA_CODEC_EXPORTS_API __attribute__ ((visibility ("default")))
 #endif
 
-#endif /* CODECS_MAYA_H_ */
+#endif /* PRT4MAYA_CODEC_H_ */

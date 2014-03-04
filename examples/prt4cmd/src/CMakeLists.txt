@@ -15,7 +15,8 @@ include_directories(${Boost_INCLUDE_DIR})
 link_directories(${Boost_LIBRARY_DIRS})
 add_definitions(-DBOOST_MINOR_VERSION=${Boost_MINOR_VERSION})
 
-include(../../prt.cmake)
+#set(prt_DIR "../../../cmake")
+set(prt_DIR		"/fasthome/shaegler/prt_trunk/com.esri.prt.build/cmake")
 find_package(prt CONFIG)
 
 

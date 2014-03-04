@@ -18,10 +18,11 @@
 #include "prt4maya/Utilities.h"
 #include "prt4maya/PRTNode.h"
 
-using namespace prtUtils;
 
 namespace {
+
 static const bool TRACE = false;
+
 void prtTrace(const std::wstring& arg1, std::size_t arg2) {
 	if (TRACE) {
 		std::wostringstream wostr;
@@ -29,7 +30,9 @@ void prtTrace(const std::wstring& arg1, std::size_t arg2) {
 		prt::log(wostr.str().c_str(), prt::LOG_TRACE);
 	}
 }
-}
+
+} // anonymous namespace
+
 
 void MayaOutputHandler::setVertices(double* vtx, size_t size) {
 	prtTrace(L"setVertices: size = ", size);
@@ -81,7 +84,7 @@ void MayaOutputHandler::setFaces(int* counts, size_t countsSize, int* connects, 
 void MayaOutputHandler::createMesh() {
 	MStatus stat;
 
-	DBG("--- MayaData::createMesh begin");
+	prtu::dbg("--- MayaData::createMesh begin");
 
 	if(mPlug == 0 || mData == 0) return;
 
@@ -92,10 +95,10 @@ void MayaOutputHandler::createMesh() {
 	MObject newOutputData = dataCreator.create(&stat);
 	MCHECK(stat);
 
-	DBG("    mVertices.length         = %d", mVertices.length());
-	DBG("    mVerticesCounts.length   = %d", mVerticesCounts.length());
-	DBG("    mVerticesConnects.length = %d", mVerticesConnects.length());
-	DBG("    mNormals.length          = %d", mNormals.length());
+	prtu::dbg("    mVertices.length         = %d", mVertices.length());
+	prtu::dbg("    mVerticesCounts.length   = %d", mVerticesCounts.length());
+	prtu::dbg("    mVerticesConnects.length = %d", mVerticesConnects.length());
+	prtu::dbg("    mNormals.length          = %d", mNormals.length());
 
 	mFnMesh = new MFnMesh();
 	MObject oMesh = mFnMesh->create(mVertices.length(), mVerticesCounts.length(), mVertices, mVerticesCounts, mVerticesConnects, newOutputData, &stat);
@@ -110,10 +113,10 @@ void MayaOutputHandler::createMesh() {
 
 			MCHECK(mFnMesh->setUVs(mU, mV, &uvSet));
 
-			DBG("    mU.length          = %d", mU.length());
-			DBG("    mV.length          = %d", mV.length());
-			DBG("    mUVCounts.length   = %d", mUVCounts.length());
-			DBG("    mUVConnects.length = %d", mUVConnects.length());
+			prtu::dbg("    mU.length          = %d", mU.length());
+			prtu::dbg("    mV.length          = %d", mV.length());
+			prtu::dbg("    mUVCounts.length   = %d", mUVCounts.length());
+			prtu::dbg("    mUVConnects.length = %d", mUVConnects.length());
 
 			MCHECK(mFnMesh->assignUVs(mUVCounts, mUVConnects, &uvSet));
 		}
@@ -124,14 +127,14 @@ void MayaOutputHandler::createMesh() {
 	mShadingCmd->clear();
 
 	if(mNormals.length() > 0) {
-		DBG("    mNormals.length        = %d", mNormals.length());
+		prtu::dbg("    mNormals.length        = %d", mNormals.length());
 
 		// NOTE: this expects that vertices and vertex normals use the same index domain (-> maya encoder)
 		MVectorArray expandedNormals(mVerticesConnects.length());
 		for (unsigned int i = 0; i < mVerticesConnects.length(); i++)
 			expandedNormals[i] = mNormals[mVerticesConnects[i]];
 		
-		DBG("    expandedNormals.length = %d", expandedNormals.length());
+		prtu::dbg("    expandedNormals.length = %d", expandedNormals.length());
 
 		MCHECK(mFnMesh->setVertexNormals(expandedNormals, mVerticesConnects));
 	}
@@ -143,7 +146,7 @@ MString getGroupName(const wchar_t* name) {
 	MString matName(name);
 	int     len    = matName.numChars();
 	MString result = "prtmat";
-	result        += toCleanId(matName.substringW(matName.rindexW('/') + 1, len));
+	result        += prtu::toCleanId(matName.substringW(matName.rindexW('/') + 1, len));
 	result        += "SG";
 	return result;
 }

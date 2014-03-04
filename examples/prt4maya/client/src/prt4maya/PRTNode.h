@@ -58,29 +58,29 @@
 #include "wrapper/MayaOutputHandler.h"
 
 #ifdef _MSC_VER
-#include <WinNT.h>
+#	include <WinNT.h>
 #endif
 
 #define PRT_TYPE_ID 0x8666b
 
-static const MString  NAME_RULE_PKG      ("Rule_Package");
-static const MString  NAME_GENERATE      ("Generate_Model");
-static const wchar_t* FILE_PREFIX      = L"file:///";
-static const wchar_t* FLEXNET_LIB      = L"flexnet_prt";
-static const wchar_t* ANNOT_START_RULE = L"@StartRule";
-static const wchar_t* ANNOT_RANGE      = L"@Range";
-static const wchar_t* ANNOT_COLOR      = L"@Color";
-static const wchar_t* ANNOT_DIR        = L"@Directory";
-static const wchar_t* ANNOT_FILE       = L"@File";
-static const wchar_t* ANNOT_GROUP      = L"@Group";
-static const wchar_t* NULL_KEY         = L"#NULL#";
-static const wchar_t* ENC_MAYA         = L"com.esri.prt.codecs.maya.MayaEncoder";
-static const wchar_t* ENC_ATTR         = L"com.esri.prt.core.AttributeEvalEncoder";
-#ifdef _MSC_VER
-static const wchar_t  SEPERATOR        = L'\\';
-#else
-static const wchar_t  SEPERATOR        = L'/';
-#endif
+
+static const char*		FLEXNET_LIB			= "flexnet_prt";
+static const wchar_t*	PRT_EXT_SUBDIR		= L"ext";
+
+static const wchar_t*	ENC_ATTR			= L"com.esri.prt.core.AttributeEvalEncoder";
+static const wchar_t*	ENC_MAYA			= L"MayaEncoder";
+
+static const MString	NAME_RULE_PKG		("Rule_Package");
+static const MString	NAME_GENERATE		("Generate_Model");
+static const wchar_t*	FILE_PREFIX			= L"file:///";
+static const wchar_t*	ANNOT_START_RULE	= L"@StartRule";
+static const wchar_t*	ANNOT_RANGE			= L"@Range";
+static const wchar_t*	ANNOT_COLOR			= L"@Color";
+static const wchar_t*	ANNOT_DIR			= L"@Directory";
+static const wchar_t*	ANNOT_FILE			= L"@File";
+static const wchar_t*	ANNOT_GROUP			= L"@Group";
+static const wchar_t*	NULL_KEY			= L"#NULL#";
+
 
 class PRTNode;
 
@@ -105,6 +105,7 @@ private:
 	MIntArray              mBVals;
 };
 
+
 class PRTNode : public MPxNode {
 	friend class PRTEnum;
 public:
@@ -116,7 +117,7 @@ public:
 
 	static  void *                 creator();
 	static  MStatus                initialize();
-	static std::wstring            getPluginRoot();
+	static const std::string&      getPluginRoot();
 
 	const PRTEnum *                findEnum(const MObject & attr) const;
 	void                           destroyEnums();
@@ -162,6 +163,7 @@ private:
 	MStatus             updateShapeAttributes();
 };
 
+
 class PRTAttrs : public MPxCommand {
 public:
 	MStatus         doIt(const MArgList& args);
@@ -185,6 +187,7 @@ private:
 	static MString  longName(const MString & attrName);
 	static MString  briefName(const MString & attrName);
 };
+
 
 class PRTMaterials : public MPxCommand
 {
