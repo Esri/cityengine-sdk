@@ -370,6 +370,7 @@ static const size_t 	UnitQuad_indexCount      = 4;
 static const uint32_t	UnitQuad_faceCounts[]    = { 4 };
 static const size_t 	UnitQuad_faceCountsCount = 1;
 
+// TODO: make evalAttr finds more robust
 MStatus PRTAttrs::createAttributes(MFnDependencyNode & node, const std::wstring & ruleFile, const std::wstring & startRule, prt::AttributeMapBuilder* aBuilder, const prt::RuleFileInfo* info) {
 	MStatus           stat;
 	MStatus           stat2;

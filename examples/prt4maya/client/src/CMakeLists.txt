@@ -5,17 +5,23 @@ set(PROJECT prt4maya)
 project(${PROJECT})
 include(../../common.cmake)
 
+if(MAYA_PLUGIN_INSTALL_PATH)
+	set(CMAKE_INSTALL_PREFIX ${MAYA_PLUGIN_INSTALL_PATH})
+else()
+	set(CMAKE_INSTALL_PREFIX "${PROJECT_SOURCE_DIR}/../install")
+endif()
+
 
 ### dependencies
 
-find_package(prt CONFIG)
+find_package(prt CONFIG REQUIRED)
 include_directories(${PRT_INCLUDE_PATH})
 
 include_directories(${maya_include_path})
 link_directories(${maya_library_path})
 
 set(prt4maya_codec_DIR "../../codec/install/cmake")
-find_package(prt4maya_codec CONFIG)
+find_package(prt4maya_codec CONFIG REQUIRED)
 include_directories(${PRT4MAYA_CODEC_INCLUDE_PATH})
 
 
@@ -24,10 +30,17 @@ include_directories(${PRT4MAYA_CODEC_INCLUDE_PATH})
 if(WIN32)
 	set(CMAKE_C_FLAGS "")
 	set(CMAKE_CXX_FLAGS "")
-	set(CMAKE_CXX_FLAGS_DEBUG "/Zi /nologo /W3 /WX- /Od -DWIN32 -D_DEBUG -D_WINDOWS -D_AFXDLL -D_MBCS -DNT_PLUGIN -DREQUIRE_IOSTREAM -DBits64_ -D_WINDLL /Gm- /EHsc /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Gd /errorReport:queue")
-	#	set(CMAKE_CXX_FLAGS_RELEASE "/Zi /nologo /W3 /WX- /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_AFXDLL" /D "_MBCS" /D "NT_PLUGIN" /D "REQUIRE_IOSTREAM" /D "Bits64_" /D "_WINDLL" /Gm- /EHsc /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fp"Release/prt4maya.pch" /Fa"Release\" /Fo"Release\" /Fd"Release\vc100.pdb" /Gd /errorReport:queue")
-	#	SET( CMAKE_SHARED_LINKER_FLAGS_DEBUG "/ALLOWISOLATION /MANIFESTUAC:\"level='asInvoker' uiAccess='false'\" /TLBID:1 /DYNAMICBASE:NO /MACHINE:X64 /ERRORREPORT:QUEUE")
-	SET( CMAKE_SHARED_LINKER_FLAGS_DEBUG "/subsystem:windows /dll /debug /export:initializePlugin /export:uninitializePlugin /MANIFESTUAC:\"level='asInvoker' uiAccess='false'\" /TLBID:1 /DYNAMICBASE:NO /MACHINE:X64 /ERRORREPORT:QUEUE")
+	
+	#set(CMAKE_CXX_FLAGS_DEBUG "/Zi /nologo /W3 /WX- /Od -DWIN32 -D_DEBUG -D_WINDOWS -D_AFXDLL -D_MBCS -DNT_PLUGIN -DREQUIRE_IOSTREAM -DBits64_ -D_WINDLL /Gm- /EHsc /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Gd /errorReport:queue")
+	set(CMAKE_CXX_FLAGS_DEBUG "/Gm /GR /GS /EHsc /Zi /DWIN32 /D_DEBUG /RTC1 /c /D_WINDOWS /D_AFXDLL /D_MBCS /DNT_PLUGIN /DREQUIRE_IOSTREAM /DBits64_")
+
+	#set(CMAKE_CXX_FLAGS_RELEASE "/Zi /nologo /W3 /WX- /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_AFXDLL" /D "_MBCS" /D "NT_PLUGIN" /D "REQUIRE_IOSTREAM" /D "Bits64_" /D "_WINDLL" /Gm- /EHsc /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fp"Release/prt4maya.pch" /Fa"Release\" /Fo"Release\" /Fd"Release\vc100.pdb" /Gd /errorReport:queue")
+	set(CMAKE_CXX_FLAGS_RELEASE "/GR /GS /EHsc /c /DWIN32 /DNDEBUG /D_WINDOWS /D_AFXDLL /D_MBCS /DNT_PLUGIN /DREQUIRE_IOSTREAM /DBits64_")
+
+	set(CMAKE_SHARED_LINKER_FLAGS_DEBUG="/NODEFAULTLIB:LIBCMT /export:initializePlugin /export:uninitializePlugin")
+	set(CMAKE_SHARED_LINKER_FLAGS_RELEASE "/NODEFAULTLIB:CPMTD /export:initializePlugin /export:uninitializePlugin")
+	#SET( CMAKE_SHARED_LINKER_FLAGS_DEBUG "/ALLOWISOLATION /MANIFESTUAC:\"level='asInvoker' uiAccess='false'\" /TLBID:1 /DYNAMICBASE:NO /MACHINE:X64 /ERRORREPORT:QUEUE")
+	#SET( CMAKE_SHARED_LINKER_FLAGS_DEBUG "/subsystem:windows /dll /debug  /MANIFESTUAC:\"level='asInvoker' uiAccess='false'\" /TLBID:1 /DYNAMICBASE:NO /MACHINE:X64 /ERRORREPORT:QUEUE")
 else()
 	# build settings required by maya
 	# NOTE: make sure to compile the maya plugin with gcc 4.1.2 (for maya 2012/2013)
@@ -48,29 +61,40 @@ set(CMAKE_INSTALL_RPATH "\$ORIGIN/")
 
 add_subdirectory(prt4maya)
 add_subdirectory(wrapper)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/prtModule.in ${CMAKE_CURRENT_BINARY_DIR}/prtModule @ONLY)
 
 add_library(${PROJECT} SHARED ${SOURCES})
-target_link_libraries(${PROJECT} Foundation OpenMaya ${PRT_LIBRARIES})
-
+target_link_libraries(${PROJECT} Foundation OpenMaya OpenMayaUI ${PRT_LINK_LIBRARIES})
 set_target_properties(${PROJECT} PROPERTIES LINKER_LANGUAGE CXX)
+
+if(WIN32)
+	add_custom_command(TARGET ${PROJECT} POST_BUILD
+		COMMAND ${CMAKE_COMMAND} -E rename "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT}.dll" "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT}.mll"
+	)
+endif()
 
 
 ### setup install target
 
-if(MAYA_PLUGIN_INSTALL_PATH)
-	set(CMAKE_INSTALL_PREFIX ${MAYA_PLUGIN_INSTALL_PATH})
+if(WIN32)
+	install(CODE "file(REMOVE_RECURSE ${CMAKE_INSTALL_PREFIX})")
+	install(FILES "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT}.mll" DESTINATION plug-ins)
+	install(FILES ${PRT_LIBRARIES} DESTINATION plug-ins)
+	install(FILES ${PRT_EXT_LIBRARIES} DESTINATION plug-ins/ext)
+	install(FILES ${PRT4MAYA_CODEC_EXT_LIBRARIES} DESTINATION plug-ins/ext)
+	install(FILES scripts/AEprtTemplate.mel DESTINATION scripts)
+	install(FILES scripts/prt4mayaCreateUI.mel DESTINATION scripts)
+	install(FILES scripts/prt4mayaDeleteUI.mel DESTINATION scripts)
+	install(FILES ${CMAKE_CURRENT_BINARY_DIR}/prtModule DESTINATION .)
 else()
-	set(CMAKE_INSTALL_PREFIX "${PROJECT_SOURCE_DIR}/../install")
+	install(CODE "file(REMOVE_RECURSE ${CMAKE_INSTALL_PREFIX})")
+	install(TARGETS ${PROJECT} DESTINATION .)
+	install(FILES ${PRT_LIBRARIES} DESTINATION .)
+	install(FILES ${PRT_EXT_LIBRARIES} DESTINATION ext)
+	install(FILES ${PRT4MAYA_CODEC_LIBRARIES} DESTINATION ext)
+
+	install(FILES scripts/AEprtTemplate.mel DESTINATION .)
+	install(FILES scripts/prt4mayaCreateUI.mel DESTINATION .)
+	install(FILES scripts/prt4mayaDeleteUI.mel DESTINATION .)
 endif()
-
-install(CODE "file(REMOVE_RECURSE ${CMAKE_INSTALL_PREFIX})")
-install(TARGETS ${PROJECT} DESTINATION .)
-install(FILES ${PRT_LIBRARIES} DESTINATION .)
-install(FILES ${PRT_EXT_LIBRARIES} DESTINATION ext)
-install(FILES ${PRT4MAYA_CODEC_LIBRARIES} DESTINATION ext)
-
-install(FILES scripts/AEprtTemplate.mel DESTINATION .)
-install(FILES scripts/prt4mayaCreateUI.mel DESTINATION .)
-install(FILES scripts/prt4mayaDeleteUI.mel DESTINATION .)
-
 

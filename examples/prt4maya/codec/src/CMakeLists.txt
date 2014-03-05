@@ -11,10 +11,10 @@ include(../../common.cmake)
 
 ### dependencies
 
-find_package(Boost)
+find_package(Boost REQUIRED)
 include_directories(${Boost_INCLUDE_DIR})
 
-find_package(prt CONFIG)
+find_package(prt CONFIG REQUIRED)
 include_directories(${PRT_INCLUDE_PATH})
 
 
@@ -31,9 +31,7 @@ elseif(PRT_LINUX)
 	target_link_libraries(${PROJECT} z pthread dl rt)
 endif()
 
-target_link_libraries(${PROJECT} ${PRT_LIBRARIES})
-
-#set_target_properties(${PROJECT} PROPERTIES VERSION 1.0.0 SOVERSION 1)
+target_link_libraries(${PROJECT} ${PRT_LINK_LIBRARIES})
 set_target_properties(${PROJECT} PROPERTIES LINKER_LANGUAGE CXX)
 
 

@@ -383,14 +383,15 @@ const std::string& PRTNode::getPluginRoot() {
 		HMODULE hModule = 0;
 
 		GetModuleHandleEx(GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS | GET_MODULE_HANDLE_EX_FLAG_UNCHANGED_REFCOUNT, (LPCSTR)PRTNode::creator, &hModule);
-		DWORD res = ::GetModuleFileName(hModule, (LPWCH)dllPath, _MAX_PATH);
+		DWORD res = ::GetModuleFileName(hModule, dllPath, _MAX_PATH);
 		if (res == 0) {
 			// TODO DWORD e = ::GetLastError();
 			throw std::runtime_error("failed to get plugin location");
 		}
 	
 		_splitpath_s(dllPath, drive, 8, dir, _MAX_PATH, 0, 0, 0, 0);
-		rootPath = new std::string(drive + dir); // accepted mem leak
+		rootPath = new std::string(drive);
+		rootPath->append(dir);
 #else
 		Dl_info dl_info;
 		dladdr((void *)getPluginRoot, &dl_info);
@@ -465,18 +466,13 @@ MStatus initializePlugin( MObject obj ){
 
 	const std::string flexLibName = prtu::getSharedLibraryPrefix<char>() + std::string(FLEXNET_LIB) + prtu::getSharedLibrarySuffix<char>();
 	prtu::dbg("flexLibName = %s", flexLibName.c_str());
-	std::string flexLibPath = pluginRoot;
-#ifdef _WIN32
-		flexLibPath.append("..\\"); // windows: we install core + license libraries alongside maya.exe instead of the plugin folder
-#endif
-	flexLibPath.append(flexLibName);
-
+	const std::string flexLibPath = pluginRoot + flexLibName;
 	prtu::dbg("flexLibPath = %s", flexLibPath.c_str());
 	
 	prt::FlexLicParams flp;
 	flp.mActLibPath    = flexLibPath.c_str();
-	flp.mFeature       = "CityEngAdvFx";
-	flp.mHostName      = "";
+	flp.mFeature       = "CityEngAdv";
+	flp.mHostName      = "27000@esrilm.esri.com";
 	
 	prt::Status status = prt::STATUS_UNSPECIFIED_ERROR;
 	{
@@ -493,7 +489,7 @@ MStatus initializePlugin( MObject obj ){
 	PRTNode::theCache = prt::CacheObject::create(prt::CacheObject::CACHE_TYPE_DEFAULT);
 
 
-	MFnPlugin plugin( obj, "Esri", "1.0", "Any");
+	MFnPlugin plugin( obj, "Esri R&D Center Zurich", "1.0", "Any");
 
 	MCHECK(plugin.registerNode("prt", PRTNode::theID, &PRTNode::creator, &PRTNode::initialize, MPxNode::kDependNode));
 	MCHECK(plugin.registerUI("prt4mayaCreateUI", "prt4mayaDeleteUI"));
