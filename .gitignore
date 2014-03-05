@@ -19,6 +19,8 @@
 *.cprojects
 
 # extracted prt releases
+/prt*
+/esri_prtsdk_*/
 /include
 /bin
 /lib
@@ -30,4 +32,3 @@
 *.tar.bz2
 *.tbz
 *.tbz2
-esri_prtsdk_1_0_1286_windows_x86_64_vc10/
