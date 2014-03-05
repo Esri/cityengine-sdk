@@ -498,8 +498,6 @@ MStatus initializePlugin( MObject obj ){
 	if (!tryToGetLicenseDetails(flp))
 		return MS::kFailure;	
 
-	std::cout << flp.mHostName << std::endl;
-	
 	prt::Status status = prt::STATUS_UNSPECIFIED_ERROR;
 	{
 		const wchar_t* prtExtPathPOD = prtExtPath.c_str();
