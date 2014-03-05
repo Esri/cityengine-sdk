@@ -453,16 +453,40 @@ void PRTNode::uninitialize() {
 	}
 }
 
+namespace {
+	
+const char* ENV_LIC_FEATURE = "ESRI_CE_SDK_LIC_FEATURE";
+const char* ENV_LIC_SERVER = "ESRI_CE_SDK_LIC_HOST";
+const char* EMPTY_STRING = "";
+
+bool tryToGetLicenseDetails(prt::FlexLicParams& flp) {
+	const char* envLicFeature = getenv(ENV_LIC_FEATURE);
+	const char* envLicServer = getenv(ENV_LIC_SERVER);
+	if (envLicFeature == 0) {
+		prt::log(L"prt4maya: could not get license feature type from environment", prt::LOG_FATAL);
+		return false;
+	}
+	if ((strcmp(envLicFeature, "CityEngAdv") == 0) && (envLicServer == 0)) {
+		prt::log(L"prt4maya: license type 'CityEngAdv' requires a license server hostname (<port>@<host>, e.g. 27000@flexnet.host.com)", prt::LOG_FATAL);
+		return false;
+	}
+	flp.mFeature       = envLicFeature;
+	flp.mHostName      = envLicServer != 0 ? envLicServer : EMPTY_STRING;
+	return true;
+}
+	
+} // anonymous namespace
+
 MStatus initializePlugin( MObject obj ){
 	PRTNode::initLogger();
-	prt::log(L"initialized prt logger", prt::LOG_DEBUG);
+	prtu::dbg("initialized prt logger");
 	
 	const std::string& pluginRoot   = PRTNode::getPluginRoot();
 	std::wstring wPluginRoot(pluginRoot.length(), L' ');
 	std::copy(pluginRoot.begin(), pluginRoot.end(), wPluginRoot.begin());
 
 	const std::wstring prtExtPath = wPluginRoot + PRT_EXT_SUBDIR;
-	prt::log((L"looking for prt extensions at " + prtExtPath).c_str(), prt::LOG_DEBUG);
+	prtu::wdbg(L"looking for prt extensions at %ls",prtExtPath.c_str());
 
 	const std::string flexLibName = prtu::getSharedLibraryPrefix<char>() + std::string(FLEXNET_LIB) + prtu::getSharedLibrarySuffix<char>();
 	prtu::dbg("flexLibName = %s", flexLibName.c_str());
@@ -470,9 +494,11 @@ MStatus initializePlugin( MObject obj ){
 	prtu::dbg("flexLibPath = %s", flexLibPath.c_str());
 	
 	prt::FlexLicParams flp;
-	flp.mActLibPath    = flexLibPath.c_str();
-	flp.mFeature       = "CityEngAdv";
-	flp.mHostName      = "27000@esrilm.esri.com";
+	flp.mActLibPath = flexLibPath.c_str();
+	if (!tryToGetLicenseDetails(flp))
+		return MS::kFailure;	
+
+	std::cout << flp.mHostName << std::endl;
 	
 	prt::Status status = prt::STATUS_UNSPECIFIED_ERROR;
 	{
