@@ -341,7 +341,7 @@ std::wstring Context::getPluginRoot() {
 	return root;
 }
 
-bool Context::initialize() {
+bool Context::initialize(const char* licFeature, const char* licHost) {
 	const std::wstring root = getPrtLibRoot();
 
 	// set up console log handler
@@ -358,12 +358,33 @@ bool Context::initialize() {
 	}
 
 	// set up licensing information
+	if(licFeature == NULL || strcmp(licFeature, "CityEngBas") != 0 && strcmp(licFeature, "CityEngBasFx") != 0 && strcmp(licFeature, "CityEngAdv") != 0 && strcmp(licFeature, "CityEngAdvFx") != 0) {
+		std::wstring msg(L"Invalid license feature ");
+		if(licFeature != NULL) {
+			msg.push_back(L'\'');
+			msg.append(std::wstring_convert<std::codecvt_utf8<wchar_t>>().from_bytes(licFeature));
+			msg.push_back(L'\'');
+		} else
+			msg.append(L"(null)");
+		msg.append(L"; must be 'CityEngBas', 'CityEngBasFx', 'CityEngAdv', or 'CityEngAdvFx'");
+		::MessageBoxW(NULL, msg.c_str(), L"prt4unity", MB_OK | MB_ICONERROR);
+		return false;
+	}
+
+	if((strcmp(licFeature, "CityEngBas") == 0 || strcmp(licFeature, "CityEngAdv") == 0) && (licHost == NULL || licHost[0] == 0)) {
+		std::wstring msg(L"License type '");
+		msg.append(std::wstring_convert<std::codecvt_utf8<wchar_t>>().from_bytes(licFeature));
+		msg.append(L"' requires a license server hostname (<port>@<host>, e.g. 27000@flexnet.host.com)");
+		::MessageBoxW(NULL, msg.c_str(), L"prt4unity", MB_OK | MB_ICONERROR);
+		return false;
+	}
+
 	const std::wstring flexLib = root + FLEXNET_LIB;
 	const std::string flexLibPath = std::wstring_convert<std::codecvt_utf8<wchar_t>>().to_bytes(flexLib);
 	prt::FlexLicParams flp;
 	flp.mActLibPath = flexLibPath.c_str();
-	flp.mFeature = "CityEngAdvFx";
-	flp.mHostName = "";
+	flp.mFeature = licFeature;
+	flp.mHostName = licHost != NULL ? licHost : "";
 
 	// initialize PRT with the path to its extension libraries, the desired log level and the licensing data
 	prt::Status status;

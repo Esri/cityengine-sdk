@@ -160,7 +160,7 @@ public:
 public:
 	static std::wstring getPrtLibRoot();
 	static std::wstring getPluginRoot();
-	static bool initialize();
+	static bool initialize(const char* licFeature, const char* licHost);
 	static void uninitialize();
 	static void setLogMessageCallback(UnityLogHandler::LogMessageCallback callback);
 	static void postUnityLogMessage(const wchar_t* message, uint32_t level);

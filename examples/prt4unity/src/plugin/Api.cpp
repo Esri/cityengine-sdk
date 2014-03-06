@@ -21,8 +21,8 @@ namespace {
 	}
 }
 
-bool Initialize() {
-	return Context::initialize();
+bool Initialize(const char* licFeature, const char* licHost) {
+	return Context::initialize(licFeature, licHost);
 }
 
 void Uninitialize() {
