@@ -172,7 +172,7 @@ int main (int argc, char *argv[]) {
 			prt::Status status = prt::STATUS_UNSPECIFIED_ERROR;
 			assetsMap = prt::createResolveMap(rpkURI.c_str(), 0, &status);
 			if(status != prt::STATUS_OK) {
-				std::err << "getting resolve map from '" << inputArgs.mRulePackage.string() << "' failed, aborting." << std::endl;
+				std::cerr << "getting resolve map from '" << inputArgs.mRulePackage.string() << "' failed, aborting." << std::endl;
 				exit(1);
 			}
 
