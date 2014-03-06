@@ -3,8 +3,18 @@ set(prt_DIR		"${PROJECT_SOURCE_DIR}/../../../../prt/cmake")
 
 # boost location
 if (WIN32)
-	set(Boost_INCLUDE_DIR "P:/local/boost_1_55_0")
-	set(Boost_LIBRARY_DIR "P:/local/boost_1_55_0/lib64-msvc-10.0")
+	set(ENV_BOOST_INC "$ENV{Boost_INCLUDE_DIR}")
+	set(ENV_BOOST_LIB "$ENV{Boost_LIBRARY_DIR}")
+	if(ENV_BOOST_INC)
+		set(Boost_INCLUDE_DIR ${ENV_BOOST_INC})
+	else()
+		set(Boost_INCLUDE_DIR "C:/local/boost_1_55_0")
+	endif()
+	if(ENV_BOOST_LIB)
+		set(Boost_LIBRARY_DIR ${ENV_BOOST_LIB})
+	else()
+		set(Boost_LIBRARY_DIR "C:/local/boost_1_55_0/lib64-msvc-10.0")
+	endif()
 endif()
 
 # autodesk maya installation location
