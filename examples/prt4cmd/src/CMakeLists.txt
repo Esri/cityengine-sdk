@@ -16,7 +16,7 @@ link_directories(${Boost_LIBRARY_DIRS})
 add_definitions(-DBOOST_MINOR_VERSION=${Boost_MINOR_VERSION})
 
 if(NOT prt_DIR)
-	set(prt_DIR "../../../prt/cmake")
+	set(prt_DIR "${PROJECT_SOURCE_DIR}/../../../prt/cmake")
 endif()
 find_package(prt CONFIG)
 
