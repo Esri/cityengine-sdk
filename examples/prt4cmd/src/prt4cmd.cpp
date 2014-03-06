@@ -166,13 +166,13 @@ int main (int argc, char *argv[]) {
 		// -- create resolve map based on rule package
 		const prt::ResolveMap* assetsMap = 0;
 		if (!inputArgs.mRulePackage.empty()) {
-			if (inputArgs.mLogLevel <= prt::LOG_INFO) std::wcout << L"Using rule package " << inputArgs.mRulePackage << std::endl;
+			if (inputArgs.mLogLevel <= prt::LOG_INFO) std::cout << "Using rule package " << inputArgs.mRulePackage.string() << std::endl;
 
 			std::wstring rpkURI = toFileURI<wchar_t>(/*inputArgs.mWorkDir / */ inputArgs.mRulePackage); // legacy workaround for old boost
 			prt::Status status = prt::STATUS_UNSPECIFIED_ERROR;
 			assetsMap = prt::createResolveMap(rpkURI.c_str(), 0, &status);
 			if(status != prt::STATUS_OK) {
-				std::wcerr << L"getting resolve map from '" << inputArgs.mRulePackage << L"' failed, aborting." << std::endl;
+				std::werr << "getting resolve map from '" << inputArgs.mRulePackage.string() << "' failed, aborting." << std::endl;
 				exit(1);
 			}
 
@@ -213,8 +213,6 @@ int main (int argc, char *argv[]) {
 		if (inputArgs.mInitialShapeAttrs->hasKey(L"seed") && inputArgs.mInitialShapeAttrs->getType(L"seed") == prt::AttributeMap::PT_INT)
 			seed = inputArgs.mInitialShapeAttrs->getInt(L"seed");
 
-		std::cout << "INITIAL SHAPE ATTRS" << objectToXML(inputArgs.mInitialShapeAttrs) << std::endl;
-
 		isb->setAttributes(
 				ruleFile.c_str(),
 				startRule.c_str(),
@@ -240,8 +238,6 @@ int main (int argc, char *argv[]) {
 		const prt::AttributeMap* validatedEncOpts = createValidatedOptions(inputArgs.mEncoderID.c_str(), inputArgs.mEncoderOpts);
 		const prt::AttributeMap* validatedErrOpts = createValidatedOptions(ENCODER_ID_CGA_ERROR, errOptions);
 		const prt::AttributeMap* validatedPrintOpts = createValidatedOptions(ENCODER_ID_CGA_PRINT, printOptions);
-
-		std::wcout << "ENCODER OPTS" << toOSWideFromOSNarrow(objectToXML(validatedEncOpts)) << std::endl;
 
 		// -- THE GENERATE CALL
 		const prt::AttributeMap* encoderOpts[] = { validatedEncOpts, validatedErrOpts, validatedPrintOpts };
