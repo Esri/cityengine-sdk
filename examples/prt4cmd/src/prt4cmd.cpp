@@ -337,11 +337,7 @@ const prt::AttributeMap* createAttributeMapFromTypedKeyValues(const std::vector<
 bool initInputArgs(int argc, char *argv[], InputArgs& inputArgs) {
 	// determine current path
 	boost::filesystem::path executablePath = boost::filesystem::system_complete(boost::filesystem::path(argv[0]));
-#if (BOOST_MINOR_VERSION > 34)
 	inputArgs.mWorkDir = executablePath.parent_path().parent_path();
-#else
-	inputArgs.mWorkDir = executablePath / "../..";
-#endif
 
 	boost::filesystem::path defaultOutputPath = inputArgs.mWorkDir / "output";
 	std::vector<std::wstring> argShapeAttributes, argEncOpts;
@@ -539,11 +535,7 @@ template<> std::string toStr(const boost::filesystem::path& p) {
 
 
 template<> std::wstring toStr(const boost::filesystem::path& p) {
-#if (BOOST_MINOR_VERSION > 34)
 	return p.wstring();
-#else
-	return toOSWideFromOSNarrow(p.string());
-#endif
 }
 
 

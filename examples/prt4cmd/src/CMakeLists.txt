@@ -13,7 +13,6 @@ project(${PROJECT})
 find_package(Boost COMPONENTS program_options filesystem)
 include_directories(${Boost_INCLUDE_DIR})
 link_directories(${Boost_LIBRARY_DIRS})
-add_definitions(-DBOOST_MINOR_VERSION=${Boost_MINOR_VERSION})
 
 if(NOT prt_DIR)
 	set(prt_DIR "${PROJECT_SOURCE_DIR}/../../../prt/cmake")
