@@ -10,7 +10,7 @@ project(${PROJECT})
 
 ### dependencies
 
-find_package(Boost COMPONENTS program_options filesystem)
+find_package(Boost COMPONENTS system program_options filesystem)
 include_directories(${Boost_INCLUDE_DIR})
 link_directories(${Boost_LIBRARY_DIRS})
 
