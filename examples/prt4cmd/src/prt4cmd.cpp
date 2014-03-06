@@ -82,7 +82,7 @@ struct InputArgs {
 	std::wstring				mEncoderID;
 	const prt::AttributeMap*	mEncoderOpts;
 	std::wstring				mOutputPath;
-	std::wstring				mRulePackage;
+	boost::filesystem::path		mRulePackage;
 	const prt::AttributeMap*	mInitialShapeAttrs;
 	std::wstring				mInitialShapeGeo;
 	int							mLogLevel;
@@ -360,7 +360,7 @@ bool initInputArgs(int argc, char *argv[], InputArgs& inputArgs) {
 			boost::program_options::wvalue<std::wstring>(&inputArgs.mEncoderID)->default_value(ENCODER_ID_OBJ, toOSNarrowFromOSWide(ENCODER_ID_OBJ)), "The encoder ID, e.g. 'com.esri.prt.codecs.OBJEncoder'.");
 	desc.add_options()(
 			"rule-package,p",
-			boost::program_options::wvalue<std::wstring>(&inputArgs.mRulePackage)->default_value(L"", ""),
+			boost::program_options::value<boost::filesystem::path>(&inputArgs.mRulePackage),
 			"Set the rule package path."
 	);
 	desc.add_options()(
@@ -535,7 +535,7 @@ template<> std::string toStr(const boost::filesystem::path& p) {
 
 
 template<> std::wstring toStr(const boost::filesystem::path& p) {
-	return p.wstring();
+	return toOSWideFromOSNarrow(p.string()); // recent boost versions: return p.wstring();
 }
 
 
