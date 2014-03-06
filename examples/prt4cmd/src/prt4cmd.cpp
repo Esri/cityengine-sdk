@@ -392,7 +392,7 @@ bool initInputArgs(int argc, char *argv[], InputArgs& inputArgs) {
 	);
 	desc.add_options()(
 			"license-feature,f",
-			boost::program_options::value<std::string>(&inputArgs.mLicFeature)->default_value("CityEngAdv"),
+			boost::program_options::value<std::string>(&inputArgs.mLicFeature),
 			"License Feature to use, one of CityEngBasFx, CityEngBas, CityEngAdvFx, CityEngAdv"
 	);
 
