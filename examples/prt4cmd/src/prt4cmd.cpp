@@ -266,7 +266,8 @@ int main (int argc, char *argv[]) {
 	cache->destroy();
 
 	// release prt license and shutdown
-	licHandle->destroy();
+	if (licHandle)
+		licHandle->destroy();
 
 	// -- remove loggers
 	prt::removeLogHandler(logHandler);

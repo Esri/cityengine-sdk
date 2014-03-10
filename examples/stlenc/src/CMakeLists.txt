@@ -10,13 +10,15 @@ project(${PROJECT})
 
 ### dependencies
 
-find_package(Boost)
+find_package(Boost REQUIRED)
 include_directories(${Boost_INCLUDE_DIR})
 link_directories(${Boost_LIBRARY_DIRS})
 add_definitions(-DBOOST_MINOR_VERSION=${Boost_MINOR_VERSION})
 
-include(../../prt.cmake)
-find_package(prt CONFIG)
+if (NOT prt_DIR)
+	set(prt_DIR ${PROJECT_SOURCE_DIR}/../../../prt/cmake)
+endif()
+find_package(prt CONFIG REQUIRED)
 
 
 ### build target

@@ -159,7 +159,8 @@ STLEncoderFactory* STLEncoderFactory::createInstance() {
 	encoderInfoBuilder.setDescription(STLEncoder::DESCRIPTION);
 	encoderInfoBuilder.setType(prt::CT_GEOMETRY);
 
-	//encoderInfoBuilder.setValidator(prtx::EncodeOptionsValidatorPtr(new TestOptionsValidator()));
+	// optionally we could setup a validator
+	// encoderInfoBuilder.setValidator(prtx::EncodeOptionsValidatorPtr(new TestOptionsValidator()));
 
 	prtx::PRTUtils::AttributeMapBuilderPtr amb(prt::AttributeMapBuilder::create());
 	amb->setString(EO_BASE_NAME, L"stl_default_name");
