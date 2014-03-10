@@ -52,7 +52,7 @@ void MayaEncoder::init(prtx::GenerateContext& /*context*/) {
 
 
 void MayaEncoder::encode(prtx::GenerateContext& context, size_t initialShapeIndex) {
-	const prtx::InitialShape* ishape = context.getInitialShape(initialShapeIndex);
+	prtx::InitialShape const* initialShape = context.getInitialShape(initialShapeIndex);
 
 	IMayaOutputHandler* oh = dynamic_cast<IMayaOutputHandler*>(getCallbacks());
 
@@ -65,7 +65,7 @@ void MayaEncoder::encode(prtx::GenerateContext& context, size_t initialShapeInde
 
 	prtx::LeafIteratorPtr li = prtx::LeafIterator::create(context, initialShapeIndex);
 	for (prtx::ShapePtr shape = li->getNext(); shape != 0; shape = li->getNext())
-		encPrep->add(context.getCache(), shape);
+		encPrep->add(context.getCache(), shape, initialShape->getAttributeMap());
 
 	prtx::GeometryPtrVector geometries;
 	std::vector<prtx::DoubleVector> trafos;
@@ -92,7 +92,7 @@ void MayaEncoder::encode(prtx::GenerateContext& context, size_t initialShapeInde
 
 	size_t   start = 0;
 	size_t   end   = 0;
-	wchar_t* ruleFile = wcsdup(ishape->getRuleFile());
+	wchar_t* ruleFile = wcsdup(initialShape->getRuleFile()); // TODO: cleanup
 	for(size_t i = 0; ruleFile[i]; i++) {
 		switch(ruleFile[i]) {
 			case '\\':
