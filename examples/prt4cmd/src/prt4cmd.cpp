@@ -341,7 +341,7 @@ bool initInputArgs(int argc, char *argv[], InputArgs& inputArgs) {
 	std::wstring argInfoFile;
 
 	boost::program_options::options_description desc("Available Options");
-	desc.add_options()("help,h", "This very help screen.")("version,v", "Show CityEengine SDK version.");
+	desc.add_options()("help,h", "This very help screen.")("version,v", "Show CityEngine SDK version.");
 	desc.add_options()(
 			"log-level,l",
 			boost::program_options::value<int>(&inputArgs.mLogLevel)->default_value(2),
