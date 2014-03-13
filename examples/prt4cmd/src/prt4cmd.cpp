@@ -485,12 +485,12 @@ bool initInputArgs(int argc, char *argv[], InputArgs& inputArgs) {
 	}
 	
 	if (vm.count("info")) {
-		inputArgs.mInfoFile = toOSNarrowFromOSWide(argInfoFile); // legacy workaround for old boost
+		inputArgs.mInfoFile = toOSNarrowFromOSWide(argInfoFile); // workaround for boost 1.41
 	}
 	
 	// make sure the path to the initial shape geometry is a valid URI
 	if (!inputArgs.mInitialShapeGeo.empty()) {
-		boost::filesystem::path isGeoPath(inputArgs.mInitialShapeGeo);
+		boost::filesystem::path isGeoPath = toOSNarrowFromOSWide(inputArgs.mInitialShapeGeo); // workaround for boost 1.41
 		if (boost::filesystem::exists(isGeoPath)) {
 			inputArgs.mInitialShapeGeo = toFileURI<wchar_t>(isGeoPath);
 		}
