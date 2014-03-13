@@ -21,9 +21,8 @@
 #endif
 
 
-static const int MINIMAL_VERSION_MAJOR = 0;
-static const int MINIMAL_VERSION_MINOR = 9;
-static const int MINIMAL_VERSION_BUILD = 0;
+static const int MINIMAL_VERSION_MAJOR = 1;
+static const int MINIMAL_VERSION_MINOR = 1;
 
 
 extern "C" {
@@ -48,10 +47,6 @@ CODECS_UNITY_EXPORTS_API int getMinimalVersionMajor() {
 
 CODECS_UNITY_EXPORTS_API int getMinimalVersionMinor() {
 	return MINIMAL_VERSION_MINOR;
-}
-
-CODECS_UNITY_EXPORTS_API int getMinimalVersionBuild() {
-	return MINIMAL_VERSION_BUILD;
 }
 
 }

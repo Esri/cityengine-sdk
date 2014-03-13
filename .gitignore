@@ -20,7 +20,7 @@
 
 # extracted prt releases
 /prt*
-/esri_prtsdk_*/
+/esri_*/
 /include
 /bin
 /lib

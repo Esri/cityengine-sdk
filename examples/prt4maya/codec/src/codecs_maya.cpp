@@ -16,8 +16,7 @@
 
 
 static const int MINIMAL_VERSION_MAJOR = 1;
-static const int MINIMAL_VERSION_MINOR = 0;
-static const int MINIMAL_VERSION_BUILD = 0;
+static const int MINIMAL_VERSION_MINOR = 1;
 
 
 extern "C" {
@@ -39,11 +38,6 @@ PRT4MAYA_CODEC_EXPORTS_API int getMinimalVersionMajor() {
 
 PRT4MAYA_CODEC_EXPORTS_API int getMinimalVersionMinor() {
 	return MINIMAL_VERSION_MINOR;
-}
-
-
-PRT4MAYA_CODEC_EXPORTS_API int getMinimalVersionBuild() {
-	return MINIMAL_VERSION_BUILD;
 }
 
 

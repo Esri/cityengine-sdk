@@ -24,9 +24,7 @@
  */
 
 #include <iostream>
-
 #include "prtx/ExtensionManager.h"
-
 #include "STLEncoder.h"
 
 
@@ -38,8 +36,7 @@
 
 
 static const int MINIMAL_VERSION_MAJOR = 1;
-static const int MINIMAL_VERSION_MINOR = 0;
-static const int MINIMAL_VERSION_BUILD = 0;
+static const int MINIMAL_VERSION_MINOR = 1;
 
 
 extern "C" {
@@ -67,11 +64,6 @@ STLENC_EXPORTS_API int getMinimalVersionMajor() {
 
 STLENC_EXPORTS_API int getMinimalVersionMinor() {
 	return MINIMAL_VERSION_MINOR;
-}
-
-
-STLENC_EXPORTS_API int getMinimalVersionBuild() {
-	return MINIMAL_VERSION_BUILD;
 }
 
 
