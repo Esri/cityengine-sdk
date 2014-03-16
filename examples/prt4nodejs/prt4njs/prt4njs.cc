@@ -530,13 +530,12 @@ v8::Handle<v8::Value> njsInit(const v8::Arguments& args) {
 }
 
 
-v8::Handle<v8::Value> njsCleanup(const v8::Arguments& args) {
+v8::Handle<v8::Value> njsShutdown(const v8::Arguments& args) {
 	v8::HandleScope scope;
 
 	delete prtCtx;
 	prtCtx = 0;
 
-	LOG_DBG << "cleaned up";
 	return scope.Close(v8::Undefined());
 }
 
@@ -551,6 +550,16 @@ v8::Handle<v8::Value> njsRuleInfo(const v8::Arguments& args) {
 	prt::RuleFileInfo const* info = prt::createRuleFileInfo(wRPKUri.c_str(), prtCtx->mCache, &status);
 
 	return scope.Close(NJSRuleFileInfo::create(info));
+}
+
+
+v8::Handle<v8::Value> njsCreateInitialShape(const v8::Arguments& args) {
+
+}
+
+
+v8::Handle<v8::Value> njsCreateCallback(const v8::Arguments& args) {
+
 }
 
 
@@ -667,10 +676,12 @@ v8::Handle<v8::Value> njsGenerate(const v8::Arguments& args) {
 
 
 void init(v8::Handle<v8::Object> exports) {
-	exports->Set(v8::String::NewSymbol("init"), 	v8::FunctionTemplate::New(njsInit)->GetFunction());
-	exports->Set(v8::String::NewSymbol("cleanup"),	v8::FunctionTemplate::New(njsCleanup)->GetFunction());
-	exports->Set(v8::String::NewSymbol("ruleInfo"),	v8::FunctionTemplate::New(njsRuleInfo)->GetFunction());
-	exports->Set(v8::String::NewSymbol("generate"),	v8::FunctionTemplate::New(njsGenerate)->GetFunction());
+	exports->Set(v8::String::NewSymbol("init"), 				v8::FunctionTemplate::New(njsInit)->GetFunction());
+	exports->Set(v8::String::NewSymbol("shutdown"),				v8::FunctionTemplate::New(njsShutdown)->GetFunction());
+	exports->Set(v8::String::NewSymbol("getRuleInfo"),			v8::FunctionTemplate::New(njsRuleInfo)->GetFunction());
+	exports->Set(v8::String::NewSymbol("createInitialShape"),	v8::FunctionTemplate::New(njsCreateInitialShape)->GetFunction());
+	exports->Set(v8::String::NewSymbol("createCallback"),		v8::FunctionTemplate::New(njsCreateCallback)->GetFunction());
+	exports->Set(v8::String::NewSymbol("generate"),				v8::FunctionTemplate::New(njsGenerate)->GetFunction());
 }
 
 NODE_MODULE(prt4njs, init);

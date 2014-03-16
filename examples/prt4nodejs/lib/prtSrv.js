@@ -8,22 +8,23 @@ const ADDRESS = '0.0.0.0';
 var http = require('http');
 var prt4njs = require('../prt4njs/build/Release/prt4njs');
 
-var prtExtLib = __dirname + "/../../../prt/lib";
-var prtLicLib = __dirname + "/../../../prt/bin/libflexnet_prt.dylib";
+var prtRoot		= __dirname + "/../../../prt";
 var prtLicType = "CityEngAdvFx";
 var prtLicHost = "";
 var prtLogLevel = 1;
 
-if (prt4njs.init(prtExtLib, prtLicLib, prtLicType, prtLicHost, prtLogLevel) != 0)
+if (prt4njs.init(prtRoot, prtLicType, prtLicHost, prtLogLevel) != 0)
 	return;
 
 function prtCleanup() {
 	console.log("closing down");
-	prt4njs.cleanup();
+	prt4njs.shutdown();
 }
 
 var server = http.createServer(function (req, res) {
 	res.writeHead(200, {'Content-Type': 'text/plain'});
+	// TODO: return json with metadata (e.g. data link) for each generated feature
+	// prt4njs will serve the actual data upon request
 	res.end("prt4njs init");
 });
 
