@@ -1,0 +1,22 @@
+{
+  "name": "prt4nodejs",
+  "version": "0.1.0",
+  "description": "a esri ce sdk deamon based on node.js",
+  "main": "lib/prt.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified! Configure in package.json\" && exit 1",
+    "start": "node lib/prt.js"
+  },
+  "repository": "",
+  "keywords": [
+    "node.js",
+    "eclipse",
+    "nodeclipse"
+  ],
+  "author": "Simon Haegler",
+  "license": "MIT",
+  "readmeFilename": "README.md"
+  "dependencies": {
+	  "daemon": "-1.1.0"
+  }
+}
