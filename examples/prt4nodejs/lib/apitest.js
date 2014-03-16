@@ -5,10 +5,12 @@ var prtLicType	= "CityEngAdvFx";
 var prtLicHost	= "";
 var prtLogLevel = 3;
 
+var testRule = "rpk:file:/Volumes/Data/Users/shaegler/Documents/esri/dev/prt_trunk/com.esri.prt.test/resources/rules/candler.01.rpk!/bin/candler.01.cgb";
+
 if (prt4njs.init(prtRoot, prtLicType, prtLicHost, prtLogLevel) != 0)
 	return;
 
-var info = prt4njs.ruleInfo("rpk:file:/Volumes/Data/Users/shaegler/Documents/esri/dev/prt_trunk/com.esri.prt.test/resources/rules/candler.01.rpk!/bin/candler.01.cgb");
+var info = prt4njs.getRuleInfo(testRule);
 
 console.log("-- RULES (" + info.getNumRules() + ")");
 for (var ri = 0; ri < info.getNumRules(); ri++) {
@@ -28,4 +30,40 @@ for (var ai = 0; ai < info.getNumAttributes(); ai++) {
 	console.log("   " + attr.getReturnType() + " " + attr.getName());
 }
 
-prt4njs.cleanup();
+var initialShapes = [];
+
+var initialShapeData = {
+	'uid'		: "shape0001",
+	'ruleSet'	: testRule,			// any URI, can also be data: URI
+	'startRule'	: "Default$Init",	// Style$StartRule
+	'vertices'	: [ ],				// vertex coordinate floats, multiple of 3
+	'faces'		: [ ],				// face counts ccw: [ [face0idx], [face1idx], .. ]
+	'attributes': [ 				// array with key/val pairs   
+	    { "key" : 1.23 }
+	]
+}
+initialShapes.push(prt4njs.createInitialShape(initialShapeData)); 
+
+var callback = prt4njs.createCallback(function(jsonMetadata) {
+	// process the metadata, e.g. a webserver would return it to the client who in turn can decide to fetch the actual data
+
+	// example return json:
+	//	[
+	//	 {
+	//		 'uid' : "shape0001",
+	//		 'data': "http://localhost:1337/shape0001/data"
+	//	 },
+	//	 {
+	//		 'uid' : "shape0002",
+	//		 ...
+	//	 }
+	//	]
+	
+});
+prt4njs.generate(initialShapes, encoder, cachedCallback);
+
+prt4njs.shutdown();
+
+
+// client <---------> srv (prt4njs) <-> prt
+ 
