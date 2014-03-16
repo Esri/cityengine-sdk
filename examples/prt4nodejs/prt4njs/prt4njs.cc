@@ -540,7 +540,7 @@ v8::Handle<v8::Value> njsShutdown(const v8::Arguments& args) {
 }
 
 
-v8::Handle<v8::Value> njsRuleInfo(const v8::Arguments& args) {
+v8::Handle<v8::Value> njsRuleInfoAdv(const v8::Arguments& args) {
 	v8::String::Utf8Value rpkURI(args[0]->ToString());
 	v8::HandleScope scope;
 
@@ -550,6 +550,108 @@ v8::Handle<v8::Value> njsRuleInfo(const v8::Arguments& args) {
 	prt::RuleFileInfo const* info = prt::createRuleFileInfo(wRPKUri.c_str(), prtCtx->mCache, &status);
 
 	return scope.Close(NJSRuleFileInfo::create(info));
+}
+
+
+namespace {
+
+std::string toUTF8(const wchar_t* u16) {
+	return boost::locale::conv::utf_to_utf<char>(u16);
+}
+
+template<typename T> v8::Local<v8::Array> annotationsToNJS(T const* p) {
+	const size_t numAnnots = p->getNumAnnotations();
+	v8::Local<v8::Array> njsAnnots = v8::Array::New(numAnnots);
+	for (size_t i = 0; i < numAnnots; i++) {
+		prt::Annotation const* a = p->getAnnotation(i);
+
+		const size_t numArgs = a->getNumArguments();
+		v8::Local<v8::Array> njsArgs = v8::Array::New(numArgs);
+		for (size_t ai = 0; ai < numArgs; ai++) {
+			prt::AnnotationArgument const* arg = a->getArgument(ai);
+			v8::Local<v8::Object> njsArg = v8::Object::New();
+			njsArg->Set(v8::Local<v8::Value>::New(v8::String::New("type")), toNJS(arg->getType()), v8::ReadOnly);
+			v8::Local<v8::Value> val;
+			switch (arg->getType()) {
+			case prt::AAT_BOOL:		val = v8::Local<v8::Boolean>::New(v8::Boolean::New(arg->getBool())); break;
+			case prt::AAT_FLOAT:	val = v8::Number::New(arg->getFloat()); break;
+			case prt::AAT_STR:		val = v8::String::New(toUTF8(arg->getStr()).c_str()); break;
+			default: break;
+			}
+			njsArg->Set(v8::Local<v8::Value>::New(v8::String::New("val")), val, v8::ReadOnly);
+			njsArgs->Set(ai, njsArg);
+		}
+
+		v8::Local<v8::Object> njsAnnot = v8::Object::New();
+		njsAnnot->Set(v8::Local<v8::Value>::New(v8::String::New("name")), v8::Local<v8::Value>::New(v8::String::New(toUTF8(a->getName()).c_str())), v8::ReadOnly);
+		njsAnnot->Set(v8::Local<v8::Value>::New(v8::String::New("args")), njsArgs, v8::ReadOnly);
+		njsAnnots->Set(i, njsAnnot);
+
+
+	}
+	return njsAnnots;
+}
+
+v8::Local<v8::Object> toNJS(prt::RuleFileInfo::Entry const* entry) {
+	const std::string name = boost::locale::conv::utf_to_utf<char>(entry->getName());
+	std::vector<std::string> tokenized;
+	boost::split(tokenized, name, boost::is_any_of("$"), boost::token_compress_on);
+
+	const size_t numParams = entry->getNumParameters();
+	v8::Local<v8::Array> njsRuleParams = v8::Array::New(numParams);
+	for (size_t pi = 0; pi < numParams; pi++) {
+		prt::RuleFileInfo::Parameter const* param = entry->getParameter(pi);
+
+		v8::Local<v8::Object> njsParam = v8::Object::New();
+		njsParam->Set(v8::Local<v8::Value>::New(v8::String::New("name")), v8::Local<v8::Value>::New(v8::String::New(toUTF8(param->getName()).c_str())), v8::ReadOnly);
+		njsParam->Set(v8::Local<v8::Value>::New(v8::String::New("type")), toNJS(param->getType()), v8::ReadOnly);
+		njsParam->Set(v8::Local<v8::Value>::New(v8::String::New("annots")), annotationsToNJS(param), v8::ReadOnly);
+		njsRuleParams->Set(pi, njsParam);
+	}
+
+	v8::Local<v8::Object> njsRule = v8::Object::New();
+	njsRule->Set(v8::Local<v8::Value>::New(v8::String::New("name")), v8::Local<v8::Value>::New(v8::String::New(tokenized[1].c_str())), v8::ReadOnly);
+	njsRule->Set(v8::Local<v8::Value>::New(v8::String::New("style")), v8::Local<v8::Value>::New(v8::String::New(tokenized[0].c_str())), v8::ReadOnly);
+	njsRule->Set(v8::Local<v8::Value>::New(v8::String::New("params")), njsRuleParams, v8::ReadOnly);
+	njsRule->Set(v8::Local<v8::Value>::New(v8::String::New("annots")), annotationsToNJS(entry), v8::ReadOnly);
+
+	return njsRule;
+}
+
+}
+
+
+v8::Handle<v8::Value> njsRuleInfo(const v8::Arguments& args) {
+	v8::String::Utf8Value rpkURI(args[0]->ToString());
+	v8::Local<v8::Function> cb = v8::Local<v8::Function>::Cast(args[1]);
+	v8::HandleScope scope;
+
+	prt::Status status = prt::STATUS_UNSPECIFIED_ERROR;
+	const std::wstring wRPKUri = boost::locale::conv::utf_to_utf<wchar_t>(*rpkURI);
+	prt::RuleFileInfo const* info = prt::createRuleFileInfo(wRPKUri.c_str(), prtCtx->mCache, &status);
+
+	const size_t numRules = info->getNumRules();
+	v8::Local<v8::Array> njsRules = v8::Array::New(numRules);
+	for (size_t ri = 0; ri < numRules; ri++) {
+		prt::RuleFileInfo::Entry const* rule = info->getRule(ri);
+		njsRules->Set(ri, toNJS(rule));
+	}
+
+	const size_t numAttributes = info->getNumAttributes();
+	v8::Local<v8::Array> njsAttrs = v8::Array::New(numAttributes);
+	for (size_t ai = 0; ai < numAttributes; ai++) {
+		prt::RuleFileInfo::Entry const* attr = info->getAttribute(ai);
+		njsAttrs->Set(ai, toNJS(attr));
+	}
+
+	v8::Local<v8::Object> njsInfo = v8::Object::New();
+	njsInfo->Set(v8::Local<v8::Value>::New(v8::String::New("rules")), njsRules, v8::ReadOnly);
+	njsInfo->Set(v8::Local<v8::Value>::New(v8::String::New("attributes")), njsAttrs, v8::ReadOnly);
+
+	const unsigned argc = 1;
+	v8::Local<v8::Value> argv[argc] = { njsInfo };
+	cb->Call(v8::Context::GetCurrent()->Global(), argc, argv);
+	return scope.Close(v8::Undefined());
 }
 
 
@@ -678,6 +780,7 @@ v8::Handle<v8::Value> njsGenerate(const v8::Arguments& args) {
 void init(v8::Handle<v8::Object> exports) {
 	exports->Set(v8::String::NewSymbol("init"), 				v8::FunctionTemplate::New(njsInit)->GetFunction());
 	exports->Set(v8::String::NewSymbol("shutdown"),				v8::FunctionTemplate::New(njsShutdown)->GetFunction());
+//	exports->Set(v8::String::NewSymbol("getRuleInfoAdv"),		v8::FunctionTemplate::New(njsRuleInfoAdv)->GetFunction());
 	exports->Set(v8::String::NewSymbol("getRuleInfo"),			v8::FunctionTemplate::New(njsRuleInfo)->GetFunction());
 	exports->Set(v8::String::NewSymbol("createInitialShape"),	v8::FunctionTemplate::New(njsCreateInitialShape)->GetFunction());
 	exports->Set(v8::String::NewSymbol("createCallback"),		v8::FunctionTemplate::New(njsCreateCallback)->GetFunction());
