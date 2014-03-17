@@ -13,6 +13,7 @@
 #include "boost/assign.hpp"
 #include "boost/locale/encoding.hpp"
 #include "boost/shared_ptr.hpp"
+#include "boost/scoped_array.hpp"
 
 #include "prt/prt.h"
 #include "prt/API.h"
@@ -194,12 +195,182 @@ struct PRTContext {
 PRTContext* prtCtx = 0;
 
 
+std::string toUTF8(const wchar_t* u16) {
+	return boost::locale::conv::utf_to_utf<char>(u16);
+}
+
+std::string toUTF8(const std::wstring& u16) {
+	return boost::locale::conv::utf_to_utf<char>(u16);
+}
+
+template<typename T> v8::Local<v8::Value> toNJS(T v);
+
 const char* AnnotationTypeNames[6] = { "void", "bool", "float", "string", "int", "unknown" };
 
-v8::Local<v8::String> toNJS(prt::AnnotationArgumentType aat) {
-	v8::Local<v8::String> njsAAT = v8::String::New(AnnotationTypeNames[aat]);
-//	njsAAT->Set(v8::String::NewSymbol(), v8::Int32::New(static_cast<int32_t>(aat)), v8::ReadOnly);
-	return njsAAT;
+template<> v8::Local<v8::Value> toNJS(char const* s) {
+	return v8::Local<v8::String>(v8::String::New(s));
+}
+
+template<> v8::Local<v8::Value> toNJS(const std::string& s) {
+	return v8::Local<v8::String>(v8::String::New(s.c_str()));
+}
+
+template<> v8::Local<v8::Value> toNJS(wchar_t const* s) {
+	return v8::Local<v8::String>(v8::String::New(toUTF8(s).c_str()));
+}
+
+template<> v8::Local<v8::Value> toNJS(const std::wstring& s) {
+	return v8::Local<v8::String>(v8::String::New(toUTF8(s).c_str()));
+}
+
+template<> v8::Local<v8::Value> toNJS(double d) {
+	return v8::Local<v8::Number>(v8::Number::New(d));
+}
+
+template<> v8::Local<v8::Value> toNJS(bool d) {
+	return v8::Local<v8::Number>(v8::Number::New(d));
+}
+
+template<> v8::Local<v8::Value> toNJS(int32_t i) {
+	return v8::Local<v8::Integer>(v8::Integer::New(i));
+}
+
+template<> v8::Local<v8::Value> toNJS(prt::AnnotationArgumentType aat) {
+	return toNJS(AnnotationTypeNames[aat]);
+}
+
+template<typename T> v8::Local<v8::Array> toNJS(T const* const a, size_t n) {
+	v8::Local<v8::Array> njsArray = v8::Array::New(n);
+	for (size_t i = 0; i < n; i++) {
+		njsArray->Set(i, toNJS(a[i]));
+	}
+	return njsArray;
+}
+
+template<> v8::Local<v8::Value> toNJS(prt::AttributeMap const* am) {
+	v8::Local<v8::Object> njsAM = v8::Object::New();
+	size_t keyCount = 0;
+	wchar_t const* const* const keys = am->getKeys(&keyCount);
+	for (size_t k = 0; k < keyCount; k++) {
+		const wchar_t* const key = keys[k];
+		assert(key != 0);
+		v8::Local<v8::Value> njsValue;
+		switch(am->getType(key)) {
+		case prt::Attributable::PT_STRING:
+			njsValue = toNJS(am->getString(key));
+			break;
+		case prt::Attributable::PT_FLOAT:
+			njsValue = toNJS(am->getFloat(key));
+			break;
+		case prt::Attributable::PT_BOOL:
+			njsValue = toNJS(am->getBool(key));
+			break;
+		case prt::Attributable::PT_INT:
+			njsValue = toNJS(am->getInt(key));
+			break;
+		case prt::Attributable::PT_STRING_ARRAY: {
+			size_t n = 0;
+			wchar_t const* const* a = am->getStringArray(key, &n);
+			njsValue = toNJS(a, n);
+			break;
+		}
+		case prt::Attributable::PT_INT_ARRAY: {
+			size_t n = 0;
+			int32_t const* a = am->getIntArray(key, &n);
+			njsValue = toNJS(a, n);
+			break;
+		}
+		case prt::Attributable::PT_FLOAT_ARRAY: {
+			size_t n = 0;
+			double const* a = am->getFloatArray(key, &n);
+			njsValue = toNJS(a, n);
+			break;
+		}
+		case prt::Attributable::PT_BOOL_ARRAY: {
+			size_t n = 0;
+			bool const* a = am->getBoolArray(key, &n);
+			njsValue = toNJS(a, n);
+			break;
+		}
+		default:
+			break;
+		}
+		if (!njsValue.IsEmpty())
+			njsAM->Set(v8::Local<v8::Value>::New(v8::String::New(toUTF8(key).c_str())), njsValue);
+	}
+	return njsAM;
+}
+
+template<> v8::Local<v8::Value> toNJS(prt::EncoderInfo const* info) {
+	v8::Local<v8::Object> njsInfo = v8::Object::New();
+	njsInfo->Set(v8::Local<v8::Value>::New(v8::String::New("id")), toNJS(info->getID()), v8::ReadOnly);
+
+	prt::AttributeMap const* defOpts = 0;
+	prt::Status status = info->createValidatedOptionsAndStates(0, &defOpts);
+	assert(status == prt::STATUS_OK);
+	njsInfo->Set(v8::Local<v8::Value>::New(v8::String::New("options")), toNJS(defOpts));
+	defOpts->destroy();
+
+	return njsInfo;
+}
+
+template<typename T> v8::Local<v8::Array> annotationsToNJS(T const* p) {
+	const size_t numAnnots = p->getNumAnnotations();
+	v8::Local<v8::Array> njsAnnots = v8::Array::New(numAnnots);
+	for (size_t i = 0; i < numAnnots; i++) {
+		prt::Annotation const* a = p->getAnnotation(i);
+
+		const size_t numArgs = a->getNumArguments();
+		v8::Local<v8::Array> njsArgs = v8::Array::New(numArgs);
+		for (size_t ai = 0; ai < numArgs; ai++) {
+			prt::AnnotationArgument const* arg = a->getArgument(ai);
+			v8::Local<v8::Object> njsArg = v8::Object::New();
+			njsArg->Set(v8::Local<v8::Value>::New(v8::String::New("type")), toNJS(arg->getType()), v8::ReadOnly);
+			v8::Local<v8::Value> val;
+			switch (arg->getType()) {
+			case prt::AAT_BOOL:		val = v8::Local<v8::Boolean>::New(v8::Boolean::New(arg->getBool())); break;
+			case prt::AAT_FLOAT:	val = v8::Number::New(arg->getFloat()); break;
+			case prt::AAT_STR:		val = v8::String::New(toUTF8(arg->getStr()).c_str()); break;
+			default: break;
+			}
+			njsArg->Set(v8::Local<v8::Value>::New(v8::String::New("val")), val, v8::ReadOnly);
+			njsArgs->Set(ai, njsArg);
+		}
+
+		v8::Local<v8::Object> njsAnnot = v8::Object::New();
+		njsAnnot->Set(v8::Local<v8::Value>::New(v8::String::New("name")), v8::Local<v8::Value>::New(v8::String::New(toUTF8(a->getName()).c_str())), v8::ReadOnly);
+		njsAnnot->Set(v8::Local<v8::Value>::New(v8::String::New("args")), njsArgs, v8::ReadOnly);
+		njsAnnots->Set(i, njsAnnot);
+
+
+	}
+	return njsAnnots;
+}
+
+v8::Local<v8::Object> toNJS(prt::RuleFileInfo::Entry const* entry) {
+	const std::string name = boost::locale::conv::utf_to_utf<char>(entry->getName());
+	std::vector<std::string> tokenized;
+	boost::split(tokenized, name, boost::is_any_of("$"), boost::token_compress_on);
+
+	const size_t numParams = entry->getNumParameters();
+	v8::Local<v8::Array> njsRuleParams = v8::Array::New(numParams);
+	for (size_t pi = 0; pi < numParams; pi++) {
+		prt::RuleFileInfo::Parameter const* param = entry->getParameter(pi);
+
+		v8::Local<v8::Object> njsParam = v8::Object::New();
+		njsParam->Set(v8::Local<v8::Value>::New(v8::String::New("name")), v8::Local<v8::Value>::New(v8::String::New(toUTF8(param->getName()).c_str())), v8::ReadOnly);
+		njsParam->Set(v8::Local<v8::Value>::New(v8::String::New("type")), toNJS(param->getType()), v8::ReadOnly);
+		njsParam->Set(v8::Local<v8::Value>::New(v8::String::New("annots")), annotationsToNJS(param), v8::ReadOnly);
+		njsRuleParams->Set(pi, njsParam);
+	}
+
+	v8::Local<v8::Object> njsRule = v8::Object::New();
+	njsRule->Set(v8::Local<v8::Value>::New(v8::String::New("name")), v8::Local<v8::Value>::New(v8::String::New(tokenized[1].c_str())), v8::ReadOnly);
+	njsRule->Set(v8::Local<v8::Value>::New(v8::String::New("style")), v8::Local<v8::Value>::New(v8::String::New(tokenized[0].c_str())), v8::ReadOnly);
+	njsRule->Set(v8::Local<v8::Value>::New(v8::String::New("params")), njsRuleParams, v8::ReadOnly);
+	njsRule->Set(v8::Local<v8::Value>::New(v8::String::New("annots")), annotationsToNJS(entry), v8::ReadOnly);
+
+	return njsRule;
 }
 
 
@@ -553,75 +724,7 @@ v8::Handle<v8::Value> njsRuleInfoAdv(const v8::Arguments& args) {
 }
 
 
-namespace {
-
-std::string toUTF8(const wchar_t* u16) {
-	return boost::locale::conv::utf_to_utf<char>(u16);
-}
-
-template<typename T> v8::Local<v8::Array> annotationsToNJS(T const* p) {
-	const size_t numAnnots = p->getNumAnnotations();
-	v8::Local<v8::Array> njsAnnots = v8::Array::New(numAnnots);
-	for (size_t i = 0; i < numAnnots; i++) {
-		prt::Annotation const* a = p->getAnnotation(i);
-
-		const size_t numArgs = a->getNumArguments();
-		v8::Local<v8::Array> njsArgs = v8::Array::New(numArgs);
-		for (size_t ai = 0; ai < numArgs; ai++) {
-			prt::AnnotationArgument const* arg = a->getArgument(ai);
-			v8::Local<v8::Object> njsArg = v8::Object::New();
-			njsArg->Set(v8::Local<v8::Value>::New(v8::String::New("type")), toNJS(arg->getType()), v8::ReadOnly);
-			v8::Local<v8::Value> val;
-			switch (arg->getType()) {
-			case prt::AAT_BOOL:		val = v8::Local<v8::Boolean>::New(v8::Boolean::New(arg->getBool())); break;
-			case prt::AAT_FLOAT:	val = v8::Number::New(arg->getFloat()); break;
-			case prt::AAT_STR:		val = v8::String::New(toUTF8(arg->getStr()).c_str()); break;
-			default: break;
-			}
-			njsArg->Set(v8::Local<v8::Value>::New(v8::String::New("val")), val, v8::ReadOnly);
-			njsArgs->Set(ai, njsArg);
-		}
-
-		v8::Local<v8::Object> njsAnnot = v8::Object::New();
-		njsAnnot->Set(v8::Local<v8::Value>::New(v8::String::New("name")), v8::Local<v8::Value>::New(v8::String::New(toUTF8(a->getName()).c_str())), v8::ReadOnly);
-		njsAnnot->Set(v8::Local<v8::Value>::New(v8::String::New("args")), njsArgs, v8::ReadOnly);
-		njsAnnots->Set(i, njsAnnot);
-
-
-	}
-	return njsAnnots;
-}
-
-v8::Local<v8::Object> toNJS(prt::RuleFileInfo::Entry const* entry) {
-	const std::string name = boost::locale::conv::utf_to_utf<char>(entry->getName());
-	std::vector<std::string> tokenized;
-	boost::split(tokenized, name, boost::is_any_of("$"), boost::token_compress_on);
-
-	const size_t numParams = entry->getNumParameters();
-	v8::Local<v8::Array> njsRuleParams = v8::Array::New(numParams);
-	for (size_t pi = 0; pi < numParams; pi++) {
-		prt::RuleFileInfo::Parameter const* param = entry->getParameter(pi);
-
-		v8::Local<v8::Object> njsParam = v8::Object::New();
-		njsParam->Set(v8::Local<v8::Value>::New(v8::String::New("name")), v8::Local<v8::Value>::New(v8::String::New(toUTF8(param->getName()).c_str())), v8::ReadOnly);
-		njsParam->Set(v8::Local<v8::Value>::New(v8::String::New("type")), toNJS(param->getType()), v8::ReadOnly);
-		njsParam->Set(v8::Local<v8::Value>::New(v8::String::New("annots")), annotationsToNJS(param), v8::ReadOnly);
-		njsRuleParams->Set(pi, njsParam);
-	}
-
-	v8::Local<v8::Object> njsRule = v8::Object::New();
-	njsRule->Set(v8::Local<v8::Value>::New(v8::String::New("name")), v8::Local<v8::Value>::New(v8::String::New(tokenized[1].c_str())), v8::ReadOnly);
-	njsRule->Set(v8::Local<v8::Value>::New(v8::String::New("style")), v8::Local<v8::Value>::New(v8::String::New(tokenized[0].c_str())), v8::ReadOnly);
-	njsRule->Set(v8::Local<v8::Value>::New(v8::String::New("params")), njsRuleParams, v8::ReadOnly);
-	njsRule->Set(v8::Local<v8::Value>::New(v8::String::New("annots")), annotationsToNJS(entry), v8::ReadOnly);
-
-	return njsRule;
-}
-
-}
-
-
-v8::Handle<v8::Value> njsRuleInfo(const v8::Arguments& args) {
+v8::Handle<v8::Value> njsGetRuleInfo(const v8::Arguments& args) {
 	v8::String::Utf8Value rpkURI(args[0]->ToString());
 	v8::Local<v8::Function> cb = v8::Local<v8::Function>::Cast(args[1]);
 	v8::HandleScope scope;
@@ -644,134 +747,188 @@ v8::Handle<v8::Value> njsRuleInfo(const v8::Arguments& args) {
 		njsAttrs->Set(ai, toNJS(attr));
 	}
 
+	info->destroy();
+
 	v8::Local<v8::Object> njsInfo = v8::Object::New();
-	njsInfo->Set(v8::Local<v8::Value>::New(v8::String::New("rules")), njsRules, v8::ReadOnly);
-	njsInfo->Set(v8::Local<v8::Value>::New(v8::String::New("attributes")), njsAttrs, v8::ReadOnly);
+	njsInfo->Set(toNJS("rules"), njsRules, v8::ReadOnly);
+	njsInfo->Set(toNJS("attributes"), njsAttrs, v8::ReadOnly);
 
 	const unsigned argc = 1;
 	v8::Local<v8::Value> argv[argc] = { njsInfo };
 	cb->Call(v8::Context::GetCurrent()->Global(), argc, argv);
-	return scope.Close(v8::Undefined());
+	return scope.Close(v8::Local<v8::Integer>(v8::Integer::New(static_cast<uint64_t>(status))));
 }
 
 
-v8::Handle<v8::Value> njsCreateInitialShape(const v8::Arguments& args) {
-
+namespace {
+const std::wstring ID_DELIM = L";";
 }
 
 
-v8::Handle<v8::Value> njsCreateCallback(const v8::Arguments& args) {
+v8::Handle<v8::Value> njsListEncoderIDs(const v8::Arguments& args) {
+	v8::Local<v8::Function> cb = v8::Local<v8::Function>::Cast(args[0]);
+	v8::HandleScope scope;
 
+	LOG_DBG << "njsListEncoderIDs";
+
+	const size_t is = 1024;
+	size_t s = is;
+	boost::scoped_array<wchar_t> idStr(new wchar_t[is]);
+	prt::Status status = prt::listEncoderIds(idStr.get(), &s);
+	if (s > is) {
+		idStr.reset(new wchar_t[s]);
+		status = prt::listEncoderIds(idStr.get(), &s);
+	}
+
+	std::wstring idStr_(idStr.get());
+	LOG_DBG << s << idStr_;
+
+	std::vector<std::wstring> ids;
+	boost::trim_right_if(idStr_, boost::is_any_of(ID_DELIM));
+	boost::split(ids, idStr_, boost::is_any_of(ID_DELIM), boost::token_compress_on);
+
+	const size_t numIDs = ids.size();
+	v8::Local<v8::Array> njsEncIDs = v8::Array::New(numIDs);
+	for (size_t i = 0; i < numIDs; i++) {
+		njsEncIDs->Set(i, toNJS<const std::wstring&>(ids[i]));
+	}
+
+	const unsigned argc = 1;
+	v8::Local<v8::Value> argv[argc] = { njsEncIDs };
+	cb->Call(v8::Context::GetCurrent()->Global(), argc, argv);
+	return scope.Close(v8::Local<v8::Integer>(v8::Integer::New(static_cast<uint64_t>(status))));
+}
+
+
+v8::Handle<v8::Value> njsGetEncoderInfo(const v8::Arguments& args) {
+	v8::String::Utf8Value njsEncID(args[0]->ToString());
+	v8::Local<v8::Function> cb = v8::Local<v8::Function>::Cast(args[1]);
+	v8::HandleScope scope;
+
+	prt::Status status = prt::STATUS_UNSPECIFIED_ERROR;
+	const std::wstring wEncID = boost::locale::conv::utf_to_utf<wchar_t>(*njsEncID);
+	prt::EncoderInfo const* info = prt::createEncoderInfo(wEncID.c_str(), &status);
+	v8::Local<v8::Value> njsInfo = toNJS(info);
+	info->destroy();
+
+	const unsigned argc = 1;
+	v8::Local<v8::Value> argv[argc] = { njsInfo };
+	cb->Call(v8::Context::GetCurrent()->Global(), argc, argv);
+	return scope.Close(v8::Local<v8::Integer>(v8::Integer::New(static_cast<uint64_t>(status))));
 }
 
 
 v8::Handle<v8::Value> njsGenerate(const v8::Arguments& args) {
-	v8::String::Utf8Value rpkURI(args[0]->ToString());
+	v8::String::Utf8Value jsonIS(args[0]->ToString());
+	v8::String::Utf8Value encID(args[1]->ToString());
+	v8::Local<v8::Object> cbObj = v8::Local<v8::Object>::Cast(args[2]);
 	v8::HandleScope scope;
 
-//	const prt::ResolveMap* assetsMap = 0;
-//	if (!inputArgs.mRulePackage.empty()) {
-//		if (inputArgs.mLogLevel <= prt::LOG_INFO) std::cout << "Using rule package " << inputArgs.mRulePackage.string() << std::endl;
-//
-//		std::wstring rpkURI = toFileURI<wchar_t>(/*inputArgs.mWorkDir / */ inputArgs.mRulePackage); // legacy workaround for old boost
-//		prt::Status status = prt::STATUS_UNSPECIFIED_ERROR;
-//		assetsMap = prt::createResolveMap(rpkURI.c_str(), 0, &status);
-//		if(status != prt::STATUS_OK) {
-//			LOG_ERR << "getting resolve map from '" << inputArgs.mRulePackage.string() << "' failed, aborting.";
-//			runCtx.cleanup();
-//			return 1;
-//		}
-//
-//		LOG_DBG << "resolve map = " << objectToXML(assetsMap);
-//	}
-//
-//	prt::MemoryOutputCallbacks* moh = prt::MemoryOutputCallbacks::create();
-//	{
-//
-//		// -- setup initial shape
-//		prt::InitialShapeBuilder* isb = prt::InitialShapeBuilder::create();
-//		if (!inputArgs.mInitialShapeGeo.empty()) {
-//			LOG_DBG << L"trying to read initial shape geometry from " << inputArgs.mInitialShapeGeo;
-//			isb->resolveGeometry(inputArgs.mInitialShapeGeo.c_str(), assetsMap, cache);
-//		}
-//		else {
-//			isb->setGeometry(
-//					UnitQuad::vertices,
-//					UnitQuad::vertexCount,
-//					UnitQuad::indices,
-//					UnitQuad::indexCount,
-//					UnitQuad::faceCounts,
-//					UnitQuad::faceCountsCount,
-//					0,
-//					0
-//			);
-//		}
-//
-//		// -- setup initial shape attributes
-//		std::wstring shapeName	= L"TheInitialShape";
-//
-//		std::wstring ruleFile = L"bin/rule.cgb";
-//		if (inputArgs.mInitialShapeAttrs->hasKey(L"ruleFile") && inputArgs.mInitialShapeAttrs->getType(L"ruleFile") == prt::AttributeMap::PT_STRING)
-//			ruleFile = inputArgs.mInitialShapeAttrs->getString(L"ruleFile");
-//
-//		std::wstring startRule = L"default$init";
-//		if (inputArgs.mInitialShapeAttrs->hasKey(L"startRule") && inputArgs.mInitialShapeAttrs->getType(L"startRule") == prt::AttributeMap::PT_STRING)
-//			startRule = inputArgs.mInitialShapeAttrs->getString(L"startRule");
-//
-//		int32_t seed = isb->computeSeed();
-//		if (inputArgs.mInitialShapeAttrs->hasKey(L"seed") && inputArgs.mInitialShapeAttrs->getType(L"seed") == prt::AttributeMap::PT_INT)
-//			seed = inputArgs.mInitialShapeAttrs->getInt(L"seed");
-//
-//		isb->setAttributes(
-//				ruleFile.c_str(),
-//				startRule.c_str(),
-//				seed,
-//				shapeName.c_str(),
-//				inputArgs.mInitialShapeAttrs,
-//				assetsMap
-//		);
-//
-//		// -- create initial shape
-//		std::vector<const prt::InitialShape*> initialShapes = boost::assign::list_of(isb->createInitialShapeAndReset());
-//		isb->destroy();
-//
-//		// -- setup options for helper encoders
-//		prt::AttributeMapBuilder* optionsBuilder = prt::AttributeMapBuilder::create();
-//		optionsBuilder->setString(L"name", FILE_CGA_ERROR);
-//		const prt::AttributeMap* errOptions = optionsBuilder->createAttributeMapAndReset();
-//		optionsBuilder->setString(L"name", FILE_CGA_PRINT);
-//		const prt::AttributeMap* printOptions = optionsBuilder->createAttributeMapAndReset();
-//		optionsBuilder->destroy();
-//
-//		// -- validate & complete encoder options
-//		const prt::AttributeMap* validatedEncOpts = createValidatedOptions(inputArgs.mEncoderID.c_str(), inputArgs.mEncoderOpts);
-//		const prt::AttributeMap* validatedErrOpts = createValidatedOptions(ENCODER_ID_CGA_ERROR, errOptions);
-//		const prt::AttributeMap* validatedPrintOpts = createValidatedOptions(ENCODER_ID_CGA_PRINT, printOptions);
-//
-//		// -- THE GENERATE CALL
-//		const prt::AttributeMap* encoderOpts[] = { validatedEncOpts, validatedErrOpts, validatedPrintOpts };
-//		const wchar_t* encoders[] = {
-//				inputArgs.mEncoderID.c_str(),	// our desired encoder
-//				ENCODER_ID_CGA_ERROR,			// an encoder to redirect rule errors into CGAErrors.txt
-//				ENCODER_ID_CGA_PRINT			// an encoder to redirect CGA print statements to CGAPrint.txt
-//		};
-//		prt::Status stat = prt::generate(&initialShapes[0], initialShapes.size(), 0, encoders, 3, encoderOpts, foh, cache, 0);
-//		if(stat != prt::STATUS_OK) {
-//			LOG_ERR << "prt::generate() failed with status: '" << prt::getStatusDescription(stat) << "' (" << stat << ")";
-//		}
-//
-//		// -- cleanup
-//		errOptions->destroy();
-//		printOptions->destroy();
-//		validatedEncOpts->destroy();
-//		validatedErrOpts->destroy();
-//		validatedPrintOpts->destroy();
-//		for(size_t i=0; i<initialShapes.size(); i++)
-//			initialShapes[i]->destroy();
-//		if(assetsMap) assetsMap->destroy();
-//
-//	}
-//	moh->destroy();
+	v8::Local<v8::Function> cbGenEnd = v8::Local<v8::Function>::Cast(cbObj->Get(v8::String::New("generateEnd")));
+
+	//	const prt::ResolveMap* assetsMap = 0;
+	//	if (!inputArgs.mRulePackage.empty()) {
+	//		if (inputArgs.mLogLevel <= prt::LOG_INFO) std::cout << "Using rule package " << inputArgs.mRulePackage.string() << std::endl;
+	//
+	//		std::wstring rpkURI = toFileURI<wchar_t>(/*inputArgs.mWorkDir / */ inputArgs.mRulePackage); // legacy workaround for old boost
+	//		prt::Status status = prt::STATUS_UNSPECIFIED_ERROR;
+	//		assetsMap = prt::createResolveMap(rpkURI.c_str(), 0, &status);
+	//		if(status != prt::STATUS_OK) {
+	//			LOG_ERR << "getting resolve map from '" << inputArgs.mRulePackage.string() << "' failed, aborting.";
+	//			runCtx.cleanup();
+	//			return 1;
+	//		}
+	//
+	//		LOG_DBG << "resolve map = " << objectToXML(assetsMap);
+	//	}
+	//
+	//	prt::MemoryOutputCallbacks* moh = prt::MemoryOutputCallbacks::create();
+	//	{
+	//
+	//		// -- setup initial shape
+	//		prt::InitialShapeBuilder* isb = prt::InitialShapeBuilder::create();
+	//		if (!inputArgs.mInitialShapeGeo.empty()) {
+	//			LOG_DBG << L"trying to read initial shape geometry from " << inputArgs.mInitialShapeGeo;
+	//			isb->resolveGeometry(inputArgs.mInitialShapeGeo.c_str(), assetsMap, cache);
+	//		}
+	//		else {
+	//			isb->setGeometry(
+	//					UnitQuad::vertices,
+	//					UnitQuad::vertexCount,
+	//					UnitQuad::indices,
+	//					UnitQuad::indexCount,
+	//					UnitQuad::faceCounts,
+	//					UnitQuad::faceCountsCount,
+	//					0,
+	//					0
+	//			);
+	//		}
+	//
+	//		// -- setup initial shape attributes
+	//		std::wstring shapeName	= L"TheInitialShape";
+	//
+	//		std::wstring ruleFile = L"bin/rule.cgb";
+	//		if (inputArgs.mInitialShapeAttrs->hasKey(L"ruleFile") && inputArgs.mInitialShapeAttrs->getType(L"ruleFile") == prt::AttributeMap::PT_STRING)
+	//			ruleFile = inputArgs.mInitialShapeAttrs->getString(L"ruleFile");
+	//
+	//		std::wstring startRule = L"default$init";
+	//		if (inputArgs.mInitialShapeAttrs->hasKey(L"startRule") && inputArgs.mInitialShapeAttrs->getType(L"startRule") == prt::AttributeMap::PT_STRING)
+	//			startRule = inputArgs.mInitialShapeAttrs->getString(L"startRule");
+	//
+	//		int32_t seed = isb->computeSeed();
+	//		if (inputArgs.mInitialShapeAttrs->hasKey(L"seed") && inputArgs.mInitialShapeAttrs->getType(L"seed") == prt::AttributeMap::PT_INT)
+	//			seed = inputArgs.mInitialShapeAttrs->getInt(L"seed");
+	//
+	//		isb->setAttributes(
+	//				ruleFile.c_str(),
+	//				startRule.c_str(),
+	//				seed,
+	//				shapeName.c_str(),
+	//				inputArgs.mInitialShapeAttrs,
+	//				assetsMap
+	//		);
+	//
+	//		// -- create initial shape
+	//		std::vector<const prt::InitialShape*> initialShapes = boost::assign::list_of(isb->createInitialShapeAndReset());
+	//		isb->destroy();
+	//
+	//		// -- setup options for helper encoders
+	//		prt::AttributeMapBuilder* optionsBuilder = prt::AttributeMapBuilder::create();
+	//		optionsBuilder->setString(L"name", FILE_CGA_ERROR);
+	//		const prt::AttributeMap* errOptions = optionsBuilder->createAttributeMapAndReset();
+	//		optionsBuilder->setString(L"name", FILE_CGA_PRINT);
+	//		const prt::AttributeMap* printOptions = optionsBuilder->createAttributeMapAndReset();
+	//		optionsBuilder->destroy();
+	//
+	//		// -- validate & complete encoder options
+	//		const prt::AttributeMap* validatedEncOpts = createValidatedOptions(inputArgs.mEncoderID.c_str(), inputArgs.mEncoderOpts);
+	//		const prt::AttributeMap* validatedErrOpts = createValidatedOptions(ENCODER_ID_CGA_ERROR, errOptions);
+	//		const prt::AttributeMap* validatedPrintOpts = createValidatedOptions(ENCODER_ID_CGA_PRINT, printOptions);
+	//
+	//		// -- THE GENERATE CALL
+	//		const prt::AttributeMap* encoderOpts[] = { validatedEncOpts, validatedErrOpts, validatedPrintOpts };
+	//		const wchar_t* encoders[] = {
+	//				inputArgs.mEncoderID.c_str(),	// our desired encoder
+	//				ENCODER_ID_CGA_ERROR,			// an encoder to redirect rule errors into CGAErrors.txt
+	//				ENCODER_ID_CGA_PRINT			// an encoder to redirect CGA print statements to CGAPrint.txt
+	//		};
+	//		prt::Status stat = prt::generate(&initialShapes[0], initialShapes.size(), 0, encoders, 3, encoderOpts, foh, cache, 0);
+	//		if(stat != prt::STATUS_OK) {
+	//			LOG_ERR << "prt::generate() failed with status: '" << prt::getStatusDescription(stat) << "' (" << stat << ")";
+	//		}
+	//
+	//		// -- cleanup
+	//		errOptions->destroy();
+	//		printOptions->destroy();
+	//		validatedEncOpts->destroy();
+	//		validatedErrOpts->destroy();
+	//		validatedPrintOpts->destroy();
+	//		for(size_t i=0; i<initialShapes.size(); i++)
+	//			initialShapes[i]->destroy();
+	//		if(assetsMap) assetsMap->destroy();
+	//
+	//	}
+	//	moh->destroy();
 
 	return scope.Close(v8::Undefined());
 }
@@ -780,10 +937,9 @@ v8::Handle<v8::Value> njsGenerate(const v8::Arguments& args) {
 void init(v8::Handle<v8::Object> exports) {
 	exports->Set(v8::String::NewSymbol("init"), 				v8::FunctionTemplate::New(njsInit)->GetFunction());
 	exports->Set(v8::String::NewSymbol("shutdown"),				v8::FunctionTemplate::New(njsShutdown)->GetFunction());
-//	exports->Set(v8::String::NewSymbol("getRuleInfoAdv"),		v8::FunctionTemplate::New(njsRuleInfoAdv)->GetFunction());
-	exports->Set(v8::String::NewSymbol("getRuleInfo"),			v8::FunctionTemplate::New(njsRuleInfo)->GetFunction());
-	exports->Set(v8::String::NewSymbol("createInitialShape"),	v8::FunctionTemplate::New(njsCreateInitialShape)->GetFunction());
-	exports->Set(v8::String::NewSymbol("createCallback"),		v8::FunctionTemplate::New(njsCreateCallback)->GetFunction());
+	exports->Set(v8::String::NewSymbol("getRuleInfo"),			v8::FunctionTemplate::New(njsGetRuleInfo)->GetFunction());
+	exports->Set(v8::String::NewSymbol("listEncoderIDs"),		v8::FunctionTemplate::New(njsListEncoderIDs)->GetFunction());
+	exports->Set(v8::String::NewSymbol("getEncoderInfo"),		v8::FunctionTemplate::New(njsGetEncoderInfo)->GetFunction());
 	exports->Set(v8::String::NewSymbol("generate"),				v8::FunctionTemplate::New(njsGenerate)->GetFunction());
 }
 
