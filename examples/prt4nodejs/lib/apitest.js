@@ -11,6 +11,13 @@ var testRPKURI		= "file:/Volumes/Data/Users/shaegler/Documents/esri/dev/prt_trun
 var testRulePath	= "/bin/candler.01.cgb";
 var testRuleURI		= "rpk:" + testRPKURI + "!" + testRulePath;
 
+var prt = {
+		'root' : prtRoot,
+		'licType' : prtLicType,
+		'licHost' : prtLicHost,
+		'logLevel': prtLogLevel,
+}
+
 if (prt4njs.init(prtRoot, prtLicType, prtLicHost, prtLogLevel) !== 0) {
 	return;
 }
@@ -29,12 +36,13 @@ var initialShapes =
 		'rpk'		: testRPKURI,
 		'ruleFile'	: testRuleURI,
 		'startRule'	: "Default$Lot",
-		'vertices'	: [  0, 0, 0,  0, 0, 1,  1, 0, 1,  1, 0, 0 ],
+		'vertices'	: [  0, 0, 0,  0, 0, 20,  20, 0, 20,  20, 0, 0 ],
 		'faces'		: [ [0, 1, 2, 3] ],
 		'attributes': { }
 	} ];
 
 var callbacks = {
+		'dataRoot': '/tmp/prt4njs',
 		'shapeBegin' : function(uid) { },
 		'shapeEnd'   : function(result) { },
 		'generateEnd': function(result) {
