@@ -7,12 +7,15 @@ var prtLicType	= "CityEngAdvFx";
 var prtLicHost	= "";
 var prtLogLevel = 1;
 
-var testRule = "rpk:file:/Volumes/Data/Users/shaegler/Documents/esri/dev/prt_trunk/com.esri.prt.test/resources/rules/candler.01.rpk!/bin/candler.01.cgb";
+var testRPKURI		= "file:/Volumes/Data/Users/shaegler/Documents/esri/dev/prt_trunk/com.esri.prt.test/resources/rules/candler.01.rpk";
+var testRulePath	= "/bin/candler.01.cgb";
+var testRuleURI		= "rpk:" + testRPKURI + "!" + testRulePath;
 
-if (prt4njs.init(prtRoot, prtLicType, prtLicHost, prtLogLevel) != 0)
+if (prt4njs.init(prtRoot, prtLicType, prtLicHost, prtLogLevel) !== 0) {
 	return;
+}
 
-prt4njs.getRuleInfo(testRule, function(info) {
+prt4njs.getRuleInfo(testRuleURI, function(info) {
 	console.log(util.inspect(info, false, null));
 });
 
@@ -20,50 +23,34 @@ prt4njs.listEncoderIDs(function(ids) {
 	console.log(ids);
 });
 
+var initialShapes =
+	[ {
+		'uid'		: "shape0",
+		'rpk'		: testRPKURI,
+		'ruleFile'	: testRuleURI,
+		'startRule'	: "Default$Lot",
+		'vertices'	: [  0, 0, 0,  0, 0, 1,  1, 0, 1,  1, 0, 0 ],
+		'faces'		: [ [0, 1, 2, 3] ],
+		'attributes': { }
+	} ];
+
+var callbacks = {
+		'shapeBegin' : function(uid) { },
+		'shapeEnd'   : function(result) { },
+		'generateEnd': function(result) {
+			console.log(result);
+		}
+};
+
+var encodeInfo = undefined;
+
 prt4njs.getEncoderInfo("com.esri.prt.codecs.OBJEncoder", function(info) {
+	info.options.baseName = "njstest";
 	console.log(util.inspect(info, false, null));
+	encodeInfo = info;
 });
 
-var initialShapes = [
-    {
-	'uid'		: "shape0001",
-	'ruleSet'	: testRule,			// any URI, can also be data: URI
-	'startRule'	: "Default$Init",	// Style$StartRule
-	'vertices'	: [ ],				// vertex coordinate floats, multiple of 3
-	'faces'		: [ ],				// face counts ccw: [ [face0idx], [face1idx], .. ]
-	'attributes': [ 				// array with key/val pairs   
-	    { "key" : 1.23 }
-	]
-    },
-	//...
-];
 
-
-// open question: should the prt4njs impl offer a 'cached' callback (with optional webserver) or should it be done by the client code here
-
-
-//var result = {
-//	'encoder' : '<encId>',
-//	'shapes' : [
-//	{
-//		'uid' : "shape0001",
-//		'status': "ok | invalid rule | gen error | ...",
-//		'data': "", // character or binary array (depends on encoder)
-//	},
-//	// next shape ...
-//	]
-//}
-//
-//var callbacks = {
-//	'shapeBegin' : function(uid) { },
-//	'shapeEnd'   : function(result) { }, // { 'uid' : "", 'data' : "" }
-//	'generateEnd': function(result) { } // [ { 'uid': "", 'data': "" }, ... ]
-//};
-//
-//prt4njs.generate(initialShapes, encoder, callbacks);
+var status = prt4njs.generate(initialShapes, encodeInfo, callbacks);
 
 prt4njs.shutdown();
-
-
-// client <---------> srv (prt4njs) <-> prt
- 
