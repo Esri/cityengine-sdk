@@ -19,6 +19,7 @@
 #include "prt/API.h"
 #include "prt/Cache.h"
 #include "prt/MemoryOutputCallbacks.h"
+#include "prt/FileOutputCallbacks.h"
 #include "prt/FlexLicParams.h"
 
 #include "node.h"
@@ -892,13 +893,28 @@ v8::Handle<v8::Value> njsGetEncoderInfo(const v8::Arguments& args) {
 
 
 v8::Handle<v8::Value> njsGenerate(const v8::Arguments& args) {
+	v8::HandleScope scope;
+
 	v8::Local<v8::Array> njsInitialShapes	= v8::Local<v8::Array>::Cast(args[0]);
 	v8::Local<v8::Object> njsEncInfo		= v8::Local<v8::Object>::Cast(args[1]);
 	v8::Local<v8::Object> cbObj				= v8::Local<v8::Object>::Cast(args[2]);
-	v8::Local<v8::Function> cbGenEnd = v8::Local<v8::Function>::Cast(cbObj->Get(toNJS("generateEnd")));
-	v8::HandleScope scope;
 
-	prt::MemoryOutputCallbacks* moh = prt::MemoryOutputCallbacks::create();
+	prt::SimpleOutputCallbacks* cb = 0;
+	prt::FileOutputCallbacks* fcb = 0;
+	prt::MemoryOutputCallbacks* mcb = 0;
+	v8::Local<v8::String> dataRoot = v8::Local<v8::String>::Cast(cbObj->Get(toNJS("dataRoot")));
+	if (!dataRoot->IsUndefined()) {
+		std::wstring cbm = fromNJS(dataRoot);
+		fcb = prt::FileOutputCallbacks::create(cbm.c_str());
+		cb = fcb;
+	}
+	else {
+		mcb = prt::MemoryOutputCallbacks::create();
+		cb = mcb;
+	}
+
+	v8::Local<v8::Function> cbGenEnd = v8::Local<v8::Function>::Cast(cbObj->Get(toNJS("generateEnd")));
+
 	{
 		std::vector<const prt::InitialShape*> initialShapes;
 		initialShapes.reserve(njsInitialShapes->Length());
@@ -926,14 +942,16 @@ v8::Handle<v8::Value> njsGenerate(const v8::Arguments& args) {
 
 			v8::Local<v8::Array> njsFaces = v8::Local<v8::Array>::Cast(njsIS->Get(toNJS("faces")));
 			std::vector<uint32_t> faceIndices, faceCounts;
-			const size_t numFaceIndices = njsFaces->Length();
-			faceIndices.reserve(3*numFaceIndices); // estimate
-			for (size_t fi = 0; fi < numFaceIndices; fi++) {
+			const size_t numFaces = njsFaces->Length();
+			faceIndices.reserve(3*numFaces); // estimate
+			for (size_t fi = 0; fi < numFaces; fi++) {
 				v8::Local<v8::Array> njsFace = v8::Local<v8::Array>::Cast(njsFaces->Get(fi));
-				for (size_t i = 0; i < njsFaces->Length(); i++) {
-					faceIndices.push_back(njsFace->Get(i)->Uint32Value());
+				const size_t numIndices = njsFace->Length();
+				for (size_t ii = 0; ii < numIndices; ii++) {
+					faceIndices.push_back(njsFace->Get(ii)->Uint32Value());
 				}
-				faceCounts.push_back(njsFaces->Length());
+				faceCounts.push_back(numIndices);
+				LOG_DBG << "face count" << faceCounts.back();
 			}
 			isb->setGeometry(
 					&vertices[0], vertices.size(),
@@ -976,7 +994,7 @@ v8::Handle<v8::Value> njsGenerate(const v8::Arguments& args) {
 				&initialShapes[0], initialShapes.size(),
 				0,
 				&encoders[0], encoders.size(),
-				encoderOpts, moh, prtCtx->mCache, 0
+				encoderOpts, cb, prtCtx->mCache, 0
 		);
 		if(stat != prt::STATUS_OK) {
 			LOG_ERR << "prt::generate() failed with status: '" << prt::getStatusDescription(stat) << "' (" << stat << ")";
@@ -989,18 +1007,24 @@ v8::Handle<v8::Value> njsGenerate(const v8::Arguments& args) {
 		v8::Local<v8::Object> result = v8::Local<v8::Object>(v8::Object::New());
 		result->Set(toNJS("encoderInfo"), njsEncInfo);
 
-		for (size_t bi = 0; bi < moh->getNumBlocks(); bi++) {
-			size_t blockSize = 0;
-			const uint8_t* blockData = moh->getBlock(bi, &blockSize);
 
-			//result->Set(toNJS("data"), njsEncInfo);
+		if (mcb != 0) {
+			for (size_t bi = 0; bi < mcb->getNumBlocks(); bi++) {
+				size_t blockSize = 0;
+				const uint8_t* blockData = mcb->getBlock(bi, &blockSize);
+
+				//result->Set(toNJS("data"), njsEncInfo);
+			}
 		}
 
 		const unsigned argc = 1;
 		v8::Local<v8::Value> argv[argc] = { result };
 		cbGenEnd->Call(v8::Context::GetCurrent()->Global(), argc, argv);
 	}
-	moh->destroy();
+	if (mcb != 0)
+		mcb->destroy();
+	else if (fcb != 0)
+		fcb->destroy();
 
 	//	return scope.Close(v8::Local<v8::Integer>(v8::Integer::New(static_cast<uint64_t>(status))));
 	return scope.Close(v8::Undefined());
