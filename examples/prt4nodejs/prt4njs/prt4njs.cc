@@ -899,6 +899,7 @@ v8::Handle<v8::Value> njsGenerate(const v8::Arguments& args) {
 	v8::Local<v8::Object> njsEncInfo		= v8::Local<v8::Object>::Cast(args[1]);
 	v8::Local<v8::Object> cbObj				= v8::Local<v8::Object>::Cast(args[2]);
 
+	// TODO: use custom callback to record the written blocks for js callbacks
 	prt::SimpleOutputCallbacks* cb = 0;
 	prt::FileOutputCallbacks* fcb = 0;
 	prt::MemoryOutputCallbacks* mcb = 0;
@@ -1007,14 +1008,19 @@ v8::Handle<v8::Value> njsGenerate(const v8::Arguments& args) {
 		v8::Local<v8::Object> result = v8::Local<v8::Object>(v8::Object::New());
 		result->Set(toNJS("encoderInfo"), njsEncInfo);
 
-
 		if (mcb != 0) {
 			for (size_t bi = 0; bi < mcb->getNumBlocks(); bi++) {
 				size_t blockSize = 0;
 				const uint8_t* blockData = mcb->getBlock(bi, &blockSize);
-
-				//result->Set(toNJS("data"), njsEncInfo);
+				std::ostringstream u;
+				u << "memory://" << std::hex << blockData << "/" << std::dec << blockSize;
+				result->Set(toNJS("data"), toNJS(u.str()));
 			}
+		}
+		else {
+			std::string dataURI = "file:";
+			dataURI += *v8::String::Utf8Value(dataRoot);
+			result->Set(toNJS("data"), toNJS<const std::string&>(dataURI));
 		}
 
 		const unsigned argc = 1;
