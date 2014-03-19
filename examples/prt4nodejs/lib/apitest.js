@@ -11,12 +11,12 @@ var testRPKURI		= "file:/Volumes/Data/Users/shaegler/Documents/esri/dev/prt_trun
 var testRulePath	= "/bin/candler.01.cgb";
 var testRuleURI		= "rpk:" + testRPKURI + "!" + testRulePath;
 
-var prt = {
-		'root' : prtRoot,
-		'licType' : prtLicType,
-		'licHost' : prtLicHost,
-		'logLevel': prtLogLevel,
-}
+//var prt = {
+//'root' : prtRoot,
+//'licType' : prtLicType,
+//'licHost' : prtLicHost,
+//'logLevel': prtLogLevel,
+//}
 
 if (prt4njs.init(prtRoot, prtLicType, prtLicHost, prtLogLevel) !== 0) {
 	return;
@@ -43,9 +43,25 @@ var initialShapes =
 
 var callbacks = {
 		'dataRoot': '/tmp/prt4njs',
-		'shapeBegin' : function(uid) { },
-		'shapeEnd'   : function(result) { },
-		'generateEnd': function(result) {
+		'generateBegin'	: function(uid) { },
+		'shapeBegin' 	: function(uid) { },
+		'shapeEnd'   	: function(result) { },
+		'generateEnd'	: function(result) {
+
+// spec for callback result
+//			var result = {
+//					'id' : '',
+//					'options' : { },
+//					'output': // output blocks as defined by simpleoutputcallback 'write' calls
+//						[ 
+//						 {
+//							 'uids' : [ ], // one or more initial shape ids depending on encoder options
+//							 'data' : "" // either an uri to the data or the data itself (???)
+//						 },
+//						 // next output block
+//						 ] 
+//			};
+
 			console.log(result);
 		}
 };
