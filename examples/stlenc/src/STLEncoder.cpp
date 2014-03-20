@@ -158,6 +158,7 @@ STLEncoderFactory* STLEncoderFactory::createInstance() {
 	encoderInfoBuilder.setName(STLEncoder::NAME);
 	encoderInfoBuilder.setDescription(STLEncoder::DESCRIPTION);
 	encoderInfoBuilder.setType(prt::CT_GEOMETRY);
+	encoderInfoBuilder.setExtension(STL_EXT);
 
 	// optionally we could setup a validator
 	// encoderInfoBuilder.setValidator(prtx::EncodeOptionsValidatorPtr(new TestOptionsValidator()));
