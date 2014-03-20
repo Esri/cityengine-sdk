@@ -185,7 +185,6 @@ template<> std::wstring toFileURI(const boost::filesystem::path& p);
 std::string getSharedLibraryPrefix();
 std::string getSharedLibrarySuffix();
 
-
 // ok, let's start the party
 int main (int argc, char *argv[]) {
 	
@@ -296,7 +295,7 @@ int main (int argc, char *argv[]) {
 		if (inputArgs.mInitialShapeAttrs->hasKey(L"startRule") && inputArgs.mInitialShapeAttrs->getType(L"startRule") == prt::AttributeMap::PT_STRING)
 			startRule = inputArgs.mInitialShapeAttrs->getString(L"startRule");
 		
-		int32_t seed = isb->computeSeed();
+		int32_t seed = 666;
 		if (inputArgs.mInitialShapeAttrs->hasKey(L"seed") && inputArgs.mInitialShapeAttrs->getType(L"seed") == prt::AttributeMap::PT_INT)
 			seed = inputArgs.mInitialShapeAttrs->getInt(L"seed");
 		
