@@ -7,7 +7,6 @@
  * See http://github.com/ArcGIS/esri-cityengine-sdk for instructions.
  */
 
-
 #ifndef PRT4MAYA_NODE_H_
 #define PRT4MAYA_NODE_H_
 
@@ -61,25 +60,12 @@
 #	include <WinNT.h>
 #endif
 
+
 #define PRT_TYPE_ID 0x8666b
 
-
-static const char*		FLEXNET_LIB			= "flexnet_prt";
-static const wchar_t*	PRT_EXT_SUBDIR		= L"ext";
-
-static const wchar_t*	ENC_ATTR			= L"com.esri.prt.core.AttributeEvalEncoder";
-static const wchar_t*	ENC_MAYA			= L"MayaEncoder";
-
-static const MString	NAME_RULE_PKG		("Rule_Package");
-static const MString	NAME_GENERATE		("Generate_Model");
-static const wchar_t*	FILE_PREFIX			= L"file:///";
-static const wchar_t*	ANNOT_START_RULE	= L"@StartRule";
-static const wchar_t*	ANNOT_RANGE			= L"@Range";
-static const wchar_t*	ANNOT_COLOR			= L"@Color";
-static const wchar_t*	ANNOT_DIR			= L"@Directory";
-static const wchar_t*	ANNOT_FILE			= L"@File";
-static const wchar_t*	ANNOT_GROUP			= L"@Group";
-static const wchar_t*	NULL_KEY			= L"#NULL#";
+extern const wchar_t*	ENC_ATTR;
+extern const wchar_t*	FILE_PREFIX;
+extern const MString	NAME_GENERATE;
 
 
 class PRTNode;

@@ -187,4 +187,35 @@ MString toCleanId(const MString& name) {
 	return result;
 }
 
+
+int32_t computeSeed(const MFloatPoint& p) {
+	int32_t seed = static_cast<int32_t>(p[0]);
+	seed ^= static_cast<int32_t>(p[2]);
+	seed %= 714025;
+	return seed;
 }
+
+
+int32_t computeSeed(MFloatPointArray& vertices) {
+	MFloatPoint a(0.0, 0.0, 0.0);
+	for (size_t vi = 0; vi < vertices.length(); vi++) {
+		a += vertices[vi];
+	}
+	a = a / static_cast<double>(vertices.length()); 
+	return computeSeed(a);
+}
+
+
+int32_t computeSeed(const double* vertices, size_t count) {
+	MFloatPoint a(0.0, 0.0, 0.0);
+	for (size_t vi = 0; vi < count; vi += 3) {
+		a[0] += vertices[vi+0];
+		a[1] += vertices[vi+1];
+		a[2] += vertices[vi+2];
+	}
+	a = a / static_cast<double>(count); 
+	return computeSeed(a);
+}
+
+
+} // namespace prtu

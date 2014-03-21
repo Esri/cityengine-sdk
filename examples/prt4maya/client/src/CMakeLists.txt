@@ -45,7 +45,7 @@ else()
 	# build settings required by maya
 	# NOTE: make sure to compile the maya plugin with gcc 4.1.2 (for maya 2012/2013)
 	set(CMAKE_C_FLAGS "-Wall -Wextra -DBits64_ -m64 -DUNIX -D_BOOL -DLINUX -DFUNCPROTO -D_GNU_SOURCE -DLINUX_64 -fPIC -fno-strict-aliasing -DREQUIRE_IOSTREAM -Wno-deprecated -Wall -Wno-multichar -Wno-comment -Wno-sign-compare -funsigned-char -Wno-reorder -fno-gnu-keywords -ftemplate-depth-25 -pthread")
-	set(CMAKE_CXX_FLAGS "${CMAKE_C_FLAGS} -Wno-deprecated -fno-gnu-keywords")
+	set(CMAKE_CXX_FLAGS "${CMAKE_C_FLAGS} -Wall -Wno-deprecated -fno-gnu-keywords")
 
 	set(CMAKE_CXX_FLAGS_DEBUG "-ggdb")
 	set(CMAKE_CXX_FLAGS_RELEASE "-O3 -s")
