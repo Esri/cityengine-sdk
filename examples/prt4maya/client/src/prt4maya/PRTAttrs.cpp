@@ -22,6 +22,16 @@
 #include <limits>
 
 
+namespace {
+const wchar_t*	ANNOT_START_RULE	= L"@StartRule";
+const wchar_t*	ANNOT_RANGE			= L"@Range";
+const wchar_t*	ANNOT_COLOR			= L"@Color";
+const wchar_t*	ANNOT_DIR			= L"@Directory";
+const wchar_t*	ANNOT_FILE			= L"@File";
+const wchar_t*	NULL_KEY			= L"#NULL#";
+}
+
+
 inline MString & PRTAttrs::getStringParameter(MObject & node, MObject & attr, MString & value) {
 	MPlug plug(node, attr);
 	plug.getValue(value);
@@ -346,11 +356,13 @@ MStatus PRTEnum::fill() {
 					mFVals.append(std::numeric_limits<double>::quiet_NaN());
 					mSVals.append(MString(mAnnot->getArgument(arg)->getStr()));
 					break;
+				default:
+					break;
 			}
 		}
 	} else {
 		for(unsigned int i = 0; i < mKeys.length(); i++)
-			MStatus result = mAttr.addField(mKeys[i], (short)i);
+			mAttr.addField(mKeys[i], (short)i);
 	}
 	return MS::kSuccess;
 }
@@ -369,6 +381,7 @@ static const uint32_t	UnitQuad_indices[]       = { 0, 1, 2, 3 };
 static const size_t 	UnitQuad_indexCount      = 4;
 static const uint32_t	UnitQuad_faceCounts[]    = { 4 };
 static const size_t 	UnitQuad_faceCountsCount = 1;
+static const int32_t	UnitQuad_seed = prtu::computeSeed(UnitQuad_vertices, UnitQuad_vertexCount);
 
 // TODO: make evalAttr finds more robust
 MStatus PRTAttrs::createAttributes(MFnDependencyNode & node, const std::wstring & ruleFile, const std::wstring & startRule, prt::AttributeMapBuilder* aBuilder, const prt::RuleFileInfo* info) {
@@ -395,7 +408,7 @@ MStatus PRTAttrs::createAttributes(MFnDependencyNode & node, const std::wstring 
 	isb->setAttributes(
 			ruleFile.c_str(),
 			startRule.c_str(),
-			isb->computeSeed(),
+			UnitQuad_seed,
 			L"",
 			attrs,
 			prtNode->mResolveMap
@@ -503,6 +516,8 @@ MStatus PRTAttrs::createAttributes(MFnDependencyNode & node, const std::wstring 
 
 				break;
 			}
+		default:
+			break;
 		}
 	}
 

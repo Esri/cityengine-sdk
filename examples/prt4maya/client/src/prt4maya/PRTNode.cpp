@@ -13,8 +13,8 @@
 #include <sstream>
 
 #ifndef _MSC_VER
-#include <dlfcn.h>
-#include <cstdio>
+#	include <dlfcn.h>
+#	include <cstdio>
 #endif
 
 #include <maya/MFnPlugin.h>
@@ -30,11 +30,21 @@
 
 #include "prt/FlexLicParams.h"
 
+const wchar_t*	ENC_ATTR				= L"com.esri.prt.core.AttributeEvalEncoder";
+const wchar_t*	FILE_PREFIX				= L"file:///";
+const MString	NAME_GENERATE			= "Generate_Model";
 
 namespace {
-	const prt::LogLevel	PRT_LOG_LEVEL		= prt::LOG_WARNING;
-	const bool			ENABLE_LOG_CONSOLE	= true;
-	const bool			ENABLE_LOG_FILE		= false;
+const char*			FLEXNET_LIB			= "flexnet_prt";
+const wchar_t*		PRT_EXT_SUBDIR		= L"ext";
+
+const wchar_t*		ENC_MAYA			= L"MayaEncoder";
+
+const MString	NAME_RULE_PKG			= "Rule_Package";
+
+const prt::LogLevel	PRT_LOG_LEVEL		= prt::LOG_WARNING;
+const bool			ENABLE_LOG_CONSOLE	= true;
+const bool			ENABLE_LOG_FILE		= false;
 }
 
 
@@ -147,7 +157,7 @@ MStatus PRTNode::compute(const MPlug& plug, MDataBlock& data ) {
 			isb->setAttributes(
 					mRuleFile.c_str(),
 					mStartRule.c_str(),
-					isb->computeSeed(),
+					prtu::computeSeed(vertices),
 					L"",
 					mGenerateAttrs,
 					mResolveMap
