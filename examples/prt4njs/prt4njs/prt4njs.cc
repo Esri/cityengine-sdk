@@ -448,6 +448,26 @@ prt::AttributeMap const* fromNJS(const v8::Local<v8::Object>& njsObj) {
 }
 
 
+int32_t computeSeed(const double (&p)[3]) {
+	int32_t seed = static_cast<int32_t>(p[0]);
+	seed ^= static_cast<int32_t>(p[2]);
+	seed %= 714025;
+	return seed;
+}
+
+
+int32_t computeSeed(const double* vertices, size_t count) {
+	double a[3] = { 0.0, 0.0, 0.0 };
+	for (size_t vi = 0; vi < count; vi++) {
+		a[vi%3] += vertices[vi];
+	}
+	a[0] = a[0] / static_cast<double>(count/3);
+	a[1] = a[1] / static_cast<double>(count/3);
+	a[2] = a[2] / static_cast<double>(count/3);
+	return computeSeed(a);
+}
+
+
 } // namespace anonymous
 
 
@@ -963,7 +983,7 @@ v8::Handle<v8::Value> njsGenerate(const v8::Arguments& args) {
 			isb->setAttributes(
 					ruleFile.c_str(),
 					startRule.c_str(),
-					isb->computeSeed(),
+					computeSeed(&vertices[0], vertices.size()),
 					uid.c_str(),
 					attributes,
 					resolveMap
