@@ -1,4 +1,4 @@
-var prt4njs = require('../prt4njs/build/Debug/prt4njs');
+var prt4njs = require('../prt4njs/install/prt4njs');
 //var prt4njs = require('../prt4njs/build/Release/prt4njs');
 var util = require('util');
 

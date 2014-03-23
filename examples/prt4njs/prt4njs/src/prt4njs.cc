@@ -208,9 +208,7 @@ void toUTF16(const char* u8, std::wstring& u16) {
 	u16.assign(boost::locale::conv::utf_to_utf<wchar_t>(u8));
 }
 
-template<typename T> v8::Local<v8::Value> toNJS(T v);
-
-const char* AnnotationTypeNames[6] = { "void", "bool", "float", "string", "int", "unknown" };
+template<typename T> v8::Local<v8::Value> toNJS(T v) { assert(false); }
 
 template<> v8::Local<v8::Value> toNJS(char const* s) {
 	return v8::Local<v8::String>(v8::String::New(s));
@@ -240,6 +238,7 @@ template<> v8::Local<v8::Value> toNJS(int32_t i) {
 	return v8::Local<v8::Integer>(v8::Integer::New(i));
 }
 
+const char* AnnotationTypeNames[6] = { "void", "bool", "float", "string", "int", "unknown" };
 template<> v8::Local<v8::Value> toNJS(prt::AnnotationArgumentType aat) {
 	return toNJS(AnnotationTypeNames[aat]);
 }
