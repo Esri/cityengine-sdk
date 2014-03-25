@@ -16,10 +16,11 @@
   2. edit common.cmake to your requirements
   3. run build.bat or build.sh
   4. add the following line to your <HOME>/maya/2012-x64/Maya.env file:```
-MAYA_MODULE_PATH=<path the sdk>/esri-cityengine-sdk/examples/prt4maya/client/install
+MAYA_PLUG_IN_PATH = <path to sdk>/esri-cityengine-sdk/examples/prt4maya/client/install/plug-ins
+MAYA_SCRIPT_PATH  = <path to sdk>/esri-cityengine-sdk/examples/prt4maya/client/install/scripts
 ```
   5. (windows only) add the plug-ins directory to your PATH variable (either global or just for maya):```
-set PATH=<path to sdk>\esri-cityengine-sdk\examples\prt4maya\client\install\plug-ins;%PATH%
+set PATH=<path to sdk>/esri-cityengine-sdk/examples/prt4maya/client/install/plug-ins;%PATH%
 ```
   6. set license env vars:
     * ESRI_CE_SDK_LIC_FEATURE to one of { CityEngBas, CityEngBasFx, CityEngAdv, CityEngAdvFx }
