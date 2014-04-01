@@ -24,7 +24,7 @@
 #include "prtx/ExtensionManager.h"
 #include "prtx/GenerateContext.h"
 
-#include "encoder/IMayaOutputHandler.h"
+#include "encoder/IMayaCallbacks.h"
 #include "encoder/MayaEncoder.h"
 
 const std::wstring MayaEncoder::ID          	= L"MayaEncoder"; // todo: define in common header
@@ -45,7 +45,7 @@ MayaEncoder::~MayaEncoder() {
 void MayaEncoder::init(prtx::GenerateContext& /*context*/) {
 	prt::Callbacks* cb = getCallbacks();
 	log_debug("MayaEncoder::init: cb = %x") % (size_t)cb;
-	IMayaOutputHandler* oh = dynamic_cast<IMayaOutputHandler*>(cb);
+	IMayaCallbacks* oh = dynamic_cast<IMayaCallbacks*>(cb);
 	log_debug("                   oh = %x") % (size_t)oh;
 	if(oh == 0) throw(prtx::StatusException(prt::STATUS_ILLEGAL_CALLBACK_OBJECT));
 }
@@ -54,7 +54,7 @@ void MayaEncoder::init(prtx::GenerateContext& /*context*/) {
 void MayaEncoder::encode(prtx::GenerateContext& context, size_t initialShapeIndex) {
 	prtx::InitialShape const* initialShape = context.getInitialShape(initialShapeIndex);
 
-	IMayaOutputHandler* oh = dynamic_cast<IMayaOutputHandler*>(getCallbacks());
+	IMayaCallbacks* oh = dynamic_cast<IMayaCallbacks*>(getCallbacks());
 
 	prtx::DefaultNamePreparator        namePrep;
 	prtx::NamePreparator::NamespacePtr nsMesh     = namePrep.newNamespace();
@@ -111,7 +111,7 @@ void MayaEncoder::encode(prtx::GenerateContext& context, size_t initialShapeInde
 	convertGeometry(cgbName, geometries, materials, oh);
 }
 
-void MayaEncoder::convertGeometry(const std::wstring& cgbName, const prtx::GeometryPtrVector& geometries, const std::vector<prtx::MaterialPtrVector>& mats, IMayaOutputHandler* mayaOutput) {
+void MayaEncoder::convertGeometry(const std::wstring& cgbName, const prtx::GeometryPtrVector& geometries, const std::vector<prtx::MaterialPtrVector>& mats, IMayaCallbacks* mayaOutput) {
 	std::vector<double> vertices;
 	std::vector<int>    counts;
 	std::vector<int>    connects;

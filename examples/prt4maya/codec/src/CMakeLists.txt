@@ -39,7 +39,7 @@ set_target_properties(${PROJECT} PROPERTIES LINKER_LANGUAGE CXX)
 
 set(CMAKE_INSTALL_PREFIX "${PROJECT_SOURCE_DIR}/../install") 
 install(TARGETS ${PROJECT} DESTINATION lib EXPORT "${PROJECT}Targets")
-install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/encoder/IMayaOutputHandler.h DESTINATION include)
+install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/encoder/IMayaCallbacks.h DESTINATION include)
 
 
 ### install config file and export target

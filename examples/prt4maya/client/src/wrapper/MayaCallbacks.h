@@ -48,10 +48,10 @@
 #include "maya/MFnSet.h"
 #include "maya/MFnPartition.h"
 
-#include "IMayaOutputHandler.h"
+#include "IMayaCallbacks.h"
 #include "prt/Cache.h"
 
-class MayaOutputHandler : public IMayaOutputHandler {
+class MayaCallbacks : public IMayaCallbacks {
 public:
 	class AttributeHolder {
 	public:
@@ -64,10 +64,10 @@ public:
 	};
 
 public:
-	MayaOutputHandler(const MPlug* plug, MDataBlock* data, MStringArray* shadingGroups, MIntArray* shadingRanges, MString* shadingCmd) :
+	MayaCallbacks(const MPlug* plug, MDataBlock* data, MStringArray* shadingGroups, MIntArray* shadingRanges, MString* shadingCmd) :
 			mPlug(plug), mData(data), mShadingGroups(shadingGroups), mShadingRanges(shadingRanges), mShadingCmd(shadingCmd)
 	{ }
-	virtual ~MayaOutputHandler() {}
+	virtual ~MayaCallbacks() {}
 
 	// prt::Callbacks interface
 	virtual prt::Status generateError(size_t /*isIndex*/, prt::Status /*status*/, const wchar_t* message) {
@@ -139,7 +139,7 @@ public:
 
 private:
 	// must not be called
-	MayaOutputHandler() : mPlug(0), mData(0), mShadingGroups(0), mShadingRanges(0), mShadingCmd(0) { }
+	MayaCallbacks() : mPlug(0), mData(0), mShadingGroups(0), mShadingRanges(0), mShadingCmd(0) { }
 
 	const MPlug*		  mPlug;
 	MDataBlock*			  mData;

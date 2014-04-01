@@ -26,7 +26,7 @@
 #include <maya/MDagPath.h>
 #include <maya/MItDependencyNodes.h>
 
-#include "wrapper/MayaOutputHandler.h"
+#include "wrapper/MayaCallbacks.h"
 
 #include "prt/StringUtils.h"
 #include "prt/FlexLicParams.h"
@@ -150,7 +150,7 @@ MStatus PRTNode::compute(const MPlug& plug, MDataBlock& data ) {
 			pconnect.get((int*)ia);
 			pcounts.get((int*)ca);
 
-			MayaOutputHandler* outputHandler = createOutputHandler(&plug, &data);
+			MayaCallbacks* outputHandler = createOutputHandler(&plug, &data);
 
 			prt::InitialShapeBuilder* isb = prt::InitialShapeBuilder::create();
 			prt::Status setGeoStatus = isb->setGeometry(
@@ -373,8 +373,8 @@ const PRTEnum* PRTNode::findEnum(const MObject & attr) const {
 	return 0;
 }
 
-MayaOutputHandler* PRTNode::createOutputHandler(const MPlug* plug, MDataBlock* data) {
-	return new MayaOutputHandler(plug, data, &mShadingGroups, &mShadingRanges, &mShadingCmd);
+MayaCallbacks* PRTNode::createOutputHandler(const MPlug* plug, MDataBlock* data) {
+	return new MayaCallbacks(plug, data, &mShadingGroups, &mShadingRanges, &mShadingCmd);
 }
 
 void PRTNode::initLogger() {

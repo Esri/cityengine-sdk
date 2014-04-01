@@ -25,7 +25,7 @@
 #include "prtx/Singleton.h"
 
 
-class IMayaOutputHandler;
+class IMayaCallbacks;
 
 class MayaEncoder : public prtx::GeometryEncoder {
 public:
@@ -47,7 +47,7 @@ private:
 			const std::wstring& cgbName,
 			const prtx::GeometryPtrVector& geometries,
 			const std::vector<prtx::MaterialPtrVector>& mat,
-			IMayaOutputHandler* mayaOutput
+			IMayaCallbacks* mayaOutput
 	);
 };
 

@@ -13,9 +13,9 @@
 #include "prt/Callbacks.h"
 
 
-class IMayaOutputHandler : public prt::Callbacks {
+class IMayaCallbacks : public prt::Callbacks {
 public:
-	virtual ~IMayaOutputHandler() { }
+	virtual ~IMayaCallbacks() { }
 
 	virtual void setVertices(double* vtx, size_t size) = 0;
 	virtual void setNormals(double* nrm, size_t size) = 0;
