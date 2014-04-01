@@ -28,10 +28,11 @@
 
 #include "wrapper/MayaOutputHandler.h"
 
+#include "prt/StringUtils.h"
 #include "prt/FlexLicParams.h"
 
 const wchar_t*	ENC_ATTR				= L"com.esri.prt.core.AttributeEvalEncoder";
-const wchar_t*	FILE_PREFIX				= L"file:///";
+const char*	    FILE_PREFIX				= "file:///";
 const MString	NAME_GENERATE			= "Generate_Model";
 
 namespace {
@@ -90,15 +91,24 @@ MStatus PRTNode::compute(const MPlug& plug, MDataBlock& data ) {
 	MStatus stat;
 	mHasMaterials = false;
 
-	std::wstring path(FILE_PREFIX);
 	MString dummy;
-	path.append(getStrParameter(rulePkg, dummy).asWChar());
+	std::string utf8Path(getStrParameter(rulePkg, dummy).asUTF8());
+	std::vector<char> percentEncodedPath(2*utf8Path.size()+1);
+	size_t len = percentEncodedPath.size();
+	prt::StringUtils::percentEncode(utf8Path.c_str(), &percentEncodedPath[0], &len);
+	if(len > percentEncodedPath.size()+1){
+		percentEncodedPath.resize(len);
+		prt::StringUtils::percentEncode(utf8Path.c_str(), &percentEncodedPath[0], &len);
+	}
+
+	std::string uri(FILE_PREFIX);
+	uri.append(&percentEncodedPath[0]);
 
 	if(mCreatedInteractively) {
-		if(mLRulePkg.compare(path)) {
+		if(mLRulePkg.compare(uri)) {
 			MGlobal::executeCommandOnIdle(MString("prtAttrs " + name()));
 			return MS::kSuccess;
-			mLRulePkg = path;
+			mLRulePkg = uri;
 		}
 	} else {
 			MFnDependencyNode fNode(thisMObject(), &stat);

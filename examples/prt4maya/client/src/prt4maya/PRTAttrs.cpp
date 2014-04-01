@@ -12,12 +12,13 @@
 
 #include "PRTNode.h"
 
-#include "prt/prt.h"
 
 #include "Utilities.h"
 #include "wrapper/MayaOutputHandler.h"
 
 #include "prt/Status.h"
+#include "prt/StringUtils.h"
+
 
 #include <limits>
 
@@ -30,7 +31,6 @@ const wchar_t*	ANNOT_DIR			= L"@Directory";
 const wchar_t*	ANNOT_FILE			= L"@File";
 const wchar_t*	NULL_KEY			= L"#NULL#";
 }
-
 
 inline MString & PRTAttrs::getStringParameter(MObject & node, MObject & attr, MString & value) {
 	MPlug plug(node, attr);
@@ -227,10 +227,19 @@ MStatus PRTAttrs::updateRuleFiles(MFnDependencyNode & node, MString & rulePkg) {
 	PRTNode* prtNode = (PRTNode*)node.userNode();
 	MStatus  stat;
 
-	std::wstring path(FILE_PREFIX);
-	path.append(rulePkg.asWChar());
+	std::string utf8Path(rulePkg.asUTF8());
+	std::vector<char> percentEncodedPath(2*utf8Path.size()+1);
+	size_t len = percentEncodedPath.size();
+	prt::StringUtils::percentEncode(utf8Path.c_str(), &percentEncodedPath[0], &len);
+	if(len > percentEncodedPath.size()+1){
+		percentEncodedPath.resize(len);
+		prt::StringUtils::percentEncode(utf8Path.c_str(), &percentEncodedPath[0], &len);
+	}
 
-	prtNode->mLRulePkg = path;
+	std::string uri(FILE_PREFIX);
+	uri.append(&percentEncodedPath[0]);
+
+	prtNode->mLRulePkg = uri;
 
 	if(prtNode->mCreatedInteractively) {
 		int count = (int)node.attributeCount(&stat);
@@ -247,7 +256,7 @@ MStatus PRTAttrs::updateRuleFiles(MFnDependencyNode & node, MString & rulePkg) {
 		for(unsigned int i = 0; i < attrs.length(); i++) {
 			MPlug   plug(node.object(), attrs[i]);
 			MString name = plug.partialName();
-			
+
 			if(prtNode->mBriefName2prtAttr.count(name.asWChar()))
 				node.removeAttribute(attrs[i]);
 		}
@@ -263,7 +272,17 @@ MStatus PRTAttrs::updateRuleFiles(MFnDependencyNode & node, MString & rulePkg) {
 	MString      unpackDir       = MGlobal::executeCommandStringResult("workspace -q -fullName");
 	unpackDir += "/assets";
 	prt::Status resolveMapStatus = prt::STATUS_UNSPECIFIED_ERROR;
-	prtNode->mResolveMap = prt::createResolveMap(path.c_str(), unpackDir.asWChar(), &resolveMapStatus);
+
+
+	std::wstring utf16URI;
+	utf16URI.resize(uri.size()+1);
+	len = utf16URI.size();
+	if(prt::StringUtils::toUTF16FromUTF8(uri.c_str(), &utf16URI[0], &len)) {
+		utf16URI.resize(len);
+		prt::StringUtils::toUTF16FromUTF8(uri.c_str(), &utf16URI[0], &len);
+	}
+
+	prtNode->mResolveMap = prt::createResolveMap(utf16URI.c_str(), unpackDir.asWChar(), &resolveMapStatus);
 	if(resolveMapStatus == prt::STATUS_OK) {
 		size_t nKeys;
 		const wchar_t * const* keys   = prtNode->mResolveMap->getKeys(&nKeys);
