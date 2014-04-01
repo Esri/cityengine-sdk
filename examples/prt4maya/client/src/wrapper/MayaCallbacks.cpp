@@ -13,7 +13,7 @@
 
 #include "maya/MItMeshPolygon.h"
 
-#include "wrapper/MayaOutputHandler.h"
+#include "wrapper/MayaCallbacks.h"
 
 #include "prt4maya/Utilities.h"
 #include "prt4maya/PRTNode.h"
@@ -34,7 +34,7 @@ void prtTrace(const std::wstring& arg1, std::size_t arg2) {
 } // anonymous namespace
 
 
-void MayaOutputHandler::setVertices(double* vtx, size_t size) {
+void MayaCallbacks::setVertices(double* vtx, size_t size) {
 	prtTrace(L"setVertices: size = ", size);
 	mVertices.clear();
 	for (size_t i = 0; i < size; i += 3)
@@ -42,7 +42,7 @@ void MayaOutputHandler::setVertices(double* vtx, size_t size) {
 }
 
 
-void MayaOutputHandler::setNormals(double* nrm, size_t size) {
+void MayaCallbacks::setNormals(double* nrm, size_t size) {
 	prtTrace(L"setNormals: size = ", size);
 	mNormals.clear();
 	for (size_t i = 0; i < size; i += 3)
@@ -50,7 +50,7 @@ void MayaOutputHandler::setNormals(double* nrm, size_t size) {
 }
 
 
-void MayaOutputHandler::setUVs(float* u, float* v, size_t size) {
+void MayaCallbacks::setUVs(float* u, float* v, size_t size) {
 	mU.clear();
 	mV.clear();
 	for (size_t i = 0; i < size; ++i) {
@@ -59,7 +59,7 @@ void MayaOutputHandler::setUVs(float* u, float* v, size_t size) {
 	}
 }
 
-void MayaOutputHandler::setFaces(int* counts, size_t countsSize, int* connects, size_t connectsSize, int* uvCounts, size_t uvCountsSize, int* uvConnects, size_t uvConnectsSize) {
+void MayaCallbacks::setFaces(int* counts, size_t countsSize, int* connects, size_t connectsSize, int* uvCounts, size_t uvCountsSize, int* uvConnects, size_t uvConnectsSize) {
 	mVerticesCounts.clear();
 	for (size_t i = 0; i < countsSize; ++i)
 		mVerticesCounts.append(counts[i]);
@@ -81,7 +81,7 @@ void MayaOutputHandler::setFaces(int* counts, size_t countsSize, int* connects, 
 
 #define VERBOSE_NORMALS 0
 
-void MayaOutputHandler::createMesh() {
+void MayaCallbacks::createMesh() {
 	MStatus stat;
 
 	prtu::dbg("--- MayaData::createMesh begin");
@@ -151,7 +151,7 @@ MString getGroupName(const wchar_t* name) {
 	return result;
 }
 
-MString MayaOutputHandler::matCreate(int start, int count, const wchar_t* name) {
+MString MayaCallbacks::matCreate(int start, int count, const wchar_t* name) {
   MString groupName = getGroupName(name);
 
 	bool createGroup = true;
@@ -174,14 +174,14 @@ MString MayaOutputHandler::matCreate(int start, int count, const wchar_t* name) 
 }
 
 
-void MayaOutputHandler::matSetDiffuseTexture(int start, int count, const wchar_t* tex) {
+void MayaCallbacks::matSetDiffuseTexture(int start, int count, const wchar_t* tex) {
 	MString matName = matCreate(start, count, tex);
 	if(matName.numChars() == 0) return;
 
 	*mShadingCmd += "prtSetDiffuseTexture(\"" + matName + "\",\"" + tex + "\",\"map1\");\n";
 }
 
-void MayaOutputHandler::matSetColor(int start, int count, float r, float g, float b) {
+void MayaCallbacks::matSetColor(int start, int count, float r, float g, float b) {
 	wchar_t name[8];
 	swprintf(name, 7, L"%02X%02X%02X", (int)(r * 255.0), (int)(g * 255.0), (int)(b * 255.0));
 	MString matName = matCreate(start, count, name);
@@ -190,21 +190,21 @@ void MayaOutputHandler::matSetColor(int start, int count, float r, float g, floa
 	*mShadingCmd += "prtSetColor(\"" + matName + "\"," + r + "," + g + "," + b + ");\n";
 }
 
-void MayaOutputHandler::finishMesh() {
+void MayaCallbacks::finishMesh() {
 	delete mFnMesh;
 }
 
-prt::Status MayaOutputHandler::attrBool(size_t /*isIndex*/, int32_t /*shapeID*/, const wchar_t* key, bool value) {
+prt::Status MayaCallbacks::attrBool(size_t /*isIndex*/, int32_t /*shapeID*/, const wchar_t* key, bool value) {
 	mAttrs[key].mBool = value;
 	return prt::STATUS_OK;
 }
 
-prt::Status MayaOutputHandler::attrFloat(size_t /*isIndex*/, int32_t /*shapeID*/, const wchar_t* key, double value) {
+prt::Status MayaCallbacks::attrFloat(size_t /*isIndex*/, int32_t /*shapeID*/, const wchar_t* key, double value) {
 	mAttrs[key].mFloat = value;
 	return prt::STATUS_OK;
 }
 
-prt::Status MayaOutputHandler::attrString(size_t /*isIndex*/, int32_t /*shapeID*/, const wchar_t* key, const wchar_t* value) {
+prt::Status MayaCallbacks::attrString(size_t /*isIndex*/, int32_t /*shapeID*/, const wchar_t* key, const wchar_t* value) {
 	mAttrs[key].mString = value;
 	return prt::STATUS_OK;
 }

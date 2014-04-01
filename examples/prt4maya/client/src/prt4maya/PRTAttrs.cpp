@@ -14,7 +14,7 @@
 
 
 #include "Utilities.h"
-#include "wrapper/MayaOutputHandler.h"
+#include "wrapper/MayaCallbacks.h"
 
 #include "prt/Status.h"
 #include "prt/StringUtils.h"
@@ -412,7 +412,7 @@ MStatus PRTAttrs::createAttributes(MFnDependencyNode & node, const std::wstring 
 	PRTNode*          prtNode = (PRTNode*)node.userNode();
 	MString           dummy;
 
-	MayaOutputHandler* outputHandler = prtNode->createOutputHandler(0, 0);
+	MayaCallbacks* outputHandler = prtNode->createOutputHandler(0, 0);
 	const prt::AttributeMap* attrs   = aBuilder->createAttributeMap();
 
 	prt::InitialShapeBuilder* isb = prt::InitialShapeBuilder::create();
@@ -436,7 +436,7 @@ MStatus PRTAttrs::createAttributes(MFnDependencyNode & node, const std::wstring 
 
 	prt::Status generateStatus = prt::generate(&shape, 1, 0, &ENC_ATTR, 1, &prtNode->mAttrEncOpts, outputHandler, PRTNode::theCache, 0);
 
-	const std::map<std::wstring, MayaOutputHandler::AttributeHolder>& evalAttrs = outputHandler->getAttrs();
+	const std::map<std::wstring, MayaCallbacks::AttributeHolder>& evalAttrs = outputHandler->getAttrs();
 
 	prtNode->mBriefName2prtAttr[NAME_GENERATE.asWChar()] = NAME_GENERATE.asWChar();
 

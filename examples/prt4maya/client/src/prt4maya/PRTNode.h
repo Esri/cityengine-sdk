@@ -54,7 +54,7 @@
 #include "prt/AttributeMap.h"
 #include "prt/LogHandler.h"
 #include "prt/API.h"
-#include "wrapper/MayaOutputHandler.h"
+#include "wrapper/MayaCallbacks.h"
 
 #ifdef _MSC_VER
 #	include <WinNT.h>
@@ -110,7 +110,7 @@ public:
 	MStatus                        attachMaterials();
 	static void                    initLogger();
 	static void                    uninitialize();
-	MayaOutputHandler*             createOutputHandler(const MPlug* plug, MDataBlock* data);
+	MayaCallbacks*             createOutputHandler(const MPlug* plug, MDataBlock* data);
 
 	std::wstring                   mRuleFile;
 	std::wstring                   mStartRule;
