@@ -64,7 +64,7 @@
 #define PRT_TYPE_ID 0x8666b
 
 extern const wchar_t*	ENC_ATTR;
-extern const wchar_t*	FILE_PREFIX;
+extern const char*	    FILE_PREFIX;
 extern const MString	NAME_GENERATE;
 
 
@@ -117,7 +117,7 @@ public:
 	MObject                        mGenerate;
 	bool                           mCreatedInteractively;
 
-	std::wstring                   mLRulePkg;
+	std::string                    mLRulePkg;
 	const prt::ResolveMap*         mResolveMap;
 	const prt::AttributeMap*       mGenerateAttrs;
 	const prt::AttributeMap*       mMayaEncOpts;
