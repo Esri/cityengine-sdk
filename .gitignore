@@ -26,6 +26,7 @@
 /lib
 /doc
 /cmake
+build
 *.zip
 *.tgz
 *.tar.gz
