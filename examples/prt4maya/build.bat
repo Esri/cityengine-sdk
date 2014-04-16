@@ -14,10 +14,8 @@ nmake install
 popd
 
 set CLIENTVC=0.0
-SET MAYA|FINDSTR /b "MAYA="|FINDSTR /i 2012 >nul
-IF ERRORLEVEL 1 (set CLIENTVC=9.0)
-SET MAYA|FINDSTR /b "MAYA="|FINDSTR /i 2014 >nul
-IF ERRORLEVEL 1 (set CLIENTVC=10.0)
+if %MAYA:~-4% == "2012" (set CLIENTVC=9.0)
+if %MAYA:~-4% == "2014" (set CLIENTVC=10.0)
 
 pushd client
 call "C:\Program Files (x86)\Microsoft Visual Studio %CLIENTVC%\VC\vcvarsall.bat" amd64
