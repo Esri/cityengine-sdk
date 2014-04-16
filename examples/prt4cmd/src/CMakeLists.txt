@@ -28,16 +28,10 @@ SET(CMAKE_INSTALL_RPATH "")
 SET(CMAKE_INSTALL_RPATH_USE_LINK_PATH FALSE)
 
 include_directories(${PRT_INCLUDE_PATH})
-target_link_libraries(${PROJECT} ${PRT_LIBRARY} ${Boost_LIBRARIES})
+target_link_libraries(${PROJECT} ${Boost_LIBRARIES} ${PRT_LIBRARY})
 
 if(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
 	set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wl,-rpath,'$ORIGIN'")
-
-elseif(${CMAKE_SYSTEM_NAME} STREQUAL "Darwin")
-	add_custom_command(TARGET ${PROJECT} POST_BUILD COMMAND ${CMAKE_INSTALL_NAME_TOOL}
-		-change @rpath/libcom.esri.prt.core.dylib ${PRT_CORE_LIBRARY}
-		${PROJECT})
-
 endif()
 
 
