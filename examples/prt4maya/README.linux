@@ -1,12 +1,20 @@
 PRT4MAYA - CityEngine SDK for Autodesk Maya
 -------------------------------------------
 
-(Instructions for RedHat Enterprise Linux 6.x and compatible distributions)
+
+PREREQUISITES
+-------------
+
+Before you start working with this example, please make sure you follow
+the main installation instructions for the CityEngine SDK in the
+README.md file at the root of this example repository. This will 
+explain how to get the sdk binaries and example data.
 
 
 SOFTWARE REQUIREMENTS
 ---------------------
 
+- Redhat Enterprise Linux 6.x or compatible
 - Esri CityEngine SDK 1.1.x (or later) with a valid Esri CityEngine 2014 license
 - Autodesk Maya 2012 or Maya 2014
 - GCC 4.4.x (or later) (installed as system package)
@@ -21,7 +29,7 @@ BUILD INSTRUCTIONS
 2. cd <path to esri-cityengine-sdk git repository>/examples/prt4maya
 3. set environment variables for dependencies:
 export maya_DIR=/usr/autodesk/maya2012-x64
-export prt_DIR=<path to unzipped cityengine sdk binaries>/cmake
+export prt_DIR=<path to cityengine sdk binaries>/cmake
 4. sh build.sh
 
 => build result will appear in ./client/install
@@ -46,3 +54,9 @@ MAYA_SCRIPT_PATH=$INSTALL/scripts
 4. start maya
 5. goto Windows -> Settings/Preferences -> Plug-in Manager
 6. load "libprt4maya.so"
+
+
+USING PRT4MAYA
+--------------
+
+TODO

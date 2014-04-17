@@ -1,7 +1,14 @@
 PRT4MAYA - CityEngine SDK for Autodesk Maya
 -------------------------------------------
 
-(Instructions for Microsoft Windows)
+
+PREREQUISITES
+-------------
+
+Before you start working with this example, please make sure you follow
+the main installation instructions for the CityEngine SDK in the
+README.md file at the root of this example repository. This will 
+explain how to get the sdk binaries and example data.
 
 
 SOFTWARE REQUIREMENTS
@@ -22,7 +29,6 @@ BUILD INSTRUCTIONS
 1. Open windows shell
 2. cd ...\path\to\esri-cityengine-sdk\examples\prt4maya
 3. set locations for dependencies (adjust if necessary):
-set prt_DIR=C:/<path to unzipped cityengine sdk binaries>/cmake
 set Boost_INCLUDE_DIR=C:/local/boost_1_54_0
 set Boost_LIBRARY_DIR=C:/local/boost_1_54_0/lib64-msvc-10.0
 4. run: "build.bat C:/Autodesk/Maya2012" (or Maya2014)
@@ -50,3 +56,4 @@ MAYA_SCRIPT_PATH=<INSTALL>\scripts
 4. start maya
 5. goto Windows -> Settings/Preferences -> Plug-in Manager
 6. load "prt4maya"
+
