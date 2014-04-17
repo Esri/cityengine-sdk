@@ -1,140 +1,53 @@
-ATTENTION: the example commands below are work in progress while we're settling on the final repo layout...
+# Esri CityEngine SDK Example Repository
 
-# Esri CityEngine SDK
+The Esri CityEngine is based on the procedural runtime, which is the underlying engine that supports two GP tools in ArcGIS 10.x and drives procedural symbology in the release of ArcGIS Professional. The CityEngine SDK enables you as a 3rd party developer to extend CityEngine with additional import and export formats and storage backends beyond simple files. Moreover, you can integrate the procedural runtime in your own client applications taking full advantage of the procedural core without running CityEngine or ArcGIS.
 
-The Esri CityEngine 2013 is based on the procedural runtime, which is the underlying engine that supports two GP tools in ArcGIS 10.2 and drives procedural symbology in the release of ArcGIS Professional. The CityEngine SDK enables you as a 3rd party developer to extend CityEngine with additional import and export formats and storage backends beyond simple files. Moreover, you can integrate the procedural runtime in your own client applications taking full advantage of the procedural core without running CityEngine or ArcGIS.
+## Preamble
 
-This document explains how to install the CityEngine SDK and how to build the included examples. For in-depth documentation please see the doc directory.
+This document explains how to install the CityEngine SDK and how to work with the source-code examples contained in this repository. The Esri CityEngine SDK is packaged into three parts:
+- An archive (esri_ce_sdk_[xyz].zip) for the SDK binaries and documentation (whitepaper and API reference).
+- This git repository with the example sources.
+- An archive (esri_ce_sdk_example_data.zip) with example data (rule packages and initial shapes).
 
-## Features
-* C++ SDK
-* Documentation
-* Example Code
+The archives are available for download at the corresponding github release page. See installation instructions below for details.
 
-## Documentation
-* Whitepaper: [doc/esri_prt_whitepaper.pdf](doc/esri_prt_whitepaper.pdf)
-* Architecture: [doc/esri_prt_architecture.pdf](doc/esri_prt_architecture.pdf)
-* API Reference: [doc/html/index.html](doc/html/index.html)
+## General Software Requirements
+Please note that the individual example READMEs may include further requirements.
 
-## Requirements
 * License for CityEngine 2013 (or later)
-* Supported OS: Windows 7, Windows 8, MacOSX 10.7, MacOSX 10.8, RHEL 6.4
+* Supported OS: Windows XP and later, MacOSX 10.7 and later, RedHat Enterprise Linux 6.x and compatible
 * C++ Compiler:
   * Windows: MSVC 10.0 or later
   * MacOSX: Clang 3.0 or later
-  * Linux: GCC 4.1.2 or later
-* (Optional) To compile PRTX extensions (e.g. custom encoders) you need to use these **exact** C++ compiler versions:
+  * Linux: GCC 4.4 or later
+* (Optional) To compile SDK extensions (e.g. custom encoders) you need to use these **exact** C++ compiler versions:
   * Windows: Microsoft C++ Compiler (cl.exe) 16.00.40219.01 for x64, included in either one of these products (i.e. choose one):
     * Visual Studio 2010 SP1 64bit
     * Windows SDK 7.1 64bit with Visual C++ 2010 Compiler SP1 (Attention: [known issue with SP1](https://connect.microsoft.com/VisualStudio/feedback/details/660584))
   * MacOSX: Apple GCC 4.2.1 included in:
     * XCode 4.2.1 and MacOSX SDK 10.7 (Based on Apple Inc. build 5658, LLVM build 2336.1.00)
-  * Linux: GCC 4.1.2 64bit
+  * Linux: GCC 4.4.7 64bit
 * Linux/OSX: GNU Make 3.82 or later
 * Windows: NMake 10.0 or later (part of Visual Studio [Express])
 * CMake 2.8.10 or later (http://www.cmake.org)
-* boost 1.34 or later (http://www.boost.org)
+* boost 1.41 or later (http://www.boost.org)
 
 ## Installation Instructions
-TODO
+1. Clone or download this repository
+2. Download the SDK binary archive from the release page (TODO: link)
+3. Donwload the SDK example data archive from the release page (TODO: link)
+4. Unzip the archives into the cloned repository (the examples will work out of the box in this way).
 
 ## Examples
-The SDK contains a (growing) number of examples with source code. Foremost, the prt4cmd example is a comprehensive example of the PRT API. It allows you to apply a rule package onto a initial shape and write the resulting geometry to disk. We encourage you to modify and play with this example source code in order to fully explore the possibilities of the CityEngine SDK.
+The SDK contains a number of examples with source code. Each example contains a README with detailed instructions how to build and use it.
 
-### Generic Build Instructions
-The following build instructions apply to all examples. See the individual example sections for any exceptions or special steps.
-  1. cd into the examples/[example] directory
-  2. Create an empty "build" directory in parallel to the src directory of the CLI example and cd into it
-  3. Generate the make files:
-    * on Linux/OSX: `cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release ../src`
-    * on Windows: `cmake -G "NMake Makefiles" -DCMAKE_BUILD_TYPE=Release ../src`
-  4. Build and install:
-    * on Linux/OSX: `make install`
-    * on Windows: `nmake install`
-
-This will create a ready-to-run or ready-to-use installation of the example in the "install" directory in parallel to the src and build directories.
-
-BOOST NOTE: if the example build script complains about "boost not found", please extend the cmake call in step 3 like this:
-```
-cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release \
-	-DBOOST_INCLUDEDIR=xxx \
-	-DBOOST_LIBRARYDIR=XXX \
-	-DBoost_USE_STATIC_LIBS=ON \
-	../src 
-```
-
-### The prt4cmd CLI example
-Note: all examples below assume that your current working directory is the "install" directory from above.
-
-#### Displaying the help screen
-Simply run the example without any arguments:
-```
-bin/prt4cmd
-```
-
-#### Specifying the license
-The SDK will make use of your installed CityEngine license (node-locked or by license server).
-The "-f" argument specifies the type of license:
-- CityEngBas (basic network license)
-- CityEngBasFx (basic node-locked license)
-- CityEngAdv (advanced network license)
-- CityEngAdvFx (advanced node-locked license)
-
-The "-s" argument is only needed for the network license types. 
-
-```
-bin/prt4cmd -f CityEngAdv -s 27000@example.com
-```
-
-For simplicity, the license arguments have been omitted in the below examples.
+A quick overview:
+- prt4cmd: a simple command line utility to apply rule packages onto initial shapes and generate models.
+- prt4maya: wraps the SDK into a plugin for Autodesk Maya
+- stlenc: demonstrates how to write a custom encoder, in this case for the STL geometry format.
 
 
-#### Generate a building with the included example rule package
-The following call will apply the rule package "data/candler.02.rpk" onto the initial shape geometry "data/candler_lot.obj".
-
-*Windows Note: On the Windows command line, please use `Default$Lot` instead of `Default\$Lot` and omit the backslashes.*
-```
-bin/prt4cmd \
-	-l 3 -p data/candler.02.rpk \
-	-a ruleFile:string=bin/candler.01.cgb \
-	-a startRule:string=Default\$Lot \
-	-e com.esri.prt.codecs.OBJEncoder \
-	-z baseName:string=myhouse \
-	-g data/candler_lot.obj
-```
-Upon completion you should find an wavefront obj file inside the install/output folder with mtl and textures.
-
-![myhouse62.png](doc/images/myhouse62.png "Building with height=62.0")
-
-#### Generate the building with a different height
-By adding the line "-a height:float=30" we change the height of the building from its default value of 62.0 to 30.0:
-
-*Windows Note: On the Windows command line, please use `Default$Lot` instead of `Default\$Lot` and omit the backslashes.*
-```
-bin/prt4cmd \
-	-l 3 \
-	-p data/candler.02.rpk \
-	-a ruleFile:string=bin/candler.01.cgb \
-	-a startRule:string=Default\$Lot \
-	-a height:float=30 \
-	-e com.esri.prt.codecs.OBJEncoder \
-	-z baseName:string=myhouse \
-	-g data/candler_lot.obj
-```
-
-![myhouse30.png](doc/images/myhouse30.png "Building with height=30.0")
-
-### The stlenc custom encoder example
-The stlenc example demonstrates the use of the PRTX API to create custom encoders which are ready to be used in prt-based host applications.
-
-Note: Libraries based on PRTX must be compiled with a specific compiler version, see requirements.
-
-#### Use the STL encoder in the prt4cmd example
-  1. Build the prt4cmd and stlenc examples using the generic build instructions above
-  2. Copy stlenc/install/lib/libprt_stlenc.*  into prt4cmd/install/lib/
-  3. The STL encoder can now be invoked with the id 'com.esri.prt.examples.STLEncoder'
-
-## Resources
+## Further Resources
 * Forum: http://forums.arcgis.com/forums/204-CityEngine-General-Discussion
 * Facebook: https://www.facebook.com/CityEngine
 * Twitter: https://twitter.com/CityEngine
@@ -145,7 +58,7 @@ Find a bug or want to request a new feature?  Please let us know by submitting a
 
 ## Contributing
 
-Anyone and everyone is welcome to contribute and to extend and improve the examples.
+Anyone and everyone is welcome to contribute and to extend and improve the examples by sending us pull requests.
 
 ## Licensing
 
