@@ -1,0 +1,48 @@
+PRT4MAYA - CityEngine SDK for Autodesk Maya
+-------------------------------------------
+
+(Instructions for RedHat Enterprise Linux 6.x and compatible distributions)
+
+
+SOFTWARE REQUIREMENTS
+---------------------
+
+- Esri CityEngine SDK 1.1.x (or later) with a valid Esri CityEngine 2014 license
+- Autodesk Maya 2012 or Maya 2014
+- GCC 4.4.x (or later) (installed as system package)
+- CMake 2.8.10 or later (installed as system package)
+- Boost 1.53 or later (installed as system package)
+
+
+BUILD INSTRUCTIONS
+------------------
+
+1. open bash shell
+2. cd <path to esri-cityengine-sdk git repository>/examples/prt4maya
+3. set environment variables for dependencies:
+export maya_DIR=/usr/autodesk/maya2012-x64
+export prt_DIR=<path to unzipped cityengine sdk binaries>/cmake
+4. sh build.sh
+
+=> build result will appear in ./client/install
+
+
+INSTALLATION INSTRUCTIONS
+-------------------------
+
+1. locate the prt4maya build output directory from above, e.g.:
+   <path to esri-cityengine-sdk git repository>/examples/prt4maya/client/install (let's call it $INSTALL)
+2. locate the Maya.env file in your home, usually it's here: ~/maya/2012-x64/Maya.env
+3. edit Maya.env as follows (replace $INSTALL with the actual path from above):
+# use CityEngAdvFx for node-locked CityEngine license or CityEngAdv for floating license
+ESRI_CE_SDK_LIC_FEATURE=CityEngAdvFx
+
+# uncomment for floating license
+# ESRI_CE_SDK_LIC_HOST=27000@my.flexnet.host
+
+MAYA_PLUG_IN_PATH=$INSTALL/plug-ins
+MAYA_SCRIPT_PATH=$INSTALL/scripts
+
+4. start maya
+5. goto Windows -> Settings/Preferences -> Plug-in Manager
+6. load "libprt4maya.so"
