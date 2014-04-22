@@ -12,8 +12,8 @@ This document explains how to install the CityEngine SDK and how to work with th
 The archives are available for download at the corresponding github release page. See installation instructions below for details.
 
 ## CityEngine SDK Releases
-- v1.1.1407 [TODO: put link to release page]
-- v1.0.1209
+- v1.1.1407 (TBD) [TODO: put link to release page]
+- v1.0.1209 (2014-01-15)
 
 ## Installation Instructions
 1. Clone or download this repository
