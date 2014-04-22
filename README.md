@@ -1,11 +1,11 @@
-# Esri CityEngine SDK Example Repository
+# Esri CityEngine SDK Examples
 
 The Esri CityEngine is based on the procedural runtime, which is the underlying engine that supports two GP tools in ArcGIS 10.x and drives procedural symbology in the release of ArcGIS Professional. The CityEngine SDK enables you as a 3rd party developer to extend CityEngine with additional import and export formats and storage backends beyond simple files. Moreover, you can integrate the procedural runtime in your own client applications taking full advantage of the procedural core without running CityEngine or ArcGIS.
 
 ## Preamble
 
 This document explains how to install the CityEngine SDK and how to work with the source-code examples contained in this repository. The Esri CityEngine SDK is packaged into three parts:
-- An archive (esri_ce_sdk_[xyz].zip) for the SDK binaries and documentation (whitepaper and API reference).
+- An archive (esri_ce_sdk_[xyz].zip) with the SDK binaries and documentation (whitepaper and API reference).
 - This git repository with the example sources.
 - An archive (esri_ce_sdk_example_data.zip) with example data (rule packages and initial shapes).
 
@@ -46,9 +46,10 @@ A quick overview:
 - prt4maya: wraps the SDK into a plugin for Autodesk Maya
 - stlenc: demonstrates how to write a custom encoder, in this case for the STL geometry format.
 
-
 ## Further Resources
-* Forum: http://forums.arcgis.com/forums/204-CityEngine-General-Discussion
+* Forum: 
+  * General CityEngine: http://forums.arcgis.com/forums/204-CityEngine-General-Discussion
+  * CityEngine SDK: http://forums.arcgis.com/forums/270-CityEngine-SDK
 * Facebook: https://www.facebook.com/CityEngine
 * Twitter: https://twitter.com/CityEngine
 
