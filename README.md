@@ -11,6 +11,24 @@ This document explains how to install the CityEngine SDK and how to work with th
 
 The archives are available for download at the corresponding github release page. See installation instructions below for details.
 
+## CityEngine SDK Releases
+- v1.1.1407 [TODO: put link to release page]
+- v1.0.1209
+
+## Installation Instructions
+1. Clone or download this repository
+2. Download the SDK binary archive from the release page (TODO: link)
+3. Donwload the SDK example data archive from the release page (TODO: link)
+4. Unzip the archives into the cloned repository (the examples will work out of the box in this way).
+
+## Examples
+This repository contains a number of source code examples. Each example contains a README with detailed instructions how to build and use it.
+
+A quick overview:
+- prt4cmd: a simple command line utility to apply rule packages onto initial shapes and generate models.
+- prt4maya: wraps the SDK into a plugin for Autodesk Maya
+- stlenc: demonstrates how to write a custom encoder, in this case for the STL geometry format.
+
 ## General Software Requirements
 Please note that the individual example READMEs may include further requirements.
 
@@ -31,20 +49,6 @@ Please note that the individual example READMEs may include further requirements
 * Windows: NMake 10.0 or later (part of Visual Studio [Express])
 * CMake 2.8.10 or later (http://www.cmake.org)
 * boost 1.41 or later (http://www.boost.org)
-
-## Installation Instructions
-1. Clone or download this repository
-2. Download the SDK binary archive from the release page (TODO: link)
-3. Donwload the SDK example data archive from the release page (TODO: link)
-4. Unzip the archives into the cloned repository (the examples will work out of the box in this way).
-
-## Examples
-The SDK contains a number of examples with source code. Each example contains a README with detailed instructions how to build and use it.
-
-A quick overview:
-- prt4cmd: a simple command line utility to apply rule packages onto initial shapes and generate models.
-- prt4maya: wraps the SDK into a plugin for Autodesk Maya
-- stlenc: demonstrates how to write a custom encoder, in this case for the STL geometry format.
 
 ## Further Resources
 * Forum: 
