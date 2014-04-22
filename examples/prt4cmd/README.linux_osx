@@ -14,17 +14,13 @@ explain how to get the sdk binaries and example data.
 SOFTWARE REQUIREMENTS
 ---------------------
 
-- Redhat Enterprise Linux 6.x or compatible
-- Esri CityEngine SDK 1.1.x (or later) with a valid Esri CityEngine 2014 license
-- GCC 4.4.x (or later) (installed as system package)
-- CMake 2.8.10 or later (installed as system package)
-- Boost 1.41 or later (installed as system package)
+see "General Software Requirements - Linux or MacOSX"
 
 
 BUILD INSTRUCTIONS
 ------------------
 
-1. Open a bash shell
+1. Open a terminal
 2. cd <path to esri-cityengine-sdk git repository>/examples/prt4cmd
 3. mkdir build && cd build
 4. cmake -G "Unix Makefiles" \

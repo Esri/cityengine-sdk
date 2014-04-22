@@ -14,13 +14,10 @@ explain how to get the sdk binaries and example data.
 SOFTWARE REQUIREMENTS
 ---------------------
 
-- Windows 7 (64bit) or later
-- Esri CityEngine SDK 1.1.x (or later) with a valid Esri CityEngine 2014 license
+- see "General Software Requirements - Windows"
 - Autodesk Maya 2012 or Maya 2014
 - Microsoft Visual Studio 2010
 - if building for Maya 2012: *also* Microsoft Visual Studio 2008
-- CMake 2.8.10 or later (www.cmake.org)
-- Boost 1.53 or later (boost.teeks99.com)
 
 
 BUILD INSTRUCTIONS
@@ -29,9 +26,9 @@ BUILD INSTRUCTIONS
 1. Open windows shell
 2. cd ...\path\to\esri-cityengine-sdk\examples\prt4maya
 3. set locations for dependencies (adjust if necessary):
-set Boost_INCLUDE_DIR=C:/local/boost_1_54_0
-set Boost_LIBRARY_DIR=C:/local/boost_1_54_0/lib64-msvc-10.0
-4. run: "build.bat C:/Autodesk/Maya2012" (or Maya2014)
+set Boost_INCLUDE_DIR=C:\local\boost_1_54_0
+set Boost_LIBRARY_DIR=C:\local\boost_1_54_0\lib64-msvc-10.0
+4. run: "build.bat C:\Autodesk\Maya2012" (or Maya2014)
 
 => build result will appear in .\client\install
 
@@ -40,8 +37,8 @@ INSTALLATION INSTRUCTIONS
 -------------------------
 
 1. locate the prt4maya build output directory, e.g.:
-   .../esri-cityengine-sdk/examples/prt4maya/client/install (let's call it <INSTALL>)
-2. locate the Maya.env file in your home, usually its in "My Documents/maya/2012-x64/"
+   ...\esri-cityengine-sdk\examples\prt4maya\client\install (let's call it <INSTALL>)
+2. locate the Maya.env file in your home, usually its in "My Documents\maya\2012-x64\"
 3. edit Maya.env as follows (replace <INSTALL> with the actual path from above):
 # use CityEngAdvFx for node-locked CityEngine license or CityEngAdv for floating license
 ESRI_CE_SDK_LIC_FEATURE=CityEngAdvFx

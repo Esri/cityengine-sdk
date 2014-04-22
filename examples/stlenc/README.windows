@@ -14,11 +14,8 @@ explain how to get the sdk binaries and example data.
 SOFTWARE REQUIREMENTS
 ---------------------
 
-- Windows 7 (64bit) or later
-- Esri CityEngine SDK 1.1.x (or later) with a valid Esri CityEngine 2014 license
-- Microsoft Visual Studio 2010
-- CMake 2.8.10 or later (www.cmake.org)
-- Boost 1.53 or later (boost.teeks99.com)
+- see "General Software Requirements - Windows"
+- Microsoft Visual Studio 2010 SP1
 
 
 BUILD INSTRUCTIONS
@@ -32,13 +29,13 @@ BUILD INSTRUCTIONS
 6. cmake ^
      -G "NMake Makefiles" ^
      -DCMAKE_BUILD_TYPE=Release ^
-     -DBOOST_INCLUDEDIR=C:/local/boost_1_54_0 ^
-     -DBOOST_LIBRARYDIR=C:/local/boost_1_54_0/lib64-msvc-10.0 ^
+     -DBOOST_INCLUDEDIR=C:\local\boost_1_54_0 ^
+     -DBOOST_LIBRARYDIR=C:\local\boost_1_54_0\lib64-msvc-10.0 ^
      -DBoost_USE_STATIC_LIBS=ON ^
      -DBoost_USE_MULTITHREADED=ON ^
      -DBoost_USE_STATIC_RUNTIME=OFF ^
-     -DCMAKE_INSTALL_PREFIX=../install ^
-     ../src
+     -DCMAKE_INSTALL_PREFIX=..\install ^
+     ..\src
 7. nmake install
 
 => The build result will appear in ..\install
@@ -48,5 +45,5 @@ CITYENGINE INSTALLATION INSTRUCTIONS
 ------------------------------------
 
 1. locate the stlenc extension library, e.g. in:
-   <path to esri-cityengine-sdk git repository>/examples/stlenc/install/lib/stlenc.dll
-2. copy stlenc.dll into <CityEngine installation location>/plugins/com.esri.prt.clients.ce.win32.win32.x86_64_1.0.0/lib/
+   <path to esri-cityengine-sdk git repository>\examples\stlenc\install\lib\stlenc.dll
+2. copy stlenc.dll into <CityEngine installation location>\plugins\com.esri.prt.clients.ce.win32.win32.x86_64_1.0.0\lib\

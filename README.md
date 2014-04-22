@@ -29,7 +29,7 @@ A quick overview:
 - prt4maya: wraps the SDK into a plugin for Autodesk Maya
 - stlenc: demonstrates how to write a custom encoder, in this case for the STL geometry format.
 
-## Software Requirements
+## General Software Requirements
 Please note that the individual example READMEs may include further requirements.
 
 #### Windows
