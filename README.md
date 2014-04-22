@@ -29,31 +29,52 @@ A quick overview:
 - prt4maya: wraps the SDK into a plugin for Autodesk Maya
 - stlenc: demonstrates how to write a custom encoder, in this case for the STL geometry format.
 
-## General Software Requirements
+## Software Requirements
 Please note that the individual example READMEs may include further requirements.
 
-* License for CityEngine 2013 (or later)
-* Supported OS: Windows XP and later, MacOSX 10.7 and later, RedHat Enterprise Linux 6.x and compatible
-* C++ Compiler:
-  * Windows: MSVC 10.0 or later
-  * MacOSX: Clang 3.0 or later
-  * Linux: GCC 4.4 or later
-* (Optional) To compile SDK extensions (e.g. custom encoders) you need to use these **exact** C++ compiler versions:
-  * Windows: Microsoft C++ Compiler (cl.exe) 16.00.40219.01 for x64, included in either one of these products (i.e. choose one):
-    * Visual Studio 2010 SP1 64bit
-    * Windows SDK 7.1 64bit with Visual C++ 2010 Compiler SP1 (Attention: [known issue with SP1](https://connect.microsoft.com/VisualStudio/feedback/details/660584))
-  * MacOSX: Apple GCC 4.2.1 included in:
-    * XCode 4.2.1 and MacOSX SDK 10.7 (Based on Apple Inc. build 5658, LLVM build 2336.1.00)
-  * Linux: GCC 4.4.7 64bit
-* Linux/OSX: GNU Make 3.82 or later
-* Windows: NMake 10.0 or later (part of Visual Studio [Express])
+#### Windows
+* Windows XP SP1 or later (32bit and 64bit)
+* License for CityEngine 2013 or later
+* Recommended C++ Compilers
+    * Microsoft VC 10.0
+    * Microsoft VC 11.0
+* (Optional) To compile SDK extensions (e.g. custom encoders) it is required to use these **exact** C++ compiler versions:
+    * Microsoft C++ Compiler (cl.exe) 16.00.40219.01 for x64, included in either one of these products:
+        * Visual Studio 2010 SP1 64bit
+        * Windows SDK 7.1 64bit with Visual C++ 2010 Compiler SP1 (Attention: [known issue with SP1](https://connect.microsoft.com/VisualStudio/feedback/details/660584))
+* NMake 10.0 or later (part of Visual Studio [Express])
+* CMake 2.8.10 or later (http://www.cmake.org)
+* boost 1.41 or later (http://www.boost.org, boost.teeks99.com)
+
+#### MacOSX
+* MacOSX 10.7 or later (64bit only)
+* License for CityEngine 2013 or later
+* Recommended C++ Compilers
+    * GCC 4.2.1 or later
+    * Clang 3.0 or later
+* (Optional) To compile SDK extensions (e.g. custom encoders) it is required to use these **exact** C++ compiler versions:
+    * Apple GCC 4.2.1 included in:
+        * XCode 4.2 and MacOSX SDK 10.7 (Based on Apple Inc. build 5658, LLVM build 2336.1.00)
+* GNU Make 3.82 or later
+* CMake 2.8.10 or later (http://www.cmake.org)
+* boost 1.41 or later (http://www.boost.org)
+
+#### Linux
+* RedHat Enterprise Linux 6.x or compatible (64bit only)
+* License for CityEngine 2013 or later
+* Recommended C++ Compilers
+    * GCC 4.4 or later
+* (Optional) To compile SDK extensions (e.g. custom encoders) it is required to use these **exact** C++ compiler versions:
+    * GCC 4.4.7 64bit included in:
+        * RedHat Enterprise Linux 6.4 Package Repository
+* GNU Make 3.82 or later
 * CMake 2.8.10 or later (http://www.cmake.org)
 * boost 1.41 or later (http://www.boost.org)
 
 ## Further Resources
 * Forum: 
-  * General CityEngine: http://forums.arcgis.com/forums/204-CityEngine-General-Discussion
-  * CityEngine SDK: http://forums.arcgis.com/forums/270-CityEngine-SDK
+    * General CityEngine: http://forums.arcgis.com/forums/204-CityEngine-General-Discussion
+    * CityEngine SDK: http://forums.arcgis.com/forums/270-CityEngine-SDK
 * Facebook: https://www.facebook.com/CityEngine
 * Twitter: https://twitter.com/CityEngine
 
