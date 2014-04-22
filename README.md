@@ -5,20 +5,20 @@ The Esri CityEngine is based on the procedural runtime, which is the underlying 
 ## Preamble
 
 This document explains how to install the CityEngine SDK and how to work with the source-code examples contained in this repository. The Esri CityEngine SDK is packaged into three parts:
-- An archive (esri_ce_sdk_[xyz].zip) with the SDK binaries and documentation (whitepaper and API reference).
 - This git repository with the example sources.
-- An archive (esri_ce_sdk_example_data.zip) with example data (rule packages and initial shapes).
+- An archive with the SDK binaries and documentation (whitepaper and API reference).
+- An archive with example data (e.g. rule packages and initial shapes).
 
 The archives are available for download at the corresponding github release page. See installation instructions below for details.
 
 ## CityEngine SDK Releases
-- v1.1.1407 (TBD) [TODO: put link to release page]
-- v1.0.1209 (2014-01-15)
+- [v1.1.1407 (TBA)](https://github.com/Esri/esri-cityengine-sdk/releases/tag/1.1.1407)
+- [v1.0.1209 (2014-01-15)](https://github.com/Esri/esri-cityengine-sdk/releases/tag/1.0.1209)
 
 ## Installation Instructions
 1. Clone or download this repository
-2. Download the SDK binary archive from the release page (TODO: link)
-3. Donwload the SDK example data archive from the release page (TODO: link)
+2. Download the SDK binary archive from the release page
+3. Donwload the SDK example data archive from the release page
 4. Unzip the archives into the cloned repository (the examples will work out of the box in this way).
 
 ## Examples
