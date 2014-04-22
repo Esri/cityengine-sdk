@@ -19,7 +19,7 @@ SOFTWARE REQUIREMENTS
 - Autodesk Maya 2012 or Maya 2014
 - GCC 4.4.x (or later) (installed as system package)
 - CMake 2.8.10 or later (installed as system package)
-- Boost 1.53 or later (installed as system package)
+- Boost 1.41 or later (installed as system package)
 
 
 BUILD INSTRUCTIONS

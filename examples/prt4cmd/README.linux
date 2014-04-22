@@ -18,7 +18,7 @@ SOFTWARE REQUIREMENTS
 - Esri CityEngine SDK 1.1.x (or later) with a valid Esri CityEngine 2014 license
 - GCC 4.4.x (or later) (installed as system package)
 - CMake 2.8.10 or later (installed as system package)
-- Boost 1.53 or later (installed as system package)
+- Boost 1.41 or later (installed as system package)
 
 
 BUILD INSTRUCTIONS
