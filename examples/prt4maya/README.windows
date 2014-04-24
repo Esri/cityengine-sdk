@@ -41,7 +41,7 @@ set Boost_LIBRARY_DIR=C:\local\boost_1_53_0\lib64-msvc-10.0
 INSTALLATION INSTRUCTIONS
 -------------------------
 
-1. locate the directory where you installed the plugin, let's call it <PLUGINDIR> 
+1. locate the directory where you copied the plugin, let's call it <PLUGINDIR> 
 2. locate the Maya.env file in your home, usually its in "My Documents\maya\2012-x64\"
 3. edit Maya.env as follows (replace <PLUGINDIR> with the actual path from above):
 # use CityEngAdvFx / CityEngBasFx for node-locked CityEngine license or CityEngAdv / CityEngBas for floating license

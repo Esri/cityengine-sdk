@@ -41,7 +41,7 @@ export prt_DIR=<path to cityengine sdk binaries>/cmake
 INSTALLATION INSTRUCTIONS
 -------------------------
 
-1. locate the directory where you installed the plugin, let's call it <PLUGINDIR> 
+1. locate the directory where you copied the plugin, let's call it <PLUGINDIR> 
 2. locate the Maya.env file in your home, usually it's here: ~/maya/2012-x64/Maya.env
 3. edit Maya.env as follows (replace $PLUGINDIR with the actual path from above):
 # use CityEngAdvFx / CityEngBasFx for node-locked CityEngine license 
