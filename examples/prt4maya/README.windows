@@ -20,9 +20,8 @@ explain how to get the sdk binaries and example data.
 SOFTWARE REQUIREMENTS
 ---------------------
 
-- see "General Software Requirements - Windows"
+- see "General Software Requirements - Windows, to compile SDK extensions"
 - Autodesk Maya 2012 or Maya 2014
-- Microsoft Visual Studio 2010
 - if building for Maya 2012: *also* Microsoft Visual Studio 2008
 
 
@@ -32,8 +31,8 @@ BUILD INSTRUCTIONS
 1. Open windows shell
 2. cd ...\path\to\esri-cityengine-sdk\examples\prt4maya
 3. set locations for dependencies (adjust if necessary):
-set Boost_INCLUDE_DIR=C:\local\boost_1_54_0
-set Boost_LIBRARY_DIR=C:\local\boost_1_54_0\lib64-msvc-10.0
+set Boost_INCLUDE_DIR=C:\local\boost_1_53_0
+set Boost_LIBRARY_DIR=C:\local\boost_1_53_0\lib64-msvc-10.0
 4. run: "build.bat C:\Autodesk\Maya2012" (or Maya2014)
 
 => build result will appear in .\client\install
