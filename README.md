@@ -43,7 +43,7 @@ Please note that the individual example READMEs may include further requirements
     * Microsoft VC10 C++ Compiler (cl.exe) 16.00.40219.01, included in Visual Studio 2010 SP1 
     * boost 1.53 binaries 
         * boost libraries need to be compiled with your compiler (VC 10) for your architecture
-        * download pre-built libraries from boost.teeks99.com (e.g. boost_1_53_0-vc64-bin.exe or boost_1_52_0-vc32-bin.exe)
+        * download pre-built libraries from http://boost.teeks99.com (e.g. boost_1_53_0-vc64-bin.exe or boost_1_52_0-vc32-bin.exe)
         * or get just the source and build it  yourself: http://www.boost.org)
 
 #### MacOSX
