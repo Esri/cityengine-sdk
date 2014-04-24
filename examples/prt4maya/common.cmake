@@ -1,5 +1,9 @@
 # prt_DIR must point to the cmake subfolder of the desired SDK installation
-set(prt_DIR		"${PROJECT_SOURCE_DIR}/../../../../prt/cmake")
+#set(prt_DIR		"${PROJECT_SOURCE_DIR}/../../../../prt/cmake")
+
+set(prt_DIR		"C:/fst/dec/ce_server_ws/com.esri.prt.build/cmake")
+
+
 
 # boost location
 if (WIN32)
@@ -8,12 +12,12 @@ if (WIN32)
 	if(ENV_BOOST_INC)
 		set(Boost_INCLUDE_DIR ${ENV_BOOST_INC})
 	else()
-		set(Boost_INCLUDE_DIR "C:/local/boost_1_55_0")
+		set(Boost_INCLUDE_DIR "C:/fst/dec/ce_server_ws/org.boost_1_53_0/include")
 	endif()
 	if(ENV_BOOST_LIB)
-		set(Boost_LIBRARY_DIR ${ENV_BOOST_LIB})
+		set(Boost_LIBRARY_DIR ${ENV_BOOST_LIB})	
 	else()
-		set(Boost_LIBRARY_DIR "C:/local/boost_1_55_0/lib64-msvc-10.0")
+		set(Boost_LIBRARY_DIR "C:/fst/dec/ce_server_ws/org.boost_1_53_0/lib/win32.x86_64")
 	endif()
 endif()
 
