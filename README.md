@@ -35,7 +35,7 @@ Please note that the individual example READMEs may include further requirements
 #### Windows
 * Windows XP SP1 or later (32bit and 64bit)
 * License for CityEngine 2013 or later
-* NMake 10.0 or later (part of Visual Studio [Express] / Windows SDK)
+* NMake 10.0 or later (part of Visual Studio)
 * CMake 2.8.10 or later (http://www.cmake.org)
 * Recommended C++ Compilers for simple clients (prt4cmd example):
     * Microsoft VC 10.0 or later
@@ -44,7 +44,7 @@ Please note that the individual example READMEs may include further requirements
     * boost 1.53 binaries 
         * boost libraries need to be compiled with your compiler (VC 10) for your architecture
         * download pre-built libraries from http://boost.teeks99.com (e.g. boost_1_53_0-vc64-bin.exe or boost_1_52_0-vc32-bin.exe)
-        * or get just the source and build it  yourself: http://www.boost.org)
+        * or get just the source and build it yourself: http://www.boost.org
 
 #### MacOSX
 * MacOSX 10.7 or later (64bit only)
