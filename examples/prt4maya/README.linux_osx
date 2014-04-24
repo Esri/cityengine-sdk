@@ -20,6 +20,7 @@ explain how to get the sdk binaries and example data.
 SOFTWARE REQUIREMENTS
 ---------------------
 
+- node-locked CityEngine license
 - see "General Software Requirements - Linux or MacOSX, to compile SDK extensions"
 - Autodesk Maya 2012 or Maya 2014
 
@@ -34,24 +35,20 @@ export maya_DIR=/usr/autodesk/maya2012-x64
 export prt_DIR=<path to cityengine sdk binaries>/cmake
 4. sh build.sh
 
-=> build result will appear in ./client/install
+=> build result will appear in ./client/install; you can use this as your plugin directory.
 
 
 INSTALLATION INSTRUCTIONS
 -------------------------
 
-1. locate the prt4maya build output directory from above, e.g.:
-   <path to esri-cityengine-sdk git repository>/examples/prt4maya/client/install (let's call it $INSTALL)
+1. locate the directory where you installed the plugin, let's call it <PLUGINDIR> 
 2. locate the Maya.env file in your home, usually it's here: ~/maya/2012-x64/Maya.env
-3. edit Maya.env as follows (replace $INSTALL with the actual path from above):
-# use CityEngAdvFx for node-locked CityEngine license or CityEngAdv for floating license
+3. edit Maya.env as follows (replace $PLUGINDIR with the actual path from above):
+# use CityEngAdvFx / CityEngBasFx for node-locked CityEngine license 
 ESRI_CE_SDK_LIC_FEATURE=CityEngAdvFx
 
-# uncomment for floating license
-# ESRI_CE_SDK_LIC_HOST=27000@my.flexnet.host
-
-MAYA_PLUG_IN_PATH=$INSTALL/plug-ins
-MAYA_SCRIPT_PATH=$INSTALL/scripts
+MAYA_PLUG_IN_PATH=$PLUGINDIR/plug-ins
+MAYA_SCRIPT_PATH=$PLUGINDIR/scripts
 
 4. start maya
 5. goto Windows -> Settings/Preferences -> Plug-in Manager
