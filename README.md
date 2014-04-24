@@ -44,7 +44,10 @@ Please note that the individual example READMEs may include further requirements
         * Windows SDK 7.1 64bit with Visual C++ 2010 Compiler SP1 (Attention: [known issue with SP1](https://connect.microsoft.com/VisualStudio/feedback/details/660584))
 * NMake 10.0 or later (part of Visual Studio [Express])
 * CMake 2.8.10 or later (http://www.cmake.org)
-* boost 1.41 or later (http://www.boost.org, boost.teeks99.com)
+* boost 1.53 binaries 
+  * boost libraries need to be compiled with your compiler (VC 10 or VC 11) for your architecture
+  * download pre-built libraries from boost.teeks99.com (e.g. boost_1_53_0-vc64-bin.exe or boost_1_52_0-vc32-bin.exe)
+  * or get just the source and build it  yourself: http://www.boost.org)
 
 #### MacOSX
 * MacOSX 10.7 or later (64bit only)
@@ -57,7 +60,7 @@ Please note that the individual example READMEs may include further requirements
         * XCode 4.2 and MacOSX SDK 10.7 (Based on Apple Inc. build 5658, LLVM build 2336.1.00)
 * GNU Make 3.82 or later
 * CMake 2.8.10 or later (http://www.cmake.org)
-* boost 1.41 or later (http://www.boost.org)
+* boost 1.53 (http://www.boost.org)
 
 #### Linux
 * RedHat Enterprise Linux 6.x or compatible (64bit only)
@@ -69,7 +72,7 @@ Please note that the individual example READMEs may include further requirements
         * RedHat Enterprise Linux 6.4 Package Repository
 * GNU Make 3.82 or later
 * CMake 2.8.10 or later (http://www.cmake.org)
-* boost 1.41 or later (http://www.boost.org)
+* boost 1.53 (http://www.boost.org)
 
 ## Further Resources
 * Forum: 
