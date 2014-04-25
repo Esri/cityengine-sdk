@@ -1,6 +1,6 @@
 # Esri CityEngine SDK Examples
 
-The Esri CityEngine is based on the procedural runtime, which is the underlying engine that supports two GP tools in ArcGIS 10.x and drives procedural symbology in the release of ArcGIS Professional. The CityEngine SDK enables you as a 3rd party developer to extend CityEngine with additional import and export formats and storage backends beyond simple files. Moreover, you can integrate the procedural runtime in your own client applications taking full advantage of the procedural core without running CityEngine or ArcGIS.
+The Esri CityEngine is based on the procedural runtime, which is the underlying engine that supports two GP tools in ArcGIS 10.x and drives procedural symbology in the release of ArcGIS Professional. The CityEngine SDK enables you as a 3rd party developer to extend CityEngine with additional import and export formats. Moreover, you can integrate the procedural runtime in your own client applications taking full advantage of the procedural core without running CityEngine or ArcGIS.
 
 ## Preamble
 
