@@ -11,8 +11,8 @@ mkdir MyUnityProject\Assets\Prt4Unity\Editor
 mkdir MyUnityProject\Assets\Prt4Unity\Scripts
 
 move prt4unity.dll MyUnityProject\Assets\Plugins\
-move Prt4UnityEditor.cs MyUnityProject\Assets\Prt4Unity\Editor\
-move Prt4Unity.cs MyUnityProject\Assets\Prt4Unity\Scripts\
+copy ..\..\src\scripts\Prt4UnityEditor.cs MyUnityProject\Assets\Prt4Unity\Editor\
+move ..\..\src\scripts\Prt4Unity.cs MyUnityProject\Assets\Prt4Unity\Scripts\
 
 mkdir ProgramFiles(x86)\Unity\Editor
 mkdir ProgramFiles(x86)\Unity\prt
