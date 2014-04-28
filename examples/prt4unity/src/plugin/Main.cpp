@@ -15,7 +15,7 @@
 BOOL APIENTRY DllMain(HMODULE hModule, DWORD ul_reason_for_call, LPVOID lpReserved) {
 	switch(ul_reason_for_call) {
 		case DLL_PROCESS_ATTACH:
-			Context::initialize(getenv("ESRI_CE_SDK_LIC_FEATURE"), getenv("ESRI_CE_SDK_LIC_HOST"));
+			// Note: do not call Context::initialize() here, that seems to lead to deadlocks
 			return TRUE;
 		case DLL_PROCESS_DETACH:
 			// Note: do not call Context::deinitialize() as the dependent DLLs have already been unloaded

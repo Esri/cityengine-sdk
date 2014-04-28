@@ -21,8 +21,8 @@ namespace {
 	}
 }
 
-bool Initialize(const char* licFeature, const char* licHost) {
-	return Context::initialize(licFeature, licHost);
+bool Initialize() {
+	return Context::initialize(getenv("ESRI_CE_SDK_LIC_FEATURE"), getenv("ESRI_CE_SDK_LIC_HOST"));
 }
 
 void Uninitialize() {

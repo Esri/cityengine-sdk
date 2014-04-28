@@ -10,6 +10,8 @@ public class Prt4Unity : MonoBehaviour
 
     #region Interface of prt4unity.dll
     [DllImport("prt4unity", CallingConvention = CallingConvention.Cdecl)]
+    public static extern bool Initialize();
+    [DllImport("prt4unity", CallingConvention = CallingConvention.Cdecl)]
     public static extern IntPtr CreateContext();
     [DllImport("prt4unity", CallingConvention = CallingConvention.Cdecl)]
     public static extern void DeleteContext(IntPtr ctx);
@@ -92,6 +94,11 @@ public class Prt4Unity : MonoBehaviour
     [DllImport("prt4unity", CallingConvention = CallingConvention.Cdecl)]
     public static extern void ReleaseMeshesAndMaterials(IntPtr ctx);
     #endregion
+
+    static Prt4Unity()
+    {
+        Initialize();
+    }
 
     [Serializable]
     public class Attribute
