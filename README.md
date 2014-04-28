@@ -1,6 +1,6 @@
 # Esri CityEngine SDK Examples
 
-The Esri CityEngine is based on the procedural runtime, which is the underlying engine that supports two GP tools in ArcGIS 10.x and drives procedural symbology in the release of ArcGIS Professional. The CityEngine SDK enables you as a 3rd party developer to extend CityEngine with additional import and export formats and storage backends beyond simple files. Moreover, you can integrate the procedural runtime in your own client applications taking full advantage of the procedural core without running CityEngine or ArcGIS.
+The Esri CityEngine is based on the procedural runtime, which is the underlying engine that supports two GP tools in ArcGIS 10.x and drives procedural symbology in the release of ArcGIS Professional. The CityEngine SDK enables you as a 3rd party developer to extend CityEngine with additional import and export formats. Moreover, you can integrate the procedural runtime in your own client applications taking full advantage of the procedural core without running CityEngine or ArcGIS.
 
 ## Preamble
 
@@ -41,10 +41,10 @@ Please note that the individual example READMEs may include further requirements
     * Microsoft VC 10.0 or later
 * To compile SDK extensions (prt4maya example, stlenc example, custom encoders) it is required to use this **exact** C++ compiler version / boost libraries:
     * Microsoft VC10 C++ Compiler (cl.exe) 16.00.40219.01, included in Visual Studio 2010 SP1 
-    * boost 1.53 binaries 
-        * boost libraries need to be compiled with your compiler (VC 10) for your architecture
-        * download pre-built libraries from http://boost.teeks99.com (e.g. boost_1_53_0-vc64-bin.exe or boost_1_52_0-vc32-bin.exe)
-        * or get just the source and build it yourself: http://www.boost.org
+    * boost 1.53 headers and binaries 
+        * get the boost 1.53 headers from http://www.boost.org
+        * get the boost 1.53 pre-compiled binaries from http://boost.teeks99.com (e.g. boost_1_53_0-vc64-bin.exe or boost_1_53_0-vc32-bin.exe)
+        * note: if you compile boost yourself, the boost libraries need to be compiled with correct compiler (VC 10)
 
 #### MacOSX
 * MacOSX 10.7 or later (64bit only)
@@ -57,7 +57,7 @@ Please note that the individual example READMEs may include further requirements
 * To compile SDK extensions (prt4maya example, stlenc example, custom encoders) it is required to use this **exact** C++ compiler version / boost libraries:
     * Apple GCC 4.2.1 included in:
         * XCode 4.2 and MacOSX SDK 10.7 (Based on Apple Inc. build 5658, LLVM build 2336.1.00)
-    * boost 1.53 (http://www.boost.org)
+    * boost 1.53 headers and binaries (e.g. via homebrew or directly from http://www.boost.org)
 
 #### Linux
 * RedHat Enterprise Linux 6.x or compatible (64bit only)
@@ -68,7 +68,7 @@ Please note that the individual example READMEs may include further requirements
     * GCC 4.4 or later
 * To compile SDK extensions (prt4maya example, stlenc example, custom encoders) it is required to use this **exact** C++ compiler version / boost libraries:
     * GCC 4.4.7 64bit included in RedHat Enterprise Linux 6.4 Package Repository
-    * boost 1.53 (http://www.boost.org)
+    * boost 1.53 headers and binaries (http://www.boost.org)
 
 ## Further Resources
 * Forum: 

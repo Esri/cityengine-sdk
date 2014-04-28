@@ -37,7 +37,7 @@ BUILD INSTRUCTIONS
 
 => The build result will appear in .\install
 
-For a 32bit build use the 32bit Visual Studio cmd shell, the 32bit build of the CitryEngine SDK and the 32bit boost libraries must be used.
+For a 32bit build use the 32bit Visual Studio cmd shell, the 32bit build of the CityEngine SDK and the 32bit boost libraries must be used.
 
 USING PRT4CMD
 -------------
