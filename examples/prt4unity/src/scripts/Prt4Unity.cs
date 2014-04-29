@@ -325,9 +325,10 @@ public class Prt4Unity : MonoBehaviour
         public bool Generate(Mesh startShape, Transform loc2WorldTrafo, Shader shader, out OutputMesh[] meshes, string specialMaterial)
         {
             Vector3[] vertices = new Vector3[startShape.vertices.Length];
-            for (int i = 0; i < vertices.Length; i++) 
+            for (int i = 0; i < vertices.Length; i++)  
                 vertices[i] = loc2WorldTrafo.TransformPoint(startShape.vertices[i]);
-            if (!Prt4Unity.Generate(ctx, vertices, vertices.Length, startShape.triangles, startShape.triangles.Length, specialMaterial))
+            
+            if(!Prt4Unity.Generate(ctx, vertices, vertices.Length, startShape.triangles, startShape.triangles.Length, specialMaterial))
             {
                 meshes = null;
                 return false;
@@ -386,15 +387,19 @@ public class Prt4Unity : MonoBehaviour
                 float[] floats = new float[numVertices * 3];
                 Marshal.Copy(pVertices, floats, 0, numVertices * 3);
                 Vector3[] vertices = new Vector3[numVertices];
+                Vector3 preScale = loc2WorldTrafo.localScale;
                 for (int v = 0; v < numVertices; v++) {
                     vertices[v] = new Vector3(floats[3 * v + 0], floats[3 * v + 1], floats[3 * v + 2]);
                     vertices[v] = loc2WorldTrafo.InverseTransformPoint(vertices[v]);
+                    vertices[v].x *= preScale.x;
+					vertices[v].y *= preScale.y;
+					vertices[v].z *= preScale.z;
                 }
                 outputMesh.mesh.vertices = vertices;
                 Marshal.Copy(pNormals, floats, 0, numVertices * 3);
                 Vector3[] normals = new Vector3[numVertices];
                 for(int v = 0; v < numVertices; v++)
-                    normals[v] = new Vector3(floats[3 * v + 0], floats[3 * v + 1], -floats[3 * v + 2]);
+                    normals[v] = new Vector3(floats[3 * v + 0], floats[3 * v + 1], floats[3 * v + 2]);
                 outputMesh.mesh.normals = normals;
                 if(pTexcoords != IntPtr.Zero)
                 {
