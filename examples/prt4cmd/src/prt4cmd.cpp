@@ -673,12 +673,28 @@ template<> std::wstring toStr(const boost::filesystem::path& p) {
 }
 
 
+std::string generic_string(const boost::filesystem::path& p) {
+#if(((BOOST_VERSION / 100) % 1000) > 41)
+	return p.generic_string();
+#else
+	std::string string = p.string();
+#ifdef _WIN32
+	boost::replace_all(string, L"\\", L"/");
+#endif
+	return string;
+#endif
+}
+
 std::wstring toFileURI(const boost::filesystem::path& p) {
-	bool isWin32 = (strcmp(prt::getVersion()->mBuildOS, "win32") == 0);
-	std::wstring schema = L"file:";
-	std::string utf8Path = toUTF8FromOSNarrow(p.generic_string());
+#ifdef _WIN32
+	static const std::wstring schema = L"file:/";
+#else
+	static const std::wstring schema = L"file:";
+#endif
+
+	std::string utf8Path = toUTF8FromOSNarrow(generic_string(p));
 	std::wstring pecString = percentEncode(utf8Path);
-	return schema + (isWin32 ? L"/" : L"") + pecString;
+	return schema + pecString;
 }
 
 
