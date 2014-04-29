@@ -27,7 +27,7 @@
 
 // constants
 namespace {
-	static const wchar_t* FILE_PREFIX      = L"file://";
+	static const wchar_t* FILE_PREFIX      = L"file:///";
 	static const wchar_t  SEPERATOR        = L'\\';
 	static const wchar_t* FLEXNET_LIB      = L"flexnet_prt.dll";
 
