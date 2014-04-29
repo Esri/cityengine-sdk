@@ -203,7 +203,7 @@ public class Prt4UnityEditor : Editor
 
             Prt4Unity.OutputMesh[] meshes;
             Transform xformShape = shape.GetComponent<Transform>();
-            if(shape.Generate(shape.GetComponent<MeshFilter>().sharedMesh, xformShape.localScale, Shader.Find("Diffuse"), out meshes))
+            if(shape.Generate(shape.GetComponent<MeshFilter>().sharedMesh, xformShape, Shader.Find("Diffuse"), out meshes))
             {
                 int i = 0;
                 foreach(Prt4Unity.OutputMesh outputMesh in meshes)

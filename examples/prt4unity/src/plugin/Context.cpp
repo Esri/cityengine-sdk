@@ -176,10 +176,32 @@ void Context::OutputHandler::newMesh(const wchar_t* name, size_t numVertices, co
 	if(name)
 		mesh->mName.assign(name);
 
+	// transform back to left-handed Unity Coord System : mirror z, invert triangle vertex orders 
+	std::vector<float> mirVertices(vertices, vertices+numVertices*3);
+	for(size_t i=0; i<numVertices; i++)
+		mirVertices[3*i+2] = -mirVertices[3*i+2];
+
+	std::vector<uint32_t> invIndices;
+	size_t curInd = 0;
+	for(size_t smi=0; smi<numSubMeshes; smi++) {
+		for(size_t i=0; i<numIndices[smi]; i+=3) {
+			invIndices.push_back(indices[curInd+2]);
+			invIndices.push_back(indices[curInd+1]);
+			invIndices.push_back(indices[curInd+0]);
+			curInd += 3;
+		}
+	}
+
+	indices = invIndices.data();
+
 	// set vertex positions, normals and texture coordinates
-	mesh->mVertices.assign(vertices, vertices + numVertices * 3);
-	if(normals)
-		mesh->mNormals.assign(normals, normals + numVertices * 3);
+	mesh->mVertices.assign(mirVertices.data(), mirVertices.data() + numVertices * 3);
+	if(normals) {
+		std::vector<float> mirNormals(normals, normals+numVertices*3);
+		for(size_t i=0; i<numVertices; i++)
+			mirNormals[3*i+2] = -mirNormals[3*i+2];
+		mesh->mNormals.assign(mirNormals.data(), mirNormals.data() + numVertices * 3);
+	}
 	if(texcoords)
 		mesh->mTexcoords.assign(texcoords, texcoords + numVertices * 2);
 
@@ -1195,17 +1217,28 @@ bool Context::generate(const float* vertices, uint32_t numVertices, const uint32
 	ScopedObject<const prt::AttributeMap> generateAttrs(aBuilder->createAttributeMap());
 
 	// create initial shape
+	// convert to CityEngine coord system: right-handed, y-up (unity: left-handed, y-up): mirror z axis, invert polygon vertex order
 	ScopedObject<prt::InitialShapeBuilder> isb(prt::InitialShapeBuilder::create());
 	std::vector<double> vertexCoords(numVertices * 3);
 	for(size_t i = 0; i < numVertices; i++) {
 		vertexCoords[3*i + 0] =  vertices[3*i + 0];
 		vertexCoords[3*i + 1] =  vertices[3*i + 1];
-		vertexCoords[3*i + 2] =  vertices[3*i + 2];
+		vertexCoords[3*i + 2] =  -vertices[3*i + 2];
 	}
 	std::vector<uint32_t> indices;
 	std::vector<uint32_t> faceCounts;
 	mergeAdjacentTriangles(vertices, numVertices, triIndices, numTriIndices, indices, faceCounts);
-	prt::Status status = isb->setGeometry(vertexCoords.data(), vertexCoords.size(), indices.data(), indices.size(), faceCounts.data(), faceCounts.size());
+
+	std::vector<uint32_t> invIndices;
+	invIndices.reserve(indices.size());
+	size_t curInd = 0;
+	for(size_t f=0; f<faceCounts.size(); f++) {
+		for(size_t i=0; i<faceCounts[f]; i++) 
+			invIndices.push_back(indices[curInd + faceCounts[f] - 1 - i]);
+		curInd += faceCounts[f];
+	}
+
+	prt::Status status = isb->setGeometry(vertexCoords.data(), vertexCoords.size(), invIndices.data(), indices.size(), faceCounts.data(), faceCounts.size());
 	if(status != prt::STATUS_OK) {
 		std::string msg = "InitialShapeBuilder setGeometry failed status = ";
 		msg += prt::getStatusDescription(status);
