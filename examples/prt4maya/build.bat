@@ -1,9 +1,24 @@
 @ECHO OFF
+setlocal
 
 set maya_DIR=%~1
+
+set CLIENT_TARGET=install
+set VER_MAJOR=0
+set VER_MINOR=0
+set VER_MICRO=0
+
+if not "%~4"=="" (
+	set VER_MAJOR=%~2
+	set VER_MINOR=%~3
+	set VER_MICRO=%~4
+	set CLIENT_TARGET=package
+)
+
 set BUILDTYPE=Release
 set GENERATOR="NMake Makefiles"
 
+setlocal
 pushd codec
 call "%ProgramFiles(x86)%\Microsoft Visual Studio 10.0\VC\vcvarsall.bat" amd64
 rd /S /Q build install
@@ -12,16 +27,27 @@ cd build
 cmake -G %GENERATOR% -DCMAKE_BUILD_TYPE=%BUILDTYPE% ../src
 nmake install
 popd
+endlocal
 
 set CLIENTVC=0.0
 if "%maya_DIR:~-4%" == "2012" (set CLIENTVC=9.0)
 if "%maya_DIR:~-4%" == "2014" (set CLIENTVC=10.0)
+if "%CLIENTVC%"=="0.0" (
+	echo "ERROR: could not derive the compiler version from the maya path, please check maya path"
+	endlocal
+	set ERRORLEVEL=1
+	exit /b %ERRORLEVEL%
+)
 
+setlocal
 pushd client
 call "%ProgramFiles(x86)%\Microsoft Visual Studio %CLIENTVC%\VC\vcvarsall.bat" amd64
 rd /S /Q build install
 mkdir build
 cd build
-cmake -G %GENERATOR% -DCMAKE_BUILD_TYPE=%BUILDTYPE% ../src
-nmake install
+cmake -G %GENERATOR% -DCMAKE_BUILD_TYPE=%BUILDTYPE% -DPRT4MAYA_VERSION_MAJOR=%VER_MAJOR% -DPRT4MAYA_VERSION_MINOR=%VER_MINOR% -DPRT4MAYA_VERSION_MICRO=%VER_MICRO% ../src
+nmake %CLIENT_TARGET%
 popd
+endlocal
+
+endlocal

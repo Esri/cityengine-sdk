@@ -15,13 +15,6 @@ else
 	VER_MICRO=$3
 fi
 
-if [ -z "$2" ]
-  then
-    PRT4MAYA_VERSION=0
-  else
-  	PRT4MAYA_VERSION=$2
-fi
-
 pushd codec
 rm -rf build install && mkdir build
 pushd build

@@ -80,11 +80,11 @@ MStatus PRTAttrs::addFloatParameter(MFnDependencyNode & node, MObject & attr, co
 	attr = nAttr.create(longName(name), briefName(name), MFnNumericData::kDouble, value, &stat );
 	if ( stat != MS::kSuccess ) throw stat;
 
-	if(!std::isnan(min)) {
+	if(!isnan(min)) {
 		MCHECK(nAttr.setMin(min));
 	}
 
-	if(!std::isnan(max)) {
+	if(!isnan(max)) {
 		MCHECK(nAttr.setMax( max ));
 	}
 

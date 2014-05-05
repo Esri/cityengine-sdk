@@ -28,8 +28,8 @@ SOFTWARE REQUIREMENTS
 BUILD INSTRUCTIONS
 ------------------
 
-1. Open windows shell
-2. cd ...\path\to\esri-cityengine-sdk\examples\prt4maya
+1. Open the standard windows shell (NOT Visual Studio Shell)
+2. cd <your path to>\esri-cityengine-sdk\examples\prt4maya
 3. set locations for dependencies (adjust if necessary):
 set Boost_INCLUDE_DIR=C:\local\boost_1_53_0
 set Boost_LIBRARY_DIR=C:\local\boost_1_53_0\lib64-msvc-10.0
