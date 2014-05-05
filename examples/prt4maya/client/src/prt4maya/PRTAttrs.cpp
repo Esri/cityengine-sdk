@@ -12,14 +12,13 @@
 
 #include "PRTNode.h"
 
-
 #include "Utilities.h"
 #include "wrapper/MayaCallbacks.h"
 
 #include "prt/Status.h"
 #include "prt/StringUtils.h"
 
-
+#include <cmath>
 #include <limits>
 
 
@@ -81,11 +80,11 @@ MStatus PRTAttrs::addFloatParameter(MFnDependencyNode & node, MObject & attr, co
 	attr = nAttr.create(longName(name), briefName(name), MFnNumericData::kDouble, value, &stat );
 	if ( stat != MS::kSuccess ) throw stat;
 
-	if(!isnan(min)) {
+	if(!std::isnan(min)) {
 		MCHECK(nAttr.setMin(min));
 	}
 
-	if(!isnan(max)) {
+	if(!std::isnan(max)) {
 		MCHECK(nAttr.setMax( max ));
 	}
 

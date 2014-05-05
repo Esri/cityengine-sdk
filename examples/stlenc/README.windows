@@ -29,8 +29,8 @@ BUILD INSTRUCTIONS
 6. cmake ^
      -G "NMake Makefiles" ^
      -DCMAKE_BUILD_TYPE=Release ^
-     -DBOOST_INCLUDEDIR=C:\local\boost_1_54_0 ^
-     -DBOOST_LIBRARYDIR=C:\local\boost_1_54_0\lib64-msvc-10.0 ^
+     -DBOOST_INCLUDEDIR=C:\local\boost_1_53_0 ^
+     -DBOOST_LIBRARYDIR=C:\local\boost_1_53_0\lib64-msvc-10.0 ^
      -DBoost_USE_STATIC_LIBS=ON ^
      -DBoost_USE_MULTITHREADED=ON ^
      -DBoost_USE_STATIC_RUNTIME=OFF ^
@@ -41,8 +41,8 @@ BUILD INSTRUCTIONS
 => The build result will appear in ..\install
 
 
-CITYENGINE INSTALLATION INSTRUCTIONS
-------------------------------------
+INSTALLATION INSTRUCTIONS FOR CITYENGINE
+----------------------------------------
 
 1. locate the stlenc extension library, e.g. in:
    <path to esri-cityengine-sdk git repository>\examples\stlenc\install\lib\stlenc.dll
