@@ -22,17 +22,42 @@ SOFTWARE REQUIREMENTS
 
 - see "General Software Requirements - Windows, to compile SDK extensions"
 - Unity 4.3 from Unity Technologies
+- CityEngine SDK 32bit build 
 
 
 BUILD INSTRUCTIONS
 ------------------
 
+- open examples\prt4unity\src\prt4unity.sln in Visual Studio 2010
+- build solution (Release mode)
 
 
-INSTALLATION INSTRUCTIONS
--------------------------
+INSTALLATION I& USAGE NSTRUCTIONS
+---------------------------------
 
-
+1. from the top-level directory of the CE sdk, run the deploy.cmd command:
+  examples\prt4unity\deploy.cmd Release C:\Users\dec\Downloads\ce_sdk
+2. in examples\prt4unity\install\Release you will find two directories:
+  - ProgramFiles(x86) => copy the contents of ProgramFiles(x86)\Unity\Editor your Unity installation (typically
+    C:\ProgramFiles (x86)\Unity\Editor)
+  - MyUnityProject => copy the content to your Unity project (after you created one, see next steps)
+3. start Unity
+4. create a new project
+5. exit Unity
+6. copy the contents of MyUnityProject (see step 2) to your project
+7. add environment variable(s) for licensing (either via 
+   "Control Panel" -> "System and Security" -> System -> "Advanced system settings" or by using a batch file):
+   - ESRI_CE_SDK_LIC_FEATURE=CityEngAdvFx 
+     (use CityEngAdvFx / CityEngBasFx for node-locked CityEngine license or CityEngAdv / CityEngBas for floating license
+   and if you use a floating license
+   - ESRI_CE_SDK_LIC_HOST=27000@my.flexnet.host
+8. start Unity
+9. create a primitive (e.g. a plane or a quad). This is your initial shape now. Select it.
+10. at the bottom of the Inspector (on the right), click on the "Add Component" button.
+11. add "prt" in the search field
+12. Select Prt4Unity 
+13. in the "Prt4Unity (Script)" section in the inspector, choose a rule package (rpk) created with CityEngine
+14. hit "Generate" 
 
 LICENSING
 ---------
