@@ -28,12 +28,9 @@ SOFTWARE REQUIREMENTS
 BUILD INSTRUCTIONS
 ------------------
 
-1. open a terminal
+1. open a terminal (e.g. bash)
 2. cd <path to esri-cityengine-sdk git repository>/examples/prt4maya
-3. set environment variables for dependencies:
-export maya_DIR=/usr/autodesk/maya2012-x64
-export prt_DIR=<path to cityengine sdk binaries>/cmake
-4. sh build.sh
+3. sh build.sh /usr/autodesk/maya2012-x64
 
 => build result will appear in ./client/install; you can use this as your plugin directory.
 
