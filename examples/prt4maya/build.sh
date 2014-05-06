@@ -9,7 +9,10 @@ then
 fi
 
 export maya_DIR=$1
-MAYA_VERSION=${maya_DIR:-4}
+if [[ $maya_DIR =~ .*maya(201[2|4]).* ]]
+then
+	export MAYA_VERSION=${BASH_REMATCH[1]}
+fi
 
 if [ $# -eq 1 ]
 then
