@@ -30,7 +30,7 @@ BUILD INSTRUCTIONS
 
 1. open a terminal (e.g. bash)
 2. cd <path to esri-cityengine-sdk git repository>/examples/prt4maya
-3. sh build.sh /usr/autodesk/maya2012-x64
+3. sh build.sh /usr/autodesk/maya2012-x64 (or maya2014-x64)
 
 => build result will appear in ./client/install; you can use this as your plugin directory.
 

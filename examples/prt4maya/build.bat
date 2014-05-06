@@ -1,7 +1,15 @@
 @ECHO OFF
+
+if "%~1"=="" (
+	echo "ERROR: first argument must be maya path"
+	set ERRORLEVEL=1
+	exit /b %ERRORLEVEL%
+)
+
 setlocal
 
 set maya_DIR=%~1
+set MAYA_VERSION=%maya_DIR:~-4%
 
 set CLIENT_TARGET=install
 set VER_MAJOR=0
@@ -30,8 +38,8 @@ popd
 endlocal
 
 set CLIENTVC=0.0
-if "%maya_DIR:~-4%" == "2012" (set CLIENTVC=9.0)
-if "%maya_DIR:~-4%" == "2014" (set CLIENTVC=10.0)
+if "%MAYA_VERSION%" == "2012" (set CLIENTVC=9.0)
+if "%MAYA_VERSION%" == "2014" (set CLIENTVC=10.0)
 if "%CLIENTVC%"=="0.0" (
 	echo "ERROR: could not derive the compiler version from the maya path, please check maya path"
 	endlocal
@@ -45,7 +53,7 @@ call "%ProgramFiles(x86)%\Microsoft Visual Studio %CLIENTVC%\VC\vcvarsall.bat" a
 rd /S /Q build install
 mkdir build
 cd build
-cmake -G %GENERATOR% -DCMAKE_BUILD_TYPE=%BUILDTYPE% -DPRT4MAYA_VERSION_MAJOR=%VER_MAJOR% -DPRT4MAYA_VERSION_MINOR=%VER_MINOR% -DPRT4MAYA_VERSION_MICRO=%VER_MICRO% ../src
+cmake -G %GENERATOR% -DCMAKE_BUILD_TYPE=%BUILDTYPE% -DPRT4MAYA_VERSION_MAJOR=%VER_MAJOR% -DPRT4MAYA_VERSION_MINOR=%VER_MINOR% -DPRT4MAYA_VERSION_MICRO=%VER_MICRO% -DMAYA_VERSION=%MAYA_VERSION% ../src
 nmake %CLIENT_TARGET%
 popd
 endlocal
