@@ -30,7 +30,7 @@ copy %PRT%\lib\com.esri.prt.adaptors.dll ProgramFiles(x86)\Unity\Editor\prt
 copy %PRT%\lib\VueExport.dll ProgramFiles(x86)\Unity\Editor\prt
 
 copy ..\..\README.windows .
-copy ..\..\..\..\license license
+xcopy /S ..\..\..\..\license license\
 
 7z a esri_prt4unity_%PRT4UNITY_BUILD_ID%_cesdk_%PRT_VERSION_MAJOR%_%PRT_VERSION_MINOR%_%PRT_VERSION_MICRO%_%BT%_win_x86.zip MyUnityProject\* ProgramFiles(x86)\* license\* README.windows
 popd
