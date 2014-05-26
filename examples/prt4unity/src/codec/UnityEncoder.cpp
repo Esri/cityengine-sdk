@@ -68,7 +68,7 @@ void UnityEncoder::encode(prtx::GenerateContext& context, size_t initialShapeInd
 	try {
 		prtx::LeafIteratorPtr li = prtx::LeafIterator::create(context, initialShapeIndex);
 		for(prtx::ShapePtr shape = li->getNext(); shape.get() != 0; shape = li->getNext())
-			encodePreparator->add(context.getCache(), shape);
+			encodePreparator->add(context.getCache(), shape, initialShape->getAttributeMap());
 	} catch(...) {
 		encodePreparator->add(context.getCache(), *initialShape, initialShapeIndex);
 	}

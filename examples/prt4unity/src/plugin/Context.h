@@ -158,7 +158,7 @@ public:
 	void releaseMeshesAndMaterials();
 
 public:
-	static std::wstring getPrtLibRoot();
+	static std::wstring getPrtCoreDLLDir();
 	static std::wstring getPluginRoot();
 	static bool initialize(const char* licFeature, const char* licHost);
 	static void uninitialize();

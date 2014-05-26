@@ -12,14 +12,13 @@
 
 #include "PRTNode.h"
 
-
 #include "Utilities.h"
 #include "wrapper/MayaCallbacks.h"
 
 #include "prt/Status.h"
 #include "prt/StringUtils.h"
 
-
+#include <cmath>
 #include <limits>
 
 

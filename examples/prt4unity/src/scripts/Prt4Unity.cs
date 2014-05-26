@@ -10,6 +10,8 @@ public class Prt4Unity : MonoBehaviour
 
     #region Interface of prt4unity.dll
     [DllImport("prt4unity", CallingConvention = CallingConvention.Cdecl)]
+    public static extern bool Initialize();
+    [DllImport("prt4unity", CallingConvention = CallingConvention.Cdecl)]
     public static extern IntPtr CreateContext();
     [DllImport("prt4unity", CallingConvention = CallingConvention.Cdecl)]
     public static extern void DeleteContext(IntPtr ctx);
@@ -92,6 +94,11 @@ public class Prt4Unity : MonoBehaviour
     [DllImport("prt4unity", CallingConvention = CallingConvention.Cdecl)]
     public static extern void ReleaseMeshesAndMaterials(IntPtr ctx);
     #endregion
+
+    static Prt4Unity()
+    {
+        Initialize();
+    }
 
     [Serializable]
     public class Attribute
@@ -315,24 +322,19 @@ public class Prt4Unity : MonoBehaviour
             }
         }
 
-        public bool Generate(Mesh startShape, Vector3 preScale, Shader shader, out OutputMesh[] meshes, string specialMaterial)
+        public bool Generate(Mesh startShape, Transform loc2WorldTrafo, Shader shader, out OutputMesh[] meshes, string specialMaterial)
         {
-            Vector3[] vertices;
-            if(preScale.x == 1.0f && preScale.y == 1.0f && preScale.z == 1.0f)
-                vertices = startShape.vertices;
-            else
-            {
-                vertices = new Vector3[startShape.vertices.Length];
-                for(int i = 0; i < vertices.Length; i++)
-                    vertices[i] = new Vector3(startShape.vertices[i].x * preScale.x, startShape.vertices[i].y * preScale.y, startShape.vertices[i].z * preScale.z);
-            }
+            Vector3[] vertices = new Vector3[startShape.vertices.Length];
+            for (int i = 0; i < vertices.Length; i++)  
+                vertices[i] = loc2WorldTrafo.TransformPoint(startShape.vertices[i]);
+            
             if(!Prt4Unity.Generate(ctx, vertices, vertices.Length, startShape.triangles, startShape.triangles.Length, specialMaterial))
             {
                 meshes = null;
                 return false;
             }
             Material[] materials = GetMaterials(shader);
-            GetMeshes(materials, out meshes);
+            GetMeshes(materials, loc2WorldTrafo, out meshes);
             Prt4Unity.ReleaseMeshesAndMaterials(ctx);
             return true;
         }
@@ -369,7 +371,7 @@ public class Prt4Unity : MonoBehaviour
         }
 
         // Retrieves meshes from last generate result and creates according Unity meshes
-        void GetMeshes(Material[] materials, out OutputMesh[] meshes)
+        void GetMeshes(Material[] materials, Transform loc2WorldTrafo, out OutputMesh[] meshes)
         {
             int numMeshes = Prt4Unity.GetMeshCount(ctx);
             meshes = new OutputMesh[numMeshes];
@@ -385,8 +387,14 @@ public class Prt4Unity : MonoBehaviour
                 float[] floats = new float[numVertices * 3];
                 Marshal.Copy(pVertices, floats, 0, numVertices * 3);
                 Vector3[] vertices = new Vector3[numVertices];
-                for(int v = 0; v < numVertices; v++)
+                Vector3 preScale = loc2WorldTrafo.localScale;
+                for (int v = 0; v < numVertices; v++) {
                     vertices[v] = new Vector3(floats[3 * v + 0], floats[3 * v + 1], floats[3 * v + 2]);
+                    vertices[v] = loc2WorldTrafo.InverseTransformPoint(vertices[v]);
+                    vertices[v].x *= preScale.x;
+					vertices[v].y *= preScale.y;
+					vertices[v].z *= preScale.z;
+                }
                 outputMesh.mesh.vertices = vertices;
                 Marshal.Copy(pNormals, floats, 0, numVertices * 3);
                 Vector3[] normals = new Vector3[numVertices];
@@ -489,10 +497,10 @@ public class Prt4Unity : MonoBehaviour
         return attributes;
     }
 
-    public bool Generate(Mesh startShape, Vector3 preScale, Shader shader, out OutputMesh[] meshes)
+    public bool Generate(Mesh startShape, Transform loc2WorldTrafo, Shader shader, out OutputMesh[] meshes)
     {
         ctx.SetAttributes(attributes);
-        return ctx.Generate(startShape, preScale, shader, out meshes, collisionMaterial);
+        return ctx.Generate(startShape, loc2WorldTrafo, shader, out meshes, collisionMaterial);
     }
 
     public void AddProceduralObject(GameObject obj)

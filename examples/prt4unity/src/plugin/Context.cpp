@@ -22,11 +22,12 @@
 #include "prt/FlexLicParams.h"
 #include "prt/LogHandler.h"
 #include "prt/RuleFileInfo.h"
+#include "prt/StringUtils.h"
 
 
 // constants
 namespace {
-	static const wchar_t* FILE_PREFIX      = L"file://";
+	static const wchar_t* FILE_PREFIX      = L"file:///";
 	static const wchar_t  SEPERATOR        = L'\\';
 	static const wchar_t* FLEXNET_LIB      = L"flexnet_prt.dll";
 
@@ -46,6 +47,23 @@ namespace {
 	// log settings
 	static const bool ENABLE_LOG_CONSOLE	= true;
 	static const bool ENABLE_LOG_FILE		= true;
+
+
+	int32_t computeSeed(const double* vertices, size_t count) {
+		float x = 0;
+		float z = 0;
+
+		for (size_t vi = 0; vi < count; vi += 3) {
+			x += (float)vertices[vi+0];
+			z += (float)vertices[vi+2];
+		}
+
+		int32_t seed = *((int32_t*)&x);
+		seed ^= *((int32_t*)&z);
+		seed %= 714025;
+		return seed;
+	}
+
 }
 
 
@@ -158,10 +176,32 @@ void Context::OutputHandler::newMesh(const wchar_t* name, size_t numVertices, co
 	if(name)
 		mesh->mName.assign(name);
 
+	// transform back to left-handed Unity Coord System : mirror z, invert triangle vertex orders 
+	std::vector<float> mirVertices(vertices, vertices+numVertices*3);
+	for(size_t i=0; i<numVertices; i++)
+		mirVertices[3*i+2] = -mirVertices[3*i+2];
+
+	std::vector<uint32_t> invIndices;
+	size_t curInd = 0;
+	for(size_t smi=0; smi<numSubMeshes; smi++) {
+		for(size_t i=0; i<numIndices[smi]; i+=3) {
+			invIndices.push_back(indices[curInd+2]);
+			invIndices.push_back(indices[curInd+1]);
+			invIndices.push_back(indices[curInd+0]);
+			curInd += 3;
+		}
+	}
+
+	indices = invIndices.data();
+
 	// set vertex positions, normals and texture coordinates
-	mesh->mVertices.assign(vertices, vertices + numVertices * 3);
-	if(normals)
-		mesh->mNormals.assign(normals, normals + numVertices * 3);
+	mesh->mVertices.assign(mirVertices.data(), mirVertices.data() + numVertices * 3);
+	if(normals) {
+		std::vector<float> mirNormals(normals, normals+numVertices*3);
+		for(size_t i=0; i<numVertices; i++)
+			mirNormals[3*i+2] = -mirNormals[3*i+2];
+		mesh->mNormals.assign(mirNormals.data(), mirNormals.data() + numVertices * 3);
+	}
 	if(texcoords)
 		mesh->mTexcoords.assign(texcoords, texcoords + numVertices * 2);
 
@@ -303,8 +343,9 @@ void Context::clearMaterials() {
 	mMaterials.clear();
 }
 
-// returns path to dynamically loaded PRT DLLs
-std::wstring Context::getPrtLibRoot() {
+
+// returns path to directory with core dll
+std::wstring Context::getPrtCoreDLLDir() {
 	HMODULE hModule = NULL;
 	GetModuleHandleEx(GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS | GET_MODULE_HANDLE_EX_FLAG_UNCHANGED_REFCOUNT, (LPCTSTR)prt::init, &hModule);
 
@@ -318,8 +359,6 @@ std::wstring Context::getPrtLibRoot() {
 
 	std::wstring root(drive);
 	root.append(dir);
-	root.append(L"prt");
-	root.push_back(SEPERATOR);
 	return root;
 }
 
@@ -342,7 +381,7 @@ std::wstring Context::getPluginRoot() {
 }
 
 bool Context::initialize(const char* licFeature, const char* licHost) {
-	const std::wstring root = getPrtLibRoot();
+	const std::wstring root = getPrtCoreDLLDir();
 
 	// set up console log handler
 	if(ENABLE_LOG_CONSOLE) {
@@ -386,9 +425,11 @@ bool Context::initialize(const char* licFeature, const char* licHost) {
 	flp.mFeature = licFeature;
 	flp.mHostName = licHost != NULL ? licHost : "";
 
+
 	// initialize PRT with the path to its extension libraries, the desired log level and the licensing data
+	std::wstring prtPlugins = root + L"prt";
 	prt::Status status;
-	const wchar_t* prtPlugIns[1] = { root.c_str() };
+	const wchar_t* prtPlugIns[1] = { prtPlugins.c_str() };
 	theLicHandle = prt::init(prtPlugIns, _countof(prtPlugIns), prt::LOG_INFO, &flp, &status);
 	if(status != prt::STATUS_OK)
 		return false;
@@ -440,7 +481,28 @@ bool Context::setRulePackage(const wchar_t* filename, const wchar_t* unpackPath)
 	SafeDestroy(mRuleFileInfo);
 
 	// create resolve map based on rule package
-	std::wstring url(FILE_PREFIX); url.append(filename);
+	std::vector<char> utf8FileName(wcslen(filename));
+	size_t strSize = utf8FileName.size();
+	prt::StringUtils::toUTF8FromUTF16(filename, &utf8FileName[0], &strSize);
+	if(strSize > utf8FileName.size()) {
+		utf8FileName.resize(strSize);
+		prt::StringUtils::toUTF8FromUTF16(filename, &utf8FileName[0], &strSize);
+	}
+	std::vector<char> pencFileName(strSize);
+	prt::StringUtils::percentEncode(&utf8FileName[0], &pencFileName[0], &strSize);
+	if(strSize > pencFileName.size()) {
+		pencFileName.resize(strSize);
+		prt::StringUtils::percentEncode(&utf8FileName[0], &pencFileName[0], &strSize);
+	}
+	std::vector<wchar_t> utf16pencFileName(strSize);
+	prt::StringUtils::toUTF16FromUTF8(&pencFileName[0], &utf16pencFileName[0], &strSize);
+ 
+	std::wstring url(FILE_PREFIX); url.append(&utf16pencFileName[0]);
+
+
+	prt::log(url.c_str(), prt::LOG_INFO);
+
+
 	prt::Status status = prt::STATUS_UNSPECIFIED_ERROR;
 	mResolveMap = prt::createResolveMap(url.c_str(), unpackPath, &status);
 	if(status != prt::STATUS_OK)
@@ -539,7 +601,7 @@ bool Context::setStartRule(size_t index) {
 	isb->setGeometry(UnitQuad_vertices, _countof(UnitQuad_vertices),
 	                 UnitQuad_indices, _countof(UnitQuad_indices),
 	                 UnitQuad_faceCounts, _countof(UnitQuad_faceCounts));
-	isb->setAttributes(mRuleFiles[mRuleFileIndex].c_str(), ruleInfo->getName(), isb->computeSeed(), L"", attrs.get(), mResolveMap);
+	isb->setAttributes(mRuleFiles[mRuleFileIndex].c_str(), ruleInfo->getName(), computeSeed(UnitQuad_vertices, _countof(UnitQuad_vertices)), L"", attrs.get(), mResolveMap);
 	ScopedObject<const prt::InitialShape> shape(isb->createInitialShapeAndReset());
 
 	// generate, using the attribute evaluation encoder
@@ -1155,24 +1217,35 @@ bool Context::generate(const float* vertices, uint32_t numVertices, const uint32
 	ScopedObject<const prt::AttributeMap> generateAttrs(aBuilder->createAttributeMap());
 
 	// create initial shape
+	// convert to CityEngine coord system: right-handed, y-up (unity: left-handed, y-up): mirror z axis, invert polygon vertex order
 	ScopedObject<prt::InitialShapeBuilder> isb(prt::InitialShapeBuilder::create());
 	std::vector<double> vertexCoords(numVertices * 3);
 	for(size_t i = 0; i < numVertices; i++) {
 		vertexCoords[3*i + 0] =  vertices[3*i + 0];
 		vertexCoords[3*i + 1] =  vertices[3*i + 1];
-		vertexCoords[3*i + 2] =  vertices[3*i + 2];
+		vertexCoords[3*i + 2] =  -vertices[3*i + 2];
 	}
 	std::vector<uint32_t> indices;
 	std::vector<uint32_t> faceCounts;
 	mergeAdjacentTriangles(vertices, numVertices, triIndices, numTriIndices, indices, faceCounts);
-	prt::Status status = isb->setGeometry(vertexCoords.data(), vertexCoords.size(), indices.data(), indices.size(), faceCounts.data(), faceCounts.size());
+
+	std::vector<uint32_t> invIndices;
+	invIndices.reserve(indices.size());
+	size_t curInd = 0;
+	for(size_t f=0; f<faceCounts.size(); f++) {
+		for(size_t i=0; i<faceCounts[f]; i++) 
+			invIndices.push_back(indices[curInd + faceCounts[f] - 1 - i]);
+		curInd += faceCounts[f];
+	}
+
+	prt::Status status = isb->setGeometry(vertexCoords.data(), vertexCoords.size(), invIndices.data(), indices.size(), faceCounts.data(), faceCounts.size());
 	if(status != prt::STATUS_OK) {
 		std::string msg = "InitialShapeBuilder setGeometry failed status = ";
 		msg += prt::getStatusDescription(status);
 		postUnityLogMessage(std::wstring_convert<std::codecvt_utf8<wchar_t>>().from_bytes(msg).c_str(), prt::LOG_ERROR);
 		return false;
 	}
-	isb->setAttributes(mRuleFiles[mRuleFileIndex].c_str(), mStartRules[mStartRuleIndex]->getName(), isb->computeSeed(), L"", generateAttrs.get(), mResolveMap);
+	isb->setAttributes(mRuleFiles[mRuleFileIndex].c_str(), mStartRules[mStartRuleIndex]->getName(), 666 /*isb->computeSeed()*/, L"", generateAttrs.get(), mResolveMap);
 	ScopedObject<const prt::InitialShape> shape(isb->createInitialShapeAndReset());
 
 	// generate, using the Unity encoder; the results are accumulated into mMeshes and mMaterials by the output handler

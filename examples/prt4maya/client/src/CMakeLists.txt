@@ -23,6 +23,9 @@ link_directories(${maya_library_path})
 set(prt4maya_codec_DIR "../../codec/install/cmake")
 find_package(prt4maya_codec CONFIG REQUIRED)
 include_directories(${PRT4MAYA_CODEC_INCLUDE_PATH})
+set(CESDK_VERSION "cesdk_${PRT_VERSION_MAJOR}_${PRT_VERSION_MINOR}_${PRT_VERSION_MICRO}")
+
+set(MAYA_DESC "maya${MAYA_VERSION}")
 
 
 ### setup compiler flags
@@ -75,23 +78,54 @@ endif()
 
 ### setup install target
 
+install(CODE "file(REMOVE_RECURSE ${CMAKE_INSTALL_PREFIX})")
+install(FILES ${PRT_LIBRARIES} DESTINATION plug-ins)
+install(FILES ${PRT_EXT_LIBRARIES} DESTINATION plug-ins/ext)
+install(FILES ${PRT4MAYA_CODEC_EXT_LIBRARIES} DESTINATION plug-ins/ext)
+install(FILES scripts/AEprtTemplate.mel DESTINATION scripts)
+install(FILES scripts/prt4mayaCreateUI.mel DESTINATION scripts)
+install(FILES scripts/prt4mayaDeleteUI.mel DESTINATION scripts)
+install(DIRECTORY ${PROJECT_SOURCE_DIR}/../../../../license DESTINATION .)
 if(WIN32)
-	install(CODE "file(REMOVE_RECURSE ${CMAKE_INSTALL_PREFIX})")
 	install(FILES "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT}.mll" DESTINATION plug-ins)
-	install(FILES ${PRT_LIBRARIES} DESTINATION plug-ins)
-	install(FILES ${PRT_EXT_LIBRARIES} DESTINATION plug-ins/ext)
-	install(FILES ${PRT4MAYA_CODEC_EXT_LIBRARIES} DESTINATION plug-ins/ext)
-	install(FILES scripts/AEprtTemplate.mel DESTINATION scripts)
-	install(FILES scripts/prt4mayaCreateUI.mel DESTINATION scripts)
-	install(FILES scripts/prt4mayaDeleteUI.mel DESTINATION scripts)
+	install(FILES ${PROJECT_SOURCE_DIR}/../../README.windows DESTINATION .)
 else()
-	install(CODE "file(REMOVE_RECURSE ${CMAKE_INSTALL_PREFIX})")
 	install(TARGETS ${PROJECT} DESTINATION plug-ins)
-	install(FILES ${PRT_LIBRARIES} DESTINATION plug-ins)
-	install(FILES ${PRT_EXT_LIBRARIES} DESTINATION plug-ins/ext)
-	install(FILES ${PRT4MAYA_CODEC_EXT_LIBRARIES} DESTINATION plug-ins/ext)
-	install(FILES scripts/AEprtTemplate.mel DESTINATION scripts)
-	install(FILES scripts/prt4mayaCreateUI.mel DESTINATION scripts)
-	install(FILES scripts/prt4mayaDeleteUI.mel DESTINATION scripts)
+	install(FILES ${PROJECT_SOURCE_DIR}/../../README.linux_osx DESTINATION .)
 endif()
+
+
+### package target
+
+string(TOLOWER ${CMAKE_SYSTEM_NAME} PACKAGE_SYSTEM)
+if(CMAKE_CXX_SIZEOF_DATA_PTR EQUAL 8)
+	set(PACKAGE_ARCH "x86_64")
+else()
+	set(PACKAGE_ARCH "x86")
+endif()
+
+set(CPACK_PACKAGE_NAME					"esri_prt4maya")
+set(CPACK_PACKAGE_VENDOR				"Esri R&D Zurich Inc.")
+set(CPACK_PACKAGE_DESCRIPTION_SUMMARY	"Maya Plugin Example for CityEngine SDK")
+set(CPACK_PACKAGE_VERSION_MAJOR			${PRT4MAYA_VERSION_MAJOR})
+set(CPACK_PACKAGE_VERSION_MINOR			${PRT4MAYA_VERSION_MINOR})
+set(CPACK_PACKAGE_VERSION_PATCH			${PRT4MAYA_VERSION_MICRO})
+set(CPACK_PACKAGE_INSTALL_DIRECTORY		"${CPACK_PACKAGE_NAME}_${PRT4MAYA_VERSION_MICRO}_${MAYA_DESC}_${CESDK_VERSION}_${PACKAGE_SYSTEM}_${PACKAGE_ARCH}")
+set(CPACK_PACKAGE_FILE_NAME				"${CPACK_PACKAGE_INSTALL_DIRECTORY}")
+
+if(${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
+	set(CPACK_GENERATOR					ZIP)
+	set(CPACK_SOURCE_GENERATOR			ZIP)
+	set(CPACK_ZIP_COMPONENT_INSTALL		1)
+elseif(${CMAKE_SYSTEM_NAME} STREQUAL "Darwin")
+	set(CPACK_GENERATOR					TGZ)
+	set(CPACK_SOURCE_GENERATOR			TGZ)
+	set(CPACK_TGZ_COMPONENT_INSTALL		1)
+elseif(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
+	set(CPACK_GENERATOR					TGZ)
+	set(CPACK_SOURCE_GENERATOR			TGZ)
+	set(CPACK_TGZ_COMPONENT_INSTALL		1)
+endif()
+
+include(CPack)
 
