@@ -13,7 +13,7 @@ The archives are available for download at the corresponding github release page
 
 ## CityEngine SDK Releases
 - [v1.1.1471 (2014-05-29)](https://github.com/Esri/esri-cityengine-sdk/releases/tag/1.1.1471)
-- [v1.0.1209 (2014-01-15)](https://github.com/Esri/esri-cityengine-sdk/releases/tag/1.0.1209)
+- v1.0.1209 (2014-01-15)
 
 ## Installation Instructions
 1. Clone or download this repository
