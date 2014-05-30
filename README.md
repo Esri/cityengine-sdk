@@ -18,7 +18,7 @@ The archives are available for download at the corresponding github release page
 ## Installation Instructions
 1. Clone or download this repository
 2. Download the SDK binary archive from the release page
-3. Donwload the SDK example data archive from the release page
+3. Download the SDK example data archive from the release page
 4. Unzip the archives into the cloned repository (the examples will work out of the box in this way).
 
 ## Examples
