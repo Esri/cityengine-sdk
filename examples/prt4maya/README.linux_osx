@@ -53,12 +53,6 @@ MAYA_SCRIPT_PATH=$PLUGINDIR/scripts
 6. load "libprt4maya.so"
 
 
-USING PRT4MAYA
---------------
-
-TODO
-
-
 LICENSING
 ---------
 
