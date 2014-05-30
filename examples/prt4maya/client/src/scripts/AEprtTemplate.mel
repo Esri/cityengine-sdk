@@ -1,0 +1,143 @@
+//
+// Esri CityEngine SDK Maya Plugin Example
+//
+// This example demonstrates the main functionality of the Procedural Runtime API.
+// Esri R&D Center Zurich, Switzerland
+//
+// See http://github.com/ArcGIS/esri-cityengine-sdk for instructions.
+
+proc string prtNode(string $attr) {
+	return `match "^[^\.]*" $attr`;
+}
+
+proc string prtPlug(string $attr) {
+	return `substitute "^[^.]*\\." $attr ""`;  
+}
+
+proc string prtControlName(string $attr) {
+	return substituteAllString(`prtPlug($attr)`, ".", "_");
+}
+  
+proc string prtAttrName(string $attr) {
+	return `substitute "^[^.]*\\." $attr ""`;
+}  
+  
+global proc int prtRPKChange(string $attr, string $varname) {
+	$varname = prtPlug($varname);
+	$oldpkg  = eval("$tmp=$" + $varname);
+	$node    = prtNode($attr);
+	$newpkg  = `getAttr ($node + ".Rule_Package")`;
+
+	return $oldpkg == $newpkg;
+}
+  
+global proc prtShowFileDialog(string $attr) {
+	$node    = prtNode($attr);
+	$plug    = prtPlug($attr);  
+	$filters = `attributeQuery -n $node -nn $plug`;
+
+	string $file[];
+	
+	if(startsWith($filters, "@Directory")) {
+		$file = `fileDialog2 -fm 3 -cap "Select Directory" -okc "Select"`;
+	} else {
+		$file = `fileDialog2 -fm 1 -cap "Select File" -ff $filters`;
+	}
+
+	if(size($file)) {  
+		setAttr -type "string" $attr $file[0];  
+		if($attr == "Rule_Package") {
+			evalDeferred "refreshEditorTemplates()";
+		}
+	}  
+}  
+
+global proc prtFileBrowse(string $attr, string $varname){
+	$varname = prtPlug($varname);
+	setUITemplate -pst attributeEditorTemplate;
+	rowLayout -nc 3;  
+	text -label `prtAttrName($attr)`;
+	string $control = prtControlName($attr);
+	textField -fileName `getAttr $attr` $control;  	
+	connectControl -fileName $control $attr;
+	symbolButton -image "navButtonBrowse.xpm" -c ("prtShowFileDialog(\"" + $attr + "\")") ($control + "_browse");
+	setParent ..;
+	setUITemplate -ppt; 
+}  
+  
+global proc prtFileBrowseReplace(string $attr, string $varname){
+	if(prtRPKChange($attr, $varname)) {	
+		string $control = prtControlName($attr);
+		connectControl $control $attr;
+		symbolButton -edit -c ("prtShowFileDialog(\"" + $attr + "\")") ($control + "_browse");
+	}
+}
+
+global proc prtFileBrowseReplaceRPK(string $attr, string $varname){
+	if(prtRPKChange($attr, $varname)) {
+		prtFileBrowseReplace($attr, $varname);
+	} else {
+		$varname = prtPlug($varname);
+		$newpkg  = `getAttr $attr`;
+		evalDeferred ("$" + $varname + "=\"" + $newpkg + "\"; refreshEditorTemplates();");
+	}
+}
+
+global proc prtColorChooser(string $attr, string $varname) {
+	setUITemplate -pst attributeEditorTemplate;
+	string $control = prtControlName($attr);
+	colorSliderGrp -label `prtAttrName($attr)` $control;
+	connectControl $control $attr;
+	setParent ..;
+	setUITemplate -ppt; 
+}  
+
+global proc prtColorChooserReplace(string $attr, string $varname){
+	if(prtRPKChange($attr, $varname)) {
+		string $control = prtControlName($attr);
+		connectControl $control $attr;
+	}
+}
+
+global proc AEprtTemplate(string $node) {
+	editorTemplate -suppress "caching"; 
+	editorTemplate -suppress "nodeState";
+
+    editorTemplate -beginScrollLayout;
+     
+	editorTemplate -beginLayout "CGA Rules" -collapse 0;
+	string $varname = ("AEprtTemplate_" + $node);
+	eval ("global string $" + $varname + "=\"" + `getAttr ($node + ".Rule_Package")` + "\"");
+	editorTemplate -callCustom "prtFileBrowse" "prtFileBrowseReplaceRPK" "Rule_Package" $varname;
+
+	editorTemplate -l "Rule_File" -adc "Rule_File";
+	editorTemplate -l "Start_Rule" -adc "Start_Rule";
+	editorTemplate -l "Generate_Model" -adc "Generate_Model";
+	
+	editorTemplate -endLayout;
+	editorTemplate -beginLayout "CGA Attributes" -collapse 0;
+		
+	string $attrs[] = `listAttr -ud $node`;
+	
+	$skip = 0;
+	for($attr in $attrs) {
+		if($attr == "Start_Rule" || $attr == "Rule_File")
+			$skip = 1;
+		
+		if($skip-- > 0) continue;
+		
+		if(`addAttr -q  -uaf ($node + "." + $attr) `) {
+			editorTemplate -callCustom "prtFileBrowse" "prtFileBrowseReplace" $attr $varname;
+		} else if(`addAttr -q  -uac ($node + "." + $attr) `) {
+			editorTemplate -callCustom "prtColorChooser" "prtColorChooserReplace" $attr $varname;
+			$skip = 3;
+		} else {
+			editorTemplate -l $attr -adc $attr;
+		}
+	}
+	editorTemplate -endLayout;
+ 
+ 	editorTemplate -aec;
+
+    editorTemplate -endScrollLayout;
+}

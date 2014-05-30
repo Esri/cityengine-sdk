@@ -1,0 +1,70 @@
+PRT4MAYA - CityEngine SDK for Autodesk Maya
+-------------------------------------------
+
+
+DISCLAIMER
+----------
+
+This is an example for using the CityEngine SDK. There is no support for this application. 
+If you find a bug or want to enhance functionality you have to do this yourself.
+
+
+PREREQUISITES
+-------------
+
+Before you start working with this example, please make sure you follow
+the main installation instructions for the CityEngine SDK in the
+README.md file at the root of this example repository. This will 
+explain how to get the sdk binaries and example data.
+
+
+SOFTWARE REQUIREMENTS
+---------------------
+
+- node-locked CityEngine license
+- see "General Software Requirements - Linux or MacOSX, to compile SDK extensions"
+- Autodesk Maya 2012 or Maya 2014
+
+
+BUILD INSTRUCTIONS
+------------------
+
+1. open a terminal (e.g. bash)
+2. cd <path to esri-cityengine-sdk git repository>/examples/prt4maya
+3. sh build.sh /usr/autodesk/maya2012-x64 (or maya2014-x64)
+
+=> build result will appear in ./client/install; you can use this as your plugin directory.
+
+
+INSTALLATION INSTRUCTIONS
+-------------------------
+
+1. locate the directory where you copied the plugin, let's call it <PLUGINDIR> 
+2. locate the Maya.env file in your home, usually it's here: ~/maya/2012-x64/Maya.env
+3. edit Maya.env as follows (replace $PLUGINDIR with the actual path from above):
+# use CityEngAdvFx / CityEngBasFx for node-locked CityEngine license 
+ESRI_CE_SDK_LIC_FEATURE=CityEngAdvFx
+
+MAYA_PLUG_IN_PATH=$PLUGINDIR/plug-ins
+MAYA_SCRIPT_PATH=$PLUGINDIR/scripts
+
+4. start maya
+5. goto Windows -> Settings/Preferences -> Plug-in Manager
+6. load "libprt4maya.so"
+
+
+USING PRT4MAYA
+--------------
+
+TODO
+
+
+LICENSING
+---------
+
+Copyright 2014 Esri
+
+You may not use the content of this repository except in compliance with the following Licenses:
+  1. All content of all directories **except "examples"** is licensed under the CityEngine EULA, see [license/EULA.pdf](license/EULA.pdf).
+  2. All content in the "examples" directory tree is licensed under the APACHE 2.0 license. You may obtain a copy of this license at http://www.apache.org/licenses/LICENSE-2.0. A copy of the license is also available in the repository at [license/APACHE-LICENSE-2.0.txt](license/APACHE-LICENSE-2.0.txt).
+

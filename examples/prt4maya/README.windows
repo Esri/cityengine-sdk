@@ -1,0 +1,71 @@
+PRT4MAYA - CityEngine SDK for Autodesk Maya
+-------------------------------------------
+
+
+DISCLAIMER
+----------
+
+This is an example for using the CityEngine SDK. There is no support for this application. 
+If you find a bug or want to enhance functionality you have to fix/do this yourself.
+
+
+PREREQUISITES
+-------------
+
+Before you start working with this example, please make sure you follow
+the main installation instructions for the CityEngine SDK in the
+README.md file at the root of this example repository. This will 
+explain how to get the sdk binaries and example data.
+
+
+SOFTWARE REQUIREMENTS
+---------------------
+
+- see "General Software Requirements - Windows, to compile SDK extensions"
+- Autodesk Maya 2012 or Maya 2014
+- if building for Maya 2012: *also* Microsoft Visual Studio 2008
+
+
+BUILD INSTRUCTIONS
+------------------
+
+1. Open the standard windows shell (NOT Visual Studio Shell)
+2. cd <your path to>\esri-cityengine-sdk\examples\prt4maya
+3. set locations for dependencies (adjust if necessary):
+set Boost_INCLUDE_DIR=C:\local\boost_1_53_0
+set Boost_LIBRARY_DIR=C:\local\boost_1_53_0\lib64-msvc-10.0
+4. run: "build.bat C:\Autodesk\Maya2012" (or Maya2014)
+
+=> build result will appear in .\client\install; you can use this as your plugin directory.
+
+
+INSTALLATION INSTRUCTIONS
+-------------------------
+
+1. locate the directory where you copied the plugin, let's call it <PLUGINDIR> 
+2. locate the Maya.env file in your home, usually its in "My Documents\maya\2012-x64\"
+3. edit Maya.env as follows (replace <PLUGINDIR> with the actual path from above):
+# use CityEngAdvFx / CityEngBasFx for node-locked CityEngine license or CityEngAdv / CityEngBas for floating license
+ESRI_CE_SDK_LIC_FEATURE=CityEngAdvFx
+
+# uncomment for floating license
+# ESRI_CE_SDK_LIC_HOST=27000@my.flexnet.host
+
+PATH=<PLUGINDIR>\plug-ins;%PATH%
+MAYA_PLUG_IN_PATH=<PLUGINDIR>\plug-ins
+MAYA_SCRIPT_PATH=<PLUGINDIR>\scripts
+
+4. start maya
+5. goto Windows -> Settings/Preferences -> Plug-in Manager
+6. load "prt4maya"
+
+
+LICENSING
+---------
+
+Copyright 2014 Esri
+
+You may not use the content of this repository except in compliance with the following Licenses:
+  1. All content of all directories **except "examples"** is licensed under the CityEngine EULA, see [license/EULA.pdf](license/EULA.pdf).
+  2. All content in the "examples" directory tree is licensed under the APACHE 2.0 license. You may obtain a copy of this license at http://www.apache.org/licenses/LICENSE-2.0. A copy of the license is also available in the repository at [license/APACHE-LICENSE-2.0.txt](license/APACHE-LICENSE-2.0.txt).
+

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<VisualStudioPropertySheet
+	ProjectType="Visual C++"
+	Version="8.00"
+	Name="prt"
+	>
+	<UserMacro
+		Name="workspace_loc"
+		Value="..\..\.."
+		PerformEnvironmentSet="true"
+	/>
+	<UserMacro
+		Name="prt_core"
+		Value="$(workspace_loc)\com.esri.prt.core\install"
+		PerformEnvironmentSet="true"
+	/>
+	<UserMacro
+		Name="prt_loader"
+		Value="$(workspace_loc)\com.esri.prt.loader.flexnet\install"
+	/>
+	<UserMacro
+		Name="prt_codecs"
+		Value="$(workspace_loc)\com.esri.prt.codecs\install"
+		PerformEnvironmentSet="true"
+	/>
+	<UserMacro
+		Name="prt_adaptors"
+		Value="$(workspace_loc)\com.esri.prt.adaptors\install"
+		PerformEnvironmentSet="true"
+	/>
+	<UserMacro
+		Name="prt_codecs_maya"
+		Value="$(workspace_loc)\com.esri.prt.codecs.maya\install"
+	/>
+	<UserMacro
+		Name="maya"
+		Value="C:\Program Files\Autodesk\Maya2012"
+	/>
+	<UserMacro
+		Name="maya_bin"
+		Value="$(maya)\bin"
+	/>
+	<UserMacro
+		Name="maya_plugins"
+		Value="$(maya_bin)\plug-ins"
+	/>
+	<UserMacro
+		Name="maya_scripts"
+		Value="$(maya)\scripts\startup"
+	/>
+</VisualStudioPropertySheet>

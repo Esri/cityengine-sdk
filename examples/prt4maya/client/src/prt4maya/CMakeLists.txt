@@ -1,0 +1,8 @@
+list(APPEND SRC
+	${CMAKE_CURRENT_SOURCE_DIR}/PRTAttrs.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/PRTCreate.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/PRTMaterials.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/PRTNode.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Utilities.cpp
+)
+add_sources(${SRC})

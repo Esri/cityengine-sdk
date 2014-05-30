@@ -4,10 +4,32 @@
 *.o
 
 # Compiled Dynamic libraries
-#*.so
-#*.dylib
+*.so
+*.dylib
+*.dll
+*.lib
 
 # Compiled Static libraries
 *.lai
 *.la
 *.a
+
+# eclipse
+*.project
+*.cprojects
+
+# extracted prt releases
+/data*
+/prt*
+/esri_*/
+/include
+/bin
+/lib
+/doc
+/cmake
+*.zip
+*.tgz
+*.tar.gz
+*.tar.bz2
+*.tbz
+*.tbz2

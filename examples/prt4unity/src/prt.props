@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Label="UserMacros">
+    <PrtRoot>../../../..</PrtRoot>
+    <PrtInclude>$(PrtRoot)/include</PrtInclude>
+    <PrtBin32>$(PrtRoot)/bin</PrtBin32>
+    <PrtLib32>$(PrtRoot)/lib</PrtLib32>
+    <BoostInclude>N:\Workspaces\prt\org.boost_1_53_0\include</BoostInclude>
+    <BoostLib32>N:\Workspaces\prt\org.boost_1_53_0\lib\win32.x86</BoostLib32>
+  </PropertyGroup>
+  <ItemGroup>
+    <BuildMacro Include="PrtRoot">
+      <Value>$(PrtRoot)</Value>
+    </BuildMacro>
+    <BuildMacro Include="PrtInclude">
+      <Value>$(PrtInclude)</Value>
+    </BuildMacro>
+    <BuildMacro Include="PrtBin32">
+      <Value>$(PrtBin32)</Value>
+    </BuildMacro>
+    <BuildMacro Include="PrtLib32">
+      <Value>$(PrtLib32)</Value>
+    </BuildMacro>
+    <BuildMacro Include="BoostInclude">
+      <Value>$(BoostInclude)</Value>
+    </BuildMacro>
+    <BuildMacro Include="BoostLib32">
+      <Value>$(BoostLib32)</Value>
+    </BuildMacro>
+  </ItemGroup>
+</Project>
