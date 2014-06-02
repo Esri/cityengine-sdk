@@ -6,16 +6,20 @@
 #include "prtx/Geometry.h"
 #include "prtx/EncodeOptions.h"
 #include "prtx/EncoderInfoBuilder.h"
+#include "prtx/DataBackend.h"
+
+#include "prt/StringUtils.h"
 
 #include "boost/foreach.hpp"
 
 #include <ostream>
 #include <sstream>
+#include <fstream>
 
 
 const std::wstring UBIDecoder::ID			= L"com.esri.prt.examples.UBIDecoder";
 const std::wstring UBIDecoder::NAME			= L"Ubisoft Example Encoder";
-const std::wstring UBIDecoder::DESCRIPTION	= L"Example decoder for the UBI format";
+const std::wstring UBIDecoder::DESCRIPTION	= L"Example decoder for custom ubisoft format";
 
 
 UBIDecoder::UBIDecoder() {
@@ -32,22 +36,17 @@ void UBIDecoder::decode(
 		prtx::ResolveMap const* resolveMap,
 		std::wstring& warnings
 ) {
-	prtx::URIPtr uri = prtx::ResolveMap::resolveKeyWithURIFallback(resolveMap, key);
+	std::wcout << L"UBIDecoder::decode" << std::endl;
 
-	log_winfo(L"UBIDecoder::decode begin: ref = '%s'") % uri->wstring();
+	std::istreambuf_iterator<char> eos;
+	std::string data(std::istreambuf_iterator<char>(stream), eos);
+	// TODO: implement custom decoder logic for 'data'
 
-	while (stream.good()) {
-		std::cout << stream;
-	}
+	prtx::GeometryBuilder gb;
+	// TODO: fill gb with geometry... (currently, ce will put a fallback geometry 'unknown asset')
+	results.push_back(boost::static_pointer_cast<prtx::Content>(gb.createShared()));
 
-//	prtx::GeometryBuilder geoBuilder;
-//	BOOST_FOREACH(ProtoMesh& p, meshes) {
-//		geoBuilder.addMesh(p.builder.createSharedAndReset(&warnings));
-//	}
-//	geoBuilder.setURI(uri);
-//	results.push_back(boost::static_pointer_cast<prtx::Content>(prtx::GeometryPtr(geoBuilder.createAndReset(&warnings))));
-
-	log_info("UBIDecoder::decode done");
+	std::wcout << L"UBIDecoder::decode done" << std::endl;
 }
 
 

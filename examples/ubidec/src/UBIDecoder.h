@@ -4,6 +4,7 @@
 #include "prtx/Singleton.h"
 #include "prtx/DecoderFactory.h"
 #include "prtx/Decoder.h"
+#include "prtx/Log.h"
 
 #include "prt/AttributeMap.h"
 #include "prt/Callbacks.h"
@@ -44,7 +45,7 @@ public:
 	virtual const std::wstring& getID() const { return UBIDecoder::ID; }
 	virtual const std::wstring& getName() const { return UBIDecoder::NAME; }
 	virtual const std::wstring& getDescription() const { return UBIDecoder::DESCRIPTION; }
-	virtual float getMerit() const { return getDefaultMerit() + 1.0; }
+	virtual float getMerit() const { return getDefaultMerit() + 1.0f; }
 
 	virtual prt::ContentType getContentType() const { return prt::CT_GEOMETRY; }
 
