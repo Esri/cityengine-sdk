@@ -14,8 +14,9 @@ explain how to get the sdk binaries and example data.
 SOFTWARE REQUIREMENTS
 ---------------------
 
-- see "General Software Requirements - Windows"
+- see "General Software Requirements"
 - Microsoft Visual Studio 2010 SP1
+- CityEngine 2014.0 (or later)
 
 
 BUILD INSTRUCTIONS
