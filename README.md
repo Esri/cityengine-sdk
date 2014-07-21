@@ -33,6 +33,9 @@ A quick overview:
 ## General Software Requirements
 Please note that the individual example READMEs may include further requirements.
 
+#### All Platforms
+* To load custom encoders built with this SDK in CityEngine, at least CityEngine 2014.0 is required.
+
 #### Windows
 * Windows XP SP1 or later (32bit and 64bit)
 * License for CityEngine 2013 or later
