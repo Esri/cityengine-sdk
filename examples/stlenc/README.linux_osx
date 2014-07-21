@@ -14,8 +14,9 @@ explain how to get the sdk binaries and example data.
 SOFTWARE REQUIREMENTS
 ---------------------
 
-- see "General Software Requirements - Linux or MacOSX"
+- see "General Software Requirements"
 - GCC 4.4.7
+- CityEngine 2014.0 (or later)
 
 
 BUILD INSTRUCTIONS
