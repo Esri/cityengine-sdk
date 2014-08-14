@@ -12,8 +12,8 @@ This document explains how to install the CityEngine SDK and how to work with th
 The archives are available for download at the corresponding github release page. See installation instructions below for details.
 
 ## CityEngine SDK Releases
-- [v1.1.1407 (TBA)](https://github.com/Esri/esri-cityengine-sdk/releases/tag/1.1.1407)
-- [v1.0.1209 (2014-01-15)](https://github.com/Esri/esri-cityengine-sdk/releases/tag/1.0.1209)
+- [v1.1.1471 (214-05-29)](https://github.com/Esri/esri-cityengine-sdk/releases/tag/1.1.1471)  (CityEngine 2014.0)
+- [v1.0.1209 (2014-01-15)](https://github.com/Esri/esri-cityengine-sdk/releases/tag/1.0.1209) (CityEngine 2013.1)
 
 ## Installation Instructions
 1. Clone or download this repository
