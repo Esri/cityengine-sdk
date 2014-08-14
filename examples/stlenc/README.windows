@@ -26,16 +26,7 @@ BUILD INSTRUCTIONS
 3. cd <path to esri-cityengine-sdk git repository>\examples\stlenc
 4. mkdir build
 5. cd build
-6. cmake ^
-     -G "NMake Makefiles" ^
-     -DCMAKE_BUILD_TYPE=Release ^
-     -DBOOST_INCLUDEDIR=C:\local\boost_1_53_0 ^
-     -DBOOST_LIBRARYDIR=C:\local\boost_1_53_0\lib64-msvc-10.0 ^
-     -DBoost_USE_STATIC_LIBS=ON ^
-     -DBoost_USE_MULTITHREADED=ON ^
-     -DBoost_USE_STATIC_RUNTIME=OFF ^
-     -DCMAKE_INSTALL_PREFIX=..\install ^
-     ..\src
+6. cmake -G "NMake Makefiles" -DCMAKE_BUILD_TYPE=Release -DBOOST_INCLUDEDIR=C:\local\boost_1_53_0 -DBOOST_LIBRARYDIR=C:\local\boost_1_53_0\lib64-msvc-10.0 -DBoost_USE_STATIC_LIBS=ON -DBoost_USE_MULTITHREADED=ON -DBoost_USE_STATIC_RUNTIME=OFF -DCMAKE_INSTALL_PREFIX=..\install ..\src
 7. nmake install
 
 => The build result will appear in ..\install
