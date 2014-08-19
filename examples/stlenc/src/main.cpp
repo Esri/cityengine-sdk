@@ -36,7 +36,7 @@
 
 
 static const int MINIMAL_VERSION_MAJOR = 1;
-static const int MINIMAL_VERSION_MINOR = 1;
+static const int MINIMAL_VERSION_MINOR = 2;
 
 
 extern "C" {

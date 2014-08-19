@@ -43,6 +43,7 @@ const std::wstring STLEncoder::NAME			= L"STL Encoder";
 const std::wstring STLEncoder::DESCRIPTION	= L"Example encoder for the STL format";
 
 const wchar_t* EO_BASE_NAME					= L"baseName";
+const wchar_t* EO_ERROR_FALLBACK			= L"errorFallback";
 const std::wstring STL_EXT					= L".stl";
 const wchar_t* WNL							= L"\n";
 
@@ -161,10 +162,11 @@ STLEncoderFactory* STLEncoderFactory::createInstance() {
 	encoderInfoBuilder.setExtension(STL_EXT);
 
 	// optionally we could setup a validator
-	// encoderInfoBuilder.setValidator(prtx::EncodeOptionsValidatorPtr(new TestOptionsValidator()));
+	// encoderInfoBuilder.setValidator(prtx::EncodeOptionsValidatorPtr(new MyOptionsValidator()));
 
 	prtx::PRTUtils::AttributeMapBuilderPtr amb(prt::AttributeMapBuilder::create());
-	amb->setString(EO_BASE_NAME, L"stl_default_name");
+	amb->setString(EO_BASE_NAME, L"stl_default_name"); // required by CityEngine
+	amb->setBool(EO_ERROR_FALLBACK, prtx::PRTX_TRUE); // required by CityEngine
 	encoderInfoBuilder.setDefaultOptions(amb->createAttributeMap());
 
 	// CityEngine requires the following annotations to create an UI for an option:
@@ -175,6 +177,9 @@ STLEncoderFactory* STLEncoderFactory::createInstance() {
 			setOrder(0.0).
 			setGroup(L"General Settings", 0.0).
 			setDescription(L"Sets the base name of the written STL file.");
+
+	// Hide the error fallback option in the CityEngine UI.
+	eoa.option(EO_ERROR_FALLBACK).flagAsHidden();
 
 	return new STLEncoderFactory(encoderInfoBuilder.create());
 }
