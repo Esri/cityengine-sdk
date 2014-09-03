@@ -1,6 +1,7 @@
 PRT4MAYA - CityEngine SDK for Autodesk Maya
 -------------------------------------------
 
+
 DISCLAIMER
 ----------
 
@@ -50,12 +51,6 @@ MAYA_SCRIPT_PATH=$PLUGINDIR/scripts
 4. start maya
 5. goto Windows -> Settings/Preferences -> Plug-in Manager
 6. load "libprt4maya.so"
-
-
-USING PRT4MAYA
---------------
-
-TODO
 
 
 LICENSING

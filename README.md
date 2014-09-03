@@ -12,13 +12,13 @@ This document explains how to install the CityEngine SDK and how to work with th
 The archives are available for download at the corresponding github release page. See installation instructions below for details.
 
 ## CityEngine SDK Releases
-- [v1.1.1471 (214-05-29)](https://github.com/Esri/esri-cityengine-sdk/releases/tag/1.1.1471)  (CityEngine 2014.0)
-- [v1.0.1209 (2014-01-15)](https://github.com/Esri/esri-cityengine-sdk/releases/tag/1.0.1209) (CityEngine 2013.1)
+- [v1.1.1471 (2014-05-29)](https://github.com/Esri/esri-cityengine-sdk/releases/tag/1.1.1471)
+- v1.0.1209 (2014-01-15)
 
 ## Installation Instructions
 1. Clone or download this repository
 2. Download the SDK binary archive from the release page
-3. Donwload the SDK example data archive from the release page
+3. Download the SDK example data archive from the release page
 4. Unzip the archives into the cloned repository (the examples will work out of the box in this way).
 
 ## Examples
@@ -32,6 +32,9 @@ A quick overview:
 
 ## General Software Requirements
 Please note that the individual example READMEs may include further requirements.
+
+#### All Platforms
+* To load custom encoders built with this SDK in CityEngine, at least CityEngine 2014.0 is required.
 
 #### Windows
 * Windows XP SP1 or later (32bit and 64bit)
