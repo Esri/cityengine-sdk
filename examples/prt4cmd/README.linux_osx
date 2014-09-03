@@ -52,8 +52,8 @@ USING PRT4CMD
    bin/prt4cmd \
         -f CityEngAdvFx \
         -l 3 \
-        -g ../../../data/candler_lot.obj \
-        -p ../../../data/candler.rpk \
+        -g <absolute path to>/data/candler_lot.obj \
+        -p <absolute path to>/data/candler.rpk \
         -a ruleFile:string=bin/candler.01.cgb \
         -a startRule:string=Default\$Lot \
         -e com.esri.prt.codecs.OBJEncoder \
@@ -70,8 +70,8 @@ USING PRT4CMD
    bin/prt4cmd \
         -f CityEngAdvFx \
         -l 3 \
-        -g ../../../data/candler_lot.obj \
-        -p ../../../data/candler.rpk \
+        -g <absolute path to>/data/candler_lot.obj \
+        -p <absolute path to>/data/candler.rpk \
         -a ruleFile:string=bin/candler.01.cgb \
         -a startRule:string=Default\$Lot \
         -a height:float=30 \
