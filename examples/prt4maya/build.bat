@@ -23,6 +23,8 @@ if not "%~4"=="" (
 	set CLIENT_TARGET=package
 )
 
+IF "%CMAKE_EXECUTABLE%"=="" (set CMAKE_EXECUTABLE=cmake)
+
 set BUILDTYPE=Release
 set GENERATOR="NMake Makefiles"
 
@@ -32,7 +34,7 @@ call "%ProgramFiles(x86)%\Microsoft Visual Studio 10.0\VC\vcvarsall.bat" amd64
 rd /S /Q build install
 mkdir build
 cd build
-cmake -G %GENERATOR% -DCMAKE_BUILD_TYPE=%BUILDTYPE% ../src
+"%CMAKE_EXECUTABLE%" -G %GENERATOR% -DCMAKE_BUILD_TYPE=%BUILDTYPE% ../src
 nmake install
 popd
 endlocal
@@ -53,7 +55,7 @@ call "%ProgramFiles(x86)%\Microsoft Visual Studio %CLIENTVC%\VC\vcvarsall.bat" a
 rd /S /Q build install
 mkdir build
 cd build
-cmake -G %GENERATOR% -DCMAKE_BUILD_TYPE=%BUILDTYPE% -DPRT4MAYA_VERSION_MAJOR=%VER_MAJOR% -DPRT4MAYA_VERSION_MINOR=%VER_MINOR% -DPRT4MAYA_VERSION_MICRO=%VER_MICRO% -DMAYA_VERSION=%MAYA_VERSION% ../src
+"%CMAKE_EXECUTABLE%" -G %GENERATOR% -DCMAKE_BUILD_TYPE=%BUILDTYPE% -DPRT4MAYA_VERSION_MAJOR=%VER_MAJOR% -DPRT4MAYA_VERSION_MINOR=%VER_MINOR% -DPRT4MAYA_VERSION_MICRO=%VER_MICRO% -DMAYA_VERSION=%MAYA_VERSION% ../src
 nmake %CLIENT_TARGET%
 popd
 endlocal
