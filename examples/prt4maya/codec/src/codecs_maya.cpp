@@ -15,8 +15,12 @@
 #include "encoder/MayaEncoder.h"
 
 
-static const int MINIMAL_VERSION_MAJOR = 1;
-static const int MINIMAL_VERSION_MINOR = 2;
+/*
+ * an extension library is only loaded if the major and minor version numbers match.
+ * this ensures compatibility.
+ */
+static const int VERSION_MAJOR = 1;
+static const int VERSION_MINOR = 3;
 
 
 extern "C" {
@@ -31,13 +35,13 @@ PRT4MAYA_CODEC_EXPORTS_API void unregisterExtensionFactories(prtx::ExtensionMana
 }
 
 
-PRT4MAYA_CODEC_EXPORTS_API int getMinimalVersionMajor() {
-	return MINIMAL_VERSION_MAJOR;
+PRT4MAYA_CODEC_EXPORTS_API int getVersionMajor() {
+	return VERSION_MAJOR;
 }
 
 
-PRT4MAYA_CODEC_EXPORTS_API int getMinimalVersionMinor() {
-	return MINIMAL_VERSION_MINOR;
+PRT4MAYA_CODEC_EXPORTS_API int getVersionMinor() {
+	return VERSION_MINOR;
 }
 
 

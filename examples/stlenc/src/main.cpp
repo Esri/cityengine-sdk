@@ -34,9 +34,12 @@
 #	define STLENC_EXPORTS_API __attribute__ ((visibility ("default")))
 #endif
 
-
-static const int MINIMAL_VERSION_MAJOR = 1;
-static const int MINIMAL_VERSION_MINOR = 2;
+/*
+ * an extension library is only loaded if the major and minor version numbers match.
+ * this ensures compatibility.
+ */
+static const int VERSION_MAJOR = 1;
+static const int VERSION_MINOR = 3;
 
 
 extern "C" {
@@ -57,13 +60,13 @@ STLENC_EXPORTS_API void unregisterExtensionFactories(prtx::ExtensionManager* /*m
 }
 
 
-STLENC_EXPORTS_API int getMinimalVersionMajor() {
-	return MINIMAL_VERSION_MAJOR;
+STLENC_EXPORTS_API int getVersionMajor() {
+	return VERSION_MAJOR;
 }
 
 
-STLENC_EXPORTS_API int getMinimalVersionMinor() {
-	return MINIMAL_VERSION_MINOR;
+STLENC_EXPORTS_API int getVersionMinor() {
+	return VERSION_MINOR;
 }
 
 
