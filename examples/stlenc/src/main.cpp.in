@@ -38,8 +38,8 @@
  * an extension library is only loaded if the major and minor version numbers match.
  * this ensures compatibility.
  */
-static const int VERSION_MAJOR = 1;
-static const int VERSION_MINOR = 3;
+static const int VERSION_MAJOR = @PRT_VERSION_MAJOR@;
+static const int VERSION_MINOR = @PRT_VERSION_MINOR@;
 
 
 extern "C" {

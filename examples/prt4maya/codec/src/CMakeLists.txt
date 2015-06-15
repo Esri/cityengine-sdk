@@ -18,6 +18,11 @@ find_package(prt CONFIG REQUIRED)
 include_directories(${PRT_INCLUDE_PATH})
 
 
+### configure sources
+
+configure_file(codecs_maya.cpp.in codecs_maya.cpp)
+
+
 ### build target
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
