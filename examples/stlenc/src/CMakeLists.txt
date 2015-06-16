@@ -22,14 +22,10 @@ find_package(prt CONFIG REQUIRED)
 set(CESDK_VERSION "cesdk_${PRT_VERSION_MAJOR}_${PRT_VERSION_MINOR}_${PRT_VERSION_MICRO}")
 
 
-### configure sources
-
-configure_file(main.cpp.in main.cpp)
-
-
 ### build target
 
 add_library(${PROJECT} SHARED main.cpp STLEncoder.cpp)
+add_definitions(-DPRT_VERSION_MAJOR=${PRT_VERSION_MAJOR} -DPRT_VERSION_MINOR=${PRT_VERSION_MINOR})
 
 include_directories(${PRT_INCLUDE_PATH})
 target_link_libraries(${PROJECT} ${PRT_LIBRARY})
