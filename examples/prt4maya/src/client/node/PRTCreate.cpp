@@ -1,12 +1,12 @@
-#include "Utilities.h"
-#include "prt4maya/PRTNode.h"
+#include "node/PRTNode.h"
+#include "node/Utilities.h"
 
 
 void* PRTCreate::creator() {
 	return new PRTCreate;
 }
 
-MStatus PRTCreate::doIt(const MArgList& args) {
+MStatus PRTCreate::doIt(const MArgList&) {
 	MString result = MGlobal::executeCommandStringResult(MString("createNode prt"));
 
 	MStatus stat;

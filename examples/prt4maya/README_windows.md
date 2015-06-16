@@ -42,16 +42,21 @@ INSTALLATION INSTRUCTIONS
 1. Locate the Maya.env file in your home, usually its in "My Documents\maya\2016"
 1. Edit Maya.env as follows:
    ```
-   ESRI_CE_SDK_LIC_FEATURE=CityEngAdvFx             :: use CityEngAdv for floating license
-   "" ESRI_CE_SDK_LIC_HOST=27000@my.flexnet.host    :: uncomment for floating license
+   :: use CityEngAdv for floating license
+   ESRI_CE_SDK_LIC_FEATURE=CityEngAdvFx
+   
+   :: uncomment for floating license
+   :: ESRI_CE_SDK_LIC_HOST=27000@my.flexnet.host
 
-   PATH=<PLUGINDIR>\plug-ins;%PATH%                 :: replace <PLUGINDIR> with the actual path
-   MAYA_PLUG_IN_PATH=<PLUGINDIR>\plug-ins           :: dito
-   MAYA_SCRIPT_PATH=<PLUGINDIR>\scripts             :: dito
+   :: replace <PLUGINDIR> with the actual path
+   PATH=<PLUGINDIR>\plug-ins;%PATH%
+   MAYA_PLUG_IN_PATH=<PLUGINDIR>\plug-ins
+   MAYA_SCRIPT_PATH=<PLUGINDIR>\scripts
    ```
 1. Start maya
 1. Open the plugin managaer: Windows -> Settings/Preferences -> Plug-in Manager
 1. Enable `prt4maya.mll`
+1. The plugin should load and a new menu item `PRT` should appear in Maya.
 
 
 LICENSING

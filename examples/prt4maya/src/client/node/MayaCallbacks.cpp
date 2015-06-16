@@ -7,16 +7,15 @@
  * See http://github.com/ArcGIS/esri-cityengine-sdk for instructions.
  */
 
-#include <cassert>
-#include <sstream>
-#include <ostream>
+#include "node/MayaCallbacks.h"
+#include "node/Utilities.h"
+#include "node/PRTNode.h"
 
 #include "maya/MItMeshPolygon.h"
 
-#include "wrapper/MayaCallbacks.h"
-
-#include "prt4maya/Utilities.h"
-#include "prt4maya/PRTNode.h"
+#include <cassert>
+#include <sstream>
+#include <ostream>
 
 
 namespace {
@@ -34,7 +33,7 @@ void prtTrace(const std::wstring& arg1, std::size_t arg2) {
 } // anonymous namespace
 
 
-void MayaCallbacks::setVertices(double* vtx, size_t size) {
+void MayaCallbacks::setVertices(const double* vtx, size_t size) {
 	prtTrace(L"setVertices: size = ", size);
 	mVertices.clear();
 	for (size_t i = 0; i < size; i += 3)
@@ -42,7 +41,7 @@ void MayaCallbacks::setVertices(double* vtx, size_t size) {
 }
 
 
-void MayaCallbacks::setNormals(double* nrm, size_t size) {
+void MayaCallbacks::setNormals(const double* nrm, size_t size) {
 	prtTrace(L"setNormals: size = ", size);
 	mNormals.clear();
 	for (size_t i = 0; i < size; i += 3)
@@ -50,7 +49,7 @@ void MayaCallbacks::setNormals(double* nrm, size_t size) {
 }
 
 
-void MayaCallbacks::setUVs(float* u, float* v, size_t size) {
+void MayaCallbacks::setUVs(const double* u, const double* v, size_t size) {
 	mU.clear();
 	mV.clear();
 	for (size_t i = 0; i < size; ++i) {
@@ -59,7 +58,12 @@ void MayaCallbacks::setUVs(float* u, float* v, size_t size) {
 	}
 }
 
-void MayaCallbacks::setFaces(int* counts, size_t countsSize, int* connects, size_t connectsSize, int* uvCounts, size_t uvCountsSize, int* uvConnects, size_t uvConnectsSize) {
+void MayaCallbacks::setFaces(
+		const uint32_t* counts, size_t countsSize,
+		const uint32_t* connects, size_t connectsSize,
+		const uint32_t* uvCounts, size_t uvCountsSize,
+		const uint32_t* uvConnects, size_t uvConnectsSize
+) {
 	mVerticesCounts.clear();
 	for (size_t i = 0; i < countsSize; ++i)
 		mVerticesCounts.append(counts[i]);
@@ -86,7 +90,8 @@ void MayaCallbacks::createMesh() {
 
 	prtu::dbg("--- MayaData::createMesh begin");
 
-	if(mPlug == 0 || mData == 0) return;
+	if (mPlug == nullptr || mData == nullptr)
+		return;
 
 	MDataHandle outputHandle = mData->outputValue(*mPlug, &stat);
 	MCHECK(stat);
@@ -105,7 +110,7 @@ void MayaCallbacks::createMesh() {
 	MCHECK(stat);
 
 	MPlugArray plugs;
-	bool isConnected = mPlug->connectedTo(plugs, false, true, &stat);
+	mPlug->connectedTo(plugs, false, true, &stat);
 	MCHECK(stat);
 	if (plugs.length() > 0) {
 		if(mUVConnects.length() > 0) {
@@ -174,14 +179,14 @@ MString MayaCallbacks::matCreate(int start, int count, const wchar_t* name) {
 }
 
 
-void MayaCallbacks::matSetDiffuseTexture(int start, int count, const wchar_t* tex) {
+void MayaCallbacks::matSetDiffuseTexture(uint32_t start, uint32_t count, const wchar_t* tex) {
 	MString matName = matCreate(start, count, tex);
-	if(matName.numChars() == 0) return;
+	if (matName.numChars() == 0) return;
 
 	*mShadingCmd += "prtSetDiffuseTexture(\"" + matName + "\",\"" + tex + "\",\"map1\");\n";
 }
 
-void MayaCallbacks::matSetColor(int start, int count, float r, float g, float b) {
+void MayaCallbacks::matSetColor(uint32_t start, uint32_t count, double r, double g, double b) {
 	wchar_t name[8];
 	swprintf(name, 7, L"%02X%02X%02X", (int)(r * 255.0), (int)(g * 255.0), (int)(b * 255.0));
 	MString matName = matCreate(start, count, name);

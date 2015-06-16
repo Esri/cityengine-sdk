@@ -7,15 +7,12 @@
  * See http://github.com/ArcGIS/esri-cityengine-sdk for instructions.
  */
 
-#include "prt4maya/PRTNode.h"
-#include "prt4maya/Utilities.h"
+#include "node/PRTNode.h"
+#include "node/Utilities.h"
+#include "node/MayaCallbacks.h"
 
-#include <sstream>
-
-#ifndef _MSC_VER
-#	include <dlfcn.h>
-#	include <cstdio>
-#endif
+#include "prt/StringUtils.h"
+#include "prt/FlexLicParams.h"
 
 #include <maya/MFnPlugin.h>
 #include <maya/MFnTransform.h>
@@ -26,27 +23,32 @@
 #include <maya/MDagPath.h>
 #include <maya/MItDependencyNodes.h>
 
-#include "wrapper/MayaCallbacks.h"
+#include <cstdio>
+#include <sstream>
 
-#include "prt/StringUtils.h"
-#include "prt/FlexLicParams.h"
+#ifdef _WIN32
+#	include <Windows.h>
+#else
+#	include <dlfcn.h>
+#endif
 
-const wchar_t*	ENC_ATTR				= L"com.esri.prt.core.AttributeEvalEncoder";
-const char*	    FILE_PREFIX				= "file:///";
-const MString	NAME_GENERATE			= "Generate_Model";
 
 namespace {
+
 const char*			FLEXNET_LIB			= "flexnet_prt";
 const wchar_t*		PRT_EXT_SUBDIR		= L"ext";
-
 const wchar_t*		ENC_MAYA			= L"MayaEncoder";
-
-const MString	NAME_RULE_PKG			= "Rule_Package";
-
-const prt::LogLevel	PRT_LOG_LEVEL		= prt::LOG_WARNING;
+const MString		NAME_RULE_PKG		= "Rule_Package";
+const prt::LogLevel	PRT_LOG_LEVEL		= prt::LOG_DEBUG;
 const bool			ENABLE_LOG_CONSOLE	= true;
 const bool			ENABLE_LOG_FILE		= false;
-}
+
+} // namespace
+
+
+const wchar_t*	ENC_ATTR		= L"com.esri.prt.core.AttributeEvalEncoder";
+const char*		FILE_PREFIX		= "file:///";
+const MString	NAME_GENERATE	= "Generate_Model";
 
 
 MTypeId PRTNode::theID(PRT_TYPE_ID);
@@ -87,6 +89,10 @@ MStatus PRTNode::setDependentsDirty(const MPlug& /*plugBeingDirtied*/, MPlugArra
 	return MS::kSuccess;
 }
 
+MStatus PRTNode::preEvaluation(const MDGContext&, const MEvaluationNode&) {
+	return MS::kSuccess;
+}
+
 MStatus PRTNode::compute(const MPlug& plug, MDataBlock& data ) {
 	MStatus stat;
 	mHasMaterials = false;
@@ -95,10 +101,10 @@ MStatus PRTNode::compute(const MPlug& plug, MDataBlock& data ) {
 	std::string utf8Path(getStrParameter(rulePkg, dummy).asUTF8());
 	std::vector<char> percentEncodedPath(2*utf8Path.size()+1);
 	size_t len = percentEncodedPath.size();
-	prt::StringUtils::percentEncode(utf8Path.c_str(), &percentEncodedPath[0], &len);
+	prt::StringUtils::percentEncode(utf8Path.c_str(), percentEncodedPath.data(), &len);
 	if(len > percentEncodedPath.size()+1){
 		percentEncodedPath.resize(len);
-		prt::StringUtils::percentEncode(utf8Path.c_str(), &percentEncodedPath[0], &len);
+		prt::StringUtils::percentEncode(utf8Path.c_str(), percentEncodedPath.data(), &len);
 	}
 
 	std::string uri(FILE_PREFIX);
@@ -111,9 +117,9 @@ MStatus PRTNode::compute(const MPlug& plug, MDataBlock& data ) {
 			mLRulePkg = uri;
 		}
 	} else {
-			MFnDependencyNode fNode(thisMObject(), &stat);
-			MCHECK(stat);
-			PRTAttrs::updateRuleFiles(fNode, getStrParameter(rulePkg, dummy));
+		MFnDependencyNode fNode(thisMObject(), &stat);
+		MCHECK(stat);
+		PRTAttrs::updateRuleFiles(fNode, getStrParameter(rulePkg, dummy));
 	}
 
 	if(plug == outMesh && mGenerateAttrs) {
@@ -142,7 +148,7 @@ MStatus PRTNode::compute(const MPlug& plug, MDataBlock& data ) {
 			uint32_t* ia = new uint32_t[pconnect.length()];
 			uint32_t* ca = new uint32_t[pcounts.length()];
 
-			for(int i = vertices.length(); --i >= 0;) {
+			for (int i = vertices.length(); --i >= 0;) {
 				va[i * 3 + 0] = vertices[i].x;
 				va[i * 3 + 1] = vertices[i].y;
 				va[i * 3 + 2] = vertices[i].z;
@@ -185,20 +191,20 @@ MStatus PRTNode::compute(const MPlug& plug, MDataBlock& data ) {
 			delete[] va;
 			delete   outputHandler;
 		} else {
-				MStatus stat;
+			MStatus stat;
 
-				MDataHandle outputHandle = data.outputValue(plug, &stat);
-				MCHECK(stat);
+			MDataHandle outputHandle = data.outputValue(plug, &stat);
+			MCHECK(stat);
 
-				MFnMeshData dataCreator;
-				MObject newOutputData = dataCreator.create(&stat);
-				MCHECK(stat);
+			MFnMeshData dataCreator;
+			MObject newOutputData = dataCreator.create(&stat);
+			MCHECK(stat);
 
-				MFnMesh fnMesh;
-				MObject oMesh = fnMesh.create(0, 0, MFloatPointArray(), MIntArray(), MIntArray(), newOutputData, &stat);
-				MCHECK(stat);
+			MFnMesh fnMesh;
+			MObject oMesh = fnMesh.create(0, 0, MFloatPointArray(), MIntArray(), MIntArray(), newOutputData, &stat);
+			MCHECK(stat);
 
-				MCHECK(outputHandle.set(newOutputData));
+			MCHECK(outputHandle.set(newOutputData));
 		}
 
 		data.setClean(plug);
@@ -224,10 +230,14 @@ MStatus PRTNode::compute(const MPlug& plug, MDataBlock& data ) {
 	return MS::kSuccess;
 }
 
+
+MStatus PRTNode::postEvaluation(const MDGContext&, const MEvaluationNode&, PostEvaluationType) {
+	return MS::kSuccess;
+}
+
 void* PRTNode::creator() {
 	return new PRTNode();
 }
-
 
 inline bool PRTNode::getBoolParameter(MObject & attr) {
 	MPlug plug(thisMObject(), attr);
@@ -408,7 +418,7 @@ const std::string& PRTNode::getPluginRoot() {
 			// TODO DWORD e = ::GetLastError();
 			throw std::runtime_error("failed to get plugin location");
 		}
-	
+
 		_splitpath_s(dllPath, drive, 8, dir, _MAX_PATH, 0, 0, 0, 0);
 		rootPath = new std::string(drive);
 		rootPath->append(dir);
@@ -474,7 +484,7 @@ void PRTNode::uninitialize() {
 }
 
 namespace {
-	
+
 const char* ENV_LIC_FEATURE = "ESRI_CE_SDK_LIC_FEATURE";
 const char* ENV_LIC_SERVER = "ESRI_CE_SDK_LIC_HOST";
 const char* EMPTY_STRING = "";
@@ -490,17 +500,21 @@ bool tryToGetLicenseDetails(prt::FlexLicParams& flp) {
 		prt::log(L"prt4maya: license type 'CityEngAdv' requires a license server hostname (<port>@<host>, e.g. 27000@flexnet.host.com)", prt::LOG_FATAL);
 		return false;
 	}
-	flp.mFeature       = envLicFeature;
-	flp.mHostName      = envLicServer != 0 ? envLicServer : EMPTY_STRING;
+	flp.mFeature = envLicFeature;
+	flp.mHostName = envLicServer != 0 ? envLicServer : EMPTY_STRING;
+
+	prtu::dbg("lic feature: '%s'", flp.mFeature);
+	prtu::dbg("lic host: '%s'", flp.mHostName);
+
 	return true;
 }
-	
-} // anonymous namespace
 
-MStatus initializePlugin( MObject obj ){
+} // namespace
+
+P4M_API MStatus initializePlugin(MObject obj){
 	PRTNode::initLogger();
 	prtu::dbg("initialized prt logger");
-	
+
 	const std::string& pluginRoot   = PRTNode::getPluginRoot();
 	std::wstring wPluginRoot(pluginRoot.length(), L' ');
 	std::copy(pluginRoot.begin(), pluginRoot.end(), wPluginRoot.begin());
@@ -512,26 +526,20 @@ MStatus initializePlugin( MObject obj ){
 	prtu::dbg("flexLibName = %s", flexLibName.c_str());
 	const std::string flexLibPath = pluginRoot + flexLibName;
 	prtu::dbg("flexLibPath = %s", flexLibPath.c_str());
-	
+
 	prt::FlexLicParams flp;
 	flp.mActLibPath = flexLibPath.c_str();
 	if (!tryToGetLicenseDetails(flp))
 		return MS::kFailure;	
 
 	prt::Status status = prt::STATUS_UNSPECIFIED_ERROR;
-	{
-		const wchar_t* prtExtPathPOD = prtExtPath.c_str();
-		PRTNode::theLicHandle = prt::init(&prtExtPathPOD, 1, PRT_LOG_LEVEL, &flp, &status);
-	}
-	
-	if (PRTNode::theLicHandle == 0)
-	  return MS::kFailure;
-		
-	if(status != prt::STATUS_OK)
+	const wchar_t* prtExtPathPOD = prtExtPath.c_str();
+	PRTNode::theLicHandle = prt::init(&prtExtPathPOD, 1, PRT_LOG_LEVEL, &flp, &status);
+
+	if (PRTNode::theLicHandle == nullptr || status != prt::STATUS_OK)
 		return MS::kFailure;
 
 	PRTNode::theCache = prt::CacheObject::create(prt::CacheObject::CACHE_TYPE_DEFAULT);
-
 
 	MFnPlugin plugin( obj, "Esri R&D Center Zurich", "1.0", "Any");
 
@@ -544,7 +552,7 @@ MStatus initializePlugin( MObject obj ){
 	return MS::kSuccess;
 }
 
-MStatus uninitializePlugin( MObject obj) {
+P4M_API MStatus uninitializePlugin( MObject obj) {
 	PRTNode::uninitialize();
 
 	MFnPlugin plugin( obj );
@@ -558,22 +566,18 @@ MStatus uninitializePlugin( MObject obj) {
 }
 
 // Main shape parameters
-//
 MObject PRTNode::rulePkg; 
 
 // Input mesh
-//
 MObject PRTNode::inMesh;
 
 // Output mesh
-//
 MObject PRTNode::outMesh;
 
 // statics
-
-prt::ConsoleLogHandler*	PRTNode::theLogHandler     = 0;
-prt::FileLogHandler*	  PRTNode::theFileLogHandler = 0;
-const prt::Object*      PRTNode::theLicHandle      = 0;
-prt::CacheObject*       PRTNode::theCache          = 0;
-int                     PRTNode::theNodeCount      = 0;
-MStringArray            PRTNode::theShadingGroups;
+prt::ConsoleLogHandler*	PRTNode::theLogHandler     = nullptr;
+prt::FileLogHandler*	PRTNode::theFileLogHandler = nullptr;
+const prt::Object*		PRTNode::theLicHandle      = nullptr;
+prt::CacheObject*		PRTNode::theCache          = nullptr;
+int						PRTNode::theNodeCount      = 0;
+MStringArray			PRTNode::theShadingGroups;

@@ -7,26 +7,23 @@
  * See http://github.com/ArcGIS/esri-cityengine-sdk for instructions.
  */
 
-#ifndef PRT4MAYA_NODE_H_
-#define PRT4MAYA_NODE_H_
+#pragma once
 
-#include <cmath>
+#include "node/MayaCallbacks.h"
 
-#include <cstdlib>
-#include <vector>
-#include <algorithm>
+#include "prt/RuleFileInfo.h"
+#include "prt/AttributeMap.h"
+#include "prt/LogHandler.h"
+#include "prt/API.h"
 
-#ifdef _MSC_VER
-#include <float.h>
-#endif
-
-#include <maya/MPxNode.h> 
-#include <maya/MString.h> 
-#include <maya/MTypeId.h> 
+#include <maya/MPxNode.h>
+#include <maya/MString.h>
+#include <maya/MTypeId.h>
 #include <maya/MPlug.h>
 #include <maya/MDataBlock.h>
 #include <maya/MDataHandle.h>
 #include <maya/MAngle.h>
+#include <maya/MEvaluationNode.h>
 #include <maya/MFnUnitAttribute.h>
 #include <maya/MFnStringData.h>
 #include <maya/MFnNumericAttribute.h>
@@ -50,15 +47,10 @@
 #include <maya/MFnSet.h>
 #include <maya/MItMeshPolygon.h>
 
-#include "prt/RuleFileInfo.h"
-#include "prt/AttributeMap.h"
-#include "prt/LogHandler.h"
-#include "prt/API.h"
-#include "wrapper/MayaCallbacks.h"
-
-#ifdef _MSC_VER
-#	include <WinNT.h>
-#endif
+#include <cmath>
+#include <cstdlib>
+#include <vector>
+#include <algorithm>
 
 
 #define PRT_TYPE_ID 0x8666b
@@ -68,86 +60,100 @@ extern const char*	    FILE_PREFIX;
 extern const MString	NAME_GENERATE;
 
 
+#ifdef _WIN32
+#	define P4M_API
+#else
+#	define P4M_API __attribute__ ((visibility ("default")))
+#endif
+
+
 class PRTNode;
 
 class PRTEnum {
 	friend class PRTAttrs;
 	friend class PRTNode;
+
 public:
+	PRTEnum(PRTNode* node, const prt::Annotation* annot = nullptr);
+	virtual ~PRTEnum() { }
 
-	PRTEnum(PRTNode * node, const prt::Annotation* annot = 0);
-	~PRTEnum() {}; 
-
-	void    add(const MString & key, const MString & value);
+	void add(const MString & key, const MString & value);
 	MStatus fill();
 
-	PRTEnum*               mNext;
-	MFnEnumAttribute       mAttr;
+public:
+	PRTEnum*				mNext;
+	MFnEnumAttribute		mAttr;
+
 private:
-	const prt::Annotation* mAnnot;
-	MStringArray           mKeys;
-	MStringArray           mSVals;
-	MDoubleArray           mFVals;
-	MIntArray              mBVals;
-};
+	const prt::Annotation*	mAnnot;
+	MStringArray			mKeys;
+	MStringArray			mSVals;
+	MDoubleArray			mFVals;
+	MIntArray				mBVals;
+}; // class PRTEnum
 
 
 class PRTNode : public MPxNode {
 	friend class PRTEnum;
+
 public:
 	PRTNode();
 	virtual ~PRTNode();
 
-	virtual MStatus                compute( const MPlug& plug, MDataBlock& data );
-	virtual MStatus                setDependentsDirty(const MPlug &plugBeingDirtied, MPlugArray &affectedPlugs);
+	virtual MStatus					preEvaluation( const  MDGContext& context, const MEvaluationNode& evaluationNode );
+	virtual MStatus					compute( const MPlug& plug, MDataBlock& data );
+	virtual MStatus					postEvaluation(const MDGContext & 	context, const MEvaluationNode & 	evaluationNode, PostEvaluationType 	evalType);
+	virtual MStatus					setDependentsDirty(const MPlug &plugBeingDirtied, MPlugArray &affectedPlugs);
 
-	static  void *                 creator();
-	static  MStatus                initialize();
-	static const std::string&      getPluginRoot();
+	static  void*					creator();
+	static  MStatus					initialize();
+	static const std::string&		getPluginRoot();
 
-	const PRTEnum *                findEnum(const MObject & attr) const;
-	void                           destroyEnums();
-	MStatus                        attachMaterials();
-	static void                    initLogger();
-	static void                    uninitialize();
-	MayaCallbacks*             createOutputHandler(const MPlug* plug, MDataBlock* data);
+	const PRTEnum*					findEnum(const MObject & attr) const;
+	void							destroyEnums();
+	MStatus							attachMaterials();
+	static void						initLogger();
+	static void						uninitialize();
+	MayaCallbacks*					createOutputHandler(const MPlug* plug, MDataBlock* data);
 
-	std::wstring                   mRuleFile;
-	std::wstring                   mStartRule;
-	MObject                        mGenerate;
-	bool                           mCreatedInteractively;
+public:
+	std::wstring					mRuleFile;
+	std::wstring					mStartRule;
+	MObject							mGenerate;
+	bool							mCreatedInteractively;
 
-	std::string                    mLRulePkg;
-	const prt::ResolveMap*         mResolveMap;
-	const prt::AttributeMap*       mGenerateAttrs;
-	const prt::AttributeMap*       mMayaEncOpts;
-	const prt::AttributeMap*       mAttrEncOpts;
+	std::string						mLRulePkg;
+	const prt::ResolveMap*			mResolveMap;
+	const prt::AttributeMap*		mGenerateAttrs;
+	const prt::AttributeMap*		mMayaEncOpts;
+	const prt::AttributeMap*		mAttrEncOpts;
 
 	std::map<std::wstring, std::wstring> mBriefName2prtAttr;
 
-	static MTypeId                 theID;
-	static MObject                 rulePkg;
-	static MObject                 inMesh;
-	static MObject                 outMesh;
-	static const prt::Object*      theLicHandle;
-	static prt::CacheObject*       theCache;
-	static MStringArray            theShadingGroups;
+	static MTypeId					theID;
+	static MObject					rulePkg;
+	static MObject					inMesh;
+	static MObject					outMesh;
+	static const prt::Object*		theLicHandle;
+	static prt::CacheObject*		theCache;
+	static MStringArray				theShadingGroups;
 
 private:
-	PRTEnum*                       mEnums;
-	bool                           mHasMaterials;
-	MStringArray                   mShadingGroups;
-	MIntArray                      mShadingRanges;
-	MString                        mShadingCmd;
+	MString&						getStrParameter(MObject & attr, MString & value);
+	bool							getBoolParameter(MObject & attr);
+	MStatus							updateShapeAttributes();
 
-	static prt::ConsoleLogHandler* theLogHandler;
-	static prt::FileLogHandler*    theFileLogHandler;
-	static int                     theNodeCount;
+private:
+	PRTEnum*						mEnums;
+	bool							mHasMaterials;
+	MStringArray					mShadingGroups;
+	MIntArray						mShadingRanges;
+	MString							mShadingCmd;
 
-	MString&            getStrParameter(MObject & attr, MString & value);
-	bool                getBoolParameter(MObject & attr);
-	MStatus             updateShapeAttributes();
-};
+	static prt::ConsoleLogHandler*	theLogHandler;
+	static prt::FileLogHandler*		theFileLogHandler;
+	static int						theNodeCount;
+}; // class PRTNode
 
 
 class PRTAttrs : public MPxCommand {
@@ -172,24 +178,18 @@ private:
 	static MStatus  createAttributes(MFnDependencyNode & node, const std::wstring & ruleFile, const std::wstring & startRule, prt::AttributeMapBuilder* aBuilder, const prt::RuleFileInfo* info);
 	static MString  longName(const MString & attrName);
 	static MString  briefName(const MString & attrName);
-};
+}; // class PRTAttrs
 
 
-class PRTMaterials : public MPxCommand
-{
+class PRTMaterials : public MPxCommand {
 public:
-	MStatus doIt( const MArgList& args );
+	MStatus doIt(const MArgList& args);
 	static void* creator();
-private:
 };
 
 
-class PRTCreate : public MPxCommand
-{
+class PRTCreate : public MPxCommand {
 public:
-	MStatus doIt( const MArgList& args );
+	MStatus doIt(const MArgList& args);
 	static void* creator();
-private:
 };
-
-#endif /* PRT4MAYA_NODE_H_ */

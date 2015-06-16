@@ -10,11 +10,9 @@
 #ifndef MAYA_OUTPUT_HANDLER_H_
 #define MAYA_OUTPUT_HANDLER_H_
 
-#include <stdexcept>
-#include <map>
-#include <string>
+#include "codec/encoder/IMayaCallbacks.h"
+#include "prt/Cache.h"
 
-#include "maya/MDataHandle.h"
 #include "maya/MStatus.h"
 #include "maya/MObject.h"
 #include "maya/MDoubleArray.h"
@@ -29,6 +27,7 @@
 #include "maya/MFloatArray.h"
 #include "maya/MFloatPoint.h"
 #include "maya/MFloatPointArray.h"
+#include "maya/MFloatVectorArray.h"
 #include "maya/MDataBlock.h"
 #include "maya/MDataHandle.h"
 #include "maya/MIntArray.h"
@@ -48,8 +47,10 @@
 #include "maya/MFnSet.h"
 #include "maya/MFnPartition.h"
 
-#include "IMayaCallbacks.h"
-#include "prt/Cache.h"
+#include <stdexcept>
+#include <map>
+#include <string>
+
 
 class MayaCallbacks : public IMayaCallbacks {
 public:
@@ -64,9 +65,8 @@ public:
 	};
 
 public:
-	MayaCallbacks(const MPlug* plug, MDataBlock* data, MStringArray* shadingGroups, MIntArray* shadingRanges, MString* shadingCmd) :
-			mPlug(plug), mData(data), mShadingGroups(shadingGroups), mShadingRanges(shadingRanges), mShadingCmd(shadingCmd)
-	{ }
+	MayaCallbacks(const MPlug* plug, MDataBlock* data, MStringArray* shadingGroups, MIntArray* shadingRanges, MString* shadingCmd)
+		: mPlug(plug), mData(data), mShadingGroups(shadingGroups), mShadingRanges(shadingRanges), mShadingCmd(shadingCmd) { }
 	virtual ~MayaCallbacks() {}
 
 	// prt::Callbacks interface
@@ -97,55 +97,52 @@ public:
 	virtual prt::Status attrBool(size_t /*isIndex*/, int32_t /*shapeID*/, const wchar_t* /*key*/, bool /*value*/);
 	virtual prt::Status attrFloat(size_t /*isIndex*/, int32_t /*shapeID*/, const wchar_t* /*key*/, double /*value*/);
 	virtual prt::Status attrString(size_t /*isIndex*/, int32_t /*shapeID*/, const wchar_t* /*key*/, const wchar_t* /*value*/);
-	
+
 public:
-	virtual void setVertices(double* vtx, size_t size);
-	virtual void setNormals(double* nrm, size_t size);
-	virtual void setUVs(float* u, float* v, size_t size);
+	virtual void setVertices(const double* vtx, size_t size);
+	virtual void setNormals(const double* nrm, size_t size);
+	virtual void setUVs(const double* u, const double* v, size_t size);
 
 	virtual void setFaces(
-			int* 	 counts,
-			size_t countsSize,
-			int*	 connects,
-			size_t connectsSize,
-			int*   uvCounts,
-			size_t uvCountsSize,
-			int*   uvConnects,
-			size_t uvConnectsSize
+			const uint32_t* counts, size_t countsSize,
+			const uint32_t* connects, size_t connectsSize,
+			const uint32_t* uvCounts, size_t uvCountsSize,
+			const uint32_t* uvConnects, size_t uvConnectsSize
 	);
+
 	virtual void createMesh();
 	virtual void finishMesh();
 
-	virtual MString matCreate(int start, int count, const wchar_t* name);
-	virtual void    matSetColor(int start, int count, float r, float g, float b);
-	virtual void    matSetDiffuseTexture(int start, int count, const wchar_t* tex);
+	virtual void matSetColor(uint32_t start, uint32_t count, double r, double g, double b);
+	virtual void matSetDiffuseTexture(uint32_t start, uint32_t count, const wchar_t* tex);
 
 public:
+	virtual MString matCreate(int start, int count, const wchar_t* name);
 	const std::map<std::wstring, AttributeHolder>& getAttrs() const { return mAttrs; }
 
 public:
-	MFnMesh*			    mFnMesh;
+	MFnMesh*			mFnMesh;
 
 	MFloatPointArray	mVertices;
-	MIntArray			    mVerticesCounts;
-	MIntArray			    mVerticesConnects;
+	MIntArray			mVerticesCounts;
+	MIntArray			mVerticesConnects;
 
-	MFloatVectorArray mNormals;
+	MFloatVectorArray	mNormals;
 
-	MFloatArray			 	mU;
-	MFloatArray			 	mV;
-	MIntArray			    mUVCounts;
-	MIntArray			    mUVConnects;
+	MFloatArray			mU;
+	MFloatArray			mV;
+	MIntArray			mUVCounts;
+	MIntArray			mUVConnects;
 
 private:
 	// must not be called
-	MayaCallbacks() : mPlug(0), mData(0), mShadingGroups(0), mShadingRanges(0), mShadingCmd(0) { }
+	MayaCallbacks() : mPlug(nullptr), mData(nullptr), mShadingGroups(nullptr), mShadingRanges(nullptr), mShadingCmd(nullptr) { }
 
-	const MPlug*		  mPlug;
-	MDataBlock*			  mData;
-	MStringArray*		  mShadingGroups;
-	MIntArray*		    mShadingRanges;
-	MString*          mShadingCmd;
+	const MPlug*		mPlug;
+	MDataBlock*			mData;
+	MStringArray*		mShadingGroups;
+	MIntArray*			mShadingRanges;
+	MString*			mShadingCmd;
 
 	std::map<std::wstring, AttributeHolder> mAttrs;
 };
