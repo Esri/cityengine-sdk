@@ -7,16 +7,15 @@
  * See http://github.com/ArcGIS/esri-cityengine-sdk for instructions.
  */
 
-#include <cassert>
-#include <sstream>
-#include <ostream>
+#include "node/MayaCallbacks.h"
+#include "node/Utilities.h"
+#include "node/PRTNode.h"
 
 #include "maya/MItMeshPolygon.h"
 
-#include "wrapper/MayaCallbacks.h"
-
-#include "prt4maya/Utilities.h"
-#include "prt4maya/PRTNode.h"
+#include <cassert>
+#include <sstream>
+#include <ostream>
 
 
 namespace {

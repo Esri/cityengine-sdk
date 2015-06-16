@@ -10,9 +10,8 @@
 #ifndef MAYA_OUTPUT_HANDLER_H_
 #define MAYA_OUTPUT_HANDLER_H_
 
-#include <stdexcept>
-#include <map>
-#include <string>
+#include "codec/encoder/IMayaCallbacks.h"
+#include "prt/Cache.h"
 
 #include "maya/MDataHandle.h"
 #include "maya/MStatus.h"
@@ -29,6 +28,7 @@
 #include "maya/MFloatArray.h"
 #include "maya/MFloatPoint.h"
 #include "maya/MFloatPointArray.h"
+#include "maya/MFloatVectorArray.h"
 #include "maya/MDataBlock.h"
 #include "maya/MDataHandle.h"
 #include "maya/MIntArray.h"
@@ -48,8 +48,10 @@
 #include "maya/MFnSet.h"
 #include "maya/MFnPartition.h"
 
-#include "IMayaCallbacks.h"
-#include "prt/Cache.h"
+#include <stdexcept>
+#include <map>
+#include <string>
+
 
 class MayaCallbacks : public IMayaCallbacks {
 public:
@@ -97,7 +99,7 @@ public:
 	virtual prt::Status attrBool(size_t /*isIndex*/, int32_t /*shapeID*/, const wchar_t* /*key*/, bool /*value*/);
 	virtual prt::Status attrFloat(size_t /*isIndex*/, int32_t /*shapeID*/, const wchar_t* /*key*/, double /*value*/);
 	virtual prt::Status attrString(size_t /*isIndex*/, int32_t /*shapeID*/, const wchar_t* /*key*/, const wchar_t* /*value*/);
-	
+
 public:
 	virtual void setVertices(double* vtx, size_t size);
 	virtual void setNormals(double* nrm, size_t size);

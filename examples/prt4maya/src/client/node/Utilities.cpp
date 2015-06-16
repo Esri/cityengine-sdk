@@ -7,9 +7,9 @@
  * See http://github.com/ArcGIS/esri-cityengine-sdk for instructions.
  */
 
-#include "prt4maya/Utilities.h"
+#include "node/Utilities.h"
 
-#include <maya/MString.h>
+#include "maya/MString.h"
 
 #include <cstdio>
 #include <cstdarg>
@@ -17,7 +17,7 @@
 
 namespace prtu {
 
-	
+
 const char* filename(const char* path) {
 	while(*(--path) != '\\');
 	return path + 1;
@@ -63,7 +63,7 @@ template<> const std::wstring& getSharedLibraryPrefix() {
 	return WSTR_EMPTY;
 #elif defined(__APPLE__)
 	return WSTR_LIB;
-#elif defined(linux)
+#elif defined(__linux__)
 	return WSTR_LIB;
 #else
 #	error unsupported build platform
@@ -76,7 +76,7 @@ template<> const std::string& getSharedLibraryPrefix() {
 	return STR_EMPTY;
 #elif defined(__APPLE__)
 	return STR_LIB;
-#elif defined(linux)
+#elif defined(__linux__)
 	return STR_LIB;
 #else
 #	error unsupported build platform
@@ -89,7 +89,7 @@ template<> const std::wstring& getSharedLibrarySuffix() {
 	return WSTR_DLL;
 #elif defined(__APPLE__)
 	return WSTR_DYLIB;
-#elif defined(linux)
+#elif defined(__linux__)
 	return WSTR_SO;
 #else
 #	error unsupported build platform
@@ -102,7 +102,7 @@ template<> const std::string& getSharedLibrarySuffix() {
 	return STR_DLL;
 #elif defined(__APPLE__)
 	return STR_DYLIB;
-#elif defined(linux)
+#elif defined(__linux__)
 	return STR_SO;
 #else
 #	error unsupported build platform
@@ -117,7 +117,7 @@ void dbg(const char* fmt, ...) {
 
 	va_start(args, fmt);
 	vprintf(fmt, args);
-  va_end(args); 
+  va_end(args);
   printf("\n");
 	fflush(0);
 }
@@ -127,7 +127,7 @@ void wdbg(const wchar_t* fmt, ...) {
 
 	va_start(args, fmt);
 	vwprintf(fmt, args);
-  va_end(args); 
+  va_end(args);
   wprintf(L"\n");
 	fflush(0);
 }
@@ -147,12 +147,12 @@ int fromHex(wchar_t c) {
 	case 'd': case 'D': return 0xd;
 	case 'e': case 'E': return 0xe;
 	case 'f': case 'F': return 0xf;
-	default: 
+	default:
 		return 0;
 	}
 }
 
-const wchar_t HEXTAB[] = L"0123456789ABCDEF"; 
+const wchar_t HEXTAB[] = L"0123456789ABCDEF";
 
 wchar_t toHex(int i) {
 	return HEXTAB[i & 0xF];
@@ -176,7 +176,7 @@ MString toCleanId(const MString& name) {
 		wchar_t c = wname[i];
 		if((c >= '0' && c <= '9') ||
 			 (c >= 'A' && c <= 'Z') ||
-			 (c >= 'a' && c <= 'z')) 
+			 (c >= 'a' && c <= 'z'))
 			dst[i] = c;
 		else
 			dst[i] = '_';
@@ -201,7 +201,7 @@ int32_t computeSeed(MFloatPointArray& vertices) {
 	for (size_t vi = 0; vi < vertices.length(); vi++) {
 		a += vertices[vi];
 	}
-	a = a / static_cast<double>(vertices.length()); 
+	a = a / static_cast<double>(vertices.length());
 	return computeSeed(a);
 }
 
@@ -213,7 +213,7 @@ int32_t computeSeed(const double* vertices, size_t count) {
 		a[1] += vertices[vi+1];
 		a[2] += vertices[vi+2];
 	}
-	a = a / static_cast<double>(count); 
+	a = a / static_cast<double>(count);
 	return computeSeed(a);
 }
 

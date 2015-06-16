@@ -7,22 +7,18 @@
  * See http://github.com/ArcGIS/esri-cityengine-sdk for instructions.
  */
 
-#ifndef PRT4MAYA_NODE_H_
-#define PRT4MAYA_NODE_H_
+#pragma once
 
-#include <cmath>
+#include "node/MayaCallbacks.h"
 
-#include <cstdlib>
-#include <vector>
-#include <algorithm>
+#include "prt/RuleFileInfo.h"
+#include "prt/AttributeMap.h"
+#include "prt/LogHandler.h"
+#include "prt/API.h"
 
-#ifdef _MSC_VER
-#include <float.h>
-#endif
-
-#include <maya/MPxNode.h> 
-#include <maya/MString.h> 
-#include <maya/MTypeId.h> 
+#include <maya/MPxNode.h>
+#include <maya/MString.h>
+#include <maya/MTypeId.h>
 #include <maya/MPlug.h>
 #include <maya/MDataBlock.h>
 #include <maya/MDataHandle.h>
@@ -50,11 +46,10 @@
 #include <maya/MFnSet.h>
 #include <maya/MItMeshPolygon.h>
 
-#include "prt/RuleFileInfo.h"
-#include "prt/AttributeMap.h"
-#include "prt/LogHandler.h"
-#include "prt/API.h"
-#include "wrapper/MayaCallbacks.h"
+#include <cmath>
+#include <cstdlib>
+#include <vector>
+#include <algorithm>
 
 #ifdef _MSC_VER
 #	include <WinNT.h>
@@ -68,6 +63,13 @@ extern const char*	    FILE_PREFIX;
 extern const MString	NAME_GENERATE;
 
 
+#ifdef _WIN32
+
+#else // !_WIN32
+#	define P4M_API __attribute__ ((visibility ("default")))
+#endif // !_WIN32
+
+
 class PRTNode;
 
 class PRTEnum {
@@ -76,7 +78,7 @@ class PRTEnum {
 public:
 
 	PRTEnum(PRTNode * node, const prt::Annotation* annot = 0);
-	~PRTEnum() {}; 
+	~PRTEnum() {};
 
 	void    add(const MString & key, const MString & value);
 	MStatus fill();
@@ -98,7 +100,9 @@ public:
 	PRTNode();
 	virtual ~PRTNode();
 
+	virtual MStatus					preEvaluation( const  MDGContext& context, const MEvaluationNode& evaluationNode );
 	virtual MStatus                compute( const MPlug& plug, MDataBlock& data );
+	virtual MStatus					postEvaluation(const MDGContext & 	context, const MEvaluationNode & 	evaluationNode, PostEvaluationType 	evalType);
 	virtual MStatus                setDependentsDirty(const MPlug &plugBeingDirtied, MPlugArray &affectedPlugs);
 
 	static  void *                 creator();
@@ -191,5 +195,3 @@ public:
 	static void* creator();
 private:
 };
-
-#endif /* PRT4MAYA_NODE_H_ */

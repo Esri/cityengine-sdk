@@ -1,5 +1,5 @@
-#include "Utilities.h"
-#include "prt4maya/PRTNode.h"
+#include "node/PRTNode.h"
+#include "node/Utilities.h"
 
 
 void* PRTCreate::creator() {

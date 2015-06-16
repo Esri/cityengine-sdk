@@ -10,10 +10,9 @@
 #define MNoPluginEntry
 #define MNoVersionString
 
-#include "PRTNode.h"
-
-#include "Utilities.h"
-#include "wrapper/MayaCallbacks.h"
+#include "node/PRTNode.h"
+#include "node/Utilities.h"
+#include "node/MayaCallbacks.h"
 
 #include "prt/Status.h"
 #include "prt/StringUtils.h"
@@ -354,8 +353,8 @@ MStatus PRTEnum::fill() {
 			const wchar_t* key = mAnnot->getArgument(arg)->getKey();
 			if(!(wcscmp(key, NULL_KEY)))
 				key = mAnnot->getArgument(arg)->getStr();
+			mKeys.append(MString(mAnnot->getArgument(arg)->getKey()));
 			switch(mAnnot->getArgument(arg)->getType()) {
-				mKeys.append(MString(mAnnot->getArgument(arg)->getKey()));
 				case prt::AAT_BOOL:
 					MCHECK(mAttr.addField(MString(key), mBVals.length()));
 					mBVals.append(mAnnot->getArgument(arg)->getBool());
@@ -416,9 +415,9 @@ MStatus PRTAttrs::createAttributes(MFnDependencyNode & node, const std::wstring 
 
 	prt::InitialShapeBuilder* isb = prt::InitialShapeBuilder::create();
 	isb->setGeometry(
-			UnitQuad_vertices, 
-			UnitQuad_vertexCount, 
-			UnitQuad_indices, 
+			UnitQuad_vertices,
+			UnitQuad_vertexCount,
+			UnitQuad_indices,
 			UnitQuad_indexCount,
 			UnitQuad_faceCounts,
 			UnitQuad_faceCountsCount
@@ -457,7 +456,7 @@ MStatus PRTAttrs::createAttributes(MFnDependencyNode & node, const std::wstring 
 					if(!(wcscmp(an->getName(), ANNOT_RANGE)))
 						e = new PRTEnum(prtNode, an);
 				}
- 
+
 				bool value = evalAttrs.find(name.asWChar())->second.mBool;
 
 				if(e) {

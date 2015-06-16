@@ -40,8 +40,7 @@ popd
 endlocal
 
 set CLIENTVC=0.0
-if "%MAYA_VERSION%" == "2012" (set CLIENTVC=9.0)
-if "%MAYA_VERSION%" == "2014" (set CLIENTVC=10.0)
+if "%MAYA_VERSION%" == "2016" (set CLIENTVC=11.0)
 if "%CLIENTVC%"=="0.0" (
 	echo "ERROR: could not derive the compiler version from the maya path, please check maya path"
 	endlocal

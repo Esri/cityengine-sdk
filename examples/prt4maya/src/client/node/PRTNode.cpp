@@ -7,15 +7,12 @@
  * See http://github.com/ArcGIS/esri-cityengine-sdk for instructions.
  */
 
-#include "prt4maya/PRTNode.h"
-#include "prt4maya/Utilities.h"
+#include "node/PRTNode.h"
+#include "node/Utilities.h"
+#include "node/MayaCallbacks.h"
 
-#include <sstream>
-
-#ifndef _MSC_VER
-#	include <dlfcn.h>
-#	include <cstdio>
-#endif
+#include "prt/StringUtils.h"
+#include "prt/FlexLicParams.h"
 
 #include <maya/MFnPlugin.h>
 #include <maya/MFnTransform.h>
@@ -26,10 +23,13 @@
 #include <maya/MDagPath.h>
 #include <maya/MItDependencyNodes.h>
 
-#include "wrapper/MayaCallbacks.h"
+#include <cstdio>
+#include <sstream>
 
-#include "prt/StringUtils.h"
-#include "prt/FlexLicParams.h"
+#ifndef _MSC_VER
+#	include <dlfcn.h>
+#endif
+
 
 const wchar_t*	ENC_ATTR				= L"com.esri.prt.core.AttributeEvalEncoder";
 const char*	    FILE_PREFIX				= "file:///";
@@ -43,7 +43,7 @@ const wchar_t*		ENC_MAYA			= L"MayaEncoder";
 
 const MString	NAME_RULE_PKG			= "Rule_Package";
 
-const prt::LogLevel	PRT_LOG_LEVEL		= prt::LOG_WARNING;
+const prt::LogLevel	PRT_LOG_LEVEL		= prt::LOG_DEBUG;
 const bool			ENABLE_LOG_CONSOLE	= true;
 const bool			ENABLE_LOG_FILE		= false;
 }
@@ -87,6 +87,10 @@ MStatus PRTNode::setDependentsDirty(const MPlug& /*plugBeingDirtied*/, MPlugArra
 	return MS::kSuccess;
 }
 
+MStatus PRTNode::preEvaluation( const  MDGContext& context, const MEvaluationNode& evaluationNode ) {
+	return MS::kSuccess;
+}
+
 MStatus PRTNode::compute(const MPlug& plug, MDataBlock& data ) {
 	MStatus stat;
 	mHasMaterials = false;
@@ -111,9 +115,9 @@ MStatus PRTNode::compute(const MPlug& plug, MDataBlock& data ) {
 			mLRulePkg = uri;
 		}
 	} else {
-			MFnDependencyNode fNode(thisMObject(), &stat);
-			MCHECK(stat);
-			PRTAttrs::updateRuleFiles(fNode, getStrParameter(rulePkg, dummy));
+		MFnDependencyNode fNode(thisMObject(), &stat);
+		MCHECK(stat);
+		PRTAttrs::updateRuleFiles(fNode, getStrParameter(rulePkg, dummy));
 	}
 
 	if(plug == outMesh && mGenerateAttrs) {
@@ -185,20 +189,20 @@ MStatus PRTNode::compute(const MPlug& plug, MDataBlock& data ) {
 			delete[] va;
 			delete   outputHandler;
 		} else {
-				MStatus stat;
+			MStatus stat;
 
-				MDataHandle outputHandle = data.outputValue(plug, &stat);
-				MCHECK(stat);
+			MDataHandle outputHandle = data.outputValue(plug, &stat);
+			MCHECK(stat);
 
-				MFnMeshData dataCreator;
-				MObject newOutputData = dataCreator.create(&stat);
-				MCHECK(stat);
+			MFnMeshData dataCreator;
+			MObject newOutputData = dataCreator.create(&stat);
+			MCHECK(stat);
 
-				MFnMesh fnMesh;
-				MObject oMesh = fnMesh.create(0, 0, MFloatPointArray(), MIntArray(), MIntArray(), newOutputData, &stat);
-				MCHECK(stat);
+			MFnMesh fnMesh;
+			MObject oMesh = fnMesh.create(0, 0, MFloatPointArray(), MIntArray(), MIntArray(), newOutputData, &stat);
+			MCHECK(stat);
 
-				MCHECK(outputHandle.set(newOutputData));
+			MCHECK(outputHandle.set(newOutputData));
 		}
 
 		data.setClean(plug);
@@ -221,6 +225,11 @@ MStatus PRTNode::compute(const MPlug& plug, MDataBlock& data ) {
 	}
 
 	mCreatedInteractively = true;
+	return MS::kSuccess;
+}
+
+
+MStatus PRTNode::postEvaluation(const MDGContext & 	context, const MEvaluationNode & 	evaluationNode, PostEvaluationType 	evalType) {
 	return MS::kSuccess;
 }
 
@@ -408,7 +417,7 @@ const std::string& PRTNode::getPluginRoot() {
 			// TODO DWORD e = ::GetLastError();
 			throw std::runtime_error("failed to get plugin location");
 		}
-	
+
 		_splitpath_s(dllPath, drive, 8, dir, _MAX_PATH, 0, 0, 0, 0);
 		rootPath = new std::string(drive);
 		rootPath->append(dir);
@@ -473,11 +482,14 @@ void PRTNode::uninitialize() {
 	}
 }
 
+extern char **environ;
+
 namespace {
-	
+
 const char* ENV_LIC_FEATURE = "ESRI_CE_SDK_LIC_FEATURE";
 const char* ENV_LIC_SERVER = "ESRI_CE_SDK_LIC_HOST";
 const char* EMPTY_STRING = "";
+
 
 bool tryToGetLicenseDetails(prt::FlexLicParams& flp) {
 	const char* envLicFeature = getenv(ENV_LIC_FEATURE);
@@ -492,15 +504,31 @@ bool tryToGetLicenseDetails(prt::FlexLicParams& flp) {
 	}
 	flp.mFeature       = envLicFeature;
 	flp.mHostName      = envLicServer != 0 ? envLicServer : EMPTY_STRING;
+
+	prtu::dbg("lic feature: '%s'", flp.mFeature);
+	prtu::dbg("lic host: '%s'", flp.mHostName);
+
 	return true;
 }
-	
-} // anonymous namespace
 
-MStatus initializePlugin( MObject obj ){
+
+void printEnv() {
+  int i = 1;
+  char *s = *environ;
+
+  for (; s; i++) {
+    printf("%s\n", s);
+    s = *(environ+i);
+  }
+}
+
+
+} // namespace
+
+P4M_API MStatus initializePlugin(MObject obj){
 	PRTNode::initLogger();
 	prtu::dbg("initialized prt logger");
-	
+
 	const std::string& pluginRoot   = PRTNode::getPluginRoot();
 	std::wstring wPluginRoot(pluginRoot.length(), L' ');
 	std::copy(pluginRoot.begin(), pluginRoot.end(), wPluginRoot.begin());
@@ -512,21 +540,32 @@ MStatus initializePlugin( MObject obj ){
 	prtu::dbg("flexLibName = %s", flexLibName.c_str());
 	const std::string flexLibPath = pluginRoot + flexLibName;
 	prtu::dbg("flexLibPath = %s", flexLibPath.c_str());
-	
+
 	prt::FlexLicParams flp;
 	flp.mActLibPath = flexLibPath.c_str();
 	if (!tryToGetLicenseDetails(flp))
 		return MS::kFailure;	
+
+
+	setenv("FLEXLM_NO_CKOUT_INSTALL_LIC", "1", 1);
+	setenv("LM_DIAGNOSTICS", "2", 1);
+
+	setenv("ARCGIS_LICENSE_FILE", flp.mHostName, 1);
+	setenv("CITYENGINE_LICENSE_FILE", flp.mHostName, 1);
+	setenv("VENDOR_LICENSE_FILE", flp.mHostName, 1);
+	setenv("LM_LICENSE_FILE", flp.mHostName, 1);
+
+	printEnv();
 
 	prt::Status status = prt::STATUS_UNSPECIFIED_ERROR;
 	{
 		const wchar_t* prtExtPathPOD = prtExtPath.c_str();
 		PRTNode::theLicHandle = prt::init(&prtExtPathPOD, 1, PRT_LOG_LEVEL, &flp, &status);
 	}
-	
+
 	if (PRTNode::theLicHandle == 0)
-	  return MS::kFailure;
-		
+		return MS::kFailure;
+
 	if(status != prt::STATUS_OK)
 		return MS::kFailure;
 
@@ -544,7 +583,7 @@ MStatus initializePlugin( MObject obj ){
 	return MS::kSuccess;
 }
 
-MStatus uninitializePlugin( MObject obj) {
+P4M_API MStatus uninitializePlugin( MObject obj) {
 	PRTNode::uninitialize();
 
 	MFnPlugin plugin( obj );
