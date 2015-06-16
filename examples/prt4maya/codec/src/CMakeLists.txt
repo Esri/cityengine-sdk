@@ -43,7 +43,7 @@ set_target_properties(${PROJECT} PROPERTIES LINKER_LANGUAGE CXX)
 ### install target
 
 set(CMAKE_INSTALL_PREFIX "${PROJECT_SOURCE_DIR}/../install") 
-install(TARGETS ${PROJECT} DESTINATION lib EXPORT "${PROJECT}Targets")
+install(TARGETS ${PROJECT} EXPORT "${PROJECT}Targets" RUNTIME DESTINATION lib)
 install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/encoder/IMayaCallbacks.h DESTINATION include)
 
 
