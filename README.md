@@ -1,6 +1,6 @@
 # Esri CityEngine SDK Examples
 
-The Esri CityEngine is based on the procedural runtime, which is the underlying engine that supports two GP tools in ArcGIS 10.x and drives procedural symbology in the release of ArcGIS Professional. The CityEngine SDK enables you as a 3rd party developer to extend CityEngine with additional import and export formats. Moreover, you can integrate the procedural runtime in your own client applications taking full advantage of the procedural core without running CityEngine or ArcGIS.
+The Esri CityEngine is based on the procedural runtime, which is the underlying engine that supports two geoprocessing tools in ArcGIS and drives procedural symbology in ArcGIS Pro. The CityEngine SDK enables you as a 3rd party developer to extend CityEngine with additional import and export formats. Moreover, you can integrate the procedural runtime in your own client applications taking full advantage of the procedural core without running CityEngine or ArcGIS.
 
 ## Preamble
 
@@ -12,6 +12,7 @@ This document explains how to install the CityEngine SDK and how to work with th
 The archives are available for download at the corresponding github release page. See installation instructions below for details.
 
 ## CityEngine SDK Releases
+- [v1.3.1969 (2015-06-17, CityEngine 2015.1)](https://github.com/Esri/esri-cityengine-sdk/releases/tag/1.3.1969)
 - [v1.3.1888 (2015-03-31, CityEngine 2015.0)](https://github.com/Esri/esri-cityengine-sdk/releases/tag/1.3.1888)
 - [v1.2.1591 (2014-09-01, CityEngine 2014.1)](https://github.com/Esri/esri-cityengine-sdk/releases/tag/1.2.1591)
 - [v1.1.1471 (2014-05-29, CityEngine 2014.0)](https://github.com/Esri/esri-cityengine-sdk/releases/tag/1.1.1471)
@@ -53,14 +54,15 @@ Please note that the individual example READMEs may include further requirements
 * To load custom encoders built with this SDK in CityEngine, at least CityEngine 2014.0 is required.
 
 #### Windows
-* Windows XP SP1 or later (32bit and 64bit)
+* Windows 7 or later (32bit and 64bit)
 * License for CityEngine 2013 or later
 * NMake 10.0 or later (part of Visual Studio)
-* CMake 2.8.10 or later (http://www.cmake.org)
+* CMake 3.0.0 or later (http://www.cmake.org)
 * Recommended C++ Compilers for simple clients (prt4cmd example):
     * Microsoft VC 10.0 or later
-* To compile SDK extensions (prt4maya example, stlenc example, custom encoders) it is required to use this **exact** C++ compiler version / boost libraries:
-    * Microsoft VC10 C++ Compiler (cl.exe) 16.00.40219.01, included in Visual Studio 2010 SP1 
+* To compile SDK extensions (prt4maya example, stlenc example, custom encoders) it is required to use one of these **exact** C++ compiler version / boost libraries:
+    * Microsoft VC10 C++ Compiler (cl.exe) 16.00.40219.01, included in Visual Studio 2010 SP1
+    * Microsoft VC11 C++ Compiler (cl.exe) 17.00.61030.0, included in Visual Studio 2012 SP4
     * boost 1.53 headers and binaries 
         * get the boost 1.53 headers from http://www.boost.org
         * get the boost 1.53 pre-compiled binaries from http://boost.teeks99.com (e.g. boost_1_53_0-vc64-bin.exe or boost_1_53_0-vc32-bin.exe)
@@ -70,7 +72,7 @@ Please note that the individual example READMEs may include further requirements
 * MacOSX 10.7 or later (64bit only)
 * License for CityEngine 2013 or later
 * GNU Make 3.82 or later
-* CMake 2.8.10 or later (http://www.cmake.org)
+* CMake 3.0.0 or later (http://www.cmake.org)
 * Recommended C++ Compilers for simple clients (prt4cmd example):
     * GCC 4.2.1 or later
     * Clang 3.0 or later
@@ -83,7 +85,7 @@ Please note that the individual example READMEs may include further requirements
 * RedHat Enterprise Linux 6.x or compatible (64bit only)
 * License for CityEngine 2013 or later
 * GNU Make 3.82 or later
-* CMake 2.8.10 or later (http://www.cmake.org)
+* CMake 3.0.0 or later (http://www.cmake.org)
 * Recommended C++ Compilers for simple clients (prt4cmd example):
     * GCC 4.4 or later
 * To compile SDK extensions (prt4maya example, stlenc example, custom encoders) it is required to use this **exact** C++ compiler version / boost libraries:
