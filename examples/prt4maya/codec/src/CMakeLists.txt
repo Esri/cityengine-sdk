@@ -24,6 +24,7 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 list(APPEND SOURCES codecs_maya.cpp encoder/MayaEncoder.cpp)
 add_library(${PROJECT} SHARED ${SOURCES})
+add_definitions(-DPRT_VERSION_MAJOR=${PRT_VERSION_MAJOR} -DPRT_VERSION_MINOR=${PRT_VERSION_MINOR})
 
 if(PRT_WINDOWS)
 	target_link_libraries(${PROJECT} IPHlpApi Psapi DbgHelp)
@@ -38,7 +39,7 @@ set_target_properties(${PROJECT} PROPERTIES LINKER_LANGUAGE CXX)
 ### install target
 
 set(CMAKE_INSTALL_PREFIX "${PROJECT_SOURCE_DIR}/../install") 
-install(TARGETS ${PROJECT} DESTINATION lib EXPORT "${PROJECT}Targets")
+install(TARGETS ${PROJECT} EXPORT "${PROJECT}Targets" RUNTIME DESTINATION lib LIBRARY DESTINATION lib)
 install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/encoder/IMayaCallbacks.h DESTINATION include)
 
 
