@@ -107,7 +107,7 @@ Anyone and everyone is welcome to contribute and to extend and improve the examp
 
 ## Licensing
 
-Copyright 2014 Esri
+Copyright 2015 Esri
 
 You may not use the content of this repository except in compliance with the following Licenses:
   1. All content of all directories **except "examples"** is licensed under the CityEngine EULA, see [license/EULA.pdf](license/EULA.pdf).
