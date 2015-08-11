@@ -1,0 +1,61 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$classprtx_1_1_attributable.html" title="prtx::Attributable" alt="" coords="511,301,628,331"/>
+<area shape="rect" id="node3" href="$classprtx_1_1_geometry.html" title="prtx::Geometry" alt="" coords="767,353,876,383"/>
+<area shape="rect" id="node5" href="$classprtx_1_1_material.html" title="prtx::Material" alt="" coords="772,300,871,329"/>
+<area shape="rect" id="node7" href="$classprtx_1_1_shape.html" title="prtx::Shape" alt="" coords="777,221,865,251"/>
+<area shape="rect" id="node9" href="$classprtx_1_1_texture.html" title="prtx::Texture" alt="" coords="773,433,869,463"/>
+<area shape="rect" id="node10" href="$classprtx_1_1_attributable_setter.html" title="prtx::AttributableSetter" alt="" coords="7,336,159,365"/>
+<area shape="rect" id="node12" href="$classprtx_1_1_geometry_builder.html" title="prtx::GeometryBuilder" alt="" coords="232,279,381,308"/>
+<area shape="rect" id="node14" href="$classprtx_1_1_material_builder.html" title="prtx::MaterialBuilder" alt="" coords="752,73,891,103"/>
+<area shape="rect" id="node16" href="$classprtx_1_1_texture_builder.html" title="prtx::TextureBuilder" alt="" coords="239,371,375,400"/>
+<area shape="rect" id="node17" href="$classprtx_1_1_builtin_attributes.html" title="prtx::BuiltinAttributes" alt="" coords="11,169,155,199"/>
+<area shape="rect" id="node19" href="$classprtx_1_1_builtin_attributes_getters.html" title="prtx::BuiltinAttributesGetters" alt="" coords="213,195,400,224"/>
+<area shape="rect" id="node27" href="$classprtx_1_1_builtin_attributes_setters.html" title="prtx::BuiltinAttributesSetters" alt="" coords="213,17,400,47"/>
+<area shape="rect" id="node21" href="$classprtx_1_1_builtin_material_attributes.html" title="prtx::BuiltinMaterialAttributes" alt="" coords="475,248,664,277"/>
+<area shape="rect" id="node24" href="$classprtx_1_1_builtin_shape_attributes.html" title="prtx::BuiltinShapeAttributes" alt="" coords="479,195,660,224"/>
+<area shape="rect" id="node29" href="$classprtx_1_1_builtin_material_attributes_builder.html" title="prtx::BuiltinMaterialAttributes\lBuilder" alt="" coords="475,5,664,51"/>
+<area shape="rect" id="node33" href="$classprtx_1_1_builder.html" title="prtx::Builder\&lt; const\l prt::Annotation \&gt;" alt="" coords="239,909,375,955"/>
+<area shape="rect" id="node37" href="$classprtx_1_1_builder.html" title="prtx::Builder\&lt; const\l prt::EncoderInfo \&gt;" alt="" coords="239,978,375,1025"/>
+<area shape="rect" id="node41" href="$classprtx_1_1_builder.html" title="prtx::Builder\&lt; C \&gt;" alt="" coords="244,1048,369,1077"/>
+<area shape="rect" id="node43" href="$classprtx_1_1_content.html" title="prtx::Content" alt="" coords="257,459,356,488"/>
+<area shape="rect" id="node56" href="$classprtx_1_1_encode_options_annotator.html" title="prtx::EncodeOptionsAnnotator" alt="" coords="208,1101,405,1131"/>
+<area shape="rect" id="node58" href="$classprtx_1_1_encode_preparator.html" title="prtx::EncodePreparator" alt="" coords="229,1155,384,1184"/>
+<area shape="rect" id="node60" href="$classprtx_1_1_extension.html" title="prtx::Extension" alt="" coords="252,1208,361,1237"/>
+<area shape="rect" id="node86" href="$classprtx_1_1_extension_factory.html" title="prtx::ExtensionFactory" alt="" coords="229,1261,384,1291"/>
+<area shape="rect" id="node94" href="$classprtx_1_1_generate_context.html" title="prtx::GenerateContext" alt="" coords="232,1315,381,1344"/>
+<area shape="rect" id="node96" href="$classprtx_1_1_name_preparator.html" title="prtx::NamePreparator" alt="" coords="233,604,380,633"/>
+<area shape="rect" id="node100" href="$classprtx_1_1_reporting_strategy.html" title="prtx::ReportingStrategy" alt="" coords="228,696,385,725"/>
+<area shape="rect" id="node108" href="$classprtx_1_1_reports_accumulator.html" title="prtx::ReportsAccumulator" alt="" coords="221,749,392,779"/>
+<area shape="rect" id="node116" href="$classprtx_1_1_singleton.html" title="prtx::Singleton\&lt; S \&gt;" alt="" coords="237,803,376,832"/>
+<area shape="rect" id="node119" href="$classprtx_1_1_trim_plane.html" title="prtx::TrimPlane" alt="" coords="252,856,361,885"/>
+<area shape="rect" id="node35" href="$classprtx_1_1_annotation_builder.html" title="prtx::AnnotationBuilder" alt="" coords="492,933,647,963"/>
+<area shape="rect" id="node39" href="$classprtx_1_1_encoder_info_builder.html" title="prtx::EncoderInfoBuilder" alt="" coords="488,987,651,1016"/>
+<area shape="rect" id="node45" href="$classprtx_1_1_c_g_b.html" title="prtx::CGB" alt="" coords="529,405,609,435"/>
+<area shape="rect" id="node47" href="$classprtx_1_1_comparable_content.html" title="prtx::ComparableContent" alt="" coords="485,512,653,541"/>
+<area shape="rect" id="node54" href="$classprtx_1_1_mesh.html" title="prtx::Mesh" alt="" coords="528,459,611,488"/>
+<area shape="rect" id="node50" href="$classprtx_1_1_shader.html" title="prtx::Shader" alt="" coords="775,512,868,541"/>
+<area shape="rect" id="node62" href="$classprtx_1_1_adaptor.html" title="prtx::Adaptor" alt="" coords="521,1041,617,1071"/>
+<area shape="rect" id="node66" href="$classprtx_1_1_decoder.html" title="prtx::Decoder" alt="" coords="519,1097,620,1127"/>
+<area shape="rect" id="node78" href="$classprtx_1_1_encoder.html" title="prtx::Encoder" alt="" coords="520,1208,619,1237"/>
+<area shape="rect" id="node64" href="$classprtx_1_1_stream_adaptor.html" title="prtx::StreamAdaptor" alt="" coords="752,888,891,917"/>
+<area shape="rect" id="node68" href="$classprtx_1_1_c_g_b_decoder.html" title="prtx::CGBDecoder" alt="" coords="756,941,887,971"/>
+<area shape="rect" id="node70" href="$classprtx_1_1_geometry_decoder.html" title="prtx::GeometryDecoder" alt="" coords="743,995,900,1024"/>
+<area shape="rect" id="node72" href="$classprtx_1_1_material_decoder.html" title="prtx::MaterialDecoder" alt="" coords="748,1048,895,1077"/>
+<area shape="rect" id="node74" href="$classprtx_1_1_shader_decoder.html" title="prtx::ShaderDecoder" alt="" coords="751,1101,892,1131"/>
+<area shape="rect" id="node76" href="$classprtx_1_1_texture_decoder.html" title="prtx::TextureDecoder" alt="" coords="749,1155,893,1184"/>
+<area shape="rect" id="node80" href="$classprtx_1_1_geometry_encoder.html" title="prtx::GeometryEncoder" alt="" coords="743,1208,900,1237"/>
+<area shape="rect" id="node82" href="$classprtx_1_1_material_encoder.html" title="prtx::MaterialEncoder" alt="" coords="748,1261,895,1291"/>
+<area shape="rect" id="node84" href="$classprtx_1_1_texture_encoder.html" title="prtx::TextureEncoder" alt="" coords="749,1315,893,1344"/>
+<area shape="rect" id="node88" href="$classprtx_1_1_adaptor_factory.html" title="prtx::AdaptorFactory" alt="" coords="499,1261,640,1291"/>
+<area shape="rect" id="node90" href="$classprtx_1_1_decoder_factory.html" title="prtx::DecoderFactory" alt="" coords="497,1315,641,1344"/>
+<area shape="rect" id="node92" href="$classprtx_1_1_encoder_factory.html" title="prtx::EncoderFactory" alt="" coords="497,1368,641,1397"/>
+<area shape="rect" id="node98" href="$classprtx_1_1_default_name_preparator.html" title="prtx::DefaultNamePreparator" alt="" coords="475,565,664,595"/>
+<area shape="rect" id="node102" href="$classprtx_1_1_all_shapes_reporting_strategy.html" title="prtx::AllShapesReporting\lStrategy" alt="" coords="487,618,652,665"/>
+<area shape="rect" id="node104" href="$classprtx_1_1_leaf_shape_reporting_strategy.html" title="prtx::LeafShapeReporting\lStrategy" alt="" coords="484,687,655,734"/>
+<area shape="rect" id="node106" href="$classprtx_1_1_single_shape_reporting_strategy.html" title="prtx::SingleShapeReporting\lStrategy" alt="" coords="479,757,660,803"/>
+<area shape="rect" id="node110" href="$classprtx_1_1_appending_reports_accumulator.html" title="prtx::AppendingReportsAccumulator" alt="" coords="453,827,685,856"/>
+<area shape="rect" id="node114" href="$classprtx_1_1_write_first_reports_accumulator.html" title="prtx::WriteFirstReportsAccumulator" alt="" coords="456,880,683,909"/>
+<area shape="rect" id="node112" href="$classprtx_1_1_summarizing_reports_accumulator.html" title="prtx::SummarizingReports\lAccumulator" alt="" coords="735,818,908,865"/>
+<area shape="rect" id="node120" href="$classprtx_1_1_shared_ptr_builder.html" title="prtx::SharedPtrBuilder\l\&lt; Geometry \&gt;" alt="" coords="8,266,157,313"/>
+<area shape="rect" id="node122" href="$classprtx_1_1_shared_ptr_builder.html" title="prtx::SharedPtrBuilder\l\&lt; Material \&gt;" alt="" coords="495,125,644,171"/>
+</map>

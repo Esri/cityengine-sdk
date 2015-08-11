@@ -1,0 +1,97 @@
+<html>
+
+<head>
+    <title>
+    texture
+    </title>
+    <link rel="stylesheet" href="../manual_style.css" type="text/css" />
+</head>
+
+<body>
+<div class="content">
+
+<!-- HEADER (use only on bookchapters) -->
+
+    <table summary="" class="header">
+        <tr>
+            <td align="left" class="helphead_l"><a href="../toc.html"><div class="helplink">&nbsp;</div></a></td>
+            <td align="right" class="helphead_r"></td>
+        </tr>
+    </table>
+
+
+<!-- CONTENT -->
+
+<h1>texture</h1>
+<h2>Synopsis</h2>
+
+<p class="code2">texture(string <span class="cga_opparam">texturePath</span>)</p>
+
+        <h2>
+        Parameters        </h2>
+        <ul>
+		<li><span class="cga_opparam">texturePath</span> (string)<br>
+		  Name of the texture file to insert. See <a class="normw" href="cga_assetSearch.html">
+		Asset Search</a> for information about search locations and <a class="normw" href="cga_builtinAssets.html">Built-in Assets</a> for a list of built-in textures. Supported image formats are listed in <a class="normw" href="cga_texturing.html">Texturing Essentials</a>.</li>
+        
+        
+  </ul>
+
+
+        <p class="info">This function uses the file specified in the <span class="cga_opparam">texturePath</span> to texture the current shape (colormap channel).</p>
+		<p class="notes">Note: The "texture" command is the simplified version of "set(material.colormap,..).</p>
+		<p class="notes">Note: The "texture" command does not create texture coordinates!</p>
+
+
+<h2>Related</h2>
+<ul>
+  <li><a class="normw" href="op_deleteUV.html">deleteUV operation</a></li>
+  <li><a class="normw" href="op_normalizeUV.html">normalizeUV operation</a></li>
+  <li><a class="normw" href="op_projectUV.html">projectUV operation</a></li>
+  <li><a class="normw" href="op_rotateUV.html">rotateUV operation</a></li>
+  <li><a class="normw" href="op_scaleUV.html">scaleUV operation</a></li>
+  <li><a class="normw" href="op_setupProjection.html">setupProjection operation</a></li>
+  <li><a class="normw" href="op_translateUV.html">translateUV operation</a></li>
+  <li><a class="normw" href="attr_material_map.html"> material.map attribute</a></li>
+</ul>
+
+
+<h2>Examples</h2>
+
+<pre class="code3">
+brickMap = "assets/bricks.jpg"
+randBuildingHeight = rand(3,20)
+
+Lot -->
+s('.75,'1,'.75)
+center(xz)
+extrude(y, randBuildingHeight)
+comp(f){side: Facade | top: set(material.color.a, .3) Roof.}
+
+Facade -->
+	# color, uv set 0
+	setupProjection(0, scope.xy, 5, 5)
+	texture(brickMap)
+	// = set(material.colormap,brickMap)
+	projectUV(0)
+</pre>
+
+<img src="images/textureExample.jpg"></img>
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- FOOTER -->
+<p class="foot">Copyright &copy;2008-2015 Esri R&D Center Zurich. All rights reserved.</p>				  
+
+</div>
+</body>
+</html>

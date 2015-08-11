@@ -1,0 +1,79 @@
+<html>
+
+<head>
+	<title>
+	split Shape Attribute
+	</title>
+    <link rel="stylesheet" href="../manual_style.css" type="text/css" />
+</head>
+
+<body>
+<div class="content">
+
+<!-- HEADER (use only on bookchapters) -->
+
+	<table summary="" class="header">
+		<tr>
+			<td align="left" class="helphead_l"><a href="../toc.html"><div class="helplink">&nbsp;</div></a></td>
+			<td align="right" class="helphead_r"></td>
+		</tr>
+	</table>
+
+
+
+<!-- CONTENT -->
+
+		<h1>
+		trim shape attribute 
+		</h1>
+		<h2>
+		Synopsis
+		</h2>
+      	<p class="code2"><a name="horizontal"></a><a name="vertical"></a>bool trim.{horizontal | vertical}</p>
+	</span></p>
+      	
+
+		<p class="text"><img alt="" class="icon" src="../images/info_icon.jpg">
+		The trim shape attribute consists of a two booleans. It is used to control the application of trim planes to the current shape and its successors. Classification of the trim planes depends on the orientation of the edge which was used to define the trim plane (i.e. the shared edge between two pre-component split faces): if the angle to the xz-plane of the pivot is less than 40 degrees, the trim plane is <em>horizontal</em>, otherwise <em>vertical</em>.
+        
+        <br><p class="piccaptioncentered"><img src="images/trim-plane_classification.png"><br>
+        Classification of a trim planes depends on the angle between the ''generating'' edge (pink) and the xz plane of the pivot.</p>
+
+        <p>
+		Set the attribute to enable or disable the trim planes in <span class="codelight">horizontal</span> 
+		or <span class="codelight">vertical</span> direction.
+        
+   		<p class="notes">Note: horizontal trim planes are disabled by default. To enable them, use <br><span class="codelight">set(trim.horizontal, true)</span>.
+
+        
+<!--  Sample Code Formatting -->
+		</p>
+		
+		<h2>
+		Related
+		</h2>
+		<ul>
+		<li>
+		<a class="normw" href="op_comp.html">
+		comp operation</a></li>
+		<li>
+		<a class="normw" href="op_i.html">
+		insert operation</a>		</li>
+		<li>
+		<a class="normw" href="op_set.html">
+		set operation</a>		</li>
+		<li>
+		<a class="normw" href="op_trim.html">
+		trim operation</a>		</li>
+		  <!-- FOOTER -->
+		</ul>
+		
+	
+        <p>&nbsp; </p>
+  <p class="foot">Copyright &copy;2008-2015 Esri R&D Center Zurich. All rights reserved.</p>				  
+
+<!-- END CENTERED CONTENT -->
+
+</div>
+</body>
+</html>
