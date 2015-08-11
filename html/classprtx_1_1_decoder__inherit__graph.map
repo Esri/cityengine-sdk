@@ -1,8 +1,0 @@
-<map id="prtx::Decoder" name="prtx::Decoder">
-<area shape="rect" id="node7" href="$classprtx_1_1_c_g_b_decoder.html" title="prtx::CGBDecoder" alt="" coords="473,5,604,35"/>
-<area shape="rect" id="node9" href="$classprtx_1_1_geometry_decoder.html" title="prtx::GeometryDecoder" alt="" coords="460,59,617,88"/>
-<area shape="rect" id="node11" href="$classprtx_1_1_material_decoder.html" title="prtx::MaterialDecoder" alt="" coords="465,112,612,141"/>
-<area shape="rect" id="node13" href="$classprtx_1_1_shader_decoder.html" title="prtx::ShaderDecoder" alt="" coords="468,165,609,195"/>
-<area shape="rect" id="node15" href="$classprtx_1_1_texture_decoder.html" title="prtx::TextureDecoder" alt="" coords="467,219,611,248"/>
-<area shape="rect" id="node2" href="$classprtx_1_1_extension.html" title="prtx::Extension" alt="" coords="151,112,260,141"/>
-</map>

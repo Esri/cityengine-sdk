@@ -1,7 +1,0 @@
-<map id="prtx::MaterialBuilder" name="prtx::MaterialBuilder">
-<area shape="rect" id="node2" href="$classprtx_1_1_shared_ptr_builder.html" title="prtx::SharedPtrBuilder\l\&lt; Material \&gt;" alt="" coords="453,5,603,51"/>
-<area shape="rect" id="node4" href="$classprtx_1_1_attributable_setter.html" title="prtx::AttributableSetter" alt="" coords="452,75,604,104"/>
-<area shape="rect" id="node6" href="$classprtx_1_1_builtin_material_attributes_builder.html" title="prtx::BuiltinMaterialAttributes\lBuilder" alt="" coords="433,127,623,174"/>
-<area shape="rect" id="node8" href="$classprtx_1_1_builtin_attributes_setters.html" title="prtx::BuiltinAttributesSetters" alt="" coords="197,136,384,165"/>
-<area shape="rect" id="node10" href="$classprtx_1_1_builtin_attributes.html" title="prtx::BuiltinAttributes" alt="" coords="5,136,149,165"/>
-</map>
