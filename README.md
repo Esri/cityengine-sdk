@@ -93,6 +93,9 @@ Please note that the individual example READMEs may include further requirements
     * boost 1.53 headers and binaries (http://www.boost.org)
 
 ## Further Resources
+* Documentation:
+    * Online: https://esri.github.io/esri-cityengine-sdk
+    * Offline: see /doc subdirectory inside the release archive
 * Forum: 
     * General CityEngine: http://forums.arcgis.com/forums/204-CityEngine-General-Discussion
     * CityEngine SDK: http://forums.arcgis.com/forums/270-CityEngine-SDK
