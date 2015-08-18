@@ -22,7 +22,7 @@ SOFTWARE REQUIREMENTS
 ---------------------
 
 - see "General Software Requirements - Linux or MacOSX, for simple clients"
-- Boost libraries 1.41 or later (binary build for your compiler / platform, http://www.boost.org)
+- Boost libraries 1.53 or later (binary build for your compiler / platform, http://www.boost.org)
 
 
 BUILD INSTRUCTIONS

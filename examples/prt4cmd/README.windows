@@ -22,7 +22,7 @@ SOFTWARE REQUIREMENTS
 ---------------------
 
 - see "General Software Requirements - Windows, for simple clients"
-- Boost libraries 1.41 or later (binary build for your compiler / platform, http://www.boost.org or
+- Boost libraries 1.53 or later (binary build for your compiler / platform, http://www.boost.org or
   http://boost.teeks99.com)
 
 
