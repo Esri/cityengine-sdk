@@ -9,7 +9,7 @@
  * Written by Simon Haegler
  * Esri R&D Center Zurich, Switzerland
  *
- * Copyright 2014 Esri R&D Center Zurich
+ * Copyright 2015 Esri R&D Center Zurich
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
