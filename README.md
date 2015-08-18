@@ -52,45 +52,39 @@ Please note that the individual example READMEs may include further requirements
 
 #### All Platforms
 * To load custom encoders built with this SDK in CityEngine, at least CityEngine 2014.0 is required.
+* License for matching CityEngine
+* CMake 3.0.0 or later (http://www.cmake.org)
+* Optionally for custom SDK extension: boost 1.53 headers and binaries (using the same compiler as specified below)
+    * Get the boost 1.53 headers from http://www.boost.org
 
 #### Windows
-* Windows 7 or later (32bit and 64bit)
-* License for CityEngine 2013 or later
+* Windows 7 or later (32bit or 64bit)
 * NMake 10.0 or later (part of Visual Studio)
-* CMake 3.0.0 or later (http://www.cmake.org)
 * Recommended C++ Compilers for simple clients (prt4cmd example):
-    * Microsoft VC 10.0 or later
-* To compile SDK extensions (prt4maya example, stlenc example, custom encoders) it is required to use one of these **exact** C++ compiler version / boost libraries:
+    * VC10 or later
+* To compile SDK extensions (e.g. the stlenc example or a custom encoder) for **use in CityEngine 2014.0 up to 2015.2**, it is required to use this exact compiler:
     * Microsoft VC10 C++ Compiler (cl.exe) 16.00.40219.01, included in Visual Studio 2010 SP1
+* Otherwise (e.g. the prt4maya example), also the VC11 compiler is supported:
     * Microsoft VC11 C++ Compiler (cl.exe) 17.00.61030.0, included in Visual Studio 2012 SP4
-    * boost 1.53 headers and binaries 
-        * get the boost 1.53 headers from http://www.boost.org
-        * get the boost 1.53 pre-compiled binaries from http://boost.teeks99.com (e.g. boost_1_53_0-vc64-bin.exe or boost_1_53_0-vc32-bin.exe)
-        * note: if you compile boost yourself, the boost libraries need to be compiled with correct compiler (VC 10)
+* Pre-compiled boost libraries for VC10 or VC11 can be obtained from http://boost.teeks99.com (e.g. boost_1_53_0-vc64-bin.exe or boost_1_53_0-vc32-bin.exe)
 
 #### MacOSX
-* MacOSX 10.7 or later (64bit only)
-* License for CityEngine 2013 or later
+* To compile: MacOSX 10.7
+* To run: MacOSX 10.7 or later
 * GNU Make 3.82 or later
-* CMake 3.0.0 or later (http://www.cmake.org)
 * Recommended C++ Compilers for simple clients (prt4cmd example):
     * GCC 4.2.1 or later
-    * Clang 3.0 or later
-* To compile SDK extensions (prt4maya example, stlenc example, custom encoders) it is required to use this **exact** C++ compiler version / boost libraries:
+* To compile SDK extensions (e.g. prt4maya example or the stlenc example for use in CityEngine) it is required to use this **exact** C++ compiler version:
     * Apple GCC 4.2.1 included in:
         * XCode 4.2 and MacOSX SDK 10.7 (Based on Apple Inc. build 5658, LLVM build 2336.1.00)
-    * boost 1.53 headers and binaries (e.g. via homebrew or directly from http://www.boost.org)
 
 #### Linux
 * RedHat Enterprise Linux 6.x or compatible (64bit only)
-* License for CityEngine 2013 or later
 * GNU Make 3.82 or later
-* CMake 3.0.0 or later (http://www.cmake.org)
 * Recommended C++ Compilers for simple clients (prt4cmd example):
     * GCC 4.4 or later
-* To compile SDK extensions (prt4maya example, stlenc example, custom encoders) it is required to use this **exact** C++ compiler version / boost libraries:
+* To compile SDK extensions (e.g. prt4maya example or the stlenc example for use in CityEngine) it is required to use this **exact** C++ compiler version:
     * GCC 4.4.7 64bit included in RedHat Enterprise Linux 6.4 Package Repository
-    * boost 1.53 headers and binaries (http://www.boost.org)
 
 ## Further Resources
 * Documentation:
