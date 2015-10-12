@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['fetchfinalizedinstances',['fetchFinalizedInstances',['../classprtx_1_1_encode_preparator.html#a05e4bf9e7394c000b8def852f61b36ac',1,'prtx::EncodePreparator']]],
+  ['fetchfinalizedinstances',['fetchFinalizedInstances',['../classprtx_1_1_encode_preparator.html#abde29e7a3351acc67746b8b26d2761be',1,'prtx::EncodePreparator']]],
   ['fileextensions',['FileExtensions',['../classprtx_1_1_file_extensions.html#ab37caaf6d8d82bf423b217cf3e7a784c',1,'prtx::FileExtensions::FileExtensions(const std::wstring &amp;e)'],['../classprtx_1_1_file_extensions.html#ad5a09b34fabc8486fdd26ab556f990f3',1,'prtx::FileExtensions::FileExtensions(const WStringVector &amp;v)']]],
   ['finalize',['finalize',['../classprtx_1_1_reports_accumulator.html#af336a21263086dddfe22f76e295acfea',1,'prtx::ReportsAccumulator']]],
   ['finish',['finish',['../classprtx_1_1_encoder.html#af64bcbbeb6522f48009fa9d8a90bd61d',1,'prtx::Encoder']]],

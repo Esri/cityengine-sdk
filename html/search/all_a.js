@@ -14,5 +14,6 @@ var searchData=
   ['logformatter',['LogFormatter',['../classprtx_1_1_log_formatter.html#accdb8984a304bb0613b8748971282ea9',1,'prtx::LogFormatter::LogFormatter(prt::LogLevel l)'],['../classprtx_1_1_log_formatter.html#a7842b2226837982224f6117eafa2edb3',1,'prtx::LogFormatter::LogFormatter(prt::LogLevel l, const std::string &amp;s)'],['../classprtx_1_1_log_formatter.html#aac8aa49d7fe5305003e8a2509083d18e',1,'prtx::LogFormatter::LogFormatter(prt::LogLevel l, const std::string &amp;s, const std::string &amp;p)'],['../classprtx_1_1_log_formatter.html#af3af1c3c2f80e2f7619f66c62a40f54c',1,'prtx::LogFormatter::LogFormatter(prt::LogLevel l, const std::exception &amp;e)'],['../classprtx_1_1_log_formatter.html#a8aa6b2002e2fb69b15c46b42dc18b334',1,'prtx::LogFormatter::LogFormatter(prt::LogLevel l, const std::string &amp;s, const std::exception &amp;e)']]],
   ['logformatterw',['LogFormatterW',['../classprtx_1_1_log_formatter_w.html',1,'prtx']]],
   ['loghandler',['LogHandler',['../classprt_1_1_log_handler.html',1,'prt']]],
-  ['loglevel',['LogLevel',['../namespaceprt.html#ac35a3cef5502bd6490d1742bd427916a',1,'prt']]]
+  ['loglevel',['LogLevel',['../namespaceprt.html#ac35a3cef5502bd6490d1742bd427916a',1,'prt']]],
+  ['logstats',['logStats',['../classprt_1_1_simple_output_callbacks.html#a00487364ce861c5faee31fdfca15bcc9',1,'prt::SimpleOutputCallbacks']]]
 ];

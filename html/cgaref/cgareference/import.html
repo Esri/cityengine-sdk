@@ -31,6 +31,7 @@
   <p class="code2">import <i>id( style-id_1, ... , style-id_n)</i> : <i>&quot;file.cga&quot;</i></p>
   <p class="code2">import <i>id</i> : <i>&quot;file.cga&quot; ( attribute_1, ... , attribute_n )</i></p>
   <p class="code2">import <i>id</i> : <i>&quot;file.cga&quot; ( attribute_1 = value, ... , attribute_n = value )</i></p>
+  <p class="code2">import <i>id</i> : <i>&quot;file.cga&quot; ()</i></p>
         
         
         
@@ -52,6 +53,8 @@
      rule file can additionally specify a new value for the attribute by redefining an attribute with an expression as in the 
      fourth form of the import statement (&quot;attribute_1 = value, ... , attribute_n = value&quot;) where the right hand side
      expression is evaluated in the scope of the <i>importing</i> rule file.
+     <p>
+     Using empty parantheses protects all imported attributes.
       </p><p>
       Setting the attribute source of an imported attribute in the inspector to something else than &quot;Rule-defined value&quot; will
       disable this behavior for that attribute completely and the value will be taken from the designated source instead.

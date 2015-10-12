@@ -11,9 +11,10 @@ var classprt_1_1_cache =
     [ "flushEntry", "classprt_1_1_cache.html#a5a2c8e1d7f807aaedeeb149db5ba52cd", null ],
     [ "getPersistentBlob", "classprt_1_1_cache.html#a38b743ee5a3cc5eb3433c68d49f094f6", null ],
     [ "getTransientBlob", "classprt_1_1_cache.html#a2383024ae3bfb8ed36ac6ef10cee776c", null ],
+    [ "insertAndGetTransientBlob", "classprt_1_1_cache.html#ad2948bd4bbfb48d86f2b6e532bbc32ca", null ],
     [ "insertPersistentBlobAndLock", "classprt_1_1_cache.html#aff97c1c7936e43ef9f91a6b51bb424fe", null ],
-    [ "insertTransientBlob", "classprt_1_1_cache.html#a0134f77b66fc48c8bae793abbc18484a", null ],
     [ "releasePersistentBlob", "classprt_1_1_cache.html#a09ca633a92fc8b2ddf2020f3a00eb51e", null ],
+    [ "releaseTransientBlob", "classprt_1_1_cache.html#a62e1d3519b0f0045d44d2733ccbd4557", null ],
     [ "tryLockPersistentBlobs", "classprt_1_1_cache.html#a87ac2223c59fd73ea116b36adc9db8ad", null ],
     [ "unlockPersistentBlob", "classprt_1_1_cache.html#a167cf1542480b24cf3debb42ef2db3a5", null ]
 ];

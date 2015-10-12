@@ -3,7 +3,7 @@ var searchData=
   ['range',['RANGE',['../namespaceprtx_1_1_annotations.html#abdcdb1cd62295bc421c45b8be3a2be0d',1,'prtx::Annotations']]],
   ['readuri',['readURI',['../namespaceprtx_1_1_data_backend.html#a6f0e5478aa4d2481589148dc0cb2fd38',1,'prtx::DataBackend']]],
   ['releasepersistentblob',['releasePersistentBlob',['../classprt_1_1_cache.html#a09ca633a92fc8b2ddf2020f3a00eb51e',1,'prt::Cache']]],
-  ['releasetransientblob',['releaseTransientBlob',['../classprt_1_1_cache.html#a05aa7cff51e3f8035cc9b7a249566ff6',1,'prt::Cache']]],
+  ['releasetransientblob',['releaseTransientBlob',['../classprt_1_1_cache.html#a62e1d3519b0f0045d44d2733ccbd4557',1,'prt::Cache']]],
   ['removeloghandler',['removeLogHandler',['../namespaceprt.html#a0e58922795880d9c4e5200f05ca0ae07',1,'prt']]],
   ['removequery',['removeQuery',['../namespaceprtx_1_1_u_r_i_utils.html#a83543cfe5b67025b514db5ce4d8459a7',1,'prtx::URIUtils']]],
   ['replaceextension',['replaceExtension',['../namespaceprtx_1_1_u_r_i_utils.html#a3997ca016b3c6203f1923168a167c4c1',1,'prtx::URIUtils']]],

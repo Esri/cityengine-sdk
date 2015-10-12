@@ -21,6 +21,7 @@ var classprt_1_1_simple_output_callbacks =
     [ "closeCGAError", "classprt_1_1_simple_output_callbacks.html#aaf9ce41611c99b93e7cb8d925bafedae", null ],
     [ "closeCGAPrint", "classprt_1_1_simple_output_callbacks.html#aaee9991b1c1bc42e424487609567f7b2", null ],
     [ "closeCGAReport", "classprt_1_1_simple_output_callbacks.html#a0d9eb4cd8c6b491ecb9c01057539492a", null ],
+    [ "logStats", "classprt_1_1_simple_output_callbacks.html#a00487364ce861c5faee31fdfca15bcc9", null ],
     [ "open", "classprt_1_1_simple_output_callbacks.html#afb479768e86b1cb86515a633674157a4", null ],
     [ "openCGAError", "classprt_1_1_simple_output_callbacks.html#af07c0a27a169bf26129838f370621c29", null ],
     [ "openCGAPrint", "classprt_1_1_simple_output_callbacks.html#a4f357c8dce0c63684b7cd920b212d90d", null ],

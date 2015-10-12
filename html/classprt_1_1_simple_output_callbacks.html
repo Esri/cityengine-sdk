@@ -31,7 +31,7 @@
   <td id="projectlogo"><img alt="Logo" src="esri_prt_55px.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Esri Procedural Runtime
-   &#160;<span id="projectnumber">1.3.0</span>
+   &#160;<span id="projectnumber">1.4.2074</span>
    </div>
   </td>
  </tr>
@@ -194,6 +194,8 @@ virtual <a class="el" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4"
 <tr class="memitem:a0d9eb4cd8c6b491ecb9c01057539492a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0d9eb4cd8c6b491ecb9c01057539492a"></a>
 virtual <a class="el" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a>&#160;</td><td class="memItemRight" valign="bottom"><b>closeCGAReport</b> ()=0</td></tr>
 <tr class="separator:a0d9eb4cd8c6b491ecb9c01057539492a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00487364ce861c5faee31fdfca15bcc9"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprt_1_1_simple_output_callbacks.html#a00487364ce861c5faee31fdfca15bcc9">logStats</a> (uint64_t handle, const size_t *isIndices, size_t isCount, <a class="el" href="namespaceprt.html#a0bbc8b7c3113196a20860f569f833b2d">ContentType</a> contentType, const <a class="el" href="classprt_1_1_attribute_map.html">prt::AttributeMap</a> *stats)</td></tr>
+<tr class="separator:a00487364ce861c5faee31fdfca15bcc9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afb479768e86b1cb86515a633674157a4"><td class="memItemLeft" align="right" valign="top">virtual uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprt_1_1_simple_output_callbacks.html#afb479768e86b1cb86515a633674157a4">open</a> (const wchar_t *encoderId, const <a class="el" href="namespaceprt.html#a0bbc8b7c3113196a20860f569f833b2d">ContentType</a> contentType, const wchar_t *name, <a class="el" href="classprt_1_1_simple_output_callbacks.html#a0a58825fa70a8cedacd2c3a9734b3217">StringEncoding</a> enc=SE_NATIVE, <a class="el" href="classprt_1_1_simple_output_callbacks.html#aded1c7f05390e59a3be8e897f39ee2ca">OpenMode</a> mode=OPENMODE_ALWAYS, <a class="el" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">prt::Status</a> *stat=0)=0</td></tr>
 <tr class="separator:afb479768e86b1cb86515a633674157a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af07c0a27a169bf26129838f370621c29"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprt_1_1_simple_output_callbacks.html#af07c0a27a169bf26129838f370621c29">openCGAError</a> (const wchar_t *name)=0</td></tr>
@@ -352,6 +354,70 @@ virtual <a class="el" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4"
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>status. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a00487364ce861c5faee31fdfca15bcc9"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a> prt::SimpleOutputCallbacks::logStats </td>
+          <td>(</td>
+          <td class="paramtype">uint64_t&#160;</td>
+          <td class="paramname"><em>handle</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const size_t *&#160;</td>
+          <td class="paramname"><em>isIndices</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>isCount</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceprt.html#a0bbc8b7c3113196a20860f569f833b2d">ContentType</a>&#160;</td>
+          <td class="paramname"><em>contentType</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classprt_1_1_attribute_map.html">prt::AttributeMap</a> *&#160;</td>
+          <td class="paramname"><em>stats</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Passes meta-data about the written entity to the client (e.g. polygon count, mesh names, etc.) All arrays in the meta-data are interepreted as follows: The i-th element of each array belongs to the same object and will be grouped. Therefore all arrays need to have equal length.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">handle</td><td>Handle of entity. </td></tr>
+    <tr><td class="paramname">isIndices</td><td>All indices that contributed to the contents of this entity </td></tr>
+    <tr><td class="paramname">isCount</td><td>The length of the array given in isIndices </td></tr>
+    <tr><td class="paramname">contentType</td><td>The type for which meta-data is passed </td></tr>
+    <tr><td class="paramname">stats</td><td>The meta-data that is passed to the client </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>status </dd></dl>
 
 </div>
 </div>
@@ -717,7 +783,7 @@ virtual <a class="el" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4"
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespaceprt.html">prt</a></li><li class="navelem"><a class="el" href="classprt_1_1_simple_output_callbacks.html">SimpleOutputCallbacks</a></li>
-    <li class="footer">Generated on Tue Jun 16 2015 00:06:23 for Esri Procedural Runtime by
+    <li class="footer">Generated on Mon Sep 28 2015 22:14:27 for Esri Procedural Runtime by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.7 </li>
   </ul>

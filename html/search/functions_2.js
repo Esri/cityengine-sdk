@@ -41,6 +41,7 @@ var searchData=
   ['createstreamadaptor',['createStreamAdaptor',['../classprtx_1_1_extension_manager.html#a28593c0c8e3353a4a8052e461272ea24',1,'prtx::ExtensionManager']]],
   ['createtexture',['createTexture',['../classprtx_1_1_texture_builder.html#a6b77ecdc996ea482860fea14f0e0f55f',1,'prtx::TextureBuilder']]],
   ['createtextureandreset',['createTextureAndReset',['../classprtx_1_1_texture_builder.html#ab439738ceb1f97a85c172e442fb41adc',1,'prtx::TextureBuilder']]],
+  ['createtextureatlases',['createTextureAtlases',['../classprtx_1_1_encode_preparator_1_1_preparation_flags.html#ae6687c55ad69c31793e7402dbbcc506c',1,'prtx::EncodePreparator::PreparationFlags']]],
   ['createtexturemetadata',['createTextureMetadata',['../namespaceprt.html#a712216cfa8a8e79f00e9bbce25c5be33',1,'prt']]],
   ['createtriangulatedmesh',['createTriangulatedMesh',['../namespaceprtx_1_1_mesh_utils.html#ac85e134acfe68559e3af8e02b63ba8fd',1,'prtx::MeshUtils']]],
   ['createvalidatedoptionsandstates',['createValidatedOptionsAndStates',['../classprt_1_1_encoder_info.html#a88f249ddddd784bab2f731963c9693c2',1,'prt::EncoderInfo']]]

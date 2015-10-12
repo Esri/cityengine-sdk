@@ -5,7 +5,7 @@
 </head>
 <body>
 <h1>Esri Procedural Runtime Encoder/Decoder Reference</h1>
-<small>(Automatically generated from PRT 1.3.1969; Build Date: 2015-06-15 16:08; Build Configuration: PRT_BC_REL PRT_CC_OPT)</small><p>This is the PRT reference documentation for all built-in encoders and decoders.</p>
+<small>(Automatically generated from PRT 1.4.2074; Build Date: 2015-09-28 17:32; Build Configuration: PRT_BC_REL PRT_CC_OPT)</small><p>This is the PRT reference documentation for all built-in encoders and decoders.</p>
 <p>The encoder documentation lists for each encoder its supported encoder options. In PRT, the encoder options
 	are stored in an object of type prt::AttributeMap, therefore the term "attribute" is used synonymously in this
 	document for a single encoder option. Each attribute consists of a type, a default value and (optional)
@@ -121,6 +121,46 @@
 	
 	
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	<tr>
+<td>facesWithHoles</td>
+<td>str</td>
+<td>PASS</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Faces With Holes<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Specifies how faces with holes should be handled during the export.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 9080<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Geometry Settings<br>order:float = 2<br>
+</td>
+</tr>
+		<tr>
+<td>@Range</td>
+<td>PASS:str = Write as holes<br>TRIANGULATE_FACES_WITH_HOLES:str = Triangulate faces with holes<br>DISCARD_HOLES:str = Discard holes<br>CONVERT_HOLES_TO_FACES:str = Convert holes to faces<br>
+</td>
+</tr>
+	</table></td>
+</tr>
 	<tr>
 <td>triangulateMeshes</td>
 <td>bool</td>
@@ -148,6 +188,7 @@
 </tr>
 	</table></td>
 </tr>
+	
 	<tr>
 <td>mergeTexcoords</td>
 <td>bool</td>
@@ -176,38 +217,7 @@
 	</table></td>
 </tr>
 	
-	<tr>
-<td>texcoordPrecision</td>
-<td>float</td>
-<td>1.0e-04</td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Texture Coordinate Precision<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Specifies the minimal distance between texels.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 9030<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = Geometry Settings<br>order:float = 2<br>
-</td>
-</tr>
-		<tr>
-<td>@Range</td>
-<td>0:float = 1e-05<br>1:float = 1<br>
-</td>
-</tr>
-	</table></td>
-</tr>
+	
 	<tr>
 <td>normalPrecision</td>
 <td>float</td>
@@ -226,40 +236,6 @@
 		<tr>
 <td>@Order</td>
 <td>:float = 9020<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = Geometry Settings<br>order:float = 2<br>
-</td>
-</tr>
-		<tr>
-<td>@Range</td>
-<td>0:float = 1e-05<br>1:float = 1<br>
-</td>
-</tr>
-	</table></td>
-</tr>
-	
-	
-	<tr>
-<td>vertexPrecision</td>
-<td>float</td>
-<td>0.001</td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Vertex Precision<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Specifies the minimal distance between vertices.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 9010<br>
 </td>
 </tr>
 		<tr>
@@ -306,6 +282,37 @@
 </tr>
 	</table></td>
 </tr>
+	<tr>
+<td>globalOffset</td>
+<td>float_array</td>
+<td></td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Global Offset<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Global (= for all shapes/models) offset for exported geometry.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 7020<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Geometry Settings<br>order:float = 2<br>
+</td>
+</tr>
+		<tr>
+<td>@Point3D</td>
+<td></td>
+</tr>
+	</table></td>
+</tr>
 	
 	<tr>
 <td>textureCoordinates</td>
@@ -335,34 +342,6 @@
 		<tr>
 <td>@Range</td>
 <td>NONE:str = Do not write any UVs<br>FIRST:str = Only write first layer of UVs<br>ALL:str = Write all UV layers<br>
-</td>
-</tr>
-	</table></td>
-</tr>
-	
-	<tr>
-<td>mergeVertices</td>
-<td>bool</td>
-<td>true</td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Merge Vertices Within Precision<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Finds co-incidental vertices (using the precision distance) and shares their index.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 9040<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = Geometry Settings<br>order:float = 2<br>
 </td>
 </tr>
 	</table></td>
@@ -400,6 +379,93 @@
 	</table></td>
 </tr>
 	<tr>
+<td>mergeVertices</td>
+<td>bool</td>
+<td>true</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Merge Vertices Within Precision<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Finds co-incidental vertices (using the precision distance) and shares their index.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 9040<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Geometry Settings<br>order:float = 2<br>
+</td>
+</tr>
+	</table></td>
+</tr>
+	<tr>
+<td>texcoordPrecision</td>
+<td>float</td>
+<td>1.0e-04</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Texture Coordinate Precision<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Specifies the minimal distance between texels.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 9030<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Geometry Settings<br>order:float = 2<br>
+</td>
+</tr>
+		<tr>
+<td>@Range</td>
+<td>0:float = 1e-05<br>1:float = 1<br>
+</td>
+</tr>
+	</table></td>
+</tr>
+	<tr>
+<td>createTextureAtlases</td>
+<td>bool</td>
+<td>false</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Create Texture Atlases<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Creates texture atlases which combine a set of textures into one, thus reducing the number of textures and materials. All textures except COLORMAPs are removed.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 4030<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Texture Settings<br>order:float = 4<br>
+</td>
+</tr>
+	</table></td>
+</tr>
+	
+	<tr>
 <td>collectTextures</td>
 <td>bool</td>
 <td>true</td>
@@ -426,7 +492,6 @@
 </tr>
 	</table></td>
 </tr>
-	
 	<tr>
 <td>includeMaterials</td>
 <td>bool</td>
@@ -513,6 +578,8 @@
 </tr>
 	</table></td>
 </tr>
+	
+	
 	<tr>
 <td>mergeNormals</td>
 <td>bool</td>
@@ -540,8 +607,6 @@
 </tr>
 	</table></td>
 </tr>
-	
-	
 	<tr>
 <td>meshGranularity</td>
 <td>str</td>
@@ -574,6 +639,7 @@
 </tr>
 	</table></td>
 </tr>
+	
 	<tr>
 <td>baseName</td>
 <td>str</td>
@@ -602,33 +668,56 @@
 	</table></td>
 </tr>
 	<tr>
-<td>globalOffset</td>
-<td>float_array</td>
-<td></td>
+<td>createShapeGroups</td>
+<td>bool</td>
+<td>false</td>
 <td><table class="doxtable">
 		<tr>
 <td>@Label</td>
-<td>:str = Global Offset<br>
+<td>:str = Create Shape Groups<br>
 </td>
 </tr>
 		<tr>
 <td>@Description</td>
-<td>:str = Global (= for all shapes/models) offset for exported geometry.<br>
+<td>:str = Create a group/transformation node per shape. Note that generated geometry is only merged inside a shape if enabled.<br>
 </td>
 </tr>
 		<tr>
 <td>@Order</td>
-<td>:float = 7020<br>
+<td>:float = 3030<br>
 </td>
 </tr>
 		<tr>
 <td>@Group</td>
-<td>name:str = Geometry Settings<br>order:float = 2<br>
+<td>name:str = Granularity Settings<br>order:float = 1<br>
+</td>
+</tr>
+	</table></td>
+</tr>
+	<tr>
+<td>writeLog</td>
+<td>bool</td>
+<td>false</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Write Log<br>
 </td>
 </tr>
 		<tr>
-<td>@Point3D</td>
-<td></td>
+<td>@Description</td>
+<td>:str = Write log file with statistics about this export session.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 7005<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Advanced Settings<br>order:float = 5<br>
+</td>
 </tr>
 	</table></td>
 </tr>
@@ -660,33 +749,6 @@
 		<tr>
 <td>@Range</td>
 <td>OVERWRITE:str = Overwrite existing files<br>SKIP:str = Skip existing files<br>
-</td>
-</tr>
-	</table></td>
-</tr>
-	<tr>
-<td>createShapeGroups</td>
-<td>bool</td>
-<td>false</td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Create Shape Groups<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Create a group/transformation node per shape. Note that generated geometry is only merged inside a shape if enabled.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 3030<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = Granularity Settings<br>order:float = 1<br>
 </td>
 </tr>
 	</table></td>
@@ -724,6 +786,38 @@
 </tr>
 	
 	<tr>
+<td>maxAtlasDim</td>
+<td>int</td>
+<td>11</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Texture Atlas Max Dimension (2^n)<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Specifies the maximal dimension of the texture atlases in power-of-2 pixels, e.g. 11 gives a 2048x2048 Atlas.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 4040<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Texture Settings<br>order:float = 4<br>
+</td>
+</tr>
+		<tr>
+<td>@Range</td>
+<td>0:float = 4<br>1:float = 16<br>
+</td>
+</tr>
+	</table></td>
+</tr>
+	<tr>
 <td>globalScalingFactor</td>
 <td>float</td>
 <td>1.0</td>
@@ -751,6 +845,33 @@
 		<tr>
 <td>@Range</td>
 <td>0:float = 1e-05<br>1:float = 10000<br>
+</td>
+</tr>
+	</table></td>
+</tr>
+	<tr>
+<td>atlasAddWrapBorder</td>
+<td>bool</td>
+<td>true</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Texture Atlas Border<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Add a border of clamped pixels to protect against wrap mode bleeding.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 4060<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Texture Settings<br>order:float = 4<br>
 </td>
 </tr>
 	</table></td>
@@ -786,25 +907,24 @@
 </tr>
 	</table></td>
 </tr>
-	
 	<tr>
-<td>facesWithHoles</td>
-<td>str</td>
-<td>PASS</td>
+<td>vertexPrecision</td>
+<td>float</td>
+<td>0.001</td>
 <td><table class="doxtable">
 		<tr>
 <td>@Label</td>
-<td>:str = Faces With Holes<br>
+<td>:str = Vertex Precision<br>
 </td>
 </tr>
 		<tr>
 <td>@Description</td>
-<td>:str = Specifies how faces with holes should be handled during the export.<br>
+<td>:str = Specifies the minimal distance between vertices.<br>
 </td>
 </tr>
 		<tr>
 <td>@Order</td>
-<td>:float = 9080<br>
+<td>:float = 9010<br>
 </td>
 </tr>
 		<tr>
@@ -814,29 +934,29 @@
 </tr>
 		<tr>
 <td>@Range</td>
-<td>PASS:str = Write as holes<br>TRIANGULATE_FACES_WITH_HOLES:str = Triangulate faces with holes<br>DISCARD_HOLES:str = Discard holes<br>CONVERT_HOLES_TO_FACES:str = Convert holes to faces<br>
+<td>0:float = 1e-05<br>1:float = 1<br>
 </td>
 </tr>
 	</table></td>
 </tr>
 	<tr>
-<td>errorFallback</td>
-<td>bool</td>
-<td>true</td>
+<td>applicationName</td>
+<td>str</td>
+<td></td>
 <td><table class="doxtable">
 		<tr>
 <td>@Label</td>
-<td>:str = Error Fallback<br>
+<td>:str = Application Name<br>
 </td>
 </tr>
 		<tr>
 <td>@Description</td>
-<td>:str = Fall back to start shape geometry, if generation fails. Else, ignore failed start shapes.<br>
+<td>:str = Name of application.<br>
 </td>
 </tr>
 		<tr>
 <td>@Order</td>
-<td>:float = 1020<br>
+<td>:float = 0.101<br>
 </td>
 </tr>
 		<tr>
@@ -878,6 +998,37 @@
 	</table></td>
 </tr>
 	<tr>
+<td>applicationVersion</td>
+<td>str</td>
+<td></td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Application Version<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Version of application.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 0.102<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = General Settings<br>order:float = 0<br>
+</td>
+</tr>
+		<tr>
+<td>@Hidden</td>
+<td></td>
+</tr>
+	</table></td>
+</tr>
+	<tr>
 <td>localOffset</td>
 <td>str</td>
 <td>NONE</td>
@@ -906,6 +1057,68 @@
 <td>@Range</td>
 <td>NONE:str = None<br>MODEL_CENTROID:str = Model Centroid<br>MODEL_CENTROID_BOTTOM:str = Model Centroid Bottom<br>SHAPE_CENTROID:str = Shape Centroid<br>SHAPE_CENTROID_BOTTOM:str = Shape Centroid Bottom<br>
 </td>
+</tr>
+	</table></td>
+</tr>
+	<tr>
+<td>errorFallback</td>
+<td>bool</td>
+<td>true</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Error Fallback<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Fall back to start shape geometry, if generation fails. Else, ignore failed start shapes.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 1020<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = General Settings<br>order:float = 0<br>
+</td>
+</tr>
+		<tr>
+<td>@Hidden</td>
+<td></td>
+</tr>
+	</table></td>
+</tr>
+	<tr>
+<td>applicationVendor</td>
+<td>str</td>
+<td></td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Application Vendor<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Vendor of application.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 0.104<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = General Settings<br>order:float = 0<br>
+</td>
+</tr>
+		<tr>
+<td>@Hidden</td>
+<td></td>
 </tr>
 	</table></td>
 </tr>
@@ -1010,6 +1223,42 @@
 	
 	
 	
+	
+	
+	
+	
+	<tr>
+<td>facesWithHoles</td>
+<td>str</td>
+<td>TRIANGULATE_FACES_WITH_HOLES</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Faces With Holes<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Specifies how faces with holes should be handled during the export.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 9080<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Geometry Settings<br>order:float = 2<br>
+</td>
+</tr>
+		<tr>
+<td>@Range</td>
+<td>TRIANGULATE_FACES_WITH_HOLES:str = Triangulate faces with holes<br>DISCARD_HOLES:str = Discard holes<br>CONVERT_HOLES_TO_FACES:str = Convert holes to faces<br>
+</td>
+</tr>
+	</table></td>
+</tr>
 	<tr>
 <td>triangulateMeshes</td>
 <td>bool</td>
@@ -1067,6 +1316,34 @@
 </tr>
 	
 	<tr>
+<td>mergeNormals</td>
+<td>bool</td>
+<td>true</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Merge Normals Within Precision<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Finds parallel normals (using the precision distance) and shares their index.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 9050<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Geometry Settings<br>order:float = 2<br>
+</td>
+</tr>
+	</table></td>
+</tr>
+	
+	<tr>
 <td>mergeVertices</td>
 <td>bool</td>
 <td>true</td>
@@ -1093,6 +1370,7 @@
 </tr>
 	</table></td>
 </tr>
+	
 	
 	<tr>
 <td>normalPrecision</td>
@@ -1126,7 +1404,6 @@
 </tr>
 	</table></td>
 </tr>
-	
 	<tr>
 <td>embedTextures</td>
 <td>bool</td>
@@ -1220,6 +1497,7 @@
 	</table></td>
 </tr>
 	
+	
 	<tr>
 <td>textureCoordinates</td>
 <td>str</td>
@@ -1252,7 +1530,6 @@
 </tr>
 	</table></td>
 </tr>
-	
 	<tr>
 <td>normalsIndexing</td>
 <td>str</td>
@@ -1399,35 +1676,6 @@
 	</table></td>
 </tr>
 	<tr>
-<td>mergeNormals</td>
-<td>bool</td>
-<td>true</td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Merge Normals Within Precision<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Finds parallel normals (using the precision distance) and shares their index.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 9050<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = Geometry Settings<br>order:float = 2<br>
-</td>
-</tr>
-	</table></td>
-</tr>
-	
-	
-	<tr>
 <td>meshGranularity</td>
 <td>str</td>
 <td>INSTANCED</td>
@@ -1459,6 +1707,7 @@
 </tr>
 	</table></td>
 </tr>
+	
 	<tr>
 <td>baseName</td>
 <td>str</td>
@@ -1574,33 +1823,28 @@
 	</table></td>
 </tr>
 	<tr>
-<td>existingFiles</td>
-<td>str</td>
-<td>OVERWRITE</td>
+<td>createTextureAtlases</td>
+<td>bool</td>
+<td>false</td>
 <td><table class="doxtable">
 		<tr>
 <td>@Label</td>
-<td>:str = Existing Files<br>
+<td>:str = Create Texture Atlases<br>
 </td>
 </tr>
 		<tr>
 <td>@Description</td>
-<td>:str = Specifies how files should be written during the export run. The log file will be written anyways.<br>
+<td>:str = Creates texture atlases which combine a set of textures into one, thus reducing the number of textures and materials. All textures except COLORMAPs are removed.<br>
 </td>
 </tr>
 		<tr>
 <td>@Order</td>
-<td>:float = 7100<br>
+<td>:float = 4030<br>
 </td>
 </tr>
 		<tr>
 <td>@Group</td>
-<td>name:str = Advanced Settings<br>order:float = 5<br>
-</td>
-</tr>
-		<tr>
-<td>@Range</td>
-<td>OVERWRITE:str = Overwrite existing files<br>SKIP:str = Skip existing files<br>
+<td>name:str = Texture Settings<br>order:float = 4<br>
 </td>
 </tr>
 	</table></td>
@@ -1628,6 +1872,65 @@
 		<tr>
 <td>@Group</td>
 <td>name:str = Granularity Settings<br>order:float = 1<br>
+</td>
+</tr>
+	</table></td>
+</tr>
+	<tr>
+<td>writeLog</td>
+<td>bool</td>
+<td>false</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Write Log<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Write log file with statistics about this export session.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 7005<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Advanced Settings<br>order:float = 5<br>
+</td>
+</tr>
+	</table></td>
+</tr>
+	<tr>
+<td>existingFiles</td>
+<td>str</td>
+<td>OVERWRITE</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Existing Files<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Specifies how files should be written during the export run. The log file will be written anyways.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 7100<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Advanced Settings<br>order:float = 5<br>
+</td>
+</tr>
+		<tr>
+<td>@Range</td>
+<td>OVERWRITE:str = Overwrite existing files<br>SKIP:str = Skip existing files<br>
 </td>
 </tr>
 	</table></td>
@@ -1695,6 +1998,66 @@
 	</table></td>
 </tr>
 	<tr>
+<td>atlasAddWrapBorder</td>
+<td>bool</td>
+<td>true</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Texture Atlas Border<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Add a border of clamped pixels to protect against wrap mode bleeding.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 4060<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Texture Settings<br>order:float = 4<br>
+</td>
+</tr>
+	</table></td>
+</tr>
+	
+	<tr>
+<td>maxAtlasDim</td>
+<td>int</td>
+<td>11</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Texture Atlas Max Dimension (2^n)<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Specifies the maximal dimension of the texture atlases in power-of-2 pixels, e.g. 11 gives a 2048x2048 Atlas.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 4040<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Texture Settings<br>order:float = 4<br>
+</td>
+</tr>
+		<tr>
+<td>@Range</td>
+<td>0:float = 4<br>1:float = 16<br>
+</td>
+</tr>
+	</table></td>
+</tr>
+	<tr>
 <td>vertexPrecision</td>
 <td>float</td>
 <td>0.001</td>
@@ -1754,102 +2117,6 @@
 		<tr>
 <td>@Hidden</td>
 <td></td>
-</tr>
-	</table></td>
-</tr>
-	<tr>
-<td>applicationVendor</td>
-<td>str</td>
-<td></td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Application Vendor<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Vendor of application.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 0.104<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = General Settings<br>order:float = 0<br>
-</td>
-</tr>
-		<tr>
-<td>@Hidden</td>
-<td></td>
-</tr>
-	</table></td>
-</tr>
-	<tr>
-<td>vertexNormals</td>
-<td>str</td>
-<td>PASS</td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Vertex Normals<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Controls the export of vertex normals.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 5020<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = Geometry Settings<br>order:float = 2<br>
-</td>
-</tr>
-		<tr>
-<td>@Range</td>
-<td>PASS:str = Write vertex normals<br>NONE:str = Do not write any vertex normals<br>SET_MISSING:str = Write face normal if vertex normal is missing<br>SET_ALL:str = Always write face normal<br>
-</td>
-</tr>
-	</table></td>
-</tr>
-	
-	<tr>
-<td>facesWithHoles</td>
-<td>str</td>
-<td>TRIANGULATE_FACES_WITH_HOLES</td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Faces With Holes<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Specifies how faces with holes should be handled during the export.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 9080<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = Geometry Settings<br>order:float = 2<br>
-</td>
-</tr>
-		<tr>
-<td>@Range</td>
-<td>TRIANGULATE_FACES_WITH_HOLES:str = Triangulate faces with holes<br>DISCARD_HOLES:str = Discard holes<br>CONVERT_HOLES_TO_FACES:str = Convert holes to faces<br>
-</td>
 </tr>
 	</table></td>
 </tr>
@@ -1971,6 +2238,69 @@
 		<tr>
 <td>@Hidden</td>
 <td></td>
+</tr>
+	</table></td>
+</tr>
+	<tr>
+<td>applicationVendor</td>
+<td>str</td>
+<td></td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Application Vendor<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Vendor of application.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 0.104<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = General Settings<br>order:float = 0<br>
+</td>
+</tr>
+		<tr>
+<td>@Hidden</td>
+<td></td>
+</tr>
+	</table></td>
+</tr>
+	<tr>
+<td>vertexNormals</td>
+<td>str</td>
+<td>PASS</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Vertex Normals<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Controls the export of vertex normals.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 5020<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Geometry Settings<br>order:float = 2<br>
+</td>
+</tr>
+		<tr>
+<td>@Range</td>
+<td>PASS:str = Write vertex normals<br>NONE:str = Do not write any vertex normals<br>SET_MISSING:str = Write face normal if vertex normal is missing<br>SET_ALL:str = Always write face normal<br>
+</td>
 </tr>
 	</table></td>
 </tr>
@@ -2216,6 +2546,7 @@
 </tr>
 	
 	
+	
 	<tr>
 <td>existingFiles</td>
 <td>str</td>
@@ -2244,6 +2575,33 @@
 		<tr>
 <td>@Range</td>
 <td>OVERWRITE:str = Overwrite existing files<br>SKIP:str = Skip existing files<br>
+</td>
+</tr>
+	</table></td>
+</tr>
+	<tr>
+<td>writeLog</td>
+<td>bool</td>
+<td>false</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Write Log<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Write log file with statistics about this export session.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 7005<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Advanced Settings<br>order:float = 5<br>
 </td>
 </tr>
 	</table></td>
@@ -2275,7 +2633,6 @@
 </tr>
 	</table></td>
 </tr>
-	
 	<tr>
 <td>baseName</td>
 <td>str</td>
@@ -2303,6 +2660,7 @@
 </tr>
 	</table></td>
 </tr>
+	
 <tr><td colspan="4"></td></tr>
 <tr><td colspan="4"><h3><a name="com.esri.prt.codecs.OBJEncoder">Wavefront OBJ (com.esri.prt.codecs.OBJEncoder)</a></h3></td></tr>
 <tr><td colspan="4">Encodes geometry into the Wavefront OBJ format.</td></tr>
@@ -2333,38 +2691,14 @@
 	
 	
 	
-	<tr>
-<td>existingFiles</td>
-<td>str</td>
-<td>OVERWRITE</td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Existing Files<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Specifies how files should be written during the export run. The log file will be written anyways.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 7100<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = Advanced Settings<br>order:float = 5<br>
-</td>
-</tr>
-		<tr>
-<td>@Range</td>
-<td>OVERWRITE:str = Overwrite existing files<br>SKIP:str = Skip existing files<br>
-</td>
-</tr>
-	</table></td>
-</tr>
+	
+	
+	
+	
+	
+	
+	
+	
 	<tr>
 <td>collectTextures</td>
 <td>bool</td>
@@ -2502,6 +2836,33 @@
 	</table></td>
 </tr>
 	<tr>
+<td>createTextureAtlases</td>
+<td>bool</td>
+<td>false</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Create Texture Atlases<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Creates texture atlases which combine a set of textures into one, thus reducing the number of textures and materials. All textures except COLORMAPs are removed.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 4030<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Texture Settings<br>order:float = 4<br>
+</td>
+</tr>
+	</table></td>
+</tr>
+	<tr>
 <td>texcoordPrecision</td>
 <td>float</td>
 <td>1.0e-04</td>
@@ -2533,8 +2894,6 @@
 </tr>
 	</table></td>
 </tr>
-	
-	
 	<tr>
 <td>normalPrecision</td>
 <td>float</td>
@@ -2567,70 +2926,8 @@
 </tr>
 	</table></td>
 </tr>
-	<tr>
-<td>vertexPrecision</td>
-<td>float</td>
-<td>0.001</td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Vertex Precision<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Specifies the output precision for vertices.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 9010<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = Geometry Settings<br>order:float = 2<br>
-</td>
-</tr>
-		<tr>
-<td>@Range</td>
-<td>0:float = 1e-05<br>1:float = 1<br>
-</td>
-</tr>
-	</table></td>
-</tr>
 	
-	<tr>
-<td>globalOffset</td>
-<td>float_array</td>
-<td></td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Global Offset<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Global (= for all shapes/models) offset for exported geometry.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 7020<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = Geometry Settings<br>order:float = 2<br>
-</td>
-</tr>
-		<tr>
-<td>@Point3D</td>
-<td></td>
-</tr>
-	</table></td>
-</tr>
+	
 	<tr>
 <td>textureCoordinates</td>
 <td>str</td>
@@ -2724,6 +3021,35 @@
 	</table></td>
 </tr>
 	<tr>
+<td>mergeNormals</td>
+<td>bool</td>
+<td>true</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Merge Normals Within Precision<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Finds parallel normals (using the precision distance) and shares their index.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 9050<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Geometry Settings<br>order:float = 2<br>
+</td>
+</tr>
+	</table></td>
+</tr>
+	
+	
+	<tr>
 <td>meshGranularity</td>
 <td>str</td>
 <td>PER_MATERIAL</td>
@@ -2755,34 +3081,6 @@
 </tr>
 	</table></td>
 </tr>
-	<tr>
-<td>mergeNormals</td>
-<td>bool</td>
-<td>true</td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Merge Normals Within Precision<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Finds parallel normals (using the precision distance) and shares their index.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 9050<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = Geometry Settings<br>order:float = 2<br>
-</td>
-</tr>
-	</table></td>
-</tr>
-	
 	
 	<tr>
 <td>baseName</td>
@@ -2811,7 +3109,154 @@
 </tr>
 	</table></td>
 </tr>
-	
+	<tr>
+<td>globalOffset</td>
+<td>float_array</td>
+<td></td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Global Offset<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Global (= for all shapes/models) offset for exported geometry.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 7020<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Geometry Settings<br>order:float = 2<br>
+</td>
+</tr>
+		<tr>
+<td>@Point3D</td>
+<td></td>
+</tr>
+	</table></td>
+</tr>
+	<tr>
+<td>writeLog</td>
+<td>bool</td>
+<td>false</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Write Log<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Write log file with statistics about this export session.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 7005<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Advanced Settings<br>order:float = 5<br>
+</td>
+</tr>
+	</table></td>
+</tr>
+	<tr>
+<td>existingFiles</td>
+<td>str</td>
+<td>OVERWRITE</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Existing Files<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Specifies how files should be written during the export run. The log file will be written anyways.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 7100<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Advanced Settings<br>order:float = 5<br>
+</td>
+</tr>
+		<tr>
+<td>@Range</td>
+<td>OVERWRITE:str = Overwrite existing files<br>SKIP:str = Skip existing files<br>
+</td>
+</tr>
+	</table></td>
+</tr>
+	<tr>
+<td>author</td>
+<td>str</td>
+<td></td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Author<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Author of data.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 0.11<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = General Settings<br>order:float = 0<br>
+</td>
+</tr>
+		<tr>
+<td>@Hidden</td>
+<td></td>
+</tr>
+	</table></td>
+</tr>
+	<tr>
+<td>atlasAddWrapBorder</td>
+<td>bool</td>
+<td>true</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Texture Atlas Border<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Add a border of clamped pixels to protect against wrap mode bleeding.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 4060<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Texture Settings<br>order:float = 4<br>
+</td>
+</tr>
+	</table></td>
+</tr>
 	<tr>
 <td>applicationString</td>
 <td>str</td>
@@ -2840,6 +3285,102 @@
 		<tr>
 <td>@Hidden</td>
 <td></td>
+</tr>
+	</table></td>
+</tr>
+	<tr>
+<td>maxAtlasDim</td>
+<td>int</td>
+<td>11</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Texture Atlas Max Dimension (2^n)<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Specifies the maximal dimension of the texture atlases in power-of-2 pixels, e.g. 11 gives a 2048x2048 Atlas.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 4040<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Texture Settings<br>order:float = 4<br>
+</td>
+</tr>
+		<tr>
+<td>@Range</td>
+<td>0:float = 4<br>1:float = 16<br>
+</td>
+</tr>
+	</table></td>
+</tr>
+	
+	<tr>
+<td>applicationName</td>
+<td>str</td>
+<td></td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Application Name<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Name of application.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 0.101<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = General Settings<br>order:float = 0<br>
+</td>
+</tr>
+		<tr>
+<td>@Hidden</td>
+<td></td>
+</tr>
+	</table></td>
+</tr>
+	<tr>
+<td>vertexPrecision</td>
+<td>float</td>
+<td>0.001</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Vertex Precision<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Specifies the output precision for vertices.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 9010<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Geometry Settings<br>order:float = 2<br>
+</td>
+</tr>
+		<tr>
+<td>@Range</td>
+<td>0:float = 1e-05<br>1:float = 1<br>
+</td>
 </tr>
 	</table></td>
 </tr>
@@ -2894,6 +3435,37 @@
 		<tr>
 <td>@Order</td>
 <td>:float = 1020<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = General Settings<br>order:float = 0<br>
+</td>
+</tr>
+		<tr>
+<td>@Hidden</td>
+<td></td>
+</tr>
+	</table></td>
+</tr>
+	<tr>
+<td>applicationVersion</td>
+<td>str</td>
+<td></td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Application Version<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Version of application.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 0.102<br>
 </td>
 </tr>
 		<tr>
@@ -2963,6 +3535,37 @@
 <td>@Range</td>
 <td>NONE:str = None<br>MODEL_CENTROID:str = Model Centroid<br>MODEL_CENTROID_BOTTOM:str = Model Centroid Bottom<br>SHAPE_CENTROID:str = Shape Centroid<br>SHAPE_CENTROID_BOTTOM:str = Shape Centroid Bottom<br>
 </td>
+</tr>
+	</table></td>
+</tr>
+	<tr>
+<td>applicationVendor</td>
+<td>str</td>
+<td></td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Application Vendor<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Vendor of application.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 0.104<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = General Settings<br>order:float = 0<br>
+</td>
+</tr>
+		<tr>
+<td>@Hidden</td>
+<td></td>
 </tr>
 	</table></td>
 </tr>
@@ -3229,38 +3832,13 @@
 	
 	
 	
-	<tr>
-<td>existingFiles</td>
-<td>str</td>
-<td>OVERWRITE</td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Existing Files<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Specifies how files should be written during the export run. The log file will be written anyways.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 7100<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = Advanced Settings<br>order:float = 5<br>
-</td>
-</tr>
-		<tr>
-<td>@Range</td>
-<td>OVERWRITE:str = Overwrite existing files<br>SKIP:str = Skip existing files<br>
-</td>
-</tr>
-	</table></td>
-</tr>
+	
+	
+	
+	
+	
+	
+	
 	<tr>
 <td>shaderTemplate</td>
 <td>str</td>
@@ -3289,7 +3867,33 @@
 	</table></td>
 </tr>
 	
-	
+	<tr>
+<td>camTranslate</td>
+<td>float_array</td>
+<td></td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Camera Translation<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Translation of the camera.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 7091<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Advanced Settings<br>order:float = 5<br>
+</td>
+</tr>
+	</table></td>
+</tr>
 	<tr>
 <td>addCameraData</td>
 <td>bool</td>
@@ -3346,6 +3950,33 @@
 </tr>
 	
 	
+	<tr>
+<td>shapeNameDelimiter</td>
+<td>str</td>
+<td>_</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Shape Name Delimiter<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Delimiting character for resolution of shape name clashes.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 7060<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Advanced Settings<br>order:float = 5<br>
+</td>
+</tr>
+	</table></td>
+</tr>
 	<tr>
 <td>compression</td>
 <td>bool</td>
@@ -3432,7 +4063,6 @@
 </tr>
 	</table></td>
 </tr>
-	
 	<tr>
 <td>mergeTexcoords</td>
 <td>bool</td>
@@ -3488,6 +4118,7 @@
 	</table></td>
 </tr>
 	
+	
 	<tr>
 <td>normalPrecision</td>
 <td>float</td>
@@ -3520,35 +4151,29 @@
 </tr>
 	</table></td>
 </tr>
-	
 	<tr>
-<td>vertexPrecision</td>
-<td>float</td>
-<td>0.001</td>
+<td>camRotate</td>
+<td>float_array</td>
+<td></td>
 <td><table class="doxtable">
 		<tr>
 <td>@Label</td>
-<td>:str = Vertex Precision<br>
+<td>:str = Camera Rotation<br>
 </td>
 </tr>
 		<tr>
 <td>@Description</td>
-<td>:str = Specifies the minimal distance between vertices.<br>
+<td>:str = Rotation of the camera.<br>
 </td>
 </tr>
 		<tr>
 <td>@Order</td>
-<td>:float = 9010<br>
+<td>:float = 7092<br>
 </td>
 </tr>
 		<tr>
 <td>@Group</td>
-<td>name:str = Geometry Settings<br>order:float = 2<br>
-</td>
-</tr>
-		<tr>
-<td>@Range</td>
-<td>0:float = 1e-05<br>1:float = 1<br>
+<td>name:str = Advanced Settings<br>order:float = 5<br>
 </td>
 </tr>
 	</table></td>
@@ -3585,34 +4210,6 @@
 	</table></td>
 </tr>
 	<tr>
-<td>camRotate</td>
-<td>float_array</td>
-<td></td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Camera Rotation<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Rotation of the camera.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 7092<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = Advanced Settings<br>order:float = 5<br>
-</td>
-</tr>
-	</table></td>
-</tr>
-	
-	<tr>
 <td>textureCoordinates</td>
 <td>str</td>
 <td>ALL</td>
@@ -3646,33 +4243,6 @@
 </tr>
 	
 	<tr>
-<td>includeMaterials</td>
-<td>bool</td>
-<td>true</td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Include Materials<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Exports material definitions (e.g. color, textures, ...).<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 4010<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = Material Settings<br>order:float = 3<br>
-</td>
-</tr>
-	</table></td>
-</tr>
-	<tr>
 <td>templateShaderName</td>
 <td>str</td>
 <td></td>
@@ -3699,6 +4269,35 @@
 </tr>
 	</table></td>
 </tr>
+	<tr>
+<td>includeMaterials</td>
+<td>bool</td>
+<td>true</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Include Materials<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Exports material definitions (e.g. color, textures, ...).<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 4010<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Material Settings<br>order:float = 3<br>
+</td>
+</tr>
+	</table></td>
+</tr>
+	
+	
 	
 	<tr>
 <td>objectMode</td>
@@ -3728,33 +4327,6 @@
 		<tr>
 <td>@Range</td>
 <td>OBJECT:str = Use objects<br>ARCHIVE:str = Use inline archives<br>
-</td>
-</tr>
-	</table></td>
-</tr>
-	<tr>
-<td>shapeNameDelimiter</td>
-<td>str</td>
-<td>_</td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Shape Name Delimiter<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Delimiting character for resolution of shape name clashes.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 7060<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = Advanced Settings<br>order:float = 5<br>
 </td>
 </tr>
 	</table></td>
@@ -3852,6 +4424,7 @@
 </tr>
 	</table></td>
 </tr>
+	
 	<tr>
 <td>baseName</td>
 <td>str</td>
@@ -3870,6 +4443,61 @@
 		<tr>
 <td>@Order</td>
 <td>:float = 1010<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = General Settings<br>order:float = 0<br>
+</td>
+</tr>
+	</table></td>
+</tr>
+	
+	<tr>
+<td>createTextureAtlases</td>
+<td>bool</td>
+<td>false</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Create Texture Atlases<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Creates texture atlases which combine a set of textures into one, thus reducing the number of textures and materials. All textures except COLORMAPs are removed.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 4030<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Texture Settings<br>order:float = 4<br>
+</td>
+</tr>
+	</table></td>
+</tr>
+	<tr>
+<td>outputPath</td>
+<td>str</td>
+<td></td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Output Path<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Path to the output location.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 0.201<br>
 </td>
 </tr>
 		<tr>
@@ -3907,33 +4535,6 @@
 		<tr>
 <td>@Range</td>
 <td>0:float = 1e-05<br>1:float = 1<br>
-</td>
-</tr>
-	</table></td>
-</tr>
-	<tr>
-<td>outputPath</td>
-<td>str</td>
-<td></td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Output Path<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Path to the output location.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 0.201<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = General Settings<br>order:float = 0<br>
 </td>
 </tr>
 	</table></td>
@@ -3993,6 +4594,314 @@
 	</table></td>
 </tr>
 	<tr>
+<td>author</td>
+<td>str</td>
+<td></td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Author<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Author of data.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 0.11<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = General Settings<br>order:float = 0<br>
+</td>
+</tr>
+		<tr>
+<td>@Hidden</td>
+<td></td>
+</tr>
+	</table></td>
+</tr>
+	<tr>
+<td>existingFiles</td>
+<td>str</td>
+<td>OVERWRITE</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Existing Files<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Specifies how files should be written during the export run. The log file will be written anyways.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 7100<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Advanced Settings<br>order:float = 5<br>
+</td>
+</tr>
+		<tr>
+<td>@Range</td>
+<td>OVERWRITE:str = Overwrite existing files<br>SKIP:str = Skip existing files<br>
+</td>
+</tr>
+	</table></td>
+</tr>
+	<tr>
+<td>writeLog</td>
+<td>bool</td>
+<td>false</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Write Log<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Write log file with statistics about this export session.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 7005<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Advanced Settings<br>order:float = 5<br>
+</td>
+</tr>
+	</table></td>
+</tr>
+	<tr>
+<td>applicationString</td>
+<td>str</td>
+<td></td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Application<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Name and version of application.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 0.103<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = General Settings<br>order:float = 0<br>
+</td>
+</tr>
+		<tr>
+<td>@Hidden</td>
+<td></td>
+</tr>
+	</table></td>
+</tr>
+	<tr>
+<td>atlasAddWrapBorder</td>
+<td>bool</td>
+<td>true</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Texture Atlas Border<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Add a border of clamped pixels to protect against wrap mode bleeding.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 4060<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Texture Settings<br>order:float = 4<br>
+</td>
+</tr>
+	</table></td>
+</tr>
+	
+	<tr>
+<td>maxAtlasDim</td>
+<td>int</td>
+<td>11</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Texture Atlas Max Dimension (2^n)<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Specifies the maximal dimension of the texture atlases in power-of-2 pixels, e.g. 11 gives a 2048x2048 Atlas.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 4040<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Texture Settings<br>order:float = 4<br>
+</td>
+</tr>
+		<tr>
+<td>@Range</td>
+<td>0:float = 4<br>1:float = 16<br>
+</td>
+</tr>
+	</table></td>
+</tr>
+	<tr>
+<td>vertexPrecision</td>
+<td>float</td>
+<td>0.001</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Vertex Precision<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Specifies the minimal distance between vertices.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 9010<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Geometry Settings<br>order:float = 2<br>
+</td>
+</tr>
+		<tr>
+<td>@Range</td>
+<td>0:float = 1e-05<br>1:float = 1<br>
+</td>
+</tr>
+	</table></td>
+</tr>
+	<tr>
+<td>applicationName</td>
+<td>str</td>
+<td></td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Application Name<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Name of application.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 0.101<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = General Settings<br>order:float = 0<br>
+</td>
+</tr>
+		<tr>
+<td>@Hidden</td>
+<td></td>
+</tr>
+	</table></td>
+</tr>
+	<tr>
+<td>vertexNormals</td>
+<td>str</td>
+<td>PASS</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Vertex Normals<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Controls the export of vertex normals.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 5020<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Geometry Settings<br>order:float = 2<br>
+</td>
+</tr>
+		<tr>
+<td>@Range</td>
+<td>PASS:str = Write vertex normals<br>NONE:str = Do not write any vertex normals<br>SET_MISSING:str = Write face normal if vertex normal is missing<br>SET_ALL:str = Always write face normal<br>
+</td>
+</tr>
+	</table></td>
+</tr>
+	<tr>
+<td>applicationVendor</td>
+<td>str</td>
+<td></td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Application Vendor<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Vendor of application.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 0.104<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = General Settings<br>order:float = 0<br>
+</td>
+</tr>
+		<tr>
+<td>@Hidden</td>
+<td></td>
+</tr>
+	</table></td>
+</tr>
+	
+	<tr>
 <td>facesWithHoles</td>
 <td>str</td>
 <td>PASS</td>
@@ -4025,23 +4934,50 @@
 	</table></td>
 </tr>
 	<tr>
-<td>errorFallback</td>
-<td>bool</td>
-<td>true</td>
+<td>memoryBudget</td>
+<td>int</td>
+<td>500</td>
 <td><table class="doxtable">
 		<tr>
 <td>@Label</td>
-<td>:str = Error Fallback<br>
+<td>:str = Memory Budget (MBytes)<br>
 </td>
 </tr>
 		<tr>
 <td>@Description</td>
-<td>:str = Fall back to start shape geometry, if generation fails. Else, ignore failed start shapes.<br>
+<td>:str = Specifies the size limit in megabytes per exported file (value 0 = unlimited). Please note: The size is measured on the unoptimized geometry, i.e. the final size may vary. The check is only performed per input shape.<br>
 </td>
 </tr>
 		<tr>
 <td>@Order</td>
-<td>:float = 1020<br>
+<td>:float = 3020<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Granularity Settings<br>order:float = 1<br>
+</td>
+</tr>
+	</table></td>
+</tr>
+	<tr>
+<td>applicationVersion</td>
+<td>str</td>
+<td></td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Application Version<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Version of application.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 0.102<br>
 </td>
 </tr>
 		<tr>
@@ -4088,89 +5024,33 @@
 	</table></td>
 </tr>
 	<tr>
-<td>memoryBudget</td>
-<td>int</td>
-<td>500</td>
+<td>errorFallback</td>
+<td>bool</td>
+<td>true</td>
 <td><table class="doxtable">
 		<tr>
 <td>@Label</td>
-<td>:str = Memory Budget (MBytes)<br>
+<td>:str = Error Fallback<br>
 </td>
 </tr>
 		<tr>
 <td>@Description</td>
-<td>:str = Specifies the size limit in megabytes per exported file (value 0 = unlimited). Please note: The size is measured on the unoptimized geometry, i.e. the final size may vary. The check is only performed per input shape.<br>
+<td>:str = Fall back to start shape geometry, if generation fails. Else, ignore failed start shapes.<br>
 </td>
 </tr>
 		<tr>
 <td>@Order</td>
-<td>:float = 3020<br>
+<td>:float = 1020<br>
 </td>
 </tr>
 		<tr>
 <td>@Group</td>
-<td>name:str = Granularity Settings<br>order:float = 1<br>
+<td>name:str = General Settings<br>order:float = 0<br>
 </td>
 </tr>
-	</table></td>
-</tr>
-	<tr>
-<td>camTranslate</td>
-<td>float_array</td>
+		<tr>
+<td>@Hidden</td>
 <td></td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Camera Translation<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Translation of the camera.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 7091<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = Advanced Settings<br>order:float = 5<br>
-</td>
-</tr>
-	</table></td>
-</tr>
-	
-	<tr>
-<td>vertexNormals</td>
-<td>str</td>
-<td>PASS</td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Vertex Normals<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Controls the export of vertex normals.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 5020<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = Geometry Settings<br>order:float = 2<br>
-</td>
-</tr>
-		<tr>
-<td>@Range</td>
-<td>PASS:str = Write vertex normals<br>NONE:str = Do not write any vertex normals<br>SET_MISSING:str = Write face normal if vertex normal is missing<br>SET_ALL:str = Always write face normal<br>
-</td>
 </tr>
 	</table></td>
 </tr>
@@ -4215,38 +5095,9 @@
 	
 	
 	
-	<tr>
-<td>globalScalingFactor</td>
-<td>float</td>
-<td>1.0</td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Global Scaling Factor<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Scaling factor for vertex coordinates.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 7025<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = Geometry Settings<br>order:float = 2<br>
-</td>
-</tr>
-		<tr>
-<td>@Range</td>
-<td>0:float = 1e-05<br>1:float = 10000<br>
-</td>
-</tr>
-	</table></td>
-</tr>
+	
+	
+	
 	
 	<tr>
 <td>shapeNameDelimiter</td>
@@ -4275,38 +5126,7 @@
 </tr>
 	</table></td>
 </tr>
-	<tr>
-<td>facesWithHoles</td>
-<td>str</td>
-<td>PASS</td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Faces With Holes<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Specifies how faces with holes should be handled during the export.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 9080<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = Geometry Settings<br>order:float = 2<br>
-</td>
-</tr>
-		<tr>
-<td>@Range</td>
-<td>PASS:str = Write as holes<br>TRIANGULATE_FACES_WITH_HOLES:str = Triangulate faces with holes<br>DISCARD_HOLES:str = Discard holes<br>CONVERT_HOLES_TO_FACES:str = Convert holes to faces<br>
-</td>
-</tr>
-	</table></td>
-</tr>
+	
 	<tr>
 <td>textureQuality</td>
 <td>float</td>
@@ -4393,6 +5213,7 @@
 </tr>
 	</table></td>
 </tr>
+	
 	<tr>
 <td>featureGranularity</td>
 <td>str_array</td>
@@ -4426,6 +5247,33 @@
 		<tr>
 <td>@PerLayer</td>
 <td>layerDefault:float = 0<br>
+</td>
+</tr>
+	</table></td>
+</tr>
+	<tr>
+<td>writeLog</td>
+<td>bool</td>
+<td>false</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Write Log<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Write log file with statistics about this export session.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 7005<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Advanced Settings<br>order:float = 5<br>
 </td>
 </tr>
 	</table></td>
@@ -4507,7 +5355,6 @@
 </tr>
 	</table></td>
 </tr>
-	
 	<tr>
 <td>generateModels</td>
 <td>bool_array</td>
@@ -4536,6 +5383,195 @@
 		<tr>
 <td>@PerLayer</td>
 <td>layerDefault:bool = true<br>
+</td>
+</tr>
+		<tr>
+<td>@Hidden</td>
+<td></td>
+</tr>
+	</table></td>
+</tr>
+	<tr>
+<td>globalScalingFactor</td>
+<td>float</td>
+<td>1.0</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Global Scaling Factor<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Scaling factor for vertex coordinates.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 7025<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Geometry Settings<br>order:float = 2<br>
+</td>
+</tr>
+		<tr>
+<td>@Range</td>
+<td>0:float = 1e-05<br>1:float = 10000<br>
+</td>
+</tr>
+	</table></td>
+</tr>
+	<tr>
+<td>applicationString</td>
+<td>str</td>
+<td></td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Application<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Name and version of application.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 0.103<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = General Settings<br>order:float = 0<br>
+</td>
+</tr>
+		<tr>
+<td>@Hidden</td>
+<td></td>
+</tr>
+	</table></td>
+</tr>
+	<tr>
+<td>facesWithHoles</td>
+<td>str</td>
+<td>PASS</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Faces With Holes<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Specifies how faces with holes should be handled during the export.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 9080<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Geometry Settings<br>order:float = 2<br>
+</td>
+</tr>
+		<tr>
+<td>@Range</td>
+<td>PASS:str = Write as holes<br>TRIANGULATE_FACES_WITH_HOLES:str = Triangulate faces with holes<br>DISCARD_HOLES:str = Discard holes<br>CONVERT_HOLES_TO_FACES:str = Convert holes to faces<br>
+</td>
+</tr>
+	</table></td>
+</tr>
+	<tr>
+<td>applicationVersion</td>
+<td>str</td>
+<td></td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Application Version<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Version of application.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 0.102<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = General Settings<br>order:float = 0<br>
+</td>
+</tr>
+		<tr>
+<td>@Hidden</td>
+<td></td>
+</tr>
+	</table></td>
+</tr>
+	
+	<tr>
+<td>applicationVendor</td>
+<td>str</td>
+<td></td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Application Vendor<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Vendor of application.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 0.104<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = General Settings<br>order:float = 0<br>
+</td>
+</tr>
+		<tr>
+<td>@Hidden</td>
+<td></td>
+</tr>
+	</table></td>
+</tr>
+	<tr>
+<td>applicationName</td>
+<td>str</td>
+<td></td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Application Name<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Name of application.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 0.101<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = General Settings<br>order:float = 0<br>
 </td>
 </tr>
 		<tr>
@@ -4803,6 +5839,9 @@
 	
 	
 	
+	
+	
+	
 	<tr>
 <td>layerTextureScaling</td>
 <td>float_array</td>
@@ -4840,7 +5879,6 @@
 </tr>
 	</table></td>
 </tr>
-	
 	<tr>
 <td>layerTextureCompression</td>
 <td>int_array</td>
@@ -4878,6 +5916,7 @@
 </tr>
 	</table></td>
 </tr>
+	
 	<tr>
 <td>layerState</td>
 <td>str_array</td>
@@ -5153,74 +6192,6 @@
 </tr>
 	
 	<tr>
-<td>existingFiles</td>
-<td>str</td>
-<td>OVERWRITE</td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Existing Files<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Specifies how files should be written during the export run. The log file will be written anyways.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 7100<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = Advanced Settings<br>order:float = 5<br>
-</td>
-</tr>
-		<tr>
-<td>@Range</td>
-<td>OVERWRITE:str = Overwrite existing files<br>SKIP:str = Skip existing files<br>
-</td>
-</tr>
-	</table></td>
-</tr>
-	<tr>
-<td>layerUID</td>
-<td>str_array</td>
-<td></td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Layer UID<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Unique layer identifier.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 20101<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = Layer Settings<br>order:float = 6<br>
-</td>
-</tr>
-		<tr>
-<td>@PerLayer</td>
-<td>layerDefault:str = <br>
-</td>
-</tr>
-		<tr>
-<td>@Hidden</td>
-<td></td>
-</tr>
-	</table></td>
-</tr>
-	<tr>
 <td>shapeNameDelimiter</td>
 <td>str</td>
 <td>_</td>
@@ -5319,38 +6290,6 @@
 		<tr>
 <td>@Order</td>
 <td>:float = 9030<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = Geometry Settings<br>order:float = 2<br>
-</td>
-</tr>
-		<tr>
-<td>@Range</td>
-<td>0:float = 1e-05<br>1:float = 1<br>
-</td>
-</tr>
-	</table></td>
-</tr>
-	<tr>
-<td>vertexPrecision</td>
-<td>float</td>
-<td>0.001</td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Vertex Precision<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Specifies the minimal distance between vertices.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 9010<br>
 </td>
 </tr>
 		<tr>
@@ -5517,7 +6456,132 @@
 	</table></td>
 </tr>
 	
-	
+	<tr>
+<td>layerUID</td>
+<td>str_array</td>
+<td></td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Layer UID<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Unique layer identifier.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 20101<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Layer Settings<br>order:float = 6<br>
+</td>
+</tr>
+		<tr>
+<td>@PerLayer</td>
+<td>layerDefault:str = <br>
+</td>
+</tr>
+		<tr>
+<td>@Hidden</td>
+<td></td>
+</tr>
+	</table></td>
+</tr>
+	<tr>
+<td>author</td>
+<td>str</td>
+<td></td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Author<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Author of data.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 0.11<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = General Settings<br>order:float = 0<br>
+</td>
+</tr>
+		<tr>
+<td>@Hidden</td>
+<td></td>
+</tr>
+	</table></td>
+</tr>
+	<tr>
+<td>writeLog</td>
+<td>bool</td>
+<td>false</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Write Log<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Write log file with statistics about this export session.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 7005<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Advanced Settings<br>order:float = 5<br>
+</td>
+</tr>
+	</table></td>
+</tr>
+	<tr>
+<td>existingFiles</td>
+<td>str</td>
+<td>OVERWRITE</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Existing Files<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Specifies how files should be written during the export run. The log file will be written anyways.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 7100<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Advanced Settings<br>order:float = 5<br>
+</td>
+</tr>
+		<tr>
+<td>@Range</td>
+<td>OVERWRITE:str = Overwrite existing files<br>SKIP:str = Skip existing files<br>
+</td>
+</tr>
+	</table></td>
+</tr>
 	<tr>
 <td>layerTextureQuality</td>
 <td>float_array</td>
@@ -5555,6 +6619,7 @@
 </tr>
 	</table></td>
 </tr>
+	
 	<tr>
 <td>applicationString</td>
 <td>str</td>
@@ -5573,6 +6638,101 @@
 		<tr>
 <td>@Order</td>
 <td>:float = 0.103<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = General Settings<br>order:float = 0<br>
+</td>
+</tr>
+		<tr>
+<td>@Hidden</td>
+<td></td>
+</tr>
+	</table></td>
+</tr>
+	<tr>
+<td>applicationName</td>
+<td>str</td>
+<td></td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Application Name<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Name of application.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 0.101<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = General Settings<br>order:float = 0<br>
+</td>
+</tr>
+		<tr>
+<td>@Hidden</td>
+<td></td>
+</tr>
+	</table></td>
+</tr>
+	
+	<tr>
+<td>vertexPrecision</td>
+<td>float</td>
+<td>0.001</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Vertex Precision<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Specifies the minimal distance between vertices.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 9010<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Geometry Settings<br>order:float = 2<br>
+</td>
+</tr>
+		<tr>
+<td>@Range</td>
+<td>0:float = 1e-05<br>1:float = 1<br>
+</td>
+</tr>
+	</table></td>
+</tr>
+	<tr>
+<td>applicationVendor</td>
+<td>str</td>
+<td></td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Application Vendor<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Vendor of application.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 0.104<br>
 </td>
 </tr>
 		<tr>
@@ -5625,6 +6785,7 @@
 	</table></td>
 </tr>
 	
+	
 	<tr>
 <td>errorFallback</td>
 <td>bool</td>
@@ -5643,6 +6804,37 @@
 		<tr>
 <td>@Order</td>
 <td>:float = 1020<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = General Settings<br>order:float = 0<br>
+</td>
+</tr>
+		<tr>
+<td>@Hidden</td>
+<td></td>
+</tr>
+	</table></td>
+</tr>
+	<tr>
+<td>applicationVersion</td>
+<td>str</td>
+<td></td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Application Version<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Version of application.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 0.102<br>
 </td>
 </tr>
 		<tr>

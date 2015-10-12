@@ -10,11 +10,10 @@ var classprtx_1_1_encode_preparator =
     ] ],
     [ "~EncodePreparator", "classprtx_1_1_encode_preparator.html#a2e9ea3dfa79b30f6f26f71c22afb5984", null ],
     [ "EncodePreparator", "classprtx_1_1_encode_preparator.html#a74d9a0880fbde62e656819251eb1f8a9", null ],
-    [ "add", "classprtx_1_1_encode_preparator.html#a3d584d763e738de7e8383ccb0dd8142b", null ],
-    [ "add", "classprtx_1_1_encode_preparator.html#a1e01f7df4d7bc50cd30c12a1f01fc379", null ],
-    [ "add", "classprtx_1_1_encode_preparator.html#a67513184e6b92186e2920d4d417fee93", null ],
+    [ "add", "classprtx_1_1_encode_preparator.html#ae9f3281127bfacfe14659bb6f69bf31b", null ],
+    [ "add", "classprtx_1_1_encode_preparator.html#a6dee76569c8f6ae7b5c05b85fc3470a9", null ],
     [ "clear", "classprtx_1_1_encode_preparator.html#ad8e97471c7584457b3fcdfe3000bb032", null ],
-    [ "fetchFinalizedInstances", "classprtx_1_1_encode_preparator.html#a05e4bf9e7394c000b8def852f61b36ac", null ],
+    [ "fetchFinalizedInstances", "classprtx_1_1_encode_preparator.html#abde29e7a3351acc67746b8b26d2761be", null ],
     [ "getBoundingBox", "classprtx_1_1_encode_preparator.html#abb1616d359df5e58ac6171effc78c08e", null ],
     [ "getUsedMem", "classprtx_1_1_encode_preparator.html#a22fe4244014b48ac43425fcc28ccfbb0", null ]
 ];

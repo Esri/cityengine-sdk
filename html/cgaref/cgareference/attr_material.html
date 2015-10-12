@@ -42,7 +42,7 @@ the value of a certain material attribute, eg. <span class="inlinedcode">print(m
   </tr>  
   <tr>
     <td><pre class="code2"><a name="shader"></a>string material.shader</pre></td>
-    <td>The shader name used for export (currently supported by <a href="../manual/export/export_formats_rib.html">RIB</a> and <a href="../manual/export/export_formats_mi.html">MI</a>).</td>
+    <td>The shader name used for export (currently supported by <a href="../manual/export/export_formats_rib.html">RIB</a>).</td>
   </tr>  
   <tr>
     <td><pre class="code2"><a name="color"></a>float material.color.{r|g|b}</pre></td>
@@ -114,41 +114,35 @@ the value of a certain material attribute, eg. <span class="inlinedcode">print(m
     <th class="params">3DS write</th>
     <th class="params">KML/DAE write</th>
     <th class="params">FBX write</th>
-    <th class="params">MI write</th>
     <th class="params">OBJ write</th>
     <th class="params">RIB write</th>
     <th class="params">VOB write</th>
-    <th class="params">ABC write</th>
     <th class="params">FileGDB write</th>
   </thead>
   <tr>
     <td>name</td>
     <td>Y</td><!-- CE -->
-    <td>Y</td><!-- DAE read -->
-    <td>Y</td><!-- OBJ read -->
+    <td>Y</td><!-- DAE -->
+    <td>Y</td><!-- OBJ -->
     <td>Y</td><!-- 3DS -->
     <td>Y</td><!-- DAE -->
     <td>Y</td><!-- FBX -->
-    <td>Y</td><!-- MI -->
     <td>Y</td><!-- OBJ -->
     <td>Y</td><!-- RIB -->
     <td>Y</td><!-- VOB -->
-    <td>- (3)</td><!-- ABC -->
     <td>-</td><!-- GDB -->
   </tr>
   <tr>
     <td>shader</td>
     <td>-</td><!-- CE -->
-    <td>-</td><!-- DAE read -->
-    <td>-</td><!-- OBJ read -->
+    <td>-</td><!-- DAE -->
+    <td>-</td><!-- OBJ -->
     <td>-</td><!-- 3DS -->
     <td>-</td><!-- DAE -->
     <td>-</td><!-- FBX -->
-    <td>Y</td><!-- MI -->
     <td>-</td><!-- OBJ -->
     <td>Y</td><!-- RIB -->
     <td>-</td><!-- VOB -->
-    <td>-</td><!-- ABC -->
     <td>-</td><!-- GDB -->
   </tr>  
   <tr>
@@ -159,11 +153,9 @@ the value of a certain material attribute, eg. <span class="inlinedcode">print(m
     <td>Y</td><!-- 3DS -->
     <td>Y (1)</td><!-- DAE -->
     <td>Y</td><!-- FBX -->
-    <td>Y</td><!-- MI -->
     <td>Y</td><!-- OBJ -->
     <td>Y</td><!-- RIB -->
     <td>Y</td><!-- VOB -->
-    <td>-</td><!-- ABC -->
     <td>Y</td><!-- GDB -->
   </tr>  
   <tr>
@@ -174,11 +166,9 @@ the value of a certain material attribute, eg. <span class="inlinedcode">print(m
     <td>-</td><!-- 3DS -->
     <td>Y</td><!-- DAE -->
     <td>Y</td><!-- FBX -->
-    <td>Y</td><!-- MI -->
     <td>Y</td><!-- OBJ -->
     <td>Y</td><!-- RIB -->
     <td>-</td><!-- VOB -->
-    <td>-</td><!-- ABC -->
     <td>-</td><!-- GDB -->
   </tr>  
   <tr>
@@ -189,7 +179,6 @@ the value of a certain material attribute, eg. <span class="inlinedcode">print(m
     <td>Y</td><!-- 3DS -->
     <td>Y</td><!-- DAE -->
     <td>Y</td><!-- FBX -->
-    <td>Y</td><!-- MI -->
     <td>Y</td><!-- OBJ -->
     <td>Y</td><!-- RIB -->
     <td>Y</td><!-- VOB -->
@@ -204,11 +193,9 @@ the value of a certain material attribute, eg. <span class="inlinedcode">print(m
     <td>Y</td><!-- 3DS -->
     <td>Y</td><!-- DAE -->
     <td>Y</td><!-- FBX -->
-    <td>Y</td><!-- MI -->
     <td>Y</td><!-- OBJ -->
     <td>Y</td><!-- RIB -->
     <td>Y</td><!-- VOB -->
-    <td>-</td><!-- ABC -->
     <td>-</td><!-- GDB -->
   </tr>  
   <tr>
@@ -219,11 +206,9 @@ the value of a certain material attribute, eg. <span class="inlinedcode">print(m
     <td>Y</td><!-- 3DS -->
     <td>Y</td><!-- DAE -->
     <td>Y</td><!-- FBX -->
-    <td>Y</td><!-- MI -->
     <td>Y</td><!-- OBJ -->
     <td>Y</td><!-- RIB -->
     <td>Y</td><!-- VOB -->
-    <td>-</td><!-- ABC -->
     <td>-</td><!-- GDB -->
   </tr>  
   <tr>
@@ -234,11 +219,9 @@ the value of a certain material attribute, eg. <span class="inlinedcode">print(m
     <td>Y</td><!-- 3DS -->
     <td>Y</td><!-- DAE -->
     <td>Y</td><!-- FBX -->
-    <td>Y</td><!-- MI -->
     <td>Y</td><!-- OBJ -->
     <td>Y</td><!-- RIB -->
     <td>Y</td><!-- VOB -->
-    <td>-</td><!-- ABC -->
     <td>-</td><!-- GDB -->
   </tr>  
   <tr>
@@ -249,11 +232,9 @@ the value of a certain material attribute, eg. <span class="inlinedcode">print(m
     <td>-</td><!-- 3DS -->
     <td>Y</td><!-- DAE -->
     <td>-</td><!-- FBX -->
-    <td>Y</td><!-- MI -->
     <td>Y</td><!-- OBJ -->
     <td>Y</td><!-- RIB -->
     <td>Y</td><!-- VOB -->
-    <td>-</td><!-- ABC -->
     <td>-</td><!-- GDB -->
   </tr>  
   <tr>
@@ -264,11 +245,9 @@ the value of a certain material attribute, eg. <span class="inlinedcode">print(m
     <td>Y</td><!-- 3DS -->
     <td>Y (1)</td><!-- DAE -->
     <td>Y</td><!-- FBX -->
-    <td>Y</td><!-- MI -->
     <td>Y</td><!-- OBJ -->
     <td>Y</td><!-- RIB -->
     <td>Y</td><!-- VOB -->
-    <td>-</td><!-- ABC -->
     <td>Y</td><!-- GDB -->
   </tr>  
   <tr>
@@ -279,11 +258,9 @@ the value of a certain material attribute, eg. <span class="inlinedcode">print(m
     <td>-</td><!-- 3DS -->
     <td>Y</td><!-- DAE -->
     <td>Y</td><!-- FBX -->
-    <td>Y</td><!-- MI -->
     <td>Y</td><!-- OBJ -->
     <td>Y</td><!-- RIB -->
     <td>Y</td><!-- VOB -->
-    <td>-</td><!-- ABC -->
     <td>-</td><!-- GDB -->
   </tr>  
   <tr>
@@ -294,11 +271,9 @@ the value of a certain material attribute, eg. <span class="inlinedcode">print(m
     <td>-</td><!-- 3DS -->
     <td>Y</td><!-- DAE -->
     <td>Y</td><!-- FBX -->
-    <td>Y</td><!-- MI -->
     <td>-</td><!-- OBJ -->
     <td>Y</td><!-- RIB -->
     <td>Y</td><!-- VOB -->
-    <td>-</td><!-- ABC -->
     <td>-</td><!-- GDB -->
   </tr>  
   <tr>
@@ -309,11 +284,9 @@ the value of a certain material attribute, eg. <span class="inlinedcode">print(m
     <td>Y</td><!-- 3DS -->
     <td>Y</td><!-- DAE -->
     <td>Y</td><!-- FBX -->
-    <td>Y</td><!-- MI -->
     <td>Y</td><!-- OBJ -->
     <td>Y</td><!-- RIB -->
     <td>Y</td><!-- VOB -->
-    <td>-</td><!-- ABC -->
     <td>-</td><!-- GDB -->
   </tr>  
   <tr>
@@ -324,11 +297,9 @@ the value of a certain material attribute, eg. <span class="inlinedcode">print(m
     <td>Y</td><!-- 3DS -->
     <td>Y</td><!-- DAE -->
     <td>Y</td><!-- FBX -->
-    <td>Y</td><!-- MI -->
     <td>Y</td><!-- OBJ -->
     <td>Y</td><!-- RIB -->
     <td>Y</td><!-- VOB -->
-    <td>-</td><!-- ABC -->
     <td>-</td><!-- GDB -->
   </tr>  
   <tr>
@@ -339,11 +310,9 @@ the value of a certain material attribute, eg. <span class="inlinedcode">print(m
     <td>-</td><!-- 3DS -->
     <td>Y</td><!-- DAE -->
     <td>Y</td><!-- FBX -->
-    <td>Y</td><!-- MI -->
     <td>-</td><!-- OBJ -->
     <td>Y</td><!-- RIB -->
     <td>-</td><!-- VOB -->
-    <td>-</td><!-- ABC -->
     <td>-</td><!-- GDB -->
   </tr>  
   <tr>
@@ -354,11 +323,9 @@ the value of a certain material attribute, eg. <span class="inlinedcode">print(m
     <td>-</td><!-- 3DS -->
     <td>Y</td><!-- DAE -->
     <td>Y</td><!-- FBX -->
-    <td>Y</td><!-- MI -->
     <td>-</td><!-- OBJ -->
     <td>Y</td><!-- RIB -->
     <td>Y</td><!-- VOB -->
-    <td>-</td><!-- ABC -->
     <td>-</td><!-- GDB -->
   </tr>  
   <tr>
@@ -369,11 +336,9 @@ the value of a certain material attribute, eg. <span class="inlinedcode">print(m
     <td>-</td><!-- 3DS -->
     <td>Y</td><!-- DAE -->
     <td>Y</td><!-- FBX -->
-    <td>Y</td><!-- MI -->
     <td>-</td><!-- OBJ -->
     <td>Y</td><!-- RIB -->
     <td>Y</td><!-- VOB -->
-    <td>-</td><!-- ABC -->
     <td>-</td><!-- GDB -->
   </tr>  
   <tr>
@@ -384,11 +349,9 @@ the value of a certain material attribute, eg. <span class="inlinedcode">print(m
     <td>-</td><!-- 3DS -->
     <td>-</td><!-- DAE -->
     <td>-</td><!-- FBX -->
-    <td>-</td><!-- MI -->
     <td>-</td><!-- OBJ -->
     <td>-</td><!-- RIB -->
     <td>-</td><!-- VOB -->
-    <td>-</td><!-- ABC -->
     <td>Y</td><!-- GDB -->
   </tr>  
   <tr>
@@ -399,20 +362,17 @@ the value of a certain material attribute, eg. <span class="inlinedcode">print(m
     <td>-</td><!-- 3DS -->
     <td>-</td><!-- DAE -->
     <td>-</td><!-- FBX -->
-    <td>-</td><!-- MI -->
     <td>-</td><!-- OBJ -->
     <td>-</td><!-- RIB -->
     <td>-</td><!-- VOB -->
-    <td>-</td><!-- ABC -->
     <td>Y</td><!-- GDB -->
   </tr>  
 </table>
 
 <h3>Remarks:</h3>
 <table>
-<tr><td>(1)</td><td>The official COLLADA standard does not support a diffuse solid color and a diffuse texture at the same time. The FCollada extension used by CE does.</td></tr>
+<tr><td>(1)</td><td>The official COLLADA standard does not support a diffuse solid color and a diffuse texture at the same time.</td></tr>
 <tr><td>(2)</td><td>In the CityEngine viewport, the colormap and dirtmap values are multiplied with the (diffuse) color.</td></tr>
-<tr><td>(3)</td><td>The Alembic (ABC) exporter currently only exports geometry, no material attributes.</td></tr>
 </table>
 
 

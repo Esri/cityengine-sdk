@@ -267,6 +267,41 @@ Roof-->
                 <em> The Roof rule is added. It projects the same texture as shown in the attribute layer onto the top faces of the mass models. The global x-axis is chosen as the u-axis, and the global z-axis as the v-axis. This results in an inverted texture along the v-axis and is corrected with the scaleUV() operation.                </em>   	</td>
     </tr>
 
+
+	<tr>
+    <td class="twocol_l"><br/>
+    <img src="images/setupProjection-global-c.png" alt="Global Texture projection" /> </td>
+    <td>
+      	<br>
+    	<br>        
+
+    	<pre class="code3">
+    	
+attr buildingheight= 20
+  
+const textureWidth = 586
+const textureHeight = 442  
+  
+offsetx = convert(x, scope, world, pos, 0, 0, 0) -
+       	(convert(x, scope, world, pos, 0, 0, 0) % textureWidth)
+
+offsetz = convert(z, scope, world, pos, 0, 0, 0) -
+       	(convert(z, scope, world, pos, 0, 0, 0) % textureHeight)
+   
+Lot-->
+   set(trim.vertical, false)
+   extrude(buildingheight)
+   comp(f){top :  Roof | side : Facade}
+ 
+Roof-->
+   setupProjection(0, world.xz, textureWidth, textureHeight, -offsetx, offsetz)
+   projectUV(0)
+   scaleUV(0, 1, -1)
+   set(material.colormap, "test_0102_ortho.jpg")
+</pre>
+                <em>Depending on the coordinate system there might be artifacts in the texture due to numerical issues. These can be avoided by using the offset parameters
+                of the setupProjection() operation.</em>   	</td>
+    </tr>
                     
   </table>
 

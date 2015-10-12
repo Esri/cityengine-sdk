@@ -38,11 +38,22 @@
   <p class="code2">@Order(<i>order</i>)</p>
   <p class="code2">@Description(&quot;<i>description</i>&quot;)</p>
   <p class="code2">@Handle(&quot;handle_params&quot;)</p>
+
+
+  <p class="code2">@InMesh</p>  
+  <p class="code2">@InPolygon</p>
+  <p class="code2">@InEdge</p>
+  <p class="code2">@InPoint</p>
+  <p class="code2">@InPointCloud</p>
+
+  <p class="code2">@Out(granularity=separatedShapes|combinedShape)</p>
+     
+
         
   <p class="text"><img alt="" class="icon" src="../images/info_icon.jpg">Annotations are used to add additional information to a rule or an attribute. Annotations are optional and do not affect the semantics of a rule and thus have no influence on the model generation. Annotations are mostly used to give additional hints for user interface elements such as the Inspector on how to present attributes or rules.
   <ul>
   <li><code>@StartRule</code>: Mark a rule as a start rule for the start rule chooser</li>
-<li><code>@Hidden</code>: Mark an attribute or rule as hidden (it will not appear in the inspector or start rule chooser)
+<li><code>@Hidden</code>: Mark an attribute or rule as hidden. Hidden attributes won't appear in the CityEngine inspector or start rule chooser, but they will be connected to matching object attributes automatically. 
 <code>@Hidden</code> can also be used to hide a set of attributes (as in its second form with a list of attribute names) before
  an <code>import</code> statement. Without explicitly naming the attributes, <code>@Hidden</code> before an import statement will hide all
  imported attributes in the inspector; the hidden annotation will be recusively propagated to the imports of the hidden import.
@@ -59,6 +70,11 @@
 <li><code>@Order(order)</code>: Sets the sort order for an attribute in the inspector. Where <code>order</code> is a numeric value.</li>
 <li><code>@Description(&quot;description&quot;)</code>: Adds a description to an attribute or rule which will be displayed as tooltip in the inspector or as description in the start rule chooser or style manager.</li>
 <li><code>@Handle(<i>handle_params</i>)</code>: Adds an <a href="../manual/cga/handles/cga_wr_handles.html">interactive handle</a> to the following attribute.</li>
+
+<li><code>@In{Mesh|Polygon|Edge|Point|PointCloud}</code>: These annotations can be used to communicate the expected geometry type of the start shape. While these annotations currently have no effect in CityEngine, ArcPro expects each start rule (see above) to be annotated with the expected input type (as of ArcPro 1.1, only <code>InPolygon</code> and <code>InMesh</code> are supported). If there is none, it defaults to <code>@InPolygon</code>. So if you export a rpk to be used with different geometry types in ArcPro, make sure you add one of these annotations.</li> 
+<li><code>@Out(granularity=separatedShapes|combinedShape)</code>: This annotation can be used to communicate the suggested granularity of the output geometry. The default is <code>combinedShape</code>. While this annotation currently has no effect in CityEngine, it is essential to trigger leaf shape generation in ArcPro. Add it to the start rule in that case.   
+
+
   </ul>
   </p>
   <h2>Example

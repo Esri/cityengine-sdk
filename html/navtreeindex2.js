@@ -1,5 +1,7 @@
 var NAVTREEINDEX2 =
 {
+"classprtx_1_1_builtin_material_attributes_builder.html":[1,0,1,16],
+"classprtx_1_1_builtin_material_attributes_builder.html#a0364db9e5bfb043c854edcfa94e7ebfd":[1,0,1,16,12],
 "classprtx_1_1_builtin_material_attributes_builder.html#a048a1552a34e49ab8904dcbe01dd34b9":[1,0,1,16,59],
 "classprtx_1_1_builtin_material_attributes_builder.html#a04c6554c738f1cc1126e9645f3a73331":[1,0,1,16,44],
 "classprtx_1_1_builtin_material_attributes_builder.html#a0883738e60f3eb5adf0040c2a9d0a0c5":[1,0,1,16,58],
@@ -246,8 +248,6 @@ var NAVTREEINDEX2 =
 "classprtx_1_1_encode_options_validator.html#a234f0bdfd02e155f5abae0090bedd7d9":[1,0,1,31,2],
 "classprtx_1_1_encode_options_validator.html#a2d0a6ad5e30160d00460969df7fce6f9":[1,0,1,31,0],
 "classprtx_1_1_encode_preparator.html":[1,0,1,32],
-"classprtx_1_1_encode_preparator.html#a05e4bf9e7394c000b8def852f61b36ac":[1,0,1,32,11],
-"classprtx_1_1_encode_preparator.html#a1e01f7df4d7bc50cd30c12a1f01fc379":[1,0,1,32,8],
-"classprtx_1_1_encode_preparator.html#a22fe4244014b48ac43425fcc28ccfbb0":[1,0,1,32,13],
+"classprtx_1_1_encode_preparator.html#a22fe4244014b48ac43425fcc28ccfbb0":[1,0,1,32,12],
 "classprtx_1_1_encode_preparator.html#a2e9ea3dfa79b30f6f26f71c22afb5984":[1,0,1,32,5]
 };

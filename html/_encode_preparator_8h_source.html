@@ -31,7 +31,7 @@
   <td id="projectlogo"><img alt="Logo" src="esri_prt_55px.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Esri Procedural Runtime
-   &#160;<span id="projectnumber">1.3.0</span>
+   &#160;<span id="projectnumber">1.4.2074</span>
    </div>
   </td>
  </tr>
@@ -126,300 +126,315 @@ $(document).ready(function(){initNavTree('_encode_preparator_8h_source.html','')
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#ifndef PRTX_ENCODEPREPARATOR_H_</span></div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#define PRTX_ENCODEPREPARATOR_H_</span></div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &quot;prtx/NamePreparator.h&quot;</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &quot;prtx/InitialShape.h&quot;</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#include &quot;prtx/Shape.h&quot;</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#include &quot;prtx/prtx.h&quot;</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#include &quot;boost/shared_ptr.hpp&quot;</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#include &quot;boost/noncopyable.hpp&quot;</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="preprocessor">#ifdef _MSC_VER</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#   pragma warning(push)</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#   pragma warning(disable : 4275)</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor">#   ifdef PRT_MSG_WARNINGS</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor">#       pragma message(__FILE__&quot;: disabled MSVC warnings 4275&quot;)</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="preprocessor">#   endif</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="keyword">namespace </span>prtx {</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &quot;prt/Callbacks.h&quot;</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#include &quot;prtx/NamePreparator.h&quot;</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#include &quot;prtx/InitialShape.h&quot;</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#include &quot;prtx/Shape.h&quot;</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#include &quot;prtx/prtx.h&quot;</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#include &quot;boost/shared_ptr.hpp&quot;</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="preprocessor">#include &quot;boost/noncopyable.hpp&quot;</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#ifdef _MSC_VER</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor">#   pragma warning(push)</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor">#   pragma warning(disable : 4275)</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="preprocessor">#   ifdef PRT_MSG_WARNINGS</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor">#       pragma message(__FILE__&quot;: disabled MSVC warnings 4275&quot;)</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="preprocessor">#   endif</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;</div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;</div>
-<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="structprtx_1_1_vertex_normal_processor.html">   41</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structprtx_1_1_vertex_normal_processor.html">VertexNormalProcessor</a> {</div>
-<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="structprtx_1_1_vertex_normal_processor.html#adc6143060777d55047c4ecef45a13a98">   42</a></span>&#160;<span class="keyword">enum</span> <a class="code" href="structprtx_1_1_vertex_normal_processor.html#adc6143060777d55047c4ecef45a13a98">Action</a> {</div>
-<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="structprtx_1_1_vertex_normal_processor.html#adc6143060777d55047c4ecef45a13a98ae0bf234e73960fc9e9419488bf58b63a">   43</a></span>&#160;    <a class="code" href="structprtx_1_1_vertex_normal_processor.html#adc6143060777d55047c4ecef45a13a98ae0bf234e73960fc9e9419488bf58b63a">PASS</a>,                           </div>
-<div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="structprtx_1_1_vertex_normal_processor.html#adc6143060777d55047c4ecef45a13a98aef1b61a8fe3a2b5256653fab8721d9e2">   44</a></span>&#160;    <a class="code" href="structprtx_1_1_vertex_normal_processor.html#adc6143060777d55047c4ecef45a13a98aef1b61a8fe3a2b5256653fab8721d9e2">DELETE_NORMALS</a>,                 </div>
-<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="structprtx_1_1_vertex_normal_processor.html#adc6143060777d55047c4ecef45a13a98a952ce05554161f65e242fc99e599fb4b">   45</a></span>&#160;    <a class="code" href="structprtx_1_1_vertex_normal_processor.html#adc6143060777d55047c4ecef45a13a98a952ce05554161f65e242fc99e599fb4b">SET_MISSING_TO_FACE_NORMALS</a>,    </div>
-<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="structprtx_1_1_vertex_normal_processor.html#adc6143060777d55047c4ecef45a13a98af0772d91fa5dc02303ce9c9b9a3e0ab6">   46</a></span>&#160;    <a class="code" href="structprtx_1_1_vertex_normal_processor.html#adc6143060777d55047c4ecef45a13a98af0772d91fa5dc02303ce9c9b9a3e0ab6">SET_ALL_TO_FACE_NORMALS</a>         </div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;};</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;};</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;</div>
-<div class="line"><a name="l00050"></a><span class="lineno"><a class="line" href="structprtx_1_1_hole_processor.html">   50</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structprtx_1_1_hole_processor.html">HoleProcessor</a> {</div>
-<div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="structprtx_1_1_hole_processor.html#a0574b2cb10749ba92314b05a5f52f032">   51</a></span>&#160;<span class="keyword">enum</span> <a class="code" href="structprtx_1_1_hole_processor.html#a0574b2cb10749ba92314b05a5f52f032">Action</a> {</div>
-<div class="line"><a name="l00052"></a><span class="lineno"><a class="line" href="structprtx_1_1_hole_processor.html#a0574b2cb10749ba92314b05a5f52f032a266d9e0de0a6a88d375fefcd90b57d50">   52</a></span>&#160;    <a class="code" href="structprtx_1_1_hole_processor.html#a0574b2cb10749ba92314b05a5f52f032a266d9e0de0a6a88d375fefcd90b57d50">PASS</a>,                           </div>
-<div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="structprtx_1_1_hole_processor.html#a0574b2cb10749ba92314b05a5f52f032aee5c516502420a76faa9660d68281ac0">   53</a></span>&#160;    <a class="code" href="structprtx_1_1_hole_processor.html#a0574b2cb10749ba92314b05a5f52f032aee5c516502420a76faa9660d68281ac0">TRIANGULATE_FACES_WITH_HOLES</a>,   </div>
-<div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="structprtx_1_1_hole_processor.html#a0574b2cb10749ba92314b05a5f52f032ad825e1a466beea202b68f659472e5d4b">   54</a></span>&#160;    <a class="code" href="structprtx_1_1_hole_processor.html#a0574b2cb10749ba92314b05a5f52f032ad825e1a466beea202b68f659472e5d4b">DELETE_HOLES</a>,                   </div>
-<div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="structprtx_1_1_hole_processor.html#a0574b2cb10749ba92314b05a5f52f032a7cc143e66ce6a9fe39eea26207d1623f">   55</a></span>&#160;    <a class="code" href="structprtx_1_1_hole_processor.html#a0574b2cb10749ba92314b05a5f52f032a7cc143e66ce6a9fe39eea26207d1623f">CONVERT_HOLES_TO_FACES</a>          </div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;};</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;};</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;</div>
-<div class="line"><a name="l00067"></a><span class="lineno"><a class="line" href="structprtx_1_1_material_transformer.html">   67</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structprtx_1_1_material_transformer.html">MaterialTransformer</a> {</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> update(</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;            <span class="keyword">const</span> <a class="code" href="classprt_1_1_attribute_map.html">prt::AttributeMap</a>*    initialShapeAttributes,</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;            <span class="keyword">const</span> <a class="code" href="namespaceprtx.html#aca45a7f98947d0b0252438ba65d009ad">prtx::MaterialPtr</a>&amp;    originalMaterial,</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;            <a class="code" href="classprtx_1_1_material_builder.html">prtx::MaterialBuilder</a>&amp;      materialUpdate</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    ) <span class="keyword">const</span> = 0;</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;};</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="keyword">class </span><a class="code" href="classprtx_1_1_reports.html">Reports</a>;</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="keyword">typedef</span> boost::shared_ptr&lt;Reports&gt; ReportsPtr;</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;</div>
-<div class="line"><a name="l00082"></a><span class="lineno"><a class="line" href="classprtx_1_1_reports.html">   82</a></span>&#160;<span class="keyword">class </span>PRTX_EXPORTS_API <a class="code" href="classprtx_1_1_reports.html">Reports</a> {</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <a class="code" href="classprtx_1_1_reports.html">Reports</a>() { }</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <a class="code" href="classprtx_1_1_reports.html">Reports</a>(</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        <span class="keyword">const</span> prtx::Shape::ReportBoolVect&amp;      boolReps,</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        <span class="keyword">const</span> prtx::Shape::ReportFloatVect&amp;     floatReps,</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        <span class="keyword">const</span> prtx::Shape::ReportStringVect&amp;    stringReps</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    );</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    <span class="keywordtype">void</span> append(<span class="keyword">const</span> ReportsPtr&amp; r);</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    prtx::Shape::ReportBoolVect     mBools;</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    prtx::Shape::ReportFloatVect    mFloats;</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    prtx::Shape::ReportStringVect   mStrings;</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;};</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="keyword">class </span><a class="code" href="classprtx_1_1_encode_preparator.html">EncodePreparator</a>;</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="keyword">typedef</span> boost::shared_ptr&lt;EncodePreparator&gt; EncodePreparatorPtr;</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;</div>
-<div class="line"><a name="l00144"></a><span class="lineno"><a class="line" href="classprtx_1_1_encode_preparator.html">  144</a></span>&#160;<span class="keyword">class </span>PRTX_EXPORTS_API <a class="code" href="classprtx_1_1_encode_preparator.html">EncodePreparator</a>  : boost::noncopyable {</div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;    <span class="keyword">static</span> <span class="keyword">const</span> <a class="code" href="namespaceprtx.html#acfbb1262ed21fac2e362179f92993c81">prtx::DoubleVector</a> IDENTITY;</div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;    <span class="keyword">class </span><a class="code" href="classprtx_1_1_encode_preparator_1_1_finalized_instance.html">FinalizedInstance</a>;</div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;    <span class="keyword">typedef</span> std::vector&lt;FinalizedInstance&gt; InstanceVector;</div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;    <span class="keyword">class </span><a class="code" href="classprtx_1_1_encode_preparator_1_1_preparation_flags.html">PreparationFlags</a>;</div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;</div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;    <span class="keyword">static</span> EncodePreparatorPtr create(</div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;            <span class="keywordtype">bool</span>                                enforceTextureConsistency,</div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;            <a class="code" href="classprtx_1_1_name_preparator.html">NamePreparator</a>&amp;                     namePreparator,</div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;            <span class="keyword">const</span> NamePreparator::NamespacePtr&amp; nsMeshes,</div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;            <span class="keyword">const</span> NamePreparator::NamespacePtr&amp; nsMaterials,</div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;            <span class="keyword">const</span> <a class="code" href="structprtx_1_1_material_transformer.html">MaterialTransformer</a>*          materialTransformer = 0</div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;    );</div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;</div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> add(</div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;            <span class="keyword">const</span> <a class="code" href="classprt_1_1_cache.html">prt::Cache</a>*           cache,</div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;            <a class="code" href="namespaceprtx.html#a11fbe551abb06f16357e0e8d66f75f75">ShapePtr</a>                    shape,</div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;            <span class="keyword">const</span> <a class="code" href="classprt_1_1_attribute_map.html">prt::AttributeMap</a>*    initialShapeAttributes,</div>
-<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;            <span class="keyword">const</span> ReportsPtr&amp;           reports = ReportsPtr()</div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;    ) = 0;</div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;</div>
-<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> add(</div>
-<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;            <span class="keyword">const</span> <a class="code" href="classprt_1_1_cache.html">prt::Cache</a>*           cache,</div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;            <span class="keyword">const</span> <a class="code" href="classprtx_1_1_initial_shape.html">prtx::InitialShape</a>&amp;   initialShape,</div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;            <span class="keywordtype">size_t</span>                      initialShapeIndex</div>
-<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;    ) = 0;</div>
-<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;</div>
-<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> add(<a class="code" href="namespaceprtx.html#a8bf959de214d2b851e31be42ee24efd7">GeometryPtr</a> g, <span class="keyword">const</span> <a class="code" href="namespaceprtx.html#acfbb1262ed21fac2e362179f92993c81">prtx::DoubleVector</a>* offset = 0) = 0;</div>
-<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="keyword">namespace </span>prtx {</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;</div>
+<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="structprtx_1_1_vertex_normal_processor.html">   43</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structprtx_1_1_vertex_normal_processor.html">VertexNormalProcessor</a> {</div>
+<div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="structprtx_1_1_vertex_normal_processor.html#adc6143060777d55047c4ecef45a13a98">   44</a></span>&#160;<span class="keyword">enum</span> <a class="code" href="structprtx_1_1_vertex_normal_processor.html#adc6143060777d55047c4ecef45a13a98">Action</a> {</div>
+<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="structprtx_1_1_vertex_normal_processor.html#adc6143060777d55047c4ecef45a13a98ae0bf234e73960fc9e9419488bf58b63a">   45</a></span>&#160;    <a class="code" href="structprtx_1_1_vertex_normal_processor.html#adc6143060777d55047c4ecef45a13a98ae0bf234e73960fc9e9419488bf58b63a">PASS</a>,                           </div>
+<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="structprtx_1_1_vertex_normal_processor.html#adc6143060777d55047c4ecef45a13a98aef1b61a8fe3a2b5256653fab8721d9e2">   46</a></span>&#160;    <a class="code" href="structprtx_1_1_vertex_normal_processor.html#adc6143060777d55047c4ecef45a13a98aef1b61a8fe3a2b5256653fab8721d9e2">DELETE_NORMALS</a>,                 </div>
+<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="structprtx_1_1_vertex_normal_processor.html#adc6143060777d55047c4ecef45a13a98a952ce05554161f65e242fc99e599fb4b">   47</a></span>&#160;    <a class="code" href="structprtx_1_1_vertex_normal_processor.html#adc6143060777d55047c4ecef45a13a98a952ce05554161f65e242fc99e599fb4b">SET_MISSING_TO_FACE_NORMALS</a>,    </div>
+<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="structprtx_1_1_vertex_normal_processor.html#adc6143060777d55047c4ecef45a13a98af0772d91fa5dc02303ce9c9b9a3e0ab6">   48</a></span>&#160;    <a class="code" href="structprtx_1_1_vertex_normal_processor.html#adc6143060777d55047c4ecef45a13a98af0772d91fa5dc02303ce9c9b9a3e0ab6">SET_ALL_TO_FACE_NORMALS</a>         </div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;};</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;};</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;</div>
+<div class="line"><a name="l00052"></a><span class="lineno"><a class="line" href="structprtx_1_1_hole_processor.html">   52</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structprtx_1_1_hole_processor.html">HoleProcessor</a> {</div>
+<div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="structprtx_1_1_hole_processor.html#a0574b2cb10749ba92314b05a5f52f032">   53</a></span>&#160;<span class="keyword">enum</span> <a class="code" href="structprtx_1_1_hole_processor.html#a0574b2cb10749ba92314b05a5f52f032">Action</a> {</div>
+<div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="structprtx_1_1_hole_processor.html#a0574b2cb10749ba92314b05a5f52f032a266d9e0de0a6a88d375fefcd90b57d50">   54</a></span>&#160;    <a class="code" href="structprtx_1_1_hole_processor.html#a0574b2cb10749ba92314b05a5f52f032a266d9e0de0a6a88d375fefcd90b57d50">PASS</a>,                           </div>
+<div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="structprtx_1_1_hole_processor.html#a0574b2cb10749ba92314b05a5f52f032aee5c516502420a76faa9660d68281ac0">   55</a></span>&#160;    <a class="code" href="structprtx_1_1_hole_processor.html#a0574b2cb10749ba92314b05a5f52f032aee5c516502420a76faa9660d68281ac0">TRIANGULATE_FACES_WITH_HOLES</a>,   </div>
+<div class="line"><a name="l00056"></a><span class="lineno"><a class="line" href="structprtx_1_1_hole_processor.html#a0574b2cb10749ba92314b05a5f52f032ad825e1a466beea202b68f659472e5d4b">   56</a></span>&#160;    <a class="code" href="structprtx_1_1_hole_processor.html#a0574b2cb10749ba92314b05a5f52f032ad825e1a466beea202b68f659472e5d4b">DELETE_HOLES</a>,                   </div>
+<div class="line"><a name="l00057"></a><span class="lineno"><a class="line" href="structprtx_1_1_hole_processor.html#a0574b2cb10749ba92314b05a5f52f032a7cc143e66ce6a9fe39eea26207d1623f">   57</a></span>&#160;    <a class="code" href="structprtx_1_1_hole_processor.html#a0574b2cb10749ba92314b05a5f52f032a7cc143e66ce6a9fe39eea26207d1623f">CONVERT_HOLES_TO_FACES</a>          </div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;};</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;};</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;</div>
+<div class="line"><a name="l00069"></a><span class="lineno"><a class="line" href="structprtx_1_1_material_transformer.html">   69</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structprtx_1_1_material_transformer.html">MaterialTransformer</a> {</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> update(</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;            <span class="keyword">const</span> <a class="code" href="classprt_1_1_attribute_map.html">prt::AttributeMap</a>*    initialShapeAttributes,</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;            <span class="keyword">const</span> <a class="code" href="namespaceprtx.html#aca45a7f98947d0b0252438ba65d009ad">prtx::MaterialPtr</a>&amp;    originalMaterial,</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;            <a class="code" href="classprtx_1_1_material_builder.html">prtx::MaterialBuilder</a>&amp;      materialUpdate</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    ) <span class="keyword">const</span> = 0;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;};</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="keyword">class </span><a class="code" href="classprtx_1_1_reports.html">Reports</a>;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="keyword">typedef</span> boost::shared_ptr&lt;Reports&gt; ReportsPtr;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;</div>
+<div class="line"><a name="l00084"></a><span class="lineno"><a class="line" href="classprtx_1_1_reports.html">   84</a></span>&#160;<span class="keyword">class </span>PRTX_EXPORTS_API <a class="code" href="classprtx_1_1_reports.html">Reports</a> {</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <a class="code" href="classprtx_1_1_reports.html">Reports</a>() { }</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    <a class="code" href="classprtx_1_1_reports.html">Reports</a>(</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        <span class="keyword">const</span> prtx::Shape::ReportBoolVect&amp;      boolReps,</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        <span class="keyword">const</span> prtx::Shape::ReportFloatVect&amp;     floatReps,</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        <span class="keyword">const</span> prtx::Shape::ReportStringVect&amp;    stringReps</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    );</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <span class="keywordtype">void</span> append(<span class="keyword">const</span> ReportsPtr&amp; r);</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    prtx::Shape::ReportBoolVect     mBools;</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    prtx::Shape::ReportFloatVect    mFloats;</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    prtx::Shape::ReportStringVect   mStrings;</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;};</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="keyword">class </span><a class="code" href="classprtx_1_1_encode_preparator.html">EncodePreparator</a>;</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="keyword">typedef</span> boost::shared_ptr&lt;EncodePreparator&gt; EncodePreparatorPtr;</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;</div>
+<div class="line"><a name="l00146"></a><span class="lineno"><a class="line" href="classprtx_1_1_encode_preparator.html">  146</a></span>&#160;<span class="keyword">class </span>PRTX_EXPORTS_API <a class="code" href="classprtx_1_1_encode_preparator.html">EncodePreparator</a>  : boost::noncopyable {</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;    <span class="keyword">static</span> <span class="keyword">const</span> <a class="code" href="namespaceprtx.html#acfbb1262ed21fac2e362179f92993c81">prtx::DoubleVector</a> IDENTITY;</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;    <span class="keyword">class </span><a class="code" href="classprtx_1_1_encode_preparator_1_1_finalized_instance.html">FinalizedInstance</a>;</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;    <span class="keyword">typedef</span> std::vector&lt;FinalizedInstance&gt; InstanceVector;</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;    <span class="keyword">class </span><a class="code" href="classprtx_1_1_encode_preparator_1_1_preparation_flags.html">PreparationFlags</a>;</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;    <span class="keyword">static</span> EncodePreparatorPtr create(</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;            <span class="keywordtype">bool</span>                                enforceTextureConsistency,</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;            <a class="code" href="classprtx_1_1_name_preparator.html">NamePreparator</a>&amp;                     namePreparator,</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;            <span class="keyword">const</span> NamePreparator::NamespacePtr&amp; nsMeshes,</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;            <span class="keyword">const</span> NamePreparator::NamespacePtr&amp; nsMaterials,</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;            <span class="keyword">const</span> <a class="code" href="structprtx_1_1_material_transformer.html">MaterialTransformer</a>*          materialTransformer = 0</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;    );</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> add(</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;            <a class="code" href="classprt_1_1_cache.html">prt::Cache</a>*                 cache,</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;            <span class="keyword">const</span> <a class="code" href="namespaceprtx.html#a11fbe551abb06f16357e0e8d66f75f75">ShapePtr</a>&amp;             shape,</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;            <span class="keyword">const</span> <a class="code" href="classprt_1_1_attribute_map.html">prt::AttributeMap</a>*    initialShapeAttributes,</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;            <span class="keyword">const</span> ReportsPtr&amp;           reports = ReportsPtr()</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;    ) = 0;</div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> add(</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;            <a class="code" href="classprt_1_1_cache.html">prt::Cache</a>*                 cache,</div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;            <span class="keyword">const</span> <a class="code" href="classprtx_1_1_initial_shape.html">prtx::InitialShape</a>&amp;   initialShape,</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;            <span class="keywordtype">size_t</span>                      initialShapeIndex</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;    ) = 0;</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;</div>
 <div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> fetchFinalizedInstances(</div>
-<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;            InstanceVector&amp;         instances,</div>
-<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;            <span class="keyword">const</span> <a class="code" href="classprtx_1_1_encode_preparator_1_1_preparation_flags.html">PreparationFlags</a>&amp; flags</div>
-<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;    ) = 0;</div>
-<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;</div>
-<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> getBoundingBox(<a class="code" href="classprtx_1_1_bounding_box.html">prtx::BoundingBox</a>&amp; bbox) = 0;</div>
-<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;</div>
-<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;    <span class="keyword">virtual</span> uint64_t getUsedMem(<span class="keywordtype">bool</span> considerInstanceCounts = <span class="keyword">false</span>) <span class="keyword">const</span> = 0;</div>
-<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;</div>
-<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> clear() = 0;</div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;</div>
-<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="classprtx_1_1_encode_preparator.html">EncodePreparator</a>();</div>
-<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;</div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;<span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00254"></a><span class="lineno"><a class="line" href="structprtx_1_1_encode_preparator_1_1_finalized_instance_base.html">  254</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structprtx_1_1_encode_preparator_1_1_finalized_instance_base.html">FinalizedInstanceBase</a> {</div>
-<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;        <a class="code" href="namespaceprtx.html#a8bf959de214d2b851e31be42ee24efd7">GeometryPtr</a>             mGeometry;</div>
-<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;        <a class="code" href="namespaceprtx.html#acfbb1262ed21fac2e362179f92993c81">prtx::DoubleVector</a>      mTransformation;</div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;        <a class="code" href="namespaceprtx.html#ab49c955da786ffdb6c09886cec54096b">prtx::MaterialPtrVector</a> mMaterials;</div>
-<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;        <a class="code" href="namespaceprtx.html#ad6d2e7a17e02b22059d00ef7816724cf">StringPtr</a>               mInitialShapeName;</div>
-<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;        <a class="code" href="namespaceprtx.html#ad6d2e7a17e02b22059d00ef7816724cf">StringPtr</a>               mShapeName;</div>
-<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;        uint32_t                mInitialShapeIndex;</div>
-<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;        uint32_t                mShapeId;</div>
-<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;        std::vector&lt;uint32_t&gt;   mMeshProperties;</div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;        <span class="keywordtype">int</span>                     mPrototype;</div>
-<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;        ReportsPtr              mReports;</div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;    };</div>
-<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;</div>
-<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;    <a class="code" href="classprtx_1_1_encode_preparator.html">EncodePreparator</a>();</div>
-<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;</div>
-<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;    <span class="keyword">static</span> <a class="code" href="structprtx_1_1_encode_preparator_1_1_finalized_instance_base.html">FinalizedInstanceBase</a>&amp; getBase(<a class="code" href="classprtx_1_1_encode_preparator_1_1_finalized_instance.html">FinalizedInstance</a>&amp; instance);</div>
-<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;</div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;    <span class="keyword">enum</span> MeshProperties {</div>
-<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;        ALL_MESH_FACES_CONVEX = 1 &lt;&lt; 0,</div>
-<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;        ALL_MESH_FACES_PLANAR = 1 &lt;&lt; 1</div>
-<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;    };</div>
-<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;</div>
-<div class="line"><a name="l00280"></a><span class="lineno"><a class="line" href="classprtx_1_1_encode_preparator_1_1_finalized_instance.html">  280</a></span>&#160;    <span class="keyword">class </span>PRTX_EXPORTS_API <a class="code" href="classprtx_1_1_encode_preparator_1_1_finalized_instance.html">FinalizedInstance</a> : <span class="keyword">private</span> <a class="code" href="structprtx_1_1_encode_preparator_1_1_finalized_instance_base.html">FinalizedInstanceBase</a> {</div>
-<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;        <span class="keyword">static</span> <span class="keyword">const</span> uint32_t NO_INITIAL_SHAPE_INDEX = uint32_t(-1);</div>
-<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;        <span class="keyword">static</span> <span class="keyword">const</span> uint32_t NO_SHAPE_ID = uint32_t(-1);</div>
-<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;</div>
-<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;        <span class="keyword">const</span> <a class="code" href="namespaceprtx.html#a8bf959de214d2b851e31be42ee24efd7">GeometryPtr</a>&amp; getGeometry() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;</div>
-<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;        <span class="keyword">const</span> <a class="code" href="namespaceprtx.html#acfbb1262ed21fac2e362179f92993c81">prtx::DoubleVector</a>&amp; getTransformation() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;</div>
-<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;        <span class="keyword">const</span> <a class="code" href="namespaceprtx.html#ab49c955da786ffdb6c09886cec54096b">prtx::MaterialPtrVector</a>&amp; getMaterials() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;</div>
-<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;        <span class="keyword">const</span> std::wstring&amp; getInitialShapeName() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;</div>
-<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;        <span class="keyword">const</span> std::wstring&amp; getShapeName() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;</div>
-<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;        uint32_t getInitialShapeIndex() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;</div>
-<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;        uint32_t getShapeId() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;</div>
-<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;        <span class="keywordtype">int</span> getPrototypeIndex() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;</div>
-<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;        <span class="keywordtype">bool</span> allMeshFacesConvex(<span class="keywordtype">size_t</span> meshIndex) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;</div>
-<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;        <span class="keywordtype">bool</span> allMeshFacesPlanar(<span class="keywordtype">size_t</span> meshIndex) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;</div>
-<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;        <span class="keyword">const</span> ReportsPtr&amp; getReports() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;</div>
-<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;        <a class="code" href="structprtx_1_1_encode_preparator_1_1_finalized_instance_base.html">FinalizedInstanceBase</a>&amp; getBase();</div>
-<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;        <span class="keyword">friend</span> <span class="keyword">class </span><a class="code" href="classprtx_1_1_encode_preparator.html">EncodePreparator</a>;</div>
-<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;    };</div>
-<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;</div>
-<div class="line"><a name="l00369"></a><span class="lineno"><a class="line" href="classprtx_1_1_encode_preparator_1_1_preparation_flags.html">  369</a></span>&#160;    <span class="keyword">class </span>PRTX_EXPORTS_API <a class="code" href="classprtx_1_1_encode_preparator_1_1_preparation_flags.html">PreparationFlags</a> {</div>
-<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00371"></a><span class="lineno"><a class="line" href="classprtx_1_1_encode_preparator_1_1_preparation_flags.html#a96855c329760c6162aca2e824b869f62">  371</a></span>&#160;        <span class="keyword">enum</span> <a class="code" href="classprtx_1_1_encode_preparator_1_1_preparation_flags.html#a96855c329760c6162aca2e824b869f62">IndexSharing</a> {</div>
-<div class="line"><a name="l00375"></a><span class="lineno"><a class="line" href="classprtx_1_1_encode_preparator_1_1_preparation_flags.html#a96855c329760c6162aca2e824b869f62aaccee14629e9e74afdbbc17f6a9f6c44">  375</a></span>&#160;            INDICES_SEPARATE_FOR_ALL_VERTEX_ATTRIBUTES              = 0,</div>
-<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;</div>
-<div class="line"><a name="l00380"></a><span class="lineno"><a class="line" href="classprtx_1_1_encode_preparator_1_1_preparation_flags.html#a96855c329760c6162aca2e824b869f62a93cd1c6e37fe84dc1375f86a46e84f86">  380</a></span>&#160;            INDICES_SAME_FOR_VERTICES_AND_NORMALS                   = (1 &lt;&lt; 0),</div>
-<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;</div>
-<div class="line"><a name="l00385"></a><span class="lineno"><a class="line" href="classprtx_1_1_encode_preparator_1_1_preparation_flags.html#a96855c329760c6162aca2e824b869f62a29951d6fced6cb19e0f9e33fe1bf45e1">  385</a></span>&#160;            INDICES_SAME_FOR_VERTICES_AND_FIRST_UV_SET              = (1 &lt;&lt; 1),</div>
-<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;</div>
-<div class="line"><a name="l00390"></a><span class="lineno"><a class="line" href="classprtx_1_1_encode_preparator_1_1_preparation_flags.html#a96855c329760c6162aca2e824b869f62a314e77959c30b02054ece48f039991bb">  390</a></span>&#160;            INDICES_SAME_FOR_VERTICES_AND_ALL_UV_SETS               = (1 &lt;&lt; 2) | INDICES_SAME_FOR_VERTICES_AND_FIRST_UV_SET,</div>
-<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;</div>
-<div class="line"><a name="l00395"></a><span class="lineno"><a class="line" href="classprtx_1_1_encode_preparator_1_1_preparation_flags.html#a96855c329760c6162aca2e824b869f62affd76189d9962aa36c1543a0ea61e176">  395</a></span>&#160;            INDICES_SAME_FOR_VERTICES_AND_NORMALS_AND_FIRST_UV_SET  = INDICES_SAME_FOR_VERTICES_AND_NORMALS | INDICES_SAME_FOR_VERTICES_AND_FIRST_UV_SET,</div>
-<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;</div>
-<div class="line"><a name="l00400"></a><span class="lineno"><a class="line" href="classprtx_1_1_encode_preparator_1_1_preparation_flags.html#a96855c329760c6162aca2e824b869f62a250bd7996e57deea7082c8476c4a1c74">  400</a></span>&#160;            INDICES_SAME_FOR_ALL_VERTEX_ATTRIBUTES                  = INDICES_SAME_FOR_VERTICES_AND_NORMALS | INDICES_SAME_FOR_VERTICES_AND_ALL_UV_SETS</div>
-<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;        };</div>
-<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;</div>
-<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;        <a class="code" href="classprtx_1_1_encode_preparator_1_1_preparation_flags.html">PreparationFlags</a>();</div>
-<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;</div>
-<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;        <a class="code" href="classprtx_1_1_encode_preparator_1_1_preparation_flags.html">PreparationFlags</a>&amp; instancing(<span class="keywordtype">bool</span> v);</div>
-<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;</div>
-<div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160;        <a class="code" href="classprtx_1_1_encode_preparator_1_1_preparation_flags.html">PreparationFlags</a>&amp; mergeByMaterial(<span class="keywordtype">bool</span> v);</div>
-<div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160;</div>
-<div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160;        <a class="code" href="classprtx_1_1_encode_preparator_1_1_preparation_flags.html">PreparationFlags</a>&amp; triangulate(<span class="keywordtype">bool</span> v);</div>
-<div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160;</div>
-<div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160;        <a class="code" href="classprtx_1_1_encode_preparator_1_1_preparation_flags.html">PreparationFlags</a>&amp; offset(<span class="keywordtype">double</span> x, <span class="keywordtype">double</span> y, <span class="keywordtype">double</span> z);</div>
-<div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160;</div>
-<div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160;        <a class="code" href="classprtx_1_1_encode_preparator_1_1_preparation_flags.html">PreparationFlags</a>&amp; offset(<span class="keyword">const</span> <span class="keywordtype">double</span>* xyz);</div>
-<div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160;</div>
-<div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160;        <a class="code" href="classprtx_1_1_encode_preparator_1_1_preparation_flags.html">PreparationFlags</a>&amp; processVertexNormals(<a class="code" href="structprtx_1_1_vertex_normal_processor.html#adc6143060777d55047c4ecef45a13a98">VertexNormalProcessor::Action</a> v);</div>
-<div class="line"><a name="l00437"></a><span class="lineno">  437</span>&#160;</div>
-<div class="line"><a name="l00443"></a><span class="lineno">  443</span>&#160;        <a class="code" href="classprtx_1_1_encode_preparator_1_1_preparation_flags.html">PreparationFlags</a>&amp; processHoles(<a class="code" href="structprtx_1_1_hole_processor.html#a0574b2cb10749ba92314b05a5f52f032">HoleProcessor::Action</a> v);</div>
-<div class="line"><a name="l00444"></a><span class="lineno">  444</span>&#160;</div>
-<div class="line"><a name="l00449"></a><span class="lineno">  449</span>&#160;        <a class="code" href="classprtx_1_1_encode_preparator_1_1_preparation_flags.html">PreparationFlags</a>&amp; mergeVertices(<span class="keywordtype">bool</span> v);</div>
-<div class="line"><a name="l00450"></a><span class="lineno">  450</span>&#160;</div>
-<div class="line"><a name="l00454"></a><span class="lineno">  454</span>&#160;        <a class="code" href="classprtx_1_1_encode_preparator_1_1_preparation_flags.html">PreparationFlags</a>&amp; cleanupVertexNormals(<span class="keywordtype">bool</span> v);</div>
-<div class="line"><a name="l00455"></a><span class="lineno">  455</span>&#160;</div>
-<div class="line"><a name="l00459"></a><span class="lineno">  459</span>&#160;        <a class="code" href="classprtx_1_1_encode_preparator_1_1_preparation_flags.html">PreparationFlags</a>&amp; cleanupUVs(<span class="keywordtype">bool</span> v);</div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;            InstanceVector&amp;             instances,</div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;            <span class="keyword">const</span> <a class="code" href="classprtx_1_1_encode_preparator_1_1_preparation_flags.html">PreparationFlags</a>&amp;     flags,</div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;            <a class="code" href="classprt_1_1_simple_output_callbacks.html">prt::SimpleOutputCallbacks</a>* cbForLogStats = 0</div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;    ) = 0;</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;</div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> getBoundingBox(<a class="code" href="classprtx_1_1_bounding_box.html">prtx::BoundingBox</a>&amp; bbox) = 0;</div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;</div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;    <span class="keyword">virtual</span> uint64_t getUsedMem(<span class="keywordtype">bool</span> considerInstanceCounts = <span class="keyword">false</span>) <span class="keyword">const</span> = 0;</div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> clear() = 0;</div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;</div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="classprtx_1_1_encode_preparator.html">EncodePreparator</a>();</div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;</div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;<span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00255"></a><span class="lineno"><a class="line" href="structprtx_1_1_encode_preparator_1_1_finalized_instance_base.html">  255</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structprtx_1_1_encode_preparator_1_1_finalized_instance_base.html">FinalizedInstanceBase</a> {</div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;        <a class="code" href="namespaceprtx.html#a8bf959de214d2b851e31be42ee24efd7">GeometryPtr</a>             mGeometry;</div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;        <a class="code" href="namespaceprtx.html#acfbb1262ed21fac2e362179f92993c81">prtx::DoubleVector</a>      mTransformation;</div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;        <a class="code" href="namespaceprtx.html#ab49c955da786ffdb6c09886cec54096b">prtx::MaterialPtrVector</a> mMaterials;</div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;        <a class="code" href="namespaceprtx.html#ad6d2e7a17e02b22059d00ef7816724cf">StringPtr</a>               mInitialShapeName;</div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;        <a class="code" href="namespaceprtx.html#ad6d2e7a17e02b22059d00ef7816724cf">StringPtr</a>               mShapeName;</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;        uint32_t                mInitialShapeIndex;</div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;        uint32_t                mShapeId;</div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;        std::vector&lt;uint32_t&gt;   mMeshProperties;</div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;        <span class="keywordtype">int</span>                     mPrototype;</div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;        ReportsPtr              mReports;</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;    };</div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;</div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;    <a class="code" href="classprtx_1_1_encode_preparator.html">EncodePreparator</a>();</div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;</div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;    <span class="keyword">static</span> <a class="code" href="structprtx_1_1_encode_preparator_1_1_finalized_instance_base.html">FinalizedInstanceBase</a>&amp; getBase(<a class="code" href="classprtx_1_1_encode_preparator_1_1_finalized_instance.html">FinalizedInstance</a>&amp; instance);</div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;</div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;    <span class="keyword">enum</span> MeshProperties {</div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;        ALL_MESH_FACES_CONVEX = 1 &lt;&lt; 0,</div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;        ALL_MESH_FACES_PLANAR = 1 &lt;&lt; 1</div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;    };</div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;</div>
+<div class="line"><a name="l00281"></a><span class="lineno"><a class="line" href="classprtx_1_1_encode_preparator_1_1_finalized_instance.html">  281</a></span>&#160;    <span class="keyword">class </span>PRTX_EXPORTS_API <a class="code" href="classprtx_1_1_encode_preparator_1_1_finalized_instance.html">FinalizedInstance</a> : <span class="keyword">private</span> <a class="code" href="structprtx_1_1_encode_preparator_1_1_finalized_instance_base.html">FinalizedInstanceBase</a> {</div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;        <span class="keyword">static</span> <span class="keyword">const</span> uint32_t NO_INITIAL_SHAPE_INDEX = uint32_t(-1);</div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;        <span class="keyword">static</span> <span class="keyword">const</span> uint32_t NO_SHAPE_ID = uint32_t(-1);</div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;</div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;        <span class="keyword">const</span> <a class="code" href="namespaceprtx.html#a8bf959de214d2b851e31be42ee24efd7">GeometryPtr</a>&amp; getGeometry() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;</div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;        <span class="keyword">const</span> <a class="code" href="namespaceprtx.html#acfbb1262ed21fac2e362179f92993c81">prtx::DoubleVector</a>&amp; getTransformation() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;</div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;        <span class="keyword">const</span> <a class="code" href="namespaceprtx.html#ab49c955da786ffdb6c09886cec54096b">prtx::MaterialPtrVector</a>&amp; getMaterials() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;</div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;        <span class="keyword">const</span> std::wstring&amp; getInitialShapeName() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;</div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;        <span class="keyword">const</span> std::wstring&amp; getShapeName() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;</div>
+<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;        uint32_t getInitialShapeIndex() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;</div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;        uint32_t getShapeId() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;</div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;        <span class="keywordtype">int</span> getPrototypeIndex() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;</div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;        <span class="keywordtype">bool</span> allMeshFacesConvex(<span class="keywordtype">size_t</span> meshIndex) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;</div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;        <span class="keywordtype">bool</span> allMeshFacesPlanar(<span class="keywordtype">size_t</span> meshIndex) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;</div>
+<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;        <span class="keyword">const</span> ReportsPtr&amp; getReports() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;</div>
+<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;        <a class="code" href="structprtx_1_1_encode_preparator_1_1_finalized_instance_base.html">FinalizedInstanceBase</a>&amp; getBase();</div>
+<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;        <span class="keyword">friend</span> <span class="keyword">class </span><a class="code" href="classprtx_1_1_encode_preparator.html">EncodePreparator</a>;</div>
+<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;    };</div>
+<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;</div>
+<div class="line"><a name="l00370"></a><span class="lineno"><a class="line" href="classprtx_1_1_encode_preparator_1_1_preparation_flags.html">  370</a></span>&#160;    <span class="keyword">class </span>PRTX_EXPORTS_API <a class="code" href="classprtx_1_1_encode_preparator_1_1_preparation_flags.html">PreparationFlags</a> {</div>
+<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00372"></a><span class="lineno"><a class="line" href="classprtx_1_1_encode_preparator_1_1_preparation_flags.html#a96855c329760c6162aca2e824b869f62">  372</a></span>&#160;        <span class="keyword">enum</span> <a class="code" href="classprtx_1_1_encode_preparator_1_1_preparation_flags.html#a96855c329760c6162aca2e824b869f62">IndexSharing</a> {</div>
+<div class="line"><a name="l00376"></a><span class="lineno"><a class="line" href="classprtx_1_1_encode_preparator_1_1_preparation_flags.html#a96855c329760c6162aca2e824b869f62aaccee14629e9e74afdbbc17f6a9f6c44">  376</a></span>&#160;            INDICES_SEPARATE_FOR_ALL_VERTEX_ATTRIBUTES              = 0,</div>
+<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;</div>
+<div class="line"><a name="l00381"></a><span class="lineno"><a class="line" href="classprtx_1_1_encode_preparator_1_1_preparation_flags.html#a96855c329760c6162aca2e824b869f62a93cd1c6e37fe84dc1375f86a46e84f86">  381</a></span>&#160;            INDICES_SAME_FOR_VERTICES_AND_NORMALS                   = (1 &lt;&lt; 0),</div>
+<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;</div>
+<div class="line"><a name="l00386"></a><span class="lineno"><a class="line" href="classprtx_1_1_encode_preparator_1_1_preparation_flags.html#a96855c329760c6162aca2e824b869f62a29951d6fced6cb19e0f9e33fe1bf45e1">  386</a></span>&#160;            INDICES_SAME_FOR_VERTICES_AND_FIRST_UV_SET              = (1 &lt;&lt; 1),</div>
+<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;</div>
+<div class="line"><a name="l00391"></a><span class="lineno"><a class="line" href="classprtx_1_1_encode_preparator_1_1_preparation_flags.html#a96855c329760c6162aca2e824b869f62a314e77959c30b02054ece48f039991bb">  391</a></span>&#160;            INDICES_SAME_FOR_VERTICES_AND_ALL_UV_SETS               = (1 &lt;&lt; 2) | INDICES_SAME_FOR_VERTICES_AND_FIRST_UV_SET,</div>
+<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;</div>
+<div class="line"><a name="l00396"></a><span class="lineno"><a class="line" href="classprtx_1_1_encode_preparator_1_1_preparation_flags.html#a96855c329760c6162aca2e824b869f62affd76189d9962aa36c1543a0ea61e176">  396</a></span>&#160;            INDICES_SAME_FOR_VERTICES_AND_NORMALS_AND_FIRST_UV_SET  = INDICES_SAME_FOR_VERTICES_AND_NORMALS | INDICES_SAME_FOR_VERTICES_AND_FIRST_UV_SET,</div>
+<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;</div>
+<div class="line"><a name="l00401"></a><span class="lineno"><a class="line" href="classprtx_1_1_encode_preparator_1_1_preparation_flags.html#a96855c329760c6162aca2e824b869f62a250bd7996e57deea7082c8476c4a1c74">  401</a></span>&#160;            INDICES_SAME_FOR_ALL_VERTEX_ATTRIBUTES                  = INDICES_SAME_FOR_VERTICES_AND_NORMALS | INDICES_SAME_FOR_VERTICES_AND_ALL_UV_SETS</div>
+<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;        };</div>
+<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;</div>
+<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;        <a class="code" href="classprtx_1_1_encode_preparator_1_1_preparation_flags.html">PreparationFlags</a>();</div>
+<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;</div>
+<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;        <a class="code" href="classprtx_1_1_encode_preparator_1_1_preparation_flags.html">PreparationFlags</a>&amp; instancing(<span class="keywordtype">bool</span> v);</div>
+<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;</div>
+<div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160;        <a class="code" href="classprtx_1_1_encode_preparator_1_1_preparation_flags.html">PreparationFlags</a>&amp; mergeByMaterial(<span class="keywordtype">bool</span> v);</div>
+<div class="line"><a name="l00416"></a><span class="lineno">  416</span>&#160;</div>
+<div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160;        <a class="code" href="classprtx_1_1_encode_preparator_1_1_preparation_flags.html">PreparationFlags</a>&amp; createTextureAtlases(<span class="keywordtype">bool</span> v);</div>
+<div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160;</div>
+<div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160;        <a class="code" href="classprtx_1_1_encode_preparator_1_1_preparation_flags.html">PreparationFlags</a>&amp; maxAtlasDim(<span class="keywordtype">int</span> v);</div>
+<div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;</div>
+<div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160;        <a class="code" href="classprtx_1_1_encode_preparator_1_1_preparation_flags.html">PreparationFlags</a>&amp; atlasAddWrapBorder(<span class="keywordtype">bool</span> v);</div>
+<div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160;</div>
+<div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160;        <a class="code" href="classprtx_1_1_encode_preparator_1_1_preparation_flags.html">PreparationFlags</a>&amp; triangulate(<span class="keywordtype">bool</span> v);</div>
+<div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160;</div>
+<div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160;        <a class="code" href="classprtx_1_1_encode_preparator_1_1_preparation_flags.html">PreparationFlags</a>&amp; offset(<span class="keywordtype">double</span> x, <span class="keywordtype">double</span> y, <span class="keywordtype">double</span> z);</div>
+<div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160;</div>
+<div class="line"><a name="l00445"></a><span class="lineno">  445</span>&#160;        <a class="code" href="classprtx_1_1_encode_preparator_1_1_preparation_flags.html">PreparationFlags</a>&amp; offset(<span class="keyword">const</span> <span class="keywordtype">double</span>* xyz);</div>
+<div class="line"><a name="l00446"></a><span class="lineno">  446</span>&#160;</div>
+<div class="line"><a name="l00452"></a><span class="lineno">  452</span>&#160;        <a class="code" href="classprtx_1_1_encode_preparator_1_1_preparation_flags.html">PreparationFlags</a>&amp; processVertexNormals(<a class="code" href="structprtx_1_1_vertex_normal_processor.html#adc6143060777d55047c4ecef45a13a98">VertexNormalProcessor::Action</a> v);</div>
+<div class="line"><a name="l00453"></a><span class="lineno">  453</span>&#160;</div>
+<div class="line"><a name="l00459"></a><span class="lineno">  459</span>&#160;        <a class="code" href="classprtx_1_1_encode_preparator_1_1_preparation_flags.html">PreparationFlags</a>&amp; processHoles(<a class="code" href="structprtx_1_1_hole_processor.html#a0574b2cb10749ba92314b05a5f52f032">HoleProcessor::Action</a> v);</div>
 <div class="line"><a name="l00460"></a><span class="lineno">  460</span>&#160;</div>
-<div class="line"><a name="l00464"></a><span class="lineno">  464</span>&#160;        <a class="code" href="classprtx_1_1_encode_preparator_1_1_preparation_flags.html">PreparationFlags</a>&amp; mergeToleranceVertices(<span class="keywordtype">float</span> v);</div>
-<div class="line"><a name="l00465"></a><span class="lineno">  465</span>&#160;</div>
-<div class="line"><a name="l00469"></a><span class="lineno">  469</span>&#160;        <a class="code" href="classprtx_1_1_encode_preparator_1_1_preparation_flags.html">PreparationFlags</a>&amp; mergeToleranceNormals(<span class="keywordtype">float</span> v);</div>
-<div class="line"><a name="l00470"></a><span class="lineno">  470</span>&#160;</div>
-<div class="line"><a name="l00474"></a><span class="lineno">  474</span>&#160;        <a class="code" href="classprtx_1_1_encode_preparator_1_1_preparation_flags.html">PreparationFlags</a>&amp; mergeToleranceUVs(<span class="keywordtype">float</span> v);</div>
-<div class="line"><a name="l00475"></a><span class="lineno">  475</span>&#160;</div>
-<div class="line"><a name="l00481"></a><span class="lineno">  481</span>&#160;        <a class="code" href="classprtx_1_1_encode_preparator_1_1_preparation_flags.html">PreparationFlags</a>&amp; indexSharing(<a class="code" href="classprtx_1_1_encode_preparator_1_1_preparation_flags.html#a96855c329760c6162aca2e824b869f62">IndexSharing</a> v);</div>
-<div class="line"><a name="l00482"></a><span class="lineno">  482</span>&#160;</div>
-<div class="line"><a name="l00487"></a><span class="lineno">  487</span>&#160;        <a class="code" href="classprtx_1_1_encode_preparator_1_1_preparation_flags.html">PreparationFlags</a>&amp; determineMeshProperties(<span class="keywordtype">bool</span> v);</div>
-<div class="line"><a name="l00488"></a><span class="lineno">  488</span>&#160;</div>
-<div class="line"><a name="l00489"></a><span class="lineno">  489</span>&#160;        <span class="keywordtype">bool</span> instancing() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00490"></a><span class="lineno">  490</span>&#160;        <span class="keywordtype">bool</span> mergeByMaterial() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00491"></a><span class="lineno">  491</span>&#160;        <span class="keywordtype">bool</span> triangulate() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00492"></a><span class="lineno">  492</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">double</span>* offset() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00493"></a><span class="lineno">  493</span>&#160;        <a class="code" href="structprtx_1_1_vertex_normal_processor.html#adc6143060777d55047c4ecef45a13a98">VertexNormalProcessor::Action</a> processVertexNormals() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00494"></a><span class="lineno">  494</span>&#160;        <a class="code" href="structprtx_1_1_hole_processor.html#a0574b2cb10749ba92314b05a5f52f032">HoleProcessor::Action</a> processHoles() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00495"></a><span class="lineno">  495</span>&#160;        <span class="keywordtype">bool</span> mergeVertices() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00496"></a><span class="lineno">  496</span>&#160;        <span class="keywordtype">bool</span> cleanupVertexNormals() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00497"></a><span class="lineno">  497</span>&#160;        <span class="keywordtype">bool</span> cleanupUVs() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00498"></a><span class="lineno">  498</span>&#160;        <span class="keywordtype">float</span> mergeToleranceVertices() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00499"></a><span class="lineno">  499</span>&#160;        <span class="keywordtype">float</span> mergeToleranceNormals() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00500"></a><span class="lineno">  500</span>&#160;        <span class="keywordtype">float</span> mergeToleranceUVs() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00501"></a><span class="lineno">  501</span>&#160;        <a class="code" href="classprtx_1_1_encode_preparator_1_1_preparation_flags.html#a96855c329760c6162aca2e824b869f62">IndexSharing</a> indexSharing() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00502"></a><span class="lineno">  502</span>&#160;        <span class="keywordtype">bool</span> determineMeshProperties() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00503"></a><span class="lineno">  503</span>&#160;</div>
-<div class="line"><a name="l00504"></a><span class="lineno">  504</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00505"></a><span class="lineno">  505</span>&#160;        <span class="keywordtype">bool</span> mInstancing;</div>
-<div class="line"><a name="l00506"></a><span class="lineno">  506</span>&#160;        <span class="keywordtype">bool</span> mMergeByMaterial;</div>
-<div class="line"><a name="l00507"></a><span class="lineno">  507</span>&#160;        <span class="keywordtype">bool</span> mTriangulate;</div>
-<div class="line"><a name="l00508"></a><span class="lineno">  508</span>&#160;        <span class="keywordtype">bool</span> mDetermineMeshProperties;</div>
-<div class="line"><a name="l00509"></a><span class="lineno">  509</span>&#160;        <span class="keywordtype">bool</span> mMergeVertices;</div>
-<div class="line"><a name="l00510"></a><span class="lineno">  510</span>&#160;        <span class="keywordtype">bool</span> mCleanupVertexNormals;</div>
-<div class="line"><a name="l00511"></a><span class="lineno">  511</span>&#160;        <span class="keywordtype">bool</span> mCleanupUVs;</div>
-<div class="line"><a name="l00512"></a><span class="lineno">  512</span>&#160;        <a class="code" href="structprtx_1_1_vertex_normal_processor.html#adc6143060777d55047c4ecef45a13a98">VertexNormalProcessor::Action</a> mVertexNormalAction;</div>
-<div class="line"><a name="l00513"></a><span class="lineno">  513</span>&#160;        <a class="code" href="structprtx_1_1_hole_processor.html#a0574b2cb10749ba92314b05a5f52f032">HoleProcessor::Action</a> mHoleAction;</div>
-<div class="line"><a name="l00514"></a><span class="lineno">  514</span>&#160;        <a class="code" href="classprtx_1_1_encode_preparator_1_1_preparation_flags.html#a96855c329760c6162aca2e824b869f62">IndexSharing</a> mIndexSharing;</div>
-<div class="line"><a name="l00515"></a><span class="lineno">  515</span>&#160;        <span class="keywordtype">float</span> mMergeToleranceVertices;</div>
-<div class="line"><a name="l00516"></a><span class="lineno">  516</span>&#160;        <span class="keywordtype">float</span> mMergeToleranceNormals;</div>
-<div class="line"><a name="l00517"></a><span class="lineno">  517</span>&#160;        <span class="keywordtype">float</span> mMergeToleranceUVs;</div>
-<div class="line"><a name="l00518"></a><span class="lineno">  518</span>&#160;        <span class="keywordtype">double</span> mOffset[3];</div>
-<div class="line"><a name="l00519"></a><span class="lineno">  519</span>&#160;    };</div>
-<div class="line"><a name="l00520"></a><span class="lineno">  520</span>&#160;};</div>
-<div class="line"><a name="l00521"></a><span class="lineno">  521</span>&#160;</div>
+<div class="line"><a name="l00465"></a><span class="lineno">  465</span>&#160;        <a class="code" href="classprtx_1_1_encode_preparator_1_1_preparation_flags.html">PreparationFlags</a>&amp; mergeVertices(<span class="keywordtype">bool</span> v);</div>
+<div class="line"><a name="l00466"></a><span class="lineno">  466</span>&#160;</div>
+<div class="line"><a name="l00470"></a><span class="lineno">  470</span>&#160;        <a class="code" href="classprtx_1_1_encode_preparator_1_1_preparation_flags.html">PreparationFlags</a>&amp; cleanupVertexNormals(<span class="keywordtype">bool</span> v);</div>
+<div class="line"><a name="l00471"></a><span class="lineno">  471</span>&#160;</div>
+<div class="line"><a name="l00475"></a><span class="lineno">  475</span>&#160;        <a class="code" href="classprtx_1_1_encode_preparator_1_1_preparation_flags.html">PreparationFlags</a>&amp; cleanupUVs(<span class="keywordtype">bool</span> v);</div>
+<div class="line"><a name="l00476"></a><span class="lineno">  476</span>&#160;</div>
+<div class="line"><a name="l00480"></a><span class="lineno">  480</span>&#160;        <a class="code" href="classprtx_1_1_encode_preparator_1_1_preparation_flags.html">PreparationFlags</a>&amp; mergeToleranceVertices(<span class="keywordtype">float</span> v);</div>
+<div class="line"><a name="l00481"></a><span class="lineno">  481</span>&#160;</div>
+<div class="line"><a name="l00485"></a><span class="lineno">  485</span>&#160;        <a class="code" href="classprtx_1_1_encode_preparator_1_1_preparation_flags.html">PreparationFlags</a>&amp; mergeToleranceNormals(<span class="keywordtype">float</span> v);</div>
+<div class="line"><a name="l00486"></a><span class="lineno">  486</span>&#160;</div>
+<div class="line"><a name="l00490"></a><span class="lineno">  490</span>&#160;        <a class="code" href="classprtx_1_1_encode_preparator_1_1_preparation_flags.html">PreparationFlags</a>&amp; mergeToleranceUVs(<span class="keywordtype">float</span> v);</div>
+<div class="line"><a name="l00491"></a><span class="lineno">  491</span>&#160;</div>
+<div class="line"><a name="l00497"></a><span class="lineno">  497</span>&#160;        <a class="code" href="classprtx_1_1_encode_preparator_1_1_preparation_flags.html">PreparationFlags</a>&amp; indexSharing(<a class="code" href="classprtx_1_1_encode_preparator_1_1_preparation_flags.html#a96855c329760c6162aca2e824b869f62">IndexSharing</a> v);</div>
+<div class="line"><a name="l00498"></a><span class="lineno">  498</span>&#160;</div>
+<div class="line"><a name="l00503"></a><span class="lineno">  503</span>&#160;        <a class="code" href="classprtx_1_1_encode_preparator_1_1_preparation_flags.html">PreparationFlags</a>&amp; determineMeshProperties(<span class="keywordtype">bool</span> v);</div>
+<div class="line"><a name="l00504"></a><span class="lineno">  504</span>&#160;</div>
+<div class="line"><a name="l00505"></a><span class="lineno">  505</span>&#160;        <span class="keywordtype">bool</span> instancing() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00506"></a><span class="lineno">  506</span>&#160;        <span class="keywordtype">bool</span> mergeByMaterial() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00507"></a><span class="lineno">  507</span>&#160;        <span class="keywordtype">bool</span> createTextureAtlases() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00508"></a><span class="lineno">  508</span>&#160;        <span class="keywordtype">int</span> maxAtlasDim() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00509"></a><span class="lineno">  509</span>&#160;        <span class="keywordtype">bool</span> atlasAddWrapBorder() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00510"></a><span class="lineno">  510</span>&#160;        <span class="keywordtype">bool</span> triangulate() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00511"></a><span class="lineno">  511</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">double</span>* offset() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00512"></a><span class="lineno">  512</span>&#160;        <a class="code" href="structprtx_1_1_vertex_normal_processor.html#adc6143060777d55047c4ecef45a13a98">VertexNormalProcessor::Action</a> processVertexNormals() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00513"></a><span class="lineno">  513</span>&#160;        <a class="code" href="structprtx_1_1_hole_processor.html#a0574b2cb10749ba92314b05a5f52f032">HoleProcessor::Action</a> processHoles() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00514"></a><span class="lineno">  514</span>&#160;        <span class="keywordtype">bool</span> mergeVertices() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00515"></a><span class="lineno">  515</span>&#160;        <span class="keywordtype">bool</span> cleanupVertexNormals() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00516"></a><span class="lineno">  516</span>&#160;        <span class="keywordtype">bool</span> cleanupUVs() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00517"></a><span class="lineno">  517</span>&#160;        <span class="keywordtype">float</span> mergeToleranceVertices() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00518"></a><span class="lineno">  518</span>&#160;        <span class="keywordtype">float</span> mergeToleranceNormals() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00519"></a><span class="lineno">  519</span>&#160;        <span class="keywordtype">float</span> mergeToleranceUVs() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00520"></a><span class="lineno">  520</span>&#160;        <a class="code" href="classprtx_1_1_encode_preparator_1_1_preparation_flags.html#a96855c329760c6162aca2e824b869f62">IndexSharing</a> indexSharing() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00521"></a><span class="lineno">  521</span>&#160;        <span class="keywordtype">bool</span> determineMeshProperties() <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00522"></a><span class="lineno">  522</span>&#160;</div>
-<div class="line"><a name="l00523"></a><span class="lineno">  523</span>&#160;} <span class="comment">// namespace prtx</span></div>
-<div class="line"><a name="l00524"></a><span class="lineno">  524</span>&#160;</div>
-<div class="line"><a name="l00525"></a><span class="lineno">  525</span>&#160;</div>
-<div class="line"><a name="l00526"></a><span class="lineno">  526</span>&#160;<span class="preprocessor">#ifdef _MSC_VER</span></div>
-<div class="line"><a name="l00527"></a><span class="lineno">  527</span>&#160;<span class="preprocessor">#   pragma warning(pop)</span></div>
-<div class="line"><a name="l00528"></a><span class="lineno">  528</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00529"></a><span class="lineno">  529</span>&#160;</div>
-<div class="line"><a name="l00530"></a><span class="lineno">  530</span>&#160;</div>
-<div class="line"><a name="l00531"></a><span class="lineno">  531</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* PRTX_ENCODEPREPARATOR_H_ */</span><span class="preprocessor"></span></div>
-<div class="ttc" id="structprtx_1_1_vertex_normal_processor_html_adc6143060777d55047c4ecef45a13a98a952ce05554161f65e242fc99e599fb4b"><div class="ttname"><a href="structprtx_1_1_vertex_normal_processor.html#adc6143060777d55047c4ecef45a13a98a952ce05554161f65e242fc99e599fb4b">prtx::VertexNormalProcessor::SET_MISSING_TO_FACE_NORMALS</a></div><div class="ttdoc">Any missing vertex normals will be set to the corresponding face normal. </div><div class="ttdef"><b>Definition:</b> EncodePreparator.h:45</div></div>
+<div class="line"><a name="l00523"></a><span class="lineno">  523</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00524"></a><span class="lineno">  524</span>&#160;        <span class="keywordtype">bool</span> mInstancing;</div>
+<div class="line"><a name="l00525"></a><span class="lineno">  525</span>&#160;        <span class="keywordtype">bool</span> mMergeByMaterial;</div>
+<div class="line"><a name="l00526"></a><span class="lineno">  526</span>&#160;        <span class="keywordtype">bool</span> mCreateTextureAtlases;</div>
+<div class="line"><a name="l00527"></a><span class="lineno">  527</span>&#160;        <span class="keywordtype">int</span>  mMaxAtlasDim;</div>
+<div class="line"><a name="l00528"></a><span class="lineno">  528</span>&#160;        <span class="keywordtype">bool</span> mAtlasAddWrapBorder;</div>
+<div class="line"><a name="l00529"></a><span class="lineno">  529</span>&#160;        <span class="keywordtype">bool</span> mTriangulate;</div>
+<div class="line"><a name="l00530"></a><span class="lineno">  530</span>&#160;        <span class="keywordtype">bool</span> mDetermineMeshProperties;</div>
+<div class="line"><a name="l00531"></a><span class="lineno">  531</span>&#160;        <span class="keywordtype">bool</span> mMergeVertices;</div>
+<div class="line"><a name="l00532"></a><span class="lineno">  532</span>&#160;        <span class="keywordtype">bool</span> mCleanupVertexNormals;</div>
+<div class="line"><a name="l00533"></a><span class="lineno">  533</span>&#160;        <span class="keywordtype">bool</span> mCleanupUVs;</div>
+<div class="line"><a name="l00534"></a><span class="lineno">  534</span>&#160;        <a class="code" href="structprtx_1_1_vertex_normal_processor.html#adc6143060777d55047c4ecef45a13a98">VertexNormalProcessor::Action</a> mVertexNormalAction;</div>
+<div class="line"><a name="l00535"></a><span class="lineno">  535</span>&#160;        <a class="code" href="structprtx_1_1_hole_processor.html#a0574b2cb10749ba92314b05a5f52f032">HoleProcessor::Action</a> mHoleAction;</div>
+<div class="line"><a name="l00536"></a><span class="lineno">  536</span>&#160;        <a class="code" href="classprtx_1_1_encode_preparator_1_1_preparation_flags.html#a96855c329760c6162aca2e824b869f62">IndexSharing</a> mIndexSharing;</div>
+<div class="line"><a name="l00537"></a><span class="lineno">  537</span>&#160;        <span class="keywordtype">float</span> mMergeToleranceVertices;</div>
+<div class="line"><a name="l00538"></a><span class="lineno">  538</span>&#160;        <span class="keywordtype">float</span> mMergeToleranceNormals;</div>
+<div class="line"><a name="l00539"></a><span class="lineno">  539</span>&#160;        <span class="keywordtype">float</span> mMergeToleranceUVs;</div>
+<div class="line"><a name="l00540"></a><span class="lineno">  540</span>&#160;        <span class="keywordtype">double</span> mOffset[3];</div>
+<div class="line"><a name="l00541"></a><span class="lineno">  541</span>&#160;    };</div>
+<div class="line"><a name="l00542"></a><span class="lineno">  542</span>&#160;};</div>
+<div class="line"><a name="l00543"></a><span class="lineno">  543</span>&#160;</div>
+<div class="line"><a name="l00544"></a><span class="lineno">  544</span>&#160;</div>
+<div class="line"><a name="l00545"></a><span class="lineno">  545</span>&#160;} <span class="comment">// namespace prtx</span></div>
+<div class="line"><a name="l00546"></a><span class="lineno">  546</span>&#160;</div>
+<div class="line"><a name="l00547"></a><span class="lineno">  547</span>&#160;</div>
+<div class="line"><a name="l00548"></a><span class="lineno">  548</span>&#160;<span class="preprocessor">#ifdef _MSC_VER</span></div>
+<div class="line"><a name="l00549"></a><span class="lineno">  549</span>&#160;<span class="preprocessor">#   pragma warning(pop)</span></div>
+<div class="line"><a name="l00550"></a><span class="lineno">  550</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00551"></a><span class="lineno">  551</span>&#160;</div>
+<div class="line"><a name="l00552"></a><span class="lineno">  552</span>&#160;</div>
+<div class="line"><a name="l00553"></a><span class="lineno">  553</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* PRTX_ENCODEPREPARATOR_H_ */</span><span class="preprocessor"></span></div>
+<div class="ttc" id="structprtx_1_1_vertex_normal_processor_html_adc6143060777d55047c4ecef45a13a98a952ce05554161f65e242fc99e599fb4b"><div class="ttname"><a href="structprtx_1_1_vertex_normal_processor.html#adc6143060777d55047c4ecef45a13a98a952ce05554161f65e242fc99e599fb4b">prtx::VertexNormalProcessor::SET_MISSING_TO_FACE_NORMALS</a></div><div class="ttdoc">Any missing vertex normals will be set to the corresponding face normal. </div><div class="ttdef"><b>Definition:</b> EncodePreparator.h:47</div></div>
 <div class="ttc" id="namespaceprtx_html_a8bf959de214d2b851e31be42ee24efd7"><div class="ttname"><a href="namespaceprtx.html#a8bf959de214d2b851e31be42ee24efd7">prtx::GeometryPtr</a></div><div class="ttdeci">boost::shared_ptr&lt; Geometry &gt; GeometryPtr</div><div class="ttdoc">shared Geometry pointer </div><div class="ttdef"><b>Definition:</b> DebugUtils.h:39</div></div>
 <div class="ttc" id="namespaceprtx_html_ab49c955da786ffdb6c09886cec54096b"><div class="ttname"><a href="namespaceprtx.html#ab49c955da786ffdb6c09886cec54096b">prtx::MaterialPtrVector</a></div><div class="ttdeci">std::vector&lt; MaterialPtr &gt; MaterialPtrVector</div><div class="ttdoc">vector of shared Material pointers </div><div class="ttdef"><b>Definition:</b> Material.h:51</div></div>
 <div class="ttc" id="namespaceprtx_html_ad6d2e7a17e02b22059d00ef7816724cf"><div class="ttname"><a href="namespaceprtx.html#ad6d2e7a17e02b22059d00ef7816724cf">prtx::StringPtr</a></div><div class="ttdeci">boost::shared_ptr&lt; std::wstring &gt; StringPtr</div><div class="ttdoc">shared std::string </div><div class="ttdef"><b>Definition:</b> Types.h:56</div></div>
-<div class="ttc" id="structprtx_1_1_hole_processor_html_a0574b2cb10749ba92314b05a5f52f032a266d9e0de0a6a88d375fefcd90b57d50"><div class="ttname"><a href="structprtx_1_1_hole_processor.html#a0574b2cb10749ba92314b05a5f52f032a266d9e0de0a6a88d375fefcd90b57d50">prtx::HoleProcessor::PASS</a></div><div class="ttdoc">Faces with holes are not modified. </div><div class="ttdef"><b>Definition:</b> EncodePreparator.h:52</div></div>
+<div class="ttc" id="structprtx_1_1_hole_processor_html_a0574b2cb10749ba92314b05a5f52f032a266d9e0de0a6a88d375fefcd90b57d50"><div class="ttname"><a href="structprtx_1_1_hole_processor.html#a0574b2cb10749ba92314b05a5f52f032a266d9e0de0a6a88d375fefcd90b57d50">prtx::HoleProcessor::PASS</a></div><div class="ttdoc">Faces with holes are not modified. </div><div class="ttdef"><b>Definition:</b> EncodePreparator.h:54</div></div>
 <div class="ttc" id="classprtx_1_1_bounding_box_html"><div class="ttname"><a href="classprtx_1_1_bounding_box.html">prtx::BoundingBox</a></div><div class="ttdef"><b>Definition:</b> BoundingBox.h:41</div></div>
-<div class="ttc" id="structprtx_1_1_hole_processor_html_a0574b2cb10749ba92314b05a5f52f032aee5c516502420a76faa9660d68281ac0"><div class="ttname"><a href="structprtx_1_1_hole_processor.html#a0574b2cb10749ba92314b05a5f52f032aee5c516502420a76faa9660d68281ac0">prtx::HoleProcessor::TRIANGULATE_FACES_WITH_HOLES</a></div><div class="ttdoc">Faces with holes will be triangulated. </div><div class="ttdef"><b>Definition:</b> EncodePreparator.h:53</div></div>
+<div class="ttc" id="structprtx_1_1_hole_processor_html_a0574b2cb10749ba92314b05a5f52f032aee5c516502420a76faa9660d68281ac0"><div class="ttname"><a href="structprtx_1_1_hole_processor.html#a0574b2cb10749ba92314b05a5f52f032aee5c516502420a76faa9660d68281ac0">prtx::HoleProcessor::TRIANGULATE_FACES_WITH_HOLES</a></div><div class="ttdoc">Faces with holes will be triangulated. </div><div class="ttdef"><b>Definition:</b> EncodePreparator.h:55</div></div>
 <div class="ttc" id="namespaceprtx_html_acfbb1262ed21fac2e362179f92993c81"><div class="ttname"><a href="namespaceprtx.html#acfbb1262ed21fac2e362179f92993c81">prtx::DoubleVector</a></div><div class="ttdeci">std::vector&lt; double &gt; DoubleVector</div><div class="ttdoc">vector of double </div><div class="ttdef"><b>Definition:</b> Types.h:52</div></div>
-<div class="ttc" id="structprtx_1_1_hole_processor_html_a0574b2cb10749ba92314b05a5f52f032a7cc143e66ce6a9fe39eea26207d1623f"><div class="ttname"><a href="structprtx_1_1_hole_processor.html#a0574b2cb10749ba92314b05a5f52f032a7cc143e66ce6a9fe39eea26207d1623f">prtx::HoleProcessor::CONVERT_HOLES_TO_FACES</a></div><div class="ttdoc">Holes will be converted to regular faces. </div><div class="ttdef"><b>Definition:</b> EncodePreparator.h:55</div></div>
-<div class="ttc" id="structprtx_1_1_hole_processor_html_a0574b2cb10749ba92314b05a5f52f032ad825e1a466beea202b68f659472e5d4b"><div class="ttname"><a href="structprtx_1_1_hole_processor.html#a0574b2cb10749ba92314b05a5f52f032ad825e1a466beea202b68f659472e5d4b">prtx::HoleProcessor::DELETE_HOLES</a></div><div class="ttdoc">Any holes will be deleted. </div><div class="ttdef"><b>Definition:</b> EncodePreparator.h:54</div></div>
-<div class="ttc" id="classprtx_1_1_encode_preparator_1_1_preparation_flags_html_a96855c329760c6162aca2e824b869f62"><div class="ttname"><a href="classprtx_1_1_encode_preparator_1_1_preparation_flags.html#a96855c329760c6162aca2e824b869f62">prtx::EncodePreparator::PreparationFlags::IndexSharing</a></div><div class="ttdeci">IndexSharing</div><div class="ttdef"><b>Definition:</b> EncodePreparator.h:371</div></div>
-<div class="ttc" id="structprtx_1_1_vertex_normal_processor_html_adc6143060777d55047c4ecef45a13a98"><div class="ttname"><a href="structprtx_1_1_vertex_normal_processor.html#adc6143060777d55047c4ecef45a13a98">prtx::VertexNormalProcessor::Action</a></div><div class="ttdeci">Action</div><div class="ttdef"><b>Definition:</b> EncodePreparator.h:42</div></div>
-<div class="ttc" id="classprtx_1_1_encode_preparator_1_1_finalized_instance_html"><div class="ttname"><a href="classprtx_1_1_encode_preparator_1_1_finalized_instance.html">prtx::EncodePreparator::FinalizedInstance</a></div><div class="ttdef"><b>Definition:</b> EncodePreparator.h:280</div></div>
-<div class="ttc" id="classprtx_1_1_encode_preparator_html"><div class="ttname"><a href="classprtx_1_1_encode_preparator.html">prtx::EncodePreparator</a></div><div class="ttdef"><b>Definition:</b> EncodePreparator.h:144</div></div>
-<div class="ttc" id="structprtx_1_1_encode_preparator_1_1_finalized_instance_base_html"><div class="ttname"><a href="structprtx_1_1_encode_preparator_1_1_finalized_instance_base.html">prtx::EncodePreparator::FinalizedInstanceBase</a></div><div class="ttdef"><b>Definition:</b> EncodePreparator.h:254</div></div>
+<div class="ttc" id="structprtx_1_1_hole_processor_html_a0574b2cb10749ba92314b05a5f52f032a7cc143e66ce6a9fe39eea26207d1623f"><div class="ttname"><a href="structprtx_1_1_hole_processor.html#a0574b2cb10749ba92314b05a5f52f032a7cc143e66ce6a9fe39eea26207d1623f">prtx::HoleProcessor::CONVERT_HOLES_TO_FACES</a></div><div class="ttdoc">Holes will be converted to regular faces. </div><div class="ttdef"><b>Definition:</b> EncodePreparator.h:57</div></div>
+<div class="ttc" id="structprtx_1_1_hole_processor_html_a0574b2cb10749ba92314b05a5f52f032ad825e1a466beea202b68f659472e5d4b"><div class="ttname"><a href="structprtx_1_1_hole_processor.html#a0574b2cb10749ba92314b05a5f52f032ad825e1a466beea202b68f659472e5d4b">prtx::HoleProcessor::DELETE_HOLES</a></div><div class="ttdoc">Any holes will be deleted. </div><div class="ttdef"><b>Definition:</b> EncodePreparator.h:56</div></div>
+<div class="ttc" id="classprtx_1_1_encode_preparator_1_1_preparation_flags_html_a96855c329760c6162aca2e824b869f62"><div class="ttname"><a href="classprtx_1_1_encode_preparator_1_1_preparation_flags.html#a96855c329760c6162aca2e824b869f62">prtx::EncodePreparator::PreparationFlags::IndexSharing</a></div><div class="ttdeci">IndexSharing</div><div class="ttdef"><b>Definition:</b> EncodePreparator.h:372</div></div>
+<div class="ttc" id="structprtx_1_1_vertex_normal_processor_html_adc6143060777d55047c4ecef45a13a98"><div class="ttname"><a href="structprtx_1_1_vertex_normal_processor.html#adc6143060777d55047c4ecef45a13a98">prtx::VertexNormalProcessor::Action</a></div><div class="ttdeci">Action</div><div class="ttdef"><b>Definition:</b> EncodePreparator.h:44</div></div>
+<div class="ttc" id="classprtx_1_1_encode_preparator_1_1_finalized_instance_html"><div class="ttname"><a href="classprtx_1_1_encode_preparator_1_1_finalized_instance.html">prtx::EncodePreparator::FinalizedInstance</a></div><div class="ttdef"><b>Definition:</b> EncodePreparator.h:281</div></div>
+<div class="ttc" id="classprtx_1_1_encode_preparator_html"><div class="ttname"><a href="classprtx_1_1_encode_preparator.html">prtx::EncodePreparator</a></div><div class="ttdef"><b>Definition:</b> EncodePreparator.h:146</div></div>
+<div class="ttc" id="structprtx_1_1_encode_preparator_1_1_finalized_instance_base_html"><div class="ttname"><a href="structprtx_1_1_encode_preparator_1_1_finalized_instance_base.html">prtx::EncodePreparator::FinalizedInstanceBase</a></div><div class="ttdef"><b>Definition:</b> EncodePreparator.h:255</div></div>
 <div class="ttc" id="classprtx_1_1_initial_shape_html"><div class="ttname"><a href="classprtx_1_1_initial_shape.html">prtx::InitialShape</a></div><div class="ttdef"><b>Definition:</b> /InitialShape.h:27</div></div>
-<div class="ttc" id="classprt_1_1_cache_html"><div class="ttname"><a href="classprt_1_1_cache.html">prt::Cache</a></div><div class="ttdef"><b>Definition:</b> Cache.h:54</div></div>
-<div class="ttc" id="structprtx_1_1_vertex_normal_processor_html_adc6143060777d55047c4ecef45a13a98af0772d91fa5dc02303ce9c9b9a3e0ab6"><div class="ttname"><a href="structprtx_1_1_vertex_normal_processor.html#adc6143060777d55047c4ecef45a13a98af0772d91fa5dc02303ce9c9b9a3e0ab6">prtx::VertexNormalProcessor::SET_ALL_TO_FACE_NORMALS</a></div><div class="ttdoc">All vertex normals will be replaced with the corresponding face normal. </div><div class="ttdef"><b>Definition:</b> EncodePreparator.h:46</div></div>
-<div class="ttc" id="structprtx_1_1_vertex_normal_processor_html_adc6143060777d55047c4ecef45a13a98ae0bf234e73960fc9e9419488bf58b63a"><div class="ttname"><a href="structprtx_1_1_vertex_normal_processor.html#adc6143060777d55047c4ecef45a13a98ae0bf234e73960fc9e9419488bf58b63a">prtx::VertexNormalProcessor::PASS</a></div><div class="ttdoc">The vertex normals are not modified. </div><div class="ttdef"><b>Definition:</b> EncodePreparator.h:43</div></div>
+<div class="ttc" id="classprt_1_1_simple_output_callbacks_html"><div class="ttname"><a href="classprt_1_1_simple_output_callbacks.html">prt::SimpleOutputCallbacks</a></div><div class="ttdef"><b>Definition:</b> Callbacks.h:228</div></div>
+<div class="ttc" id="classprt_1_1_cache_html"><div class="ttname"><a href="classprt_1_1_cache.html">prt::Cache</a></div><div class="ttdef"><b>Definition:</b> Cache.h:53</div></div>
+<div class="ttc" id="structprtx_1_1_vertex_normal_processor_html_adc6143060777d55047c4ecef45a13a98af0772d91fa5dc02303ce9c9b9a3e0ab6"><div class="ttname"><a href="structprtx_1_1_vertex_normal_processor.html#adc6143060777d55047c4ecef45a13a98af0772d91fa5dc02303ce9c9b9a3e0ab6">prtx::VertexNormalProcessor::SET_ALL_TO_FACE_NORMALS</a></div><div class="ttdoc">All vertex normals will be replaced with the corresponding face normal. </div><div class="ttdef"><b>Definition:</b> EncodePreparator.h:48</div></div>
+<div class="ttc" id="structprtx_1_1_vertex_normal_processor_html_adc6143060777d55047c4ecef45a13a98ae0bf234e73960fc9e9419488bf58b63a"><div class="ttname"><a href="structprtx_1_1_vertex_normal_processor.html#adc6143060777d55047c4ecef45a13a98ae0bf234e73960fc9e9419488bf58b63a">prtx::VertexNormalProcessor::PASS</a></div><div class="ttdoc">The vertex normals are not modified. </div><div class="ttdef"><b>Definition:</b> EncodePreparator.h:45</div></div>
 <div class="ttc" id="classprt_1_1_attribute_map_html"><div class="ttname"><a href="classprt_1_1_attribute_map.html">prt::AttributeMap</a></div><div class="ttdef"><b>Definition:</b> AttributeMap.h:32</div></div>
 <div class="ttc" id="namespaceprtx_html_aca45a7f98947d0b0252438ba65d009ad"><div class="ttname"><a href="namespaceprtx.html#aca45a7f98947d0b0252438ba65d009ad">prtx::MaterialPtr</a></div><div class="ttdeci">boost::shared_ptr&lt; Material &gt; MaterialPtr</div><div class="ttdoc">shared Material pointer </div><div class="ttdef"><b>Definition:</b> Material.h:49</div></div>
-<div class="ttc" id="structprtx_1_1_hole_processor_html_a0574b2cb10749ba92314b05a5f52f032"><div class="ttname"><a href="structprtx_1_1_hole_processor.html#a0574b2cb10749ba92314b05a5f52f032">prtx::HoleProcessor::Action</a></div><div class="ttdeci">Action</div><div class="ttdef"><b>Definition:</b> EncodePreparator.h:51</div></div>
-<div class="ttc" id="structprtx_1_1_material_transformer_html"><div class="ttname"><a href="structprtx_1_1_material_transformer.html">prtx::MaterialTransformer</a></div><div class="ttdef"><b>Definition:</b> EncodePreparator.h:67</div></div>
-<div class="ttc" id="classprtx_1_1_encode_preparator_1_1_preparation_flags_html"><div class="ttname"><a href="classprtx_1_1_encode_preparator_1_1_preparation_flags.html">prtx::EncodePreparator::PreparationFlags</a></div><div class="ttdef"><b>Definition:</b> EncodePreparator.h:369</div></div>
-<div class="ttc" id="structprtx_1_1_vertex_normal_processor_html"><div class="ttname"><a href="structprtx_1_1_vertex_normal_processor.html">prtx::VertexNormalProcessor</a></div><div class="ttdef"><b>Definition:</b> EncodePreparator.h:41</div></div>
+<div class="ttc" id="structprtx_1_1_hole_processor_html_a0574b2cb10749ba92314b05a5f52f032"><div class="ttname"><a href="structprtx_1_1_hole_processor.html#a0574b2cb10749ba92314b05a5f52f032">prtx::HoleProcessor::Action</a></div><div class="ttdeci">Action</div><div class="ttdef"><b>Definition:</b> EncodePreparator.h:53</div></div>
+<div class="ttc" id="structprtx_1_1_material_transformer_html"><div class="ttname"><a href="structprtx_1_1_material_transformer.html">prtx::MaterialTransformer</a></div><div class="ttdef"><b>Definition:</b> EncodePreparator.h:69</div></div>
+<div class="ttc" id="classprtx_1_1_encode_preparator_1_1_preparation_flags_html"><div class="ttname"><a href="classprtx_1_1_encode_preparator_1_1_preparation_flags.html">prtx::EncodePreparator::PreparationFlags</a></div><div class="ttdef"><b>Definition:</b> EncodePreparator.h:370</div></div>
+<div class="ttc" id="structprtx_1_1_vertex_normal_processor_html"><div class="ttname"><a href="structprtx_1_1_vertex_normal_processor.html">prtx::VertexNormalProcessor</a></div><div class="ttdef"><b>Definition:</b> EncodePreparator.h:43</div></div>
 <div class="ttc" id="namespaceprtx_html_a11fbe551abb06f16357e0e8d66f75f75"><div class="ttname"><a href="namespaceprtx.html#a11fbe551abb06f16357e0e8d66f75f75">prtx::ShapePtr</a></div><div class="ttdeci">boost::shared_ptr&lt; Shape &gt; ShapePtr</div><div class="ttdoc">shared pointer to a Shape </div><div class="ttdef"><b>Definition:</b> Shape.h:33</div></div>
-<div class="ttc" id="structprtx_1_1_hole_processor_html"><div class="ttname"><a href="structprtx_1_1_hole_processor.html">prtx::HoleProcessor</a></div><div class="ttdef"><b>Definition:</b> EncodePreparator.h:50</div></div>
-<div class="ttc" id="classprtx_1_1_reports_html"><div class="ttname"><a href="classprtx_1_1_reports.html">prtx::Reports</a></div><div class="ttdef"><b>Definition:</b> EncodePreparator.h:82</div></div>
-<div class="ttc" id="structprtx_1_1_vertex_normal_processor_html_adc6143060777d55047c4ecef45a13a98aef1b61a8fe3a2b5256653fab8721d9e2"><div class="ttname"><a href="structprtx_1_1_vertex_normal_processor.html#adc6143060777d55047c4ecef45a13a98aef1b61a8fe3a2b5256653fab8721d9e2">prtx::VertexNormalProcessor::DELETE_NORMALS</a></div><div class="ttdoc">The vertex normals are deleted. </div><div class="ttdef"><b>Definition:</b> EncodePreparator.h:44</div></div>
+<div class="ttc" id="structprtx_1_1_hole_processor_html"><div class="ttname"><a href="structprtx_1_1_hole_processor.html">prtx::HoleProcessor</a></div><div class="ttdef"><b>Definition:</b> EncodePreparator.h:52</div></div>
+<div class="ttc" id="classprtx_1_1_reports_html"><div class="ttname"><a href="classprtx_1_1_reports.html">prtx::Reports</a></div><div class="ttdef"><b>Definition:</b> EncodePreparator.h:84</div></div>
+<div class="ttc" id="structprtx_1_1_vertex_normal_processor_html_adc6143060777d55047c4ecef45a13a98aef1b61a8fe3a2b5256653fab8721d9e2"><div class="ttname"><a href="structprtx_1_1_vertex_normal_processor.html#adc6143060777d55047c4ecef45a13a98aef1b61a8fe3a2b5256653fab8721d9e2">prtx::VertexNormalProcessor::DELETE_NORMALS</a></div><div class="ttdoc">The vertex normals are deleted. </div><div class="ttdef"><b>Definition:</b> EncodePreparator.h:46</div></div>
 <div class="ttc" id="classprtx_1_1_name_preparator_html"><div class="ttname"><a href="classprtx_1_1_name_preparator.html">prtx::NamePreparator</a></div><div class="ttdef"><b>Definition:</b> NamePreparator.h:44</div></div>
 <div class="ttc" id="classprtx_1_1_material_builder_html"><div class="ttname"><a href="classprtx_1_1_material_builder.html">prtx::MaterialBuilder</a></div><div class="ttdef"><b>Definition:</b> Material.h:232</div></div>
 </div><!-- fragment --></div><!-- contents -->
@@ -428,7 +443,7 @@ $(document).ready(function(){initNavTree('_encode_preparator_8h_source.html','')
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_f4d0b50486959f5b523ec02356ccf9e2.html">prtx</a></li><li class="navelem"><b>EncodePreparator.h</b></li>
-    <li class="footer">Generated on Tue Jun 16 2015 00:06:23 for Esri Procedural Runtime by
+    <li class="footer">Generated on Mon Sep 28 2015 22:14:27 for Esri Procedural Runtime by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.7 </li>
   </ul>

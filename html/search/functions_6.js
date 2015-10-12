@@ -23,7 +23,7 @@ var searchData=
   ['getboundingboxworld',['getBoundingBoxWorld',['../namespaceprtx_1_1_shape_utils.html#a425a48ddaf8bf9d4d83c7fa5ba681c79',1,'prtx::ShapeUtils']]],
   ['getbuffer',['getBuffer',['../classprtx_1_1_texture.html#a76e38e75a92c2706d899e5f4a85d54d8',1,'prtx::Texture']]],
   ['getbuffersize',['getBufferSize',['../classprtx_1_1_texture.html#a45d790e93fe2c4fd14e7c748a457f087',1,'prtx::Texture']]],
-  ['getbytesperpixel',['getBytesPerPixel',['../classprtx_1_1_texture.html#a8b398d5b2f0c5bef67941daa7c7b9900',1,'prtx::Texture']]],
+  ['getbytesperpixel',['getBytesPerPixel',['../classprtx_1_1_texture.html#aea4279a5b3455dd1da30234281cf64c6',1,'prtx::Texture']]],
   ['getcache',['getCache',['../classprtx_1_1_generate_context.html#a56f5d5173e5021d0a5ed43ce10b89320',1,'prtx::GenerateContext']]],
   ['getcachekey',['getCacheKey',['../classprt_1_1_initial_shape.html#a759be62f6d5ad644fe4f46d1af9c775a',1,'prt::InitialShape']]],
   ['getcallbacks',['getCallbacks',['../classprtx_1_1_encoder.html#ac0281aa75d44ea47c0dccd423db46b9e',1,'prtx::Encoder::getCallbacks()'],['../classprtx_1_1_generate_context.html#afcfef614d62246d746fd0062eab5d212',1,'prtx::GenerateContext::getCallbacks()']]],

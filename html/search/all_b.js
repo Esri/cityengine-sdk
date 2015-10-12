@@ -10,6 +10,7 @@ var searchData=
   ['materialptr',['MaterialPtr',['../namespaceprtx.html#aca45a7f98947d0b0252438ba65d009ad',1,'prtx']]],
   ['materialptrvector',['MaterialPtrVector',['../namespaceprtx.html#ab49c955da786ffdb6c09886cec54096b',1,'prtx']]],
   ['materialtransformer',['MaterialTransformer',['../structprtx_1_1_material_transformer.html',1,'prtx']]],
+  ['maxatlasdim',['maxAtlasDim',['../classprtx_1_1_encode_preparator_1_1_preparation_flags.html#a90d0f9e6739b76359d1623336c02da4c',1,'prtx::EncodePreparator::PreparationFlags']]],
   ['mbuildarch',['mBuildArch',['../structprt_1_1_version.html#aa03528e9857ad2a733ccb526b5bb4f75',1,'prt::Version']]],
   ['mcgacversion',['mCGACVersion',['../structprt_1_1_version.html#ad4dfb82f77852d77ac460ddbcd64a1ad',1,'prt::Version']]],
   ['mcgacversionmajor',['mCGACVersionMajor',['../structprt_1_1_version.html#ae279de52a8fbb2e2e4aa49e31df04780',1,'prt::Version']]],
