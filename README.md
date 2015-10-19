@@ -92,8 +92,7 @@ Please note that the individual example READMEs may include further requirements
     * Online: https://esri.github.io/esri-cityengine-sdk
     * Offline: see /doc subdirectory inside the release archive
 * Forum: 
-    * General CityEngine: http://forums.arcgis.com/forums/204-CityEngine-General-Discussion
-    * CityEngine SDK: http://forums.arcgis.com/forums/270-CityEngine-SDK
+    * General CityEngine: https://geonet.esri.com/community/gis/3d/cityengine
 * Facebook: https://www.facebook.com/CityEngine
 * Twitter: https://twitter.com/CityEngine
 
