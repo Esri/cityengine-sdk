@@ -52,7 +52,7 @@ A quick overview:
 Please note that the individual example READMEs may include further requirements.
 
 #### All Platforms
-* To load custom encoders built with this SDK in CityEngine, at least CityEngine 2014.0 is required.
+* To load custom encoders built with this SDK in CityEngine, CityEngine 2015.2 is required.
 * License for matching CityEngine
 * CMake 3.0.0 or later (http://www.cmake.org)
 * Optionally for custom SDK extension: boost 1.53 headers and binaries (using the same compiler as specified below)
