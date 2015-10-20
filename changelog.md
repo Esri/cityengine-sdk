@@ -1,7 +1,7 @@
 ESRI CITYENGINE SDK 1.4.2074 CHANGELOG
 ======================================
 
-This document lists all changes compared to CityEngine SDK 1.3.1969
+This section lists all changes compared to CityEngine SDK 1.3.1969
 
 
 General Info
@@ -69,7 +69,7 @@ Built-In Codecs Changes and Fixes
 ESRI CITYENGINE SDK 1.3.1969 CHANGELOG
 ======================================
 
-This document lists all changes compared to CityEngine SDK 1.3.1888
+This section lists all changes compared to CityEngine SDK 1.3.1888
 
 
 General Info
@@ -110,7 +110,7 @@ Built-In Codecs Changes and Fixes
 ESRI CITYENGINE SDK 1.3.1888 CHANGELOG
 ======================================
 
-This document lists all changes compared to CityEngine SDK 1.2.1591.
+This section lists all changes compared to CityEngine SDK 1.2.1591.
 
 
 General Info
@@ -206,7 +206,7 @@ Misc Changes and Fixes
 ESRI CITYENGINE SDK 1.2.1591 CHANGELOG
 ======================================
 
-This document lists all changes compared to CityEngine SDK 1.1.1471.
+This section lists all changes compared to CityEngine SDK 1.1.1471.
 
 
 General Info
@@ -312,7 +312,7 @@ Misc Changes and Fixes
 ESRI CITYENGINE SDK 1.1.1471 CHANGELOG
 ======================================
 
-This document lists all changes compared to CE SDK release 1.0.1209.
+This section lists all changes compared to CE SDK release 1.0.1209.
 
 
 General Info
