@@ -55,8 +55,8 @@ Please note that the individual example READMEs may include further requirements
 * To load custom encoders built with this SDK in CityEngine, CityEngine 2015.2 is required. For older versions of CityEngine an older version of the SDK might have to be used, see table above. 
 * License for matching CityEngine
 * CMake 3.0.0 or later (http://www.cmake.org)
-* Optionally for custom SDK extension: boost 1.53 headers and binaries (using the same compiler as specified below)
-    * Get the boost 1.53 headers from http://www.boost.org
+* Optionally for custom SDK extension: boost 1.59 headers and binaries (using the same compiler as specified below)
+    * Get the boost 1.59 headers from http://www.boost.org
 
 #### Windows
 * Windows 7 or later (32bit or 64bit)
@@ -70,22 +70,21 @@ Please note that the individual example READMEs may include further requirements
 * Pre-compiled boost libraries for VC10 or VC11 can be obtained from http://boost.teeks99.com (e.g. boost_1_53_0-vc64-bin.exe or boost_1_53_0-vc32-bin.exe)
 
 #### MacOSX
-* To compile: MacOSX 10.7
-* To run: MacOSX 10.7 or later
+* To compile: MacOSX Yosemite (10.10)
+* To run: MacOSX Yosemite (10.10) or later
 * GNU Make 3.82 or later
 * Recommended C++ Compilers for simple clients (prt4cmd example):
-    * GCC 4.2.1 or later
+    * Apple CLANG 6.1 or later
 * To compile SDK extensions (e.g. prt4maya example or the stlenc example for use in CityEngine) it is required to use this **exact** C++ compiler version:
-    * Apple GCC 4.2.1 included in:
-        * XCode 4.2 and MacOSX SDK 10.7 (Based on Apple Inc. build 5658, LLVM build 2336.1.00)
+    * Apple CLANG 6.1 included in XCode 6.4
 
 #### Linux
 * RedHat Enterprise Linux 6.x or compatible (64bit only)
 * GNU Make 3.82 or later
 * Recommended C++ Compilers for simple clients (prt4cmd example):
-    * GCC 4.4 or later
+    * GCC 4.8.2 or later
 * To compile SDK extensions (e.g. prt4maya example or the stlenc example for use in CityEngine) it is required to use this **exact** C++ compiler version:
-    * GCC 4.4.7 64bit included in RedHat Enterprise Linux 6.4 Package Repository
+    * GCC 4.8.2 included in RedHat Enterprise Linux 6 DevToolSet 2.1
 
 ## Further Resources
 * Documentation:
