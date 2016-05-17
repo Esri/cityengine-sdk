@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8.10)
+cmake_minimum_required(VERSION 3.0)
 cmake_policy(SET CMP0015 NEW)
 
 
@@ -10,7 +10,7 @@ project(${PROJECT})
 
 ### dependencies
 
-find_package(Boost COMPONENTS system program_options filesystem)
+find_package(Boost 1.56.0 REQUIRED COMPONENTS system program_options filesystem)
 include_directories(${Boost_INCLUDE_DIR})
 link_directories(${Boost_LIBRARY_DIRS})
 
@@ -18,6 +18,7 @@ if(NOT prt_DIR)
 	set(prt_DIR "${PROJECT_SOURCE_DIR}/../../../prt/cmake")
 endif()
 find_package(prt CONFIG)
+include_directories(${PRT_INCLUDE_PATH})
 set(CESDK_VERSION "cesdk_${PRT_VERSION_MAJOR}_${PRT_VERSION_MINOR}_${PRT_VERSION_MICRO}")
 
 
@@ -28,7 +29,7 @@ add_executable(${PROJECT} prt4cmd.cpp)
 SET(CMAKE_INSTALL_RPATH "")
 SET(CMAKE_INSTALL_RPATH_USE_LINK_PATH FALSE)
 
-include_directories(${PRT_INCLUDE_PATH})
+target_compile_options(${PROJECT} PRIVATE -std=c++11)
 target_link_libraries(${PROJECT} ${Boost_LIBRARIES} ${PRT_LIBRARY})
 
 if(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
