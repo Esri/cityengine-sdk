@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8.10)
+cmake_minimum_required(VERSION 3.0)
 cmake_policy(SET CMP0015 NEW)
 
 
@@ -10,30 +10,37 @@ project(${PROJECT})
 
 ### dependencies
 
-find_package(Boost COMPONENTS system program_options filesystem)
+find_package(Boost 1.53.0 REQUIRED COMPONENTS system program_options filesystem)
 include_directories(${Boost_INCLUDE_DIR})
 link_directories(${Boost_LIBRARY_DIRS})
 
 if(NOT prt_DIR)
-	set(prt_DIR "${PROJECT_SOURCE_DIR}/../../../prt/cmake")
+	set(prt_DIR "${PROJECT_SOURCE_DIR}/../../../prt/cmake") # fallback location
 endif()
 find_package(prt CONFIG)
+include_directories(${PRT_INCLUDE_PATH})
 set(CESDK_VERSION "cesdk_${PRT_VERSION_MAJOR}_${PRT_VERSION_MINOR}_${PRT_VERSION_MICRO}")
 
 
 ### build target
 
-add_executable(${PROJECT} prt4cmd.cpp)
+set(CMAKE_INSTALL_RPATH_USE_LINK_PATH FALSE)
+set(CMAKE_SKIP_RPATH FALSE)
 
-SET(CMAKE_INSTALL_RPATH "")
-SET(CMAKE_INSTALL_RPATH_USE_LINK_PATH FALSE)
+#set(CMAKE_INSTALL_RPATH "\$ORIGIN/")
+set(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_RPATH}:\$ORIGIN")
 
-include_directories(${PRT_INCLUDE_PATH})
-target_link_libraries(${PROJECT} ${Boost_LIBRARIES} ${PRT_LIBRARY})
+add_executable(${PROJECT} prt4cmd.cpp utils.cpp)
 
-if(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
-	set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wl,-rpath,'$ORIGIN'")
+if(${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
+	target_compile_definitions(${PROJECT} PRIVATE _SCL_SECURE_NO_WARNINGS)
+elseif(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
+	target_compile_options(${PROJECT} PRIVATE -std=c++11 -march=nocona -fvisibility=hidden -fvisibility-inlines-hidden -Wl,--exclude-libs,ALL -Wall -Wextra -Wunused-parameter -Wl,-rpath,'\$ORIGIN')
+elseif(${CMAKE_SYSTEM_NAME} STREQUAL "Darwin")
+	target_compile_options(${PROJECT} PRIVATE -std=c++14 -stdlib=libc++)
 endif()
+
+target_link_libraries(${PROJECT} ${Boost_LIBRARIES} ${PRT_LIBRARY})
 
 
 ### install target
@@ -47,9 +54,9 @@ install(FILES ${PRT_EXT_LIBRARIES} DESTINATION lib)
 install(CODE "FILE(MAKE_DIRECTORY ${CMAKE_INSTALL_PREFIX}/output)")
 install(DIRECTORY ${PROJECT_SOURCE_DIR}/../../../license DESTINATION .)
 if(WIN32)
-	install(FILES ${PROJECT_SOURCE_DIR}/../README.windows DESTINATION .)
+	install(FILES ${PROJECT_SOURCE_DIR}/../README_windows.md DESTINATION .)
 else()
-	install(FILES ${PROJECT_SOURCE_DIR}/../README.linux_osx DESTINATION .)
+	install(FILES ${PROJECT_SOURCE_DIR}/../README_linux_osx.md DESTINATION .)
 endif()
 
 
