@@ -27,6 +27,8 @@ BUILD INSTRUCTIONS
 4. cmake -G "Unix Makefiles" \
      -DCMAKE_INSTALL_PREFIX=../install \
      -DCMAKE_BUILD_TYPE=Release \
+     -DBOOST_INCLUDEDIR=<path to boost include> \
+     -DBOOST_LIBRARYDIR=<path to boost lib> \
      -DBoost_NO_BOOST_CMAKE=ON \
      -DBoost_USE_STATIC_LIBS=ON \
      -DBoost_USE_MULTITHREADED=ON \
