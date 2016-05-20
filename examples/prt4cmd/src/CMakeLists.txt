@@ -10,7 +10,7 @@ project(${PROJECT})
 
 ### dependencies
 
-find_package(Boost 1.59.0 REQUIRED COMPONENTS system program_options filesystem)
+find_package(Boost 1.53.0 REQUIRED COMPONENTS system program_options filesystem)
 include_directories(${Boost_INCLUDE_DIR})
 link_directories(${Boost_LIBRARY_DIRS})
 
@@ -30,7 +30,9 @@ SET(CMAKE_INSTALL_RPATH "")
 SET(CMAKE_INSTALL_RPATH_USE_LINK_PATH FALSE)
 
 if(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
-	target_compile_options(${PROJECT} PRIVATE -std=c++11 -march=nocona  -fvisibility=hidden -fvisibility-inlines-hidden -Wl,--exclude-libs,ALL -Wall -Wextra -Wunused-parameter -Wl,-rpath,'$ORIGIN')
+	target_compile_options(${PROJECT} PRIVATE -std=c++11 -march=nocona -fvisibility=hidden -fvisibility-inlines-hidden -Wl,--exclude-libs,ALL -Wall -Wextra -Wunused-parameter -Wl,-rpath,'$ORIGIN')
+elseif(${CMAKE_SYSTEM_NAME} STREQUAL "Darwin")
+	target_compile_options(${PROJECT} PRIVATE -std=c++14 -stdlib=libc++)
 endif()
 
 target_link_libraries(${PROJECT} ${Boost_LIBRARIES} ${PRT_LIBRARY})
