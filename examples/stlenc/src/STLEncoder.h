@@ -23,19 +23,18 @@
  * limitations under the License.
  */
 
-#ifndef PRT_EXAMPLE_STLENCODER_H_
-#define PRT_EXAMPLE_STLENCODER_H_
-
-#include <string>
-
-#include "prt/AttributeMap.h"
-#include "prt/Callbacks.h"
+#pragma once
 
 #include "prtx/prtx.h"
 #include "prtx/Encoder.h"
 #include "prtx/EncodePreparator.h"
 #include "prtx/EncoderFactory.h"
 #include "prtx/Singleton.h"
+
+#include "prt/AttributeMap.h"
+#include "prt/Callbacks.h"
+
+#include <string>
 
 
 // forward declare some classes to reduce header inclusion
@@ -73,6 +72,3 @@ public:
 	}
 
 };
-
-
-#endif /* PRT_EXAMPLE_STLENCODER_H_ */

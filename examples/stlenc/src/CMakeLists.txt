@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8.10)
+cmake_minimum_required(VERSION 3.0)
 cmake_policy(SET CMP0015 NEW)
 
 
@@ -10,15 +10,11 @@ project(${PROJECT})
 
 ### dependencies
 
-find_package(Boost REQUIRED)
-include_directories(${Boost_INCLUDE_DIR})
-link_directories(${Boost_LIBRARY_DIRS})
-add_definitions(-DBOOST_MINOR_VERSION=${Boost_MINOR_VERSION})
-
 if (NOT prt_DIR)
 	set(prt_DIR ${PROJECT_SOURCE_DIR}/../../../prt/cmake)
 endif()
 find_package(prt CONFIG REQUIRED)
+include_directories(${PRT_INCLUDE_PATH})
 set(CESDK_VERSION "cesdk_${PRT_VERSION_MAJOR}_${PRT_VERSION_MINOR}_${PRT_VERSION_MICRO}")
 
 
@@ -27,7 +23,11 @@ set(CESDK_VERSION "cesdk_${PRT_VERSION_MAJOR}_${PRT_VERSION_MINOR}_${PRT_VERSION
 add_library(${PROJECT} SHARED main.cpp STLEncoder.cpp)
 add_definitions(-DPRT_VERSION_MAJOR=${PRT_VERSION_MAJOR} -DPRT_VERSION_MINOR=${PRT_VERSION_MINOR})
 
-include_directories(${PRT_INCLUDE_PATH})
+if(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
+	target_compile_options(${PROJECT} PRIVATE -std=c++11 -march=nocona -fvisibility=hidden -fvisibility-inlines-hidden -Wl,--exclude-libs,ALL -Wall -Wextra -Wunused-parameter -Wl,-rpath,'$ORIGIN')
+elseif(${CMAKE_SYSTEM_NAME} STREQUAL "Darwin")
+	target_compile_options(${PROJECT} PRIVATE -std=c++14 -stdlib=libc++ -fvisibility=hidden -fvisibility-inlines-hidden -Wl,--exclude-libs,ALL -Wall -Wextra -Wunused-parameter)
+endif()
 target_link_libraries(${PROJECT} ${PRT_LIBRARY})
 
 
@@ -39,9 +39,9 @@ install(CODE "file(REMOVE_RECURSE ${CMAKE_INSTALL_PREFIX}/*)")
 install(TARGETS ${PROJECT} DESTINATION lib)
 install(DIRECTORY ${PROJECT_SOURCE_DIR}/../../../license DESTINATION .)
 if(WIN32)
-	install(FILES ${PROJECT_SOURCE_DIR}/../README.windows DESTINATION .)
+	install(FILES ${PROJECT_SOURCE_DIR}/../README_windows.md DESTINATION .)
 else()
-	install(FILES ${PROJECT_SOURCE_DIR}/../README.linux_osx DESTINATION .)
+	install(FILES ${PROJECT_SOURCE_DIR}/../README_linux_osx.md DESTINATION .)
 endif()
 
 
