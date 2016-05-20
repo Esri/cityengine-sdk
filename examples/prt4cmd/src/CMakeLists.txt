@@ -10,7 +10,7 @@ project(${PROJECT})
 
 ### dependencies
 
-find_package(Boost 1.56.0 REQUIRED COMPONENTS system program_options filesystem)
+find_package(Boost 1.59.0 REQUIRED COMPONENTS system program_options filesystem)
 include_directories(${Boost_INCLUDE_DIR})
 link_directories(${Boost_LIBRARY_DIRS})
 
@@ -29,12 +29,12 @@ add_executable(${PROJECT} prt4cmd.cpp)
 SET(CMAKE_INSTALL_RPATH "")
 SET(CMAKE_INSTALL_RPATH_USE_LINK_PATH FALSE)
 
-target_compile_options(${PROJECT} PRIVATE -std=c++11)
+if(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
+	target_compile_options(${PROJECT} PRIVATE -std=c++11 -march=nocona  -fvisibility=hidden -fvisibility-inlines-hidden -Wl,--exclude-libs,ALL -Wall -Wextra -Wunused-parameter -Wl,-rpath,'$ORIGIN')
+endif()
+
 target_link_libraries(${PROJECT} ${Boost_LIBRARIES} ${PRT_LIBRARY})
 
-if(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
-	set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wl,-rpath,'$ORIGIN'")
-endif()
 
 
 ### install target
