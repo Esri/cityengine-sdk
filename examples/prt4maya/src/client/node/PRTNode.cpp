@@ -26,7 +26,9 @@
 #include <cstdio>
 #include <sstream>
 
-#ifndef _MSC_VER
+#ifdef _WIN32
+#	include <Windows.h>
+#else
 #	include <dlfcn.h>
 #endif
 
@@ -512,15 +514,15 @@ bool tryToGetLicenseDetails(prt::FlexLicParams& flp) {
 }
 
 
-void printEnv() {
-  int i = 1;
-  char *s = *environ;
-
-  for (; s; i++) {
-    printf("%s\n", s);
-    s = *(environ+i);
-  }
-}
+//void printEnv() {
+//  int i = 1;
+//  char *s = *environ;
+//
+//  for (; s; i++) {
+//    printf("%s\n", s);
+//    s = *(environ+i);
+//  }
+//}
 
 
 } // namespace
@@ -546,16 +548,15 @@ P4M_API MStatus initializePlugin(MObject obj){
 	if (!tryToGetLicenseDetails(flp))
 		return MS::kFailure;	
 
-
-	setenv("FLEXLM_NO_CKOUT_INSTALL_LIC", "1", 1);
-	setenv("LM_DIAGNOSTICS", "2", 1);
-
-	setenv("ARCGIS_LICENSE_FILE", flp.mHostName, 1);
-	setenv("CITYENGINE_LICENSE_FILE", flp.mHostName, 1);
-	setenv("VENDOR_LICENSE_FILE", flp.mHostName, 1);
-	setenv("LM_LICENSE_FILE", flp.mHostName, 1);
-
-	printEnv();
+//	setenv("FLEXLM_NO_CKOUT_INSTALL_LIC", "1", 1);
+//	setenv("LM_DIAGNOSTICS", "2", 1);
+//
+//	setenv("ARCGIS_LICENSE_FILE", flp.mHostName, 1);
+//	setenv("CITYENGINE_LICENSE_FILE", flp.mHostName, 1);
+//	setenv("VENDOR_LICENSE_FILE", flp.mHostName, 1);
+//	setenv("LM_LICENSE_FILE", flp.mHostName, 1);
+//
+//	printEnv();
 
 	prt::Status status = prt::STATUS_UNSPECIFIED_ERROR;
 	{

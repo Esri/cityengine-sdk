@@ -51,10 +51,6 @@
 #include <vector>
 #include <algorithm>
 
-#ifdef _MSC_VER
-#	include <WinNT.h>
-#endif
-
 
 #define PRT_TYPE_ID 0x8666b
 
@@ -64,7 +60,7 @@ extern const MString	NAME_GENERATE;
 
 
 #ifdef _WIN32
-
+#	define P4M_API
 #else // !_WIN32
 #	define P4M_API __attribute__ ((visibility ("default")))
 #endif // !_WIN32

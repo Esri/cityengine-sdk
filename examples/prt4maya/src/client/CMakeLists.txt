@@ -6,12 +6,7 @@ cmake_policy(SET CMP0015 NEW)
 
 set(PROJECT prt4maya_client)
 project(${PROJECT})
-
-if(MAYA_PLUGIN_INSTALL_PATH)
-	set(CMAKE_INSTALL_PREFIX ${MAYA_PLUGIN_INSTALL_PATH})
-else()
-	set(CMAKE_INSTALL_PREFIX "${PROJECT_SOURCE_DIR}/../install")
-endif()
+include(${CMAKE_CURRENT_LIST_DIR}/../common.cmake)
 
 
 ### dependencies
@@ -19,11 +14,9 @@ endif()
 include_directories(${maya_include_path})
 link_directories(${maya_library_path})
 
-#set(prt4maya_codec_DIR "../codec/install/cmake")
-#find_package(prt4maya_codec CONFIG REQUIRED)
-#include_directories(${PRT4MAYA_CODEC_INCLUDE_PATH})
-
-set(MAYA_DESC "maya${MAYA_VERSION}")
+if(WIN32)
+	include_directories("${CMAKE_CURRENT_LIST_DIR}/..")
+endif()
 
 
 ### setup compiler flags
@@ -38,8 +31,9 @@ if(WIN32)
 	#set(CMAKE_CXX_FLAGS_RELEASE "/Zi /nologo /W3 /WX- /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_AFXDLL" /D "_MBCS" /D "NT_PLUGIN" /D "REQUIRE_IOSTREAM" /D "Bits64_" /D "_WINDLL" /Gm- /EHsc /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fp"Release/prt4maya.pch" /Fa"Release\" /Fo"Release\" /Fd"Release\vc100.pdb" /Gd /errorReport:queue")
 	set(CMAKE_CXX_FLAGS_RELEASE "/GR /GS /EHsc /c /DWIN32 /DNDEBUG /D_WINDOWS /D_AFXDLL /D_MBCS /DNT_PLUGIN /DREQUIRE_IOSTREAM /DBits64_")
 
-	set(CMAKE_SHARED_LINKER_FLAGS_DEBUG="/NODEFAULTLIB:LIBCMT /export:initializePlugin /export:uninitializePlugin")
+	set(CMAKE_SHARED_LINKER_FLAGS_DEBUG "/DEBUG /NODEFAULTLIB:LIBCMT /export:initializePlugin /export:uninitializePlugin")
 	set(CMAKE_SHARED_LINKER_FLAGS_RELEASE "/NODEFAULTLIB:CPMTD /export:initializePlugin /export:uninitializePlugin")
+	
 	#SET( CMAKE_SHARED_LINKER_FLAGS_DEBUG "/ALLOWISOLATION /MANIFESTUAC:\"level='asInvoker' uiAccess='false'\" /TLBID:1 /DYNAMICBASE:NO /MACHINE:X64 /ERRORREPORT:QUEUE")
 	#SET( CMAKE_SHARED_LINKER_FLAGS_DEBUG "/subsystem:windows /dll /debug  /MANIFESTUAC:\"level='asInvoker' uiAccess='false'\" /TLBID:1 /DYNAMICBASE:NO /MACHINE:X64 /ERRORREPORT:QUEUE")
 else()
@@ -69,11 +63,11 @@ add_library(${PROJECT} SHARED
 	node/Utilities.cpp
 	node/MayaCallbacks.cpp
 )
-#target_compile_options(${PROJECT} PUBLIC "-std=c++11 -Wl,--exclude-libs,ALL") # $<$<CONFIG:RELEASE>:${P4M_COMPILE_FLAGS}>
+
 target_link_libraries(${PROJECT} Foundation OpenMaya OpenMayaUI ${PRT_LINK_LIBRARIES})
 set_target_properties(${PROJECT} PROPERTIES LINKER_LANGUAGE CXX)
 
-if(WIN32)
+if(${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
 	add_custom_command(TARGET ${PROJECT} POST_BUILD
 		COMMAND ${CMAKE_COMMAND} -E rename "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT}.dll" "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT}.mll"
 	)
@@ -82,7 +76,6 @@ endif()
 
 ### setup install target
 
-install(CODE "file(REMOVE_RECURSE ${CMAKE_INSTALL_PREFIX})")
 install(FILES ${PRT_LIBRARIES} DESTINATION plug-ins)
 install(FILES ${PRT_EXT_LIBRARIES} DESTINATION plug-ins/ext)
 install(FILES ${PRT4MAYA_CODEC_EXT_LIBRARIES} DESTINATION plug-ins/ext)

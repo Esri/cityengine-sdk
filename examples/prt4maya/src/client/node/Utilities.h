@@ -12,6 +12,7 @@
 #include "maya/MStatus.h"
 #include "maya/MFloatPointArray.h"
 
+#include <cstdint>
 
 
 #define DO_DBG 1
