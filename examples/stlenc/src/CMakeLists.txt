@@ -29,7 +29,9 @@ add_library(${PROJECT} SHARED main.cpp STLEncoder.cpp)
 add_definitions(-DPRT_VERSION_MAJOR=${PRT_VERSION_MAJOR} -DPRT_VERSION_MINOR=${PRT_VERSION_MINOR})
 
 if(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
-	target_compile_options(${PROJECT} PRIVATE -std=c++11 -march=nocona  -fvisibility=hidden -fvisibility-inlines-hidden -Wl,--exclude-libs,ALL -Wall -Wextra -Wunused-parameter -Wl,-rpath,'$ORIGIN')
+	target_compile_options(${PROJECT} PRIVATE -std=c++11 -march=nocona -fvisibility=hidden -fvisibility-inlines-hidden -Wl,--exclude-libs,ALL -Wall -Wextra -Wunused-parameter -Wl,-rpath,'$ORIGIN')
+elseif(${CMAKE_SYSTEM_NAME} STREQUAL "Darwin")
+	target_compile_options(${PROJECT} PRIVATE -std=c++14 -stdlib=libc++ -fvisibility=hidden -fvisibility-inlines-hidden -Wl,--exclude-libs,ALL -Wall -Wextra -Wunused-parameter)
 endif()
 target_link_libraries(${PROJECT} ${PRT_LIBRARY})
 
