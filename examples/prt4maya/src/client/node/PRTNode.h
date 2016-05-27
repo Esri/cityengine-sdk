@@ -23,6 +23,7 @@
 #include <maya/MDataBlock.h>
 #include <maya/MDataHandle.h>
 #include <maya/MAngle.h>
+#include <maya/MEvaluationNode.h>
 #include <maya/MFnUnitAttribute.h>
 #include <maya/MFnStringData.h>
 #include <maya/MFnNumericAttribute.h>

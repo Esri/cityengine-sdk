@@ -13,7 +13,6 @@
 #include "codec/encoder/IMayaCallbacks.h"
 #include "prt/Cache.h"
 
-#include "maya/MDataHandle.h"
 #include "maya/MStatus.h"
 #include "maya/MObject.h"
 #include "maya/MDoubleArray.h"

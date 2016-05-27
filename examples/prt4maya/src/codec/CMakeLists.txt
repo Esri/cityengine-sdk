@@ -43,9 +43,9 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 if(${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
 	# nop
 elseif(${CMAKE_SYSTEM_NAME} STREQUAL "Darwin")
-	target_compile_options(${PROJECT} PUBLIC "-std=c++11") # $<$<CONFIG:RELEASE>:${P4M_COMPILE_FLAGS}>
-elseif(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
 	target_compile_options(${PROJECT} PUBLIC "-std=c++14 -stdlib=libc++") # $<$<CONFIG:RELEASE>:${P4M_COMPILE_FLAGS}>
+elseif(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
+	target_compile_options(${PROJECT} PUBLIC "-std=c++11") # $<$<CONFIG:RELEASE>:${P4M_COMPILE_FLAGS}>
 endif()
 
 add_definitions(-DPRT_VERSION_MAJOR=${PRT_VERSION_MAJOR} -DPRT_VERSION_MINOR=${PRT_VERSION_MINOR})
