@@ -60,10 +60,3 @@ endif()
 
 target_link_libraries(${PROJECT} ${PRT_LINK_LIBRARIES})
 set_target_properties(${PROJECT} PROPERTIES LINKER_LANGUAGE CXX)
-
-
-### install target
-
-install(TARGETS ${PROJECT}
-	DESTINATION plug-ins/ext
-)
