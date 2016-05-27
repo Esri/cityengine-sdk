@@ -16,12 +16,8 @@ set(CESDK_VERSION "cesdk_${PRT_VERSION_MAJOR}_${PRT_VERSION_MINOR}_${PRT_VERSION
 
 ### autodesk maya installation location
 
-set(ENV_MAYA_DIR "$ENV{maya_DIR}")
-if(ENV_MAYA_DIR)
-	set(maya_DIR "${ENV_MAYA_DIR}")
-endif()
 if(NOT maya_DIR)
-	message(FATAL_ERROR "maya_DIR environment variable has not been found")
+	message(FATAL_ERROR "maya_DIR has not been set")
 endif()
 set(maya_include_path	"${maya_DIR}/include")
 set(maya_library_path	"${maya_DIR}/lib")

@@ -78,7 +78,7 @@ endif()
 
 install(FILES ${PRT_LIBRARIES} DESTINATION plug-ins)
 install(FILES ${PRT_EXT_LIBRARIES} DESTINATION plug-ins/ext)
-install(FILES ../../build/codec/prt4maya_codec.dll DESTINATION plug-ins/ext) # fetch result of codecs project
+install(FILES ${CMAKE_CURRENT_LIST_DIR}/../../build/codec/${CMAKE_SHARED_LIBRARY_PREFIX}prt4maya_codec${CMAKE_SHARED_LIBRARY_SUFFIX} DESTINATION plug-ins/ext) # fetch result of codecs project
 install(FILES scripts/AEprtTemplate.mel DESTINATION scripts)
 install(FILES scripts/prt4mayaCreateUI.mel DESTINATION scripts)
 install(FILES scripts/prt4mayaDeleteUI.mel DESTINATION scripts)
