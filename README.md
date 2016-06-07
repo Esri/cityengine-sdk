@@ -45,7 +45,6 @@ This repository contains a number of source code examples. Each example contains
 A quick overview:
 - prt4cmd: a simple command line utility to apply rule packages onto initial shapes and generate models.
 - prt4maya: wraps the SDK into a plugin for Autodesk Maya
-- prt4unity: wraps the SDK into a plugin for the Unity game engine
 - stlenc: demonstrates how to write a custom encoder, in this case for the STL geometry format.
 
 ## General Software Requirements
