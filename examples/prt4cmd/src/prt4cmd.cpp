@@ -23,7 +23,7 @@
  */
 
 #ifdef _WIN32
-#define _SCL_SECURE_NO_WARNINGS
+#	define _SCL_SECURE_NO_WARNINGS
 #endif
 
 #include "prt/prt.h"
@@ -78,16 +78,18 @@ const size_t 	faceCountsCount	= 1;
  * helpers for prt object management
  */
 struct PRTDestroyer { void operator()(prt::Object const* p) const { if (p) p->destroy(); } };
-using ObjectPtr = std::unique_ptr<const prt::Object, PRTDestroyer>;
-using CachePtr = std::unique_ptr<prt::CacheObject, PRTDestroyer>;
-using ResolveMapPtr = std::unique_ptr<const prt::ResolveMap, PRTDestroyer>;
-using InitialShapePtr = std::unique_ptr<const prt::InitialShape, PRTDestroyer>;
-using InitialShapeBuilderPtr = std::unique_ptr<prt::InitialShapeBuilder, PRTDestroyer>;
-using AttributeMapPtr = std::unique_ptr<const prt::AttributeMap, PRTDestroyer>;
-using AttributeMapBuilderPtr = std::unique_ptr<prt::AttributeMapBuilder, PRTDestroyer>;
-using FileOutputCallbacksPtr = std::unique_ptr<prt::FileOutputCallbacks, PRTDestroyer>;
-using ConsoleLogHandlerPtr = std::unique_ptr<prt::ConsoleLogHandler, PRTDestroyer>;
-using FileLogHandlerPtr = std::unique_ptr<prt::FileLogHandler, PRTDestroyer>;
+using ObjectPtr					= std::unique_ptr<const prt::Object, PRTDestroyer>;
+using CachePtr					= std::unique_ptr<prt::CacheObject, PRTDestroyer>;
+using ResolveMapPtr				= std::unique_ptr<const prt::ResolveMap, PRTDestroyer>;
+using InitialShapePtr			= std::unique_ptr<const prt::InitialShape, PRTDestroyer>;
+using InitialShapeBuilderPtr	= std::unique_ptr<prt::InitialShapeBuilder, PRTDestroyer>;
+using AttributeMapPtr			= std::unique_ptr<const prt::AttributeMap, PRTDestroyer>;
+using AttributeMapBuilderPtr	= std::unique_ptr<prt::AttributeMapBuilder, PRTDestroyer>;
+using FileOutputCallbacksPtr	= std::unique_ptr<prt::FileOutputCallbacks, PRTDestroyer>;
+using ConsoleLogHandlerPtr		= std::unique_ptr<prt::ConsoleLogHandler, PRTDestroyer>;
+using FileLogHandlerPtr			= std::unique_ptr<prt::FileLogHandler, PRTDestroyer>;
+using EncoderInfoPtr			= std::unique_ptr<const prt::EncoderInfo, PRTDestroyer>;
+using DecoderInfoPtr			= std::unique_ptr<const prt::DecoderInfo, PRTDestroyer>;
 
 
 /**
@@ -100,25 +102,18 @@ std::string getSharedLibrarySuffix();
 /**
  * Helper struct to transport command line arguments
  */
-typedef std::map<std::wstring, std::wstring> StringStringMap;
 struct InputArgs {
-	InputArgs() : mEncoderOpts(0), mInitialShapeAttrs(0) { }
-	~InputArgs() {
-		if (mEncoderOpts != 0) mEncoderOpts->destroy();
-		if (mInitialShapeAttrs != 0) mInitialShapeAttrs->destroy();
-	}
-	
-	boost::filesystem::path		mWorkDir;
-	std::wstring				mEncoderID;
-	const prt::AttributeMap*	mEncoderOpts;
-	boost::filesystem::path		mOutputPath;
-	std::string					mRulePackage;
-	const prt::AttributeMap*	mInitialShapeAttrs;
-	std::wstring				mInitialShapeGeo;
-	int							mLogLevel;
-	boost::filesystem::path		mInfoFile;
-	std::string					mLicHost;
-	std::string					mLicFeature;
+	boost::filesystem::path	mWorkDir;
+	std::wstring			mEncoderID;
+	AttributeMapPtr			mEncoderOpts;
+	boost::filesystem::path	mOutputPath;
+	std::string				mRulePackage;
+	AttributeMapPtr			mInitialShapeAttrs;
+	std::wstring			mInitialShapeGeo;
+	int						mLogLevel;
+	boost::filesystem::path	mInfoFile;
+	std::string				mLicHost;
+	std::string				mLicFeature;
 };
 
 
@@ -223,7 +218,7 @@ std::wstring toUTF16FromOSNarrow(const std::string& osString);
 std::string  toUTF8FromOSNarrow (const std::string& osString);
 std::wstring percentEncode      (const std::string& utf8String);
 bool initInputArgs(int argc, char *argv[], InputArgs& inputArgs);
-const prt::AttributeMap* createValidatedOptions(const wchar_t* encID, const prt::AttributeMap* unvalidatedOptions);
+AttributeMapPtr createValidatedOptions(const wchar_t* encID, const AttributeMapPtr& unvalidatedOptions);
 std::string objectToXML(prt::Object const* obj);
 void codecInfoToXML(InputArgs& inputArgs);
 std::wstring toFileURI(const boost::filesystem::path& p);
@@ -315,7 +310,7 @@ int main (int argc, char *argv[]) {
 				startRule.c_str(),
 				seed,
 				shapeName.c_str(),
-				inputArgs.mInitialShapeAttrs,
+				inputArgs.mInitialShapeAttrs.get(),
 				resolveMap.get()
 		);
 
@@ -332,8 +327,8 @@ int main (int argc, char *argv[]) {
 
 		// -- validate & complete encoder options
 		AttributeMapPtr validatedEncOpts{createValidatedOptions(inputArgs.mEncoderID.c_str(), inputArgs.mEncoderOpts)};
-		AttributeMapPtr validatedErrOpts{createValidatedOptions(ENCODER_ID_CGA_ERROR, errOptions.get())};
-		AttributeMapPtr validatedPrintOpts{createValidatedOptions(ENCODER_ID_CGA_PRINT, printOptions.get())};
+		AttributeMapPtr validatedErrOpts{createValidatedOptions(ENCODER_ID_CGA_ERROR, errOptions)};
+		AttributeMapPtr validatedPrintOpts{createValidatedOptions(ENCODER_ID_CGA_PRINT, printOptions)};
 
 		// -- setup encoder IDs and corresponding options
 		std::array<const wchar_t*,3> encoders = {
@@ -369,8 +364,8 @@ int main (int argc, char *argv[]) {
 /**
  * Helper to convert a list of "<key>:<type>=<value>" strings into an prt::AttributeMap
  */
-const prt::AttributeMap* createAttributeMapFromTypedKeyValues(const std::vector<std::wstring>& args) {
-	prt::AttributeMapBuilder* bld = prt::AttributeMapBuilder::create();
+AttributeMapPtr createAttributeMapFromTypedKeyValues(const std::vector<std::wstring>& args) {
+	AttributeMapBuilderPtr bld{prt::AttributeMapBuilder::create()};
 	for (const std::wstring& a: args) {
 		std::vector<std::wstring> splits;
 		boost::split(splits, a, boost::algorithm::is_any_of(":="), boost::token_compress_on);
@@ -379,27 +374,25 @@ const prt::AttributeMap* createAttributeMapFromTypedKeyValues(const std::vector<
 				bld->setString(splits[0].c_str(), splits[2].c_str());
 			}
 			else if (splits[1] == L"float") {
-				double d;
-				std::wistringstream istr(splits[2]);
-				istr >> d;
-				if (!istr.fail())
+				try {
+					double d = std::stod(splits[2]);
 					bld->setFloat(splits[0].c_str(), d);
-				else
-					std::wcerr << L"cannot set float attribute " << splits[0] << std::endl;
+				} catch (std::exception& e) {
+					std::wcerr << L"cannot set float attribute " << splits[0] << ": " << e.what() << std::endl;
+				}
 			}
 			else if (splits[1] == L"int") {
-				int32_t v;
-				std::wistringstream istr(splits[2]);
-				istr >> v;
-				if (!istr.fail())
+				try {
+					int32_t v = std::stoi(splits[2]);
 					bld->setInt(splits[0].c_str(), v);
-				else
-					std::wcerr << L"cannot set int attribute " << splits[0] << std::endl;
+				} catch (std::exception& e) {
+					std::wcerr << L"cannot set int attribute " << splits[0] << ": " << e.what() << std::endl;
+				}
 			}
 			else if (splits[1] == L"bool") {
 				bool v;
 				std::wistringstream istr(splits[2]);
-				istr >> v;
+				istr >> std::boolalpha >> v;
 				if (!istr.fail())
 					bld->setBool(splits[0].c_str(), v);
 				else
@@ -409,9 +402,7 @@ const prt::AttributeMap* createAttributeMapFromTypedKeyValues(const std::vector<
 		else
 			std::wcout << L"warning: ignored key/value item: " << a << std::endl;
 	}
-	const prt::AttributeMap* am = bld->createAttributeMapAndReset();
-	bld->destroy();
-	return am;
+	return AttributeMapPtr{bld->createAttributeMapAndReset()};
 }
 
 
@@ -428,64 +419,64 @@ bool initInputArgs(int argc, char *argv[], InputArgs& inputArgs) {
 	boost::program_options::options_description desc("Available Options");
 	desc.add_options()("help,h", "This very help screen.")("version,v", "Show CityEngine SDK version.");
 	desc.add_options()(
-		"log-level,l",
-		boost::program_options::value<int>(&inputArgs.mLogLevel)->default_value(2),
-					   "Set log filter level: 1 = debug, 2 = info, 3 = warning, 4 = error, 5 = fatal, >5 = no output"
+			"log-level,l",
+			boost::program_options::value<int>(&inputArgs.mLogLevel)->default_value(2),
+			"Set log filter level: 1 = debug, 2 = info, 3 = warning, 4 = error, 5 = fatal, >5 = no output"
 	);
 	desc.add_options()(
-		"output,o",
-		boost::program_options::value<boost::filesystem::path>(&inputArgs.mOutputPath)->default_value(inputArgs.mWorkDir / "output"),
-					   "Set the output path for the callbacks."
+			"output,o",
+			boost::program_options::value<boost::filesystem::path>(&inputArgs.mOutputPath)->default_value(inputArgs.mWorkDir / "output"),
+			"Set the output path for the callbacks."
 	);
 	desc.add_options()(
-		"encoder,e",
-		boost::program_options::wvalue<std::wstring>(&inputArgs.mEncoderID)->default_value(ENCODER_ID_OBJ, toOSNarrowFromUTF16(ENCODER_ID_OBJ)), "The encoder ID, e.g. 'com.esri.prt.codecs.OBJEncoder'.");
+			"encoder,e",
+			boost::program_options::wvalue<std::wstring>(&inputArgs.mEncoderID)->default_value(ENCODER_ID_OBJ, toOSNarrowFromUTF16(ENCODER_ID_OBJ)), "The encoder ID, e.g. 'com.esri.prt.codecs.OBJEncoder'.");
 	desc.add_options()(
-		"rule-package,p",
-		boost::program_options::value<std::string>(&inputArgs.mRulePackage),
-					   "Set the rule package path."
+			"rule-package,p",
+			boost::program_options::value<std::string>(&inputArgs.mRulePackage),
+			"Set the rule package path."
 	);
 	desc.add_options()(
-		"shape-attr,a",
-		boost::program_options::wvalue<std::vector<std::wstring> >(&argShapeAttributes),
-					   "Set a initial shape attribute (syntax is <name>:<type>=<value>, type = {string,float,int,bool})."
+			"shape-attr,a",
+			boost::program_options::wvalue<std::vector<std::wstring> >(&argShapeAttributes),
+			"Set a initial shape attribute (syntax is <name>:<type>=<value>, type = {string,float,int,bool})."
 	);
 	desc.add_options()(
-		"shape-geo,g",
-		boost::program_options::wvalue<std::wstring>(&inputArgs.mInitialShapeGeo),
-					   "(Optional) Path to a file with shape geometry");
+			"shape-geo,g",
+			boost::program_options::wvalue<std::wstring>(&inputArgs.mInitialShapeGeo),
+			"(Optional) Path to a file with shape geometry");
 	desc.add_options()(
-		"encoder-option,z",
-		boost::program_options::wvalue<std::vector<std::wstring> >(&argEncOpts),
-					   "Set a encoder option (syntax is <name>:<type>=<value>, type = {string,float,int,bool})."
+			"encoder-option,z",
+			boost::program_options::wvalue<std::vector<std::wstring> >(&argEncOpts),
+			"Set a encoder option (syntax is <name>:<type>=<value>, type = {string,float,int,bool})."
 	);
 	desc.add_options()(
-		"info,i",
-		boost::program_options::value<boost::filesystem::path>(&inputArgs.mInfoFile), "Write XML Extension Information to file"
+			"info,i",
+			boost::program_options::value<boost::filesystem::path>(&inputArgs.mInfoFile), "Write XML Extension Information to file"
 	);
 	desc.add_options()(
-		"license-server,s",
-		boost::program_options::value<std::string>(&inputArgs.mLicHost),
-					   "License Server Host Name, example: 27000@myserver.example.com"
+			"license-server,s",
+			boost::program_options::value<std::string>(&inputArgs.mLicHost),
+			"License Server Host Name, example: 27000@myserver.example.com"
 	);
 	desc.add_options()(
-		"license-feature,f",
-		boost::program_options::value<std::string>(&inputArgs.mLicFeature),
-					   "License Feature to use, one of CityEngBasFx, CityEngBas, CityEngAdvFx, CityEngAdv"
+			"license-feature,f",
+			boost::program_options::value<std::string>(&inputArgs.mLicFeature),
+			"License Feature to use, one of CityEngBasFx, CityEngBas, CityEngAdvFx, CityEngAdv"
 	);
-	
+
 	boost::program_options::positional_options_description posDesc;
 	posDesc.add("shape-ref", -1);
-	
+
 	boost::program_options::variables_map vm;
 	boost::program_options::store(boost::program_options::command_line_parser(argc, argv).options(desc).positional(posDesc).run(), vm);
 	boost::program_options::notify(vm);
-	
+
 	if (argc == 1 || vm.count("help")) {
 		std::cout << desc << std::endl;
 		return false;
 	}
-	
+
 	if (vm.count("version")) {
 		std::cout << prt::getVersion()->mFullName << std::endl;
 		return false;
@@ -502,10 +493,10 @@ bool initInputArgs(int argc, char *argv[], InputArgs& inputArgs) {
 			return false;
 		}
 	}
-	
+
 	inputArgs.mInitialShapeAttrs = createAttributeMapFromTypedKeyValues(argShapeAttributes);
 	inputArgs.mEncoderOpts = createAttributeMapFromTypedKeyValues(argEncOpts);
-	
+
 	return true;
 }
 
@@ -514,12 +505,12 @@ std::string toOSNarrowFromUTF16(const std::wstring& osWString) {
 	std::vector<char> temp(osWString.size());
 	size_t size = temp.size();
 	prt::Status status = prt::STATUS_OK;
-	prt::StringUtils::toOSNarrowFromUTF16(osWString.c_str(), &temp[0], &size, &status);
+	prt::StringUtils::toOSNarrowFromUTF16(osWString.c_str(), temp.data(), &size, &status);
 	if(size > temp.size()) {
 		temp.resize(size);
-		prt::StringUtils::toOSNarrowFromUTF16(osWString.c_str(), &temp[0], &size, &status);
+		prt::StringUtils::toOSNarrowFromUTF16(osWString.c_str(), temp.data(), &size, &status);
 	}
-	return std::string(&temp[0]);
+	return std::string(temp.data());
 }
 
 
@@ -527,12 +518,12 @@ std::wstring toUTF16FromOSNarrow(const std::string& osString) {
 	std::vector<wchar_t> temp(osString.size());
 	size_t size = temp.size();
 	prt::Status status = prt::STATUS_OK;
-	prt::StringUtils::toUTF16FromOSNarrow(osString.c_str(), &temp[0], &size, &status);
+	prt::StringUtils::toUTF16FromOSNarrow(osString.c_str(), temp.data(), &size, &status);
 	if(size > temp.size()) {
 		temp.resize(size);
-		prt::StringUtils::toUTF16FromOSNarrow(osString.c_str(), &temp[0], &size, &status);
+		prt::StringUtils::toUTF16FromOSNarrow(osString.c_str(), temp.data(), &size, &status);
 	}
-	return std::wstring(&temp[0]);
+	return std::wstring(temp.data());
 }
 
 std::string toUTF8FromOSNarrow(const std::string& osString) {
@@ -540,108 +531,108 @@ std::string toUTF8FromOSNarrow(const std::string& osString) {
 	std::vector<char> temp(utf16String.size());
 	size_t size = temp.size();
 	prt::Status status = prt::STATUS_OK;
-	prt::StringUtils::toUTF8FromUTF16(utf16String.c_str(), &temp[0], &size, &status);
+	prt::StringUtils::toUTF8FromUTF16(utf16String.c_str(), temp.data(), &size, &status);
 	if(size > temp.size()) {
 		temp.resize(size);
-		prt::StringUtils::toUTF8FromUTF16(utf16String.c_str(), &temp[0], &size, &status);
+		prt::StringUtils::toUTF8FromUTF16(utf16String.c_str(), temp.data(), &size, &status);
 	}
-	return std::string(&temp[0]);
+	return std::string(temp.data());
 }
 
 std::wstring percentEncode(const std::string& utf8String) {
 	std::vector<char> temp(2*utf8String.size());
 	size_t size = temp.size();
 	prt::Status status = prt::STATUS_OK;
-	prt::StringUtils::percentEncode(utf8String.c_str(), &temp[0], &size, &status);
+	prt::StringUtils::percentEncode(utf8String.c_str(), temp.data(), &size, &status);
 	if(size > temp.size()) {
 		temp.resize(size);
-		prt::StringUtils::percentEncode(utf8String.c_str(), &temp[0], &size, &status);
+		prt::StringUtils::percentEncode(utf8String.c_str(), temp.data(), &size, &status);
 	}
 
 	std::vector<wchar_t> u16temp(temp.size());
 	size = u16temp.size();
-	prt::StringUtils::toUTF16FromUTF8(&temp[0], &u16temp[0], &size, &status);
+	prt::StringUtils::toUTF16FromUTF8(temp.data(), u16temp.data(), &size, &status);
 	if(size > u16temp.size()) {
 		u16temp.resize(size);
-		prt::StringUtils::toUTF16FromUTF8(&temp[0], &u16temp[0], &size, &status);
+		prt::StringUtils::toUTF16FromUTF8(temp.data(), u16temp.data(), &size, &status);
 	}
 
-	return std::wstring(&u16temp[0]);
+	return std::wstring(u16temp.data());
 }
 
 
 std::string objectToXML(prt::Object const* obj) {
-	if (obj == 0)
+	if (obj == nullptr)
 		throw std::invalid_argument("object pointer is not valid");
 	const size_t siz = 4096;
 	size_t actualSiz = siz;
 	std::string buffer(siz, ' ');
-	obj->toXML((char*)&buffer[0], &actualSiz);
+	obj->toXML((char*)buffer.data(), &actualSiz);
 	buffer.resize(actualSiz-1); // ignore terminating 0
 	if(siz < actualSiz)
-		obj->toXML((char*)&buffer[0], &actualSiz);
+		obj->toXML((char*)buffer.data(), &actualSiz);
 	return buffer;
 }
 
 
 void codecInfoToXML(InputArgs& inputArgs) {
 	std::vector<std::wstring> encIDs, decIDs;
-	
+
 	const size_t siz = 1024;
 	size_t actualSiz = siz;
 	std::vector<wchar_t> ids(siz, L' ');
 	std::wstring idsStr;
-	
-	prt::listEncoderIds((wchar_t*)&ids[0], &actualSiz);
+
+	prt::listEncoderIds((wchar_t*)ids.data(), &actualSiz);
 	ids.resize(actualSiz);
 	if(siz < actualSiz)
-		prt::listEncoderIds((wchar_t*)&ids[0], &actualSiz);
-	idsStr = &ids[0];
+		prt::listEncoderIds((wchar_t*)ids.data(), &actualSiz);
+	idsStr.assign(ids.data());
 	boost::trim_if(idsStr, boost::is_any_of("; "));
 	boost::split(encIDs, idsStr, boost::is_any_of(L";"), boost::token_compress_on);
-	
-	prt::listDecoderIds((wchar_t*)&ids[0], &actualSiz);
+
+	prt::listDecoderIds((wchar_t*)ids.data(), &actualSiz);
 	ids.resize(actualSiz);
 	if(siz < actualSiz)
-		prt::listDecoderIds((wchar_t*)&ids[0], &actualSiz);
-	idsStr = &ids[0];
+		prt::listDecoderIds((wchar_t*)ids.data(), &actualSiz);
+	idsStr.assign(ids.data());
 	boost::trim_if(idsStr, boost::is_any_of("; "));
 	boost::split(decIDs, idsStr, boost::is_any_of(L";"), boost::token_compress_on);
-	
-	std::ofstream xml(inputArgs.mInfoFile.string().c_str());
+
+	std::ofstream xml(inputArgs.mInfoFile.string());
 	xml << "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n\n";
-	
+
 	xml << "<Codecs build=\"" << prt::getVersion()->mVersion
-	<< "\" buildDate=\"" << prt::getVersion()->mBuildDate
-	<< "\" buildConfig=\"" << prt::getVersion()->mBuildConfig
-	<< "\">\n";
-	
+		<< "\" buildDate=\"" << prt::getVersion()->mBuildDate
+		<< "\" buildConfig=\"" << prt::getVersion()->mBuildConfig
+		<< "\">\n";
+
 	xml << "<Encoders>\n";
 	for (const std::wstring& encID: encIDs) {
 		prt::Status s = prt::STATUS_UNSPECIFIED_ERROR;
-		const prt::EncoderInfo* encInfo = prt::createEncoderInfo(encID.c_str(), &s);
-		if (s == prt::STATUS_OK && encInfo != 0)
-			xml << objectToXML(encInfo) << std::endl;
+		EncoderInfoPtr encInfo{prt::createEncoderInfo(encID.c_str(), &s)};
+		if (s == prt::STATUS_OK && encInfo)
+			xml << objectToXML(encInfo.get()) << std::endl;
 		else
 			std::wcout << L"encoder not found for ID: " << encID << std::endl;
-		encInfo->destroy();
 	}
 	xml << "</Encoders>\n";
-	
+
 	xml << "<Decoders>\n";
 	for (const std::wstring& decID: decIDs) {
 		prt::Status s = prt::STATUS_UNSPECIFIED_ERROR;
-		const prt::DecoderInfo* decInfo = prt::createDecoderInfo(decID.c_str(), &s);
-		if (s == prt::STATUS_OK && decInfo != 0)
-			xml << objectToXML(decInfo) << std::endl;
+		DecoderInfoPtr decInfo{prt::createDecoderInfo(decID.c_str(), &s)};
+		if (s == prt::STATUS_OK && decInfo)
+			xml << objectToXML(decInfo.get()) << std::endl;
 		else
 			std::wcout << L"decoder not found for ID: " << decID << std::endl;
-		decInfo->destroy();
 	}
 	xml << "</Decoders>\n";
-	
+
 	xml << "</Codecs>\n";
 	xml.close();
+
+	LOG_INF << "Dumped codecs info to " << inputArgs.mInfoFile;
 }
 
 
@@ -658,39 +649,36 @@ std::wstring toFileURI(const boost::filesystem::path& p) {
 }
 
 
-const prt::AttributeMap* createValidatedOptions(const wchar_t* encID, const prt::AttributeMap* unvalidatedOptions) {
-	const prt::EncoderInfo* encInfo = prt::createEncoderInfo(encID);
+AttributeMapPtr createValidatedOptions(const wchar_t* encID, const AttributeMapPtr& unvalidatedOptions) {
+	EncoderInfoPtr encInfo{prt::createEncoderInfo(encID)};
 	const prt::AttributeMap* validatedOptions = 0;
-	const prt::AttributeMap* optionStates = 0;
-	encInfo->createValidatedOptionsAndStates(unvalidatedOptions, &validatedOptions, &optionStates);
-	optionStates->destroy();
-	encInfo->destroy();
-	return validatedOptions;
+	encInfo->createValidatedOptionsAndStates(unvalidatedOptions.get(), &validatedOptions);
+	return AttributeMapPtr(validatedOptions);
 }
 
 
 std::string getSharedLibraryPrefix() {
-	#if defined(_WIN32)
+#if defined(_WIN32)
 	return "";
-	#elif defined(__APPLE__)
+#elif defined(__APPLE__)
 	return "lib";
-	#elif defined(__linux__)
+#elif defined(__linux__)
 	return "lib";
-	#else
-	#	error unsupported build platform
-	#endif
+#else
+#	error unsupported build platform
+#endif
 }
 
 
 std::string getSharedLibrarySuffix() {
-	#if defined(_WIN32)
+#if defined(_WIN32)
 	return ".dll";
-	#elif defined(__APPLE__)
+#elif defined(__APPLE__)
 	return ".dylib";
-	#elif defined(__linux__)
+#elif defined(__linux__)
 	return ".so";
-	#else
-	#	error unsupported build platform
-	#endif
+#else
+#	error unsupported build platform
+#endif
 }
 

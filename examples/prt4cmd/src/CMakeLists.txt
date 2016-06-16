@@ -24,19 +24,21 @@ set(CESDK_VERSION "cesdk_${PRT_VERSION_MAJOR}_${PRT_VERSION_MINOR}_${PRT_VERSION
 
 ### build target
 
+set(CMAKE_INSTALL_RPATH_USE_LINK_PATH FALSE)
+set(CMAKE_SKIP_RPATH FALSE)
+
+#set(CMAKE_INSTALL_RPATH "\$ORIGIN/")
+set(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_RPATH}:\$ORIGIN")
+
 add_executable(${PROJECT} prt4cmd.cpp)
 
-SET(CMAKE_INSTALL_RPATH "")
-SET(CMAKE_INSTALL_RPATH_USE_LINK_PATH FALSE)
-
 if(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
-	target_compile_options(${PROJECT} PRIVATE -std=c++11 -march=nocona -fvisibility=hidden -fvisibility-inlines-hidden -Wl,--exclude-libs,ALL -Wall -Wextra -Wunused-parameter -Wl,-rpath,'$ORIGIN')
+	target_compile_options(${PROJECT} PRIVATE -std=c++11 -march=nocona -fvisibility=hidden -fvisibility-inlines-hidden -Wl,--exclude-libs,ALL -Wall -Wextra -Wunused-parameter -Wl,-rpath,'\$ORIGIN')
 elseif(${CMAKE_SYSTEM_NAME} STREQUAL "Darwin")
 	target_compile_options(${PROJECT} PRIVATE -std=c++14 -stdlib=libc++)
 endif()
 
 target_link_libraries(${PROJECT} ${Boost_LIBRARIES} ${PRT_LIBRARY})
-
 
 
 ### install target
