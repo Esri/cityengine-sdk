@@ -1,5 +1,6 @@
 ###
 ### common helpers for both codec and client projects
+###
 
 
 ### look for the PRT libraries
@@ -9,19 +10,18 @@ if(NOT prt_DIR)
 	set(prt_DIR "${CMAKE_CURRENT_LIST_DIR}/../../../prt/cmake")
 endif()
 
-find_package(prt CONFIG REQUIRED) # TODO: make sure prt >= 1.6
-include_directories(${PRT_INCLUDE_PATH})
+find_package(prt CONFIG REQUIRED)
 set(CESDK_VERSION "cesdk_${PRT_VERSION_MAJOR}_${PRT_VERSION_MINOR}_${PRT_VERSION_MICRO}")
 
 
 ### autodesk maya installation location
 
 if(NOT maya_DIR)
-	message(FATAL_ERROR "maya_DIR has not been set")
+	message(FATAL_ERROR "maya_DIR has not been set. please use '-Dmaya_DIR=xxx' to set it to the location of maya (must include devkit).")
 endif()
-set(maya_include_path	"${maya_DIR}/include")
-set(maya_library_path	"${maya_DIR}/lib")
-message(STATUS "maya_DIR = ${maya_DIR}")
+set(maya_INCLUDE_PATH "${maya_DIR}/include" CACHE PATH "maya header include path" FORCE)
+set(maya_LIBRARY_PATH "${maya_DIR}/lib" CACHE PATH "maya libraries path" FORCE)
+message(STATUS "detected maya_DIR: ${maya_DIR}")
 
 
 ### plugin installation location

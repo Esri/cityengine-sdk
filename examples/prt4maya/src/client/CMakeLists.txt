@@ -4,15 +4,17 @@ cmake_policy(SET CMP0015 NEW)
 
 ### project definition
 
-set(PROJECT prt4maya_client)
+set(PROJECT prt4maya)
 project(${PROJECT})
 include(${CMAKE_CURRENT_LIST_DIR}/../common.cmake)
 
 
 ### dependencies
 
-include_directories(${maya_include_path})
-link_directories(${maya_library_path})
+include_directories(${PRT_INCLUDE_PATH})
+
+include_directories(${maya_INCLUDE_PATH})
+link_directories(${maya_LIBRARY_PATH})
 
 if(WIN32)
 	include_directories("${CMAKE_CURRENT_LIST_DIR}/..")
@@ -76,6 +78,7 @@ endif()
 
 ### setup install target
 
+install(CODE "file(REMOVE_RECURSE ${CMAKE_INSTALL_PREFIX}/*)")
 install(FILES ${PRT_LIBRARIES} DESTINATION plug-ins)
 install(FILES ${PRT_EXT_LIBRARIES} DESTINATION plug-ins/ext)
 install(FILES ${CMAKE_CURRENT_LIST_DIR}/../../build/codec/${CMAKE_SHARED_LIBRARY_PREFIX}prt4maya_codec${CMAKE_SHARED_LIBRARY_SUFFIX} DESTINATION plug-ins/ext) # fetch result of codecs project
