@@ -47,6 +47,7 @@
 #include <string>
 #include <vector>
 #include <iterator>
+#include <functional>
 
 
 /**
@@ -93,13 +94,6 @@ using DecoderInfoPtr			= std::unique_ptr<const prt::DecoderInfo, PRTDestroyer>;
 
 
 /**
- * fwd declarations of helper functions
- */
-std::string getSharedLibraryPrefix();
-std::string getSharedLibrarySuffix();
-
-
-/**
  * Helper struct to transport command line arguments
  */
 struct InputArgs {
@@ -115,6 +109,22 @@ struct InputArgs {
 	std::string				mLicHost;
 	std::string				mLicFeature;
 };
+
+
+/**
+ * fwd declarations of helper functions
+ */
+std::string getSharedLibraryPrefix();
+std::string getSharedLibrarySuffix();
+std::string  toOSNarrowFromUTF16(const std::wstring& osWString);
+std::wstring toUTF16FromOSNarrow(const std::string& osString);
+std::string  toUTF8FromOSNarrow (const std::string& osString);
+std::wstring percentEncode      (const std::string& utf8String);
+bool initInputArgs(int argc, char *argv[], InputArgs& inputArgs);
+AttributeMapPtr createValidatedOptions(const wchar_t* encID, const AttributeMapPtr& unvalidatedOptions);
+std::string objectToXML(prt::Object const* obj);
+void codecInfoToXML(InputArgs& inputArgs);
+std::wstring toFileURI(const boost::filesystem::path& p);
 
 
 /**
@@ -211,20 +221,6 @@ typedef LT<prt::LOG_ERROR>		_LOG_ERR;
 
 
 /**
- * more forward declarations of helper functions
- */
-std::string  toOSNarrowFromUTF16(const std::wstring& osWString);
-std::wstring toUTF16FromOSNarrow(const std::string& osString);
-std::string  toUTF8FromOSNarrow (const std::string& osString);
-std::wstring percentEncode      (const std::string& utf8String);
-bool initInputArgs(int argc, char *argv[], InputArgs& inputArgs);
-AttributeMapPtr createValidatedOptions(const wchar_t* encID, const AttributeMapPtr& unvalidatedOptions);
-std::string objectToXML(prt::Object const* obj);
-void codecInfoToXML(InputArgs& inputArgs);
-std::wstring toFileURI(const boost::filesystem::path& p);
-
-
-/**
  * finally, the actual model generation
  */
 int main (int argc, char *argv[]) {
@@ -281,12 +277,9 @@ int main (int argc, char *argv[]) {
 		}
 		else {
 			isb->setGeometry(
-					UnitQuad::vertices,
-					UnitQuad::vertexCount,
-					UnitQuad::indices,
-					UnitQuad::indexCount,
-					UnitQuad::faceCounts,
-					UnitQuad::faceCountsCount
+					UnitQuad::vertices, UnitQuad::vertexCount,
+					UnitQuad::indices, UnitQuad::indexCount,
+					UnitQuad::faceCounts, UnitQuad::faceCountsCount
 			);
 		}
 
@@ -560,44 +553,56 @@ std::wstring percentEncode(const std::string& utf8String) {
 	return std::wstring(u16temp.data());
 }
 
+template<typename C> using APIFunc = std::function<C*(C*, size_t*, prt::Status*)>;
+
+template<typename C> std::basic_string<C> callAPI(APIFunc<C> f, size_t initialSize) {
+	std::vector<C> buffer(initialSize, ' ');
+
+	size_t actualSize = initialSize;
+	f(buffer.data(), &actualSize, nullptr);
+	buffer.resize(actualSize);
+
+	if (initialSize < actualSize)
+		f(buffer.data(), &actualSize, nullptr);
+
+	return std::basic_string<C>{buffer.data()};
+}
+
+//template<typename C, typename FUNC>
+//std::basic_string<C> listIDs(FUNC f, size_t initialSize) {
+//	std::vector<C> ids(initialSize, L' ');
+//
+//	size_t actualSize = initialSize;
+//	f(ids.data(), &actualSize, nullptr);
+//	ids.resize(actualSize);
+//
+//	if (initialSize < actualSize)
+//		f(ids.data(), &actualSize, nullptr);
+//
+//	return std::basic_string<C>{ ids.data() };
+//}
 
 std::string objectToXML(prt::Object const* obj) {
 	if (obj == nullptr)
 		throw std::invalid_argument("object pointer is not valid");
-	const size_t siz = 4096;
-	size_t actualSiz = siz;
-	std::string buffer(siz, ' ');
-	obj->toXML((char*)buffer.data(), &actualSiz);
-	buffer.resize(actualSiz-1); // ignore terminating 0
-	if(siz < actualSiz)
-		obj->toXML((char*)buffer.data(), &actualSiz);
-	return buffer;
+
+	using ActualObjectType = std::remove_pointer<std::remove_cv<decltype(obj)>::type>::type;
+	APIFunc<char> toXMLFunc = std::bind(&prt::Object::toXML, obj);
+
+	return callAPI<char>(toXMLFunc, 4096);
 }
 
-
 void codecInfoToXML(InputArgs& inputArgs) {
+	std::wstring encIDsStr{ callAPI<wchar_t>(prt::listEncoderIds, 1024) };
+	std::wstring decIDsStr{ callAPI<wchar_t>(prt::listDecoderIds, 1024) };
+
 	std::vector<std::wstring> encIDs, decIDs;
 
-	const size_t siz = 1024;
-	size_t actualSiz = siz;
-	std::vector<wchar_t> ids(siz, L' ');
-	std::wstring idsStr;
+	boost::trim_if(encIDsStr, boost::is_any_of("; "));
+	boost::split(encIDs, encIDsStr, boost::is_any_of(L";"), boost::token_compress_on);
 
-	prt::listEncoderIds((wchar_t*)ids.data(), &actualSiz);
-	ids.resize(actualSiz);
-	if(siz < actualSiz)
-		prt::listEncoderIds((wchar_t*)ids.data(), &actualSiz);
-	idsStr.assign(ids.data());
-	boost::trim_if(idsStr, boost::is_any_of("; "));
-	boost::split(encIDs, idsStr, boost::is_any_of(L";"), boost::token_compress_on);
-
-	prt::listDecoderIds((wchar_t*)ids.data(), &actualSiz);
-	ids.resize(actualSiz);
-	if(siz < actualSiz)
-		prt::listDecoderIds((wchar_t*)ids.data(), &actualSiz);
-	idsStr.assign(ids.data());
-	boost::trim_if(idsStr, boost::is_any_of("; "));
-	boost::split(decIDs, idsStr, boost::is_any_of(L";"), boost::token_compress_on);
+	boost::trim_if(decIDsStr, boost::is_any_of("; "));
+	boost::split(decIDs, decIDsStr, boost::is_any_of(L";"), boost::token_compress_on);
 
 	std::ofstream xml(inputArgs.mInfoFile.string());
 	xml << "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n\n";

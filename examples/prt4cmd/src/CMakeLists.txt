@@ -15,7 +15,7 @@ include_directories(${Boost_INCLUDE_DIR})
 link_directories(${Boost_LIBRARY_DIRS})
 
 if(NOT prt_DIR)
-	set(prt_DIR "${PROJECT_SOURCE_DIR}/../../../prt/cmake")
+	set(prt_DIR "${PROJECT_SOURCE_DIR}/../../../prt/cmake") # fallback location
 endif()
 find_package(prt CONFIG)
 include_directories(${PRT_INCLUDE_PATH})
@@ -52,9 +52,9 @@ install(FILES ${PRT_EXT_LIBRARIES} DESTINATION lib)
 install(CODE "FILE(MAKE_DIRECTORY ${CMAKE_INSTALL_PREFIX}/output)")
 install(DIRECTORY ${PROJECT_SOURCE_DIR}/../../../license DESTINATION .)
 if(WIN32)
-	install(FILES ${PROJECT_SOURCE_DIR}/../README.windows DESTINATION .)
+	install(FILES ${PROJECT_SOURCE_DIR}/../README_windows.md DESTINATION .)
 else()
-	install(FILES ${PROJECT_SOURCE_DIR}/../README.linux_osx DESTINATION .)
+	install(FILES ${PROJECT_SOURCE_DIR}/../README_linux_osx.md DESTINATION .)
 endif()
 
 
