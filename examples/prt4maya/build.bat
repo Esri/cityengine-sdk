@@ -36,6 +36,7 @@ pushd build\codec
 nmake all
 popd
 endlocal
+if %errorlevel% neq 0 exit /b %errorlevel%
 
 setlocal
 call "%ProgramFiles(x86)%\Microsoft Visual Studio 11.0\VC\vcvarsall.bat" amd64

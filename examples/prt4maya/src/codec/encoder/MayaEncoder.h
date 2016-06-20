@@ -7,25 +7,18 @@
  * See http://github.com/ArcGIS/esri-cityengine-sdk for instructions.
  */
 
-#ifndef MAYAENCODER_H_
-#define MAYAENCODER_H_
+#pragma once
 
-#include <string>
-#include <iostream>
-#include <stdexcept>
-
-#include "prt/ContentType.h"
-#include "prt/InitialShape.h"
-
-#include "prtx/ResolveMap.h"
 #include "prtx/Encoder.h"
 #include "prtx/EncoderFactory.h"
 #include "prtx/EncoderInfoBuilder.h"
-#include "prtx/PRTUtils.h"
 #include "prtx/Singleton.h"
 
+#include "prt/ContentType.h"
 
-class IMayaCallbacks;
+#include <string>
+#include <memory>
+
 
 class MayaEncoder : public prtx::GeometryEncoder {
 public:
@@ -35,22 +28,20 @@ public:
 
 public:
 	MayaEncoder(const std::wstring& id, const prt::AttributeMap* options, prt::Callbacks* callbacks);
-	virtual ~MayaEncoder();
+	virtual ~MayaEncoder() { }
 
 public:
-	virtual void init(prtx::GenerateContext& /*context*/);
+	virtual void init(prtx::GenerateContext&);
 	virtual void encode(prtx::GenerateContext& context, size_t initialShapeIndex);
-	virtual void finish(prtx::GenerateContext& /*context*/);
+	virtual void finish(prtx::GenerateContext&) { }
 
 private:
 	void convertGeometry(
 			const std::wstring& cgbName,
 			const prtx::GeometryPtrVector& geometries,
-			const std::vector<prtx::MaterialPtrVector>& mat,
-			IMayaCallbacks* mayaOutput
+			const std::vector<prtx::MaterialPtrVector>& mat
 	);
 };
-
 
 class MayaEncoderFactory : public prtx::EncoderFactory, public prtx::Singleton<MayaEncoderFactory> {
 public:
@@ -72,6 +63,3 @@ public:
 		return new MayaEncoder(getID(), options, callbacks);
 	}
 };
-
-
-#endif /* MAYAENCODER_H_ */

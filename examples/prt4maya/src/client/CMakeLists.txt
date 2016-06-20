@@ -88,10 +88,10 @@ install(FILES scripts/prt4mayaDeleteUI.mel DESTINATION scripts)
 install(DIRECTORY ${PROJECT_SOURCE_DIR}/../../../../license DESTINATION .)
 if(WIN32)
 	install(FILES "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT}.mll" DESTINATION plug-ins)
-	install(FILES ${PROJECT_SOURCE_DIR}/../../README.windows DESTINATION .)
+	install(FILES ${PROJECT_SOURCE_DIR}/../../README_windows.md DESTINATION .)
 else()
 	install(TARGETS ${PROJECT} DESTINATION plug-ins)
-	install(FILES ${PROJECT_SOURCE_DIR}/../../README.linux_osx DESTINATION .)
+	install(FILES ${PROJECT_SOURCE_DIR}/../../README_linux_osx.md DESTINATION .)
 endif()
 
 

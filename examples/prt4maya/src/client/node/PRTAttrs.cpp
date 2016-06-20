@@ -392,13 +392,15 @@ void PRTEnum::add(const MString & key, const MString & value) {
 	mSVals.append(value);
 }
 
-static const double 	UnitQuad_vertices[]      = { 0, 0, 0,  0, 0, 1,  1, 0, 1,  1, 0, 0 };
-static const size_t 	UnitQuad_vertexCount     = 12;
-static const uint32_t	UnitQuad_indices[]       = { 0, 1, 2, 3 };
-static const size_t 	UnitQuad_indexCount      = 4;
-static const uint32_t	UnitQuad_faceCounts[]    = { 4 };
-static const size_t 	UnitQuad_faceCountsCount = 1;
-static const int32_t	UnitQuad_seed = prtu::computeSeed(UnitQuad_vertices, UnitQuad_vertexCount);
+namespace UnitQuad {
+const double	vertices[]		= { 0, 0, 0,  0, 0, 1,  1, 0, 1,  1, 0, 0 };
+const size_t	vertexCount		= 12;
+const uint32_t	indices[]		= { 0, 1, 2, 3 };
+const size_t	indexCount		= 4;
+const uint32_t	faceCounts[]	= { 4 };
+const size_t	faceCountsCount	= 1;
+const int32_t	seed			= prtu::computeSeed(vertices, vertexCount);
+}
 
 // TODO: make evalAttr finds more robust
 MStatus PRTAttrs::createAttributes(MFnDependencyNode & node, const std::wstring & ruleFile, const std::wstring & startRule, prt::AttributeMapBuilder* aBuilder, const prt::RuleFileInfo* info) {
@@ -415,35 +417,34 @@ MStatus PRTAttrs::createAttributes(MFnDependencyNode & node, const std::wstring 
 
 	prt::InitialShapeBuilder* isb = prt::InitialShapeBuilder::create();
 	isb->setGeometry(
-			UnitQuad_vertices,
-			UnitQuad_vertexCount,
-			UnitQuad_indices,
-			UnitQuad_indexCount,
-			UnitQuad_faceCounts,
-			UnitQuad_faceCountsCount
+			UnitQuad::vertices,
+			UnitQuad::vertexCount,
+			UnitQuad::indices,
+			UnitQuad::indexCount,
+			UnitQuad::faceCounts,
+			UnitQuad::faceCountsCount
 	);
 	isb->setAttributes(
 			ruleFile.c_str(),
 			startRule.c_str(),
-			UnitQuad_seed,
+			UnitQuad::seed,
 			L"",
 			attrs,
 			prtNode->mResolveMap
 	);
 	const prt::InitialShape* shape = isb->createInitialShapeAndReset();
 
-	prt::Status generateStatus = prt::generate(&shape, 1, 0, &ENC_ATTR, 1, &prtNode->mAttrEncOpts, outputHandler, PRTNode::theCache, 0);
+	prt::generate(&shape, 1, 0, &ENC_ATTR, 1, &prtNode->mAttrEncOpts, outputHandler, PRTNode::theCache, 0);
 
 	const std::map<std::wstring, MayaCallbacks::AttributeHolder>& evalAttrs = outputHandler->getAttrs();
 
 	prtNode->mBriefName2prtAttr[NAME_GENERATE.asWChar()] = NAME_GENERATE.asWChar();
 
 	for(size_t i = 0; i < info->getNumAttributes(); i++) {
-		PRTEnum*       e          = 0;
-		bool           createAttr = false;
+		PRTEnum* e = nullptr;
 
-		const MString  name       = MString(info->getAttribute(i)->getName());
-		MObject        attr;
+		const MString name = MString(info->getAttribute(i)->getName());
+		MObject attr;
 
 		if(info->getAttribute(i)->getNumParameters() != 0) continue;
 
@@ -456,9 +457,7 @@ MStatus PRTAttrs::createAttributes(MFnDependencyNode & node, const std::wstring 
 					if(!(wcscmp(an->getName(), ANNOT_RANGE)))
 						e = new PRTEnum(prtNode, an);
 				}
-
 				bool value = evalAttrs.find(name.asWChar())->second.mBool;
-
 				if(e) {
 					MCHECK(addEnumParameter(node, attr, name, value, e));
 				} else {

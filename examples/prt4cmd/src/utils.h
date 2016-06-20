@@ -1,3 +1,5 @@
+#pragma once
+
 #include "prt/API.h"
 #include "prt/FileOutputCallbacks.h"
 #include "prt/LogHandler.h"

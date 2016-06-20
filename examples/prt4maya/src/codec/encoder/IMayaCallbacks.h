@@ -7,8 +7,7 @@
  * See http://github.com/ArcGIS/esri-cityengine-sdk for instructions.
  */
 
-#ifndef IMAYA_OUTPUT_HANDLER_H_
-#define IMAYA_OUTPUT_HANDLER_H_
+#pragma once
 
 #include "prt/Callbacks.h"
 
@@ -17,17 +16,20 @@ class IMayaCallbacks : public prt::Callbacks {
 public:
 	virtual ~IMayaCallbacks() { }
 
-	virtual void setVertices(double* vtx, size_t size) = 0;
-	virtual void setNormals(double* nrm, size_t size) = 0;
-	virtual void setUVs(float* u, float* v, size_t size) = 0;
+	virtual void setVertices(const double* vtx, size_t size) = 0;
+	virtual void setNormals(const double* nrm, size_t size) = 0;
+	virtual void setUVs(const double* u, const double* v, size_t size) = 0;
 
-	virtual void setFaces(int* counts, size_t countsSize, int* connects, size_t connectsSize, int* uvCounts, size_t uvCountsSize, int* uvConnects, size_t uvConnectsSize) = 0;
+	virtual void setFaces(
+			const uint32_t* counts, size_t countsSize,
+			const uint32_t* connects, size_t connectsSize,
+			const uint32_t* uvCounts, size_t uvCountsSize,
+			const uint32_t* uvConnects, size_t uvConnectsSize
+	) = 0;
+
 	virtual void createMesh() = 0;
 	virtual void finishMesh() = 0;
 
-	virtual void matSetColor(int start, int count, float r, float g, float b) = 0;
-	virtual void matSetDiffuseTexture(int start, int count, const wchar_t* tex) = 0;
+	virtual void matSetColor(uint32_t start, uint32_t count, double r, double g, double b) = 0;
+	virtual void matSetDiffuseTexture(uint32_t start, uint32_t count, const wchar_t* tex) = 0;
 };
-
-#endif /* IMAYA_OUTPUT_HANDLER_H_ */
-

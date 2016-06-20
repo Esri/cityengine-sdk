@@ -23,7 +23,6 @@ SOFTWARE REQUIREMENTS
 
 - See "General Software Requirements - Linux or MacOSX, to compile SDK extensions"
 - Autodesk Maya 2016 **including the development kit** (devkit)
-- Note: on linux, this only works with a node-locked CityEngine license
 
 
 BUILD INSTRUCTIONS
@@ -32,7 +31,7 @@ BUILD INSTRUCTIONS
 1. Open a terminal (e.g. bash)
 1. Change into the example directory: `cd <path to esri-cityengine-sdk git repository>/examples/prt4maya`
 1. Create a build directory and change into it: `mkdir build && cd build`
-1. Run cmake: `cmake -Dmaya_DIR=/usr/autodesk/maya2016 ../src`
+1. Run cmake (please adjust the maya path): `cmake -Dmaya_DIR=/usr/autodesk/maya2016 ../src`
 1. Compile: `make install`
 1. The build result will appear in the `install` directory in parallel to the `build` directory. We will use this as the plugin directory below.
 
@@ -44,7 +43,8 @@ INSTALLATION INSTRUCTIONS
 1. Locate the Maya.env file in your home: `~/maya/2016/Maya.env`
 1. Edit Maya.env as follows:
    ```
-   ESRI_CE_SDK_LIC_FEATURE=CityEngAdvFx
+   ESRI_CE_SDK_LIC_FEATURE=CityEngAdvFx            # use CityEngAdv for floating license
+   # ESRI_CE_SDK_LIC_HOST=27000@my.flexnet.host    # uncomment for floating license
    
    PLUGINDIR=<PLUGINDIR> # replace <PLUGINDIR> with the actual path
    MAYA_PLUG_IN_PATH=$PLUGINDIR/plug-ins
@@ -53,6 +53,7 @@ INSTALLATION INSTRUCTIONS
 1. Start maya (note: you may want to start maya from a shell to see the prt4maya log output)
 1. Open the plugin manager: Windows -> Settings/Preferences -> Plug-in Manager
 1. Enable `libprt4maya.so`
+1. The plugin should load and a new menu item `PRT` should appear in Maya.
 
 
 LICENSING
