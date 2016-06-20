@@ -30,9 +30,11 @@ set(CMAKE_SKIP_RPATH FALSE)
 #set(CMAKE_INSTALL_RPATH "\$ORIGIN/")
 set(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_RPATH}:\$ORIGIN")
 
-add_executable(${PROJECT} prt4cmd.cpp)
+add_executable(${PROJECT} prt4cmd.cpp utils.cpp)
 
-if(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
+if(${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
+	target_compile_definitions(${PROJECT} PRIVATE _SCL_SECURE_NO_WARNINGS)
+elseif(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
 	target_compile_options(${PROJECT} PRIVATE -std=c++11 -march=nocona -fvisibility=hidden -fvisibility-inlines-hidden -Wl,--exclude-libs,ALL -Wall -Wextra -Wunused-parameter -Wl,-rpath,'\$ORIGIN')
 elseif(${CMAKE_SYSTEM_NAME} STREQUAL "Darwin")
 	target_compile_options(${PROJECT} PRIVATE -std=c++14 -stdlib=libc++)

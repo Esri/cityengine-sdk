@@ -31,7 +31,7 @@ BUILD INSTRUCTIONS
 1. Open a terminal (e.g. bash)
 1. Change into the example directory: `cd <your path to>/esri-cityengine-sdk/examples/prt4cmd`
 1. Prepare build directory: `mkdir build && cd build`
-1. Run cmake: `cmake -G "Unix Makefiles" -DCMAKE_INSTALL_PREFIX=../install -DCMAKE_BUILD_TYPE=Release -DBoost_NO_BOOST_CMAKE=ON ../src`
+1. Run cmake (trying to use boost from your system path): `cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release -DBoost_NO_BOOST_CMAKE=ON ../src`
 1. Compile: `make install`
 1. The build result will appear in a `install` directory in parallel to the `build` directory.
 
@@ -46,10 +46,10 @@ USING PRT4CMD
    bin/prt4cmd \
         -f CityEngAdvFx \
         -l 3 \
-        -g <absolute path to>/data/candler_lot.obj \
+        -g <absolute path to>/data/candler_footprint.obj \
         -p <absolute path to>/data/candler.rpk \
-        -a ruleFile:string=bin/candler.01.cgb \
-        -a startRule:string=Default\$Lot \
+        -a ruleFile:string=bin/candler.cgb \
+        -a startRule:string=Default\$Footprint \
         -e com.esri.prt.codecs.OBJEncoder \
         -z baseName:string=theCandler
    ```
@@ -63,10 +63,10 @@ USING PRT4CMD
    bin/prt4cmd \
         -f CityEngAdvFx \
         -l 3 \
-        -g <absolute path to>/data/candler_lot.obj \
+        -g <absolute path to>/data/candler_footprint.obj \
         -p <absolute path to>/data/candler.rpk \
-        -a ruleFile:string=bin/candler.01.cgb \
-        -a startRule:string=Default\$Lot \
+        -a ruleFile:string=bin/candler.cgb \
+        -a startRule:string=Default\$Footprint \
         -a height:float=30 \
         -e com.esri.prt.codecs.OBJEncoder \
         -z baseName:string=theCandler

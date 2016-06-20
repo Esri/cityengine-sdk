@@ -22,33 +22,25 @@
  * limitations under the License.
  */
 
-#ifdef _WIN32
-#	define _SCL_SECURE_NO_WARNINGS
-#endif
+#include "utils.h"
+#include "logging.h"
 
 #include "prt/prt.h"
 #include "prt/API.h"
-#include "prt/FileOutputCallbacks.h"
-#include "prt/LogHandler.h"
 #include "prt/ContentType.h"
 #include "prt/FlexLicParams.h"
-#include "prt/StringUtils.h"
 
-#include "boost/filesystem.hpp"
-#include "boost/program_options.hpp"
-#include "boost/algorithm/string.hpp"
-
-#include <memory>
-#include <cstdio>
-#include <cstdlib>
-#include <iostream>
-#include <fstream>
-#include <sstream>
 #include <string>
 #include <vector>
 #include <iterator>
 #include <functional>
+#include <array>
+#include <cstdlib>
+#include <cstdio>
+#include <iostream>
 
+
+namespace {
 
 /**
  * commonly used constants
@@ -61,77 +53,11 @@ const wchar_t*	ENCODER_ID_CGA_ERROR	= L"com.esri.prt.core.CGAErrorEncoder";
 const wchar_t*	ENCODER_ID_CGA_PRINT	= L"com.esri.prt.core.CGAPrintEncoder";
 const wchar_t*	ENCODER_ID_OBJ			= L"com.esri.prt.codecs.OBJEncoder";
 
-
-/**
- * default initial shape geometry (a quad)
- */
-namespace UnitQuad {
-const double 	vertices[]		= { 0, 0, 0,  0, 0, 1,  1, 0, 1,  1, 0, 0 };
-const size_t 	vertexCount		= 12;
-const uint32_t	indices[]		= { 0, 1, 2, 3 };
-const size_t 	indexCount		= 4;
-const uint32_t 	faceCounts[]	= { 4 };
-const size_t 	faceCountsCount	= 1;
-}
-
-
-/**
- * helpers for prt object management
- */
-struct PRTDestroyer { void operator()(prt::Object const* p) const { if (p) p->destroy(); } };
-using ObjectPtr					= std::unique_ptr<const prt::Object, PRTDestroyer>;
-using CachePtr					= std::unique_ptr<prt::CacheObject, PRTDestroyer>;
-using ResolveMapPtr				= std::unique_ptr<const prt::ResolveMap, PRTDestroyer>;
-using InitialShapePtr			= std::unique_ptr<const prt::InitialShape, PRTDestroyer>;
-using InitialShapeBuilderPtr	= std::unique_ptr<prt::InitialShapeBuilder, PRTDestroyer>;
-using AttributeMapPtr			= std::unique_ptr<const prt::AttributeMap, PRTDestroyer>;
-using AttributeMapBuilderPtr	= std::unique_ptr<prt::AttributeMapBuilder, PRTDestroyer>;
-using FileOutputCallbacksPtr	= std::unique_ptr<prt::FileOutputCallbacks, PRTDestroyer>;
-using ConsoleLogHandlerPtr		= std::unique_ptr<prt::ConsoleLogHandler, PRTDestroyer>;
-using FileLogHandlerPtr			= std::unique_ptr<prt::FileLogHandler, PRTDestroyer>;
-using EncoderInfoPtr			= std::unique_ptr<const prt::EncoderInfo, PRTDestroyer>;
-using DecoderInfoPtr			= std::unique_ptr<const prt::DecoderInfo, PRTDestroyer>;
-
-
-/**
- * Helper struct to transport command line arguments
- */
-struct InputArgs {
-	boost::filesystem::path	mWorkDir;
-	std::wstring			mEncoderID;
-	AttributeMapPtr			mEncoderOpts;
-	boost::filesystem::path	mOutputPath;
-	std::string				mRulePackage;
-	AttributeMapPtr			mInitialShapeAttrs;
-	std::wstring			mInitialShapeGeo;
-	int						mLogLevel;
-	boost::filesystem::path	mInfoFile;
-	std::string				mLicHost;
-	std::string				mLicFeature;
-};
-
-
-/**
- * fwd declarations of helper functions
- */
-std::string getSharedLibraryPrefix();
-std::string getSharedLibrarySuffix();
-std::string  toOSNarrowFromUTF16(const std::wstring& osWString);
-std::wstring toUTF16FromOSNarrow(const std::string& osString);
-std::string  toUTF8FromOSNarrow (const std::string& osString);
-std::wstring percentEncode      (const std::string& utf8String);
-bool initInputArgs(int argc, char *argv[], InputArgs& inputArgs);
-AttributeMapPtr createValidatedOptions(const wchar_t* encID, const AttributeMapPtr& unvalidatedOptions);
-std::string objectToXML(prt::Object const* obj);
-void codecInfoToXML(InputArgs& inputArgs);
-std::wstring toFileURI(const boost::filesystem::path& p);
-
-
 /**
  * Helper struct to manage PRT lifetime and licensing
  */
 struct PRTContext {
-	PRTContext(const InputArgs& inputArgs) {
+	PRTContext(const pcu::InputArgs& inputArgs) {
 		// -- create a console and file logger and register them with PRT
 		boost::filesystem::path fsLogPath = inputArgs.mWorkDir / FILE_LOG;
 		mLogHandler.reset(prt::ConsoleLogHandler::create(prt::LogHandler::ALL, prt::LogHandler::ALL_COUNT));
@@ -142,7 +68,8 @@ struct PRTContext {
 		// -- setup paths for plugins and licensing, assume standard sdk layout
 		boost::filesystem::path rootPath = inputArgs.mWorkDir;
 		boost::filesystem::path extPath = rootPath / "lib";
-		boost::filesystem::path fsFlexLib = rootPath / "bin" / (getSharedLibraryPrefix() + FILE_FLEXNET_LIB + getSharedLibrarySuffix());
+		std::string fsFlexLibBaseName = pcu::getSharedLibraryPrefix() + FILE_FLEXNET_LIB + pcu::getSharedLibrarySuffix();
+		boost::filesystem::path fsFlexLib = rootPath / "bin" / fsFlexLibBaseName;
 		std::string flexLib = fsFlexLib.string();
 
 		// -- setup the licensing information
@@ -151,7 +78,7 @@ struct PRTContext {
 		flp.mFeature = inputArgs.mLicFeature.c_str();
 		flp.mHostName = inputArgs.mLicHost.c_str();
 
-		// -- initialize PRT with the path to its extension libraries, the desired log level and the licensing data
+		// -- initialize PRT with the path to its extension libraries, the desired log level and licensing data
 		std::wstring wExtPath = extPath.wstring();
 		std::array<const wchar_t*, 1> extPaths = { wExtPath.c_str() };
 		mLicHandle.reset(prt::init(extPaths.data(), extPaths.size(), (prt::LogLevel)inputArgs.mLogLevel, &flp));
@@ -166,68 +93,22 @@ struct PRTContext {
 		prt::removeLogHandler(mFileLogHandler.get());
 	}
 
-	ConsoleLogHandlerPtr	mLogHandler;
-	FileLogHandlerPtr		mFileLogHandler;
-	ObjectPtr				mLicHandle;
+	pcu::ConsoleLogHandlerPtr	mLogHandler;
+	pcu::FileLogHandlerPtr		mFileLogHandler;
+	pcu::ObjectPtr				mLicHandle;
 };
+
+} // namespace
 
 
 /**
- * Logging Helpers
- */
-namespace Loggers {
-
-struct Logger { };
-
-// log to std streams
-const std::wstring LEVELS[] = { L"trace", L"debug", L"info", L"warning", L"error", L"fatal" };
-template<prt::LogLevel L> struct StreamLogger : public Logger {
-	StreamLogger(std::wostream& out = std::wcout) : Logger(), mOut(out) { mOut << prefix(); }
-	virtual ~StreamLogger() { mOut << std::endl; }
-	StreamLogger<L>& operator<<(std::wostream&(*x)(std::wostream&)) { mOut << x; return *this; }
-	StreamLogger<L>& operator<<(const std::string& x) { std::copy(x.begin(), x.end(), std::ostream_iterator<char, wchar_t>(mOut)); return *this; }
-	template<typename T> StreamLogger<L>& operator<<(const T& x) { mOut << x; return *this; }
-	static std::wstring prefix() { return L"[" + LEVELS[L] + L"] "; }
-	std::wostream& mOut;
-};
-
-// log through the prt logger
-template<prt::LogLevel L> struct PRTLogger : public Logger {
-	PRTLogger() : Logger() { }
-	virtual ~PRTLogger() { prt::log(wstr.str().c_str(), L); }
-	PRTLogger<L>& operator<<(std::wostream&(*x)(std::wostream&)) { wstr << x;  return *this; }
-	PRTLogger<L>& operator<<(const std::string& x) {
-		std::copy(x.begin(), x.end(), std::ostream_iterator<char, wchar_t>(wstr));
-		return *this;
-	}
-	template<typename T> PRTLogger<L>& operator<<(const T& x) { wstr << x; return *this; }
-	std::wostringstream wstr;
-};
-
-// choose your logger (PRTLogger or StreamLogger)
-#define LT PRTLogger
-
-typedef LT<prt::LOG_DEBUG>		_LOG_DBG;
-typedef LT<prt::LOG_INFO>		_LOG_INF;
-typedef LT<prt::LOG_WARNING>	_LOG_WRN;
-typedef LT<prt::LOG_ERROR>		_LOG_ERR;
-
-} // namespace Loggers
-
-#define LOG_DBG Loggers::_LOG_DBG()
-#define LOG_INF Loggers::_LOG_INF()
-#define LOG_WRN Loggers::_LOG_WRN()
-#define LOG_ERR Loggers::_LOG_ERR()
-
-
-/**
- * finally, the actual model generation
+ * the actual model generation
  */
 int main (int argc, char *argv[]) {
 	try {
 		// -- fetch command line args
-		InputArgs inputArgs;
-		if (!initInputArgs(argc, argv, inputArgs))
+		pcu::InputArgs inputArgs(ENCODER_ID_OBJ);
+		if (!pcu::initInputArgs(argc, argv, inputArgs))
 			return EXIT_FAILURE;
 
 		// -- initialize PRT via a helper struct
@@ -239,7 +120,7 @@ int main (int argc, char *argv[]) {
 
 		// -- optionally handle the "codec info" command line switch and exit
 		if (!inputArgs.mInfoFile.empty()) {
-			codecInfoToXML(inputArgs);
+			pcu::codecInfoToXML(inputArgs);
 			return EXIT_SUCCESS;
 		}
 
@@ -250,36 +131,37 @@ int main (int argc, char *argv[]) {
 		}
 
 		// -- create resolve map based on rule package
-		ResolveMapPtr resolveMap;
+		pcu::ResolveMapPtr resolveMap;
 		if (!inputArgs.mRulePackage.empty()) {
-			if (inputArgs.mLogLevel <= prt::LOG_INFO) std::cout << "Using rule package " << inputArgs.mRulePackage << std::endl;
+			LOG_INF << "Using rule package " << inputArgs.mRulePackage << std::endl;
 
-			std::wstring rpkURI = toFileURI(inputArgs.mRulePackage);
+			std::wstring rpkURI = pcu::toFileURI(inputArgs.mRulePackage);
 			prt::Status status = prt::STATUS_UNSPECIFIED_ERROR;
 			resolveMap.reset(prt::createResolveMap(rpkURI.c_str(), nullptr, &status));
-			if(status != prt::STATUS_OK) {
+			if (resolveMap && (status == prt::STATUS_OK)) {
+				LOG_DBG << "resolve map = " << pcu::objectToXML(resolveMap.get());
+			}
+			else {
 				LOG_ERR << "getting resolve map from '" << inputArgs.mRulePackage << "' failed, aborting.";
 				return EXIT_FAILURE;
 			}
-
-			LOG_DBG << "resolve map = " << objectToXML(resolveMap.get());
 		}
 
 		// -- create cache & callback
-		FileOutputCallbacksPtr foc{prt::FileOutputCallbacks::create(inputArgs.mOutputPath.wstring().c_str())};
-		CachePtr cache{prt::CacheObject::create(prt::CacheObject::CACHE_TYPE_DEFAULT)};
+		pcu::FileOutputCallbacksPtr foc{prt::FileOutputCallbacks::create(inputArgs.mOutputPath.wstring().c_str())};
+		pcu::CachePtr cache{prt::CacheObject::create(prt::CacheObject::CACHE_TYPE_DEFAULT)};
 
 		// -- setup initial shape geometry
-		InitialShapeBuilderPtr isb{prt::InitialShapeBuilder::create()};
+		pcu::InitialShapeBuilderPtr isb{prt::InitialShapeBuilder::create()};
 		if (!inputArgs.mInitialShapeGeo.empty()) {
 			LOG_DBG << L"trying to read initial shape geometry from " << inputArgs.mInitialShapeGeo;
 			isb->resolveGeometry(inputArgs.mInitialShapeGeo.c_str(), resolveMap.get(), cache.get());
 		}
 		else {
 			isb->setGeometry(
-					UnitQuad::vertices, UnitQuad::vertexCount,
-					UnitQuad::indices, UnitQuad::indexCount,
-					UnitQuad::faceCounts, UnitQuad::faceCountsCount
+					pcu::quad::vertices, pcu::quad::vertexCount,
+					pcu::quad::indices, pcu::quad::indexCount,
+					pcu::quad::faceCounts, pcu::quad::faceCountsCount
 			);
 		}
 
@@ -308,20 +190,20 @@ int main (int argc, char *argv[]) {
 		);
 
 		// -- create initial shape
-		InitialShapePtr initialShape{isb->createInitialShapeAndReset()};
+		pcu::InitialShapePtr initialShape{isb->createInitialShapeAndReset()};
 		std::vector<const prt::InitialShape*> initialShapes = { initialShape.get() };
 
 		// -- setup options for helper encoders
-		AttributeMapBuilderPtr optionsBuilder{prt::AttributeMapBuilder::create()};
+		pcu::AttributeMapBuilderPtr optionsBuilder{prt::AttributeMapBuilder::create()};
 		optionsBuilder->setString(L"name", FILE_CGA_ERROR);
-		AttributeMapPtr errOptions{optionsBuilder->createAttributeMapAndReset()};
+		pcu::AttributeMapPtr errOptions{optionsBuilder->createAttributeMapAndReset()};
 		optionsBuilder->setString(L"name", FILE_CGA_PRINT);
-		AttributeMapPtr printOptions{optionsBuilder->createAttributeMapAndReset()};
+		pcu::AttributeMapPtr printOptions{optionsBuilder->createAttributeMapAndReset()};
 
 		// -- validate & complete encoder options
-		AttributeMapPtr validatedEncOpts{createValidatedOptions(inputArgs.mEncoderID.c_str(), inputArgs.mEncoderOpts)};
-		AttributeMapPtr validatedErrOpts{createValidatedOptions(ENCODER_ID_CGA_ERROR, errOptions)};
-		AttributeMapPtr validatedPrintOpts{createValidatedOptions(ENCODER_ID_CGA_PRINT, printOptions)};
+		pcu::AttributeMapPtr validatedEncOpts{createValidatedOptions(inputArgs.mEncoderID.c_str(), inputArgs.mEncoderOpts)};
+		pcu::AttributeMapPtr validatedErrOpts{createValidatedOptions(ENCODER_ID_CGA_ERROR, errOptions)};
+		pcu::AttributeMapPtr validatedPrintOpts{createValidatedOptions(ENCODER_ID_CGA_PRINT, printOptions)};
 
 		// -- setup encoder IDs and corresponding options
 		std::array<const wchar_t*,3> encoders = {
@@ -352,338 +234,3 @@ int main (int argc, char *argv[]) {
 		return EXIT_FAILURE;
 	}
 }
-
-
-/**
- * Helper to convert a list of "<key>:<type>=<value>" strings into an prt::AttributeMap
- */
-AttributeMapPtr createAttributeMapFromTypedKeyValues(const std::vector<std::wstring>& args) {
-	AttributeMapBuilderPtr bld{prt::AttributeMapBuilder::create()};
-	for (const std::wstring& a: args) {
-		std::vector<std::wstring> splits;
-		boost::split(splits, a, boost::algorithm::is_any_of(":="), boost::token_compress_on);
-		if (splits.size() == 3) {
-			if (splits[1] == L"string") {
-				bld->setString(splits[0].c_str(), splits[2].c_str());
-			}
-			else if (splits[1] == L"float") {
-				try {
-					double d = std::stod(splits[2]);
-					bld->setFloat(splits[0].c_str(), d);
-				} catch (std::exception& e) {
-					std::wcerr << L"cannot set float attribute " << splits[0] << ": " << e.what() << std::endl;
-				}
-			}
-			else if (splits[1] == L"int") {
-				try {
-					int32_t v = std::stoi(splits[2]);
-					bld->setInt(splits[0].c_str(), v);
-				} catch (std::exception& e) {
-					std::wcerr << L"cannot set int attribute " << splits[0] << ": " << e.what() << std::endl;
-				}
-			}
-			else if (splits[1] == L"bool") {
-				bool v;
-				std::wistringstream istr(splits[2]);
-				istr >> std::boolalpha >> v;
-				if (!istr.fail())
-					bld->setBool(splits[0].c_str(), v);
-				else
-					std::wcerr << L"cannot set bool attribute " << splits[0] << std::endl;
-			}
-		}
-		else
-			std::wcout << L"warning: ignored key/value item: " << a << std::endl;
-	}
-	return AttributeMapPtr{bld->createAttributeMapAndReset()};
-}
-
-
-/**
- * Parse the command line arguments and setup the inputArgs struct.
- */
-bool initInputArgs(int argc, char *argv[], InputArgs& inputArgs) {
-	// determine current path
-	boost::filesystem::path executablePath = boost::filesystem::system_complete(boost::filesystem::path(argv[0]));
-	inputArgs.mWorkDir = executablePath.parent_path().parent_path();
-
-	std::vector<std::wstring> argShapeAttributes, argEncOpts;
-
-	boost::program_options::options_description desc("Available Options");
-	desc.add_options()("help,h", "This very help screen.")("version,v", "Show CityEngine SDK version.");
-	desc.add_options()(
-			"log-level,l",
-			boost::program_options::value<int>(&inputArgs.mLogLevel)->default_value(2),
-			"Set log filter level: 1 = debug, 2 = info, 3 = warning, 4 = error, 5 = fatal, >5 = no output"
-	);
-	desc.add_options()(
-			"output,o",
-			boost::program_options::value<boost::filesystem::path>(&inputArgs.mOutputPath)->default_value(inputArgs.mWorkDir / "output"),
-			"Set the output path for the callbacks."
-	);
-	desc.add_options()(
-			"encoder,e",
-			boost::program_options::wvalue<std::wstring>(&inputArgs.mEncoderID)->default_value(ENCODER_ID_OBJ, toOSNarrowFromUTF16(ENCODER_ID_OBJ)), "The encoder ID, e.g. 'com.esri.prt.codecs.OBJEncoder'.");
-	desc.add_options()(
-			"rule-package,p",
-			boost::program_options::value<std::string>(&inputArgs.mRulePackage),
-			"Set the rule package path."
-	);
-	desc.add_options()(
-			"shape-attr,a",
-			boost::program_options::wvalue<std::vector<std::wstring> >(&argShapeAttributes),
-			"Set a initial shape attribute (syntax is <name>:<type>=<value>, type = {string,float,int,bool})."
-	);
-	desc.add_options()(
-			"shape-geo,g",
-			boost::program_options::wvalue<std::wstring>(&inputArgs.mInitialShapeGeo),
-			"(Optional) Path to a file with shape geometry");
-	desc.add_options()(
-			"encoder-option,z",
-			boost::program_options::wvalue<std::vector<std::wstring> >(&argEncOpts),
-			"Set a encoder option (syntax is <name>:<type>=<value>, type = {string,float,int,bool})."
-	);
-	desc.add_options()(
-			"info,i",
-			boost::program_options::value<boost::filesystem::path>(&inputArgs.mInfoFile), "Write XML Extension Information to file"
-	);
-	desc.add_options()(
-			"license-server,s",
-			boost::program_options::value<std::string>(&inputArgs.mLicHost),
-			"License Server Host Name, example: 27000@myserver.example.com"
-	);
-	desc.add_options()(
-			"license-feature,f",
-			boost::program_options::value<std::string>(&inputArgs.mLicFeature),
-			"License Feature to use, one of CityEngBasFx, CityEngBas, CityEngAdvFx, CityEngAdv"
-	);
-
-	boost::program_options::positional_options_description posDesc;
-	posDesc.add("shape-ref", -1);
-
-	boost::program_options::variables_map vm;
-	boost::program_options::store(boost::program_options::command_line_parser(argc, argv).options(desc).positional(posDesc).run(), vm);
-	boost::program_options::notify(vm);
-
-	if (argc == 1 || vm.count("help")) {
-		std::cout << desc << std::endl;
-		return false;
-	}
-
-	if (vm.count("version")) {
-		std::cout << prt::getVersion()->mFullName << std::endl;
-		return false;
-	}
-
-	// make sure the path to the initial shape geometry is a valid URI
-	if (!inputArgs.mInitialShapeGeo.empty()) {
-		boost::filesystem::path isGeoPath = toOSNarrowFromUTF16(inputArgs.mInitialShapeGeo); // workaround for boost 1.41
-		if (boost::filesystem::exists(isGeoPath)) {
-			inputArgs.mInitialShapeGeo = toFileURI(isGeoPath);
-		}
-		else {
-			std::wcerr << L"path to initial shape uri is not valid: " << inputArgs.mInitialShapeGeo << std::endl;
-			return false;
-		}
-	}
-
-	inputArgs.mInitialShapeAttrs = createAttributeMapFromTypedKeyValues(argShapeAttributes);
-	inputArgs.mEncoderOpts = createAttributeMapFromTypedKeyValues(argEncOpts);
-
-	return true;
-}
-
-
-std::string toOSNarrowFromUTF16(const std::wstring& osWString) {
-	std::vector<char> temp(osWString.size());
-	size_t size = temp.size();
-	prt::Status status = prt::STATUS_OK;
-	prt::StringUtils::toOSNarrowFromUTF16(osWString.c_str(), temp.data(), &size, &status);
-	if(size > temp.size()) {
-		temp.resize(size);
-		prt::StringUtils::toOSNarrowFromUTF16(osWString.c_str(), temp.data(), &size, &status);
-	}
-	return std::string(temp.data());
-}
-
-
-std::wstring toUTF16FromOSNarrow(const std::string& osString) {
-	std::vector<wchar_t> temp(osString.size());
-	size_t size = temp.size();
-	prt::Status status = prt::STATUS_OK;
-	prt::StringUtils::toUTF16FromOSNarrow(osString.c_str(), temp.data(), &size, &status);
-	if(size > temp.size()) {
-		temp.resize(size);
-		prt::StringUtils::toUTF16FromOSNarrow(osString.c_str(), temp.data(), &size, &status);
-	}
-	return std::wstring(temp.data());
-}
-
-std::string toUTF8FromOSNarrow(const std::string& osString) {
-	std::wstring utf16String = toUTF16FromOSNarrow(osString);
-	std::vector<char> temp(utf16String.size());
-	size_t size = temp.size();
-	prt::Status status = prt::STATUS_OK;
-	prt::StringUtils::toUTF8FromUTF16(utf16String.c_str(), temp.data(), &size, &status);
-	if(size > temp.size()) {
-		temp.resize(size);
-		prt::StringUtils::toUTF8FromUTF16(utf16String.c_str(), temp.data(), &size, &status);
-	}
-	return std::string(temp.data());
-}
-
-std::wstring percentEncode(const std::string& utf8String) {
-	std::vector<char> temp(2*utf8String.size());
-	size_t size = temp.size();
-	prt::Status status = prt::STATUS_OK;
-	prt::StringUtils::percentEncode(utf8String.c_str(), temp.data(), &size, &status);
-	if(size > temp.size()) {
-		temp.resize(size);
-		prt::StringUtils::percentEncode(utf8String.c_str(), temp.data(), &size, &status);
-	}
-
-	std::vector<wchar_t> u16temp(temp.size());
-	size = u16temp.size();
-	prt::StringUtils::toUTF16FromUTF8(temp.data(), u16temp.data(), &size, &status);
-	if(size > u16temp.size()) {
-		u16temp.resize(size);
-		prt::StringUtils::toUTF16FromUTF8(temp.data(), u16temp.data(), &size, &status);
-	}
-
-	return std::wstring(u16temp.data());
-}
-
-template<typename C> using APIFunc = std::function<C*(C*, size_t*, prt::Status*)>;
-
-template<typename C> std::basic_string<C> callAPI(APIFunc<C> f, size_t initialSize) {
-	std::vector<C> buffer(initialSize, ' ');
-
-	size_t actualSize = initialSize;
-	f(buffer.data(), &actualSize, nullptr);
-	buffer.resize(actualSize);
-
-	if (initialSize < actualSize)
-		f(buffer.data(), &actualSize, nullptr);
-
-	return std::basic_string<C>{buffer.data()};
-}
-
-//template<typename C, typename FUNC>
-//std::basic_string<C> listIDs(FUNC f, size_t initialSize) {
-//	std::vector<C> ids(initialSize, L' ');
-//
-//	size_t actualSize = initialSize;
-//	f(ids.data(), &actualSize, nullptr);
-//	ids.resize(actualSize);
-//
-//	if (initialSize < actualSize)
-//		f(ids.data(), &actualSize, nullptr);
-//
-//	return std::basic_string<C>{ ids.data() };
-//}
-
-std::string objectToXML(prt::Object const* obj) {
-	if (obj == nullptr)
-		throw std::invalid_argument("object pointer is not valid");
-
-	using ActualObjectType = std::remove_pointer<std::remove_cv<decltype(obj)>::type>::type;
-	APIFunc<char> toXMLFunc = std::bind(&prt::Object::toXML, obj);
-
-	return callAPI<char>(toXMLFunc, 4096);
-}
-
-void codecInfoToXML(InputArgs& inputArgs) {
-	std::wstring encIDsStr{ callAPI<wchar_t>(prt::listEncoderIds, 1024) };
-	std::wstring decIDsStr{ callAPI<wchar_t>(prt::listDecoderIds, 1024) };
-
-	std::vector<std::wstring> encIDs, decIDs;
-
-	boost::trim_if(encIDsStr, boost::is_any_of("; "));
-	boost::split(encIDs, encIDsStr, boost::is_any_of(L";"), boost::token_compress_on);
-
-	boost::trim_if(decIDsStr, boost::is_any_of("; "));
-	boost::split(decIDs, decIDsStr, boost::is_any_of(L";"), boost::token_compress_on);
-
-	std::ofstream xml(inputArgs.mInfoFile.string());
-	xml << "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n\n";
-
-	xml << "<Codecs build=\"" << prt::getVersion()->mVersion
-		<< "\" buildDate=\"" << prt::getVersion()->mBuildDate
-		<< "\" buildConfig=\"" << prt::getVersion()->mBuildConfig
-		<< "\">\n";
-
-	xml << "<Encoders>\n";
-	for (const std::wstring& encID: encIDs) {
-		prt::Status s = prt::STATUS_UNSPECIFIED_ERROR;
-		EncoderInfoPtr encInfo{prt::createEncoderInfo(encID.c_str(), &s)};
-		if (s == prt::STATUS_OK && encInfo)
-			xml << objectToXML(encInfo.get()) << std::endl;
-		else
-			std::wcout << L"encoder not found for ID: " << encID << std::endl;
-	}
-	xml << "</Encoders>\n";
-
-	xml << "<Decoders>\n";
-	for (const std::wstring& decID: decIDs) {
-		prt::Status s = prt::STATUS_UNSPECIFIED_ERROR;
-		DecoderInfoPtr decInfo{prt::createDecoderInfo(decID.c_str(), &s)};
-		if (s == prt::STATUS_OK && decInfo)
-			xml << objectToXML(decInfo.get()) << std::endl;
-		else
-			std::wcout << L"decoder not found for ID: " << decID << std::endl;
-	}
-	xml << "</Decoders>\n";
-
-	xml << "</Codecs>\n";
-	xml.close();
-
-	LOG_INF << "Dumped codecs info to " << inputArgs.mInfoFile;
-}
-
-
-std::wstring toFileURI(const boost::filesystem::path& p) {
-#ifdef _WIN32
-	static const std::wstring schema = L"file:/";
-#else
-	static const std::wstring schema = L"file:";
-#endif
-
-	std::string utf8Path = toUTF8FromOSNarrow(p.generic_string());
-	std::wstring pecString = percentEncode(utf8Path);
-	return schema + pecString;
-}
-
-
-AttributeMapPtr createValidatedOptions(const wchar_t* encID, const AttributeMapPtr& unvalidatedOptions) {
-	EncoderInfoPtr encInfo{prt::createEncoderInfo(encID)};
-	const prt::AttributeMap* validatedOptions = 0;
-	encInfo->createValidatedOptionsAndStates(unvalidatedOptions.get(), &validatedOptions);
-	return AttributeMapPtr(validatedOptions);
-}
-
-
-std::string getSharedLibraryPrefix() {
-#if defined(_WIN32)
-	return "";
-#elif defined(__APPLE__)
-	return "lib";
-#elif defined(__linux__)
-	return "lib";
-#else
-#	error unsupported build platform
-#endif
-}
-
-
-std::string getSharedLibrarySuffix() {
-#if defined(_WIN32)
-	return ".dll";
-#elif defined(__APPLE__)
-	return ".dylib";
-#elif defined(__linux__)
-	return ".so";
-#else
-#	error unsupported build platform
-#endif
-}
-
