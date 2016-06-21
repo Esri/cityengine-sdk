@@ -12,6 +12,7 @@ This document explains how to install the CityEngine SDK and how to work with th
 The archives are available for download at the corresponding github release page. See installation instructions below for details.
 
 ## CityEngine SDK Releases
+- [v1.6.2663 (2016-06-21, CityEngine 2016.0)](https://github.com/Esri/esri-cityengine-sdk/releases/tag/1.6.2663)
 - [v1.4.2074 (2015-10-06, CityEngine 2015.2)](https://github.com/Esri/esri-cityengine-sdk/releases/tag/1.4.2074)
 - [v1.3.1969 (2015-06-17, CityEngine 2015.1)](https://github.com/Esri/esri-cityengine-sdk/releases/tag/1.3.1969)
 - [v1.3.1888 (2015-03-31, CityEngine 2015.0)](https://github.com/Esri/esri-cityengine-sdk/releases/tag/1.3.1888)
@@ -54,36 +55,32 @@ Please note that the individual example READMEs may include further requirements
 * To load custom encoders built with this SDK in CityEngine, CityEngine 2015.2 is required. For older versions of CityEngine an older version of the SDK might have to be used, see table above. 
 * License for matching CityEngine
 * CMake 3.0.0 or later (http://www.cmake.org)
-* Optionally for custom SDK extension: boost 1.59 headers and binaries (using the same compiler as specified below)
-    * Get the boost 1.59 headers from http://www.boost.org
 
 #### Windows
-* Windows 7 or later (32bit or 64bit)
-* NMake 10.0 or later (part of Visual Studio)
-* Recommended C++ Compilers for simple clients (prt4cmd example):
-    * VC10 or later
-* To compile SDK extensions (e.g. the stlenc example or a custom encoder) for **use in CityEngine 2014.0 up to 2015.2**, it is required to use this exact compiler:
-    * Microsoft VC10 C++ Compiler (cl.exe) 16.00.40219.01, included in Visual Studio 2010 SP1
-* Otherwise (e.g. the prt4maya example), also the VC11 compiler is supported:
-    * Microsoft VC11 C++ Compiler (cl.exe) 17.00.61030.0, included in Visual Studio 2012 SP4
-* Pre-compiled boost libraries for VC10 or VC11 can be obtained from http://boost.teeks99.com (e.g. boost_1_53_0-vc64-bin.exe or boost_1_53_0-vc32-bin.exe)
+* Windows 7 or later (64bit)
+* NMake 10.0 or later (NMake is part of Visual Studio)
+* Recommended C++ Compilers for client code (e.g. `prt4cmd` example): `VC 12 C++ Compiler (Visual Studio 2013) or later`
+* To compile SDK extensions (e.g. the `stlenc` example or a custom encoder) for **use in CityEngine 2016.0**, it is required to use this exact compiler:
+    * Microsoft `VC12 C++ Compiler (cl.exe) 18.00.40629.0`, included in `Visual Studio 2013 Update 3`
 
 #### MacOSX
-* To compile: MacOSX Yosemite (10.10)
-* To run: MacOSX Yosemite (10.10) or later
 * GNU Make 3.82 or later
-* Recommended C++ Compilers for simple clients (prt4cmd example):
+* Recommended build environment for client code (e.g. the `prt4cmd` example):
+    * MacOSX Yosemite (10.10) or later
     * Apple CLANG 6.1 or later
-* To compile SDK extensions (e.g. prt4maya example or the stlenc example for use in CityEngine) it is required to use this **exact** C++ compiler version:
+* **Required** build environment to compile SDK extensions (e.g. the `stlenc` example for use in CityEngine and other custom extensions):
+    * MacOSX Yosemite (10.10)
     * Apple CLANG 6.1 included in XCode 6.4
+    * Required flags: `-std=c++14 -stdlib=libc++ -fvisibility=hidden -fvisibility-inlines-hidden -Wl,--exclude-libs,ALL`
 
 #### Linux
 * RedHat Enterprise Linux 6.x or compatible (64bit only)
 * GNU Make 3.82 or later
-* Recommended C++ Compilers for simple clients (prt4cmd example):
+* Recommended C++ Compilers for client code (e.g. the `prt4cmd` example):
     * GCC 4.8.2 or later
-* To compile SDK extensions (e.g. prt4maya example or the stlenc example for use in CityEngine) it is required to use this **exact** C++ compiler version:
+* To compile SDK extensions (e.g. the `stlenc` example for use in CityEngine or other custom extensions) it is required to use this **exact** C++ build environment:
     * GCC 4.8.2 included in RedHat Enterprise Linux 6 DevToolSet 2.1
+    * Required flags `-std=c++11 -march=nocona -fvisibility=hidden -fvisibility-inlines-hidden -Wl,--exclude-libs,ALL`
 
 ## Further Resources
 * Documentation:
@@ -105,7 +102,7 @@ Anyone and everyone is welcome to contribute and to extend and improve the examp
 
 ## Licensing
 
-Copyright 2015 Esri
+Copyright (c) 2016 Esri
 
 You may not use the content of this repository except in compliance with the following Licenses:
   1. All content of all directories **except "examples"** is licensed under the CityEngine EULA, see [license/EULA.pdf](license/EULA.pdf).
