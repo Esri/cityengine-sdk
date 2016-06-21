@@ -1,3 +1,100 @@
+ESRI CITYENGINE SDK 1.6.2663 CHANGELOG
+======================================
+
+This section lists changes compared to CityEngine SDK 1.4.2074
+
+
+General Info
+------------
+* CityEngine SDK 1.6.2663 is used in CityEngine 2016.0 (2016.0.2642).
+* CityEngine SDK 1.5 has been an internal release only.
+* Increased license level to "2016.0", licenses for 2015.2 and older are not valid for CityEngine SDK 1.6.
+
+
+PRT API
+-------
+* Added new function `prt::setLogLevel` to specify the minimally active logging level.
+
+
+PRTX API
+--------
+* Required compilers have been upgraded and C++11 has been enabled:
+  * Windows: Visual Studio 2013 Update 3
+  * OSX: Apple Clang 6.1 (Xcode 6.4) (on OSX, we require C++14)
+  * RHEL: GCC 4.8.2 (DevToolSet 2.1)
+* Removed dependency on the Boost C++ library.
+* Added support for texture regions to `prtx::Mesh`. [CE-2509]
+* Improved texture atlas generator in `prtx::EncodePreparator`:
+  * Added flag `atlasRepeatingTextures` to support repeating textures. [CE-2510]
+  * Added flag `maxTexSize` to resize incoming textures. [CE-2251]
+  * Added flag `forceAtlasing` to force atlas even for a single textures. [CE-2471]
+
+
+CGA 
+---
+* Increased CGA language version to `2016.0`
+* New CGA Operations
+  * Added new operation `splitArea`. [CE-2106]
+  * Added new operation `softenNormals`. [CE-1848]
+  * Added new operation `innerRectangle` with alignment and remainder options. [CE-2566]
+  * Added new primitive generation operations `primitiveQuad`, `primitiveDisk`, `primitiveCube`, `primitiveSphere`, `primitiveCylinder` and `primitiveCone`. [CE-2418, CE-2419]
+* Changes to existing CGA operations
+  * Updated `insert` operation [CE-2271]:
+    * New parameter `upAxisOfGeometry` that specifies the up axis of the geometry.
+    * New parameter `insertMode` that specifies the alignment and positioning of the geometry in the scope.
+    * Also see deprecation list below.
+  * `setNormals` operation:
+    * New mode `auto` that uses softenNormals functionality. [CE-1848]
+    * New mode `conform` that computes consistent normals. [CE-1849]
+  * `cleanupGeometry`: Mode `all`/`faces`: All duplicate/inverse faces are removed except one (independent from orientation).
+  * `extrude` operation
+    * The parameter `axisWorld` is deprecated and changed to a parameter `extrusionType`
+    * New types `face.normal`, `vertex.normal`, `world.up` and `world.up.flatTop`
+    * The axes `x`, `y`, `z`, `world.x`, `world.y` and `world.z` are deprecated. Use type `world.up` instead of axis `world.y`.
+  * `roofGable`, `roofHip`, `roofPyramid` and `roofShed`
+    * Roofs can now be generated with a given height.
+    * New parameter `valueType` to switch beetween a roof generation `byAngle` or `byHeight`.
+* Deprecated Operations and Arguments
+  * `innerRect` (replaced by `innerRectangle`)
+  * Deprecations related to `insert`:
+    * `builtin:cube` and `builtin:cube:notex` arguments for `insert` are replaced by new `primitiveCube` operation.
+    * The usage of `s(0,0,0)` is deprecated in relation to `insert`. Use `keepSizeAndPosition` as `insertMode` instead.
+* Bugfixes
+  * `cleanup`, roofs, `extrude`: fixed vertex normal computation for rare cases [CE-2531]
+  * `roofShed` operation: For shed roofs on shapes with one face no horizontal trim planes, hip, valley and ridge edges are now generated. This was already the case for shapes with more than one face.
+  * `scatter`: fixes precision problem and fixed a crash
+  * `split`, `trim` and `insert` operation: Fixed a bug that led to wrong results when vertices or edges lie in the respective split/trim plane.
+  * `geometry.isInstanced`: Fixed for builtin primitives ("builtin:cube" and "builtin:cube:notex"). [CE-1566]
+  * `roofHip`, `roofGable`: Fixed a bug that occured on rectangular shapes and led to a wrong shading due to double vertices.
+  * `roofShed`: Fixed a bug that generated wrong shed roofs for shapes with more than one face, at least one hole and a non-zero edge index set. [CE-1562]
+  * `cleanupGeometry`: Fixed an issue that prevented vertices to merge when they were the first vertex in a face. [CE-2531]
+  * `geometry.area` and normal calculation became more accurate; floating point precision got improved in general.
+
+
+Built-In Codecs Changes and Fixes
+---------------------------------
+* New Encoders
+  * Added Alembic encoder.
+  * Added I3S (SPK) encoder.
+  * Added TIFF texture encoder.
+  * Added raw memory texture encoder. [CE-2471]
+* Changes/Fixes to existing Codecs:
+  * MTL Encoder: fixed wrong line feed character
+  * `ShapeAttributeEncoder`: optimized performance of attribute handling. [CE-1837]
+
+
+Misc Changes and Fixes
+----------------------
+* Fixed a memory leak in `prt::generateOccluders`. [CE-2100]
+* Fixed a memory leak in the `comp` split. [CE-2100]
+* Fixed a memory leak in the `prtx::EncodePreparator`. [CE-1355]
+* Fixed multiple memory leaks in prtx::Mesh.
+* Fixed compiler firewall on RHEL.
+* Fixed a bug where the logger reported events in the wrong log level.
+* Fixed a crash on exit related to threading on OSX.
+
+
+
 ESRI CITYENGINE SDK 1.4.2074 CHANGELOG
 ======================================
 
