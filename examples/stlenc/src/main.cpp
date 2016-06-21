@@ -23,9 +23,9 @@
  * limitations under the License.
  */
 
-#include <iostream>
-#include "prtx/ExtensionManager.h"
 #include "STLEncoder.h"
+#include "prtx/ExtensionManager.h"
+#include <iostream>
 
 
 #ifdef _WIN32

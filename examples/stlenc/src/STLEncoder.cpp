@@ -23,10 +23,7 @@
  * limitations under the License.
  */
 
-#include <ostream>
-#include <sstream>
-
-#include "boost/foreach.hpp"
+#include "STLEncoder.h"
 
 #include "prtx/Shape.h"
 #include "prtx/ShapeIterator.h"
@@ -35,30 +32,40 @@
 #include "prtx/EncodeOptions.h"
 #include "prtx/EncoderInfoBuilder.h"
 
-#include "STLEncoder.h"
+#include <sstream>
+
+
+namespace {
+
+const wchar_t* EO_BASE_NAME			= L"baseName";
+const wchar_t* EO_ERROR_FALLBACK	= L"errorFallback";
+const std::wstring STL_EXT			= L".stl";
+const wchar_t* WNL					= L"\n";
+
+const prtx::EncodePreparator::PreparationFlags ENC_PREP_FLAGS = prtx::EncodePreparator::PreparationFlags()
+	.instancing(false)
+	.mergeByMaterial(true)
+	.triangulate(true)
+	.mergeVertices(true)
+	.cleanupVertexNormals(true)
+	.cleanupUVs(true)
+	.processVertexNormals(prtx::VertexNormalProcessor::SET_ALL_TO_FACE_NORMALS);
+
+} // namespace
 
 
 const std::wstring STLEncoder::ID			= L"com.esri.prt.examples.STLEncoder";
 const std::wstring STLEncoder::NAME			= L"STL Encoder";
 const std::wstring STLEncoder::DESCRIPTION	= L"Example encoder for the STL format";
 
-const wchar_t* EO_BASE_NAME					= L"baseName";
-const wchar_t* EO_ERROR_FALLBACK			= L"errorFallback";
-const std::wstring STL_EXT					= L".stl";
-const wchar_t* WNL							= L"\n";
-
 
 /**
  * The constructor just forwards the encoder id, defaultOptions and callbacks to the geometry encoder.
  */
 STLEncoder::STLEncoder(const std::wstring& id, const prt::AttributeMap* defaultOptions, prt::Callbacks* callbacks)
-: prtx::GeometryEncoder(id, defaultOptions, callbacks)
-{
-}
+: prtx::GeometryEncoder(id, defaultOptions, callbacks) { }
 
-
-STLEncoder::~STLEncoder() {
-}
+STLEncoder::~STLEncoder() { }
 
 
 /**
@@ -80,7 +87,7 @@ void STLEncoder::encode(prtx::GenerateContext& context, size_t initialShapeIndex
 	const prtx::InitialShape* is = context.getInitialShape(initialShapeIndex);
 	try {
 		prtx::LeafIteratorPtr li = prtx::LeafIterator::create(context, initialShapeIndex);
-		for (prtx::ShapePtr shape = li->getNext(); shape.get() != 0; shape = li->getNext()) {
+		for (prtx::ShapePtr shape = li->getNext(); shape.get() != nullptr; shape = li->getNext()) {
 			mEncodePreparator->add(context.getCache(), shape, is->getAttributeMap());
 		}
 	} catch(...) {
@@ -97,24 +104,15 @@ void STLEncoder::finish(prtx::GenerateContext& /*context*/) {
 	prt::SimpleOutputCallbacks* soh = dynamic_cast<prt::SimpleOutputCallbacks*>(getCallbacks());
 	const std::wstring baseName = getOptions()->getString(EO_BASE_NAME);
 
-	prtx::EncodePreparator::PreparationFlags prepFlags;
-	prepFlags.instancing(false);
-	prepFlags.mergeByMaterial(true);
-	prepFlags.triangulate(true);
-	prepFlags.mergeVertices(true);
-	prepFlags.cleanupVertexNormals(true);
-	prepFlags.cleanupUVs(true);
-	prepFlags.processVertexNormals(prtx::VertexNormalProcessor::SET_ALL_TO_FACE_NORMALS);
-
 	std::vector<prtx::EncodePreparator::FinalizedInstance> finalizedInstances;
-	mEncodePreparator->fetchFinalizedInstances(finalizedInstances, prepFlags);
+	mEncodePreparator->fetchFinalizedInstances(finalizedInstances, ENC_PREP_FLAGS);
 
 	std::wostringstream out;
 	out << std::scientific;
 	out << L"solid " << baseName << L"\n";
 
-	BOOST_FOREACH(prtx::EncodePreparator::FinalizedInstance& instance, finalizedInstances) {
-		BOOST_FOREACH(const prtx::MeshPtr& m, instance.getGeometry()->getMeshes()) {
+	for (const auto& instance: finalizedInstances) {
+		for (const prtx::MeshPtr& m: instance.getGeometry()->getMeshes()) {
 			for (uint32_t fi = 0, n = m->getFaceCount(); fi < n; fi++) {
 				const prtx::DoubleVector& vc = m->getVertexCoords();
 
@@ -172,11 +170,11 @@ STLEncoderFactory* STLEncoderFactory::createInstance() {
 	// CityEngine requires the following annotations to create an UI for an option:
 	// label, order, group and description
 	prtx::EncodeOptionsAnnotator eoa(encoderInfoBuilder);
-	eoa.option(EO_BASE_NAME).
-			setLabel(L"Base Name").
-			setOrder(0.0).
-			setGroup(L"General Settings", 0.0).
-			setDescription(L"Sets the base name of the written STL file.");
+	eoa.option(EO_BASE_NAME)
+			.setLabel(L"Base Name")
+			.setOrder(0.0)
+			.setGroup(L"General Settings", 0.0)
+			.setDescription(L"Sets the base name of the written STL file.");
 
 	// Hide the error fallback option in the CityEngine UI.
 	eoa.option(EO_ERROR_FALLBACK).flagAsHidden();

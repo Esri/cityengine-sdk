@@ -10,11 +10,6 @@ project(${PROJECT})
 
 ### dependencies
 
-find_package(Boost 1.59.0 EXACT REQUIRED COMPONENTS system program_options filesystem)
-include_directories(${Boost_INCLUDE_DIR})
-link_directories(${Boost_LIBRARY_DIRS})
-add_definitions(-DBOOST_MINOR_VERSION=${Boost_MINOR_VERSION})
-
 if (NOT prt_DIR)
 	set(prt_DIR ${PROJECT_SOURCE_DIR}/../../../prt/cmake)
 endif()
@@ -44,9 +39,9 @@ install(CODE "file(REMOVE_RECURSE ${CMAKE_INSTALL_PREFIX}/*)")
 install(TARGETS ${PROJECT} DESTINATION lib)
 install(DIRECTORY ${PROJECT_SOURCE_DIR}/../../../license DESTINATION .)
 if(WIN32)
-	install(FILES ${PROJECT_SOURCE_DIR}/../README.windows DESTINATION .)
+	install(FILES ${PROJECT_SOURCE_DIR}/../README_windows.md DESTINATION .)
 else()
-	install(FILES ${PROJECT_SOURCE_DIR}/../README.linux_osx DESTINATION .)
+	install(FILES ${PROJECT_SOURCE_DIR}/../README_linux_osx.md DESTINATION .)
 endif()
 
 
