@@ -52,7 +52,7 @@ A quick overview:
 Please note that the individual example READMEs may include further requirements.
 
 #### All Platforms
-* To load custom encoders built with this SDK in CityEngine, CityEngine 2015.2 is required. For older versions of CityEngine an older version of the SDK might have to be used, see table above. 
+* To load custom encoders built with this SDK in CityEngine, CityEngine 2016.0 is required. For older versions of CityEngine an older version of the SDK might have to be used, see table above. 
 * License for matching CityEngine
 * CMake 3.0.0 or later (http://www.cmake.org)
 
@@ -60,8 +60,9 @@ Please note that the individual example READMEs may include further requirements
 * Windows 7 or later (64bit)
 * NMake 10.0 or later (NMake is part of Visual Studio)
 * Recommended C++ Compilers for client code (e.g. `prt4cmd` example): `VC 12 C++ Compiler (Visual Studio 2013) or later`
-* To compile SDK extensions (e.g. the `stlenc` example or a custom encoder) for **use in CityEngine 2016.0**, it is required to use this exact compiler:
-    * Microsoft `VC12 C++ Compiler (cl.exe) 18.00.40629.0`, included in `Visual Studio 2013 Update 3`
+* To compile SDK extensions (e.g. the `stlenc` example or a custom encoder) it is required to use this exact compiler:
+    * Microsoft `VC12 C++ Compiler (cl.exe) 18.00.40629.0`, included in `Visual Studio 2013 Update 5`
+    * Required flags: `/bigobj /GR /EHsc /MD`
 
 #### MacOSX
 * GNU Make 3.82 or later
