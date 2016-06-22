@@ -19,7 +19,7 @@ PRT API
 PRTX API
 --------
 * Required compilers have been upgraded and C++11 has been enabled:
-  * Windows: Visual Studio 2013 Update 3
+  * Windows: Visual Studio 2013 Update 5
   * OSX: Apple Clang 6.1 (Xcode 6.4) (on OSX, we require C++14)
   * RHEL: GCC 4.8.2 (DevToolSet 2.1)
 * Removed dependency on the Boost C++ library.

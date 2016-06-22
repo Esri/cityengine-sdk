@@ -15,7 +15,7 @@ SOFTWARE REQUIREMENTS
 ---------------------
 
 - see "General Software Requirements - Windows"
-- Microsoft Visual Studio 2013 Update 3
+- Microsoft Visual Studio 2013 Update 5
 
 
 BUILD INSTRUCTIONS
