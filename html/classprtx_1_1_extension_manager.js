@@ -1,5 +1,6 @@
 var classprtx_1_1_extension_manager =
 [
+    [ "ExtensionManager", "classprtx_1_1_extension_manager.html#a53eabb740508e4491d58f2a89a070106", null ],
     [ "~ExtensionManager", "classprtx_1_1_extension_manager.html#a53fda30a467a4a70d1f2dd5defe258d1", null ],
     [ "ExtensionManager", "classprtx_1_1_extension_manager.html#a771caee460160a239721a8f523966d4a", null ],
     [ "addFactory", "classprtx_1_1_extension_manager.html#ac64bbc446ff2604bcdd6f83b3b00bae9", null ],
@@ -11,5 +12,6 @@ var classprtx_1_1_extension_manager =
     [ "createStreamAdaptor", "classprtx_1_1_extension_manager.html#a28593c0c8e3353a4a8052e461272ea24", null ],
     [ "init", "classprtx_1_1_extension_manager.html#afe8610035ed26a317bdf95d7adc1c6c2", null ],
     [ "listDecoderIds", "classprtx_1_1_extension_manager.html#ae143960188e40f1faba768a123001a50", null ],
-    [ "listEncoderIds", "classprtx_1_1_extension_manager.html#aabb3ad10867d219143db62941c9ac602", null ]
+    [ "listEncoderIds", "classprtx_1_1_extension_manager.html#aabb3ad10867d219143db62941c9ac602", null ],
+    [ "operator=", "classprtx_1_1_extension_manager.html#a746f98d7f1896ab7843efe86d918773d", null ]
 ];

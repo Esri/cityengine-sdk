@@ -1,7 +1,7 @@
 var classprtx_1_1_name_preparator =
 [
     [ "NamespaceInfo", "structprtx_1_1_name_preparator_1_1_namespace_info.html", "structprtx_1_1_name_preparator_1_1_namespace_info" ],
-    [ "NamespacePtr", "classprtx_1_1_name_preparator.html#a838fb4fc1b3f118d437ef21fdf83d080", null ],
+    [ "NamespacePtr", "classprtx_1_1_name_preparator.html#a1f86489870481c9b338b36bc92761a1a", null ],
     [ "Entity", "classprtx_1_1_name_preparator.html#ac2ff0484b53c0e2e3881a7af7bc4f898", [
       [ "ENTITY_MATERIAL", "classprtx_1_1_name_preparator.html#ac2ff0484b53c0e2e3881a7af7bc4f898abf128a7359dfec2d2a34311fc9b13818", null ],
       [ "ENTITY_MESH", "classprtx_1_1_name_preparator.html#ac2ff0484b53c0e2e3881a7af7bc4f898a5f0c49d2694e8e74a1c629d7bd25c542", null ],

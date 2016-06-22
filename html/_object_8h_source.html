@@ -31,7 +31,7 @@
   <td id="projectlogo"><img alt="Logo" src="esri_prt_55px.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Esri Procedural Runtime
-   &#160;<span id="projectnumber">1.4.2074</span>
+   &#160;<span id="projectnumber">1.6.2663</span>
    </div>
   </td>
  </tr>
@@ -128,32 +128,33 @@ $(document).ready(function(){initNavTree('_object_8h_source.html','');});
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &quot;prt/prt.h&quot;</span></div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &quot;prt/Status.h&quot;</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#include &quot;prt/prt_stdint.h&quot;</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#include &lt;cstddef&gt;</span></div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keyword">namespace </span>prt {</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keyword">namespace </span>prt {</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;</div>
-<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="classprt_1_1_object.html">   34</a></span>&#160;<span class="keyword">class </span>PRT_EXPORTS_API <a class="code" href="classprt_1_1_object.html">Object</a> {</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keywordtype">void</span> destroy() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">char</span>* toXML(<span class="keywordtype">char</span>* result, <span class="keywordtype">size_t</span>* resultSize, <a class="code" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a>* stat = 0) <span class="keyword">const</span> = 0;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keywordtype">char</span>* toXMLDocument(<span class="keywordtype">char</span>* result, <span class="keywordtype">size_t</span>* resultSize, <a class="code" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a>* stat = 0) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <a class="code" href="classprt_1_1_object.html">Object</a>() { }</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <a class="code" href="classprt_1_1_object.html">Object</a>(<span class="keyword">const</span> <a class="code" href="classprt_1_1_object.html">Object</a>&amp;) { }</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="classprt_1_1_object.html">Object</a>() { }</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;};</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;</div>
+<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="classprt_1_1_object.html">   35</a></span>&#160;<span class="keyword">class </span>PRT_EXPORTS_API <a class="code" href="classprt_1_1_object.html">Object</a> {</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keywordtype">void</span> destroy() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">char</span>* toXML(<span class="keywordtype">char</span>* result, <span class="keywordtype">size_t</span>* resultSize, <a class="code" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a>* stat = 0) <span class="keyword">const</span> = 0;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="keywordtype">char</span>* toXMLDocument(<span class="keywordtype">char</span>* result, <span class="keywordtype">size_t</span>* resultSize, <a class="code" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a>* stat = 0) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <a class="code" href="classprt_1_1_object.html">Object</a>() { }</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <a class="code" href="classprt_1_1_object.html">Object</a>(<span class="keyword">const</span> <a class="code" href="classprt_1_1_object.html">Object</a>&amp;) { }</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="classprt_1_1_object.html">Object</a>() { }</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;};</div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;} <span class="comment">/* namespace prt */</span></div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;} <span class="comment">/* namespace prt */</span></div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* PRT_OBJECT_H */</span><span class="preprocessor"></span></div>
-<div class="ttc" id="classprt_1_1_object_html"><div class="ttname"><a href="classprt_1_1_object.html">prt::Object</a></div><div class="ttdef"><b>Definition:</b> Object.h:34</div></div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* PRT_OBJECT_H */</span><span class="preprocessor"></span></div>
+<div class="ttc" id="classprt_1_1_object_html"><div class="ttname"><a href="classprt_1_1_object.html">prt::Object</a></div><div class="ttdef"><b>Definition:</b> Object.h:35</div></div>
 <div class="ttc" id="namespaceprt_html_acf0b3066b48a14bccb756bee9a4700e4"><div class="ttname"><a href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">prt::Status</a></div><div class="ttdeci">Status</div><div class="ttdef"><b>Definition:</b> Status.h:31</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
@@ -161,7 +162,7 @@ $(document).ready(function(){initNavTree('_object_8h_source.html','');});
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_e104a5fd3f1a5c6eb1edb871fc217c8e.html">prt</a></li><li class="navelem"><b>Object.h</b></li>
-    <li class="footer">Generated on Mon Sep 28 2015 22:14:27 for Esri Procedural Runtime by
+    <li class="footer">Generated on Wed Jun 1 2016 18:56:58 for Esri Procedural Runtime by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.7 </li>
   </ul>

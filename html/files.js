@@ -57,7 +57,6 @@ var files =
     [ "Object.h", "_object_8h_source.html", null ],
     [ "OcclusionSet.h", "_occlusion_set_8h_source.html", null ],
     [ "prt.h", "prt_8h_source.html", null ],
-    [ "prt_stdint.h", "prt__stdint_8h_source.html", null ],
     [ "PRTUtils.h", "_p_r_t_utils_8h_source.html", null ],
     [ "prtx.h", "prtx_8h_source.html", null ],
     [ "ReportsCollector.h", "_reports_collector_8h_source.html", null ],

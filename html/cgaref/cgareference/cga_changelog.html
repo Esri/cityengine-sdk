@@ -32,6 +32,57 @@
   </tr>
 
   <tr>
+  	<td>2016.0 <br>CGAC 1.6 </td>
+    <td>
+		New operations:
+        <ul>
+			<li><a href="op_softenNormals.html"><span class="code_std">softenNormals</span></a> operation.</li>
+			<li><a href="op_innerRectangle.html"><span class="code_std">innerRectangle</span></a> operation with alignment and remainder options. It replaces the <a href="op_innerRect.html"><span class="code_std">innerRect</span></a> operation that is deprecated.</li>
+			<li><a href="op_primitive.html#quad"><span class="code_std">primitiveQuad</span></a>, <a href="op_primitive.html#disk"><span class="code_std">primitiveDisk</span></a>, <a href="op_primitive.html#cube"><span class="code_std">primitiveCube</span></a>, <a href="op_primitive.html#sphere"><span class="code_std">primitiveSphere</span></a>, <a href="op_primitive.html#cylinder"><span class="code_std">primitiveCylinder</span></a> and <a href="op_primitive.html#cone"><span class="code_std">primitiveCone</span></a> operations. The <a href="op_primitive.html#cube"><span class="code_std">primitiveCube</span></a> operation replaces <span class="code_std">"builtin:cube"</span> and <span class="code_std">"builtin:cube:notex"</span> that are deprecated.</li>
+			<li><a href="op_splitArea.html"><span class="code_std">splitArea</span></a> operation.</li>
+        </ul>
+		Changes to existing features:
+		<ul>
+			<li><a href="op_setNormals.html"><span class="code_std">setNormals</span></a> operation:</li>
+			<ul>
+				<li>New mode <span class="codelight">auto</span> that uses <a href="op_softenNormals.html"><span class="code_std">softenNormals</span></a> functionality.</li>
+				<li>New mode <span class="codelight">conform</span> that computes consistent normals.</li>
+			</ul>
+			<li>The <a href="op_innerRect.html"><span class="code_std">innerRect</span></a> operation is deprecated. Use <a href="op_innerRectangle.html"><span class="code_std">innerRectangle</span></a> operation instead.</li>
+			<li><a href="op_cleanupGeometry.html"><span class="code_std">cleanupGeometry</span></a> operation: Mode <span class="code_std">all</span>/<span class="code_std">faces</span>: All duplicate/inverse faces are removed except one (independent from orientation).</li>
+			<li><a href="op_i.html"><span class="code_std">i</span></a> operation:</li>
+			<ul>
+				<li>New parameter <span class="cga_opparam">upAxisOfGeometry</span> that specifies the up axis of the geometry.</li>
+				<li>New parameter <span class="cga_opparam">insertMode</span> that specifies the alignment and positioning of the geometry in the scope.</li>
+				<li>The usage of <a href="op_i.html#insertionZeroScope"><span class="code_std">s(0,0,0)</span></a> is deprecated. Use <span class="codelight">keepSizeAndPosition</span> as <span class="cga_opparam">insertMode</span> instead.</li>
+			</ul>
+			<li><span class="code_std">"builtin:cube"</span> and <span class="code_std">"builtin:cube:notex"</span> are deprecated. Use <a href="op_primitive.html#cube"><span class="code_std">primitiveCube</span></a> instead.</li>
+			<li><a href="op_extrude.html"><span class="code_std">extrude</span></a> operation:</li>
+			<ul>
+				<li>The paramater <span class="cga_opparam">axisWorld</span> is deprecated and changed to a parameter <span class="cga_opparam">extrusionType</span>.</li>
+				<li>New types <span class="codelight">face.normal</span>, <span class="codelight">vertex.normal</span>, <span class="codelight">world.up</span> and <span class="codelight">world.up.flatTop</span>.</li>
+				<li>The axes <span class="codelight">x</span>, <span class="codelight">y</span>, <span class="codelight">z</span>, <span class="codelight">world.x</span>, <span class="codelight">world.y</span> and <span class="codelight">world.z</span> are deprecated. Use type <span class="codelight">world.up</span> instead of axis <span class="codelight">world.y</span>.</li>
+			</ul>
+			<li><a href="op_roofGable.html"><span class="code_std">roofGable</span></a>, <a href="op_roofHip.html"><span class="code_std">roofHip</span></a>, <a href="op_roofPyramid.html"><span class="code_std">roofPyramid</span></a> and <a href="op_roofShed.html"><span class="code_std">roofShed</span></a> operation:</li>
+			<ul>
+				<li>Roofs can be generated wrt. a given height.</li>
+				<li>New parameter <span class="cga_opparam">valueType</span> to switch beetween a roof generation <span class="codelight">byAngle</span> or <span class="codelight">byHeight</span>.</li>
+			</ul>
+			<li><a href="op_roofShed.html"><span class="code_std">roofShed</span></a> operation: For shed roofs on shapes with <i>one</i> face no horizontal trim planes, hip, valley and ridge edges are generated. This was already the case for shapes with more than one face.</li>
+		</ul>
+		Bugfixes:
+        <ul>
+			<li><a href="op_split.html"><span class="code_std">split</span></a>, <a href="op_trim.html"><span class="code_std">trim</span></a> and <a href="op_i.html"><span class="code_std">i</span></a> operation: Fixed a bug that led to wrong results when vertices or edges lie in the respective split/trim plane.</li>
+			<li><a href="func_geometry.html#isInstanced"><span class="code_std">geometry.isInstanced</span></a> function: Fixed for builtin primitives (<span class="code_std">"builtin:cube"</span> and <span class="code_std">"builtin:cube:notex"</span>). Also supports <a href="op_primitive.html#quad"><span class="code_std">primitiveQuad</span></a>, <a href="op_primitive.html#disk"><span class="code_std">primitiveDisk</span></a>, <a href="op_primitive.html#cube"><span class="code_std">primitiveCube</span></a>, <a href="op_primitive.html#sphere"><span class="code_std">primitiveSphere</span></a>, <a href="op_primitive.html#cylinder"><span class="code_std">primitiveCylinder</span></a> and <a href="op_primitive.html#cone"><span class="code_std">primitiveCone</span></a>.</li>
+			<li><a href="op_roofHip.html"><span class="code_std">roofHip</span></a>, <a href="op_roofGable.html"><span class="code_std">roofGable</span></a> operation: Fixed a bug that occured on rectangular shapes and led to a wrong shading due to double vertices.</li>
+			<li><a href="op_roofShed.html"><span class="code_std">roofShed</span></a> operation: Fixed a bug that generated wrong shed roofs for shapes with more than one face, at least one hole and a non-zero edge index set.</li>
+			<li><a href="op_cleanupGeometry.html"><span class="code_std">cleanupGeometry</span></a> operation: Fixed an issue that prevented vertices to merge when they were the first vertex in a face.</li>
+            <li><a href="func_geometry.html#area"><span class="code_std">geometry.area</span></a> and normal calculation became more accurate; floating point precision got improved in general.</li>    
+        </ul>
+    </td>
+  </tr>  
+  
+  <tr>
   	<td>2015.2 <br>CGAC 1.5 </td>
     <td>
     
@@ -40,7 +91,7 @@
           <li><a href="func_getGeoCoord.html"><span class="code_std">getGeoCoord</span></a> function: fixed a bug where selectors <span class="code_std">lat</span>, <span class="code_std">lon</span> did not return the correct WGS84 coordinates for some coordinate systems. 
     	  </li>    
      </td>
-</tr>
+  </tr>
 
   <tr>
   	<td>2015.1 <br>CGAC 1.5 </td>
@@ -66,7 +117,7 @@
   	    new functions:
         <ul>
           <li><a href="func_getTreeKey.html"><span class="code_std">getTreeKey</span></a> function.</li>
-         <li><a href="func_isnull.html"><span class="code_std">isnull</span></a> function.</li>
+         <li><a href="func_isnull.html"><span class="code_std">isNull</span></a> function.</li>
          </ul>
         
         changes to existing features:    
@@ -502,7 +553,7 @@ material.normalmap, material.normalmap.{su|sv|tu|tv|rw}</span></a> attributes</l
             </li>
             <li><a href="op_innerRect.html"><span class="code_std">innerRect</span></a> operation: fixed shape placement if scope contains rotation.</li>
         	<li>Self-intersecting polygons are handled properly now (<a href="op_scatter.html"><span class="code_std">scatter</span></a>, <a href="op_split.html"><span class="code_std">uv split</span></a> operations and rendering).</li>
-            <li><a href="op_roofHip.html"><span class="code_std">roofHip</span></a> operation: fixed a crash in a specific situation (with overhang, on colinear vertices).</li>
+            <li><a href="op_roofHip.html"><span class="code_std">roofHip</span></a> operation: fixed a crash in a specific situation (with overhang, on collinear vertices).</li>
             <li>fixed <a href="attr_comp.html"><span class="code_std">comp.sel</span></a> (only contained last word, e.g &quot;front&quot; instead of &quot;object.front&quot;).</li>
             <li>fixed a bug in <a href="op_convexify.html"><span class="code_std">convexify</span></a>: check resulting polys for zero area, remove degenerate ones - led to crashes in follow-op operations in some cases.</li>
             <li><a href="op_rotate.html"><span class="code_std">rotate</span></a> operation: fixed a bug in scope case (was rotated around pivot, not scope).</li>
@@ -550,7 +601,7 @@ material.normalmap, material.normalmap.{su|sv|tu|tv|rw}</span></a> attributes</l
 			<li>Fixed a bug in trimming a negative sized scope.</li>
 	        <li><a href="op_color.html"><span class="code_std">color</span></a> does not touch alpha (used to set it to 1.0).</li>             
            	<li><a href="op_comp.html"><span class="code_std">comp</span></a> operation: corrected scope selectors for negative scope sizes (e.g. front becomes back if scope.sz is < 0).</li>
-	        <li><a href="op_convexify.html"><span class="code_std">convexify</span></a> and <a href="op_convexify.html"><span class="code_std">innerRect</span></a> operations: fixed a numerical problem concerning colinear vertices: remove'em before the operations.</li>             
+	        <li><a href="op_convexify.html"><span class="code_std">convexify</span></a> and <a href="op_convexify.html"><span class="code_std">innerRect</span></a> operations: fixed a numerical problem concerning collinear vertices: remove'em before the operations.</li>             
 	        <li><a href="op_mirrorScope.html"><span class="code_std">mirrorScope</span></a> operation: fixed a bug which resulted in wrong translations.</li>             
 	        <li><a href="op_roofShed.html"><span class="code_std">roofShed</span></a> operation: fixed vertex indices for shed roofs on multi-face shapes.</li>
 			<li><a href="op_offset.html"><span class="code_std">offset</span></a> operation: fixed a bug in the case where no inside/border geometry was generated (due to a too large offset) and the according selector was used.</li>
@@ -607,7 +658,7 @@ overload  .</li>
             </ul>
             </li>
             <li>Fixed a bug in intra-occlusion (in some cases wrong pre-component-split volume was taken to check against).</li>
-  	       	<li><a href="func_geometry.html#isPlanar"><span class="code_std">geometry.isPlanar</span></a> function: in case of colinear edges nonplanarity was reported.</li>
+  	       	<li><a href="func_geometry.html#isPlanar"><span class="code_std">geometry.isPlanar</span></a> function: in case of collinear edges nonplanarity was reported.</li>
             <li><a href="op_innerRect.html"><span class="code_std">innerRect</span></a>, <a href="op_convexify.html"><span class="code_std">convexify</span></a>, <a href="op_roofGable.html"><span class="code_std">roofGable</span></a>, <a href="op_roofHip.html"><span class="code_std">roofHip</span></a>, <a href="op_roofPyramid.html"><span class="code_std">roofPyramid</span></a>operations and <a href="op_roofShed.html"><span class="code_std">roofShed</span></a> operations:  fixed a numerical issue.</li>
             <li><a href="op_alignScopeToGeometry.html"><span class="code_std">alignScopeToGeometry</span></a> operation: <span class="code_std">world.lowest</span> selector: if all vertices had y-coordinate exactly on 0.0 result was random.</li>
 			<li><a href="op_comp.html"><span class="code_std">comp</span></a> operation: if the &quot;=&quot; operator was used in conjunction with a rotated scope, the resulting shape had wrong scope and pivot position.</li>
@@ -778,7 +829,7 @@ overload  .</li>
   
 
   <h3><!-- FOOTER --> </h3>
-        <p class="foot">Copyright &copy;2008-2015 Esri R&D Center Zurich. All rights reserved.</p>                  
+        <p class="foot">Copyright &copy;2008-2016 Esri R&D Center Zurich. All rights reserved.</p>                  
 
 <!-- END CENTERED CONTENT -->
 

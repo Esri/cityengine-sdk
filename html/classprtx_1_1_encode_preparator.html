@@ -31,7 +31,7 @@
   <td id="projectlogo"><img alt="Logo" src="esri_prt_55px.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Esri Procedural Runtime
-   &#160;<span id="projectnumber">1.4.2074</span>
+   &#160;<span id="projectnumber">1.6.2663</span>
    </div>
   </td>
  </tr>
@@ -112,6 +112,7 @@ $(document).ready(function(){initNavTree('classprtx_1_1_encode_preparator.html',
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="#pub-static-attribs">Static Public Attributes</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-static-methods">Static Protected Member Functions</a>  </div>
   <div class="headertitle">
 <div class="title">prtx::EncodePreparator Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
@@ -119,12 +120,6 @@ $(document).ready(function(){initNavTree('classprtx_1_1_encode_preparator.html',
 <div class="contents">
 
 <p><code>#include &lt;<a class="el" href="_encode_preparator_8h_source.html">EncodePreparator.h</a>&gt;</code></p>
-<div class="dynheader">
-Inheritance diagram for prtx::EncodePreparator:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classprtx_1_1_encode_preparator__inherit__graph.svg" width="166" height="118"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
-</div>
-<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
@@ -151,14 +146,14 @@ typedef std::vector<br class="typebreak" />
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ae9f3281127bfacfe14659bb6f69bf31b"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_encode_preparator.html#ae9f3281127bfacfe14659bb6f69bf31b">add</a> (<a class="el" href="classprt_1_1_cache.html">prt::Cache</a> *cache, const <a class="el" href="namespaceprtx.html#a11fbe551abb06f16357e0e8d66f75f75">ShapePtr</a> &amp;shape, const <a class="el" href="classprt_1_1_attribute_map.html">prt::AttributeMap</a> *initialShapeAttributes, const ReportsPtr &amp;reports=ReportsPtr())=0</td></tr>
+<tr class="memitem:ae9f3281127bfacfe14659bb6f69bf31b"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_encode_preparator.html#ae9f3281127bfacfe14659bb6f69bf31b">add</a> (<a class="el" href="classprt_1_1_cache.html">prt::Cache</a> *cache, const <a class="el" href="namespaceprtx.html#ae498291eedf7bb693154ad40acda74d0">ShapePtr</a> &amp;shape, const <a class="el" href="classprt_1_1_attribute_map.html">prt::AttributeMap</a> *initialShapeAttributes, const ReportsPtr &amp;reports=ReportsPtr())=0</td></tr>
 <tr class="separator:ae9f3281127bfacfe14659bb6f69bf31b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6dee76569c8f6ae7b5c05b85fc3470a9"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_encode_preparator.html#a6dee76569c8f6ae7b5c05b85fc3470a9">add</a> (<a class="el" href="classprt_1_1_cache.html">prt::Cache</a> *cache, const <a class="el" href="classprtx_1_1_initial_shape.html">prtx::InitialShape</a> &amp;initialShape, size_t initialShapeIndex)=0</td></tr>
 <tr class="separator:a6dee76569c8f6ae7b5c05b85fc3470a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad8e97471c7584457b3fcdfe3000bb032"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_encode_preparator.html#ad8e97471c7584457b3fcdfe3000bb032">clear</a> ()=0</td></tr>
 <tr class="separator:ad8e97471c7584457b3fcdfe3000bb032"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abde29e7a3351acc67746b8b26d2761be"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_encode_preparator.html#abde29e7a3351acc67746b8b26d2761be">fetchFinalizedInstances</a> (InstanceVector &amp;instances, const <a class="el" href="classprtx_1_1_encode_preparator_1_1_preparation_flags.html">PreparationFlags</a> &amp;flags, <a class="el" href="classprt_1_1_simple_output_callbacks.html">prt::SimpleOutputCallbacks</a> *cbForLogStats=0)=0</td></tr>
-<tr class="separator:abde29e7a3351acc67746b8b26d2761be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac590db9fbdaf2c81bf972a9da974843c"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_encode_preparator.html#ac590db9fbdaf2c81bf972a9da974843c">fetchFinalizedInstances</a> (InstanceVector &amp;instances, const <a class="el" href="classprtx_1_1_encode_preparator_1_1_preparation_flags.html">PreparationFlags</a> &amp;flags, <a class="el" href="classprt_1_1_simple_output_callbacks.html">prt::SimpleOutputCallbacks</a> *cbForLogStats=nullptr)=0</td></tr>
+<tr class="separator:ac590db9fbdaf2c81bf972a9da974843c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abb1616d359df5e58ac6171effc78c08e"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_encode_preparator.html#abb1616d359df5e58ac6171effc78c08e">getBoundingBox</a> (<a class="el" href="classprtx_1_1_bounding_box.html">prtx::BoundingBox</a> &amp;bbox)=0</td></tr>
 <tr class="separator:abb1616d359df5e58ac6171effc78c08e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a22fe4244014b48ac43425fcc28ccfbb0"><td class="memItemLeft" align="right" valign="top">virtual uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_encode_preparator.html#a22fe4244014b48ac43425fcc28ccfbb0">getUsedMem</a> (bool considerInstanceCounts=false) const =0</td></tr>
@@ -174,6 +169,15 @@ Static Public Attributes</h2></td></tr>
 <tr class="memitem:a9bcd18ce6bbc8e2690f60b42ab95cac6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9bcd18ce6bbc8e2690f60b42ab95cac6"></a>
 static const <a class="el" href="namespaceprtx.html#acfbb1262ed21fac2e362179f92993c81">prtx::DoubleVector</a>&#160;</td><td class="memItemRight" valign="bottom"><b>IDENTITY</b></td></tr>
 <tr class="separator:a9bcd18ce6bbc8e2690f60b42ab95cac6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:a0090b906974bc9d8be07a729d9d3e7af"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0090b906974bc9d8be07a729d9d3e7af"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>EncodePreparator</b> (const <a class="el" href="classprtx_1_1_encode_preparator.html">EncodePreparator</a> &amp;)=delete</td></tr>
+<tr class="separator:a0090b906974bc9d8be07a729d9d3e7af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aecfacdce1c5b0ca9afdd5321ed513c41"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aecfacdce1c5b0ca9afdd5321ed513c41"></a>
+<a class="el" href="classprtx_1_1_encode_preparator.html">EncodePreparator</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const <a class="el" href="classprtx_1_1_encode_preparator.html">EncodePreparator</a> &amp;)=delete</td></tr>
+<tr class="separator:aecfacdce1c5b0ca9afdd5321ed513c41"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-static-methods"></a>
 Static Protected Member Functions</h2></td></tr>
@@ -225,7 +229,7 @@ static <a class="el" href="structprtx_1_1_encode_preparator_1_1_finalized_instan
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="namespaceprtx.html#a11fbe551abb06f16357e0e8d66f75f75">ShapePtr</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="namespaceprtx.html#ae498291eedf7bb693154ad40acda74d0">ShapePtr</a> &amp;&#160;</td>
           <td class="paramname"><em>shape</em>, </td>
         </tr>
         <tr>
@@ -412,7 +416,7 @@ AttributeMap </dd>
 
 </div>
 </div>
-<a class="anchor" id="abde29e7a3351acc67746b8b26d2761be"></a>
+<a class="anchor" id="ac590db9fbdaf2c81bf972a9da974843c"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -435,7 +439,7 @@ AttributeMap </dd>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="classprt_1_1_simple_output_callbacks.html">prt::SimpleOutputCallbacks</a> *&#160;</td>
-          <td class="paramname"><em>cbForLogStats</em> = <code>0</code>&#160;</td>
+          <td class="paramname"><em>cbForLogStats</em> = <code>nullptr</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -455,7 +459,7 @@ AttributeMap </dd>
   <table class="params">
     <tr><td class="paramdir">[out]</td><td class="paramname">instances</td><td>Receives the instances. </td></tr>
     <tr><td class="paramdir"></td><td class="paramname">flags</td><td>Preparation flags to control the preparation process. </td></tr>
-    <tr><td class="paramdir"></td><td class="paramname">flags</td><td>optional pointer to a <a class="el" href="classprt_1_1_simple_output_callbacks.html">prt::SimpleOutputCallbacks</a> instance. If provided some option-dependent stats might be written to logStats().</td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">cbForLogStats</td><td>optional pointer to a <a class="el" href="classprt_1_1_simple_output_callbacks.html">prt::SimpleOutputCallbacks</a> instance. If provided some option-dependent stats might be written to logStats().</td></tr>
   </table>
   </dd>
 </dl>
@@ -525,7 +529,7 @@ AttributeMap </dd>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespaceprtx.html">prtx</a></li><li class="navelem"><a class="el" href="classprtx_1_1_encode_preparator.html">EncodePreparator</a></li>
-    <li class="footer">Generated on Mon Sep 28 2015 22:14:27 for Esri Procedural Runtime by
+    <li class="footer">Generated on Wed Jun 1 2016 18:56:58 for Esri Procedural Runtime by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.7 </li>
   </ul>

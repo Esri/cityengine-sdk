@@ -1,10 +1,7 @@
 <map id="prtx::BuiltinAttributes" name="prtx::BuiltinAttributes">
-<area shape="rect" id="node3" href="$classprtx_1_1_builtin_attributes_getters.html" title="prtx::BuiltinAttributesGetters" alt="" coords="197,59,384,88"/>
-<area shape="rect" id="node13" href="$classprtx_1_1_builtin_attributes_setters.html" title="prtx::BuiltinAttributesSetters" alt="" coords="197,116,384,145"/>
-<area shape="rect" id="node5" href="$classprtx_1_1_builtin_material_attributes.html" title="prtx::BuiltinMaterialAttributes" alt="" coords="433,5,623,35"/>
-<area shape="rect" id="node9" href="$classprtx_1_1_builtin_shape_attributes.html" title="prtx::BuiltinShapeAttributes" alt="" coords="437,59,619,88"/>
-<area shape="rect" id="node7" href="$classprtx_1_1_material.html" title="prtx::Material" alt="" coords="692,5,791,35"/>
-<area shape="rect" id="node11" href="$classprtx_1_1_shape.html" title="prtx::Shape" alt="" coords="697,59,785,88"/>
-<area shape="rect" id="node15" href="$classprtx_1_1_builtin_material_attributes_builder.html" title="prtx::BuiltinMaterialAttributes\lBuilder" alt="" coords="433,111,623,158"/>
-<area shape="rect" id="node17" href="$classprtx_1_1_material_builder.html" title="prtx::MaterialBuilder" alt="" coords="672,120,811,149"/>
+<area shape="rect" id="node3" href="$classprtx_1_1_builtin_attributes_getters.html" title="prtx::BuiltinAttributesGetters" alt="" coords="111,83,297,112"/>
+<area shape="rect" id="node5" href="$classprtx_1_1_builtin_material_attributes.html" title="prtx::BuiltinMaterialAttributes" alt="" coords="5,160,195,189"/>
+<area shape="rect" id="node9" href="$classprtx_1_1_builtin_shape_attributes.html" title="prtx::BuiltinShapeAttributes" alt="" coords="219,160,400,189"/>
+<area shape="rect" id="node7" href="$classprtx_1_1_material.html" title="prtx::Material" alt="" coords="51,237,149,267"/>
+<area shape="rect" id="node11" href="$classprtx_1_1_shape.html" title="prtx::Shape" alt="" coords="265,237,353,267"/>
 </map>

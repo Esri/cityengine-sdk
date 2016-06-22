@@ -2,6 +2,7 @@ var searchData=
 [
   ['materialbuilder',['MaterialBuilder',['../classprtx_1_1_material_builder.html#a56bb5627b72ffb85880ba89d26e56c4d',1,'prtx::MaterialBuilder::MaterialBuilder()'],['../classprtx_1_1_material_builder.html#a22f9de7591d4316f98e0d4e2fc0960db',1,'prtx::MaterialBuilder::MaterialBuilder(const ShaderPtr &amp;shader)']]],
   ['maxatlasdim',['maxAtlasDim',['../classprtx_1_1_encode_preparator_1_1_preparation_flags.html#a90d0f9e6739b76359d1623336c02da4c',1,'prtx::EncodePreparator::PreparationFlags']]],
+  ['maxtexsize',['maxTexSize',['../classprtx_1_1_encode_preparator_1_1_preparation_flags.html#abb03ba68d365d39281eac1fae0e8a7fc',1,'prtx::EncodePreparator::PreparationFlags']]],
   ['mergebymaterial',['mergeByMaterial',['../classprtx_1_1_encode_preparator_1_1_preparation_flags.html#a076b40152243fe5e5e29e723e20b7c95',1,'prtx::EncodePreparator::PreparationFlags']]],
   ['mergetolerancenormals',['mergeToleranceNormals',['../classprtx_1_1_encode_preparator_1_1_preparation_flags.html#ac8049cf705b6348fa55e63d84926cf55',1,'prtx::EncodePreparator::PreparationFlags']]],
   ['mergetoleranceuvs',['mergeToleranceUVs',['../classprtx_1_1_encode_preparator_1_1_preparation_flags.html#ab935bbb269a03a06eb3b137d5dd66717',1,'prtx::EncodePreparator::PreparationFlags']]],

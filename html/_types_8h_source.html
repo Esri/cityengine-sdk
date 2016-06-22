@@ -31,7 +31,7 @@
   <td id="projectlogo"><img alt="Logo" src="esri_prt_55px.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Esri Procedural Runtime
-   &#160;<span id="projectnumber">1.4.2074</span>
+   &#160;<span id="projectnumber">1.6.2663</span>
    </div>
   </td>
  </tr>
@@ -126,70 +126,52 @@ $(document).ready(function(){initNavTree('_types_8h_source.html','');});
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#ifndef PRTX_TYPES_H_</span></div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#define PRTX_TYPES_H_</span></div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &quot;prt/prt_stdint.h&quot;</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &quot;prtx/prtx.h&quot;</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#ifdef PRT_WINDOWS</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#elif defined(PRT_LINUX) || defined(PRT_MACOSX)</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#   if PRT_GCC_VERSION &gt;= 40600</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#       pragma GCC diagnostic push</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#   endif</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="preprocessor">#   pragma GCC diagnostic ignored &quot;-Wconversion&quot;</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#ifdef PRT_MSG_WARNINGS</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor">#   pragma message(__FILE__&quot;: disabling a number of warnings for boost&quot;)</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor">#include &quot;boost/shared_ptr.hpp&quot;</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor">#ifdef PRT_WINDOWS</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="preprocessor">#elif defined(PRT_LINUX) || defined(PRT_MACOSX)</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="preprocessor">#   if PRT_GCC_VERSION &gt;= 40600</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="preprocessor">#       pragma GCC diagnostic pop</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="preprocessor">#   endif</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &quot;prtx/prtx.h&quot;</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#include &lt;memory&gt;</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keyword">namespace </span>prtx {</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;</div>
+<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="namespaceprtx.html#a6a43e75e11aa3ef9e18d9fd8312ebb9f">   30</a></span>&#160;<span class="keyword">typedef</span> uint8_t                         <a class="code" href="namespaceprtx.html#a6a43e75e11aa3ef9e18d9fd8312ebb9f">Bool</a>;               </div>
+<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="namespaceprtx.html#afb8abeb6630c0959e01b1e174d7ecc88">   31</a></span>&#160;<span class="keyword">typedef</span> std::vector&lt;prtx::Bool&gt;         <a class="code" href="namespaceprtx.html#afb8abeb6630c0959e01b1e174d7ecc88">BoolVector</a>;         </div>
+<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="namespaceprtx.html#acfbb1262ed21fac2e362179f92993c81">   32</a></span>&#160;<span class="keyword">typedef</span> std::vector&lt;double&gt;             <a class="code" href="namespaceprtx.html#acfbb1262ed21fac2e362179f92993c81">DoubleVector</a>;       </div>
+<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="namespaceprtx.html#a997ead27a2a1a9b685b1e57f1e0188a2">   33</a></span>&#160;<span class="keyword">typedef</span> std::vector&lt;int32_t&gt;            <a class="code" href="namespaceprtx.html#a997ead27a2a1a9b685b1e57f1e0188a2">Int32Vector</a>;        </div>
+<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="namespaceprtx.html#a13cf9e6ffa44e327d61579c4ca01194f">   34</a></span>&#160;<span class="keyword">typedef</span> std::vector&lt;std::string&gt;        <a class="code" href="namespaceprtx.html#a13cf9e6ffa44e327d61579c4ca01194f">StringVector</a>;       </div>
+<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="namespaceprtx.html#ac5fdcb1f68c5a0ac7295260cfd20b307">   35</a></span>&#160;<span class="keyword">typedef</span> std::vector&lt;std::wstring&gt;       <a class="code" href="namespaceprtx.html#ac5fdcb1f68c5a0ac7295260cfd20b307">WStringVector</a>;      </div>
+<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="namespaceprtx.html#accefd9f35e922e9c5b364551372aff1f">   36</a></span>&#160;<span class="keyword">typedef</span> std::shared_ptr&lt;std::wstring&gt;   <a class="code" href="namespaceprtx.html#accefd9f35e922e9c5b364551372aff1f">StringPtr</a>;          </div>
+<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="namespaceprtx.html#aee4ac5c7d055b7b7e7811e52ba7db496">   37</a></span>&#160;<span class="keyword">typedef</span> std::vector&lt;uint8_t&gt;            <a class="code" href="namespaceprtx.html#aee4ac5c7d055b7b7e7811e52ba7db496">BinaryVector</a>;       </div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="keyword">const</span> <a class="code" href="namespaceprtx.html#a6a43e75e11aa3ef9e18d9fd8312ebb9f">Bool</a> PRTX_FALSE   = <span class="keyword">static_cast&lt;</span><a class="code" href="namespaceprtx.html#a6a43e75e11aa3ef9e18d9fd8312ebb9f">Bool</a><span class="keyword">&gt;</span>(0u);</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="keyword">const</span> <a class="code" href="namespaceprtx.html#a6a43e75e11aa3ef9e18d9fd8312ebb9f">Bool</a> PRTX_TRUE    = <span class="keyword">static_cast&lt;</span><a class="code" href="namespaceprtx.html#a6a43e75e11aa3ef9e18d9fd8312ebb9f">Bool</a><span class="keyword">&gt;</span>(1u);</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="keyword">const</span> <a class="code" href="namespaceprtx.html#a6a43e75e11aa3ef9e18d9fd8312ebb9f">Bool</a> PRTX_NO      = <span class="keyword">static_cast&lt;</span><a class="code" href="namespaceprtx.html#a6a43e75e11aa3ef9e18d9fd8312ebb9f">Bool</a><span class="keyword">&gt;</span>(0u);</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="keyword">const</span> <a class="code" href="namespaceprtx.html#a6a43e75e11aa3ef9e18d9fd8312ebb9f">Bool</a> PRTX_YES     = <span class="keyword">static_cast&lt;</span><a class="code" href="namespaceprtx.html#a6a43e75e11aa3ef9e18d9fd8312ebb9f">Bool</a><span class="keyword">&gt;</span>(1u);</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="keyword">inline</span> <span class="keywordtype">bool</span> toPrimitive(<a class="code" href="namespaceprtx.html#a6a43e75e11aa3ef9e18d9fd8312ebb9f">Bool</a> b) { <span class="keywordflow">return</span> (b == PRTX_TRUE); }</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;PRTX_EXPORTS_API <a class="code" href="namespaceprtx.html#a6a43e75e11aa3ef9e18d9fd8312ebb9f">Bool</a> boolFromString(<span class="keyword">const</span> std::wstring&amp; w);</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;PRTX_EXPORTS_API <a class="code" href="namespaceprtx.html#a6a43e75e11aa3ef9e18d9fd8312ebb9f">Bool</a> boolFromString(<span class="keyword">const</span> std::string&amp; s);</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="keyword">namespace </span>prtx {</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;} <span class="comment">// namespace prtx</span></div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;</div>
-<div class="line"><a name="l00050"></a><span class="lineno"><a class="line" href="namespaceprtx.html#a6a43e75e11aa3ef9e18d9fd8312ebb9f">   50</a></span>&#160;<span class="keyword">typedef</span> uint8_t                         <a class="code" href="namespaceprtx.html#a6a43e75e11aa3ef9e18d9fd8312ebb9f">Bool</a>;               </div>
-<div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="namespaceprtx.html#afb8abeb6630c0959e01b1e174d7ecc88">   51</a></span>&#160;<span class="keyword">typedef</span> std::vector&lt;prtx::Bool&gt;         <a class="code" href="namespaceprtx.html#afb8abeb6630c0959e01b1e174d7ecc88">BoolVector</a>;         </div>
-<div class="line"><a name="l00052"></a><span class="lineno"><a class="line" href="namespaceprtx.html#acfbb1262ed21fac2e362179f92993c81">   52</a></span>&#160;<span class="keyword">typedef</span> std::vector&lt;double&gt;             <a class="code" href="namespaceprtx.html#acfbb1262ed21fac2e362179f92993c81">DoubleVector</a>;       </div>
-<div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="namespaceprtx.html#a997ead27a2a1a9b685b1e57f1e0188a2">   53</a></span>&#160;<span class="keyword">typedef</span> std::vector&lt;int32_t&gt;            <a class="code" href="namespaceprtx.html#a997ead27a2a1a9b685b1e57f1e0188a2">Int32Vector</a>;        </div>
-<div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="namespaceprtx.html#a13cf9e6ffa44e327d61579c4ca01194f">   54</a></span>&#160;<span class="keyword">typedef</span> std::vector&lt;std::string&gt;        <a class="code" href="namespaceprtx.html#a13cf9e6ffa44e327d61579c4ca01194f">StringVector</a>;       </div>
-<div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="namespaceprtx.html#ac5fdcb1f68c5a0ac7295260cfd20b307">   55</a></span>&#160;<span class="keyword">typedef</span> std::vector&lt;std::wstring&gt;       <a class="code" href="namespaceprtx.html#ac5fdcb1f68c5a0ac7295260cfd20b307">WStringVector</a>;      </div>
-<div class="line"><a name="l00056"></a><span class="lineno"><a class="line" href="namespaceprtx.html#ad6d2e7a17e02b22059d00ef7816724cf">   56</a></span>&#160;<span class="keyword">typedef</span> boost::shared_ptr&lt;std::wstring&gt; <a class="code" href="namespaceprtx.html#ad6d2e7a17e02b22059d00ef7816724cf">StringPtr</a>;          </div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="keyword">const</span> <a class="code" href="namespaceprtx.html#a6a43e75e11aa3ef9e18d9fd8312ebb9f">Bool</a> PRTX_FALSE   = <span class="keyword">static_cast&lt;</span><a class="code" href="namespaceprtx.html#a6a43e75e11aa3ef9e18d9fd8312ebb9f">Bool</a><span class="keyword">&gt;</span>(0u);</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="keyword">const</span> <a class="code" href="namespaceprtx.html#a6a43e75e11aa3ef9e18d9fd8312ebb9f">Bool</a> PRTX_TRUE    = <span class="keyword">static_cast&lt;</span><a class="code" href="namespaceprtx.html#a6a43e75e11aa3ef9e18d9fd8312ebb9f">Bool</a><span class="keyword">&gt;</span>(1u);</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="keyword">const</span> <a class="code" href="namespaceprtx.html#a6a43e75e11aa3ef9e18d9fd8312ebb9f">Bool</a> PRTX_NO      = <span class="keyword">static_cast&lt;</span><a class="code" href="namespaceprtx.html#a6a43e75e11aa3ef9e18d9fd8312ebb9f">Bool</a><span class="keyword">&gt;</span>(0u);</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="keyword">const</span> <a class="code" href="namespaceprtx.html#a6a43e75e11aa3ef9e18d9fd8312ebb9f">Bool</a> PRTX_YES     = <span class="keyword">static_cast&lt;</span><a class="code" href="namespaceprtx.html#a6a43e75e11aa3ef9e18d9fd8312ebb9f">Bool</a><span class="keyword">&gt;</span>(1u);</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="keyword">inline</span> <span class="keywordtype">bool</span> toPrimitive(<a class="code" href="namespaceprtx.html#a6a43e75e11aa3ef9e18d9fd8312ebb9f">Bool</a> b) { <span class="keywordflow">return</span> (b == PRTX_TRUE); }</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;PRTX_EXPORTS_API <a class="code" href="namespaceprtx.html#a6a43e75e11aa3ef9e18d9fd8312ebb9f">Bool</a> boolFromString(<span class="keyword">const</span> std::wstring&amp; w);</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;PRTX_EXPORTS_API <a class="code" href="namespaceprtx.html#a6a43e75e11aa3ef9e18d9fd8312ebb9f">Bool</a> boolFromString(<span class="keyword">const</span> std::string&amp; s);</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;} <span class="comment">// namespace prtx</span></div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* PRTX_TYPES_H_ */</span><span class="preprocessor"></span></div>
-<div class="ttc" id="namespaceprtx_html_a6a43e75e11aa3ef9e18d9fd8312ebb9f"><div class="ttname"><a href="namespaceprtx.html#a6a43e75e11aa3ef9e18d9fd8312ebb9f">prtx::Bool</a></div><div class="ttdeci">uint8_t Bool</div><div class="ttdoc">uint8_t based Bool type </div><div class="ttdef"><b>Definition:</b> Types.h:50</div></div>
-<div class="ttc" id="namespaceprtx_html_ad6d2e7a17e02b22059d00ef7816724cf"><div class="ttname"><a href="namespaceprtx.html#ad6d2e7a17e02b22059d00ef7816724cf">prtx::StringPtr</a></div><div class="ttdeci">boost::shared_ptr&lt; std::wstring &gt; StringPtr</div><div class="ttdoc">shared std::string </div><div class="ttdef"><b>Definition:</b> Types.h:56</div></div>
-<div class="ttc" id="namespaceprtx_html_afb8abeb6630c0959e01b1e174d7ecc88"><div class="ttname"><a href="namespaceprtx.html#afb8abeb6630c0959e01b1e174d7ecc88">prtx::BoolVector</a></div><div class="ttdeci">std::vector&lt; prtx::Bool &gt; BoolVector</div><div class="ttdoc">vector of uint8_t based Bool type </div><div class="ttdef"><b>Definition:</b> Types.h:51</div></div>
-<div class="ttc" id="namespaceprtx_html_acfbb1262ed21fac2e362179f92993c81"><div class="ttname"><a href="namespaceprtx.html#acfbb1262ed21fac2e362179f92993c81">prtx::DoubleVector</a></div><div class="ttdeci">std::vector&lt; double &gt; DoubleVector</div><div class="ttdoc">vector of double </div><div class="ttdef"><b>Definition:</b> Types.h:52</div></div>
-<div class="ttc" id="namespaceprtx_html_a13cf9e6ffa44e327d61579c4ca01194f"><div class="ttname"><a href="namespaceprtx.html#a13cf9e6ffa44e327d61579c4ca01194f">prtx::StringVector</a></div><div class="ttdeci">std::vector&lt; std::string &gt; StringVector</div><div class="ttdoc">vector of std::string </div><div class="ttdef"><b>Definition:</b> Types.h:54</div></div>
-<div class="ttc" id="namespaceprtx_html_a997ead27a2a1a9b685b1e57f1e0188a2"><div class="ttname"><a href="namespaceprtx.html#a997ead27a2a1a9b685b1e57f1e0188a2">prtx::Int32Vector</a></div><div class="ttdeci">std::vector&lt; int32_t &gt; Int32Vector</div><div class="ttdoc">vector of int32_t </div><div class="ttdef"><b>Definition:</b> Types.h:53</div></div>
-<div class="ttc" id="namespaceprtx_html_ac5fdcb1f68c5a0ac7295260cfd20b307"><div class="ttname"><a href="namespaceprtx.html#ac5fdcb1f68c5a0ac7295260cfd20b307">prtx::WStringVector</a></div><div class="ttdeci">std::vector&lt; std::wstring &gt; WStringVector</div><div class="ttdoc">vector of std::wstring </div><div class="ttdef"><b>Definition:</b> Types.h:55</div></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* PRTX_TYPES_H_ */</span><span class="preprocessor"></span></div>
+<div class="ttc" id="namespaceprtx_html_a6a43e75e11aa3ef9e18d9fd8312ebb9f"><div class="ttname"><a href="namespaceprtx.html#a6a43e75e11aa3ef9e18d9fd8312ebb9f">prtx::Bool</a></div><div class="ttdeci">uint8_t Bool</div><div class="ttdoc">uint8_t based Bool type </div><div class="ttdef"><b>Definition:</b> Types.h:30</div></div>
+<div class="ttc" id="namespaceprtx_html_afb8abeb6630c0959e01b1e174d7ecc88"><div class="ttname"><a href="namespaceprtx.html#afb8abeb6630c0959e01b1e174d7ecc88">prtx::BoolVector</a></div><div class="ttdeci">std::vector&lt; prtx::Bool &gt; BoolVector</div><div class="ttdoc">vector of uint8_t based Bool type </div><div class="ttdef"><b>Definition:</b> Types.h:31</div></div>
+<div class="ttc" id="namespaceprtx_html_acfbb1262ed21fac2e362179f92993c81"><div class="ttname"><a href="namespaceprtx.html#acfbb1262ed21fac2e362179f92993c81">prtx::DoubleVector</a></div><div class="ttdeci">std::vector&lt; double &gt; DoubleVector</div><div class="ttdoc">vector of double </div><div class="ttdef"><b>Definition:</b> Types.h:32</div></div>
+<div class="ttc" id="namespaceprtx_html_aee4ac5c7d055b7b7e7811e52ba7db496"><div class="ttname"><a href="namespaceprtx.html#aee4ac5c7d055b7b7e7811e52ba7db496">prtx::BinaryVector</a></div><div class="ttdeci">std::vector&lt; uint8_t &gt; BinaryVector</div><div class="ttdoc">vector to hold binary data </div><div class="ttdef"><b>Definition:</b> Types.h:37</div></div>
+<div class="ttc" id="namespaceprtx_html_accefd9f35e922e9c5b364551372aff1f"><div class="ttname"><a href="namespaceprtx.html#accefd9f35e922e9c5b364551372aff1f">prtx::StringPtr</a></div><div class="ttdeci">std::shared_ptr&lt; std::wstring &gt; StringPtr</div><div class="ttdoc">shared std::string </div><div class="ttdef"><b>Definition:</b> Types.h:36</div></div>
+<div class="ttc" id="namespaceprtx_html_a13cf9e6ffa44e327d61579c4ca01194f"><div class="ttname"><a href="namespaceprtx.html#a13cf9e6ffa44e327d61579c4ca01194f">prtx::StringVector</a></div><div class="ttdeci">std::vector&lt; std::string &gt; StringVector</div><div class="ttdoc">vector of std::string </div><div class="ttdef"><b>Definition:</b> Types.h:34</div></div>
+<div class="ttc" id="namespaceprtx_html_a997ead27a2a1a9b685b1e57f1e0188a2"><div class="ttname"><a href="namespaceprtx.html#a997ead27a2a1a9b685b1e57f1e0188a2">prtx::Int32Vector</a></div><div class="ttdeci">std::vector&lt; int32_t &gt; Int32Vector</div><div class="ttdoc">vector of int32_t </div><div class="ttdef"><b>Definition:</b> Types.h:33</div></div>
+<div class="ttc" id="namespaceprtx_html_ac5fdcb1f68c5a0ac7295260cfd20b307"><div class="ttname"><a href="namespaceprtx.html#ac5fdcb1f68c5a0ac7295260cfd20b307">prtx::WStringVector</a></div><div class="ttdeci">std::vector&lt; std::wstring &gt; WStringVector</div><div class="ttdoc">vector of std::wstring </div><div class="ttdef"><b>Definition:</b> Types.h:35</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_f4d0b50486959f5b523ec02356ccf9e2.html">prtx</a></li><li class="navelem"><b>Types.h</b></li>
-    <li class="footer">Generated on Mon Sep 28 2015 22:14:27 for Esri Procedural Runtime by
+    <li class="footer">Generated on Wed Jun 1 2016 18:56:58 for Esri Procedural Runtime by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.7 </li>
   </ul>

@@ -1,0 +1,373 @@
+<html>
+
+<head>
+    <title>primitive Operations</title>
+    <link rel="stylesheet" href="../manual_style.css" type="text/css" /></head>
+
+<body>
+<div class="content">
+
+<!-- HEADER (use only on bookchapters) -->
+
+    <table summary="" class="header">
+        <tr>
+            <td align="left" class="helphead_l"><a href="../toc.html"><div class="helplink">&nbsp;</div></a></td>
+            <td align="right" class="helphead_r"></td>
+        </tr>
+    </table>
+
+<!-- CONTENT -->
+
+    <h1><a name="quad"></a>primitiveQuad operation</h1>
+		<h2>Synopsis</h2>
+		<p class="code2">primitiveQuad()</p>
+        <p class="code2">primitiveQuad(<span class="cga_opparam">width</span>, <span class="cga_opparam">length</span>)</p>
+
+		<p class="info">
+			The <span class="cga_keyword">primitiveQuad</span> operation inserts a quad geometry into the scope of the current shape.
+			<ul>
+				<li>If no <span class="cga_opparam">width</span> and <span class="cga_opparam">length</span> is given the bounding box coincides with the scope. Zero scope sizes are handled the same way as in the <a class="normw" href="op_i.html#insertionZeroScope"><span class="code_std">i</span></a> operation.</li>
+				<li>If dimensions are specified the quad is positioned in the xz center of the scope lying on y=0.</li>
+			</ul>
+			If one scope size is zero while the 2 other sizes are not zero the quad will be inserted with respect to the plane defined by the valued scope sizes.<br>
+			<br>
+			The quad has texture coordinates on the first texture layer (COLORMAP).
+		</p>
+		
+        <h2>Parameters</h2>
+		<ul>
+			<li><span class="cga_opparam">width</span> (float)<br>Width of the quad.</li>
+			<li><span class="cga_opparam">length</span> (float)<br>Length of the quad.</li>
+		</ul>
+		
+		<h2>Examples</h2>
+		<table summary="" class="twocol">
+		<tr>
+			<td class="twocol_l"><img src="images/primitiveQuadExample1.png" alt="Insert a" width="298"/></td>
+			<td><pre class="code3">
+Lot-->
+	rotateScope(0, 0, 90) // scope.sx is 0
+	primitiveQuad()
+	texture("builtin:uvtest.png")
+			</pre>
+			<em>The inserted quad is fit into the current scope yz dimension.</em>
+			</td>
+		</tr>
+		<tr>
+			<td class="twocol_l"><img src="images/primitiveQuadExample2.png" alt="Insert a" width="298"/></td>
+			<td><pre class="code3">
+Lot-->
+	rotateScope(0, 0, 90) // scope.sx is 0
+	primitiveQuad(10,20)
+	texture("builtin:uvtest.png")
+			</pre>
+			<em>The inserted quad has a width of 10, a length of 20 and is positioned in the yz center.</em>
+			</td>
+		</tr>
+		</table>
+		
+		<h2>Related</h2>        
+		<ul>
+			<li><a class="normw" href="op_i.html">i operation</a></li>
+			<li><a class="normw" href="op_primitive.html#disk">primitiveDisk operation</a></li>
+			<li><a class="normw" href="op_primitive.html#cube">primitiveCube operation</a></li>
+			<li><a class="normw" href="op_primitive.html#sphere">primitiveSphere operation</a></li>
+			<li><a class="normw" href="op_primitive.html#cylinder">primitiveCylinder operation</a></li>
+			<li><a class="normw" href="op_primitive.html#cone">primitiveCone operation</a></li>
+		</ul>
+
+        <br><br><br><br><br>
+
+    <h1><a name="disk"></a>primitiveDisk operation</h1>
+		<h2>Synopsis</h2>
+        <p class="code2">primitiveDisk()</p>
+        <p class="code2">primitiveDisk(<span class="cga_opparam">nVertices</span>)</p>
+		<p class="code2">primitiveDisk(<span class="cga_opparam">nVertices</span>,<span class="cga_opparam">radius</span>)</p>
+
+		<p class="info">
+			The <span class="cga_keyword">primitiveDisk</span> operation inserts a disk geometry into the scope of the current shape.
+			<ul>
+				<li>If no <span class="cga_opparam">radius</span> is given the bounding box coincides with the scope. Zero scope sizes are handled the same way as in the <a class="normw" href="op_i.html#insertionZeroScope"><span class="code_std">i</span></a> operation.</li>
+				<li>If <span class="cga_opparam">radius</span> is specified the disk is positioned in the xz-center of the scope lying on y=0.</li>
+			</ul>
+			If one scope size is zero while the 2 other sizes are not zero the disk will be inserted with respect to the plane defined by the valued scope sizes.<br>
+			<br>
+			The disk has texture coordinates on the first texture layer (COLORMAP).
+		</p>
+		
+        <h2>Parameters</h2>
+		<ul>
+			<li><span class="cga_opparam">nVertices</span> (integer)<br>Number of vertices at the boundary of the disk. There must be at least 3 vertices. The default value is 16.</li>
+			<li><span class="cga_opparam">radius</span> (float)<br>Radius of the disk.</li>
+		</ul>
+		
+		<h2>Examples</h2>
+		<table summary="" class="twocol">
+		<tr>
+			<td class="twocol_l"><img src="images/primitiveDiskExample1.png" alt="Insert a" width="298"/></td>
+			<td><pre class="code3">
+Lot-->
+	rotateScope(-90, 0, 0) // scope.sz is 0
+	primitiveDisk()
+	texture("builtin:uvtest.png")
+			</pre>
+			<em>The inserted disk has 16 vertices and is fit into the current scope xy dimension.</em>
+			</td>
+		</tr>
+		<tr>
+			<td class="twocol_l"><img src="images/primitiveDiskExample2.png" alt="Insert a" width="298"/></td>
+			<td><pre class="code3">
+Lot-->
+	rotateScope(-90, 0, 0) // scope.sz is 0
+	primitiveDisk(8,10)
+	texture("builtin:uvtest.png")
+			</pre>
+			<em>The inserted disk has 8 vertices, a radius of 10 and is positioned in the xy center.</em>
+			</td>
+		</tr>
+		</table>
+		
+		<h2>Related</h2>        
+		<ul>
+			<li><a class="normw" href="op_i.html">i operation</a></li>
+			<li><a class="normw" href="op_primitive.html#quad">primitiveQuad operation</a></li>
+			<li><a class="normw" href="op_primitive.html#cube">primitiveCube operation</a></li>
+			<li><a class="normw" href="op_primitive.html#sphere">primitiveSphere operation</a></li>
+			<li><a class="normw" href="op_primitive.html#cylinder">primitiveCylinder operation</a></li>
+			<li><a class="normw" href="op_primitive.html#cone">primitiveCone operation</a></li>
+		</ul>
+		
+		<br><br><br><br><br>
+        
+    <h1><a name="cube"></a>primitiveCube operation</h1>
+		<h2>Synopsis</h2>
+        <p class="code2">primitiveCube()</p>
+		<p class="code2">primitiveCube(<span class="cga_opparam">width</span>,<span class="cga_opparam">height</span>,<span class="cga_opparam">depth</span>)</p>
+		
+		<p class="info">The <span class="cga_keyword">primitiveCube</span> operation inserts a cube geometry into the scope of the current shape.
+		<ul>
+			<li>If no <span class="cga_opparam">width</span>, <span class="cga_opparam">height</span> and <span class="cga_opparam">depth</span> are given the bounding box coincides with the scope. Zero scope sizes are handled the same way as in the <a class="normw" href="op_i.html#insertionZeroScope"><span class="code_std">i</span></a> operation.</li>
+			<li>If dimensions are specified the cube is positioned in the xz-center of the scope lying on y=0.</li>
+		</ul>
+		The cube has texture coordinates on the first texture layer (COLORMAP).
+		</p>
+
+        <h2>Parameters</h2>
+		<ul>
+			<li><span class="cga_opparam">width</span> (float)<br>Width of the cube.</li>
+			<li><span class="cga_opparam">height</span> (float)<br>Height of the cube.</li>
+			<li><span class="cga_opparam">depth</span> (float)<br>Depth of the cube.</li>
+		</ul>
+		
+		<h2>Examples</h2>
+		<table summary="" class="twocol">
+		<tr>
+			<td class="twocol_l"><img src="images/primitiveCubeExample1.png" alt="Insert a" width="298"/></td>
+			<td><pre class="code3">
+Lot-->
+   primitiveCube()
+   texture("builtin:uvtest.png")
+			</pre>
+			<em>The inserted cube is fit into the current scope. The scope's zero size is modified relative to the average of the two non-zero sizes.</em>
+			</td>
+		</tr>
+		<tr>
+			<td class="twocol_l"><img src="images/primitiveCubeExample2.png" alt="Insert a" width="298"/></td>
+			<td><pre class="code3">
+Lot-->
+   primitiveCube(10,15,20)
+   texture("builtin:uvtest.png")
+			</pre>
+			<em>The inserted cube has a width of 10, a height of 15, a depth of 20 and is positioned in the xz center.</em>
+			</td>
+		</tr>
+		</table>
+		
+		<h2>Related</h2>        
+		<ul>
+			<li><a class="normw" href="op_i.html">i operation</a></li>
+			<li><a class="normw" href="op_primitive.html#quad">primitiveQuad operation</a></li>
+			<li><a class="normw" href="op_primitive.html#disk">primitiveDisk operation</a></li>
+			<li><a class="normw" href="op_primitive.html#sphere">primitiveSphere operation</a></li>
+			<li><a class="normw" href="op_primitive.html#cylinder">primitiveCylinder operation</a></li>
+			<li><a class="normw" href="op_primitive.html#cone">primitiveCone operation</a></li>
+		</ul>
+		
+		<br><br><br><br><br>
+
+	<h1><a name="sphere"></a>primitiveSphere operation</h1>
+		<h2>Synopsis</h2>
+        <p class="code2">primitiveSphere()</p>
+		<p class="code2">primitiveSphere(<span class="cga_opparam">sides</span>,<span class="cga_opparam">divisions</span>)</p>
+		<p class="code2">primitiveSphere(<span class="cga_opparam">sides</span>,<span class="cga_opparam">divisions</span>,<span class="cga_opparam">radius</span>)</p>
+		
+		<p class="info">The <span class="cga_keyword">primitiveSphere</span> operation inserts a sphere geometry into the scope of the current shape.
+		<ul>
+			<li>If no <span class="cga_opparam">radius</span> is given the bounding box coincides with the scope. Zero scope sizes are handled the same way as in the <a class="normw" href="op_i.html#insertionZeroScope"><span class="code_std">i</span></a> operation.</li>
+			<li>If <span class="cga_opparam">radius</span> is specified the sphere is positioned in the xz-center of the scope lying on y=0.</li>
+		</ul>
+		The sphere has texture coordinates on the first texture layer (COLORMAP).
+		</p>
+
+        <h2>Parameters</h2>
+		<ul>
+			<li><span class="cga_opparam">sides</span> (integer)<br>Number of subdivisions along latitude of the sphere. There must be at least 3 sides. The default value is 16.</li>
+			<li><span class="cga_opparam">divisions</span> (integer)<br>Number of subdivisions along longitude  of the sphere. There must be at least 2 divisions. The default value is 16.</li>
+			<li><span class="cga_opparam">radius</span> (float)<br>Radius of the sphere.</li>
+		</ul>
+		
+		<h2>Examples</h2>
+		<table summary="" class="twocol">
+		<tr>
+			<td class="twocol_l"><img src="images/primitiveSphereExample1.png" alt="Insert a" width="298"/></td>
+			<td><pre class="code3">
+Lot-->
+   primitiveSphere()
+   texture("builtin:uvtest.png")
+			</pre>
+			<em>The inserted sphere has 16 sides, 16 divisions and is fit into the current scope. The scope's zero size is modified relative to the average of the two non-zero sizes.</em>
+			</td>
+		</tr>
+		<tr>
+			<td class="twocol_l"><img src="images/primitiveSphereExample2.png" alt="Insert a" width="298"/></td>
+			<td><pre class="code3">
+Lot-->
+   primitiveSphere(8,4,10)
+   texture("builtin:uvtest.png")
+			</pre>
+			<em>The inserted sphere has 8 sides, 4 divisions, a radius of 10 and is positioned in the xz center.</em>
+			</td>
+		</tr>
+		</table>
+		
+		<h2>Related</h2>        
+		<ul>
+			<li><a class="normw" href="op_i.html">i operation</a></li>
+			<li><a class="normw" href="op_primitive.html#quad">primitiveQuad operation</a></li>
+			<li><a class="normw" href="op_primitive.html#disk">primitiveDisk operation</a></li>
+			<li><a class="normw" href="op_primitive.html#cube">primitiveCube operation</a></li>
+			<li><a class="normw" href="op_primitive.html#cylinder">primitiveCylinder operation</a></li>
+			<li><a class="normw" href="op_primitive.html#cone">primitiveCone operation</a></li>
+		</ul>
+		
+		<br><br><br><br><br>
+		
+	<h1><a name="cylinder"></a>primitiveCylinder operation</h1>
+		<h2>Synopsis</h2>
+        <p class="code2">primitiveCylinder()</p>
+		<p class="code2">primitiveCylinder(<span class="cga_opparam">sides</span>)</p>
+		<p class="code2">primitiveCylinder(<span class="cga_opparam">sides</span>,<span class="cga_opparam">radius</span>,<span class="cga_opparam">height</span>)</p>
+		
+		<p class="info">The <span class="cga_keyword">primitiveCylinder</span> operation inserts a cylinder geometry into the scope of the current shape.
+		<ul>
+			<li>If no <span class="cga_opparam">radius</span> and <span class="cga_opparam">height</span> are given the bounding box coincides with the scope. Zero scope sizes are handled the same way as in the <a class="normw" href="op_i.html#insertionZeroScope"><span class="code_std">i</span></a> operation.</li>
+			<li>If dimensions are specified the cylinder is positioned in the xz-center of the scope lying on y=0.</li>
+		</ul>
+		The cylinder has texture coordinates on the first texture layer (COLORMAP).
+		</p>
+
+        <h2>Parameters</h2>
+		<ul>
+			<li><span class="cga_opparam">sides</span> (integer)<br>Number of subdivisions of the cylindrical surface. There must be at least 3 sides. The default value is 16.</li>
+			<li><span class="cga_opparam">radius</span> (float)<br>Radius of the cylinder.</li>
+			<li><span class="cga_opparam">height</span> (float)<br>Height of the cylinder.</li>
+		</ul>
+		
+		<h2>Examples</h2>
+		<table summary="" class="twocol">
+		<tr>
+			<td class="twocol_l"><img src="images/primitiveCylinderExample1.png" alt="Insert a" width="298"/></td>
+			<td><pre class="code3">
+Lot-->
+   primitiveCylinder()
+   texture("builtin:uvtest.png")
+			</pre>
+			<em>The inserted cylinder has 16 sides and is fit into the current scope. The scope's zero size is modified relative to the average of the two non-zero sizes.</em>
+			</td>
+		</tr>
+		<tr>
+			<td class="twocol_l"><img src="images/primitiveCylinderExample2.png" alt="Insert a" width="298"/></td>
+			<td><pre class="code3">
+Lot-->
+   primitiveCylinder(8,10,15)
+   texture("builtin:uvtest.png")
+			</pre>
+			<em>The inserted cylinder has 8 sides, a radius of 10, a height of 15 and is positioned in the xz center.</em>
+			</td>
+		</tr>
+		</table>
+		
+		<h2>Related</h2>        
+		<ul>
+			<li><a class="normw" href="op_i.html">i operation</a></li>
+			<li><a class="normw" href="op_primitive.html#quad">primitiveQuad operation</a></li>
+			<li><a class="normw" href="op_primitive.html#disk">primitiveDisk operation</a></li>
+			<li><a class="normw" href="op_primitive.html#cube">primitiveCube operation</a></li>
+			<li><a class="normw" href="op_primitive.html#sphere">primitiveSphere operation</a></li>
+			<li><a class="normw" href="op_primitive.html#cone">primitiveCone operation</a></li>
+		</ul>
+		
+		<br><br><br><br><br>
+		
+	<h1><a name="cone"></a>primitiveCone operation</h1>
+		<h2>Synopsis</h2>
+        <p class="code2">primitiveCone()</p>
+		<p class="code2">primitiveCone(<span class="cga_opparam">sides</span>)</p>
+		<p class="code2">primitiveCone(<span class="cga_opparam">sides</span>,<span class="cga_opparam">radius</span>,<span class="cga_opparam">height</span>)</p>
+
+		<p class="info">The <span class="cga_keyword">primitiveCone</span> operation inserts a cone geometry into the scope of the current shape.
+		<ul>
+			<li>If no <span class="cga_opparam">radius</span> and <span class="cga_opparam">height</span> are given the bounding box coincides with the scope. Zero scope sizes are handled the same way as in the <a class="normw" href="op_i.html#insertionZeroScope"><span class="code_std">i</span></a> operation.</li>
+			<li>If dimensions are specified the cone is positioned in the xz-center of the scope lying on y=0.</li>
+		</ul>
+		The cone has texture coordinates on the first texture layer (COLORMAP).
+		</p>
+		
+        <h2>Parameters</h2>
+		<ul>
+			<li><span class="cga_opparam">sides</span> (integer)<br>Number of subdivisions of the cone surface. There must be at least 3 sides. The default value is 16.</li>
+			<li><span class="cga_opparam">radius</span> (float)<br>Radius of the cone.</li>
+			<li><span class="cga_opparam">height</span> (float)<br>Height of the cone.</li>
+		</ul>
+		
+		<h2>Examples</h2>
+		<table summary="" class="twocol">
+		<tr>
+			<td class="twocol_l"><img src="images/primitiveConeExample1.png" alt="Insert a" width="298"/></td>
+			<td><pre class="code3">
+Lot-->
+   primitiveCone()
+   texture("builtin:uvtest.png")
+			</pre>
+			<em>The inserted cone has 16 sides and is fit into the current scope. The scope's zero size is modified relative to the average of the two non-zero sizes.</em>
+			</td>
+		</tr>
+		<tr>
+			<td class="twocol_l"><img src="images/primitiveConeExample2.png" alt="Insert a" width="298"/></td>
+			<td><pre class="code3">
+Lot-->
+   primitiveCone(8,10,15)
+   texture("builtin:uvtest.png")
+			</pre>
+			<em>The inserted cone has 8 sides, a radius of 10, a height of 15 and is positioned in the xz center.</em>
+			</td>
+		</tr>
+		</table>
+		<h2>Related</h2>        
+		<ul>
+			<li><a class="normw" href="op_i.html">i operation</a></li>
+			<li><a class="normw" href="op_primitive.html#quad">primitiveQuad operation</a></li>
+			<li><a class="normw" href="op_primitive.html#disk">primitiveDisk operation</a></li>
+			<li><a class="normw" href="op_primitive.html#cube">primitiveCube operation</a></li>
+			<li><a class="normw" href="op_primitive.html#sphere">primitiveSphere operation</a></li>
+			<li><a class="normw" href="op_primitive.html#cylinder">primitiveCylinder operation</a></li>
+		</ul>
+
+<!-- FOOTER -->
+<p class="foot">Copyright &copy;2008-2016 Esri R&D Center Zurich. All rights reserved.</p>				  
+
+<!-- END CENTERED CONTENT -->
+
+</div>
+</body>
+</html>

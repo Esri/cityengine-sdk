@@ -31,7 +31,7 @@
   <td id="projectlogo"><img alt="Logo" src="esri_prt_55px.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Esri Procedural Runtime
-   &#160;<span id="projectnumber">1.4.2074</span>
+   &#160;<span id="projectnumber">1.6.2663</span>
    </div>
   </td>
  </tr>
@@ -127,29 +127,32 @@ $(document).ready(function(){initNavTree('_string_utils_8h_source.html','');});
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#define STRINGUTILS_H_</span></div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &quot;prt/Status.h&quot;</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &quot;prt/prt_stdint.h&quot;</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keyword">namespace </span>prt {</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#include &lt;cstddef&gt;</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#include &lt;cstdint&gt;</span></div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keyword">namespace </span>StringUtils {</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;PRT_EXPORTS_API <span class="keywordtype">char</span>*    <a class="code" href="namespaceprt_1_1_string_utils.html#a28e30cbe5dd22bf674ac25d33ca9b45b">toOSNarrowFromUTF16</a>(<span class="keyword">const</span> <span class="keywordtype">wchar_t</span>* utf16String, <span class="keywordtype">char</span>* result, <span class="keywordtype">size_t</span>* resultSize, <a class="code" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a>* stat = 0);</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;PRT_EXPORTS_API <span class="keywordtype">wchar_t</span>* <a class="code" href="namespaceprt_1_1_string_utils.html#a5054cbc58ae66d4f1629940ec08ca901">toUTF16FromOSNarrow</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* osString, <span class="keywordtype">wchar_t</span>* result, <span class="keywordtype">size_t</span>* resultSize, <a class="code" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a>* stat = 0);</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;PRT_EXPORTS_API <span class="keywordtype">wchar_t</span>* <a class="code" href="namespaceprt_1_1_string_utils.html#a81889b15bcaa84ab6b86ff38a2364dc1">toUTF16FromUTF8</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* utf8String, <span class="keywordtype">wchar_t</span>* result, <span class="keywordtype">size_t</span>* resultSize, <a class="code" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a>* stat = 0);</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;PRT_EXPORTS_API <span class="keywordtype">char</span>*    <a class="code" href="namespaceprt_1_1_string_utils.html#ace42554fab82f85564e9979a11240289">toUTF8FromUTF16</a>(<span class="keyword">const</span> <span class="keywordtype">wchar_t</span>* utf16String, <span class="keywordtype">char</span>* result, <span class="keywordtype">size_t</span>* resultSize, <a class="code" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a>* stat = 0);</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;PRT_EXPORTS_API <span class="keywordtype">char</span>*    <a class="code" href="namespaceprt_1_1_string_utils.html#a53335d564ff2cfe09526efb21743b0e4">percentEncode</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* utf8String, <span class="keywordtype">char</span>* result, <span class="keywordtype">size_t</span>* resultSize, <a class="code" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a>* stat = 0);</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;}</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keyword">namespace </span>prt {</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="keyword">namespace </span>StringUtils {</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;PRT_EXPORTS_API <span class="keywordtype">char</span>*    <a class="code" href="namespaceprt_1_1_string_utils.html#a28e30cbe5dd22bf674ac25d33ca9b45b">toOSNarrowFromUTF16</a>(<span class="keyword">const</span> <span class="keywordtype">wchar_t</span>* utf16String, <span class="keywordtype">char</span>* result, <span class="keywordtype">size_t</span>* resultSize, <a class="code" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a>* stat = 0);</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;PRT_EXPORTS_API <span class="keywordtype">wchar_t</span>* <a class="code" href="namespaceprt_1_1_string_utils.html#a5054cbc58ae66d4f1629940ec08ca901">toUTF16FromOSNarrow</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* osString, <span class="keywordtype">wchar_t</span>* result, <span class="keywordtype">size_t</span>* resultSize, <a class="code" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a>* stat = 0);</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;PRT_EXPORTS_API <span class="keywordtype">wchar_t</span>* <a class="code" href="namespaceprt_1_1_string_utils.html#a81889b15bcaa84ab6b86ff38a2364dc1">toUTF16FromUTF8</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* utf8String, <span class="keywordtype">wchar_t</span>* result, <span class="keywordtype">size_t</span>* resultSize, <a class="code" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a>* stat = 0);</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;PRT_EXPORTS_API <span class="keywordtype">char</span>*    <a class="code" href="namespaceprt_1_1_string_utils.html#ace42554fab82f85564e9979a11240289">toUTF8FromUTF16</a>(<span class="keyword">const</span> <span class="keywordtype">wchar_t</span>* utf16String, <span class="keywordtype">char</span>* result, <span class="keywordtype">size_t</span>* resultSize, <a class="code" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a>* stat = 0);</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;PRT_EXPORTS_API <span class="keywordtype">char</span>*    <a class="code" href="namespaceprt_1_1_string_utils.html#a53335d564ff2cfe09526efb21743b0e4">percentEncode</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* utf8String, <span class="keywordtype">char</span>* result, <span class="keywordtype">size_t</span>* resultSize, <a class="code" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a>* stat = 0);</div>
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;</div>
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;}</div>
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* STRINGUTILS_H_ */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;}</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* STRINGUTILS_H_ */</span><span class="preprocessor"></span></div>
 <div class="ttc" id="namespaceprt_1_1_string_utils_html_ace42554fab82f85564e9979a11240289"><div class="ttname"><a href="namespaceprt_1_1_string_utils.html#ace42554fab82f85564e9979a11240289">prt::StringUtils::toUTF8FromUTF16</a></div><div class="ttdeci">char * toUTF8FromUTF16(const wchar_t *utf16String, char *result, size_t *resultSize, Status *stat=0)</div></div>
 <div class="ttc" id="namespaceprt_1_1_string_utils_html_a5054cbc58ae66d4f1629940ec08ca901"><div class="ttname"><a href="namespaceprt_1_1_string_utils.html#a5054cbc58ae66d4f1629940ec08ca901">prt::StringUtils::toUTF16FromOSNarrow</a></div><div class="ttdeci">wchar_t * toUTF16FromOSNarrow(const char *osString, wchar_t *result, size_t *resultSize, Status *stat=0)</div></div>
 <div class="ttc" id="namespaceprt_1_1_string_utils_html_a81889b15bcaa84ab6b86ff38a2364dc1"><div class="ttname"><a href="namespaceprt_1_1_string_utils.html#a81889b15bcaa84ab6b86ff38a2364dc1">prt::StringUtils::toUTF16FromUTF8</a></div><div class="ttdeci">wchar_t * toUTF16FromUTF8(const char *utf8String, wchar_t *result, size_t *resultSize, Status *stat=0)</div></div>
@@ -162,7 +165,7 @@ $(document).ready(function(){initNavTree('_string_utils_8h_source.html','');});
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_e104a5fd3f1a5c6eb1edb871fc217c8e.html">prt</a></li><li class="navelem"><b>StringUtils.h</b></li>
-    <li class="footer">Generated on Mon Sep 28 2015 22:14:27 for Esri Procedural Runtime by
+    <li class="footer">Generated on Wed Jun 1 2016 18:56:58 for Esri Procedural Runtime by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.7 </li>
   </ul>

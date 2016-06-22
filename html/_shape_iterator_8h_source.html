@@ -31,7 +31,7 @@
   <td id="projectlogo"><img alt="Logo" src="esri_prt_55px.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Esri Procedural Runtime
-   &#160;<span id="projectnumber">1.4.2074</span>
+   &#160;<span id="projectnumber">1.6.2663</span>
    </div>
   </td>
  </tr>
@@ -126,18 +126,18 @@ $(document).ready(function(){initNavTree('_shape_iterator_8h_source.html','');})
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#ifndef PRTX_SHAPEITERATOR_H_</span></div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#define PRTX_SHAPEITERATOR_H_</span></div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &quot;boost/shared_ptr.hpp&quot;</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#include &quot;prtx/prtx.h&quot;</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#include &quot;prtx/Shape.h&quot;</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#include &quot;prtx/GenerateContext.h&quot;</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &quot;prtx/prtx.h&quot;</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &quot;prtx/Shape.h&quot;</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#include &quot;prtx/GenerateContext.h&quot;</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#include &lt;memory&gt;</span></div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keyword">namespace </span>prtx {</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;</div>
 <div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="classprtx_1_1_shape_iterator.html">   38</a></span>&#160;<span class="keyword">class </span>PRTX_EXPORTS_API <a class="code" href="classprtx_1_1_shape_iterator.html">ShapeIterator</a> {</div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="namespaceprtx.html#a11fbe551abb06f16357e0e8d66f75f75">ShapePtr</a> getNext() = 0;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="namespaceprtx.html#ae498291eedf7bb693154ad40acda74d0">ShapePtr</a> getNext() = 0;</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="keyword">protected</span>:</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="classprtx_1_1_shape_iterator.html">ShapeIterator</a>() {}</div>
@@ -146,7 +146,7 @@ $(document).ready(function(){initNavTree('_shape_iterator_8h_source.html','');})
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="keyword">class </span><a class="code" href="classprtx_1_1_depth_first_iterator.html">DepthFirstIterator</a>;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="keyword">typedef</span> boost::shared_ptr&lt;DepthFirstIterator&gt; DepthFirstIteratorPtr;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="keyword">typedef</span> std::shared_ptr&lt;DepthFirstIterator&gt; DepthFirstIteratorPtr;</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;</div>
 <div class="line"><a name="l00057"></a><span class="lineno"><a class="line" href="classprtx_1_1_depth_first_iterator.html">   57</a></span>&#160;<span class="keyword">class </span>PRTX_EXPORTS_API <a class="code" href="classprtx_1_1_depth_first_iterator.html">DepthFirstIterator</a> : <span class="keyword">public</span> <a class="code" href="classprtx_1_1_shape_iterator.html">ShapeIterator</a> {</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="keyword">public</span>:</div>
@@ -161,7 +161,7 @@ $(document).ready(function(){initNavTree('_shape_iterator_8h_source.html','');})
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;</div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="keyword">class </span><a class="code" href="classprtx_1_1_breadth_first_iterator.html">BreadthFirstIterator</a>;</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="keyword">typedef</span> boost::shared_ptr&lt;BreadthFirstIterator&gt; BreadthFirstIteratorPtr;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="keyword">typedef</span> std::shared_ptr&lt;BreadthFirstIterator&gt; BreadthFirstIteratorPtr;</div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;</div>
 <div class="line"><a name="l00080"></a><span class="lineno"><a class="line" href="classprtx_1_1_breadth_first_iterator.html">   80</a></span>&#160;<span class="keyword">class </span>PRTX_EXPORTS_API <a class="code" href="classprtx_1_1_breadth_first_iterator.html">BreadthFirstIterator</a> : <span class="keyword">public</span> <a class="code" href="classprtx_1_1_shape_iterator.html">ShapeIterator</a> {</div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="keyword">public</span>:</div>
@@ -176,7 +176,7 @@ $(document).ready(function(){initNavTree('_shape_iterator_8h_source.html','');})
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;</div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;</div>
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="keyword">class </span><a class="code" href="classprtx_1_1_leaf_iterator.html">LeafIterator</a>;</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="keyword">typedef</span> boost::shared_ptr&lt;LeafIterator&gt; LeafIteratorPtr;</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="keyword">typedef</span> std::shared_ptr&lt;LeafIterator&gt; LeafIteratorPtr;</div>
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;</div>
 <div class="line"><a name="l00103"></a><span class="lineno"><a class="line" href="classprtx_1_1_leaf_iterator.html">  103</a></span>&#160;<span class="keyword">class </span>PRTX_EXPORTS_API <a class="code" href="classprtx_1_1_leaf_iterator.html">LeafIterator</a> : <span class="keyword">public</span> <a class="code" href="classprtx_1_1_shape_iterator.html">ShapeIterator</a> {</div>
 <div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="keyword">public</span>:</div>
@@ -191,7 +191,7 @@ $(document).ready(function(){initNavTree('_shape_iterator_8h_source.html','');})
 <div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;</div>
 <div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;</div>
 <div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="keyword">class </span><a class="code" href="classprtx_1_1_initial_shape_iterator.html">InitialShapeIterator</a>;</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="keyword">typedef</span> boost::shared_ptr&lt;InitialShapeIterator&gt; InitialShapeIteratorPtr;</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="keyword">typedef</span> std::shared_ptr&lt;InitialShapeIterator&gt; InitialShapeIteratorPtr;</div>
 <div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;</div>
 <div class="line"><a name="l00128"></a><span class="lineno"><a class="line" href="classprtx_1_1_initial_shape_iterator.html">  128</a></span>&#160;<span class="keyword">class </span>PRTX_EXPORTS_API <a class="code" href="classprtx_1_1_initial_shape_iterator.html">InitialShapeIterator</a> : <span class="keyword">public</span> <a class="code" href="classprtx_1_1_shape_iterator.html">ShapeIterator</a> {</div>
 <div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;<span class="keyword">public</span>:</div>
@@ -206,7 +206,7 @@ $(document).ready(function(){initNavTree('_shape_iterator_8h_source.html','');})
 <div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;</div>
 <div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;</div>
 <div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;<span class="keyword">class </span><a class="code" href="classprtx_1_1_selected_shapes_iterator.html">SelectedShapesIterator</a>;</div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;<span class="keyword">typedef</span> boost::shared_ptr&lt;SelectedShapesIterator&gt; SelectedShapesIteratorPtr;</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;<span class="keyword">typedef</span> std::shared_ptr&lt;SelectedShapesIterator&gt; SelectedShapesIteratorPtr;</div>
 <div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;</div>
 <div class="line"><a name="l00154"></a><span class="lineno"><a class="line" href="classprtx_1_1_selected_shapes_iterator.html">  154</a></span>&#160;<span class="keyword">class </span>PRTX_EXPORTS_API <a class="code" href="classprtx_1_1_selected_shapes_iterator.html">SelectedShapesIterator</a> : <span class="keyword">public</span> <a class="code" href="classprtx_1_1_shape_iterator.html">ShapeIterator</a> {</div>
 <div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;<span class="keyword">public</span>:</div>
@@ -221,7 +221,7 @@ $(document).ready(function(){initNavTree('_shape_iterator_8h_source.html','');})
 <div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;</div>
 <div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;</div>
 <div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;<span class="keyword">class </span><a class="code" href="classprtx_1_1_c_g_a_print_iterator.html">CGAPrintIterator</a>;</div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;<span class="keyword">typedef</span> boost::shared_ptr&lt;CGAPrintIterator&gt; CGAPrintIteratorPtr;</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;<span class="keyword">typedef</span> std::shared_ptr&lt;CGAPrintIterator&gt; CGAPrintIteratorPtr;</div>
 <div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;</div>
 <div class="line"><a name="l00178"></a><span class="lineno"><a class="line" href="classprtx_1_1_c_g_a_print_iterator.html">  178</a></span>&#160;<span class="keyword">class </span>PRTX_EXPORTS_API <a class="code" href="classprtx_1_1_c_g_a_print_iterator.html">CGAPrintIterator</a> : <span class="keyword">public</span> <a class="code" href="classprtx_1_1_shape_iterator.html">ShapeIterator</a> {</div>
 <div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;<span class="keyword">public</span>:</div>
@@ -236,7 +236,7 @@ $(document).ready(function(){initNavTree('_shape_iterator_8h_source.html','');})
 <div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;</div>
 <div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;</div>
 <div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;<span class="keyword">class </span><a class="code" href="classprtx_1_1_c_g_a_error_iterator.html">CGAErrorIterator</a>;</div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;<span class="keyword">typedef</span> boost::shared_ptr&lt;CGAErrorIterator&gt; CGAErrorIteratorPtr;</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;<span class="keyword">typedef</span> std::shared_ptr&lt;CGAErrorIterator&gt; CGAErrorIteratorPtr;</div>
 <div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;</div>
 <div class="line"><a name="l00201"></a><span class="lineno"><a class="line" href="classprtx_1_1_c_g_a_error_iterator.html">  201</a></span>&#160;<span class="keyword">class </span>PRTX_EXPORTS_API <a class="code" href="classprtx_1_1_c_g_a_error_iterator.html">CGAErrorIterator</a> : <span class="keyword">public</span> <a class="code" href="classprtx_1_1_shape_iterator.html">ShapeIterator</a> {</div>
 <div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;<span class="keyword">public</span>:</div>
@@ -253,7 +253,7 @@ $(document).ready(function(){initNavTree('_shape_iterator_8h_source.html','');})
 <div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;</div>
 <div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;</div>
 <div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;<span class="keyword">class </span><a class="code" href="classprtx_1_1_c_g_a_report_iterator.html">CGAReportIterator</a>;</div>
-<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;<span class="keyword">typedef</span> boost::shared_ptr&lt;CGAReportIterator&gt; CGAReportIteratorPtr;</div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;<span class="keyword">typedef</span> std::shared_ptr&lt;CGAReportIterator&gt; CGAReportIteratorPtr;</div>
 <div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;</div>
 <div class="line"><a name="l00230"></a><span class="lineno"><a class="line" href="classprtx_1_1_c_g_a_report_iterator.html">  230</a></span>&#160;<span class="keyword">class </span>PRTX_EXPORTS_API <a class="code" href="classprtx_1_1_c_g_a_report_iterator.html">CGAReportIterator</a> : <span class="keyword">public</span> <a class="code" href="classprtx_1_1_shape_iterator.html">ShapeIterator</a> {</div>
 <div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;<span class="keyword">public</span>:</div>
@@ -274,13 +274,13 @@ $(document).ready(function(){initNavTree('_shape_iterator_8h_source.html','');})
 <div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* PRTX_SHAPEITERATOR_H_ */</span><span class="preprocessor"></span></div>
 <div class="ttc" id="classprtx_1_1_leaf_iterator_html"><div class="ttname"><a href="classprtx_1_1_leaf_iterator.html">prtx::LeafIterator</a></div><div class="ttdef"><b>Definition:</b> ShapeIterator.h:103</div></div>
 <div class="ttc" id="classprtx_1_1_selected_shapes_iterator_html"><div class="ttname"><a href="classprtx_1_1_selected_shapes_iterator.html">prtx::SelectedShapesIterator</a></div><div class="ttdef"><b>Definition:</b> ShapeIterator.h:154</div></div>
-<div class="ttc" id="classprtx_1_1_generate_context_html"><div class="ttname"><a href="classprtx_1_1_generate_context.html">prtx::GenerateContext</a></div><div class="ttdef"><b>Definition:</b> GenerateContext.h:44</div></div>
+<div class="ttc" id="classprtx_1_1_generate_context_html"><div class="ttname"><a href="classprtx_1_1_generate_context.html">prtx::GenerateContext</a></div><div class="ttdef"><b>Definition:</b> GenerateContext.h:43</div></div>
 <div class="ttc" id="classprtx_1_1_shape_iterator_html"><div class="ttname"><a href="classprtx_1_1_shape_iterator.html">prtx::ShapeIterator</a></div><div class="ttdef"><b>Definition:</b> ShapeIterator.h:38</div></div>
 <div class="ttc" id="classprtx_1_1_c_g_a_report_iterator_html"><div class="ttname"><a href="classprtx_1_1_c_g_a_report_iterator.html">prtx::CGAReportIterator</a></div><div class="ttdef"><b>Definition:</b> ShapeIterator.h:230</div></div>
 <div class="ttc" id="classprtx_1_1_c_g_a_print_iterator_html"><div class="ttname"><a href="classprtx_1_1_c_g_a_print_iterator.html">prtx::CGAPrintIterator</a></div><div class="ttdef"><b>Definition:</b> ShapeIterator.h:178</div></div>
 <div class="ttc" id="classprtx_1_1_initial_shape_iterator_html"><div class="ttname"><a href="classprtx_1_1_initial_shape_iterator.html">prtx::InitialShapeIterator</a></div><div class="ttdef"><b>Definition:</b> ShapeIterator.h:128</div></div>
+<div class="ttc" id="namespaceprtx_html_ae498291eedf7bb693154ad40acda74d0"><div class="ttname"><a href="namespaceprtx.html#ae498291eedf7bb693154ad40acda74d0">prtx::ShapePtr</a></div><div class="ttdeci">std::shared_ptr&lt; Shape &gt; ShapePtr</div><div class="ttdoc">shared pointer to a Shape </div><div class="ttdef"><b>Definition:</b> Shape.h:35</div></div>
 <div class="ttc" id="classprtx_1_1_c_g_a_error_iterator_html"><div class="ttname"><a href="classprtx_1_1_c_g_a_error_iterator.html">prtx::CGAErrorIterator</a></div><div class="ttdef"><b>Definition:</b> ShapeIterator.h:201</div></div>
-<div class="ttc" id="namespaceprtx_html_a11fbe551abb06f16357e0e8d66f75f75"><div class="ttname"><a href="namespaceprtx.html#a11fbe551abb06f16357e0e8d66f75f75">prtx::ShapePtr</a></div><div class="ttdeci">boost::shared_ptr&lt; Shape &gt; ShapePtr</div><div class="ttdoc">shared pointer to a Shape </div><div class="ttdef"><b>Definition:</b> Shape.h:33</div></div>
 <div class="ttc" id="classprtx_1_1_breadth_first_iterator_html"><div class="ttname"><a href="classprtx_1_1_breadth_first_iterator.html">prtx::BreadthFirstIterator</a></div><div class="ttdef"><b>Definition:</b> ShapeIterator.h:80</div></div>
 <div class="ttc" id="classprtx_1_1_depth_first_iterator_html"><div class="ttname"><a href="classprtx_1_1_depth_first_iterator.html">prtx::DepthFirstIterator</a></div><div class="ttdef"><b>Definition:</b> ShapeIterator.h:57</div></div>
 </div><!-- fragment --></div><!-- contents -->
@@ -289,7 +289,7 @@ $(document).ready(function(){initNavTree('_shape_iterator_8h_source.html','');})
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_f4d0b50486959f5b523ec02356ccf9e2.html">prtx</a></li><li class="navelem"><b>ShapeIterator.h</b></li>
-    <li class="footer">Generated on Mon Sep 28 2015 22:14:27 for Esri Procedural Runtime by
+    <li class="footer">Generated on Wed Jun 1 2016 18:56:58 for Esri Procedural Runtime by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.7 </li>
   </ul>

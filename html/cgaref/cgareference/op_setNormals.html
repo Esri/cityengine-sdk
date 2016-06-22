@@ -12,69 +12,94 @@
 
 <!-- HEADER (use only on bookchapters) -->
 
-    <table summary="" class="header">
-        <tr>
-            <td align="left" class="helphead_l"><a href="../toc.html"><div class="helplink">&nbsp;</div></a></td>
-            <td align="right" class="helphead_r"></td>
-        </tr>
-    </table>
+<table summary="" class="header">
+	<tr>
+		<td align="left" class="helphead_l"><a href="../toc.html"><div class="helplink">&nbsp;</div></a></td>
+		<td align="right" class="helphead_r"></td>
+	</tr>
+</table>
 
 
 <!-- CONTENT -->
 
 <h1>setNormals</h1>
 <h2>Synopsis</h2>
-
 <p class="code2">setNormals(<span class="cga_opparam">normalsMode</span>)</p>
-<h2>
-Parameters
-</h2>
+<p class="info">The <span class="codelight">setNormals()</span> operation sets the normals of the current shapes' geometry to the desired mode.</p>
+
+<h2>Parameters</h2>
 <ul>
 	<li><span class="cga_opparam">normalsMode</span> (selstr)<br>
 		<ul>
-        	<li><span class="codelight">hard</span>: use the face normals.</li>
-        	<li><span class="codelight">soft</span>: for each vertex, use the average of the adjacent face normals.</li>
+        	<li><span class="codelight">hard</span>: use the face normals. This is equivalent to <span class="codelight"><a href="op_softenNormals.html">softenNormals</a>(0)</span>.</li>
+			<li><span class="codelight">conform</span>: same as <span class="codelight">hard</span>. Computes consistent normals using the connectivity and a heuristic that favors the world's up direction.</li>
+        	<li><span class="codelight">soft</span>: for each vertex, use the average of the adjacent face normals. This is equivalent to <span class="codelight"><a href="op_softenNormals.html">softenNormals</a>(180)</span>.</li>
+			<li><span class="codelight">auto</span>: same as <span class="codelight">soft</span>. Edges where faces meet at an angle greater than or equal to 30 degrees are shaded as hard edges. This is equivalent to <span class="codelight"><a href="op_softenNormals.html">softenNormals</a>(30)</span>.</li>
         </ul>
 	</li>
-</ul>		
+</ul>
 
-<p class="info">The <span class="codelight">setNormals()</span> operation sets the normals of the current shapes' geometry to the desired mode.</p>
+<p class="notes">The <span class="codelight">soft</span> and <span class="codelight">auto</span> modes require disconnected shapes to be combined and duplicate vertices to be merged in order to compute vertex normals using adjacent face normals.</p>
 
-
-        <h2>Related</h2>
-        <ul>
-        	<li><a class="normw" href="op_cleanupGeometry.html">cleanupGeometry operation</a></li>
-        	<li><a class="normw" href="op_convexify.html">convexify operation</a></li>
-        	<li><a class="normw" href="op_innerRect.html">innerRect operation</a></li>
-        	<li><a class="normw" href="op_mirror.html">mirror operation</a></li>
-        	<li><a class="normw" href="op_reduceGeometry.html">reduceGeometry operation</a></li>
-        	<li><a class="normw" href="op_reverseNormals.html">reverseNormals operation</a></li>
-        	<li><a class="normw" href="op_trim.html">trim operation</a></li>
-     	</ul>
-
+<p class="notes">The <span class="codelight">conform</span> mode is not successful is every case.</p>
+If the <span class="codelight">conform</span> mode is not successful consider the following options:	
+<ul>
+	<li>Combine disconnected shapes belonging to a single building.</li>
+	<li>Merged vertices and remove duplicate faces using <span class="codelight"><a class="normw" href="op_cleanupGeometry.html">cleanupGeometry</a>(faces, 0.1)</span> operation.</li>
+	<li>In case of discontinous textures not all duplicate faces are removed. Consider <span class="codelight"><a class="normw" href="op_deleteUV.html">deleteUV</a></span> operation.</li>
+</ul>
+ 
+<h2>Related</h2>
+<ul>
+	<li><a class="normw" href="op_softenNormals.html">softenNormals operation</a></li>
+	<li><a class="normw" href="op_cleanupGeometry.html">cleanupGeometry operation</a></li>
+	<li><a class="normw" href="op_convexify.html">convexify operation</a></li>
+	<li><a class="normw" href="op_innerRectangle.html">innerRectangle operation</a></li>
+	<li><a class="normw" href="op_mirror.html">mirror operation</a></li>
+	<li><a class="normw" href="op_reduceGeometry.html">reduceGeometry operation</a></li>
+	<li><a class="normw" href="op_reverseNormals.html">reverseNormals operation</a></li>
+	<li><a class="normw" href="op_trim.html">trim operation</a></li>
+</ul>
 
 <h2>Examples</h2>
 <h3>Shaded Sphere</h3>
-	<table>
-    	<tr>
-        	<td>
-            	<img src="images/setNormals_sphere_hard.png" alt="Envelope example a" width="300"/> 
-				<br><br>
-                 <center><em>Shaded sphere with hard normals.</em></center>
-            </td>
-            <td width="100">
-            </td>
-            <td>
-            	<img src="images/setNormals_sphere_soft.png" alt="Envelope example a" width="300"/> 
-				<br><br>
-                <center><em>Shaded sphere with soft normals.</em></center>
-             </td>
-        </tr>
-   </table>     
+<table>
+	<tr>
+		<td>
+			<img src="images/setNormals_sphere_hard.png" alt="Envelope example a" width="300"/> 
+			<br><br>
+			 <center><em>Shaded sphere with hard normals.</em></center>
+		</td>
+		<td width="100">
+		</td>
+		<td>
+			<img src="images/setNormals_sphere_soft.png" alt="Envelope example a" width="300"/> 
+			<br><br>
+			<center><em>Shaded sphere with soft normals.</em></center>
+		 </td>
+	</tr>
+</table>     
+<h3>Consistent normals</h3>
+<table>
+	<tr>
+		<td>
+			<img src="images/conformNormals1.png" alt="Envelope example a" width="300"/> 
+			<br><br>
+			 <center><em>Building with inconsistent face normals.</em></center>
+		</td>
+		<td width="100">
+		</td>
+		<td>
+			<img src="images/conformNormals2.png" alt="Envelope example a" width="300"/> 
+			<br><br>
+			<center><em>Building with consistent face normals.</em></center>
+		 </td>
+	</tr>
+</table>     
 
 
 <!-- FOOTER -->
-<p class="foot">Copyright &copy;2008-2015 Esri R&D Center Zurich. All rights reserved.</p>				  
+<p class="foot">Copyright &copy;2008-2016 Esri R&D Center Zurich. All rights reserved.</p>				  
 
 </div>
 </body>

@@ -1,7 +1,7 @@
 var searchData=
 [
   ['object',['Object',['../classprt_1_1_object.html',1,'prt']]],
-  ['objectdestroyer',['ObjectDestroyer',['../classprtx_1_1_p_r_t_utils_1_1_object_destroyer.html',1,'prtx::PRTUtils']]],
+  ['objectdestroyer',['ObjectDestroyer',['../structprtx_1_1_p_r_t_utils_1_1_object_destroyer.html',1,'prtx::PRTUtils']]],
   ['objectptr',['ObjectPtr',['../classprtx_1_1_p_r_t_utils_1_1_object_ptr.html',1,'prtx::PRTUtils']]],
   ['objecttoxml',['objectToXML',['../namespaceprtx_1_1_p_r_t_utils.html#ac22ee1f5a929e7877386ab2935808ff6',1,'prtx::PRTUtils']]],
   ['occlusionset',['OcclusionSet',['../classprt_1_1_occlusion_set.html',1,'prt']]],

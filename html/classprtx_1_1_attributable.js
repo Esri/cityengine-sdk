@@ -1,5 +1,6 @@
 var classprtx_1_1_attributable =
 [
+    [ "PrimitiveType", "classprtx_1_1_attributable.html#a3db87e4f064fd8db35a04d22a139856d", null ],
     [ "Attributable", "classprtx_1_1_attributable.html#a0f9361c510aac2cd108b9f394e10cc91", null ],
     [ "~Attributable", "classprtx_1_1_attributable.html#a12f21f1dae6dd7e10f5e75cea56d5433", null ],
     [ "getBlindData", "classprtx_1_1_attributable.html#a9cee7768a8b8516def7402d889ac18b5", null ],
@@ -12,6 +13,6 @@ var classprtx_1_1_attributable =
     [ "getKeys", "classprtx_1_1_attributable.html#ad6182c2a5667105aa43a2e2f8b4c0689", null ],
     [ "getString", "classprtx_1_1_attributable.html#a3426f43453bbcbe32cdb31450f3c861b", null ],
     [ "getStringArray", "classprtx_1_1_attributable.html#a9287d5fe2068d3b257935ec7449ee31d", null ],
-    [ "getType", "classprtx_1_1_attributable.html#a97f47f4ccd3fd3f307f1557ab0f336e9", null ],
+    [ "getType", "classprtx_1_1_attributable.html#ae565a1d1e52850954cd0789eb981cf13", null ],
     [ "hasKey", "classprtx_1_1_attributable.html#a6ee84bdee913f80172acfa248269e39b", null ]
 ];

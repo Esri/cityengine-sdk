@@ -5,6 +5,8 @@ var classprtx_1_1_log_formatter_w =
     [ "LogFormatterW", "classprtx_1_1_log_formatter_w.html#a5eb1e410265b6dab077e157762e91c35", null ],
     [ "LogFormatterW", "classprtx_1_1_log_formatter_w.html#ac2ee8fe872c7bac8ea09d7954b484e09", null ],
     [ "LogFormatterW", "classprtx_1_1_log_formatter_w.html#afc5222f2f92d9fe049630c0582111aad", null ],
+    [ "LogFormatterW", "classprtx_1_1_log_formatter_w.html#a768d6e5b0a0c179e1235177ac700e3f1", null ],
+    [ "LogFormatterW", "classprtx_1_1_log_formatter_w.html#ae9897871d4467908878e2b502fe267fc", null ],
     [ "~LogFormatterW", "classprtx_1_1_log_formatter_w.html#acc69e86b6571a4df918ac1fbdc625866", null ],
     [ "log", "classprtx_1_1_log_formatter_w.html#a34e76f0b2aa796ff5aad5570425aba4a", null ],
     [ "operator%", "classprtx_1_1_log_formatter_w.html#aa093678c50d8959b8ebcab9ff88ba269", null ],
@@ -21,7 +23,6 @@ var classprtx_1_1_log_formatter_w =
     [ "operator%", "classprtx_1_1_log_formatter_w.html#a76ffc94a310adb1d98ce139da54f8b7b", null ],
     [ "operator%", "classprtx_1_1_log_formatter_w.html#a4a67664abed30e57c1c37fcdbbe969e8", null ],
     [ "operator%", "classprtx_1_1_log_formatter_w.html#a6e87fa356ee933308209724cebc3e3c0", null ],
-    [ "operator%", "classprtx_1_1_log_formatter_w.html#a2f0b35f988bdc2a152f690deb2099deb", null ],
     [ "operator%", "classprtx_1_1_log_formatter_w.html#a132ed6fd3b38569b75b87c1647716ee4", null ],
     [ "operator%", "classprtx_1_1_log_formatter_w.html#ad4e82580e6552bbc15837702b567d6b1", null ],
     [ "operator%", "classprtx_1_1_log_formatter_w.html#af3ea869031efcb4d57a689f8860af847", null ],
@@ -29,5 +30,5 @@ var classprtx_1_1_log_formatter_w =
     [ "operator%", "classprtx_1_1_log_formatter_w.html#af11eb703a73ca39436c939f772eb91b0", null ],
     [ "operator%", "classprtx_1_1_log_formatter_w.html#a13adb2af7e1ae6b333f67159019cb46a", null ],
     [ "operator%", "classprtx_1_1_log_formatter_w.html#a6fbcb0080fcf695a56ad6f1c5556b0b6", null ],
-    [ "operator<<", "classprtx_1_1_log_formatter_w.html#ad4ccd2d839ed989e2adcddc81f2691b3", null ]
+    [ "operator=", "classprtx_1_1_log_formatter_w.html#a2e6ae44d314f0e1df4e75fdf66922889", null ]
 ];

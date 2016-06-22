@@ -31,7 +31,7 @@
   <td id="projectlogo"><img alt="Logo" src="esri_prt_55px.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Esri Procedural Runtime
-   &#160;<span id="projectnumber">1.4.2074</span>
+   &#160;<span id="projectnumber">1.6.2663</span>
    </div>
   </td>
  </tr>
@@ -169,17 +169,20 @@ $(document).ready(function(){initNavTree('_file_extensions_8h_source.html','');}
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;</div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;} <span class="comment">// namespace prtx</span></div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* PRTX_FILEEXTENSIONS_H_ */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="preprocessor">#ifdef _MSC_VER</span></div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="preprocessor">#   pragma warning(pop)</span></div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* PRTX_FILEEXTENSIONS_H_ */</span><span class="preprocessor"></span></div>
 <div class="ttc" id="classprtx_1_1_file_extensions_html"><div class="ttname"><a href="classprtx_1_1_file_extensions.html">prtx::FileExtensions</a></div><div class="ttdef"><b>Definition:</b> FileExtensions.h:43</div></div>
-<div class="ttc" id="namespaceprtx_html_ac5fdcb1f68c5a0ac7295260cfd20b307"><div class="ttname"><a href="namespaceprtx.html#ac5fdcb1f68c5a0ac7295260cfd20b307">prtx::WStringVector</a></div><div class="ttdeci">std::vector&lt; std::wstring &gt; WStringVector</div><div class="ttdoc">vector of std::wstring </div><div class="ttdef"><b>Definition:</b> Types.h:55</div></div>
+<div class="ttc" id="namespaceprtx_html_ac5fdcb1f68c5a0ac7295260cfd20b307"><div class="ttname"><a href="namespaceprtx.html#ac5fdcb1f68c5a0ac7295260cfd20b307">prtx::WStringVector</a></div><div class="ttdeci">std::vector&lt; std::wstring &gt; WStringVector</div><div class="ttdoc">vector of std::wstring </div><div class="ttdef"><b>Definition:</b> Types.h:35</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_f4d0b50486959f5b523ec02356ccf9e2.html">prtx</a></li><li class="navelem"><b>FileExtensions.h</b></li>
-    <li class="footer">Generated on Mon Sep 28 2015 22:14:27 for Esri Procedural Runtime by
+    <li class="footer">Generated on Wed Jun 1 2016 18:56:58 for Esri Procedural Runtime by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.7 </li>
   </ul>

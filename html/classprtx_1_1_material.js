@@ -16,6 +16,6 @@ var classprtx_1_1_material =
     [ "getTexture", "classprtx_1_1_material.html#a11964526ffc6a33a1b1c43c5a0aa731a", null ],
     [ "getTextureArray", "classprtx_1_1_material.html#a4cd8d56e6496ef690a8b43ecca2815ae", null ],
     [ "getTextureArrayItem", "classprtx_1_1_material.html#a56c9887e46760de79dd5f367bb06b30e", null ],
-    [ "getType", "classprtx_1_1_material.html#ab8b89038afd787b4d5c8761f5fcd55fe", null ],
+    [ "getType", "classprtx_1_1_material.html#a16a70ccfe8b9e679744f624d1597df1c", null ],
     [ "hasKey", "classprtx_1_1_material.html#a06a5722d8f0b420de6792c1dfc38ba3f", null ]
 ];

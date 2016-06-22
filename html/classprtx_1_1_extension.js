@@ -8,7 +8,9 @@ var classprtx_1_1_extension =
       [ "ET_COUNT", "classprtx_1_1_extension.html#ad6048fac4019029ec39431db1d873801aa45cb845f502c461b3c0fa3f76b7fe23", null ]
     ] ],
     [ "Extension", "classprtx_1_1_extension.html#a52c4a11ff093ee293b47c46b0f498a31", null ],
+    [ "Extension", "classprtx_1_1_extension.html#a1d7478e72a33b585c1f999fc63e17f0c", null ],
     [ "~Extension", "classprtx_1_1_extension.html#a984ffbccdce5dfb4a1d14d8fb18d1630", null ],
     [ "getContentType", "classprtx_1_1_extension.html#afcb93de542d39e8737c39b250ba25c09", null ],
-    [ "getExtensionType", "classprtx_1_1_extension.html#a307f12933f13a31429aec91454c180f0", null ]
+    [ "getExtensionType", "classprtx_1_1_extension.html#a307f12933f13a31429aec91454c180f0", null ],
+    [ "operator=", "classprtx_1_1_extension.html#a666463f3c332706e0075da7fbf948d1e", null ]
 ];

@@ -20,6 +20,7 @@ var NAVTREE =
         [ "All", "functions.html", "functions_dup" ],
         [ "Functions", "functions_func.html", "functions_func" ],
         [ "Variables", "functions_vars.html", null ],
+        [ "Typedefs", "functions_type.html", null ],
         [ "Enumerations", "functions_enum.html", null ],
         [ "Enumerator", "functions_eval.html", null ]
       ] ]
@@ -34,10 +35,11 @@ var NAVTREEINDEX =
 [
 "_2_attributable_8h_source.html",
 "classprt_1_1_memory_output_callbacks.html#a21faf4e35269b6ee68a807d04f4b8b19",
-"classprtx_1_1_builtin_material_attributes_builder.html",
-"classprtx_1_1_encode_preparator.html#a3851fbecbcaea1ece14e355a90877ecd",
-"classprtx_1_1_log_formatter_w.html#a4a67664abed30e57c1c37fcdbbe969e8",
-"classprtx_1_1_stream_adaptor.html#a357722c1fe8398dd864211ed35e3fbc1"
+"classprtx_1_1_builtin_material_attributes.html#afa7bb2a2c5a80bc39470f134823d25d0",
+"classprtx_1_1_encode_options_validator.html#a2d0a6ad5e30160d00460969df7fce6f9",
+"classprtx_1_1_log_formatter.html#a99ba56d0f2668ef06b3b2b388d693be9",
+"classprtx_1_1_shape.html#a56b09a6b1bf2f842b92aa85e3ed7a501",
+"structprtx_1_1_encode_preparator_1_1_finalized_instance_base.html#ac0ef4d278655b53079016408cf32e24f"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

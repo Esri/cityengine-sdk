@@ -31,7 +31,7 @@
   <td id="projectlogo"><img alt="Logo" src="esri_prt_55px.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Esri Procedural Runtime
-   &#160;<span id="projectnumber">1.4.2074</span>
+   &#160;<span id="projectnumber">1.6.2663</span>
    </div>
   </td>
  </tr>
@@ -243,11 +243,14 @@ $(document).ready(function(){initNavTree('_a_p_i_8h_source.html','');});
 <div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;</div>
 <div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;PRT_EXPORTS_API <a class="code" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a>  <a class="code" href="namespaceprt.html#a0b4337b6cedb6d554afe1875c874047f">log</a>(<span class="keyword">const</span> <span class="keywordtype">wchar_t</span>* msg, <a class="code" href="namespaceprt.html#ac35a3cef5502bd6490d1742bd427916a">LogLevel</a> level);</div>
 <div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;</div>
-<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;</div>
-<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;} <span class="comment">/* namespace prt */</span></div>
-<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;</div>
-<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;</div>
-<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* PRT_API_H_ */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;PRT_EXPORTS_API <a class="code" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a>  <a class="code" href="namespaceprt.html#a134acce0e87126ded51dcbe9b1f9299b">setLogLevel</a>(<a class="code" href="namespaceprt.html#ac35a3cef5502bd6490d1742bd427916a">LogLevel</a> level);</div>
+<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;</div>
+<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;PRT_EXPORTS_API <a class="code" href="namespaceprt.html#ac35a3cef5502bd6490d1742bd427916a">LogLevel</a> <a class="code" href="namespaceprt.html#af25a90488eeae74f63442d12ac0583a2">getLogLevel</a>(<a class="code" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a>* status = <span class="keyword">nullptr</span>);</div>
+<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;</div>
+<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;} <span class="comment">/* namespace prt */</span></div>
+<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;</div>
+<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;</div>
+<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* PRT_API_H_ */</span><span class="preprocessor"></span></div>
 <div class="ttc" id="classprt_1_1_resolve_map_html"><div class="ttname"><a href="classprt_1_1_resolve_map.html">prt::ResolveMap</a></div><div class="ttdef"><b>Definition:</b> ResolveMap.h:37</div></div>
 <div class="ttc" id="namespaceprt_html_a162ddce1fca72929c0a1d463cbaedace"><div class="ttname"><a href="namespaceprt.html#a162ddce1fca72929c0a1d463cbaedace">prt::init</a></div><div class="ttdeci">const Object * init(const wchar_t **prtPlugins, size_t prtPluginsCount, LogLevel logLevel, const LicParams *lic, Status *stat=0)</div></div>
 <div class="ttc" id="namespaceprt_html_a75af4b46d5201f10f077f637002c190f"><div class="ttname"><a href="namespaceprt.html#a75af4b46d5201f10f077f637002c190f">prt::createDecoderInfo</a></div><div class="ttdeci">DecoderInfo const * createDecoderInfo(const wchar_t *decoderId, Status *stat=0)</div></div>
@@ -256,30 +259,32 @@ $(document).ready(function(){initNavTree('_a_p_i_8h_source.html','');});
 <div class="ttc" id="namespaceprt_html_a89e46749c5dc39f359a2eb0d0e970c20"><div class="ttname"><a href="namespaceprt.html#a89e46749c5dc39f359a2eb0d0e970c20">prt::addLogHandler</a></div><div class="ttdeci">Status addLogHandler(LogHandler *logHandler)</div></div>
 <div class="ttc" id="namespaceprt_html_a356d4059266a53b3ab45fe1ff6a66a4d"><div class="ttname"><a href="namespaceprt.html#a356d4059266a53b3ab45fe1ff6a66a4d">prt::getStatusDescription</a></div><div class="ttdeci">const char * getStatusDescription(Status stat)</div></div>
 <div class="ttc" id="namespaceprt_html_ac35a3cef5502bd6490d1742bd427916a"><div class="ttname"><a href="namespaceprt.html#ac35a3cef5502bd6490d1742bd427916a">prt::LogLevel</a></div><div class="ttdeci">LogLevel</div><div class="ttdef"><b>Definition:</b> LogLevel.h:29</div></div>
-<div class="ttc" id="classprt_1_1_log_handler_html"><div class="ttname"><a href="classprt_1_1_log_handler.html">prt::LogHandler</a></div><div class="ttdef"><b>Definition:</b> LogHandler.h:37</div></div>
+<div class="ttc" id="classprt_1_1_log_handler_html"><div class="ttname"><a href="classprt_1_1_log_handler.html">prt::LogHandler</a></div><div class="ttdef"><b>Definition:</b> LogHandler.h:36</div></div>
 <div class="ttc" id="structprt_1_1_lic_params_html"><div class="ttname"><a href="structprt_1_1_lic_params.html">prt::LicParams</a></div><div class="ttdef"><b>Definition:</b> API.h:47</div></div>
 <div class="ttc" id="classprt_1_1_decoder_info_html"><div class="ttname"><a href="classprt_1_1_decoder_info.html">prt::DecoderInfo</a></div><div class="ttdef"><b>Definition:</b> DecoderInfo.h:30</div></div>
 <div class="ttc" id="namespaceprt_html_a436140265511923d495469adb411b9a5"><div class="ttname"><a href="namespaceprt.html#a436140265511923d495469adb411b9a5">prt::createEncoderInfo</a></div><div class="ttdeci">EncoderInfo const * createEncoderInfo(const wchar_t *encoderId, Status *stat=0)</div></div>
 <div class="ttc" id="namespaceprt_html_a6694b33fa488d9eaf0ff21ac43dec3e5"><div class="ttname"><a href="namespaceprt.html#a6694b33fa488d9eaf0ff21ac43dec3e5">prt::getVersion</a></div><div class="ttdeci">Version const * getVersion()</div></div>
 <div class="ttc" id="namespaceprt_html_aed888be2cbb5bff27ee2d05c6f67da0f"><div class="ttname"><a href="namespaceprt.html#aed888be2cbb5bff27ee2d05c6f67da0f">prt::createResolveMap</a></div><div class="ttdeci">ResolveMap const * createResolveMap(const wchar_t *rpkURI, const wchar_t *unpackFileSystemPath=0, Status *stat=0)</div></div>
 <div class="ttc" id="classprt_1_1_encoder_info_html"><div class="ttname"><a href="classprt_1_1_encoder_info.html">prt::EncoderInfo</a></div><div class="ttdef"><b>Definition:</b> EncoderInfo.h:42</div></div>
-<div class="ttc" id="classprt_1_1_occlusion_set_html"><div class="ttname"><a href="classprt_1_1_occlusion_set.html">prt::OcclusionSet</a></div><div class="ttdef"><b>Definition:</b> OcclusionSet.h:36</div></div>
+<div class="ttc" id="classprt_1_1_occlusion_set_html"><div class="ttname"><a href="classprt_1_1_occlusion_set.html">prt::OcclusionSet</a></div><div class="ttdef"><b>Definition:</b> OcclusionSet.h:39</div></div>
 <div class="ttc" id="namespaceprt_html_abfe8090353f524a61fcf36af4a99e645"><div class="ttname"><a href="namespaceprt.html#abfe8090353f524a61fcf36af4a99e645">prt::encodeTexture</a></div><div class="ttdeci">Status encodeTexture(const AttributeMap *metadata, const uint8_t *pixeldata, const wchar_t *encoderId, const AttributeMap *encoderOptions, SimpleOutputCallbacks *soc)</div></div>
-<div class="ttc" id="classprt_1_1_object_html"><div class="ttname"><a href="classprt_1_1_object.html">prt::Object</a></div><div class="ttdef"><b>Definition:</b> Object.h:34</div></div>
+<div class="ttc" id="classprt_1_1_object_html"><div class="ttname"><a href="classprt_1_1_object.html">prt::Object</a></div><div class="ttdef"><b>Definition:</b> Object.h:35</div></div>
 <div class="ttc" id="namespaceprt_html_a0b4337b6cedb6d554afe1875c874047f"><div class="ttname"><a href="namespaceprt.html#a0b4337b6cedb6d554afe1875c874047f">prt::log</a></div><div class="ttdeci">Status log(const wchar_t *msg, LogLevel level)</div></div>
-<div class="ttc" id="classprt_1_1_simple_output_callbacks_html"><div class="ttname"><a href="classprt_1_1_simple_output_callbacks.html">prt::SimpleOutputCallbacks</a></div><div class="ttdef"><b>Definition:</b> Callbacks.h:228</div></div>
+<div class="ttc" id="classprt_1_1_simple_output_callbacks_html"><div class="ttname"><a href="classprt_1_1_simple_output_callbacks.html">prt::SimpleOutputCallbacks</a></div><div class="ttdef"><b>Definition:</b> Callbacks.h:230</div></div>
 <div class="ttc" id="classprt_1_1_cache_html"><div class="ttname"><a href="classprt_1_1_cache.html">prt::Cache</a></div><div class="ttdef"><b>Definition:</b> Cache.h:53</div></div>
 <div class="ttc" id="namespaceprt_html_a501cba1dbab21f74320d3edae47fcde2"><div class="ttname"><a href="namespaceprt.html#a501cba1dbab21f74320d3edae47fcde2">prt::getTexturePixeldata</a></div><div class="ttdeci">Status getTexturePixeldata(const wchar_t *uri, uint8_t *buffer, size_t bufferSize, Cache *cache=0)</div></div>
 <div class="ttc" id="classprt_1_1_attribute_map_html"><div class="ttname"><a href="classprt_1_1_attribute_map.html">prt::AttributeMap</a></div><div class="ttdef"><b>Definition:</b> AttributeMap.h:32</div></div>
-<div class="ttc" id="classprt_1_1_initial_shape_html"><div class="ttname"><a href="classprt_1_1_initial_shape.html">prt::InitialShape</a></div><div class="ttdef"><b>Definition:</b> InitialShape.h:47</div></div>
+<div class="ttc" id="classprt_1_1_initial_shape_html"><div class="ttname"><a href="classprt_1_1_initial_shape.html">prt::InitialShape</a></div><div class="ttdef"><b>Definition:</b> InitialShape.h:46</div></div>
 <div class="ttc" id="namespaceprt_html_acf0b3066b48a14bccb756bee9a4700e4"><div class="ttname"><a href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">prt::Status</a></div><div class="ttdeci">Status</div><div class="ttdef"><b>Definition:</b> Status.h:31</div></div>
+<div class="ttc" id="namespaceprt_html_af25a90488eeae74f63442d12ac0583a2"><div class="ttname"><a href="namespaceprt.html#af25a90488eeae74f63442d12ac0583a2">prt::getLogLevel</a></div><div class="ttdeci">LogLevel getLogLevel(Status *status=nullptr)</div></div>
 <div class="ttc" id="structprt_1_1_version_html"><div class="ttname"><a href="structprt_1_1_version.html">prt::Version</a></div><div class="ttdef"><b>Definition:</b> Version.h:30</div></div>
 <div class="ttc" id="namespaceprt_html_a2c4145b062e0958c575a68c611559c70"><div class="ttname"><a href="namespaceprt.html#a2c4145b062e0958c575a68c611559c70">prt::listEncoderIds</a></div><div class="ttdeci">wchar_t * listEncoderIds(wchar_t *result, size_t *resultSize, Status *stat=0)</div></div>
+<div class="ttc" id="namespaceprt_html_a134acce0e87126ded51dcbe9b1f9299b"><div class="ttname"><a href="namespaceprt.html#a134acce0e87126ded51dcbe9b1f9299b">prt::setLogLevel</a></div><div class="ttdeci">Status setLogLevel(LogLevel level)</div></div>
 <div class="ttc" id="namespaceprt_html_a1f062c0e72b9956ed72d05003fd9727a"><div class="ttname"><a href="namespaceprt.html#a1f062c0e72b9956ed72d05003fd9727a">prt::listDecoderIds</a></div><div class="ttdeci">wchar_t * listDecoderIds(wchar_t *result, size_t *resultSize, Status *stat=0)</div></div>
 <div class="ttc" id="namespaceprt_html_afa0ae24ac8c170f90d1393e077f7779f"><div class="ttname"><a href="namespaceprt.html#afa0ae24ac8c170f90d1393e077f7779f">prt::createRuleFileInfo</a></div><div class="ttdeci">RuleFileInfo const * createRuleFileInfo(const wchar_t *ruleFileURI, Cache *cache=0, Status *stat=0)</div></div>
-<div class="ttc" id="classprt_1_1_callbacks_html"><div class="ttname"><a href="classprt_1_1_callbacks.html">prt::Callbacks</a></div><div class="ttdef"><b>Definition:</b> Callbacks.h:43</div></div>
+<div class="ttc" id="classprt_1_1_callbacks_html"><div class="ttname"><a href="classprt_1_1_callbacks.html">prt::Callbacks</a></div><div class="ttdef"><b>Definition:</b> Callbacks.h:45</div></div>
 <div class="ttc" id="namespaceprt_html_a74ca85b8136772409924d4df7f4b5c07"><div class="ttname"><a href="namespaceprt.html#a74ca85b8136772409924d4df7f4b5c07">prt::generateOccluders</a></div><div class="ttdeci">Status generateOccluders(const InitialShape **const initialShapes, size_t initialShapeCount, prt::OcclusionSet::Handle *occlusionHandles, const wchar_t **encoders, size_t encodersCount, const AttributeMap **encoderOptions, Callbacks *callbacks, Cache *cache, OcclusionSet *occlSet, const AttributeMap *generateOptions=0)</div></div>
-<div class="ttc" id="classprt_1_1_rule_file_info_html"><div class="ttname"><a href="classprt_1_1_rule_file_info.html">prt::RuleFileInfo</a></div><div class="ttdef"><b>Definition:</b> RuleFileInfo.h:63</div></div>
+<div class="ttc" id="classprt_1_1_rule_file_info_html"><div class="ttname"><a href="classprt_1_1_rule_file_info.html">prt::RuleFileInfo</a></div><div class="ttdef"><b>Definition:</b> RuleFileInfo.h:62</div></div>
 <div class="ttc" id="namespaceprt_html_a0e58922795880d9c4e5200f05ca0ae07"><div class="ttname"><a href="namespaceprt.html#a0e58922795880d9c4e5200f05ca0ae07">prt::removeLogHandler</a></div><div class="ttdeci">Status removeLogHandler(LogHandler *logHandler)</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
@@ -287,7 +292,7 @@ $(document).ready(function(){initNavTree('_a_p_i_8h_source.html','');});
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_e104a5fd3f1a5c6eb1edb871fc217c8e.html">prt</a></li><li class="navelem"><b>API.h</b></li>
-    <li class="footer">Generated on Mon Sep 28 2015 22:14:27 for Esri Procedural Runtime by
+    <li class="footer">Generated on Wed Jun 1 2016 18:56:58 for Esri Procedural Runtime by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.7 </li>
   </ul>

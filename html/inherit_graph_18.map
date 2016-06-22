@@ -1,3 +1,15 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$structprtx_1_1_name_preparator_1_1_namespace_info.html" title="prtx::NamePreparator\l::NamespaceInfo" alt="" coords="5,5,152,51"/>
+<area shape="rect" id="node1" href="$classprtx_1_1_extension.html" title="prtx::Extension" alt="" coords="7,165,116,195"/>
+<area shape="rect" id="node3" href="$classprtx_1_1_adaptor.html" title="prtx::Adaptor" alt="" coords="168,59,264,88"/>
+<area shape="rect" id="node7" href="$classprtx_1_1_decoder.html" title="prtx::Decoder" alt="" coords="165,165,267,195"/>
+<area shape="rect" id="node19" href="$classprtx_1_1_encoder.html" title="prtx::Encoder" alt="" coords="167,352,265,381"/>
+<area shape="rect" id="node5" href="$classprtx_1_1_stream_adaptor.html" title="prtx::StreamAdaptor" alt="" coords="325,5,464,35"/>
+<area shape="rect" id="node9" href="$classprtx_1_1_c_g_b_decoder.html" title="prtx::CGBDecoder" alt="" coords="329,59,460,88"/>
+<area shape="rect" id="node11" href="$classprtx_1_1_geometry_decoder.html" title="prtx::GeometryDecoder" alt="" coords="316,112,473,141"/>
+<area shape="rect" id="node13" href="$classprtx_1_1_material_decoder.html" title="prtx::MaterialDecoder" alt="" coords="321,165,468,195"/>
+<area shape="rect" id="node15" href="$classprtx_1_1_shader_decoder.html" title="prtx::ShaderDecoder" alt="" coords="324,219,465,248"/>
+<area shape="rect" id="node17" href="$classprtx_1_1_texture_decoder.html" title="prtx::TextureDecoder" alt="" coords="323,272,467,301"/>
+<area shape="rect" id="node21" href="$classprtx_1_1_geometry_encoder.html" title="prtx::GeometryEncoder" alt="" coords="316,325,473,355"/>
+<area shape="rect" id="node23" href="$classprtx_1_1_material_encoder.html" title="prtx::MaterialEncoder" alt="" coords="321,379,468,408"/>
+<area shape="rect" id="node25" href="$classprtx_1_1_texture_encoder.html" title="prtx::TextureEncoder" alt="" coords="323,432,467,461"/>
 </map>

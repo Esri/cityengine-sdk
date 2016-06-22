@@ -31,7 +31,7 @@
   <td id="projectlogo"><img alt="Logo" src="esri_prt_55px.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Esri Procedural Runtime
-   &#160;<span id="projectnumber">1.4.2074</span>
+   &#160;<span id="projectnumber">1.6.2663</span>
    </div>
   </td>
  </tr>
@@ -108,8 +108,7 @@ $(document).ready(function(){initNavTree('classprtx_1_1_builtin_shape_attributes
   <div class="summary">
 <a href="classprtx_1_1_builtin_shape_attributes-members.html">List of all members</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pro-methods">Protected Member Functions</a> &#124;
-<a href="#pro-static-attribs">Static Protected Attributes</a>  </div>
+<a href="#pro-methods">Protected Member Functions</a>  </div>
   <div class="headertitle">
 <div class="title">prtx::BuiltinShapeAttributes Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
 </div><!--header-->
@@ -134,15 +133,6 @@ virtual const std::wstring &amp;&#160;</td><td class="memItemRight" valign="bott
 <tr class="memitem:a1b9d7ffff535fc884641258f08620bb7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1b9d7ffff535fc884641258f08620bb7"></a>
 virtual double&#160;</td><td class="memItemRight" valign="bottom"><b>comp_total</b> () const =0</td></tr>
 <tr class="separator:a1b9d7ffff535fc884641258f08620bb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a415ec00d2d616c6f816b8912514202b2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a415ec00d2d616c6f816b8912514202b2"></a>
-virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>getBuiltinBool</b> (const std::wstring &amp;k, bool &amp;stat) const </td></tr>
-<tr class="separator:a415ec00d2d616c6f816b8912514202b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeb0a057bb16066fdb2a73e9962f86808"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aeb0a057bb16066fdb2a73e9962f86808"></a>
-virtual double&#160;</td><td class="memItemRight" valign="bottom"><b>getBuiltinFloat</b> (const std::wstring &amp;k, bool &amp;stat) const </td></tr>
-<tr class="separator:aeb0a057bb16066fdb2a73e9962f86808"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a73e005d9ca23b90903bcc3b49dc407a3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a73e005d9ca23b90903bcc3b49dc407a3"></a>
-virtual const std::wstring &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getBuiltinString</b> (const std::wstring &amp;k, bool &amp;val) const </td></tr>
-<tr class="separator:a73e005d9ca23b90903bcc3b49dc407a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8f74aafb398dc062c5ccd621e717fbb1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8f74aafb398dc062c5ccd621e717fbb1"></a>
 virtual const std::wstring &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>initialShape_name</b> () const =0</td></tr>
 <tr class="separator:a8f74aafb398dc062c5ccd621e717fbb1"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -386,37 +376,22 @@ virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>trim_vertical
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:ab0589b33df7bcba3d01a4cce54d151f7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab0589b33df7bcba3d01a4cce54d151f7"></a>
-virtual const wchar_t **&#160;</td><td class="memItemRight" valign="bottom"><b>getBoolAttrKeys</b> () const </td></tr>
-<tr class="separator:ab0589b33df7bcba3d01a4cce54d151f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a47c768c96b95185084fd46fb1e452b82"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a47c768c96b95185084fd46fb1e452b82"></a>
-virtual const wchar_t **&#160;</td><td class="memItemRight" valign="bottom"><b>getFloatAttrKeys</b> () const </td></tr>
-<tr class="separator:a47c768c96b95185084fd46fb1e452b82"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4966d4d161cadbb9ccd641143712f1fc"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4966d4d161cadbb9ccd641143712f1fc"></a>
-virtual const wchar_t **&#160;</td><td class="memItemRight" valign="bottom"><b>getStringAttrKeys</b> () const </td></tr>
-<tr class="separator:a4966d4d161cadbb9ccd641143712f1fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pro_methods_classprtx_1_1_builtin_attributes"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classprtx_1_1_builtin_attributes')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classprtx_1_1_builtin_attributes.html">prtx::BuiltinAttributes</a></td></tr>
-<tr class="memitem:ae8db74a953a14dcebbca975c6d0df99b inherit pro_methods_classprtx_1_1_builtin_attributes"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae8db74a953a14dcebbca975c6d0df99b"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>fillBuiltinKeys</b> (<a class="el" href="namespaceprtx.html#ac5fdcb1f68c5a0ac7295260cfd20b307">WStringVector</a> &amp;keys) const </td></tr>
-<tr class="separator:ae8db74a953a14dcebbca975c6d0df99b inherit pro_methods_classprtx_1_1_builtin_attributes"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6478d94a3af58b550a38c5b4ec795dfb inherit pro_methods_classprtx_1_1_builtin_attributes"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6478d94a3af58b550a38c5b4ec795dfb"></a>
-<a class="el" href="classprt_1_1_attributable.html#aaa464b033212c723bf25b39383b19012">prt::Attributable::PrimitiveType</a>&#160;</td><td class="memItemRight" valign="bottom"><b>getBuiltinType</b> (const std::wstring &amp;k) const </td></tr>
-<tr class="separator:a6478d94a3af58b550a38c5b4ec795dfb inherit pro_methods_classprtx_1_1_builtin_attributes"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-static-attribs"></a>
-Static Protected Attributes</h2></td></tr>
-<tr class="memitem:a2c2fbc941c1ea818dc3219ffacc2ef39"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2c2fbc941c1ea818dc3219ffacc2ef39"></a>
-static const wchar_t *&#160;</td><td class="memItemRight" valign="bottom"><b>BOOL_ATTRS</b> []</td></tr>
-<tr class="separator:a2c2fbc941c1ea818dc3219ffacc2ef39"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4316a48e1ef76cba9060fed91a254170"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4316a48e1ef76cba9060fed91a254170"></a>
-static const wchar_t *&#160;</td><td class="memItemRight" valign="bottom"><b>FLOAT_ATTRS</b> []</td></tr>
-<tr class="separator:a4316a48e1ef76cba9060fed91a254170"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a68b1fd6191091ec068170e927b0a22ac"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a68b1fd6191091ec068170e927b0a22ac"></a>
-static std::vector&lt; std::wstring &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>mBuiltinKeys</b></td></tr>
-<tr class="separator:a68b1fd6191091ec068170e927b0a22ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae9d8f83c8abee6e1a6b8275b2491c684"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae9d8f83c8abee6e1a6b8275b2491c684"></a>
-static const wchar_t *&#160;</td><td class="memItemRight" valign="bottom"><b>STRING_ATTRS</b> []</td></tr>
-<tr class="separator:ae9d8f83c8abee6e1a6b8275b2491c684"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa9405ebd96e6b352c765c7453490a0ae"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa9405ebd96e6b352c765c7453490a0ae"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>fillBuiltinKeys</b> (<a class="el" href="namespaceprtx.html#ac5fdcb1f68c5a0ac7295260cfd20b307">WStringVector</a> &amp;keys) const override</td></tr>
+<tr class="separator:aa9405ebd96e6b352c765c7453490a0ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b6717b58d9a7f88f8a67c17c2a99471"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5b6717b58d9a7f88f8a67c17c2a99471"></a>
+virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>getBuiltinBool</b> (const std::wstring &amp;k, bool &amp;stat) const override</td></tr>
+<tr class="separator:a5b6717b58d9a7f88f8a67c17c2a99471"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a34d5bd0d760484d6286722f1883b840d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a34d5bd0d760484d6286722f1883b840d"></a>
+virtual double&#160;</td><td class="memItemRight" valign="bottom"><b>getBuiltinFloat</b> (const std::wstring &amp;k, bool &amp;stat) const override</td></tr>
+<tr class="separator:a34d5bd0d760484d6286722f1883b840d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab9aa40d54911460534be4a9615b4ddac"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab9aa40d54911460534be4a9615b4ddac"></a>
+virtual const std::wstring &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getBuiltinString</b> (const std::wstring &amp;k, bool &amp;val) const override</td></tr>
+<tr class="separator:ab9aa40d54911460534be4a9615b4ddac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaf9d6789ba5ba85e255dc4a59e0b84a1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aaf9d6789ba5ba85e255dc4a59e0b84a1"></a>
+virtual <br class="typebreak" />
+<a class="el" href="classprt_1_1_attributable.html#aaa464b033212c723bf25b39383b19012">prt::Attributable::PrimitiveType</a>&#160;</td><td class="memItemRight" valign="bottom"><b>getBuiltinType</b> (const std::wstring &amp;k) const override</td></tr>
+<tr class="separator:aaf9d6789ba5ba85e255dc4a59e0b84a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Interface for direct getters of the <a href="cgaref/cgareference/cgaindex.html#shapeattributes">CGA Shape Attributes</a>. </p><dl class="section see"><dt>See also</dt><dd><a class="el" href="classprtx_1_1_shape.html">Shape</a> </dd></dl>
@@ -429,7 +404,7 @@ static const wchar_t *&#160;</td><td class="memItemRight" valign="bottom"><b>STR
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespaceprtx.html">prtx</a></li><li class="navelem"><a class="el" href="classprtx_1_1_builtin_shape_attributes.html">BuiltinShapeAttributes</a></li>
-    <li class="footer">Generated on Mon Sep 28 2015 22:14:27 for Esri Procedural Runtime by
+    <li class="footer">Generated on Wed Jun 1 2016 18:56:58 for Esri Procedural Runtime by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.7 </li>
   </ul>

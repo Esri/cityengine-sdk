@@ -16,6 +16,9 @@ var classprtx_1_1_mesh_builder =
     [ "addNormalCoords", "classprtx_1_1_mesh_builder.html#ab8a1643865cd6c5a2427a6bc81e9b201", null ],
     [ "addNormalCoords", "classprtx_1_1_mesh_builder.html#ab31ae4d4e1669833877351e8289dcf71", null ],
     [ "addNormalCoords", "classprtx_1_1_mesh_builder.html#a122db43be75726b8286850c4a97e79ef", null ],
+    [ "addTextureRegionCoords", "classprtx_1_1_mesh_builder.html#aeb22b0f206c33c34c6a1dc21a4301982", null ],
+    [ "addTextureRegionCoords", "classprtx_1_1_mesh_builder.html#a6baa404819b014a2bcff0edba70a2501", null ],
+    [ "addTextureRegionCoords", "classprtx_1_1_mesh_builder.html#a6ca3a9443a46cbe9bf2c579e5d966465", null ],
     [ "addUVCoords", "classprtx_1_1_mesh_builder.html#afcc463883d10a162310171f084ee8ef2", null ],
     [ "addUVCoords", "classprtx_1_1_mesh_builder.html#a3c641fe7b78e26cd3bda9c1fd9c31ed1", null ],
     [ "addUVCoords", "classprtx_1_1_mesh_builder.html#a4556669335dcd97f8a4e0e7667ef413b", null ],
@@ -30,6 +33,7 @@ var classprtx_1_1_mesh_builder =
     [ "resetMaterials", "classprtx_1_1_mesh_builder.html#a4eacb986044eafd84e10feb46d73f6fb", null ],
     [ "setFaceMaterialIndex", "classprtx_1_1_mesh_builder.html#a13491e11a8a828d82d53985162f35d4a", null ],
     [ "setFaceNormalIndices", "classprtx_1_1_mesh_builder.html#a90359553f0fce72afb8e8e94bf566886", null ],
+    [ "setFaceTextureRegionIndex", "classprtx_1_1_mesh_builder.html#ad26d0004ef25d29c3082dbfe59d2b8e3", null ],
     [ "setFaceUVIndices", "classprtx_1_1_mesh_builder.html#a60b1498c9b359010430fc3f3ed90057a", null ],
     [ "setFaceVertexIndices", "classprtx_1_1_mesh_builder.html#a5178f99a6d6135e876dfa29a1260cc8e", null ],
     [ "setName", "classprtx_1_1_mesh_builder.html#a201a288e6691f748531dd704b6355e19", null ]

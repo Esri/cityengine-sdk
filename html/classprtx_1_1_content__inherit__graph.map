@@ -1,9 +1,9 @@
 <map id="prtx::Content" name="prtx::Content">
-<area shape="rect" id="node5" href="$classprtx_1_1_c_g_b.html" title="prtx::CGB" alt="" coords="5,160,85,189"/>
-<area shape="rect" id="node7" href="$classprtx_1_1_comparable_content.html" title="prtx::ComparableContent" alt="" coords="109,160,277,189"/>
-<area shape="rect" id="node15" href="$classprtx_1_1_geometry.html" title="prtx::Geometry" alt="" coords="301,160,411,189"/>
-<area shape="rect" id="node17" href="$classprtx_1_1_mesh.html" title="prtx::Mesh" alt="" coords="435,160,517,189"/>
-<area shape="rect" id="node9" href="$classprtx_1_1_material.html" title="prtx::Material" alt="" coords="24,237,123,267"/>
-<area shape="rect" id="node11" href="$classprtx_1_1_shader.html" title="prtx::Shader" alt="" coords="147,237,240,267"/>
-<area shape="rect" id="node13" href="$classprtx_1_1_texture.html" title="prtx::Texture" alt="" coords="264,237,360,267"/>
+<area shape="rect" id="node3" href="$classprtx_1_1_c_g_b.html" title="prtx::CGB" alt="" coords="5,83,85,112"/>
+<area shape="rect" id="node5" href="$classprtx_1_1_comparable_content.html" title="prtx::ComparableContent" alt="" coords="109,83,277,112"/>
+<area shape="rect" id="node13" href="$classprtx_1_1_geometry.html" title="prtx::Geometry" alt="" coords="301,83,411,112"/>
+<area shape="rect" id="node15" href="$classprtx_1_1_mesh.html" title="prtx::Mesh" alt="" coords="435,83,517,112"/>
+<area shape="rect" id="node7" href="$classprtx_1_1_material.html" title="prtx::Material" alt="" coords="24,160,123,189"/>
+<area shape="rect" id="node9" href="$classprtx_1_1_shader.html" title="prtx::Shader" alt="" coords="147,160,240,189"/>
+<area shape="rect" id="node11" href="$classprtx_1_1_texture.html" title="prtx::Texture" alt="" coords="264,160,360,189"/>
 </map>

@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['fetchfinalizedinstances',['fetchFinalizedInstances',['../classprtx_1_1_encode_preparator.html#abde29e7a3351acc67746b8b26d2761be',1,'prtx::EncodePreparator']]],
+  ['fetchfinalizedinstances',['fetchFinalizedInstances',['../classprtx_1_1_encode_preparator.html#ac590db9fbdaf2c81bf972a9da974843c',1,'prtx::EncodePreparator']]],
   ['fileextensions',['FileExtensions',['../classprtx_1_1_file_extensions.html#ab37caaf6d8d82bf423b217cf3e7a784c',1,'prtx::FileExtensions::FileExtensions(const std::wstring &amp;e)'],['../classprtx_1_1_file_extensions.html#ad5a09b34fabc8486fdd26ab556f990f3',1,'prtx::FileExtensions::FileExtensions(const WStringVector &amp;v)']]],
   ['finalize',['finalize',['../classprtx_1_1_reports_accumulator.html#af336a21263086dddfe22f76e295acfea',1,'prtx::ReportsAccumulator']]],
   ['finish',['finish',['../classprtx_1_1_encoder.html#af64bcbbeb6522f48009fa9d8a90bd61d',1,'prtx::Encoder']]],
@@ -11,5 +11,6 @@ var searchData=
   ['flagaspoint3d',['flagAsPoint3D',['../classprtx_1_1_encode_options_annotator.html#a0744a5465fbf90d1d4516aee928d4730',1,'prtx::EncodeOptionsAnnotator']]],
   ['flushall',['flushAll',['../classprt_1_1_cache.html#aeb26f522c077c5a4c61d513dce53ea24',1,'prt::Cache']]],
   ['flushcontenttype',['flushContentType',['../classprt_1_1_cache.html#adbc09156293308b739d6f817b94b5c29',1,'prt::Cache']]],
-  ['flushentry',['flushEntry',['../classprt_1_1_cache.html#a5a2c8e1d7f807aaedeeb149db5ba52cd',1,'prt::Cache']]]
+  ['flushentry',['flushEntry',['../classprt_1_1_cache.html#a5a2c8e1d7f807aaedeeb149db5ba52cd',1,'prt::Cache']]],
+  ['forceatlasing',['forceAtlasing',['../classprtx_1_1_encode_preparator_1_1_preparation_flags.html#a9d1a015c1dd2415d218e8853aa90e521',1,'prtx::EncodePreparator::PreparationFlags']]]
 ];

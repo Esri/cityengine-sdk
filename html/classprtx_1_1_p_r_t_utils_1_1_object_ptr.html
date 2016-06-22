@@ -31,7 +31,7 @@
   <td id="projectlogo"><img alt="Logo" src="esri_prt_55px.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Esri Procedural Runtime
-   &#160;<span id="projectnumber">1.4.2074</span>
+   &#160;<span id="projectnumber">1.6.2663</span>
    </div>
   </td>
  </tr>
@@ -134,6 +134,9 @@ P *&#160;</td><td class="memItemRight" valign="bottom"><b>get</b> () const </td>
 <tr class="memitem:a10f3e8e1360100e56626ade5d6e82268"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a10f3e8e1360100e56626ade5d6e82268"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>ObjectPtr</b> (P *p)</td></tr>
 <tr class="separator:a10f3e8e1360100e56626ade5d6e82268"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2fd985eeb40f3e87ce574058b2afadf1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2fd985eeb40f3e87ce574058b2afadf1"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>operator bool</b> () const </td></tr>
+<tr class="separator:a2fd985eeb40f3e87ce574058b2afadf1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a821fd113d42f0008f0f45e2143062104"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a821fd113d42f0008f0f45e2143062104"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>operator()</b> () const </td></tr>
 <tr class="separator:a821fd113d42f0008f0f45e2143062104"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -149,12 +152,15 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>operator&lt;</b> (con
 <tr class="memitem:a174b2b163d6443f56c1508fb91e1b56b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a174b2b163d6443f56c1508fb91e1b56b"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>operator==</b> (const <a class="el" href="classprtx_1_1_p_r_t_utils_1_1_object_ptr.html">ObjectPtr</a>&lt; P &gt; &amp;rhs) const </td></tr>
 <tr class="separator:a174b2b163d6443f56c1508fb91e1b56b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3ade37c3a71cf13b6889f90fcf082ab5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3ade37c3a71cf13b6889f90fcf082ab5"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>reset</b> (P *p)</td></tr>
+<tr class="separator:a3ade37c3a71cf13b6889f90fcf082ab5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:aa98a769b114d4b99d506b00b1a1095dc"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa98a769b114d4b99d506b00b1a1095dc"></a>
-boost::shared_ptr&lt; P &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>mPRT</b></td></tr>
-<tr class="separator:aa98a769b114d4b99d506b00b1a1095dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6c3d13bf9ff9ed75aac89e688f10edc6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6c3d13bf9ff9ed75aac89e688f10edc6"></a>
+std::shared_ptr&lt; P &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>mPRT</b></td></tr>
+<tr class="separator:a6c3d13bf9ff9ed75aac89e688f10edc6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;typename P&gt;<br />
@@ -170,7 +176,7 @@ class prtx::PRTUtils::ObjectPtr&lt; P &gt;</h3>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespaceprtx.html">prtx</a></li><li class="navelem"><a class="el" href="namespaceprtx_1_1_p_r_t_utils.html">PRTUtils</a></li><li class="navelem"><a class="el" href="classprtx_1_1_p_r_t_utils_1_1_object_ptr.html">ObjectPtr</a></li>
-    <li class="footer">Generated on Mon Sep 28 2015 22:14:28 for Esri Procedural Runtime by
+    <li class="footer">Generated on Wed Jun 1 2016 18:56:58 for Esri Procedural Runtime by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.7 </li>
   </ul>

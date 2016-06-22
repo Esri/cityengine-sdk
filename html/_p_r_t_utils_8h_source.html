@@ -31,7 +31,7 @@
   <td id="projectlogo"><img alt="Logo" src="esri_prt_55px.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Esri Procedural Runtime
-   &#160;<span id="projectnumber">1.4.2074</span>
+   &#160;<span id="projectnumber">1.6.2663</span>
    </div>
   </td>
  </tr>
@@ -126,29 +126,29 @@ $(document).ready(function(){initNavTree('_p_r_t_utils_8h_source.html','');});
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#ifndef PRTX_CLASSUTILS_H_</span></div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#define PRTX_CLASSUTILS_H_</span></div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &quot;prt/Object.h&quot;</span></div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#include &quot;boost/shared_ptr.hpp&quot;</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#include &quot;prtx/prtx.h&quot;</span></div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#include &quot;prt/Object.h&quot;</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#include &quot;prtx/prtx.h&quot;</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#include &lt;memory&gt;</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#include &lt;cassert&gt;</span></div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keyword">namespace </span>prt {</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="keyword">class </span>AttributeMap;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keyword">class </span>AttributeMapBuilder;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keyword">class </span>ResolveMap;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keyword">class </span>ResolveMapBuilder;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="keyword">class </span>InitialShape;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="keyword">class </span>InitialShapeBuilder;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="keyword">class </span>RuleFileInfo;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="keyword">class </span>EncoderInfo;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="keyword">class </span>DecoderInfo;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="keyword">class </span>Annotation;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="keyword">class </span>AttributeMap;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="keyword">class </span>AttributeMapBuilder;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keyword">class </span>ResolveMap;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keyword">class </span>ResolveMapBuilder;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keyword">class </span>InitialShape;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="keyword">class </span>InitialShapeBuilder;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="keyword">class </span>RuleFileInfo;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="keyword">class </span>EncoderInfo;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="keyword">class </span>DecoderInfo;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="keyword">class </span>Annotation;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="keyword">class </span>CacheObject;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="keyword">class </span>OcclusionSet;</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;} <span class="comment">// namespace prt</span></div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;</div>
@@ -159,62 +159,67 @@ $(document).ready(function(){initNavTree('_p_r_t_utils_8h_source.html','');});
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="keyword">namespace </span>PRTUtils {</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;</div>
-<div class="line"><a name="l00060"></a><span class="lineno"><a class="line" href="classprtx_1_1_p_r_t_utils_1_1_object_destroyer.html">   60</a></span>&#160;<span class="keyword">class </span><a class="code" href="classprtx_1_1_p_r_t_utils_1_1_object_destroyer.html">ObjectDestroyer</a> {</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keywordtype">void</span> operator()(<a class="code" href="classprt_1_1_object.html">prt::Object</a> <span class="keyword">const</span>* p) { p-&gt;<a class="code" href="classprt_1_1_object.html#acc54db5c6d262525ed65a6edad804e34">destroy</a>(); }</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;};</div>
+<div class="line"><a name="l00060"></a><span class="lineno"><a class="line" href="structprtx_1_1_p_r_t_utils_1_1_object_destroyer.html">   60</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structprtx_1_1_p_r_t_utils_1_1_object_destroyer.html">ObjectDestroyer</a> {</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keywordtype">void</span> operator()(<a class="code" href="classprt_1_1_object.html">prt::Object</a> <span class="keyword">const</span>* p) { p-&gt;<a class="code" href="classprt_1_1_object.html#acc54db5c6d262525ed65a6edad804e34">destroy</a>(); }</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;};</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;</div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;</div>
-<div class="line"><a name="l00069"></a><span class="lineno"><a class="line" href="classprtx_1_1_p_r_t_utils_1_1_object_ptr.html">   69</a></span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> P&gt; <span class="keyword">class </span><a class="code" href="classprtx_1_1_p_r_t_utils_1_1_object_ptr.html">ObjectPtr</a> {</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="keyword">typedef</span> P   type;</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keyword">typedef</span> P*  ptrType;</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <a class="code" href="classprtx_1_1_p_r_t_utils_1_1_object_ptr.html">ObjectPtr</a>() { }</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="keyword">explicit</span> <a class="code" href="classprtx_1_1_p_r_t_utils_1_1_object_ptr.html">ObjectPtr</a>(P* p) : mPRT(p, <a class="code" href="classprtx_1_1_p_r_t_utils_1_1_object_destroyer.html">ObjectDestroyer</a>()) { assert(p != 0); }</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="classprtx_1_1_p_r_t_utils_1_1_object_ptr.html">ObjectPtr</a>() { }</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    P* <span class="keyword">get</span>() <span class="keyword">const</span> { <span class="keywordflow">return</span> mPRT.get(); }</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    P* operator-&gt;()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> mPRT.get(); }</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    P&amp; operator*()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> *mPRT; }</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <span class="keywordtype">bool</span> operator&lt;(const ObjectPtr&lt;P&gt;&amp; rhs) <span class="keyword">const</span> { <span class="keywordflow">return</span> (mPRT.get() &lt; rhs.mPRT.get()); }</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="keywordtype">bool</span> operator==(<span class="keyword">const</span> <a class="code" href="classprtx_1_1_p_r_t_utils_1_1_object_ptr.html">ObjectPtr&lt;P&gt;</a>&amp; rhs)<span class="keyword"> const </span>{ <span class="keywordflow">return</span> (mPRT.get() == rhs.mPRT.get()); }</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="keywordtype">bool</span> operator()()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> mPRT; }</div>
+<div class="line"><a name="l00068"></a><span class="lineno"><a class="line" href="classprtx_1_1_p_r_t_utils_1_1_object_ptr.html">   68</a></span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> P&gt; <span class="keyword">class </span><a class="code" href="classprtx_1_1_p_r_t_utils_1_1_object_ptr.html">ObjectPtr</a> {</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keyword">typedef</span> P   type;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="keyword">typedef</span> P*  ptrType;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <a class="code" href="classprtx_1_1_p_r_t_utils_1_1_object_ptr.html">ObjectPtr</a>() { }</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keyword">explicit</span> <a class="code" href="classprtx_1_1_p_r_t_utils_1_1_object_ptr.html">ObjectPtr</a>(P* p) : mPRT(p, <a class="code" href="structprtx_1_1_p_r_t_utils_1_1_object_destroyer.html">ObjectDestroyer</a>()) { assert(p != <span class="keyword">nullptr</span>); }</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="classprtx_1_1_p_r_t_utils_1_1_object_ptr.html">ObjectPtr</a>() { }</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    P* <span class="keyword">get</span>() <span class="keyword">const</span> { <span class="keywordflow">return</span> mPRT.get(); }</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    P* operator-&gt;()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> mPRT.get(); }</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    P&amp; operator*()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> *mPRT; }</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="keywordtype">bool</span> operator&lt;(const ObjectPtr&lt;P&gt;&amp; rhs) <span class="keyword">const</span> { <span class="keywordflow">return</span> (mPRT.get() &lt; rhs.mPRT.get()); }</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <span class="keywordtype">bool</span> operator==(<span class="keyword">const</span> <a class="code" href="classprtx_1_1_p_r_t_utils_1_1_object_ptr.html">ObjectPtr&lt;P&gt;</a>&amp; rhs)<span class="keyword"> const </span>{ <span class="keywordflow">return</span> (mPRT.get() == rhs.mPRT.get()); }</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="keywordtype">bool</span> operator()()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> (<span class="keywordtype">bool</span>)mPRT; }</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="keyword">explicit</span> <span class="keyword">operator</span> bool()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> mPRT.operator bool(); }</div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    boost::shared_ptr&lt;P&gt; mPRT;</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;};</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="keyword">typedef</span> <a class="code" href="classprtx_1_1_p_r_t_utils_1_1_object_ptr.html">ObjectPtr&lt;const	prt::AttributeMap&gt;</a>          <a class="code" href="classprtx_1_1_p_r_t_utils_1_1_object_ptr.html">AttributeMapPtr</a>;</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="keyword">typedef</span> <a class="code" href="classprtx_1_1_p_r_t_utils_1_1_object_ptr.html">ObjectPtr&lt;		prt::AttributeMapBuilder&gt;</a>   <a class="code" href="classprtx_1_1_p_r_t_utils_1_1_object_ptr.html">AttributeMapBuilderPtr</a>;</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="keyword">typedef</span> <a class="code" href="classprtx_1_1_p_r_t_utils_1_1_object_ptr.html">ObjectPtr&lt;const	prt::ResolveMap&gt;</a>            <a class="code" href="classprtx_1_1_p_r_t_utils_1_1_object_ptr.html">ResolveMapPtr</a>;</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="keyword">typedef</span> <a class="code" href="classprtx_1_1_p_r_t_utils_1_1_object_ptr.html">ObjectPtr&lt;		prt::ResolveMapBuilder&gt;</a>     <a class="code" href="classprtx_1_1_p_r_t_utils_1_1_object_ptr.html">ResolveMapBuilderPtr</a>;</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="keyword">typedef</span> <a class="code" href="classprtx_1_1_p_r_t_utils_1_1_object_ptr.html">ObjectPtr&lt;const	prt::InitialShape&gt;</a>          <a class="code" href="classprtx_1_1_p_r_t_utils_1_1_object_ptr.html">InitialShapePtr</a>;</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="keyword">typedef</span> <a class="code" href="classprtx_1_1_p_r_t_utils_1_1_object_ptr.html">ObjectPtr&lt;		prt::InitialShapeBuilder&gt;</a>   <a class="code" href="classprtx_1_1_p_r_t_utils_1_1_object_ptr.html">InitialShapeBuilderPtr</a>;</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="keyword">typedef</span> <a class="code" href="classprtx_1_1_p_r_t_utils_1_1_object_ptr.html">ObjectPtr&lt;const	prt::RuleFileInfo&gt;</a>          <a class="code" href="classprtx_1_1_p_r_t_utils_1_1_object_ptr.html">RuleFileInfoPtr</a>;</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="keyword">typedef</span> <a class="code" href="classprtx_1_1_p_r_t_utils_1_1_object_ptr.html">ObjectPtr&lt;const	prt::EncoderInfo&gt;</a>           <a class="code" href="classprtx_1_1_p_r_t_utils_1_1_object_ptr.html">EncoderInfoPtr</a>;</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="keyword">typedef</span> <a class="code" href="classprtx_1_1_p_r_t_utils_1_1_object_ptr.html">ObjectPtr&lt;const	prt::DecoderInfo&gt;</a>           <a class="code" href="classprtx_1_1_p_r_t_utils_1_1_object_ptr.html">DecoderInfoPtr</a>;</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="keyword">typedef</span> <a class="code" href="classprtx_1_1_p_r_t_utils_1_1_object_ptr.html">ObjectPtr&lt;const	prt::Annotation&gt;</a>            <a class="code" href="classprtx_1_1_p_r_t_utils_1_1_object_ptr.html">AnnotationPtr</a>;</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;PRTX_EXPORTS_API std::string <a class="code" href="namespaceprtx_1_1_p_r_t_utils.html#ac22ee1f5a929e7877386ab2935808ff6">objectToXML</a>(<a class="code" href="classprt_1_1_object.html">prt::Object</a> <span class="keyword">const</span>* <span class="keyword">const</span> p);</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="keywordtype">void</span> reset(P* p) { mPRT.reset(p, <a class="code" href="structprtx_1_1_p_r_t_utils_1_1_object_destroyer.html">ObjectDestroyer</a>()); }</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    std::shared_ptr&lt;P&gt; mPRT;</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;};</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="keyword">typedef</span> <a class="code" href="classprtx_1_1_p_r_t_utils_1_1_object_ptr.html">ObjectPtr&lt;const	prt::AttributeMap&gt;</a>          <a class="code" href="classprtx_1_1_p_r_t_utils_1_1_object_ptr.html">AttributeMapPtr</a>;</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="keyword">typedef</span> <a class="code" href="classprtx_1_1_p_r_t_utils_1_1_object_ptr.html">ObjectPtr&lt;		prt::AttributeMapBuilder&gt;</a>   <a class="code" href="classprtx_1_1_p_r_t_utils_1_1_object_ptr.html">AttributeMapBuilderPtr</a>;</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="keyword">typedef</span> <a class="code" href="classprtx_1_1_p_r_t_utils_1_1_object_ptr.html">ObjectPtr&lt;const	prt::ResolveMap&gt;</a>            <a class="code" href="classprtx_1_1_p_r_t_utils_1_1_object_ptr.html">ResolveMapPtr</a>;</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="keyword">typedef</span> <a class="code" href="classprtx_1_1_p_r_t_utils_1_1_object_ptr.html">ObjectPtr&lt;		prt::ResolveMapBuilder&gt;</a>     <a class="code" href="classprtx_1_1_p_r_t_utils_1_1_object_ptr.html">ResolveMapBuilderPtr</a>;</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="keyword">typedef</span> <a class="code" href="classprtx_1_1_p_r_t_utils_1_1_object_ptr.html">ObjectPtr&lt;const	prt::InitialShape&gt;</a>          <a class="code" href="classprtx_1_1_p_r_t_utils_1_1_object_ptr.html">InitialShapePtr</a>;</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="keyword">typedef</span> <a class="code" href="classprtx_1_1_p_r_t_utils_1_1_object_ptr.html">ObjectPtr&lt;		prt::InitialShapeBuilder&gt;</a>   <a class="code" href="classprtx_1_1_p_r_t_utils_1_1_object_ptr.html">InitialShapeBuilderPtr</a>;</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="keyword">typedef</span> <a class="code" href="classprtx_1_1_p_r_t_utils_1_1_object_ptr.html">ObjectPtr&lt;		prt::OcclusionSet&gt;</a>          <a class="code" href="classprtx_1_1_p_r_t_utils_1_1_object_ptr.html">OcclusionSetPtr</a>;</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="keyword">typedef</span> <a class="code" href="classprtx_1_1_p_r_t_utils_1_1_object_ptr.html">ObjectPtr&lt;const	prt::RuleFileInfo&gt;</a>          <a class="code" href="classprtx_1_1_p_r_t_utils_1_1_object_ptr.html">RuleFileInfoPtr</a>;</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="keyword">typedef</span> <a class="code" href="classprtx_1_1_p_r_t_utils_1_1_object_ptr.html">ObjectPtr&lt;const	prt::EncoderInfo&gt;</a>           <a class="code" href="classprtx_1_1_p_r_t_utils_1_1_object_ptr.html">EncoderInfoPtr</a>;</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="keyword">typedef</span> <a class="code" href="classprtx_1_1_p_r_t_utils_1_1_object_ptr.html">ObjectPtr&lt;const	prt::DecoderInfo&gt;</a>           <a class="code" href="classprtx_1_1_p_r_t_utils_1_1_object_ptr.html">DecoderInfoPtr</a>;</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="keyword">typedef</span> <a class="code" href="classprtx_1_1_p_r_t_utils_1_1_object_ptr.html">ObjectPtr&lt;const	prt::Annotation&gt;</a>            <a class="code" href="classprtx_1_1_p_r_t_utils_1_1_object_ptr.html">AnnotationPtr</a>;</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="keyword">typedef</span> <a class="code" href="classprtx_1_1_p_r_t_utils_1_1_object_ptr.html">ObjectPtr&lt;		prt::CacheObject&gt;</a>           <a class="code" href="classprtx_1_1_p_r_t_utils_1_1_object_ptr.html">CacheObjectPtr</a>;</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;</div>
 <div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;} <span class="comment">// namespace PRTUtils</span></div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;} <span class="comment">// namespace prtx</span></div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;PRTX_EXPORTS_API std::string <a class="code" href="namespaceprtx_1_1_p_r_t_utils.html#ac22ee1f5a929e7877386ab2935808ff6">objectToXML</a>(<a class="code" href="classprt_1_1_object.html">prt::Object</a> <span class="keyword">const</span>* <span class="keyword">const</span> p);</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;</div>
 <div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* PRTX_CLASSUTILS_H_ */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;} <span class="comment">// namespace PRTUtils</span></div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;} <span class="comment">// namespace prtx</span></div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* PRTX_CLASSUTILS_H_ */</span><span class="preprocessor"></span></div>
 <div class="ttc" id="namespaceprtx_1_1_p_r_t_utils_html_ac22ee1f5a929e7877386ab2935808ff6"><div class="ttname"><a href="namespaceprtx_1_1_p_r_t_utils.html#ac22ee1f5a929e7877386ab2935808ff6">prtx::PRTUtils::objectToXML</a></div><div class="ttdeci">std::string objectToXML(prt::Object const *const p)</div></div>
-<div class="ttc" id="classprtx_1_1_p_r_t_utils_1_1_object_ptr_html"><div class="ttname"><a href="classprtx_1_1_p_r_t_utils_1_1_object_ptr.html">prtx::PRTUtils::ObjectPtr</a></div><div class="ttdef"><b>Definition:</b> PRTUtils.h:69</div></div>
-<div class="ttc" id="classprtx_1_1_p_r_t_utils_1_1_object_destroyer_html"><div class="ttname"><a href="classprtx_1_1_p_r_t_utils_1_1_object_destroyer.html">prtx::PRTUtils::ObjectDestroyer</a></div><div class="ttdef"><b>Definition:</b> PRTUtils.h:60</div></div>
-<div class="ttc" id="classprt_1_1_object_html"><div class="ttname"><a href="classprt_1_1_object.html">prt::Object</a></div><div class="ttdef"><b>Definition:</b> Object.h:34</div></div>
+<div class="ttc" id="structprtx_1_1_p_r_t_utils_1_1_object_destroyer_html"><div class="ttname"><a href="structprtx_1_1_p_r_t_utils_1_1_object_destroyer.html">prtx::PRTUtils::ObjectDestroyer</a></div><div class="ttdef"><b>Definition:</b> PRTUtils.h:60</div></div>
+<div class="ttc" id="classprtx_1_1_p_r_t_utils_1_1_object_ptr_html"><div class="ttname"><a href="classprtx_1_1_p_r_t_utils_1_1_object_ptr.html">prtx::PRTUtils::ObjectPtr</a></div><div class="ttdef"><b>Definition:</b> PRTUtils.h:68</div></div>
+<div class="ttc" id="classprt_1_1_object_html"><div class="ttname"><a href="classprt_1_1_object.html">prt::Object</a></div><div class="ttdef"><b>Definition:</b> Object.h:35</div></div>
 <div class="ttc" id="classprt_1_1_object_html_acc54db5c6d262525ed65a6edad804e34"><div class="ttname"><a href="classprt_1_1_object.html#acc54db5c6d262525ed65a6edad804e34">prt::Object::destroy</a></div><div class="ttdeci">void destroy() const </div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
@@ -222,7 +227,7 @@ $(document).ready(function(){initNavTree('_p_r_t_utils_8h_source.html','');});
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_f4d0b50486959f5b523ec02356ccf9e2.html">prtx</a></li><li class="navelem"><b>PRTUtils.h</b></li>
-    <li class="footer">Generated on Mon Sep 28 2015 22:14:27 for Esri Procedural Runtime by
+    <li class="footer">Generated on Wed Jun 1 2016 18:56:58 for Esri Procedural Runtime by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.7 </li>
   </ul>

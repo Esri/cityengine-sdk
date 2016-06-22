@@ -31,7 +31,7 @@
   <td id="projectlogo"><img alt="Logo" src="esri_prt_55px.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Esri Procedural Runtime
-   &#160;<span id="projectnumber">1.4.2074</span>
+   &#160;<span id="projectnumber">1.6.2663</span>
    </div>
   </td>
  </tr>
@@ -80,6 +80,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li class="current"><a href="functions.html"><span>All</span></a></li>
       <li><a href="functions_func.html"><span>Functions</span></a></li>
       <li><a href="functions_vars.html"><span>Variables</span></a></li>
+      <li><a href="functions_type.html"><span>Typedefs</span></a></li>
       <li><a href="functions_enum.html"><span>Enumerations</span></a></li>
       <li><a href="functions_eval.html"><span>Enumerator</span></a></li>
     </ul>
@@ -310,6 +311,12 @@ $(document).ready(function(){initNavTree('functions_g.html','');});
 <li>getFaceMaterialIndices()
 : <a class="el" href="classprtx_1_1_mesh.html#af1df574f8d101e5cc4d931296b46608f">prtx::Mesh</a>
 </li>
+<li>getFaceTextureRegionIndex()
+: <a class="el" href="classprtx_1_1_mesh.html#a008d09102ebe1209312637135fdf27ab">prtx::Mesh</a>
+</li>
+<li>getFaceTextureRegionIndices()
+: <a class="el" href="classprtx_1_1_mesh.html#a45167600e677996d29bcc86beaa9e529">prtx::Mesh</a>
+</li>
 <li>getFaceUVCount()
 : <a class="el" href="classprtx_1_1_mesh.html#a2248e7e9da324f15d5b3ae7b354e2e56">prtx::Mesh</a>
 </li>
@@ -499,7 +506,7 @@ $(document).ready(function(){initNavTree('functions_g.html','');});
 : <a class="el" href="classprtx_1_1_encode_preparator_1_1_finalized_instance.html#a9771a8ff6495e0e9414e27e69a0570f8">prtx::EncodePreparator::FinalizedInstance</a>
 </li>
 <li>getQuery()
-: <a class="el" href="classprtx_1_1_u_r_i.html#a8025bd6197007d2a9c925f5d2a3a3d48">prtx::URI</a>
+: <a class="el" href="classprtx_1_1_u_r_i.html#a8f75564b9dc2f4f1300f147ac8af1f60">prtx::URI</a>
 </li>
 <li>getRandomSeed()
 : <a class="el" href="classprt_1_1_initial_shape.html#a48476bd4ad7b16216806df53c64ef4cd">prt::InitialShape</a>
@@ -554,6 +561,9 @@ $(document).ready(function(){initNavTree('functions_g.html','');});
 <li>getTextureArrayItem()
 : <a class="el" href="classprtx_1_1_material.html#a56c9887e46760de79dd5f367bb06b30e">prtx::Material</a>
 </li>
+<li>getTextureRegions()
+: <a class="el" href="classprtx_1_1_mesh.html#a2958b5bf28eb4fe5bd0f8710dc8d37d0">prtx::Mesh</a>
+</li>
 <li>getTransformation()
 : <a class="el" href="classprtx_1_1_encode_preparator_1_1_finalized_instance.html#a1d2db7e0d470077ef1ee21120e305356">prtx::EncodePreparator::FinalizedInstance</a>
 </li>
@@ -566,8 +576,8 @@ $(document).ready(function(){initNavTree('functions_g.html','');});
 <li>getType()
 : <a class="el" href="classprt_1_1_attributable.html#ae60d0fe18446b045c84755503a704e06">prt::Attributable</a>
 , <a class="el" href="classprt_1_1_encoder_info.html#a2a0e92a0a7b86dc4db61eb0f6cd7c3fa">prt::EncoderInfo</a>
-, <a class="el" href="classprtx_1_1_attributable.html#a97f47f4ccd3fd3f307f1557ab0f336e9">prtx::Attributable</a>
-, <a class="el" href="classprtx_1_1_material.html#ab8b89038afd787b4d5c8761f5fcd55fe">prtx::Material</a>
+, <a class="el" href="classprtx_1_1_attributable.html#ae565a1d1e52850954cd0789eb981cf13">prtx::Attributable</a>
+, <a class="el" href="classprtx_1_1_material.html#a16a70ccfe8b9e679744f624d1597df1c">prtx::Material</a>
 </li>
 <li>getURI()
 : <a class="el" href="classprtx_1_1_geometry.html#a8d87d81236e60598366910f348055350">prtx::Geometry</a>
@@ -575,9 +585,10 @@ $(document).ready(function(){initNavTree('functions_g.html','');});
 </li>
 <li>getUsedMem()
 : <a class="el" href="classprtx_1_1_encode_preparator.html#a22fe4244014b48ac43425fcc28ccfbb0">prtx::EncodePreparator</a>
+, <a class="el" href="classprtx_1_1_mesh.html#a8047b94a0658bb12ca26c7e8b935431a">prtx::Mesh</a>
 </li>
 <li>getUVCoords()
-: <a class="el" href="classprtx_1_1_mesh.html#abf5e81b75260f5d9a528b2893649c3fe">prtx::Mesh</a>
+: <a class="el" href="classprtx_1_1_mesh.html#a0e8315f65d40bd5ec72c80473fc55705">prtx::Mesh</a>
 </li>
 <li>getUVSetsCount()
 : <a class="el" href="classprtx_1_1_mesh.html#af92197b1a2fa4f871ab11302796aeac8">prtx::Mesh</a>
@@ -606,7 +617,7 @@ $(document).ready(function(){initNavTree('functions_g.html','');});
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Mon Sep 28 2015 22:14:28 for Esri Procedural Runtime by
+    <li class="footer">Generated on Wed Jun 1 2016 18:56:59 for Esri Procedural Runtime by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.7 </li>
   </ul>

@@ -31,7 +31,7 @@
   <td id="projectlogo"><img alt="Logo" src="esri_prt_55px.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Esri Procedural Runtime
-   &#160;<span id="projectnumber">1.4.2074</span>
+   &#160;<span id="projectnumber">1.6.2663</span>
    </div>
   </td>
  </tr>
@@ -126,44 +126,42 @@ $(document).ready(function(){initNavTree('_adaptor_factory_8h_source.html','');}
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#ifndef PRTX_ADAPTORFACTORY_H_</span></div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#define PRTX_ADAPTORFACTORY_H_</span></div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#include &quot;prtx.h&quot;</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#include &quot;prtx/Extension.h&quot;</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#include &quot;prtx/ExtensionFactory.h&quot;</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &quot;prtx.h&quot;</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &quot;prtx/Extension.h&quot;</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#include &quot;prtx/ExtensionFactory.h&quot;</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keyword">namespace </span>prtx {</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keyword">namespace </span>prtx {</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;</div>
-<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="classprtx_1_1_adaptor_factory.html">   35</a></span>&#160;<span class="keyword">class </span>PRTX_EXPORTS_API <a class="code" href="classprtx_1_1_adaptor_factory.html">AdaptorFactory</a> : <span class="keyword">public</span> <a class="code" href="classprtx_1_1_extension_factory.html">ExtensionFactory</a> {</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <a class="code" href="classprtx_1_1_adaptor_factory.html">AdaptorFactory</a>() { }</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="classprtx_1_1_adaptor_factory.html">AdaptorFactory</a>() { }</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="classprtx_1_1_extension.html#ad6048fac4019029ec39431db1d873801">prtx::Extension::ExtensionType</a> getExtensionType() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="namespaceprt.html#a0bbc8b7c3113196a20860f569f833b2d">prt::ContentType</a> getContentType() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;};</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;</div>
+<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="classprtx_1_1_adaptor_factory.html">   33</a></span>&#160;<span class="keyword">class </span>PRTX_EXPORTS_API <a class="code" href="classprtx_1_1_adaptor_factory.html">AdaptorFactory</a> : <span class="keyword">public</span> <a class="code" href="classprtx_1_1_extension_factory.html">ExtensionFactory</a> {</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <a class="code" href="classprtx_1_1_adaptor_factory.html">AdaptorFactory</a>() { }</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="classprtx_1_1_adaptor_factory.html">AdaptorFactory</a>() { }</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="classprtx_1_1_extension.html#ad6048fac4019029ec39431db1d873801">prtx::Extension::ExtensionType</a> getExtensionType() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="namespaceprt.html#a0bbc8b7c3113196a20860f569f833b2d">prt::ContentType</a> getContentType() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;};</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;} <span class="comment">/* namespace prtx */</span></div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;} <span class="comment">/* namespace prtx */</span></div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* PRTX_ADAPTORFACTORY_H_ */</span><span class="preprocessor"></span></div>
-<div class="ttc" id="classprtx_1_1_extension_html_ad6048fac4019029ec39431db1d873801"><div class="ttname"><a href="classprtx_1_1_extension.html#ad6048fac4019029ec39431db1d873801">prtx::Extension::ExtensionType</a></div><div class="ttdeci">ExtensionType</div><div class="ttdef"><b>Definition:</b> Extension.h:48</div></div>
-<div class="ttc" id="classprtx_1_1_extension_factory_html"><div class="ttname"><a href="classprtx_1_1_extension_factory.html">prtx::ExtensionFactory</a></div><div class="ttdef"><b>Definition:</b> ExtensionFactory.h:56</div></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* PRTX_ADAPTORFACTORY_H_ */</span><span class="preprocessor"></span></div>
+<div class="ttc" id="classprtx_1_1_extension_html_ad6048fac4019029ec39431db1d873801"><div class="ttname"><a href="classprtx_1_1_extension.html#ad6048fac4019029ec39431db1d873801">prtx::Extension::ExtensionType</a></div><div class="ttdeci">ExtensionType</div><div class="ttdef"><b>Definition:</b> Extension.h:46</div></div>
+<div class="ttc" id="classprtx_1_1_extension_factory_html"><div class="ttname"><a href="classprtx_1_1_extension_factory.html">prtx::ExtensionFactory</a></div><div class="ttdef"><b>Definition:</b> ExtensionFactory.h:54</div></div>
 <div class="ttc" id="namespaceprt_html_a0bbc8b7c3113196a20860f569f833b2d"><div class="ttname"><a href="namespaceprt.html#a0bbc8b7c3113196a20860f569f833b2d">prt::ContentType</a></div><div class="ttdeci">ContentType</div><div class="ttdef"><b>Definition:</b> ContentType.h:28</div></div>
-<div class="ttc" id="classprtx_1_1_adaptor_factory_html"><div class="ttname"><a href="classprtx_1_1_adaptor_factory.html">prtx::AdaptorFactory</a></div><div class="ttdef"><b>Definition:</b> AdaptorFactory.h:35</div></div>
+<div class="ttc" id="classprtx_1_1_adaptor_factory_html"><div class="ttname"><a href="classprtx_1_1_adaptor_factory.html">prtx::AdaptorFactory</a></div><div class="ttdef"><b>Definition:</b> AdaptorFactory.h:33</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_f4d0b50486959f5b523ec02356ccf9e2.html">prtx</a></li><li class="navelem"><b>AdaptorFactory.h</b></li>
-    <li class="footer">Generated on Mon Sep 28 2015 22:14:27 for Esri Procedural Runtime by
+    <li class="footer">Generated on Wed Jun 1 2016 18:56:58 for Esri Procedural Runtime by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.7 </li>
   </ul>

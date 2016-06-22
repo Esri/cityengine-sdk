@@ -1,0 +1,83 @@
+<html>
+
+<head>
+    <title>
+    softenNormals Operation
+    </title>
+    <link rel="stylesheet" href="../manual_style.css" type="text/css" />
+</head>
+
+<body>
+<div class="content">
+
+<!-- HEADER (use only on bookchapters) -->
+
+    <table summary="" class="header">
+        <tr>
+            <td align="left" class="helphead_l"><a href="../toc.html"><div class="helplink">&nbsp;</div></a></td>
+            <td align="right" class="helphead_r"></td>
+        </tr>
+    </table>
+
+
+<!-- CONTENT -->
+
+<h1>softenNormals</h1>
+<h2>Synopsis</h2>
+<p class="code2">softenNormals(<span class="cga_opparam">angle</span>)</p>
+<p class="info">The <span class="codelight">softenNormals()</span> operation sets the normals of the current shapes' geometry to the desired mode.</p>
+
+<h2>Parameters</h2>
+<ul>
+	<li><span class="cga_opparam">angle</span> (float)<br>
+		For each vertex, use the average of the adjacent face normals. Edges where faces meet at an angle greater than or equal as specified are shaded as hard edges. Setting an angle of 
+		<ul>
+			<li>0 degrees is equivalent to <span class="codelight"><a href="op_setNormals.html">setNormals</a>(hard)</span>,</li>
+			<li>30 degrees is equivalent to <span class="codelight"><a href="op_setNormals.html">setNormals</a>(auto)</span> and</li>
+			<li>180 degrees is equivalent to <span class="codelight"><a href="op_setNormals.html">setNormals</a>(soft)</span>.</li>
+		</ul>
+		<p class="notes">Disconnected shapes must be combined and duplicate vertices must be merged in order to compute vertex normals using adjacent face normals.</p>
+	</li>
+</ul>		
+
+<h2>Related</h2>
+<ul>
+	<li><a class="normw" href="op_setNormals.html">setNormals operation</a></li>
+	<li><a class="normw" href="op_cleanupGeometry.html">cleanupGeometry operation</a></li>
+	<li><a class="normw" href="op_convexify.html">convexify operation</a></li>
+	<li><a class="normw" href="op_innerRectangle.html">innerRectangle operation</a></li>
+	<li><a class="normw" href="op_mirror.html">mirror operation</a></li>
+	<li><a class="normw" href="op_reduceGeometry.html">reduceGeometry operation</a></li>
+	<li><a class="normw" href="op_reverseNormals.html">reverseNormals operation</a></li>
+	<li><a class="normw" href="op_trim.html">trim operation</a></li>
+</ul>
+
+<h2>Examples</h2>
+<h3>Shaded Hemisphere</h3>
+<table>
+	<tr>
+		<td>
+			<img src="images/softenNormals_angle0.png" alt="Envelope example a" width="300"/> 
+			<br><br>
+			<center><em>Shaded hemisphere with angle 0</br>(hard normals).</em></center>
+		</td>
+		<td>
+			<img src="images/softenNormals_angle30.png" alt="Envelope example a" width="300"/> 
+			<br><br>
+			<center><em>Shaded hemisphere with angle 30</br>(auto normals).</em></center>
+		 </td>
+		 <td>
+			<img src="images/softenNormals_angle180.png" alt="Envelope example a" width="300"/> 
+			<br><br>
+			<center><em>Shaded hemisphere with angle 180</br>(soft normals).</em></center>
+		 </td>
+	</tr>
+</table>     
+
+
+<!-- FOOTER -->
+<p class="foot">Copyright &copy;2008-2016 Esri R&D Center Zurich. All rights reserved.</p>				  
+
+</div>
+</body>
+</html>

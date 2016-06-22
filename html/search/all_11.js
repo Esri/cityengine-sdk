@@ -5,7 +5,7 @@ var searchData=
   ['texturebuilder',['TextureBuilder',['../classprtx_1_1_texture_builder.html',1,'prtx']]],
   ['texturedecoder',['TextureDecoder',['../classprtx_1_1_texture_decoder.html',1,'prtx']]],
   ['textureencoder',['TextureEncoder',['../classprtx_1_1_texture_encoder.html',1,'prtx']]],
-  ['textureptr',['TexturePtr',['../namespaceprtx.html#a77ab638ce5a7874daffacd95e7df1283',1,'prtx']]],
+  ['textureptr',['TexturePtr',['../namespaceprtx.html#acc7afcec4e6a1bd29692bdc1f45d36df',1,'prtx']]],
   ['textureptrvector',['TexturePtrVector',['../namespaceprtx.html#a9842945f020c6906455bcf07686fffc2',1,'prtx']]],
   ['tocontenttype',['toContentType',['../classprtx_1_1_extension.html#a2ba4034e3e2648f87a43653452e3d4fd',1,'prtx::Extension']]],
   ['toextensiontype',['toExtensionType',['../classprtx_1_1_extension.html#a20bc0ab4212fbcd7d39c5407ef4a26f1',1,'prtx::Extension']]],
@@ -23,7 +23,7 @@ var searchData=
   ['triangulate',['triangulate',['../classprtx_1_1_encode_preparator_1_1_preparation_flags.html#af324c399740cba5abf69214f60fb8a04',1,'prtx::EncodePreparator::PreparationFlags']]],
   ['triangulate_5ffaces_5fwith_5fholes',['TRIANGULATE_FACES_WITH_HOLES',['../structprtx_1_1_hole_processor.html#a0574b2cb10749ba92314b05a5f52f032aee5c516502420a76faa9660d68281ac0',1,'prtx::HoleProcessor']]],
   ['trimplane',['TrimPlane',['../classprtx_1_1_trim_plane.html',1,'prtx']]],
-  ['trimplaneptr',['TrimPlanePtr',['../namespaceprtx.html#a6e50844e2323bfa41f551754b251ee80',1,'prtx']]],
+  ['trimplaneptr',['TrimPlanePtr',['../namespaceprtx.html#a01023861f74813213ea6c65e4c201161',1,'prtx']]],
   ['trimplaneptrvector',['TrimPlanePtrVector',['../namespaceprtx.html#a90f6fa0ea3d2fca3c8650414fa099843',1,'prtx']]],
   ['trylockpersistentblobs',['tryLockPersistentBlobs',['../classprt_1_1_cache.html#a87ac2223c59fd73ea116b36adc9db8ad',1,'prt::Cache']]]
 ];

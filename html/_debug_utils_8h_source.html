@@ -31,7 +31,7 @@
   <td id="projectlogo"><img alt="Logo" src="esri_prt_55px.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Esri Procedural Runtime
-   &#160;<span id="projectnumber">1.4.2074</span>
+   &#160;<span id="projectnumber">1.6.2663</span>
    </div>
   </td>
  </tr>
@@ -126,73 +126,74 @@ $(document).ready(function(){initNavTree('_debug_utils_8h_source.html','');});
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#ifndef PRTX_DEBUGUTILS_H_</span></div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#define PRTX_DEBUGUTILS_H_</span></div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &lt;ostream&gt;</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#include &quot;boost/shared_ptr.hpp&quot;</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &quot;prtx/prtx.h&quot;</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &lt;ostream&gt;</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#include &lt;memory&gt;</span></div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#include &quot;prtx/prtx.h&quot;</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keyword">namespace </span>prtx {</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keyword">namespace </span>prtx {</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keyword">class </span>Mesh;</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="keyword">class </span>Geometry;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="keyword">class </span>Material;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keyword">class </span>Shader;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keyword">class </span>Texture;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keyword">class </span>TrimPlane;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="keyword">class </span>BoundingBox;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="keyword">class </span>Reports;</div>
-<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="namespaceprtx.html#a8bf959de214d2b851e31be42ee24efd7">   39</a></span>&#160;<span class="keyword">class </span><a class="code" href="classprtx_1_1_generate_context.html">GenerateContext</a>;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="keyword">typedef</span> boost::shared_ptr&lt;Geometry&gt; <a class="code" href="namespaceprtx.html#a8bf959de214d2b851e31be42ee24efd7">GeometryPtr</a>;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="keyword">typedef</span> boost::shared_ptr&lt;Reports&gt; ReportsPtr;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="keyword">namespace </span>DebugUtils {</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keyword">class </span>Attributable;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keyword">class </span>Mesh;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keyword">class </span>Geometry;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keyword">class </span>Material;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="keyword">class </span>Shader;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="keyword">class </span>Texture;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keyword">class </span>TrimPlane;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keyword">class </span>BoundingBox;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keyword">class </span>Reports;</div>
+<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="namespaceprtx.html#a837126da564c8ec570fcd42c79d71624">   37</a></span>&#160;<span class="keyword">class </span><a class="code" href="classprtx_1_1_generate_context.html">GenerateContext</a>;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="keyword">typedef</span> std::shared_ptr&lt;Geometry&gt; <a class="code" href="namespaceprtx.html#a837126da564c8ec570fcd42c79d71624">GeometryPtr</a>;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="keyword">typedef</span> std::shared_ptr&lt;Reports&gt; ReportsPtr;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="keyword">namespace </span>DebugUtils {</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;PRTX_EXPORTS_API <span class="keywordtype">void</span> dump(std::wostream&amp; stream, <span class="keyword">const</span> <a class="code" href="classprtx_1_1_attributable.html">Attributable</a>&amp; a);</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;PRTX_EXPORTS_API <span class="keywordtype">void</span> <a class="code" href="namespaceprtx_1_1_debug_utils.html#a620c409207db407b791b20475df04943">dump</a>(std::wostream&amp; stream, <span class="keyword">const</span> <a class="code" href="classprtx_1_1_geometry.html">Geometry</a>&amp; g);</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;PRTX_EXPORTS_API <span class="keywordtype">void</span> <a class="code" href="namespaceprtx_1_1_debug_utils.html#a620c409207db407b791b20475df04943">dump</a>(std::wostream&amp; stream, <span class="keyword">const</span> <a class="code" href="classprtx_1_1_mesh.html">Mesh</a>&amp; mesh);</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;PRTX_EXPORTS_API <span class="keywordtype">void</span> <a class="code" href="namespaceprtx_1_1_debug_utils.html#a620c409207db407b791b20475df04943">dump</a>(std::wostream&amp; stream, <span class="keyword">const</span> <a class="code" href="classprtx_1_1_material.html">Material</a>&amp; m);</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;PRTX_EXPORTS_API <span class="keywordtype">void</span> <a class="code" href="namespaceprtx_1_1_debug_utils.html#a620c409207db407b791b20475df04943">dump</a>(std::wostream&amp; stream, <span class="keyword">const</span> <a class="code" href="classprtx_1_1_shader.html">Shader</a>&amp; m);</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;PRTX_EXPORTS_API <span class="keywordtype">void</span> <a class="code" href="namespaceprtx_1_1_debug_utils.html#a620c409207db407b791b20475df04943">dump</a>(std::wostream&amp; stream, <span class="keyword">const</span> <a class="code" href="classprtx_1_1_texture.html">Texture</a>&amp; m);</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;PRTX_EXPORTS_API <span class="keywordtype">void</span> <a class="code" href="namespaceprtx_1_1_debug_utils.html#a620c409207db407b791b20475df04943">dump</a>(std::wostream&amp; stream, <span class="keyword">const</span> <a class="code" href="classprtx_1_1_trim_plane.html">TrimPlane</a>&amp; m);</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;PRTX_EXPORTS_API <span class="keywordtype">void</span> <a class="code" href="namespaceprtx_1_1_debug_utils.html#a620c409207db407b791b20475df04943">dump</a>(<a class="code" href="classprtx_1_1_generate_context.html">prtx::GenerateContext</a>&amp; context, <span class="keywordtype">size_t</span> initialShapeIndex, <span class="keyword">const</span> std::wstring&amp; pathToDotFile);</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;PRTX_EXPORTS_API std::ostream&amp; <a class="code" href="namespaceprtx_1_1_debug_utils.html#a20a8a2fd53a558cca088547cf9075df9">operator&lt;&lt;</a>(std::ostream&amp; stream, <span class="keyword">const</span> <a class="code" href="classprtx_1_1_bounding_box.html">BoundingBox</a>&amp; b);</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;PRTX_EXPORTS_API std::wostream&amp; <a class="code" href="namespaceprtx_1_1_debug_utils.html#a20a8a2fd53a558cca088547cf9075df9">operator&lt;&lt;</a>(std::wostream&amp; stream, <span class="keyword">const</span> <a class="code" href="classprtx_1_1_bounding_box.html">BoundingBox</a>&amp; b);</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;PRTX_EXPORTS_API std::wostream&amp; <a class="code" href="namespaceprtx_1_1_debug_utils.html#a20a8a2fd53a558cca088547cf9075df9">operator&lt;&lt;</a>(std::wostream&amp; stream, <span class="keyword">const</span> prtx::ReportsPtr&amp; r);</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;PRTX_EXPORTS_API <a class="code" href="namespaceprtx.html#a8bf959de214d2b851e31be42ee24efd7">prtx::GeometryPtr</a> <a class="code" href="namespaceprtx_1_1_debug_utils.html#aaa0435b1837443b386e7be75187fd75c">toGeometry</a>(<span class="keyword">const</span> <a class="code" href="classprtx_1_1_bounding_box.html">prtx::BoundingBox</a>&amp; bbox, <span class="keyword">const</span> std::wstring&amp; geoName = std::wstring());</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;PRTX_EXPORTS_API <span class="keywordtype">void</span> dump(std::wostream&amp; stream, <span class="keyword">const</span> <a class="code" href="classprtx_1_1_geometry.html">Geometry</a>&amp; g);</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;PRTX_EXPORTS_API <span class="keywordtype">void</span> dump(std::wostream&amp; stream, <span class="keyword">const</span> <a class="code" href="classprtx_1_1_mesh.html">Mesh</a>&amp; mesh);</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;PRTX_EXPORTS_API <span class="keywordtype">void</span> dump(std::wostream&amp; stream, <span class="keyword">const</span> <a class="code" href="classprtx_1_1_material.html">Material</a>&amp; m);</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;PRTX_EXPORTS_API <span class="keywordtype">void</span> dump(std::wostream&amp; stream, <span class="keyword">const</span> <a class="code" href="classprtx_1_1_shader.html">Shader</a>&amp; m);</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;PRTX_EXPORTS_API <span class="keywordtype">void</span> dump(std::wostream&amp; stream, <span class="keyword">const</span> <a class="code" href="classprtx_1_1_texture.html">Texture</a>&amp; m);</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;PRTX_EXPORTS_API <span class="keywordtype">void</span> dump(std::wostream&amp; stream, <span class="keyword">const</span> <a class="code" href="classprtx_1_1_trim_plane.html">TrimPlane</a>&amp; m);</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;PRTX_EXPORTS_API <span class="keywordtype">void</span> dump(<a class="code" href="classprtx_1_1_generate_context.html">prtx::GenerateContext</a>&amp; context, <span class="keywordtype">size_t</span> initialShapeIndex, <span class="keyword">const</span> std::wstring&amp; pathToDotFile);</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;PRTX_EXPORTS_API std::ostream&amp; <a class="code" href="namespaceprtx_1_1_debug_utils.html#a20a8a2fd53a558cca088547cf9075df9">operator&lt;&lt;</a>(std::ostream&amp; stream, <span class="keyword">const</span> <a class="code" href="classprtx_1_1_bounding_box.html">BoundingBox</a>&amp; b);</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;PRTX_EXPORTS_API std::wostream&amp; <a class="code" href="namespaceprtx_1_1_debug_utils.html#a20a8a2fd53a558cca088547cf9075df9">operator&lt;&lt;</a>(std::wostream&amp; stream, <span class="keyword">const</span> <a class="code" href="classprtx_1_1_bounding_box.html">BoundingBox</a>&amp; b);</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;PRTX_EXPORTS_API std::wostream&amp; <a class="code" href="namespaceprtx_1_1_debug_utils.html#a20a8a2fd53a558cca088547cf9075df9">operator&lt;&lt;</a>(std::wostream&amp; stream, <span class="keyword">const</span> prtx::ReportsPtr&amp; r);</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;PRTX_EXPORTS_API <a class="code" href="namespaceprtx.html#a837126da564c8ec570fcd42c79d71624">prtx::GeometryPtr</a> <a class="code" href="namespaceprtx_1_1_debug_utils.html#aaa0435b1837443b386e7be75187fd75c">toGeometry</a>(<span class="keyword">const</span> <a class="code" href="classprtx_1_1_bounding_box.html">prtx::BoundingBox</a>&amp; bbox, <span class="keyword">const</span> std::wstring&amp; geoName = std::wstring());</div>
 <div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;} <span class="comment">// namespace DebugUtils</span></div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;} <span class="comment">// namespace DebugUtils</span></div>
 <div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;} <span class="comment">// namespace prtx</span></div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;} <span class="comment">// namespace prtx</span></div>
 <div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* PRTX_DEBUGUTILS_H_ */</span><span class="preprocessor"></span></div>
-<div class="ttc" id="namespaceprtx_html_a8bf959de214d2b851e31be42ee24efd7"><div class="ttname"><a href="namespaceprtx.html#a8bf959de214d2b851e31be42ee24efd7">prtx::GeometryPtr</a></div><div class="ttdeci">boost::shared_ptr&lt; Geometry &gt; GeometryPtr</div><div class="ttdoc">shared Geometry pointer </div><div class="ttdef"><b>Definition:</b> DebugUtils.h:39</div></div>
-<div class="ttc" id="classprtx_1_1_generate_context_html"><div class="ttname"><a href="classprtx_1_1_generate_context.html">prtx::GenerateContext</a></div><div class="ttdef"><b>Definition:</b> GenerateContext.h:44</div></div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* PRTX_DEBUGUTILS_H_ */</span><span class="preprocessor"></span></div>
+<div class="ttc" id="classprtx_1_1_generate_context_html"><div class="ttname"><a href="classprtx_1_1_generate_context.html">prtx::GenerateContext</a></div><div class="ttdef"><b>Definition:</b> GenerateContext.h:43</div></div>
 <div class="ttc" id="classprtx_1_1_bounding_box_html"><div class="ttname"><a href="classprtx_1_1_bounding_box.html">prtx::BoundingBox</a></div><div class="ttdef"><b>Definition:</b> BoundingBox.h:41</div></div>
-<div class="ttc" id="namespaceprtx_1_1_debug_utils_html_a620c409207db407b791b20475df04943"><div class="ttname"><a href="namespaceprtx_1_1_debug_utils.html#a620c409207db407b791b20475df04943">prtx::DebugUtils::dump</a></div><div class="ttdeci">void dump(std::wostream &amp;stream, const Geometry &amp;g)</div></div>
-<div class="ttc" id="classprtx_1_1_texture_html"><div class="ttname"><a href="classprtx_1_1_texture.html">prtx::Texture</a></div><div class="ttdef"><b>Definition:</b> Texture.h:65</div></div>
-<div class="ttc" id="classprtx_1_1_material_html"><div class="ttname"><a href="classprtx_1_1_material.html">prtx::Material</a></div><div class="ttdef"><b>Definition:</b> Material.h:156</div></div>
-<div class="ttc" id="classprtx_1_1_geometry_html"><div class="ttname"><a href="classprtx_1_1_geometry.html">prtx::Geometry</a></div><div class="ttdef"><b>Definition:</b> Geometry.h:61</div></div>
+<div class="ttc" id="classprtx_1_1_attributable_html"><div class="ttname"><a href="classprtx_1_1_attributable.html">prtx::Attributable</a></div><div class="ttdef"><b>Definition:</b> /Attributable.h:37</div></div>
+<div class="ttc" id="classprtx_1_1_texture_html"><div class="ttname"><a href="classprtx_1_1_texture.html">prtx::Texture</a></div><div class="ttdef"><b>Definition:</b> Texture.h:62</div></div>
+<div class="ttc" id="classprtx_1_1_material_html"><div class="ttname"><a href="classprtx_1_1_material.html">prtx::Material</a></div><div class="ttdef"><b>Definition:</b> Material.h:155</div></div>
+<div class="ttc" id="classprtx_1_1_geometry_html"><div class="ttname"><a href="classprtx_1_1_geometry.html">prtx::Geometry</a></div><div class="ttdef"><b>Definition:</b> Geometry.h:60</div></div>
+<div class="ttc" id="namespaceprtx_html_a837126da564c8ec570fcd42c79d71624"><div class="ttname"><a href="namespaceprtx.html#a837126da564c8ec570fcd42c79d71624">prtx::GeometryPtr</a></div><div class="ttdeci">std::shared_ptr&lt; Geometry &gt; GeometryPtr</div><div class="ttdoc">shared Geometry pointer </div><div class="ttdef"><b>Definition:</b> DebugUtils.h:37</div></div>
 <div class="ttc" id="namespaceprtx_1_1_debug_utils_html_aaa0435b1837443b386e7be75187fd75c"><div class="ttname"><a href="namespaceprtx_1_1_debug_utils.html#aaa0435b1837443b386e7be75187fd75c">prtx::DebugUtils::toGeometry</a></div><div class="ttdeci">prtx::GeometryPtr toGeometry(const prtx::BoundingBox &amp;bbox, const std::wstring &amp;geoName=std::wstring())</div></div>
-<div class="ttc" id="classprtx_1_1_shader_html"><div class="ttname"><a href="classprtx_1_1_shader.html">prtx::Shader</a></div><div class="ttdef"><b>Definition:</b> Shader.h:79</div></div>
-<div class="ttc" id="classprtx_1_1_mesh_html"><div class="ttname"><a href="classprtx_1_1_mesh.html">prtx::Mesh</a></div><div class="ttdef"><b>Definition:</b> Mesh.h:76</div></div>
+<div class="ttc" id="classprtx_1_1_shader_html"><div class="ttname"><a href="classprtx_1_1_shader.html">prtx::Shader</a></div><div class="ttdef"><b>Definition:</b> Shader.h:78</div></div>
+<div class="ttc" id="classprtx_1_1_mesh_html"><div class="ttname"><a href="classprtx_1_1_mesh.html">prtx::Mesh</a></div><div class="ttdef"><b>Definition:</b> Mesh.h:75</div></div>
 <div class="ttc" id="classprtx_1_1_trim_plane_html"><div class="ttname"><a href="classprtx_1_1_trim_plane.html">prtx::TrimPlane</a></div><div class="ttdef"><b>Definition:</b> TrimPlane.h:48</div></div>
 <div class="ttc" id="namespaceprtx_1_1_debug_utils_html_a20a8a2fd53a558cca088547cf9075df9"><div class="ttname"><a href="namespaceprtx_1_1_debug_utils.html#a20a8a2fd53a558cca088547cf9075df9">prtx::DebugUtils::operator&lt;&lt;</a></div><div class="ttdeci">std::ostream &amp; operator&lt;&lt;(std::ostream &amp;stream, const BoundingBox &amp;b)</div></div>
 </div><!-- fragment --></div><!-- contents -->
@@ -201,7 +202,7 @@ $(document).ready(function(){initNavTree('_debug_utils_8h_source.html','');});
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_f4d0b50486959f5b523ec02356ccf9e2.html">prtx</a></li><li class="navelem"><b>DebugUtils.h</b></li>
-    <li class="footer">Generated on Mon Sep 28 2015 22:14:27 for Esri Procedural Runtime by
+    <li class="footer">Generated on Wed Jun 1 2016 18:56:58 for Esri Procedural Runtime by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.7 </li>
   </ul>

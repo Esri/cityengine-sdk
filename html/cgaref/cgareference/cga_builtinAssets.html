@@ -21,12 +21,17 @@
 
 <!-- CONTENT -->
 <h1>Built-in Assets and Textures</h1>
-CGA supports a number of built-in assets which are always available:
+CGA supports a number of built-in assets and textures which are always available:
 
 <h2>Geometry Assets</h2>
+All geometries have vertex normals and texture coordinates on the first texture layer (COLORMAP).
 <ul>
-	<li>builtin:cube - the unit cube with vertex normals and texture coordinates on the first texture layer (COLORMAP).</li>
-    <li>builtin:cube:notex - the unit cube without texture coordinates.</li>
+	<li><a class="normw" href="op_primitive.html#quad">primitiveQuad</a> - a unit quad.</li>
+	<li><a class="normw" href="op_primitive.html#disk">primitiveDisk</a> - a unit disk.</li>
+	<li><a class="normw" href="op_primitive.html#cube">primitiveCube</a> - a unit cube.</li>
+	<li><a class="normw" href="op_primitive.html#sphere">primitiveSphere</a> - a unit sphere.</li>
+	<li><a class="normw" href="op_primitive.html#cylinder">primitiveCylinder</a> - a unit cylinder.</li>
+	<li><a class="normw" href="op_primitive.html#cone">primitiveCone</a> - a unit cone.</li>
 </ul>
 
 <h2>Textures</h2>
@@ -40,7 +45,7 @@ CGA supports a number of built-in assets which are always available:
 <p class="example">	
 <pre class="code3">
 Init-->
-	i("builtin:cube")
+	primitiveCube()
 	texture("builtin:default")
 </pre>
 </p>
@@ -52,7 +57,7 @@ Init-->
 <p class="example">	
 <pre class="code3">
 Init-->
-	i("builtin:cube")
+	primitiveCube()
 	texture("builtin:uvtest.png")
 </pre>
 </p>
@@ -64,7 +69,7 @@ Init-->
 
 
 <!-- FOOTER -->
-<p class="foot">Copyright &copy;2008-2015 Esri R&D Center Zurich. All rights reserved.</p>				  
+<p class="foot">Copyright &copy;2008-2016 Esri R&D Center Zurich. All rights reserved.</p>				  
 
 <!-- END CENTERED CONTENT -->
 
