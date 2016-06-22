@@ -28,7 +28,8 @@ PRTX API
   * Added flag `atlasRepeatingTextures` to support repeating textures. [CE-2510]
   * Added flag `maxTexSize` to resize incoming textures. [CE-2251]
   * Added flag `forceAtlasing` to force atlas even for a single textures. [CE-2471]
-
+* cleaned up logger interface
+* small interface cleanups
 
 CGA 
 ---
