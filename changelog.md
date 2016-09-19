@@ -1,3 +1,90 @@
+ESRI CITYENGINE SDK 1.7.2915 CHANGELOG
+======================================
+
+This section lists changes compared to CityEngine SDK 1.6.2663
+
+
+General Info
+------------
+* CityEngine SDK 1.7.2915 is used in CityEngine 2016.1 (2016.1.2875).
+
+
+PRT API
+-------
+* Clarified the documentation of prt::Callbacks::cgaGetCoord regarding projection support.
+* Also fixed the status return value in some cases of prt::Callbacks::cgaGetCoord.
+
+
+PRTX API
+--------
+* Fixed a bug in the encode preparator where the bounding box was not invalidated after fetching instances.
+* Improved the consistency of the encode preparator regarding mesh order. [CE-3003]
+* Fixed a bug where invalid PRT extension libraries were registered. This fixes potential crashes at exit.
+
+
+CGA 
+---
+* Improved performance of inner rectangle operation. [CE-2623]
+* Improved robustness of remainder computation in inner rectangle operation. [CE-3073, CE-3113]
+* Fixed a static initialization issue on Linux and MacOS which led to wrong results on first model generation. [CE-3270]
+* Fixed a bug with collinear trim planes during the roof operation. [CE-2915]
+* Fixed a bug where polygons where not correctly merged after a trim operation. [CE-2911]
+* Fixed a bug where rule attributes where not correctly overwritten by lower-level CGA imports. [CE-2870]
+* Fixed two issues regarding trim planes and scope in the roofGable operation. [CE-2912]
+* Fixed a bug regarding roof generation on perfectly square polygons. [CE-2972]
+* Fixed a bug where edge comp split would return the wrong edge on non-planar polygons. [CE-2260]
+* Fixed a crash in the envelope operation. [CE-1568]
+* Fixed a crash on setNormals, cleanupGeometry operations. [CE-2997]
+* Fixed a number of bugs in trim plane generation in the roof operations. [CE-1991]
+* Fixed a bug in reduceGeometry and cleanUpGeometry operations regarding wrong resulting scope. [CE-2532]
+
+
+Built-In Codecs Changes and Fixes
+---------------------------------
+* OBJ Decoder
+  * Fixed support for spaces in texture file names. [CE-1548]
+* OBJ Encoder
+  * Fixed a number of bugs in the export log generation.
+  * Fixed a small memory leak.
+* Collada Decoder
+  * Added support for common texture/sampler schema dialect/shortcut. [CE-2382]
+  * Avoid triggering empty CGA asset warnings.
+* Texture Encoders
+  * Fixed a threading issue when encoding JPEG textures in parallel. [CE-3131]
+* ShapeBuffer Encoder
+  * Fixed support for polyline holes. [CE-3267]
+* Alembic Encoder
+  * Added support for the "Alembic Preview Material Schema". [CE-3192]
+  * Improved Alembic node hierarchy with an additional grid hierarchy layer. [CE-3114]
+  * Updated to Alembic SDK 1.6.1. [CE-3071]
+  * Fixed support for UV sets > 0 and avoid writing empty uv set 0.
+  * Added support for self/child bounds.
+  * Added support for OID initial shape attributes. [CE-2939]
+  * Added support for the material.shader property. [CE-2851]
+  * Fixed a number of minor issues and improved robustness.
+* I3S Encoder (Scene Layer Packages)
+  * Fix crash with empty shapes. [CE-3157]
+  * Added white diffuse color if vertexColor is on. [CE-3139]
+  * Fixed compression method used to store SPKs. This fixes support for ArcGIS Earth. [CE-3175]
+  * Fixed a bug in converting vertex normals. [CE-3144]
+  * Fixed bounding spheres computation for scenes with units in feet. [CE-3046]
+  * Fixed wrong z-value in scenes with units in feet. [CE-3046]
+  * Added atlas flag to better support ArcGIS Earth. [CE-3062]
+  * Added support for vertex normals in global scenes. [CE-3045]
+  * Added support for textureData attribute to better support ArcGIS Pro. [CE-3044]
+  * Added support for export log generation. [CE-2600]
+  * Added support for CGA reports. [CE-2520]
+* FBX Decoder
+  * Fixed a crash in the FBX decoder while handling empty nodes. [CE-3057]
+
+
+Misc Changes and Fixes
+----------------------
+* Linux: Added a prefix to the internal Flexnet Publisher symbols to avoid potential
+  license collisions with flexnet-based host applications. [CE-2844]
+
+
+
 ESRI CITYENGINE SDK 1.6.2663 CHANGELOG
 ======================================
 
