@@ -52,7 +52,7 @@ Built-In Codecs Changes and Fixes
 * Texture Encoders
   * Fixed a threading issue when encoding JPEG textures in parallel. [CE-3131]
 * ShapeBuffer Encoder
-  * Fixed support for polygon holes. [CE-3267]
+  * Fixed support for polygons with holes. [CE-3267]
 * Alembic Encoder
   * Added support for the "Alembic Preview Material Schema". [CE-3192]
   * Improved Alembic node hierarchy with an additional grid hierarchy layer. [CE-3114]
