@@ -42,7 +42,7 @@ CGA
 Built-In Codecs Changes and Fixes
 ---------------------------------
 * OBJ Decoder
-  * Fixed support for spaces in texture file names. [CE-1548]
+  * Fixed support for spaces in texture and mtl file names. [CE-1548]
 * OBJ Encoder
   * Fixed a number of bugs in the export log generation.
   * Fixed a small memory leak.
