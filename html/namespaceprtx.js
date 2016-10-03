@@ -52,6 +52,8 @@ var namespaceprtx =
     [ "LeafShapeReportingStrategy", "classprtx_1_1_leaf_shape_reporting_strategy.html", null ],
     [ "LogFormatter", "classprtx_1_1_log_formatter.html", "classprtx_1_1_log_formatter" ],
     [ "LogFormatterW", "classprtx_1_1_log_formatter_w.html", "classprtx_1_1_log_formatter_w" ],
+    [ "LogFwd", "classprtx_1_1_log_fwd.html", "classprtx_1_1_log_fwd" ],
+    [ "LogFwd< true, L, LT >", "classprtx_1_1_log_fwd_3_01true_00_01_l_00_01_l_t_01_4.html", "classprtx_1_1_log_fwd_3_01true_00_01_l_00_01_l_t_01_4" ],
     [ "Material", "classprtx_1_1_material.html", "classprtx_1_1_material" ],
     [ "MaterialBuilder", "classprtx_1_1_material_builder.html", "classprtx_1_1_material_builder" ],
     [ "MaterialDecoder", "classprtx_1_1_material_decoder.html", "classprtx_1_1_material_decoder" ],

@@ -31,7 +31,7 @@
   <td id="projectlogo"><img alt="Logo" src="esri_prt_55px.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Esri Procedural Runtime
-   &#160;<span id="projectnumber">1.6.2663</span>
+   &#160;<span id="projectnumber">1.7.2915</span>
    </div>
   </td>
  </tr>
@@ -107,7 +107,7 @@ $(document).ready(function(){initNavTree('_encoder_info_8h_source.html','');});
 </div><!--header-->
 <div class="contents">
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">  COPYRIGHT (c) 2012-2014 Esri R&amp;D Center Zurich</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">  COPYRIGHT (c) 2012-2016 Esri R&amp;D Center Zurich</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">  TRADE SECRETS: ESRI PROPRIETARY AND CONFIDENTIAL</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">  Unpublished material - all rights reserved under the</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">  Copyright Laws of the United States and applicable international</span></div>
@@ -156,7 +156,7 @@ $(document).ready(function(){initNavTree('_encoder_info_8h_source.html','');});
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a> createValidatedOptionsAndStates(</div>
 <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;            <span class="keyword">const</span> <a class="code" href="classprt_1_1_attribute_map.html">AttributeMap</a>* optionsIn,</div>
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;            <span class="keyword">const</span> <a class="code" href="classprt_1_1_attribute_map.html">AttributeMap</a>** optionsOut,</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;            <span class="keyword">const</span> <a class="code" href="classprt_1_1_attribute_map.html">AttributeMap</a>** statesOut = 0</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;            <span class="keyword">const</span> <a class="code" href="classprt_1_1_attribute_map.html">AttributeMap</a>** statesOut = <span class="keyword">nullptr</span></div>
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    ) <span class="keyword">const</span> = 0;</div>
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;</div>
 <div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    <span class="keyword">virtual</span> <span class="keyword">const</span> <span class="keywordtype">wchar_t</span>* <span class="keyword">const</span>* getOptionKeys(<span class="keywordtype">size_t</span>* count, <a class="code" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a>* status = 0) <span class="keyword">const</span> = 0;</div>
@@ -180,6 +180,7 @@ $(document).ready(function(){initNavTree('_encoder_info_8h_source.html','');});
 <div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;</div>
 <div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;</div>
 <div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* PRT_ENCODERINFO_H_ */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;</div>
 <div class="ttc" id="classprt_1_1_encoder_info_html_ad5e9c03c62c27b98a51161de8745bb7ba89933f829f051ff6ec573a44daf9950b"><div class="ttname"><a href="classprt_1_1_encoder_info.html#ad5e9c03c62c27b98a51161de8745bb7ba89933f829f051ff6ec573a44daf9950b">prt::EncoderInfo::OS_ENABLED</a></div><div class="ttdoc">The option is enabled and should be RW in a potential UI. </div><div class="ttdef"><b>Definition:</b> EncoderInfo.h:48</div></div>
 <div class="ttc" id="classprt_1_1_encoder_info_html_ad5e9c03c62c27b98a51161de8745bb7b"><div class="ttname"><a href="classprt_1_1_encoder_info.html#ad5e9c03c62c27b98a51161de8745bb7b">prt::EncoderInfo::OptionState</a></div><div class="ttdeci">OptionState</div><div class="ttdef"><b>Definition:</b> EncoderInfo.h:47</div></div>
 <div class="ttc" id="classprt_1_1_encoder_info_html_ad5e9c03c62c27b98a51161de8745bb7ba9cecaa202171df5cfb63d9dcda3efa40"><div class="ttname"><a href="classprt_1_1_encoder_info.html#ad5e9c03c62c27b98a51161de8745bb7ba9cecaa202171df5cfb63d9dcda3efa40">prt::EncoderInfo::OS_DISABLED</a></div><div class="ttdoc">The option is disabled and should be RO in a potential UI. </div><div class="ttdef"><b>Definition:</b> EncoderInfo.h:49</div></div>
@@ -195,7 +196,7 @@ $(document).ready(function(){initNavTree('_encoder_info_8h_source.html','');});
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_e104a5fd3f1a5c6eb1edb871fc217c8e.html">prt</a></li><li class="navelem"><b>EncoderInfo.h</b></li>
-    <li class="footer">Generated on Wed Jun 1 2016 18:56:58 for Esri Procedural Runtime by
+    <li class="footer">Generated on Mon Sep 19 2016 13:23:26 for Esri Procedural Runtime by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.7 </li>
   </ul>

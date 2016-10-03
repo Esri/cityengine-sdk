@@ -44,5 +44,5 @@ var searchData=
   ['createtextureatlases',['createTextureAtlases',['../classprtx_1_1_encode_preparator_1_1_preparation_flags.html#ae6687c55ad69c31793e7402dbbcc506c',1,'prtx::EncodePreparator::PreparationFlags']]],
   ['createtexturemetadata',['createTextureMetadata',['../namespaceprt.html#a712216cfa8a8e79f00e9bbce25c5be33',1,'prt']]],
   ['createtriangulatedmesh',['createTriangulatedMesh',['../namespaceprtx_1_1_mesh_utils.html#ac85e134acfe68559e3af8e02b63ba8fd',1,'prtx::MeshUtils']]],
-  ['createvalidatedoptionsandstates',['createValidatedOptionsAndStates',['../classprt_1_1_encoder_info.html#a88f249ddddd784bab2f731963c9693c2',1,'prt::EncoderInfo']]]
+  ['createvalidatedoptionsandstates',['createValidatedOptionsAndStates',['../classprt_1_1_encoder_info.html#a733f6ac84d58b3e01df908d42e5ad8af',1,'prt::EncoderInfo']]]
 ];

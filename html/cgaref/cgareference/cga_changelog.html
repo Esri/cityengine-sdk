@@ -32,6 +32,58 @@
   </tr>
 
   <tr>
+	<td>2016.1 <br>CGAC 1.7</td>
+	<td>
+		Changes to existing features:
+		<ul>
+			<li><a href="op_innerRectangle.html"><span class="code_std">innerRectangle</span></a> operation:</li>
+			<ul>
+				<li>Enhanced overall performance.</li>
+				<li>Correct largest rectangle is now also found for large concave polygons with high vertex count.</li>
+				<li>The <span class="codelight">edge</span> mode does not consider negligible short edges.</li>
+				<li>More accurate consideration of near collinear edges.</li>
+				<li>Very thin remainder faces are prevented.</li>
+			</ul>
+		</ul>
+		Bugfixes:
+        <ul>
+			<li><a href="op_trim.html"><span class="code_std">trim</span></a>, <a href="op_i.html"><span class="code_std">i</span></a> operation: Fixed various issues for trim planes on concave faces:</li>
+			<ul>
+				<li>Fixed issues where parts of a mesh are not trimmed away.</li>
+				<li>Fixed an issue where the trimmed mesh contained unnecessary edges.</li>
+				<li>Fixed an issue where the trimmed mesh on a roof face contained holes.</li>
+			</ul>
+			<li><a href="op_cleanupGeometry.html"><span class="code_std">cleanupGeometry</span></a>, <a href="op_reduceGeometry.html"><span class="code_std">reduceGeometry</span></a> operation: Fixed wrong result if scope contained rotational part.</li>
+			<li><a href="op_cleanupGeometry.html"><span class="code_std">cleanupGeometry</span></a> operation: Fixed a bug that led to inconsistent meshes which could led to a crash on some subsequent operations, e.g. <a href="op_setNormals.html"><span class="code_std">setNormals(soft)</span></a> or <a href="op_softenNormals.html"><span class="code_std">softenNormals()</span></a>.</li>
+	        <li><a href="op_offset.html"><span class="code_std">offset</span></a> operation: Fixed undefined behaviour for negative offsets on polygons with holes.</li>
+			<li><a href="op_envelope.html"><span class="code_std">envelope</span></a> operation: Fixed a bug that could led to a crash when vertices were collinear.</li>
+          	<li><a href="func_getGeoCoord.html"><span class="code_std">getGeoCoord</span></a> function: <span class="code_std">X</span>, <span class="code_std">Y</span> selectors: Fixed to-meter conversion for non-metrical coordinate systems.</li> 
+			<li><a href="op_innerRectangle.html"><span class="code_std">innerRectangle</span></a> operation:</li>
+			<ul>
+				<li>Improved stability in remainder computation.</li>
+				<li>Fixed failing remainder computation when rectangle edge coincided with collinear vertices of the face.</li>
+				<li>Fixed errors and wrong largest rectangles on very small faces.</li>
+				<li>Improved accuracy of rectangle alignment in <span class="code_std">edge</span> mode.</li>
+			</ul>
+			<li><a href="op_roofHip.html"><span class="code_std">roofHip</span></a>, <a href="op_roofGable.html"><span class="code_std">roofGable</span></a> operation:</li>
+			<ul>
+				<li>Solved issues that led to wrong results on exact square lots as well as exact rectangular lots with collinear vertices.</li>
+				<li>Solved an issue on roofs with overhangs and small pediments where trim planes were missing and scopes of face components were wrong.</li>
+			</ul>
+			<li><a href="op_comp.html"><span class="code_std">comp</span></a> operation: Fixed wrong edge component split when adjacent faces were non-planar.</li>
+			<li>CGA compiler: Fixed several issues related to attribute propagation/overwriting using <a href="import.html"><span class="code_std">import</span></a>:</li>
+			<ul>
+				<li>Importing a rule that in turn imports another rule and propagates attributes now works correctly.</li>
+				<li>Fixed an issue where attributes from 2nd (and higher) level imports were overwritten although not defined in 1st level import.</li>
+				<li>Fixed an issue where the specification of a new attribute value of a 2nd (and higher) level import was not working although not defined in 1st level import.</li>
+				<li>Fixed an issue where an attribute was not propagated to 1st level import where it was used to overwrite another attribute in 2nd (and higher) level import.</li>
+			</ul>
+			<li> Fixed a CGB decoder initialization problem on Linux and OSX.</li>
+        </ul>
+	</td>
+  </tr>
+  
+  <tr>
   	<td>2016.0 <br>CGAC 1.6 </td>
     <td>
 		New operations:
@@ -53,8 +105,7 @@
 			<li><a href="op_i.html"><span class="code_std">i</span></a> operation:</li>
 			<ul>
 				<li>New parameter <span class="cga_opparam">upAxisOfGeometry</span> that specifies the up axis of the geometry.</li>
-				<li>New parameter <span class="cga_opparam">insertMode</span> that specifies the alignment and positioning of the geometry in the scope.</li>
-				<li>The usage of <a href="op_i.html#insertionZeroScope"><span class="code_std">s(0,0,0)</span></a> is deprecated. Use <span class="codelight">keepSizeAndPosition</span> as <span class="cga_opparam">insertMode</span> instead.</li>
+				<li>New parameter <span class="cga_opparam">insertMode</span> that specifies the alignment and positioning of the geometry in the scope. The option <span class="codelight">keepSizeAndPosition</span> is the same as using <a href="op_i.html#insertionZeroScope"><span class="code_std">s(0,0,0)</span></a>.</li>
 			</ul>
 			<li><span class="code_std">"builtin:cube"</span> and <span class="code_std">"builtin:cube:notex"</span> are deprecated. Use <a href="op_primitive.html#cube"><span class="code_std">primitiveCube</span></a> instead.</li>
 			<li><a href="op_extrude.html"><span class="code_std">extrude</span></a> operation:</li>
@@ -829,7 +880,7 @@ overload  .</li>
   
 
   <h3><!-- FOOTER --> </h3>
-        <p class="foot">Copyright &copy;2008-2016 Esri R&D Center Zurich. All rights reserved.</p>                  
+        <p class="foot">Copyright &copy;2008-2016 Esri R&amp;D Center Zurich. All rights reserved.</p>                  
 
 <!-- END CENTERED CONTENT -->
 

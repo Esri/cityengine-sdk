@@ -31,7 +31,7 @@
   <td id="projectlogo"><img alt="Logo" src="esri_prt_55px.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Esri Procedural Runtime
-   &#160;<span id="projectnumber">1.6.2663</span>
+   &#160;<span id="projectnumber">1.7.2915</span>
    </div>
   </td>
  </tr>
@@ -240,6 +240,10 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_log_formatter_w.html">LogFormatterW</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_log_fwd.html">LogFwd</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_log_fwd_3_01true_00_01_l_00_01_l_t_01_4.html">LogFwd&lt; true, L, LT &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_material.html">Material</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_material_builder.html">MaterialBuilder</a></td></tr>
@@ -418,6 +422,10 @@ typedef std::vector&lt; int32_t &gt;&#160;</td><td class="memItemRight" valign="
 typedef std::shared_ptr<br class="typebreak" />
 &lt; <a class="el" href="classprtx_1_1_leaf_iterator.html">LeafIterator</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>LeafIteratorPtr</b></td></tr>
 <tr class="separator:a0aeb1e100bc4984f1804a3254d037ca2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa44ef0f9c3c76074fa65b83eaa86b84a"><td class="memTemplParams" colspan="2"><a class="anchor" id="aa44ef0f9c3c76074fa65b83eaa86b84a"></a>
+template&lt;prt::LogLevel L&gt; </td></tr>
+<tr class="memitem:aa44ef0f9c3c76074fa65b83eaa86b84a"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><b>LogSwitch</b> = <a class="el" href="classprtx_1_1_log_fwd.html">LogFwd</a>&lt; LOG_CONDITION, L, <a class="el" href="classprtx_1_1_log_formatter.html">prtx::LogFormatter</a> &gt;</td></tr>
+<tr class="separator:aa44ef0f9c3c76074fa65b83eaa86b84a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a033b0b782881a6a13a1ad01c8ba0cf54"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a033b0b782881a6a13a1ad01c8ba0cf54"></a>
 typedef std::shared_ptr<br class="typebreak" />
 &lt; <a class="el" href="classprtx_1_1_material_builder.html">MaterialBuilder</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>MaterialBuilderPtr</b></td></tr>
@@ -507,6 +515,10 @@ typedef std::shared_ptr&lt; <a class="el" href="classprtx_1_1_u_r_i.html">URI</a
 typedef std::vector&lt; <a class="el" href="namespaceprtx.html#a2f661d48bd64c0c84f0e66fcbcba51e5">URIPtr</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprtx.html#ac9f73257598a9ec60d36021731ce95a6">URIPtrVector</a></td></tr>
 <tr class="memdesc:ac9f73257598a9ec60d36021731ce95a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">vector of shared pointers to <a class="el" href="classprtx_1_1_u_r_i.html">prtx::URI</a> <br /></td></tr>
 <tr class="separator:ac9f73257598a9ec60d36021731ce95a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a913429bf715da992965211ddcc84ea69"><td class="memTemplParams" colspan="2"><a class="anchor" id="a913429bf715da992965211ddcc84ea69"></a>
+template&lt;prt::LogLevel L&gt; </td></tr>
+<tr class="memitem:a913429bf715da992965211ddcc84ea69"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><b>WLogSwitch</b> = <a class="el" href="classprtx_1_1_log_fwd.html">LogFwd</a>&lt; LOG_CONDITION, L, <a class="el" href="classprtx_1_1_log_formatter_w.html">prtx::LogFormatterW</a> &gt;</td></tr>
+<tr class="separator:a913429bf715da992965211ddcc84ea69"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac5fdcb1f68c5a0ac7295260cfd20b307"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac5fdcb1f68c5a0ac7295260cfd20b307"></a>
 typedef std::vector&lt; std::wstring &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprtx.html#ac5fdcb1f68c5a0ac7295260cfd20b307">WStringVector</a></td></tr>
 <tr class="memdesc:ac5fdcb1f68c5a0ac7295260cfd20b307"><td class="mdescLeft">&#160;</td><td class="mdescRight">vector of std::wstring <br /></td></tr>
@@ -555,7 +567,7 @@ const <a class="el" href="namespaceprtx.html#a6a43e75e11aa3ef9e18d9fd8312ebb9f">
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespaceprtx.html">prtx</a></li>
-    <li class="footer">Generated on Wed Jun 1 2016 18:56:58 for Esri Procedural Runtime by
+    <li class="footer">Generated on Mon Sep 19 2016 13:23:26 for Esri Procedural Runtime by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.7 </li>
   </ul>

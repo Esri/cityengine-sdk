@@ -5,7 +5,7 @@
 </head>
 <body>
 <h1>Esri Procedural Runtime Encoder/Decoder Reference</h1>
-<small>(Automatically generated from PRT 1.6.2663; Build Date: 2016-06-01 17:56; Build Configuration: PRT_BC_REL PRT_CC_OPT)</small><p>This is the PRT reference documentation for all built-in encoders and decoders.</p>
+<small>(Automatically generated from PRT 1.7.2915; Build Date: 2016-09-19 12:15; Build Configuration: PRT_BC_REL PRT_CC_OPT)</small><p>This is the PRT reference documentation for all built-in encoders and decoders.</p>
 <p>The encoder documentation lists for each encoder its supported encoder options. In PRT, the encoder options
 	are stored in an object of type prt::AttributeMap, therefore the term "attribute" is used synonymously in this
 	document for a single encoder option. Each attribute consists of a type, a default value and (optional)
@@ -100,6 +100,18 @@
 <th>Default Value</th>
 <th>Annotations</th>
 </tr>
+	<tr>
+<td>/enc/objectID</td>
+<td>str</td>
+<td></td>
+<td><table class="doxtable">
+		<tr>
+<td>@Description</td>
+<td>:str = The unique object ID of the initial shape. The format is client specific.<br>
+</td>
+</tr>
+	</table></td>
+</tr>
 <tr><td colspan="4"><h4>Default Encoder Options</h4></td></tr>
 <tr>
 <th>Key</th>
@@ -110,34 +122,6 @@
 	
 	
 	
-	
-	<tr>
-<td>shapeNameDelimiter</td>
-<td>str</td>
-<td>_</td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Shape Name Delimiter<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Delimiting character for resolution of shape name clashes.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 7060<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = Advanced Settings<br>order:float = 5<br>
-</td>
-</tr>
-	</table></td>
-</tr>
 	
 	<tr>
 <td>globalOffset</td>
@@ -170,6 +154,66 @@
 </tr>
 	</table></td>
 </tr>
+	<tr>
+<td>cellSize</td>
+<td>int</td>
+<td>1000</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Top Level Cell Size<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Cell size (meters) of top level grid of shapes (0 = single cell).<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 1015<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = General Settings<br>order:float = 0<br>
+</td>
+</tr>
+		<tr>
+<td>@Range</td>
+<td>0:float = 0<br>1:float = 32768<br>
+</td>
+</tr>
+	</table></td>
+</tr>
+	<tr>
+<td>shapeNameDelimiter</td>
+<td>str</td>
+<td>_</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Shape Name Delimiter<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Delimiting character for resolution of shape name clashes.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 7060<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Advanced Settings<br>order:float = 5<br>
+</td>
+</tr>
+	</table></td>
+</tr>
+	
 	<tr>
 <td>facesWithHoles</td>
 <td>str</td>
@@ -325,6 +369,7 @@
 </tr>
 	</table></td>
 </tr>
+	
 	<tr>
 <td>triangulateMeshes</td>
 <td>bool</td>
@@ -352,7 +397,6 @@
 </tr>
 	</table></td>
 </tr>
-	
 	<tr>
 <td>errorFallback</td>
 <td>bool</td>
@@ -501,6 +545,7 @@
 </tr>
 	</table></td>
 </tr>
+	
 	
 	<tr>
 <td>maxAtlasDim</td>
@@ -2775,33 +2820,7 @@
 	
 	
 	
-	<tr>
-<td>shapeNameDelimiter</td>
-<td>str</td>
-<td>_</td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Shape Name Delimiter<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Delimiting character for resolution of shape name clashes.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 7060<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = Advanced Settings<br>order:float = 5<br>
-</td>
-</tr>
-	</table></td>
-</tr>
+	
 	<tr>
 <td>layerEnabled</td>
 <td>bool_array</td>
@@ -2861,6 +2880,7 @@
 </tr>
 	</table></td>
 </tr>
+	
 	<tr>
 <td>layerUID</td>
 <td>str_array</td>
@@ -2897,7 +2917,6 @@
 </tr>
 	</table></td>
 </tr>
-	
 	<tr>
 <td>layerName</td>
 <td>str_array</td>
@@ -3034,7 +3053,7 @@
 	<tr>
 <td>emitReports</td>
 <td>bool</td>
-<td>false</td>
+<td>true</td>
 <td><table class="doxtable">
 		<tr>
 <td>@Label</td>
@@ -3056,9 +3075,32 @@
 <td>name:str = General Settings<br>order:float = 0<br>
 </td>
 </tr>
+	</table></td>
+</tr>
+	<tr>
+<td>ignoreLayers</td>
+<td>bool</td>
+<td>true</td>
+<td><table class="doxtable">
 		<tr>
-<td>@Hidden</td>
-<td></td>
+<td>@Label</td>
+<td>:str = Combine Layers<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Ignores the different layers and merges them into one layer.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 1029<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = General Settings<br>order:float = 0<br>
+</td>
 </tr>
 	</table></td>
 </tr>
@@ -3291,32 +3333,33 @@
 	</table></td>
 </tr>
 	<tr>
-<td>ignoreLayers</td>
+<td>writeLog</td>
 <td>bool</td>
-<td>true</td>
+<td>false</td>
 <td><table class="doxtable">
 		<tr>
 <td>@Label</td>
-<td>:str = Combine Layers<br>
+<td>:str = Write Log<br>
 </td>
 </tr>
 		<tr>
 <td>@Description</td>
-<td>:str = Ignores the different layers and merges them into one layer.<br>
+<td>:str = Write log file with statistics about this export session.<br>
 </td>
 </tr>
 		<tr>
 <td>@Order</td>
-<td>:float = 1029<br>
+<td>:float = 7005<br>
 </td>
 </tr>
 		<tr>
 <td>@Group</td>
-<td>name:str = General Settings<br>order:float = 0<br>
+<td>name:str = Advanced Settings<br>order:float = 5<br>
 </td>
 </tr>
 	</table></td>
 </tr>
+	
 	<tr>
 <td>author</td>
 <td>str</td>
@@ -3418,6 +3461,61 @@
 </tr>
 	
 	<tr>
+<td>outputPath</td>
+<td>str</td>
+<td></td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Output Path<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Path to the output location.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 0.201<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = General Settings<br>order:float = 0<br>
+</td>
+</tr>
+	</table></td>
+</tr>
+	<tr>
+<td>shapeNameDelimiter</td>
+<td>str</td>
+<td>_</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Shape Name Delimiter<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Delimiting character for resolution of shape name clashes.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 7060<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Advanced Settings<br>order:float = 5<br>
+</td>
+</tr>
+	</table></td>
+</tr>
+	
+	<tr>
 <td>layerTextureEncoding</td>
 <td>str_array</td>
 <td></td>
@@ -3450,34 +3548,6 @@
 		<tr>
 <td>@PerLayer</td>
 <td>layerDefault:float = 2<br>
-</td>
-</tr>
-	</table></td>
-</tr>
-	
-	<tr>
-<td>outputPath</td>
-<td>str</td>
-<td></td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Output Path<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Path to the output location.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 0.201<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = General Settings<br>order:float = 0<br>
 </td>
 </tr>
 	</table></td>
@@ -3589,7 +3659,6 @@
 </tr>
 	</table></td>
 </tr>
-	
 	
 	
 	

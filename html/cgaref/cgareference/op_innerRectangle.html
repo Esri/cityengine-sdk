@@ -30,6 +30,8 @@
 
 	<p class="info">The <span class="cga_keyword">innerRectangle</span> operation finds for each face of the current shape's geometry the largest rectangle which is fully inside the face.</p>
 	
+	<p class="notes">The face must not have self-intersections.</p>
+	
 	<h2>Parameters</h2>
     
 	<ul>
@@ -37,9 +39,9 @@
 			Semantic alignment keyword:
 			<ul>
 			   <li><span class="codelight">scope</span>: The largest inner rectangle is found that has sides parallel to the scope's axes.</li>
-			   <li><span class="codelight">edge</span>: The largest inner rectangle is found that has a side parallel to one edge.</li>
+			   <li><span class="codelight">edge</span>: The largest inner rectangle is found that has a side parallel to one edge. Per outer polygon/hole only edges with length greater than quarter the maximum length are considered.</li>
 			   
-			   <p class="info">The resulting shape is a rectangle seen from the predominant scope axis of the face normal.</p>
+			   <p class="notes">The resulting shape is a rectangle seen from the predominant scope axis of the face normal. The scope's orientation is the same as in the initial shape.</p>
 			   
 			</ul>
 		</li>
@@ -157,7 +159,7 @@ Extrude-->
                 
 <!-- FOOTER -->
 
-<p class="foot">Copyright &copy;2008-2016 Esri R&D Center Zurich. All rights reserved.</p>				  
+<p class="foot">Copyright &copy;2008-2016 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
 
 <!-- END CENTERED CONTENT -->
 

@@ -106,9 +106,13 @@ var hierarchy =
     ] ],
     [ "prtx::LogFormatter", "classprtx_1_1_log_formatter.html", null ],
     [ "prtx::LogFormatterW", "classprtx_1_1_log_formatter_w.html", null ],
+    [ "prtx::LogFwd< E, L, LT >", "classprtx_1_1_log_fwd.html", null ],
     [ "prt::LogHandler", "classprt_1_1_log_handler.html", [
       [ "prt::ConsoleLogHandler", "classprt_1_1_console_log_handler.html", null ],
       [ "prt::FileLogHandler", "classprt_1_1_file_log_handler.html", null ]
+    ] ],
+    [ "LT", null, [
+      [ "prtx::LogFwd< true, L, LT >", "classprtx_1_1_log_fwd_3_01true_00_01_l_00_01_l_t_01_4.html", null ]
     ] ],
     [ "prtx::MaterialTransformer", "structprtx_1_1_material_transformer.html", null ],
     [ "prtx::NamePreparator", "classprtx_1_1_name_preparator.html", [
