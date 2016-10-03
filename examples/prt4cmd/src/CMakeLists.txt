@@ -43,6 +43,10 @@ elseif(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
 	target_compile_options(${PROJECT} PRIVATE -std=c++11 -march=nocona -fvisibility=hidden -fvisibility-inlines-hidden -Wl,--exclude-libs,ALL -Wall -Wextra -Wunused-parameter -Wl,-rpath,'\$ORIGIN')
 elseif(${CMAKE_SYSTEM_NAME} STREQUAL "Darwin")
 	target_compile_options(${PROJECT} PRIVATE -std=c++14 -stdlib=libc++)
+	add_custom_command(TARGET ${PROJECT} POST_BUILD COMMAND ${CMAKE_INSTALL_NAME_TOOL} 
+		-change libcom.esri.prt.core.dylib @loader_path/libcom.esri.prt.core.dylib
+		${CMAKE_BINARY_DIR}/${PROJECT}
+	)
 endif()
 
 target_link_libraries(${PROJECT} ${Boost_LIBRARIES} ${PRT_LIBRARY})
