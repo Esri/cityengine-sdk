@@ -45,7 +45,7 @@ USING PRT4CMD
 1. Type `bin\prt4cmd.exe` or `bin\prt4cmd.exe -h` to see the list of options.
 1. Type the following to generate the "candler" building model in the wavefront obj format:
    ```
-   bin\prt4cmd -f CityEngAdvFx -l 3 -g ..\..\..\data\candler_footprint.obj -p ..\..\..\data\candler.rpk -a ruleFile:string=bin/candler.cgb -a startRule:string=Default$Footprint -e com.esri.prt.codecs.OBJEncoder -z baseName:string=theCandler
+   bin\prt4cmd -f CityEngAdvFx -l 3 -g <absolute_path_to>\data\candler_footprint.obj -p <absolute_path_to>\data\candler.rpk -a ruleFile:string=bin/candler.cgb -a startRule:string=Default$Footprint -e com.esri.prt.codecs.OBJEncoder -z baseName:string=theCandler
    ```
 1. The result is placed in the output directory:
    - `theCandler.obj`
@@ -53,7 +53,7 @@ USING PRT4CMD
    - Bunch of texture files
 1. To regenerate the same model with a different height, use the following command (note the additional `-a height...` statement):
    ```
-   bin\prt4cmd -f CityEngAdvFx -l 3 -g ..\..\..\data\candler_footprint.obj -p ..\..\..\data\candler.rpk -a ruleFile:string=bin/candler.cgb -a startRule:string=Default$Footprint -a height:float=30 -e com.esri.prt.codecs.OBJEncoder -z baseName:string=theCandler
+   bin\prt4cmd -f CityEngAdvFx -l 3 -g <absolute_path_to>\data\candler_footprint.obj -p <absolute_path_to>\data\candler.rpk -a ruleFile:string=bin/candler.cgb -a startRule:string=Default$Footprint -a height:float=30 -e com.esri.prt.codecs.OBJEncoder -z baseName:string=theCandler
    ```
 1. The obj file will now contain a model which is 30m high instead of the default 62m.
 
