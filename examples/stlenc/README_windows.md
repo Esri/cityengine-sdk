@@ -22,8 +22,8 @@ BUILD INSTRUCTIONS
 ------------------
 
 1. Open a `VS2013 x64 Native Tools Command Prompt`
-1. Change into the example directory: `cd <path to esri-cityengine-sdk git repository>/examples/stlenc`
-1. Create a build directory and change into it: `mkdir build`
+1. Change into the example directory: `cd <your path to>\esri-cityengine-sdk\examples\stlenc`
+1. Create a build directory: `mkdir build`
 1. Change into the build directory: `cd build`
 1. Run cmake: `cmake -G "NMake Makefiles" -DCMAKE_BUILD_TYPE=Release ..\src`
 1. Compile: `nmake install`
@@ -34,8 +34,8 @@ INSTALLATION INSTRUCTIONS FOR CITYENGINE
 ----------------------------------------
 
 1. Locate the `stlenc` extension library in the `install` directory above, e.g. at:
-   `<path to esri-cityengine-sdk git repository>\examples\stlenc\install\lib\stlenc.dll`
-1. Copy `stlenc.dll` into `<CityEngine installation location>\plugins\com.esri.prt.clients.ce.win32.win32.x86_64_1.0.0\lib\`
+   `<your path to>\esri-cityengine-sdk\examples\stlenc\install\lib\prt_stlenc.dll`
+1. Copy `prt_stlenc.dll` into `<CityEngine installation location>\plugins\com.esri.prt.clients.ce.win32.win32.x86_64_1.0.0\lib\`
 1. Start CityEngine and verify that the new `STL Encoder` appears in the model export format list.
 
 

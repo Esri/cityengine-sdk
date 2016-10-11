@@ -5,8 +5,8 @@ PRT4MAYA - CityEngine SDK for Autodesk Maya
 DISCLAIMER
 ----------
 
-This is an example for using the CityEngine SDK. There is no support for this application. 
-If you find a bug or want to enhance functionality you have to fix/do this yourself.
+This is an example for using the CityEngine SDK, not an official product with support.
+If you find a bug or are missing a feature, let us know by submitting an issue. Or - even better - submit a pull request.
 
 
 PREREQUISITES
@@ -38,8 +38,8 @@ BUILD INSTRUCTIONS
 INSTALLATION INSTRUCTIONS
 -------------------------
 
-1. Locate the directory where you copied the plugin, let's call it `PLUGINDIR`
-1. Locate the Maya.env file in your home, usually its in "My Documents\maya\2016"
+1. Locate the directory where you copied the plugin (or keep `<your path to>\esri-cityengine-sdk\examples\prt4maya\install`), let's call it `PLUGINDIR`
+1. Locate the Maya.env file in your home, usually its in "<home directory>\Documents\maya\2016"
 1. Edit Maya.env as follows:
    ```
    :: use CityEngAdv for floating license
