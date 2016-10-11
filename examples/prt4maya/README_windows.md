@@ -38,7 +38,7 @@ BUILD INSTRUCTIONS
 INSTALLATION INSTRUCTIONS
 -------------------------
 
-1. Locate the directory where you copied the plugin (or keep <your path to>\esri-cityengine-sdk\examples\prt4maya\install), let's call it `PLUGINDIR`
+1. Locate the directory where you copied the plugin (or keep `<your path to>\esri-cityengine-sdk\examples\prt4maya\install`), let's call it `PLUGINDIR`
 1. Locate the Maya.env file in your home, usually its in "<home directory>\Documents\maya\2016"
 1. Edit Maya.env as follows:
    ```
