@@ -33,7 +33,7 @@ BUILD INSTRUCTIONS
 1. Change into the example directory: `cd <your path to>\esri-cityengine-sdk\examples\prt4cmd`
 1. Prepare build directory: `mkdir build`
 1. And change into it: `cd build`
-1. Run cmake (please adjust boost path): `cmake -G "NMake Makefiles" -DCMAKE_BUILD_TYPE=Release -Dprt_DIR=<path to cityengine sdk binaries>\cmake -DBOOST_INCLUDEDIR=C:\local\boost_1_53_0 -DBOOST_LIBRARYDIR=C:\local\boost_1_53_0\lib64-msvc-10.0 -DBoost_USE_STATIC_LIBS=ON ..\src`
+1. Run cmake (please adjust boost path): `cmake -G "NMake Makefiles" -DCMAKE_BUILD_TYPE=Release -Dprt_DIR=<your path to>\esri-cityengine-sdk\prt\cmake -DBOOST_INCLUDEDIR=C:\local\boost_1_53_0 -DBOOST_LIBRARYDIR=C:\local\boost_1_53_0\lib64-msvc-12.0 -DBoost_USE_STATIC_LIBS=ON ..\src`
 1. Compile: `nmake install`
 1. The build result will appear in an `install` directory in parallal to the `build` directory.
 
@@ -45,15 +45,15 @@ USING PRT4CMD
 1. Type `bin\prt4cmd.exe` or `bin\prt4cmd.exe -h` to see the list of options.
 1. Type the following to generate the "candler" building model in the wavefront obj format:
    ```
-   bin\prt4cmd -f CityEngAdvFx -l 3 -g ..\..\..\data\candler_footprint.obj -p ..\..\..\data\candler.rpk -a ruleFile:string=bin/candler.cgb -a startRule:string=Default$Footprint -e com.esri.prt.codecs.OBJEncoder -z baseName:string=theCandler
+   bin\prt4cmd -f CityEngAdvFx -l 3 -g <your path to>\esri-cityengine-sdk\data\candler_footprint.obj -p <your path to>\esri-cityengine-sdk\data\candler.rpk -a ruleFile:string=bin/candler.cgb -a startRule:string=Default$Footprint -e com.esri.prt.codecs.OBJEncoder -z baseName:string=theCandler
    ```
 1. The result is placed in the output directory:
-   - `theCandler.obj`
+   - `theCandler_0.obj`
    - `theCandler.mtl`
    - Bunch of texture files
-1. To regenerate the same model with a different height, use the following command (note the additional `-a height...` statement):
+1. To regenerate the same model with a different height, use the following command (note the additional `-a BuildingHeight...` statement):
    ```
-   bin\prt4cmd -f CityEngAdvFx -l 3 -g ..\..\..\data\candler_footprint.obj -p ..\..\..\data\candler.rpk -a ruleFile:string=bin/candler.cgb -a startRule:string=Default$Footprint -a height:float=30 -e com.esri.prt.codecs.OBJEncoder -z baseName:string=theCandler
+   bin\prt4cmd -f CityEngAdvFx -l 3 -g <your path to>\esri-cityengine-sdk\data\candler_footprint.obj -p <your path to>\esri-cityengine-sdk\data\candler.rpk -a ruleFile:string=bin/candler.cgb -a startRule:string=Default$Footprint -a BuildingHeight:float=30 -e com.esri.prt.codecs.OBJEncoder -z baseName:string=theCandler
    ```
 1. The obj file will now contain a model which is 30m high instead of the default 62m.
 

@@ -5,8 +5,8 @@ PRT4MAYA - CityEngine SDK for Autodesk Maya
 DISCLAIMER
 ----------
 
-This is an example for using the CityEngine SDK. There is no support for this application. 
-If you find a bug or want to enhance functionality you have to do this yourself.
+This is an example for using the CityEngine SDK, not an official product with support.
+If you find a bug or are missing a feature, let us know by submitting an issue. Or - even better - submit a pull request.
 
 
 PREREQUISITES
@@ -29,7 +29,7 @@ BUILD INSTRUCTIONS
 ------------------
 
 1. Open a terminal (e.g. bash)
-1. Change into the example directory: `cd <path to esri-cityengine-sdk git repository>/examples/prt4maya`
+1. Change into the example directory: `cd <your path to>/esri-cityengine-sdk/examples/prt4maya`
 1. Create a build directory and change into it: `mkdir build && cd build`
 1. Run cmake (please adjust the maya path): `cmake -Dmaya_DIR=/usr/autodesk/maya2016 ../src`
 1. Compile: `make install`
@@ -39,7 +39,7 @@ BUILD INSTRUCTIONS
 INSTALLATION INSTRUCTIONS
 -------------------------
 
-1. Locate the absolute path to the `install` directory created above, let's call it `PLUGINDIR`
+1. Locate the absolute path to the `install` directory created above (or keep <your path to>/esri-cityengine-sdk/examples/prt4maya/install), let's call it `PLUGINDIR`
 1. Locate the Maya.env file in your home: `~/maya/2016/Maya.env`
 1. Edit Maya.env as follows:
    ```

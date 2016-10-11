@@ -22,7 +22,7 @@ BUILD INSTRUCTIONS
 ------------------
 
 1. Open a `bash` shell
-1. Change into the example directory: `cd <path to esri-cityengine-sdk git repository>/examples/stlenc`
+1. Change into the example directory: `cd <your path to>/esri-cityengine-sdk/examples/stlenc`
 1. Create a build directory and change into it: `mkdir build && cd build`
 1. Run cmake: `cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release ../src`
 1. Compile: `make install`
@@ -33,8 +33,8 @@ INSTALLATION INSTRUCTIONS FOR CITYENGINE
 ----------------------------------------
 
 1. Locate the `stlenc` extension library in the `install` directory above, e.g. at:
-   `<path to esri-cityengine-sdk git repository>/examples/stlenc/install/lib/libstlenc.so`
-1. Copy `libstlenc.so` into `<CityEngine installation location>/plugins/com.esri.prt.clients.ce.gtk.linux.x86_64_1.0.0/lib/`
+   `<your path to>/esri-cityengine-sdk/examples/stlenc/install/lib/libprt_stlenc.so`
+1. Copy `libprt_stlenc.so` into `<CityEngine installation location>/plugins/com.esri.prt.clients.ce.gtk.linux.x86_64_1.0.0/lib/`
 1. Start CityEngine and verify that the new `STL Encoder` appears in the model export format list.
 
 
