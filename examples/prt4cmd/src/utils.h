@@ -37,25 +37,23 @@ using DecoderInfoPtr			= std::unique_ptr<const prt::DecoderInfo, PRTDestroyer>;
 /**
  * options helpers
  */
-AttributeMapPtr createValidatedOptions(const wchar_t* encID, const AttributeMapPtr& unvalidatedOptions);
+AttributeMapPtr createValidatedOptions(const std::wstring& encID, const AttributeMapPtr& unvalidatedOptions);
 
 /**
  * command line argument helpers
  */
 struct InputArgs {
-	InputArgs(const std::wstring& defaultEncoderID) : mEncoderID(defaultEncoderID) { }
-
-	boost::filesystem::path	mWorkDir;
-	std::wstring			mEncoderID;
-	AttributeMapPtr			mEncoderOpts;
-	boost::filesystem::path	mOutputPath;
-	std::string				mRulePackage;
-	AttributeMapPtr			mInitialShapeAttrs;
-	std::wstring			mInitialShapeGeo;
-	int						mLogLevel;
-	boost::filesystem::path	mInfoFile;
-	std::string				mLicHost;
-	std::string				mLicFeature;
+	boost::filesystem::path mWorkDir;
+	std::string             mEncoderID;
+	AttributeMapPtr         mEncoderOpts;
+	boost::filesystem::path mOutputPath;
+	std::string             mRulePackage;
+	AttributeMapPtr         mInitialShapeAttrs;
+	std::string             mInitialShapeGeo;
+	int                     mLogLevel;
+	boost::filesystem::path mInfoFile;
+	std::string             mLicHost;
+	std::string             mLicFeature;
 };
 
 bool initInputArgs(int argc, char *argv[], InputArgs& inputArgs);
@@ -71,9 +69,10 @@ std::string getSharedLibrarySuffix();
  */
 std::string  toOSNarrowFromUTF16(const std::wstring& osWString);
 std::wstring toUTF16FromOSNarrow(const std::string& osString);
+std::wstring toUTF16FromUTF8    (const std::string& utf8String);
 std::string  toUTF8FromOSNarrow (const std::string& osString);
-std::wstring percentEncode      (const std::string& utf8String);
-std::wstring toFileURI(const boost::filesystem::path& p);
+std::string  percentEncode      (const std::string& utf8String);
+std::string  toFileURI(const boost::filesystem::path& p);
 
 /**
  * XML helpers

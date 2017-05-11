@@ -3,7 +3,7 @@
 
 #include "prt/StringUtils.h"
 
-#include "boost/program_options.hpp"
+#include "CLI11.hpp"
 #include "boost/algorithm/string.hpp"
 
 #include <iostream>
@@ -13,10 +13,12 @@
 namespace {
 
 #ifdef _WIN32
-	const std::wstring FILE_SCHEMA = L"file:/";
+	const std::string FILE_SCHEMA = "file:/";
 #else
-	const std::wstring FILE_SCHEMA = L"file:";
+	const std::string FILE_SCHEMA = "file:";
 #endif
+
+const char* ENCODER_ID_OBJ = "com.esri.prt.codecs.OBJEncoder";
 
 } // namespace
 
@@ -26,11 +28,12 @@ namespace pcu {
 /**
  * Helper function to convert a list of "<key>:<type>=<value>" strings into a prt::AttributeMap
  */
-AttributeMapPtr createAttributeMapFromTypedKeyValues(const std::vector<std::wstring>& args) {
+AttributeMapPtr createAttributeMapFromTypedKeyValues(const std::vector<std::string>& args) {
 	AttributeMapBuilderPtr bld{prt::AttributeMapBuilder::create()};
-	for (const std::wstring& a: args) {
+	for (const std::string& a: args) {
+		const std::wstring wa = toUTF16FromOSNarrow(a);
 		std::vector<std::wstring> splits;
-		boost::split(splits, a, boost::algorithm::is_any_of(":="), boost::token_compress_on);
+		boost::split(splits, wa, boost::algorithm::is_any_of(":="), boost::token_compress_on);
 		if (splits.size() == 3) {
 			if (splits[1] == L"string") {
 				bld->setString(splits[0].c_str(), splits[2].c_str());
@@ -62,7 +65,7 @@ AttributeMapPtr createAttributeMapFromTypedKeyValues(const std::vector<std::wstr
 			}
 		}
 		else
-			std::wcout << L"warning: ignored key/value item: " << a << std::endl;
+			std::wcout << L"warning: ignored key/value item: " << wa << std::endl;
 	}
 	return AttributeMapPtr{bld->createAttributeMapAndReset()};
 }
@@ -75,88 +78,64 @@ bool initInputArgs(int argc, char *argv[], InputArgs& inputArgs) {
 	boost::filesystem::path executablePath = boost::filesystem::system_complete(boost::filesystem::path(argv[0]));
 	inputArgs.mWorkDir = executablePath.parent_path().parent_path();
 
-	std::vector<std::wstring> argShapeAttributes, argEncOpts;
+	// setup default values
+	inputArgs.mEncoderID  = ENCODER_ID_OBJ;
+	inputArgs.mLogLevel   = 2;
+	inputArgs.mOutputPath = inputArgs.mWorkDir / "output";
 
-	boost::program_options::options_description desc("Available Options");
-	desc.add_options()("help,h", "This very help screen.")("version,v", "Show CityEngine SDK version.");
-	desc.add_options()(
-			"log-level,l",
-			boost::program_options::value<int>(&inputArgs.mLogLevel)->default_value(2),
-			"Set log filter level: 1 = debug, 2 = info, 3 = warning, 4 = error, 5 = fatal, >5 = no output"
-	);
-	desc.add_options()(
-			"output,o",
-			boost::program_options::value<boost::filesystem::path>(&inputArgs.mOutputPath)->default_value(inputArgs.mWorkDir / "output"),
-			"Set the output path for the callbacks."
-	);
-	desc.add_options()(
-			"encoder,e",
-			boost::program_options::wvalue<std::wstring>(&inputArgs.mEncoderID)->default_value(inputArgs.mEncoderID, toOSNarrowFromUTF16(inputArgs.mEncoderID)), "The encoder ID, e.g. 'com.esri.prt.codecs.OBJEncoder'.");
-	desc.add_options()(
-			"rule-package,p",
-			boost::program_options::value<std::string>(&inputArgs.mRulePackage),
-			"Set the rule package path."
-	);
-	desc.add_options()(
-			"shape-attr,a",
-			boost::program_options::wvalue<std::vector<std::wstring> >(&argShapeAttributes),
-			"Set a initial shape attribute (syntax is <name>:<type>=<value>, type = {string,float,int,bool})."
-	);
-	desc.add_options()(
-			"shape-geo,g",
-			boost::program_options::wvalue<std::wstring>(&inputArgs.mInitialShapeGeo),
-			"(Optional) Path to a file with shape geometry");
-	desc.add_options()(
-			"encoder-option,z",
-			boost::program_options::wvalue<std::vector<std::wstring> >(&argEncOpts),
-			"Set a encoder option (syntax is <name>:<type>=<value>, type = {string,float,int,bool})."
-	);
-	desc.add_options()(
-			"info,i",
-			boost::program_options::value<boost::filesystem::path>(&inputArgs.mInfoFile), "Write XML Extension Information to file"
-	);
-	desc.add_options()(
-			"license-server,s",
-			boost::program_options::value<std::string>(&inputArgs.mLicHost),
-			"License Server Host Name, example: 27000@myserver.example.com"
-	);
-	desc.add_options()(
-			"license-feature,f",
-			boost::program_options::value<std::string>(&inputArgs.mLicFeature),
-			"License Feature to use, one of CityEngBasFx, CityEngBas, CityEngAdvFx, CityEngAdv"
-	);
+	CLI::callback_t convertShapeAttrs = [&inputArgs](std::vector<std::string> argShapeAttrs) {
+		inputArgs.mInitialShapeAttrs = createAttributeMapFromTypedKeyValues(argShapeAttrs);
+		return true;
+	};
 
-	boost::program_options::positional_options_description posDesc;
-	posDesc.add("shape-ref", -1);
+	CLI::callback_t convertEncOpts = [&inputArgs](std::vector<std::string> argEncOpts) {
+		inputArgs.mEncoderOpts = createAttributeMapFromTypedKeyValues(argEncOpts);
+		return true;
+	};
 
-	boost::program_options::variables_map vm;
-	boost::program_options::store(boost::program_options::command_line_parser(argc, argv).options(desc).positional(posDesc).run(), vm);
-	boost::program_options::notify(vm);
+	CLI::App app{"prt4cmd - command line example for the CityEngine Procedural RunTime"};
+	auto optHelp = app.add_flag("-h,--help", "This very help screen.");
+	auto optVer  = app.add_flag("-v,--version", "Show CityEngine SDK version.");
+	app.add_option("-l,--log-level", inputArgs.mLogLevel, "Set log filter level: 1 = debug, 2 = info, 3 = warning, 4 = error, 5 = fatal, >5 = no output");
+	app.add_option("-o,--output", inputArgs.mOutputPath, "Set the output path for the callbacks.");
+	app.add_option("-e,--encoder", inputArgs.mEncoderID, "The encoder ID, e.g. 'com.esri.prt.codecs.OBJEncoder'.");
+	app.add_option("-p,--rule-package", inputArgs.mRulePackage, "Set the rule package path.");
+	app.add_option("-a,--shape-attr", convertShapeAttrs, "Set a initial shape attribute (syntax is <name>:<type>=<value>, type = {string,float,int,bool}).");
+	app.add_option("-g,--shape-geo", inputArgs.mInitialShapeGeo, "(Optional) Path to a file with shape geometry");
+	app.add_option("-z,--encoder-option", convertEncOpts, "Set a encoder option (syntax is <name>:<type>=<value>, type = {string,float,int,bool}).");
+	app.add_option("-i,--info", inputArgs.mInfoFile, "Write XML Extension Information to file");
+	app.add_option("-s,--license-server", inputArgs.mLicHost, "License Server Host Name, example: 27000@myserver.example.com");
+	app.add_option("-f,--license-feature", inputArgs.mLicFeature, "License Feature to use, one of CityEngBasFx, CityEngBas, CityEngAdvFx, CityEngAdv");
+	//app.add_option("shape-ref", -1);
 
-	if (argc == 1 || vm.count("help")) {
-		std::cout << desc << std::endl;
+	try {
+  	  app.parse(argc, argv);
+	} catch (const CLI::ParseError &e) {
+		std::cerr << e.what() << std::endl;
+    	return false;
+	}
+
+	if (optHelp->count() == 1) {
+		std::cout << "the help" << std::endl;
 		return false;
 	}
 
-	if (vm.count("version")) {
+	if (optVer->count() == 1) {
 		std::cout << prt::getVersion()->mFullName << std::endl;
 		return false;
 	}
 
 	// make sure the path to the initial shape geometry is a valid URI
 	if (!inputArgs.mInitialShapeGeo.empty()) {
-		boost::filesystem::path isGeoPath = toOSNarrowFromUTF16(inputArgs.mInitialShapeGeo); // workaround for boost 1.41
+		boost::filesystem::path isGeoPath = inputArgs.mInitialShapeGeo;
 		if (boost::filesystem::exists(isGeoPath)) {
 			inputArgs.mInitialShapeGeo = toFileURI(isGeoPath);
 		}
 		else {
-			std::wcerr << L"path to initial shape uri is not valid: " << inputArgs.mInitialShapeGeo << std::endl;
+			std::cerr << L"path to initial shape uri is not valid: " << inputArgs.mInitialShapeGeo << std::endl;
 			return false;
 		}
 	}
-
-	inputArgs.mInitialShapeAttrs = createAttributeMapFromTypedKeyValues(argShapeAttributes);
-	inputArgs.mEncoderOpts = createAttributeMapFromTypedKeyValues(argEncOpts);
 
 	return true;
 }
@@ -186,14 +165,17 @@ std::wstring toUTF16FromOSNarrow(const std::string& osString) {
 	return callAPI<char, wchar_t>(prt::StringUtils::toUTF16FromOSNarrow, osString);
 }
 
+std::wstring toUTF16FromUTF8(const std::string& utf8String) {
+	return callAPI<char, wchar_t>(prt::StringUtils::toUTF16FromUTF8, utf8String);
+}
+
 std::string toUTF8FromOSNarrow(const std::string& osString) {
 	std::wstring utf16String = toUTF16FromOSNarrow(osString);
 	return callAPI<wchar_t, char>(prt::StringUtils::toUTF8FromUTF16, utf16String);
 }
 
-std::wstring percentEncode(const std::string& utf8String) {
-	std::string pe{ callAPI<char, char>(prt::StringUtils::percentEncode, utf8String) };
-	return callAPI<char, wchar_t>(prt::StringUtils::toUTF16FromUTF8, pe);
+std::string percentEncode(const std::string& utf8String) {
+	return callAPI<char, char>(prt::StringUtils::percentEncode, utf8String);
 }
 
 
@@ -268,14 +250,14 @@ void codecInfoToXML(InputArgs& inputArgs) {
 	LOG_INF << "Dumped codecs info to " << inputArgs.mInfoFile;
 }
 
-std::wstring toFileURI(const boost::filesystem::path& p) {
+std::string toFileURI(const boost::filesystem::path& p) {
 	std::string utf8Path = toUTF8FromOSNarrow(p.generic_string());
-	std::wstring pecString = percentEncode(utf8Path);
-	return FILE_SCHEMA + pecString;
+	std::string u8PE = percentEncode(utf8Path);
+	return FILE_SCHEMA + u8PE;
 }
 
-AttributeMapPtr createValidatedOptions(const wchar_t* encID, const AttributeMapPtr& unvalidatedOptions) {
-	EncoderInfoPtr encInfo{prt::createEncoderInfo(encID)};
+AttributeMapPtr createValidatedOptions(const std::wstring& encID, const AttributeMapPtr& unvalidatedOptions) {
+	EncoderInfoPtr encInfo{prt::createEncoderInfo(encID.c_str())};
 	const prt::AttributeMap* validatedOptions = nullptr;
 	encInfo->createValidatedOptionsAndStates(unvalidatedOptions.get(), &validatedOptions);
 	return AttributeMapPtr(validatedOptions);

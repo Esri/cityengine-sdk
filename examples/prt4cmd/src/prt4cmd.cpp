@@ -8,7 +8,7 @@
  * Written by Matthias Specht and Simon Haegler
  * Esri R&D Center Zurich, Switzerland
  *
- * Copyright 2016 Esri R&D Center Zurich
+ * Copyright (c) 2017 Esri R&D Center Zurich
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -45,13 +45,12 @@ namespace {
 /**
  * commonly used constants
  */
-const char*		FILE_FLEXNET_LIB		= "flexnet_prt";
-const char* 	FILE_LOG				= "prt4cmd.log";
-const wchar_t*	FILE_CGA_ERROR			= L"CGAErrors.txt";
-const wchar_t*	FILE_CGA_PRINT			= L"CGAPrint.txt";
-const wchar_t*	ENCODER_ID_CGA_ERROR	= L"com.esri.prt.core.CGAErrorEncoder";
-const wchar_t*	ENCODER_ID_CGA_PRINT	= L"com.esri.prt.core.CGAPrintEncoder";
-const wchar_t*	ENCODER_ID_OBJ			= L"com.esri.prt.codecs.OBJEncoder";
+const char*    FILE_FLEXNET_LIB     = "flexnet_prt";
+const char*    FILE_LOG             = "prt4cmd.log";
+const wchar_t* FILE_CGA_ERROR       = L"CGAErrors.txt";
+const wchar_t* FILE_CGA_PRINT       = L"CGAPrint.txt";
+const wchar_t* ENCODER_ID_CGA_ERROR = L"com.esri.prt.core.CGAErrorEncoder";
+const wchar_t* ENCODER_ID_CGA_PRINT = L"com.esri.prt.core.CGAPrintEncoder";
 
 /**
  * Helper struct to manage PRT lifetime and licensing
@@ -107,7 +106,7 @@ struct PRTContext {
 int main (int argc, char *argv[]) {
 	try {
 		// -- fetch command line args
-		pcu::InputArgs inputArgs(ENCODER_ID_OBJ);
+		pcu::InputArgs inputArgs;
 		if (!pcu::initInputArgs(argc, argv, inputArgs))
 			return EXIT_FAILURE;
 
@@ -135,9 +134,9 @@ int main (int argc, char *argv[]) {
 		if (!inputArgs.mRulePackage.empty()) {
 			LOG_INF << "Using rule package " << inputArgs.mRulePackage << std::endl;
 
-			std::wstring rpkURI = pcu::toFileURI(inputArgs.mRulePackage);
+			std::string u8rpkURI = pcu::toFileURI(inputArgs.mRulePackage);
 			prt::Status status = prt::STATUS_UNSPECIFIED_ERROR;
-			resolveMap.reset(prt::createResolveMap(rpkURI.c_str(), nullptr, &status));
+			resolveMap.reset(prt::createResolveMap(pcu::toUTF16FromUTF8(u8rpkURI).c_str(), nullptr, &status));
 			if (resolveMap && (status == prt::STATUS_OK)) {
 				LOG_DBG << "resolve map = " << pcu::objectToXML(resolveMap.get());
 			}
@@ -155,7 +154,7 @@ int main (int argc, char *argv[]) {
 		pcu::InitialShapeBuilderPtr isb{prt::InitialShapeBuilder::create()};
 		if (!inputArgs.mInitialShapeGeo.empty()) {
 			LOG_DBG << L"trying to read initial shape geometry from " << inputArgs.mInitialShapeGeo;
-			isb->resolveGeometry(inputArgs.mInitialShapeGeo.c_str(), resolveMap.get(), cache.get());
+			isb->resolveGeometry(pcu::toUTF16FromOSNarrow(inputArgs.mInitialShapeGeo).c_str(), resolveMap.get(), cache.get());
 		}
 		else {
 			isb->setGeometry(
@@ -201,15 +200,16 @@ int main (int argc, char *argv[]) {
 		pcu::AttributeMapPtr printOptions{optionsBuilder->createAttributeMapAndReset()};
 
 		// -- validate & complete encoder options
-		pcu::AttributeMapPtr validatedEncOpts{createValidatedOptions(inputArgs.mEncoderID.c_str(), inputArgs.mEncoderOpts)};
+		pcu::AttributeMapPtr validatedEncOpts{createValidatedOptions(pcu::toUTF16FromOSNarrow(inputArgs.mEncoderID), inputArgs.mEncoderOpts)};
 		pcu::AttributeMapPtr validatedErrOpts{createValidatedOptions(ENCODER_ID_CGA_ERROR, errOptions)};
 		pcu::AttributeMapPtr validatedPrintOpts{createValidatedOptions(ENCODER_ID_CGA_PRINT, printOptions)};
 
 		// -- setup encoder IDs and corresponding options
+		std::wstring encoder = pcu::toUTF16FromOSNarrow(inputArgs.mEncoderID);
 		std::array<const wchar_t*,3> encoders = {
-				inputArgs.mEncoderID.c_str(),	// our desired encoder
-				ENCODER_ID_CGA_ERROR,			// an encoder to redirect rule errors into CGAErrors.txt
-				ENCODER_ID_CGA_PRINT			// an encoder to redirect CGA print statements to CGAPrint.txt
+				encoder.c_str(),      // our desired encoder
+				ENCODER_ID_CGA_ERROR, // an encoder to redirect rule errors into CGAErrors.txt
+				ENCODER_ID_CGA_PRINT  // an encoder to redirect CGA print statements to CGAPrint.txt
 		};
 		std::array<const prt::AttributeMap*,3> encoderOpts = { validatedEncOpts.get(), validatedErrOpts.get(), validatedPrintOpts.get() };
 

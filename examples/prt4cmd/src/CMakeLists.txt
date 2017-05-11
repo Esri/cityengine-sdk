@@ -10,7 +10,7 @@ project(${PROJECT})
 
 ### dependencies
 
-find_package(Boost 1.53.0 REQUIRED COMPONENTS system program_options filesystem)
+find_package(Boost 1.53.0 REQUIRED COMPONENTS system filesystem)
 include_directories(${Boost_INCLUDE_DIR})
 link_directories(${Boost_LIBRARY_DIRS})
 
@@ -40,7 +40,10 @@ add_executable(${PROJECT} prt4cmd.cpp utils.cpp)
 if(${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
 	target_compile_definitions(${PROJECT} PRIVATE _SCL_SECURE_NO_WARNINGS)
 elseif(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
-	target_compile_options(${PROJECT} PRIVATE -std=c++11 -march=nocona -fvisibility=hidden -fvisibility-inlines-hidden -Wl,--exclude-libs,ALL -Wall -Wextra -Wunused-parameter -Wl,-rpath,'\$ORIGIN')
+	target_compile_options(${PROJECT} PRIVATE
+		-std=c++11 -march=nocona -fvisibility=hidden -fvisibility-inlines-hidden
+		-Wl,--exclude-libs,ALL -Wall -Wextra -Wunused-parameter -Wl,-rpath,'\$ORIGIN'
+	)
 elseif(${CMAKE_SYSTEM_NAME} STREQUAL "Darwin")
 	target_compile_options(${PROJECT} PRIVATE -std=c++14 -stdlib=libc++)
 endif()
@@ -50,7 +53,7 @@ target_link_libraries(${PROJECT} ${Boost_LIBRARIES} ${PRT_LIBRARY})
 
 ### install target
 
-set(CMAKE_INSTALL_PREFIX "${PROJECT_SOURCE_DIR}/../install" CACHE PATH "default install prefix" FORCE) 
+set(CMAKE_INSTALL_PREFIX "${PROJECT_SOURCE_DIR}/../install" CACHE PATH "default install prefix" FORCE)
 
 install(CODE "file(REMOVE_RECURSE ${CMAKE_INSTALL_PREFIX}/*)")
 install(PROGRAMS ${CMAKE_BINARY_DIR}/prt4cmd${CMAKE_EXECUTABLE_SUFFIX} DESTINATION bin)
