@@ -21,8 +21,7 @@ explain how to get the sdk binaries and example data.
 SOFTWARE REQUIREMENTS
 ---------------------
 
-- See "General Software Requirements - Linux or MacOSX, for simple clients"
-- Boost libraries 1.53 or later (binary build for your compiler / platform, http://www.boost.org)
+- See "General Software Requirements"
 
 
 BUILD INSTRUCTIONS
@@ -31,7 +30,7 @@ BUILD INSTRUCTIONS
 1. Open a terminal (e.g. bash)
 1. Change into the example directory: `cd <your path to>/esri-cityengine-sdk/examples/prt4cmd`
 1. Prepare build directory: `mkdir build && cd build`
-1. Run cmake (trying to use boost from your system path): `cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release -DBoost_NO_BOOST_CMAKE=ON ../src`
+1. Run cmake: `cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release ../src`
 1. Compile: `make install`
 1. The build result will appear in a `install` directory in parallel to the `build` directory.
 

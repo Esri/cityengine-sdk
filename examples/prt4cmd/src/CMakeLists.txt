@@ -10,10 +10,6 @@ project(${PROJECT})
 
 ### dependencies
 
-find_package(Boost 1.53.0 REQUIRED COMPONENTS system filesystem)
-include_directories(${Boost_INCLUDE_DIR})
-link_directories(${Boost_LIBRARY_DIRS})
-
 if(NOT prt_DIR)
 	set(prt_DIR "${PROJECT_SOURCE_DIR}/../../../prt/cmake") # fallback location
 endif()
@@ -48,7 +44,7 @@ elseif(${CMAKE_SYSTEM_NAME} STREQUAL "Darwin")
 	target_compile_options(${PROJECT} PRIVATE -std=c++14 -stdlib=libc++)
 endif()
 
-target_link_libraries(${PROJECT} ${Boost_LIBRARIES} ${PRT_LIBRARY})
+target_link_libraries(${PROJECT} ${PRT_LIBRARY})
 
 
 ### install target
@@ -67,6 +63,11 @@ else()
 	install(FILES ${PROJECT_SOURCE_DIR}/../README_linux_osx.md DESTINATION .)
 endif()
 
+add_custom_target(install_${PROJECT_NAME}
+	$(MAKE) install
+	DEPENDS ${PROJECT_NAME}
+	COMMENT "Installing ${PROJECT_NAME}"
+)
 
 ### package target
 

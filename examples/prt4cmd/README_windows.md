@@ -21,9 +21,7 @@ explain how to get the sdk binaries and example data.
 SOFTWARE REQUIREMENTS
 ---------------------
 
-- See "General Software Requirements - Windows, for simple clients"
-- Boost libraries 1.53 or later (binary build for your compiler / platform, http://www.boost.org or
-  http://boost.teeks99.com)
+- See "General Software Requirements"
 
 
 BUILD INSTRUCTIONS
@@ -33,7 +31,7 @@ BUILD INSTRUCTIONS
 1. Change into the example directory: `cd <your path to>\esri-cityengine-sdk\examples\prt4cmd`
 1. Prepare build directory: `mkdir build`
 1. And change into it: `cd build`
-1. Run cmake (please adjust boost path): `cmake -G "NMake Makefiles" -DCMAKE_BUILD_TYPE=Release -Dprt_DIR=<your path to>\esri-cityengine-sdk\prt\cmake -DBOOST_INCLUDEDIR=C:\local\boost_1_53_0 -DBOOST_LIBRARYDIR=C:\local\boost_1_53_0\lib64-msvc-12.0 -DBoost_USE_STATIC_LIBS=ON ..\src`
+1. Run cmake: `cmake -G "NMake Makefiles" -DCMAKE_BUILD_TYPE=Release ..\src`
 1. Compile: `nmake install`
 1. The build result will appear in an `install` directory in parallal to the `build` directory.
 

@@ -57,28 +57,28 @@ const wchar_t* ENCODER_ID_CGA_PRINT = L"com.esri.prt.core.CGAPrintEncoder";
  */
 struct PRTContext {
 	PRTContext(const pcu::InputArgs& inputArgs) {
-		// -- create a console and file logger and register them with PRT
-		boost::filesystem::path fsLogPath = inputArgs.mWorkDir / FILE_LOG;
+		// create a console and file logger and register them with PRT
+		pcu::Path fsLogPath = inputArgs.mWorkDir / FILE_LOG;
 		mLogHandler.reset(prt::ConsoleLogHandler::create(prt::LogHandler::ALL, prt::LogHandler::ALL_COUNT));
-		mFileLogHandler.reset(prt::FileLogHandler::create(prt::LogHandler::ALL, prt::LogHandler::ALL_COUNT, fsLogPath.wstring().c_str()));
+		mFileLogHandler.reset(prt::FileLogHandler::create(prt::LogHandler::ALL, prt::LogHandler::ALL_COUNT, fsLogPath.native_wstring().c_str()));
 		prt::addLogHandler(mLogHandler.get());
 		prt::addLogHandler(mFileLogHandler.get());
 
-		// -- setup paths for plugins and licensing, assume standard sdk layout
-		boost::filesystem::path rootPath = inputArgs.mWorkDir;
-		boost::filesystem::path extPath = rootPath / "lib";
+		// setup paths for plugins and licensing, assume standard sdk layout
+		pcu::Path rootPath = inputArgs.mWorkDir;
+		pcu::Path extPath = rootPath / "lib";
 		std::string fsFlexLibBaseName = pcu::getSharedLibraryPrefix() + FILE_FLEXNET_LIB + pcu::getSharedLibrarySuffix();
-		boost::filesystem::path fsFlexLib = rootPath / "bin" / fsFlexLibBaseName;
-		std::string flexLib = fsFlexLib.string();
+		pcu::Path fsFlexLib = rootPath / "bin" / fsFlexLibBaseName;
+		std::string flexLib = fsFlexLib.native_string();
 
-		// -- setup the licensing information
+		// setup the licensing information
 		prt::FlexLicParams flp;
 		flp.mActLibPath = flexLib.c_str();
-		flp.mFeature = inputArgs.mLicFeature.c_str();
-		flp.mHostName = inputArgs.mLicHost.c_str();
+		flp.mFeature    = inputArgs.mLicFeature.c_str();
+		flp.mHostName   = inputArgs.mLicHost.c_str();
 
-		// -- initialize PRT with the path to its extension libraries, the desired log level and licensing data
-		std::wstring wExtPath = extPath.wstring();
+		// initialize PRT with the path to its extension libraries, the desired log level and licensing data
+		const std::wstring wExtPath = extPath.native_wstring();
 		std::array<const wchar_t*, 1> extPaths = { wExtPath.c_str() };
 		mLicHandle.reset(prt::init(extPaths.data(), extPaths.size(), (prt::LogLevel)inputArgs.mLogLevel, &flp));
 	}
@@ -87,14 +87,18 @@ struct PRTContext {
 		// release PRT license
 		mLicHandle.reset();
 
-		// -- remove loggers
+		// remove loggers
 		prt::removeLogHandler(mLogHandler.get());
 		prt::removeLogHandler(mFileLogHandler.get());
 	}
 
-	pcu::ConsoleLogHandlerPtr	mLogHandler;
-	pcu::FileLogHandlerPtr		mFileLogHandler;
-	pcu::ObjectPtr				mLicHandle;
+	explicit operator bool() const {
+		return (bool)mLicHandle;
+	}
+
+	pcu::ConsoleLogHandlerPtr mLogHandler;
+	pcu::FileLogHandlerPtr    mFileLogHandler;
+	pcu::ObjectPtr            mLicHandle;
 };
 
 } // namespace
@@ -110,21 +114,21 @@ int main (int argc, char *argv[]) {
 		if (!pcu::initInputArgs(argc, argv, inputArgs))
 			return EXIT_FAILURE;
 
-		// -- initialize PRT via a helper struct
+		// -- initialize PRT via the above helper struct
 		PRTContext prtCtx(inputArgs);
-		if (!prtCtx.mLicHandle) {
+		if (!prtCtx) {
 			LOG_ERR << L"failed to get a CityEngine license, bailing out.";
 			return EXIT_FAILURE;
 		}
 
 		// -- optionally handle the "codec info" command line switch and exit
 		if (!inputArgs.mInfoFile.empty()) {
-			pcu::codecInfoToXML(inputArgs);
+			pcu::codecInfoToXML(inputArgs.mInfoFile);
 			return EXIT_SUCCESS;
 		}
 
 		// -- setup output path for file callbacks
-		if (!boost::filesystem::exists(inputArgs.mOutputPath)) {
+		if (!inputArgs.mOutputPath.exists()) {
 			LOG_ERR << L"output path '" << inputArgs.mOutputPath << L"' does not exist, cannot continue.";
 			return EXIT_FAILURE;
 		}
@@ -147,7 +151,7 @@ int main (int argc, char *argv[]) {
 		}
 
 		// -- create cache & callback
-		pcu::FileOutputCallbacksPtr foc{prt::FileOutputCallbacks::create(inputArgs.mOutputPath.wstring().c_str())};
+		pcu::FileOutputCallbacksPtr foc{prt::FileOutputCallbacks::create(inputArgs.mOutputPath.native_wstring().c_str())};
 		pcu::CachePtr cache{prt::CacheObject::create(prt::CacheObject::CACHE_TYPE_DEFAULT)};
 
 		// -- setup initial shape geometry
@@ -155,29 +159,34 @@ int main (int argc, char *argv[]) {
 		if (!inputArgs.mInitialShapeGeo.empty()) {
 			LOG_DBG << L"trying to read initial shape geometry from " << inputArgs.mInitialShapeGeo;
 			isb->resolveGeometry(pcu::toUTF16FromOSNarrow(inputArgs.mInitialShapeGeo).c_str(), resolveMap.get(), cache.get());
+			// TODO: handle status
 		}
 		else {
 			isb->setGeometry(
-					pcu::quad::vertices, pcu::quad::vertexCount,
-					pcu::quad::indices, pcu::quad::indexCount,
-					pcu::quad::faceCounts, pcu::quad::faceCountsCount
+				pcu::quad::vertices, pcu::quad::vertexCount,
+				pcu::quad::indices, pcu::quad::indexCount,
+				pcu::quad::faceCounts, pcu::quad::faceCountsCount
 			);
 		}
 
 		// -- setup initial shape attributes
-		std::wstring shapeName	= L"TheInitialShape";
-
-		std::wstring ruleFile = L"bin/rule.cgb";
-		if (inputArgs.mInitialShapeAttrs->hasKey(L"ruleFile") && inputArgs.mInitialShapeAttrs->getType(L"ruleFile") == prt::AttributeMap::PT_STRING)
-			ruleFile = inputArgs.mInitialShapeAttrs->getString(L"ruleFile");
-
+		std::wstring ruleFile  = L"bin/rule.cgb";
 		std::wstring startRule = L"default$init";
-		if (inputArgs.mInitialShapeAttrs->hasKey(L"startRule") && inputArgs.mInitialShapeAttrs->getType(L"startRule") == prt::AttributeMap::PT_STRING)
-			startRule = inputArgs.mInitialShapeAttrs->getString(L"startRule");
+		int32_t      seed      = 666;
+		std::wstring shapeName = L"TheInitialShape";
 
-		int32_t seed = 666;
-		if (inputArgs.mInitialShapeAttrs->hasKey(L"seed") && inputArgs.mInitialShapeAttrs->getType(L"seed") == prt::AttributeMap::PT_INT)
-			seed = inputArgs.mInitialShapeAttrs->getInt(L"seed");
+		if (inputArgs.mInitialShapeAttrs) {
+			if (inputArgs.mInitialShapeAttrs->hasKey(L"ruleFile") &&
+				inputArgs.mInitialShapeAttrs->getType(L"ruleFile") == prt::AttributeMap::PT_STRING)
+				ruleFile = inputArgs.mInitialShapeAttrs->getString(L"ruleFile");
+			if (inputArgs.mInitialShapeAttrs->hasKey(L"startRule") &&
+				inputArgs.mInitialShapeAttrs->getType(L"startRule") == prt::AttributeMap::PT_STRING)
+				startRule = inputArgs.mInitialShapeAttrs->getString(L"startRule");
+			if (inputArgs.mInitialShapeAttrs->hasKey(L"seed") &&
+				inputArgs.mInitialShapeAttrs->getType(L"seed") == prt::AttributeMap::PT_INT)
+				seed = inputArgs.mInitialShapeAttrs->getInt(L"seed");
+		}
+		// TODO: implement smart fallback for ruleFile and startRule (first cgb, first start rule in RPK)
 
 		isb->setAttributes(
 				ruleFile.c_str(),
