@@ -1,3 +1,24 @@
+/**
+ * Esri CityEngine SDK CLI Example
+ *
+ * This example demonstrates the main functionality of the Procedural Runtime API.
+ *
+ * See README_<platform>.md for build instructions.
+ *
+ * Copyright (c) 2012-2017 Esri R&D Center Zurich
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 #pragma once
 
 #include "prt/API.h"
@@ -5,9 +26,17 @@
 #include "prt/LogHandler.h"
 
 #include <memory>
+#include <string>
+#include <cstdlib>
 
 
 namespace pcu { // prt4cmd utils
+
+enum class RunStatus : uint8_t {
+	DONE     = EXIT_SUCCESS,
+	FAILED   = EXIT_FAILURE,
+	CONTINUE = 2
+};
 
 /**
  * helpers for prt object management
@@ -59,7 +88,7 @@ URI          toFileURI          (const std::string& p);
  * XML helpers
  */
 std::string objectToXML(prt::Object const* obj);
-void codecInfoToXML(const std::string& infoFilePath);
+RunStatus codecInfoToXML(const std::string& infoFilePath);
 
 /**
  * default initial shape geometry (a quad)
@@ -80,7 +109,7 @@ const size_t   faceCountsCount = 1;
 class Path {
 public:
 	Path() = default;
-	Path(const std::string& p) : mPath(p) { }
+	Path(const std::string& p);
 	Path(const Path&) = default;
 	virtual ~Path() = default;
 
@@ -108,11 +137,11 @@ inline std::wostream& operator<<(std::wostream& out, const Path& p) {
 }
 
 /**
- * command line argument helpers
+ * command line argument helper
  */
 struct InputArgs {
 	InputArgs(int argc, char *argv[]);
-	explicit operator bool() { return mReady; }
+    bool readyToRumble() const { return (mStatus == RunStatus::CONTINUE); }
 
 	Path            mWorkDir;
 	Path            mOutputPath;
@@ -125,7 +154,7 @@ struct InputArgs {
 	std::string     mInfoFile;
 	std::string     mLicHost;
 	std::string     mLicFeature;
-	bool            mReady;
+	RunStatus       mStatus;
 };
 
 } // namespace pcu

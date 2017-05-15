@@ -1,3 +1,24 @@
+/**
+ * Esri CityEngine SDK CLI Example
+ *
+ * This example demonstrates the main functionality of the Procedural Runtime API.
+ *
+ * See README_<platform>.md for build instructions.
+ *
+ * Copyright (c) 2012-2017 Esri R&D Center Zurich
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 #include "utils.h"
 #include "logging.h"
 
@@ -8,6 +29,8 @@
 #include <algorithm>
 #include <cstdlib>
 #include <iostream>
+#include <sys/types.h>
+#include <sys/stat.h>
 
 
 namespace {
@@ -29,6 +52,43 @@ void tokenize(const std::basic_string<C>& str, std::vector<std::basic_string<C>>
 		lastPos = str.find_first_not_of(delimiters, pos);
 		pos = str.find_first_of(delimiters, lastPos);
 	}
+}
+
+#if defined(_WIN32)
+#	include <Windows.h>
+#elif defined(__APPLE__)
+#	include <mach-o/dyld.h>
+#elif defined(__linux__)
+#	include <sys/types.h>
+#	include <unistd.h>
+#endif
+
+pcu::Path getExecutablePath() {
+#if defined(_WIN32)
+    HMODULE hModule = GetModuleHandle(nullptr);
+    if (hModule != NULL) {
+        char path[MAX_PATH];
+        auto pathSize = GetModuleFileName(hModule, path, sizeof(path));
+        return (pathSize > 0) ? pcu::Path(std::string(path, path+pathSize)) : pcu::Path();
+    }
+    else
+        return {};
+#elif defined(__APPLE__)
+    char path[1024];
+	uint32_t size = sizeof(path);
+	if (_NSGetExecutablePath(path, &size) == 0)
+    	return (size > 0) ? pcu::Path(std::string(path, path+size)) : pcu::Path();
+	else
+    	return {};
+#elif defined(__linux__)
+	const std::string proc = "/proc/" + std::to_string(getpid()) + "/exe";
+	char path[1024];
+	const size_t len = sizeof(path);
+	const ssize_t bytes = readlink(proc.c_str(), path, len);
+	return (bytes > 0) ? pcu::Path(std::string(path, path+bytes)) : pcu::Path();
+#else
+#	error unsupported build platform
+#endif
 }
 
 } // namespace
@@ -81,47 +141,10 @@ AttributeMapPtr createAttributeMapFromTypedKeyValues(const std::vector<std::stri
 	return AttributeMapPtr{bld->createAttributeMapAndReset()};
 }
 
-#if defined(_WIN32)
-#	include <Windows.h>
-#elif defined(__APPLE__)
-#	include <mach-o/dyld.h>
-#elif defined(__linux__)
-#	include <sys/types.h>
-#	include <unistd.h>
-#endif
-
-std::string getExecutablePath() {
-#if defined(_WIN32)
-    HMODULE hModule = GetModuleHandle(nullptr);
-    if (hModule != NULL) {
-		char path[MAX_PATH];
-		auto pathSize = GetModuleFileName(hModule, path, sizeof(path));
-		return (pathSize > 0) ? std::string(ownPth, ownPth+resSize) : std::string();
-	}
-	else
-		return {};
-#elif defined(__APPLE__)
-	char path[1024];
-	uint32_t size = sizeof(path);
-	if (_NSGetExecutablePath(path, &size) == 0)
-    	return (size > 0) ? std::string(path, path+size) : std::string();
-	else
-    	return {};
-#elif defined(__linux__)
-	const std::string proc = "/proc/" + std::to_string(getpid()) + "/exe";
-	char path[1024];
-	const size_t len = sizeof(path);
-	const ssize_t bytes = readlink(proc.c_str(), path, len);
-	return (bytes > 0) ? std::string(path, path+bytes) : std::string();
-#else
-#	error unsupported build platform
-#endif
-}
-
 /**
  * Parse the command line arguments and setup the inputArgs struct.
  */
-InputArgs::InputArgs(int argc, char *argv[]) : mReady(false) {
+InputArgs::InputArgs(int argc, char *argv[]) : mStatus(RunStatus::FAILED) {
 	// determine current path
 	Path executable(getExecutablePath());
 	mWorkDir = executable.getParent().getParent();
@@ -157,20 +180,18 @@ InputArgs::InputArgs(int argc, char *argv[]) : mReady(false) {
 	// setup options
 	CLI::App app{"prt4cmd - command line example for the CityEngine Procedural RunTime"};
 	auto optVer    = app.add_flag  ("-v,--version",                                     "Show CityEngine SDK version.");
-	                 app.add_option("-l,--log-level",       mLogLevel,        "Set log filter level: 1 = debug, 2 = info, 3 = warning, 4 = error, 5 = fatal, >5 = no output");
+	                 app.add_option("-l,--log-level",       mLogLevel,                  "Set log filter level: 1 = debug, 2 = info, 3 = warning, 4 = error, 5 = fatal, >5 = no output");
 	                 app.add_option("-o,--output",          convertOutputPath,          "Set the output path for the callbacks.");
-	                 app.add_option("-e,--encoder",         mEncoderID,       "The encoder ID, e.g. 'com.esri.prt.codecs.OBJEncoder'.");
-	auto optRPK    = app.add_option("-p,--rule-package",    mRulePackage,     "Set the rule package path.");
+	                 app.add_option("-e,--encoder",         mEncoderID,                 "The encoder ID, e.g. 'com.esri.prt.codecs.OBJEncoder'.");
+	auto optRPK    = app.add_option("-p,--rule-package",    mRulePackage,               "Set the rule package path.");
 	                 app.add_option("-a,--shape-attr",      convertShapeAttrs,          "Set a initial shape attribute (syntax is <name>:<type>=<value>, type = {string,float,int,bool}).");
 	                 app.add_option("-g,--shape-geo",       convertInitialShapeGeoPath, "(Optional) Path to a file with shape geometry");
 	                 app.add_option("-z,--encoder-option",  convertEncOpts,             "Set a encoder option (syntax is <name>:<type>=<value>, type = {string,float,int,bool}).");
-	auto optInfo   = app.add_option("-i,--info",            mInfoFile,        "Write XML Extension Information to file");
-	auto optLic    = app.add_option("-f,--license-feature", mLicFeature,      "License Feature to use, one of CityEngBasFx, CityEngBas, CityEngAdvFx, CityEngAdv");
-	auto optLicSrv = app.add_option("-s,--license-server",  mLicHost,         "License Server Host Name, example: 27000@myserver.example.com");
+	auto optInfo   = app.add_option("-i,--info",            mInfoFile,                  "Write XML Extension Information to file");
+	                 app.add_option("-f,--license-feature", mLicFeature,                "License Feature to use, one of CityEngBasFx, CityEngBas, CityEngAdvFx, CityEngAdv");
+	                 app.add_option("-s,--license-server",  mLicHost,                   "License Server Host Name, example: 27000@myserver.example.com");
 
 	// setup option requirements
-	optLic->required();
-	optLicSrv->requires(optLic);
 	optInfo->excludes(optRPK);
 
 	// parse options
@@ -180,14 +201,20 @@ InputArgs::InputArgs(int argc, char *argv[]) : mReady(false) {
     	app.exit(e);
     	return;
 	}
+
+	// basic validation of input args
 	if (optVer->count() == 1) {
 		std::cout << prt::getVersion()->mFullName << std::endl;
+		mStatus = RunStatus::DONE;
 	}
 	else if (optInfo->count() == 0 && optRPK->count() == 0) {
 		std::cerr << "error: at least one of '" << optRPK->get_name() << "' or '" << optInfo->get_name() << "' is required." << std::endl;
 	}
+	else if (optRPK->count() > 0 && !mOutputPath.exists()) {
+		std::cerr << "output path '" << mOutputPath << "' does not exist, cannot continue." << std::endl;
+	}
 	else
-		mReady = true;
+		mStatus = RunStatus::CONTINUE;
 }
 
 
@@ -252,7 +279,7 @@ std::string objectToXML(prt::Object const* obj) {
 	return callAPI<char>(toXMLFunc, 4096);
 }
 
-void codecInfoToXML(const std::string& infoFilePath) {
+RunStatus codecInfoToXML(const std::string& infoFilePath) {
 	std::wstring encIDsStr{ callAPI<wchar_t>(prt::listEncoderIds, 1024) };
 	std::wstring decIDsStr{ callAPI<wchar_t>(prt::listDecoderIds, 1024) };
 
@@ -260,40 +287,47 @@ void codecInfoToXML(const std::string& infoFilePath) {
 	tokenize<wchar_t>(encIDsStr, encIDs, L";");
 	tokenize<wchar_t>(decIDsStr, decIDs, L";");
 
-	std::ofstream xml(infoFilePath);
-	xml << "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n\n";
+	try {
+		std::ofstream xml(infoFilePath);
+		xml << "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n\n";
 
-	xml << "<Codecs build=\""  << prt::getVersion()->mVersion
-		<< "\" buildDate=\""   << prt::getVersion()->mBuildDate
-		<< "\" buildConfig=\"" << prt::getVersion()->mBuildConfig
-		<< "\">\n";
+		xml << "<Codecs build=\"" << prt::getVersion()->mVersion
+			<< "\" buildDate=\"" << prt::getVersion()->mBuildDate
+			<< "\" buildConfig=\"" << prt::getVersion()->mBuildConfig
+			<< "\">\n";
 
-	xml << "<Encoders>\n";
-	for (const std::wstring& encID: encIDs) {
-		prt::Status s = prt::STATUS_UNSPECIFIED_ERROR;
-		EncoderInfoPtr encInfo{prt::createEncoderInfo(encID.c_str(), &s)};
-		if (s == prt::STATUS_OK && encInfo)
-			xml << objectToXML(encInfo.get()) << std::endl;
-		else
-			std::wcout << L"encoder not found for ID: " << encID << std::endl;
+		xml << "<Encoders>\n";
+		for (const std::wstring& encID: encIDs) {
+			prt::Status s = prt::STATUS_UNSPECIFIED_ERROR;
+			EncoderInfoPtr encInfo{prt::createEncoderInfo(encID.c_str(), &s)};
+			if (s == prt::STATUS_OK && encInfo)
+				xml << objectToXML(encInfo.get()) << std::endl;
+			else
+				LOG_ERR << L"encoder not found for ID: " << encID << std::endl;
+		}
+		xml << "</Encoders>\n";
+
+		xml << "<Decoders>\n";
+		for (const std::wstring& decID: decIDs) {
+			prt::Status s = prt::STATUS_UNSPECIFIED_ERROR;
+			DecoderInfoPtr decInfo{prt::createDecoderInfo(decID.c_str(), &s)};
+			if (s == prt::STATUS_OK && decInfo)
+				xml << objectToXML(decInfo.get()) << std::endl;
+			else
+				LOG_ERR << L"decoder not found for ID: " << decID << std::endl;
+		}
+		xml << "</Decoders>\n";
+
+		xml << "</Codecs>\n";
+		xml.close();
+
+		LOG_INF << "Dumped codecs info to " << infoFilePath;
+	} catch (std::exception& e) {
+		LOG_ERR << "Exception while dumping codec info: " << e.what();
+		return RunStatus::FAILED;
 	}
-	xml << "</Encoders>\n";
 
-	xml << "<Decoders>\n";
-	for (const std::wstring& decID: decIDs) {
-		prt::Status s = prt::STATUS_UNSPECIFIED_ERROR;
-		DecoderInfoPtr decInfo{prt::createDecoderInfo(decID.c_str(), &s)};
-		if (s == prt::STATUS_OK && decInfo)
-			xml << objectToXML(decInfo.get()) << std::endl;
-		else
-			std::wcout << L"decoder not found for ID: " << decID << std::endl;
-	}
-	xml << "</Decoders>\n";
-
-	xml << "</Codecs>\n";
-	xml.close();
-
-	LOG_INF << "Dumped codecs info to " << infoFilePath;
+	return RunStatus::DONE;
 }
 
 URI toFileURI(const std::string& p) {
@@ -334,8 +368,17 @@ std::string getSharedLibrarySuffix() {
 }
 
 
+std::string makeGeneric(const std::string& s) {
+    std::string t = s;
+    std::replace(t.begin(), t.end(), '\\', '/');
+    return t;
+}
+
+
+Path::Path(const std::string& p) : mPath(makeGeneric(p)) { }
+
 Path Path::operator/(const std::string& e) const {
-	return {mPath + '/' + e};
+	return {mPath + '/' + makeGeneric(e)};
 }
 
 std::string Path::generic_string() const {
@@ -372,8 +415,8 @@ URI Path::getFileURI() const {
 }
 
 bool Path::exists() const {
-	std::ifstream s(mPath);
-	return s.good(); // very simple check for accessibility
+    struct stat info;
+    return (stat(native_string().c_str(), &info) == 0);
 }
 
 

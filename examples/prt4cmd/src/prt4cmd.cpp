@@ -3,12 +3,9 @@
  *
  * This example demonstrates the main functionality of the Procedural Runtime API.
  *
- * See README for build instructions.
+ * See README_<platform>.md for build instructions.
  *
- * Written by Matthias Specht and Simon Haegler
- * Esri R&D Center Zurich, Switzerland
- *
- * Copyright (c) 2017 Esri R&D Center Zurich
+ * Copyright (c) 2012-2017 Esri R&D Center Zurich
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -51,9 +48,10 @@ const wchar_t* FILE_CGA_ERROR       = L"CGAErrors.txt";
 const wchar_t* FILE_CGA_PRINT       = L"CGAPrint.txt";
 const wchar_t* ENCODER_ID_CGA_ERROR = L"com.esri.prt.core.CGAErrorEncoder";
 const wchar_t* ENCODER_ID_CGA_PRINT = L"com.esri.prt.core.CGAPrintEncoder";
+const wchar_t* ENCODER_OPT_NAME     = L"name";
 
 /**
- * Helper struct to manage PRT lifetime and licensing
+ * Helper struct to manage PRT lifetime (e.g. the prt::init() call) and licensing
  */
 struct PRTContext {
 	PRTContext(const pcu::InputArgs& inputArgs) {
@@ -64,7 +62,7 @@ struct PRTContext {
 		prt::addLogHandler(mLogHandler.get());
 		prt::addLogHandler(mFileLogHandler.get());
 
-		// setup paths for plugins and licensing, assume standard sdk layout
+		// setup paths for plugins and licensing, assume standard SDK layout as per README.md
 		pcu::Path rootPath = inputArgs.mWorkDir;
 		pcu::Path extPath = rootPath / "lib";
 		std::string fsFlexLibBaseName = pcu::getSharedLibraryPrefix() + FILE_FLEXNET_LIB + pcu::getSharedLibrarySuffix();
@@ -111,8 +109,8 @@ int main (int argc, char *argv[]) {
 	try {
 		// -- fetch command line args
 		pcu::InputArgs inputArgs(argc, argv);
-		if (!inputArgs)
-			return EXIT_FAILURE;
+		if (!inputArgs.readyToRumble())
+			return static_cast<int>(inputArgs.mStatus);
 
 		// -- initialize PRT via the above helper struct
 		PRTContext prtCtx(inputArgs);
@@ -121,17 +119,11 @@ int main (int argc, char *argv[]) {
 			return EXIT_FAILURE;
 		}
 
-		// -- optionally handle the "codec info" command line switch and exit
-		if (!inputArgs.mInfoFile.empty()) {
-			pcu::codecInfoToXML(inputArgs.mInfoFile);
-			return EXIT_SUCCESS;
-		}
-
-		// -- setup output path for file callbacks
-		if (!inputArgs.mOutputPath.exists()) {
-			LOG_ERR << L"output path '" << inputArgs.mOutputPath << L"' does not exist, cannot continue.";
-			return EXIT_FAILURE;
-		}
+        // handle the info option (must happen after successful init)
+        if (!inputArgs.mInfoFile.empty()) {
+            pcu::RunStatus s = pcu::codecInfoToXML(inputArgs.mInfoFile);
+            return static_cast<int>(s);
+        }
 
 		// -- create resolve map based on rule package
 		pcu::ResolveMapPtr resolveMap;
@@ -158,8 +150,11 @@ int main (int argc, char *argv[]) {
 		pcu::InitialShapeBuilderPtr isb{prt::InitialShapeBuilder::create()};
 		if (!inputArgs.mInitialShapeGeo.empty()) {
 			LOG_DBG << L"trying to read initial shape geometry from " << inputArgs.mInitialShapeGeo;
-			isb->resolveGeometry(pcu::toUTF16FromOSNarrow(inputArgs.mInitialShapeGeo).c_str(), resolveMap.get(), cache.get());
-			// TODO: handle status
+			prt::Status s = isb->resolveGeometry(pcu::toUTF16FromOSNarrow(inputArgs.mInitialShapeGeo).c_str(), resolveMap.get(), cache.get());
+			if (s != prt::STATUS_OK) {
+                LOG_ERR << "could not resolve geometry from " << inputArgs.mInitialShapeGeo;
+                return EXIT_FAILURE;
+            }
 		}
 		else {
 			isb->setGeometry(
@@ -186,7 +181,6 @@ int main (int argc, char *argv[]) {
 				inputArgs.mInitialShapeAttrs->getType(L"seed") == prt::AttributeMap::PT_INT)
 				seed = inputArgs.mInitialShapeAttrs->getInt(L"seed");
 		}
-		// TODO: implement smart fallback for ruleFile and startRule (first cgb, first start rule in RPK)
 
 		isb->setAttributes(
 				ruleFile.c_str(),
@@ -203,9 +197,9 @@ int main (int argc, char *argv[]) {
 
 		// -- setup options for helper encoders
 		pcu::AttributeMapBuilderPtr optionsBuilder{prt::AttributeMapBuilder::create()};
-		optionsBuilder->setString(L"name", FILE_CGA_ERROR);
+		optionsBuilder->setString(ENCODER_OPT_NAME, FILE_CGA_ERROR);
 		pcu::AttributeMapPtr errOptions{optionsBuilder->createAttributeMapAndReset()};
-		optionsBuilder->setString(L"name", FILE_CGA_PRINT);
+		optionsBuilder->setString(ENCODER_OPT_NAME, FILE_CGA_PRINT);
 		pcu::AttributeMapPtr printOptions{optionsBuilder->createAttributeMapAndReset()};
 
 		// -- validate & complete encoder options
