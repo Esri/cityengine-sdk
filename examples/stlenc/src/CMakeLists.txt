@@ -20,6 +20,10 @@ set(CESDK_VERSION "cesdk_${PRT_VERSION_MAJOR}_${PRT_VERSION_MINOR}_${PRT_VERSION
 
 ### build target
 
+if(NOT CMAKE_BUILD_TYPE)
+	set(CMAKE_BUILD_TYPE "Release" CACHE STRING "Choose one of: Debug Release RelWithDebInfo MinSizeRel" FORCE)
+endif()
+
 add_library(${PROJECT} SHARED main.cpp STLEncoder.cpp)
 add_definitions(-DPRT_VERSION_MAJOR=${PRT_VERSION_MAJOR} -DPRT_VERSION_MINOR=${PRT_VERSION_MINOR})
 
@@ -33,16 +37,22 @@ target_link_libraries(${PROJECT} ${PRT_LIBRARY})
 
 ### install target
 
-set(CMAKE_INSTALL_PREFIX "${PROJECT_SOURCE_DIR}/../install" CACHE PATH "default install prefix" FORCE) 
+set(CMAKE_INSTALL_PREFIX "${PROJECT_SOURCE_DIR}/../install" CACHE PATH "default install prefix" FORCE)
 
 install(CODE "file(REMOVE_RECURSE ${CMAKE_INSTALL_PREFIX}/*)")
-install(TARGETS ${PROJECT} DESTINATION lib)
+install(TARGETS ${PROJECT} RUNTIME DESTINATION lib LIBRARY DESTINATION lib)
 install(DIRECTORY ${PROJECT_SOURCE_DIR}/../../../license DESTINATION .)
 if(WIN32)
 	install(FILES ${PROJECT_SOURCE_DIR}/../README_windows.md DESTINATION .)
 else()
 	install(FILES ${PROJECT_SOURCE_DIR}/../README_linux_osx.md DESTINATION .)
 endif()
+
+add_custom_target(install_${PROJECT_NAME}
+		$(MAKE) install
+		DEPENDS ${PROJECT_NAME}
+		COMMENT "Installing ${PROJECT_NAME}"
+		)
 
 
 ### package target
