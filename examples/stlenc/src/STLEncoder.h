@@ -9,7 +9,7 @@
  * Written by Simon Haegler
  * Esri R&D Center Zurich, Switzerland
  *
- * Copyright 2015 Esri R&D Center Zurich
+ * Copyright 2012-2017 (c) Esri R&D Center Zurich
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -48,16 +48,20 @@ public:
 	static const std::wstring NAME;
 	static const std::wstring DESCRIPTION;
 
-	STLEncoder(const std::wstring& id, const prt::AttributeMap* defaultOptions, prt::Callbacks* callbacks);
-	virtual ~STLEncoder();
+	using prtx::GeometryEncoder::GeometryEncoder; // re-use parent constructor
+
+	STLEncoder(const STLEncoder&) = delete;
+	STLEncoder(STLEncoder&&) = delete;
+	STLEncoder& operator=(STLEncoder&) = delete;
+	virtual ~STLEncoder() = default;
 
 	virtual void init(prtx::GenerateContext& context);
 	virtual void encode(prtx::GenerateContext& context, size_t initialShapeIndex);
 	virtual void finish(prtx::GenerateContext& context);
 
 private:
-	prtx::DefaultNamePreparator	mNamePreparator;
-	prtx::EncodePreparatorPtr	mEncodePreparator;
+	prtx::DefaultNamePreparator mNamePreparator;
+	prtx::EncodePreparatorPtr   mEncodePreparator;
 };
 
 
@@ -66,7 +70,11 @@ public:
 	static STLEncoderFactory* createInstance();
 
 	STLEncoderFactory(const prt::EncoderInfo* info) : prtx::EncoderFactory(info) { }
-	virtual ~STLEncoderFactory() { }
+	STLEncoderFactory(const STLEncoderFactory&) = delete;
+	STLEncoderFactory(STLEncoderFactory&&) = delete;
+	STLEncoderFactory& operator=(STLEncoderFactory&) = delete;
+	virtual ~STLEncoderFactory() = default;
+
 	virtual STLEncoder* create(const prt::AttributeMap* defaultOptions, prt::Callbacks* callbacks) const {
 		return new STLEncoder(getID(), defaultOptions, callbacks);
 	}

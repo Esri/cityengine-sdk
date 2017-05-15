@@ -9,7 +9,7 @@
  * Written by Simon Haegler
  * Esri R&D Center Zurich, Switzerland
  *
- * Copyright 2015 Esri R&D Center Zurich
+ * Copyright 2012-2017 (c) Esri R&D Center Zurich
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -37,10 +37,10 @@
 
 namespace {
 
-const wchar_t* EO_BASE_NAME			= L"baseName";
-const wchar_t* EO_ERROR_FALLBACK	= L"errorFallback";
-const std::wstring STL_EXT			= L".stl";
-const wchar_t* WNL					= L"\n";
+const wchar_t*     EO_BASE_NAME      = L"baseName";
+const wchar_t*     EO_ERROR_FALLBACK = L"errorFallback";
+const std::wstring STL_EXT           = L".stl";
+const wchar_t*     WNL               = L"\n";
 
 const prtx::EncodePreparator::PreparationFlags ENC_PREP_FLAGS = prtx::EncodePreparator::PreparationFlags()
 	.instancing(false)
@@ -54,18 +54,9 @@ const prtx::EncodePreparator::PreparationFlags ENC_PREP_FLAGS = prtx::EncodePrep
 } // namespace
 
 
-const std::wstring STLEncoder::ID			= L"com.esri.prt.examples.STLEncoder";
-const std::wstring STLEncoder::NAME			= L"STL Encoder";
-const std::wstring STLEncoder::DESCRIPTION	= L"Example encoder for the STL format";
-
-
-/**
- * The constructor just forwards the encoder id, defaultOptions and callbacks to the geometry encoder.
- */
-STLEncoder::STLEncoder(const std::wstring& id, const prt::AttributeMap* defaultOptions, prt::Callbacks* callbacks)
-: prtx::GeometryEncoder(id, defaultOptions, callbacks) { }
-
-STLEncoder::~STLEncoder() { }
+const std::wstring STLEncoder::ID          = L"com.esri.prt.examples.STLEncoder";
+const std::wstring STLEncoder::NAME        = L"STL Encoder";
+const std::wstring STLEncoder::DESCRIPTION = L"Example encoder for the STL format";
 
 
 /**
@@ -140,8 +131,8 @@ void STLEncoder::finish(prtx::GenerateContext& /*context*/) {
 	out << L"endsolid" << WNL;
 
 	// let the client application write the file via callback
-	std::wstring fileName = baseName + STL_EXT;
-	uint64_t h = soh->open(ID.c_str(), prt::CT_GEOMETRY, fileName.c_str(), prt::SimpleOutputCallbacks::SE_UTF8);
+	const std::wstring fileName = baseName + STL_EXT;
+	const uint64_t h = soh->open(ID.c_str(), prt::CT_GEOMETRY, fileName.c_str(), prt::SimpleOutputCallbacks::SE_UTF8);
 	soh->write(h, out.str().c_str());
 	soh->close(h, 0, 0);
 }
