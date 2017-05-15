@@ -111,6 +111,9 @@ inline std::wostream& operator<<(std::wostream& out, const Path& p) {
  * command line argument helpers
  */
 struct InputArgs {
+	InputArgs(int argc, char *argv[]);
+	explicit operator bool() { return mReady; }
+
 	Path            mWorkDir;
 	Path            mOutputPath;
 	std::string     mEncoderID;
@@ -122,8 +125,7 @@ struct InputArgs {
 	std::string     mInfoFile;
 	std::string     mLicHost;
 	std::string     mLicFeature;
+	bool            mReady;
 };
-
-bool initInputArgs(int argc, char *argv[], InputArgs& inputArgs);
 
 } // namespace pcu

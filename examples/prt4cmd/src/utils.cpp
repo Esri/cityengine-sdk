@@ -121,52 +121,52 @@ std::string getExecutablePath() {
 /**
  * Parse the command line arguments and setup the inputArgs struct.
  */
-bool initInputArgs(int argc, char *argv[], InputArgs& inputArgs) {
+InputArgs::InputArgs(int argc, char *argv[]) : mReady(false) {
 	// determine current path
 	Path executable(getExecutablePath());
-	inputArgs.mWorkDir = executable.getParent().getParent();
+	mWorkDir = executable.getParent().getParent();
 
 	// setup default values
-	inputArgs.mEncoderID  = ENCODER_ID_OBJ;
-	inputArgs.mLogLevel   = 2;
-	inputArgs.mOutputPath = inputArgs.mWorkDir / "output";
+	mEncoderID  = ENCODER_ID_OBJ;
+	mLogLevel   = 2;
+	mOutputPath = mWorkDir / "output";
 
 	// setup arg handling callbacks
-	CLI::callback_t convertShapeAttrs = [&inputArgs](std::vector<std::string> argShapeAttrs) {
-		inputArgs.mInitialShapeAttrs = createAttributeMapFromTypedKeyValues(argShapeAttrs);
+	CLI::callback_t convertShapeAttrs = [this](std::vector<std::string> argShapeAttrs) {
+		mInitialShapeAttrs = createAttributeMapFromTypedKeyValues(argShapeAttrs);
 		return true;
 	};
-	CLI::callback_t convertEncOpts = [&inputArgs](std::vector<std::string> argEncOpts) {
-		inputArgs.mEncoderOpts = createAttributeMapFromTypedKeyValues(argEncOpts);
+	CLI::callback_t convertEncOpts = [this](std::vector<std::string> argEncOpts) {
+		mEncoderOpts = createAttributeMapFromTypedKeyValues(argEncOpts);
 		return true;
 	};
-	CLI::callback_t convertOutputPath = [&inputArgs](std::vector<std::string> arg) {
+	CLI::callback_t convertOutputPath = [this](std::vector<std::string> arg) {
 		if (arg.empty())
 			return false;
-		inputArgs.mOutputPath = inputArgs.mWorkDir / arg.front();
+		mOutputPath = mWorkDir / arg.front();
 		return true;
 	};
-	CLI::callback_t convertInitialShapeGeoPath = [&inputArgs](std::vector<std::string> arg) {
+	CLI::callback_t convertInitialShapeGeoPath = [this](std::vector<std::string> arg) {
 		if (arg.empty())
 			return false;
 		Path p(arg.front());
-		inputArgs.mInitialShapeGeo = p.getFileURI(); // we let prt deal with invalid file paths etc
+		mInitialShapeGeo = p.getFileURI(); // we let prt deal with invalid file paths etc
 		return true;
 	};
 
 	// setup options
 	CLI::App app{"prt4cmd - command line example for the CityEngine Procedural RunTime"};
 	auto optVer    = app.add_flag  ("-v,--version",                                     "Show CityEngine SDK version.");
-	                 app.add_option("-l,--log-level",       inputArgs.mLogLevel,        "Set log filter level: 1 = debug, 2 = info, 3 = warning, 4 = error, 5 = fatal, >5 = no output");
+	                 app.add_option("-l,--log-level",       mLogLevel,        "Set log filter level: 1 = debug, 2 = info, 3 = warning, 4 = error, 5 = fatal, >5 = no output");
 	                 app.add_option("-o,--output",          convertOutputPath,          "Set the output path for the callbacks.");
-	                 app.add_option("-e,--encoder",         inputArgs.mEncoderID,       "The encoder ID, e.g. 'com.esri.prt.codecs.OBJEncoder'.");
-	auto optRPK    = app.add_option("-p,--rule-package",    inputArgs.mRulePackage,     "Set the rule package path.");
+	                 app.add_option("-e,--encoder",         mEncoderID,       "The encoder ID, e.g. 'com.esri.prt.codecs.OBJEncoder'.");
+	auto optRPK    = app.add_option("-p,--rule-package",    mRulePackage,     "Set the rule package path.");
 	                 app.add_option("-a,--shape-attr",      convertShapeAttrs,          "Set a initial shape attribute (syntax is <name>:<type>=<value>, type = {string,float,int,bool}).");
 	                 app.add_option("-g,--shape-geo",       convertInitialShapeGeoPath, "(Optional) Path to a file with shape geometry");
 	                 app.add_option("-z,--encoder-option",  convertEncOpts,             "Set a encoder option (syntax is <name>:<type>=<value>, type = {string,float,int,bool}).");
-	auto optInfo   = app.add_option("-i,--info",            inputArgs.mInfoFile,        "Write XML Extension Information to file");
-	auto optLic    = app.add_option("-f,--license-feature", inputArgs.mLicFeature,      "License Feature to use, one of CityEngBasFx, CityEngBas, CityEngAdvFx, CityEngAdv");
-	auto optLicSrv = app.add_option("-s,--license-server",  inputArgs.mLicHost,         "License Server Host Name, example: 27000@myserver.example.com");
+	auto optInfo   = app.add_option("-i,--info",            mInfoFile,        "Write XML Extension Information to file");
+	auto optLic    = app.add_option("-f,--license-feature", mLicFeature,      "License Feature to use, one of CityEngBasFx, CityEngBas, CityEngAdvFx, CityEngAdv");
+	auto optLicSrv = app.add_option("-s,--license-server",  mLicHost,         "License Server Host Name, example: 27000@myserver.example.com");
 
 	// setup option requirements
 	optLic->required();
@@ -178,17 +178,16 @@ bool initInputArgs(int argc, char *argv[], InputArgs& inputArgs) {
   	  app.parse(argc, argv);
 	} catch (const CLI::Error& e) {
     	app.exit(e);
-    	return false;
+    	return;
 	}
 	if (optVer->count() == 1) {
 		std::cout << prt::getVersion()->mFullName << std::endl;
-		return false;
 	}
-	if (optInfo->count() == 0 && optRPK->count() == 0) { // TODO: how to do this with CLI11 tools?
+	else if (optInfo->count() == 0 && optRPK->count() == 0) {
 		std::cerr << "error: at least one of '" << optRPK->get_name() << "' or '" << optInfo->get_name() << "' is required." << std::endl;
-		return false;
 	}
-	return true;
+	else
+		mReady = true;
 }
 
 

@@ -110,8 +110,8 @@ struct PRTContext {
 int main (int argc, char *argv[]) {
 	try {
 		// -- fetch command line args
-		pcu::InputArgs inputArgs;
-		if (!pcu::initInputArgs(argc, argv, inputArgs))
+		pcu::InputArgs inputArgs(argc, argv);
+		if (!inputArgs)
 			return EXIT_FAILURE;
 
 		// -- initialize PRT via the above helper struct
