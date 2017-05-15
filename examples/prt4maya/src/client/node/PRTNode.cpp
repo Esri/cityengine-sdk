@@ -46,34 +46,37 @@ const bool			ENABLE_LOG_FILE		= false;
 } // namespace
 
 
-const wchar_t*	ENC_ATTR		= L"com.esri.prt.core.AttributeEvalEncoder";
-const char*		FILE_PREFIX		= "file:///";
-const MString	NAME_GENERATE	= "Generate_Model";
+const wchar_t* ENC_ATTR      = L"com.esri.prt.core.AttributeEvalEncoder";
+const char*    FILE_PREFIX   = "file:///";
+const MString  NAME_GENERATE = "Generate_Model";
 
 
 MTypeId PRTNode::theID(PRT_TYPE_ID);
 
-PRTNode::PRTNode() : mResolveMap(0), mGenerateAttrs(0), mMayaEncOpts(0), mAttrEncOpts(0), mEnums(0), mHasMaterials(false), mCreatedInteractively(false) {
+PRTNode::PRTNode()
+: mResolveMap(nullptr), mGenerateAttrs(nullptr), mMayaEncOpts(nullptr), mAttrEncOpts(nullptr)
+, mEnums(nullptr), mHasMaterials(false), mCreatedInteractively(false)
+{
 	theNodeCount++;
 
 	{
 		prt::EncoderInfo  const* encInfo = prt::createEncoderInfo(ENC_MAYA);	
-		encInfo->createValidatedOptionsAndStates(0, &mMayaEncOpts, 0);
+		encInfo->createValidatedOptionsAndStates(nullptr, &mMayaEncOpts, nullptr);
 		encInfo->destroy();
 	}
 
 	{
 		prt::EncoderInfo  const* encInfo = prt::createEncoderInfo(ENC_ATTR);	
-		encInfo->createValidatedOptionsAndStates(0, &mAttrEncOpts, 0);
+		encInfo->createValidatedOptionsAndStates(nullptr, &mAttrEncOpts, nullptr);
 		encInfo->destroy();
 	}
 }
 
 PRTNode::~PRTNode() {
-	if(mResolveMap)    {mResolveMap->destroy();    mResolveMap    = 0;}
-	if(mGenerateAttrs) {mGenerateAttrs->destroy(); mGenerateAttrs = 0;}
-	if(mMayaEncOpts)   {mMayaEncOpts->destroy();   mMayaEncOpts   = 0;}
-	if(mAttrEncOpts)   {mAttrEncOpts->destroy();   mAttrEncOpts   = 0;}
+	if(mResolveMap)    {mResolveMap->destroy();    mResolveMap    = nullptr;}
+	if(mGenerateAttrs) {mGenerateAttrs->destroy(); mGenerateAttrs = nullptr;}
+	if(mMayaEncOpts)   {mMayaEncOpts->destroy();   mMayaEncOpts   = nullptr;}
+	if(mAttrEncOpts)   {mAttrEncOpts->destroy();   mAttrEncOpts   = nullptr;}
 	if(mEnums)         {destroyEnums();}
 
 	if(--theNodeCount == 0) {
@@ -84,7 +87,7 @@ PRTNode::~PRTNode() {
 }
 
 MStatus PRTNode::setDependentsDirty(const MPlug& /*plugBeingDirtied*/, MPlugArray& affectedPlugs) {
-	MPlug   pOutMesh(thisMObject(), outMesh);
+	MPlug pOutMesh(thisMObject(), outMesh);
 	affectedPlugs.append(pOutMesh);
 	return MS::kSuccess;
 }
@@ -372,7 +375,7 @@ void PRTNode::destroyEnums() {
 		e = tmp;
 	}
 
-	mEnums = 0;
+	mEnums = nullptr;
 }
 
 const PRTEnum* PRTNode::findEnum(const MObject & attr) const {
@@ -380,7 +383,7 @@ const PRTEnum* PRTNode::findEnum(const MObject & attr) const {
 		if(e->mAttr.object() == attr)
 			return e;
 	}
-	return 0;
+	return nullptr;
 }
 
 MayaCallbacks* PRTNode::createOutputHandler(const MPlug* plug, MDataBlock* data) {
@@ -492,16 +495,16 @@ const char* EMPTY_STRING = "";
 bool tryToGetLicenseDetails(prt::FlexLicParams& flp) {
 	const char* envLicFeature = getenv(ENV_LIC_FEATURE);
 	const char* envLicServer = getenv(ENV_LIC_SERVER);
-	if (envLicFeature == 0) {
+	if (envLicFeature == nullptr) {
 		prt::log(L"prt4maya: could not get license feature type from environment", prt::LOG_FATAL);
 		return false;
 	}
-	if ((strcmp(envLicFeature, "CityEngAdv") == 0) && (envLicServer == 0)) {
+	if ((strcmp(envLicFeature, "CityEngAdv") == 0) && (envLicServer == nullptr)) {
 		prt::log(L"prt4maya: license type 'CityEngAdv' requires a license server hostname (<port>@<host>, e.g. 27000@flexnet.host.com)", prt::LOG_FATAL);
 		return false;
 	}
 	flp.mFeature = envLicFeature;
-	flp.mHostName = envLicServer != 0 ? envLicServer : EMPTY_STRING;
+	flp.mHostName = envLicServer != nullptr ? envLicServer : EMPTY_STRING;
 
 	prtu::dbg("lic feature: '%s'", flp.mFeature);
 	prtu::dbg("lic host: '%s'", flp.mHostName);

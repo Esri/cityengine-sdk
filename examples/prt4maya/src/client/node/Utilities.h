@@ -13,6 +13,11 @@
 #include "maya/MFloatPointArray.h"
 
 #include <cstdint>
+#include <cmath>
+
+#if defined(_MSC_VER) && (_MSC_VER <= 1700)
+#   include <cfloat>
+#endif
 
 
 #define DO_DBG 1
@@ -20,7 +25,6 @@
 
 
 namespace prtu {
-
 
 const char* filename(const char* path);
 
@@ -46,5 +50,13 @@ MString toCleanId(const MString& name);
 
 int32_t computeSeed(MFloatPointArray& vertices);
 int32_t computeSeed(const double* vertices, size_t count);
+
+inline bool isnan(double d) {
+#if defined(_MSC_VER) && (_MSC_VER <= 1700)
+    return ::isnan(d);
+#else
+    return std::isnan(d);
+#endif
+}
 
 } // namespace prtu

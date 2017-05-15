@@ -20,8 +20,7 @@
 
 namespace {
 
-static const bool TRACE = false;
-
+const bool TRACE = false;
 void prtTrace(const std::wstring& arg1, std::size_t arg2) {
 	if (TRACE) {
 		std::wostringstream wostr;
@@ -40,14 +39,12 @@ void MayaCallbacks::setVertices(const double* vtx, size_t size) {
 		mVertices.append((float)vtx[i], (float)vtx[i+1], (float)vtx[i+2]);
 }
 
-
 void MayaCallbacks::setNormals(const double* nrm, size_t size) {
 	prtTrace(L"setNormals: size = ", size);
 	mNormals.clear();
 	for (size_t i = 0; i < size; i += 3)
 		mNormals.append(MVector(nrm[i], nrm[i+1], nrm[i+2]));
 }
-
 
 void MayaCallbacks::setUVs(const double* u, const double* v, size_t size) {
 	mU.clear();
@@ -83,8 +80,6 @@ void MayaCallbacks::setFaces(
 		mUVConnects.append(uvConnects[i]);
 }
 
-#define VERBOSE_NORMALS 0
-
 void MayaCallbacks::createMesh() {
 	MStatus stat;
 
@@ -105,7 +100,7 @@ void MayaCallbacks::createMesh() {
 	prtu::dbg("    mVerticesConnects.length = %d", mVerticesConnects.length());
 	prtu::dbg("    mNormals.length          = %d", mNormals.length());
 
-	mFnMesh = new MFnMesh();
+	mFnMesh.reset(new MFnMesh());
 	MObject oMesh = mFnMesh->create(mVertices.length(), mVerticesCounts.length(), mVertices, mVerticesCounts, mVerticesConnects, newOutputData, &stat);
 	MCHECK(stat);
 
@@ -134,11 +129,11 @@ void MayaCallbacks::createMesh() {
 	if(mNormals.length() > 0) {
 		prtu::dbg("    mNormals.length        = %d", mNormals.length());
 
-		// NOTE: this expects that vertices and vertex normals use the same index domain (-> maya encoder)
+		// NOTE: this assumes that vertices and vertex normals use the same index domain (-> maya encoder)
 		MVectorArray expandedNormals(mVerticesConnects.length());
 		for (unsigned int i = 0; i < mVerticesConnects.length(); i++)
 			expandedNormals[i] = mNormals[mVerticesConnects[i]];
-		
+
 		prtu::dbg("    expandedNormals.length = %d", expandedNormals.length());
 
 		MCHECK(mFnMesh->setVertexNormals(expandedNormals, mVerticesConnects));
@@ -165,7 +160,7 @@ MString MayaCallbacks::matCreate(int start, int count, const wchar_t* name) {
 			createGroup = false;
 			break;
 		}
-	
+
 	if(createGroup) {
 		PRTNode::theShadingGroups.append(groupName);
 		*mShadingCmd += "sets -renderable true -noSurfaceShader true -empty -name (\"" + groupName + "\");\n";
@@ -178,11 +173,10 @@ MString MayaCallbacks::matCreate(int start, int count, const wchar_t* name) {
 	return createGroup ? groupName : MString();
 }
 
-
 void MayaCallbacks::matSetDiffuseTexture(uint32_t start, uint32_t count, const wchar_t* tex) {
 	MString matName = matCreate(start, count, tex);
-	if (matName.numChars() == 0) return;
-
+	if (matName.numChars() == 0)
+		return;
 	*mShadingCmd += "prtSetDiffuseTexture(\"" + matName + "\",\"" + tex + "\",\"map1\");\n";
 }
 
@@ -190,13 +184,13 @@ void MayaCallbacks::matSetColor(uint32_t start, uint32_t count, double r, double
 	wchar_t name[8];
 	swprintf(name, 7, L"%02X%02X%02X", (int)(r * 255.0), (int)(g * 255.0), (int)(b * 255.0));
 	MString matName = matCreate(start, count, name);
-	if(matName.numChars() == 0) return;
-
+	if(matName.numChars() == 0)
+		return;
 	*mShadingCmd += "prtSetColor(\"" + matName + "\"," + r + "," + g + "," + b + ");\n";
 }
 
 void MayaCallbacks::finishMesh() {
-	delete mFnMesh;
+	mFnMesh.reset();
 }
 
 prt::Status MayaCallbacks::attrBool(size_t /*isIndex*/, int32_t /*shapeID*/, const wchar_t* key, bool value) {

@@ -22,13 +22,14 @@
 
 
 namespace {
-const wchar_t*	ANNOT_START_RULE	= L"@StartRule";
-const wchar_t*	ANNOT_RANGE			= L"@Range";
-const wchar_t*	ANNOT_COLOR			= L"@Color";
-const wchar_t*	ANNOT_DIR			= L"@Directory";
-const wchar_t*	ANNOT_FILE			= L"@File";
-const wchar_t*	NULL_KEY			= L"#NULL#";
-}
+const wchar_t* ANNOT_START_RULE = L"@StartRule";
+const wchar_t* ANNOT_RANGE      = L"@Range";
+const wchar_t* ANNOT_COLOR      = L"@Color";
+const wchar_t* ANNOT_DIR        = L"@Directory";
+const wchar_t* ANNOT_FILE       = L"@File";
+const wchar_t* NULL_KEY         = L"#NULL#";
+} // namespace
+
 
 inline MString & PRTAttrs::getStringParameter(MObject & node, MObject & attr, MString & value) {
 	MPlug plug(node, attr);
@@ -77,13 +78,14 @@ MStatus PRTAttrs::addFloatParameter(MFnDependencyNode & node, MObject & attr, co
 	MStatus stat;
 	MFnNumericAttribute nAttr;
 	attr = nAttr.create(longName(name), briefName(name), MFnNumericData::kDouble, value, &stat );
-	if ( stat != MS::kSuccess ) throw stat;
+	if (stat != MS::kSuccess)
+		throw stat;
 
-	if(!isnan(min)) {
+	if (!prtu::isnan(min)) {
 		MCHECK(nAttr.setMin(min));
 	}
 
-	if(!isnan(max)) {
+	if (!prtu::isnan(max)) {
 		MCHECK(nAttr.setMax( max ));
 	}
 
@@ -132,8 +134,6 @@ MStatus PRTAttrs::addEnumParameter(MFnDependencyNode & node, MObject & attr, con
 }
 
 MStatus PRTAttrs::addEnumParameter(MFnDependencyNode & node, MObject & attr, const MString & name, short value, PRTEnum * e) {
-
-
 	MStatus stat;
 
 	attr = e->mAttr.create(longName(name), briefName(name), value, &stat);
@@ -152,7 +152,7 @@ MStatus PRTAttrs::addEnumParameter(MFnDependencyNode & node, MObject & attr, con
 MStatus PRTAttrs::addFileParameter(MFnDependencyNode & node, MObject & attr, const MString & name, const MString & value, MString & exts ) {
 	MStatus           stat;
 	MStatus           stat2;
-	MFnStringData		  stringData;
+	MFnStringData     stringData;
 	MFnTypedAttribute sAttr;
 
 	attr = sAttr.create(longName(name), briefName(name), MFnData::kString, stringData.create("", &stat2), &stat );
@@ -165,7 +165,6 @@ MStatus PRTAttrs::addFileParameter(MFnDependencyNode & node, MObject & attr, con
 	MPlug plug(node.object(), attr);
 	MCHECK(plug.setValue(value));
 
-
 	return MS::kSuccess;
 }
 
@@ -175,7 +174,7 @@ MStatus PRTAttrs::addColorParameter(MFnDependencyNode & node, MObject & attr, co
 
 	const wchar_t* s = value.asWChar();
 
-	attr = nAttr.createColor(longName(name), briefName(name), &stat );
+	attr = nAttr.createColor(longName(name), briefName(name), &stat);
 	MCHECK(stat);
 
 	double r = 0.0;
@@ -203,11 +202,10 @@ MStatus PRTAttrs::addColorParameter(MFnDependencyNode & node, MObject & attr, co
 	return MS::kSuccess;
 }
 
-
 MStatus PRTAttrs::addStrParameter(MFnDependencyNode & node, MObject & attr, const MString & name, MString & value ) {
 	MStatus           stat;
 	MStatus           stat2;
-	MFnStringData		  stringData;
+	MFnStringData     stringData;
 	MFnTypedAttribute sAttr;
 
 	attr = sAttr.create(longName(name), briefName(name), MFnData::kString, stringData.create(value, &stat2), &stat );
@@ -267,10 +265,9 @@ MStatus PRTAttrs::updateRuleFiles(MFnDependencyNode & node, MString & rulePkg) {
 	prtNode->mRuleFile.clear();
 	prtNode->mStartRule.clear();
 
-	MString      unpackDir       = MGlobal::executeCommandStringResult("workspace -q -fullName");
+	MString unpackDir = MGlobal::executeCommandStringResult("workspace -q -fullName");
 	unpackDir += "/assets";
 	prt::Status resolveMapStatus = prt::STATUS_UNSPECIFIED_ERROR;
-
 
 	std::wstring utf16URI;
 	utf16URI.resize(uri.size()+1);
@@ -283,8 +280,8 @@ MStatus PRTAttrs::updateRuleFiles(MFnDependencyNode & node, MString & rulePkg) {
 	prtNode->mResolveMap = prt::createResolveMap(utf16URI.c_str(), unpackDir.asWChar(), &resolveMapStatus);
 	if(resolveMapStatus == prt::STATUS_OK) {
 		size_t nKeys;
-		const wchar_t * const* keys   = prtNode->mResolveMap->getKeys(&nKeys);
-		std::wstring           sCGB(L".cgb");
+		const wchar_t * const* keys = prtNode->mResolveMap->getKeys(&nKeys);
+		std::wstring sCGB(L".cgb");
 		for(size_t k = 0; k < nKeys; k++) {
 			std::wstring key = std::wstring(keys[k]);
 			if(std::equal(sCGB.rbegin(), sCGB.rend(), key.rbegin())) {
@@ -293,7 +290,7 @@ MStatus PRTAttrs::updateRuleFiles(MFnDependencyNode & node, MString & rulePkg) {
 			}
 		}
 	} else {
-		prtNode->mResolveMap = 0;
+		prtNode->mResolveMap = nullptr;
 	}
 
 	if(prtNode->mRuleFile.length() > 0)
@@ -305,13 +302,14 @@ MStatus PRTAttrs::updateRuleFiles(MFnDependencyNode & node, MString & rulePkg) {
 MStatus PRTAttrs::updateStartRules(MFnDependencyNode & node) {
 	PRTNode* prtNode = (PRTNode*)node.userNode();
 
-	const prt::RuleFileInfo::Entry* startRule = 0;
+	const prt::RuleFileInfo::Entry* startRule = nullptr;
 
 	prt::Status infoStatus = prt::STATUS_UNSPECIFIED_ERROR;
-	const prt::RuleFileInfo* info = prt::createRuleFileInfo(prtNode->mResolveMap->getString(prtNode->mRuleFile.c_str()), 0, &infoStatus);
+	const prt::RuleFileInfo* info = prt::createRuleFileInfo(prtNode->mResolveMap->getString(prtNode->mRuleFile.c_str()), nullptr, &infoStatus);
 	if (infoStatus == prt::STATUS_OK) {
 		for(size_t r = 0; r < info->getNumRules(); r++) {
-			if(info->getRule(r)->getNumParameters() > 0) continue;
+			if(info->getRule(r)->getNumParameters() > 0)
+				continue;
 			for(size_t a = 0; a < info->getRule(r)->getNumAnnotations(); a++) {
 				if(!(wcscmp(info->getRule(r)->getAnnotation(a)->getName(), ANNOT_START_RULE))) {
 					startRule = info->getRule(r);
@@ -327,7 +325,7 @@ MStatus PRTAttrs::updateStartRules(MFnDependencyNode & node) {
 
 		if(prtNode->mGenerateAttrs) {
 			prtNode->mGenerateAttrs->destroy();
-			prtNode->mGenerateAttrs = 0;
+			prtNode->mGenerateAttrs = nullptr;
 		}
 
 		prt::AttributeMapBuilder* aBuilder = prt::AttributeMapBuilder::create();
@@ -393,13 +391,13 @@ void PRTEnum::add(const MString & key, const MString & value) {
 }
 
 namespace UnitQuad {
-const double	vertices[]		= { 0, 0, 0,  0, 0, 1,  1, 0, 1,  1, 0, 0 };
-const size_t	vertexCount		= 12;
-const uint32_t	indices[]		= { 0, 1, 2, 3 };
-const size_t	indexCount		= 4;
-const uint32_t	faceCounts[]	= { 4 };
-const size_t	faceCountsCount	= 1;
-const int32_t	seed			= prtu::computeSeed(vertices, vertexCount);
+const double   vertices[]      = { 0, 0, 0,  0, 0, 1,  1, 0, 1,  1, 0, 0 };
+const size_t   vertexCount     = 12;
+const uint32_t indices[]       = { 0, 1, 2, 3 };
+const size_t   indexCount      = 4;
+const uint32_t faceCounts[]    = { 4 };
+const size_t   faceCountsCount = 1;
+const int32_t  seed            = prtu::computeSeed(vertices, vertexCount);
 }
 
 // TODO: make evalAttr finds more robust
@@ -412,7 +410,7 @@ MStatus PRTAttrs::createAttributes(MFnDependencyNode & node, const std::wstring 
 	PRTNode*          prtNode = (PRTNode*)node.userNode();
 	MString           dummy;
 
-	MayaCallbacks* outputHandler = prtNode->createOutputHandler(0, 0);
+	std::unique_ptr<MayaCallbacks> outputHandler(prtNode->createOutputHandler(nullptr, nullptr));
 	const prt::AttributeMap* attrs   = aBuilder->createAttributeMap();
 
 	prt::InitialShapeBuilder* isb = prt::InitialShapeBuilder::create();
@@ -434,7 +432,7 @@ MStatus PRTAttrs::createAttributes(MFnDependencyNode & node, const std::wstring 
 	);
 	const prt::InitialShape* shape = isb->createInitialShapeAndReset();
 
-	prt::generate(&shape, 1, 0, &ENC_ATTR, 1, &prtNode->mAttrEncOpts, outputHandler, PRTNode::theCache, 0);
+	prt::generate(&shape, 1, nullptr, &ENC_ATTR, 1, &prtNode->mAttrEncOpts, outputHandler.get(), PRTNode::theCache, nullptr);
 
 	const std::map<std::wstring, MayaCallbacks::AttributeHolder>& evalAttrs = outputHandler->getAttrs();
 
@@ -539,7 +537,6 @@ MStatus PRTAttrs::createAttributes(MFnDependencyNode & node, const std::wstring 
 
 	shape->destroy();
 	attrs->destroy();
-	delete outputHandler;
 
 	return MS::kSuccess;
 }

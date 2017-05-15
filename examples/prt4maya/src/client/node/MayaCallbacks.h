@@ -7,8 +7,7 @@
  * See http://github.com/ArcGIS/esri-cityengine-sdk for instructions.
  */
 
-#ifndef MAYA_OUTPUT_HANDLER_H_
-#define MAYA_OUTPUT_HANDLER_H_
+#pragma once
 
 #include "codec/encoder/IMayaCallbacks.h"
 #include "prt/Cache.h"
@@ -47,6 +46,7 @@
 #include "maya/MFnSet.h"
 #include "maya/MFnPartition.h"
 
+#include <memory>
 #include <stdexcept>
 #include <map>
 #include <string>
@@ -58,16 +58,17 @@ public:
 	public:
 		AttributeHolder() { }
 		AttributeHolder(bool b, double d, std::wstring s) : mBool(b), mFloat(d), mString(s) { }
-		virtual ~AttributeHolder() {  }
+		virtual ~AttributeHolder() { }
 		bool         mBool;
 		double       mFloat;
 		std::wstring mString;
 	};
+	typedef std::map<std::wstring, AttributeHolder> NamedAttributeHolders;
 
 public:
 	MayaCallbacks(const MPlug* plug, MDataBlock* data, MStringArray* shadingGroups, MIntArray* shadingRanges, MString* shadingCmd)
 		: mPlug(plug), mData(data), mShadingGroups(shadingGroups), mShadingRanges(shadingRanges), mShadingCmd(shadingCmd) { }
-	virtual ~MayaCallbacks() {}
+	virtual ~MayaCallbacks() { }
 
 	// prt::Callbacks interface
 	virtual prt::Status generateError(size_t /*isIndex*/, prt::Status /*status*/, const wchar_t* message) {
@@ -118,34 +119,28 @@ public:
 
 public:
 	virtual MString matCreate(int start, int count, const wchar_t* name);
-	const std::map<std::wstring, AttributeHolder>& getAttrs() const { return mAttrs; }
-
-public:
-	MFnMesh*			mFnMesh;
-
-	MFloatPointArray	mVertices;
-	MIntArray			mVerticesCounts;
-	MIntArray			mVerticesConnects;
-
-	MFloatVectorArray	mNormals;
-
-	MFloatArray			mU;
-	MFloatArray			mV;
-	MIntArray			mUVCounts;
-	MIntArray			mUVConnects;
+	const NamedAttributeHolders& getAttrs() const { return mAttrs; }
 
 private:
 	// must not be called
 	MayaCallbacks() : mPlug(nullptr), mData(nullptr), mShadingGroups(nullptr), mShadingRanges(nullptr), mShadingCmd(nullptr) { }
 
-	const MPlug*		mPlug;
-	MDataBlock*			mData;
-	MStringArray*		mShadingGroups;
-	MIntArray*			mShadingRanges;
-	MString*			mShadingCmd;
+public:
+	std::unique_ptr<MFnMesh> mFnMesh;
+	MFloatPointArray         mVertices;
+	MIntArray                mVerticesCounts;
+	MIntArray                mVerticesConnects;
+	MFloatVectorArray        mNormals;
+	MFloatArray              mU;
+	MFloatArray              mV;
+	MIntArray                mUVCounts;
+	MIntArray                mUVConnects;
 
-	std::map<std::wstring, AttributeHolder> mAttrs;
+private:
+	const MPlug*             mPlug;
+	MDataBlock*	             mData;
+	MStringArray*            mShadingGroups;
+	MIntArray*               mShadingRanges;
+	MString*                 mShadingCmd;
+	NamedAttributeHolders    mAttrs;
 };
-
-
-#endif /* MAYA_OUTPUT_HANDLER_H_ */
