@@ -1,3 +1,5 @@
 /build
 /install
 /src/.idea
+/src/CMakeSettings.json
+/.vs
