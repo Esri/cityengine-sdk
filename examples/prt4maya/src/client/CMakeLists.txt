@@ -23,6 +23,10 @@ endif()
 
 ### setup compiler flags
 
+if(NOT CMAKE_BUILD_TYPE)
+	set(CMAKE_BUILD_TYPE "Release" CACHE STRING "Choose one of: Debug Release RelWithDebInfo MinSizeRel" FORCE)
+endif()
+
 if(WIN32)
 	set(CMAKE_C_FLAGS "")
 	set(CMAKE_CXX_FLAGS "")
@@ -35,7 +39,7 @@ if(WIN32)
 
 	set(CMAKE_SHARED_LINKER_FLAGS_DEBUG "/DEBUG /NODEFAULTLIB:LIBCMT /export:initializePlugin /export:uninitializePlugin")
 	set(CMAKE_SHARED_LINKER_FLAGS_RELEASE "/NODEFAULTLIB:CPMTD /export:initializePlugin /export:uninitializePlugin")
-	
+
 	#SET( CMAKE_SHARED_LINKER_FLAGS_DEBUG "/ALLOWISOLATION /MANIFESTUAC:\"level='asInvoker' uiAccess='false'\" /TLBID:1 /DYNAMICBASE:NO /MACHINE:X64 /ERRORREPORT:QUEUE")
 	#SET( CMAKE_SHARED_LINKER_FLAGS_DEBUG "/subsystem:windows /dll /debug  /MANIFESTUAC:\"level='asInvoker' uiAccess='false'\" /TLBID:1 /DYNAMICBASE:NO /MACHINE:X64 /ERRORREPORT:QUEUE")
 else()
@@ -78,10 +82,16 @@ endif()
 
 ### setup install target
 
-install(CODE "file(REMOVE_RECURSE ${CMAKE_INSTALL_PREFIX}/*)")
+if(NOT PRT4MAYA_CODEC_BINARY_DIR)
+	set(PRT4MAYA_CODEC_BINARY_DIR "${PROJECT_BINARY_DIR}/../codec")
+endif()
+
 install(FILES ${PRT_LIBRARIES} DESTINATION plug-ins)
 install(FILES ${PRT_EXT_LIBRARIES} DESTINATION plug-ins/ext)
-install(FILES ${CMAKE_CURRENT_LIST_DIR}/../../build/codec/${CMAKE_SHARED_LIBRARY_PREFIX}prt4maya_codec${CMAKE_SHARED_LIBRARY_SUFFIX} DESTINATION plug-ins/ext) # fetch result of codecs project
+install(
+	FILES "${PRT4MAYA_CODEC_BINARY_DIR}/${CMAKE_SHARED_LIBRARY_PREFIX}prt4maya_codec${CMAKE_SHARED_LIBRARY_SUFFIX}"
+	DESTINATION plug-ins/ext
+)
 install(FILES scripts/AEprtTemplate.mel DESTINATION scripts)
 install(FILES scripts/prt4mayaCreateUI.mel DESTINATION scripts)
 install(FILES scripts/prt4mayaDeleteUI.mel DESTINATION scripts)
@@ -128,4 +138,3 @@ elseif(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
 endif()
 
 include(CPack)
-

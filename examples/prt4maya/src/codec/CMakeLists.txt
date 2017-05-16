@@ -24,17 +24,22 @@ add_library(${PROJECT} SHARED
 
 ### setup compiler flags
 
-set(CMAKE_INCLUDE_CURRENT_DIR ON)
-add_definitions(-DPRT_VERSION_MAJOR=${PRT_VERSION_MAJOR} -DPRT_VERSION_MINOR=${PRT_VERSION_MINOR})
+if(NOT CMAKE_BUILD_TYPE)
+	set(CMAKE_BUILD_TYPE "Release" CACHE STRING "Choose one of: Debug Release RelWithDebInfo MinSizeRel" FORCE)
+endif()
 
-# TODO: separate into prt/prtx-specific compiler flags and prt4maya specific compiler flags
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
+target_compile_definitions(${PROJECT} PRIVATE
+	-DPRT_VERSION_MAJOR=${PRT_VERSION_MAJOR}
+	-DPRT_VERSION_MINOR=${PRT_VERSION_MINOR}
+)
 
 if(${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
 	# none
 elseif(${CMAKE_SYSTEM_NAME} STREQUAL "Darwin")
-	target_compile_options(${PROJECT} PUBLIC "-std=c++14 -stdlib=libc++") # $<$<CONFIG:RELEASE>:${P4M_COMPILE_FLAGS}>
+	target_compile_options(${PROJECT} PRIVATE "-std=c++14 -stdlib=libc++")
 elseif(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
-	target_compile_options(${PROJECT} PUBLIC "-std=c++11") # $<$<CONFIG:RELEASE>:${P4M_COMPILE_FLAGS}>
+	target_compile_options(${PROJECT} PRIVATE "-std=c++11") #TODO: exactly replicate linux compiler flags from prt compiler.cmake
 endif()
 
 

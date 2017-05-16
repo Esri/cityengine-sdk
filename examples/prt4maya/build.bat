@@ -1,4 +1,5 @@
 @ECHO OFF
+set ERRORLEVEL=0
 
 if "%~1"=="" (
 	echo ERROR: first argument must be path to prt/cmake, second argument must be path to maya
@@ -8,13 +9,16 @@ if "%~1"=="" (
 
 setlocal
 
-set CLIENT_TARGET=install
 set prt_DIR=%~1
 set maya_DIR=%~2
+set GENERATOR="NMake Makefiles"
+
+if "%CMAKE_EXECUTABLE%"=="" (set CMAKE_EXECUTABLE=cmake)
 
 set VER_MAJOR=0
 set VER_MINOR=0
 set VER_MICRO=0
+set CLIENT_TARGET=install
 if not "%~3"=="" (
 	set VER_MAJOR=%~3
 	set VER_MINOR=%~4
@@ -22,21 +26,22 @@ if not "%~3"=="" (
 	set CLIENT_TARGET=package
 )
 
-IF "%CMAKE_EXECUTABLE%"=="" (set CMAKE_EXECUTABLE=cmake)
-
-set GENERATOR="NMake Makefiles"
-
 rd /S /Q build
+rd /S /Q install
 
 setlocal
-call "%ProgramFiles(x86)%\Microsoft Visual Studio 12.0\VC\vcvarsall.bat" amd64
+call "%ProgramFiles(x86)%\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" amd64
 mkdir build\codec
 pushd build\codec
-"%CMAKE_EXECUTABLE%" -G %GENERATOR% -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=../../install -Dmaya_DIR=%maya_DIR% ../../src/codec
-nmake all
+"%CMAKE_EXECUTABLE%" -G %GENERATOR% -DCMAKE_BUILD_TYPE=Release -Dmaya_DIR=%maya_DIR% ../../src/codec
+nmake
 popd
 endlocal
-if %errorlevel% neq 0 exit /b %errorlevel%
+
+if %ERRORLEVEL% neq 0 (
+     echo "error building codec: %ERRORLEVEL%"
+     exit /b %ERRORLEVEL%
+)
 
 setlocal
 call "%ProgramFiles(x86)%\Microsoft Visual Studio 11.0\VC\vcvarsall.bat" amd64
