@@ -11,6 +11,7 @@ project(${PROJECT})
 ### dependencies
 
 if(NOT prt_DIR)
+	message(STATUS "prt_DIR not set, trying fallback ${PROJECT_SOURCE_DIR}/../../../prt/cmake")
 	set(prt_DIR "${PROJECT_SOURCE_DIR}/../../../prt/cmake") # fallback location
 endif()
 find_package(prt CONFIG)
@@ -19,6 +20,10 @@ set(CESDK_VERSION "cesdk_${PRT_VERSION_MAJOR}_${PRT_VERSION_MINOR}_${PRT_VERSION
 
 
 ### build target
+
+if(NOT CMAKE_BUILD_TYPE)
+	set(CMAKE_BUILD_TYPE "Release" CACHE STRING "Choose one of: Debug Release RelWithDebInfo MinSizeRel" FORCE)
+endif()
 
 if(NOT ${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
 	set(CMAKE_INSTALL_RPATH_USE_LINK_PATH FALSE)
@@ -52,7 +57,7 @@ target_link_libraries(${PROJECT} ${PRT_LIBRARY})
 set(CMAKE_INSTALL_PREFIX "${PROJECT_SOURCE_DIR}/../install" CACHE PATH "default install prefix" FORCE)
 
 install(CODE "file(REMOVE_RECURSE ${CMAKE_INSTALL_PREFIX}/*)")
-install(PROGRAMS ${CMAKE_BINARY_DIR}/prt4cmd${CMAKE_EXECUTABLE_SUFFIX} DESTINATION bin)
+install(TARGETS ${PROJECT} RUNTIME DESTINATION bin)
 install(FILES ${PRT_LIBRARIES} DESTINATION bin OPTIONAL)
 install(FILES ${PRT_EXT_LIBRARIES} DESTINATION lib)
 install(CODE "FILE(MAKE_DIRECTORY ${CMAKE_INSTALL_PREFIX}/output)")
@@ -62,6 +67,7 @@ if(${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
 else()
 	install(FILES ${PROJECT_SOURCE_DIR}/../README_linux_osx.md DESTINATION .)
 endif()
+
 
 add_custom_target(install_${PROJECT_NAME}
 	$(MAKE) install
