@@ -21,17 +21,17 @@ explain how to get the sdk binaries and example data.
 SOFTWARE REQUIREMENTS
 ---------------------
 
-- See "General Software Requirements"
+- See "General Software Requirements" (Windows)
 
 
 BUILD INSTRUCTIONS
 ------------------
 
-1. Open a `VS2013 x64 Native Tools Command Prompt`
+1. Open a `VS2015 x64 Native Tools Command Prompt`
 1. Change into the example directory: `cd <your path to>\esri-cityengine-sdk\examples\prt4cmd`
 1. Prepare build directory: `mkdir build`
 1. And change into it: `cd build`
-1. Run cmake: `cmake -G "NMake Makefiles" -DCMAKE_BUILD_TYPE=Release ..\src`
+1. Run cmake: `cmake -G "NMake Makefiles" ..\src`
 1. Compile: `nmake install`
 1. The build result will appear in an `install` directory in parallal to the `build` directory.
 
@@ -73,7 +73,7 @@ The `-s` argument is only needed for the network license types, for example:
 LICENSING
 ---------
 
-Copyright (c) 2016 Esri
+Copyright (c) 2017 Esri
 
 You may not use the content of this repository except in compliance with the following Licenses:
   1. All content of all directories **except "examples"** is licensed under the CityEngine EULA, see [license/EULA.pdf](license/EULA.pdf).
