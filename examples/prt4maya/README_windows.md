@@ -21,9 +21,9 @@ explain how to get the sdk binaries and example data.
 SOFTWARE REQUIREMENTS
 ---------------------
 
-- See "General Software Requirements - Windows, to compile SDK extensions"
-- Visual Studio 2012 (in addition to Visual Studio 2013)
-- Autodesk Maya 2016 **including the development kit** (devkit)
+- See "General Software Requirements" (Windows)
+- Visual Studio 2012 (in addition to Visual Studio 2015)
+- Autodesk Maya 2016 SP6 **including the development kit** (devkit)
 
 
 BUILD INSTRUCTIONS
@@ -62,7 +62,7 @@ INSTALLATION INSTRUCTIONS
 LICENSING
 ---------
 
-Copyright (c) 2016 Esri
+Copyright (c) 2017 Esri
 
 You may not use the content of this repository except in compliance with the following Licenses:
   1. All content of all directories **except "examples"** is licensed under the CityEngine EULA, see [license/EULA.pdf](license/EULA.pdf).

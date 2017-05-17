@@ -21,8 +21,8 @@ explain how to get the sdk binaries and example data.
 SOFTWARE REQUIREMENTS
 ---------------------
 
-- See "General Software Requirements - Linux or MacOSX, to compile SDK extensions"
-- Autodesk Maya 2016 **including the development kit** (devkit)
+- See "General Software Requirements" (Linux or macOS)
+- Autodesk Maya 2016 with development kit (devkit)
 
 
 BUILD INSTRUCTIONS
@@ -59,7 +59,7 @@ INSTALLATION INSTRUCTIONS
 LICENSING
 ---------
 
-Copyright (c) 2016 Esri
+Copyright (c) 2017 Esri
 
 You may not use the content of this repository except in compliance with the following Licenses:
   1. All content of all directories **except "examples"** is licensed under the CityEngine EULA, see [license/EULA.pdf](license/EULA.pdf).
