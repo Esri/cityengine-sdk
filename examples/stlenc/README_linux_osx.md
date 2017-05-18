@@ -14,8 +14,8 @@ explain how to get the sdk binaries and example data.
 SOFTWARE REQUIREMENTS
 ---------------------
 
-- see "General Software Requirements - Linux or MacOSX"
-- GCC 4.8.2 from RedHat Enterprise Linux 6 DevToolSet 2.1
+- see "General Software Requirements" (Linux or MacOSX)
+- Make sure you use the **exact** compiler for PRT extensions
 
 
 BUILD INSTRUCTIONS
@@ -24,7 +24,7 @@ BUILD INSTRUCTIONS
 1. Open a `bash` shell
 1. Change into the example directory: `cd <your path to>/esri-cityengine-sdk/examples/stlenc`
 1. Create a build directory and change into it: `mkdir build && cd build`
-1. Run cmake: `cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release ../src`
+1. Run cmake: `cmake ../src`
 1. Compile: `make install`
 1. The build result will appear in the `install` directory in parallel to the `build` directory.
 
@@ -41,7 +41,7 @@ INSTALLATION INSTRUCTIONS FOR CITYENGINE
 LICENSING
 ---------
 
-Copyright (c) 2016 Esri
+Copyright (c) 2017 Esri
 
 You may not use the content of this repository except in compliance with the following Licenses:
   1. All content of all directories **except "examples"** is licensed under the CityEngine EULA, see [license/EULA.pdf](license/EULA.pdf).
