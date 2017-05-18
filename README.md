@@ -12,6 +12,7 @@ This document explains how to install the CityEngine SDK and how to work with th
 The archives are available for download at the corresponding github release page. See installation instructions below for details.
 
 ## CityEngine SDK Releases
+- [v1.8.XXXX (2017-??-??, CityEngine 2017.0)](TODO)
 - [v1.7.2915 (2016-10-03, CityEngine 2016.1)](https://github.com/Esri/esri-cityengine-sdk/releases/tag/1.7.2915)
 - [v1.6.2663 (2016-06-21, CityEngine 2016.0)](https://github.com/Esri/esri-cityengine-sdk/releases/tag/1.6.2663)
 - [v1.4.2074 (2015-10-06, CityEngine 2015.2)](https://github.com/Esri/esri-cityengine-sdk/releases/tag/1.4.2074)
@@ -53,34 +54,34 @@ A quick overview:
 Please note that the individual example READMEs may include further requirements.
 
 #### All Platforms
-* To load custom encoders built with this SDK in CityEngine, CityEngine 2016.0 is required. For older versions of CityEngine an older version of the SDK might have to be used, see table above. 
+* To load custom encoders built with this SDK in CityEngine, CityEngine 2017.0 is required. For older versions of CityEngine an older version of the SDK might have to be used, see table above.
 * License for matching CityEngine
-* CMake 3.0.0 or later (http://www.cmake.org)
+* CMake 3.6.0 or later (http://www.cmake.org)
 
 #### Windows
-* Windows 7 or later (64bit)
+* Windows 7, 8.1 or 10 (64bit)
 * NMake 10.0 or later (NMake is part of Visual Studio)
-* Recommended C++ Compilers for client code (e.g. `prt4cmd` example): `VC 12 C++ Compiler (Visual Studio 2013) or later`
-* To compile SDK extensions (e.g. the `stlenc` example or a custom encoder) it is required to use this exact compiler:
-    * Microsoft `VC12 C++ Compiler (cl.exe) 18.00.40629.0`, included in `Visual Studio 2013 Update 5`
+* Recommended C++ Compilers for client code (e.g. `prt4cmd` example): `VC 14 C++ Compiler (Visual Studio 2015) or later`
+* To compile SDK extensions (e.g. the `stlenc` example or a custom encoder) it is required to use this **exact** compiler:
+    * Microsoft `VC14 C++ Compiler (cl.exe) 19.0.24215.1`, included in `Visual Studio 2015 Update 3`
     * Required flags: `/bigobj /GR /EHsc /MD`
 
 #### MacOSX
 * GNU Make 3.82 or later
 * Recommended build environment for client code (e.g. the `prt4cmd` example):
-    * MacOSX Yosemite (10.10) or later
-    * Apple CLANG 6.1 or later
-* **Required** build environment to compile SDK extensions (e.g. the `stlenc` example for use in CityEngine and other custom extensions):
+    * MacOSX Yosemite (10.11) or later
+    * Apple Clang 7.3 or later
+* To compile SDK extensions (e.g. the `stlenc` example or a custom encoder) it is required to use this **exact** compiler:
     * MacOSX Yosemite (10.10)
-    * Apple CLANG 6.1 included in XCode 6.4
+    * Apple Clang 7.3 included in XCode 7.3
     * Required flags: `-std=c++14 -stdlib=libc++ -fvisibility=hidden -fvisibility-inlines-hidden -Wl,--exclude-libs,ALL`
 
 #### Linux
-* RedHat Enterprise Linux 6.x or compatible (64bit only)
+* RedHat Enterprise Linux 6.x/7.x or compatible (64bit only)
 * GNU Make 3.82 or later
 * Recommended C++ Compilers for client code (e.g. the `prt4cmd` example):
     * GCC 4.8.2 or later
-* To compile SDK extensions (e.g. the `stlenc` example for use in CityEngine or other custom extensions) it is required to use this **exact** C++ build environment:
+* To compile SDK extensions (e.g. the `stlenc` example or a custom encoder) it is required to use this **exact** compiler:
     * GCC 4.8.2 included in RedHat Enterprise Linux 6 DevToolSet 2.1
     * Required flags `-std=c++11 -march=nocona -fvisibility=hidden -fvisibility-inlines-hidden -Wl,--exclude-libs,ALL`
 
@@ -89,7 +90,7 @@ Please note that the individual example READMEs may include further requirements
     * [Changelog](changelog.md)
     * Online reference: https://esri.github.io/esri-cityengine-sdk
     * Offline reference: see /doc subdirectory inside the release archive
-* Forum: 
+* Forum:
     * General CityEngine: https://geonet.esri.com/community/gis/3d/cityengine
 * Facebook: https://www.facebook.com/CityEngine
 * Twitter: https://twitter.com/CityEngine
@@ -104,11 +105,12 @@ Anyone and everyone is welcome to contribute and to extend and improve the examp
 
 ## Licensing
 
-Copyright (c) 2016 Esri
+Copyright (c) 2017 Esri
 
 You may not use the content of this repository except in compliance with the following Licenses:
   1. All content of all directories **except "examples"** is licensed under the CityEngine EULA, see [license/EULA.pdf](license/EULA.pdf).
-  2. All content in the "examples" directory tree is licensed under the APACHE 2.0 license. You may obtain a copy of this license at http://www.apache.org/licenses/LICENSE-2.0. A copy of the license is also available in the repository at [license/APACHE-LICENSE-2.0.txt](license/APACHE-LICENSE-2.0.txt).
+  1. All content in the "examples" directory tree is licensed under the APACHE 2.0 license. You may obtain a copy of this license at http://www.apache.org/licenses/LICENSE-2.0. A copy of the license is also available in the repository at [license/APACHE-LICENSE-2.0.txt](license/APACHE-LICENSE-2.0.txt).
+  1. The example data is licensed by the "ESRI Attribution and Licensing Agreement".
 
 [](Esri Tags: CityEngine)
 [](Esri Language: C++)
