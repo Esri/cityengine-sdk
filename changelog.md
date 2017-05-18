@@ -1,3 +1,111 @@
+ESRI CITYENGINE SDK 1.8.3501 CHANGELOG
+======================================
+
+This section lists changes compared to CityEngine SDK 1.7.2915
+
+
+General Info
+------------
+* CityEngine SDK 1.8.3501 is used in CityEngine 2017.0 (2017.0.3406).
+
+
+PRT API
+-------
+* Added a prt::generate overload with support for multiple occlusion sets. [CE-3791, CE-3994]
+
+
+PRTX API
+--------
+* Added support for multiple occlusion sets (GenerateContext.h). [CE-3791]
+* Small change to improve const correctness (ExtensionManager.h, GenerateContext.h).
+
+
+CGA
+---
+(Please also refer to the CGA ChangeLog for 2017.0 in the [CityEngine Online Help](http://cehelp.esri.com/help/index.jsp?topic=/com.procedural.cityengine.help/html/cgareference/cga_changelog.html) for new operations and bug-fixes.)
+* Increased CGA language version to `2017.0`
+*  New operations:
+  * label operation.
+* New functions:
+  * New basic functions: min, max and clamp.
+  * New functions for color conversion: colorHexToB, colorHexToG, colorHexToH, colorHexToO, colorHexToR, colorHexToS, colorHexToV, colorHSVToHex, colorHSVOToHex, colorRGBToHex and colorRGBOToHex.
+  * New functions for context queries to labeled shapes: minimumDistance, contextCompare and contextCount.
+* Changes to existing features:
+  * primitiveQuad, primitiveDisk, primitiveCube operation: Removed vertex normals because they do not influence shading. Vertex normals can still be created using setNormals or softenNormals operation.
+  * comp operation: New component selectors g for groups, m for materials and h for holes.
+  * inside, overlaps and touches functions:
+    * New optional label identifier for performing occlusion queries on labeled occluder shapes.
+    * Geometries only slightly lying outside an occluder shape are considered inside (adjusted threshold behavior due to floating point limitations).
+    * Surfaces touch also when normals point in same direction.
+  * Support shapes consisting of vertices or edges (coming from comp or scatter operation):
+    * geometry.isClosedSurface, geometry.isPlanar, geometry.isRectangular functions: Return false.
+    * geometry.nEdges function: Counts edges.      
+    * geometry.isOriented function: Consider vertex/edge normal.
+* Bugfixes:
+  * setback operation: In some cases self-intersecting faces on concave shapes were created. That could lead to a failure of subsequent operations.
+  * comp operation:
+    * Combined (=) face component split now respects per-face materials.
+    * Fixed wrong edge component split for edges with opposing adjacent faces.
+    * Fixed wrong result of combined (=) vertex and edge component split.
+    * Fixed (deprecated) noStreetSide comp split selector handling.
+  * geometry.area and geometry.isOriented function: Corrected scope selectors for negative scope sizes (e.g. front becomes back if scope.sz is < 0).
+  * alignScopeToGeometry operation: zUp mode: Fixed wrong pivot for meshes that only consist of vertices (for example from vertex splits or scatter).
+  * inside, overlaps and touches functions:
+    * Fixed a bug where a closed shape were not touching and not overlapping another geometry that lied inside.
+    * Intra-occlusion: Fixed a bug where component split shapes which are children of the current shape were considered for occlusion.
+    * Inter-occlusion: Fixed a bug where occlusion-queries were not considered when defined in consts or functions.
+    * Fixed a bug that mistakenly returned true in rare situations due to near zero-area triangles.
+    * Inter-ccclusion: Fixed a bug that created an occluder shape by a component split or offset operation during the intra ghost tree generation which was then mistakenly considered also for inter occlusion.
+    * Fixed behavior in exports.
+  * set operation: fixed a bug: trying to set the initialShape.pz attribute resulted in inconsistent behaviour (mismatch with initialShape.pa).
+  * alignScopeToAxes, rotateScope, mirrorScope, setPivot, cleanupGeometry, reduceGeometry, convexify, split operations: Correctly consider a non-adjusted scope coming from a split operation.
+  * offset operation: Now keeps asset materials and groups.
+  * scatter operation: Issue warning for negative or zero number of points.
+  * inside, overlaps, touches, geometry.angle functions, alignScopeToGeometry, alignScopeToAxes operations: Fixed for shapes consisting of vertices or edges (coming from comp or scatter operation).
+  * assetApproxRatio, assetApproxSize, assetBestRatio, assetBestSize, assetFitSize, fileRandom, imageApproxRatio, imageBestRatio, fileSearch functions: Fixed a bug which led to wrong asset lookups if used in RPKs.
+
+
+Built-In Codecs Changes and Fixes
+---------------------------------
+* Multiple Encoders/Decoders
+  * Fixed import/export of vertex normals (FBX/Collada). [CE-3407]
+  * Fixed matrix inversion for mirror-matrices (fixes several FBX/Collada import issues). [CE-3970]
+  * Correctly import material names (FBX/Collada). [CE-2352]
+* I3S/SLPK Encoder
+  * Fixed a crash when no geometry was generated. [CE-4325]
+  * Fixed a problem where nodes could end up with too much geometry. [CE-4075]
+  * Fixed projection of vertex normals into the target coordinate system.
+  * Addded support for "popupInfo".
+  * Changed file extension from spk to slpk. [CE-3201]
+  * Fixed the header of the compressed SLPK archive - resolves import problems in ArcGIS Earth and Pro [CE-3888]
+* FBX Encoder/Decoder
+  * Updated to FBX SDK 2017.0.1 (internal file format 7.5.0). [CE-3313]
+  * Correctly apply the FBX scene units on import. [CE-2259]
+  * Correctly convert geometry into current scene coordinate system on import. [CE-2978]
+  * Correctly read material of instanced geometries.
+  * Instances were not correctly exported if the "create shape groups" option was enabled. [CE-2540]
+* Collada Encoder
+  * Fixed a problem with non-consequtive uv sets. [CE-2839]
+  * Avoid unreferenced texture coordinates in exported Collada files. [CE-1359]
+  * By default, "Global Scaling Factor" has a hidden annotation. [CE-1353]
+  * Enable Collada encoder in basic license feature set. [CE-3771]
+* Alembic Encoder
+  * Updated to Alembic library 1.7.0
+* Renderman Encoder
+  * Added support for renderman txmake tool. [CE-1830]
+
+
+Misc Changes and Fixes
+----------------------
+* Fixed a threading-related crash in roof operations and skeleton subdivision. [CE-3706]
+* Fixed a Windows handle leak when looking up the path to the core library. [CE-2143]
+* Licensing sub-system has been updated to FNP 11.13. [CE-3053]
+* Compiler toolchain updates (see README.md)
+  * Windows: Visual Studio 2015 Update 3 (C++14)
+  * macOS: Apple Clang 7.3 (Xcode 7.3), C++14, new min macOS 10.11
+  * Linux: GCC 4.8.2 (C++11) (no change)
+
+
 ESRI CITYENGINE SDK 1.7.2915 CHANGELOG
 ======================================
 
@@ -22,7 +130,7 @@ PRTX API
 * Fixed a bug where invalid PRT extension libraries were registered. This fixes potential crashes at exit.
 
 
-CGA 
+CGA
 ---
 * Improved performance of inner rectangle operation. [CE-2623]
 * Improved robustness of remainder computation in inner rectangle operation. [CE-3073, CE-3113]
@@ -118,7 +226,7 @@ PRTX API
 * cleaned up logger interface
 * small interface cleanups
 
-CGA 
+CGA
 ---
 * Increased CGA language version to `2016.0`
 * New CGA Operations
@@ -219,7 +327,7 @@ PRTX API
 * Fixed a crash with style-prefixed shape attributes.
 
 
-CGA 
+CGA
 ---
 * No changes.
 
@@ -229,7 +337,7 @@ Built-In Codecs Changes and Fixes
 * All Encoders
   * Added an option to enable output of export stats via the new logStats() callback.
   * Fixed validation of various encoder options (e.g. fixed missing min/max clamping).
-  * Removed functionality to emit reports by default. Users should use the CGA Report 
+  * Removed functionality to emit reports by default. Users should use the CGA Report
     Encoder (com.esri.prt.core.CGAReportEncoder) to emit reports.
 * FBX decoder
   * Fixed reading of multiple uv sets.
@@ -273,7 +381,7 @@ PRTX API
 * No changes.
 
 
-CGA 
+CGA
 ---
 * Fixed a numerical issue which led to misaligned faces after comp(f)
 
@@ -287,7 +395,7 @@ Built-In Codecs Changes and Fixes
   * Now includes layer names to uniquify object names, e.g. it is now possible
     to have identically named objects in different layers (e.g. House1.Wall and House2.Wall)
 * All encoders:
-  * Fixed a bug in the EncodePreparator where the final mesh and material lists could get out of sync. 
+  * Fixed a bug in the EncodePreparator where the final mesh and material lists could get out of sync.
   * Fixed a bug in object name processing: it now recognizes existing number suffices in object names.
 
 
@@ -321,7 +429,7 @@ PRTX API
   - removed create() and createAndReset() methods for prtx builders
 
 
-CGA 
+CGA
 ---
 (Please also check the CGA change log in the CityEngine 2015.0
 manual for details.)
@@ -416,7 +524,7 @@ PRTX API
   * Added customizable support for collecting CGA reports from the shape tree.
 
 
-CGA 
+CGA
 ---
 (Please also check the CGA change log in the CityEngine 2014.1 manual for details.)
 
@@ -451,7 +559,7 @@ Built-In Codecs Changes and Fixes
 All Encoders
   * Added support for lines and points to EncodePreparator.
   * EncodePreparator: decreased default texture coordinate merge tolerance
-    to 1e-4 to avoid UV precision issues on large objects. 
+    to 1e-4 to avoid UV precision issues on large objects.
   * Renamed encoder option "exportContent" (enum) to "errorFallback" (boolean)
     and hide it per default. The option "errorFallback" is now a requirement for
     CityEngine-compatible encoders.
@@ -526,7 +634,7 @@ Changes to existing Features
 Bug Fixes
   * Fixed multiple threading issues, e.g. in prt::init().
   * Fixed a bug where the API was in an undefined state after license handle destruction.
-  * createResolveMap(): unpack to filesystem feature: 
+  * createResolveMap(): unpack to filesystem feature:
       * URIs in the resolve map were not percent-encoded.
       * Fixed handling of RPK entries with non-ansi/ascii characters.
   * Fixed error/status handling on all toXML() implementations.
@@ -563,7 +671,7 @@ CGA Operations
 New Features
   * Improved hole support in:
     * offset() operation
-    * roof operations 
+    * roof operations
   * setback() operation: new syntax and selectors for selecting edges
     based on their uv coordinates.
   * tileUV() operation: textureWidth or the textureHeight parameter protection.
@@ -582,7 +690,7 @@ Bug Fixes
       * spaces in quotes broken
       * crash if fileSearch() due to illegal regexp
   * Initial shape attribute values wrong in const / attr functions
-  * comp() selector issues 
+  * comp() selector issues
   * imageInfo() crashes
   * imagesSortRatio() crashes
   * geometry.angle() broken
