@@ -1,6 +1,6 @@
 # Esri CityEngine SDK Examples
 
-The Esri CityEngine is based on the procedural runtime, which is the underlying engine that supports two geoprocessing tools in ArcGIS and drives procedural symbology in ArcGIS Pro. The CityEngine SDK enables you as a 3rd party developer to extend CityEngine with additional import and export formats. Moreover, you can integrate the procedural runtime in your own client applications taking full advantage of the procedural core without running CityEngine or ArcGIS.
+Esri CityEngine is based on Esri Procedural Runtime, which is the underlying engine that supports two geoprocessing tools in ArcGIS and drives procedural symbology in ArcGIS Pro. The CityEngine SDK enables you as a 3rd party developer to extend CityEngine with additional import and export formats. Moreover, you can integrate the procedural runtime in your own client applications taking full advantage of the procedural core without running CityEngine or ArcGIS.
 
 ## Preamble
 
@@ -12,7 +12,7 @@ This document explains how to install the CityEngine SDK and how to work with th
 The archives are available for download at the corresponding github release page. See installation instructions below for details.
 
 ## CityEngine SDK Releases
-- [v1.8.XXXX (2017-??-??, CityEngine 2017.0)](TODO)
+- [v1.8.3501 (2017-06-29, CityEngine 2017.0)](https://github.com/Esri/esri-cityengine-sdk/releases/tag/1.8.3501)
 - [v1.7.2915 (2016-10-03, CityEngine 2016.1)](https://github.com/Esri/esri-cityengine-sdk/releases/tag/1.7.2915)
 - [v1.6.2663 (2016-06-21, CityEngine 2016.0)](https://github.com/Esri/esri-cityengine-sdk/releases/tag/1.6.2663)
 - [v1.4.2074 (2015-10-06, CityEngine 2015.2)](https://github.com/Esri/esri-cityengine-sdk/releases/tag/1.4.2074)
@@ -49,12 +49,13 @@ A quick overview:
 - prt4cmd: a simple command line utility to apply rule packages onto initial shapes and generate models.
 - prt4maya: wraps the SDK into a plugin for Autodesk Maya
 - stlenc: demonstrates how to write a custom encoder, in this case for the STL geometry format.
+- stldec: demonstrates how to write a custom decoder for the STL geometry format.
 
 ## General Software Requirements
 Please note that the individual example READMEs may include further requirements.
 
 #### All Platforms
-* To load custom encoders built with this SDK in CityEngine, CityEngine 2017.0 is required. For older versions of CityEngine an older version of the SDK might have to be used, see table above.
+* To load custom encoders built with this SDK in CityEngine, CityEngine 2017.0 is required. For older versions of CityEngine an older version of the SDK might have to be used, see list above.
 * License for matching CityEngine
 * CMake 3.3.0 or later (http://www.cmake.org)
 
@@ -82,7 +83,7 @@ Please note that the individual example READMEs may include further requirements
 * Recommended C++ Compilers for client code (e.g. the `prt4cmd` example):
     * GCC 4.8.2 or later
 * To compile SDK extensions (e.g. the `stlenc` example or a custom encoder) it is required to use this **exact** compiler:
-    * GCC 4.8.2 included in RedHat Enterprise Linux 6 DevToolSet 2.1
+    * GCC 4.8.2 included in RedHat Enterprise Linux 6 DevToolSet 2.1 or standard compiler of RHEL 7.x
     * Required flags `-std=c++11 -march=nocona -fvisibility=hidden -fvisibility-inlines-hidden -Wl,--exclude-libs,ALL`
 
 ## Further Resources
