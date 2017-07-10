@@ -73,7 +73,7 @@ Please note that the individual example READMEs may include further requirements
     * MacOSX Yosemite (10.11) or later
     * Apple Clang 7.3 or later
 * To compile SDK extensions (e.g. the `stlenc` example or a custom encoder) it is required to use this **exact** compiler:
-    * MacOSX Yosemite (10.10)
+    * MacOSX Yosemite (10.11)
     * Apple Clang 7.3 included in XCode 7.3
     * Required flags: `-std=c++14 -stdlib=libc++ -fvisibility=hidden -fvisibility-inlines-hidden -Wl,--exclude-libs,ALL`
 
