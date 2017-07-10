@@ -12,42 +12,48 @@
 
 <!-- HEADER (use only on bookchapters) -->
 
-    <table summary="" class="header">
-        <tr>
-            <td align="left" class="helphead_l"><a href="../toc.html"><div class="helplink">&nbsp;</div></a></td>
-            <td align="right" class="helphead_r"></td>
-        </tr>
-    </table>
-
+<table summary="" class="header">
+	<tr>
+		<td align="left" class="helphead_l"><a href="../toc.html"><div class="helplink">&nbsp;</div></a></td>
+		<td align="right" class="helphead_r"></td>
+	</tr>
+</table>
 
 <!-- CONTENT -->
 
-        <h1>
-        cleanupGeometry operation
-        </h1>
+<h1>cleanupGeometry operation</h1>
 
+<h2>Synopsis</h2>
 
-  <h2> Synopsis </h2>
-  <p class="code2"><span class="cga_op">cleanupGeometry</span>(<span class="cga_opparam">componentSelector, tol</span>)</p>
-  <h2> Parameters </h2>
-  <ul>
-    <li><span class="cga_opparam">componentSelector</span> (selstr)<br>
-    What components to clean up:
-    <ul>
-    	<li><span class="codelight">vertices</span>: merges vertices and removes collinear vertices.</li>
-    	<li><span class="codelight">edges</span>: merges vertices and removes shared edges between coplanar faces.</li>
-    	<li><span class="codelight">faces</span>: merges vertices and removes duplicate faces and degenerated faces with small area.</li>
-    	<li><span class="codelight">all</span>: cleans up all components.</li>
+<p class="code2"><span class="cga_op">cleanupGeometry</span>(<span class="cga_opparam">componentSelector, tol</span>)</p>
+
+<h2> Parameters </h2>
+
+<ul>
+	<li><span class="cga_opparam">componentSelector</span> (selstr)<br>
+	What components to clean up:
+	<ul>
+		<li><span class="codelight">vertices</span>: merges vertices and removes collinear vertices.</li>
+		<li><span class="codelight">edges</span>: merges vertices and removes shared edges between coplanar faces.</li>
+		<li><span class="codelight">faces</span>: merges vertices and removes duplicate faces and degenerated faces with small area.</li>
+		<li><span class="codelight">all</span>: cleans up all components.</li>
 	</ul>
-    </li>
+	</li>
     <li><span class="cga_opparam">tol</span> (float)<br>
-    Controls the rigorousness of the cleanup operation. Valid values are in the range [0, 1]. While 0 only cleans up matching components (e.g. vertices with identical coordinates are merged or adjacent faces with identical normals are combined), 1 is more aggressive: vertices up to a distance of 1m are merged, and normals with intermediate angles up to 10 degrees are considered coplanar. For values in-between 0 and 1 linear interpolation is applied.
+		Controls the rigorousness of the cleanup operation. Valid values are in the range [0, 1].
+		<ul>
+			<li>0: Only cleans up matching components. Vertices must be identical, edges collinear, faces coplanar or with zero area in order to be removed.</li>
+			<li>1: Vertices up to a distance of 1m are merged. Edges with intermediate angles up to 10 degrees are considerd collinear. Normals with intermediate angles up to 10 degrees are considered coplanar. Faces with area up to 1m&sup2; are removed.</li>
+			<li>]0, 1[: For values in-between 0 and 1 linear interpolation is applied.</li>
+		</ul>
     </li>
- </ul>
+</ul>
 
-<p class="info">
-        The <span class="codelight">cleanupGeometry</span> operation cleans up the current shape's geometry. This allows for optimizing the geometry for subsequent cga operations.
+<p class="info">The <span class="codelight">cleanupGeometry</span> operation cleans up the current shape's geometry.</p>
 
+<p>The intent of this operation is to optimize the data structure of the geometry without the intent to change the appearance of the model. The polygon and vertex count is reduced.</p>
+
+<p>The cleanup can be necessary for subsequent CGA operations. For example, <a class="normw" href="op_setNormals.html">setNormals</a> and <a class="normw" href="op_softenNormals.html">softenNormals</a> operations require duplicate vertices to be merged in order to compute vertex normals using adjacent face normals.</p>
 
 <h2>Related</h2>
 <ul>
@@ -57,82 +63,69 @@
     <li><a class="normw" href="op_reduceGeometry.html">reduceGeometry operation</a></li>
     <li><a class="normw" href="op_reverseNormals.html">reverseNormals operation</a></li>
     <li><a class="normw" href="op_setNormals.html">setNormals operation</a></li>
-    <li><a class="normw" href="op_trim.html">trim operation</a></li>
+	<li><a class="normw" href="op_softenNormals.html">softenNormals operation</a></li>
 </ul>
 
-
-
 <h2>Examples</h2>
+
 <h3>Cleaning up a triangulated asset</h3>
-        <table summary="" class="twocol">
-          <tr>
-            <td class="twocol_l"><br/>
-            <img src="images/cleanup_a-none.png" alt="Before cleanup"/> </td>
-            <td>
-            <br>
-            <br>
-            <br>
-            <br>
-            
-            <pre class="code3">
+<table summary="" class="twocol">
+<tr>
+	<td class="twocol_l"><br/><img src="images/cleanup_a-none.png" alt="Before cleanup"/> </td>
+	<td>
+	<pre class="code3">
+
+	
+	
+
 Init-->
-  i("myHouse.dae")
-</pre>
-            <br>
-            <br>
+i("myHouse.dae")
 
-            <em>The original asset (464 faces, 758 vertices).</em>
-			</td>
-          </tr>
 
-          <tr>
-            <td class="twocol_l"><br/>
-            <img src="images/cleanup_a-all_0.png" alt="cleanupGeometry(all, 0)"/> </td>
-            <td>
-            <br>
-            <br>
-            <br>
-            <br>
- 
-            <pre class="code3">
+	</pre>
+	<em>The original asset (464 faces, 758 vertices).</em>
+	</td>
+</tr>
+<tr>
+	<td class="twocol_l"><br/><img src="images/cleanup_a-all_0.png" alt="cleanupGeometry(all, 0)"/></td>
+	<td>
+	<pre class="code3">
+	
+	
+	
+	
 Init-->
-   i("myHouse.dae")
-   cleanupGeometry(all, 0)
-</pre>
-            <br>
-            <br>
+i("myHouse.dae")
+cleanupGeometry(all, 0)
 
-            <em>Mild cleanup removes most disturbing edges (190 faces, 752 vertices).</em>
-			</td>
-          </tr>
 
-          <tr>
-            <td class="twocol_l"><br/>
-            <img src="images/cleanup_a-all_0_1.png" alt="cleanupGeometry(all, 0.1)"/> </td>
-            <td>
-            <br>
-            <br>
-            <br>
-            <br>
- 
-            <pre class="code3">
+	</pre>
+	<em>Mild cleanup removes most disturbing edges (190 faces, 752 vertices).</em>
+	</td>
+</tr>
+<tr>
+	<td class="twocol_l"><br/><img src="images/cleanup_a-all_0_1.png" alt="cleanupGeometry(all, 0.1)"/></td>
+	<td>
+	<pre class="code3">
+	
+	
+	
+	
+	
 Init-->
-   i("myHouse.dae")
-   cleanupGeometry(all, 0.1)
-</pre>
-            <br>
-            <br>
-
-            <em>Increasing the tolerance gets rid of the remaining nasty edges (146 faces, 616 vertices).</em>
-			</td>
-          </tr>
-
-	</table>
+i("myHouse.dae")
+cleanupGeometry(all, 0.1)
 
 
+	</pre>
+	<em>Increasing the tolerance gets rid of the remaining nasty edges (146 faces, 616 vertices).</em>
+	</td>
+</tr>
+</table>
 
 <!-- FOOTER -->
-<p class="foot">Copyright &copy;2008-2016 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
+
+<p class="foot">Copyright &copy;2008-2017 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
 
 <!-- END CENTERED CONTENT -->
 

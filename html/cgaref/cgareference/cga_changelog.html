@@ -32,6 +32,83 @@
   </tr>
 
   <tr>
+	<td>2017.0 <br>CGAC 1.8</td>
+	<td>
+		New operations:
+		<ul>
+			<li><a href="op_label.html"><span class="code_std">label</span></a> operation.</li>
+		</ul>
+		New functions:
+		<ul>
+			<li>New basic functions: <a href="celib/min.html"><span class="code_std">min</span></a>, <a href="celib/max.html"><span class="code_std">max</span></a> and <a href="celib/clamp.html"><span class="code_std">clamp</span></a>.
+			<li>New functions for color conversion: <a href="celib/colorHexToB.html"><span class="code_std">colorHexToB</span></a>, <a href="celib/colorHexToG.html"><span class="code_std">colorHexToG</span></a>, <a href="celib/colorHexToH.html"><span class="code_std">colorHexToH</span></a>, <a href="celib/colorHexToO.html"><span class="code_std">colorHexToO</span></a>, <a href="celib/colorHexToR.html"><span class="code_std">colorHexToR</span></a>, <a href="celib/colorHexToS.html"><span class="code_std">colorHexToS</span></a>, <a href="celib/colorHexToV.html"><span class="code_std">colorHexToV</span></a>, <a href="celib/colorHSVToHex.html"><span class="code_std">colorHSVToHex</span></a>, <a href="celib/colorHSVOToHex.html"><span class="code_std">colorHSVOToHex</span></a>, <a href="celib/colorRGBToHex.html"><span class="code_std">colorRGBToHex</span></a> and <a href="celib/colorRGBOToHex.html"><span class="code_std">colorRGBOToHex</span></a>.
+			<li>New functions for <a href="cga_context.html">context queries</a> to <a href="op_label.html">labeled</a> shapes: <a href="func_minimumDistance.html"><span class="code_std">minimumDistance</span></a>, <a href="func_contextCompare.html"><span class="code_std">contextCompare</span></a> and <a href="func_contextCount.html"><span class="code_std">contextCount</span></a>.</li>
+		</ul>
+		Changes to existing features:
+		<ul>
+			<li><a href="op_primitive.html#quad"><span class="code_std">primitiveQuad</span></a>, <a href="op_primitive.html#disk"><span class="code_std">primitiveDisk</span></a>, <a href="op_primitive.html#cube"><span class="code_std">primitiveCube</span></a> operation: Removed vertex normals because they do not influence shading. Vertex normals can still be created using <a href="op_setNormals.html"><span class="code_std">setNormals</span></a> or <a href="op_softenNormals.html"><span class="code_std">softenNormals</span></a> operation.</li>
+			<li>CGA compiler: Improved compile time in case of errors due to naming conflicts, especially when rules with many parameters are present.</li>
+			<li><a href="op_comp.html"><span class="code_std">comp</span></a> operation: New component selectors <span class="codelight">g</span> for groups, <span class="codelight">m</span> for materials and <span class="codelight">h</span> for holes.</li>
+			<li><a href="func_occlusion.html"><span class="code_std">inside</span></a>, <a href="func_occlusion.html"><span class="code_std">overlaps</span></a> and <a href="func_occlusion.html"><span class="code_std">touches</span></a> functions:</li>
+			<ul>
+				<li>New optional label identifier for performing occlusion queries on <a href="op_label.html">labeled</a> occluder shapes.</li>
+				<li>Geometries only slightly lying outside an occluder shape are considered inside (adjusted threshold behavior due to floating point limitations).</li>
+				<li>Surfaces touch also when normals point in same direction.</li>
+			</ul>
+			<li>Support shapes consisting of vertices or edges (coming from <a href="op_comp.html"><span class="code_std">comp</span></a> or <a href="op_scatter.html"><span class="code_std">scatter</span></a> operation):</li>
+			<ul>
+				<li><a href="func_geometry.html#isClosedSurface"><span class="code_std">geometry.isClosedSurface</span></a>, <a href="func_geometry.html#isPlanar"><span class="code_std">geometry.isPlanar</span></a>, <a href="func_geometry.html#isRectangular"><span class="code_std">geometry.isRectangular</span></a> functions: Return <span class="cga_keyword">false</span>.</li>
+				<li><a href="func_geometry.html#nEdges"><span class="code_std">geometry.nEdges</span></a> function: Counts edges.</li>
+				<li><a href="func_geometry.html#isOriented"><span class="code_std">geometry.isOriented</span></a> function: Consider vertex/edge normal.</li>
+			</ul>
+		</ul>
+		Bugfixes:
+		<ul>
+			<li><a href="op_setback.html"><span class="code_std">setback</span></a> operation: In some cases self-intersecting faces on concave shapes were created. That could lead to a failure of subsequent operations.</li>
+			<li><a href="op_comp.html"><span class="code_std">comp</span></a> operation:</li>
+			<ul>
+				<li>Combined (<span class="codelight">=</span>) face component split now respects per-face materials.</li>
+				<li>Fixed wrong edge component split for edges with opposing adjacent faces.</li>
+				<li>Fixed wrong result of combined (<span class="codelight">=</span>) vertex and edge component split.</li>
+				<li>Fixed (deprecated) <span class="codelight">noStreetSide</span> comp split selector handling.</li>
+			</ul>
+			<li><a href="func_geometry.html#area"><span class="code_std">geometry.area</span></a> and <a href="func_geometry.html#isOriented"><span class="code_std">geometry.isOriented</span></a> function: Corrected scope selectors for negative scope sizes (e.g. front becomes back if scope.sz is < 0).</li>
+			<li><a href="op_alignScopeToGeometry.html"><span class="code_std">alignScopeToGeometry</span></a> operation: <span class="codelight">zUp</span> mode: Fixed wrong pivot for meshes that only consist of vertices (for example from vertex splits or <a href="op_scatter.html"><span class="code_std">scatter</span></a>).</li>
+			<li>CGA compiler:</li>
+			<ul>
+				<li><a href="import.html"><span class="code_std">Overriding</span></a> of <a href="const.html"><span class="code_std">const</span></a> is avoided or gives error.</li>
+				<li>Fixed missing rule line reference of incompatible <a href="version.html"><span class="code_std">version</span></a> warnings.</li>
+				<li>Fixed an issue where a rule file could not be recompiled correctly after fixing errors.</li>
+				<li>Fixed wrong rule line references of compile errors.</li>
+			</ul>
+			<li><a href="func_occlusion.html"><span class="code_std">inside</span></a>, <a href="func_occlusion.html"><span class="code_std">overlaps</span></a> and <a href="func_occlusion.html"><span class="code_std">touches</span></a> functions:</li>
+			<ul>
+				<li>Fixed a bug where a closed shape were not touching and not overlapping another geometry that lied inside.</li>
+				<li>Intra-occlusion: Fixed a bug where component split shapes which are children of the current shape were considered for occlusion.</li>
+				<li>Inter-occlusion: Fixed a bug where occlusion-queries were not considered when defined in consts or functions.</li>
+				<li>Fixed a bug that mistakenly returned true in rare situations due to near zero-area triangles.</li>
+				<li>Inter-ccclusion: Fixed a bug that created an occluder shape by a <a href="op_comp.html">component split</a> or <a href="op_offset.html">offset</a> operation during the intra ghost tree generation which was then mistakenly considered also for inter occlusion.</li>
+				<li>Fixed correct behavior in exports.</li>
+			</ul>
+			<li><a href="op_set.html"><span class="code_std">set</span></a> operation: fixed a bug: trying to set the <a href="attr_initialShape.html"><span class="code_std">initialShape.pz</span></a> attribute resulted in inconsistent behaviour (mismatch with initialShape.pa).</li>
+			<li><a href="op_alignScopeToAxes.html"><span class="code_std">alignScopeToAxes</span></a>, <a href="op_rotateScope.html"><span class="code_std">rotateScope</span></a>, <a href="op_mirrorScope.html"><span class="code_std">mirrorScope</span></a>, <a href="op_setPivot.html"><span class="code_std">setPivot</span></a>, <a href="op_cleanupGeometry.html"><span class="code_std">cleanupGeometry</span></a>, <a href="op_reduceGeometry.html"><span class="code_std">reduceGeometry</span></a>, <a href="op_convexify.html"><span class="code_std">convexify</span></a>, <a href="op_split.html"><span class="code_std">split</span></a> operations: Correctly consider a non-adjusted scope coming from a <a href="op_split.html"><span class="code_std">split</span></a> operation.</li>
+			<li><a href="op_offset.html"><span class="code_std">offset</span></a> operation: Now keeps asset materials and groups.</li>
+			<li><a href="op_scatter.html"><span class="code_std">scatter</span></a> operation: Issue warning for negative or zero number of points.</li>
+			<li><a href="func_occlusion.html"><span class="code_std">inside</span></a>, <a href="func_occlusion.html"><span class="code_std">overlaps</span></a>, <a href="func_occlusion.html"><span class="code_std">touches</span></a>, <a href="func_geometry.html#angle"><span class="code_std">geometry.angle</span></a> functions, <a href="op_alignScopeToGeometry.html"><span class="code_std">alignScopeToGeometry</span></a>, <a href="op_alignScopeToAxes.html"><span class="code_std">alignScopeToAxes</span></a> operations: Fixed for shapes consisting of vertices or edges (coming from <a href="op_comp.html"><span class="code_std">comp</span></a> or <a href="op_scatter.html"><span class="code_std">scatter</span></a> operation).</li>
+			<li><a href="celib/assetApproxRatio.html"><span class="code_std">assetApproxRatio</span></a>,
+				<a href="celib/assetApproxSize.html"><span class="code_std">assetApproxSize</span></a>,
+				<a href="celib/assetBestRatio.html"><span class="code_std">assetBestRatio</span></a>,
+				<a href="celib/assetBestSize.html"><span class="code_std">assetBestSize</span></a>,
+				<a href="celib/assetFitSize.html"><span class="code_std">assetFitSize</span></a>,
+				<a href="celib/fileRandom.html"><span class="code_std">fileRandom</span></a>,
+				<a href="celib/imageApproxRatio.html"><span class="code_std">imageApproxRatio</span></a>,
+				<a href="celib/imageBestRatio.html"><span class="code_std">imageBestRatio</span></a>,
+				<a href="func_fileSearch.html"><span class="code_std">fileSearch</span></a> functions: Fixed a bug which led to wrong asset lookups if used in RPKs.</li>
+		</ul>
+	</td>
+  </tr>
+  
+  <tr>
 	<td>2016.1 <br>CGAC 1.7</td>
 	<td>
 		Changes to existing features:
@@ -54,7 +131,7 @@
 				<li>Fixed an issue where the trimmed mesh on a roof face contained holes.</li>
 			</ul>
 			<li><a href="op_cleanupGeometry.html"><span class="code_std">cleanupGeometry</span></a>, <a href="op_reduceGeometry.html"><span class="code_std">reduceGeometry</span></a> operation: Fixed wrong result if scope contained rotational part.</li>
-			<li><a href="op_cleanupGeometry.html"><span class="code_std">cleanupGeometry</span></a> operation: Fixed a bug that led to inconsistent meshes which could led to a crash on some subsequent operations, e.g. <a href="op_setNormals.html"><span class="code_std">setNormals(soft)</span></a> or <a href="op_softenNormals.html"><span class="code_std">softenNormals()</span></a>.</li>
+			<li><a href="op_cleanupGeometry.html"><span class="code_std">cleanupGeometry</span></a> operation: Fixed a bug that led to inconsistent meshes which could led to a crash on some subsequent operations, e.g. <a href="op_setNormals.html"><span class="code_std">setNormals(soft)</span></a> or <a href="op_softenNormals.html"><span class="code_std">softenNormals</span></a>.</li>
 	        <li><a href="op_offset.html"><span class="code_std">offset</span></a> operation: Fixed undefined behaviour for negative offsets on polygons with holes.</li>
 			<li><a href="op_envelope.html"><span class="code_std">envelope</span></a> operation: Fixed a bug that could led to a crash when vertices were collinear.</li>
           	<li><a href="func_getGeoCoord.html"><span class="code_std">getGeoCoord</span></a> function: <span class="code_std">X</span>, <span class="code_std">Y</span> selectors: Fixed to-meter conversion for non-metrical coordinate systems.</li> 
@@ -880,7 +957,7 @@ overload  .</li>
   
 
   <h3><!-- FOOTER --> </h3>
-        <p class="foot">Copyright &copy;2008-2016 Esri R&amp;D Center Zurich. All rights reserved.</p>                  
+        <p class="foot">Copyright &copy;2008-2017 Esri R&amp;D Center Zurich. All rights reserved.</p>                  
 
 <!-- END CENTERED CONTENT -->
 

@@ -10,7 +10,7 @@ var classprtx_1_1_extension_manager =
     [ "createEncoder", "classprtx_1_1_extension_manager.html#a53f51cd6419b01db98af0f26c565ccfd", null ],
     [ "createEncoderInfo", "classprtx_1_1_extension_manager.html#a109c6664a53ebba97ece3097efab5bef", null ],
     [ "createStreamAdaptor", "classprtx_1_1_extension_manager.html#a28593c0c8e3353a4a8052e461272ea24", null ],
-    [ "init", "classprtx_1_1_extension_manager.html#afe8610035ed26a317bdf95d7adc1c6c2", null ],
+    [ "init", "classprtx_1_1_extension_manager.html#aaf290299ab4c3fa4e48a3f500c19f27a", null ],
     [ "listDecoderIds", "classprtx_1_1_extension_manager.html#ae143960188e40f1faba768a123001a50", null ],
     [ "listEncoderIds", "classprtx_1_1_extension_manager.html#aabb3ad10867d219143db62941c9ac602", null ],
     [ "operator=", "classprtx_1_1_extension_manager.html#a746f98d7f1896ab7843efe86d918773d", null ]

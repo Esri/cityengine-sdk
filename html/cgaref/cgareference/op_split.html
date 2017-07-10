@@ -129,10 +129,10 @@ information about the texture layer IDs.</a>
     Repeat switch: the repeat switch triggers the repetition of the defined split into the current shape's
     <span class="cga_keyword">scope</span>, as many times as possible. The number of repetitions and floating dimensions are adapted to the best solution (best number of repetitions and least stretching).</li>
 </ul>
-<p class="text"><img alt="" class="icon" src=
-"../images/info_icon.jpg"><h5>XYZ Split (Cartesian Space)</h5>
 
-The split operation subdivides the
+<h5>XYZ Split (Cartesian Space)</h5>
+
+<p class="info">The split operation subdivides the
 current shape along the specified <span class=
 "cga_keyword">scope</span> axis into a set of smaller shapes. For
 each <span class="cga_opparam">size</span>-<span class=
@@ -163,6 +163,20 @@ nested level is unlimited.</p>
 Splits can also be applied in the 2d uv texture domain. Texture coordinates define a 2d parameter space on a 3d surface. Examples of such parameterizations are streets (u along thew street direction, v along the width) and facades (generated with <span class="cga_keyword">setupProjection()</span> and <span class="cga_keyword">projectUV()</span>, u along the width and v along the height). This permits to operate directly on the surface. In general, uv coordinates are in the [0,1] range and not connected to a unit like meters or yards on the surface (defined by the underlying mesh). Setting the <span class="cga_opparam">splitDirection</span> parameter to <span class="cga_codelight">unitSpace</span> permits to operate directly on the surface, i.e. work in units (e.g. meters or yards). Depending on the geometry and type of parameterization there is some inherent distortion in this conversion.<br>
 Borders (start, end) of the uv split are defined by the minimal and maximal values found in the selected uv coordinates. The genral syntax of the split is the same as in the cartesian case described above, i.e. relative and floating operators (' and ~) can be used as well as the repeat operator (*). Please check out the <a href="#uvsplitbasic">examples below</a>.
 
+  <h3 class="text">Shape attributes</h3>
+  <p class="text">Each generated shape will have a number of attributes set:</p>
+  <ul>
+    <li>split.index: The zero-based index of the selected component.</li>
+    <li>split.total: The total number of components selected by the selector.</li>
+  </ul>
+  <p>Index and total are global; for instance</p>
+  <pre class="code3">
+     ...
+     primitiveCube()
+     split(x) { '0.1 : A | '0.1 : B }*
+  </pre>
+  <p>will create 5 shapes with rule A interleaved with 5 shapes with rule B where split.index goes from 0 to 9 with all even numbers on rule A and all odd numbers on rule B while split.total will be 10.</p>
+  <p>For more information see <a class="normw" href="attr_split.html">split attribute</a>.</p>
 
 <h2>Related</h2>
 <ul>
@@ -547,7 +561,7 @@ The same street after a u-split in unitSpace. Every 20 meters a 3 meter wide ban
 
 
 <!-- FOOTER -->
-<p class="foot">Copyright &copy;2008-2016 Esri R&amp;D Center Zurich. All rights reserved.</p>
+<p class="foot">Copyright &copy;2008-2017 Esri R&amp;D Center Zurich. All rights reserved.</p>
 <!-- END CENTERED CONTENT --></div>
 </body>
 </html>

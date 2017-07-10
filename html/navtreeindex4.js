@@ -1,5 +1,7 @@
 var NAVTREEINDEX4 =
 {
+"classprtx_1_1_log_formatter.html#a8de2237f4571d307452aba7b8f1db11f":[1,0,1,50,23],
+"classprtx_1_1_log_formatter.html#a8ec2cdac7ff955ccd1a8c16891b1d1ce":[1,0,1,50,20],
 "classprtx_1_1_log_formatter.html#a99ba56d0f2668ef06b3b2b388d693be9":[1,0,1,50,28],
 "classprtx_1_1_log_formatter.html#a99f37e2834b59d41e8def55f30dd781e":[1,0,1,50,14],
 "classprtx_1_1_log_formatter.html#a9ad4a49485acdecea0755c65330c9b5d":[1,0,1,50,17],
@@ -247,7 +249,5 @@ var NAVTREEINDEX4 =
 "classprtx_1_1_shader_builder.html#aae8ac9be90ada6821390de9a66386eac":[1,0,1,69,2],
 "classprtx_1_1_shader_builder.html#ad12a48a4413d520860e116beb2ae2597":[1,0,1,69,1],
 "classprtx_1_1_shader_builder.html#af72cac67faddf6403060d0045e8d8989":[1,0,1,69,5],
-"classprtx_1_1_shader_builder.html#af75ed3fa7515895802e8dd8138f0b07f":[1,0,1,69,0],
-"classprtx_1_1_shader_decoder.html":[1,0,1,70],
-"classprtx_1_1_shader_decoder.html#a268e2b2ed3e0d92c6a57fd33f7d0f53a":[1,0,1,70,0]
+"classprtx_1_1_shader_builder.html#af75ed3fa7515895802e8dd8138f0b07f":[1,0,1,69,0]
 };

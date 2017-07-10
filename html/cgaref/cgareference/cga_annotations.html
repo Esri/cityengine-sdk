@@ -37,6 +37,8 @@
   <p class="code2">@Order(<i>order</i>)</p>
   <p class="code2">@Description(&quot;<i>description</i>&quot;)</p>
   <p class="code2">@Handle(<i>handle_params</i>)</p>
+ 
+  
 
 
   <p class="code2">@InMesh</p>  
@@ -44,12 +46,15 @@
   <p class="code2">@InEdge</p>
   <p class="code2">@InPoint</p>
   <p class="code2">@InPointCloud</p>
+  <p class="code2">@Angle</p>
+  <p class="code2">@Percent</p>
+  <p class="code2">@Distance</p>
 
   <p class="code2">@Out(granularity=separatedShapes|combinedShape)</p>
      
 
         
-  <p class="text"><img alt="" class="icon" src="../images/info_icon.jpg">Annotations are used to add additional information to a rule or an attribute. Annotations are optional and do not affect the semantics of a rule and thus have no influence on the model generation. Annotations are mostly used to give additional hints for user interface elements such as the Inspector on how to present attributes or rules.
+  <p class="info">Annotations are used to add additional information to a rule or an attribute. Annotations are optional and do not affect the semantics of a rule and thus have no influence on the model generation. Annotations are mostly used to give additional hints for user interface elements such as the Inspector on how to present attributes or rules.</p>
   <ul>
   <li><code>@StartRule</code>: Mark a rule as a start rule for the start rule chooser</li>
 <li><code>@Hidden</code>: Mark an attribute or rule as hidden. Hidden attributes won't appear in the CityEngine inspector or start rule chooser, but they will be connected to matching object attributes automatically. 
@@ -69,14 +74,13 @@
 <li><code>@Description(&quot;description&quot;)</code>: Adds a description to an attribute or rule which will be displayed as tooltip in the inspector or as description in the start rule chooser or style manager. Use \n for linebreaks.</li>
 <li><code>@Handle(<i>handle_params</i>)</code>: Adds an <a href="../manual/cga/handles/cga_wr_handles.html">interactive handle</a> to the following attribute.</li>
 
-<li><code>@In{Mesh|Polygon|Edge|Point|PointCloud}</code>: These annotations can be used to communicate the expected geometry type of the start shape. While these annotations currently have no effect in CityEngine, ArcPro expects each start rule (see above) to be annotated with the expected input type (as of ArcPro 1.1, only <code>InPolygon</code> and <code>InMesh</code> are supported). If there is none, it defaults to <code>@InPolygon</code>. So if you export a rpk to be used with different geometry types in ArcPro, make sure you add one of these annotations.</li> 
-<li><code>@Out(granularity=separatedShapes|combinedShape)</code>: This annotation can be used to communicate the suggested granularity of the output geometry. The default is <code>combinedShape</code>. While this annotation currently has no effect in CityEngine, it is essential to trigger leaf shape generation in ArcPro. Add it to the start rule in that case.   
+<li><code>@In{Mesh|Polygon|Edge|Point|PointCloud}</code>: These annotations can be used to communicate the expected geometry type of the start shape. While these annotations currently have no effect in CityEngine, ArcGIS Pro expects each start rule (see above) to be annotated with the expected input type (as of ArcGIS Pro 1.1, only <code>InPolygon</code> and <code>InMesh</code> are supported). If there is none, it defaults to <code>@InPolygon</code>. So if you export a rpk to be used with different geometry types in ArcGIS Pro, make sure you add one of these annotations.</li>
+<li><code>@{Angle|Percent|Distance}</code>: Mark the attribute as <code>{Angle|Percent|Distance}</code>. Currently, this is only supported in ArcGIS Pro.
+<li><code>@Out(granularity=separatedShapes|combinedShape)</code>: This annotation can be used to communicate the suggested granularity of the output geometry. The default is <code>combinedShape</code>. While this annotation currently has no effect in CityEngine, it is essential to trigger leaf shape generation in ArcGIS Pro. Add it to the start rule in that case.</li>
 
 
   </ul>
-  </p>
-  <h2>Example
-</h2>
+  <h2>Example</h2>
 
   <h3>Adding annotations</h3>
         <table summary="" class="onecol">
@@ -149,7 +153,7 @@ attr width = 40
 
 
 <!-- FOOTER -->
-<p class="foot">Copyright &copy;2008-2016 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
+<p class="foot">Copyright &copy;2008-2017 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
 
 <!-- END CENTERED CONTENT -->
 

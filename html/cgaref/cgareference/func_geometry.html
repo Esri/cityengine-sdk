@@ -39,10 +39,10 @@
          <h2>Returns</h2>
          
         <p>Angle of the current shape's geometry, depending on the selector, in degrees.</p>
-        <p class="text"><img alt="" class="icon" src="../images/info_icon.jpg">
+        <p class="info">
       Azimuth is the horizontal angle measured clockwise from the north, i.e. 90 degrees is east, 180 degrees is south and 270 degrees is west. Azimuth is in the range [0, 360[.
-      <br>The geometry.angle(zenith) function returns the same value as ( 90 - geometry.angle(maxSlope) )
-        <p class="text">
+      <br>The geometry.angle(zenith) function returns the same value as ( 90 - geometry.angle(maxSlope) )</p>
+        
  
   <h2>Examples </h2>
     <img src="images/angle_maxSlope.jpg" alt="nada" width="298" ></td>
@@ -72,18 +72,16 @@
         <li><span class="cga_opparam">areaSelector</span><br>
       Selector for the faces to include in the area calculation. Valid selectors are:
       <ul>
-        <li>surface (default), all,</li>
+        <li>all/surface (default),</li>
         <li>back, bottom, front, top, left, right, side,</li>
-        <li>object.front,object.back,object.bottom,object.top,object.left,object.right,object.side,</li>
-        <li>world.north,world.south,world.west,world.east,world.up,world.down,world.side,</li>
+        <li>object.front, object.back, object.bottom, object.top, object.left, object.right, object.side,</li>
+        <li>world.north, world.south, world.west, world.east, world.up, world.down, world.side,</li>
         <li>street.front, street.back, street.right, street.left, street.side</li>
       </ul>
         </li>
          <h2>Returns</h2>
         <p>Surface area of the current shape's geometry, depending on the provided area selector.</p>
-        <p class="text"><img alt="" class="icon" src="../images/info_icon.jpg">
-      The surface area of the geometry is the sum of the area of all its faces. 
-        <p class="text">
+        <p class="info">The surface area of the geometry is the sum of the area of all its faces.</p>
         
 
         <br><br><br><br><br>
@@ -138,7 +136,7 @@
 
          <h2>
         Returns</h2>
-         <p class="content"><span class="cga_keyword">true</span> if the all of the geometry's edges belong to exactly 2 faces.</p>
+         <p class="content"><span class="cga_keyword">true</span> if the geometry contains at least one face and all edges belong to exactly 2 faces, <span class="cga_keyword">false</span> otherwise.</p>
       <h2>
         Related
   </h2>
@@ -197,13 +195,15 @@
 
          <h2>Returns</h2>
          
-        <p><span class="code_std">True</span> if the current shape's geometry is the instance of an asset, i.e. the geometry has not been altered since the i() operation, <span class="code_std">false</span> otherwise.</p>
-        <p class="text"><img alt="" class="icon" src="../images/info_icon.jpg"> The <span class="code_std">geometry.isInstanced()</span> function can be used to e.g. check if an inserted asset was trimmed. 
+        <p><span class="code_std">True</span> if the current shape's geometry is the instance of an asset, i.e. the geometry has not been altered since the <a class="normw" href="op_i.html">insert operation</a>, <span class="code_std">false</span> otherwise.</p>
+        <p class="info">The <span class="code_std">geometry.isInstanced()</span> function can be used to e.g. check if an inserted asset was trimmed.</p>
 
 
         <h2>Related</h2>
 		<ul>
-			<li><a class="normw" href="op_i.html">i() operation</a></li>
+			<li><a class="normw" href="op_i.html">insert operation</a></li>
+			<li><a class="normw" href="op_trim.html">trim operation</a></li>
+			<li><a class="normw" href="attr_trim.html">trim attribute</a></li>
 		</ul>
 
 
@@ -236,15 +236,13 @@
         Returns</h2>
         <p><span class="code_std">True</span> if at least one of the geometry's faces matches the <span class="cga_opparam">orientationSelector</span>, 
         <span class="code_std">false</span> otherwise.</p>
-        <p class="text"><img alt="" class="icon" src="../images/info_icon.jpg">
-      The <span class="code_std">geometry.isOriented</span> function can be used to determine a shape's orientation.
-        <p class="text">
+        <p class="info">The <span class="code_std">geometry.isOriented</span> function can be used to determine a shape's orientation.</p>
         
         <h2>Related</h2>
   <ul>
         <li>
         <a class="normw" href="op_comp.html">
-        comp() operation</a>        </li>
+        comp operation</a>        </li>
 
   </ul>
 
@@ -267,7 +265,7 @@
         </ul>
         <h2>
         Returns</h2>
-        <span class="cga_keyword">true</span> if all faces of the geometry are planar (within <span class="cga_opparam">tolerance</span>, <span class="cga_keyword">false</span> otherwise.
+        <span class="cga_keyword">true</span> if the geometry contains at least one face and all faces of are planar (within <span class="cga_opparam">tolerance</span>), <span class="cga_keyword">false</span> otherwise.
   
   <h2>
         Related
@@ -304,7 +302,7 @@
         </ul>
         <h2>
         Returns</h2>
-         <p class="content"><span class="cga_keyword">true</span> if all faces of the current shape's geometry consist of 4 vertices and contain only right angles, <span class="cga_keyword">false</span> otherwise. Angles in the range [90-<span class="cga_opparam">tolerance</span>, 90+<span class="cga_opparam">tolerance</span>] are considered to be &quot;right&quot;.</p>  
+         <p class="content"><span class="cga_keyword">true</span> if the geometry contains at least one face and all faces consist of 4 vertices and contain only right angles, <span class="cga_keyword">false</span> otherwise. Angles in the range [90-<span class="cga_opparam">tolerance</span>, 90+<span class="cga_opparam">tolerance</span>] are considered to be &quot;right&quot;.</p>  
   <h2>
         Related
   </h2>
@@ -499,7 +497,7 @@
   </ul>
 
 <!-- FOOTER -->
-<p class="foot">Copyright &copy;2008-2016 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
+<p class="foot">Copyright &copy;2008-2017 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
 
 <!-- END CENTERED CONTENT -->
 

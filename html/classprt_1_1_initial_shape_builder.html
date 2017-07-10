@@ -31,7 +31,7 @@
   <td id="projectlogo"><img alt="Logo" src="esri_prt_55px.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Esri Procedural Runtime
-   &#160;<span id="projectnumber">1.7.2915</span>
+   &#160;<span id="projectnumber">1.8.3501</span>
    </div>
   </td>
  </tr>
@@ -466,9 +466,9 @@ Additional Inherited Members</h2></td></tr>
 <tr>
 <td>/cgaenv/trimPlanesComputeSize </td><td>float </td><td>100.0 </td><td>The size of the computed trimplanes in meters; float; default: 100.0 </td></tr>
 <tr>
-<td>/cgaenv/touchesMaxDist </td><td>float </td><td>1e-3 </td><td>The maximum distance to distinct between touches and intersects; </td></tr>
+<td>/cgaenv/touchesMaxDist </td><td>float </td><td>1e-3 </td><td>Due to floating point limitations, occlusion queries use this threshold value. </td></tr>
 <tr>
-<td>/cache/key </td><td>string </td><td></td><td>Set the cache key associated to this initial shape. This allows e.g. for re-using an initial shape's cache key with a different instance. See also the generateOptions parameter of <a class="el" href="namespaceprt.html#a0ea77f812e862aa5e15b1234220fd368">generate()</a>. </td></tr>
+<td>/cache/key </td><td>string </td><td></td><td>Set the cache key associated to this initial shape. This allows e.g. for re-using an initial shape's cache key with a different instance. See also the generateOptions parameter of <a class="el" href="namespaceprt.html#a310381e586ced8f4b08efd472a6f0782">generate()</a>. </td></tr>
 <tr>
 <td>/enc/ </td><td></td><td></td><td>Reserved namespace for encoders. The <a href="esri_prt_codecs.html">encoder documentation</a> lists the known initial shape attributes per encoder. Typically, these attributes are used to control encoder behavior on a per-initial-shape basis, i.e. they are the per-initial-shape counterpart to the encoder options. Also see the <a class="el" href="_app_notes.html">Application Notes</a> for an usage example. </td></tr>
 </table>
@@ -479,7 +479,7 @@ Additional Inherited Members</h2></td></tr>
     <tr><td class="paramname">randomSeed</td><td>The random seed; this will be the <a href="cgaref/cgareference/attr_seedian.html">seedian cga attribute</a> of the initial shape. </td></tr>
     <tr><td class="paramname">name</td><td>The name of the initial shape. This will be the <a href="cgaref/cgareference/attr_initialShape.html">initialShape.name cga attribute</a>. </td></tr>
     <tr><td class="paramname">attributes</td><td>The rule attributes. </td></tr>
-    <tr><td class="paramname">resolveMap</td><td>The resolve map to use in <a class="el" href="namespaceprt.html#a0ea77f812e862aa5e15b1234220fd368">generate()</a>. </td></tr>
+    <tr><td class="paramname">resolveMap</td><td>The resolve map to use in <a class="el" href="namespaceprt.html#a310381e586ced8f4b08efd472a6f0782">generate()</a>. </td></tr>
   </table>
   </dd>
 </dl>
@@ -659,7 +659,7 @@ Additional Inherited Members</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespaceprt.html">prt</a></li><li class="navelem"><a class="el" href="classprt_1_1_initial_shape_builder.html">InitialShapeBuilder</a></li>
-    <li class="footer">Generated on Mon Sep 19 2016 13:23:26 for Esri Procedural Runtime by
+    <li class="footer">Generated on Fri Jun 9 2017 18:28:05 for Esri Procedural Runtime by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.7 </li>
   </ul>

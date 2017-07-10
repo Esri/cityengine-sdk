@@ -31,7 +31,7 @@
   <td id="projectlogo"><img alt="Logo" src="esri_prt_55px.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Esri Procedural Runtime
-   &#160;<span id="projectnumber">1.7.2915</span>
+   &#160;<span id="projectnumber">1.8.3501</span>
    </div>
   </td>
  </tr>
@@ -182,8 +182,8 @@ Public Member Functions</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="classprt_1_1_callbacks.html">Callbacks</a> are used to return data such as errors or reports during generation, to lookup coordinates dependent on the client's coordinate system and to report progress and query for cancelation.</p>
-<p>A client must either use one of the provided implementations (FileOutputHandler, MemoryOutputHandler) or implement this interface in order to use the <a class="el" href="namespaceprt.html#a0ea77f812e862aa5e15b1234220fd368">generate()</a> functions.</p>
-<p>An instance of a <a class="el" href="classprt_1_1_callbacks.html">Callbacks</a> subclass is instantiated &amp; destroyed by the client. It usually lives for a number of sequential <a class="el" href="namespaceprt.html#a0ea77f812e862aa5e15b1234220fd368">generate()</a> calls. All member functions must be thread-safe (can be called simultaneously by a number of internal threads). One instance of a <a class="el" href="classprt_1_1_callbacks.html">Callbacks</a> must not be used by more than one concurrent <a class="el" href="namespaceprt.html#a0ea77f812e862aa5e15b1234220fd368">generate()</a> calls. </p>
+<p>A client must either use one of the provided implementations (FileOutputHandler, MemoryOutputHandler) or implement this interface in order to use the <a class="el" href="namespaceprt.html#a310381e586ced8f4b08efd472a6f0782">generate()</a> functions.</p>
+<p>An instance of a <a class="el" href="classprt_1_1_callbacks.html">Callbacks</a> subclass is instantiated &amp; destroyed by the client. It usually lives for a number of sequential <a class="el" href="namespaceprt.html#a310381e586ced8f4b08efd472a6f0782">generate()</a> calls. All member functions must be thread-safe (can be called simultaneously by a number of internal threads). One instance of a <a class="el" href="classprt_1_1_callbacks.html">Callbacks</a> must not be used by more than one concurrent <a class="el" href="namespaceprt.html#a310381e586ced8f4b08efd472a6f0782">generate()</a> calls. </p>
 </div><h2 class="groupheader">Member Enumeration Documentation</h2>
 <a class="anchor" id="a0f26a9045559ca8cfe9ae8843ba6ba0a"></a>
 <div class="memitem">
@@ -270,10 +270,10 @@ LAYER_X, LAYER_Y, LAYER_Z: The layer coordinates. Layer coordinates are not used
 </table>
 </div><div class="memdoc">
 <p>Reports to the client that one of the assets used by the rule was erroneous. Called by com.esri.prt.core.CGAErrorEncoder (potentially by any encoder).</p>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="namespaceprt.html#a0ea77f812e862aa5e15b1234220fd368">generate()</a>, <a class="el" href="classprt_1_1_initial_shape.html">InitialShape</a>, <a class="el" href="classprt_1_1_resolve_map.html">ResolveMap</a></dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="namespaceprt.html#a310381e586ced8f4b08efd472a6f0782">generate()</a>, <a class="el" href="classprt_1_1_initial_shape.html">InitialShape</a>, <a class="el" href="classprt_1_1_resolve_map.html">ResolveMap</a></dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">isIndex</td><td>Initial shape index (relative to the initialShapes array in the <a class="el" href="namespaceprt.html#a0ea77f812e862aa5e15b1234220fd368">generate()</a> call) </td></tr>
+    <tr><td class="paramname">isIndex</td><td>Initial shape index (relative to the initialShapes array in the <a class="el" href="namespaceprt.html#a310381e586ced8f4b08efd472a6f0782">generate()</a> call) </td></tr>
     <tr><td class="paramname">level</td><td>Error/warning/info. </td></tr>
     <tr><td class="paramname">key</td><td>The asset's key (symbolic name) into the initial shape's <a class="el" href="classprt_1_1_resolve_map.html">ResolveMap</a>. </td></tr>
     <tr><td class="paramname">uri</td><td>The asset's URI from the initial shape's <a class="el" href="classprt_1_1_resolve_map.html">ResolveMap</a>. </td></tr>
@@ -331,7 +331,7 @@ LAYER_X, LAYER_Y, LAYER_Z: The layer coordinates. Layer coordinates are not used
 <p>Reports the value of an evaluated attribute to the client. Called by com.esri.prt.core.AttributeEvalEncoder (potentially by any encoder).</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">isIndex</td><td>Initial shape index (relative to the initialShapes array in the <a class="el" href="namespaceprt.html#a0ea77f812e862aa5e15b1234220fd368">generate()</a> call) </td></tr>
+    <tr><td class="paramname">isIndex</td><td>Initial shape index (relative to the initialShapes array in the <a class="el" href="namespaceprt.html#a310381e586ced8f4b08efd472a6f0782">generate()</a> call) </td></tr>
     <tr><td class="paramname">shapeID</td><td>Unique shape id to identify the shape in the shape tree. See <a class="el" href="classprtx_1_1_shape.html">prtx::Shape</a>. </td></tr>
     <tr><td class="paramname">key</td><td>The key of the attribute. </td></tr>
     <tr><td class="paramname">value</td><td>The evaluated value. </td></tr>
@@ -388,7 +388,7 @@ LAYER_X, LAYER_Y, LAYER_Z: The layer coordinates. Layer coordinates are not used
 <p>Reports the value of an evaluated attribute to the client. Called by com.esri.prt.core.AttributeEvalEncoder (potentially by any encoder).</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">isIndex</td><td>Initial shape index (relative to the initialShapes array in the <a class="el" href="namespaceprt.html#a0ea77f812e862aa5e15b1234220fd368">generate()</a> call) </td></tr>
+    <tr><td class="paramname">isIndex</td><td>Initial shape index (relative to the initialShapes array in the <a class="el" href="namespaceprt.html#a310381e586ced8f4b08efd472a6f0782">generate()</a> call) </td></tr>
     <tr><td class="paramname">shapeID</td><td>Unique shape id to identify the shape in the shape tree. See <a class="el" href="classprtx_1_1_shape.html">prtx::Shape</a>. </td></tr>
     <tr><td class="paramname">key</td><td>The key of the attribute. </td></tr>
     <tr><td class="paramname">value</td><td>The evaluated value. </td></tr>
@@ -445,7 +445,7 @@ LAYER_X, LAYER_Y, LAYER_Z: The layer coordinates. Layer coordinates are not used
 <p>Reports the value of an evaluated attribute to the client. Called by com.esri.prt.core.AttributeEvalEncoder (potentially by any encoder).</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">isIndex</td><td>Initial shape index (relative to the initialShapes array in the <a class="el" href="namespaceprt.html#a0ea77f812e862aa5e15b1234220fd368">generate()</a> call) </td></tr>
+    <tr><td class="paramname">isIndex</td><td>Initial shape index (relative to the initialShapes array in the <a class="el" href="namespaceprt.html#a310381e586ced8f4b08efd472a6f0782">generate()</a> call) </td></tr>
     <tr><td class="paramname">shapeID</td><td>Unique shape id to identify the shape in the shape tree. See <a class="el" href="classprtx_1_1_shape.html">prtx::Shape</a>. </td></tr>
     <tr><td class="paramname">key</td><td>The key of the attribute. </td></tr>
     <tr><td class="paramname">value</td><td>The evaluated value. </td></tr>
@@ -512,10 +512,10 @@ LAYER_X, LAYER_Y, LAYER_Z: The layer coordinates. Layer coordinates are not used
 </table>
 </div><div class="memdoc">
 <p>Reports to the client that a runtime cga error occuried during generation of a model. Called by com.esri.prt.core.CGAErrorEncoder (potentially by any encoder).</p>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="namespaceprt.html#a0ea77f812e862aa5e15b1234220fd368">generate()</a></dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="namespaceprt.html#a310381e586ced8f4b08efd472a6f0782">generate()</a></dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">isIndex</td><td>Initial shape index (relative to the initialShapes array in the <a class="el" href="namespaceprt.html#a0ea77f812e862aa5e15b1234220fd368">generate()</a> call) </td></tr>
+    <tr><td class="paramname">isIndex</td><td>Initial shape index (relative to the initialShapes array in the <a class="el" href="namespaceprt.html#a310381e586ced8f4b08efd472a6f0782">generate()</a> call) </td></tr>
     <tr><td class="paramname">shapeID</td><td>Unique shape id to identify the shape in the shape tree. See <a class="el" href="classprtx_1_1_shape.html">prtx::Shape</a>. </td></tr>
     <tr><td class="paramname">level</td><td>Error/warning/info. </td></tr>
     <tr><td class="paramname">methodId</td><td>CGB-internal method id in which the error occurred. </td></tr>
@@ -587,7 +587,7 @@ LAYER_X, LAYER_Y, LAYER_Z: The layer coordinates. Layer coordinates are not used
 <p>Some cga functions (getGeoCord) rely on this. Additionally, some encoders use this functioanlity as well.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir"></td><td class="paramname">isIndex</td><td>Initial shape index (relative to the initialShapes array in the <a class="el" href="namespaceprt.html#a0ea77f812e862aa5e15b1234220fd368">generate()</a> call) </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">isIndex</td><td>Initial shape index (relative to the initialShapes array in the <a class="el" href="namespaceprt.html#a310381e586ced8f4b08efd472a6f0782">generate()</a> call) </td></tr>
     <tr><td class="paramdir"></td><td class="paramname">sel</td><td>Selector for the desired coordinate. </td></tr>
     <tr><td class="paramdir"></td><td class="paramname">x</td><td>X world coordinate in cga system. </td></tr>
     <tr><td class="paramdir"></td><td class="paramname">y</td><td>Y world coordinate in cga system. </td></tr>
@@ -638,10 +638,10 @@ LAYER_X, LAYER_Y, LAYER_Z: The layer coordinates. Layer coordinates are not used
 </table>
 </div><div class="memdoc">
 <p>Reports to the client that a cga print operation/function was called during generation of a model. Called by com.esri.prt.core.CGAPrintEncoder (potentially by any encoder).</p>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="namespaceprt.html#a0ea77f812e862aa5e15b1234220fd368">generate()</a></dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="namespaceprt.html#a310381e586ced8f4b08efd472a6f0782">generate()</a></dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">isIndex</td><td>Initial shape index (relative to the initialShapes array in the <a class="el" href="namespaceprt.html#a0ea77f812e862aa5e15b1234220fd368">generate()</a> call) </td></tr>
+    <tr><td class="paramname">isIndex</td><td>Initial shape index (relative to the initialShapes array in the <a class="el" href="namespaceprt.html#a310381e586ced8f4b08efd472a6f0782">generate()</a> call) </td></tr>
     <tr><td class="paramname">shapeID</td><td>Unique shape id to identify the shape in the shape tree. See <a class="el" href="classprtx_1_1_shape.html">prtx::Shape</a>. </td></tr>
     <tr><td class="paramname">txt</td><td>The printed text. </td></tr>
   </table>
@@ -697,7 +697,7 @@ LAYER_X, LAYER_Y, LAYER_Z: The layer coordinates. Layer coordinates are not used
 <p>Reports to the client that a cga report operation was called during generation of a model. Called by com.esri.prt.core.CGAReportEncoder (potentially by any encoder).</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">isIndex</td><td>Initial shape index (relative to the initialShapes array in the <a class="el" href="namespaceprt.html#a0ea77f812e862aa5e15b1234220fd368">generate()</a> call) </td></tr>
+    <tr><td class="paramname">isIndex</td><td>Initial shape index (relative to the initialShapes array in the <a class="el" href="namespaceprt.html#a310381e586ced8f4b08efd472a6f0782">generate()</a> call) </td></tr>
     <tr><td class="paramname">shapeID</td><td>Unique shape id to identify the shape in the shape tree. See <a class="el" href="classprtx_1_1_shape.html">prtx::Shape</a>. </td></tr>
     <tr><td class="paramname">key</td><td>The key in the report operation. </td></tr>
     <tr><td class="paramname">value</td><td>The value in the report operation. </td></tr>
@@ -754,7 +754,7 @@ LAYER_X, LAYER_Y, LAYER_Z: The layer coordinates. Layer coordinates are not used
 <p>Reports to the client that a cga report operation was called during generation of a model. Called by com.esri.prt.core.CGAReportEncoder (potentially by any encoder).</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">isIndex</td><td>Initial shape index (relative to the initialShapes array in the <a class="el" href="namespaceprt.html#a0ea77f812e862aa5e15b1234220fd368">generate()</a> call) </td></tr>
+    <tr><td class="paramname">isIndex</td><td>Initial shape index (relative to the initialShapes array in the <a class="el" href="namespaceprt.html#a310381e586ced8f4b08efd472a6f0782">generate()</a> call) </td></tr>
     <tr><td class="paramname">shapeID</td><td>Unique shape id to identify the shape in the shape tree. See <a class="el" href="classprtx_1_1_shape.html">prtx::Shape</a>. </td></tr>
     <tr><td class="paramname">key</td><td>The key in the report operation. </td></tr>
     <tr><td class="paramname">value</td><td>The value in the report operation. </td></tr>
@@ -811,7 +811,7 @@ LAYER_X, LAYER_Y, LAYER_Z: The layer coordinates. Layer coordinates are not used
 <p>Reports to the client that a cga report operation was called during generation of a model. Called by com.esri.prt.core.CGAReportEncoder (potentially by any encoder).</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">isIndex</td><td>Initial shape index (relative to the initialShapes array in the <a class="el" href="namespaceprt.html#a0ea77f812e862aa5e15b1234220fd368">generate()</a> call) </td></tr>
+    <tr><td class="paramname">isIndex</td><td>Initial shape index (relative to the initialShapes array in the <a class="el" href="namespaceprt.html#a310381e586ced8f4b08efd472a6f0782">generate()</a> call) </td></tr>
     <tr><td class="paramname">shapeID</td><td>Unique shape id to identify the shape in the shape tree. See <a class="el" href="classprtx_1_1_shape.html">prtx::Shape</a>. </td></tr>
     <tr><td class="paramname">key</td><td>The key in the report operation. </td></tr>
     <tr><td class="paramname">value</td><td>The value in the report operation. </td></tr>
@@ -862,7 +862,7 @@ LAYER_X, LAYER_Y, LAYER_Z: The layer coordinates. Layer coordinates are not used
 <p>Reports to the client that an application error occurred during generation of one of the initial shapes.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">isIndex</td><td>Initial shape index (relative to the initialShapes array in the <a class="el" href="namespaceprt.html#a0ea77f812e862aa5e15b1234220fd368">generate()</a> call) </td></tr>
+    <tr><td class="paramname">isIndex</td><td>Initial shape index (relative to the initialShapes array in the <a class="el" href="namespaceprt.html#a310381e586ced8f4b08efd472a6f0782">generate()</a> call) </td></tr>
     <tr><td class="paramname">status</td><td>The erroneous status encountered during generation / encoding of the initial shape. </td></tr>
     <tr><td class="paramname">message</td><td>An error message. </td></tr>
   </table>
@@ -893,7 +893,7 @@ LAYER_X, LAYER_Y, LAYER_Z: The layer coordinates. Layer coordinates are not used
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Called during the generation() call. Called at least once for every initial shape in the <a class="el" href="namespaceprt.html#a0ea77f812e862aa5e15b1234220fd368">generate()</a> call. Allows the client to abort the generate process.</p>
+<p>Called during the generation() call. Called at least once for every initial shape in the <a class="el" href="namespaceprt.html#a310381e586ced8f4b08efd472a6f0782">generate()</a> call. Allows the client to abort the generate process.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">percentageCompleted</td><td>A value in [0, 100] </td></tr>
@@ -913,7 +913,7 @@ LAYER_X, LAYER_Y, LAYER_Z: The layer coordinates. Layer coordinates are not used
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespaceprt.html">prt</a></li><li class="navelem"><a class="el" href="classprt_1_1_callbacks.html">Callbacks</a></li>
-    <li class="footer">Generated on Mon Sep 19 2016 13:23:26 for Esri Procedural Runtime by
+    <li class="footer">Generated on Fri Jun 9 2017 18:28:05 for Esri Procedural Runtime by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.7 </li>
   </ul>

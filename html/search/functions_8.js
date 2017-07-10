@@ -1,7 +1,7 @@
 var searchData=
 [
   ['indexsharing',['indexSharing',['../classprtx_1_1_encode_preparator_1_1_preparation_flags.html#a6a1df631d1154544270c2326a291b065',1,'prtx::EncodePreparator::PreparationFlags']]],
-  ['init',['init',['../classprtx_1_1_encoder.html#ad354a15d21c18920da7a9b208482db5c',1,'prtx::Encoder::init()'],['../namespaceprt.html#a162ddce1fca72929c0a1d463cbaedace',1,'prt::init()']]],
+  ['init',['init',['../classprtx_1_1_encoder.html#ad354a15d21c18920da7a9b208482db5c',1,'prtx::Encoder::init()'],['../namespaceprt.html#a389d6191a10c5ae7dfc86dcce24c311d',1,'prt::init()']]],
   ['insertandgettransientblob',['insertAndGetTransientBlob',['../classprt_1_1_cache.html#ad2948bd4bbfb48d86f2b6e532bbc32ca',1,'prt::Cache']]],
   ['insertpersistentblobandlock',['insertPersistentBlobAndLock',['../classprt_1_1_cache.html#aff97c1c7936e43ef9f91a6b51bb424fe',1,'prt::Cache']]],
   ['instance',['instance',['../classprtx_1_1_extension_manager.html#a8a8c3f3befafd05f80995c151a57807e',1,'prtx::ExtensionManager']]],
