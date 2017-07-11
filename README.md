@@ -112,6 +112,3 @@ You may not use the content of this repository except in compliance with the fol
   1. All content of all directories **except "examples"** is licensed under the CityEngine EULA, see [license/EULA.pdf](license/EULA.pdf).
   1. All content in the "examples" directory tree is licensed under the APACHE 2.0 license. You may obtain a copy of this license at http://www.apache.org/licenses/LICENSE-2.0. A copy of the license is also available in the repository at [license/APACHE-LICENSE-2.0.txt](license/APACHE-LICENSE-2.0.txt).
   1. The example data is licensed by the "ESRI Attribution and Licensing Agreement".
-
-[](Esri Tags: CityEngine)
-[](Esri Language: C++)
