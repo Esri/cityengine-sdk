@@ -4,14 +4,14 @@ cmake_policy(SET CMP0015 NEW)
 
 ### project definition
 
+if(NOT CMAKE_BUILD_TYPE)
+	set(CMAKE_BUILD_TYPE "Release" CACHE STRING "Choose one of: Debug Release RelWithDebInfo MinSizeRel")
+endif()
+
 project(prt_stldec)
 
 
 ### setup build target
-
-if(NOT CMAKE_BUILD_TYPE)
-	set(CMAKE_BUILD_TYPE "Release" CACHE STRING "Choose one of: Debug Release RelWithDebInfo MinSizeRel" FORCE)
-endif()
 
 add_library(${PROJECT_NAME} SHARED main.cpp STLDecoder.cpp)
 

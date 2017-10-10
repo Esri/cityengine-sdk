@@ -4,6 +4,10 @@ cmake_policy(SET CMP0015 NEW)
 
 ### project definition
 
+if(NOT CMAKE_BUILD_TYPE)
+	set(CMAKE_BUILD_TYPE "Release" CACHE STRING "Choose one of: Debug Release RelWithDebInfo MinSizeRel")
+endif()
+
 set(PROJECT prt_stlenc)
 project(${PROJECT})
 
@@ -19,10 +23,6 @@ set(CESDK_VERSION "cesdk_${PRT_VERSION_MAJOR}_${PRT_VERSION_MINOR}_${PRT_VERSION
 
 
 ### build target
-
-if(NOT CMAKE_BUILD_TYPE)
-	set(CMAKE_BUILD_TYPE "Release" CACHE STRING "Choose one of: Debug Release RelWithDebInfo MinSizeRel" FORCE)
-endif()
 
 add_library(${PROJECT} SHARED main.cpp STLEncoder.cpp)
 add_definitions(-DPRT_VERSION_MAJOR=${PRT_VERSION_MAJOR} -DPRT_VERSION_MINOR=${PRT_VERSION_MINOR})

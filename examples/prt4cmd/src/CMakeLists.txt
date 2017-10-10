@@ -4,6 +4,10 @@ cmake_policy(SET CMP0015 NEW)
 
 ### project definition
 
+if(NOT CMAKE_BUILD_TYPE)
+	set(CMAKE_BUILD_TYPE "Release" CACHE STRING "Choose one of: Debug Release RelWithDebInfo MinSizeRel")
+endif()
+
 set(PROJECT prt4cmd)
 project(${PROJECT})
 
@@ -20,10 +24,6 @@ set(CESDK_VERSION "cesdk_${PRT_VERSION_MAJOR}_${PRT_VERSION_MINOR}_${PRT_VERSION
 
 
 ### build target
-
-if(NOT CMAKE_BUILD_TYPE)
-	set(CMAKE_BUILD_TYPE "Release" CACHE STRING "Choose one of: Debug Release RelWithDebInfo MinSizeRel" FORCE)
-endif()
 
 if(NOT ${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
 	set(CMAKE_INSTALL_RPATH_USE_LINK_PATH FALSE)

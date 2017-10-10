@@ -4,6 +4,10 @@ cmake_policy(SET CMP0015 NEW)
 
 ### project definition
 
+if(NOT CMAKE_BUILD_TYPE)
+	set(CMAKE_BUILD_TYPE "Release" CACHE STRING "Choose one of: Debug Release RelWithDebInfo MinSizeRel")
+endif()
+
 set(PROJECT prt4maya)
 project(${PROJECT})
 include(${CMAKE_CURRENT_LIST_DIR}/../common.cmake)
@@ -22,10 +26,6 @@ endif()
 
 
 ### setup compiler flags
-
-if(NOT CMAKE_BUILD_TYPE)
-	set(CMAKE_BUILD_TYPE "Release" CACHE STRING "Choose one of: Debug Release RelWithDebInfo MinSizeRel" FORCE)
-endif()
 
 if(WIN32)
 	set(CMAKE_C_FLAGS "")

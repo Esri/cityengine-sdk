@@ -4,6 +4,10 @@ cmake_policy(SET CMP0015 NEW)
 
 ### project definition
 
+if(NOT CMAKE_BUILD_TYPE)
+	set(CMAKE_BUILD_TYPE "Release" CACHE STRING "Choose one of: Debug Release RelWithDebInfo MinSizeRel")
+endif()
+
 set(PROJECT prt4maya_codec)
 project(${PROJECT})
 include(${CMAKE_CURRENT_LIST_DIR}/../common.cmake)
@@ -23,10 +27,6 @@ add_library(${PROJECT} SHARED
 
 
 ### setup compiler flags
-
-if(NOT CMAKE_BUILD_TYPE)
-	set(CMAKE_BUILD_TYPE "Release" CACHE STRING "Choose one of: Debug Release RelWithDebInfo MinSizeRel" FORCE)
-endif()
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 target_compile_definitions(${PROJECT} PRIVATE
