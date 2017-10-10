@@ -71,51 +71,51 @@ public:
 	virtual ~MayaCallbacks() { }
 
 	// prt::Callbacks interface
-	virtual prt::Status generateError(size_t /*isIndex*/, prt::Status /*status*/, const wchar_t* message) {
+	virtual prt::Status generateError(size_t /*isIndex*/, prt::Status /*status*/, const wchar_t* message) override {
 		std::wcout << "GENERATE ERROR: " << message << std::endl;
 		return prt::STATUS_OK;
 	}
-	virtual prt::Status assetError(size_t /*isIndex*/, prt::CGAErrorLevel /*level*/, const wchar_t* /*key*/, const wchar_t* /*uri*/, const wchar_t* message) {
+	virtual prt::Status assetError(size_t /*isIndex*/, prt::CGAErrorLevel /*level*/, const wchar_t* /*key*/, const wchar_t* /*uri*/, const wchar_t* message) override {
 		std::wcout << "ASSET ERROR: " << message << std::endl;
 		return prt::STATUS_OK;
 	}
-	virtual prt::Status cgaError(size_t /*isIndex*/, int32_t /*shapeID*/, prt::CGAErrorLevel /*level*/, int32_t /*methodId*/, int32_t /*pc*/, const wchar_t* message) {
+	virtual prt::Status cgaError(size_t /*isIndex*/, int32_t /*shapeID*/, prt::CGAErrorLevel /*level*/, int32_t /*methodId*/, int32_t /*pc*/, const wchar_t* message) override {
 		std::wcout << "CGA ERROR: " << message << std::endl;
 		return prt::STATUS_OK;
 	}
-	virtual prt::Status cgaPrint(size_t /*isIndex*/, int32_t /*shapeID*/, const wchar_t* /*txt*/) {
+	virtual prt::Status cgaPrint(size_t /*isIndex*/, int32_t /*shapeID*/, const wchar_t* /*txt*/) override {
 		return prt::STATUS_OK;
 	}
-	virtual prt::Status cgaReportBool(size_t /*isIndex*/, int32_t /*shapeID*/, const wchar_t* /*key*/, bool /*value*/) {
+	virtual prt::Status cgaReportBool(size_t /*isIndex*/, int32_t /*shapeID*/, const wchar_t* /*key*/, bool /*value*/) override {
 		return prt::STATUS_OK;
 	}
-	virtual prt::Status cgaReportFloat(size_t /*isIndex*/, int32_t /*shapeID*/, const wchar_t* /*key*/, double /*value*/) {
+	virtual prt::Status cgaReportFloat(size_t /*isIndex*/, int32_t /*shapeID*/, const wchar_t* /*key*/, double /*value*/) override {
 		return prt::STATUS_OK;
 	}
-	virtual prt::Status cgaReportString(size_t /*isIndex*/, int32_t /*shapeID*/, const wchar_t* /*key*/, const wchar_t* /*value*/) {
+	virtual prt::Status cgaReportString(size_t /*isIndex*/, int32_t /*shapeID*/, const wchar_t* /*key*/, const wchar_t* /*value*/) override {
 		return prt::STATUS_OK;
 	}
-	virtual prt::Status attrBool(size_t /*isIndex*/, int32_t /*shapeID*/, const wchar_t* /*key*/, bool /*value*/);
-	virtual prt::Status attrFloat(size_t /*isIndex*/, int32_t /*shapeID*/, const wchar_t* /*key*/, double /*value*/);
-	virtual prt::Status attrString(size_t /*isIndex*/, int32_t /*shapeID*/, const wchar_t* /*key*/, const wchar_t* /*value*/);
+	virtual prt::Status attrBool(size_t /*isIndex*/, int32_t /*shapeID*/, const wchar_t* /*key*/, bool /*value*/) override;
+	virtual prt::Status attrFloat(size_t /*isIndex*/, int32_t /*shapeID*/, const wchar_t* /*key*/, double /*value*/) override;
+	virtual prt::Status attrString(size_t /*isIndex*/, int32_t /*shapeID*/, const wchar_t* /*key*/, const wchar_t* /*value*/) override;
 
 public:
-	virtual void setVertices(const double* vtx, size_t size);
-	virtual void setNormals(const double* nrm, size_t size);
-	virtual void setUVs(const double* u, const double* v, size_t size);
+	virtual void setVertices(const double* vtx, size_t size) override;
+	virtual void setNormals(const double* nrm, size_t size) override;
+	virtual void setUVs(const double* u, const double* v, size_t size) override;
 
 	virtual void setFaces(
 			const uint32_t* counts, size_t countsSize,
 			const uint32_t* connects, size_t connectsSize,
 			const uint32_t* uvCounts, size_t uvCountsSize,
 			const uint32_t* uvConnects, size_t uvConnectsSize
-	);
+	) override;
 
-	virtual void createMesh();
-	virtual void finishMesh();
+	virtual void createMesh() override;
+	virtual void finishMesh() override;
 
-	virtual void matSetColor(uint32_t start, uint32_t count, double r, double g, double b);
-	virtual void matSetDiffuseTexture(uint32_t start, uint32_t count, const wchar_t* tex);
+	virtual void matSetColor(uint32_t start, uint32_t count, double r, double g, double b) override;
+	virtual void matSetDiffuseTexture(uint32_t start, uint32_t count, const wchar_t* tex) override;
 
 public:
 	virtual MString matCreate(int start, int count, const wchar_t* name);

@@ -47,7 +47,7 @@ public:
 			const std::wstring&     key,
 			prtx::ResolveMap const* resolveMap,
 			std::wstring&           warnings
-	);
+	) override;
 };
 
 
@@ -61,10 +61,10 @@ public:
 	STLDecoderFactory& operator=(STLDecoderFactory&) = delete;
 	virtual ~STLDecoderFactory() = default;
 
-    virtual STLDecoder* create() const;
+    virtual STLDecoder* create() const override;
 
-    virtual const std::wstring& getID() const;
-    virtual const std::wstring& getName() const;
-    virtual const std::wstring& getDescription() const;
-    virtual prt::ContentType getContentType() const;
+    virtual const std::wstring& getID() const override;
+    virtual const std::wstring& getName() const override;
+    virtual const std::wstring& getDescription() const override;
+    virtual prt::ContentType getContentType() const override;
 };

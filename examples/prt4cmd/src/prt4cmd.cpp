@@ -56,18 +56,18 @@ const wchar_t* ENCODER_OPT_NAME     = L"name";
 struct PRTContext {
 	PRTContext(const pcu::InputArgs& inputArgs) {
 		// create a console and file logger and register them with PRT
-		pcu::Path fsLogPath = inputArgs.mWorkDir / FILE_LOG;
+		const pcu::Path fsLogPath = inputArgs.mWorkDir / FILE_LOG;
 		mLogHandler.reset(prt::ConsoleLogHandler::create(prt::LogHandler::ALL, prt::LogHandler::ALL_COUNT));
 		mFileLogHandler.reset(prt::FileLogHandler::create(prt::LogHandler::ALL, prt::LogHandler::ALL_COUNT, fsLogPath.native_wstring().c_str()));
 		prt::addLogHandler(mLogHandler.get());
 		prt::addLogHandler(mFileLogHandler.get());
 
 		// setup paths for plugins and licensing, assume standard SDK layout as per README.md
-		pcu::Path rootPath = inputArgs.mWorkDir;
-		pcu::Path extPath = rootPath / "lib";
-		std::string fsFlexLibBaseName = pcu::getSharedLibraryPrefix() + FILE_FLEXNET_LIB + pcu::getSharedLibrarySuffix();
-		pcu::Path fsFlexLib = rootPath / "bin" / fsFlexLibBaseName;
-		std::string flexLib = fsFlexLib.native_string();
+		const pcu::Path rootPath = inputArgs.mWorkDir;
+		const pcu::Path extPath = rootPath / "lib";
+		const std::string fsFlexLibBaseName = pcu::getSharedLibraryPrefix() + FILE_FLEXNET_LIB + pcu::getSharedLibrarySuffix();
+		const pcu::Path fsFlexLib = rootPath / "bin" / fsFlexLibBaseName;
+		const std::string flexLib = fsFlexLib.native_string();
 
 		// setup the licensing information
 		prt::FlexLicParams flp;
@@ -77,7 +77,7 @@ struct PRTContext {
 
 		// initialize PRT with the path to its extension libraries, the desired log level and licensing data
 		const std::wstring wExtPath = extPath.native_wstring();
-		std::array<const wchar_t*, 1> extPaths = { wExtPath.c_str() };
+		const std::array<const wchar_t*, 1> extPaths = { wExtPath.c_str() };
 		mLicHandle.reset(prt::init(extPaths.data(), extPaths.size(), (prt::LogLevel)inputArgs.mLogLevel, &flp));
 	}
 
@@ -108,20 +108,20 @@ struct PRTContext {
 int main (int argc, char *argv[]) {
 	try {
 		// -- fetch command line args
-		pcu::InputArgs inputArgs(argc, argv);
+		const pcu::InputArgs inputArgs(argc, argv);
 		if (!inputArgs.readyToRumble())
 			return static_cast<int>(inputArgs.mStatus);
 
 		// -- initialize PRT via the above helper struct
-		PRTContext prtCtx(inputArgs);
+		const PRTContext prtCtx(inputArgs);
 		if (!prtCtx) {
 			LOG_ERR << L"failed to get a CityEngine license, bailing out.";
 			return EXIT_FAILURE;
 		}
 
-        // handle the info option (must happen after successful init)
+        // -- handle the info option (must happen after successful init)
         if (!inputArgs.mInfoFile.empty()) {
-            pcu::RunStatus s = pcu::codecInfoToXML(inputArgs.mInfoFile);
+            const pcu::RunStatus s = pcu::codecInfoToXML(inputArgs.mInfoFile);
             return static_cast<int>(s);
         }
 
@@ -130,7 +130,7 @@ int main (int argc, char *argv[]) {
 		if (!inputArgs.mRulePackage.empty()) {
 			LOG_INF << "Using rule package " << inputArgs.mRulePackage << std::endl;
 
-			std::string u8rpkURI = pcu::toFileURI(inputArgs.mRulePackage);
+			const std::string u8rpkURI = pcu::toFileURI(inputArgs.mRulePackage);
 			prt::Status status = prt::STATUS_UNSPECIFIED_ERROR;
 			resolveMap.reset(prt::createResolveMap(pcu::toUTF16FromUTF8(u8rpkURI).c_str(), nullptr, &status));
 			if (resolveMap && (status == prt::STATUS_OK)) {
@@ -150,7 +150,7 @@ int main (int argc, char *argv[]) {
 		pcu::InitialShapeBuilderPtr isb{prt::InitialShapeBuilder::create()};
 		if (!inputArgs.mInitialShapeGeo.empty()) {
 			LOG_DBG << L"trying to read initial shape geometry from " << inputArgs.mInitialShapeGeo;
-			prt::Status s = isb->resolveGeometry(pcu::toUTF16FromOSNarrow(inputArgs.mInitialShapeGeo).c_str(), resolveMap.get(), cache.get());
+			const prt::Status s = isb->resolveGeometry(pcu::toUTF16FromOSNarrow(inputArgs.mInitialShapeGeo).c_str(), resolveMap.get(), cache.get());
 			if (s != prt::STATUS_OK) {
                 LOG_ERR << "could not resolve geometry from " << inputArgs.mInitialShapeGeo;
                 return EXIT_FAILURE;
@@ -165,10 +165,10 @@ int main (int argc, char *argv[]) {
 		}
 
 		// -- setup initial shape attributes
-		std::wstring ruleFile  = L"bin/rule.cgb";
-		std::wstring startRule = L"default$init";
-		int32_t      seed      = 666;
-		std::wstring shapeName = L"TheInitialShape";
+		std::wstring       ruleFile  = L"bin/rule.cgb";
+		std::wstring       startRule = L"default$init";
+		int32_t            seed      = 666;
+		const std::wstring shapeName = L"TheInitialShape";
 
 		if (inputArgs.mInitialShapeAttrs) {
 			if (inputArgs.mInitialShapeAttrs->hasKey(L"ruleFile") &&
@@ -192,32 +192,32 @@ int main (int argc, char *argv[]) {
 		);
 
 		// -- create initial shape
-		pcu::InitialShapePtr initialShape{isb->createInitialShapeAndReset()};
-		std::vector<const prt::InitialShape*> initialShapes = { initialShape.get() };
+		const pcu::InitialShapePtr initialShape{isb->createInitialShapeAndReset()};
+		const std::vector<const prt::InitialShape*> initialShapes = { initialShape.get() };
 
 		// -- setup options for helper encoders
-		pcu::AttributeMapBuilderPtr optionsBuilder{prt::AttributeMapBuilder::create()};
+		const pcu::AttributeMapBuilderPtr optionsBuilder{prt::AttributeMapBuilder::create()};
 		optionsBuilder->setString(ENCODER_OPT_NAME, FILE_CGA_ERROR);
-		pcu::AttributeMapPtr errOptions{optionsBuilder->createAttributeMapAndReset()};
+		const pcu::AttributeMapPtr errOptions{optionsBuilder->createAttributeMapAndReset()};
 		optionsBuilder->setString(ENCODER_OPT_NAME, FILE_CGA_PRINT);
-		pcu::AttributeMapPtr printOptions{optionsBuilder->createAttributeMapAndReset()};
+		const pcu::AttributeMapPtr printOptions{optionsBuilder->createAttributeMapAndReset()};
 
 		// -- validate & complete encoder options
-		pcu::AttributeMapPtr validatedEncOpts{createValidatedOptions(pcu::toUTF16FromOSNarrow(inputArgs.mEncoderID), inputArgs.mEncoderOpts)};
-		pcu::AttributeMapPtr validatedErrOpts{createValidatedOptions(ENCODER_ID_CGA_ERROR, errOptions)};
-		pcu::AttributeMapPtr validatedPrintOpts{createValidatedOptions(ENCODER_ID_CGA_PRINT, printOptions)};
+		const pcu::AttributeMapPtr validatedEncOpts{createValidatedOptions(pcu::toUTF16FromOSNarrow(inputArgs.mEncoderID), inputArgs.mEncoderOpts)};
+		const pcu::AttributeMapPtr validatedErrOpts{createValidatedOptions(ENCODER_ID_CGA_ERROR, errOptions)};
+		const pcu::AttributeMapPtr validatedPrintOpts{createValidatedOptions(ENCODER_ID_CGA_PRINT, printOptions)};
 
 		// -- setup encoder IDs and corresponding options
-		std::wstring encoder = pcu::toUTF16FromOSNarrow(inputArgs.mEncoderID);
-		std::array<const wchar_t*,3> encoders = {
+		const std::wstring encoder = pcu::toUTF16FromOSNarrow(inputArgs.mEncoderID);
+		const std::array<const wchar_t*,3> encoders = {
 				encoder.c_str(),      // our desired encoder
 				ENCODER_ID_CGA_ERROR, // an encoder to redirect rule errors into CGAErrors.txt
 				ENCODER_ID_CGA_PRINT  // an encoder to redirect CGA print statements to CGAPrint.txt
 		};
-		std::array<const prt::AttributeMap*,3> encoderOpts = { validatedEncOpts.get(), validatedErrOpts.get(), validatedPrintOpts.get() };
+		const std::array<const prt::AttributeMap*,3> encoderOpts = { validatedEncOpts.get(), validatedErrOpts.get(), validatedPrintOpts.get() };
 
 		// -- THE GENERATE CALL
-		prt::Status genStat = prt::generate(
+		const prt::Status genStat = prt::generate(
 				initialShapes.data(), initialShapes.size(), nullptr,
 				encoders.data(), encoders.size(), encoderOpts.data(),
 				foc.get(), cache.get(), nullptr
@@ -228,7 +228,7 @@ int main (int argc, char *argv[]) {
 
 		return EXIT_SUCCESS;
 	}
-	catch (std::exception& e) {
+	catch (const std::exception& e) {
 		std::cerr << "caught exception: " << e.what() << std::endl;
 		return EXIT_FAILURE;
 	}

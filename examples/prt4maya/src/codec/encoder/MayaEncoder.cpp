@@ -42,9 +42,9 @@ const prtx::EncodePreparator::PreparationFlags PREP_FLAGS = prtx::EncodePreparat
 	.indexSharing(prtx::EncodePreparator::PreparationFlags::INDICES_SAME_FOR_VERTICES_AND_NORMALS);
 
 std::wstring getBaseName(const wchar_t* path) {
-	std::wstring bn{ path };
-	size_t p = bn.find_last_of(L"/\\");
-	size_t e = bn.find_last_of(L'.');
+	const std::wstring bn{ path };
+	const size_t p = bn.find_last_of(L"/\\");
+	const size_t e = bn.find_last_of(L'.');
 	if (e == std::wstring::npos || e < p)
 		return bn.substr(p+1);
 	return bn.substr(p+1, e);
@@ -62,14 +62,14 @@ MayaEncoder::MayaEncoder(const std::wstring& id, const prt::AttributeMap* option
 : prtx::GeometryEncoder(id, options, callbacks) { }
 
 void MayaEncoder::init(prtx::GenerateContext&) {
-	prt::Callbacks* cb = getCallbacks();
-	IMayaCallbacks* oh = dynamic_cast<IMayaCallbacks*>(cb);
+	const prt::Callbacks* cb = getCallbacks();
+	const IMayaCallbacks* oh = dynamic_cast<const IMayaCallbacks*>(cb);
 	if (oh == nullptr)
 		throw prtx::StatusException(prt::STATUS_ILLEGAL_CALLBACK_OBJECT);
 }
 
 void MayaEncoder::encode(prtx::GenerateContext& context, size_t initialShapeIndex) {
-	prtx::InitialShape const* initialShape = context.getInitialShape(initialShapeIndex);
+	const prtx::InitialShape* initialShape = context.getInitialShape(initialShapeIndex);
 
 	prtx::DefaultNamePreparator namePrep;
 	prtx::NamePreparator::NamespacePtr nsMesh{ namePrep.newNamespace() };
@@ -107,7 +107,7 @@ void MayaEncoder::convertGeometry(const std::wstring& cgbName, const prtx::Geome
 			const uint32_t				faceCnt		= mesh->getFaceCount();
 			const prtx::DoubleVector&	verts		= mesh->getVertexCoords();
 			const prtx::DoubleVector&	norms		= mesh->getVertexNormalsCoords();
-			bool						hasUVs		= mesh->getUVSetsCount() > 0;
+			const bool					hasUVs		= mesh->getUVSetsCount() > 0;
 			size_t						uvsCount	= 0;
 
 			vertices.insert(vertices.end(), verts.cbegin(), verts.cend());
@@ -172,14 +172,14 @@ void MayaEncoder::convertGeometry(const std::wstring& cgbName, const prtx::Geome
 		const prtx::MaterialPtr& mat = matIt->front();
 
 		const prtx::MeshPtrVector& meshes = geo->getMeshes();
-		uint32_t faceCount = std::accumulate(meshes.begin(), meshes.end(), 0, [](uint32_t c, const prtx::MeshPtr& m) {
+		const uint32_t faceCount = std::accumulate(meshes.begin(), meshes.end(), 0, [](uint32_t c, const prtx::MeshPtr& m) {
 			return c + m->getFaceCount();
 		});
 
 		std::wstring tex;
 		if (mat->diffuseMap().size() > 0 && mat->diffuseMap().front()->isValid()) {
-			prtx::URIPtr texURI = mat->diffuseMap().front()->getURI();
-			std::wstring texPath = texURI->getPath();
+			const prtx::URIPtr texURI = mat->diffuseMap().front()->getURI();
+			const std::wstring texPath = texURI->getPath();
 			mayaOutput->matSetDiffuseTexture(startFace, faceCount, texPath.c_str());
 		} else {
 			mayaOutput->matSetColor(startFace, faceCount, mat->color_r(), mat->color_g(), mat->color_b());

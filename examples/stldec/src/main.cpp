@@ -41,7 +41,7 @@ extern "C" {
 STLDEC_EXPORTS_API void registerExtensionFactories(prtx::ExtensionManager* manager) {
 	try {
 		manager->addFactory(STLDecoderFactory::instance());
-	} catch (std::exception& e) {
+	} catch (const std::exception& e) {
 		std::cerr << __FUNCTION__ << " caught exception: " <<  e.what() << std::endl;
 	} catch (...) {
 		std::cerr << __FUNCTION__ << " caught unknown exception: " << std::endl;

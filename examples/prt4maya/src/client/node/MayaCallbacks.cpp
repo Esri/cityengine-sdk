@@ -36,7 +36,7 @@ void MayaCallbacks::setVertices(const double* vtx, size_t size) {
 	prtTrace(L"setVertices: size = ", size);
 	mVertices.clear();
 	for (size_t i = 0; i < size; i += 3)
-		mVertices.append((float)vtx[i], (float)vtx[i+1], (float)vtx[i+2]);
+		mVertices.append(static_cast<float>(vtx[i]), static_cast<float>(vtx[i+1]), static_cast<float>(vtx[i+2]));
 }
 
 void MayaCallbacks::setNormals(const double* nrm, size_t size) {
@@ -144,7 +144,7 @@ void MayaCallbacks::createMesh() {
 
 MString getGroupName(const wchar_t* name) {
 	MString matName(name);
-	int     len    = matName.numChars();
+	const unsigned int len = matName.numChars();
 	MString result = "prtmat";
 	result        += prtu::toCleanId(matName.substringW(matName.rindexW('/') + 1, len));
 	result        += "SG";
@@ -152,7 +152,7 @@ MString getGroupName(const wchar_t* name) {
 }
 
 MString MayaCallbacks::matCreate(int start, int count, const wchar_t* name) {
-  MString groupName = getGroupName(name);
+	const MString groupName = getGroupName(name);
 
 	bool createGroup = true;
 	for(int i = PRTNode::theShadingGroups.length(); --i >= 0;)
@@ -174,7 +174,7 @@ MString MayaCallbacks::matCreate(int start, int count, const wchar_t* name) {
 }
 
 void MayaCallbacks::matSetDiffuseTexture(uint32_t start, uint32_t count, const wchar_t* tex) {
-	MString matName = matCreate(start, count, tex);
+	const MString matName = matCreate(start, count, tex);
 	if (matName.numChars() == 0)
 		return;
 	*mShadingCmd += "prtSetDiffuseTexture(\"" + matName + "\",\"" + tex + "\",\"map1\");\n";
@@ -183,7 +183,7 @@ void MayaCallbacks::matSetDiffuseTexture(uint32_t start, uint32_t count, const w
 void MayaCallbacks::matSetColor(uint32_t start, uint32_t count, double r, double g, double b) {
 	wchar_t name[8];
 	swprintf(name, 7, L"%02X%02X%02X", (int)(r * 255.0), (int)(g * 255.0), (int)(b * 255.0));
-	MString matName = matCreate(start, count, name);
+	const MString matName = matCreate(start, count, name);
 	if(matName.numChars() == 0)
 		return;
 	*mShadingCmd += "prtSetColor(\"" + matName + "\"," + r + "," + g + "," + b + ");\n";

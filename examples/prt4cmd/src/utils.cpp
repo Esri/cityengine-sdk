@@ -67,15 +67,15 @@ pcu::Path getExecutablePath() {
 #if defined(_WIN32)
     HMODULE hModule = GetModuleHandle(nullptr);
     if (hModule != NULL) {
-        char path[MAX_PATH];
-        auto pathSize = GetModuleFileName(hModule, path, sizeof(path));
+    	char path[MAX_PATH];
+    	const auto pathSize = GetModuleFileName(hModule, path, sizeof(path));
         return (pathSize > 0) ? pcu::Path(std::string(path, path+pathSize)) : pcu::Path();
     }
     else
         return {};
 #elif defined(__APPLE__)
     char path[1024];
-	uint32_t size = sizeof(path);
+    uint32_t size = sizeof(path);
 	if (_NSGetExecutablePath(path, &size) == 0)
     	return (size > 0) ? pcu::Path(std::string(path, path+size)) : pcu::Path();
 	else
@@ -146,7 +146,7 @@ AttributeMapPtr createAttributeMapFromTypedKeyValues(const std::vector<std::stri
  */
 InputArgs::InputArgs(int argc, char *argv[]) : mStatus(RunStatus::FAILED) {
 	// determine current path
-	Path executable(getExecutablePath());
+	const Path executable(getExecutablePath());
 	mWorkDir = executable.getParent().getParent();
 
 	// setup default values
@@ -155,21 +155,21 @@ InputArgs::InputArgs(int argc, char *argv[]) : mStatus(RunStatus::FAILED) {
 	mOutputPath = mWorkDir / "output";
 
 	// setup arg handling callbacks
-	CLI::callback_t convertShapeAttrs = [this](std::vector<std::string> argShapeAttrs) {
+	const CLI::callback_t convertShapeAttrs = [this](std::vector<std::string> argShapeAttrs) {
 		mInitialShapeAttrs = createAttributeMapFromTypedKeyValues(argShapeAttrs);
 		return true;
 	};
-	CLI::callback_t convertEncOpts = [this](std::vector<std::string> argEncOpts) {
+	const CLI::callback_t convertEncOpts = [this](std::vector<std::string> argEncOpts) {
 		mEncoderOpts = createAttributeMapFromTypedKeyValues(argEncOpts);
 		return true;
 	};
-	CLI::callback_t convertOutputPath = [this](std::vector<std::string> arg) {
+	const CLI::callback_t convertOutputPath = [this](std::vector<std::string> arg) {
 		if (arg.empty())
 			return false;
 		mOutputPath = mWorkDir / arg.front();
 		return true;
 	};
-	CLI::callback_t convertInitialShapeGeoPath = [this](std::vector<std::string> arg) {
+	const CLI::callback_t convertInitialShapeGeoPath = [this](std::vector<std::string> arg) {
 		if (arg.empty())
 			return false;
 		Path p(arg.front());
@@ -179,24 +179,24 @@ InputArgs::InputArgs(int argc, char *argv[]) : mStatus(RunStatus::FAILED) {
 
 	// setup options
 	CLI::App app{"prt4cmd - command line example for the CityEngine Procedural RunTime"};
-	auto optVer    = app.add_flag  ("-v,--version",                                     "Show CityEngine SDK version.");
-	                 app.add_option("-l,--log-level",       mLogLevel,                  "Set log filter level: 1 = debug, 2 = info, 3 = warning, 4 = error, 5 = fatal, >5 = no output");
-	                 app.add_option("-o,--output",          convertOutputPath,          "Set the output path for the callbacks.");
-	                 app.add_option("-e,--encoder",         mEncoderID,                 "The encoder ID, e.g. 'com.esri.prt.codecs.OBJEncoder'.");
-	auto optRPK    = app.add_option("-p,--rule-package",    mRulePackage,               "Set the rule package path.");
-	                 app.add_option("-a,--shape-attr",      convertShapeAttrs,          "Set a initial shape attribute (syntax is <name>:<type>=<value>, type = {string,float,int,bool}).");
-	                 app.add_option("-g,--shape-geo",       convertInitialShapeGeoPath, "(Optional) Path to a file with shape geometry");
-	                 app.add_option("-z,--encoder-option",  convertEncOpts,             "Set a encoder option (syntax is <name>:<type>=<value>, type = {string,float,int,bool}).");
-	auto optInfo   = app.add_option("-i,--info",            mInfoFile,                  "Write XML Extension Information to file");
-	                 app.add_option("-f,--license-feature", mLicFeature,                "License Feature to use, one of CityEngBasFx, CityEngBas, CityEngAdvFx, CityEngAdv");
-	                 app.add_option("-s,--license-server",  mLicHost,                   "License Server Host Name, example: 27000@myserver.example.com");
+	const auto optVer =  app.add_flag  ("-v,--version",                                     "Show CityEngine SDK version.");
+	                     app.add_option("-l,--log-level",       mLogLevel,                  "Set log filter level: 1 = debug, 2 = info, 3 = warning, 4 = error, 5 = fatal, >5 = no output");
+	                     app.add_option("-o,--output",          convertOutputPath,          "Set the output path for the callbacks.");
+	                     app.add_option("-e,--encoder",         mEncoderID,                 "The encoder ID, e.g. 'com.esri.prt.codecs.OBJEncoder'.");
+	const auto optRPK =  app.add_option("-p,--rule-package",    mRulePackage,               "Set the rule package path.");
+	                     app.add_option("-a,--shape-attr",      convertShapeAttrs,          "Set a initial shape attribute (syntax is <name>:<type>=<value>, type = {string,float,int,bool}).");
+	                     app.add_option("-g,--shape-geo",       convertInitialShapeGeoPath, "(Optional) Path to a file with shape geometry");
+	                     app.add_option("-z,--encoder-option",  convertEncOpts,             "Set a encoder option (syntax is <name>:<type>=<value>, type = {string,float,int,bool}).");
+	const auto optInfo = app.add_option("-i,--info",            mInfoFile,                  "Write XML Extension Information to file");
+	                     app.add_option("-f,--license-feature", mLicFeature,                "License Feature to use, one of CityEngBasFx, CityEngBas, CityEngAdvFx, CityEngAdv");
+	                     app.add_option("-s,--license-server",  mLicHost,                   "License Server Host Name, example: 27000@myserver.example.com");
 
 	// setup option requirements
 	optInfo->excludes(optRPK);
 
 	// parse options
 	try {
-  	  app.parse(argc, argv);
+		app.parse(argc, argv);
 	} catch (const CLI::Error& e) {
     	app.exit(e);
     	return;
@@ -274,14 +274,14 @@ std::basic_string<C> callAPI(FUNC f, size_t initialSize) {
 	return std::basic_string<C>{buffer.data()};
 }
 
-std::string objectToXML(prt::Object const* obj) {
+std::string objectToXML(const prt::Object* obj) {
 	auto toXMLFunc = std::bind(&prt::Object::toXML, obj, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
 	return callAPI<char>(toXMLFunc, 4096);
 }
 
 RunStatus codecInfoToXML(const std::string& infoFilePath) {
-	std::wstring encIDsStr{ callAPI<wchar_t>(prt::listEncoderIds, 1024) };
-	std::wstring decIDsStr{ callAPI<wchar_t>(prt::listDecoderIds, 1024) };
+	const std::wstring encIDsStr{ callAPI<wchar_t>(prt::listEncoderIds, 1024) };
+	const std::wstring decIDsStr{ callAPI<wchar_t>(prt::listDecoderIds, 1024) };
 
 	std::vector<std::wstring> encIDs, decIDs;
 	tokenize<wchar_t>(encIDsStr, encIDs, L";");
@@ -299,7 +299,7 @@ RunStatus codecInfoToXML(const std::string& infoFilePath) {
 		xml << "<Encoders>\n";
 		for (const std::wstring& encID: encIDs) {
 			prt::Status s = prt::STATUS_UNSPECIFIED_ERROR;
-			EncoderInfoPtr encInfo{prt::createEncoderInfo(encID.c_str(), &s)};
+			const EncoderInfoPtr encInfo{prt::createEncoderInfo(encID.c_str(), &s)};
 			if (s == prt::STATUS_OK && encInfo)
 				xml << objectToXML(encInfo.get()) << std::endl;
 			else
@@ -310,7 +310,7 @@ RunStatus codecInfoToXML(const std::string& infoFilePath) {
 		xml << "<Decoders>\n";
 		for (const std::wstring& decID: decIDs) {
 			prt::Status s = prt::STATUS_UNSPECIFIED_ERROR;
-			DecoderInfoPtr decInfo{prt::createDecoderInfo(decID.c_str(), &s)};
+			const DecoderInfoPtr decInfo{prt::createDecoderInfo(decID.c_str(), &s)};
 			if (s == prt::STATUS_OK && decInfo)
 				xml << objectToXML(decInfo.get()) << std::endl;
 			else
@@ -331,13 +331,13 @@ RunStatus codecInfoToXML(const std::string& infoFilePath) {
 }
 
 URI toFileURI(const std::string& p) {
-	std::string utf8Path = toUTF8FromOSNarrow(p);
-	std::string u8PE = percentEncode(utf8Path);
+	const std::string utf8Path = toUTF8FromOSNarrow(p);
+	const std::string u8PE = percentEncode(utf8Path);
 	return FILE_SCHEMA + u8PE;
 }
 
 AttributeMapPtr createValidatedOptions(const std::wstring& encID, const AttributeMapPtr& unvalidatedOptions) {
-	EncoderInfoPtr encInfo{prt::createEncoderInfo(encID.c_str())};
+	const EncoderInfoPtr encInfo{prt::createEncoderInfo(encID.c_str())};
 	const prt::AttributeMap* validatedOptions = nullptr;
 	encInfo->createValidatedOptionsAndStates(unvalidatedOptions.get(), &validatedOptions);
 	return AttributeMapPtr(validatedOptions);
@@ -404,7 +404,7 @@ std::wstring Path::native_wstring() const {
 }
 
 Path Path::getParent() const {
-	auto p = mPath.find_last_of('/');
+	const auto p = mPath.find_last_of('/');
 	if (p != std::string::npos)
 		return {mPath.substr(0, p)};
 	return {};

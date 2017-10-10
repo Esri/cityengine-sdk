@@ -60,13 +60,13 @@ PRTNode::PRTNode()
 	theNodeCount++;
 
 	{
-		prt::EncoderInfo  const* encInfo = prt::createEncoderInfo(ENC_MAYA);	
+		const prt::EncoderInfo* encInfo = prt::createEncoderInfo(ENC_MAYA);
 		encInfo->createValidatedOptionsAndStates(nullptr, &mMayaEncOpts, nullptr);
 		encInfo->destroy();
 	}
 
 	{
-		prt::EncoderInfo  const* encInfo = prt::createEncoderInfo(ENC_ATTR);	
+		const prt::EncoderInfo* encInfo = prt::createEncoderInfo(ENC_ATTR);
 		encInfo->createValidatedOptionsAndStates(nullptr, &mAttrEncOpts, nullptr);
 		encInfo->destroy();
 	}
@@ -87,7 +87,7 @@ PRTNode::~PRTNode() {
 }
 
 MStatus PRTNode::setDependentsDirty(const MPlug& /*plugBeingDirtied*/, MPlugArray& affectedPlugs) {
-	MPlug pOutMesh(thisMObject(), outMesh);
+	const MPlug pOutMesh(thisMObject(), outMesh);
 	affectedPlugs.append(pOutMesh);
 	return MS::kSuccess;
 }
@@ -101,7 +101,7 @@ MStatus PRTNode::compute(const MPlug& plug, MDataBlock& data ) {
 	mHasMaterials = false;
 
 	MString dummy;
-	std::string utf8Path(getStrParameter(rulePkg, dummy).asUTF8());
+	const std::string utf8Path(getStrParameter(rulePkg, dummy).asUTF8());
 	std::vector<char> percentEncodedPath(2*utf8Path.size()+1);
 	size_t len = percentEncodedPath.size();
 	prt::StringUtils::percentEncode(utf8Path.c_str(), percentEncodedPath.data(), &len);
@@ -126,19 +126,19 @@ MStatus PRTNode::compute(const MPlug& plug, MDataBlock& data ) {
 	}
 
 	if(plug == outMesh && mGenerateAttrs) {
-		bool connected = plug.isNetworked(&stat);
+		const bool connected = plug.isNetworked(&stat);
 		MCHECK(stat);
 		if(!connected)
 			return MS::kFailure;
 
-		MDataHandle inputHandle = data.inputValue(inMesh, &stat);
+		const MDataHandle inputHandle = data.inputValue(inMesh, &stat);
 		MCHECK(stat);
-		MObject iMesh = inputHandle.asMesh();
+		const MObject iMesh = inputHandle.asMesh();
 
 		updateShapeAttributes();
 
 		if(getBoolParameter(mGenerate)) {
-			MFnMesh iMeshFn(iMesh);
+			const MFnMesh iMeshFn(iMesh);
 
 			MFloatPointArray vertices;
 			MIntArray        pcounts;
@@ -151,7 +151,7 @@ MStatus PRTNode::compute(const MPlug& plug, MDataBlock& data ) {
 			uint32_t* ia = new uint32_t[pconnect.length()];
 			uint32_t* ca = new uint32_t[pcounts.length()];
 
-			for (int i = vertices.length(); --i >= 0;) {
+			for (int i = static_cast<int>(vertices.length()); --i >= 0;) {
 				va[i * 3 + 0] = vertices[i].x;
 				va[i * 3 + 1] = vertices[i].y;
 				va[i * 3 + 2] = vertices[i].z;
@@ -183,7 +183,7 @@ MStatus PRTNode::compute(const MPlug& plug, MDataBlock& data ) {
 			);
 
 			const prt::InitialShape* shape          = isb->createInitialShapeAndReset();
-			prt::Status              generateStatus = prt::generate(&shape, 1, 0, &ENC_MAYA, 1, &mMayaEncOpts, outputHandler, PRTNode::theCache, 0);
+			const prt::Status        generateStatus = prt::generate(&shape, 1, 0, &ENC_MAYA, 1, &mMayaEncOpts, outputHandler, PRTNode::theCache, 0);
 			if (generateStatus != prt::STATUS_OK)
 				std::cerr << "prt generate failed: " << prt::getStatusDescription(generateStatus) << std::endl;
 			isb->destroy();
@@ -242,7 +242,7 @@ void* PRTNode::creator() {
 	return new PRTNode();
 }
 
-inline bool PRTNode::getBoolParameter(MObject & attr) {
+inline bool PRTNode::getBoolParameter(const MObject & attr) {
 	MPlug plug(thisMObject(), attr);
 	if(attr.hasFn(MFn::kNumericAttribute)) {
 		bool result;
@@ -252,7 +252,7 @@ inline bool PRTNode::getBoolParameter(MObject & attr) {
 	return false;
 }
 
-inline MString & PRTNode::getStrParameter(MObject & attr, MString& value) {
+inline MString & PRTNode::getStrParameter(const MObject & attr, MString& value) {
 	MPlug plug(thisMObject(), attr);
 
 	if(attr.hasFn(MFn::kNumericAttribute)) {
@@ -264,7 +264,7 @@ inline MString & PRTNode::getStrParameter(MObject & attr, MString& value) {
 	} else if(attr.hasFn(MFn::kEnumAttribute)) {
 		short eValue;
 		const PRTEnum* e = findEnum(attr);
-		if(e) {
+		if(e != nullptr) {
 			plug.getValue(eValue);
 			value = e->mSVals[eValue];
 		}
@@ -276,24 +276,24 @@ MStatus PRTNode::updateShapeAttributes() {
 	if(!(mGenerateAttrs)) return MS::kSuccess; 
 
 	MStatus           stat;
-	MObject           node = thisMObject();
-	MFnDependencyNode fNode(node, &stat);
+	const MObject     node = thisMObject();
+	const MFnDependencyNode fNode(node, &stat);
 	MCHECK(stat);
 
-	int count = (int)fNode.attributeCount(&stat);
+	const unsigned int count = fNode.attributeCount(&stat);
 	MCHECK(stat);
 
 	prt::AttributeMapBuilder* aBuilder = prt::AttributeMapBuilder::create();
 
-	for(int i = 0; i < count; i++) {
-		MObject attr = fNode.attribute(i, &stat);
+	for(unsigned int i = 0; i < count; i++) {
+		const MObject attr = fNode.attribute(i, &stat);
 		if(stat != MS::kSuccess) continue;
 
-		MPlug plug(node, attr);
+		const MPlug plug(node, attr);
 		if(!(plug.isDynamic())) continue;
 
-		MString       briefName = plug.partialName();
-		std::wstring  name      = mBriefName2prtAttr[briefName.asWChar()];
+		const MString       briefName = plug.partialName();
+		const std::wstring  name      = mBriefName2prtAttr[briefName.asWChar()];
 
 		if(attr.hasFn(MFn::kNumericAttribute)) {
 			MFnNumericAttribute nAttr(attr);
@@ -397,7 +397,7 @@ void PRTNode::initLogger() {
 	}
 
 	if (ENABLE_LOG_FILE) {
-		std::string logPath = getPluginRoot() + prtu::getDirSeparator<char>() + "prt4maya.log";
+		const std::string logPath = getPluginRoot() + prtu::getDirSeparator<char>() + "prt4maya.log";
 		std::wstring wLogPath(logPath.length(), L' ');
 		std::copy(logPath.begin(), logPath.end(), wLogPath.begin());
 		theFileLogHandler = prt::FileLogHandler::create(prt::LogHandler::ALL, prt::LogHandler::ALL_COUNT, wLogPath.c_str());
@@ -407,8 +407,8 @@ void PRTNode::initLogger() {
 
 // plugin root = location of prt4maya shared library
 const std::string& PRTNode::getPluginRoot() {
-	static std::string* rootPath = 0;
-	if (rootPath == 0) {
+	static std::string* rootPath = nullptr;
+	if (rootPath == nullptr) {
 #ifdef _MSC_VER
 		char dllPath[_MAX_PATH];
 		char drive[8];
@@ -416,7 +416,7 @@ const std::string& PRTNode::getPluginRoot() {
 		HMODULE hModule = 0;
 
 		GetModuleHandleEx(GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS | GET_MODULE_HANDLE_EX_FLAG_UNCHANGED_REFCOUNT, (LPCSTR)PRTNode::creator, &hModule);
-		DWORD res = ::GetModuleFileName(hModule, dllPath, _MAX_PATH);
+		const DWORD res = ::GetModuleFileName(hModule, dllPath, _MAX_PATH);
 		if (res == 0) {
 			// TODO DWORD e = ::GetLastError();
 			throw std::runtime_error("failed to get plugin location");
@@ -428,7 +428,7 @@ const std::string& PRTNode::getPluginRoot() {
 #else
 		Dl_info dl_info;
 		dladdr((void *)getPluginRoot, &dl_info);
-		std::string tmp(dl_info.dli_fname);
+		const std::string tmp(dl_info.dli_fname);
 		rootPath = new std::string(tmp.substr(0, tmp.find_last_of(prtu::getDirSeparator<char>()))); // accepted mem leak
 #endif
 		if (*rootPath->rbegin() != prtu::getDirSeparator<char>())

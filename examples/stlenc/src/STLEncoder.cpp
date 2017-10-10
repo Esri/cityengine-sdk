@@ -77,7 +77,7 @@ void STLEncoder::init(prtx::GenerateContext& /*context*/) {
 void STLEncoder::encode(prtx::GenerateContext& context, size_t initialShapeIndex) {
 	const prtx::InitialShape* is = context.getInitialShape(initialShapeIndex);
 	try {
-		prtx::LeafIteratorPtr li = prtx::LeafIterator::create(context, initialShapeIndex);
+		const prtx::LeafIteratorPtr li = prtx::LeafIterator::create(context, initialShapeIndex);
 		for (prtx::ShapePtr shape = li->getNext(); shape.get() != nullptr; shape = li->getNext()) {
 			mEncodePreparator->add(context.getCache(), shape, is->getAttributeMap());
 		}

@@ -42,7 +42,7 @@ enum class RunStatus : uint8_t {
  * helpers for prt object management
  */
 struct PRTDestroyer {
-	void operator()(prt::Object const* p) const {
+	void operator()(const prt::Object* p) const {
 		if (p)
 			p->destroy();
 	}
@@ -87,7 +87,7 @@ URI          toFileURI          (const std::string& p);
 /**
  * XML helpers
  */
-std::string objectToXML(prt::Object const* obj);
+std::string objectToXML(const prt::Object* obj);
 RunStatus codecInfoToXML(const std::string& infoFilePath);
 
 /**

@@ -55,9 +55,9 @@ public:
 	STLEncoder& operator=(STLEncoder&) = delete;
 	virtual ~STLEncoder() = default;
 
-	virtual void init(prtx::GenerateContext& context);
-	virtual void encode(prtx::GenerateContext& context, size_t initialShapeIndex);
-	virtual void finish(prtx::GenerateContext& context);
+	virtual void init(prtx::GenerateContext& context) override;
+	virtual void encode(prtx::GenerateContext& context, size_t initialShapeIndex) override;
+	virtual void finish(prtx::GenerateContext& context) override;
 
 private:
 	prtx::DefaultNamePreparator mNamePreparator;
@@ -75,7 +75,7 @@ public:
 	STLEncoderFactory& operator=(STLEncoderFactory&) = delete;
 	virtual ~STLEncoderFactory() = default;
 
-	virtual STLEncoder* create(const prt::AttributeMap* defaultOptions, prt::Callbacks* callbacks) const {
+	virtual STLEncoder* create(const prt::AttributeMap* defaultOptions, prt::Callbacks* callbacks) const override {
 		return new STLEncoder(getID(), defaultOptions, callbacks);
 	}
 

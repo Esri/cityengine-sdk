@@ -15,7 +15,7 @@ MStatus PRTCreate::doIt(const MArgList&) {
 	tempList.add(result);
 	MObject prtNode;
 	MCHECK(tempList.getDependNode(0, prtNode));
-	MFnDependencyNode fNode(prtNode, &stat);
+	const MFnDependencyNode fNode(prtNode, &stat);
 	MCHECK(stat);
 
 	if(fNode.typeId().id() != PRT_TYPE_ID)

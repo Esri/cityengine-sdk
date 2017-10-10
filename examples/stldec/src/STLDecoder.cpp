@@ -46,14 +46,14 @@ enum class Token {
 	SOLID, FACET, NORMAL, OUTER, LOOP, VERTEX, ENDLOOP, ENDFACET, ENDSOLID, UNKNOWN
 };
 
-using TokenMap = std::map<const std::string, Token>;
+using TokenMap = std::map<std::string, Token>;
 TokenMap theTokenMap;
 std::once_flag tokenMapInitFlag;
 
 Token getNextToken(std::istream& stream) {
     std::call_once(tokenMapInitFlag, [](){
 		theTokenMap = {
-                {"solid",   Token::SOLID},
+                {"solid",    Token::SOLID},
                 {"facet",    Token::FACET},
                 {"normal",   Token::NORMAL},
                 {"outer",    Token::OUTER},
@@ -68,7 +68,7 @@ Token getNextToken(std::istream& stream) {
 	std::string tokenStr;
 	stream >> tokenStr;
 
-	auto t = theTokenMap.find(tokenStr);
+	const auto t = theTokenMap.find(tokenStr);
 	return (t == theTokenMap.end()) ? Token::UNKNOWN : t->second;
 }
 

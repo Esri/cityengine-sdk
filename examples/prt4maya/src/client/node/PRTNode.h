@@ -100,10 +100,10 @@ public:
 	PRTNode();
 	virtual ~PRTNode();
 
-	virtual MStatus					preEvaluation( const  MDGContext& context, const MEvaluationNode& evaluationNode );
-	virtual MStatus					compute( const MPlug& plug, MDataBlock& data );
-	virtual MStatus					postEvaluation(const MDGContext & 	context, const MEvaluationNode & 	evaluationNode, PostEvaluationType 	evalType);
-	virtual MStatus					setDependentsDirty(const MPlug &plugBeingDirtied, MPlugArray &affectedPlugs);
+	virtual MStatus					preEvaluation( const  MDGContext& context, const MEvaluationNode& evaluationNode ) override;
+	virtual MStatus					compute( const MPlug& plug, MDataBlock& data ) override;
+	virtual MStatus					postEvaluation(const MDGContext & 	context, const MEvaluationNode & 	evaluationNode, PostEvaluationType 	evalType) override;
+	virtual MStatus					setDependentsDirty(const MPlug &plugBeingDirtied, MPlugArray &affectedPlugs) override;
 
 	static  void*					creator();
 	static  MStatus					initialize();
@@ -139,8 +139,8 @@ public:
 	static MStringArray				theShadingGroups;
 
 private:
-	MString&						getStrParameter(MObject & attr, MString & value);
-	bool							getBoolParameter(MObject & attr);
+	MString&						getStrParameter(const MObject & attr, MString & value);
+	bool							getBoolParameter(const MObject & attr);
 	MStatus							updateShapeAttributes();
 
 private:
@@ -158,21 +158,21 @@ private:
 
 class PRTAttrs : public MPxCommand {
 public:
-	MStatus         doIt(const MArgList& args);
+	virtual MStatus doIt(const MArgList& args) override;
 	static void*    creator();
-	static MStatus  updateRuleFiles(MFnDependencyNode & node, MString & rulePkg);
+	static MStatus  updateRuleFiles(MFnDependencyNode & node, const MString & rulePkg);
 private:
 	static MString& getStringParameter(MObject & node, MObject & attr, MString & value);
 	static MStatus  setStringParameter(MObject & node, MObject & attr, MString & value);
 	static MStatus  addBoolParameter(MFnDependencyNode & node, MObject & attr, const MString & name, bool val);
 	static MStatus  addFloatParameter(MFnDependencyNode & node,  MObject & attr, const MString & name, double val, double min, double max);
-	static MStatus  addStrParameter(MFnDependencyNode & node,  MObject & attr, const MString & name, MString & attrDefault);
-	static MStatus  addFileParameter(MFnDependencyNode & node,  MObject & attr, const MString & name, const MString & attrDefault, MString & ext);
+	static MStatus  addStrParameter(MFnDependencyNode & node,  MObject & attr, const MString & name, const MString & attrDefault);
+	static MStatus  addFileParameter(MFnDependencyNode & node,  MObject & attr, const MString & name, const MString & attrDefault, const MString & ext);
 	static MStatus  addEnumParameter(MFnDependencyNode & node,  MObject & attr, const MString & name, bool value, PRTEnum * e);
 	static MStatus  addEnumParameter(MFnDependencyNode & node,  MObject & attr, const MString & name, double value, PRTEnum * e);
 	static MStatus  addEnumParameter(MFnDependencyNode & node,  MObject & attr, const MString & name, MString value, PRTEnum * e);
 	static MStatus  addEnumParameter(MFnDependencyNode & node,  MObject & attr, const MString & name, short value, PRTEnum * e);
-	static MStatus  addColorParameter(MFnDependencyNode & node,  MObject & attr, const MString & name, MString& attrDefault);
+	static MStatus  addColorParameter(MFnDependencyNode & node,  MObject & attr, const MString & name, const MString& attrDefault);
 	static MStatus  addParameter(MFnDependencyNode & node, MObject & attr ,  MFnAttribute& tAttr);
 	static MStatus  updateStartRules(MFnDependencyNode & node);
 	static MStatus  createAttributes(MFnDependencyNode & node, const std::wstring & ruleFile, const std::wstring & startRule, prt::AttributeMapBuilder* aBuilder, const prt::RuleFileInfo* info);
@@ -183,7 +183,7 @@ private:
 
 class PRTMaterials : public MPxCommand {
 public:
-	MStatus doIt(const MArgList& args);
+	virtual MStatus doIt(const MArgList& args) override;
 	static void* creator();
 };
 

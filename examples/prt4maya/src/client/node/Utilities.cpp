@@ -117,8 +117,8 @@ void dbg(const char* fmt, ...) {
 
 	va_start(args, fmt);
 	vprintf(fmt, args);
-  va_end(args);
-  printf("\n");
+	va_end(args);
+	printf("\n");
 	fflush(0);
 }
 
@@ -127,8 +127,8 @@ void wdbg(const wchar_t* fmt, ...) {
 
 	va_start(args, fmt);
 	vwprintf(fmt, args);
-  va_end(args);
-  wprintf(L"\n");
+	va_end(args);
+	wprintf(L"\n");
 	fflush(0);
 }
 
@@ -169,10 +169,10 @@ void toHex(wchar_t* color, double r, double g, double b) {
 
 
 MString toCleanId(const MString& name) {
-	int            len    = name.numChars();
-	const wchar_t* wname  = name.asWChar();
-	wchar_t*       dst    = new wchar_t[len + 1];
-	for(int i = 0; i < len; i++) {
+	const unsigned int len    = name.numChars();
+	const wchar_t*     wname  = name.asWChar();
+	wchar_t*           dst    = new wchar_t[len + 1];
+	for(unsigned int i = 0; i < len; i++) {
 		wchar_t c = wname[i];
 		if((c >= '0' && c <= '9') ||
 			 (c >= 'A' && c <= 'Z') ||

@@ -31,9 +31,9 @@ public:
 	virtual ~MayaEncoder() { }
 
 public:
-	virtual void init(prtx::GenerateContext&);
-	virtual void encode(prtx::GenerateContext& context, size_t initialShapeIndex);
-	virtual void finish(prtx::GenerateContext&) { }
+	virtual void init(prtx::GenerateContext&) override;
+	virtual void encode(prtx::GenerateContext& context, size_t initialShapeIndex) override;
+	virtual void finish(prtx::GenerateContext&) override { }
 
 private:
 	void convertGeometry(
@@ -59,7 +59,7 @@ public:
 	MayaEncoderFactory(const prt::EncoderInfo* info) : prtx::EncoderFactory(info) { }
 	virtual ~MayaEncoderFactory() { }
 
-	virtual MayaEncoder* create(const prt::AttributeMap* options, prt::Callbacks* callbacks) const {
+	virtual MayaEncoder* create(const prt::AttributeMap* options, prt::Callbacks* callbacks) const override {
 		return new MayaEncoder(getID(), options, callbacks);
 	}
 };

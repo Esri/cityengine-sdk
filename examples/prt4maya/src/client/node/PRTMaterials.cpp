@@ -37,11 +37,11 @@ MStatus PRTNode::attachMaterials() {
 						break;
 					}
 					MCHECK(stat);
-					for(int pOut = (int)node.attributeCount(); --pOut >= 0 ;) {
-						MObject attr = node.attribute(pOut, &stat);
+					for(int pOut = static_cast<int>(node.attributeCount()); --pOut >= 0 ;) {
+						const MObject attr = node.attribute(pOut, &stat);
 						MCHECK(stat);
 						if(attr.apiType() == MFn::kGenericAttribute) {
-							MPlug oPlug(node.object(), attr);
+							const MPlug oPlug(node.object(), attr);
 							if(oPlug.isSource() && OUTPUT_GEOMETRY == oPlug.partialName()) {
 								plug = oPlug;
 								p    = plugs.length();
@@ -68,7 +68,7 @@ MStatus PRTNode::attachMaterials() {
 
 		mHasMaterials = true;
 
-	} catch (MStatus& ms) {
+	} catch (const MStatus& ms) {
 		return ms;
 	}
 	return MS::kSuccess;
@@ -77,14 +77,14 @@ MStatus PRTNode::attachMaterials() {
 MStatus PRTMaterials::doIt(const MArgList& args) {
 	MStatus stat;
 
-	MString prtNodeName = args.asString(0, &stat);
+	const MString prtNodeName = args.asString(0, &stat);
 	MCHECK(stat);
 
 	MSelectionList tempList;
 	tempList.add(prtNodeName);
 	MObject prtNode;
 	MCHECK(tempList.getDependNode(0, prtNode));
-	MFnDependencyNode fNode(prtNode, &stat);
+	const MFnDependencyNode fNode(prtNode, &stat);
 	MCHECK(stat);
 
 	if(fNode.typeId().id() != PRT_TYPE_ID)

@@ -32,7 +32,7 @@ const wchar_t* NULL_KEY         = L"#NULL#";
 
 
 inline MString & PRTAttrs::getStringParameter(MObject & node, MObject & attr, MString & value) {
-	MPlug plug(node, attr);
+	const MPlug plug(node, attr);
 	plug.getValue(value);
 	return value;
 }
@@ -99,9 +99,9 @@ MStatus PRTAttrs::addFloatParameter(MFnDependencyNode & node, MObject & attr, co
 
 MStatus PRTAttrs::addEnumParameter(MFnDependencyNode & node, MObject & attr, const MString & name, bool value, PRTEnum * e) {
 	short idx = 0;
-	for(int i = (int)e->mBVals.length(); --i >= 0;) {
+	for(int i = static_cast<int>(e->mBVals.length()); --i >= 0;) {
 		if((e->mBVals[i] != 0) == value) {
-			idx = (short)i;
+			idx = static_cast<short>(i);
 			break;
 		}
 	}
@@ -111,9 +111,9 @@ MStatus PRTAttrs::addEnumParameter(MFnDependencyNode & node, MObject & attr, con
 
 MStatus PRTAttrs::addEnumParameter(MFnDependencyNode & node, MObject & attr, const MString & name, double value, PRTEnum * e) {
 	short idx = 0;
-	for(int i = (int)e->mFVals.length(); --i >= 0;) {
+	for(int i = static_cast<int>(e->mFVals.length()); --i >= 0;) {
 		if(e->mFVals[i] == value) {
-			idx = (short)i;
+			idx = static_cast<short>(i);
 			break;
 		}
 	}
@@ -123,9 +123,9 @@ MStatus PRTAttrs::addEnumParameter(MFnDependencyNode & node, MObject & attr, con
 
 MStatus PRTAttrs::addEnumParameter(MFnDependencyNode & node, MObject & attr, const MString & name, MString value, PRTEnum * e) {
 	short idx = 0;
-	for(int i = (int)e->mSVals.length(); --i >= 0;) {
+	for(int i = static_cast<int>(e->mSVals.length()); --i >= 0;) {
 		if(e->mSVals[i] == value) {
-			idx = (short)i;
+			idx = static_cast<short>(i);
 			break;
 		}
 	}
@@ -149,7 +149,7 @@ MStatus PRTAttrs::addEnumParameter(MFnDependencyNode & node, MObject & attr, con
 	return MS::kSuccess;
 }
 
-MStatus PRTAttrs::addFileParameter(MFnDependencyNode & node, MObject & attr, const MString & name, const MString & value, MString & exts ) {
+MStatus PRTAttrs::addFileParameter(MFnDependencyNode & node, MObject & attr, const MString & name, const MString & value, const MString & exts ) {
 	MStatus           stat;
 	MStatus           stat2;
 	MFnStringData     stringData;
@@ -168,7 +168,7 @@ MStatus PRTAttrs::addFileParameter(MFnDependencyNode & node, MObject & attr, con
 	return MS::kSuccess;
 }
 
-MStatus PRTAttrs::addColorParameter(MFnDependencyNode & node, MObject & attr, const MString & name, MString & value ) {
+MStatus PRTAttrs::addColorParameter(MFnDependencyNode & node, MObject & attr, const MString & name, const MString & value ) {
 	MStatus             stat;
 	MFnNumericAttribute nAttr;
 
@@ -182,9 +182,9 @@ MStatus PRTAttrs::addColorParameter(MFnDependencyNode & node, MObject & attr, co
 	double b = 0.0;
 
 	if (s[0] == '#' && wcslen(s) >= 7) {
-		r = (double)((prtu::fromHex(s[1]) << 4) + prtu::fromHex(s[2])) / 255.0;
-		g = (double)((prtu::fromHex(s[3]) << 4) + prtu::fromHex(s[4])) / 255.0;
-		b = (double)((prtu::fromHex(s[5]) << 4) + prtu::fromHex(s[6])) / 255.0;
+		r = static_cast<double>((prtu::fromHex(s[1]) << 4) + prtu::fromHex(s[2])) / 255.0;
+		g = static_cast<double>((prtu::fromHex(s[3]) << 4) + prtu::fromHex(s[4])) / 255.0;
+		b = static_cast<double>((prtu::fromHex(s[5]) << 4) + prtu::fromHex(s[6])) / 255.0;
 
 		nAttr.setDefault(r, g, b);
 	}
@@ -202,7 +202,7 @@ MStatus PRTAttrs::addColorParameter(MFnDependencyNode & node, MObject & attr, co
 	return MS::kSuccess;
 }
 
-MStatus PRTAttrs::addStrParameter(MFnDependencyNode & node, MObject & attr, const MString & name, MString & value ) {
+MStatus PRTAttrs::addStrParameter(MFnDependencyNode & node, MObject & attr, const MString & name, const MString & value ) {
 	MStatus           stat;
 	MStatus           stat2;
 	MFnStringData     stringData;
@@ -219,11 +219,11 @@ MStatus PRTAttrs::addStrParameter(MFnDependencyNode & node, MObject & attr, cons
 	return MS::kSuccess;
 }
 
-MStatus PRTAttrs::updateRuleFiles(MFnDependencyNode & node, MString & rulePkg) {
+MStatus PRTAttrs::updateRuleFiles(MFnDependencyNode & node, const MString & rulePkg) {
 	PRTNode* prtNode = (PRTNode*)node.userNode();
 	MStatus  stat;
 
-	std::string utf8Path(rulePkg.asUTF8());
+	const std::string utf8Path(rulePkg.asUTF8());
 	std::vector<char> percentEncodedPath(2*utf8Path.size()+1);
 	size_t len = percentEncodedPath.size();
 	prt::StringUtils::percentEncode(utf8Path.c_str(), &percentEncodedPath[0], &len);
@@ -238,20 +238,20 @@ MStatus PRTAttrs::updateRuleFiles(MFnDependencyNode & node, MString & rulePkg) {
 	prtNode->mLRulePkg = uri;
 
 	if(prtNode->mCreatedInteractively) {
-		int count = (int)node.attributeCount(&stat);
+		const unsigned int count = node.attributeCount(&stat);
 		MCHECK(stat);
 
 		MObjectArray attrs;
 
-		for(int i = 0; i < count; i++) {
-			MObject attr = node.attribute(i, &stat);
+		for(unsigned int i = 0; i < count; i++) {
+			const MObject attr = node.attribute(i, &stat);
 			if(stat != MS::kSuccess) continue;
 			attrs.append(attr);
 		}
 
 		for(unsigned int i = 0; i < attrs.length(); i++) {
-			MPlug   plug(node.object(), attrs[i]);
-			MString name = plug.partialName();
+			const MPlug   plug(node.object(), attrs[i]);
+			const MString name = plug.partialName();
 
 			if(prtNode->mBriefName2prtAttr.count(name.asWChar()))
 				node.removeAttribute(attrs[i]);
@@ -283,7 +283,7 @@ MStatus PRTAttrs::updateRuleFiles(MFnDependencyNode & node, MString & rulePkg) {
 		const wchar_t * const* keys = prtNode->mResolveMap->getKeys(&nKeys);
 		std::wstring sCGB(L".cgb");
 		for(size_t k = 0; k < nKeys; k++) {
-			std::wstring key = std::wstring(keys[k]);
+			const std::wstring key = std::wstring(keys[k]);
 			if(std::equal(sCGB.rbegin(), sCGB.rend(), key.rbegin())) {
 				prtNode->mRuleFile = key;
 				break;
@@ -455,13 +455,13 @@ MStatus PRTAttrs::createAttributes(MFnDependencyNode & node, const std::wstring 
 					if(!(wcscmp(an->getName(), ANNOT_RANGE)))
 						e = new PRTEnum(prtNode, an);
 				}
-				bool value = evalAttrs.find(name.asWChar())->second.mBool;
+				const bool value = evalAttrs.find(name.asWChar())->second.mBool;
 				if(e) {
 					MCHECK(addEnumParameter(node, attr, name, value, e));
 				} else {
 					MCHECK(addBoolParameter(node, attr, name, value));
 				}
-			break;
+				break;
 			}
 		case prt::AAT_FLOAT: {
 				double min = std::numeric_limits<double>::quiet_NaN();
@@ -477,7 +477,7 @@ MStatus PRTAttrs::createAttributes(MFnDependencyNode & node, const std::wstring 
 					}
 				}
 
-				double value = evalAttrs.find(name.asWChar())->second.mFloat;
+				const double value = evalAttrs.find(name.asWChar())->second.mFloat;
 
 				if(e) {
 					MCHECK(addEnumParameter(node, attr, name, value, e));
@@ -513,8 +513,8 @@ MStatus PRTAttrs::createAttributes(MFnDependencyNode & node, const std::wstring 
 					}
 				}
 
-				std::wstring value = evalAttrs.find(name.asWChar())->second.mString;
-				MString mvalue(value.c_str());
+				const std::wstring value = evalAttrs.find(name.asWChar())->second.mString;
+				const MString mvalue(value.c_str());
 				if(!(asColor) && mvalue.length() == 7 && value[0] == L'#')
 					asColor = true;
 
@@ -527,7 +527,6 @@ MStatus PRTAttrs::createAttributes(MFnDependencyNode & node, const std::wstring 
 				} else {
 					MCHECK(addStrParameter(node, attr, name, mvalue));
 				}
-
 				break;
 			}
 		default:
@@ -544,7 +543,7 @@ MStatus PRTAttrs::createAttributes(MFnDependencyNode & node, const std::wstring 
 MStatus PRTAttrs::doIt(const MArgList& args) {
 	MStatus stat;
 
-	MString prtNodeName = args.asString(0, &stat);
+	const MString prtNodeName = args.asString(0, &stat);
 	MCHECK(stat);
 
 	MSelectionList tempList;
