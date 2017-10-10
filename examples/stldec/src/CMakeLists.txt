@@ -38,9 +38,7 @@ target_compile_definitions(${PROJECT_NAME} PRIVATE
 
 ### install target
 
-if(NOT CMAKE_INSTALL_PREFIX)
-	set(CMAKE_INSTALL_PREFIX "${PROJECT_SOURCE_DIR}/../install" CACHE PATH "default install prefix" FORCE)
-endif()
+set(CMAKE_INSTALL_PREFIX "${PROJECT_SOURCE_DIR}/../install" CACHE PATH "default install prefix" FORCE)
 
 install(CODE "file(REMOVE_RECURSE ${CMAKE_INSTALL_PREFIX}/*)")
 install(TARGETS ${PROJECT_NAME} RUNTIME DESTINATION lib LIBRARY DESTINATION lib)
