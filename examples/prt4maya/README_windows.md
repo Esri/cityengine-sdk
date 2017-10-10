@@ -31,7 +31,7 @@ BUILD INSTRUCTIONS
 
 1. Open the standard windows shell (**not** the Visual Studio Shell)
 1. `cd <your path to>\esri-cityengine-sdk\examples\prt4maya`
-1. `build.bat ..\..\prt\cmake C:\Autodesk\Maya2016`
+1. `build.bat ..\..\prt\cmake "<your path to>\Autodesk\Maya2016"`
 1. The build result will appear in the `install` directory in parallel to the `build` directory. We will use this as the plugin directory below.
 
 
@@ -39,7 +39,7 @@ INSTALLATION INSTRUCTIONS
 -------------------------
 
 1. Locate the directory where you copied the plugin (or keep `<your path to>\esri-cityengine-sdk\examples\prt4maya\install`), let's call it `PLUGINDIR`
-1. Locate the Maya.env file in your home, usually its in "<home directory>\Documents\maya\2016"
+1. Locate the Maya.env file in your home, usually its in `<home directory>\Documents\maya\2016`
 1. Edit Maya.env as follows:
    ```
    :: use CityEngAdv for floating license
@@ -54,7 +54,7 @@ INSTALLATION INSTRUCTIONS
    MAYA_SCRIPT_PATH=<PLUGINDIR>\scripts
    ```
 1. Start maya
-1. Open the plugin managaer: Windows -> Settings/Preferences -> Plug-in Manager
+1. Open the plugin manager: Windows -> Settings/Preferences -> Plug-in Manager
 1. Enable `prt4maya.mll`
 1. The plugin should load and a new menu item `PRT` should appear in Maya.
 
