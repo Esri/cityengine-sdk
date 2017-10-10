@@ -39,7 +39,7 @@ endif()
 add_executable(${PROJECT} prt4cmd.cpp utils.cpp)
 
 if(${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
-	target_compile_definitions(${PROJECT} PRIVATE _SCL_SECURE_NO_WARNINGS)
+	target_compile_definitions(${PROJECT} PRIVATE _CRT_SECURE_NO_WARNINGS)
 elseif(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
 	target_compile_options(${PROJECT} PRIVATE
 		-std=c++11 -march=nocona -fvisibility=hidden -fvisibility-inlines-hidden
