@@ -1,3 +1,78 @@
+ESRI CITYENGINE SDK 1.9.XXXX CHANGELOG
+======================================
+
+This section lists changes compared to CityEngine SDK 1.8.3501
+
+
+General Info
+------------
+* CityEngine SDK 1.9.XXXX is used in CityEngine 2017.1 (2017.1.XXXX).
+
+
+PRT API
+-------
+* Documentation
+  * Added missing namespaces (StringUtils.h).
+  * Added link to featured annotations (RuleFileInfo.h). 
+
+
+PRTX API
+--------
+* Added cut textures flag to EncodePreparator (EncodePreparator.h).
+* New function returns pseudo id from initial shape (EncodePreparator.h).
+* Added copy constructor for transformed mesh builder (Mesh.h).
+* Removed obsolete includes (EncodePreparator.h).
+* Documentation
+  * Added missing namespaces (DataBackend.h, AnnotationBuilder.h).
+  * Clarified ExtensionManager::addFactory (ExtensionManager.h).
+
+CGA
+---
+(Please also refer to the CGA ChangeLog for 2017.1 in the [CityEngine Online Help](http://cehelp.esri.com/help/index.jsp?topic=/com.procedural.cityengine.help/html/cgareference/cga_changelog.html) for new operations and bug-fixes.)
+* Increased CGA language version to `2017.1`
+* New annotations:
+  * @Enum annotation.
+* New functions:
+  * geometry.height function.
+* Changes to existing features:
+  * cleanupGeometry operation: Merge vertices: Vertices of holes are now merged within tolerance. As a consequence, neighboring holes could be merged to a single hole and small holes could be removed.
+  * Prior usage of @Range annotation is deprecated. Instead use new parameterized version of @Range annotation and new @Enum annotation.
+  * @Angle, @Distance and @Percent annotations are supported in CityEngine.
+* Bugfixes:
+  * Occlusion queries: Improved accuracy in cases when the query geometry lies on the surface of an occluder shape.
+  * All intra context/occlusion queries: Fixed a bug where queries did not respect occluder/context shapes and therefore returned a wrong value. This happened for labels (including the empty label) which were not encountered in the first evaluation pass (two-pass generation process).
+* cleanupGeometry operation:
+  * Merge vertices: Prevent creation of small holes and inverted faces.
+  * Remove duplicate faces: Correct consideration of holes.
+  * Remove shared edges between coplanar faces: Enhanced overall robustness and results for holes.
+  * Remove degenerate faces with small area: Applied at the end in order to reduce impact.
+* scatter operation: Gaussian standard deviation can be specified in relative coordinates.
+* tileUV operation: Fixed creation of invalid UVs in case of near zero area geometry.
+
+
+Built-In Codecs Changes and Fixes
+---------------------------------
+* New Encoders
+  * Added Unreal encoder.
+* I3S/SLPK Encoder
+  * Added an option to enable backface culling ("backfaceCulling"). [CE-3656]
+  * Added attribute statistics and labels. [CE-4529]
+  * Fixed inconsistent feature IDs. [CE-4105, CE-4672]
+  * Fixed handling of CGA generation errors. [CE-4398]
+* Collada Decoder
+  * Bugfixes and support for more than one UV set. [CE-3389]
+* ShapeBuffer Encoder
+  * Textures are cropped to used regions. [CE-2602]
+* FBX Decoder
+  * Set asset URI in FBX decoder (fixes instancing support).
+
+
+Misc Changes and Fixes
+----------------------
+* Licensing sub-system has been updated to FNP 11.14. [CE-4676]
+
+
+
 ESRI CITYENGINE SDK 1.8.3501 CHANGELOG
 ======================================
 
@@ -75,7 +150,7 @@ Built-In Codecs Changes and Fixes
   * Fixed a crash when no geometry was generated. [CE-4325]
   * Fixed a problem where nodes could end up with too much geometry. [CE-4075]
   * Fixed projection of vertex normals into the target coordinate system.
-  * Addded support for "popupInfo".
+  * Added support for "popupInfo".
   * Changed file extension from spk to slpk. [CE-3201]
   * Fixed the header of the compressed SLPK archive - resolves import problems in ArcGIS Earth and Pro [CE-3888]
 * FBX Encoder/Decoder
