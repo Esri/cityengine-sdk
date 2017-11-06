@@ -1,4 +1,4 @@
-ESRI CITYENGINE SDK 1.9.XXXX CHANGELOG
+ESRI CITYENGINE SDK 1.9.3786 CHANGELOG
 ======================================
 
 This section lists changes compared to CityEngine SDK 1.8.3501
@@ -6,7 +6,7 @@ This section lists changes compared to CityEngine SDK 1.8.3501
 
 General Info
 ------------
-* CityEngine SDK 1.9.XXXX is used in CityEngine 2017.1 (2017.1.XXXX).
+* CityEngine SDK 1.9.3786 is used in CityEngine 2017.1 (2017.1.3674).
 
 
 PRT API
@@ -59,8 +59,6 @@ Built-In Codecs Changes and Fixes
   * Added attribute statistics and labels. [CE-4529]
   * Fixed inconsistent feature IDs. [CE-4105, CE-4672]
   * Fixed handling of CGA generation errors. [CE-4398]
-* Collada Decoder
-  * Bugfixes and support for more than one UV set. [CE-3389]
 * ShapeBuffer Encoder
   * Textures are cropped to used regions. [CE-2602]
 * FBX Decoder
