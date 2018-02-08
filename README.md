@@ -12,6 +12,7 @@ This document explains how to install the CityEngine SDK and how to work with th
 The archives are available for download at the corresponding github release page. See installation instructions below for details.
 
 ## CityEngine SDK Releases
+- [v1.X.YYYY (2018-XX-XX, CityEngine 2018.0)](https://github.com/Esri/esri-cityengine-sdk/releases/tag/1.X.YYYY)
 - [v1.9.3786 (2017-11-06, CityEngine 2017.1)](https://github.com/Esri/esri-cityengine-sdk/releases/tag/1.9.3786)
 - [v1.8.3501 (2017-06-29, CityEngine 2017.0)](https://github.com/Esri/esri-cityengine-sdk/releases/tag/1.8.3501)
 - [v1.7.2915 (2016-10-03, CityEngine 2016.1)](https://github.com/Esri/esri-cityengine-sdk/releases/tag/1.7.2915)
@@ -79,14 +80,14 @@ Please note that the individual example READMEs may include further requirements
     * Required flags: `-std=c++14 -stdlib=libc++ -fvisibility=hidden -fvisibility-inlines-hidden -Wl,--exclude-libs,ALL`
 
 #### Linux
-* RedHat Enterprise Linux 6.x/7.x or compatible (64bit only)
+* RedHat Enterprise Linux 7.x or compatible (64bit only)
 * GNU Make 3.82 or later
 * Recommended C++ Compilers for client code (e.g. the `prt4cmd` example):
-    * GCC 4.8.2 or later
+    * GCC 6.3 or later
 * To compile SDK extensions (e.g. the `stlenc` example or a custom encoder) it is required to use this **exact** compiler:
-    * RedHat Enterprise Linux 6.x or compatible
-    * GCC 4.8.2 included in RedHat Enterprise Linux 6 DevToolSet 2.1
-    * Required flags: `-std=c++11 -march=nocona -fvisibility=hidden -fvisibility-inlines-hidden -Wl,--exclude-libs,ALL`
+    * RedHat Enterprise Linux 7.x or compatible
+    * GCC 6.3.1 included in RedHat Enterprise Linux DevToolSet 6.1
+    * Required flags: `-std=c++14 -march=nocona -fvisibility=hidden -fvisibility-inlines-hidden -Wl,--exclude-libs,ALL`
 
 ## Further Resources
 * Documentation:
@@ -108,7 +109,7 @@ Anyone and everyone is welcome to contribute and to extend and improve the examp
 
 ## Licensing
 
-Copyright (c) 2017 Esri
+Copyright (c) 2018 Esri
 
 You may not use the content of this repository except in compliance with the following Licenses:
   1. All content of all directories **except "examples"** is licensed under the CityEngine EULA, see [license/EULA.pdf](license/EULA.pdf).
