@@ -26,6 +26,7 @@
 #include "STLDecoder.h"
 
 #include "prtx/Geometry.h"
+#include "prtx/Mesh.h"
 
 #include <sstream>
 #include <limits>
