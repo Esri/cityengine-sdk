@@ -19,6 +19,19 @@
 #include <string>
 #include <memory>
 
+// Forward declarations
+namespace prtx {
+
+class Geometry;
+typedef std::shared_ptr<Geometry> GeometryPtr;		///< shared Geometry pointer
+typedef std::vector<GeometryPtr>  GeometryPtrVector;		///< vector of shared Geometry pointers
+
+class Material;
+typedef std::shared_ptr<Material> MaterialPtr;			///< shared Material pointer
+typedef std::vector<MaterialPtr>  MaterialPtrVector;		///< vector of shared Material pointers
+
+} // prtx
+
 
 class MayaEncoder : public prtx::GeometryEncoder {
 public:
