@@ -29,6 +29,7 @@
 #include "prtx/ShapeIterator.h"
 #include "prtx/GenerateContext.h"
 #include "prtx/Geometry.h"
+#include "prtx/Mesh.h"
 #include "prtx/EncodeOptions.h"
 #include "prtx/EncoderInfoBuilder.h"
 
