@@ -21,7 +21,7 @@ SOFTWARE REQUIREMENTS
 BUILD INSTRUCTIONS
 ------------------
 
-1. Open a `VS2015 x64 Native Tools Command Prompt`
+1. Open a `VS2017 x64 Native Tools Command Prompt`
 1. Change into the example directory: `cd <your path to>\esri-cityengine-sdk\examples\stldec`
 1. Create a build directory: `mkdir build`
 1. Change into the build directory: `cd build`
@@ -42,7 +42,7 @@ INSTALLATION INSTRUCTIONS FOR CITYENGINE
 LICENSING
 ---------
 
-Copyright (c) 2017 Esri
+Copyright (c) 2018 Esri
 
 You may not use the content of this repository except in compliance with the following Licenses:
   1. All content of all directories **except "examples"** is licensed under the CityEngine EULA, see [license/EULA.pdf](license/EULA.pdf).
