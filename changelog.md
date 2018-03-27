@@ -1,3 +1,78 @@
+ESRI CITYENGINE SDK 1.10.YYYY CHANGELOG
+=======================================
+
+This section lists changes compared to CityEngine SDK 1.9.3786.
+
+
+General Info
+------------
+* CityEngine SDK 1.10.YYYY is used in CityEngine 2018.0 (2018.0.ZZZZ).
+
+
+PRT API
+-------
+* Fixed the XML representation of prt::AttributeMapBuilder.
+* Fixed missing enum items in API reference (e.g. prt::LogLevel). [CE-5326]
+
+
+PRTX API
+--------
+* Fixed wrong prtx::Mesh::getUVSetsCount() return value.
+* Fixed wrong prtx::MeshBuilder error message if uv coordinates and indices are out of sync.
+* Updated prtx::NamePreparator to filter out invalid characters in URIs (e.g. for file name creation). [CE-5276]
+* Reduced header inclusion and introduced a few forward-declarations. [CE-5382]
+
+
+CGA
+---
+*  Behavior change in "random" evaluation: Fixed a bug in the evaluation of attr/const functions where the random generator could produce unexpected values if attrs/const functions are mutual dependent.
+* New operation: "insertAlongUV"
+* New function: "assetNamingInfo"
+* Changes to existing functions:
+  * acos, asin and sqrt: A warning is issued if the parameter is outside of the valid range.
+* Bugfixes:
+  * comp operation:
+    * Re-evaluate random generator for each group (g) and material (m) component. Before this fix rand returned the same value for each component.
+    * Group components (g): Fixed wrong per-face materials for meshes with holes.
+  * trim and i operation: Trim planes now respect holes in assets.
+  * trim, i and split operation: Trim planes and splits now respect per-face materials.
+  * split operation: Fixed missing filling face when faces with near zero area were present at the split position.
+
+
+Built-In Codecs Changes and Fixes
+---------------------------------
+* Collada Decoder
+  * Fixed a bug where multiple UV coordinate sets could be wrongly imported. [CE-3389]
+* Unreal Encoder
+  * Updated to Epic Unreal Studio / Datasmith SDK 0.18 (corresponding to Unreal Engine 4.19).
+  * Introduced two new encoder options to control mesh granularity and instancing behavior. [CE-5306]
+  * Fixed a bug where the Datasmith NormalMap texture mode was not correctly set. [CE-4997]
+  * Fixed a bug where the wrong output path was logged. [CE-5306]
+  * Fixed a memory leak when resizing texture to power-of-two. [CE-5276]
+  * Fixed a bug where the "maximum number of objects" limit of Unreal could be reached. [CE-5301]
+* Texture Encoder
+  * Added support for (32bit) GeoTiff metadata. [CE-1771]
+* Vue, Alembic, Collada, OBJ Encoders
+  * Added stricter validation on object/file names to support non-english locales. [CE-5276]
+* I3S Encoder
+  * Fixed a bug where encoding multiple objects with identical bounding boxes could lead to a crash. [CE-5057]
+  * Fixed a bug where the I3S node level could be set to a wrong value.
+* Shape Buffer Encoder
+  * Added an encoder option to only export CGA report sums instead of all values. [CE-4673]
+* Vue Encoder
+  * Fixed a bug where not all encoded textures are correctly logged. [CE-5224]
+
+
+Misc Changes and Fixes
+----------------------
+* OS and Compiler Ugrades
+  * Linux: Switched to RHEL 7 and GCC 6.3 with C++14
+  * Windows: Switched to Visual Studio 2017 (MSVC Toolchain 14.11)
+  * macOS: Switched to macOS 10.12 and Apple Clang 8.1
+* Added Unreal encoder libraries to generated CMake config. [CE-5394]
+
+
+
 ESRI CITYENGINE SDK 1.9.3786 CHANGELOG
 ======================================
 
