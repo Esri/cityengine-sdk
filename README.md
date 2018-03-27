@@ -68,12 +68,12 @@ Please note that the individual example READMEs may include further requirements
     * Microsoft `MSVC 14.11 C++ Compiler Toolset with cl.exe version 19.11`, included in `Visual Studio 2015 Update 3`
     * Required flags: `/bigobj /GR /EHsc /MD`
 
-#### MacOSX
+#### macOS
 * Recommended build environment for client code (e.g. the `prt4cmd` example):
-    * MacOSX Yosemite (10.12) or later
+    * macOS Sierra (10.12) or later
     * Apple Clang 8.1 or later
 * To compile SDK extensions (e.g. the `stlenc` example or a custom encoder) it is required to use this **exact** compiler:
-    * MacOSX Yosemite (10.12)
+    * macOS Sierra (10.12)
     * Apple Clang 8.1 included in XCode 8.3
     * Required flags: `-std=c++14 -stdlib=libc++ -fvisibility=hidden -fvisibility-inlines-hidden -Wl,--exclude-libs,ALL`
 
