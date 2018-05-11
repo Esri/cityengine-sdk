@@ -4,8 +4,6 @@ var classprtx_1_1_string_enum =
     [ "PodItem", "structprtx_1_1_string_enum_1_1_pod_item.html", "structprtx_1_1_string_enum_1_1_pod_item" ],
     [ "ItemConstIter", "classprtx_1_1_string_enum.html#aaee3806a07a0818ef5ad847dff9bf410", null ],
     [ "StringEnum", "classprtx_1_1_string_enum.html#a5b48d52e344c0a9aec97b3a62f635059", null ],
-    [ "StringEnum", "classprtx_1_1_string_enum.html#adc194ffe71a28891fd438fe84c0e8de1", null ],
-    [ "StringEnum", "classprtx_1_1_string_enum.html#a6bce300d84dbb300a20a036cdef9fe4b", null ],
     [ "StringEnum", "classprtx_1_1_string_enum.html#a32a823e62ea37883b0ee8c3cde597ada", null ],
     [ "addItem", "classprtx_1_1_string_enum.html#a4353f2c5f492b8f905874ada6465e49f", null ],
     [ "addItems", "classprtx_1_1_string_enum.html#a17a6243009939be38de68f7d5957c9bb", null ],
@@ -17,5 +15,8 @@ var classprtx_1_1_string_enum =
     [ "getValueById", "classprtx_1_1_string_enum.html#a308889af68cb787f807ebf53d02ac78a", null ],
     [ "operator[]", "classprtx_1_1_string_enum.html#a1d35d751dd73f5bb02fc3d749afc7ea8", null ],
     [ "removeAllItems", "classprtx_1_1_string_enum.html#a9990ff8bdcc6b7e8abd5398b811326cf", null ],
-    [ "removeItem", "classprtx_1_1_string_enum.html#a5f185c68785460b5c2efc2c89ca69935", null ]
+    [ "removeItem", "classprtx_1_1_string_enum.html#a5f185c68785460b5c2efc2c89ca69935", null ],
+    [ "__pad0__", "classprtx_1_1_string_enum.html#a3cd1919ea13150983e4d48e2167ad1af", null ],
+    [ "__pad1__", "classprtx_1_1_string_enum.html#a296649890d9985fb93b6271ae76b9c10", null ],
+    [ "items", "classprtx_1_1_string_enum.html#ac4d8fc11a2aa3d3de61b7c9b4b1685de", null ]
 ];

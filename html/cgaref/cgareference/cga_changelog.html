@@ -27,10 +27,90 @@
   
   <table border="outset">
   <tr>
-  <td><strong>City Engine version (= CGA version)</strong></td>
+  <td width="12%"><strong>City Engine version<br>(= CGA version)</strong></td>
   <td><strong>Changes</strong></td>
   </tr>
-
+	<tr>
+		<td>2018.0 <br>CGAC 1.10</td>
+		<td>
+			Changed fundamental behaviour:
+			<ul>
+				<li><strong>Random evaluation of attr/const functions</strong>:<br> The initialization of the random number generator was affected by the mutual dependency of attr/const functions.<br>This could lead to the undesired behaviour that an attribute A which is initialized using probability functions (<a href="func_rand.html"><span class="code_std">rand</span></a>, <a href="func_p.html"><span class="code_std">p</span></a>), stochastic conditions or related utility functions (<a href="celib/listRandom.html"><span class="code_std">listRandom</span></a>, <a href="celib/fileRandom.html"><span class="code_std">fileRandom</span></a>, <a href="celib/assetFitSize.html"><span class="code_std">assetFitSize</span></a>,
+				<a href="celib/assetApproxSize.html"><span class="code_std">assetApproxSize</span></a>, <a href="celib/imageApproxRatio.html"><span class="code_std">imageApproxRatio</span></a>) could change its random value
+				<ul>
+					<li>if another attribute B was added that calls A or</li>
+					<li>if a call to another attribute B was added to A where B is also randomly evaluated.</li>
+				</ul>
+				This fix potentially changes your existing models even with the same <a href="attr_seedian.html"><span class="code_std">seedian</span></a> on the initial shape.</li> <!-- CE-3187 -->
+			</ul>
+			New operations:
+			<ul>
+				<li><a href="op_insertAlongUV.html"><span class="code_std">insertAlongUV</span></a> operation.</li> <!-- CE-2329 -->
+			</ul>
+			New functions:
+			<ul>
+				<li><a href="func_assetNamingInfo.html"><span class="code_std">assetNamingInfo</span></a> function.</li> <!-- CE-3850 -->
+			</ul>
+			Changes to existing features:
+			<ul>
+				<li><a href="func_acos.html"><span class="code_std">acos</span></a>, <a href="func_asin.html"><span class="code_std">asin</span></a> and <a href="func_sqrt.html"><span class="code_std">sqrt</span></a> function: A warning is issued if the parameter is outside of the valid range.</li> <!-- CE-4902 -->
+			</ul>
+			Bugfixes:
+			<ul>
+				<li>CGA Compiler:</li>
+				<ul>
+					<li>Compiler now checks for matching return types of attributes and functions with the same name accross styles. Prior, inconsistent return types resulted in a crash when switching styles or displaying all styles in the file preview.</li> <!-- CE-1565 -->
+					<li>Matching parameter types for rules and functions across styles are now also checked for unused definitions.</li> <!-- CE-1565 -->
+					<li>Compiler now checks if a definition type (attribute, const, function or rule) is consistent across styles.</li> <!-- CE-1565 -->
+					<li>Fixed wrong line reference of incompatible version warnings. This happened for rules that imported other rule files.</li> <!-- CE-3362 -->
+				</ul>
+				<li><a href="op_comp.html"><span class="code_std">comp</span></a> operation:</li>
+				<ul>
+					<li>Re-evaluate random generator for each group (<span class="codelight">g</span>) and material (<span class="codelight">m</span>) component. Before this fix <a href="func_rand.html"><span class="code_std">rand</span></a> returned the same value for each component.</li> <!-- CE-2329 -->
+					<li>Group components (<span class="codelight">g</span>): Fixed wrong per-face materials for meshes with holes.</li> <!-- CE-2329 -->
+				</ul>
+				<li><a href="op_trim.html"><span class="code_std">trim</span></a>, <a href="op_i.html"><span class="code_std">i</span></a> operation: Trim planes now respect holes in assets.</li> <!-- CE-2329 -->
+				<li><a href="op_trim.html"><span class="code_std">trim</span></a>, <a href="op_i.html"><span class="code_std">i</span></a>, <a href="op_split.html"><span class="code_std">split</span></a> operation: Trim planes and splits now respect per-face materials.</li> <!-- CE-2329 -->
+				<li><a href="op_split.html"><span class="code_std">split</span></a> operation: Fixed missing filling face when faces with near zero area were present at the split position.</li> <!-- CE-2329 -->
+			</ul>
+		</td>
+	</tr>
+  
+	<tr>
+		<td>2017.1 <br>CGAC 1.9</td>
+		<td>
+			New annotations:
+			<ul>
+				<li><a href="cga_annotations.html#enum"><span class="code_std">@Enum</span></a> annotation.</li>
+			</ul>
+			New functions:
+			<ul>
+				<li><a href="func_geometry.html#height"><span class="code_std">geometry.height</span></a> function.</li>
+			</ul>
+			Changes to existing features:
+			<ul>
+				<li><a href="op_cleanupGeometry.html"><span class="code_std">cleanupGeometry</span></a> operation: Merge vertices: Vertices of holes are now merged within tolerance. As a consequence, neighboring holes could be merged to a single hole and small holes could be removed.</li>
+				<li>Prior usage of <span class="code_std">@Range</span> annotation is deprecated. Instead use new parameterized version of <a href="cga_annotations.html#range"><span class="code_std">@Range</span></a> annotation and new <a href="cga_annotations.html#enum"><span class="code_std">@Enum</span></a> annotation.</li>
+				<li><a href="cga_annotations.html#angle"><span class="code_std">@Angle</span></a>, <a href="cga_annotations.html#dist"><span class="code_std">@Distance</span></a> and <a href="cga_annotations.html#percent"><span class="code_std">@Percent</span></a> annotations are supported in CityEngine.</li>
+			</ul>
+			Bugfixes:
+			<ul>
+				<li><a href="func_occlusion.html">Occlusion queries</a>: Improved accuracy in cases when the query geometry lies on the surface of an occluder shape.</li>
+				<li>All <em>intra</em> <a href="cga_context.html">context/occlusion queries</a>: Fixed a bug where queries did not respect occluder/context shapes and therefore returned a wrong value. This happened for labels (including the empty label) which were not encountered in the first evaluation pass (<a href="cga_context.html#twopass">two-pass generation process</a>).</li>
+				<li><a href="op_cleanupGeometry.html"><span class="code_std">cleanupGeometry</span></a> operation:</li>
+				<ul>
+					<li>Merge vertices: Prevent creation of small holes and inverted faces.</li>
+					<li>Remove duplicate faces: Correct consideration of holes.</li>
+					<li>Remove shared edges between coplanar faces: Enhanced overall robustness and results for holes.</li>
+					<li>Remove degenerate faces with small area: Applied at the end in order to reduce impact.</li>
+				</ul>
+				<li>CGA Compiler: Fixed an issue where names and values were not matched correctly in an annotation <span class="code_std">@Annotation(name=value).</span></li>
+				<li><a href="op_scatter.html"><span class="code_std">scatter</span></a> operation: Gaussian standard deviation can be specified in relative coordinates.</li>
+				<li><a href="op_tileUV.html"><span class="code_std">tileUV</span></a> operation: Fixed creation of invalid UVs in case of near zero area geometry.</li>
+			</ul>
+		</td>
+	</tr>
+  
   <tr>
 	<td>2017.0 <br>CGAC 1.8</td>
 	<td>
@@ -40,8 +120,8 @@
 		</ul>
 		New functions:
 		<ul>
-			<li>New basic functions: <a href="celib/min.html"><span class="code_std">min</span></a>, <a href="celib/max.html"><span class="code_std">max</span></a> and <a href="celib/clamp.html"><span class="code_std">clamp</span></a>.
-			<li>New functions for color conversion: <a href="celib/colorHexToB.html"><span class="code_std">colorHexToB</span></a>, <a href="celib/colorHexToG.html"><span class="code_std">colorHexToG</span></a>, <a href="celib/colorHexToH.html"><span class="code_std">colorHexToH</span></a>, <a href="celib/colorHexToO.html"><span class="code_std">colorHexToO</span></a>, <a href="celib/colorHexToR.html"><span class="code_std">colorHexToR</span></a>, <a href="celib/colorHexToS.html"><span class="code_std">colorHexToS</span></a>, <a href="celib/colorHexToV.html"><span class="code_std">colorHexToV</span></a>, <a href="celib/colorHSVToHex.html"><span class="code_std">colorHSVToHex</span></a>, <a href="celib/colorHSVOToHex.html"><span class="code_std">colorHSVOToHex</span></a>, <a href="celib/colorRGBToHex.html"><span class="code_std">colorRGBToHex</span></a> and <a href="celib/colorRGBOToHex.html"><span class="code_std">colorRGBOToHex</span></a>.
+			<li>New basic functions: <a href="celib/min.html"><span class="code_std">min</span></a>, <a href="celib/max.html"><span class="code_std">max</span></a> and <a href="celib/clamp.html"><span class="code_std">clamp</span></a>.</li>
+			<li>New functions for color conversion: <a href="celib/colorHexToB.html"><span class="code_std">colorHexToB</span></a>, <a href="celib/colorHexToG.html"><span class="code_std">colorHexToG</span></a>, <a href="celib/colorHexToH.html"><span class="code_std">colorHexToH</span></a>, <a href="celib/colorHexToO.html"><span class="code_std">colorHexToO</span></a>, <a href="celib/colorHexToR.html"><span class="code_std">colorHexToR</span></a>, <a href="celib/colorHexToS.html"><span class="code_std">colorHexToS</span></a>, <a href="celib/colorHexToV.html"><span class="code_std">colorHexToV</span></a>, <a href="celib/colorHSVToHex.html"><span class="code_std">colorHSVToHex</span></a>, <a href="celib/colorHSVOToHex.html"><span class="code_std">colorHSVOToHex</span></a>, <a href="celib/colorRGBToHex.html"><span class="code_std">colorRGBToHex</span></a> and <a href="celib/colorRGBOToHex.html"><span class="code_std">colorRGBOToHex</span></a>.</li>
 			<li>New functions for <a href="cga_context.html">context queries</a> to <a href="op_label.html">labeled</a> shapes: <a href="func_minimumDistance.html"><span class="code_std">minimumDistance</span></a>, <a href="func_contextCompare.html"><span class="code_std">contextCompare</span></a> and <a href="func_contextCount.html"><span class="code_std">contextCount</span></a>.</li>
 		</ul>
 		Changes to existing features:
@@ -957,7 +1037,7 @@ overload  .</li>
   
 
   <h3><!-- FOOTER --> </h3>
-        <p class="foot">Copyright &copy;2008-2017 Esri R&amp;D Center Zurich. All rights reserved.</p>                  
+        <p class="foot">Copyright &copy;2008-2018 Esri R&amp;D Center Zurich. All rights reserved.</p>                  
 
 <!-- END CENTERED CONTENT -->
 

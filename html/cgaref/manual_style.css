@@ -1136,3 +1136,40 @@ textarea.showcode{
 	height:20px;
 	border:1px solid red;
 }
+
+
+.erdz-api-table {
+	width             : 100%; 
+	margin-top        : 15px; 
+	border            : 1px solid #ddd; 
+	margin-bottom     : 2px; 
+	border-spacing    : 0px;
+}
+
+.erdz-api-table .tr {
+	border            : 0px;
+}
+
+.erdz-api-table .erdz-api-proto{
+	background-color  : #eee; 
+	font-size         : 13px;
+}
+
+.erdz-api-table .erdz-api-text {
+	color             : #4c555a; 
+	font-size         : 13px; 
+	text-align        : justify; 
+	padding           : 5px 15px 5px 50px;
+}
+
+.erdz-api-table .erdz-api-example {
+	color             : #4c555a; 
+	font-size         : 13px; 
+	text-align        : justify; 
+	padding           : 5px 15px 5px 50px;
+}
+
+.erdz-api-table .erdz-api-example ul {
+	list-style-type   : none;
+}
+

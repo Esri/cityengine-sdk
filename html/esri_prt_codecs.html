@@ -5,7 +5,7 @@
 </head>
 <body>
 <h1>Esri Procedural Runtime Encoder/Decoder Reference</h1>
-<small>(Automatically generated from PRT 1.8.3501; Build Date: 2017-06-09 17:14; Build Configuration: PRT_BC_REL PRT_CC_OPT)</small><p>This is the PRT reference documentation for all built-in encoders and decoders.</p>
+<small>(Automatically generated from PRT 1.10.4051; Build Date: 2018-05-03 16:45; Build Configuration: PRT_BC_REL PRT_CC_OPT)</small><p>This is the PRT reference documentation for all built-in encoders and decoders.</p>
 <p>The encoder documentation lists for each encoder its supported encoder options. In PRT, the encoder options
 	are stored in an object of type prt::AttributeMap, therefore the term "attribute" is used synonymously in this
 	document for a single encoder option. Each attribute consists of a type, a default value and (optional)
@@ -214,161 +214,6 @@
 	</table></td>
 </tr>
 	
-	<tr>
-<td>facesWithHoles</td>
-<td>str</td>
-<td>TRIANGULATE_FACES_WITH_HOLES</td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Faces With Holes<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Specifies how faces with holes should be handled during the export.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 9080<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = Geometry Settings<br>order:float = 2<br>
-</td>
-</tr>
-		<tr>
-<td>@Range</td>
-<td>TRIANGULATE_FACES_WITH_HOLES:str = Triangulate faces with holes<br>DISCARD_HOLES:str = Discard holes<br>CONVERT_HOLES_TO_FACES:str = Convert holes to faces<br>
-</td>
-</tr>
-	</table></td>
-</tr>
-	<tr>
-<td>baseName</td>
-<td>str</td>
-<td>base_name</td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Base Name<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = The base name for all files.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 1010<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = General Settings<br>order:float = 0<br>
-</td>
-</tr>
-	</table></td>
-</tr>
-	
-	<tr>
-<td>applicationString</td>
-<td>str</td>
-<td></td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Application<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Name and version of application.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 0.103<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = General Settings<br>order:float = 0<br>
-</td>
-</tr>
-		<tr>
-<td>@Hidden</td>
-<td></td>
-</tr>
-	</table></td>
-</tr>
-	<tr>
-<td>author</td>
-<td>str</td>
-<td></td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Author<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Author of data.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 0.11<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = General Settings<br>order:float = 0<br>
-</td>
-</tr>
-		<tr>
-<td>@Hidden</td>
-<td></td>
-</tr>
-	</table></td>
-</tr>
-	
-	<tr>
-<td>localOffset</td>
-<td>str</td>
-<td>NONE</td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Local Offset<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Local (= per shape or model) offset for exported geometry.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 7010<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = Geometry Settings<br>order:float = 2<br>
-</td>
-</tr>
-		<tr>
-<td>@Range</td>
-<td>NONE:str = None<br>MODEL_CENTROID:str = Model Centroid<br>MODEL_CENTROID_BOTTOM:str = Model Centroid Bottom<br>SHAPE_CENTROID:str = Shape Centroid<br>SHAPE_CENTROID_BOTTOM:str = Shape Centroid Bottom<br>
-</td>
-</tr>
-	</table></td>
-</tr>
 	
 	<tr>
 <td>triangulateMeshes</td>
@@ -488,6 +333,161 @@
 	</table></td>
 </tr>
 	
+	<tr>
+<td>facesWithHoles</td>
+<td>str</td>
+<td>TRIANGULATE_FACES_WITH_HOLES</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Faces With Holes<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Specifies how faces with holes should be handled during the export.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 9080<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Geometry Settings<br>order:float = 2<br>
+</td>
+</tr>
+		<tr>
+<td>@Range</td>
+<td>TRIANGULATE_FACES_WITH_HOLES:str = Triangulate faces with holes<br>DISCARD_HOLES:str = Discard holes<br>CONVERT_HOLES_TO_FACES:str = Convert holes to faces<br>
+</td>
+</tr>
+	</table></td>
+</tr>
+	
+	<tr>
+<td>applicationString</td>
+<td>str</td>
+<td></td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Application<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Name and version of application.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 0.103<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = General Settings<br>order:float = 0<br>
+</td>
+</tr>
+		<tr>
+<td>@Hidden</td>
+<td></td>
+</tr>
+	</table></td>
+</tr>
+	<tr>
+<td>baseName</td>
+<td>str</td>
+<td>base_name</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Base Name<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = The base name for all files.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 1010<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = General Settings<br>order:float = 0<br>
+</td>
+</tr>
+	</table></td>
+</tr>
+	<tr>
+<td>author</td>
+<td>str</td>
+<td></td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Author<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Author of data.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 0.11<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = General Settings<br>order:float = 0<br>
+</td>
+</tr>
+		<tr>
+<td>@Hidden</td>
+<td></td>
+</tr>
+	</table></td>
+</tr>
+	
+	<tr>
+<td>localOffset</td>
+<td>str</td>
+<td>NONE</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Local Offset<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Local (= per shape or model) offset for exported geometry.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 7010<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Geometry Settings<br>order:float = 2<br>
+</td>
+</tr>
+		<tr>
+<td>@Range</td>
+<td>NONE:str = None<br>MODEL_CENTROID:str = Model Centroid<br>MODEL_CENTROID_BOTTOM:str = Model Centroid Bottom<br>SHAPE_CENTROID:str = Shape Centroid<br>SHAPE_CENTROID_BOTTOM:str = Shape Centroid Bottom<br>
+</td>
+</tr>
+	</table></td>
+</tr>
 	
 	<tr>
 <td>atlasAddWrapBorder</td>
@@ -796,6 +796,95 @@
 </tr>
 	</table></td>
 </tr>
+	<tr>
+<td>applicationString</td>
+<td>str</td>
+<td></td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Application<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Name and version of application.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 0.103<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = General Settings<br>order:float = 0<br>
+</td>
+</tr>
+		<tr>
+<td>@Hidden</td>
+<td></td>
+</tr>
+	</table></td>
+</tr>
+	<tr>
+<td>baseName</td>
+<td>str</td>
+<td>base_name</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Base Name<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = The base name for all files.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 1010<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = General Settings<br>order:float = 0<br>
+</td>
+</tr>
+	</table></td>
+</tr>
+	<tr>
+<td>applicationVersion</td>
+<td>str</td>
+<td></td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Application Version<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Version of application.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 0.102<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = General Settings<br>order:float = 0<br>
+</td>
+</tr>
+		<tr>
+<td>@Hidden</td>
+<td></td>
+</tr>
+	</table></td>
+</tr>
 	
 	<tr>
 <td>vertexNormals</td>
@@ -852,39 +941,6 @@
 		<tr>
 <td>@Group</td>
 <td>name:str = Geometry Settings<br>order:float = 2<br>
-</td>
-</tr>
-	</table></td>
-</tr>
-	
-	<tr>
-<td>fileGranularity</td>
-<td>str</td>
-<td>MEMORY_BUDGET</td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = File Granularity<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Specifies the partition of the generated geometry into files.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 3010<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = Granularity Settings<br>order:float = 1<br>
-</td>
-</tr>
-		<tr>
-<td>@Range</td>
-<td>MEMORY_BUDGET:str = One file as long as Memory Budget is not exceeded<br>START_SHAPE:str = One file per start shape<br>
 </td>
 </tr>
 	</table></td>
@@ -948,91 +1004,35 @@
 </tr>
 	</table></td>
 </tr>
+	
 	<tr>
-<td>applicationVersion</td>
+<td>fileGranularity</td>
 <td>str</td>
-<td></td>
+<td>MEMORY_BUDGET</td>
 <td><table class="doxtable">
 		<tr>
 <td>@Label</td>
-<td>:str = Application Version<br>
+<td>:str = File Granularity<br>
 </td>
 </tr>
 		<tr>
 <td>@Description</td>
-<td>:str = Version of application.<br>
+<td>:str = Specifies the partition of the generated geometry into files.<br>
 </td>
 </tr>
 		<tr>
 <td>@Order</td>
-<td>:float = 0.102<br>
+<td>:float = 3010<br>
 </td>
 </tr>
 		<tr>
 <td>@Group</td>
-<td>name:str = General Settings<br>order:float = 0<br>
+<td>name:str = Granularity Settings<br>order:float = 1<br>
 </td>
 </tr>
 		<tr>
-<td>@Hidden</td>
-<td></td>
-</tr>
-	</table></td>
-</tr>
-	<tr>
-<td>applicationString</td>
-<td>str</td>
-<td></td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Application<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Name and version of application.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 0.103<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = General Settings<br>order:float = 0<br>
-</td>
-</tr>
-		<tr>
-<td>@Hidden</td>
-<td></td>
-</tr>
-	</table></td>
-</tr>
-	<tr>
-<td>baseName</td>
-<td>str</td>
-<td>base_name</td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Base Name<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = The base name for all files.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 1010<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = General Settings<br>order:float = 0<br>
+<td>@Range</td>
+<td>MEMORY_BUDGET:str = One file as long as Memory Budget is not exceeded<br>START_SHAPE:str = One file per start shape<br>
 </td>
 </tr>
 	</table></td>
@@ -1950,11 +1950,100 @@
 </tr>
 	</table></td>
 </tr>
+	<tr>
+<td>applicationString</td>
+<td>str</td>
+<td></td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Application<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Name and version of application.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 0.103<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = General Settings<br>order:float = 0<br>
+</td>
+</tr>
+		<tr>
+<td>@Hidden</td>
+<td></td>
+</tr>
+	</table></td>
+</tr>
+	<tr>
+<td>baseName</td>
+<td>str</td>
+<td>base_name</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Base Name<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = The base name for all files.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 1010<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = General Settings<br>order:float = 0<br>
+</td>
+</tr>
+	</table></td>
+</tr>
+	<tr>
+<td>applicationVersion</td>
+<td>str</td>
+<td></td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Application Version<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Version of application.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 0.102<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = General Settings<br>order:float = 0<br>
+</td>
+</tr>
+		<tr>
+<td>@Hidden</td>
+<td></td>
+</tr>
+	</table></td>
+</tr>
 	
 	<tr>
 <td>vertexNormals</td>
 <td>str</td>
-<td>PASS</td>
+<td>SET_MISSING</td>
 <td><table class="doxtable">
 		<tr>
 <td>@Label</td>
@@ -2066,95 +2155,6 @@
 		<tr>
 <td>@Hidden</td>
 <td></td>
-</tr>
-	</table></td>
-</tr>
-	<tr>
-<td>applicationVersion</td>
-<td>str</td>
-<td></td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Application Version<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Version of application.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 0.102<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = General Settings<br>order:float = 0<br>
-</td>
-</tr>
-		<tr>
-<td>@Hidden</td>
-<td></td>
-</tr>
-	</table></td>
-</tr>
-	<tr>
-<td>applicationString</td>
-<td>str</td>
-<td></td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Application<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Name and version of application.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 0.103<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = General Settings<br>order:float = 0<br>
-</td>
-</tr>
-		<tr>
-<td>@Hidden</td>
-<td></td>
-</tr>
-	</table></td>
-</tr>
-	<tr>
-<td>baseName</td>
-<td>str</td>
-<td>base_name</td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Base Name<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = The base name for all files.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 1010<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = General Settings<br>order:float = 0<br>
-</td>
 </tr>
 	</table></td>
 </tr>
@@ -2922,75 +2922,6 @@
 	</table></td>
 </tr>
 	<tr>
-<td>layerName</td>
-<td>str_array</td>
-<td></td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Layer Name<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Layer name.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 20100<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = Layer Settings<br>order:float = 6<br>
-</td>
-</tr>
-		<tr>
-<td>@PerLayer</td>
-<td>layerDefault:str = <br>
-</td>
-</tr>
-	</table></td>
-</tr>
-	<tr>
-<td>layerTextureCompression</td>
-<td>int_array</td>
-<td></td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Texture Compression<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Set texture compression for lossless texture encoders.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 20170<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = Layer Settings<br>order:float = 6<br>
-</td>
-</tr>
-		<tr>
-<td>@Range</td>
-<td>0:float = 1<br>1:float = 9<br>
-</td>
-</tr>
-		<tr>
-<td>@PerLayer</td>
-<td>layerDefault:float = 9<br>
-</td>
-</tr>
-	</table></td>
-</tr>
-	<tr>
 <td>sceneType</td>
 <td>str</td>
 <td>Global</td>
@@ -3022,61 +2953,133 @@
 </tr>
 	</table></td>
 </tr>
+	
 	<tr>
-<td>globalOffset</td>
-<td>float_array</td>
+<td>applicationName</td>
+<td>str</td>
 <td></td>
 <td><table class="doxtable">
 		<tr>
 <td>@Label</td>
-<td>:str = Global Offset<br>
+<td>:str = Application Name<br>
 </td>
 </tr>
 		<tr>
 <td>@Description</td>
-<td>:str = Global (= for all shapes/models) offset for exported geometry.<br>
+<td>:str = Name of application.<br>
 </td>
 </tr>
 		<tr>
 <td>@Order</td>
-<td>:float = 7020<br>
+<td>:float = 0.101<br>
 </td>
 </tr>
 		<tr>
 <td>@Group</td>
-<td>name:str = Geometry Settings<br>order:float = 2<br>
+<td>name:str = General Settings<br>order:float = 0<br>
 </td>
 </tr>
 		<tr>
-<td>@Point3D</td>
+<td>@Hidden</td>
+<td></td>
+</tr>
+	</table></td>
+</tr>
+	
+	
+	<tr>
+<td>sceneAuth</td>
+<td>str</td>
+<td>EPSG</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Scene CS Authority<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Specifies the coordinate system authority of the scene.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 7210<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Advanced Settings<br>order:float = 5<br>
+</td>
+</tr>
+		<tr>
+<td>@Hidden</td>
 <td></td>
 </tr>
 	</table></td>
 </tr>
 	
 	<tr>
-<td>emitReports</td>
-<td>bool</td>
-<td>true</td>
+<td>shapeNameDelimiter</td>
+<td>str</td>
+<td>_</td>
 <td><table class="doxtable">
 		<tr>
 <td>@Label</td>
-<td>:str = Emit Reports<br>
+<td>:str = Shape Name Delimiter<br>
 </td>
 </tr>
 		<tr>
 <td>@Description</td>
-<td>:str = DEBUG OPTION: Export CGA reports generated on models.<br>
+<td>:str = Delimiting character for resolution of shape name clashes.<br>
 </td>
 </tr>
 		<tr>
 <td>@Order</td>
-<td>:float = 1030<br>
+<td>:float = 7060<br>
 </td>
 </tr>
 		<tr>
 <td>@Group</td>
-<td>name:str = General Settings<br>order:float = 0<br>
+<td>name:str = Advanced Settings<br>order:float = 5<br>
+</td>
+</tr>
+	</table></td>
+</tr>
+	
+	<tr>
+<td>layerTextureEncoding</td>
+<td>str_array</td>
+<td></td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Textures<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Specifies whether and how the textures should be encoded.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 22000<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Layer Settings<br>order:float = 6<br>
+</td>
+</tr>
+		<tr>
+<td>@Range</td>
+<td>SKIP:str = No textures<br>TRY_TO_REUSE_SOURCE:str = Try to keep source texture data; reencode only if necessary<br>REENCODE:str = Reencode textures<br>
+</td>
+</tr>
+		<tr>
+<td>@PerLayer</td>
+<td>layerDefault:float = 2<br>
 </td>
 </tr>
 	</table></td>
@@ -3108,34 +3111,63 @@
 </tr>
 	</table></td>
 </tr>
+	
+	
 	<tr>
-<td>applicationVersion</td>
-<td>str</td>
-<td></td>
+<td>writePackage</td>
+<td>bool</td>
+<td>true</td>
 <td><table class="doxtable">
 		<tr>
 <td>@Label</td>
-<td>:str = Application Version<br>
+<td>:str = Write Package<br>
 </td>
 </tr>
 		<tr>
 <td>@Description</td>
-<td>:str = Version of application.<br>
+<td>:str = DEBUG OPTION: Bundle the exported files into a scene package.<br>
 </td>
 </tr>
 		<tr>
 <td>@Order</td>
-<td>:float = 0.102<br>
+<td>:float = 7050<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Advanced Settings<br>order:float = 5<br>
+</td>
+</tr>
+		<tr>
+<td>@Hidden</td>
+<td></td>
+</tr>
+	</table></td>
+</tr>
+	<tr>
+<td>backfaceCulling</td>
+<td>bool</td>
+<td>false</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Backface Culling<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Activate Backface Culling.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 1031<br>
 </td>
 </tr>
 		<tr>
 <td>@Group</td>
 <td>name:str = General Settings<br>order:float = 0<br>
 </td>
-</tr>
-		<tr>
-<td>@Hidden</td>
-<td></td>
 </tr>
 	</table></td>
 </tr>
@@ -3171,23 +3203,23 @@
 	</table></td>
 </tr>
 	<tr>
-<td>errorFallback</td>
-<td>bool</td>
-<td>true</td>
+<td>applicationVersion</td>
+<td>str</td>
+<td></td>
 <td><table class="doxtable">
 		<tr>
 <td>@Label</td>
-<td>:str = Error Fallback<br>
+<td>:str = Application Version<br>
 </td>
 </tr>
 		<tr>
 <td>@Description</td>
-<td>:str = Fall back to start shape geometry, if generation fails. Else, ignore failed start shapes.<br>
+<td>:str = Version of application.<br>
 </td>
 </tr>
 		<tr>
 <td>@Order</td>
-<td>:float = 1020<br>
+<td>:float = 0.102<br>
 </td>
 </tr>
 		<tr>
@@ -3201,7 +3233,6 @@
 </tr>
 	</table></td>
 </tr>
-	
 	<tr>
 <td>existingFiles</td>
 <td>str</td>
@@ -3234,30 +3265,29 @@
 </tr>
 	</table></td>
 </tr>
-	
 	<tr>
-<td>writePackage</td>
+<td>errorFallback</td>
 <td>bool</td>
 <td>true</td>
 <td><table class="doxtable">
 		<tr>
 <td>@Label</td>
-<td>:str = Write Package<br>
+<td>:str = Error Fallback<br>
 </td>
 </tr>
 		<tr>
 <td>@Description</td>
-<td>:str = DEBUG OPTION: Bundle the exported files into a scene package.<br>
+<td>:str = Fall back to start shape geometry, if generation fails. Else, ignore failed start shapes.<br>
 </td>
 </tr>
 		<tr>
 <td>@Order</td>
-<td>:float = 7050<br>
+<td>:float = 1020<br>
 </td>
 </tr>
 		<tr>
 <td>@Group</td>
-<td>name:str = Advanced Settings<br>order:float = 5<br>
+<td>name:str = General Settings<br>order:float = 0<br>
 </td>
 </tr>
 		<tr>
@@ -3363,7 +3393,6 @@
 </tr>
 	</table></td>
 </tr>
-	
 	<tr>
 <td>author</td>
 <td>str</td>
@@ -3412,7 +3441,7 @@
 </tr>
 		<tr>
 <td>@Order</td>
-<td>:float = 20160<br>
+<td>:float = 22010<br>
 </td>
 </tr>
 		<tr>
@@ -3492,51 +3521,55 @@
 	</table></td>
 </tr>
 	<tr>
-<td>shapeNameDelimiter</td>
-<td>str</td>
-<td>_</td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Shape Name Delimiter<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Delimiting character for resolution of shape name clashes.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 7060<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = Advanced Settings<br>order:float = 5<br>
-</td>
-</tr>
-	</table></td>
-</tr>
-	
-	<tr>
-<td>layerTextureEncoding</td>
+<td>layerName</td>
 <td>str_array</td>
 <td></td>
 <td><table class="doxtable">
 		<tr>
 <td>@Label</td>
-<td>:str = Textures<br>
+<td>:str = Layer Name<br>
 </td>
 </tr>
 		<tr>
 <td>@Description</td>
-<td>:str = Specifies whether and how the textures should be encoded.<br>
+<td>:str = Layer name.<br>
 </td>
 </tr>
 		<tr>
 <td>@Order</td>
-<td>:float = 20150<br>
+<td>:float = 20100<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Layer Settings<br>order:float = 6<br>
+</td>
+</tr>
+		<tr>
+<td>@PerLayer</td>
+<td>layerDefault:str = <br>
+</td>
+</tr>
+	</table></td>
+</tr>
+	<tr>
+<td>layerTextureCompression</td>
+<td>int_array</td>
+<td></td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Texture Compression<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Set texture compression for lossless texture encoders.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 22020<br>
 </td>
 </tr>
 		<tr>
@@ -3546,16 +3579,17 @@
 </tr>
 		<tr>
 <td>@Range</td>
-<td>SKIP:str = No textures<br>TRY_TO_REUSE_SOURCE:str = Try to keep source texture data; reencode only if necessary<br>REENCODE:str = Reencode textures<br>
+<td>0:float = 1<br>1:float = 9<br>
 </td>
 </tr>
 		<tr>
 <td>@PerLayer</td>
-<td>layerDefault:float = 2<br>
+<td>layerDefault:float = 9<br>
 </td>
 </tr>
 	</table></td>
 </tr>
+	
 	<tr>
 <td>layerTextureMaxDimension</td>
 <td>int_array</td>
@@ -3573,7 +3607,7 @@
 </tr>
 		<tr>
 <td>@Order</td>
-<td>:float = 20190<br>
+<td>:float = 22040<br>
 </td>
 </tr>
 		<tr>
@@ -3593,6 +3627,68 @@
 </tr>
 	</table></td>
 </tr>
+	<tr>
+<td>emitReports</td>
+<td>bool</td>
+<td>true</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Emit Reports<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Export CGA reports generated on models.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 1030<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = General Settings<br>order:float = 0<br>
+</td>
+</tr>
+	</table></td>
+</tr>
+	
+	
+	<tr>
+<td>layerBackfaceCulling</td>
+<td>bool_array</td>
+<td></td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Backface culling<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Activate backface culling.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 20200<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Layer Settings<br>order:float = 6<br>
+</td>
+</tr>
+		<tr>
+<td>@PerLayer</td>
+<td>layerDefault:bool = false<br>
+</td>
+</tr>
+	</table></td>
+</tr>
+	
 	
 	<tr>
 <td>layerTextureScaling</td>
@@ -3611,7 +3707,7 @@
 </tr>
 		<tr>
 <td>@Order</td>
-<td>:float = 20180<br>
+<td>:float = 22030<br>
 </td>
 </tr>
 		<tr>
@@ -3664,64 +3760,24 @@
 	</table></td>
 </tr>
 	
-	
-	
-	
-	
-	
-	
-	
 	<tr>
-<td>sceneAuth</td>
+<td>featureGranularity</td>
 <td>str</td>
-<td>EPSG</td>
+<td>FEATURE_PER_SHAPE</td>
 <td><table class="doxtable">
 		<tr>
 <td>@Label</td>
-<td>:str = Scene CS Authority<br>
+<td>:str = Feature Granularity<br>
 </td>
 </tr>
 		<tr>
 <td>@Description</td>
-<td>:str = Specifies the coordinate system authority of the scene.<br>
+<td>:str = Set Feature Granularity.<br>
 </td>
 </tr>
 		<tr>
 <td>@Order</td>
-<td>:float = 7210<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = Advanced Settings<br>order:float = 5<br>
-</td>
-</tr>
-		<tr>
-<td>@Hidden</td>
-<td></td>
-</tr>
-	</table></td>
-</tr>
-	
-	
-	<tr>
-<td>applicationName</td>
-<td>str</td>
-<td></td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Application Name<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Name of application.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 0.101<br>
+<td>:float = 1033<br>
 </td>
 </tr>
 		<tr>
@@ -3730,11 +3786,17 @@
 </td>
 </tr>
 		<tr>
-<td>@Hidden</td>
-<td></td>
+<td>@Range</td>
+<td>FEATURE_PER_SHAPE:str = One Feature Per Shape<br>FEATURE_PER_LEAF_SHAPE:str = One Feature Per Leaf Shape<br>
+</td>
 </tr>
 	</table></td>
 </tr>
+	
+	
+	
+	
+	
 	
 <tr><td colspan="4"></td></tr>
 <tr><td colspan="4"><h3><a name="com.esri.prt.codecs.JPGEncoder">JPEG Encoder (com.esri.prt.codecs.JPGEncoder)</a></h3></td></tr>
@@ -3783,35 +3845,6 @@
 </tr>
 	</table></td>
 </tr>
-	<tr>
-<td>textureMaxDimension</td>
-<td>int</td>
-<td>0</td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Maximum Size<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Maximum size of texture resolution (0 = no limit).<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 15110<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = Texture Settings<br>order:float = 4<br>
-</td>
-</tr>
-	</table></td>
-</tr>
-	
-	
 	<tr>
 <td>textureScalingFactor</td>
 <td>float</td>
@@ -3876,6 +3909,35 @@
 </tr>
 	</table></td>
 </tr>
+	<tr>
+<td>textureMaxDimension</td>
+<td>int</td>
+<td>0</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Maximum Size<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Maximum size of texture resolution (0 = no limit).<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 15110<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Texture Settings<br>order:float = 4<br>
+</td>
+</tr>
+	</table></td>
+</tr>
+	
+	
 	<tr>
 <td>textureFlipH</td>
 <td>bool</td>
@@ -3978,6 +4040,34 @@
 </tr>
 	
 	
+	<tr>
+<td>collectTextures</td>
+<td>bool</td>
+<td>true</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Collect Textures<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Collects all used textures and copies them into the target folder. All texture references are adjusted accordingly.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 4020<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Texture Settings<br>order:float = 4<br>
+</td>
+</tr>
+	</table></td>
+</tr>
+	
 	
 	<tr>
 <td>writeLog</td>
@@ -4006,30 +4096,29 @@
 </tr>
 	</table></td>
 </tr>
-	
 	<tr>
-<td>collectTextures</td>
-<td>bool</td>
-<td>true</td>
+<td>baseName</td>
+<td>str</td>
+<td>prt_mtl_encoder</td>
 <td><table class="doxtable">
 		<tr>
 <td>@Label</td>
-<td>:str = Collect Textures<br>
+<td>:str = Base Name<br>
 </td>
 </tr>
 		<tr>
 <td>@Description</td>
-<td>:str = Collects all used textures and copies them into the target folder. All texture references are adjusted accordingly.<br>
+<td>:str = The base name for all files.<br>
 </td>
 </tr>
 		<tr>
 <td>@Order</td>
-<td>:float = 4020<br>
+<td>:float = 1010<br>
 </td>
 </tr>
 		<tr>
 <td>@Group</td>
-<td>name:str = Texture Settings<br>order:float = 4<br>
+<td>name:str = General Settings<br>order:float = 0<br>
 </td>
 </tr>
 	</table></td>
@@ -4062,33 +4151,6 @@
 		<tr>
 <td>@Range</td>
 <td>OVERWRITE:str = Overwrite existing files<br>SKIP:str = Skip existing files<br>
-</td>
-</tr>
-	</table></td>
-</tr>
-	<tr>
-<td>baseName</td>
-<td>str</td>
-<td>prt_mtl_encoder</td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Base Name<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = The base name for all files.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 1010<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = General Settings<br>order:float = 0<br>
 </td>
 </tr>
 	</table></td>
@@ -4358,65 +4420,6 @@
 	
 	
 	
-	
-	<tr>
-<td>includeMaterials</td>
-<td>bool</td>
-<td>true</td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Include Materials<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Exports material definitions (e.g. color, textures, ...).<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 4010<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = Material Settings<br>order:float = 3<br>
-</td>
-</tr>
-	</table></td>
-</tr>
-	<tr>
-<td>applicationName</td>
-<td>str</td>
-<td></td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Application Name<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Name of application.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 0.101<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = General Settings<br>order:float = 0<br>
-</td>
-</tr>
-		<tr>
-<td>@Hidden</td>
-<td></td>
-</tr>
-	</table></td>
-</tr>
 	<tr>
 <td>facesWithHoles</td>
 <td>str</td>
@@ -4446,37 +4449,6 @@
 <td>@Range</td>
 <td>TRIANGULATE_FACES_WITH_HOLES:str = Triangulate faces with holes<br>DISCARD_HOLES:str = Discard holes<br>CONVERT_HOLES_TO_FACES:str = Convert holes to faces<br>
 </td>
-</tr>
-	</table></td>
-</tr>
-	<tr>
-<td>applicationVersion</td>
-<td>str</td>
-<td></td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Application Version<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Version of application.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 0.102<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = General Settings<br>order:float = 0<br>
-</td>
-</tr>
-		<tr>
-<td>@Hidden</td>
-<td></td>
 </tr>
 	</table></td>
 </tr>
@@ -4537,6 +4509,96 @@
 <td>@Group</td>
 <td>name:str = General Settings<br>order:float = 0<br>
 </td>
+</tr>
+	</table></td>
+</tr>
+	<tr>
+<td>applicationVersion</td>
+<td>str</td>
+<td></td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Application Version<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Version of application.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 0.102<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = General Settings<br>order:float = 0<br>
+</td>
+</tr>
+		<tr>
+<td>@Hidden</td>
+<td></td>
+</tr>
+	</table></td>
+</tr>
+	
+	<tr>
+<td>includeMaterials</td>
+<td>bool</td>
+<td>true</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Include Materials<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Exports material definitions (e.g. color, textures, ...).<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 4010<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Material Settings<br>order:float = 3<br>
+</td>
+</tr>
+	</table></td>
+</tr>
+	<tr>
+<td>applicationName</td>
+<td>str</td>
+<td></td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Application Name<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Name of application.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 0.101<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = General Settings<br>order:float = 0<br>
+</td>
+</tr>
+		<tr>
+<td>@Hidden</td>
+<td></td>
 </tr>
 	</table></td>
 </tr>
@@ -5079,35 +5141,6 @@
 	</table></td>
 </tr>
 	<tr>
-<td>textureMaxDimension</td>
-<td>int</td>
-<td>0</td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Maximum Size<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Maximum size of texture resolution (0 = no limit).<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 15110<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = Texture Settings<br>order:float = 4<br>
-</td>
-</tr>
-	</table></td>
-</tr>
-	
-	
-	<tr>
 <td>textureScalingFactor</td>
 <td>float</td>
 <td>1.0</td>
@@ -5139,6 +5172,35 @@
 </tr>
 	</table></td>
 </tr>
+	<tr>
+<td>textureMaxDimension</td>
+<td>int</td>
+<td>0</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Maximum Size<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Maximum size of texture resolution (0 = no limit).<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 15110<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Texture Settings<br>order:float = 4<br>
+</td>
+</tr>
+	</table></td>
+</tr>
+	
+	
 	<tr>
 <td>textureFlipH</td>
 <td>bool</td>
@@ -5277,6 +5339,34 @@
 </tr>
 	
 	<tr>
+<td>textureMaxDimension</td>
+<td>int</td>
+<td>0</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Maximum Size<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Maximum size of texture resolution (0 = no limit).<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 15110<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Texture Settings<br>order:float = 4<br>
+</td>
+</tr>
+	</table></td>
+</tr>
+	
+	<tr>
 <td>textureScalingFactor</td>
 <td>float</td>
 <td>1.0</td>
@@ -5308,25 +5398,24 @@
 </tr>
 	</table></td>
 </tr>
-	
 	<tr>
-<td>textureMaxDimension</td>
-<td>int</td>
-<td>0</td>
+<td>textureName</td>
+<td>str</td>
+<td>texture.mem</td>
 <td><table class="doxtable">
 		<tr>
 <td>@Label</td>
-<td>:str = Maximum Size<br>
+<td>:str = Texture Name<br>
 </td>
 </tr>
 		<tr>
 <td>@Description</td>
-<td>:str = Maximum size of texture resolution (0 = no limit).<br>
+<td>:str = Texture base name.<br>
 </td>
 </tr>
 		<tr>
 <td>@Order</td>
-<td>:float = 15110<br>
+<td>:float = 15100<br>
 </td>
 </tr>
 		<tr>
@@ -5354,33 +5443,6 @@
 		<tr>
 <td>@Order</td>
 <td>:float = 15130<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = Texture Settings<br>order:float = 4<br>
-</td>
-</tr>
-	</table></td>
-</tr>
-	<tr>
-<td>textureName</td>
-<td>str</td>
-<td>texture.mem</td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Texture Name<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Texture base name.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 15100<br>
 </td>
 </tr>
 		<tr>
@@ -6727,92 +6789,6 @@
 	
 	
 	<tr>
-<td>writeLog</td>
-<td>bool</td>
-<td>false</td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Write Log<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Write log file with statistics about this export session.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 7005<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = Advanced Settings<br>order:float = 5<br>
-</td>
-</tr>
-	</table></td>
-</tr>
-	<tr>
-<td>emitReports</td>
-<td>bool</td>
-<td>true</td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Emit Reports<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Export CGA reports generated on models.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 1030<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = General Settings<br>order:float = 0<br>
-</td>
-</tr>
-	</table></td>
-</tr>
-	<tr>
-<td>applicationVendor</td>
-<td>str</td>
-<td></td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Application Vendor<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Vendor of application.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 0.104<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = General Settings<br>order:float = 0<br>
-</td>
-</tr>
-		<tr>
-<td>@Hidden</td>
-<td></td>
-</tr>
-	</table></td>
-</tr>
-	
-	<tr>
 <td>shapeNameDelimiter</td>
 <td>str</td>
 <td>_</td>
@@ -7002,6 +6978,97 @@
 </tr>
 	</table></td>
 </tr>
+	<tr>
+<td>writeLog</td>
+<td>bool</td>
+<td>false</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Write Log<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Write log file with statistics about this export session.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 7005<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Advanced Settings<br>order:float = 5<br>
+</td>
+</tr>
+	</table></td>
+</tr>
+	<tr>
+<td>emitReports</td>
+<td>str</td>
+<td>FULL</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Emit Reports<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Whether and how to emit GA reports reports on models.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 1030<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = General Settings<br>order:float = 0<br>
+</td>
+</tr>
+		<tr>
+<td>@Range</td>
+<td>NONE:str = Do not export any reports<br>SUM_ONLY:str = Only export the sum of the reports<br>FULL:str = Export the full summary of the reports<br>
+</td>
+</tr>
+	</table></td>
+</tr>
+	<tr>
+<td>applicationVendor</td>
+<td>str</td>
+<td></td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Application Vendor<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Vendor of application.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 0.104<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = General Settings<br>order:float = 0<br>
+</td>
+</tr>
+		<tr>
+<td>@Hidden</td>
+<td></td>
+</tr>
+	</table></td>
+</tr>
+	
 	<tr>
 <td>generateModels</td>
 <td>bool_array</td>
@@ -7223,6 +7290,34 @@
 </tr>
 	
 	<tr>
+<td>textureMaxDimension</td>
+<td>int</td>
+<td>0</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Maximum Size<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Maximum size of texture resolution (0 = no limit).<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 15110<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Texture Settings<br>order:float = 4<br>
+</td>
+</tr>
+	</table></td>
+</tr>
+	
+	<tr>
 <td>textureScalingFactor</td>
 <td>float</td>
 <td>1.0</td>
@@ -7254,25 +7349,24 @@
 </tr>
 	</table></td>
 </tr>
-	
 	<tr>
-<td>textureMaxDimension</td>
-<td>int</td>
-<td>0</td>
+<td>textureName</td>
+<td>str</td>
+<td>texture.tif</td>
 <td><table class="doxtable">
 		<tr>
 <td>@Label</td>
-<td>:str = Maximum Size<br>
+<td>:str = Texture Name<br>
 </td>
 </tr>
 		<tr>
 <td>@Description</td>
-<td>:str = Maximum size of texture resolution (0 = no limit).<br>
+<td>:str = Texture base name.<br>
 </td>
 </tr>
 		<tr>
 <td>@Order</td>
-<td>:float = 15110<br>
+<td>:float = 15100<br>
 </td>
 </tr>
 		<tr>
@@ -7300,33 +7394,6 @@
 		<tr>
 <td>@Order</td>
 <td>:float = 15130<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = Texture Settings<br>order:float = 4<br>
-</td>
-</tr>
-	</table></td>
-</tr>
-	<tr>
-<td>textureName</td>
-<td>str</td>
-<td>texture.tif</td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Texture Name<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Texture base name.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 15100<br>
 </td>
 </tr>
 		<tr>
@@ -7754,6 +7821,129 @@
 </tr>
 	</table></td>
 </tr>
+	
+	<tr>
+<td>includeMaterials</td>
+<td>bool</td>
+<td>true</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Include Materials<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Exports material definitions (e.g. color, textures, ...).<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 4010<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Material Settings<br>order:float = 3<br>
+</td>
+</tr>
+	</table></td>
+</tr>
+	<tr>
+<td>applicationName</td>
+<td>str</td>
+<td></td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Application Name<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Name of application.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 0.101<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = General Settings<br>order:float = 0<br>
+</td>
+</tr>
+		<tr>
+<td>@Hidden</td>
+<td></td>
+</tr>
+	</table></td>
+</tr>
+	
+	
+	<tr>
+<td>applicationString</td>
+<td>str</td>
+<td></td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Application<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Name and version of application.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 0.103<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = General Settings<br>order:float = 0<br>
+</td>
+</tr>
+		<tr>
+<td>@Hidden</td>
+<td></td>
+</tr>
+	</table></td>
+</tr>
+	<tr>
+<td>applicationVersion</td>
+<td>str</td>
+<td></td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Application Version<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Version of application.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 0.102<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = General Settings<br>order:float = 0<br>
+</td>
+</tr>
+		<tr>
+<td>@Hidden</td>
+<td></td>
+</tr>
+	</table></td>
+</tr>
 	<tr>
 <td>injectJSON</td>
 <td>str_array</td>
@@ -7818,129 +8008,6 @@
 	</table></td>
 </tr>
 	
-	
-	<tr>
-<td>includeMaterials</td>
-<td>bool</td>
-<td>true</td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Include Materials<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Exports material definitions (e.g. color, textures, ...).<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 4010<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = Material Settings<br>order:float = 3<br>
-</td>
-</tr>
-	</table></td>
-</tr>
-	<tr>
-<td>applicationName</td>
-<td>str</td>
-<td></td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Application Name<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Name of application.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 0.101<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = General Settings<br>order:float = 0<br>
-</td>
-</tr>
-		<tr>
-<td>@Hidden</td>
-<td></td>
-</tr>
-	</table></td>
-</tr>
-	
-	
-	<tr>
-<td>applicationVersion</td>
-<td>str</td>
-<td></td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Application Version<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Version of application.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 0.102<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = General Settings<br>order:float = 0<br>
-</td>
-</tr>
-		<tr>
-<td>@Hidden</td>
-<td></td>
-</tr>
-	</table></td>
-</tr>
-	<tr>
-<td>applicationString</td>
-<td>str</td>
-<td></td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Application<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Name and version of application.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 0.103<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = General Settings<br>order:float = 0<br>
-</td>
-</tr>
-		<tr>
-<td>@Hidden</td>
-<td></td>
-</tr>
-	</table></td>
-</tr>
 	<tr>
 <td>applicationVendor</td>
 <td>str</td>
@@ -8453,6 +8520,27 @@
 <th>Annotations</th>
 </tr>
 	<tr>
+<td>/enc/com.esri.prt.codecs.WebSceneObjectEncoder/elevationMode</td>
+<td>str</td>
+<td>relativeToGround</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Description</td>
+<td>:str = Controls the 'elevationMode' attribute of a CityEngine WebScene object.<br>
+</td>
+</tr>
+		<tr>
+<td>@Range</td>
+<td>clampToGround:str = <br>relativeToGround:str = <br>altitude:str = <br>
+</td>
+</tr>
+		<tr>
+<td>@Mandatory</td>
+<td></td>
+</tr>
+	</table></td>
+</tr>
+	<tr>
 <td>/enc/layerUID</td>
 <td>str</td>
 <td></td>
@@ -8476,27 +8564,6 @@
 		<tr>
 <td>@Description</td>
 <td>:str = The name of the layer the initial shape (object) belongs to.<br>
-</td>
-</tr>
-		<tr>
-<td>@Mandatory</td>
-<td></td>
-</tr>
-	</table></td>
-</tr>
-	<tr>
-<td>/enc/com.esri.prt.codecs.WebSceneObjectEncoder/elevationMode</td>
-<td>str</td>
-<td>relativeToGround</td>
-<td><table class="doxtable">
-		<tr>
-<td>@Description</td>
-<td>:str = Controls the 'elevationMode' attribute of a CityEngine WebScene object.<br>
-</td>
-</tr>
-		<tr>
-<td>@Range</td>
-<td>clampToGround:str = <br>relativeToGround:str = <br>altitude:str = <br>
 </td>
 </tr>
 		<tr>
@@ -8751,67 +8818,6 @@
 </tr>
 	</table></td>
 </tr>
-	
-	<tr>
-<td>geometryBase64</td>
-<td>bool</td>
-<td>true</td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Geometry As Base64<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Encode geometry data into Base64.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 2040<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = Geometry Settings<br>order:float = 2<br>
-</td>
-</tr>
-	</table></td>
-</tr>
-	
-	<tr>
-<td>objectInteraction</td>
-<td>str</td>
-<td>PICKABLE</td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Object Interaction<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Specifies how the objects interact.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 2020<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = General Settings<br>order:float = 0<br>
-</td>
-</tr>
-		<tr>
-<td>@Range</td>
-<td>PICKABLE:str = Pickable<br>LOCKED:str = Locked<br>
-</td>
-</tr>
-	</table></td>
-</tr>
 	<tr>
 <td>errorFallback</td>
 <td>bool</td>
@@ -8870,6 +8876,67 @@
 </tr>
 	</table></td>
 </tr>
+	<tr>
+<td>objectInteraction</td>
+<td>str</td>
+<td>PICKABLE</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Object Interaction<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Specifies how the objects interact.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 2020<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = General Settings<br>order:float = 0<br>
+</td>
+</tr>
+		<tr>
+<td>@Range</td>
+<td>PICKABLE:str = Pickable<br>LOCKED:str = Locked<br>
+</td>
+</tr>
+	</table></td>
+</tr>
+	
+	<tr>
+<td>geometryBase64</td>
+<td>bool</td>
+<td>true</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Geometry As Base64<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Encode geometry data into Base64.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 2040<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Geometry Settings<br>order:float = 2<br>
+</td>
+</tr>
+	</table></td>
+</tr>
+	
 	<tr>
 <td>textureScalingFactor</td>
 <td>float</td>
@@ -9016,20 +9083,6 @@
 <th>Annotations</th>
 </tr>
 	
-	
-	
-	<tr>
-<td>name</td>
-<td>str</td>
-<td>CGAReport.txt</td>
-<td><table class="doxtable"></table></td>
-</tr>
-	<tr>
-<td>shapeId</td>
-<td>int</td>
-<td>0</td>
-<td><table class="doxtable"></table></td>
-</tr>
 	<tr>
 <td>errorHandling</td>
 <td>int</td>
@@ -9041,6 +9094,20 @@
 </td>
 </tr>
 	</table></td>
+</tr>
+	<tr>
+<td>shapeId</td>
+<td>int</td>
+<td>0</td>
+<td><table class="doxtable"></table></td>
+</tr>
+	
+	
+	<tr>
+<td>name</td>
+<td>str</td>
+<td>CGAReport.txt</td>
+<td><table class="doxtable"></table></td>
 </tr>
 <tr><td colspan="4"></td></tr>
 <tr><td colspan="4"><h3><a name="com.esri.prt.core.CGAErrorEncoder">CGA Error Encoder (com.esri.prt.core.CGAErrorEncoder)</a></h3></td></tr>
@@ -9060,13 +9127,13 @@
 <th>Annotations</th>
 </tr>
 	
-	
 	<tr>
 <td>name</td>
 <td>str</td>
 <td>CGAError.txt</td>
 <td><table class="doxtable"></table></td>
 </tr>
+	
 	<tr>
 <td>errorHandling</td>
 <td>int</td>
@@ -9097,13 +9164,13 @@
 <th>Annotations</th>
 </tr>
 	
-	
 	<tr>
 <td>name</td>
 <td>str</td>
 <td>CGAPrint.txt</td>
 <td><table class="doxtable"></table></td>
 </tr>
+	
 	<tr>
 <td>errorHandling</td>
 <td>int</td>
@@ -9134,13 +9201,13 @@
 <th>Annotations</th>
 </tr>
 	
-	
 	<tr>
 <td>name</td>
 <td>str</td>
 <td>CGAReport.txt</td>
 <td><table class="doxtable"></table></td>
 </tr>
+	
 	<tr>
 <td>errorHandling</td>
 <td>int</td>

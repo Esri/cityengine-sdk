@@ -1,5 +1,6 @@
 var namespaces =
 [
-    [ "prt", "namespaceprt.html", "namespaceprt" ],
-    [ "prtx", "namespaceprtx.html", "namespaceprtx" ]
+    [ "prt", "namespaceprt.html", null ],
+    [ "prtx", "namespaceprtx.html", "namespaceprtx" ],
+    [ "StringUtils", "namespace_string_utils.html", null ]
 ];

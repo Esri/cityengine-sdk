@@ -19,6 +19,8 @@ var classprtx_1_1_encode_preparator_1_1_preparation_flags =
     [ "cleanupVertexNormals", "classprtx_1_1_encode_preparator_1_1_preparation_flags.html#a9c475e19dc3961fae4c965a14f2cab64", null ],
     [ "createTextureAtlases", "classprtx_1_1_encode_preparator_1_1_preparation_flags.html#ae6687c55ad69c31793e7402dbbcc506c", null ],
     [ "createTextureAtlases", "classprtx_1_1_encode_preparator_1_1_preparation_flags.html#a66918ce92972db26553c665bda1379c4", null ],
+    [ "cutoutTextures", "classprtx_1_1_encode_preparator_1_1_preparation_flags.html#a526e7bcb840f78f272038854260a144b", null ],
+    [ "cutoutTextures", "classprtx_1_1_encode_preparator_1_1_preparation_flags.html#a83061d5297f7824f009f3a1039495b9d", null ],
     [ "determineMeshProperties", "classprtx_1_1_encode_preparator_1_1_preparation_flags.html#a51eab09572ebac986a0291234513375f", null ],
     [ "determineMeshProperties", "classprtx_1_1_encode_preparator_1_1_preparation_flags.html#a2edfa10317dae8c56ca35acc4f14d712", null ],
     [ "forceAtlasing", "classprtx_1_1_encode_preparator_1_1_preparation_flags.html#a9d1a015c1dd2415d218e8853aa90e521", null ],

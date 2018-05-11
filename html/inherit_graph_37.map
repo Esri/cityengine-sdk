@@ -1,11 +1,10 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classprtx_1_1_shape_iterator.html" title="prtx::ShapeIterator" alt="" coords="5,192,136,221"/>
-<area shape="rect" id="node3" href="$classprtx_1_1_breadth_first_iterator.html" title="prtx::BreadthFirstIterator" alt="" coords="197,5,360,35"/>
-<area shape="rect" id="node5" href="$classprtx_1_1_c_g_a_error_iterator.html" title="prtx::CGAErrorIterator" alt="" coords="204,59,353,88"/>
-<area shape="rect" id="node7" href="$classprtx_1_1_c_g_a_print_iterator.html" title="prtx::CGAPrintIterator" alt="" coords="204,112,353,141"/>
-<area shape="rect" id="node9" href="$classprtx_1_1_c_g_a_report_iterator.html" title="prtx::CGAReportIterator" alt="" coords="199,165,359,195"/>
-<area shape="rect" id="node11" href="$classprtx_1_1_depth_first_iterator.html" title="prtx::DepthFirstIterator" alt="" coords="201,219,356,248"/>
-<area shape="rect" id="node13" href="$classprtx_1_1_initial_shape_iterator.html" title="prtx::InitialShapeIterator" alt="" coords="199,272,359,301"/>
-<area shape="rect" id="node15" href="$classprtx_1_1_leaf_iterator.html" title="prtx::LeafIterator" alt="" coords="220,325,337,355"/>
-<area shape="rect" id="node17" href="$classprtx_1_1_selected_shapes_iterator.html" title="prtx::SelectedShapesIterator" alt="" coords="185,379,372,408"/>
+<area shape="rect" id="node1" href="$classprtx_1_1_attributable_setter.html" title="prtx::AttributableSetter" alt="" coords="259,71,413,97"/>
+<area shape="rect" id="node2" href="$classprtx_1_1_geometry_builder.html" title="prtx::GeometryBuilder" alt="" coords="480,16,629,43"/>
+<area shape="rect" id="node3" href="$classprtx_1_1_material_builder.html" title="prtx::MaterialBuilder" alt="" coords="485,129,624,156"/>
+<area shape="rect" id="node4" href="$classprtx_1_1_texture_builder.html" title="prtx::TextureBuilder" alt="" coords="487,71,623,97"/>
+<area shape="rect" id="node5" href="$classprtx_1_1_builtin_attributes_setters.html" title="prtx::BuiltinAttributesSetters" alt="" coords="5,129,192,156"/>
+<area shape="rect" id="node6" href="$classprtx_1_1_builtin_material_attributes_builder.html" title="prtx::BuiltinMaterialAttributes\lBuilder" alt="" coords="241,122,431,163"/>
+<area shape="rect" id="node7" href="$classprtx_1_1_shared_ptr_builder.html" title="prtx::SharedPtrBuilder\l\&lt; Geometry \&gt;" alt="" coords="261,5,411,46"/>
+<area shape="rect" id="node8" href="$classprtx_1_1_shared_ptr_builder.html" title="prtx::SharedPtrBuilder\l\&lt; Material \&gt;" alt="" coords="261,187,411,229"/>
 </map>

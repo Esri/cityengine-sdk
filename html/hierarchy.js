@@ -115,10 +115,6 @@ var hierarchy =
       [ "prtx::LogFwd< true, L, LT >", "classprtx_1_1_log_fwd_3_01true_00_01_l_00_01_l_t_01_4.html", null ]
     ] ],
     [ "prtx::MaterialTransformer", "structprtx_1_1_material_transformer.html", null ],
-    [ "prtx::NamePreparator", "classprtx_1_1_name_preparator.html", [
-      [ "prtx::DefaultNamePreparator", "classprtx_1_1_default_name_preparator.html", null ]
-    ] ],
-    [ "prtx::NamePreparator::NamespaceInfo", "structprtx_1_1_name_preparator_1_1_namespace_info.html", null ],
     [ "prt::Object", "classprt_1_1_object.html", [
       [ "prt::Annotation", "classprt_1_1_annotation.html", null ],
       [ "prt::AnnotationArgument", "classprt_1_1_annotation_argument.html", null ],
@@ -155,7 +151,8 @@ var hierarchy =
     [ "prtx::Reports", "classprtx_1_1_reports.html", null ],
     [ "prtx::ReportsAccumulator", "classprtx_1_1_reports_accumulator.html", [
       [ "prtx::AppendingReportsAccumulator", "classprtx_1_1_appending_reports_accumulator.html", [
-        [ "prtx::SummarizingReportsAccumulator", "classprtx_1_1_summarizing_reports_accumulator.html", null ]
+        [ "prtx::SummarizingReportsAccumulator", "classprtx_1_1_summarizing_reports_accumulator.html", null ],
+        [ "prtx::SumReportsAccumulator", "classprtx_1_1_sum_reports_accumulator.html", null ]
       ] ],
       [ "prtx::WriteFirstReportsAccumulator", "classprtx_1_1_write_first_reports_accumulator.html", null ]
     ] ],

@@ -27,165 +27,163 @@
 
 <h1>CGA Shape Grammar Reference</h1>
 
-
 <table style="width:100%">
 	<tr style="font-size:90%;margin:5px">
-    	<td><a href="#operations">Operations</a><a href="#operations"></a></td>
-     	<td><a href="#shapeattributes">Shape Attributes</a><a href="#shapeattributes"></a></td>
-     	<td><a href="#builtinfunctions">Builtin Functions</a><a href="#builtinfunctions"></a></td>
-     	<td><a href="#other">Other Keywords</a><a href="#other"></a></td>
-     	<td><a href="#celib">CGA Utilities</a><a href="#celib"></a></td>
-     	<td><a href="#misc">Misc Information</a><a href="#misc"></a></td>
-    </tr>
-</table>   
-
-<br>
+		<td><a href="#operations">Operations</a><a href="#operations"></a></td>
+		<td><a href="#shapeattributes">Shape Attributes</a><a href="#shapeattributes"></a></td>
+		<td><a href="#builtinfunctions">Builtin Functions</a><a href="#builtinfunctions"></a></td>
+		<td><a href="#other">Other Keywords</a><a href="#other"></a></td>
+		<td><a href="#celib">CGA Utilities</a><a href="#celib"></a></td>
+		<td><a href="#misc">Misc Information</a><a href="#misc"></a></td>
+	</tr>
+</table>
 
 
+<h2 id="operations">Operations</h2>
 
-
-<h2><a name="operations"></a>Operations</h2>
 <h3 class="cgaIndexCategory"><a name="geometrycreation"></a>Geometry Creation</h3>
-    <table summary="" class="cga">
-        <tr>
-            <td class="overview"> <img src="images/insert.png"> <br> <a href="op_i.html" >i (insert)</a></td>
-            <td class="overview"> <img src="images/extrude.png" >  <br> <a href="op_extrude.html" >extrude</a></td>    
-            <td class="overview"> <img src="images/envelope.png" >  <br> <a href="op_envelope.html" >envelope</a></td>              
-            <td class="overview"> <img src="images/taper.png" >  <br> <a href="op_taper.html" >taper</a></td>      
-        </tr><tr>
-            <td class="overview"> <img src="images/roofGable.png" >  <br> <a href="op_roofGable.html" >roofGable</a></td>     
-            <td class="overview"> <img src="images/roofHip.png" >  <br> <a href="op_roofHip.html" >roofHip</a></td>              
-            <td class="overview"> <img src="images/roofPyramid.png" >  <br> <a href="op_roofPyramid.html" >roofPyramid</a></td>
-            <td class="overview"> <img src="images/roofShed.png" >  <br> <a href="op_roofShed.html" >roofShed</a></td>      
-        </tr><tr>
-            <td class="overview"> <img src="images/icon_innerRectangle.png" >  <br> <a href="op_innerRectangle.html" >innerRectangle</a></td>
-			<td class="overview"> <img src="images/primitiveQuad.png"> <br> <a href="op_primitive.html#quad">primitiveQuad</a></td>
-			<td class="overview"> <img src="images/primitiveDisk.png"> <br> <a href="op_primitive.html#disk">primitiveDisk</a></td>
-			<td class="overview"> <img src="images/primitiveCube.png"> <br> <a href="op_primitive.html#cube">primitiveCube</a></td>
-		</tr><tr>
-			<td class="overview"> <img src="images/primitiveSphere.png"> <br> <a href="op_primitive.html#sphere">primitiveSphere</a></td>
-			<td class="overview"> <img src="images/primitiveCylinder.png"> <br> <a href="op_primitive.html#cylinder">primitiveCylinder</a></td>
-			<td class="overview"> <img src="images/primitiveCone.png"> <br> <a href="op_primitive.html#cone">primitiveCone</a></td>
-        </tr>
-        
-    </table>
 
+<table summary="" class="cga">
+	<tr>
+		<td class="overview"><a href="op_i.html"><img src="images/insert.png"><br>i (insert)</a></td>
+		<td class="overview"><a href="op_extrude.html"><img src="images/extrude.png"><br>extrude</a></td>    
+		<td class="overview"><a href="op_envelope.html"><img src="images/envelope.png"><br>envelope</a></td>              
+		<td class="overview"><a href="op_taper.html"><img src="images/taper.png"><br>taper</a></td>      
+	</tr><tr>
+		<td class="overview"><a href="op_roofGable.html"><img src="images/roofGable.png"><br>roofGable</a></td>     
+		<td class="overview"><a href="op_roofHip.html"><img src="images/roofHip.png"><br>roofHip</a></td>              
+		<td class="overview"><a href="op_roofPyramid.html"><img src="images/roofPyramid.png"><br>roofPyramid</a></td>
+		<td class="overview"><a href="op_roofShed.html"><img src="images/roofShed.png"><br>roofShed</a></td>      
+	</tr><tr>
+		<td class="overview"><a href="op_innerRectangle.html"><img src="images/icon_innerRectangle.png"><br>innerRectangle</a></td>
+		<td class="overview"><a href="op_primitive.html#quad"><img src="images/primitiveQuad.png"><br>primitiveQuad</a></td>
+		<td class="overview"><a href="op_primitive.html#disk"><img src="images/primitiveDisk.png"><br>primitiveDisk</a></td>
+		<td class="overview"><a href="op_primitive.html#cube"><img src="images/primitiveCube.png"><br>primitiveCube</a></td>
+	</tr><tr>
+		<td class="overview"><a href="op_primitive.html#sphere"><img src="images/primitiveSphere.png"><br>primitiveSphere</a></td>
+		<td class="overview"><a href="op_primitive.html#cylinder"><img src="images/primitiveCylinder.png"><br>primitiveCylinder</a></td>
+		<td class="overview"><a href="op_primitive.html#cone"><img src="images/primitiveCone.png"><br>primitiveCone</a></td>
+		<td class="overview"><a href="op_insertAlongUV.html"><img src="images/insertAlongUV.png"><br>insertAlongUV</a></td>
+	</tr>
+</table>
 
-<h3><a name="geometrysubdivision"></a>Geometry Subdivision</h3>
-    <table summary="" class="cga">
-        <tr>
-            <td class="overview"> <img src="images/split.png" >  <br> <a href="op_split.html" >split</a></td>
-			<td class="overview"> <img src="images/splitArea.png" >  <br> <a href="op_splitArea.html" >splitArea</a></td>
-            <td class="overview"> <img src="images/comp.png" >  <br> <a href="op_comp.html" >comp</a></td>    
-            <td class="overview"> <img src="images/offset.png" >  <br> <a href="op_offset.html" >offset</a></td>      
-        </tr><tr>
-			<td class="overview"> <img src="images/setback.png" >  <br> <a href="op_setback.html" >setback</a></td>     
-            <td class="overview"> <img src="images/shapeL.png" >  <br> <a href="op_shapeLUO.html" >shapeL</a></td>
-            <td class="overview"> <img src="images/shapeU.png" >  <br> <a href="op_shapeLUO.html" >shapeU</a></td>
-            <td class="overview"> <img src="images/shapeO.png" >  <br> <a href="op_shapeLUO.html" >shapeO</a></td> 
-		</tr><tr>
-			<td class="overview"> <img src="images/scatter.png" >  <br> <a href="op_scatter.html" >scatter</a></td>   
-		</tr>
-    </table>
+<h3 id="geometrysubdivision">Geometry Subdivision</h3>
 
-<h3><a name="geometrymanipulation"></a>Geometry Manipulation</h3>
-    <table summary="" class="cga">
-        <tr>
-            <td class="overview"> <img src="images/cleanupGeometry.png" >  <br> <a href="op_cleanupGeometry.html" >cleanupGeometry</a></td>
-            <td class="overview"> <img src="images/convexify.png" >  <br> <a href="op_convexify.html" >convexify</a></td>    
-            <td class="overview"> <img src="images/deleteHoles.png" >  <br> <a href="op_deleteHoles.html" >deleteHoles</a></td>  
-            <td class="overview"> <img src="images/reverseNormals.png" >  <br> <a href="op_reverseNormals.html" >reverseNormals</a></td>      
-        </tr><tr>
-            <td class="overview"> <img src="images/setNormals.png" >  <br> <a href="op_setNormals.html" >setNormals</a></td>
-			<td class="overview"> <img src="images/softenNormals.png" >  <br> <a href="op_softenNormals.html" >softenNormals</a></td>
-            <td class="overview"> <img src="images/mirror.png" >  <br> <a href="op_mirror.html" >mirror</a></td>
-            <td class="overview"> <img src="images/reduceGeometry.png" >  <br> <a href="op_reduceGeometry.html" >reduceGeometry</a></td>
-		</tr><tr>
-            <td class="overview"> <img src="images/trim.png" >  <br> <a href="op_trim.html" >trim</a></td>  
-        </tr>
-    </table>
+<table summary="" class="cga">
+	<tr>
+		<td class="overview"><a href="op_split.html"><img src="images/split.png"><br>split</a></td>
+		<td class="overview"><a href="op_splitArea.html"><img src="images/splitArea.png"><br>splitArea</a></td>
+		<td class="overview"><a href="op_comp.html"><img src="images/comp.png"><br>comp</a></td>    
+		<td class="overview"><a href="op_offset.html"><img src="images/offset.png"><br>offset</a></td>      
+	</tr><tr>
+		<td class="overview"><a href="op_setback.html"><img src="images/setback.png"><br>setback</a></td>     
+		<td class="overview"><a href="op_shapeLUO.html"><img src="images/shapeL.png"><br>shapeL</a></td>
+		<td class="overview"><a href="op_shapeLUO.html"><img src="images/shapeU.png"><br>shapeU</a></td>
+		<td class="overview"><a href="op_shapeLUO.html"><img src="images/shapeO.png"><br>shapeO</a></td> 
+	</tr><tr>
+		<td class="overview"><a href="op_scatter.html"><img src="images/scatter.png"><br>scatter</a></td>   
+	</tr>
+</table>
 
+<h3 id="geometrymanipulation">Geometry Manipulation</h3>
+
+<table summary="" class="cga">
+	<tr>
+		<td class="overview"><a href="op_cleanupGeometry.html"><img src="images/cleanupGeometry.png"><br>cleanupGeometry</a></td>
+		<td class="overview"><a href="op_convexify.html"><img src="images/convexify.png"><br>convexify</a></td>    
+		<td class="overview"><a href="op_deleteHoles.html"><img src="images/deleteHoles.png"><br>deleteHoles</a></td>  
+		<td class="overview"><a href="op_reverseNormals.html"><img src="images/reverseNormals.png"><br>reverseNormals</a></td>      
+	</tr><tr>
+		<td class="overview"><a href="op_setNormals.html"><img src="images/setNormals.png"><br>setNormals</a></td>
+		<td class="overview"><a href="op_softenNormals.html"><img src="images/softenNormals.png"><br>softenNormals</a></td>
+		<td class="overview"><a href="op_mirror.html"><img src="images/mirror.png"><br>mirror</a></td>
+		<td class="overview"><a href="op_reduceGeometry.html"><img src="images/reduceGeometry.png"><br>reduceGeometry</a></td>
+	</tr><tr>
+		<td class="overview"><a href="op_trim.html"><img src="images/trim.png"><br>trim</a></td>  
+	</tr>
+</table>
 
 <h3><a name="texturing"></a>Texturing</h3>
-    <table summary="" class="cga">
-        <tr>
-            <td class="overview"> <img src="images/texture.png" >  <br> <a href="op_texture.html" >texture</a></td>
-            <td class="overview"> <img src="images/setupProj.png" >  <br> <a href="op_setupProjection.html" >setupProjection</a></td>    
-            <td class="overview"> <img src="images/projectUV.png" >  <br> <a href="op_projectUV.html" >projectUV</a></td>      
-            <td class="overview"> <img src="images/translateUV.png" >  <br> <a href="op_translateUV.html" >translateUV</a></td>     
-        </tr><tr>
-        <tr>
-            <td class="overview"> <img src="images/scaleUV.png" >  <br> <a href="op_scaleUV.html" >scaleUV</a></td>
-            <td class="overview"> <img src="images/normalizeUV.png" >  <br> <a href="op_normalizeUV.html" >normalizeUV</a></td>    
-            <td class="overview"> <img src="images/tileUV.png" >  <br> <a href="op_tileUV.html" >tileUV</a></td>      
-            <td class="overview"> <img src="images/rotateUV.png" >  <br> <a href="op_rotateUV.html" >rotateUV</a></td>     
-        </tr><tr>
-            <td class="overview"> <img src="images/deleteUV.png" >  <br> <a href="op_deleteUV.html" >deleteUV</a></td>
-        </tr>
-    </table>
+
+<table summary="" class="cga">
+	<tr>
+		<td class="overview"><a href="op_texture.html"><img src="images/texture.png"><br>texture</a></td>
+		<td class="overview"><a href="op_setupProjection.html"><img src="images/setupProj.png"><br>setupProjection</a></td>    
+		<td class="overview"><a href="op_projectUV.html"><img src="images/projectUV.png"><br>projectUV</a></td>      
+		<td class="overview"><a href="op_translateUV.html"><img src="images/translateUV.png"><br>translateUV</a></td>     
+	</tr><tr>
+	<tr>
+		<td class="overview"><a href="op_scaleUV.html"><img src="images/scaleUV.png"><br>scaleUV</a></td>
+		<td class="overview"><a href="op_normalizeUV.html"><img src="images/normalizeUV.png"><br>normalizeUV</a></td>    
+		<td class="overview"><a href="op_tileUV.html"><img src="images/tileUV.png"><br>tileUV</a></td>      
+		<td class="overview"><a href="op_rotateUV.html"><img src="images/rotateUV.png"><br>rotateUV</a></td>     
+	</tr><tr>
+		<td class="overview"><a href="op_deleteUV.html"><img src="images/deleteUV.png"><br>deleteUV</a></td>
+	</tr>
+</table>
 
 <h3><a name="transformations"></a>Transformations</h3>
-    <table summary="" class="cga">
-        <tr>
-            <td class="overview"> <img src="images/t.png" >  <br> <a href="op_t.html" >t (scope translate)</a></td>
-            <td class="overview"> <img src="images/t.png" >  <br> <a href="op_translate.html" >translate</a></td>
-            <td class="overview"> <img src="images/s.png" >  <br> <a href="op_s.html" >s (scope size)</a></td>    
-            <td class="overview"> <img src="images/r.png" >  <br> <a href="op_r.html" >r (scope rotate)</a></td>
-        </tr><tr>
-            <td class="overview"> <img src="images/r.png" >  <br> <a href="op_rotate.html" >rotate</a></td>
-            <td class="overview"> <img src="images/center.png" >  <br> <a href="op_center.html" >center</a></td>   
-    </table>
+
+<table summary="" class="cga">
+	<tr>
+		<td class="overview"><a href="op_t.html"><img src="images/t.png"><br>t (scope translate)</a></td>
+		<td class="overview"><a href="op_translate.html"><img src="images/t.png"><br>translate</a></td>
+		<td class="overview"><a href="op_s.html"><img src="images/s.png"><br>s (scope size)</a></td>    
+		<td class="overview"><a href="op_r.html"><img src="images/r.png"><br>r (scope rotate)</a></td>
+	</tr><tr>
+		<td class="overview"><a href="op_rotate.html"><img src="images/r.png"><br>rotate</a></td>
+		<td class="overview"><a href="op_center.html"><img src="images/center.png"><br>center</a></td>   
+</table>
 
 <h3><a name="scope"></a>Scope</h3>
-    <table summary="" class="cga">
-        <tr>
-            <td class="overview"> <img src="images/alignScopeToAxes.png" >  <br> <a href="op_alignScopeToAxes.html" >alignScopeToAxes</a></td>   
-            <td class="overview"> <img src="images/alignScopeToGeo.png" >  <br> <a href="op_alignScopeToGeometry.html" >alignScopeToGeometry</a></td>    
-            <td class="overview"> <img src="images/rotateScope.png" >  <br> <a href="op_rotateScope.html" >rotateScope</a></td>      
-            <td class="overview"> <img src="images/setPivot.png" >  <br> <a href="op_setPivot.html" >setPivot</a></td>   
-        </tr><tr>
-            <td class="overview"> <img src="images/mirrorScope.png" >  <br> <a href="op_mirrorScope.html" >mirrorScope</a></td>  
-        </tr>
-    </table>
+
+<table summary="" class="cga">
+	<tr>
+		<td class="overview"><a href="op_alignScopeToAxes.html"><img src="images/alignScopeToAxes.png"><br>alignScopeToAxes</a></td>   
+		<td class="overview"><a href="op_alignScopeToGeometry.html"><img src="images/alignScopeToGeo.png"><br>alignScopeToGeometry</a></td>    
+		<td class="overview"><a href="op_rotateScope.html"><img src="images/rotateScope.png"><br>rotateScope</a></td>      
+		<td class="overview"><a href="op_setPivot.html"><img src="images/setPivot.png"><br>setPivot</a></td>   
+	</tr><tr>
+		<td class="overview"><a href="op_mirrorScope.html"><img src="images/mirrorScope.png"><br>mirrorScope</a></td>  
+	</tr>
+</table>
 
 <h3><a name="flowcontrol"></a>Flow Control</h3>
-    <table summary="" class="cga">
-        <tr>
-            <td class="overview"> <img src="images/pop.png" >  <br> <a href="op_pushpop.html" >pop</a></td>
-            <td class="overview"> <img src="images/push.png" >  <br> <a href="op_pushpop.html" >push</a></td>   
-            <td class="overview"> <img src="images/nil.png" >  <br> <a href="op_nil.html" >NIL</a></td>
-            <td class="overview"> </td> 
-        </tr>
-    </table>
+
+<table summary="" class="cga">
+	<tr>
+		<td class="overview"><a href="op_pushpop.html"><img src="images/pop.png"><br>pop</a></td>
+		<td class="overview"><a href="op_pushpop.html"><img src="images/push.png"><br>push</a></td>   
+		<td class="overview"><a href="op_nil.html"><img src="images/nil.png"><br>NIL</a></td>
+		<td class="overview"></td> 
+	</tr>
+</table>
 
 <h3><a name="flowcontrol"></a>Context</h3>
-    <table summary="" class="cga">
-        <tr>
-            <td class="overview"> <img src="images/label.png" >  <br> <a href="op_label.html" >label</a></td>
-            <td class="overview"> </td> 
-            <td class="overview"> </td> 
-            <td class="overview"> </td> 
-        </tr>
-    </table>
+
+<table summary="" class="cga">
+	<tr>
+		<td class="overview"><a href="op_label.html"><img src="images/label.png"><br>label</a></td>
+		<td class="overview"></td> 
+		<td class="overview"></td> 
+		<td class="overview"></td> 
+	</tr>
+</table>
 	
 <h3><a name="attributes"></a>Attributes</h3>
-    <table summary="" class="cga">
-        <tr>
-            <td class="overview"> <img src="images/set.png" >  <br> <a href="op_set.html" >set</a></td>
-            <td class="overview"> <img src="images/color.png" >  <br> <a href="op_color.html" >color</a></td>
-            <td class="overview"> <img src="images/report.png" >  <br> <a href="op_report.html" >report</a></td>   
-            <td class="overview"> <img src="images/print.png" >  <br> <a href="op_print.html" >print</a></td>      
-        </tr>
-    </table>
 
-
-
-
-
+<table summary="" class="cga">
+	<tr>
+		<td class="overview"><a href="op_set.html"><img src="images/set.png"><br>set</a></td>
+		<td class="overview"><a href="op_color.html"><img src="images/color.png"><br>color</a></td>
+		<td class="overview"><a href="op_report.html"><img src="images/report.png"><br>report</a></td>   
+		<td class="overview"><a href="op_print.html"><img src="images/print.png"><br>print</a></td>      
+	</tr>
+</table>
 
 <br><br><br>
 
-<h2><a name="shapeattributes"></a>Shape Attributes</h2>
+<h2 id="shapeattributes">Shape Attributes</h2>
 <p>Shape Attributes are properties of the current shape. They can always be read (like functions) and some of them can be set with the <a href="op_set.html" >set</a> operation.</p>
 <table summary="" class="cga">
 		<tr>
@@ -203,7 +201,7 @@
 
 <br><br><br>
 
-<h2><a name="builtinfunctions"></a>Builtin Functions</h2>
+<h2 id="builtinfunctions">Builtin Functions</h2>
 <p>Functions always return a value and do not alter the current shape (with the exception of probability functions which change the state of the shape's random number generator).</p>
 
 <h3><a name="math"></a>Math Functions</h3>
@@ -276,18 +274,19 @@
     <td class="overview"><a href="func_geometry.html#area" >geometry.area</a></td>
     <td class="overview"><a href="func_geometry.html#angle" >geometry.angle</a></td>
     <td class="overview"><a href="func_geometry.html#du" >geometry.{du|dv}</a></td>
-    <td class="overview"><a href="func_geometry.html#isClosedSurface" >geometry.isClosedSurface</a></td>
+	<td class="overview"><a href="func_geometry.html#height" >geometry.height</a></td>
   </tr><tr>
+	<td class="overview"><a href="func_geometry.html#isClosedSurface" >geometry.isClosedSurface</a></td>
     <td class="overview"><a href="func_geometry.html#isConcave" >geometry.isConcave</a></td>
     <td class="overview"><a href="func_geometry.html#isInstanced" >geometry.isInstanced</a></td> 
     <td class="overview"><a href="func_geometry.html#isOriented" >geometry.isOriented</a></td>  
-    <td class="overview"><a href="func_geometry.html#isPlanar" >geometry.isPlanar</a></td>  
   </tr><tr>
+	<td class="overview"><a href="func_geometry.html#isPlanar" >geometry.isPlanar</a></td>  
     <td class="overview"><a href="func_geometry.html#isRectangular" >geometry.isRectangular</a></td>
     <td class="overview"><a href="func_geometry.html#nEdges" >geometry.nEdges</a></td>
     <td class="overview"><a href="func_geometry.html#nFaces" >geometry.nFaces</a></td>
-    <td class="overview"><a href="func_geometry.html#nHoles" >geometry.nHoles</a></td>
   </tr><tr>
+    <td class="overview"><a href="func_geometry.html#nHoles" >geometry.nHoles</a></td>
     <td class="overview"><a href="func_geometry.html#nVertices" >geometry.nVertices</a></td>  
     <td class="overview"><a href="func_geometry.html#uMin" >geometry.{uMin|uMax|vMin|vMax}</a></td>
     <td class="overview"><a href="func_geometry.html#volume" >geometry.volume</a></td>
@@ -308,10 +307,11 @@
 <table summary="" class="cga">
   <tr>
 	<td class="overview"><a href="func_assetInfo.html" >assetInfo</a></td>
+	<td class="overview"><a href="func_assetNamingInfo.html" >assetNamingInfo</a></td>
 	<td class="overview"><a href="func_assetsSortRatio.html" >assetsSortRatio</a></td>
 	<td class="overview"><a href="func_assetsSortSize.html" >assetsSortSize</a></td>
-    <td class="overview"><a href="func_imageInfo.html" >imageInfo</a></td>
   </tr>
+	<td class="overview"><a href="func_imageInfo.html" >imageInfo</a></td>
     <td class="overview"><a href="func_imagesSortRatio.html" >imagesSortRatio</a></td>
 </table>
 
@@ -335,7 +335,7 @@
   </tr>
 </table>
 
-<h3><a name="bfuncmisc"></a>Miscellaneous Functions</h3>
+<h3 id="bfuncmisc">Miscellaneous Functions</h3>
 <table summary="" class="cga">
   <tr>
     <td class="overview"><a href="func_convert.html" >convert</a></td>
@@ -350,7 +350,7 @@
 
 <br><br><br>
 
-<h2><a name="other"></a>Other Keywords</h2>
+<h2 id="other">Other Keywords</h2>
 <table summary="" class="cga">
   <tr>
     <td class="overview"><a href="attr.html" >attr</a></td>
@@ -368,8 +368,8 @@
 
 <br><br><br>
 
-<h2><a name="celib"></a><a name="CGAUtilFuncLib"></a>CGA Utility Functions Library</h2>
-<h3><a name="celibstring"></a><a name="StringUtilFunc"></a>String Utility Functions</h3>
+<h2 id="celib" id="CGAUtilFuncLib">CGA Utility Functions Library</h2>
+<h3 id="celibstring" id="StringUtilFunc">String Utility Functions</h3>
 <table summary="" class="cga">
   <tr>
     <td class="overview"><a href="celib/findFirst.html" >findFirst</a></td>
@@ -462,7 +462,7 @@
 
 <br><br><br>
 
-<h2><a name="misc"></a>Miscellaneous Information</h2>
+<h2 id="misc"></a>Miscellaneous Information</h2>
 <table summary="" class="cga">
   <tr>
 	<td class="overview"><a name="changelog"></a><a href="cga_changelog.html">CGA Changelog</a></td>
@@ -479,7 +479,7 @@
   <!-- FOOTER -->
 </p>
 <p>&nbsp; </p>
-<p class="foot">Copyright &copy;2008-2017 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
+<p class="foot">Copyright &copy;2008-2018 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
 
 </div>
 </body>

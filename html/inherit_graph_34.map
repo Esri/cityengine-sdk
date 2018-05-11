@@ -1,6 +1,7 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classprtx_1_1_reporting_strategy.html" title="prtx::ReportingStrategy" alt="" coords="5,83,163,112"/>
-<area shape="rect" id="node3" href="$classprtx_1_1_all_shapes_reporting_strategy.html" title="prtx::AllShapesReporting\lStrategy" alt="" coords="219,5,384,51"/>
-<area shape="rect" id="node5" href="$classprtx_1_1_leaf_shape_reporting_strategy.html" title="prtx::LeafShapeReporting\lStrategy" alt="" coords="216,74,387,121"/>
-<area shape="rect" id="node7" href="$classprtx_1_1_single_shape_reporting_strategy.html" title="prtx::SingleShapeReporting\lStrategy" alt="" coords="211,143,392,190"/>
+<area shape="rect" id="node1" href="$classprtx_1_1_reports_accumulator.html" title="prtx::ReportsAccumulator" alt="" coords="5,67,176,93"/>
+<area shape="rect" id="node2" href="$classprtx_1_1_appending_reports_accumulator.html" title="prtx::AppendingReportsAccumulator" alt="" coords="224,41,456,68"/>
+<area shape="rect" id="node5" href="$classprtx_1_1_write_first_reports_accumulator.html" title="prtx::WriteFirstReportsAccumulator" alt="" coords="226,92,454,119"/>
+<area shape="rect" id="node3" href="$classprtx_1_1_summarizing_reports_accumulator.html" title="prtx::SummarizingReports\lAccumulator" alt="" coords="517,5,691,46"/>
+<area shape="rect" id="node4" href="$classprtx_1_1_sum_reports_accumulator.html" title="prtx::SumReportsAccumulator" alt="" coords="505,71,703,97"/>
 </map>

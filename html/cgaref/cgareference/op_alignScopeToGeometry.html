@@ -45,16 +45,15 @@
     </ul>
   </ul>
   
-  <p class="info">The <span class="codelight">alignScopeToGeometry</span> operation manipulates the <span class="codelight">scope</span>, the <span class="codelight">pivot</span> and 
-    the <span class="codelight">geometry</span> attributes in the following way: <br>
-    1. select new pivot axis directions (defined by <span class="cga_opparam">upAxisSelector</span> and the selected face and edge, see below)<br>
-    2. calculate the oriented bounding box (OOB) for the geometry along these axes and set pivot.p to
-    the origin of the OOB. The new scope dimensions are set to the OOB.<br>
-    3. transform the geometry into this new coordinate system. <br>
-    The parameters let you choose an edge of a face in the geometry. The new x-axis of the scope 
-    will be parallel to this edge, and the up-axis will be the face's normal.
-    <!--  Sample Code Formatting -->
-    The <span class="cga_keyword">geometry</span> is projected to the new <span class="cga_keyword">scope</span> (i.e. stays at the same place in world coordinates).</p>
+<p class="info">The <span class="codelight">alignScopeToGeometry</span> operation manipulates the <span class="codelight">scope</span>, the <span class="codelight">pivot</span> and the <span class="codelight">geometry</span> attributes in the following way:</p>
+<ol>
+	<li>select new pivot axis directions (defined by <span class="cga_opparam">upAxisSelector</span> and the selected face and edge, see below)</li>
+    <li>calculate the oriented bounding box (OOB) for the geometry along these axes and set pivot.p to the origin of the OOB. The new scope dimensions are set to the OOB.</li>
+    <li>transform the geometry into this new coordinate system.</li>
+</ol>
+<p>The parameters let you choose an edge of a face in the geometry. The new x-axis of the scope will be parallel to this edge, and the up-axis will be the face's normal.</p>
+<p>The <span class="cga_keyword">geometry</span> is projected to the new <span class="cga_keyword">scope</span> (i.e. stays at the same place in world coordinates).</p>
+
   <h2> Related </h2>
   <ul>
     <li> <a class="normw" href="op_alignScopeToAxes.html"> alignScopeToAxes operation</a> </li>
@@ -131,7 +130,7 @@
         <p><em>In this case, "any" and "world.lowest" select the edge with lowest y-position (in world coordinates), which becomes the new x-axis, and the corresponding face-normal becomes the new y-axis (because of the yUp selector). </em></p></td>
     </tr>
   </table>
-  <p class="foot">Copyright &copy;2008-2017 Esri R&amp;D Center Zurich. All rights reserved.</p>
+  <p class="foot">Copyright &copy;2008-2018 Esri R&amp;D Center Zurich. All rights reserved.</p>
   <!-- END CENTERED CONTENT -->
 </div>
 </body>

@@ -1,5 +1,5 @@
 <map id="prtx::ExtensionFactory" name="prtx::ExtensionFactory">
-<area shape="rect" id="node3" href="$classprtx_1_1_adaptor_factory.html" title="prtx::AdaptorFactory" alt="" coords="5,83,147,112"/>
-<area shape="rect" id="node5" href="$classprtx_1_1_decoder_factory.html" title="prtx::DecoderFactory" alt="" coords="171,83,315,112"/>
-<area shape="rect" id="node7" href="$classprtx_1_1_encoder_factory.html" title="prtx::EncoderFactory" alt="" coords="339,83,483,112"/>
+<area shape="rect" id="node2" href="$classprtx_1_1_adaptor_factory.html" title="prtx::AdaptorFactory" alt="" coords="5,80,147,107"/>
+<area shape="rect" id="node3" href="$classprtx_1_1_decoder_factory.html" title="prtx::DecoderFactory" alt="" coords="171,80,316,107"/>
+<area shape="rect" id="node4" href="$classprtx_1_1_encoder_factory.html" title="prtx::EncoderFactory" alt="" coords="341,80,485,107"/>
 </map>

@@ -2,6 +2,7 @@ var classprtx_1_1_mesh_builder =
 [
     [ "MeshBuilder", "classprtx_1_1_mesh_builder.html#aa081bd0885eb9a31189ae4a47ffe30d5", null ],
     [ "MeshBuilder", "classprtx_1_1_mesh_builder.html#a0aebfdf1c4bfbd64c8107caa8608b213", null ],
+    [ "MeshBuilder", "classprtx_1_1_mesh_builder.html#a5a2411667c163b06b951a187c0eee0f6", null ],
     [ "MeshBuilder", "classprtx_1_1_mesh_builder.html#a39ddc5a410a161d72e0aaecc28228214", null ],
     [ "MeshBuilder", "classprtx_1_1_mesh_builder.html#a579e04cc6d6e50a51b0510eb91d86170", null ],
     [ "~MeshBuilder", "classprtx_1_1_mesh_builder.html#aeb7198b2e4ceeec141006e172d296719", null ],

@@ -130,7 +130,7 @@
             
 <a name="trimPlanes"></a><h3>Trim Planes</h3>
   
-<p>Additionally, for faces, the component split generates <i>trim planes</i>. Trim planes are placed along the shared edges of the new face in a bisecting angle. The purpose of trim planes is twofold. On one side, trimming handles geometry intersections on the boundary of two neighboring faces, and on the other side, trimming is used to handle non-rectangular faces. The trim planes are applied using the <a class="normw" href="op_i.html#trim">insert operation</a> or the <a class="normw" href="op_trim.html">trim</a> operation.</p>
+<p>Additionally, for faces, the component split generates <i>trim planes</i>. Trim planes are placed along the shared edges of the new faces in a bisecting angle. The purpose of trim planes is twofold. On one side, trimming handles geometry intersections on the boundary of two neighboring faces, and on the other side, trimming is used to handle non-rectangular faces. The trim planes are applied using the <a class="normw" href="op_i.html#trim">insert operation</a>, <a class="normw" href="op_primitive.html">primitive operations</a>, or the <a class="normw" href="op_trim.html">trim</a> operation.</p>
 <p>According to the direction of the shared edge, trim planes are classified into horizontal and vertical planes. They can be switched on or off by <a class="normw" href="op_set.html">setting</a> the <a class="normw" href="attr_trim.html">trim attribute</a> to true or false. By default, trimming is activated for vertical trim planes and deactivated for horizontal trim planes. Check the trim planes examples <a class="normw" href="#trimExamples">below</a>.</p>
 <p class="notes"><em>Trim planes are only generated if the : operator is used!</em></p>
 <p>Trim planes can be configured in the <a href="../manual/ui/cep/grammarcore.html#generate" class="internlink">procedural runtime preferences</a>.</p>
@@ -186,6 +186,7 @@ These selectors depend on the availability of the streetWidth attribute map; see
 	<li><a class="normw" href="attr_pivot.html">pivot attribute</a></li>
 	<li><a class="normw" href="attr_scope.html">scope attribute</a></li>
 	<li><a class="normw" href="attr_trim.html">trim attribute</a></li>
+	<li><a class="normw" href="func_assetNamingInfo.html">assetNamingInfo function</a></li>
 </ul>
 
 <h2>&nbsp;</h2>
@@ -516,7 +517,7 @@ Lot-->
 		
 Lot-->
    i("Orange_Tree_Model_0.obj") 
-   comp(g) { 2 : Trunk. | all = set(material.opacity, 0.2) Foilage. }
+   comp(g) { 2 : Trunk. | all = set(material.opacity, 0.2) Foliage. }
 			</pre>
             <p><em>A tree model is split into its groups.</em></p>
 		</td>
@@ -549,7 +550,7 @@ Lot-->
 
 
 <!-- FOOTER -->
-<p class="foot">Copyright &copy;2008-2017 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
+<p class="foot">Copyright &copy;2008-2018 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
 
 <!-- END CENTERED CONTENT -->
 

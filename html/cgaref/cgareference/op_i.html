@@ -22,8 +22,7 @@
 
 <!-- CONTENT -->
 
-        <h1>
-        insert operation       </h1>
+        <h1>insert operation</h1>
         
 		<h2>Synopsis</h2>
         <p class="code2">i(<span class="cga_opparam">geometryPath</span>)</p>
@@ -34,7 +33,7 @@
         <ul>
 			<li><span class="cga_opparam">geometryPath</span> (string)<br>
 				Name of the geometry asset to insert. See <a class="normw" href="cga_assetSearch.html">
-				Asset Search</a> for information about search locations and <a class="normw" href="cga_builtinAssets.html">Built-in Assets</a> for a list of built-in assets.
+				Asset Search</a> for information about search locations.
 			</li>
 			<li><span class="cga_opparam">upAxisOfGeometry</span> (keyword)<br>
 				Semantic up axis keyword:
@@ -53,7 +52,6 @@
 			</li>
         </ul>
 
-        
         <p class="info">Reads a geometry asset (3D model, polygon mesh) from a file and inserts it into the scope of the current shape. 
  		The asset is transformed such that its bounding box coincides with the scope.</p>
  		  <p class="text">If one or more of the <span class="codelight">scope</span>'s sizes <span class="codelight">sx</span>, <span class="codelight">sy</span> and <span class="codelight">sz</span> (i.e. width, height or depth) are zero the scope is modified as follows:</p>          
@@ -66,9 +64,10 @@
 
 <a name="trim"></a>
 <p class="notes">If the current shape has trim planes (generated in a <a class="normw" href="op_comp.html#trimPlanes">component split</a>), the model is cut with the trim planes. Trim planes can be enabled and disabled by the <a class="normw" href="attr_trim.html">trim attribute</a>. Use the <a class="normw" href="func_geometry.html#isInstanced">geometry.isInstanced</a> function to check if an inserted asset was trimmed. See example <a class="normw" href="#trimExample">below</a>.</p>
-  
-  
-<h2>Supported Asset Formats</h2>
+
+<p class="notes">A collection of basic geometries are available as <a class="normw" href="cga_builtinAssets.html">built-in assets</a>.</p>
+ 
+<h2 id="supported_formats">Supported Asset Formats</h2>
 <p class="content">Currently, the Wavefront OBJ and the COLLADA DAE
 formats are supported as asset formats.</p>
 
@@ -104,7 +103,7 @@ texture coordinates of inconsistent meshes.</p>
 		<li><a class="normw" href="op_primitive.html#sphere">primitiveSphere operation</a></li>
 		<li><a class="normw" href="op_primitive.html#cylinder">primitiveCylinder operation</a></li>
 		<li><a class="normw" href="op_primitive.html#cone">primitiveCone operation</a></li>
-		<li><a class="normw" href="op_trim">trim operation</a></li>
+		<li><a class="normw" href="op_trim.html">trim operation</a></li>
         <li><a class="normw" href="func_geometry.html#isInstanced">geometry.isInstanced function</a></li>
  		<li><a class="normw" href="attr_scope.html">scope attribute</a></li>
 		<li><a class="normw" href="attr_trim.html">trim attribute</a></li>
@@ -256,7 +255,7 @@ Side--&gt;
 
 
 <!-- FOOTER -->
-<p class="foot">Copyright &copy;2008-2017 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
+<p class="foot">Copyright &copy;2008-2018 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
 
 <!-- END CENTERED CONTENT -->
 </div>

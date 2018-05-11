@@ -1,6 +1,6 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classprtx_1_1_extension_factory.html" title="prtx::ExtensionFactory" alt="" coords="5,59,160,88"/>
-<area shape="rect" id="node3" href="$classprtx_1_1_adaptor_factory.html" title="prtx::AdaptorFactory" alt="" coords="211,5,352,35"/>
-<area shape="rect" id="node5" href="$classprtx_1_1_decoder_factory.html" title="prtx::DecoderFactory" alt="" coords="209,59,353,88"/>
-<area shape="rect" id="node7" href="$classprtx_1_1_encoder_factory.html" title="prtx::EncoderFactory" alt="" coords="209,112,353,141"/>
+<area shape="rect" id="node1" href="$classprtx_1_1_extension_factory.html" title="prtx::ExtensionFactory" alt="" coords="5,56,160,83"/>
+<area shape="rect" id="node2" href="$classprtx_1_1_adaptor_factory.html" title="prtx::AdaptorFactory" alt="" coords="211,5,352,32"/>
+<area shape="rect" id="node3" href="$classprtx_1_1_decoder_factory.html" title="prtx::DecoderFactory" alt="" coords="209,56,354,83"/>
+<area shape="rect" id="node4" href="$classprtx_1_1_encoder_factory.html" title="prtx::EncoderFactory" alt="" coords="209,107,353,133"/>
 </map>

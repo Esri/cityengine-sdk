@@ -96,6 +96,7 @@ Context queries are functions that return information about contextual shapes in
 </ul>
 <p class="notes">The contextural influence of shapes is determined by their assigned scenarios and not by their current visibility in the viewport.</p>
 
+<a name="twopass"></a>
 <h2>Two-pass generation process</h2>
 
 <p>At the time context queries are evaluated not all geometries that could be relevant have been generated. Additionally, context queries are typically applied in the conditional part of a rule. Their result can influence the generated model and, therefore, in turn could change the result of the queries. Because of that, a special deterministic two-pass generation process is performed for <em>intra</em> context:</p>
@@ -193,7 +194,7 @@ Test --> case overlaps(intra) : s('2,'1,'2) center(xyz) Red
 </tr>
 </table>
 
-<p class="foot">Copyright &copy;2008-2017 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
+<p class="foot">Copyright &copy;2008-2018 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
 
 </div>
 </body>

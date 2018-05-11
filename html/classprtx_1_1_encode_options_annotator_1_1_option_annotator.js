@@ -7,6 +7,7 @@ var classprtx_1_1_encode_options_annotator_1_1_option_annotator =
     [ "flagAsPerLayer", "classprtx_1_1_encode_options_annotator_1_1_option_annotator.html#a67cc5331b52b02834c9edd39e843e076", null ],
     [ "flagAsPoint2D", "classprtx_1_1_encode_options_annotator_1_1_option_annotator.html#a26f8a1e84c0c8101ac1e65c053b696b0", null ],
     [ "flagAsPoint3D", "classprtx_1_1_encode_options_annotator_1_1_option_annotator.html#a7eb04e757b549a56708aa51c8c979d6c", null ],
+    [ "operator=", "classprtx_1_1_encode_options_annotator_1_1_option_annotator.html#aed2b39bfa98a8b14f9b19da9ade4bebe", null ],
     [ "setDescription", "classprtx_1_1_encode_options_annotator_1_1_option_annotator.html#a8e05c9d522bfd5b494dbf6809706a7be", null ],
     [ "setEnumerants", "classprtx_1_1_encode_options_annotator_1_1_option_annotator.html#a493a5c47763994ee3292c92560be67ab", null ],
     [ "setGroup", "classprtx_1_1_encode_options_annotator_1_1_option_annotator.html#af8d44ce1edead3eb7ba1a24b1c41d5bf", null ],

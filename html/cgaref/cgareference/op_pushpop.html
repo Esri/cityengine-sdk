@@ -59,7 +59,7 @@ Lot -->
     r(scopeCenter, 0, 22.5, 0) X. 
     r(scopeCenter, 0, 22.5, 0) X.
     r(scopeCenter, 0, 22.5, 0) X.</pre>
-	<em>In this example, the extruded shape is rotated three times and assigned to a new shape (X).</em></td>
+	<em>In this example, the extruded shape is rotated three times and assigned to a new shape (X). The rotations build on each other.</em></td>
 </tr>
 <tr>
 	<td class="twocol_l"><br/>
@@ -72,7 +72,7 @@ Lot -->
     [ r(scopeCenter, 0, 22.5, 0) X. ]
     [ r(scopeCenter, 0, 22.5, 0) X. ]
     [ r(scopeCenter, 0, 22.5, 0) X. ]</pre>
-	<em>Encapsulating the rotations and createShape operations with a push/pop pair makes all X coincide.</em></td>
+	<em>Encapsulating the rotations and create shape operations with a push/pop pair makes all shapes X coincide. The rotations are independent of each other.</em></td>
 </tr>
 </table>
 
@@ -94,7 +94,7 @@ House -->
     [ t(0,10,0) roofHip(45) Roof. ]
     extrude(10)
     comp(f) { top : NIL | all = House. }</pre>
-	<em>Both rules generate the same result. In the second rule the roof is generated first using push/pop operations.</em></td>
+	<em>Both rules generate the same result. In the second rule, the roof is generated first using push/pop operations.</em></td>
 </tr>
 </table>
 
@@ -129,16 +129,16 @@ Cylinder -->
 	<td><pre class="code3">
 
 Lot -->
-	s(1,1,1)
-	[ case scope.sx == 1 : primitiveCube() Cube.
-	  else : primitiveCylinder() Cylinder. ]
+    s(1,1,1)
+    [ case scope.sx == 1 : primitiveCube() Cube.
+      else : primitiveCylinder() Cylinder. ]
 	</pre>
 	<em>Conditional and stochastic statements must not have preceding operations. Use push and pop to encapsulate a case switch.</em></td>
 </tr>
 </table>
 
 <!-- FOOTER -->
-<p class="foot">Copyright &copy;2008-2017 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
+<p class="foot">Copyright &copy;2008-2018 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
 
 <!-- END CENTERED CONTENT -->
 
