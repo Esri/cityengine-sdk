@@ -30,7 +30,7 @@ rd /S /Q build
 rd /S /Q install
 
 setlocal
-call "%ProgramFiles(x86)%\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" amd64
+call "%ProgramFiles(x86)%\Microsoft Visual Studio\2017\Professional\VC\Auxiliary\Build\vcvarsall.bat" x64 8.1 -vcvars_ver=14.11
 mkdir build\codec
 pushd build\codec
 "%CMAKE_EXECUTABLE%" -G %GENERATOR% -DCMAKE_BUILD_TYPE=Release -Dmaya_DIR=%maya_DIR% ../../src/codec

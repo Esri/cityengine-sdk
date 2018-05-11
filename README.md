@@ -12,7 +12,7 @@ This document explains how to install the CityEngine SDK and how to work with th
 The archives are available for download at the corresponding github release page. See installation instructions below for details.
 
 ## CityEngine SDK Releases
-- [v1.X.YYYY (2018-XX-XX, CityEngine 2018.0)](https://github.com/Esri/esri-cityengine-sdk/releases/tag/1.X.YYYY)
+- [v1.10.YYYY (2018-XX-XX, CityEngine 2018.0)](https://github.com/Esri/esri-cityengine-sdk/releases/tag/1.10.YYYY)
 - [v1.9.3786 (2017-11-06, CityEngine 2017.1)](https://github.com/Esri/esri-cityengine-sdk/releases/tag/1.9.3786)
 - [v1.8.3501 (2017-06-29, CityEngine 2017.0)](https://github.com/Esri/esri-cityengine-sdk/releases/tag/1.8.3501)
 - [v1.7.2915 (2016-10-03, CityEngine 2016.1)](https://github.com/Esri/esri-cityengine-sdk/releases/tag/1.7.2915)
@@ -63,25 +63,22 @@ Please note that the individual example READMEs may include further requirements
 
 #### Windows
 * Windows 7, 8.1 or 10 (64bit)
-* NMake 10.0 or later (NMake is part of Visual Studio)
-* Recommended C++ Compilers for client code (e.g. `prt4cmd` example): `VC 14 C++ Compiler (Visual Studio 2015) or later`
+* Recommended C++ Compilers for client code (e.g. `prt4cmd` example): `MSVC 14.11 C++ Compiler Toolset (Visual Studio 2017) or later`
 * To compile SDK extensions (e.g. the `stlenc` example or a custom encoder) it is required to use this **exact** compiler:
-    * Microsoft `VC14 C++ Compiler (cl.exe) 19.0.24215.1`, included in `Visual Studio 2015 Update 3`
+    * Microsoft `MSVC 14.11 C++ Compiler Toolset with cl.exe version 19.11`, included in `Visual Studio 2015 Update 3`
     * Required flags: `/bigobj /GR /EHsc /MD`
 
-#### MacOSX
-* GNU Make 3.82 or later
+#### macOS
 * Recommended build environment for client code (e.g. the `prt4cmd` example):
-    * MacOSX Yosemite (10.11) or later
-    * Apple Clang 7.3 or later
+    * macOS Sierra (10.12) or later
+    * Apple Clang 8.1 or later
 * To compile SDK extensions (e.g. the `stlenc` example or a custom encoder) it is required to use this **exact** compiler:
-    * MacOSX Yosemite (10.11)
-    * Apple Clang 7.3 included in XCode 7.3
+    * macOS Sierra (10.12)
+    * Apple Clang 8.1 included in XCode 8.3
     * Required flags: `-std=c++14 -stdlib=libc++ -fvisibility=hidden -fvisibility-inlines-hidden -Wl,--exclude-libs,ALL`
 
 #### Linux
 * RedHat Enterprise Linux 7.x or compatible (64bit only)
-* GNU Make 3.82 or later
 * Recommended C++ Compilers for client code (e.g. the `prt4cmd` example):
     * GCC 6.3 or later
 * To compile SDK extensions (e.g. the `stlenc` example or a custom encoder) it is required to use this **exact** compiler:
