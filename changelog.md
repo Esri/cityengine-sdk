@@ -1,3 +1,45 @@
+ESRI CITYENGINE SDK 1.11.YYYY CHANGELOG
+=======================================
+
+This section lists changes compared to CityEngine SDK 1.10.4051.
+
+
+General Info
+------------
+* CityEngine SDK 1.11.YYYY is used in CityEngine 2018.1 (2018.1.ZZZZ).
+
+
+PRT API
+-------
+* Corrected /cgaenv default values in API reference.
+
+
+CGA
+---
+* setback operation: The first edge of setback faces is set at the outline of the initial face. For remainder faces the first edge is the closest to the first edge of the initial shape. This fix potentially changes your existing models. [CE-5592]
+* alignScopeToGeometry operation: Fixed a numerical instability when world.lowest is used. In case multiple faces or edges are candidates for the lowest component, the one with the lowest index is chosen. This fix potentially changes your existing models. [CE-4828]
+* innerRectangle operation: Fixed a numerical instability. In case several rectangles are candidates for the largest, the one with the lowest distance to the shape's centroid is chosen. This fix potentially changes your existing models. [CE-4788]
+* Bugfixes:
+  * setback operation:
+    * Avoid creation of slivers, especially at rounded corners with short edges. [CE-4463]
+    * Fixed a possible crash for invalid uv-sets. [CE-4123]
+
+
+Built-In Codecs Changes and Fixes
+---------------------------------
+* New Encoders
+  * Added LERC encoder. [CE-5288]
+* OBJ, MTL Decoders:
+  * Set zero specular reflectivity to 1 when a specular map is present. [CE-5384]
+* I3S/SLPK Encoder:
+  * Store Texture Atlas using DXT/DDS. [CE-2294, CE-5667]
+  * Use minimum oriented bounding boxes for nodes. [CE-5577]
+* Unreal Encoder:
+  * Added simple terrain support. [CE-4579]
+  * Store shape/model offsets in "Unreal Actor Locators" instead of adding them to the geometry. [CE-5729]
+
+
+
 ESRI CITYENGINE SDK 1.10.4051 CHANGELOG
 =======================================
 
