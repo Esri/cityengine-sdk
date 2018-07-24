@@ -30,17 +30,7 @@ rd /S /Q build
 rd /S /Q install
 
 setlocal
-pushd %ProgramFiles(x86)%\Microsoft Visual Studio\Installer
-for /f "usebackq tokens=1* delims=: " %%i in (`vswhere -latest -requires Microsoft.Component.MSBuild`) do (
-  if /i "%%i"=="installationPath" set InstallDir=%%j
-)
-popd
-@ECHO ON
-echo InstallDir: "%InstallDir%"
-@ECHO OFF
-pushd .
-call "%InstallDir%\VC\Auxiliary\Build\vcvarsall.bat" x64 8.1 -vcvars_ver=14.11
-popd
+call "%ProgramFiles(x86)%\Microsoft Visual Studio\2017\Professional\VC\Auxiliary\Build\vcvarsall.bat" x64 8.1 -vcvars_ver=14.11
 mkdir build\codec
 pushd build\codec
 "%CMAKE_EXECUTABLE%" -G %GENERATOR% -DCMAKE_BUILD_TYPE=Release -Dmaya_DIR=%maya_DIR% ../../src/codec
