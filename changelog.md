@@ -11,32 +11,39 @@ General Info
 
 PRT API
 -------
-* Corrected /cgaenv default values in API reference.
+* Corrected cgaenv default values in API reference.
 
 
 CGA
 ---
-* setback operation: The first edge of setback faces is set at the outline of the initial face. For remainder faces the first edge is the closest to the first edge of the initial shape. This fix potentially changes your existing models. [CE-5592]
-* alignScopeToGeometry operation: Fixed a numerical instability when world.lowest is used. In case multiple faces or edges are candidates for the lowest component, the one with the lowest index is chosen. This fix potentially changes your existing models. [CE-4828]
-* innerRectangle operation: Fixed a numerical instability. In case several rectangles are candidates for the largest, the one with the lowest distance to the shape's centroid is chosen. This fix potentially changes your existing models. [CE-4788]
-* Bugfixes:
-  * setback operation:
-    * Avoid creation of slivers, especially at rounded corners with short edges. [CE-4463]
-    * Fixed a possible crash for invalid uv-sets. [CE-4123]
+* `setback` Operation
+  * The first edge of setback faces is set at the outline of the initial face. For remainder faces the first edge is the closest to the first edge of the initial shape. This fix potentially changes your existing models. [CE-5592]
+  * Avoid creation of slivers, especially at rounded corners with short edges. [CE-4463]
+  * Fixed a possible crash for invalid uv-sets. [CE-4123]
+* `alignScopeToGeometry` Operation
+  * Fixed a numerical instability when `world.lowest` is used. In case multiple faces or edges are candidates for the lowest component, the one with the lowest index is chosen. This fix potentially changes your existing models. [CE-4828]
+* `innerRectangle` Operation
+  * Fixed a numerical instability. In case several rectangles are candidates for the largest, the one with the lowest distance to the shape's centroid is chosen. This fix potentially changes your existing models. [CE-4788]
 
 
 Built-In Codecs Changes and Fixes
 ---------------------------------
 * New Encoders
   * Added LERC encoder. [CE-5288]
-* OBJ, MTL Decoders:
-  * Set zero specular reflectivity to 1 when a specular map is present. [CE-5384]
+* OBJ/MTL Decoder:
+  * If Ks is zero and map_Ks is present, assume a value of 1 for Ks. [CE-5384]
 * I3S/SLPK Encoder:
-  * Store Texture Atlas using DXT/DDS. [CE-2294, CE-5667]
-  * Use minimum oriented bounding boxes for nodes. [CE-5577]
+  * Additionally store textures in DXT/DDS formats. [CE-2294, CE-5667]
+  * Use minimum oriented bounding boxes for nodes instead of bounding spheres. [CE-5577]
 * Unreal Encoder:
   * Added simple terrain support. [CE-4579]
   * Store shape/model offsets in "Unreal Actor Locators" instead of adding them to the geometry. [CE-5729]
+  * Ensure that the `foliage` flag is only set on instances with identical materials.
+
+
+Misc Changes and Fixes
+----------------------
+* Added new shared library `glutess` to the CE SDK: The OpenGL tesselator is now included, we do not rely anymore on the one provided by the OpenGL drivers.
 
 
 
