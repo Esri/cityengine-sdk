@@ -49,7 +49,7 @@ elseif(${CMAKE_SYSTEM_NAME} STREQUAL "Darwin")
 	target_compile_options(${PROJECT} PRIVATE -std=c++14 -stdlib=libc++)
 endif()
 
-target_link_libraries(${PROJECT} ${PRT_LIBRARY})
+target_link_libraries(${PROJECT} ${PRT_LINK_LIBRARIES})
 
 
 ### install target
