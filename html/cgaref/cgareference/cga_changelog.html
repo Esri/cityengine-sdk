@@ -31,6 +31,25 @@
   <td><strong>Changes</strong></td>
   </tr>
 	<tr>
+		<td>2018.1 <br>CGAC 1.11</td>
+		<td>
+			Changes to existing features:
+			<ul>
+				<li><a href="op_setback.html"><span class="code_std">setback</span></a> operation: The first edge of setback faces is set at the outline of the initial face. For remainder faces the first edge is the closest to the first edge of the initial shape. This fix potentially changes your existing models.</li> <!-- CE-5592 -->
+				<li><a href="op_alignScopeToGeometry.html"><span class="code_std">alignScopeToGeometry</span></a> operation: Fixed a numerical instability when <span class="codelight">world.lowest</span> is used. In case multiple faces or edges are candidates for the lowest component, the one with the lowest index is chosen. This fix potentially changes your existing models.</li> <!-- CE-4828 -->
+				<li><a href="op_innerRectangle.html"><span class="code_std">innerRectangle</span></a> operation: Fixed a numerical instability. In case several rectangles are candidates for the largest, the one with the lowest distance to the shape's centroid is chosen. This fix potentially changes your existing models.</li> <!-- CE-4788 -->
+			</ul>
+			Bugfixes:
+			<ul>
+				<li><a href="op_setback.html"><span class="code_std">setback</span></a> operation:</li>
+				<ul>
+					<li>Avoid creation of slivers, especially at rounded corners with short edges.</li> <!-- CE-4463 -->
+					<li>Fixed a possible crash for invalid uv-sets.</li> <!-- CE-4123 -->
+				</ul>
+			</ul>
+		</td>
+	</tr>
+	<tr>
 		<td>2018.0 <br>CGAC 1.10</td>
 		<td>
 			Changed fundamental behaviour:
@@ -59,7 +78,7 @@
 			<ul>
 				<li>CGA Compiler:</li>
 				<ul>
-					<li>Compiler now checks for matching return types of attributes and functions with the same name accross styles. Prior, inconsistent return types resulted in a crash when switching styles or displaying all styles in the file preview.</li> <!-- CE-1565 -->
+					<li>The compiler now checks for matching return types of attributes and functions with the same name across styles. Prior, inconsistent return types resulted in a crash when switching styles or displaying all styles in the file preview.</li> <!-- CE-1565 -->
 					<li>Matching parameter types for rules and functions across styles are now also checked for unused definitions.</li> <!-- CE-1565 -->
 					<li>Compiler now checks if a definition type (attribute, const, function or rule) is consistent across styles.</li> <!-- CE-1565 -->
 					<li>Fixed wrong line reference of incompatible version warnings. This happened for rules that imported other rule files.</li> <!-- CE-3362 -->

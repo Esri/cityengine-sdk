@@ -26,15 +26,17 @@
         setback operation
         </h1>
 
-  <h2> Synopsis </h2>
-  <p class="code2"><span class="cga_op">setback</span>(<span class="cga_opparam">setbackDistance</span>) { selector operator operations | selector operator operations ... }</p>
-    <p class="code2"><span class="cga_op">setback</span>(<span class="cga_opparam">setbackDistance, uvSet</span>) { selector operator operations | selector operator operations ... }</p>
+<h2>Synopsis</h2>
 
-  <h2> Parameters </h2>
-  <ul>
-    <li><span class="cga_opparam">setbackDistance</span> (float)<br>
-    The setback distance.
-    </li>
+<p class="code2"><span class="cga_op">setback</span>(<span class="cga_opparam">setbackDistance</span>) { selector operator operations | selector operator operations ... }</p>
+<p class="code2"><span class="cga_op">setback</span>(<span class="cga_opparam">setbackDistance, uvSet</span>) { selector operator operations | selector operator operations ... }</p>
+
+<br>
+
+<h2>Parameters</h2>
+
+<ul>
+	<li><span class="cga_opparam">setbackDistance</span> (float)<br>The setback distance.</li>
     <li><span class="cga_opparam">uvSet</span> (float)<br>
     The uv set to use for uv-based selectors. Default is 0.
     </li>
@@ -72,7 +74,7 @@
             </li>
     	    <li>
 	          <i>index (float)</i>: 
-		        Selects the <i>index</i>-th component (0-based). Too large and negative indices a modulo wrapped to a correct index.</li>
+		        Selects the <i>index</i>-th component (0-based). Too large and negative indices are modulo wrapped to a correct index.</li>
             <li>
 	          <span class="codelight">uv.left, uv.right, uv.bottom, uv.top</span>: Selects edges based on their uv-coordinates. The outwards-pointing normal of each edge is analyzed to classify the edge with (<span class="codelight">left, right</span>) beeing the negative and positive u-axis and (<span class="codelight">bottom, top</span>) being the negative and positive v-axis. 
           </ul>
@@ -117,25 +119,23 @@
 <h2>Examples</h2>
 <h3>Setback on Street Front </h3>
 
-<center>
-            <img src="images/setback_street.front.png" alt="Setback streetfront"/> </td>
-</center>
-            <br>
-            
-            <pre class="code3">
-LotInner-->Lot
+<table summary="" class="twocol">
+<tr>
+	<td class="twocol_l"><br><img src="images/setback_street.front.png" width="298" alt="setback_street.front"/></td>
+	<td><pre class="code3">
+LotInner --> Lot
 
-Lot-->
-	setback(5) { street.front : Garten | remainder : Building }
+Lot --> setback(5) { street.front : Garten |
+                     remainder    : Building }
     	
 Garten --> color("#00ff00")
 
-Building-->
-	offset(-3, inside)
-	extrude(world.up, rand(5, 15))
-</pre>
-
-
+Building --> offset(-3, inside)
+             extrude(world.up, rand(5, 15))
+	</pre>
+	</td>
+</tr>
+</table>
 
 <!-- FOOTER -->
 <p class="foot">Copyright &copy;2008-2018 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
