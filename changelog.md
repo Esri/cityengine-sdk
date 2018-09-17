@@ -1,4 +1,4 @@
-ESRI CITYENGINE SDK 1.10.YYYY CHANGELOG
+ESRI CITYENGINE SDK 1.10.4198 CHANGELOG
 =======================================
 
 This section lists changes compared to CityEngine SDK 1.10.4051.
@@ -6,7 +6,7 @@ This section lists changes compared to CityEngine SDK 1.10.4051.
 
 General Info
 ------------
-* CityEngine SDK 1.10.YYYY is used in CityEngine 2018.1 (2018.1.ZZZZ).
+* CityEngine SDK 1.10.4198 is used in CityEngine 2018.1 (2018.1.4065).
 
 
 PRT API
