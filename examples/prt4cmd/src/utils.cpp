@@ -196,6 +196,8 @@ InputArgs::InputArgs(int argc, char *argv[]) : mStatus(RunStatus::FAILED) {
 
 	// parse options
 	try {
+		if(argc <= 1)
+			throw CLI::CallForHelp();
 		app.parse(argc, argv);
 	} catch (const CLI::Error& e) {
     	app.exit(e);
