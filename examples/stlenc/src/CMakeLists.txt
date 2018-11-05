@@ -50,7 +50,7 @@ else()
 endif()
 
 add_custom_target(install_${PROJECT_NAME}
-		$(MAKE) install
+		${CMAKE_COMMAND} -P ${PROJECT_BINARY_DIR}/cmake_install.cmake
 		DEPENDS ${PROJECT_NAME}
 		COMMENT "Installing ${PROJECT_NAME}"
 		)
