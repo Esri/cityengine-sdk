@@ -18,7 +18,7 @@ if(NOT prt_DIR)
 	message(STATUS "prt_DIR not set, trying fallback ${PROJECT_SOURCE_DIR}/../../../prt/cmake")
 	set(prt_DIR "${PROJECT_SOURCE_DIR}/../../../prt/cmake") # fallback location
 endif()
-find_package(prt CONFIG)
+find_package(prt REQUIRED CONFIG)
 include_directories(${PRT_INCLUDE_PATH})
 set(CESDK_VERSION "cesdk_${PRT_VERSION_MAJOR}_${PRT_VERSION_MINOR}_${PRT_VERSION_MICRO}")
 
@@ -69,12 +69,6 @@ else()
 	install(FILES ${PROJECT_SOURCE_DIR}/../README_linux_osx.md DESTINATION .)
 endif()
 
-
-add_custom_target(install_${PROJECT_NAME}
-	$(MAKE) install
-	DEPENDS ${PROJECT_NAME}
-	COMMENT "Installing ${PROJECT_NAME}"
-)
 
 ### package target
 

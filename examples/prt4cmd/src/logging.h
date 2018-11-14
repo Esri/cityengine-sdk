@@ -42,7 +42,7 @@ const std::wstring LEVELS[] = { L"trace", L"debug", L"info", L"warning", L"error
 // log to std streams
 template<prt::LogLevel L>
 struct StreamLogger : public Logger {
-	StreamLogger(std::wostream& out = std::wcout) : Logger(), mOut(out) { mOut << prefix(); }
+	explicit StreamLogger(std::wostream& out = std::wcout) : Logger(), mOut(out) { mOut << prefix(); }
 	virtual ~StreamLogger() { mOut << std::endl; }
 	StreamLogger<L>& operator<<(std::wostream&(*x)(std::wostream&)) { mOut << x; return *this; }
 	StreamLogger<L>& operator<<(const std::string& x) { std::copy(x.begin(), x.end(), std::ostream_iterator<char, wchar_t>(mOut)); return *this; }

@@ -43,7 +43,7 @@ USING PRT4CMD
 1. Type `bin\prt4cmd.exe` or `bin\prt4cmd.exe -h` to see the list of options.
 1. Type the following to generate the "candler" building model in the wavefront obj format:
    ```
-   bin\prt4cmd -f CityEngAdvFx -l 3 -g <your path to>\esri-cityengine-sdk\data\candler_footprint.obj -p <your path to>\esri-cityengine-sdk\data\candler.rpk -a ruleFile:string=bin/candler.cgb -a startRule:string=Default$Footprint -e com.esri.prt.codecs.OBJEncoder -z baseName:string=theCandler
+   bin\prt4cmd -l 3 -g <your path to>\esri-cityengine-sdk\data\candler_footprint.obj -p <your path to>\esri-cityengine-sdk\data\candler.rpk -a ruleFile:string=bin/candler.cgb -a startRule:string=Default$Footprint -e com.esri.prt.codecs.OBJEncoder -z baseName:string=theCandler
    ```
 1. The result is placed in the output directory:
    - `theCandler_0.obj`
@@ -51,23 +51,9 @@ USING PRT4CMD
    - Bunch of texture files
 1. To regenerate the same model with a different height, use the following command (note the additional `-a BuildingHeight...` statement):
    ```
-   bin\prt4cmd -f CityEngAdvFx -l 3 -g <your path to>\esri-cityengine-sdk\data\candler_footprint.obj -p <your path to>\esri-cityengine-sdk\data\candler.rpk -a ruleFile:string=bin/candler.cgb -a startRule:string=Default$Footprint -a BuildingHeight:float=30 -e com.esri.prt.codecs.OBJEncoder -z baseName:string=theCandler
+   bin\prt4cmd -l 3 -g <your path to>\esri-cityengine-sdk\data\candler_footprint.obj -p <your path to>\esri-cityengine-sdk\data\candler.rpk -a ruleFile:string=bin/candler.cgb -a startRule:string=Default$Footprint -a BuildingHeight:float=30 -e com.esri.prt.codecs.OBJEncoder -z baseName:string=theCandler
    ```
 1. The obj file will now contain a model which is 30m high instead of the default 62m.
-
-
-SPECIFYING THE LICENSE TYPE
----------------------------
-
-The SDK will make use of your installed CityEngine license (node-locked or network license).
-The `-f` argument specifies the type of license:
-- CityEngBas (basic network license)
-- CityEngBasFx (basic node-locked license)
-- CityEngAdv (advanced network license)
-- CityEngAdvFx (advanced node-locked license)
-
-The `-s` argument is only needed for the network license types, for example: 
-`bin\prt4cmd -f CityEngAdv -s 27000@example.com`
 
 
 LICENSING
@@ -76,5 +62,5 @@ LICENSING
 Copyright (c) 2018 Esri
 
 You may not use the content of this repository except in compliance with the following Licenses:
-  1. All content of all directories **except "examples"** is licensed under the CityEngine EULA, see [EULA.pdf](EULA.pdf).
+  1. All content of all directories **except "examples"** is licensed under the CityEngine EULA, see [EULA.pdf](../../EULA.pdf).
   2. All content in the "examples" directory tree is licensed under the APACHE 2.0 license. You may obtain a copy of this license at http://www.apache.org/licenses/LICENSE-2.0.

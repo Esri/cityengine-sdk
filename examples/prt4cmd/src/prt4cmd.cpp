@@ -25,7 +25,6 @@
 #include "prt/prt.h"
 #include "prt/API.h"
 #include "prt/ContentType.h"
-#include "prt/FlexLicParams.h"
 
 #include <string>
 #include <vector>
@@ -42,7 +41,6 @@ namespace {
 /**
  * commonly used constants
  */
-const char*    FILE_FLEXNET_LIB     = "flexnet_prt";
 const char*    FILE_LOG             = "prt4cmd.log";
 const wchar_t* FILE_CGA_ERROR       = L"CGAErrors.txt";
 const wchar_t* FILE_CGA_PRINT       = L"CGAPrint.txt";
@@ -51,7 +49,7 @@ const wchar_t* ENCODER_ID_CGA_PRINT = L"com.esri.prt.core.CGAPrintEncoder";
 const wchar_t* ENCODER_OPT_NAME     = L"name";
 
 /**
- * Helper struct to manage PRT lifetime (e.g. the prt::init() call) and licensing
+ * Helper struct to manage PRT lifetime (e.g. the prt::init() call)
  */
 struct PRTContext {
 	PRTContext(const pcu::InputArgs& inputArgs) {
@@ -62,28 +60,19 @@ struct PRTContext {
 		prt::addLogHandler(mLogHandler.get());
 		prt::addLogHandler(mFileLogHandler.get());
 
-		// setup paths for plugins and licensing, assume standard SDK layout as per README.md
+		// setup paths for plugins, assume standard SDK layout as per README.md
 		const pcu::Path rootPath = inputArgs.mWorkDir;
 		const pcu::Path extPath = rootPath / "lib";
-		const std::string fsFlexLibBaseName = pcu::getSharedLibraryPrefix() + FILE_FLEXNET_LIB + pcu::getSharedLibrarySuffix();
-		const pcu::Path fsFlexLib = rootPath / "bin" / fsFlexLibBaseName;
-		const std::string flexLib = fsFlexLib.native_string();
 
-		// setup the licensing information
-		prt::FlexLicParams flp;
-		flp.mActLibPath = flexLib.c_str();
-		flp.mFeature    = inputArgs.mLicFeature.c_str();
-		flp.mHostName   = inputArgs.mLicHost.c_str();
-
-		// initialize PRT with the path to its extension libraries, the desired log level and licensing data
+		// initialize PRT with the path to its extension libraries, the desired log level
 		const std::wstring wExtPath = extPath.native_wstring();
 		const std::array<const wchar_t*, 1> extPaths = { wExtPath.c_str() };
-		mLicHandle.reset(prt::init(extPaths.data(), extPaths.size(), (prt::LogLevel)inputArgs.mLogLevel, &flp));
+		mPRTHandle.reset(prt::init(extPaths.data(), extPaths.size(), (prt::LogLevel)inputArgs.mLogLevel));
 	}
 
 	~PRTContext() {
-		// release PRT license
-		mLicHandle.reset();
+		// shutdown PRT
+		mPRTHandle.reset();
 
 		// remove loggers
 		prt::removeLogHandler(mLogHandler.get());
@@ -91,12 +80,12 @@ struct PRTContext {
 	}
 
 	explicit operator bool() const {
-		return (bool)mLicHandle;
+		return (bool)mPRTHandle;
 	}
 
 	pcu::ConsoleLogHandlerPtr mLogHandler;
 	pcu::FileLogHandlerPtr    mFileLogHandler;
-	pcu::ObjectPtr            mLicHandle;
+	pcu::ObjectPtr            mPRTHandle;
 };
 
 } // namespace
@@ -105,7 +94,7 @@ struct PRTContext {
 /**
  * the actual model generation
  */
-int main (int argc, char *argv[]) {
+int main(int argc, char *argv[]) {
 	try {
 		// -- fetch command line args
 		const pcu::InputArgs inputArgs(argc, argv);
@@ -115,7 +104,7 @@ int main (int argc, char *argv[]) {
 		// -- initialize PRT via the above helper struct
 		const PRTContext prtCtx(inputArgs);
 		if (!prtCtx) {
-			LOG_ERR << L"failed to get a CityEngine license, bailing out.";
+			LOG_ERR << L"Failed to start PRT, aborting.";
 			return EXIT_FAILURE;
 		}
 

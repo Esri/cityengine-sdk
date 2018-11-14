@@ -67,12 +67,6 @@ using DecoderInfoPtr         = std::unique_ptr<const prt::DecoderInfo,         P
 AttributeMapPtr createValidatedOptions(const std::wstring& encID, const AttributeMapPtr& unvalidatedOptions);
 
 /**
- * shared library helpers
- */
-std::string getSharedLibraryPrefix();
-std::string getSharedLibrarySuffix();
-
-/**
  * string and URI helpers
  */
 using URI = std::string;
@@ -152,8 +146,6 @@ struct InputArgs {
 	URI             mInitialShapeGeo;
 	int             mLogLevel;
 	std::string     mInfoFile;
-	std::string     mLicHost;
-	std::string     mLicFeature;
 	RunStatus       mStatus;
 };
 

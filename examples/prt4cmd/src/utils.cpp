@@ -188,8 +188,6 @@ InputArgs::InputArgs(int argc, char *argv[]) : mStatus(RunStatus::FAILED) {
 	                     app.add_option("-g,--shape-geo",       convertInitialShapeGeoPath, "(Optional) Path to a file with shape geometry");
 	                     app.add_option("-z,--encoder-option",  convertEncOpts,             "Set a encoder option (syntax is <name>:<type>=<value>, type = {string,float,int,bool}).");
 	const auto optInfo = app.add_option("-i,--info",            mInfoFile,                  "Write XML Extension Information to file");
-	                     app.add_option("-f,--license-feature", mLicFeature,                "License Feature to use, one of CityEngBasFx, CityEngBas, CityEngAdvFx, CityEngAdv");
-	                     app.add_option("-s,--license-server",  mLicHost,                   "License Server Host Name, example: 27000@myserver.example.com");
 
 	// setup option requirements
 	optInfo->excludes(optRPK);
@@ -343,30 +341,6 @@ AttributeMapPtr createValidatedOptions(const std::wstring& encID, const Attribut
 	const prt::AttributeMap* validatedOptions = nullptr;
 	encInfo->createValidatedOptionsAndStates(unvalidatedOptions.get(), &validatedOptions);
 	return AttributeMapPtr(validatedOptions);
-}
-
-std::string getSharedLibraryPrefix() {
-#if defined(_WIN32)
-	return "";
-#elif defined(__APPLE__)
-	return "lib";
-#elif defined(__linux__)
-	return "lib";
-#else
-#	error unsupported build platform
-#endif
-}
-
-std::string getSharedLibrarySuffix() {
-#if defined(_WIN32)
-	return ".dll";
-#elif defined(__APPLE__)
-	return ".dylib";
-#elif defined(__linux__)
-	return ".so";
-#else
-#	error unsupported build platform
-#endif
 }
 
 
