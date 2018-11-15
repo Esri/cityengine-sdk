@@ -50,12 +50,6 @@ else()
 	install(FILES ${PROJECT_SOURCE_DIR}/../README_linux_osx.md OPTIONAL DESTINATION .)
 endif()
 
-add_custom_target(install_${PROJECT_NAME}
-		$(MAKE) install
-		DEPENDS ${PROJECT_NAME}
-		COMMENT "Installing ${PROJECT_NAME}"
-		)
-
 
 ### package target
 
