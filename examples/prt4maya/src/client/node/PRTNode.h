@@ -134,7 +134,7 @@ public:
 	static MObject					rulePkg;
 	static MObject					inMesh;
 	static MObject					outMesh;
-	static const prt::Object*		theLicHandle;
+	static const prt::Object*		thePRT;
 	static prt::CacheObject*		theCache;
 	static MStringArray				theShadingGroups;
 

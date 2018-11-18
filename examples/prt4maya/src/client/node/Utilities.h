@@ -35,14 +35,6 @@ template<typename C> C getDirSeparator();
 template<> char getDirSeparator();
 template<> wchar_t getDirSeparator();
 
-template<typename C> const std::basic_string<C>& getSharedLibraryPrefix();
-template<> const std::wstring& getSharedLibraryPrefix();
-template<> const std::string& getSharedLibraryPrefix();
-
-template<typename C> const std::basic_string<C>& getSharedLibrarySuffix();
-template<> const std::wstring& getSharedLibrarySuffix();
-template<> const std::string& getSharedLibrarySuffix();
-
 int fromHex(wchar_t c);
 wchar_t toHex(int i);
 void toHex(wchar_t* color, double r, double g, double b);

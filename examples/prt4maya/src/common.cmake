@@ -19,9 +19,15 @@ set(CESDK_VERSION "cesdk_${PRT_VERSION_MAJOR}_${PRT_VERSION_MINOR}_${PRT_VERSION
 if(NOT maya_DIR)
 	message(FATAL_ERROR "maya_DIR has not been set. please use '-Dmaya_DIR=xxx' to set it to the location of maya (must include devkit).")
 endif()
-set(maya_INCLUDE_PATH "${maya_DIR}/include" CACHE PATH "maya header include path" FORCE)
-set(maya_LIBRARY_PATH "${maya_DIR}/lib" CACHE PATH "maya libraries path" FORCE)
 message(STATUS "detected maya_DIR: ${maya_DIR}")
+
+find_path(maya_INCLUDE_PATH NAMES "maya/MApiVersion.h" PATHS "${maya_DIR}/include" NO_DEFAULT_PATH)
+message(STATUS "detected maya include dir: ${maya_INCLUDE_PATH}")
+
+find_library(maya_LINK_LIB_FOUNDATION NAMES "Foundation" PATHS "${maya_DIR}/lib")
+find_library(maya_LINK_LIB_OPENMAYA   NAMES "OpenMaya"   PATHS "${maya_DIR}/lib")
+find_library(maya_LINK_LIB_OPENMAYAUI NAMES "OpenMayaUI" PATHS "${maya_DIR}/lib")
+list(APPEND maya_LINK_LIBRARIES ${maya_LINK_LIB_FOUNDATION} ${maya_LINK_LIB_OPENMAYA} ${maya_LINK_LIB_OPENMAYAUI})
 
 
 ### plugin installation location

@@ -1,15 +1,10 @@
-cmake_minimum_required(VERSION 3.3)
+cmake_minimum_required(VERSION 3.8)
 
-project(prt4maya)
+project(prt4maya_parent)
+
+set(PRT4MAYA_CODEC_BINARY_DIR ${CMAKE_CURRENT_BINARY_DIR}/codec) # TODO: still needed
 
 add_subdirectory(codec)
-
-set(PRT4MAYA_CODEC_BINARY_DIR ${CMAKE_CURRENT_BINARY_DIR}/codec)
 add_subdirectory(client)
 
-add_custom_target(install_${PROJECT_NAME}
-	make install
-	DEPENDS ${PROJECT_NAME}
-	COMMENT "Installing ${PROJECT_NAME}"
-)
- 
+add_dependencies(prt4maya prt4maya_codec)

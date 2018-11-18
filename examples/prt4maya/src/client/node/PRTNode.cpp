@@ -12,7 +12,6 @@
 #include "node/MayaCallbacks.h"
 
 #include "prt/StringUtils.h"
-#include "prt/FlexLicParams.h"
 
 #include <maya/MFnPlugin.h>
 #include <maya/MFnTransform.h>
@@ -35,7 +34,6 @@
 
 namespace {
 
-const char*			FLEXNET_LIB			= "flexnet_prt";
 const wchar_t*		PRT_EXT_SUBDIR		= L"ext";
 const wchar_t*		ENC_MAYA			= L"MayaEncoder";
 const MString		NAME_RULE_PKG		= "Rule_Package";
@@ -474,7 +472,7 @@ MStatus PRTNode::initialize() {
 
 void PRTNode::uninitialize() {
 	theCache->destroy();
-	theLicHandle->destroy();
+	thePRT->destroy();
 
 	if (ENABLE_LOG_CONSOLE) {
 		prt::removeLogHandler(theLogHandler);
@@ -485,34 +483,6 @@ void PRTNode::uninitialize() {
 		theFileLogHandler->destroy();
 	}
 }
-
-namespace {
-
-const char* ENV_LIC_FEATURE = "ESRI_CE_SDK_LIC_FEATURE";
-const char* ENV_LIC_SERVER = "ESRI_CE_SDK_LIC_HOST";
-const char* EMPTY_STRING = "";
-
-bool tryToGetLicenseDetails(prt::FlexLicParams& flp) {
-	const char* envLicFeature = getenv(ENV_LIC_FEATURE);
-	const char* envLicServer = getenv(ENV_LIC_SERVER);
-	if (envLicFeature == nullptr) {
-		prt::log(L"prt4maya: could not get license feature type from environment", prt::LOG_FATAL);
-		return false;
-	}
-	if ((strcmp(envLicFeature, "CityEngAdv") == 0) && (envLicServer == nullptr)) {
-		prt::log(L"prt4maya: license type 'CityEngAdv' requires a license server hostname (<port>@<host>, e.g. 27000@flexnet.host.com)", prt::LOG_FATAL);
-		return false;
-	}
-	flp.mFeature = envLicFeature;
-	flp.mHostName = envLicServer != nullptr ? envLicServer : EMPTY_STRING;
-
-	prtu::dbg("lic feature: '%s'", flp.mFeature);
-	prtu::dbg("lic host: '%s'", flp.mHostName);
-
-	return true;
-}
-
-} // namespace
 
 P4M_API MStatus initializePlugin(MObject obj){
 	PRTNode::initLogger();
@@ -525,21 +495,11 @@ P4M_API MStatus initializePlugin(MObject obj){
 	const std::wstring prtExtPath = wPluginRoot + PRT_EXT_SUBDIR;
 	prtu::wdbg(L"looking for prt extensions at %ls",prtExtPath.c_str());
 
-	const std::string flexLibName = prtu::getSharedLibraryPrefix<char>() + std::string(FLEXNET_LIB) + prtu::getSharedLibrarySuffix<char>();
-	prtu::dbg("flexLibName = %s", flexLibName.c_str());
-	const std::string flexLibPath = pluginRoot + flexLibName;
-	prtu::dbg("flexLibPath = %s", flexLibPath.c_str());
-
-	prt::FlexLicParams flp;
-	flp.mActLibPath = flexLibPath.c_str();
-	if (!tryToGetLicenseDetails(flp))
-		return MS::kFailure;	
-
 	prt::Status status = prt::STATUS_UNSPECIFIED_ERROR;
 	const wchar_t* prtExtPathPOD = prtExtPath.c_str();
-	PRTNode::theLicHandle = prt::init(&prtExtPathPOD, 1, PRT_LOG_LEVEL, &flp, &status);
+	PRTNode::thePRT = prt::init(&prtExtPathPOD, 1, PRT_LOG_LEVEL, &status);
 
-	if (PRTNode::theLicHandle == nullptr || status != prt::STATUS_OK)
+	if (PRTNode::thePRT == nullptr || status != prt::STATUS_OK)
 		return MS::kFailure;
 
 	PRTNode::theCache = prt::CacheObject::create(prt::CacheObject::CACHE_TYPE_DEFAULT);
@@ -580,7 +540,7 @@ MObject PRTNode::outMesh;
 // statics
 prt::ConsoleLogHandler*	PRTNode::theLogHandler     = nullptr;
 prt::FileLogHandler*	PRTNode::theFileLogHandler = nullptr;
-const prt::Object*		PRTNode::theLicHandle      = nullptr;
+const prt::Object*		PRTNode::thePRT            = nullptr;
 prt::CacheObject*		PRTNode::theCache          = nullptr;
 int						PRTNode::theNodeCount      = 0;
 MStringArray			PRTNode::theShadingGroups;
