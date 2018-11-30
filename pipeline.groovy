@@ -16,8 +16,9 @@ import com.esri.zrh.jenkins.ce.PrtAppPipelineLibrary
 @Field final String BUILD_TARGET = 'package'
 
 @Field final List CONFIGS = [		
-	[ ba: psl.BA_RHEL7, os: cepl.CFG_OS_RHEL7, tc: cepl.CFG_TC_GCC63, arch: cepl.CFG_ARCH_X86_64, bc: cepl.CFG_BC_REL, cc: cepl.CFG_CC_OPT ],
-	[ ba: psl.BA_WIN10, os: cepl.CFG_OS_WIN10, tc: cepl.CFG_TC_VC141, arch: cepl.CFG_ARCH_X86_64, bc: cepl.CFG_BC_REL, cc: cepl.CFG_CC_OPT ]
+	[ os: cepl.CFG_OS_RHEL7, bc: cepl.CFG_BC_REL, tc: cepl.CFG_TC_GCC63, cc: cepl.CFG_CC_OPT, arch: cepl.CFG_ARCH_X86_64 ],
+	[ os: cepl.CFG_OS_WIN10, bc: cepl.CFG_BC_REL, tc: cepl.CFG_TC_VC141, cc: cepl.CFG_CC_OPT, arch: cepl.CFG_ARCH_X86_64 ],
+	[ os: cepl.CFG_OS_OSX12, bc: cepl.CFG_BC_REL, tc: cepl.CFG_TC_AC81,  cc: cepl.CFG_CC_OPT, arch: cepl.CFG_ARCH_X86_64 ],
 ]
 
 
