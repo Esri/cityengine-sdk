@@ -42,12 +42,6 @@ INSTALLATION INSTRUCTIONS
 1. Locate the Maya.env file in your home, usually its in `<home directory>\Documents\maya\2016`
 1. Edit Maya.env as follows:
    ```
-   :: use CityEngAdv for floating license
-   ESRI_CE_SDK_LIC_FEATURE=CityEngAdvFx
-   
-   :: uncomment for floating license
-   :: ESRI_CE_SDK_LIC_HOST=27000@my.flexnet.host
-
    :: replace <PLUGINDIR> with the actual path
    PATH=<PLUGINDIR>\plug-ins;%PATH%
    MAYA_PLUG_IN_PATH=<PLUGINDIR>\plug-ins
