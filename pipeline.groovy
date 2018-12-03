@@ -59,7 +59,7 @@ Map taskGenSTLDEC() {
 }
 
 Map taskGenPRT4MAYA() {
-	return cepl.generateTasks('prt4maya', this.&taskBuildPRT4MAYA, CONFIGS)
+	return cepl.generateTasks('prt4maya', this.&taskBuildPRT4MAYA, CONFIGS.findAll{ it.os != cepl.CFG_OS_OSX12 }) // TODO: implement macos support
 }
 
 
