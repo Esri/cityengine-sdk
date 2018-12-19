@@ -1,12 +1,8 @@
-cmake_minimum_required(VERSION 3.8)
+cmake_minimum_required(VERSION 3.13)
 cmake_policy(SET CMP0015 NEW)
 
 
 ### project definition
-
-if(NOT CMAKE_BUILD_TYPE)
-	set(CMAKE_BUILD_TYPE "Release" CACHE STRING "Choose one of: Debug Release RelWithDebInfo MinSizeRel")
-endif()
 
 project(prt4maya_codec)
 include(${CMAKE_CURRENT_LIST_DIR}/../common.cmake) # TODO: could be moved to top-level script
@@ -50,3 +46,8 @@ elseif(${CMAKE_SYSTEM_NAME} STREQUAL "Darwin")
 elseif(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
 	target_link_libraries(${PROJECT_NAME} z pthread dl rt)
 endif()
+
+
+### install
+
+install(TARGETS ${PROJECT_NAME} DESTINATION plug-ins/ext)

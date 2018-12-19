@@ -1,12 +1,8 @@
-cmake_minimum_required(VERSION 3.8)
+cmake_minimum_required(VERSION 3.13)
 cmake_policy(SET CMP0015 NEW)
 
 
 ### project definition
-
-if(NOT CMAKE_BUILD_TYPE)
-	set(CMAKE_BUILD_TYPE "Release" CACHE STRING "Choose one of: Debug Release RelWithDebInfo MinSizeRel")
-endif()
 
 project(prt4maya CXX)
 include(${CMAKE_CURRENT_LIST_DIR}/../common.cmake) # TODO: could be moved to top-level script
@@ -26,6 +22,11 @@ add_library(${PROJECT_NAME} SHARED
 		node/PRTNode.cpp
 		node/Utilities.cpp
 		node/MayaCallbacks.cpp)
+
+if(WIN32)
+    # On Windows, Maya requires plugins to have the extension "mll"
+    set_target_properties(${PROJECT_NAME} PROPERTIES SUFFIX ".mll")
+endif()
 
 
 ### setup compiler flags
@@ -52,8 +53,8 @@ else()
 			-fvisibility=hidden -fvisibility-inlines-hidden
 			-m64 -fPIC -fno-strict-aliasing -funsigned-char -Wno-reorder -fno-gnu-keywords -ftemplate-depth=50 -pthread
 			-Wall -Wextra -Wno-deprecated -Wno-multichar -Wno-comment -Wno-sign-compare
-            $<$<CONFIG:DEBUG>:-ggdb>
-            $<$<CONFIG:RELEASE>:-O2 -s>)
+			$<$<CONFIG:DEBUG>:-ggdb>
+			$<$<CONFIG:RELEASE>:-O2 -s>)
 
 	target_compile_definitions(${PROJECT_NAME} PRIVATE
 			-DBits64_ -DUNIX -D_BOOL -DLINUX -DFUNCPROTO -D_GNU_SOURCE -DLINUX_64 -DREQUIRE_IOSTREAM)
@@ -61,61 +62,32 @@ endif()
 
 
 target_include_directories(${PROJECT_NAME} PRIVATE
-		${CMAKE_SOURCE_DIR}
+		${CMAKE_SOURCE_DIR} # TODO: needed?
 		${PRT_INCLUDE_PATH}
 		${maya_INCLUDE_PATH})
-
-if(WIN32) # TODO: still needed?
-	target_include_directories(${PROJECT_NAME} PRIVATE "${CMAKE_CURRENT_LIST_DIR}/..")
-endif()
 
 target_link_libraries(${PROJECT_NAME} PRIVATE
 		${maya_LINK_LIBRARIES} ${PRT_LINK_LIBRARIES})
 
-if(${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
-	add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
-		COMMAND ${CMAKE_COMMAND} -E rename "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.dll" "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.mll")
-endif()
-
 
 ### setup install target
 
-if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
-	set(CMAKE_INSTALL_PREFIX "${CMAKE_BINARY_DIR}/../install")
-endif()
-
-if(NOT PRT4MAYA_CODEC_BINARY_DIR)
-	set(PRT4MAYA_CODEC_BINARY_DIR "${PROJECT_BINARY_DIR}/../codec")
-endif()
-
+install(TARGETS ${PROJECT_NAME} DESTINATION plug-ins)
 install(FILES ${PRT_LIBRARIES} DESTINATION plug-ins)
 install(FILES ${PRT_EXT_LIBRARIES} DESTINATION plug-ins/ext)
-install(
-	FILES "${PRT4MAYA_CODEC_BINARY_DIR}/${CMAKE_SHARED_LIBRARY_PREFIX}prt4maya_codec${CMAKE_SHARED_LIBRARY_SUFFIX}"
-	DESTINATION plug-ins/ext
-)
 install(FILES scripts/AEprtTemplate.mel DESTINATION scripts)
 install(FILES scripts/prt4mayaCreateUI.mel DESTINATION scripts)
 install(FILES scripts/prt4mayaDeleteUI.mel DESTINATION scripts)
 install(FILES ${PROJECT_SOURCE_DIR}/../../../../LICENSE DESTINATION .)
 install(FILES ${PROJECT_SOURCE_DIR}/../../../../EULA.pdf DESTINATION .)
 if(WIN32)
-	install(FILES "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.mll" DESTINATION plug-ins)
 	install(FILES ${PROJECT_SOURCE_DIR}/../../README_windows.md DESTINATION .)
 else()
-	install(TARGETS ${PROJECT_NAME} DESTINATION plug-ins)
 	install(FILES ${PROJECT_SOURCE_DIR}/../../README_linux_osx.md DESTINATION .)
 endif()
 
 
 ### package target
-
-#string(TOLOWER ${CMAKE_SYSTEM_NAME} PACKAGE_SYSTEM)
-#if(CMAKE_CXX_SIZEOF_DATA_PTR EQUAL 8)
-#	set(PACKAGE_ARCH "x86_64")
-#else()
-#	set(PACKAGE_ARCH "x86")
-#endif()
 
 set(CPACK_PACKAGE_NAME					"esri_prt4maya")
 set(CPACK_PACKAGE_VENDOR				"Esri R&D Center Zurich")
