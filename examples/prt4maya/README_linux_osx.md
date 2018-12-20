@@ -22,7 +22,7 @@ SOFTWARE REQUIREMENTS
 ---------------------
 
 - See "General Software Requirements" (Linux or macOS)
-- Autodesk Maya 2016 with development kit (devkit)
+- Autodesk Maya 2018 with development kit (devkit), please refer to the [Maya documentation](http://help.autodesk.com/view/MAYAUL/2018/ENU/?guid=__files_Setting_up_your_build_environment_htm)
 
 
 BUILD INSTRUCTIONS
@@ -31,7 +31,7 @@ BUILD INSTRUCTIONS
 1. Open a terminal (e.g. bash)
 1. Change into the example directory: `cd <your path to>/esri-cityengine-sdk/examples/prt4maya`
 1. Create a build directory and change into it: `mkdir build && cd build`
-1. Run cmake (please adjust the maya path): `cmake -Dmaya_DIR=/usr/autodesk/maya2016 ../src`
+1. Run cmake (please adjust the maya path): `cmake -Dmaya_DIR=/usr/autodesk/maya2018 ../src`
 1. Compile: `make install`
 1. The build result will appear in the `install` directory in parallel to the `build` directory. We will use this as the plugin directory below.
 
@@ -40,7 +40,7 @@ INSTALLATION INSTRUCTIONS
 -------------------------
 
 1. Locate the absolute path to the `install` directory created above (or keep `<your path to>/esri-cityengine-sdk/examples/prt4maya/install`), let's call it `PLUGINDIR`
-1. Locate the Maya.env file in your home: `~/maya/2016/Maya.env`
+1. Locate the Maya.env file in your home: `~/maya/2018/Maya.env`
 1. Edit Maya.env as follows:
    ```
    PLUGINDIR=<PLUGINDIR> # replace <PLUGINDIR> with the actual path

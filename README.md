@@ -72,9 +72,9 @@ Please note that the individual example READMEs may include further requirements
 * Required flags for extension libraries: `-std=c++14 -stdlib=libc++ -fvisibility=hidden -fvisibility-inlines-hidden -Wl,--exclude-libs,ALL`
 
 #### Linux
-* RedHat Enterprise Linux 7.x or compatible (64bit only)
+* RedHat Enterprise Linux 7.x or compatible
 * Required C++ compiler: GCC 6.3 or later (RedHat Enterprise Linux DevToolSet 6.1)
-* Required flags for extension libraries: `-std=c++14 -march=nocona -fvisibility=hidden -fvisibility-inlines-hidden -Wl,--exclude-libs,ALL`
+* Required flags for extension libraries: `-std=c++14 -D_GLIBCXX_USE_CXX11_ABI=0 -march=nocona -fvisibility=hidden -fvisibility-inlines-hidden -Wl,--exclude-libs,ALL`
 
 ## Further Resources
 * Documentation:
