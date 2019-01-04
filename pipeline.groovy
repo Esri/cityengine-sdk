@@ -1,10 +1,12 @@
 import groovy.transform.Field
 import com.esri.zrh.jenkins.PipelineSupportLibrary 
+import com.esri.zrh.jenkins.PslFactory
+import com.esri.zrh.jenkins.psl.UploadTrackingPsl
 import com.esri.zrh.jenkins.JenkinsTools
 import com.esri.zrh.jenkins.ce.CityEnginePipelineLibrary
 import com.esri.zrh.jenkins.ce.PrtAppPipelineLibrary
 
-@Field def psl = new PipelineSupportLibrary(this)
+@Field def psl = PslFactory.create(this, UploadTrackingPsl.ID)
 @Field def cepl = new CityEnginePipelineLibrary(this, psl)
 @Field def papl = new PrtAppPipelineLibrary(cepl)
 

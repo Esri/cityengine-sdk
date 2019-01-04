@@ -7,8 +7,9 @@ import groovy.transform.Field
 
 @Library('psl')
 import com.esri.zrh.jenkins.PipelineSupportLibrary 
+import com.esri.zrh.jenkins.PslFactory 
 
-@Field def psl = new PipelineSupportLibrary(this)
+@Field def psl = PslFactory.create(this)
 
 
 // -- SETUP
