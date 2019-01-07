@@ -57,34 +57,24 @@ A quick overview:
 Please note that the individual example READMEs may include further requirements.
 
 #### All Platforms
-* To load custom encoders built with this SDK in CityEngine, CityEngine 2018.1 is required. For older versions of CityEngine an older version of the SDK might have to be used, see list above.
+* To load custom encoders built with the latest SDK, CityEngine 2018.1 is required. For older versions of CityEngine an older version of the SDK might have to be used, see list above.
 * License for matching CityEngine
-* CMake 3.9.6 or later (http://www.cmake.org)
+* CMake 3.13 or later (http://www.cmake.org)
 
 #### Windows
 * Windows 7, 8.1 or 10 (64bit)
-* Recommended C++ Compilers for client code (e.g. `prt4cmd` example): `MSVC 14.11 C++ Compiler Toolset (Visual Studio 2017) or later`
-* To compile SDK extensions (e.g. the `stlenc` example or a custom encoder) it is required to use this **exact** compiler:
-    * Microsoft `MSVC 14.11 C++ Compiler Toolset with cl.exe version 19.11`, included in `Visual Studio 2017 - VC++ 2017 version 15.4 v14.11 toolset`
-    * Required flags: `/bigobj /GR /EHsc /MD`
+* Required C++ compiler: Visual Studio 2017 with Toolset MSVC 14.11 or later
+* Required flags for extension libraries: `/bigobj /GR /EHsc /MD`
 
 #### macOS
-* Recommended build environment for client code (e.g. the `prt4cmd` example):
-    * macOS Sierra (10.12) or later
-    * Apple Clang 8.1 or later
-* To compile SDK extensions (e.g. the `stlenc` example or a custom encoder) it is required to use this **exact** compiler:
-    * macOS Sierra (10.12)
-    * Apple Clang 8.1 included in XCode 8.3
-    * Required flags: `-std=c++14 -stdlib=libc++ -fvisibility=hidden -fvisibility-inlines-hidden -Wl,--exclude-libs,ALL`
+* macOS Sierra (10.12) or later
+* Required C++ compiler: Apple Clang 8.1 or later (i.e. XCode 8.3 or later)
+* Required flags for extension libraries: `-std=c++14 -stdlib=libc++ -fvisibility=hidden -fvisibility-inlines-hidden -Wl,--exclude-libs,ALL`
 
 #### Linux
 * RedHat Enterprise Linux 7.x or compatible (64bit only)
-* Recommended C++ Compilers for client code (e.g. the `prt4cmd` example):
-    * GCC 6.3 or later
-* To compile SDK extensions (e.g. the `stlenc` example or a custom encoder) it is required to use this **exact** compiler:
-    * RedHat Enterprise Linux 7.x or compatible
-    * GCC 6.3.1 included in RedHat Enterprise Linux DevToolSet 6.1
-    * Required flags: `-std=c++14 -march=nocona -fvisibility=hidden -fvisibility-inlines-hidden -Wl,--exclude-libs,ALL`
+* Required C++ compiler: GCC 6.3 or later (RedHat Enterprise Linux DevToolSet 6.1)
+* Required flags for extension libraries: `-std=c++14 -march=nocona -fvisibility=hidden -fvisibility-inlines-hidden -Wl,--exclude-libs,ALL`
 
 ## Further Resources
 * Documentation:
@@ -110,5 +100,5 @@ Copyright (c) 2018 Esri
 
 You may not use the content of this repository except in compliance with the following Licenses:
   1. All content of all directories **except "examples"** is licensed under the CityEngine EULA, see [EULA.pdf](EULA.pdf).
-  1. All content in the "examples" directory tree is licensed under the APACHE 2.0 license. You may obtain a copy of this license at http://www.apache.org/licenses/LICENSE-2.0.
-  1. The example data is licensed by the "ESRI Attribution and Licensing Agreement".
+  2. All content in the "examples" directory tree is licensed under the APACHE 2.0 license. You may obtain a copy of this license at http://www.apache.org/licenses/LICENSE-2.0.
+  3. The example data is licensed by the "ESRI Attribution and Licensing Agreement".
