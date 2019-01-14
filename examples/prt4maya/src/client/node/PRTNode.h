@@ -164,15 +164,15 @@ public:
 private:
 	static MString& getStringParameter(MObject & node, MObject & attr, MString & value);
 	static MStatus  setStringParameter(MObject & node, MObject & attr, MString & value);
-	static MStatus  addBoolParameter(MFnDependencyNode & node, MObject & attr, const MString & name, bool val);
-	static MStatus  addFloatParameter(MFnDependencyNode & node,  MObject & attr, const MString & name, double val, double min, double max);
-	static MStatus  addStrParameter(MFnDependencyNode & node,  MObject & attr, const MString & name, const MString & attrDefault);
-	static MStatus  addFileParameter(MFnDependencyNode & node,  MObject & attr, const MString & name, const MString & attrDefault, const MString & ext);
-	static MStatus  addEnumParameter(MFnDependencyNode & node,  MObject & attr, const MString & name, bool value, PRTEnum * e);
-	static MStatus  addEnumParameter(MFnDependencyNode & node,  MObject & attr, const MString & name, double value, PRTEnum * e);
-	static MStatus  addEnumParameter(MFnDependencyNode & node,  MObject & attr, const MString & name, MString value, PRTEnum * e);
-	static MStatus  addEnumParameter(MFnDependencyNode & node,  MObject & attr, const MString & name, short value, PRTEnum * e);
-	static MStatus  addColorParameter(MFnDependencyNode & node,  MObject & attr, const MString & name, const MString& attrDefault);
+	static MStatus  addBoolParameter(MFnDependencyNode & node, MObject & attr, const MString & name, bool defaultValue);
+	static MStatus  addFloatParameter(MFnDependencyNode & node,  MObject & attr, const MString & name, double defaultValue, double min, double max);
+	static MStatus  addStrParameter(MFnDependencyNode & node,  MObject & attr, const MString & name, const MString & defaultValue);
+	static MStatus  addFileParameter(MFnDependencyNode & node,  MObject & attr, const MString & name, const MString & defaultValue, const MString & ext);
+	static MStatus  addEnumParameter(MFnDependencyNode & node,  MObject & attr, const MString & name, bool defaultValue, PRTEnum * e);
+	static MStatus  addEnumParameter(MFnDependencyNode & node,  MObject & attr, const MString & name, double defaultValue, PRTEnum * e);
+	static MStatus  addEnumParameter(MFnDependencyNode & node,  MObject & attr, const MString & name, MString defaultValue, PRTEnum * e);
+	static MStatus  addEnumParameter(MFnDependencyNode & node,  MObject & attr, const MString & name, short defaultValue, PRTEnum * e);
+	static MStatus  addColorParameter(MFnDependencyNode & node,  MObject & attr, const MString & name, const MString& defaultValue);
 	static MStatus  addParameter(MFnDependencyNode & node, MObject & attr ,  MFnAttribute& tAttr);
 	static MStatus  updateStartRules(MFnDependencyNode & node);
 	static MStatus  createAttributes(MFnDependencyNode & node, const std::wstring & ruleFile, const std::wstring & startRule, prt::AttributeMapBuilder* aBuilder, const prt::RuleFileInfo* info);

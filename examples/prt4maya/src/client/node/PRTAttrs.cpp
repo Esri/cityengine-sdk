@@ -60,7 +60,7 @@ MString PRTAttrs::briefName(const MString & attrName) {
 	return prtu::toCleanId(attrName);
 }
 
-MStatus PRTAttrs::addBoolParameter(MFnDependencyNode & node, MObject & attr, const MString & name, bool value) {
+MStatus PRTAttrs::addBoolParameter(MFnDependencyNode & node, MObject & attr, const MString & name, bool defaultValue) {
 	MStatus stat;
 	MFnNumericAttribute nAttr;
 	attr = nAttr.create(longName(name), briefName(name), MFnNumericData::kBoolean, value, &stat);
@@ -74,7 +74,7 @@ MStatus PRTAttrs::addBoolParameter(MFnDependencyNode & node, MObject & attr, con
 	return MS::kSuccess;
 }
 
-MStatus PRTAttrs::addFloatParameter(MFnDependencyNode & node, MObject & attr, const MString & name, double value, double min, double max) {
+MStatus PRTAttrs::addFloatParameter(MFnDependencyNode & node, MObject & attr, const MString & name, double defaultValue, double min, double max) {
 	MStatus stat;
 	MFnNumericAttribute nAttr;
 	attr = nAttr.create(longName(name), briefName(name), MFnNumericData::kDouble, value, &stat );
@@ -97,7 +97,7 @@ MStatus PRTAttrs::addFloatParameter(MFnDependencyNode & node, MObject & attr, co
 	return MS::kSuccess;
 }
 
-MStatus PRTAttrs::addEnumParameter(MFnDependencyNode & node, MObject & attr, const MString & name, bool value, PRTEnum * e) {
+MStatus PRTAttrs::addEnumParameter(MFnDependencyNode & node, MObject & attr, const MString & name, bool defaultValue, PRTEnum * e) {
 	short idx = 0;
 	for(int i = static_cast<int>(e->mBVals.length()); --i >= 0;) {
 		if((e->mBVals[i] != 0) == value) {
@@ -109,7 +109,7 @@ MStatus PRTAttrs::addEnumParameter(MFnDependencyNode & node, MObject & attr, con
 	return addEnumParameter(node, attr, name, idx, e);
 }
 
-MStatus PRTAttrs::addEnumParameter(MFnDependencyNode & node, MObject & attr, const MString & name, double value, PRTEnum * e) {
+MStatus PRTAttrs::addEnumParameter(MFnDependencyNode & node, MObject & attr, const MString & name, double defaultValue, PRTEnum * e) {
 	short idx = 0;
 	for(int i = static_cast<int>(e->mFVals.length()); --i >= 0;) {
 		if(e->mFVals[i] == value) {
@@ -121,7 +121,7 @@ MStatus PRTAttrs::addEnumParameter(MFnDependencyNode & node, MObject & attr, con
 	return addEnumParameter(node, attr, name, idx, e);
 }
 
-MStatus PRTAttrs::addEnumParameter(MFnDependencyNode & node, MObject & attr, const MString & name, MString value, PRTEnum * e) {
+MStatus PRTAttrs::addEnumParameter(MFnDependencyNode & node, MObject & attr, const MString & name, MString defaultValue, PRTEnum * e) {
 	short idx = 0;
 	for(int i = static_cast<int>(e->mSVals.length()); --i >= 0;) {
 		if(e->mSVals[i] == value) {
@@ -133,7 +133,7 @@ MStatus PRTAttrs::addEnumParameter(MFnDependencyNode & node, MObject & attr, con
 	return addEnumParameter(node, attr, name, idx, e);
 }
 
-MStatus PRTAttrs::addEnumParameter(MFnDependencyNode & node, MObject & attr, const MString & name, short value, PRTEnum * e) {
+MStatus PRTAttrs::addEnumParameter(MFnDependencyNode & node, MObject & attr, const MString & name, short defaultValue, PRTEnum * e) {
 	MStatus stat;
 
 	attr = e->mAttr.create(longName(name), briefName(name), value, &stat);
@@ -149,7 +149,7 @@ MStatus PRTAttrs::addEnumParameter(MFnDependencyNode & node, MObject & attr, con
 	return MS::kSuccess;
 }
 
-MStatus PRTAttrs::addFileParameter(MFnDependencyNode & node, MObject & attr, const MString & name, const MString & value, const MString & exts ) {
+MStatus PRTAttrs::addFileParameter(MFnDependencyNode & node, MObject & attr, const MString & name, const MString & defaultValue, const MString & exts ) {
 	MStatus           stat;
 	MStatus           stat2;
 	MFnStringData     stringData;
@@ -168,7 +168,7 @@ MStatus PRTAttrs::addFileParameter(MFnDependencyNode & node, MObject & attr, con
 	return MS::kSuccess;
 }
 
-MStatus PRTAttrs::addColorParameter(MFnDependencyNode & node, MObject & attr, const MString & name, const MString & value ) {
+MStatus PRTAttrs::addColorParameter(MFnDependencyNode & node, MObject & attr, const MString & name, const MString & defaultValue) {
 	MStatus             stat;
 	MFnNumericAttribute nAttr;
 
@@ -202,7 +202,7 @@ MStatus PRTAttrs::addColorParameter(MFnDependencyNode & node, MObject & attr, co
 	return MS::kSuccess;
 }
 
-MStatus PRTAttrs::addStrParameter(MFnDependencyNode & node, MObject & attr, const MString & name, const MString & value ) {
+MStatus PRTAttrs::addStrParameter(MFnDependencyNode & node, MObject & attr, const MString & name, const MString & defaultValue ) {
 	MStatus           stat;
 	MStatus           stat2;
 	MFnStringData     stringData;
