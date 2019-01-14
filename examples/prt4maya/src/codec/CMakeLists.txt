@@ -20,7 +20,7 @@ target_compile_definitions(${CODEC_TARGET} PRIVATE
 	-DPRT_VERSION_MINOR=${PRT_VERSION_MINOR})
 
 if(${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
-	target_compile_options(${CODEC_TARGET} PRIVATE -bigobj -GR -EHsc -MD)
+	target_compile_options(${CODEC_TARGET} PRIVATE -bigobj -GR -EHsc)
 elseif(${CMAKE_SYSTEM_NAME} STREQUAL "Darwin")
 	target_compile_options(${CODEC_TARGET} PRIVATE -std=c++14 -stdlib=libc++ -fvisibility=hidden -fvisibility-inlines-hidden -Wl,--exclude-libs,ALL)
 elseif(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
