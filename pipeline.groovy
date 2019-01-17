@@ -77,7 +77,7 @@ def taskBuildPRT4CMD(cfg) {
 		[ key: 'PRT4CMD_VERSION_MICRO', val: env.BUILD_NUMBER ]
 	]
 	papl.buildConfig(REPO, myBranch, "${SOURCES}/${appName}/src", BUILD_TARGET, cfg, DEPS, defs)
-	papl.publish(appName, myBranch, "esri_${appName}*.zip", "0.0.${env.BUILD_NUMBER}", cfg)
+	papl.publish(appName, myBranch, "esri_${appName}*.zip", { "0.0.${env.BUILD_NUMBER}" }, cfg)
 }
 
 def taskBuildSTLENC(cfg) {
@@ -88,7 +88,7 @@ def taskBuildSTLENC(cfg) {
 		[ key: 'STLENC_VERSION_MICRO', val: env.BUILD_NUMBER ]
 	]
 	papl.buildConfig(REPO, myBranch, "${SOURCES}/${appName}/src", BUILD_TARGET, cfg, DEPS, defs)
-	papl.publish(appName, myBranch, "esri_${appName}*.zip", "0.0.${env.BUILD_NUMBER}", cfg)
+	papl.publish(appName, myBranch, "esri_${appName}*.zip", { "0.0.${env.BUILD_NUMBER}" }, cfg)
 }
 
 def taskBuildSTLDEC(cfg) {
@@ -99,7 +99,7 @@ def taskBuildSTLDEC(cfg) {
 		[ key: 'STLDEC_VERSION_MICRO', val: env.BUILD_NUMBER ]
 	]
 	papl.buildConfig(REPO, myBranch, "${SOURCES}/${appName}/src", BUILD_TARGET, cfg, DEPS, defs)
-	papl.publish(appName, myBranch, "esri_${appName}*.zip", "0.0.${env.BUILD_NUMBER}", cfg)
+	papl.publish(appName, myBranch, "esri_${appName}*.zip", { "0.0.${env.BUILD_NUMBER}" }, cfg)
 }
 
 def taskBuildPRT4MAYA(cfg) {
@@ -113,7 +113,7 @@ def taskBuildPRT4MAYA(cfg) {
 		[ key: 'PRT4MAYA_VERSION_MICRO', val: env.BUILD_NUMBER ]
 	]
 	papl.buildConfig(REPO, myBranch, "${SOURCES}/${appName}/src", BUILD_TARGET, cfg, DEPS, defs)
-	papl.publish(appName, myBranch, "esri_${appName}*.zip", "0.0.${env.BUILD_NUMBER}", cfg)
+	papl.publish(appName, myBranch, "esri_${appName}*.zip", { "0.0.${env.BUILD_NUMBER}" }, cfg)
 }
 
 
