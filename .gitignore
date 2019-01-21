@@ -18,41 +18,8 @@
 *.project
 *.cprojects
 
-# extracted prt releases
-/data*
-/prt*
-/esri_*/
-/include
-/bin
-/lib
-/doc
-/cmake
-build
-*.zip
-*.tgz
-*.tar.gz
-*.tar.bz2
-*.tbz
-*.tbz2
-# Compiled Object files
-*.slo
-*.lo
-*.o
-
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
-*.lib
-
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-
-# eclipse
-*.project
-*.cprojects
+# intellij and related
+.idea
 
 # extracted prt releases
 /data*
