@@ -104,10 +104,10 @@ def taskBuildSTLDEC(cfg) {
 
 def taskBuildPRT4MAYA(cfg) {
 	final String appName = 'prt4maya'
-	final List DEPS = [ PrtAppPipelineLibrary.Dependencies.CESDK, PrtAppPipelineLibrary.Dependencies.MAYA ]
+	final List DEPS = [ PrtAppPipelineLibrary.Dependencies.CESDK, PrtAppPipelineLibrary.Dependencies.MAYA2018 ]
 	List defs = [
 		[ key: 'prt_DIR',                val: PrtAppPipelineLibrary.Dependencies.CESDK.p ],
-		[ key: 'maya_DIR',               val: PrtAppPipelineLibrary.Dependencies.MAYA.p ],
+		[ key: 'maya_DIR',               val: PrtAppPipelineLibrary.Dependencies.MAYA2018.p ],
 		[ key: 'PRT4MAYA_VERSION_MAJOR', val: 0 ],
 		[ key: 'PRT4MAYA_VERSION_MINOR', val: 0 ],
 		[ key: 'PRT4MAYA_VERSION_MICRO', val: env.BUILD_NUMBER ]
