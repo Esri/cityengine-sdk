@@ -64,7 +64,7 @@ Please note that the individual example READMEs may include further requirements
 #### Windows
 * Windows 7, 8.1 or 10 (64bit)
 * Required C++ compiler: Visual Studio 2017 with Toolset MSVC 14.11 or later
-* Required flags for extension libraries: `/bigobj /GR /EHsc /MD`
+* Required flags for extension libraries release mode: `/bigobj /GR /EHsc /MD` (use `/MDd` to debug)
 
 #### macOS
 * macOS Sierra (10.12) or later
