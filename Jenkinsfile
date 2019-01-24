@@ -14,7 +14,6 @@ import com.esri.zrh.jenkins.PslFactory
 
 // -- SETUP
 
-properties([ disableConcurrentBuilds() ])
 psl.runsHere('production')
 env.PIPELINE_ARCHIVING_ALLOWED = "true" // TODO: eventually restrict to master branch
 
