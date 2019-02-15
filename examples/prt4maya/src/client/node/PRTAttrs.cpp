@@ -436,7 +436,7 @@ MStatus PRTAttrs::createAttributes(MFnDependencyNode & node, const std::wstring 
 	PRTNode*          prtNode = (PRTNode*)node.userNode();
 	MString           dummy;
 
-	std::unique_ptr<MayaCallbacks> outputHandler(prtNode->createOutputHandler(nullptr, nullptr));
+	std::unique_ptr<MayaCallbacks> outputHandler(prtNode->createOutputHandler(nullptr, nullptr, nullptr));
 	const prt::AttributeMap* attrs   = aBuilder->createAttributeMap();
 
 	prt::InitialShapeBuilder* isb = prt::InitialShapeBuilder::create();

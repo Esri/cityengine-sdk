@@ -49,6 +49,7 @@
 #include <memory>
 #include <stdexcept>
 #include <map>
+#include <vector>
 #include <string>
 
 
@@ -66,8 +67,8 @@ public:
 	typedef std::map<std::wstring, AttributeHolder> NamedAttributeHolders;
 
 public:
-	MayaCallbacks(const MPlug* plug, MDataBlock* data, MStringArray* shadingGroups, MIntArray* shadingRanges, MString* shadingCmd)
-		: mPlug(plug), mData(data), mShadingGroups(shadingGroups), mShadingRanges(shadingRanges), mShadingCmd(shadingCmd) { }
+	MayaCallbacks(const MPlug* plugInMesh, const MPlug* plugOutMesh, MDataBlock* data)
+		: mPlugInMesh(plugInMesh), mPlug(plugOutMesh), mData(data) { }
 	virtual ~MayaCallbacks() { }
 
 	// prt::Callbacks interface
@@ -114,16 +115,14 @@ public:
 	virtual void createMesh() override;
 	virtual void finishMesh() override;
 
-	virtual void matSetColor(uint32_t start, uint32_t count, double r, double g, double b) override;
-	virtual void matSetDiffuseTexture(uint32_t start, uint32_t count, const wchar_t* tex) override;
+    virtual void setMaterial(uint32_t start, uint32_t count, const prtx::MaterialPtr& mat) override;
 
 public:
-	virtual MString matCreate(int start, int count, const wchar_t* name);
 	const NamedAttributeHolders& getAttrs() const { return mAttrs; }
 
 private:
 	// must not be called
-	MayaCallbacks() : mPlug(nullptr), mData(nullptr), mShadingGroups(nullptr), mShadingRanges(nullptr), mShadingCmd(nullptr) { }
+	MayaCallbacks() : mPlugInMesh(nullptr), mPlug(nullptr), mData(nullptr) { }
 
 public:
 	std::unique_ptr<MFnMesh> mFnMesh;
@@ -138,9 +137,9 @@ public:
 
 private:
 	const MPlug*             mPlug;
+    const MPlug*             mPlugInMesh;
 	MDataBlock*	             mData;
-	MStringArray*            mShadingGroups;
-	MIntArray*               mShadingRanges;
-	MString*                 mShadingCmd;
+	std::vector<prtx::MaterialPtr> mMaterials;
+    MIntArray               mShadingRanges;
 	NamedAttributeHolders    mAttrs;
 };

@@ -8,6 +8,7 @@
  */
 
 #include "node/PRTNode.h"
+#include "node/PRTMaterialNode.h"
 #include "node/Utilities.h"
 #include "node/MayaCallbacks.h"
 
@@ -53,7 +54,7 @@ MTypeId PRTNode::theID(PRT_TYPE_ID);
 
 PRTNode::PRTNode()
 : mResolveMap(nullptr), mGenerateAttrs(nullptr), mMayaEncOpts(nullptr), mAttrEncOpts(nullptr)
-, mEnums(nullptr), mHasMaterials(false), mCreatedInteractively(false)
+, mEnums(nullptr), mCreatedInteractively(false)
 {
 	theNodeCount++;
 
@@ -77,10 +78,6 @@ PRTNode::~PRTNode() {
 	if(mAttrEncOpts)   {mAttrEncOpts->destroy();   mAttrEncOpts   = nullptr;}
 	if(mEnums)         {destroyEnums();}
 
-	if(--theNodeCount == 0) {
-		theShadingGroups.clear();
-	}
-
 	prtu::dbg("PRTNode disposed\n");
 }
 
@@ -96,7 +93,6 @@ MStatus PRTNode::preEvaluation(const MDGContext&, const MEvaluationNode&) {
 
 MStatus PRTNode::compute(const MPlug& plug, MDataBlock& data ) {
 	MStatus stat;
-	mHasMaterials = false;
 
 	MString dummy;
 	const std::string utf8Path(getStrParameter(rulePkg, dummy).asUTF8());
@@ -157,7 +153,8 @@ MStatus PRTNode::compute(const MPlug& plug, MDataBlock& data ) {
 			pconnect.get((int*)ia);
 			pcounts.get((int*)ca);
 
-			MayaCallbacks* outputHandler = createOutputHandler(&plug, &data);
+            MPlug inMeshPlug(thisMObject(), inMesh);
+			MayaCallbacks* outputHandler = createOutputHandler(&inMeshPlug, &plug, &data);
 
 			prt::InitialShapeBuilder* isb = prt::InitialShapeBuilder::create();
 			prt::Status setGeoStatus = isb->setGeometry(
@@ -210,10 +207,8 @@ MStatus PRTNode::compute(const MPlug& plug, MDataBlock& data ) {
 
 		data.setClean(plug);
 
-		if(mCreatedInteractively) {
-			MGlobal::executeCommand(mShadingCmd, DO_DBG, false);
-			MGlobal::executeCommandOnIdle(MString("prtMaterials " + name()), DO_DBG);
-		} else {
+		if(!mCreatedInteractively)
+		{
 			MPlug pState(thisMObject(), state);
 			int value;
 			pState.getValue(value);
@@ -384,8 +379,8 @@ const PRTEnum* PRTNode::findEnum(const MObject & attr) const {
 	return nullptr;
 }
 
-MayaCallbacks* PRTNode::createOutputHandler(const MPlug* plug, MDataBlock* data) {
-	return new MayaCallbacks(plug, data, &mShadingGroups, &mShadingRanges, &mShadingCmd);
+MayaCallbacks* PRTNode::createOutputHandler(const MPlug* plugInMesh, const MPlug* plugOutMesh, MDataBlock* data) {
+	return new MayaCallbacks(plugInMesh, plugOutMesh, data);
 }
 
 void PRTNode::initLogger() {
@@ -507,9 +502,9 @@ P4M_API MStatus initializePlugin(MObject obj){
 	MFnPlugin plugin( obj, "Esri R&D Center Zurich", "1.0", "Any");
 
 	MCHECK(plugin.registerNode("prt", PRTNode::theID, &PRTNode::creator, &PRTNode::initialize, MPxNode::kDependNode));
+    MCHECK(plugin.registerNode("prtMaterial", PRTMaterialNode::theID, &PRTMaterialNode::creator, &PRTMaterialNode::initialize, MPxNode::kDependNode));
 	MCHECK(plugin.registerUI("prt4mayaCreateUI", "prt4mayaDeleteUI"));
 	MCHECK(plugin.registerCommand("prtAttrs",     PRTAttrs::creator));
-	MCHECK(plugin.registerCommand("prtMaterials", PRTMaterials::creator));
 	MCHECK(plugin.registerCommand("prtCreate",    PRTCreate::creator));
 
 	return MS::kSuccess;
@@ -543,4 +538,3 @@ prt::FileLogHandler*	PRTNode::theFileLogHandler = nullptr;
 const prt::Object*		PRTNode::thePRT            = nullptr;
 prt::CacheObject*		PRTNode::theCache          = nullptr;
 int						PRTNode::theNodeCount      = 0;
-MStringArray			PRTNode::theShadingGroups;

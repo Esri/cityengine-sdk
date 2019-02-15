@@ -111,10 +111,9 @@ public:
 
 	const PRTEnum*					findEnum(const MObject & attr) const;
 	void							destroyEnums();
-	MStatus							attachMaterials();
 	static void						initLogger();
 	static void						uninitialize();
-	MayaCallbacks*					createOutputHandler(const MPlug* plug, MDataBlock* data);
+	MayaCallbacks*					createOutputHandler(const MPlug* plugInMesh, const MPlug* plugOutMesh, MDataBlock* data);
 
 public:
 	std::wstring					mRuleFile;
@@ -136,7 +135,6 @@ public:
 	static MObject					outMesh;
 	static const prt::Object*		thePRT;
 	static prt::CacheObject*		theCache;
-	static MStringArray				theShadingGroups;
 
 private:
 	MString&						getStrParameter(const MObject & attr, MString & value);
@@ -145,10 +143,6 @@ private:
 
 private:
 	PRTEnum*						mEnums;
-	bool							mHasMaterials;
-	MStringArray					mShadingGroups;
-	MIntArray						mShadingRanges;
-	MString							mShadingCmd;
 
 	static prt::ConsoleLogHandler*	theLogHandler;
 	static prt::FileLogHandler*		theFileLogHandler;
@@ -180,13 +174,6 @@ private:
 	static MString  briefName(const MString & attrName);
     template<typename T> static T getPlugValueAndRemoveAttr(MFnDependencyNode & node, const MString & briefName, const T & defaultValue);
 }; // class PRTAttrs
-
-
-class PRTMaterials : public MPxCommand {
-public:
-	virtual MStatus doIt(const MArgList& args) override;
-	static void* creator();
-};
 
 
 class PRTCreate : public MPxCommand {

@@ -163,7 +163,6 @@ void MayaEncoder::convertGeometry(const std::wstring& cgbName, const prtx::Geome
 			uvConnects.data(), uvConnects.size()
 	);
 
-	mayaOutput->createMesh();
 
 	uint32_t startFace = 0;
 	uint32_t geoIdx = 0;
@@ -172,22 +171,17 @@ void MayaEncoder::convertGeometry(const std::wstring& cgbName, const prtx::Geome
 		const prtx::GeometryPtr& geo = *geoIt;
 		const prtx::MaterialPtr& mat = matIt->front();
 
-		const prtx::MeshPtrVector& meshes = geo->getMeshes();
-		const uint32_t faceCount = std::accumulate(meshes.begin(), meshes.end(), 0, [](uint32_t c, const prtx::MeshPtr& m) {
-			return c + m->getFaceCount();
-		});
+        const prtx::MeshPtrVector& meshes = geo->getMeshes();
+        const uint32_t faceCount = std::accumulate(meshes.begin(), meshes.end(), 0, [](uint32_t c, const prtx::MeshPtr& m) {
+            return c + m->getFaceCount();
+        });
 
-		std::wstring tex;
-		if (mat->diffuseMap().size() > 0 && mat->diffuseMap().front()->isValid()) {
-			const prtx::URIPtr texURI = mat->diffuseMap().front()->getURI();
-			const std::wstring texPath = texURI->getPath();
-			mayaOutput->matSetDiffuseTexture(startFace, faceCount, texPath.c_str());
-		} else {
-			mayaOutput->matSetColor(startFace, faceCount, mat->color_r(), mat->color_g(), mat->color_b());
-		}
 
-		startFace += faceCount;
-	}
+        mayaOutput->setMaterial(startFace, faceCount, mat);
+        startFace += faceCount;
+    }
 
+
+	mayaOutput->createMesh();
 	mayaOutput->finishMesh();
 }

@@ -36,7 +36,8 @@ set(MAYA_LIB_DIR "${maya_DIR}/lib")
 find_library(maya_LINK_LIB_FOUNDATION NAMES "Foundation" PATHS "${MAYA_LIB_DIR}")
 find_library(maya_LINK_LIB_OPENMAYA   NAMES "OpenMaya"   PATHS "${MAYA_LIB_DIR}")
 find_library(maya_LINK_LIB_OPENMAYAUI NAMES "OpenMayaUI" PATHS "${MAYA_LIB_DIR}")
-list(APPEND maya_LINK_LIBRARIES ${maya_LINK_LIB_FOUNDATION} ${maya_LINK_LIB_OPENMAYA} ${maya_LINK_LIB_OPENMAYAUI})
+find_library(maya_LINK_LIB_METADATA NAMES "MetaData" PATHS "${MAYA_LIB_DIR}")
+list(APPEND maya_LINK_LIBRARIES ${maya_LINK_LIB_FOUNDATION} ${maya_LINK_LIB_OPENMAYA} ${maya_LINK_LIB_OPENMAYAUI} ${maya_LINK_LIB_METADATA})
 
 
 ### plugin installation location

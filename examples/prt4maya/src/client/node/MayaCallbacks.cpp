@@ -10,13 +10,19 @@
 #include "node/MayaCallbacks.h"
 #include "node/Utilities.h"
 #include "node/PRTNode.h"
+#include "node/PRTMaterialNode.h"
 
 #include "maya/MItMeshPolygon.h"
+#include <maya/adskDataStream.h>
+#include <maya/adskDataChannel.h>
+#include <maya/adskDataAssociations.h>
+#include <maya/adskDataAccessorMaya.h>
 
 #include <cassert>
 #include <sstream>
 #include <ostream>
-
+#include <locale> 
+#include <codecvt>
 
 namespace {
 
@@ -80,6 +86,12 @@ void MayaCallbacks::setFaces(
 		mUVConnects.append(uvConnects[i]);
 }
 
+void MayaCallbacks::setMaterial(uint32_t start, uint32_t count, const prtx::MaterialPtr& mat) {    
+    mMaterials.push_back(mat);
+    mShadingRanges.append(start);
+    mShadingRanges.append(start + count - 1);
+}
+
 void MayaCallbacks::createMesh() {
 	MStatus stat;
 
@@ -88,7 +100,7 @@ void MayaCallbacks::createMesh() {
 	if (mPlug == nullptr || mData == nullptr)
 		return;
 
-	MDataHandle outputHandle = mData->outputValue(*mPlug, &stat);
+	MDataHandle outMeshHandle = mData->outputValue(*mPlug, &stat);
 	MCHECK(stat);
 
 	MFnMeshData dataCreator;
@@ -105,7 +117,7 @@ void MayaCallbacks::createMesh() {
 	MCHECK(stat);
 
 	MPlugArray plugs;
-	mPlug->connectedTo(plugs, false, true, &stat);
+    mPlug->connectedTo(plugs, false, true, &stat);
 	MCHECK(stat);
 	if (plugs.length() > 0) {
 		if(mUVConnects.length() > 0) {
@@ -122,10 +134,6 @@ void MayaCallbacks::createMesh() {
 		}
 	}
 
-	mShadingGroups->clear();
-	mShadingRanges->clear();
-	mShadingCmd->clear();
-
 	if(mNormals.length() > 0) {
 		prtu::dbg("    mNormals.length        = %d", mNormals.length());
 
@@ -139,58 +147,92 @@ void MayaCallbacks::createMesh() {
 		MCHECK(mFnMesh->setVertexNormals(expandedNormals, mVerticesConnects));
 	}
 
-	MCHECK(outputHandle.set(newOutputData));
-}
+    MCHECK(outMeshHandle.set(newOutputData));
 
-MString getGroupName(const wchar_t* name) {
-	MString matName(name);
-	const unsigned int len = matName.numChars();
-	MString result = "prtmat";
-	result        += prtu::toCleanId(matName.substringW(matName.rindexW('/') + 1, len));
-	result        += "SG";
-	return result;
-}
+    // create material metadata
+    adsk::Data::Structure* fStructure;	  // Structure to use for creation
+    fStructure = adsk::Data::Structure::structureByName(gPRTMatStructure.c_str());
+    if (fStructure == NULL)
+    {
+        // Register our structure since it is not registered yet.
+        fStructure = adsk::Data::Structure::create();
+        fStructure->setName(gPRTMatStructure.c_str());
+        fStructure->addMember(adsk::Data::Member::kString, 1, gPRTMatMemberTexture.c_str());
+        fStructure->addMember(adsk::Data::Member::kDouble, 3, gPRTMatMemberColor.c_str());
+        fStructure->addMember(adsk::Data::Member::kInt32, 1, gPRTMatMemberFaceStart.c_str());
+        fStructure->addMember(adsk::Data::Member::kInt32, 1, gPRTMatMemberFaceEnd.c_str());
+        adsk::Data::Structure::registerStructure(*fStructure);
+    }
 
-MString MayaCallbacks::matCreate(int start, int count, const wchar_t* name) {
-	const MString groupName = getGroupName(name);
+    MDataHandle inMeshHandle = mData->inputValue(*mPlugInMesh, &stat);
+    MCHECK(stat);
+    MObject inMeshObj = inMeshHandle.asMesh();
+    MFnMesh inputMesh(inMeshObj);
+    MObject outMeshObj = outMeshHandle.asMesh();
+    MFnMesh outputMesh(outMeshObj);
 
-	bool createGroup = true;
-	for(int i = PRTNode::theShadingGroups.length(); --i >= 0;)
-		if(PRTNode::theShadingGroups[i] == groupName)  {
-			createGroup = false;
-			break;
-		}
+    adsk::Data::Associations newMetadata(inputMesh.metadata(&stat));
+    newMetadata.makeUnique();
+    MCHECK(stat);
+    adsk::Data::Channel newChannel = newMetadata.channel(gPRTMatChannel);
+    adsk::Data::Stream newStream(*fStructure, gPRTMatStream);
 
-	if(createGroup) {
-		PRTNode::theShadingGroups.append(groupName);
-		*mShadingCmd += "sets -renderable true -noSurfaceShader true -empty -name (\"" + groupName + "\");\n";
-	}
+    newChannel.setDataStream(newStream);
+    newMetadata.setChannel(newChannel);
 
-	mShadingGroups->append(groupName);
-	mShadingRanges->append(start);
-	mShadingRanges->append(start + count - 1);
+    for (unsigned int i = 0; i < mMaterials.size(); i++) {
+        adsk::Data::Handle handle(*fStructure);
 
-	return createGroup ? groupName : MString();
-}
+        prtx::MaterialPtr mat = mMaterials[i];
 
-void MayaCallbacks::matSetDiffuseTexture(uint32_t start, uint32_t count, const wchar_t* tex) {
-	const MString matName = matCreate(start, count, tex);
-	if (matName.numChars() == 0)
-		return;
-	*mShadingCmd += "prtSetDiffuseTexture(\"" + matName + "\",\"" + tex + "\",\"map1\");\n";
-}
+        if (mat->diffuseMap().size() > 0 && mat->diffuseMap().front()->isValid()) {
+            const prtx::URIPtr texURI = mat->diffuseMap().front()->getURI();
+            const std::wstring texPathW = texURI->getPath();
 
-void MayaCallbacks::matSetColor(uint32_t start, uint32_t count, double r, double g, double b) {
-	wchar_t name[8];
-	swprintf(name, 7, L"%02X%02X%02X", (int)(r * 255.0), (int)(g * 255.0), (int)(b * 255.0));
-	const MString matName = matCreate(start, count, name);
-	if(matName.numChars() == 0)
-		return;
-	*mShadingCmd += "prtSetColor(\"" + matName + "\"," + r + "," + g + "," + b + ");\n";
+            using convert_typeX = std::codecvt_utf8<wchar_t>;
+            std::wstring_convert<convert_typeX, wchar_t> converterX;
+            std::string texPath = converterX.to_bytes(texPathW);
+
+            handle.setPositionByMemberName(gPRTMatMemberTexture.c_str());
+            size_t l = texPath.length();
+
+            //from createMetadataCmd.cpp
+            char** data = handle.asString();
+            data[0] = (char*)malloc(sizeof(char) * (l+1));
+            for (unsigned int s = 0; s < l; ++s)
+            {
+                data[0][s] = texPath[s];
+            }
+            data[0][l] = '\0';            
+
+            //from adskSceneMetadata: 0 != handle.fromStr( dataString, 0, errors )
+            // std::string errors;
+            // handle.fromStr(texPath, 0, errors);
+
+
+        }
+
+        handle.setPositionByMemberName(gPRTMatMemberColor.c_str());
+        handle.asDouble()[0] = mat->color_r();
+        handle.asDouble()[1] = mat->color_g();
+        handle.asDouble()[2] = mat->color_b();
+
+        handle.setPositionByMemberName(gPRTMatMemberFaceStart.c_str());
+        handle.asInt32()[0] = mShadingRanges[i * 2];
+
+        handle.setPositionByMemberName(gPRTMatMemberFaceEnd.c_str());
+        handle.asInt32()[0] = mShadingRanges[i * 2 + 1];
+
+        newStream.setElement(i, handle);
+    }
+    
+    outputMesh.setMetadata(newMetadata);
 }
 
 void MayaCallbacks::finishMesh() {
 	mFnMesh.reset();
+    mMaterials.clear();
+    mShadingRanges.clear();
 }
 
 prt::Status MayaCallbacks::attrBool(size_t /*isIndex*/, int32_t /*shapeID*/, const wchar_t* key, bool value) {

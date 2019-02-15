@@ -10,7 +10,7 @@
 #pragma once
 
 #include "prt/Callbacks.h"
-
+#include "prtx/Material.h"
 
 class IMayaCallbacks : public prt::Callbacks {
 public:
@@ -19,6 +19,7 @@ public:
 	virtual void setVertices(const double* vtx, size_t size) = 0;
 	virtual void setNormals(const double* nrm, size_t size) = 0;
 	virtual void setUVs(const double* u, const double* v, size_t size) = 0;
+    virtual void setMaterial(uint32_t start, uint32_t count, const prtx::MaterialPtr& mat) = 0;
 
 	virtual void setFaces(
 			const uint32_t* counts, size_t countsSize,
@@ -30,6 +31,4 @@ public:
 	virtual void createMesh() = 0;
 	virtual void finishMesh() = 0;
 
-	virtual void matSetColor(uint32_t start, uint32_t count, double r, double g, double b) = 0;
-	virtual void matSetDiffuseTexture(uint32_t start, uint32_t count, const wchar_t* tex) = 0;
 };

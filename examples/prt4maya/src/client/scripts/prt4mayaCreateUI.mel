@@ -55,13 +55,18 @@ global proc createPrtNode() {
 			setAttr -type "string" ($prtName + ".Rule_Package") $rulePackage;
 			string $parent[]  = `listRelatives -parent $node`;
 			string $meshName;
+            string $prtMaterialName;
 			if(size($parent)) {
+                $prtMaterialName = `createNode prtMaterial`;
 				$meshName = `createNode -parent $parent[0] mesh`;
 			} else {
+                $prtMaterialName = `createNode prtMaterial`;
 				$meshName = `createNode -parent $node mesh`;
 			}
+            $prtMaterialName = `rename $prtMaterialName "prtMaterial#"`;
 			$meshName = `rename $meshName "prtShape#"`;
-			connectAttr ( ( $prtName + ".outMesh" ), ( $meshName + ".inMesh" ) );
+            connectAttr ( ( $prtName + ".outMesh" ), ( $prtMaterialName + ".inMesh" ) );
+			connectAttr ( ( $prtMaterialName + ".outMesh" ), ( $meshName + ".inMesh" ) );
 			connectAttr ( ( $node + ".outMesh" ), ( $prtName + ".inMesh" ) );
 			sets -addElement initialShadingGroup $meshName;
 		}
