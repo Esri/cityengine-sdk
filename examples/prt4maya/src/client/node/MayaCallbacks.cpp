@@ -12,6 +12,8 @@
 #include "node/PRTNode.h"
 #include "node/PRTMaterialNode.h"
 
+#include "prt/StringUtils.h"
+
 #include "maya/MItMeshPolygon.h"
 #include <maya/adskDataStream.h>
 #include <maya/adskDataChannel.h>
@@ -150,6 +152,7 @@ void MayaCallbacks::createMesh() {
     MCHECK(outMeshHandle.set(newOutputData));
 
     // create material metadata
+    size_t maxStringLength = 400;
     adsk::Data::Structure* fStructure;	  // Structure to use for creation
     fStructure = adsk::Data::Structure::structureByName(gPRTMatStructure.c_str());
     if (fStructure == NULL)
@@ -157,7 +160,8 @@ void MayaCallbacks::createMesh() {
         // Register our structure since it is not registered yet.
         fStructure = adsk::Data::Structure::create();
         fStructure->setName(gPRTMatStructure.c_str());
-        fStructure->addMember(adsk::Data::Member::kString, 1, gPRTMatMemberTexture.c_str());
+        //workaround: using kString type crashes maya when setting metadata elememts. Therefore we use array of kUInt8
+        fStructure->addMember(adsk::Data::Member::kUInt8, maxStringLength+1, gPRTMatMemberTexture.c_str());
         fStructure->addMember(adsk::Data::Member::kDouble, 3, gPRTMatMemberColor.c_str());
         fStructure->addMember(adsk::Data::Member::kInt32, 1, gPRTMatMemberFaceStart.c_str());
         fStructure->addMember(adsk::Data::Member::kInt32, 1, gPRTMatMemberFaceEnd.c_str());
@@ -187,29 +191,14 @@ void MayaCallbacks::createMesh() {
 
         if (mat->diffuseMap().size() > 0 && mat->diffuseMap().front()->isValid()) {
             const prtx::URIPtr texURI = mat->diffuseMap().front()->getURI();
-            const std::wstring texPathW = texURI->getPath();
+            const std::wstring texPathW = texURI->getPath();                       
 
-            using convert_typeX = std::codecvt_utf8<wchar_t>;
-            std::wstring_convert<convert_typeX, wchar_t> converterX;
-            std::string texPath = converterX.to_bytes(texPathW);
+            if (texPathW.length() >= maxStringLength)
+                prt::log(L"Maximum texture path size is "+ maxStringLength, prt::LOG_ERROR);
 
-            handle.setPositionByMemberName(gPRTMatMemberTexture.c_str());
-            size_t l = texPath.length();
-
-            //from createMetadataCmd.cpp
-            char** data = handle.asString();
-            data[0] = (char*)malloc(sizeof(char) * (l+1));
-            for (unsigned int s = 0; s < l; ++s)
-            {
-                data[0][s] = texPath[s];
-            }
-            data[0][l] = '\0';            
-
-            //from adskSceneMetadata: 0 != handle.fromStr( dataString, 0, errors )
-            // std::string errors;
-            // handle.fromStr(texPath, 0, errors);
-
-
+            size_t maxStringLengthTmp = maxStringLength;
+            //workaround: transporting string as uint8 array, because using asString crashes maya
+            char* texPath = prt::StringUtils::toOSNarrowFromUTF16(texPathW.c_str(), (char*)handle.asUInt8(), &maxStringLengthTmp);
         }
 
         handle.setPositionByMemberName(gPRTMatMemberColor.c_str());

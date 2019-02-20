@@ -198,9 +198,10 @@ MStatus PRTMaterialNode::compute(const MPlug& plug, MDataBlock& block)
                     sHandle.setPositionByMemberName(gPRTMatMemberFaceEnd.c_str());
                     int faceEnd = sHandle.asInt32()[0];
 
+                    //workaround: transporting string as uint8 array, because using asString crashes maya
                     char* tex = nullptr;
                     if (sHandle.setPositionByMemberName(gPRTMatMemberTexture.c_str()))
-                        tex = sHandle.asString()[0];
+                        tex = (char*) sHandle.asUInt8();
 
                     double* col = nullptr;
                     if (sHandle.setPositionByMemberName(gPRTMatMemberColor.c_str()))
