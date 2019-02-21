@@ -50,9 +50,9 @@ global proc createPrtNode() {
 	if(size($rulePackage)) {
 		string $initialShapes[] = collectInitialShapes($select, $rulePackage[0]);
 		for($node in $initialShapes) {
-			$prtName = `prtCreate`;
+			$prtName = `createNode prt`;
 			$prtName = `rename $prtName "prt#"`;
-			setAttr -type "string" ($prtName + ".Rule_Package") $rulePackage;
+			prtAttrs $prtName $rulePackage;
 			string $parent[]  = `listRelatives -parent $node`;
 			string $meshName;
             string $prtMaterialName;

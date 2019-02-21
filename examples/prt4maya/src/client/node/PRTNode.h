@@ -119,9 +119,7 @@ public:
 	std::wstring					mRuleFile;
 	std::wstring					mStartRule;
 	MObject							mGenerate;
-	bool							mCreatedInteractively;
 
-	std::string						mLRulePkg;
 	const prt::ResolveMap*			mResolveMap;
 	const prt::AttributeMap*		mGenerateAttrs;
 	const prt::AttributeMap*		mMayaEncOpts;
@@ -130,7 +128,6 @@ public:
 	std::map<std::wstring, std::wstring> mBriefName2prtAttr;
 
 	static MTypeId					theID;
-	static MObject					rulePkg;
 	static MObject					inMesh;
 	static MObject					outMesh;
 	static const prt::Object*		thePRT;
@@ -175,9 +172,3 @@ private:
     template<typename T> static T getPlugValueAndRemoveAttr(MFnDependencyNode & node, const MString & briefName, const T & defaultValue);
 }; // class PRTAttrs
 
-
-class PRTCreate : public MPxCommand {
-public:
-	MStatus doIt(const MArgList& args);
-	static void* creator();
-};

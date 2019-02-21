@@ -54,7 +54,7 @@ MTypeId PRTNode::theID(PRT_TYPE_ID);
 
 PRTNode::PRTNode()
 : mResolveMap(nullptr), mGenerateAttrs(nullptr), mMayaEncOpts(nullptr), mAttrEncOpts(nullptr)
-, mEnums(nullptr), mCreatedInteractively(false)
+, mEnums(nullptr)
 {
 	theNodeCount++;
 
@@ -93,31 +93,6 @@ MStatus PRTNode::preEvaluation(const MDGContext&, const MEvaluationNode&) {
 
 MStatus PRTNode::compute(const MPlug& plug, MDataBlock& data ) {
 	MStatus stat;
-
-	MString dummy;
-	const std::string utf8Path(getStrParameter(rulePkg, dummy).asUTF8());
-	std::vector<char> percentEncodedPath(2*utf8Path.size()+1);
-	size_t len = percentEncodedPath.size();
-	prt::StringUtils::percentEncode(utf8Path.c_str(), percentEncodedPath.data(), &len);
-	if(len > percentEncodedPath.size()+1){
-		percentEncodedPath.resize(len);
-		prt::StringUtils::percentEncode(utf8Path.c_str(), percentEncodedPath.data(), &len);
-	}
-
-	std::string uri(FILE_PREFIX);
-	uri.append(&percentEncodedPath[0]);
-
-	if(mCreatedInteractively) {
-		if(mLRulePkg.compare(uri)) {
-			MGlobal::executeCommandOnIdle(MString("prtAttrs " + name()));
-			return MS::kSuccess;
-			mLRulePkg = uri;
-		}
-	} else {
-		MFnDependencyNode fNode(thisMObject(), &stat);
-		MCHECK(stat);
-		PRTAttrs::updateRuleFiles(fNode, getStrParameter(rulePkg, dummy));
-	}
 
 	if(plug == outMesh && mGenerateAttrs) {
 		const bool connected = plug.isNetworked(&stat);
@@ -206,23 +181,8 @@ MStatus PRTNode::compute(const MPlug& plug, MDataBlock& data ) {
 		}
 
 		data.setClean(plug);
-
-		if(!mCreatedInteractively)
-		{
-			MPlug pState(thisMObject(), state);
-			int value;
-			pState.getValue(value);
-			if(value)
-				pState.setValue(0);
-
-			MPlug pHist(thisMObject(), isHistoricallyInteresting);
-			pState.getValue(value);
-			if(value != 2)
-				pHist.setValue(2);
-		}
 	}
 
-	mCreatedInteractively = true;
 	return MS::kSuccess;
 }
 
@@ -452,16 +412,6 @@ MStatus PRTNode::initialize() {
 	MFnStringData  	  stringData;
 	MFnTypedAttribute fAttr;
 
-	rulePkg = fAttr.create( NAME_RULE_PKG, "rulePkg", MFnData::kString, stringData.create(&stat2), &stat );
-	MCHECK(stat2);
-	MCHECK(stat);
-	MCHECK(fAttr.setUsedAsFilename(true));
-	MCHECK(fAttr.setCached    (true));
-	MCHECK(fAttr.setStorable  (true));
-	MCHECK(fAttr.setNiceNameOverride(MString("Rule Package(*.rpk)")));
-	MCHECK(addAttribute(rulePkg));
-	MCHECK(attributeAffects(rulePkg, outMesh ));
-
 	return MS::kSuccess;
 }
 
@@ -505,7 +455,6 @@ P4M_API MStatus initializePlugin(MObject obj){
     MCHECK(plugin.registerNode("prtMaterial", PRTMaterialNode::theID, &PRTMaterialNode::creator, &PRTMaterialNode::initialize, MPxNode::kDependNode));
 	MCHECK(plugin.registerUI("prt4mayaCreateUI", "prt4mayaDeleteUI"));
 	MCHECK(plugin.registerCommand("prtAttrs",     PRTAttrs::creator));
-	MCHECK(plugin.registerCommand("prtCreate",    PRTCreate::creator));
 
 	return MS::kSuccess;
 }
@@ -515,16 +464,12 @@ P4M_API MStatus uninitializePlugin( MObject obj) {
 
 	MFnPlugin plugin( obj );
 
-	MCHECK(plugin.deregisterCommand("prtCreate"));
 	MCHECK(plugin.deregisterCommand("prtMaterials"));
 	MCHECK(plugin.deregisterCommand("prtAttrs"));
 	MCHECK(plugin.deregisterNode(PRTNode::theID));
 
 	return MS::kSuccess;
 }
-
-// Main shape parameters
-MObject PRTNode::rulePkg; 
 
 // Input mesh
 MObject PRTNode::inMesh;

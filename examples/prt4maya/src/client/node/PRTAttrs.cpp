@@ -261,32 +261,25 @@ MStatus PRTAttrs::updateRuleFiles(MFnDependencyNode & node, const MString & rule
 	std::string uri(FILE_PREFIX);
 	uri.append(&percentEncodedPath[0]);
 
-	prtNode->mLRulePkg = uri;
+	const unsigned int count = node.attributeCount(&stat);
+	MCHECK(stat);
 
-	if(prtNode->mCreatedInteractively) {
-		const unsigned int count = node.attributeCount(&stat);
-		MCHECK(stat);
+	MObjectArray attrs;
 
-		MObjectArray attrs;
-
-		for(unsigned int i = 0; i < count; i++) {
-			const MObject attr = node.attribute(i, &stat);
-			if(stat != MS::kSuccess) continue;
-			attrs.append(attr);
-		}
-
-		for(unsigned int i = 0; i < attrs.length(); i++) {
-			const MPlug   plug(node.object(), attrs[i]);
-			const MString name = plug.partialName();
-
-			if(prtNode->mBriefName2prtAttr.count(name.asWChar()))
-				node.removeAttribute(attrs[i]);
-		}
-		prtNode->destroyEnums();
-	} else {
-		node.removeAttribute(node.attribute(NAME_GENERATE, &stat));
-		MCHECK(stat);
+	for(unsigned int i = 0; i < count; i++) {
+		const MObject attr = node.attribute(i, &stat);
+		if(stat != MS::kSuccess) continue;
+		attrs.append(attr);
 	}
+
+	for(unsigned int i = 0; i < attrs.length(); i++) {
+		const MPlug   plug(node.object(), attrs[i]);
+		const MString name = plug.partialName();
+
+		if(prtNode->mBriefName2prtAttr.count(name.asWChar()))
+			node.removeAttribute(attrs[i]);
+	}
+	prtNode->destroyEnums();
 
 	prtNode->mRuleFile.clear();
 	prtNode->mStartRule.clear();
@@ -569,7 +562,12 @@ MStatus PRTAttrs::createAttributes(MFnDependencyNode & node, const std::wstring 
 MStatus PRTAttrs::doIt(const MArgList& args) {
 	MStatus stat;
 
+    if (args.length()!=2)
+        return MS::kFailure;
+
 	const MString prtNodeName = args.asString(0, &stat);
+    MCHECK(stat);
+    const MString prtRulePkg = args.asString(1, &stat);
 	MCHECK(stat);
 
 	MSelectionList tempList;
@@ -583,7 +581,7 @@ MStatus PRTAttrs::doIt(const MArgList& args) {
 		return MS::kFailure;
 
 	MString sRulePkg;
-	updateRuleFiles(fNode, getStringParameter(prtNode, ((PRTNode*)fNode.userNode())->rulePkg, sRulePkg));
+	updateRuleFiles(fNode, prtRulePkg);
 
 	MGlobal::executeCommand(MString("refreshEditorTemplates"));
 

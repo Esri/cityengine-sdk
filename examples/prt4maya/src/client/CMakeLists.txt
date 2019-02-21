@@ -6,7 +6,6 @@ cmake_policy(SET CMP0015 NEW)
 
 add_library(${PRT4MAYA_TARGET} SHARED
 		node/PRTAttrs.cpp
-		node/PRTCreate.cpp
 		node/PRTNode.cpp
         node/PRTMaterialNode.cpp
 		node/Utilities.cpp
