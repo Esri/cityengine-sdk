@@ -31,18 +31,18 @@ const wchar_t* NULL_KEY         = L"#NULL#";
 } // namespace
 
 
-inline MString & PRTAttrs::getStringParameter(MObject & node, MObject & attr, MString & value) {
+inline MString & PRTAssignCommand::getStringParameter(MObject & node, MObject & attr, MString & value) {
 	const MPlug plug(node, attr);
 	plug.getValue(value);
 	return value;
 }
 
-inline MStatus PRTAttrs::setStringParameter(MObject & node, MObject & attr, MString & value) {
+inline MStatus PRTAssignCommand::setStringParameter(MObject & node, MObject & attr, MString & value) {
 	MPlug plug(node, attr);
 	return plug.setValue(value);
 }
 
-MStatus PRTAttrs::addParameter(MFnDependencyNode & node, MObject & attr, MFnAttribute& tAttr) {
+MStatus PRTAssignCommand::addParameter(MFnDependencyNode & node, MObject & attr, MFnAttribute& tAttr) {
 	if(!(node.hasAttribute(tAttr.shortName()))) {
 		MCHECK(tAttr.setKeyable (true));
 		MCHECK(tAttr.setHidden(false));
@@ -52,7 +52,7 @@ MStatus PRTAttrs::addParameter(MFnDependencyNode & node, MObject & attr, MFnAttr
 	return MS::kSuccess;
 }
 
-template<typename T> T PRTAttrs::getPlugValueAndRemoveAttr(MFnDependencyNode & node, const MString & briefName, const T& defaultValue) {
+template<typename T> T PRTAssignCommand::getPlugValueAndRemoveAttr(MFnDependencyNode & node, const MString & briefName, const T& defaultValue) {
     T plugValue = defaultValue;
     if (node.hasAttribute(briefName)) {
         const MPlug plug = node.findPlug(briefName);
@@ -67,20 +67,20 @@ template<typename T> T PRTAttrs::getPlugValueAndRemoveAttr(MFnDependencyNode & n
     return plugValue;
 }
 
-template double PRTAttrs::getPlugValueAndRemoveAttr<double>(MFnDependencyNode&, const MString &, const double&);
-template bool PRTAttrs::getPlugValueAndRemoveAttr<bool>(MFnDependencyNode&, const MString &, const bool&);
-template short PRTAttrs::getPlugValueAndRemoveAttr<short>(MFnDependencyNode&, const MString &, const short&);
-template MString PRTAttrs::getPlugValueAndRemoveAttr<MString>(MFnDependencyNode&, const MString &, const MString&);
+template double PRTAssignCommand::getPlugValueAndRemoveAttr<double>(MFnDependencyNode&, const MString &, const double&);
+template bool PRTAssignCommand::getPlugValueAndRemoveAttr<bool>(MFnDependencyNode&, const MString &, const bool&);
+template short PRTAssignCommand::getPlugValueAndRemoveAttr<short>(MFnDependencyNode&, const MString &, const short&);
+template MString PRTAssignCommand::getPlugValueAndRemoveAttr<MString>(MFnDependencyNode&, const MString &, const MString&);
 
-MString PRTAttrs::longName(const MString& attrName) {
+MString PRTAssignCommand::longName(const MString& attrName) {
 	return prtu::toCleanId(attrName.substring(attrName.index('$') + 1, attrName.length()));
 }
 
-MString PRTAttrs::briefName(const MString & attrName) {
+MString PRTAssignCommand::briefName(const MString & attrName) {
 	return prtu::toCleanId(attrName);
 }
 
-MStatus PRTAttrs::addBoolParameter(MFnDependencyNode & node, MObject & attr, const MString & name, bool defaultValue) {
+MStatus PRTAssignCommand::addBoolParameter(MFnDependencyNode & node, MObject & attr, const MString & name, bool defaultValue) {
 	MStatus stat;
 	MFnNumericAttribute nAttr;
 
@@ -96,7 +96,7 @@ MStatus PRTAttrs::addBoolParameter(MFnDependencyNode & node, MObject & attr, con
 	return MS::kSuccess;
 }
 
-MStatus PRTAttrs::addFloatParameter(MFnDependencyNode & node, MObject & attr, const MString & name, double defaultValue, double min, double max) {
+MStatus PRTAssignCommand::addFloatParameter(MFnDependencyNode & node, MObject & attr, const MString & name, double defaultValue, double min, double max) {
 	MStatus stat;
 	MFnNumericAttribute nAttr;
 
@@ -121,7 +121,7 @@ MStatus PRTAttrs::addFloatParameter(MFnDependencyNode & node, MObject & attr, co
 	return MS::kSuccess;
 }
 
-MStatus PRTAttrs::addEnumParameter(MFnDependencyNode & node, MObject & attr, const MString & name, bool defaultValue, PRTEnum * e) {
+MStatus PRTAssignCommand::addEnumParameter(MFnDependencyNode & node, MObject & attr, const MString & name, bool defaultValue, PRTEnum * e) {
 	short idx = 0;
 	for(int i = static_cast<int>(e->mBVals.length()); --i >= 0;) {
 		if((e->mBVals[i] != 0) == defaultValue) {
@@ -133,7 +133,7 @@ MStatus PRTAttrs::addEnumParameter(MFnDependencyNode & node, MObject & attr, con
 	return addEnumParameter(node, attr, name, idx, e);
 }
 
-MStatus PRTAttrs::addEnumParameter(MFnDependencyNode & node, MObject & attr, const MString & name, double defaultValue, PRTEnum * e) {
+MStatus PRTAssignCommand::addEnumParameter(MFnDependencyNode & node, MObject & attr, const MString & name, double defaultValue, PRTEnum * e) {
 	short idx = 0;
 	for(int i = static_cast<int>(e->mFVals.length()); --i >= 0;) {
 		if(e->mFVals[i] == defaultValue) {
@@ -145,7 +145,7 @@ MStatus PRTAttrs::addEnumParameter(MFnDependencyNode & node, MObject & attr, con
 	return addEnumParameter(node, attr, name, idx, e);
 }
 
-MStatus PRTAttrs::addEnumParameter(MFnDependencyNode & node, MObject & attr, const MString & name, MString defaultValue, PRTEnum * e) {
+MStatus PRTAssignCommand::addEnumParameter(MFnDependencyNode & node, MObject & attr, const MString & name, MString defaultValue, PRTEnum * e) {
 	short idx = 0;
 	for(int i = static_cast<int>(e->mSVals.length()); --i >= 0;) {
 		if(e->mSVals[i] == defaultValue) {
@@ -157,7 +157,7 @@ MStatus PRTAttrs::addEnumParameter(MFnDependencyNode & node, MObject & attr, con
 	return addEnumParameter(node, attr, name, idx, e);
 }
 
-MStatus PRTAttrs::addEnumParameter(MFnDependencyNode & node, MObject & attr, const MString & name, short defaultValue, PRTEnum * e) {
+MStatus PRTAssignCommand::addEnumParameter(MFnDependencyNode & node, MObject & attr, const MString & name, short defaultValue, PRTEnum * e) {
 	MStatus stat;
 
     short plugValue = getPlugValueAndRemoveAttr(node, briefName(name), defaultValue);
@@ -174,7 +174,7 @@ MStatus PRTAttrs::addEnumParameter(MFnDependencyNode & node, MObject & attr, con
 	return MS::kSuccess;
 }
 
-MStatus PRTAttrs::addFileParameter(MFnDependencyNode & node, MObject & attr, const MString & name, const MString & defaultValue, const MString & exts ) {
+MStatus PRTAssignCommand::addFileParameter(MFnDependencyNode & node, MObject & attr, const MString & name, const MString & defaultValue, const MString & exts ) {
 	MStatus           stat;
 	MStatus           stat2;
 	MFnStringData     stringData;
@@ -194,7 +194,7 @@ MStatus PRTAttrs::addFileParameter(MFnDependencyNode & node, MObject & attr, con
 	return MS::kSuccess;
 }
 
-MStatus PRTAttrs::addColorParameter(MFnDependencyNode & node, MObject & attr, const MString & name, const MString & defaultValue) {
+MStatus PRTAssignCommand::addColorParameter(MFnDependencyNode & node, MObject & attr, const MString & name, const MString & defaultValue) {
 	MStatus             stat;
 	MFnNumericAttribute nAttr;
 
@@ -227,7 +227,7 @@ MStatus PRTAttrs::addColorParameter(MFnDependencyNode & node, MObject & attr, co
 	return MS::kSuccess;
 }
 
-MStatus PRTAttrs::addStrParameter(MFnDependencyNode & node, MObject & attr, const MString & name, const MString & defaultValue ) {
+MStatus PRTAssignCommand::addStrParameter(MFnDependencyNode & node, MObject & attr, const MString & name, const MString & defaultValue ) {
 	MStatus           stat;
 	MStatus           stat2;
 	MFnStringData     stringData;
@@ -245,7 +245,7 @@ MStatus PRTAttrs::addStrParameter(MFnDependencyNode & node, MObject & attr, cons
 	return MS::kSuccess;
 }
 
-MStatus PRTAttrs::updateRuleFiles(MFnDependencyNode & node, const MString & rulePkg) {
+MStatus PRTAssignCommand::updateRuleFiles(MFnDependencyNode & node, const MString & rulePkg) {
 	PRTNode* prtNode = (PRTNode*)node.userNode();
 	MStatus  stat;
 
@@ -318,7 +318,7 @@ MStatus PRTAttrs::updateRuleFiles(MFnDependencyNode & node, const MString & rule
 	return MS::kSuccess;
 }
 
-MStatus PRTAttrs::updateStartRules(MFnDependencyNode & node) {
+MStatus PRTAssignCommand::updateStartRules(MFnDependencyNode & node) {
 	PRTNode* prtNode = (PRTNode*)node.userNode();
 
 	const prt::RuleFileInfo::Entry* startRule = nullptr;
@@ -420,7 +420,7 @@ const int32_t  seed            = prtu::computeSeed(vertices, vertexCount);
 }
 
 // TODO: make evalAttr finds more robust
-MStatus PRTAttrs::createAttributes(MFnDependencyNode & node, const std::wstring & ruleFile, const std::wstring & startRule, prt::AttributeMapBuilder* aBuilder, const prt::RuleFileInfo* info) {
+MStatus PRTAssignCommand::createAttributes(MFnDependencyNode & node, const std::wstring & ruleFile, const std::wstring & startRule, prt::AttributeMapBuilder* aBuilder, const prt::RuleFileInfo* info) {
 	MStatus           stat;
 	MStatus           stat2;
 	MFnNumericData    numericData;
@@ -559,7 +559,7 @@ MStatus PRTAttrs::createAttributes(MFnDependencyNode & node, const std::wstring 
 	return MS::kSuccess;
 }
 
-MStatus PRTAttrs::doIt(const MArgList& args) {
+MStatus PRTAssignCommand::doIt(const MArgList& args) {
 	MStatus stat;
 
     if (args.length()!=2)
@@ -588,6 +588,6 @@ MStatus PRTAttrs::doIt(const MArgList& args) {
 	return MS::kSuccess;
 }
 
-void* PRTAttrs::creator() {
-	return new PRTAttrs;
+void* PRTAssignCommand::creator() {
+	return new PRTAssignCommand;
 }

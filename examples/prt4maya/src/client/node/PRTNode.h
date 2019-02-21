@@ -70,7 +70,7 @@ extern const MString	NAME_GENERATE;
 class PRTNode;
 
 class PRTEnum {
-	friend class PRTAttrs;
+	friend class PRTAssignCommand;
 	friend class PRTNode;
 
 public:
@@ -147,7 +147,7 @@ private:
 }; // class PRTNode
 
 
-class PRTAttrs : public MPxCommand {
+class PRTAssignCommand : public MPxCommand {
 public:
 	virtual MStatus doIt(const MArgList& args) override;
 	static void*    creator();
@@ -170,5 +170,5 @@ private:
 	static MString  longName(const MString & attrName);
 	static MString  briefName(const MString & attrName);
     template<typename T> static T getPlugValueAndRemoveAttr(MFnDependencyNode & node, const MString & briefName, const T & defaultValue);
-}; // class PRTAttrs
+}; // class PRTAssignCommand
 

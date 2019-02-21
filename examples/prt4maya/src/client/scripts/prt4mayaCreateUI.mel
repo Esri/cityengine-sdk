@@ -52,7 +52,7 @@ global proc createPrtNode() {
 		for($node in $initialShapes) {
 			$prtName = `createNode prt`;
 			$prtName = `rename $prtName "prt#"`;
-			prtAttrs $prtName $rulePackage;
+			prtAssign $prtName $rulePackage;
 			string $parent[]  = `listRelatives -parent $node`;
 			string $meshName;
             string $prtMaterialName;

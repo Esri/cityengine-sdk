@@ -454,7 +454,7 @@ P4M_API MStatus initializePlugin(MObject obj){
 	MCHECK(plugin.registerNode("prt", PRTNode::theID, &PRTNode::creator, &PRTNode::initialize, MPxNode::kDependNode));
     MCHECK(plugin.registerNode("prtMaterial", PRTMaterialNode::theID, &PRTMaterialNode::creator, &PRTMaterialNode::initialize, MPxNode::kDependNode));
 	MCHECK(plugin.registerUI("prt4mayaCreateUI", "prt4mayaDeleteUI"));
-	MCHECK(plugin.registerCommand("prtAttrs",     PRTAttrs::creator));
+	MCHECK(plugin.registerCommand("prtAssign",     PRTAssignCommand::creator));
 
 	return MS::kSuccess;
 }
