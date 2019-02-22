@@ -9,7 +9,14 @@ add_library(${PRT4MAYA_TARGET} SHARED
 		node/PRTNode.cpp
         node/PRTMaterialNode.cpp
 		node/Utilities.cpp
-		node/MayaCallbacks.cpp)
+		node/MayaCallbacks.cpp
+        prtModifier/PRTModifierAction.cpp
+        prtModifier/PRTModifierCommand.cpp
+        prtModifier/PRTModifierNode.cpp
+        prtModifier/PRTModifierPlugin.cpp
+        prtModifier/polyModifierBase/polyModifierCmd.cpp
+        prtModifier/polyModifierBase/polyModifierFty.cpp
+        prtModifier/polyModifierBase/polyModifierNode.cpp)
 
 set_target_properties(${PRT4MAYA_TARGET} PROPERTIES
 	INSTALL_RPATH_USE_LINK_PATH FALSE

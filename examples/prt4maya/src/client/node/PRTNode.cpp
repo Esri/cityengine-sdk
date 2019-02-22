@@ -14,7 +14,7 @@
 
 #include "prt/StringUtils.h"
 
-#include <maya/MFnPlugin.h>
+//#include <maya/MFnPlugin.h>
 #include <maya/MFnTransform.h>
 #include <maya/MFnSet.h>
 #include <maya/MFnPhongShader.h>
@@ -429,6 +429,7 @@ void PRTNode::uninitialize() {
 	}
 }
 
+/*
 P4M_API MStatus initializePlugin(MObject obj){
 	PRTNode::initLogger();
 	prtu::dbg("initialized prt logger");
@@ -469,7 +470,7 @@ P4M_API MStatus uninitializePlugin( MObject obj) {
 	MCHECK(plugin.deregisterNode(PRTNode::theID));
 
 	return MS::kSuccess;
-}
+}*/
 
 // Input mesh
 MObject PRTNode::inMesh;
