@@ -70,7 +70,7 @@ public:
 
     virtual MStatus					compute(const MPlug& plug, MDataBlock& data) override;
 
-    static MTypeId					theID;
+    static MTypeId					id;
     static  MObject	aInMesh;
     static  MObject	aOutMesh;
 

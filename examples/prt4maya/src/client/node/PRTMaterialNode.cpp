@@ -32,7 +32,7 @@
 #	include <dlfcn.h>
 #endif
 
-MTypeId PRTMaterialNode::theID(PRT_MATERIAL_TYPE_ID);
+MTypeId PRTMaterialNode::id(PRT_MATERIAL_TYPE_ID);
 
 MObject	PRTMaterialNode::aInMesh;
 MObject PRTMaterialNode::aOutMesh;

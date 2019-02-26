@@ -9,22 +9,17 @@
 
 #include "node/MayaCallbacks.h"
 #include "node/Utilities.h"
-#include "node/PRTNode.h"
+#include "prtModifier/PRTModifierNode.h"
 #include "node/PRTMaterialNode.h"
 
 #include "prt/StringUtils.h"
 
-#include "maya/MItMeshPolygon.h"
 #include <maya/adskDataStream.h>
 #include <maya/adskDataChannel.h>
 #include <maya/adskDataAssociations.h>
 #include <maya/adskDataAccessorMaya.h>
 
-#include <cassert>
 #include <sstream>
-#include <ostream>
-#include <locale> 
-#include <codecvt>
 
 namespace {
 
@@ -99,10 +94,6 @@ void MayaCallbacks::createMesh() {
 
 	prtu::dbg("--- MayaData::createMesh begin");
 
-	if (mPlug == nullptr || mData == nullptr)
-		return;
-
-	MDataHandle outMeshHandle = mData->outputValue(*mPlug, &stat);
 	MCHECK(stat);
 
 	MFnMeshData dataCreator;
@@ -118,23 +109,19 @@ void MayaCallbacks::createMesh() {
 	MObject oMesh = mFnMesh->create(mVertices.length(), mVerticesCounts.length(), mVertices, mVerticesCounts, mVerticesConnects, newOutputData, &stat);
 	MCHECK(stat);
 
-	MPlugArray plugs;
-    mPlug->connectedTo(plugs, false, true, &stat);
-	MCHECK(stat);
-	if (plugs.length() > 0) {
-		if(mUVConnects.length() > 0) {
-			MString uvSet = "map1";
 
-			MCHECK(mFnMesh->setUVs(mU, mV, &uvSet));
+	if(mUVConnects.length() > 0) {
+		MString uvSet = "map1";
 
-			prtu::dbg("    mU.length          = %d", mU.length());
-			prtu::dbg("    mV.length          = %d", mV.length());
-			prtu::dbg("    mUVCounts.length   = %d", mUVCounts.length());
-			prtu::dbg("    mUVConnects.length = %d", mUVConnects.length());
+		MCHECK(mFnMesh->setUVs(mU, mV, &uvSet));
 
-			MCHECK(mFnMesh->assignUVs(mUVCounts, mUVConnects, &uvSet));
-		}
-	}
+		prtu::dbg("    mU.length          = %d", mU.length());
+		prtu::dbg("    mV.length          = %d", mV.length());
+		prtu::dbg("    mUVCounts.length   = %d", mUVCounts.length());
+		prtu::dbg("    mUVConnects.length = %d", mUVConnects.length());
+
+		MCHECK(mFnMesh->assignUVs(mUVCounts, mUVConnects, &uvSet));
+	}	
 
 	if(mNormals.length() > 0) {
 		prtu::dbg("    mNormals.length        = %d", mNormals.length());
@@ -149,7 +136,8 @@ void MayaCallbacks::createMesh() {
 		MCHECK(mFnMesh->setVertexNormals(expandedNormals, mVerticesConnects));
 	}
 
-    MCHECK(outMeshHandle.set(newOutputData));
+    MFnMesh outputMesh(outMeshObj);
+    outputMesh.copyInPlace(oMesh);
 
     // create material metadata
     size_t maxStringLength = 400;
@@ -167,13 +155,9 @@ void MayaCallbacks::createMesh() {
         fStructure->addMember(adsk::Data::Member::kInt32, 1, gPRTMatMemberFaceEnd.c_str());
         adsk::Data::Structure::registerStructure(*fStructure);
     }
-
-    MDataHandle inMeshHandle = mData->inputValue(*mPlugInMesh, &stat);
+    
     MCHECK(stat);
-    MObject inMeshObj = inMeshHandle.asMesh();
     MFnMesh inputMesh(inMeshObj);
-    MObject outMeshObj = outMeshHandle.asMesh();
-    MFnMesh outputMesh(outMeshObj);
 
     adsk::Data::Associations newMetadata(inputMesh.metadata(&stat));
     newMetadata.makeUnique();

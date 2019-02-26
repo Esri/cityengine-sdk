@@ -67,8 +67,8 @@ public:
 	typedef std::map<std::wstring, AttributeHolder> NamedAttributeHolders;
 
 public:
-	MayaCallbacks(const MPlug* plugInMesh, const MPlug* plugOutMesh, MDataBlock* data)
-		: mPlugInMesh(plugInMesh), mPlug(plugOutMesh), mData(data) { }
+	MayaCallbacks(const MObject inMesh, const MObject outMesh)
+		: inMeshObj(inMesh), outMeshObj(outMesh) { }
 	virtual ~MayaCallbacks() { }
 
 	// prt::Callbacks interface
@@ -122,7 +122,7 @@ public:
 
 private:
 	// must not be called
-	MayaCallbacks() : mPlugInMesh(nullptr), mPlug(nullptr), mData(nullptr) { }
+	MayaCallbacks() { }
 
 public:
 	std::unique_ptr<MFnMesh> mFnMesh;
@@ -136,9 +136,9 @@ public:
 	MIntArray                mUVConnects;
 
 private:
-	const MPlug*             mPlug;
-    const MPlug*             mPlugInMesh;
-	MDataBlock*	             mData;
+    MObject                 outMeshObj;
+    MObject                 inMeshObj;
+
 	std::vector<prtx::MaterialPtr> mMaterials;
     MIntArray               mShadingRanges;
 	NamedAttributeHolders    mAttrs;

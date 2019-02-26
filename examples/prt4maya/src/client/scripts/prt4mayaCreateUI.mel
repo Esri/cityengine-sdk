@@ -13,24 +13,14 @@ proc string[] appendAarray(string $a0[], string $a1[]) {
 	return $result;
 }
 
-proc string[] collectInitialShapes(string $nodes[], string $rulePackage) {
+proc string[] collectInitialShapes(string $nodes[]) {
 	string $result[];
 	for($node in $nodes) {
 	    string $type = `nodeType $node`;
 		if($type == "mesh") {
-			string $dsts[] = `connectionInfo -dfs ($node + ".outMesh")`;
-			if(size($dsts)) {
-				for($dst in $dsts) {
-					string $dstNode = `match "[^.]*" $dst`;
-					if(`nodeType $dstNode` == "prt") {
-						setAttr -type "string" ($dstNode + ".Rule_Package") $rulePackage;
-						return $result;
-					}
-				}
-			}
 			$result = appendAarray($result, {$node});
 		} else if($type == "transform") {
-			string $tmp[] = collectInitialShapes(`listRelatives -ni -pa -children $node`, $rulePackage);
+			string $tmp[] = collectInitialShapes(`listRelatives -ni -pa -children $node`);
 			$result = appendAarray($result, $tmp);
 		}
 	}
@@ -39,37 +29,40 @@ proc string[] collectInitialShapes(string $nodes[], string $rulePackage) {
 
 global proc createPrtNode() {
 	string $select[] = `ls -sl`;
+	string $initialShapes[] = collectInitialShapes($select);
 	
-	if(!(size($select))) {
-		confirmDialog -title "Missing selection" -message "Please select a polygon first in order to apply a rule." -button "OK";
+	if(!(size($initialShapes))) {
+		confirmDialog -title "Missing selection" -message "Please select shapes first in order to apply a rule." -button "OK";
+		return;
 	}
 
 	$filters = "Rule Package (*.rpk);;All Files (*.*)";
 	string $rulePackage[] = `fileDialog2 -fm 1 -cap "Select Rule Package" -ff $filters`;
 	
+	
 	if(size($rulePackage)) {
-		string $initialShapes[] = collectInitialShapes($select, $rulePackage[0]);
 		for($node in $initialShapes) {
-			$prtName = `createNode prt`;
-			$prtName = `rename $prtName "prt#"`;
-			prtAssign $prtName $rulePackage;
-			string $parent[]  = `listRelatives -parent $node`;
-			string $meshName;
-            string $prtMaterialName;
-			if(size($parent)) {
-                $prtMaterialName = `createNode prtMaterial`;
-				$meshName = `createNode -parent $parent[0] mesh`;
-			} else {
-                $prtMaterialName = `createNode prtMaterial`;
-				$meshName = `createNode -parent $node mesh`;
-			}
-            $prtMaterialName = `rename $prtMaterialName "prtMaterial#"`;
-			$meshName = `rename $meshName "prtShape#"`;
-            connectAttr ( ( $prtName + ".outMesh" ), ( $prtMaterialName + ".inMesh" ) );
-			connectAttr ( ( $prtMaterialName + ".outMesh" ), ( $meshName + ".inMesh" ) );
-			connectAttr ( ( $node + ".outMesh" ), ( $prtName + ".inMesh" ) );
-			sets -addElement initialShadingGroup $meshName;
+			select -r $node;
+			prtAssign $rulePackage;
 		}
+	}
+	select -r $select;
+}
+
+global proc createPrtMaterialNode() {
+	string $select[] = `ls -sl`;
+	string $initialShapes[] = collectInitialShapes($select);
+	
+	if(!(size($initialShapes))) {
+		confirmDialog -title "Missing selection" -message "Please select shapes first in order to create materials." -button "OK";
+		return;
+	}	
+	
+	for($node in $initialShapes) {
+		$prtMaterialName = `createNode prtMaterial`;
+		$im =  `connectionInfo -sfd ($node +".inMesh")`;
+		connectAttr -force ( $prtMaterialName + ".outMesh" ) ( $node + ".inMesh" );
+		connectAttr -force ( $im ) ( $prtMaterialName + ".inMesh" );
 	}
 }
 
@@ -84,6 +77,7 @@ global proc createPrtMenu() {
 		setParent -m $gPrtMenu;
 		menuItem -divider true;
 		menuItem -label "Attach Rule..."  -c "createPrtNode" -annotation "Attach a CGA rule package to a geometry";
+		menuItem -label "Create Materials"  -c "createPrtMaterialNode" -annotation "Create Materials";
 		setParent -m ..;
 	}
 }
