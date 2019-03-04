@@ -10,6 +10,7 @@
 #include <maya/MFnTypedAttribute.h>
 #include <maya/MFnStringData.h>
 
+#include <limits>
 #ifdef _WIN32
 #	include <Windows.h>
 #else
