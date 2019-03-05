@@ -6,26 +6,26 @@
 #include "PRTModifierAction.h"
 
 #include <maya/MTypeId.h>
- 
+
 class PRTModifierNode : public polyModifierNode
 {
 public:
 	PRTModifierNode();
-	~PRTModifierNode() override; 
+	~PRTModifierNode() override;
 
-	MStatus		compute( const MPlug& plug, MDataBlock& data ) override;
-    virtual MStatus setDependentsDirty(const MPlug &plugBeingDirtied, MPlugArray &affectedPlugs) override;
+	MStatus compute(const MPlug& plug, MDataBlock& data) override;
+	virtual MStatus setDependentsDirty(const MPlug &plugBeingDirtied, MPlugArray &affectedPlugs) override;
 
-	static  void*		creator();
-	static  MStatus		initialize();
+	static  void*   creator();
+	static  MStatus initialize();
 
 public:
 
-    static MObject      rulePkg;
-	static	MTypeId		id;
-    MString             currentRulePkg;
+	static MObject      rulePkg;
+	static MTypeId      id;
+	MString             currentRulePkg;
 
-	PRTModifierAction			fPRTModifierAction;
+	PRTModifierAction   fPRTModifierAction;
 
 };
 

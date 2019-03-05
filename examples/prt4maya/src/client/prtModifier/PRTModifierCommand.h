@@ -11,20 +11,20 @@ public:
     PRTModifierCommand();
 	~PRTModifierCommand() override;
 
-	static		void* creator();
+	static void* creator();
 
-	bool		isUndoable() const override;
+	bool isUndoable() const override;
 
-	MStatus		doIt( const MArgList& ) override;
-	MStatus		redoIt() override;
-	MStatus		undoIt() override;
+	MStatus doIt(const MArgList&) override;
+	MStatus redoIt() override;
+	MStatus undoIt() override;
 
-	MStatus		initModifierNode( MObject modifierNode ) override;
-	MStatus		directModifier( MObject mesh ) override;
+	MStatus initModifierNode(MObject modifierNode) override;
+	MStatus directModifier(MObject mesh) override;
 
 private:
 
-    MString mRulePkg;
+	MString mRulePkg;
 };
 
 #endif

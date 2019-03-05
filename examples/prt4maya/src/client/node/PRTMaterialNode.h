@@ -61,22 +61,22 @@ const std::string gPRTMatMemberFaceEnd = "faceIndexEnd";
 class PRTMaterialNode : public MPxNode {
 
 public:
-    PRTMaterialNode();
-    virtual ~PRTMaterialNode();
+	PRTMaterialNode();
+	virtual ~PRTMaterialNode();
 
-    static  void*		creator();
-    static  MStatus		initialize();
-    static  const char*	nodeName();
+	static  void*       creator();
+	static  MStatus     initialize();
+	static  const char* nodeName();
 
-    virtual MStatus					compute(const MPlug& plug, MDataBlock& data) override;
+	virtual MStatus compute(const MPlug& plug, MDataBlock& data) override;
 
-    static MTypeId					id;
-    static  MObject	aInMesh;
-    static  MObject	aOutMesh;
+	static MTypeId  id;
+	static  MObject aInMesh;
+	static  MObject aOutMesh;
 
 private:
-    static MStringArray				theShadingGroups;
-    MString createShadingGroup(const wchar_t* name, MString* shadingCmd);
+	static MStringArray theShadingGroups;
+	MString createShadingGroup(const wchar_t* name, MString* shadingCmd);
 }; // class PRTMaterialNode
 
 

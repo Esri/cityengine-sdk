@@ -16,20 +16,20 @@
 #include <maya/MIOStream.h>
 
 
-#define MCheckStatus(status,message)	\
-	if( MStatus::kSuccess != status ) {	\
-		cerr << message << "\n";		\
-		return status;					\
+#define MCheckStatus(status,message) \
+	if( MStatus::kSuccess != status ) { \
+		cerr << message << "\n"; \
+		return status; \
 	}
 
 
 namespace {
-    const MString		NAME_RULE_PKG = "Rule_Package";
+	const MString NAME_RULE_PKG = "Rule_Package";
 }
 
 // Unique Node TypeId
-MTypeId     PRTModifierNode::id( 0x00085000 );
-MObject     PRTModifierNode::rulePkg;
+MTypeId PRTModifierNode::id(0x00085000);
+MObject PRTModifierNode::rulePkg;
 
 
 PRTModifierNode::PRTModifierNode()
@@ -38,21 +38,21 @@ PRTModifierNode::PRTModifierNode()
 PRTModifierNode::~PRTModifierNode()
 {}
 
-//make sure the dynamically added plugs affect the outMesh
+// make sure the dynamically added plugs affect the outMesh
 MStatus PRTModifierNode::setDependentsDirty(const MPlug& /*plugBeingDirtied*/, MPlugArray& affectedPlugs) {
-    const MPlug pOutMesh(thisMObject(), outMesh);
-    affectedPlugs.append(pOutMesh);
-    return MS::kSuccess;
+	const MPlug pOutMesh(thisMObject(), outMesh);
+	affectedPlugs.append(pOutMesh);
+	return MS::kSuccess;
 }
 
-//		This method computes the value of the given output plug based
-//		on the values of the input attributes. Based on the Maya example splitUvCmd
-MStatus PRTModifierNode::compute( const MPlug& plug, MDataBlock& data )
+// This method computes the value of the given output plug based
+// on the values of the input attributes. Based on the Maya example splitUvCmd
+MStatus PRTModifierNode::compute(const MPlug& plug, MDataBlock& data)
 {
 	MStatus status = MS::kSuccess;
- 
-	MDataHandle stateData = data.outputValue( state, &status );
-    MCheckStatus( status, "ERROR getting state" );
+
+	MDataHandle stateData = data.outputValue(state, &status);
+	MCheckStatus(status, "ERROR getting state");
 
 	// Check for the HasNoEffect/PassThrough flag on the node.
 	// (stateData is an enumeration standard in all depend nodes)
@@ -60,13 +60,13 @@ MStatus PRTModifierNode::compute( const MPlug& plug, MDataBlock& data )
 	// (0 = Normal)
 	// (1 = HasNoEffect/PassThrough)
 	// (2 = Blocking)
-	if( stateData.asShort() == 1 )
+	if (stateData.asShort() == 1)
 	{
-		MDataHandle inputData = data.inputValue( inMesh, &status );
-		MCheckStatus(status,"ERROR getting inMesh");
+		MDataHandle inputData = data.inputValue(inMesh, &status);
+		MCheckStatus(status, "ERROR getting inMesh");
 
-		MDataHandle outputData = data.outputValue( outMesh, &status );
-		MCheckStatus(status,"ERROR getting outMesh");
+		MDataHandle outputData = data.outputValue(outMesh, &status);
+		MCheckStatus(status, "ERROR getting outMesh");
 
 		// Simply redirect the inMesh to the outMesh for the PassThrough effect
 		outputData.set(inputData.asMesh());
@@ -78,39 +78,37 @@ MStatus PRTModifierNode::compute( const MPlug& plug, MDataBlock& data )
 		// we must return MS::kUnknownParameter
 		if (plug == outMesh)
 		{
-			MDataHandle inputData = data.inputValue( inMesh, &status );
-			MCheckStatus(status,"ERROR getting inMesh");
+			MDataHandle inputData = data.inputValue(inMesh, &status);
+			MCheckStatus(status, "ERROR getting inMesh");
 
-			MDataHandle outputData = data.outputValue( outMesh, &status );
-			MCheckStatus(status,"ERROR getting outMesh"); 
+			MDataHandle outputData = data.outputValue(outMesh, &status);
+			MCheckStatus(status, "ERROR getting outMesh");
 
-            MDataHandle rulePkgData = data.inputValue(rulePkg, &status);
-            MCheckStatus(status, "ERROR getting rulePkg");
-            
+			MDataHandle rulePkgData = data.inputValue(rulePkg, &status);
+			MCheckStatus(status, "ERROR getting rulePkg");
+
 			// Copy the inMesh to the outMesh, so you can
 			// perform operations directly on outMesh
 			//
 			outputData.set(inputData.asMesh());
 			MObject iMesh = outputData.asMesh();
-            MObject oMesh = outputData.asMesh();
+			MObject oMesh = outputData.asMesh();
 
 			// Set the mesh object and component List on the factory
-			
-            if (rulePkgData.asString() != currentRulePkg) {
-            	auto mObj = thisMObject(); // needed because C++ standard does not allow reference to rvalue
-                fPRTModifierAction.updateRuleFiles(mObj, rulePkgData.asString());
-            }
-            fPRTModifierAction.fillAttributesFromNode(thisMObject());
-            fPRTModifierAction.setMesh(iMesh, oMesh);
+
+			if (rulePkgData.asString() != currentRulePkg) {
+				auto mObj = thisMObject(); // needed because C++ standard does not allow reference to rvalue
+				fPRTModifierAction.updateRuleFiles(mObj, rulePkgData.asString());
+			}
+			fPRTModifierAction.fillAttributesFromNode(thisMObject());
+			fPRTModifierAction.setMesh(iMesh, oMesh);
 
 			// Now, perform the PRT
-			//
 			status = fPRTModifierAction.doIt();
 
-            currentRulePkg = rulePkgData.asString();
+			currentRulePkg = rulePkgData.asString();
 
 			// Mark the output mesh as clean
-			//
 			outputData.setClean();
 		}
 		else
@@ -118,7 +116,7 @@ MStatus PRTModifierNode::compute( const MPlug& plug, MDataBlock& data )
 			status = MS::kUnknownParameter;
 		}
 	}
-    
+
 	return status;
 }
 
@@ -128,75 +126,71 @@ void* PRTModifierNode::creator()
 }
 
 MStatus PRTModifierNode::initialize()
+// Description:
+//  This method is called to create and initialize all of the attributes
+//  and attribute dependencies for this node type.  This is only called 
+//  once when the node type is registered with Maya.
 //
-//	Description:
-//		This method is called to create and initialize all of the attributes
-//      and attribute dependencies for this node type.  This is only called 
-//		once when the node type is registered with Maya.
-//
-//	Return Values:
-//		MS::kSuccess
-//		MS::kFailure
-//		
+// Return Values:
+//  MS::kSuccess
+//  MS::kFailure
 {
 	MStatus				status;
 
 	MFnTypedAttribute attrFn;
 	MFnEnumAttribute enumFn;
 
-	
+
 	inMesh = attrFn.create("inMesh", "im", MFnMeshData::kMesh);
 	attrFn.setStorable(true);	// To be stored during file-save
 
 	// Attribute is read-only because it is an output attribute
-	//
 	outMesh = attrFn.create("outMesh", "om", MFnMeshData::kMesh);
 	attrFn.setStorable(false);
 	attrFn.setWritable(false);
 
 	// Add the attributes we have created to the node
-	//
 
-	status = addAttribute( inMesh );
-		if (!status)
-		{
-			status.perror("addAttribute");
-			return status;
-		}
-	status = addAttribute( outMesh);
-		if (!status)
-		{
-			status.perror("addAttribute");
-			return status;
-		}
+	status = addAttribute(inMesh);
+	if (!status)
+	{
+		status.perror("addAttribute");
+		return status;
+	}
+	status = addAttribute(outMesh);
+	if (!status)
+	{
+		status.perror("addAttribute");
+		return status;
+	}
 
-    MStatus				stat2;
-    MStatus				stat;
-    MFnStringData        stringData;
-    MFnTypedAttribute fAttr;
+	MStatus stat2;
+	MStatus stat;
+	MFnStringData stringData;
+	MFnTypedAttribute fAttr;
 
 
-    rulePkg = fAttr.create(NAME_RULE_PKG, "rulePkg", MFnData::kString, stringData.create(&stat2), &stat);
-    MCHECK(stat2);
-    MCHECK(stat);
-    MCHECK(fAttr.setUsedAsFilename(true));
-    MCHECK(fAttr.setCached(true));
-    MCHECK(fAttr.setStorable(true));
-    MCHECK(fAttr.setNiceNameOverride(MString("Rule Package(*.rpk)")));
-    MCHECK(addAttribute(rulePkg));
-    MCHECK(attributeAffects(rulePkg, outMesh));
+	rulePkg = fAttr.create(NAME_RULE_PKG, "rulePkg", MFnData::kString, stringData.create(&stat2), &stat);
+	MCHECK(stat2);
+	MCHECK(stat);
+	MCHECK(fAttr.setUsedAsFilename(true));
+	MCHECK(fAttr.setCached(true));
+	MCHECK(fAttr.setStorable(true));
+	MCHECK(fAttr.setNiceNameOverride(MString("Rule Package(*.rpk)")));
+	MCHECK(addAttribute(rulePkg));
+	MCHECK(attributeAffects(rulePkg, outMesh));
 
 
 	// Set up a dependency between the input and the output.  This will cause
 	// the output to be marked dirty when the input changes.  The output will
 	// then be recomputed the next time the value of the output is requested.
 	//
-	status = attributeAffects( inMesh, outMesh );
-		if (!status)
-		{
-			status.perror("attributeAffects");
-			return status;
-		}
+	status = attributeAffects(inMesh, outMesh);
+	if (!status)
+	{
+		status.perror("attributeAffects");
+		return status;
+	}
 
 	return MS::kSuccess;
 

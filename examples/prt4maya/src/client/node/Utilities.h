@@ -26,29 +26,29 @@
 
 namespace prtu {
 
-const char* filename(const char* path);
+	const char* filename(const char* path);
 
-void dbg(const char* fmt, ...);
-void wdbg(const wchar_t* fmt, ...);
+	void dbg(const char* fmt, ...);
+	void wdbg(const wchar_t* fmt, ...);
 
-template<typename C> C getDirSeparator();
-template<> char getDirSeparator();
-template<> wchar_t getDirSeparator();
+	template<typename C> C getDirSeparator();
+	template<> char getDirSeparator();
+	template<> wchar_t getDirSeparator();
 
-int fromHex(wchar_t c);
-wchar_t toHex(int i);
-void toHex(wchar_t* color, double r, double g, double b);
-MString toCleanId(const MString& name);
+	int fromHex(wchar_t c);
+	wchar_t toHex(int i);
+	void toHex(wchar_t* color, double r, double g, double b);
+	MString toCleanId(const MString& name);
 
-int32_t computeSeed(MFloatPointArray& vertices);
-int32_t computeSeed(const double* vertices, size_t count);
+	int32_t computeSeed(MFloatPointArray& vertices);
+	int32_t computeSeed(const double* vertices, size_t count);
 
-inline bool isnan(double d) {
+	inline bool isnan(double d) {
 #if defined(_MSC_VER) && (_MSC_VER <= 1700)
-    return ::isnan(d);
+		return ::isnan(d);
 #else
-    return std::isnan(d);
+		return std::isnan(d);
 #endif
-}
+	}
 
 } // namespace prtu

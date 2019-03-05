@@ -23,14 +23,14 @@
 
 namespace {
 
-const bool TRACE = false;
-void prtTrace(const std::wstring& arg1, std::size_t arg2) {
-	if (TRACE) {
-		std::wostringstream wostr;
-		wostr << L"[MOH] "<< arg1 << arg2;
-		prt::log(wostr.str().c_str(), prt::LOG_TRACE);
+	const bool TRACE = false;
+	void prtTrace(const std::wstring& arg1, std::size_t arg2) {
+		if (TRACE) {
+			std::wostringstream wostr;
+			wostr << L"[MOH] " << arg1 << arg2;
+			prt::log(wostr.str().c_str(), prt::LOG_TRACE);
+		}
 	}
-}
 
 } // anonymous namespace
 
@@ -39,14 +39,14 @@ void MayaCallbacks::setVertices(const double* vtx, size_t size) {
 	prtTrace(L"setVertices: size = ", size);
 	mVertices.clear();
 	for (size_t i = 0; i < size; i += 3)
-		mVertices.append(static_cast<float>(vtx[i]), static_cast<float>(vtx[i+1]), static_cast<float>(vtx[i+2]));
+		mVertices.append(static_cast<float>(vtx[i]), static_cast<float>(vtx[i + 1]), static_cast<float>(vtx[i + 2]));
 }
 
 void MayaCallbacks::setNormals(const double* nrm, size_t size) {
 	prtTrace(L"setNormals: size = ", size);
 	mNormals.clear();
 	for (size_t i = 0; i < size; i += 3)
-		mNormals.append(MVector(nrm[i], nrm[i+1], nrm[i+2]));
+		mNormals.append(MVector(nrm[i], nrm[i + 1], nrm[i + 2]));
 }
 
 void MayaCallbacks::setUVs(const double* u, const double* v, size_t size) {
@@ -59,10 +59,10 @@ void MayaCallbacks::setUVs(const double* u, const double* v, size_t size) {
 }
 
 void MayaCallbacks::setFaces(
-		const uint32_t* counts, size_t countsSize,
-		const uint32_t* connects, size_t connectsSize,
-		const uint32_t* uvCounts, size_t uvCountsSize,
-		const uint32_t* uvConnects, size_t uvConnectsSize
+	const uint32_t* counts, size_t countsSize,
+	const uint32_t* connects, size_t connectsSize,
+	const uint32_t* uvCounts, size_t uvCountsSize,
+	const uint32_t* uvConnects, size_t uvConnectsSize
 ) {
 	mVerticesCounts.clear();
 	for (size_t i = 0; i < countsSize; ++i)
@@ -83,10 +83,10 @@ void MayaCallbacks::setFaces(
 		mUVConnects.append(uvConnects[i]);
 }
 
-void MayaCallbacks::setMaterial(uint32_t start, uint32_t count, const prtx::MaterialPtr& mat) {    
-    mMaterials.push_back(mat);
-    mShadingRanges.append(start);
-    mShadingRanges.append(start + count - 1);
+void MayaCallbacks::setMaterial(uint32_t start, uint32_t count, const prtx::MaterialPtr& mat) {
+	mMaterials.push_back(mat);
+	mShadingRanges.append(start);
+	mShadingRanges.append(start + count - 1);
 }
 
 void MayaCallbacks::createMesh() {
@@ -110,7 +110,7 @@ void MayaCallbacks::createMesh() {
 	MCHECK(stat);
 
 
-	if(mUVConnects.length() > 0) {
+	if (mUVConnects.length() > 0) {
 		MString uvSet = "map1";
 
 		MCHECK(mFnMesh->setUVs(mU, mV, &uvSet));
@@ -121,9 +121,9 @@ void MayaCallbacks::createMesh() {
 		prtu::dbg("    mUVConnects.length = %d", mUVConnects.length());
 
 		MCHECK(mFnMesh->assignUVs(mUVCounts, mUVConnects, &uvSet));
-	}	
+	}
 
-	if(mNormals.length() > 0) {
+	if (mNormals.length() > 0) {
 		prtu::dbg("    mNormals.length        = %d", mNormals.length());
 
 		// NOTE: this assumes that vertices and vertex normals use the same index domain (-> maya encoder)
@@ -136,76 +136,76 @@ void MayaCallbacks::createMesh() {
 		MCHECK(mFnMesh->setVertexNormals(expandedNormals, mVerticesConnects));
 	}
 
-    MFnMesh outputMesh(outMeshObj);
-    outputMesh.copyInPlace(oMesh);
+	MFnMesh outputMesh(outMeshObj);
+	outputMesh.copyInPlace(oMesh);
 
-    // create material metadata
-    size_t maxStringLength = 400;
-    adsk::Data::Structure* fStructure;	  // Structure to use for creation
-    fStructure = adsk::Data::Structure::structureByName(gPRTMatStructure.c_str());
-    if (fStructure == NULL)
-    {
-        // Register our structure since it is not registered yet.
-        fStructure = adsk::Data::Structure::create();
-        fStructure->setName(gPRTMatStructure.c_str());
-        //workaround: using kString type crashes maya when setting metadata elememts. Therefore we use array of kUInt8
-        fStructure->addMember(adsk::Data::Member::kUInt8, maxStringLength+1, gPRTMatMemberTexture.c_str());
-        fStructure->addMember(adsk::Data::Member::kDouble, 3, gPRTMatMemberColor.c_str());
-        fStructure->addMember(adsk::Data::Member::kInt32, 1, gPRTMatMemberFaceStart.c_str());
-        fStructure->addMember(adsk::Data::Member::kInt32, 1, gPRTMatMemberFaceEnd.c_str());
-        adsk::Data::Structure::registerStructure(*fStructure);
-    }
-    
-    MCHECK(stat);
-    MFnMesh inputMesh(inMeshObj);
+	// create material metadata
+	size_t maxStringLength = 400;
+	adsk::Data::Structure* fStructure;	  // Structure to use for creation
+	fStructure = adsk::Data::Structure::structureByName(gPRTMatStructure.c_str());
+	if (fStructure == NULL)
+	{
+		// Register our structure since it is not registered yet.
+		fStructure = adsk::Data::Structure::create();
+		fStructure->setName(gPRTMatStructure.c_str());
+		//workaround: using kString type crashes maya when setting metadata elememts. Therefore we use array of kUInt8
+		fStructure->addMember(adsk::Data::Member::kUInt8, maxStringLength + 1, gPRTMatMemberTexture.c_str());
+		fStructure->addMember(adsk::Data::Member::kDouble, 3, gPRTMatMemberColor.c_str());
+		fStructure->addMember(adsk::Data::Member::kInt32, 1, gPRTMatMemberFaceStart.c_str());
+		fStructure->addMember(adsk::Data::Member::kInt32, 1, gPRTMatMemberFaceEnd.c_str());
+		adsk::Data::Structure::registerStructure(*fStructure);
+	}
 
-    adsk::Data::Associations newMetadata(inputMesh.metadata(&stat));
-    newMetadata.makeUnique();
-    MCHECK(stat);
-    adsk::Data::Channel newChannel = newMetadata.channel(gPRTMatChannel);
-    adsk::Data::Stream newStream(*fStructure, gPRTMatStream);
+	MCHECK(stat);
+	MFnMesh inputMesh(inMeshObj);
 
-    newChannel.setDataStream(newStream);
-    newMetadata.setChannel(newChannel);
+	adsk::Data::Associations newMetadata(inputMesh.metadata(&stat));
+	newMetadata.makeUnique();
+	MCHECK(stat);
+	adsk::Data::Channel newChannel = newMetadata.channel(gPRTMatChannel);
+	adsk::Data::Stream newStream(*fStructure, gPRTMatStream);
 
-    for (unsigned int i = 0; i < mMaterials.size(); i++) {
-        adsk::Data::Handle handle(*fStructure);
+	newChannel.setDataStream(newStream);
+	newMetadata.setChannel(newChannel);
 
-        prtx::MaterialPtr mat = mMaterials[i];
+	for (unsigned int i = 0; i < mMaterials.size(); i++) {
+		adsk::Data::Handle handle(*fStructure);
 
-        if (mat->diffuseMap().size() > 0 && mat->diffuseMap().front()->isValid()) {
-            const prtx::URIPtr texURI = mat->diffuseMap().front()->getURI();
-            const std::wstring texPathW = texURI->getPath();                       
+		prtx::MaterialPtr mat = mMaterials[i];
 
-            if (texPathW.length() >= maxStringLength)
-                prt::log(L"Maximum texture path size is "+ maxStringLength, prt::LOG_ERROR);
+		if (mat->diffuseMap().size() > 0 && mat->diffuseMap().front()->isValid()) {
+			const prtx::URIPtr texURI = mat->diffuseMap().front()->getURI();
+			const std::wstring texPathW = texURI->getPath();
 
-            size_t maxStringLengthTmp = maxStringLength;
-            //workaround: transporting string as uint8 array, because using asString crashes maya
-            char* texPath = prt::StringUtils::toOSNarrowFromUTF16(texPathW.c_str(), (char*)handle.asUInt8(), &maxStringLengthTmp);
-        }
+			if (texPathW.length() >= maxStringLength)
+				prt::log(L"Maximum texture path size is " + maxStringLength, prt::LOG_ERROR);
 
-        handle.setPositionByMemberName(gPRTMatMemberColor.c_str());
-        handle.asDouble()[0] = mat->color_r();
-        handle.asDouble()[1] = mat->color_g();
-        handle.asDouble()[2] = mat->color_b();
+			size_t maxStringLengthTmp = maxStringLength;
+			//workaround: transporting string as uint8 array, because using asString crashes maya
+			char* texPath = prt::StringUtils::toOSNarrowFromUTF16(texPathW.c_str(), (char*)handle.asUInt8(), &maxStringLengthTmp);
+		}
 
-        handle.setPositionByMemberName(gPRTMatMemberFaceStart.c_str());
-        handle.asInt32()[0] = mShadingRanges[i * 2];
+		handle.setPositionByMemberName(gPRTMatMemberColor.c_str());
+		handle.asDouble()[0] = mat->color_r();
+		handle.asDouble()[1] = mat->color_g();
+		handle.asDouble()[2] = mat->color_b();
 
-        handle.setPositionByMemberName(gPRTMatMemberFaceEnd.c_str());
-        handle.asInt32()[0] = mShadingRanges[i * 2 + 1];
+		handle.setPositionByMemberName(gPRTMatMemberFaceStart.c_str());
+		handle.asInt32()[0] = mShadingRanges[i * 2];
 
-        newStream.setElement(i, handle);
-    }
-    
-    outputMesh.setMetadata(newMetadata);
+		handle.setPositionByMemberName(gPRTMatMemberFaceEnd.c_str());
+		handle.asInt32()[0] = mShadingRanges[i * 2 + 1];
+
+		newStream.setElement(i, handle);
+	}
+
+	outputMesh.setMetadata(newMetadata);
 }
 
 void MayaCallbacks::finishMesh() {
 	mFnMesh.reset();
-    mMaterials.clear();
-    mShadingRanges.clear();
+	mMaterials.clear();
+	mShadingRanges.clear();
 }
 
 prt::Status MayaCallbacks::attrBool(size_t /*isIndex*/, int32_t /*shapeID*/, const wchar_t* key, bool value) {

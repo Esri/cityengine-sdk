@@ -106,16 +106,16 @@ public:
 	virtual void setUVs(const double* u, const double* v, size_t size) override;
 
 	virtual void setFaces(
-			const uint32_t* counts, size_t countsSize,
-			const uint32_t* connects, size_t connectsSize,
-			const uint32_t* uvCounts, size_t uvCountsSize,
-			const uint32_t* uvConnects, size_t uvConnectsSize
+		const uint32_t* counts, size_t countsSize,
+		const uint32_t* connects, size_t connectsSize,
+		const uint32_t* uvCounts, size_t uvCountsSize,
+		const uint32_t* uvConnects, size_t uvConnectsSize
 	) override;
 
 	virtual void createMesh() override;
 	virtual void finishMesh() override;
 
-    virtual void setMaterial(uint32_t start, uint32_t count, const prtx::MaterialPtr& mat) override;
+	virtual void setMaterial(uint32_t start, uint32_t count, const prtx::MaterialPtr& mat) override;
 
 public:
 	const NamedAttributeHolders& getAttrs() const { return mAttrs; }
@@ -136,10 +136,10 @@ public:
 	MIntArray                mUVConnects;
 
 private:
-    MObject                 outMeshObj;
-    MObject                 inMeshObj;
+	MObject                 outMeshObj;
+	MObject                 inMeshObj;
 
 	std::vector<prtx::MaterialPtr> mMaterials;
-    MIntArray               mShadingRanges;
+	MIntArray               mShadingRanges;
 	NamedAttributeHolders    mAttrs;
 };
