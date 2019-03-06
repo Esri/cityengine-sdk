@@ -101,7 +101,7 @@ void PRTModifierAction::fillAttributesFromNode(const MObject& node) {
 				wchar_t color[] = L"#000000";
 				prtu::toHex(color, r, g, b);
 
-				if (wcscmp(dcolor, color))
+				if (std::wcscmp(dcolor, color))
 					aBuilder->setString(name.c_str(), color);
 			}
 
@@ -235,7 +235,7 @@ MStatus PRTModifierAction::updateRuleFiles(MObject& node, const MString& rulePkg
 					if (info->getRule(r)->getNumParameters() > 0)
 						continue;
 					for (size_t a = 0; a < info->getRule(r)->getNumAnnotations(); a++) {
-						if (!(wcscmp(info->getRule(r)->getAnnotation(a)->getName(), ANNOT_START_RULE))) {
+						if (!(std::wcscmp(info->getRule(r)->getAnnotation(a)->getName(), ANNOT_START_RULE))) {
 							startRule = info->getRule(r);
 							break;
 						}
@@ -386,7 +386,7 @@ MStatus PRTModifierAction::createNodeAttributes(MObject& nodeObj, const std::wst
 			const prt::Annotation* enumAnnotation = nullptr;
 			for (size_t a = 0; a < info->getAttribute(i)->getNumAnnotations(); a++) {
 				const prt::Annotation* an = info->getAttribute(i)->getAnnotation(a);
-				if (!(wcscmp(an->getName(), ANNOT_RANGE)))
+				if (!(std::wcscmp(an->getName(), ANNOT_RANGE)))
 					enumAnnotation = an;
 			}
 			const bool value = evalAttrs.find(name.asWChar())->second.mBool;
@@ -405,7 +405,7 @@ MStatus PRTModifierAction::createNodeAttributes(MObject& nodeObj, const std::wst
 			const prt::Annotation* enumAnnotation = nullptr;
 			for (size_t a = 0; a < info->getAttribute(i)->getNumAnnotations(); a++) {
 				const prt::Annotation* an = info->getAttribute(i)->getAnnotation(a);
-				if (!(wcscmp(an->getName(), ANNOT_RANGE))) {
+				if (!(std::wcscmp(an->getName(), ANNOT_RANGE))) {
 					if (an->getNumArguments() == 2 && an->getArgument(0)->getType() == prt::AAT_FLOAT && an->getArgument(1)->getType() == prt::AAT_FLOAT) {
 						min = an->getArgument(0)->getFloat();
 						max = an->getArgument(1)->getFloat();
@@ -433,15 +433,15 @@ MStatus PRTModifierAction::createNodeAttributes(MObject& nodeObj, const std::wst
 			const prt::Annotation* enumAnnotation = nullptr;
 			for (size_t a = 0; a < info->getAttribute(i)->getNumAnnotations(); a++) {
 				const prt::Annotation* an = info->getAttribute(i)->getAnnotation(a);
-				if (!(wcscmp(an->getName(), ANNOT_RANGE)))
+				if (!(std::wcscmp(an->getName(), ANNOT_RANGE)))
 					enumAnnotation = an;
-				else if (!(wcscmp(an->getName(), ANNOT_COLOR)))
+				else if (!(std::wcscmp(an->getName(), ANNOT_COLOR)))
 					asColor = true;
-				else if (!(wcscmp(an->getName(), ANNOT_DIR))) {
+				else if (!(std::wcscmp(an->getName(), ANNOT_DIR))) {
 					exts = MString(an->getName());
 					asFile = true;
 				}
-				else if (!(wcscmp(an->getName(), ANNOT_FILE))) {
+				else if (!(std::wcscmp(an->getName(), ANNOT_FILE))) {
 					asFile = true;
 					for (size_t arg = 0; arg < an->getNumArguments(); arg++) {
 						if (an->getArgument(arg)->getType() == prt::AAT_STR) {
@@ -489,7 +489,7 @@ MStatus PRTModifierEnum::fill(const prt::Annotation* annot) {
 		MStatus stat;
 		for (size_t arg = 0; arg < annot->getNumArguments(); arg++) {
 			const wchar_t* key = annot->getArgument(arg)->getKey();
-			if (!(wcscmp(key, NULL_KEY)))
+			if (!(std::wcscmp(key, NULL_KEY)))
 				key = annot->getArgument(arg)->getStr();
 			mKeys.append(MString(annot->getArgument(arg)->getKey()));
 			switch (annot->getArgument(arg)->getType()) {
