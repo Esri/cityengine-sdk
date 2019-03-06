@@ -48,10 +48,6 @@ const char* PRTMaterialNode::nodeName()
 	return "PRTMaterialNode";
 }
 
-PRTMaterialNode::PRTMaterialNode()
-{
-}
-
 PRTMaterialNode::~PRTMaterialNode() {
 	theShadingGroups.clear();
 }

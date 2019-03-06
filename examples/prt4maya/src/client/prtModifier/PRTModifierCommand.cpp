@@ -5,13 +5,6 @@
 #include <maya/MGlobal.h>
 #include <maya/MArgList.h>
 
-PRTModifierCommand::PRTModifierCommand()
-{
-}
-
-PRTModifierCommand::~PRTModifierCommand()
-{}
-
 void* PRTModifierCommand::creator()
 {
 	return new PRTModifierCommand();

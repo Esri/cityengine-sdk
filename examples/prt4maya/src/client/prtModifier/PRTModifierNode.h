@@ -10,8 +10,7 @@
 class PRTModifierNode : public polyModifierNode
 {
 public:
-	PRTModifierNode();
-	~PRTModifierNode() override;
+	PRTModifierNode() = default;
 
 	MStatus compute(const MPlug& plug, MDataBlock& data) override;
 	virtual MStatus setDependentsDirty(const MPlug &plugBeingDirtied, MPlugArray &affectedPlugs) override;

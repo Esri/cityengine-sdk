@@ -61,7 +61,7 @@ const std::string gPRTMatMemberFaceEnd = "faceIndexEnd";
 class PRTMaterialNode : public MPxNode {
 
 public:
-	PRTMaterialNode();
+	PRTMaterialNode() = default;
 	virtual ~PRTMaterialNode();
 
 	static  void*       creator();

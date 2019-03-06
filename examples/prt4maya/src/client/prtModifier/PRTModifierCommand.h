@@ -8,8 +8,7 @@ class PRTModifierCommand : public polyModifierCmd
 {
 public:
 
-    PRTModifierCommand();
-	~PRTModifierCommand() override;
+	PRTModifierCommand() = default;
 
 	static void* creator();
 

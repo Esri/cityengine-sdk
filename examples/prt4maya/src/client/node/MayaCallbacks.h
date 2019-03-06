@@ -59,7 +59,6 @@ public:
 	public:
 		AttributeHolder() { }
 		AttributeHolder(bool b, double d, std::wstring s) : mBool(b), mFloat(d), mString(s) { }
-		virtual ~AttributeHolder() { }
 		bool         mBool;
 		double       mFloat;
 		std::wstring mString;
@@ -69,7 +68,6 @@ public:
 public:
 	MayaCallbacks(const MObject inMesh, const MObject outMesh)
 		: inMeshObj(inMesh), outMeshObj(outMesh) { }
-	virtual ~MayaCallbacks() { }
 
 	// prt::Callbacks interface
 	virtual prt::Status generateError(size_t /*isIndex*/, prt::Status /*status*/, const wchar_t* message) override {

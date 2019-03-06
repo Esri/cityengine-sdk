@@ -32,12 +32,6 @@ MTypeId PRTModifierNode::id(0x00085000);
 MObject PRTModifierNode::rulePkg;
 
 
-PRTModifierNode::PRTModifierNode()
-{}
-
-PRTModifierNode::~PRTModifierNode()
-{}
-
 // make sure the dynamically added plugs affect the outMesh
 MStatus PRTModifierNode::setDependentsDirty(const MPlug& /*plugBeingDirtied*/, MPlugArray& affectedPlugs) {
 	const MPlug pOutMesh(thisMObject(), outMesh);
