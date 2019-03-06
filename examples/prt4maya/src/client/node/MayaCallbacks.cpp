@@ -182,7 +182,7 @@ void MayaCallbacks::createMesh() {
 
 			size_t maxStringLengthTmp = maxStringLength;
 			//workaround: transporting string as uint8 array, because using asString crashes maya
-			char* texPath = prt::StringUtils::toOSNarrowFromUTF16(texPathW.c_str(), (char*)handle.asUInt8(), &maxStringLengthTmp);
+			prt::StringUtils::toOSNarrowFromUTF16(texPathW.c_str(), (char*)handle.asUInt8(), &maxStringLengthTmp);
 		}
 
 		handle.setPositionByMemberName(gPRTMatMemberColor.c_str());
