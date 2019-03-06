@@ -1,6 +1,4 @@
-#ifndef _PRTNode
-#define _PRTNode
-
+#pragma once
 
 #include "polyModifierBase/polyModifierNode.h"
 #include "PRTModifierAction.h"
@@ -28,4 +26,3 @@ public:
 
 };
 
-#endif

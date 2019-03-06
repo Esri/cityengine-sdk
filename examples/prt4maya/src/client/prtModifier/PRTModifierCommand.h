@@ -1,5 +1,4 @@
-#ifndef _PRTCmd
-#define _PRTCmd
+#pragma once
 
 #include "polyModifierBase/polyModifierCmd.h"
 
@@ -26,4 +25,3 @@ private:
 	MString mRulePkg;
 };
 
-#endif

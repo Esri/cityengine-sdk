@@ -1,6 +1,4 @@
-#ifndef _PRTFty
-#define _PRTFty
-
+#pragma once
 
 #include "polyModifierBase/polyModifierFty.h"
 #include "node/Utilities.h"
@@ -98,4 +96,3 @@ private:
 	template<typename T> static T getPlugValueAndRemoveAttr(MFnDependencyNode & node, const MString & briefName, const T & defaultValue);
 };
 
-#endif
