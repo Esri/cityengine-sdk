@@ -3,6 +3,8 @@
 
 
 #include "polyModifierBase/polyModifierFty.h"
+#include "node/Utilities.h"
+
 #include "prt/API.h"
 #include <maya/MObject.h>
 #include <maya/MFnEnumAttribute.h>
@@ -12,6 +14,7 @@
 #include <maya/MString.h>
 #include <maya/MPlugArray.h>
 #include <map>
+#include <list>
 
 class PRTModifierAction;
 
@@ -19,18 +22,15 @@ class PRTModifierEnum {
 	friend class PRTModifierAction;
 
 public:
-	PRTModifierEnum(PRTModifierAction* action, const prt::Annotation* annot = nullptr);
-    virtual ~PRTModifierEnum() { }
+	PRTModifierEnum() = default;
 
 	void add(const MString & key, const MString & value);
-	MStatus fill();
+	MStatus fill(const prt::Annotation*  annot);
 
 public:
-	PRTModifierEnum*        mNext;
 	MFnEnumAttribute        mAttr;
 
 private:
-	const prt::Annotation*  mAnnot;
 	MStringArray            mKeys;
 	MStringArray            mSVals;
 	MDoubleArray            mFVals;
@@ -44,7 +44,6 @@ class PRTModifierAction : public polyModifierFty
 
 public:
 	PRTModifierAction();
-	~PRTModifierAction() override;
 
 	MStatus updateRuleFiles(MObject& node, const MString& rulePkg);
 	void fillAttributesFromNode(const MObject& node);
@@ -65,8 +64,8 @@ public:
 private:
 
 	//init in PRTModifierAction::PRTModifierAction()
-	const prt::AttributeMap* mMayaEncOpts;
-	const prt::AttributeMap* mAttrEncOpts;
+	AttributeMapVector mMayaEncOpts;
+	AttributeMapVector mAttrEncOpts;
 
 	// Mesh Nodes: only used during doIt
 	MObject inMesh;
@@ -76,24 +75,23 @@ private:
 	MString                       mRulePkg;
 	std::wstring                  mRuleFile;
 	std::wstring                  mStartRule;
-	const prt::ResolveMap*        mResolveMap;
+	ResolveMapUPtr                mResolveMap;
 
 	//init in fillAttributesFromNode()
-	const prt::AttributeMap*      mGenerateAttrs;
+	AttributeMapUPtr mGenerateAttrs;
 
-	PRTModifierEnum* mEnums;
+	std::list<PRTModifierEnum> mEnums;
 	std::map<std::wstring, std::wstring> mBriefName2prtAttr;
 	MStatus createNodeAttributes(MObject& node, const std::wstring & ruleFile, const std::wstring & startRule, prt::AttributeMapBuilder* aBuilder, const prt::RuleFileInfo* info);
-	void destroyEnums();
 	static MStatus  addParameter(MFnDependencyNode & node, MObject & attr, MFnAttribute& tAttr);
 	static MStatus  addBoolParameter(MFnDependencyNode & node, MObject & attr, const MString & name, bool defaultValue);
 	static MStatus  addFloatParameter(MFnDependencyNode & node, MObject & attr, const MString & name, double defaultValue, double min, double max);
 	static MStatus  addStrParameter(MFnDependencyNode & node, MObject & attr, const MString & name, const MString & defaultValue);
 	static MStatus  addFileParameter(MFnDependencyNode & node, MObject & attr, const MString & name, const MString & defaultValue, const MString & ext);
-	static MStatus  addEnumParameter(MFnDependencyNode & node, MObject & attr, const MString & name, bool defaultValue, PRTModifierEnum * e);
-	static MStatus  addEnumParameter(MFnDependencyNode & node, MObject & attr, const MString & name, double defaultValue, PRTModifierEnum * e);
-	static MStatus  addEnumParameter(MFnDependencyNode & node, MObject & attr, const MString & name, MString defaultValue, PRTModifierEnum * e);
-	static MStatus  addEnumParameter(MFnDependencyNode & node, MObject & attr, const MString & name, short defaultValue, PRTModifierEnum * e);
+	static MStatus  addEnumParameter(const prt::Annotation* annot, MFnDependencyNode & node, MObject & attr, const MString & name, bool defaultValue, PRTModifierEnum & e);
+	static MStatus  addEnumParameter(const prt::Annotation* annot, MFnDependencyNode & node, MObject & attr, const MString & name, double defaultValue, PRTModifierEnum & e);
+	static MStatus  addEnumParameter(const prt::Annotation* annot, MFnDependencyNode & node, MObject & attr, const MString & name, MString defaultValue, PRTModifierEnum & e);
+	static MStatus  addEnumParameter(const prt::Annotation* annot, MFnDependencyNode & node, MObject & attr, const MString & name, short defaultValue, PRTModifierEnum & e);
 	static MStatus  addColorParameter(MFnDependencyNode & node, MObject & attr, const MString & name, const MString& defaultValue);
 	static MString  longName(const MString & attrName);
 	static MString  briefName(const MString & attrName);

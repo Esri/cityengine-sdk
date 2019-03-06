@@ -32,29 +32,19 @@ namespace {
 	const wchar_t* NULL_KEY = L"#NULL#";
 } // namespace
 
-PRTModifierAction::PRTModifierAction() : mEnums(nullptr), mGenerateAttrs(nullptr)
+PRTModifierAction::PRTModifierAction()
 {
-	{
-		const prt::EncoderInfo* encInfo = prt::createEncoderInfo(ENC_MAYA);
-		encInfo->createValidatedOptionsAndStates(nullptr, &mMayaEncOpts, nullptr);
-		encInfo->destroy();
-	}
 
-	{
-		const prt::EncoderInfo* encInfo = prt::createEncoderInfo(ENC_ATTR);
-		encInfo->createValidatedOptionsAndStates(nullptr, &mAttrEncOpts, nullptr);
-		encInfo->destroy();
-	}
+	EncoderInfoUPtr encInfo(prt::createEncoderInfo(ENC_MAYA));
+	const prt::AttributeMap* am;
+	encInfo->createValidatedOptionsAndStates(nullptr, &am, nullptr);
+	mMayaEncOpts.emplace_back(AttributeMapUPtr(am));
+
+	const prt::AttributeMap* am2;
+	EncoderInfoUPtr encInfoAttr(prt::createEncoderInfo(ENC_ATTR));
+	encInfoAttr->createValidatedOptionsAndStates(nullptr, &am2, nullptr);
+	mAttrEncOpts.emplace_back(AttributeMapUPtr(am2));
 }
-
-PRTModifierAction::~PRTModifierAction()
-{
-	if (mGenerateAttrs) { mGenerateAttrs->destroy(); mGenerateAttrs = nullptr; }
-	if (mMayaEncOpts) { mMayaEncOpts->destroy();   mMayaEncOpts = nullptr; }
-	if (mAttrEncOpts) { mAttrEncOpts->destroy();   mAttrEncOpts = nullptr; }
-	if (mEnums) { destroyEnums(); }
-}
-
 
 void PRTModifierAction::fillAttributesFromNode(const MObject& node) {
 	MStatus           stat;
@@ -64,7 +54,7 @@ void PRTModifierAction::fillAttributesFromNode(const MObject& node) {
 	const unsigned int count = fNode.attributeCount(&stat);
 	MCHECK(stat);
 
-	prt::AttributeMapBuilder* aBuilder = prt::AttributeMapBuilder::create();
+	AttributeMapBuilderUPtr aBuilder(prt::AttributeMapBuilder::create());
 
 	for (unsigned int i = 0; i < count; i++) {
 		const MObject attr = fNode.attribute(i, &stat);
@@ -145,8 +135,7 @@ void PRTModifierAction::fillAttributesFromNode(const MObject& node) {
 		}
 	}
 
-	mGenerateAttrs = aBuilder->createAttributeMap();
-	aBuilder->destroy();
+	mGenerateAttrs.reset(aBuilder->createAttributeMap());
 }
 
 // Sets the mesh object for the action  to operate on
@@ -206,7 +195,7 @@ MStatus PRTModifierAction::updateRuleFiles(MObject& node, const MString& rulePkg
 	std::string uri(FILE_PREFIX);
 	uri.append(&percentEncodedPath[0]);
 
-	destroyEnums();
+	mEnums.clear();
 	mRuleFile.clear();
 	mStartRule.clear();
 
@@ -222,7 +211,7 @@ MStatus PRTModifierAction::updateRuleFiles(MObject& node, const MString& rulePkg
 		prt::StringUtils::toUTF16FromUTF8(uri.c_str(), &utf16URI[0], &len);
 	}
 
-	mResolveMap = prt::createResolveMap(utf16URI.c_str(), unpackDir.asWChar(), &resolveMapStatus);
+	mResolveMap.reset(prt::createResolveMap(utf16URI.c_str(), unpackDir.asWChar(), &resolveMapStatus));
 	if (resolveMapStatus == prt::STATUS_OK) {
 		size_t nKeys;
 		const wchar_t * const* keys = mResolveMap->getKeys(&nKeys);
@@ -240,7 +229,7 @@ MStatus PRTModifierAction::updateRuleFiles(MObject& node, const MString& rulePkg
 			const prt::RuleFileInfo::Entry* startRule = nullptr;
 
 			prt::Status infoStatus = prt::STATUS_UNSPECIFIED_ERROR;
-			const prt::RuleFileInfo* info = prt::createRuleFileInfo(mResolveMap->getString(mRuleFile.c_str()), nullptr, &infoStatus);
+			RuleFileInfoUPtr info(prt::createRuleFileInfo(mResolveMap->getString(mRuleFile.c_str()), nullptr, &infoStatus));
 			if (infoStatus == prt::STATUS_OK) {
 				for (size_t r = 0; r < info->getNumRules(); r++) {
 					if (info->getRule(r)->getNumParameters() > 0)
@@ -256,20 +245,12 @@ MStatus PRTModifierAction::updateRuleFiles(MObject& node, const MString& rulePkg
 			if (startRule) {
 				mStartRule = startRule->getName();
 
-				if (mGenerateAttrs) {
-					mGenerateAttrs->destroy();
-					mGenerateAttrs = nullptr;
-				}
-
-				prt::AttributeMapBuilder* aBuilder = prt::AttributeMapBuilder::create();
+				AttributeMapBuilderUPtr aBuilder(prt::AttributeMapBuilder::create());
 				if (node != MObject::kNullObj)
-					createNodeAttributes(node, mRuleFile, mStartRule, aBuilder, info);
-				mGenerateAttrs = aBuilder->createAttributeMap();
-				aBuilder->destroy();
+					createNodeAttributes(node, mRuleFile, mStartRule, aBuilder.get(), info.get());
+				mGenerateAttrs.reset(aBuilder->createAttributeMap());
 			}
 
-			if (info)
-				info->destroy();
 		}
 
 	}
@@ -295,28 +276,28 @@ MStatus PRTModifierAction::doIt()
 	iMeshFn.getPoints(vertices);
 	iMeshFn.getVertices(pcounts, pconnect);
 
-	double*   va = new double[vertices.length() * 3];
-	uint32_t* ia = new uint32_t[pconnect.length()];
-	uint32_t* ca = new uint32_t[pcounts.length()];
-
+	std::vector<double> va(vertices.length()*3);
 	for (int i = static_cast<int>(vertices.length()); --i >= 0;) {
 		va[i * 3 + 0] = vertices[i].x;
 		va[i * 3 + 1] = vertices[i].y;
 		va[i * 3 + 2] = vertices[i].z;
 	}
-	pconnect.get((int*)ia);
-	pcounts.get((int*)ca);
+	
+	std::vector <uint32_t> ia(pconnect.length());
+	pconnect.get((int*)ia.data());
+	std::vector <uint32_t> ca(pcounts.length());
+	pcounts.get((int*)ca.data());
 
-	MayaCallbacks* outputHandler = new MayaCallbacks(inMesh, outMesh);
+	std::unique_ptr<MayaCallbacks> outputHandler(new MayaCallbacks(inMesh, outMesh));
 
-	prt::InitialShapeBuilder* isb = prt::InitialShapeBuilder::create();
+	InitialShapeBuilderUPtr isb(prt::InitialShapeBuilder::create());
 	prt::Status setGeoStatus = isb->setGeometry(
-		va,
-		vertices.length() * 3,
-		ia,
-		pconnect.length(),
-		ca,
-		pcounts.length()
+		va.data(),
+		va.size(),
+		ia.data(),
+		ia.size(),
+		ca.data(),
+		ca.size()
 	);
 	if (setGeoStatus != prt::STATUS_OK)
 		std::cerr << "InitialShapeBuilder setGeometry failed status = " << prt::getStatusDescription(setGeoStatus) << std::endl;
@@ -326,21 +307,16 @@ MStatus PRTModifierAction::doIt()
 		mStartRule.c_str(),
 		prtu::computeSeed(vertices),
 		L"",
-		mGenerateAttrs,
-		mResolveMap
+		mGenerateAttrs.get(),
+		mResolveMap.get()
 	);
 
-	const prt::InitialShape* shape = isb->createInitialShapeAndReset();
-	const prt::Status        generateStatus = prt::generate(&shape, 1, 0, &ENC_MAYA, 1, &mMayaEncOpts, outputHandler, PRTModifierAction::theCache, 0);
+	std::unique_ptr <const prt::InitialShape, PRTDestroyer> shape(isb->createInitialShapeAndReset());
+	AttributeMapNOPtrVector encOpts = prtu::toPtrVec(mMayaEncOpts);
+	InitialShapeNOPtrVector shapes = { shape.get() };
+	const prt::Status        generateStatus = prt::generate(shapes.data(), shapes.size(), 0, &ENC_MAYA, encOpts.size(), encOpts.data(), outputHandler.get(), PRTModifierAction::theCache, 0);
 	if (generateStatus != prt::STATUS_OK)
 		std::cerr << "prt generate failed: " << prt::getStatusDescription(generateStatus) << std::endl;
-	isb->destroy();
-	shape->destroy();
-
-	delete[] ca;
-	delete[] ia;
-	delete[] va;
-	delete   outputHandler;
 
 	return status;
 }
@@ -367,9 +343,9 @@ MStatus PRTModifierAction::createNodeAttributes(MObject& nodeObj, const std::wst
 	MCHECK(stat);
 
 	std::unique_ptr<MayaCallbacks> outputHandler(new MayaCallbacks(MObject::kNullObj, MObject::kNullObj));
-	const prt::AttributeMap* attrs = aBuilder->createAttributeMap();
+	AttributeMapUPtr attrs(aBuilder->createAttributeMap());
 
-	prt::InitialShapeBuilder* isb = prt::InitialShapeBuilder::create();
+	InitialShapeBuilderUPtr isb(prt::InitialShapeBuilder::create());
 	isb->setGeometry(
 		UnitQuad::vertices,
 		UnitQuad::vertexCount,
@@ -383,19 +359,20 @@ MStatus PRTModifierAction::createNodeAttributes(MObject& nodeObj, const std::wst
 		startRule.c_str(),
 		UnitQuad::seed,
 		L"",
-		attrs,
-		mResolveMap
+		attrs.get(),
+		mResolveMap.get()
 	);
-	const prt::InitialShape* shape = isb->createInitialShapeAndReset();
-
-	prt::generate(&shape, 1, nullptr, &ENC_ATTR, 1, &mAttrEncOpts, outputHandler.get(), theCache, nullptr);
+	std::unique_ptr<const prt::InitialShape, PRTDestroyer> shape(isb->createInitialShapeAndReset());
+	InitialShapeNOPtrVector shapes = { shape.get() };
+	AttributeMapNOPtrVector encOpts = prtu::toPtrVec(mAttrEncOpts);
+	prt::generate(shapes.data(), shapes.size(), nullptr, &ENC_ATTR, encOpts.size(), encOpts.data(), outputHandler.get(), theCache, nullptr);
 
 	const std::map<std::wstring, MayaCallbacks::AttributeHolder>& evalAttrs = outputHandler->getAttrs();
 
 	mBriefName2prtAttr[NAME_GENERATE.asWChar()] = NAME_GENERATE.asWChar();
 
 	for (size_t i = 0; i < info->getNumAttributes(); i++) {
-		PRTModifierEnum* e = nullptr;
+
 
 		const MString name = MString(info->getAttribute(i)->getName());
 		MObject attr;
@@ -406,14 +383,16 @@ MStatus PRTModifierAction::createNodeAttributes(MObject& nodeObj, const std::wst
 
 		switch (info->getAttribute(i)->getReturnType()) {
 		case prt::AAT_BOOL: {
+			const prt::Annotation* enumAnnotation = nullptr;
 			for (size_t a = 0; a < info->getAttribute(i)->getNumAnnotations(); a++) {
 				const prt::Annotation* an = info->getAttribute(i)->getAnnotation(a);
 				if (!(wcscmp(an->getName(), ANNOT_RANGE)))
-					e = new PRTModifierEnum(this, an);
+					enumAnnotation = an;
 			}
 			const bool value = evalAttrs.find(name.asWChar())->second.mBool;
-			if (e) {
-				MCHECK(addEnumParameter(node, attr, name, value, e));
+			if (enumAnnotation) {
+				mEnums.emplace_front();
+				MCHECK(addEnumParameter(enumAnnotation, node, attr, name, value, mEnums.front()));
 			}
 			else {
 				MCHECK(addBoolParameter(node, attr, name, value));
@@ -423,6 +402,7 @@ MStatus PRTModifierAction::createNodeAttributes(MObject& nodeObj, const std::wst
 		case prt::AAT_FLOAT: {
 			double min = std::numeric_limits<double>::quiet_NaN();
 			double max = std::numeric_limits<double>::quiet_NaN();
+			const prt::Annotation* enumAnnotation = nullptr;
 			for (size_t a = 0; a < info->getAttribute(i)->getNumAnnotations(); a++) {
 				const prt::Annotation* an = info->getAttribute(i)->getAnnotation(a);
 				if (!(wcscmp(an->getName(), ANNOT_RANGE))) {
@@ -431,14 +411,15 @@ MStatus PRTModifierAction::createNodeAttributes(MObject& nodeObj, const std::wst
 						max = an->getArgument(1)->getFloat();
 					}
 					else
-						e = new PRTModifierEnum(this, an);
+						enumAnnotation = an;
 				}
 			}
 
 			const double value = evalAttrs.find(name.asWChar())->second.mFloat;
 
-			if (e) {
-				MCHECK(addEnumParameter(node, attr, name, value, e));
+			if (enumAnnotation) {
+				mEnums.emplace_front();
+				MCHECK(addEnumParameter(enumAnnotation, node, attr, name, value, mEnums.front()));
 			}
 			else {
 				MCHECK(addFloatParameter(node, attr, name, value, min, max));
@@ -449,10 +430,11 @@ MStatus PRTModifierAction::createNodeAttributes(MObject& nodeObj, const std::wst
 			MString exts;
 			bool    asFile = false;
 			bool    asColor = false;
+			const prt::Annotation* enumAnnotation = nullptr;
 			for (size_t a = 0; a < info->getAttribute(i)->getNumAnnotations(); a++) {
 				const prt::Annotation* an = info->getAttribute(i)->getAnnotation(a);
 				if (!(wcscmp(an->getName(), ANNOT_RANGE)))
-					e = new PRTModifierEnum(this, an);
+					enumAnnotation = an;
 				else if (!(wcscmp(an->getName(), ANNOT_COLOR)))
 					asColor = true;
 				else if (!(wcscmp(an->getName(), ANNOT_DIR))) {
@@ -478,8 +460,9 @@ MStatus PRTModifierAction::createNodeAttributes(MObject& nodeObj, const std::wst
 			if (!(asColor) && mvalue.length() == 7 && value[0] == L'#')
 				asColor = true;
 
-			if (e) {
-				MCHECK(addEnumParameter(node, attr, name, mvalue, e));
+			if (enumAnnotation) {
+				mEnums.emplace_front();
+				MCHECK(addEnumParameter(enumAnnotation, node, attr, name, mvalue, mEnums.front()));
 			}
 			else if (asFile) {
 				MCHECK(addFileParameter(node, attr, name, mvalue, exts));
@@ -497,56 +480,36 @@ MStatus PRTModifierAction::createNodeAttributes(MObject& nodeObj, const std::wst
 		}
 	}
 
-	shape->destroy();
-	attrs->destroy();
-
 	return MS::kSuccess;
 }
 
 
-void PRTModifierAction::destroyEnums() {
-	if (mEnums == nullptr)
-		return;
-
-	for (PRTModifierEnum* e = mEnums; e;) {
-		PRTModifierEnum * tmp = e->mNext;
-		delete e;
-		e = tmp;
-	}
-
-	mEnums = nullptr;
-}
-
-PRTModifierEnum::PRTModifierEnum(PRTModifierAction* node, const prt::Annotation* an) : mAnnot(an), mNext(node->mEnums) {
-	node->mEnums = this;
-}
-
-MStatus PRTModifierEnum::fill() {
-	if (mAnnot) {
+MStatus PRTModifierEnum::fill(const prt::Annotation* annot) {
+	if (annot) {
 		MStatus stat;
-		for (size_t arg = 0; arg < mAnnot->getNumArguments(); arg++) {
-			const wchar_t* key = mAnnot->getArgument(arg)->getKey();
+		for (size_t arg = 0; arg < annot->getNumArguments(); arg++) {
+			const wchar_t* key = annot->getArgument(arg)->getKey();
 			if (!(wcscmp(key, NULL_KEY)))
-				key = mAnnot->getArgument(arg)->getStr();
-			mKeys.append(MString(mAnnot->getArgument(arg)->getKey()));
-			switch (mAnnot->getArgument(arg)->getType()) {
+				key = annot->getArgument(arg)->getStr();
+			mKeys.append(MString(annot->getArgument(arg)->getKey()));
+			switch (annot->getArgument(arg)->getType()) {
 			case prt::AAT_BOOL:
 				MCHECK(mAttr.addField(MString(key), mBVals.length()));
-				mBVals.append(mAnnot->getArgument(arg)->getBool());
+				mBVals.append(annot->getArgument(arg)->getBool());
 				mFVals.append(std::numeric_limits<double>::quiet_NaN());
 				mSVals.append("");
 				break;
 			case prt::AAT_FLOAT:
 				MCHECK(mAttr.addField(MString(key), mFVals.length()));
 				mBVals.append(false);
-				mFVals.append(mAnnot->getArgument(arg)->getFloat());
+				mFVals.append(annot->getArgument(arg)->getFloat());
 				mSVals.append("");
 				break;
 			case prt::AAT_STR:
 				MCHECK(mAttr.addField(MString(key), mSVals.length()));
 				mBVals.append(false);
 				mFVals.append(std::numeric_limits<double>::quiet_NaN());
-				mSVals.append(MString(mAnnot->getArgument(arg)->getStr()));
+				mSVals.append(MString(annot->getArgument(arg)->getStr()));
 				break;
 			default:
 				break;
@@ -634,52 +597,52 @@ MStatus PRTModifierAction::addFloatParameter(MFnDependencyNode & node, MObject &
 	return MS::kSuccess;
 }
 
-MStatus PRTModifierAction::addEnumParameter(MFnDependencyNode & node, MObject & attr, const MString & name, bool defaultValue, PRTModifierEnum * e) {
+MStatus PRTModifierAction::addEnumParameter(const prt::Annotation* annot, MFnDependencyNode & node, MObject & attr, const MString & name, bool defaultValue, PRTModifierEnum & e) {
 	short idx = 0;
-	for (int i = static_cast<int>(e->mBVals.length()); --i >= 0;) {
-		if ((e->mBVals[i] != 0) == defaultValue) {
+	for (int i = static_cast<int>(e.mBVals.length()); --i >= 0;) {
+		if ((e.mBVals[i] != 0) == defaultValue) {
 			idx = static_cast<short>(i);
 			break;
 		}
 	}
 
-	return addEnumParameter(node, attr, name, idx, e);
+	return addEnumParameter(annot, node, attr, name, idx, e);
 }
 
-MStatus PRTModifierAction::addEnumParameter(MFnDependencyNode & node, MObject & attr, const MString & name, double defaultValue, PRTModifierEnum * e) {
+MStatus PRTModifierAction::addEnumParameter(const prt::Annotation* annot, MFnDependencyNode & node, MObject & attr, const MString & name, double defaultValue, PRTModifierEnum & e) {
 	short idx = 0;
-	for (int i = static_cast<int>(e->mFVals.length()); --i >= 0;) {
-		if (e->mFVals[i] == defaultValue) {
+	for (int i = static_cast<int>(e.mFVals.length()); --i >= 0;) {
+		if (e.mFVals[i] == defaultValue) {
 			idx = static_cast<short>(i);
 			break;
 		}
 	}
 
-	return addEnumParameter(node, attr, name, idx, e);
+	return addEnumParameter(annot, node, attr, name, idx, e);
 }
 
-MStatus PRTModifierAction::addEnumParameter(MFnDependencyNode & node, MObject & attr, const MString & name, MString defaultValue, PRTModifierEnum * e) {
+MStatus PRTModifierAction::addEnumParameter(const prt::Annotation* annot, MFnDependencyNode & node, MObject & attr, const MString & name, MString defaultValue, PRTModifierEnum & e) {
 	short idx = 0;
-	for (int i = static_cast<int>(e->mSVals.length()); --i >= 0;) {
-		if (e->mSVals[i] == defaultValue) {
+	for (int i = static_cast<int>(e.mSVals.length()); --i >= 0;) {
+		if (e.mSVals[i] == defaultValue) {
 			idx = static_cast<short>(i);
 			break;
 		}
 	}
 
-	return addEnumParameter(node, attr, name, idx, e);
+	return addEnumParameter(annot, node, attr, name, idx, e);
 }
 
-MStatus PRTModifierAction::addEnumParameter(MFnDependencyNode & node, MObject & attr, const MString & name, short defaultValue, PRTModifierEnum * e) {
+MStatus PRTModifierAction::addEnumParameter(const prt::Annotation* annot, MFnDependencyNode & node, MObject & attr, const MString & name, short defaultValue, PRTModifierEnum & e) {
 	MStatus stat;
 
 	short plugValue = getPlugValueAndRemoveAttr(node, briefName(name), defaultValue);
-	attr = e->mAttr.create(longName(name), briefName(name), defaultValue, &stat);
+	attr = e.mAttr.create(longName(name), briefName(name), defaultValue, &stat);
 	MCHECK(stat);
 
-	MCHECK(e->fill());
+	MCHECK(e.fill(annot));
 
-	MCHECK(addParameter(node, attr, e->mAttr));
+	MCHECK(addParameter(node, attr, e.mAttr));
 
 	MPlug plug(node.object(), attr);
 	MCHECK(plug.setValue(plugValue));

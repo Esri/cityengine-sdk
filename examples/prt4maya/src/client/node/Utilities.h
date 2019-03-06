@@ -12,8 +12,17 @@
 #include "maya/MStatus.h"
 #include "maya/MFloatPointArray.h"
 
+#include "prt/Object.h"
+#include "prt/AttributeMap.h"
+#include "prt/InitialShape.h"
+#include "prt/RuleFileInfo.h"
+#include "prt/EncoderInfo.h"
+#include "prt/OcclusionSet.h"
+
 #include <cstdint>
 #include <cmath>
+#include <vector>
+#include <algorithm>
 
 #if defined(_MSC_VER) && (_MSC_VER <= 1700)
 #   include <cfloat>
@@ -23,8 +32,36 @@
 #define DO_DBG 1
 #define MCHECK(_stat_) {if(MS::kSuccess != _stat_) { prtu::dbg("maya err at %s:%d: %s %d\n", __FILE__, __LINE__, _stat_.errorString().asChar(), _stat_.statusCode());}}
 
+struct PRTDestroyer {
+	void operator()(prt::Object const* p) {
+		if (p) p->destroy();
+	}
+};
+
+using ObjectUPtr = std::unique_ptr<const prt::Object, PRTDestroyer>;
+using InitialShapeNOPtrVector = std::vector<const prt::InitialShape*>;
+using AttributeMapNOPtrVector = std::vector<const prt::AttributeMap*>;
+using CacheObjectUPtr = std::unique_ptr<prt::CacheObject, PRTDestroyer>;
+using AttributeMapUPtr = std::unique_ptr<const prt::AttributeMap, PRTDestroyer>;
+using AttributeMapVector = std::vector<AttributeMapUPtr>;
+using AttributeMapBuilderUPtr = std::unique_ptr<prt::AttributeMapBuilder, PRTDestroyer>;
+using AttributeMapBuilderVector = std::vector<AttributeMapBuilderUPtr>;
+using InitialShapeBuilderUPtr = std::unique_ptr<prt::InitialShapeBuilder, PRTDestroyer>;
+using InitialShapeBuilderVector = std::vector<InitialShapeBuilderUPtr>;
+using ResolveMapUPtr = std::unique_ptr<const prt::ResolveMap, PRTDestroyer>;
+using ResolveMapBuilderUPtr = std::unique_ptr<prt::ResolveMapBuilder, PRTDestroyer>;
+using RuleFileInfoUPtr = std::unique_ptr<const prt::RuleFileInfo, PRTDestroyer>;
+using EncoderInfoUPtr = std::unique_ptr<const prt::EncoderInfo, PRTDestroyer>;
+using OcclusionSetUPtr = std::unique_ptr<prt::OcclusionSet, PRTDestroyer>;
 
 namespace prtu {
+
+	template<typename C, typename D>
+	std::vector<const C*> toPtrVec(const std::vector<std::unique_ptr<C, D>>& sv) {
+		std::vector<const C*> pv(sv.size());
+		std::transform(sv.begin(), sv.end(), pv.begin(), [](const std::unique_ptr<C, D>& s) { return s.get(); });
+		return pv;
+	}
 
 	const char* filename(const char* path);
 
