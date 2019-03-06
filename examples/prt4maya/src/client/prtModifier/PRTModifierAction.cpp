@@ -575,12 +575,6 @@ template<typename T> T PRTModifierAction::getPlugValueAndRemoveAttr(MFnDependenc
 	return plugValue;
 }
 
-
-template double PRTModifierAction::getPlugValueAndRemoveAttr<double>(MFnDependencyNode&, const MString &, const double&);
-template bool PRTModifierAction::getPlugValueAndRemoveAttr<bool>(MFnDependencyNode&, const MString &, const bool&);
-template short PRTModifierAction::getPlugValueAndRemoveAttr<short>(MFnDependencyNode&, const MString &, const short&);
-template MString PRTModifierAction::getPlugValueAndRemoveAttr<MString>(MFnDependencyNode&, const MString &, const MString&);
-
 MString PRTModifierAction::longName(const MString& attrName) {
 	return prtu::toCleanId(attrName.substring(attrName.index('$') + 1, attrName.length()));
 }
