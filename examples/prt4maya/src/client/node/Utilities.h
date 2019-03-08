@@ -19,6 +19,7 @@
 #include "prt/EncoderInfo.h"
 #include "prt/OcclusionSet.h"
 
+#include <memory>
 #include <cstdint>
 #include <cmath>
 #include <vector>

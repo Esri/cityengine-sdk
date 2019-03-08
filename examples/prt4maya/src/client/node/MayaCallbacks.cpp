@@ -177,8 +177,10 @@ void MayaCallbacks::createMesh() {
 			const prtx::URIPtr texURI = mat->diffuseMap().front()->getURI();
 			const std::wstring texPathW = texURI->getPath();
 
-			if (texPathW.length() >= maxStringLength)
-				prt::log(L"Maximum texture path size is " + maxStringLength, prt::LOG_ERROR);
+			if (texPathW.length() >= maxStringLength) {
+				const std::wstring msg = L"Maximum texture path size is " + std::to_wstring(maxStringLength);
+				prt::log(msg.c_str(), prt::LOG_ERROR);
+			}
 
 			size_t maxStringLengthTmp = maxStringLength;
 			//workaround: transporting string as uint8 array, because using asString crashes maya
