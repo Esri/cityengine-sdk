@@ -111,6 +111,7 @@ public:
 	) override;
 
 	virtual void createMesh() override;
+	void checkStringLength(std::wstring string, const size_t &maxStringLength);
 	virtual void finishMesh() override;
 
 	virtual void setMaterial(uint32_t start, uint32_t count, const prtx::MaterialPtr& mat) override;

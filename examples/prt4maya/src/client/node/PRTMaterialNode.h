@@ -53,8 +53,8 @@
 const std::string gPRTMatStructure = "prtMaterialStructure";
 const std::string gPRTMatChannel = "prtMaterialChannel";
 const std::string gPRTMatStream = "prtMaterialStream";
-const std::string gPRTMatMemberTexture = "texture";
-const std::string gPRTMatMemberColor = "color";
+const std::string gPRTMatMemberTexture = "diffuseMap";
+const std::string gPRTMatMemberColor = "diffuseColor";
 const std::string gPRTMatMemberFaceStart = "faceIndexStart";
 const std::string gPRTMatMemberFaceEnd = "faceIndexEnd";
 
