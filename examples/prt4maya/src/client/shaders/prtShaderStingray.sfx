@@ -34,7 +34,7 @@ NumberOfNodes=73
 		SVT=5022 2003 2 1 0 
 		SDV=1.000000
 		SVT=5022 2003 3 0 1 
-		SCS=r
+		SCS=g
 		SVT=5022 2003 4 0 0 
 	OSC=1
 		SVT=5022 2003 5 
@@ -69,7 +69,7 @@ NumberOfNodes=73
 		SVT=5022 2003 2 1 0 
 		SDV=1.000000
 		SVT=5022 2003 3 0 1 
-		SCS=r
+		SCS=b
 		SVT=5022 2003 4 0 0 
 	OSC=1
 		SVT=5022 2003 5 
@@ -289,7 +289,7 @@ NumberOfNodes=73
 	posx=1 v=2003 542.261963
 	posy=1 v=2003 -977.162415
 	type=2 e=0 v=5012 2
-	defaultvecthree=2 e=0 v=3002 0.541096,0.541096,0.541096
+	defaultvecthree=2 e=0 v=3002 1.000000,0.000000,0.000000
 	defaultvector=2 e=0 v=3003 0.500000,0.500000,0.500000,0.000000
 	uiorder=2 e=0 v=2002 21
 	group=-1
@@ -320,7 +320,7 @@ NumberOfNodes=73
 	posx=1 v=2003 577.500122
 	posy=1 v=2003 -125.297607
 	type=2 e=0 v=5012 0
-	defaultscalar=2 e=0 v=2003 0.649874
+	defaultscalar=2 e=0 v=2003 1.000000
 	uiorder=2 e=0 v=2002 22
 	group=-1
 	ISC=0
@@ -704,12 +704,13 @@ NumberOfNodes=73
 			C=45 0 3 10 0 1 0
 			CPC=0
 #NT=20185 0
-	PC=9
+	PC=10
 	name=1 v=5000 colormap_trafo_suvw
 	posx=1 v=2003 -65.817390
 	posy=1 v=2003 -1162.567627
 	type=2 e=0 v=5012 2
 	defaultvectwo=2 e=0 v=3001 1.000000,1.000000
+	defaultvecthree=2 e=0 v=3002 1.000000,1.000000,0.000000
 	defaultvector=2 e=0 v=3003 1.000000,1.000000,0.000000,0.000000
 	minrange=2 e=0 v=2003 -100001.000000
 	maxrange=2 e=0 v=2003 100001.000000
@@ -750,12 +751,13 @@ NumberOfNodes=73
 			C=48 0 3 40 0 1 0
 			CPC=0
 #NT=20185 0
-	PC=9
+	PC=10
 	name=1 v=5000 dirtmap_trafo_suvw
 	posx=1 v=2003 -68.178497
 	posy=1 v=2003 -818.428833
 	type=2 e=0 v=5012 2
 	defaultvectwo=2 e=0 v=3001 1.000000,1.000000
+	defaultvecthree=2 e=0 v=3002 1.000000,1.000000,0.000000
 	defaultvector=2 e=0 v=3003 1.000000,0.000000,0.000000,0.000000
 	minrange=2 e=0 v=2003 -100001.000000
 	maxrange=2 e=0 v=2003 100001.000000
@@ -797,12 +799,13 @@ NumberOfNodes=73
 			C=51 0 3 29 0 1 0
 			CPC=0
 #NT=20185 0
-	PC=9
+	PC=10
 	name=1 v=5000 opacitymap_trafo_suvw
 	posx=1 v=2003 -68.678497
 	posy=1 v=2003 -486.928955
 	type=2 e=0 v=5012 2
 	defaultvectwo=2 e=0 v=3001 1.000000,1.000000
+	defaultvecthree=2 e=0 v=3002 1.000000,1.000000,0.000000
 	defaultvector=2 e=0 v=3003 1.000000,1.000000,0.000000,0.000000
 	minrange=2 e=0 v=2003 -100001.000000
 	maxrange=2 e=0 v=2003 100001.000000
@@ -843,12 +846,13 @@ NumberOfNodes=73
 			C=54 0 3 11 0 1 0
 			CPC=0
 #NT=20185 0
-	PC=9
+	PC=10
 	name=1 v=5000 normalmap_trafo_suvw
 	posx=1 v=2003 -41.928528
 	posy=1 v=2003 55.070992
 	type=2 e=0 v=5012 2
 	defaultvectwo=2 e=0 v=3001 1.000000,1.000000
+	defaultvecthree=2 e=0 v=3002 1.000000,1.000000,0.000000
 	defaultvector=2 e=0 v=3003 1.000000,1.000000,0.000000,0.000000
 	minrange=2 e=0 v=2003 -100001.000000
 	maxrange=2 e=0 v=2003 100001.000000
@@ -889,12 +893,13 @@ NumberOfNodes=73
 			C=57 0 3 12 0 1 0
 			CPC=0
 #NT=20185 0
-	PC=9
+	PC=10
 	name=1 v=5000 metallicmap_trafo_suvw
 	posx=1 v=2003 -40.571411
 	posy=1 v=2003 1077.071167
 	type=2 e=0 v=5012 2
 	defaultvectwo=2 e=0 v=3001 1.000000,1.000000
+	defaultvecthree=2 e=0 v=3002 1.000000,1.000000,0.000000
 	defaultvector=2 e=0 v=3003 1.000000,1.000000,0.000000,0.000000
 	minrange=2 e=0 v=2003 -100001.000000
 	maxrange=2 e=0 v=2003 100001.000000
@@ -935,12 +940,13 @@ NumberOfNodes=73
 			C=60 0 3 13 0 1 0
 			CPC=0
 #NT=20185 0
-	PC=9
+	PC=10
 	name=1 v=5000 roughnessmap_trafo_suvw
 	posx=1 v=2003 -11.071507
 	posy=1 v=2003 1472.071289
 	type=2 e=0 v=5012 2
 	defaultvectwo=2 e=0 v=3001 1.000000,1.000000
+	defaultvecthree=2 e=0 v=3002 1.000000,1.000000,0.000000
 	defaultvector=2 e=0 v=3003 1.000000,1.000000,0.000000,0.000000
 	minrange=2 e=0 v=2003 -100001.000000
 	maxrange=2 e=0 v=2003 100001.000000
@@ -981,12 +987,13 @@ NumberOfNodes=73
 			C=63 0 3 14 0 1 0
 			CPC=0
 #NT=20185 0
-	PC=9
+	PC=10
 	name=1 v=5000 emissivemap_trafo_suvw
 	posx=1 v=2003 -1.571594
 	posy=1 v=2003 1921.571533
 	type=2 e=0 v=5012 2
 	defaultvectwo=2 e=0 v=3001 1.000000,1.000000
+	defaultvecthree=2 e=0 v=3002 1.000000,1.000000,0.000000
 	defaultvector=2 e=0 v=3003 1.000000,1.000000,0.000000,0.000000
 	minrange=2 e=0 v=2003 -100001.000000
 	maxrange=2 e=0 v=2003 100001.000000
@@ -1014,12 +1021,11 @@ NumberOfNodes=73
 			C=65 0 1 62 1 2 0
 			CPC=0
 #NT=20185 0
-	PC=9
+	PC=8
 	name=1 v=5000 colormap_trafo_tuv
 	posx=1 v=2003 -68.178497
 	posy=1 v=2003 -1279.428711
 	type=2 e=0 v=5012 1
-	defaultvectwo=2 e=0 v=3001 1.000000,1.000000
 	defaultvector=2 e=0 v=3003 1.000000,1.000000,0.000000,0.000000
 	minrange=2 e=0 v=2003 -100001.000000
 	maxrange=2 e=0 v=2003 100001.000000
@@ -1032,12 +1038,11 @@ NumberOfNodes=73
 			C=66 0 1 45 0 1 0
 			CPC=0
 #NT=20185 0
-	PC=9
+	PC=8
 	name=1 v=5000 dirtmap_trafo_tuv
 	posx=1 v=2003 -67.678497
 	posy=1 v=2003 -922.928833
 	type=2 e=0 v=5012 1
-	defaultvectwo=2 e=0 v=3001 1.000000,1.000000
 	defaultvector=2 e=0 v=3003 1.000000,0.000000,0.000000,0.000000
 	minrange=2 e=0 v=2003 -100001.000000
 	maxrange=2 e=0 v=2003 100001.000000
@@ -1050,12 +1055,11 @@ NumberOfNodes=73
 			C=67 0 1 48 0 1 0
 			CPC=0
 #NT=20185 0
-	PC=9
+	PC=8
 	name=1 v=5000 opacitymap_trafo_tuv
 	posx=1 v=2003 -64.428497
 	posy=1 v=2003 -595.928955
 	type=2 e=0 v=5012 1
-	defaultvectwo=2 e=0 v=3001 1.000000,1.000000
 	defaultvector=2 e=0 v=3003 1.000000,1.000000,0.000000,0.000000
 	minrange=2 e=0 v=2003 -100001.000000
 	maxrange=2 e=0 v=2003 100001.000000
@@ -1068,12 +1072,11 @@ NumberOfNodes=73
 			C=68 0 1 51 0 1 0
 			CPC=0
 #NT=20185 0
-	PC=9
+	PC=8
 	name=1 v=5000 normalmap_trafo_tuv
 	posx=1 v=2003 -40.928528
 	posy=1 v=2003 -63.679016
 	type=2 e=0 v=5012 1
-	defaultvectwo=2 e=0 v=3001 1.000000,1.000000
 	defaultvector=2 e=0 v=3003 1.000000,1.000000,0.000000,0.000000
 	minrange=2 e=0 v=2003 -100001.000000
 	maxrange=2 e=0 v=2003 100001.000000
@@ -1086,12 +1089,11 @@ NumberOfNodes=73
 			C=69 0 1 54 0 1 0
 			CPC=0
 #NT=20185 0
-	PC=9
+	PC=8
 	name=1 v=5000 metallicmap_trafo_tuv
 	posx=1 v=2003 -37.571388
 	posy=1 v=2003 965.785461
 	type=2 e=0 v=5012 1
-	defaultvectwo=2 e=0 v=3001 1.000000,1.000000
 	defaultvector=2 e=0 v=3003 1.000000,1.000000,0.000000,0.000000
 	minrange=2 e=0 v=2003 -100001.000000
 	maxrange=2 e=0 v=2003 100001.000000
@@ -1104,12 +1106,11 @@ NumberOfNodes=73
 			C=70 0 1 57 0 1 0
 			CPC=0
 #NT=20185 0
-	PC=9
+	PC=8
 	name=1 v=5000 roughnessmap_trafo_tuv
 	posx=1 v=2003 -12.357229
 	posy=1 v=2003 1360.071045
 	type=2 e=0 v=5012 1
-	defaultvectwo=2 e=0 v=3001 1.000000,1.000000
 	defaultvector=2 e=0 v=3003 1.000000,1.000000,0.000000,0.000000
 	minrange=2 e=0 v=2003 -100001.000000
 	maxrange=2 e=0 v=2003 100001.000000
@@ -1122,12 +1123,11 @@ NumberOfNodes=73
 			C=71 0 1 60 0 1 0
 			CPC=0
 #NT=20185 0
-	PC=9
+	PC=8
 	name=1 v=5000 emissivemap_trafo_tuv
 	posx=1 v=2003 0.571209
 	posy=1 v=2003 1802.000610
 	type=2 e=0 v=5012 1
-	defaultvectwo=2 e=0 v=3001 1.000000,1.000000
 	defaultvector=2 e=0 v=3003 1.000000,1.000000,0.000000,0.000000
 	minrange=2 e=0 v=2003 -100001.000000
 	maxrange=2 e=0 v=2003 100001.000000
@@ -1622,7 +1622,7 @@ connections = [
 			instance_id = "abbaabba-abba-abba-abba-abbaabbaabb4" 
 		} 
 		select = [ 
-			"r" 
+			"b" 
 			] 
 		source = { 
 			instance_id = "abbaabba-abba-abba-abba-abbaabbaab13" 
@@ -1748,7 +1748,7 @@ connections = [
 			instance_id = "abbaabba-abba-abba-abba-abbaabbaabb2" 
 		} 
 		select = [ 
-			"r" 
+			"g" 
 			] 
 		source = { 
 			instance_id = "abbaabba-abba-abba-abba-abbaabbaab14" 
@@ -2196,7 +2196,7 @@ nodes = [
 					order = 61 
 				} 
 				type = "float2" 
-				value = [1.000000 1.000000] 
+				value = [0.000000 0.000000] 
 			} 
 		} 
 		id = "abbaabba-abba-abba-abba-abbaabbaab67" 
@@ -2247,7 +2247,7 @@ nodes = [
 					ui_type = "color" 
 				} 
 				type = "float3" 
-				value = [0.000000 0.000000 0.000000] 
+				value = [1.000000 1.000000 0.000000] 
 			} 
 		} 
 		id = "abbaabba-abba-abba-abba-abbaabbaab47" 
@@ -2317,7 +2317,7 @@ nodes = [
 					ui_type = "color" 
 				} 
 				type = "float3" 
-				value = [0.541096 0.541096 0.541096] 
+				value = [1.000000 0.000000 0.000000] 
 			} 
 		} 
 		id = "abbaabba-abba-abba-abba-abbaabbaab18" 
@@ -2448,7 +2448,7 @@ nodes = [
 					order = 61 
 				} 
 				type = "float2" 
-				value = [1.000000 1.000000] 
+				value = [0.000000 0.000000] 
 			} 
 		} 
 		id = "abbaabba-abba-abba-abba-abbaabbaab68" 
@@ -2499,7 +2499,7 @@ nodes = [
 					ui_type = "color" 
 				} 
 				type = "float3" 
-				value = [0.000000 0.000000 0.000000] 
+				value = [1.000000 1.000000 0.000000] 
 			} 
 		} 
 		id = "abbaabba-abba-abba-abba-abbaabbaab50" 
@@ -2687,7 +2687,7 @@ nodes = [
 					order = 61 
 				} 
 				type = "float2" 
-				value = [1.000000 1.000000] 
+				value = [0.000000 0.000000] 
 			} 
 		} 
 		id = "abbaabba-abba-abba-abba-abbaabbaab69" 
@@ -2738,7 +2738,7 @@ nodes = [
 					ui_type = "color" 
 				} 
 				type = "float3" 
-				value = [0.000000 0.000000 0.000000] 
+				value = [1.000000 1.000000 0.000000] 
 			} 
 		} 
 		id = "abbaabba-abba-abba-abba-abbaabbaab53" 
@@ -2807,7 +2807,7 @@ nodes = [
 					order = 22 
 				} 
 				type = "float" 
-				value = 0.649874 
+				value = 1.000000 
 			} 
 		} 
 		id = "abbaabba-abba-abba-abba-abbaabbaab20" 
@@ -2958,7 +2958,7 @@ nodes = [
 					order = 61 
 				} 
 				type = "float2" 
-				value = [1.000000 1.000000] 
+				value = [0.000000 0.000000] 
 			} 
 		} 
 		id = "abbaabba-abba-abba-abba-abbaabbaab70" 
@@ -3009,7 +3009,7 @@ nodes = [
 					ui_type = "color" 
 				} 
 				type = "float3" 
-				value = [0.000000 0.000000 0.000000] 
+				value = [1.000000 1.000000 0.000000] 
 			} 
 		} 
 		id = "abbaabba-abba-abba-abba-abbaabbaab56" 
@@ -3178,7 +3178,7 @@ nodes = [
 					order = 61 
 				} 
 				type = "float2" 
-				value = [1.000000 1.000000] 
+				value = [0.000000 0.000000] 
 			} 
 		} 
 		id = "abbaabba-abba-abba-abba-abbaabbaab71" 
@@ -3229,7 +3229,7 @@ nodes = [
 					ui_type = "color" 
 				} 
 				type = "float3" 
-				value = [0.000000 0.000000 0.000000] 
+				value = [1.000000 1.000000 0.000000] 
 			} 
 		} 
 		id = "abbaabba-abba-abba-abba-abbaabbaab59" 
@@ -3448,7 +3448,7 @@ nodes = [
 					order = 61 
 				} 
 				type = "float2" 
-				value = [1.000000 1.000000] 
+				value = [0.000000 0.000000] 
 			} 
 		} 
 		id = "abbaabba-abba-abba-abba-abbaabbaab72" 
@@ -3499,7 +3499,7 @@ nodes = [
 					ui_type = "color" 
 				} 
 				type = "float3" 
-				value = [0.000000 0.000000 0.000000] 
+				value = [1.000000 1.000000 0.000000] 
 			} 
 		} 
 		id = "abbaabba-abba-abba-abba-abbaabbaab62" 
@@ -3699,7 +3699,7 @@ nodes = [
 					order = 61 
 				} 
 				type = "float2" 
-				value = [1.000000 1.000000] 
+				value = [0.000000 0.000000] 
 			} 
 		} 
 		id = "abbaabba-abba-abba-abba-abbaabbaab73" 
@@ -3750,7 +3750,7 @@ nodes = [
 					ui_type = "color" 
 				} 
 				type = "float3" 
-				value = [0.000000 0.000000 0.000000] 
+				value = [1.000000 1.000000 0.000000] 
 			} 
 		} 
 		id = "abbaabba-abba-abba-abba-abbaabbaab65" 
