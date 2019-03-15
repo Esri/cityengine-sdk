@@ -149,7 +149,7 @@ MaterialInfo::MaterialInfo(adsk::Data::Handle sHandle) {
 	specularmapTrafo = getDoubleVector(sHandle, "specularmapTrafo", 5);
 }
 
-bool MaterialInfo::equals(const MaterialInfo& o) {
+const bool MaterialInfo::equals(const MaterialInfo& o) {
 	return
 		bumpMap == o.bumpMap &&
 		colormap == o.colormap &&
@@ -251,7 +251,7 @@ MStatus PRTMaterialNode::compute(const MPlug& plug, MDataBlock& block)
 		//find all existing prt materials
 		adsk::Data::Structure* fStructure = adsk::Data::Structure::structureByName(gPRTMatStructure.c_str());
 		std::set<std::string> shaderNames;
-		std::map<MObject, MaterialInfo> existinMaterialInfos;
+		std::list<std::pair<const MObject, const MaterialInfo>> existinMaterialInfos;
 		MItDependencyNodes itHwShaders(MFn::kPluginHardwareShader);
 		while (!itHwShaders.isDone())
 		{
@@ -270,8 +270,8 @@ MStatus PRTMaterialNode::compute(const MPlug& plug, MDataBlock& block)
 					if (matStream && matStream->elementCount() == 1) {
 						adsk::Data::Handle matSHandle = matStream->element(0);
 						if (!matSHandle.usesStructure(*fStructure)) continue;
-
-						existinMaterialInfos.emplace(obj, matSHandle);
+						auto p = std::pair<const MObject, const MaterialInfo>(obj, matSHandle);
+						existinMaterialInfos.push_back(p);
 					}
 				}
 			}
@@ -319,7 +319,7 @@ MStatus PRTMaterialNode::compute(const MPlug& plug, MDataBlock& block)
 						MFnDependencyNode n(obj);
 						
 						for (auto kv : existinMaterialInfos) {
-							if (kv.second.equals(matInfo)) {
+							if (matInfo.equals(kv.second)) {
 								matchingMaterial = kv.first;
 								break;
 							}

@@ -92,7 +92,7 @@ public:
 	std::vector<double> opacitymapTrafo;
 	std::vector<double> roughnessmapTrafo;
 
-	bool equals(const MaterialInfo& o);
+	const bool equals(const MaterialInfo& o);
 	static MString toMString(const std::vector<double> &d, size_t size, size_t offset);
 
 private:
