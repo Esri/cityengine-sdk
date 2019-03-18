@@ -41,7 +41,7 @@ target_link_libraries(${PRT4MAYA_TARGET} PRIVATE
 
 if(WIN32)
 	target_compile_options(${PRT4MAYA_TARGET} PRIVATE
-			-GR -GS -EHsc -Zi -c
+			-GR -GS -EHsc -Zi -c -permissive-
 			$<$<CONFIG:DEBUG>:-Gm -RTC1>)
 
 	target_compile_definitions(${PRT4MAYA_TARGET} PRIVATE

@@ -98,7 +98,7 @@ public:
 private:
 	std::string getTexture(adsk::Data::Handle sHandle, const std::string& texName);
 	std::vector<double>  getDoubleVector(adsk::Data::Handle sHandle,const std::string& name, size_t numElements);
-	double MaterialInfo::getDouble(adsk::Data::Handle sHandle, const std::string& name);
+	double getDouble(adsk::Data::Handle sHandle, const std::string& name);
 };
 
 class PRTMaterialNode : public MPxNode {
