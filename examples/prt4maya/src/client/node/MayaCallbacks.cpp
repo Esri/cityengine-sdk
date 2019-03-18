@@ -85,7 +85,40 @@ namespace {
 		L"dirtmap",
 		L"normalmap",
 		L"opacitymap",
+		L"opacitymap.mode",
 		L"specularmap"
+
+	#if PRT_VERSION_MAJOR > 1
+		// also blacklist CGA-style PBR attrs from CE 2019.0, PRT 2.x
+		,
+		L"emissive.b",
+		L"emissive.g",
+		L"emissive.r",
+		L"emissivemap.rw",
+		L"emissivemap.su",
+		L"emissivemap.sv",
+		L"emissivemap.tu",
+		L"emissivemap.tv",
+		L"metallicmap.rw",
+		L"metallicmap.su",
+		L"metallicmap.sv",
+		L"metallicmap.tu",
+		L"metallicmap.tv",
+		L"occlusionmap.rw",
+		L"occlusionmap.su",
+		L"occlusionmap.sv",
+		L"occlusionmap.tu",
+		L"occlusionmap.tv",
+		L"roughnessmap.rw",
+		L"roughnessmap.su",
+		L"roughnessmap.sv",
+		L"roughnessmap.tu",
+		L"roughnessmap.tv",
+		L"emissivemap",
+		L"metallicmap",
+		L"occlusionmap",
+		L"roughnessmap"
+	#endif
 	};
 
 } // anonymous namespace
