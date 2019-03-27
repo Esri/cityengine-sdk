@@ -1,3 +1,127 @@
+ESRI CITYENGINE SDK 2.0.YYYY CHANGELOG
+=======================================
+
+This section lists changes compared to CityEngine SDK 1.10.4198.
+
+
+General Info
+------------
+* CityEngine SDK 2.0.YYYY is used in CityEngine 2019.0 (2019.0.ZZZZ).
+
+
+Licensing
+---------
+* Removed requirement to have a CityEngine license. Technically the CityEngine SDK runs without a license now. All content of all directories is licensed under the Esri [Terms of Use](http://www.esri.com/legal/licensing-translations).
+
+
+PRT API
+-------
+* Removed FlexLicParams and LicParams structs and LicParams parameter in init() function. [CE-5608]
+* Renamed STATUS_ADAPTOR_NOT_FOUND to STATUS_STREAM_ADAPTOR_NOT_FOUND, added STATUS_RESOLVEMAP_PROVIDER_NOT_FOUND to Status. [CE-6016]
+* New CT_STRING in ContentType. [CE-6112]
+* Added AAT_BOOL_ARRAY, AAT_FLOAT_ARRAY, AAT_STR_ARRAY to AnnotationArgumentType. [CE-6116]
+* New InitialShapeBuilder member functions createInitialShape() and resetGeometry(). [CE-5407]
+* InitialShapeBuilder::setAttributes(): multiple calls are now possible per instance. [CE-5407]
+
+
+PRTX API
+--------
+* New function DataBackend::resolveBinaryData() and deprecated readURI(). [CE-6017]
+* New URIUtils::addFragment(), URIUtils::removeFragment(), URIUtils::addQuery() functions. [CE-6016]
+* New URI::hasFragment() and URI::getFragment() functions. [CE-6016]
+* Removed Adaptor class and introduced ResolveMapProvider class. [CE-6016]
+* Removed ET_ADAPTOR from ExtensionType and added ET_STREAM_ADAPTOR and ET_RESOLVEMAP_PROVIDER. [CE-6016]
+* New ExtensionManager::createResolveMapProvider() function. [CE-6016]
+* New CTString and StringDecoder classes, new DataBackend::resolveText() function. [CE-6112]
+* New types PRTUtils::AttributeMapUPtr, PRTUtils::AttributeMapBuilderUPtr, PRTUtils::ResolveMapUPtr, PRTUtils::ResolveMapBuilderUPtr. [CE-5407]
+* New URI::isFilePath() function. [CE-6402]
+* Shape: BuiltinShapeAttributes::xxx_map getters: return resolve map key instead of resolved URI (if you want the resolved URI, use the xxxMap getters of the Material class which return a Texture) [CE-6336]
+ 
+
+CGA
+---
+* New operations:
+  * `rectify` operation.
+  * `resetGeometry` operation.
+  * `setbackPerEdge` operation.
+  * `setbackToArea` operation.
+* New functions:
+  * `readTextFile` function.
+  * `geometry.boundaryLength` function.
+  * `splitString` function.
+  * `comp` function.
+  * Array util functions: `index`, `item` and `size`.
+  * Edge attribute functions: `edgeAttr.getFloat`, `edgeAttr.getString`, `edgeAttr.getBool`.
+* New attributes:
+  * Material attributes:
+    * `material.emissive.{r|g|b}`, `material.metallic`, `material.roughness`.
+    * `material.{emissive|occlusion|roughness|metallic}map` and corresponding `.{su|sv|tu|tv|rw}`.
+    * `material.opacitymap.mode`.
+* Changes to existing features:
+  * `alignScopeToAxes` operation: New axis selectors for alignment in the object coordinate system were added.
+  * `print` operation and `print` function: Support for arrays.
+  * `comp` operation: New component selector `fe` for face edges.
+  * `setback` operation: Supports individual distances per edge.
+* Bugfixes:
+  * `convexify` operation: Fixed incorrect results on shapes with holes.
+  * `softenNormals`, `setNormals(auto)` operation: Compute correct soft normals for vertices bordering a hole. This bug only appeared when the threshold angle was set to a value less than 180 degrees.
+  * `comp(v)`, `comp(e)` operation: Compute correct orientation of the scope z axis for vertex/edge components bordering a hole.
+  * `comp(v)`, `comp(e)`, `alignScopeToGeometry` operation: Fixed resulting scopes when applied on edges or vertices.
+  * `roofHip`, `roofGable` operation: Corrected the resulting order and first edge of roof faces if the initial shape contained collinear vertices.
+  * `roofGable` operation:
+    * Fixed a crash in subsequent operations or functions if the initial shape contained near-identical vertices.
+    * Corrected trim plane generation if the initial shape contained several faces.
+  * `cleanupGeometry` operation: Fixed a crash in vertex merge. This happened when hole vertices were within tolerance to vertices that belonged to both another hole and an encircling face.
+  * `setback` operation: Enhanced result at concave vertices.
+
+
+Built-In Codecs Changes and Fixes
+---------------------------------
+* New Decoders:
+** Added GLTF Decoder. [CE-5946]
+* New Encoders:
+** Added GLTF Encoder. [CE-5947]
+* All Encoders:
+** Speedup of vertex/normals/texture coordinates merging in exotic cases. [CE-5936]
+* Unreal Encoder:
+** Correctly handle textures with same name. [CE-5886]
+** Improve actor translation values. [CE-5875]
+** Added native metadata export. [CE-5884]
+** Added native terrain export API. [CE-6147]
+** Added default material selection if not set by CGA. [CE-6030]
+** Fixed wrong materials for instanced meshes. [CE-6378]
+** Support for PBR material properties. [CE-6120]
+** Updated datasmith library for Unreal 4.22. [CE-6424]
+** Fixed hanger on crash. [CE-6011]
+* OBJ/MTL Decoder:
+** Speedup for large material counts.
+* I3S/SLPK Encoder:
+** Update to SLPK Version 1.6. [CE-5950]
+** Fixed faulty texture mime types. [CE-5578]
+** Removed DDS Texture option (always writes them). [CE-6184]
+** Writes node pages, speeds up the scene tree parsing. [CE-6178]
+** Improved speed for DDS compression. [CE-6034]
+** Reduced memory consumption. [CE-6035]
+** Aligned MBS center and OBB center. [CE-6290] 
+** Fixed crash with non-square textures. [CE-6475]
+* FBX Encoder:
+** Only add unification extension to material name when needed. [CE-6335]
+* FBX Decoder:
+** Fixed crash due to invalid materials. [CE-6036]
+* Alembic Encoder
+** Alembic library is statically linked. [CE-6226]
+
+
+Misc Changes and Fixes
+----------------------
+* Removed FlexLM library. [CE-5608]
+* Fixed crash in ResolveMap::getString() if status argument is omitted. [CE-6187]
+* PRTUtils::ObjectDestroyer: fixed crash on nullptr.
+* Fixed random-based CGA attr initialization on 32bit (behaves the same as on 64bit now). [CE-6124]
+* Removed an invalid key which was returned in prtx::Shape::getKeys(). [CE-6336] 
+* Fixed crash in prtx::Geometry access via Attributable interface. [CE-6336]  
+
+
 ESRI CITYENGINE SDK 1.10.4198 CHANGELOG
 =======================================
 
@@ -74,7 +198,7 @@ PRTX API
 
 CGA
 ---
-*  Behavior change in "random" evaluation: Fixed a bug in the evaluation of attr/const functions where the random generator could produce unexpected values if attrs/const functions are mutual dependent.
+* Behavior change in "random" evaluation: Fixed a bug in the evaluation of attr/const functions where the random generator could produce unexpected values if attrs/const functions are mutual dependent.
 * New operation: "insertAlongUV"
 * New function: "assetNamingInfo"
 * Changes to existing functions:

@@ -42,8 +42,8 @@ INSTALLATION INSTRUCTIONS FOR CITYENGINE
 LICENSING
 ---------
 
-Copyright (c) 2018 Esri
+Copyright (c) 2019 Esri
 
 You may not use the content of this repository except in compliance with the following Licenses:
-  1. All content of all directories **except "examples"** is licensed under the CityEngine EULA, see [EULA.pdf](EULA.pdf).
+  1. All content of all directories **except "examples"** is licensed under the Esri [Terms of Use](http://www.esri.com/legal/licensing-translations).
   2. All content in the "examples" directory tree is licensed under the APACHE 2.0 license. You may obtain a copy of this license at http://www.apache.org/licenses/LICENSE-2.0.

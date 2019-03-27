@@ -12,6 +12,7 @@ This document explains how to install the CityEngine SDK and how to work with th
 The archives are available for download at the corresponding github release page. See installation instructions below for details.
 
 ## CityEngine SDK Releases
+- [v2.0.YYYY (2019-XX-XX, CityEngine 2019.0)](https://github.com/Esri/esri-cityengine-sdk/releases/tag/2.0.YYYY)
 - [v1.10.4198 (2018-09-17, CityEngine 2018.1)](https://github.com/Esri/esri-cityengine-sdk/releases/tag/1.10.4198)
 - [v1.10.4051 (2018-05-11, CityEngine 2018.0)](https://github.com/Esri/esri-cityengine-sdk/releases/tag/1.10.4051)
 - [v1.9.3786 (2017-11-06, CityEngine 2017.1)](https://github.com/Esri/esri-cityengine-sdk/releases/tag/1.9.3786)
@@ -57,7 +58,7 @@ A quick overview:
 Please note that the individual example READMEs may include further requirements.
 
 #### All Platforms
-* To load custom encoders built with the latest SDK, CityEngine 2018.1 is required. For older versions of CityEngine an older version of the SDK might have to be used, see list above.
+* To load custom encoders built with the latest SDK, CityEngine 2019.0 is required. For older versions of CityEngine an older version of the SDK might have to be used, see list above.
 * License for matching CityEngine
 * CMake 3.13 or later (http://www.cmake.org)
 
@@ -96,9 +97,9 @@ Anyone and everyone is welcome to contribute and to extend and improve the examp
 
 ## Licensing
 
-Copyright (c) 2018 Esri
+Copyright (c) 2019 Esri
 
 You may not use the content of this repository except in compliance with the following Licenses:
-  1. All content of all directories **except "examples"** is licensed under the CityEngine EULA, see [EULA.pdf](EULA.pdf).
+  1. All content of all directories **except "examples"** is licensed under the Esri [Terms of Use](http://www.esri.com/legal/licensing-translations).
   2. All content in the "examples" directory tree is licensed under the APACHE 2.0 license. You may obtain a copy of this license at http://www.apache.org/licenses/LICENSE-2.0.
   3. The example data is licensed by the "ESRI Attribution and Licensing Agreement".
