@@ -86,11 +86,7 @@ namespace {
 		L"normalmap",
 		L"opacitymap",
 		L"opacitymap.mode",
-		L"specularmap"
-
-	#if PRT_VERSION_MAJOR > 1
-		// also blacklist CGA-style PBR attrs from CE 2019.0, PRT 2.x
-		,
+		L"specularmap",
 		L"emissive.b",
 		L"emissive.g",
 		L"emissive.r",
@@ -118,7 +114,6 @@ namespace {
 		L"metallicmap",
 		L"occlusionmap",
 		L"roughnessmap"
-	#endif
 	};
 
 } // anonymous namespace
