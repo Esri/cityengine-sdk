@@ -319,8 +319,6 @@ void MayaCallbacks::createMesh() {
 			if (MATERIAL_ATTRIBUTE_BLACKLIST.count(key) > 0)
 				continue;
 
-			adsk::Data::Member::eDataType type;
-
 			size_t maxStringLengthTmp = maxStringLength;
 			prt::StringUtils::toOSNarrowFromUTF16(key.c_str(), tmp, &maxStringLengthTmp);
 

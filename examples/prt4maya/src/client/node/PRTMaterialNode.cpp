@@ -149,7 +149,7 @@ MaterialInfo::MaterialInfo(adsk::Data::Handle sHandle) {
 	specularmapTrafo = getDoubleVector(sHandle, "specularmapTrafo", 5);
 }
 
-const bool MaterialInfo::equals(const MaterialInfo& o) {
+bool MaterialInfo::equals(const MaterialInfo& o) const {
 	return
 		bumpMap == o.bumpMap &&
 		colormap == o.colormap &&
@@ -261,7 +261,6 @@ MStatus PRTMaterialNode::compute(const MPlug& plug, MDataBlock& block)
 			const adsk::Data::Associations* materialMetadata = n.metadata(&status);
 			MCHECK(status);
 
-			bool matches = false;
 			if (materialMetadata) {
 				adsk::Data::Associations materialAssociations(materialMetadata);
 				adsk::Data::Channel* matChannel = materialAssociations.findChannel(gPRTMatChannel);
@@ -373,7 +372,6 @@ MStatus PRTMaterialNode::compute(const MPlug& plug, MDataBlock& block)
 						MObject obj = itHwShaders.item();
 						MFnDependencyNode n(obj);
 
-						auto r = n.name() == shaderNameMstr;
 						if (n.name() == shaderNameMstr) {
 							adsk::Data::Associations newMetadata;
 							MCHECK(stat);
