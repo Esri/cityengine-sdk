@@ -14,6 +14,7 @@ import com.esri.zrh.jenkins.ce.PrtAppPipelineLibrary
 // -- GLOBAL DEFINITIONS
 
 @Field final String REPO         = cepl.GIT_REPO_CESDK
+@Field final String REPO_CREDS   = 'esri-cityengine-sdk-deployer-key'
 @Field final String SOURCES      = "esri-cityengine-sdk.git/examples"
 @Field final String BUILD_TARGET = 'package'
 
@@ -76,7 +77,7 @@ def taskBuildPRT4CMD(cfg) {
 		[ key: 'PRT4CMD_VERSION_MINOR', val: 0 ],
 		[ key: 'PRT4CMD_VERSION_MICRO', val: env.BUILD_NUMBER ]
 	]
-	papl.buildConfig(REPO, myBranch, "${SOURCES}/${appName}/src", BUILD_TARGET, cfg, DEPS, defs)
+	papl.buildConfig(REPO, myBranch, "${SOURCES}/${appName}/src", BUILD_TARGET, cfg, DEPS, defs, REPO_CREDS)
 	papl.publish(appName, myBranch, "esri_${appName}*.zip", { "0.0.${env.BUILD_NUMBER}" }, cfg)
 }
 
@@ -87,7 +88,7 @@ def taskBuildSTLENC(cfg) {
 		[ key: 'prt_DIR',              val: PrtAppPipelineLibrary.Dependencies.CESDK.p ],
 		[ key: 'STLENC_VERSION_MICRO', val: env.BUILD_NUMBER ]
 	]
-	papl.buildConfig(REPO, myBranch, "${SOURCES}/${appName}/src", BUILD_TARGET, cfg, DEPS, defs)
+	papl.buildConfig(REPO, myBranch, "${SOURCES}/${appName}/src", BUILD_TARGET, cfg, DEPS, defs, REPO_CREDS)
 	papl.publish(appName, myBranch, "esri_${appName}*.zip", { "0.0.${env.BUILD_NUMBER}" }, cfg)
 }
 
@@ -98,7 +99,7 @@ def taskBuildSTLDEC(cfg) {
 		[ key: 'prt_DIR',              val: PrtAppPipelineLibrary.Dependencies.CESDK.p ],
 		[ key: 'STLDEC_VERSION_MICRO', val: env.BUILD_NUMBER ]
 	]
-	papl.buildConfig(REPO, myBranch, "${SOURCES}/${appName}/src", BUILD_TARGET, cfg, DEPS, defs)
+	papl.buildConfig(REPO, myBranch, "${SOURCES}/${appName}/src", BUILD_TARGET, cfg, DEPS, defs, REPO_CREDS)
 	papl.publish(appName, myBranch, "esri_${appName}*.zip", { "0.0.${env.BUILD_NUMBER}" }, cfg)
 }
 
@@ -112,7 +113,7 @@ def taskBuildPRT4MAYA(cfg) {
 		[ key: 'PRT4MAYA_VERSION_MINOR', val: 0 ],
 		[ key: 'PRT4MAYA_VERSION_MICRO', val: env.BUILD_NUMBER ]
 	]
-	papl.buildConfig(REPO, myBranch, "${SOURCES}/${appName}/src", BUILD_TARGET, cfg, DEPS, defs)
+	papl.buildConfig(REPO, myBranch, "${SOURCES}/${appName}/src", BUILD_TARGET, cfg, DEPS, defs, REPO_CREDS)
 	papl.publish(appName, myBranch, "esri_${appName}*.zip", { "0.0.${env.BUILD_NUMBER}" }, cfg)
 }
 
