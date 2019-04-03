@@ -4,12 +4,12 @@
  * This example demonstrates the usage of the PRTX interface
  * to write custom decoders.
  *
- * See README.md in http://github.com/esri/esri-cityengine-sdk for build instructions.
+ * See README.md in https://github.com/Esri/esri-cityengine-sdk for build instructions.
  *
  * Written by Simon Haegler
  * Esri R&D Center Zurich, Switzerland
  *
- * Copyright 2017 (c) Esri R&D Center Zurich
+ * Copyright 2012-2019 (c) Esri R&D Center Zurich
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.

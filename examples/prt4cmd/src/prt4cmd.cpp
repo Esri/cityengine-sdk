@@ -3,9 +3,9 @@
  *
  * This example demonstrates the main functionality of the Procedural Runtime API.
  *
- * See README_<platform>.md for build instructions.
+ * See README.md in https://github.com/Esri/esri-cityengine-sdk for build instructions.
  *
- * Copyright (c) 2012-2017 Esri R&D Center Zurich
+ * Copyright (c) 2012-2019 Esri R&D Center Zurich
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
