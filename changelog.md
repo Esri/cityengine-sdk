@@ -35,7 +35,7 @@ PRTX API
 * New CTString and StringDecoder classes, new DataBackend::resolveText() function. [CE-6112]
 * New types PRTUtils::AttributeMapUPtr, PRTUtils::AttributeMapBuilderUPtr, PRTUtils::ResolveMapUPtr, PRTUtils::ResolveMapBuilderUPtr. [CE-5407]
 * New URI::isFilePath() function. [CE-6402]
-* Shape: BuiltinShapeAttributes::xxx_map getters: return resolve map key instead of resolved URI (if you want the resolved URI, use the xxxMap getters of the Material class which return a Texture) [CE-6336]
+* Shape: BuiltinShapeAttributes::xxx_map getters: return resolve map key instead of resolved URI (if you want the resolved URI, use the xxxMap getters of the Material class which return a Texture). [CE-6336]
  
 
 CGA
@@ -78,38 +78,38 @@ CGA
 Built-In Codecs Changes and Fixes
 ---------------------------------
 * New Decoders:
-** Added GLTF Decoder. [CE-5946]
+  * Added GLTF Decoder. [CE-5946]
 * New Encoders:
-** Added GLTF Encoder. [CE-5947]
+  * Added GLTF Encoder. [CE-5947]
 * All Encoders:
-** Speedup of vertex/normals/texture coordinates merging in exotic cases. [CE-5936]
+  * Speedup of vertex/normals/texture coordinates merging in exotic cases. [CE-5936]
 * Unreal Encoder:
-** Correctly handle textures with same name. [CE-5886]
-** Improve actor translation values. [CE-5875]
-** Added native metadata export. [CE-5884]
-** Added native terrain export API. [CE-6147]
-** Added default material selection if not set by CGA. [CE-6030]
-** Fixed wrong materials for instanced meshes. [CE-6378]
-** Support for PBR material properties. [CE-6120]
-** Updated datasmith library for Unreal 4.22. [CE-6424]
-** Fixed hanger on crash. [CE-6011]
+  * Correctly handle textures with same name. [CE-5886]
+  * Improve actor translation values. [CE-5875]
+  * Added native metadata export. [CE-5884]
+  * Added native terrain export API. [CE-6147]
+  * Added default material selection if not set by CGA. [CE-6030]
+  * Fixed wrong materials for instanced meshes. [CE-6378]
+  * Support for PBR material properties. [CE-6120]
+  * Updated datasmith library for Unreal 4.22. [CE-6424]
+  * Fixed hanger on crash. [CE-6011]
 * OBJ/MTL Decoder:
-** Speedup for large material counts.
+  * Speedup for large material counts.
 * I3S/SLPK Encoder:
-** Update to SLPK Version 1.6. [CE-5950]
-** Fixed faulty texture mime types. [CE-5578]
-** Removed DDS Texture option (always writes them). [CE-6184]
-** Writes node pages, speeds up the scene tree parsing. [CE-6178]
-** Improved speed for DDS compression. [CE-6034]
-** Reduced memory consumption. [CE-6035]
-** Aligned MBS center and OBB center. [CE-6290] 
-** Fixed crash with non-square textures. [CE-6475]
+  * Update to SLPK Version 1.6. [CE-5950]
+  * Fixed faulty texture mime types. [CE-5578]
+  * Removed DDS Texture option (always writes them). [CE-6184]
+  * Writes node pages, speeds up the scene tree parsing. [CE-6178]
+  * Improved speed for DDS compression. [CE-6034]
+  * Reduced memory consumption. [CE-6035]
+  * Aligned MBS center and OBB center. [CE-6290]
+  * Fixed crash with non-square textures. [CE-6475]
 * FBX Encoder:
-** Only add unification extension to material name when needed. [CE-6335]
+  * Only add unification extension to material name when needed. [CE-6335]
 * FBX Decoder:
-** Fixed crash due to invalid materials. [CE-6036]
+  * Fixed crash due to invalid materials. [CE-6036]
 * Alembic Encoder
-** Alembic library is statically linked. [CE-6226]
+  * Alembic library is statically linked. [CE-6226]
 
 
 Misc Changes and Fixes
