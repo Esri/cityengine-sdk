@@ -137,8 +137,8 @@ void MayaCallbacks::setUVs(const double* u, const double* v, size_t size) {
 	mU.clear();
 	mV.clear();
 	for (size_t i = 0; i < size; ++i) {
-		mU.append(u[i]);
-		mV.append(v[i]);
+		mU.append(static_cast<float>(u[i])); //maya mesh only supports float uvs
+		mV.append(static_cast<float>(v[i]));
 	}
 }
 
@@ -224,9 +224,9 @@ void MayaCallbacks::createMesh() {
 	outputMesh.copyInPlace(oMesh);
 
 	// create material metadata
-	size_t maxStringLength = 400;
-	size_t maxFloatArrayLength = 5;
-	size_t maxStringArrayLength = 2;
+	unsigned int maxStringLength = 400;
+	unsigned int maxFloatArrayLength = 5;
+	unsigned int maxStringArrayLength = 2;
 
 	adsk::Data::Structure* fStructure;	  // Structure to use for creation
 	fStructure = adsk::Data::Structure::structureByName(gPRTMatStructure.c_str());
@@ -248,8 +248,8 @@ void MayaCallbacks::createMesh() {
 				continue;
 
 			adsk::Data::Member::eDataType type;
-			size_t size = 0;
-			size_t arrayLength = 1;
+			unsigned int size = 0;
+			unsigned int arrayLength = 1;
 
 			switch (m->getType(key)) {
 			case prt::Attributable::PT_BOOL: type = adsk::Data::Member::kBoolean; size = 1;  break;
@@ -271,7 +271,7 @@ void MayaCallbacks::createMesh() {
 			}
 
 			if (size > 0) {
-				for (int i=0; i<arrayLength; i++) {
+				for (unsigned int i=0; i<arrayLength; i++) {
 					size_t maxStringLengthTmp = maxStringLength;
 					char* tmp = new char[maxStringLength];
 					std::wstring keyToUse = key;
@@ -335,19 +335,19 @@ void MayaCallbacks::createMesh() {
 				prt::StringUtils::toOSNarrowFromUTF16(mat->getString(key).c_str(), (char*)handle.asUInt8(), &maxStringLengthTmp);
 				break;
 			case prt::Attributable::PT_BOOL_ARRAY:
-				for (int i = 0; i < mat->getBoolArray(key).size() && i < maxStringLength; i++)
+				for (unsigned int i = 0; i < mat->getBoolArray(key).size() && i < maxStringLength; i++)
 					handle.asBoolean()[i] = mat->getBoolArray(key)[i];
 				break;
 			case prt::Attributable::PT_INT_ARRAY:
-				for (int i = 0; i < mat->getIntArray(key).size() && i < maxStringLength; i++)
+				for (unsigned int i = 0; i < mat->getIntArray(key).size() && i < maxStringLength; i++)
 					handle.asInt32()[i] = mat->getIntArray(key)[i];
 				break;
 			case prt::Attributable::PT_FLOAT_ARRAY:
-				for (int i = 0; i < mat->getFloatArray(key).size() && i < maxFloatArrayLength; i++)
+				for (unsigned int i = 0; i < mat->getFloatArray(key).size() && i < maxFloatArrayLength; i++)
 					handle.asDouble()[i] = mat->getFloatArray(key)[i];
 				break;
 			case prt::Attributable::PT_STRING_ARRAY: {
-				for (int i = 0; i < mat->getStringArray(key).size() && i < maxStringLength; i++)
+				for (unsigned int i = 0; i < mat->getStringArray(key).size() && i < maxStringLength; i++)
 				{
 					if (mat->getStringArray(key)[i].size() == 0)
 						continue;
@@ -375,7 +375,7 @@ void MayaCallbacks::createMesh() {
 				const auto& ta = mat->getTextureArray(key);
 				prtx::WStringVector pa(ta.size());
 				std::transform(ta.begin(), ta.end(), pa.begin(), uriToPath);
-				for (int i = 0; i < mat->getTextureArray(key).size() && i < maxStringArrayLength; i++)
+				for (unsigned int i = 0; i < mat->getTextureArray(key).size() && i < maxStringArrayLength; i++)
 				{
 					if (pa[i].size() == 0)
 						continue;

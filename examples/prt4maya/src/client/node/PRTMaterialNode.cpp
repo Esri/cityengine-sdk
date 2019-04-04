@@ -75,7 +75,7 @@ MStatus PRTMaterialNode::initialize()
 MString MaterialInfo::toMString(const std::vector<double> &d, size_t size, size_t offset)
 {
 	MString colString;
-	for (int i = offset; i < d.size() && i < offset+size; i++)
+	for (size_t i = offset; i < d.size() && i < offset+size; i++)
 	{
 		colString += d[i];
 		colString += " ";
@@ -255,7 +255,7 @@ MStatus PRTMaterialNode::compute(const MPlug& plug, MDataBlock& block)
 		MItDependencyNodes itHwShaders(MFn::kPluginHardwareShader);
 		while (!itHwShaders.isDone())
 		{
-			MObject obj = itHwShaders.item();
+			MObject obj = itHwShaders.thisNode();
 			MFnDependencyNode n(obj);
 			shaderNames.insert(std::string(n.name().asChar()));
 			const adsk::Data::Associations* materialMetadata = n.metadata(&status);
@@ -315,7 +315,7 @@ MStatus PRTMaterialNode::compute(const MPlug& plug, MDataBlock& block)
 					MObject matchingMaterial = MObject::kNullObj;
 					while (!it.isDone())
 					{
-						MObject obj = it.item();
+						MObject obj = it.thisNode();
 						MFnDependencyNode n(obj);
 						
 						for (auto kv : existinMaterialInfos) {
@@ -370,7 +370,7 @@ MStatus PRTMaterialNode::compute(const MPlug& plug, MDataBlock& block)
 					MItDependencyNodes itHwShaders(MFn::kPluginHardwareShader);
 					while (!itHwShaders.isDone())
 					{
-						MObject obj = itHwShaders.item();
+						MObject obj = itHwShaders.thisNode();
 						MFnDependencyNode n(obj);
 
 						if (n.name() == shaderNameMstr) {
