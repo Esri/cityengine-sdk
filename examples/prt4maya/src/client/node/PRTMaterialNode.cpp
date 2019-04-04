@@ -297,6 +297,7 @@ MStatus PRTMaterialNode::compute(const MPlug& plug, MDataBlock& block)
 				mShadingCmd += "string $shName;\n";
 				mShadingCmd += "string $colormap;\n";
 				mShadingCmd += "string $nodeName;\n";
+				mShadingCmd += "int $shadingNodeIndex;\n";
 
 				wchar_t* buf = new wchar_t[512];
 
@@ -394,6 +395,11 @@ MStatus PRTMaterialNode::compute(const MPlug& plug, MDataBlock& block)
 					mShadingCmd += "sets -empty -renderable true -noSurfaceShader true -name $sgName;\n";
 					mShadingCmd += "setAttr ($shName+\".initgraph\") true;\n";
 					mShadingCmd += "connectAttr -force ($shName + \".outColor\") ($sgName + \".surfaceShader\");\n";
+					
+					if (matInfo.opacityMap.size() == 0 && matInfo.opacity >= 1.0) {
+						mShadingCmd += "$shadingNodeIndex = `shaderfx -sfxnode $shName -getNodeIDByName \"Standard_Base\"`;\n";
+						mShadingCmd += "shaderfx - sfxnode $shName - edit_stringlist $shadingNodeIndex blendmode 0;\n";
+					}
 
 					//ignored: ambientColor, specularColor
 					setAttribute(mShadingCmd, matInfo.diffuseColor, 3, "diffuse_color");
