@@ -528,7 +528,7 @@ MStatus PRTModifierEnum::fill(const prt::Annotation* annot) {
 template<typename T> T PRTModifierAction::getPlugValueAndRemoveAttr(MFnDependencyNode & node, const MString & briefName, const T& defaultValue) {
 	T plugValue = defaultValue;
 	if (node.hasAttribute(briefName)) {
-		const MPlug plug = node.findPlug(briefName);
+		const MPlug plug = node.findPlug(briefName, true);
 		if (plug.isDynamic())
 		{
 			T d;
