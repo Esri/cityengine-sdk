@@ -21,7 +21,14 @@ proc string prtControlName(string $attr) {
 proc string prtAttrName(string $attr) {
 	return `substitute "^[^.]*\\." $attr ""`;
 }  
-  
+
+global proc prtReloadRPK(string $attr) {
+	$node = prtNode($attr);
+	$attrCurrentRule = $node + ".currentRule_Package";
+	setAttr -type "string" $attrCurrentRule "";
+	dgdirty $node;
+}
+
 global proc int prtRPKChange(string $attr, string $varname) {
 	$varname = prtPlug($varname);
 	$oldpkg  = eval("$tmp=$" + $varname);
@@ -55,12 +62,13 @@ global proc prtShowFileDialog(string $attr) {
 global proc prtFileBrowse(string $attr, string $varname){
 	$varname = prtPlug($varname);
 	setUITemplate -pst attributeEditorTemplate;
-	rowLayout -nc 3;  
+	rowLayout -nc 4;  
 	text -label `prtAttrName($attr)`;
 	string $control = prtControlName($attr);
 	textField -fileName `getAttr $attr` $control;  	
 	connectControl -fileName $control $attr;
-	symbolButton -image "navButtonBrowse.xpm" -c ("prtShowFileDialog(\"" + $attr + "\")") ($control + "_browse");
+	symbolButton -image "navButtonBrowse.xpm" -c ("prtShowFileDialog(\"" + $attr + "\")") ($control + "_browse");	
+	button -label "Reload" -command ("prtReloadRPK(\"" + $attr + "\")");	
 	setParent ..;
 	setUITemplate -ppt; 
 }  

@@ -19,8 +19,8 @@ public:
 public:
 
 	static MObject      rulePkg;
+	static MObject      currentRulePkg;
 	static MTypeId      id;
-	MString             currentRulePkg;
 
 	PRTModifierAction   fPRTModifierAction;
 
