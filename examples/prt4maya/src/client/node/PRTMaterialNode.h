@@ -53,6 +53,7 @@
 #include <maya/MDagPath.h>
 #include <maya/MFnSet.h>
 #include <maya/MItMeshPolygon.h>
+#include <maya/adskDataHandle.h>
 
 #include <cmath>
 #include <cstdlib>
@@ -65,16 +66,57 @@
 const std::string gPRTMatStructure = "prtMaterialStructure";
 const std::string gPRTMatChannel = "prtMaterialChannel";
 const std::string gPRTMatStream = "prtMaterialStream";
-const std::string gPRTMatMemberTexture = "texture";
-const std::string gPRTMatMemberColor = "color";
 const std::string gPRTMatMemberFaceStart = "faceIndexStart";
 const std::string gPRTMatMemberFaceEnd = "faceIndexEnd";
+
+class MaterialInfo {
+public:
+	MaterialInfo(adsk::Data::Handle sHandle);
+
+	std::string bumpMap;
+	std::string colormap;
+	std::string dirtmap;
+	std::string emissiveMap;
+	std::string metallicMap;
+	std::string normalMap;
+	std::string occlusionMap;
+	std::string opacityMap;
+	std::string roughnessMap;
+	std::string specularMap;
+
+	double opacity;
+	double metallic;
+	double roughness;
+	
+	std::vector<double> ambientColor;
+	std::vector<double> diffuseColor;
+	std::vector<double> emissiveColor;
+	std::vector<double> specularColor;
+
+	std::vector<double> specularmapTrafo;
+	std::vector<double> bumpmapTrafo;
+	std::vector<double> colormapTrafo;
+	std::vector<double> dirtmapTrafo;	
+	std::vector<double> emissivemapTrafo;
+	std::vector<double> metallicmapTrafo;
+	std::vector<double> normalmapTrafo;
+	std::vector<double> occlusionmapTrafo;
+	std::vector<double> opacitymapTrafo;
+	std::vector<double> roughnessmapTrafo;
+
+	bool equals(const MaterialInfo& o) const;
+	static MString toMString(const std::vector<double> &d, size_t size, size_t offset);
+
+private:
+	std::string getTexture(adsk::Data::Handle sHandle, const std::string& texName);
+	std::vector<double>  getDoubleVector(adsk::Data::Handle sHandle,const std::string& name, size_t numElements);
+	double getDouble(adsk::Data::Handle sHandle, const std::string& name);
+};
 
 class PRTMaterialNode : public MPxNode {
 
 public:
 	PRTMaterialNode() = default;
-	virtual ~PRTMaterialNode();
 
 	static  void*       creator();
 	static  MStatus     initialize();
@@ -87,8 +129,11 @@ public:
 	static  MObject aOutMesh;
 
 private:
-	static MStringArray theShadingGroups;
-	MString createShadingGroup(const wchar_t* name, MString* shadingCmd);
+	void setAttribute(MString &mShadingCmd, std::vector<double> vec, size_t elements, std::string target);
+	void setAttribute(MString &mShadingCmd, std::vector<double> vec, size_t elements, size_t offset, std::string target);
+	void setTexture(MString &mShadingCmd, std::string tex, std::string target);
+	void setAttribute(MString &mShadingCmd, double vec, std::string target);
+	static MString sfxFile;
 }; // class PRTMaterialNode
 
 

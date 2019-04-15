@@ -61,8 +61,10 @@ global proc createPrtMaterialNode() {
 	for($node in $initialShapes) {
 		$prtMaterialName = `createNode prtMaterial`;
 		$im =  `connectionInfo -sfd ($node +".inMesh")`;
-		connectAttr -force ( $prtMaterialName + ".outMesh" ) ( $node + ".inMesh" );
-		connectAttr -force ( $im ) ( $prtMaterialName + ".inMesh" );
+		if (size($im)>0) {
+			connectAttr -force ( $prtMaterialName + ".outMesh" ) ( $node + ".inMesh" );
+			connectAttr -force ( $im ) ( $prtMaterialName + ".inMesh" );
+		}
 	}
 }
 

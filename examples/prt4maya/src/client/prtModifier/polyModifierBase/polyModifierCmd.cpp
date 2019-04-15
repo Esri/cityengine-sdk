@@ -279,7 +279,7 @@ void polyModifierCmd::collectNodeState()
 	MFnDependencyNode depNodeFn;
 	depNodeFn.setObject( meshNodeShape );
 
-	MPlug inMeshPlug = depNodeFn.findPlug( "inMesh" );
+	MPlug inMeshPlug = depNodeFn.findPlug( "inMesh", true );
 	fHasHistory = inMeshPlug.isConnected();
 
 	// Tweaks exist only if the multi "pnts" attribute contains plugs
@@ -287,7 +287,7 @@ void polyModifierCmd::collectNodeState()
 	// search algorithm.
 	//
 	fHasTweaks = false;
-	MPlug tweakPlug = depNodeFn.findPlug( "pnts" );
+	MPlug tweakPlug = depNodeFn.findPlug( "pnts", true);
 	if( !tweakPlug.isNull() )
 	{
 		// ASSERT: tweakPlug should be an array plug!
@@ -376,7 +376,7 @@ MStatus polyModifierCmd::processMeshNode( modifyPolyData& data )
 				   "0 < dagNodeFn.parentCount() -- meshNodeshape has no parent transform" );
 	data.meshNodeTransform = dagNodeFn.parent(0);
 	
-	data.meshNodeDestPlug = dagNodeFn.findPlug( "inMesh" );
+	data.meshNodeDestPlug = dagNodeFn.findPlug( "inMesh", true);
 	data.meshNodeDestAttr = data.meshNodeDestPlug.attribute();
 
 	return status;
@@ -473,7 +473,7 @@ MStatus polyModifierCmd::processUpstreamNode( modifyPolyData& data )
 		// Get the upstream node source attribute
 		//
 		data.upstreamNodeSrcAttr = dagNodeFn.attribute( "outMesh" );
-		data.upstreamNodeSrcPlug = dagNodeFn.findPlug( "outMesh", &status );
+		data.upstreamNodeSrcPlug = dagNodeFn.findPlug( "outMesh", true , &status );
 
 		// Remove the duplicated transform node (clean up)
 		//
@@ -566,7 +566,7 @@ MStatus polyModifierCmd::processTweaks( modifyPolyData& data )
 		tweakNodeTweakAttr = depNodeFn.attribute( "tweak" );
 
 		depNodeFn.setObject( data.meshNodeShape );
-		meshTweakPlug = depNodeFn.findPlug( "pnts" );
+		meshTweakPlug = depNodeFn.findPlug( "pnts", true);
 
 		// ASSERT: meshTweakPlug should be an array plug!
 		//
@@ -742,7 +742,7 @@ MStatus polyModifierCmd::processTweaks( modifyPolyData& data )
 		if( !fHasHistory && fHasRecordHistory )
 		{
 			depNodeFn.setObject( data.upstreamNodeShape );
-			upstreamTweakPlug = depNodeFn.findPlug( "pnts" );
+			upstreamTweakPlug = depNodeFn.findPlug( "pnts", true);
 
 			if( !upstreamTweakPlug.isNull() )
 			{
@@ -879,7 +879,7 @@ MStatus polyModifierCmd::cacheMeshData()
 	dupMeshDagPath.extendToShape();
 
 	depNodeFn.setObject( dupMeshDagPath.node() );
-	dupMeshNodeOutMeshPlug = depNodeFn.findPlug( "outMesh", &status );
+	dupMeshNodeOutMeshPlug = depNodeFn.findPlug( "outMesh", true, &status );
 	MCheckStatus( status, "Could not retrieve outMesh" );
 
 	// Retrieve the meshData
@@ -927,7 +927,7 @@ MStatus polyModifierCmd::cacheMeshTweaks()
 		unsigned i;
 
 		depNodeFn.setObject( meshNode );
-		meshTweakPlug = depNodeFn.findPlug( "pnts" );
+		meshTweakPlug = depNodeFn.findPlug( "pnts", true);
 
 		// ASSERT: meshTweakPlug should be an array plug!
 		//
@@ -991,13 +991,13 @@ MStatus polyModifierCmd::undoCachedMesh()
 
 		depNodeFn.setObject( meshNodeShape );
 		meshNodeName = depNodeFn.name();
-		meshNodeDestPlug = depNodeFn.findPlug( "inMesh", &status );
+		meshNodeDestPlug = depNodeFn.findPlug( "inMesh", true, &status );
 		MCheckStatus( status, "Could not retrieve inMesh" );
-		meshNodeOutMeshPlug = depNodeFn.findPlug( "outMesh", &status );
+		meshNodeOutMeshPlug = depNodeFn.findPlug( "outMesh", true, &status );
 		MCheckStatus( status, "Could not retrieve outMesh" );
 
 		depNodeFn.setObject( dupMeshNodeShape );
-		dupMeshNodeSrcPlug = depNodeFn.findPlug( "outMesh", &status );
+		dupMeshNodeSrcPlug = depNodeFn.findPlug( "outMesh", true, &status );
 		MCheckStatus( status, "Could not retrieve outMesh" );
 
 		// For the case with tweaks, we cannot write the mesh directly back onto
@@ -1055,7 +1055,7 @@ MStatus polyModifierCmd::undoTweakProcessing()
 
 		meshNodeShape = fDagPath.node();
 		depNodeFn.setObject( meshNodeShape );
-		meshTweakPlug = depNodeFn.findPlug( "pnts" );
+		meshTweakPlug = depNodeFn.findPlug( "pnts", true);
 
 		MStatusAssert( (meshTweakPlug.isArray()),
 					   "meshTweakPlug.isArray() -- meshTweakPlug is not an array plug" );
@@ -1102,7 +1102,7 @@ MStatus polyModifierCmd::undoDirectModifier()
 		// Retrieve the inMesh and name of our mesh node (for the DG eval)
 		//
 		depNodeFn.setObject( meshNode );
-		MPlug meshNodeInMeshPlug = depNodeFn.findPlug( "inMesh", &status );
+		MPlug meshNodeInMeshPlug = depNodeFn.findPlug( "inMesh", true, &status );
 		MCheckStatus( status, "Could not retrieve inMesh" );
 		MString meshNodeName = depNodeFn.name();
 
@@ -1122,7 +1122,7 @@ MStatus polyModifierCmd::undoDirectModifier()
 		// on it.
 		//
 		depNodeFn.setObject( dupMeshDagPath.node() );
-		MPlug dupMeshNodeOutMeshPlug = depNodeFn.findPlug( "outMesh", &status );
+		MPlug dupMeshNodeOutMeshPlug = depNodeFn.findPlug( "outMesh", true, &status );
 		MCheckStatus( status, "Could not retrieve outMesh" );
 		status = dupMeshNodeOutMeshPlug.setValue( fMeshData );
 
@@ -1156,7 +1156,7 @@ MStatus polyModifierCmd::undoDirectModifier()
 		// onto the outMesh of our meshNode
 		//
 		depNodeFn.setObject( meshNode );
-		MPlug meshNodeOutMeshPlug = depNodeFn.findPlug( "outMesh", &status );
+		MPlug meshNodeOutMeshPlug = depNodeFn.findPlug( "outMesh", true, &status );
 		MCheckStatus( status, "Could not retrieve outMesh" );
 		status = meshNodeOutMeshPlug.setValue( fMeshData );
 		MCheckStatus( status, "Could not set meshData" );

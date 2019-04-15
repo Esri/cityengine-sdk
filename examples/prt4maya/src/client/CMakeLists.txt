@@ -41,7 +41,7 @@ target_link_libraries(${PRT4MAYA_TARGET} PRIVATE
 
 if(WIN32)
 	target_compile_options(${PRT4MAYA_TARGET} PRIVATE
-			-GR -GS -EHsc -Zi -c
+			-GR -GS -EHsc -Zi -c -permissive-
 			$<$<CONFIG:DEBUG>:-Gm -RTC1>)
 
 	target_compile_definitions(${PRT4MAYA_TARGET} PRIVATE
@@ -77,6 +77,7 @@ install(FILES ${PRT_EXT_LIBRARIES} DESTINATION plug-ins/ext)
 install(FILES scripts/AEprtTemplate.mel DESTINATION scripts)
 install(FILES scripts/prt4mayaCreateUI.mel DESTINATION scripts)
 install(FILES scripts/prt4mayaDeleteUI.mel DESTINATION scripts)
+install(FILES shaders/prtShaderStingray.sfx DESTINATION shaders)
 install(FILES ${PROJECT_SOURCE_DIR}/../../../LICENSE DESTINATION .)
 install(FILES ${PROJECT_SOURCE_DIR}/../../../EULA.pdf DESTINATION .)
 if(WIN32)

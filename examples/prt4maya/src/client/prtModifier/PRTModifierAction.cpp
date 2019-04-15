@@ -26,6 +26,7 @@ namespace {
 
 	const wchar_t* ANNOT_START_RULE = L"@StartRule";
 	const wchar_t* ANNOT_RANGE = L"@Range";
+	const wchar_t* ANNOT_ENUM = L"@Enum";
 	const wchar_t* ANNOT_COLOR = L"@Color";
 	const wchar_t* ANNOT_DIR = L"@Directory";
 	const wchar_t* ANNOT_FILE = L"@File";
@@ -386,7 +387,7 @@ MStatus PRTModifierAction::createNodeAttributes(MObject& nodeObj, const std::wst
 			const prt::Annotation* enumAnnotation = nullptr;
 			for (size_t a = 0; a < info->getAttribute(i)->getNumAnnotations(); a++) {
 				const prt::Annotation* an = info->getAttribute(i)->getAnnotation(a);
-				if (!(std::wcscmp(an->getName(), ANNOT_RANGE)))
+				if (!(std::wcscmp(an->getName(), ANNOT_ENUM)))
 					enumAnnotation = an;
 			}
 			const bool value = evalAttrs.find(name.asWChar())->second.mBool;
@@ -410,7 +411,8 @@ MStatus PRTModifierAction::createNodeAttributes(MObject& nodeObj, const std::wst
 						min = an->getArgument(0)->getFloat();
 						max = an->getArgument(1)->getFloat();
 					}
-					else
+				}
+				else if (!(std::wcscmp(an->getName(), ANNOT_ENUM))) {
 						enumAnnotation = an;
 				}
 			}
@@ -433,7 +435,7 @@ MStatus PRTModifierAction::createNodeAttributes(MObject& nodeObj, const std::wst
 			const prt::Annotation* enumAnnotation = nullptr;
 			for (size_t a = 0; a < info->getAttribute(i)->getNumAnnotations(); a++) {
 				const prt::Annotation* an = info->getAttribute(i)->getAnnotation(a);
-				if (!(std::wcscmp(an->getName(), ANNOT_RANGE)))
+				if (!(std::wcscmp(an->getName(), ANNOT_ENUM)))
 					enumAnnotation = an;
 				else if (!(std::wcscmp(an->getName(), ANNOT_COLOR)))
 					asColor = true;
@@ -526,7 +528,7 @@ MStatus PRTModifierEnum::fill(const prt::Annotation* annot) {
 template<typename T> T PRTModifierAction::getPlugValueAndRemoveAttr(MFnDependencyNode & node, const MString & briefName, const T& defaultValue) {
 	T plugValue = defaultValue;
 	if (node.hasAttribute(briefName)) {
-		const MPlug plug = node.findPlug(briefName);
+		const MPlug plug = node.findPlug(briefName, true);
 		if (plug.isDynamic())
 		{
 			T d;

@@ -144,22 +144,22 @@ namespace prtu {
 
 	int32_t computeSeed(MFloatPointArray& vertices) {
 		MFloatPoint a(0.0, 0.0, 0.0);
-		for (size_t vi = 0; vi < vertices.length(); vi++) {
+		for (unsigned int vi = 0; vi < vertices.length(); vi++) {
 			a += vertices[vi];
 		}
-		a = a / static_cast<double>(vertices.length());
+		a = a / static_cast<float>(vertices.length());
 		return computeSeed(a);
 	}
 
 
 	int32_t computeSeed(const double* vertices, size_t count) {
 		MFloatPoint a(0.0, 0.0, 0.0);
-		for (size_t vi = 0; vi < count; vi += 3) {
-			a[0] += vertices[vi + 0];
-			a[1] += vertices[vi + 1];
-			a[2] += vertices[vi + 2];
+		for (unsigned int vi = 0; vi < count; vi += 3) {
+			a[0] += static_cast<float>(vertices[vi + 0]);
+			a[1] += static_cast<float>(vertices[vi + 1]);
+			a[2] += static_cast<float>(vertices[vi + 2]);
 		}
-		a = a / static_cast<double>(count);
+		a = a / static_cast<float>(count);
 		return computeSeed(a);
 	}
 

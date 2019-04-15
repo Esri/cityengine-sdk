@@ -25,6 +25,7 @@
 #include "node/PRTMaterialNode.h"
 
 #include "prt/StringUtils.h"
+#include "prtx/Material.h"
 
 #include <maya/adskDataStream.h>
 #include <maya/adskDataChannel.h>
@@ -43,6 +44,89 @@ namespace {
 			prt::log(wostr.str().c_str(), prt::LOG_TRACE);
 		}
 	}
+
+	std::wstring uriToPath(const prtx::TexturePtr& t) {
+		return t->getURI()->getPath();
+	}
+
+	// we blacklist all CGA-style material attribute keys, see prtx/Material.h
+	const std::set<std::wstring> MATERIAL_ATTRIBUTE_BLACKLIST = {
+		L"ambient.b",
+		L"ambient.g",
+		L"ambient.r",
+		L"bumpmap.rw",
+		L"bumpmap.su",
+		L"bumpmap.sv",
+		L"bumpmap.tu",
+		L"bumpmap.tv",
+		L"color.a",
+		L"color.b",
+		L"color.g",
+		L"color.r",
+		L"color.rgb",
+		L"colormap.rw",
+		L"colormap.su",
+		L"colormap.sv",
+		L"colormap.tu",
+		L"colormap.tv",
+		L"dirtmap.rw",
+		L"dirtmap.su",
+		L"dirtmap.sv",
+		L"dirtmap.tu",
+		L"dirtmap.tv",
+		L"normalmap.rw",
+		L"normalmap.su",
+		L"normalmap.sv",
+		L"normalmap.tu",
+		L"normalmap.tv",
+		L"opacitymap.rw",
+		L"opacitymap.su",
+		L"opacitymap.sv",
+		L"opacitymap.tu",
+		L"opacitymap.tv",
+		L"specular.b",
+		L"specular.g",
+		L"specular.r",
+		L"specularmap.rw",
+		L"specularmap.su",
+		L"specularmap.sv",
+		L"specularmap.tu",
+		L"specularmap.tv",
+		L"bumpmap",
+		L"colormap",
+		L"dirtmap",
+		L"normalmap",
+		L"opacitymap",
+		L"opacitymap.mode",
+		L"specularmap",
+		L"emissive.b",
+		L"emissive.g",
+		L"emissive.r",
+		L"emissivemap.rw",
+		L"emissivemap.su",
+		L"emissivemap.sv",
+		L"emissivemap.tu",
+		L"emissivemap.tv",
+		L"metallicmap.rw",
+		L"metallicmap.su",
+		L"metallicmap.sv",
+		L"metallicmap.tu",
+		L"metallicmap.tv",
+		L"occlusionmap.rw",
+		L"occlusionmap.su",
+		L"occlusionmap.sv",
+		L"occlusionmap.tu",
+		L"occlusionmap.tv",
+		L"roughnessmap.rw",
+		L"roughnessmap.su",
+		L"roughnessmap.sv",
+		L"roughnessmap.tu",
+		L"roughnessmap.tv",
+		L"emissivemap",
+		L"metallicmap",
+		L"occlusionmap",
+		L"roughnessmap"
+	};
 
 } // anonymous namespace
 
@@ -65,8 +149,8 @@ void MayaCallbacks::setUVs(const double* u, const double* v, size_t size) {
 	mU.clear();
 	mV.clear();
 	for (size_t i = 0; i < size; ++i) {
-		mU.append(u[i]);
-		mV.append(v[i]);
+		mU.append(static_cast<float>(u[i])); //maya mesh only supports float uvs
+		mV.append(static_cast<float>(v[i]));
 	}
 }
 
@@ -152,7 +236,10 @@ void MayaCallbacks::createMesh() {
 	outputMesh.copyInPlace(oMesh);
 
 	// create material metadata
-	size_t maxStringLength = 400;
+	unsigned int maxStringLength = 400;
+	unsigned int maxFloatArrayLength = 5;
+	unsigned int maxStringArrayLength = 2;
+
 	adsk::Data::Structure* fStructure;	  // Structure to use for creation
 	fStructure = adsk::Data::Structure::structureByName(gPRTMatStructure.c_str());
 	if (fStructure == NULL)
@@ -160,12 +247,57 @@ void MayaCallbacks::createMesh() {
 		// Register our structure since it is not registered yet.
 		fStructure = adsk::Data::Structure::create();
 		fStructure->setName(gPRTMatStructure.c_str());
-		//workaround: using kString type crashes maya when setting metadata elememts. Therefore we use array of kUInt8
-		fStructure->addMember(adsk::Data::Member::kUInt8, maxStringLength + 1, gPRTMatMemberTexture.c_str());
-		fStructure->addMember(adsk::Data::Member::kDouble, 3, gPRTMatMemberColor.c_str());
+
 		fStructure->addMember(adsk::Data::Member::kInt32, 1, gPRTMatMemberFaceStart.c_str());
 		fStructure->addMember(adsk::Data::Member::kInt32, 1, gPRTMatMemberFaceEnd.c_str());
+
+		prtx::MaterialBuilder mb;
+		prtx::MaterialPtr m = mb.createShared();
+		const prtx::WStringVector&    keys = m->getKeys();
+
+		for (const auto& key : keys) {
+			if (MATERIAL_ATTRIBUTE_BLACKLIST.count(key) > 0)
+				continue;
+
+			adsk::Data::Member::eDataType type;
+			unsigned int size = 0;
+			unsigned int arrayLength = 1;
+
+			switch (m->getType(key)) {
+			case prt::Attributable::PT_BOOL: type = adsk::Data::Member::kBoolean; size = 1;  break;
+			case prt::Attributable::PT_FLOAT: type = adsk::Data::Member::kDouble; size = 1; break;
+			case prt::Attributable::PT_INT: type = adsk::Data::Member::kInt32; size = 1; break;
+
+			//workaround: using kString type crashes maya when setting metadata elememts. Therefore we use array of kUInt8
+			case prt::Attributable::PT_STRING: type = adsk::Data::Member::kUInt8; size = maxStringLength;  break;
+			case prt::Attributable::PT_BOOL_ARRAY: type = adsk::Data::Member::kBoolean; size = maxStringLength; break;
+			case prt::Attributable::PT_INT_ARRAY: type = adsk::Data::Member::kInt32; size = maxStringLength; break;
+			case prt::Attributable::PT_FLOAT_ARRAY: type = adsk::Data::Member::kDouble; size = maxFloatArrayLength; break;
+			case prt::Attributable::PT_STRING_ARRAY: type = adsk::Data::Member::kUInt8; size = maxStringLength; arrayLength = maxStringArrayLength; break;
+
+			case prtx::Material::PT_TEXTURE: type = adsk::Data::Member::kUInt8; size = maxStringLength;  break;
+			case prtx::Material::PT_TEXTURE_ARRAY: type = adsk::Data::Member::kUInt8; size = maxStringLength; arrayLength = maxStringArrayLength; break;
+
+			default:
+				break;
+			}
+
+			if (size > 0) {
+				for (unsigned int i=0; i<arrayLength; i++) {
+					size_t maxStringLengthTmp = maxStringLength;
+					char* tmp = new char[maxStringLength];
+					std::wstring keyToUse = key;
+					if (i>0)
+						keyToUse = key + std::to_wstring(i);
+					prt::StringUtils::toOSNarrowFromUTF16(keyToUse.c_str(), tmp, &maxStringLengthTmp);
+					fStructure->addMember(type, size, tmp);
+					delete tmp;
+				}
+			}
+		}
+
 		adsk::Data::Structure::registerStructure(*fStructure);
+
 	}
 
 	MCHECK(stat);
@@ -185,24 +317,99 @@ void MayaCallbacks::createMesh() {
 
 		prtx::MaterialPtr mat = mMaterials[i];
 
-		if (mat->diffuseMap().size() > 0 && mat->diffuseMap().front()->isValid()) {
-			const prtx::URIPtr texURI = mat->diffuseMap().front()->getURI();
-			const std::wstring texPathW = texURI->getPath();
 
-			if (texPathW.length() >= maxStringLength) {
-				const std::wstring msg = L"Maximum texture path size is " + std::to_wstring(maxStringLength);
-				prt::log(msg.c_str(), prt::LOG_ERROR);
-			}
+
+
+		char* tmp = new char[maxStringLength];
+		const prtx::WStringVector&    keys = mat->getKeys();
+		for (const auto& key : keys) {
+			if (MATERIAL_ATTRIBUTE_BLACKLIST.count(key) > 0)
+				continue;
 
 			size_t maxStringLengthTmp = maxStringLength;
-			//workaround: transporting string as uint8 array, because using asString crashes maya
-			prt::StringUtils::toOSNarrowFromUTF16(texPathW.c_str(), (char*)handle.asUInt8(), &maxStringLengthTmp);
-		}
+			prt::StringUtils::toOSNarrowFromUTF16(key.c_str(), tmp, &maxStringLengthTmp);
 
-		handle.setPositionByMemberName(gPRTMatMemberColor.c_str());
-		handle.asDouble()[0] = mat->color_r();
-		handle.asDouble()[1] = mat->color_g();
-		handle.asDouble()[2] = mat->color_b();
+			if (!handle.setPositionByMemberName(tmp))
+				continue;
+
+			maxStringLengthTmp = maxStringLength;
+
+			switch (mat->getType(key)) {
+			case prt::Attributable::PT_BOOL: handle.asBoolean()[0] = mat->getBool(key);  break;
+			case prt::Attributable::PT_FLOAT: handle.asDouble()[0] = mat->getFloat(key);  break;
+			case prt::Attributable::PT_INT: handle.asInt32()[0] = mat->getInt(key);  break;
+
+				//workaround: transporting string as uint8 array, because using asString crashes maya
+			case prt::Attributable::PT_STRING:
+				if (mat->getString(key).size()==0)
+					break;
+				checkStringLength(mat->getString(key), maxStringLength);
+				prt::StringUtils::toOSNarrowFromUTF16(mat->getString(key).c_str(), (char*)handle.asUInt8(), &maxStringLengthTmp);
+				break;
+			case prt::Attributable::PT_BOOL_ARRAY:
+				for (unsigned int i = 0; i < mat->getBoolArray(key).size() && i < maxStringLength; i++)
+					handle.asBoolean()[i] = mat->getBoolArray(key)[i];
+				break;
+			case prt::Attributable::PT_INT_ARRAY:
+				for (unsigned int i = 0; i < mat->getIntArray(key).size() && i < maxStringLength; i++)
+					handle.asInt32()[i] = mat->getIntArray(key)[i];
+				break;
+			case prt::Attributable::PT_FLOAT_ARRAY:
+				for (unsigned int i = 0; i < mat->getFloatArray(key).size() && i < maxFloatArrayLength; i++)
+					handle.asDouble()[i] = mat->getFloatArray(key)[i];
+				break;
+			case prt::Attributable::PT_STRING_ARRAY: {
+				for (unsigned int i = 0; i < mat->getStringArray(key).size() && i < maxStringLength; i++)
+				{
+					if (mat->getStringArray(key)[i].size() == 0)
+						continue;
+
+					if (i>0) {
+						std::wstring keyToUse = key + std::to_wstring(i);
+						maxStringLengthTmp = maxStringLength;
+						prt::StringUtils::toOSNarrowFromUTF16(keyToUse.c_str(), tmp, &maxStringLengthTmp);
+						handle.setPositionByMemberName(tmp+i);
+					}
+
+					maxStringLengthTmp = maxStringLength;
+					checkStringLength(mat->getStringArray(key)[i], maxStringLength);
+					prt::StringUtils::toOSNarrowFromUTF16(mat->getStringArray(key)[i].c_str(), (char*)handle.asUInt8(), &maxStringLengthTmp);
+				}
+				break;
+			}
+			case prtx::Material::PT_TEXTURE: {
+				const auto& t = mat->getTexture(key);
+				const std::wstring p = uriToPath(t);
+				prt::StringUtils::toOSNarrowFromUTF16(p.c_str(), (char*)handle.asUInt8(), &maxStringLengthTmp);
+				break;
+			}
+			case prtx::Material::PT_TEXTURE_ARRAY: {
+				const auto& ta = mat->getTextureArray(key);
+				prtx::WStringVector pa(ta.size());
+				std::transform(ta.begin(), ta.end(), pa.begin(), uriToPath);
+				for (unsigned int i = 0; i < mat->getTextureArray(key).size() && i < maxStringArrayLength; i++)
+				{
+					if (pa[i].size() == 0)
+						continue;
+
+					if (i > 0) {
+						std::wstring keyToUse = key + std::to_wstring(i);
+						maxStringLengthTmp = maxStringLength;
+						prt::StringUtils::toOSNarrowFromUTF16(keyToUse.c_str(), tmp, &maxStringLengthTmp);
+						handle.setPositionByMemberName(tmp);
+					}
+
+					maxStringLengthTmp = maxStringLength;
+					checkStringLength(pa[i].c_str(), maxStringLength);
+					prt::StringUtils::toOSNarrowFromUTF16(pa[i].c_str(), (char*)handle.asUInt8(), &maxStringLengthTmp);
+				}
+				break;
+			}
+			}
+		}
+		delete tmp;
+
+		
 
 		handle.setPositionByMemberName(gPRTMatMemberFaceStart.c_str());
 		handle.asInt32()[0] = mShadingRanges[i * 2];
@@ -214,6 +421,14 @@ void MayaCallbacks::createMesh() {
 	}
 
 	outputMesh.setMetadata(newMetadata);
+}
+
+void MayaCallbacks::checkStringLength(std::wstring string, const size_t &maxStringLength)
+{
+	if (string.length() >= maxStringLength) {
+		const std::wstring msg = L"Maximum texture path size is " + std::to_wstring(maxStringLength);
+		prt::log(msg.c_str(), prt::LOG_ERROR);
+	}
 }
 
 void MayaCallbacks::finishMesh() {
