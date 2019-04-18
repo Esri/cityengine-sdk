@@ -30,6 +30,7 @@ namespace {
 // Unique Node TypeId
 MTypeId PRTModifierNode::id(0x00085000);
 MObject PRTModifierNode::rulePkg;
+MObject PRTModifierNode::currentRulePkg;
 
 
 // make sure the dynamically added plugs affect the outMesh
@@ -81,6 +82,9 @@ MStatus PRTModifierNode::compute(const MPlug& plug, MDataBlock& data)
 			MDataHandle rulePkgData = data.inputValue(rulePkg, &status);
 			MCheckStatus(status, "ERROR getting rulePkg");
 
+			MDataHandle currentRulePkgData = data.inputValue(currentRulePkg, &status);
+			MCheckStatus(status, "ERROR getting currentRulePkg");
+
 			// Copy the inMesh to the outMesh, so you can
 			// perform operations directly on outMesh
 			//
@@ -90,7 +94,7 @@ MStatus PRTModifierNode::compute(const MPlug& plug, MDataBlock& data)
 
 			// Set the mesh object and component List on the factory
 
-			if (rulePkgData.asString() != currentRulePkg) {
+			if (rulePkgData.asString() != currentRulePkgData.asString()) {
 				auto mObj = thisMObject(); // needed because C++ standard does not allow reference to rvalue
 				fPRTModifierAction.updateRuleFiles(mObj, rulePkgData.asString());
 			}
@@ -100,7 +104,7 @@ MStatus PRTModifierNode::compute(const MPlug& plug, MDataBlock& data)
 			// Now, perform the PRT
 			status = fPRTModifierAction.doIt();
 
-			currentRulePkg = rulePkgData.asString();
+			currentRulePkgData.setString(rulePkgData.asString());
 
 			// Mark the output mesh as clean
 			outputData.setClean();
@@ -174,6 +178,14 @@ MStatus PRTModifierNode::initialize()
 	MCHECK(addAttribute(rulePkg));
 	MCHECK(attributeAffects(rulePkg, outMesh));
 
+	currentRulePkg = fAttr.create("current"+NAME_RULE_PKG, "currentRulePkg", MFnData::kString, stringData.create(&stat2), &stat);
+	MCHECK(stat2);
+	MCHECK(stat);
+	MCHECK(fAttr.setCached(true));
+	MCHECK(fAttr.setStorable(true));
+	MCHECK(fAttr.setHidden(true));
+	MCHECK(fAttr.setConnectable(false));
+	MCHECK(addAttribute(currentRulePkg));
 
 	// Set up a dependency between the input and the output.  This will cause
 	// the output to be marked dirty when the input changes.  The output will
