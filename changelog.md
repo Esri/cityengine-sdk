@@ -110,7 +110,7 @@ Built-In Codecs Changes and Fixes
 * FBX Decoder:
   * Fixed crash due to invalid materials. [CE-6036]
 * Alembic Encoder
-  * Alembic library is statically linked. [CE-6226]
+  * Moved to separate extension library and linking Alembic library statically. [CE-6226]
 
 
 Misc Changes and Fixes
