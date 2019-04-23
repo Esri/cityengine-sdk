@@ -36,6 +36,7 @@ PRTX API
 * New types PRTUtils::AttributeMapUPtr, PRTUtils::AttributeMapBuilderUPtr, PRTUtils::ResolveMapUPtr, PRTUtils::ResolveMapBuilderUPtr. [CE-5407]
 * New URI::isFilePath() function. [CE-6402]
 * Shape: BuiltinShapeAttributes::xxx_map getters: return resolve map key instead of resolved URI (if you want the resolved URI, use the xxxMap getters of the Material class which return a Texture). [CE-6336]
+* Expose type definition for `prtx::ReportDomains` to allow custom implementations of `prtx::ReportsAccumulator` without violating ODR.
  
 
 CGA
