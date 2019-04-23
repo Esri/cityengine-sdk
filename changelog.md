@@ -119,7 +119,8 @@ Misc Changes and Fixes
 * PRTUtils::ObjectDestroyer: fixed crash on nullptr.
 * Fixed random-based CGA attr initialization on 32bit (behaves the same as on 64bit now). [CE-6124]
 * Removed an invalid key which was returned in prtx::Shape::getKeys(). [CE-6336] 
-* Fixed crash in prtx::Geometry access via Attributable interface. [CE-6336]  
+* Fixed crash in prtx::Geometry access via Attributable interface. [CE-6336]
+* Improved the search functionality of the included reference documentation. [CE-5808]
 
 
 ESRI CITYENGINE SDK 1.10.4198 CHANGELOG
