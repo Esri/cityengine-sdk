@@ -1,18 +1,32 @@
-# Esri CityEngine SDK Examples
+# Esri CityEngine SDK
 
-Esri CityEngine is based on Esri Procedural Runtime, which is the underlying engine that supports two geoprocessing tools in ArcGIS and drives procedural symbology in ArcGIS Pro. The CityEngine SDK enables you as a 3rd party developer to extend CityEngine with additional import and export formats. Moreover, you can integrate the procedural runtime in your own client applications taking full advantage of the procedural core without running CityEngine or ArcGIS.
+This is the official site for the SDK of [Esri CityEngine](https://www.esri.com/en-us/arcgis/products/esri-cityengine/overview), a 3D city modeling software for urban design, visual effects, and VR/AR production.
+
+The CityEngine SDK can be used for the development of:
+
+1. *Custom importers and exporters for CityEngine.*
+
+   This means the SDK enables you to develop CityEngine plugins to read or write additional 3D and image formats or your own proprietary 3D data format. A simple use case example is 3D printing where the STL geometry format is often needed. STL support is not provided out-of-the-box in CityEngine, but you can develop your own STL exporter as described below.
+
+2. *3D apps which need a procedural geometry engine.*
+
+   The core of CityEngine is its unique geometry generation engine, called Procedural Runtime (PRT). PRT takes as input an initial geometry and then applies a given rule package (= CGA rules authored in CityEngine) to generate more detailed 3D geometry as output. For example, PRT can generate - based on given rules - a 3D model of a building out of a parcel polygon. With the SDK you can integrate PRT in your own 3D applications taking full advantage of the procedural geometry generation without running CityEngine. An interesting use case example is [Palladio](https://github.com/esri/palladio), a plugin for SideFX’s Houdini software. Palladio includes PRT and therefore extends Houdini with the procedural geometry engine of CityEngine. Another use case example could be a specific cultural heritage 3D application which automatically generates detailed 3D models of temples based on input attributes.
+
+The CityEngine SDK is free for non-commercial use. Commercial use requires at least one commercial license of the latest CityEngine version installed in the organization. Please refer to the licensing section below for more detailed licensing information.
+
 
 ## Preamble
 
-This document explains how to install the CityEngine SDK and how to work with the source-code examples contained in this repository. The Esri CityEngine SDK is packaged into three parts:
-- This git repository with the example sources.
-- An archive with the SDK binaries and documentation (whitepaper and API reference).
-- An archive with example data (e.g. rule packages and initial shapes).
+This document explains how to install the CityEngine SDK and how to work with the source-code examples contained in this repository. The CityEngine SDK is packaged into three parts:
+* This git repository with the example sources.
+* An archive per platform with the SDK binaries and documentation (whitepaper and API reference). The archives are attached to the repo release tags, see links below.
+* An archive with example data (e.g. rule packages and initial shapes).
 
 The archives are available for download at the corresponding github release page. See installation instructions below for details.
 
+
 ## CityEngine SDK Releases
-- [v2.0.YYYY (2019-XX-XX, CityEngine 2019.0)](https://github.com/Esri/esri-cityengine-sdk/releases/tag/2.0.YYYY)
+- [v2.0.5403 (2019-05-08, CityEngine 2019.0)](https://github.com/Esri/esri-cityengine-sdk/releases/tag/2.0.5403)
 - [v1.10.4198 (2018-09-17, CityEngine 2018.1)](https://github.com/Esri/esri-cityengine-sdk/releases/tag/1.10.4198)
 - [v1.10.4051 (2018-05-11, CityEngine 2018.0)](https://github.com/Esri/esri-cityengine-sdk/releases/tag/1.10.4051)
 - [v1.9.3786 (2017-11-06, CityEngine 2017.1)](https://github.com/Esri/esri-cityengine-sdk/releases/tag/1.9.3786)
@@ -25,6 +39,7 @@ The archives are available for download at the corresponding github release page
 - [v1.2.1591 (2014-09-01, CityEngine 2014.1)](https://github.com/Esri/esri-cityengine-sdk/releases/tag/1.2.1591)
 - [v1.1.1471 (2014-05-29, CityEngine 2014.0)](https://github.com/Esri/esri-cityengine-sdk/releases/tag/1.1.1471)
 - v1.0.1209 (2014-01-15, CityEngine 2013.1)
+
 
 ## Installation Instructions
 1. Clone or download this repository
@@ -45,37 +60,46 @@ The final directory layout should look like this:
         lib/...
 ```
 
+
 ## Examples
 This repository contains a number of source code examples. Each example contains a README with detailed instructions how to build and use it.
 
 A quick overview:
-- prt4cmd: a simple command line utility to apply rule packages onto initial shapes and generate models.
-- prt4maya: wraps the SDK into a plugin for Autodesk Maya
-- stlenc: demonstrates how to write a custom encoder, in this case for the STL geometry format.
-- stldec: demonstrates how to write a custom decoder for the STL geometry format.
+* prt4cmd: a simple command line utility to apply rule packages onto initial shapes and generate models.
+* stlenc: demonstrates how to write a custom encoder, in this case for the STL geometry format.
+* stldec: demonstrates how to write a custom decoder for the STL geometry format.
+
+External Use Cases:
+* [Palladio](https://github.com/esri/palladio): a CityEngine plugin for SideFX Houdini
+
 
 ## General Software Requirements
 Please note that the individual example READMEs may include further requirements.
 
+
 #### All Platforms
 * To load custom encoders built with the latest SDK, CityEngine 2019.0 is required. For older versions of CityEngine an older version of the SDK might have to be used, see list above.
-* License for matching CityEngine
+* License for matching CityEngine, e.g. to author Rule Packages.
 * CMake 3.13 or later (http://www.cmake.org)
+
 
 #### Windows
 * Windows 7, 8.1 or 10 (64bit)
 * Required C++ compiler: Visual Studio 2017 with Toolset MSVC 14.11 or later
 * Required flags for extension libraries release mode: `/bigobj /GR /EHsc /MD` (use `/MDd` to debug)
 
+
 #### macOS
 * macOS Sierra (10.12) or later
 * Required C++ compiler: Apple Clang 8.1 or later (i.e. XCode 8.3 or later)
 * Required flags for extension libraries: `-std=c++14 -stdlib=libc++ -fvisibility=hidden -fvisibility-inlines-hidden -Wl,--exclude-libs,ALL`
 
+
 #### Linux
 * RedHat Enterprise Linux 7.x or compatible
 * Required C++ compiler: GCC 6.3 or later (RedHat Enterprise Linux DevToolSet 6.1)
 * Required flags for extension libraries: `-std=c++14 -D_GLIBCXX_USE_CXX11_ABI=0 -march=nocona -fvisibility=hidden -fvisibility-inlines-hidden -Wl,--exclude-libs,ALL`
+
 
 ## Further Resources
 * Documentation:
@@ -87,19 +111,18 @@ Please note that the individual example READMEs may include further requirements
 * Facebook: https://www.facebook.com/CityEngine
 * Twitter: https://twitter.com/CityEngine
 
-## Issues
 
-Find a bug or want to request a new feature? Please let us know by submitting an issue.
+## Issues
+Did you find a bug or do you want to request a new feature? Please let us know by submitting an issue.
+
 
 ## Contributing
-
 Anyone and everyone is welcome to contribute and to extend and improve the examples by sending us pull requests.
 
-## Licensing
 
+## Licensing
 Copyright (c) 2019 Esri
 
 You may not use the content of this repository except in compliance with the following Licenses:
-  1. All content of all directories **except "examples"** is licensed under the Esri [Terms of Use](http://www.esri.com/legal/licensing-translations).
-  2. All content in the "examples" directory tree is licensed under the APACHE 2.0 license. You may obtain a copy of this license at http://www.apache.org/licenses/LICENSE-2.0.
-  3. The example data is licensed by the "ESRI Attribution and Licensing Agreement".
+1. All content in the "examples" directory tree is licensed under the APACHE 2.0 license. You may obtain a copy of this license at http://www.apache.org/licenses/LICENSE-2.0.
+1. All other content is licensed under the [Esri Terms of Use](https://www.esri.com/legal/licensing-translations) (also see [Product-Specific Terms of Use](https://assets.esri.com/content/dam/esrisites/en-us/media/legal/product-specific-terms-of-use/e300.pdf)).

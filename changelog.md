@@ -1,17 +1,17 @@
-ESRI CITYENGINE SDK 2.0.YYYY CHANGELOG
-=======================================
+ESRI CITYENGINE SDK 2.0.5403 CHANGELOG
+======================================
 
 This section lists changes compared to CityEngine SDK 1.10.4198.
 
 
 General Info
 ------------
-* CityEngine SDK 2.0.YYYY is used in CityEngine 2019.0 (2019.0.ZZZZ).
+* CityEngine SDK 2.0.5403 is used in CityEngine 2019.0.5403
 
 
 Licensing
 ---------
-* Removed requirement to have a CityEngine license. Technically the CityEngine SDK runs without a license now. All content of all directories is licensed under the Esri [Terms of Use](http://www.esri.com/legal/licensing-translations).
+* The CityEngine SDK is now free for non-commercial use and we removed the technical requirement to have a CityEngine license, i.e. the CityEngine SDK runs without a license now. All content of all directories is licensed under the [Esri Terms of Use](http://www.esri.com/legal/licensing-translations).
 
 
 PRT API
