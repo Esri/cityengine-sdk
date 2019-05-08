@@ -8,13 +8,6 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
-<link href="navtree.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="resize.js"></script>
-<script type="text/javascript" src="navtree.js"></script>
-<script type="text/javascript">
-  $(document).ready(initResizable);
-  $(window).load(resizeHeight);
-</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/search.js"></script>
 <script type="text/javascript">
@@ -31,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="esri_prt_55px.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Esri Procedural Runtime
-   &#160;<span id="projectnumber">1.10.4198</span>
+   &#160;<span id="projectnumber">2.0.5403</span>
    </div>
   </td>
  </tr>
@@ -110,20 +103,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     </ul>
   </div>
 </div><!-- top -->
-<div id="side-nav" class="ui-resizable side-nav-resizable">
-  <div id="nav-tree">
-    <div id="nav-tree-contents">
-      <div id="nav-sync" class="sync"></div>
-    </div>
-  </div>
-  <div id="splitbar" style="-moz-user-select:none;" 
-       class="ui-resizable-handle">
-  </div>
-</div>
-<script type="text/javascript">
-$(document).ready(function(){initNavTree('functions_0x72.html','');});
-</script>
-<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -155,6 +134,9 @@ $(document).ready(function(){initNavTree('functions_0x72.html','');});
 : <a class="el" href="classprtx_1_1_bounding_box.html#a8b2ddf480feb2466c77d6a2a050ea479">prtx::BoundingBox</a>
 , <a class="el" href="classprtx_1_1_mesh_builder.html#a32bc3ecd5421bf5cdcf39f66da38b1f1">prtx::MeshBuilder</a>
 </li>
+<li>resetGeometry()
+: <a class="el" href="classprt_1_1_initial_shape_builder.html#a051902426cd41e4421d4d86001abbe43">prt::InitialShapeBuilder</a>
+</li>
 <li>resetMaterials()
 : <a class="el" href="classprtx_1_1_mesh_builder.html#a4eacb986044eafd84e10feb46d73f6fb">prtx::MeshBuilder</a>
 </li>
@@ -162,14 +144,13 @@ $(document).ready(function(){initNavTree('functions_0x72.html','');});
 : <a class="el" href="classprt_1_1_attribute_map_builder.html#acdbb9cf49232342b68ebeb50d7f4c2c4">prt::AttributeMapBuilder</a>
 </li>
 <li>resolve()
-: <a class="el" href="classprtx_1_1_adaptor.html#a6738d86ee354e7ffcbe2ad87e5c1c985">prtx::Adaptor</a>
-, <a class="el" href="classprtx_1_1_stream_adaptor.html#a3156008d46774841c5d8911634b8ad17">prtx::StreamAdaptor</a>
+: <a class="el" href="classprtx_1_1_stream_adaptor.html#a8a541672774bd49e835da0899c83ddff">prtx::StreamAdaptor</a>
 </li>
 <li>resolveAttributes()
-: <a class="el" href="classprt_1_1_initial_shape_builder.html#aa7247c6919971623581271fc0bf9d1b2">prt::InitialShapeBuilder</a>
+: <a class="el" href="classprt_1_1_initial_shape_builder.html#a1624754eb26d9c0d6d7faaa26d408160">prt::InitialShapeBuilder</a>
 </li>
 <li>resolveGeometry()
-: <a class="el" href="classprt_1_1_initial_shape_builder.html#aa82c5c07b2ceca8b1c9527764976e28c">prt::InitialShapeBuilder</a>
+: <a class="el" href="classprt_1_1_initial_shape_builder.html#a3662f9060ce6e402e66030409ec1a2e9">prt::InitialShapeBuilder</a>
 </li>
 <li>resolveKey()
 : <a class="el" href="classprtx_1_1_resolve_map.html#abc0d2061a7c582ce9407fc3442007689">prtx::ResolveMap</a>
@@ -178,7 +159,7 @@ $(document).ready(function(){initNavTree('functions_0x72.html','');});
 : <a class="el" href="classprtx_1_1_resolve_map.html#a51d5eba682871ff783b3ddd5f2fda461">prtx::ResolveMap</a>
 </li>
 <li>resolveTextures()
-: <a class="el" href="classprt_1_1_initial_shape_builder.html#a7538cea31af66f052d71b0df8cde25e5">prt::InitialShapeBuilder</a>
+: <a class="el" href="classprt_1_1_initial_shape_builder.html#ab57fabb5720ed0a1437cca48682ab9ef">prt::InitialShapeBuilder</a>
 </li>
 <li>resolveURI()
 : <a class="el" href="classprtx_1_1_resolve_map.html#aa75da5005aad12624d8cb514dc5c9e94">prtx::ResolveMap</a>
@@ -191,14 +172,11 @@ $(document).ready(function(){initNavTree('functions_0x72.html','');});
 </li>
 </ul>
 </div><!-- contents -->
-</div><!-- doc-content -->
 <!-- start footer part -->
-<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
-  <ul>
-    <li class="footer">Generated on Tue Sep 25 2018 09:40:51 for Esri Procedural Runtime by
-    <a href="http://www.doxygen.org/index.html">
-    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.5 </li>
-  </ul>
-</div>
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue Apr 9 2019 11:56:31 for Esri Procedural Runtime by &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.5
+</small></address>
 </body>
 </html>

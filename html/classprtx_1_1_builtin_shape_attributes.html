@@ -8,13 +8,6 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
-<link href="navtree.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="resize.js"></script>
-<script type="text/javascript" src="navtree.js"></script>
-<script type="text/javascript">
-  $(document).ready(initResizable);
-  $(window).load(resizeHeight);
-</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/search.js"></script>
 <script type="text/javascript">
@@ -31,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="esri_prt_55px.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Esri Procedural Runtime
-   &#160;<span id="projectnumber">1.10.4198</span>
+   &#160;<span id="projectnumber">2.0.5403</span>
    </div>
   </td>
  </tr>
@@ -75,21 +68,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
-</div><!-- top -->
-<div id="side-nav" class="ui-resizable side-nav-resizable">
-  <div id="nav-tree">
-    <div id="nav-tree-contents">
-      <div id="nav-sync" class="sync"></div>
-    </div>
-  </div>
-  <div id="splitbar" style="-moz-user-select:none;" 
-       class="ui-resizable-handle">
-  </div>
-</div>
-<script type="text/javascript">
-$(document).ready(function(){initNavTree('classprtx_1_1_builtin_shape_attributes.html','');});
-</script>
-<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -104,6 +82,11 @@ $(document).ready(function(){initNavTree('classprtx_1_1_builtin_shape_attributes
 </iframe>
 </div>
 
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceprtx.html">prtx</a></li><li class="navelem"><a class="el" href="classprtx_1_1_builtin_shape_attributes.html">BuiltinShapeAttributes</a></li>  </ul>
+</div>
+</div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="classprtx_1_1_builtin_shape_attributes-members.html">List of all members</a> &#124;
@@ -120,7 +103,7 @@ Inheritance diagram for prtx::BuiltinShapeAttributes:</div>
 <div class="dyncontent">
 <div class="center"><iframe scrolling="no" frameborder="0" src="classprtx_1_1_builtin_shape_attributes__inherit__graph.svg" width="198" height="262"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
-<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -235,6 +218,54 @@ virtual double&#160;</td><td class="memItemRight" valign="bottom"><b>material_di
 <tr class="memitem:ad8adcdf9b069d9887803e0572a222ee7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad8adcdf9b069d9887803e0572a222ee7"></a>
 virtual double&#160;</td><td class="memItemRight" valign="bottom"><b>material_dirtmap_tv</b> () const =0</td></tr>
 <tr class="separator:ad8adcdf9b069d9887803e0572a222ee7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e0bf0b080a520f788723dc61145bc2b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9e0bf0b080a520f788723dc61145bc2b"></a>
+virtual double&#160;</td><td class="memItemRight" valign="bottom"><b>material_emissive_b</b> () const =0</td></tr>
+<tr class="separator:a9e0bf0b080a520f788723dc61145bc2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a36699401b1ada7c585d0319cc2f65d86"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a36699401b1ada7c585d0319cc2f65d86"></a>
+virtual double&#160;</td><td class="memItemRight" valign="bottom"><b>material_emissive_g</b> () const =0</td></tr>
+<tr class="separator:a36699401b1ada7c585d0319cc2f65d86"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a96dc341ab95ad0e5f0a90cf692390bd1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a96dc341ab95ad0e5f0a90cf692390bd1"></a>
+virtual double&#160;</td><td class="memItemRight" valign="bottom"><b>material_emissive_r</b> () const =0</td></tr>
+<tr class="separator:a96dc341ab95ad0e5f0a90cf692390bd1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6c6106ce39b5b6a5fed0b26c11e3f70b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6c6106ce39b5b6a5fed0b26c11e3f70b"></a>
+virtual const std::wstring &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>material_emissivemap</b> () const =0</td></tr>
+<tr class="separator:a6c6106ce39b5b6a5fed0b26c11e3f70b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a27e47bcd37d9a783f56fdd96af4b3799"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a27e47bcd37d9a783f56fdd96af4b3799"></a>
+virtual double&#160;</td><td class="memItemRight" valign="bottom"><b>material_emissivemap_rw</b> () const =0</td></tr>
+<tr class="separator:a27e47bcd37d9a783f56fdd96af4b3799"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af503b966d6ce408a6ef0fed646024474"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af503b966d6ce408a6ef0fed646024474"></a>
+virtual double&#160;</td><td class="memItemRight" valign="bottom"><b>material_emissivemap_su</b> () const =0</td></tr>
+<tr class="separator:af503b966d6ce408a6ef0fed646024474"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a25690120210095304daa5498be466e5a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a25690120210095304daa5498be466e5a"></a>
+virtual double&#160;</td><td class="memItemRight" valign="bottom"><b>material_emissivemap_sv</b> () const =0</td></tr>
+<tr class="separator:a25690120210095304daa5498be466e5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adf854be00ff7f6c5de1a79164a1a3e82"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="adf854be00ff7f6c5de1a79164a1a3e82"></a>
+virtual double&#160;</td><td class="memItemRight" valign="bottom"><b>material_emissivemap_tu</b> () const =0</td></tr>
+<tr class="separator:adf854be00ff7f6c5de1a79164a1a3e82"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a40edb7d426d3a2c9891767e7b39eae25"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a40edb7d426d3a2c9891767e7b39eae25"></a>
+virtual double&#160;</td><td class="memItemRight" valign="bottom"><b>material_emissivemap_tv</b> () const =0</td></tr>
+<tr class="separator:a40edb7d426d3a2c9891767e7b39eae25"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a68e8fae1e197ca32f31efe3feb9bb22c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a68e8fae1e197ca32f31efe3feb9bb22c"></a>
+virtual double&#160;</td><td class="memItemRight" valign="bottom"><b>material_metallic</b> () const =0</td></tr>
+<tr class="separator:a68e8fae1e197ca32f31efe3feb9bb22c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:accfce0865289142ac71dac19d32b95d5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="accfce0865289142ac71dac19d32b95d5"></a>
+virtual const std::wstring &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>material_metallicmap</b> () const =0</td></tr>
+<tr class="separator:accfce0865289142ac71dac19d32b95d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a781c07a94c33e195c771ff9ced593692"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a781c07a94c33e195c771ff9ced593692"></a>
+virtual double&#160;</td><td class="memItemRight" valign="bottom"><b>material_metallicmap_rw</b> () const =0</td></tr>
+<tr class="separator:a781c07a94c33e195c771ff9ced593692"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a65fbc060975006e5a23e2f0101839de2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a65fbc060975006e5a23e2f0101839de2"></a>
+virtual double&#160;</td><td class="memItemRight" valign="bottom"><b>material_metallicmap_su</b> () const =0</td></tr>
+<tr class="separator:a65fbc060975006e5a23e2f0101839de2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae9c9af627d375dd4040901a68179a876"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae9c9af627d375dd4040901a68179a876"></a>
+virtual double&#160;</td><td class="memItemRight" valign="bottom"><b>material_metallicmap_sv</b> () const =0</td></tr>
+<tr class="separator:ae9c9af627d375dd4040901a68179a876"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7345e56930ac31b051c072d3e53ffee6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7345e56930ac31b051c072d3e53ffee6"></a>
+virtual double&#160;</td><td class="memItemRight" valign="bottom"><b>material_metallicmap_tu</b> () const =0</td></tr>
+<tr class="separator:a7345e56930ac31b051c072d3e53ffee6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf836e48f1af30777c4da92189c0e26e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abf836e48f1af30777c4da92189c0e26e"></a>
+virtual double&#160;</td><td class="memItemRight" valign="bottom"><b>material_metallicmap_tv</b> () const =0</td></tr>
+<tr class="separator:abf836e48f1af30777c4da92189c0e26e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abf16dc63ead43965b501be8cf5208da3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abf16dc63ead43965b501be8cf5208da3"></a>
 virtual const std::wstring &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>material_name</b> () const =0</td></tr>
 <tr class="separator:abf16dc63ead43965b501be8cf5208da3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -256,12 +287,33 @@ virtual double&#160;</td><td class="memItemRight" valign="bottom"><b>material_no
 <tr class="memitem:a5e086fcf5b673e444610209d17160ab4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5e086fcf5b673e444610209d17160ab4"></a>
 virtual double&#160;</td><td class="memItemRight" valign="bottom"><b>material_normalmap_tv</b> () const =0</td></tr>
 <tr class="separator:a5e086fcf5b673e444610209d17160ab4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a04debf9cf634a4a6e03a9c91df616260"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a04debf9cf634a4a6e03a9c91df616260"></a>
+virtual const std::wstring &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>material_occlusionmap</b> () const =0</td></tr>
+<tr class="separator:a04debf9cf634a4a6e03a9c91df616260"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa6c7015322687ba89419526393e6cec7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa6c7015322687ba89419526393e6cec7"></a>
+virtual double&#160;</td><td class="memItemRight" valign="bottom"><b>material_occlusionmap_rw</b> () const =0</td></tr>
+<tr class="separator:aa6c7015322687ba89419526393e6cec7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a98d6abe74765fecbe8a543b8dc07beb7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a98d6abe74765fecbe8a543b8dc07beb7"></a>
+virtual double&#160;</td><td class="memItemRight" valign="bottom"><b>material_occlusionmap_su</b> () const =0</td></tr>
+<tr class="separator:a98d6abe74765fecbe8a543b8dc07beb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad72927b40a90f2aa22fc9b101619222e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad72927b40a90f2aa22fc9b101619222e"></a>
+virtual double&#160;</td><td class="memItemRight" valign="bottom"><b>material_occlusionmap_sv</b> () const =0</td></tr>
+<tr class="separator:ad72927b40a90f2aa22fc9b101619222e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afbe132e248f0b906899f567308cbac76"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afbe132e248f0b906899f567308cbac76"></a>
+virtual double&#160;</td><td class="memItemRight" valign="bottom"><b>material_occlusionmap_tu</b> () const =0</td></tr>
+<tr class="separator:afbe132e248f0b906899f567308cbac76"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abcd035fce79ee161e313751d3391e0f3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abcd035fce79ee161e313751d3391e0f3"></a>
+virtual double&#160;</td><td class="memItemRight" valign="bottom"><b>material_occlusionmap_tv</b> () const =0</td></tr>
+<tr class="separator:abcd035fce79ee161e313751d3391e0f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3f95ceff312a5eeedc6836ac25fd7d28"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3f95ceff312a5eeedc6836ac25fd7d28"></a>
 virtual double&#160;</td><td class="memItemRight" valign="bottom"><b>material_opacity</b> () const =0</td></tr>
 <tr class="separator:a3f95ceff312a5eeedc6836ac25fd7d28"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afa4be0d7f6732b4f15518b7465bde52d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afa4be0d7f6732b4f15518b7465bde52d"></a>
 virtual const std::wstring &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>material_opacitymap</b> () const =0</td></tr>
 <tr class="separator:afa4be0d7f6732b4f15518b7465bde52d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace5864bef2e83d3fddfdc780843eeb33"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ace5864bef2e83d3fddfdc780843eeb33"></a>
+virtual const std::wstring &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>material_opacitymap_mode</b> () const =0</td></tr>
+<tr class="separator:ace5864bef2e83d3fddfdc780843eeb33"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a38d4987a5b259e5f16ac22f294489dd9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a38d4987a5b259e5f16ac22f294489dd9"></a>
 virtual double&#160;</td><td class="memItemRight" valign="bottom"><b>material_opacitymap_rw</b> () const =0</td></tr>
 <tr class="separator:a38d4987a5b259e5f16ac22f294489dd9"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -280,6 +332,27 @@ virtual double&#160;</td><td class="memItemRight" valign="bottom"><b>material_op
 <tr class="memitem:a08b7a79b49ecb2309cec2f5c80b2cc02"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a08b7a79b49ecb2309cec2f5c80b2cc02"></a>
 virtual double&#160;</td><td class="memItemRight" valign="bottom"><b>material_reflectivity</b> () const =0</td></tr>
 <tr class="separator:a08b7a79b49ecb2309cec2f5c80b2cc02"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5290f4e07743d2f2471f68316262e280"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5290f4e07743d2f2471f68316262e280"></a>
+virtual double&#160;</td><td class="memItemRight" valign="bottom"><b>material_roughness</b> () const =0</td></tr>
+<tr class="separator:a5290f4e07743d2f2471f68316262e280"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7cce18121b45a79368a6c78783a79720"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7cce18121b45a79368a6c78783a79720"></a>
+virtual const std::wstring &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>material_roughnessmap</b> () const =0</td></tr>
+<tr class="separator:a7cce18121b45a79368a6c78783a79720"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3930ba3415a5c40ea72ad0d1941a5b3b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3930ba3415a5c40ea72ad0d1941a5b3b"></a>
+virtual double&#160;</td><td class="memItemRight" valign="bottom"><b>material_roughnessmap_rw</b> () const =0</td></tr>
+<tr class="separator:a3930ba3415a5c40ea72ad0d1941a5b3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a180b3afc7b8e5cbd4a37838ec4ec95e6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a180b3afc7b8e5cbd4a37838ec4ec95e6"></a>
+virtual double&#160;</td><td class="memItemRight" valign="bottom"><b>material_roughnessmap_su</b> () const =0</td></tr>
+<tr class="separator:a180b3afc7b8e5cbd4a37838ec4ec95e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a165e946c3a4c45cd65c80499cf3be0f1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a165e946c3a4c45cd65c80499cf3be0f1"></a>
+virtual double&#160;</td><td class="memItemRight" valign="bottom"><b>material_roughnessmap_sv</b> () const =0</td></tr>
+<tr class="separator:a165e946c3a4c45cd65c80499cf3be0f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec24a81348af174a45ad480b238ae58f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aec24a81348af174a45ad480b238ae58f"></a>
+virtual double&#160;</td><td class="memItemRight" valign="bottom"><b>material_roughnessmap_tu</b> () const =0</td></tr>
+<tr class="separator:aec24a81348af174a45ad480b238ae58f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa2061f2f356244a126318e3b83494eae"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa2061f2f356244a126318e3b83494eae"></a>
+virtual double&#160;</td><td class="memItemRight" valign="bottom"><b>material_roughnessmap_tv</b> () const =0</td></tr>
+<tr class="separator:aa2061f2f356244a126318e3b83494eae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a34f761b55e1d12612dd6f50481cb4d43"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a34f761b55e1d12612dd6f50481cb4d43"></a>
 virtual const std::wstring &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>material_shader</b> () const =0</td></tr>
 <tr class="separator:a34f761b55e1d12612dd6f50481cb4d43"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -400,15 +473,11 @@ virtual <br class="typebreak"/>
 <li><a class="el" href="_builtin_shape_attributes_8h_source.html">BuiltinShapeAttributes.h</a></li>
 </ul>
 </div><!-- contents -->
-</div><!-- doc-content -->
 <!-- start footer part -->
-<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
-  <ul>
-    <li class="navelem"><a class="el" href="namespaceprtx.html">prtx</a></li><li class="navelem"><a class="el" href="classprtx_1_1_builtin_shape_attributes.html">BuiltinShapeAttributes</a></li>
-    <li class="footer">Generated on Tue Sep 25 2018 09:40:51 for Esri Procedural Runtime by
-    <a href="http://www.doxygen.org/index.html">
-    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.5 </li>
-  </ul>
-</div>
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue Apr 9 2019 11:56:31 for Esri Procedural Runtime by &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.5
+</small></address>
 </body>
 </html>

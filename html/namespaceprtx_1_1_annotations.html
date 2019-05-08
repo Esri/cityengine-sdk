@@ -8,13 +8,6 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
-<link href="navtree.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="resize.js"></script>
-<script type="text/javascript" src="navtree.js"></script>
-<script type="text/javascript">
-  $(document).ready(initResizable);
-  $(window).load(resizeHeight);
-</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/search.js"></script>
 <script type="text/javascript">
@@ -31,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="esri_prt_55px.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Esri Procedural Runtime
-   &#160;<span id="projectnumber">1.10.4198</span>
+   &#160;<span id="projectnumber">2.0.5403</span>
    </div>
   </td>
  </tr>
@@ -73,21 +66,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespacemembers.html"><span>Namespace&#160;Members</span></a></li>
     </ul>
   </div>
-</div><!-- top -->
-<div id="side-nav" class="ui-resizable side-nav-resizable">
-  <div id="nav-tree">
-    <div id="nav-tree-contents">
-      <div id="nav-sync" class="sync"></div>
-    </div>
-  </div>
-  <div id="splitbar" style="-moz-user-select:none;" 
-       class="ui-resizable-handle">
-  </div>
-</div>
-<script type="text/javascript">
-$(document).ready(function(){initNavTree('namespaceprtx_1_1_annotations.html','');});
-</script>
-<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -102,6 +80,11 @@ $(document).ready(function(){initNavTree('namespaceprtx_1_1_annotations.html',''
 </iframe>
 </div>
 
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceprtx.html">prtx</a></li><li class="navelem"><a class="el" href="namespaceprtx_1_1_annotations.html">Annotations</a></li>  </ul>
+</div>
+</div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#var-members">Variables</a>  </div>
@@ -109,7 +92,14 @@ $(document).ready(function(){initNavTree('namespaceprtx_1_1_annotations.html',''
 <div class="title">prtx::Annotations Namespace Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<table class="memberdecls">
+<a name="details" id="details"></a><h2 class="groupheader">Description</h2>
+<div class="textblock"><p>Supported annotation types for encoder options or encoder-supported initial shape attributes. </p>
+<p>Typically these annotations are used to programmatically construct a user interface from an EncoderInfo instance or to make certain initial shape attributes mandatory, for example.</p>
+<p>The documentation uses "option", "option attribute", "initial shape attribute" synonymously.</p>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="classprt_1_1_encoder_info.html">prt::EncoderInfo</a> </dd>
+<dd>
+<a class="el" href="namespaceprt.html#a139ddfbf80758a1e4fbbcff7bd55d404">prt::createEncoderInfo</a> </dd></dl>
+</div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
 <tr class="memitem:a4a6fe326507c766dedec68a3ac4c5ed0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4a6fe326507c766dedec68a3ac4c5ed0"></a>
@@ -153,22 +143,12 @@ const std::wstring&#160;</td><td class="memItemRight" valign="bottom"><a class="
 <tr class="memdesc:abdcdb1cd62295bc421c45b8be3a2be0d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines a value range for the option (two double parameters). <br/></td></tr>
 <tr class="separator:abdcdb1cd62295bc421c45b8be3a2be0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Supported annotation types for encoder options or encoder-supported initial shape attributes. Typically these annotations are used to programmatically construct a user interface from an EncoderInfo instance or to make certain initial shape attributes mandatory, for example.</p>
-<p>The documentation uses "option", "option attribute", "initial shape attribute" synonymously.</p>
-<dl class="section see"><dt>See Also</dt><dd><a class="el" href="classprt_1_1_encoder_info.html">prt::EncoderInfo</a> </dd>
-<dd>
-<a class="el" href="namespaceprt.html#a139ddfbf80758a1e4fbbcff7bd55d404">prt::createEncoderInfo</a> </dd></dl>
-</div></div><!-- contents -->
-</div><!-- doc-content -->
+</div><!-- contents -->
 <!-- start footer part -->
-<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
-  <ul>
-    <li class="navelem"><a class="el" href="namespaceprtx.html">prtx</a></li><li class="navelem"><a class="el" href="namespaceprtx_1_1_annotations.html">Annotations</a></li>
-    <li class="footer">Generated on Tue Sep 25 2018 09:40:51 for Esri Procedural Runtime by
-    <a href="http://www.doxygen.org/index.html">
-    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.5 </li>
-  </ul>
-</div>
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue Apr 9 2019 11:56:31 for Esri Procedural Runtime by &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.5
+</small></address>
 </body>
 </html>

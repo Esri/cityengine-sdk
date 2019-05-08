@@ -8,13 +8,6 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
-<link href="navtree.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="resize.js"></script>
-<script type="text/javascript" src="navtree.js"></script>
-<script type="text/javascript">
-  $(document).ready(initResizable);
-  $(window).load(resizeHeight);
-</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/search.js"></script>
 <script type="text/javascript">
@@ -31,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="esri_prt_55px.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Esri Procedural Runtime
-   &#160;<span id="projectnumber">1.10.4198</span>
+   &#160;<span id="projectnumber">2.0.5403</span>
    </div>
   </td>
  </tr>
@@ -75,21 +68,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
-</div><!-- top -->
-<div id="side-nav" class="ui-resizable side-nav-resizable">
-  <div id="nav-tree">
-    <div id="nav-tree-contents">
-      <div id="nav-sync" class="sync"></div>
-    </div>
-  </div>
-  <div id="splitbar" style="-moz-user-select:none;" 
-       class="ui-resizable-handle">
-  </div>
-</div>
-<script type="text/javascript">
-$(document).ready(function(){initNavTree('classprtx_1_1_material_builder.html','');});
-</script>
-<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -104,6 +82,11 @@ $(document).ready(function(){initNavTree('classprtx_1_1_material_builder.html','
 </iframe>
 </div>
 
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceprtx.html">prtx</a></li><li class="navelem"><a class="el" href="classprtx_1_1_material_builder.html">MaterialBuilder</a></li>  </ul>
+</div>
+</div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="classprtx_1_1_material_builder-members.html">List of all members</a> &#124;
@@ -119,7 +102,7 @@ Inheritance diagram for prtx::MaterialBuilder:</div>
 <div class="dyncontent">
 <div class="center"><iframe scrolling="no" frameborder="0" src="classprtx_1_1_material_builder__inherit__graph.svg" width="624" height="168"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
-<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -242,6 +225,57 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>dirtmap_tu</b
 <tr class="memitem:ad2c0c5a43c3035ff4f2ff3f42f64bb5d inherit pub_methods_classprtx_1_1_builtin_material_attributes_builder"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad2c0c5a43c3035ff4f2ff3f42f64bb5d"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>dirtmap_tv</b> (double val)=0</td></tr>
 <tr class="separator:ad2c0c5a43c3035ff4f2ff3f42f64bb5d inherit pub_methods_classprtx_1_1_builtin_material_attributes_builder"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acfd48cb3a3c1731a54f73e0b335fafe2 inherit pub_methods_classprtx_1_1_builtin_material_attributes_builder"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acfd48cb3a3c1731a54f73e0b335fafe2"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>emissive_b</b> (double val)=0</td></tr>
+<tr class="separator:acfd48cb3a3c1731a54f73e0b335fafe2 inherit pub_methods_classprtx_1_1_builtin_material_attributes_builder"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a49722668573865c0976c5052f374f236 inherit pub_methods_classprtx_1_1_builtin_material_attributes_builder"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a49722668573865c0976c5052f374f236"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>emissive_g</b> (double val)=0</td></tr>
+<tr class="separator:a49722668573865c0976c5052f374f236 inherit pub_methods_classprtx_1_1_builtin_material_attributes_builder"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a663fbdcf0f3b9e50c7f9845dfbc241c4 inherit pub_methods_classprtx_1_1_builtin_material_attributes_builder"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a663fbdcf0f3b9e50c7f9845dfbc241c4"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>emissive_r</b> (double val)=0</td></tr>
+<tr class="separator:a663fbdcf0f3b9e50c7f9845dfbc241c4 inherit pub_methods_classprtx_1_1_builtin_material_attributes_builder"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad47fe11e44467c3d6b59515a24fb3cb8 inherit pub_methods_classprtx_1_1_builtin_material_attributes_builder"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad47fe11e44467c3d6b59515a24fb3cb8"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>emissiveColor</b> (const std::vector&lt; double &gt; &amp;val)=0</td></tr>
+<tr class="separator:ad47fe11e44467c3d6b59515a24fb3cb8 inherit pub_methods_classprtx_1_1_builtin_material_attributes_builder"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a08dca80446c1be4e09bf9e34c3d3af2c inherit pub_methods_classprtx_1_1_builtin_material_attributes_builder"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a08dca80446c1be4e09bf9e34c3d3af2c"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>emissiveMap</b> (const std::vector&lt; <a class="el" href="namespaceprtx.html#acc7afcec4e6a1bd29692bdc1f45d36df">prtx::TexturePtr</a> &gt; &amp;val, const std::vector&lt; std::wstring &gt; &amp;resolveMapKeys)=0</td></tr>
+<tr class="separator:a08dca80446c1be4e09bf9e34c3d3af2c inherit pub_methods_classprtx_1_1_builtin_material_attributes_builder"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace5eca8ad8e919e006fa44d16f056754 inherit pub_methods_classprtx_1_1_builtin_material_attributes_builder"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ace5eca8ad8e919e006fa44d16f056754"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>emissivemap_rw</b> (double val)=0</td></tr>
+<tr class="separator:ace5eca8ad8e919e006fa44d16f056754 inherit pub_methods_classprtx_1_1_builtin_material_attributes_builder"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad88355147b735addbe878521d572e384 inherit pub_methods_classprtx_1_1_builtin_material_attributes_builder"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad88355147b735addbe878521d572e384"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>emissivemap_su</b> (double val)=0</td></tr>
+<tr class="separator:ad88355147b735addbe878521d572e384 inherit pub_methods_classprtx_1_1_builtin_material_attributes_builder"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a61ac5607954f83dae6afc828b314e1 inherit pub_methods_classprtx_1_1_builtin_material_attributes_builder"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2a61ac5607954f83dae6afc828b314e1"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>emissivemap_sv</b> (double val)=0</td></tr>
+<tr class="separator:a2a61ac5607954f83dae6afc828b314e1 inherit pub_methods_classprtx_1_1_builtin_material_attributes_builder"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a293a36e1a86db841d278f44f7928947e inherit pub_methods_classprtx_1_1_builtin_material_attributes_builder"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a293a36e1a86db841d278f44f7928947e"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>emissivemap_tu</b> (double val)=0</td></tr>
+<tr class="separator:a293a36e1a86db841d278f44f7928947e inherit pub_methods_classprtx_1_1_builtin_material_attributes_builder"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a26a3b3213f239a7374db5155a5f922c8 inherit pub_methods_classprtx_1_1_builtin_material_attributes_builder"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a26a3b3213f239a7374db5155a5f922c8"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>emissivemap_tv</b> (double val)=0</td></tr>
+<tr class="separator:a26a3b3213f239a7374db5155a5f922c8 inherit pub_methods_classprtx_1_1_builtin_material_attributes_builder"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a245a386c6e0c201dc8ecbd22edd06605 inherit pub_methods_classprtx_1_1_builtin_material_attributes_builder"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a245a386c6e0c201dc8ecbd22edd06605"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>metallic</b> (double val)=0</td></tr>
+<tr class="separator:a245a386c6e0c201dc8ecbd22edd06605 inherit pub_methods_classprtx_1_1_builtin_material_attributes_builder"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5ff2ac0595f94874abe0f6423f3b607 inherit pub_methods_classprtx_1_1_builtin_material_attributes_builder"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac5ff2ac0595f94874abe0f6423f3b607"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>metallicMap</b> (const std::vector&lt; <a class="el" href="namespaceprtx.html#acc7afcec4e6a1bd29692bdc1f45d36df">prtx::TexturePtr</a> &gt; &amp;val, const std::vector&lt; std::wstring &gt; &amp;resolveMapKeys)=0</td></tr>
+<tr class="separator:ac5ff2ac0595f94874abe0f6423f3b607 inherit pub_methods_classprtx_1_1_builtin_material_attributes_builder"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aab31e2395792f0346c7d46725b747d10 inherit pub_methods_classprtx_1_1_builtin_material_attributes_builder"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aab31e2395792f0346c7d46725b747d10"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>metallicmap_rw</b> (double val)=0</td></tr>
+<tr class="separator:aab31e2395792f0346c7d46725b747d10 inherit pub_methods_classprtx_1_1_builtin_material_attributes_builder"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a41d885ac2b08d8c04e735730f5c52aa2 inherit pub_methods_classprtx_1_1_builtin_material_attributes_builder"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a41d885ac2b08d8c04e735730f5c52aa2"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>metallicmap_su</b> (double val)=0</td></tr>
+<tr class="separator:a41d885ac2b08d8c04e735730f5c52aa2 inherit pub_methods_classprtx_1_1_builtin_material_attributes_builder"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5d41c082a392a27df7c2fcbf77456e9d inherit pub_methods_classprtx_1_1_builtin_material_attributes_builder"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5d41c082a392a27df7c2fcbf77456e9d"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>metallicmap_sv</b> (double val)=0</td></tr>
+<tr class="separator:a5d41c082a392a27df7c2fcbf77456e9d inherit pub_methods_classprtx_1_1_builtin_material_attributes_builder"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3da5f1d88ee7b0082b04d925c401daaa inherit pub_methods_classprtx_1_1_builtin_material_attributes_builder"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3da5f1d88ee7b0082b04d925c401daaa"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>metallicmap_tu</b> (double val)=0</td></tr>
+<tr class="separator:a3da5f1d88ee7b0082b04d925c401daaa inherit pub_methods_classprtx_1_1_builtin_material_attributes_builder"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac4ba210b3f05241c5983b233fdac377b inherit pub_methods_classprtx_1_1_builtin_material_attributes_builder"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac4ba210b3f05241c5983b233fdac377b"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>metallicmap_tv</b> (double val)=0</td></tr>
+<tr class="separator:ac4ba210b3f05241c5983b233fdac377b inherit pub_methods_classprtx_1_1_builtin_material_attributes_builder"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3330280330a21ec2efde7ac61bc41970 inherit pub_methods_classprtx_1_1_builtin_material_attributes_builder"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3330280330a21ec2efde7ac61bc41970"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>name</b> (const std::wstring &amp;val)=0</td></tr>
 <tr class="separator:a3330280330a21ec2efde7ac61bc41970 inherit pub_methods_classprtx_1_1_builtin_material_attributes_builder"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -263,12 +297,33 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>normalmap_tu<
 <tr class="memitem:aadcd3ca84d50559a40113d873dd1b8be inherit pub_methods_classprtx_1_1_builtin_material_attributes_builder"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aadcd3ca84d50559a40113d873dd1b8be"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>normalmap_tv</b> (double val)=0</td></tr>
 <tr class="separator:aadcd3ca84d50559a40113d873dd1b8be inherit pub_methods_classprtx_1_1_builtin_material_attributes_builder"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf421e657db9092a329d5ea1da9c43ed inherit pub_methods_classprtx_1_1_builtin_material_attributes_builder"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abf421e657db9092a329d5ea1da9c43ed"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>occlusionMap</b> (const std::vector&lt; <a class="el" href="namespaceprtx.html#acc7afcec4e6a1bd29692bdc1f45d36df">prtx::TexturePtr</a> &gt; &amp;val, const std::vector&lt; std::wstring &gt; &amp;resolveMapKeys)=0</td></tr>
+<tr class="separator:abf421e657db9092a329d5ea1da9c43ed inherit pub_methods_classprtx_1_1_builtin_material_attributes_builder"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae1439f1bb314ac0147ef7c6a2cd59a7 inherit pub_methods_classprtx_1_1_builtin_material_attributes_builder"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aae1439f1bb314ac0147ef7c6a2cd59a7"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>occlusionmap_rw</b> (double val)=0</td></tr>
+<tr class="separator:aae1439f1bb314ac0147ef7c6a2cd59a7 inherit pub_methods_classprtx_1_1_builtin_material_attributes_builder"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae06908f9c125bbc70937bc9cae5cd6b2 inherit pub_methods_classprtx_1_1_builtin_material_attributes_builder"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae06908f9c125bbc70937bc9cae5cd6b2"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>occlusionmap_su</b> (double val)=0</td></tr>
+<tr class="separator:ae06908f9c125bbc70937bc9cae5cd6b2 inherit pub_methods_classprtx_1_1_builtin_material_attributes_builder"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a52ae977f65cfd5501316748de9a8aa82 inherit pub_methods_classprtx_1_1_builtin_material_attributes_builder"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a52ae977f65cfd5501316748de9a8aa82"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>occlusionmap_sv</b> (double val)=0</td></tr>
+<tr class="separator:a52ae977f65cfd5501316748de9a8aa82 inherit pub_methods_classprtx_1_1_builtin_material_attributes_builder"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a37bda1d01f88714f2e09d3553a7a5f1e inherit pub_methods_classprtx_1_1_builtin_material_attributes_builder"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a37bda1d01f88714f2e09d3553a7a5f1e"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>occlusionmap_tu</b> (double val)=0</td></tr>
+<tr class="separator:a37bda1d01f88714f2e09d3553a7a5f1e inherit pub_methods_classprtx_1_1_builtin_material_attributes_builder"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a51436da856613df4a5a0cee86b95ec5f inherit pub_methods_classprtx_1_1_builtin_material_attributes_builder"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a51436da856613df4a5a0cee86b95ec5f"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>occlusionmap_tv</b> (double val)=0</td></tr>
+<tr class="separator:a51436da856613df4a5a0cee86b95ec5f inherit pub_methods_classprtx_1_1_builtin_material_attributes_builder"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a63012fb0b76253dcafa590119521ff42 inherit pub_methods_classprtx_1_1_builtin_material_attributes_builder"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a63012fb0b76253dcafa590119521ff42"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>opacity</b> (double val)=0</td></tr>
 <tr class="separator:a63012fb0b76253dcafa590119521ff42 inherit pub_methods_classprtx_1_1_builtin_material_attributes_builder"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9d6b4c0bf4ac307917178ec595e3dcff inherit pub_methods_classprtx_1_1_builtin_material_attributes_builder"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9d6b4c0bf4ac307917178ec595e3dcff"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>opacityMap</b> (const std::vector&lt; <a class="el" href="namespaceprtx.html#acc7afcec4e6a1bd29692bdc1f45d36df">prtx::TexturePtr</a> &gt; &amp;val, const std::vector&lt; std::wstring &gt; &amp;resolveMapKeys)=0</td></tr>
 <tr class="separator:a9d6b4c0bf4ac307917178ec595e3dcff inherit pub_methods_classprtx_1_1_builtin_material_attributes_builder"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a19cb1f6fa87a6e4bf78aef83b293c371 inherit pub_methods_classprtx_1_1_builtin_material_attributes_builder"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a19cb1f6fa87a6e4bf78aef83b293c371"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>opacitymap_mode</b> (const std::wstring &amp;val)=0</td></tr>
+<tr class="separator:a19cb1f6fa87a6e4bf78aef83b293c371 inherit pub_methods_classprtx_1_1_builtin_material_attributes_builder"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac6319431be60dabb5dbe8ddb1fb19ab2 inherit pub_methods_classprtx_1_1_builtin_material_attributes_builder"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac6319431be60dabb5dbe8ddb1fb19ab2"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>opacitymap_rw</b> (double val)=0</td></tr>
 <tr class="separator:ac6319431be60dabb5dbe8ddb1fb19ab2 inherit pub_methods_classprtx_1_1_builtin_material_attributes_builder"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -287,6 +342,27 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>opacitymap_tv
 <tr class="memitem:a4ec3c8ad22a12929ba9049353b6a7356 inherit pub_methods_classprtx_1_1_builtin_material_attributes_builder"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4ec3c8ad22a12929ba9049353b6a7356"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>reflectivity</b> (double val)=0</td></tr>
 <tr class="separator:a4ec3c8ad22a12929ba9049353b6a7356 inherit pub_methods_classprtx_1_1_builtin_material_attributes_builder"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab9f9ad4ef6297c5a6536499fc20c0574 inherit pub_methods_classprtx_1_1_builtin_material_attributes_builder"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab9f9ad4ef6297c5a6536499fc20c0574"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>roughness</b> (double val)=0</td></tr>
+<tr class="separator:ab9f9ad4ef6297c5a6536499fc20c0574 inherit pub_methods_classprtx_1_1_builtin_material_attributes_builder"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a945601e6818233a8f0a8d148aa791fd1 inherit pub_methods_classprtx_1_1_builtin_material_attributes_builder"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a945601e6818233a8f0a8d148aa791fd1"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>roughnessMap</b> (const std::vector&lt; <a class="el" href="namespaceprtx.html#acc7afcec4e6a1bd29692bdc1f45d36df">prtx::TexturePtr</a> &gt; &amp;val, const std::vector&lt; std::wstring &gt; &amp;resolveMapKeys)=0</td></tr>
+<tr class="separator:a945601e6818233a8f0a8d148aa791fd1 inherit pub_methods_classprtx_1_1_builtin_material_attributes_builder"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aebe60e2950c6ad6a410145a4cfaaf6d6 inherit pub_methods_classprtx_1_1_builtin_material_attributes_builder"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aebe60e2950c6ad6a410145a4cfaaf6d6"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>roughnessmap_rw</b> (double val)=0</td></tr>
+<tr class="separator:aebe60e2950c6ad6a410145a4cfaaf6d6 inherit pub_methods_classprtx_1_1_builtin_material_attributes_builder"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a96bdb29cf7d48034b61cd77e7f7058a2 inherit pub_methods_classprtx_1_1_builtin_material_attributes_builder"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a96bdb29cf7d48034b61cd77e7f7058a2"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>roughnessmap_su</b> (double val)=0</td></tr>
+<tr class="separator:a96bdb29cf7d48034b61cd77e7f7058a2 inherit pub_methods_classprtx_1_1_builtin_material_attributes_builder"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8481853a66bff119da5cc57ca45dd65e inherit pub_methods_classprtx_1_1_builtin_material_attributes_builder"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8481853a66bff119da5cc57ca45dd65e"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>roughnessmap_sv</b> (double val)=0</td></tr>
+<tr class="separator:a8481853a66bff119da5cc57ca45dd65e inherit pub_methods_classprtx_1_1_builtin_material_attributes_builder"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a47423471f2d97a6cdab0ca108d9d13cc inherit pub_methods_classprtx_1_1_builtin_material_attributes_builder"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a47423471f2d97a6cdab0ca108d9d13cc"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>roughnessmap_tu</b> (double val)=0</td></tr>
+<tr class="separator:a47423471f2d97a6cdab0ca108d9d13cc inherit pub_methods_classprtx_1_1_builtin_material_attributes_builder"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa9d9590f52c0633f10706c79903254c9 inherit pub_methods_classprtx_1_1_builtin_material_attributes_builder"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa9d9590f52c0633f10706c79903254c9"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>roughnessmap_tv</b> (double val)=0</td></tr>
+<tr class="separator:aa9d9590f52c0633f10706c79903254c9 inherit pub_methods_classprtx_1_1_builtin_material_attributes_builder"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a49dc6bbd9c237d748ebdb0fe4c202991 inherit pub_methods_classprtx_1_1_builtin_material_attributes_builder"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a49dc6bbd9c237d748ebdb0fe4c202991"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>shader</b> (const std::wstring &amp;val)=0</td></tr>
 <tr class="separator:a49dc6bbd9c237d748ebdb0fe4c202991 inherit pub_methods_classprtx_1_1_builtin_material_attributes_builder"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -995,15 +1071,11 @@ virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>setBuiltinStr
 <li><a class="el" href="_material_8h_source.html">Material.h</a></li>
 </ul>
 </div><!-- contents -->
-</div><!-- doc-content -->
 <!-- start footer part -->
-<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
-  <ul>
-    <li class="navelem"><a class="el" href="namespaceprtx.html">prtx</a></li><li class="navelem"><a class="el" href="classprtx_1_1_material_builder.html">MaterialBuilder</a></li>
-    <li class="footer">Generated on Tue Sep 25 2018 09:40:51 for Esri Procedural Runtime by
-    <a href="http://www.doxygen.org/index.html">
-    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.5 </li>
-  </ul>
-</div>
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue Apr 9 2019 11:56:31 for Esri Procedural Runtime by &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.5
+</small></address>
 </body>
 </html>

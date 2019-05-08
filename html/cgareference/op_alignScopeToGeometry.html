@@ -1,0 +1,137 @@
+<html>
+<head>
+<title>alignScopeToGeometry Operation</title>
+<link rel="stylesheet" href="../manual_style.css" type="text/css" />
+</head>
+<body>
+<div class="content">
+  <!-- HEADER (use only on bookchapters) -->
+  <table summary="" class="header">
+    <tr>
+      <td align="left" class="helphead_l"><a href="../toc.html">
+        <div class="helplink">&nbsp;</div>
+        </a></td>
+      <td align="right" class="helphead_r"></td>
+    </tr>
+  </table>
+  <!-- CONTENT -->
+  <h1>alignScopeToGeometry operation</h1>
+  <h2> Synopsis </h2>
+  <p class="code2">alignScopeToGeometry(<span class="cga_opparam">upAxisSelector, float faceIndex, float edgeIndex</span>)</p>
+  <p class="code2">alignScopeToGeometry(<span class="cga_opparam">upAxisSelector, faceSelector, edgeIndex</span>)</p>
+  <p class="code2">alignScopeToGeometry(<span class="cga_opparam">upAxisSelector, faceIndex, edgeSelector</span>)</p>
+  <p class="code2">alignScopeToGeometry(<span class="cga_opparam">upAxisSelector, faceSelector, edgeSelector</span>)</p>
+  </span>
+  </p>
+  <h2> Parameters </h2>
+  <ul>
+    <li><span class="cga_opparam">upAxisSelector</span> (selstr)<br>
+      <span class="codelight">yUp</span>, <span class="codelight">zUp</span> <em>(Note:</em><span class="codelight">xUp</span> <em>not supported yet) </em></li>
+    <li><span class="cga_opparam">faceIndex</span> (float)<br>
+      0-based index of face which contains the edge. Negative indices are modulo-adjusted, i.e. -1 is the last face.</li>
+    <li><span class="cga_opparam">edgeIndex </span>(float)<br>
+      0-based index of edge which will become the new x-axis. Negative indices are modulo-adjusted, i.e. -1 is the last edge. Note that the edge index is relative to the selected face!</li>
+    <li><span class="cga_opparam">faceSelector</span> (selstr)<br>
+    <ul>
+    	<li><span class="codelight">world.lowest</span>: takes the face with lowest y world-coordinates.</li>
+    	<li><span class="codelight">largest</span>: takes the largest face.</li>
+    	<li><span class="codelight">any</span> (only in combination with an <span class="cga_opparam">edgeSelector</span>): takes the face for which the edge selector has extremal value.</li>
+    </ul>
+    </li>
+    <li><span class="cga_opparam">edgeSelector</span> (selstr)<br>
+    <ul>
+    	<li><span class="codelight">world.lowest</span>: takes the edge with lowest y world-coordinates.</li>
+    	<li><span class="codelight">longest</span>: takes the longest edge.</li>
+    </ul>
+  </ul>
+  
+<p class="info">The <span class="codelight">alignScopeToGeometry</span> operation manipulates the <span class="codelight">scope</span>, the <span class="codelight">pivot</span> and the <span class="codelight">geometry</span> attributes in the following way:</p>
+<ol>
+	<li>select new pivot axis directions (defined by <span class="cga_opparam">upAxisSelector</span> and the selected face and edge, see below)</li>
+    <li>calculate the oriented bounding box (OOB) for the geometry along these axes and set pivot.p to the origin of the OOB. The new scope dimensions are set to the OOB.</li>
+    <li>transform the geometry into this new coordinate system.</li>
+</ol>
+<p>The parameters let you choose an edge of a face in the geometry. The new x-axis of the scope will be parallel to this edge, and the up-axis will be the face's normal.</p>
+<p>The <span class="cga_keyword">geometry</span> is projected to the new <span class="cga_keyword">scope</span> (i.e. stays at the same place in world coordinates).</p>
+
+  <h2> Related </h2>
+  <ul>
+    <li> <a class="normw" href="op_alignScopeToAxes.html"> alignScopeToAxes operation</a> </li>
+    <li> <a class="normw" href="op_setPivot.html"> setPivot operation</a> </li>
+    <li> <a class="normw" href="attr_scope.html"> scope attribute</a> </li>
+    <li> <a class="normw" href="attr_pivot.html"> pivot attribute</a>
+      <!-- FOOTER -->
+    </li>
+  </ul>
+  <h2>Examples
+ 
+  </h2>
+  <h3>Aligning to the lowest edge</h3>
+  <table summary="" class="twocol">
+    <tr>
+      <td class="twocol_l"></br>
+        <img src="images/alignScopeToGeometry-auto-a.png" alt="initial scene" width="298" > </td>
+      <td><pre class="code">A--> comp(f){ 25 : Faces }
+
+</pre>
+        <p><em>The initial scene: After a face component split, the  scope </em>(<em>and pivot, fat) happen to be positioned such that the y-axis points towards the ground.</em></p></td>
+    </tr>
+    <tr>
+      <td class="twocol_l"></br>
+        <img src="images/alignScopeToGeometry-auto-b.png" alt="after alignScopeToGeometry with auto" width="298" ></td>
+      <td><pre class="code">A--> comp(f){ 25 : Faces }</pre>
+        <pre class="code">     alignScopeToGeometry(zUp, any, world.lowest)</pre>
+        <pre class="code">&nbsp;</pre>
+        <pre class="code">&nbsp;</pre>
+        <p><em>Applying alignScopeToGeometry() with the <span class="codelight">any</span> and <span class="codelight">world.lowest</span> selectors guarantees that the y-axis of the scope points upwards.</em></p>
+        <p><em>This is very useful e.g. for placing bricks on a roof.</em></p></td>
+    </tr>
+  </table>
+  <h3>&nbsp;</h3>
+  <h3>Basic usage</h3>
+  <table summary="" class="twocol">
+    <tr>
+      <td class="twocol_l"></br>
+        <img src="images/alignScopeToGeometry-cylinder-a.png" alt="initial scene" width="298" > </td>
+      <td><pre class="code">A -->
+    s(2,3,2)
+    i("cylinder.obj")
+    B
+    comp(f){ 
+        0:  color("#ff0000") t(0,0,0.01) X |
+        32: color("#0000ff") t(0,0,0.01) X }
+ 		</pre>
+        <p><em>The initial scene: </em><em>A mesh is inserted and two faces highlighted by applying a component split.</em></p></td>
+    </tr>
+    <tr>
+      <td class="twocol_l"><img src="images/alignScopeToGeometry-cylinder-b.png" alt="after alignScopeToGeometry with auto" width="298" ></td>
+      <td><em>The same scene, with scope and pivot of shape B highlighted.</em></td>
+    </tr>
+    <tr>
+      <td class="twocol_l"><img src="images/alignScopeToGeometry-cylinder-c.png" alt="after alignScopeToGeometry with auto" width="298" ></td>
+      <td><pre class="code">B -->
+     alignScopeToGeometry(zUp, 1) 
+    </pre>
+        <p><em>After alignScopeToGeometry(),the pivot's (and the scope's) x-axis points along edge 1 of face 0 (red); the z-axis points along the face normal and the x-axis is normal to the two others. The pivot is positioned at the edges starting point and the scope is the pivot-aligned bounding box of the geometry.</em></p></td>
+    </tr>
+    <tr>
+      <td class="twocol_l"><img src="images/alignScopeToGeometry-cylinder-d.png" alt="after alignScopeToGeometry with auto" width="298" ></td>
+      <td><pre class="code">B -->
+    alignScopeToGeometry(yUp, 32, 2) 
+    </pre>
+        <p><em>Here, the second edge of face 32 (blue) is used, and the face-normal becomes the new y-axis. </em></p></td>
+    </tr>
+    <tr>
+      <td class="twocol_l"></br>
+        <img src="images/alignScopeToGeometry-cylinder-e.png" alt="after alignScopeToGeometry with auto" width="298" ></td>
+      <td><pre class="code">B -->
+      alignScopeToGeometry(yUp, any, world.lowest) 
+    </pre>
+        <p><em>In this case, "any" and "world.lowest" select the edge with lowest y-position (in world coordinates), which becomes the new x-axis, and the corresponding face-normal becomes the new y-axis (because of the yUp selector). </em></p></td>
+    </tr>
+  </table>
+  <p class="foot">Copyright &copy;2008-2019 Esri R&amp;D Center Zurich. All rights reserved.</p>
+  <!-- END CENTERED CONTENT -->
+</div>
+</body>
+</html>

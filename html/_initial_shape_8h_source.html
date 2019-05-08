@@ -8,13 +8,6 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
-<link href="navtree.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="resize.js"></script>
-<script type="text/javascript" src="navtree.js"></script>
-<script type="text/javascript">
-  $(document).ready(initResizable);
-  $(window).load(resizeHeight);
-</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/search.js"></script>
 <script type="text/javascript">
@@ -31,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="esri_prt_55px.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Esri Procedural Runtime
-   &#160;<span id="projectnumber">1.10.4198</span>
+   &#160;<span id="projectnumber">2.0.5403</span>
    </div>
   </td>
  </tr>
@@ -72,21 +65,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="files.html"><span>File&#160;List</span></a></li>
     </ul>
   </div>
-</div><!-- top -->
-<div id="side-nav" class="ui-resizable side-nav-resizable">
-  <div id="nav-tree">
-    <div id="nav-tree-contents">
-      <div id="nav-sync" class="sync"></div>
-    </div>
-  </div>
-  <div id="splitbar" style="-moz-user-select:none;" 
-       class="ui-resizable-handle">
-  </div>
-</div>
-<script type="text/javascript">
-$(document).ready(function(){initNavTree('_initial_shape_8h_source.html','');});
-</script>
-<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -101,13 +79,18 @@ $(document).ready(function(){initNavTree('_initial_shape_8h_source.html','');});
 </iframe>
 </div>
 
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_e104a5fd3f1a5c6eb1edb871fc217c8e.html">prt</a></li>  </ul>
+</div>
+</div><!-- top -->
 <div class="header">
   <div class="headertitle">
 <div class="title">InitialShape.h</div>  </div>
 </div><!--header-->
 <div class="contents">
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">  COPYRIGHT (c) 2012-2018 Esri R&amp;D Center Zurich</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">  COPYRIGHT (c) 2012-2019 Esri R&amp;D Center Zurich</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">  TRADE SECRETS: ESRI PROPRIETARY AND CONFIDENTIAL</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">  Unpublished material - all rights reserved under the</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">  Copyright Laws of the United States and applicable international</span></div>
@@ -138,82 +121,95 @@ $(document).ready(function(){initNavTree('_initial_shape_8h_source.html','');});
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;</div>
 <div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="classprt_1_1_initial_shape.html">   46</a></span>&#160;<span class="keyword">class </span>PRT_EXPORTS_API <a class="code" href="classprt_1_1_initial_shape.html">InitialShape</a> : <span class="keyword">public</span> <a class="code" href="classprt_1_1_object.html">Object</a> {</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">wchar_t</span> <span class="keyword">const</span>*      getRuleFile()       <span class="keyword">const</span> = 0;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">wchar_t</span> <span class="keyword">const</span>*      getStartRule()      <span class="keyword">const</span> = 0;</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">wchar_t</span> <span class="keyword">const</span>*      getName()           <span class="keyword">const</span> = 0;</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keyword">virtual</span> int32_t             getRandomSeed()     <span class="keyword">const</span> = 0;</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="classprt_1_1_attribute_map.html">AttributeMap</a> <span class="keyword">const</span>* getAttributeMap()   <span class="keyword">const</span> = 0;</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="classprt_1_1_resolve_map.html">ResolveMap</a>   <span class="keyword">const</span>* getResolveMap()     <span class="keyword">const</span> = 0;</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <span class="keyword">virtual</span> <span class="keyword">const</span> <span class="keywordtype">wchar_t</span>*      getCacheKey()       <span class="keyword">const</span> = 0;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">wchar_t</span> <span class="keyword">const</span>*      getRuleFile()     <span class="keyword">const</span> = 0;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">wchar_t</span> <span class="keyword">const</span>*      getStartRule()    <span class="keyword">const</span> = 0;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">wchar_t</span> <span class="keyword">const</span>*      getName()         <span class="keyword">const</span> = 0;</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keyword">virtual</span> int32_t             getRandomSeed()   <span class="keyword">const</span> = 0;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="classprt_1_1_attribute_map.html">AttributeMap</a> <span class="keyword">const</span>* getAttributeMap() <span class="keyword">const</span> = 0;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="classprt_1_1_resolve_map.html">ResolveMap</a> <span class="keyword">const</span>*   getResolveMap()   <span class="keyword">const</span> = 0;</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">wchar_t</span> <span class="keyword">const</span>*      getCacheKey()    <span class="keyword">const</span> = 0;</div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;</div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <a class="code" href="classprt_1_1_initial_shape.html">InitialShape</a>();</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="classprt_1_1_initial_shape.html">InitialShape</a>();</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <a class="code" href="classprt_1_1_initial_shape.html">InitialShape</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="classprt_1_1_initial_shape.html">InitialShape</a>() = <span class="keywordflow">default</span>;</div>
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;};</div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;</div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;</div>
 <div class="line"><a name="l00089"></a><span class="lineno"><a class="line" href="classprt_1_1_initial_shape_builder.html">   89</a></span>&#160;<span class="keyword">class </span>PRT_EXPORTS_API <a class="code" href="classprt_1_1_initial_shape_builder.html">InitialShapeBuilder</a> : <span class="keyword">public</span> <a class="code" href="classprt_1_1_object.html">Object</a> {</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    <a class="code" href="classprt_1_1_initial_shape_builder.html">InitialShapeBuilder</a>();</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="classprt_1_1_initial_shape_builder.html">InitialShapeBuilder</a>();</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    <span class="keyword">static</span> <a class="code" href="classprt_1_1_initial_shape_builder.html">InitialShapeBuilder</a>* create(<a class="code" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a>* status = 0);</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="classprt_1_1_initial_shape.html">InitialShape</a> <span class="keyword">const</span>* createInitialShapeAndReset(<a class="code" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a>* status = 0) = 0;</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a> setGeometry(<span class="keywordtype">double</span> <span class="keyword">const</span>*         vertexCoords,</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;                               <span class="keywordtype">size_t</span>                vcCount,</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;                               uint32_t <span class="keyword">const</span>*       indices,</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;                               <span class="keywordtype">size_t</span>                indicesCount,</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;                               uint32_t <span class="keyword">const</span>*       faceCounts,</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;                               <span class="keywordtype">size_t</span>                faceCountsCount,</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;                               <span class="keyword">const</span> uint32_t*       holes = 0,</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;                               <span class="keywordtype">size_t</span>                holesCount = 0) = 0;</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;</div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a> setUVs(<span class="keywordtype">double</span> <span class="keyword">const</span>*         uvCoords,</div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;                          <span class="keywordtype">size_t</span>                uvcCount,</div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;                          uint32_t <span class="keyword">const</span>*       uvIndices,</div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;                          <span class="keywordtype">size_t</span>                uvIndicesCount,</div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;                          uint32_t <span class="keyword">const</span>*       faceCounts,</div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;                          <span class="keywordtype">size_t</span>                faceCountsCount,</div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;                          uint32_t              uvSet = 0) = 0;</div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;</div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;</div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a> resolveTextures(<span class="keywordtype">wchar_t</span> <span class="keyword">const</span>* <span class="keyword">const</span>* textureKeys,</div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;                                   <span class="keywordtype">size_t</span>                textureCount,</div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;                                   uint32_t <span class="keyword">const</span>*       faceTextureIndices,</div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;                                   uint32_t              facesCount,</div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;                                   <span class="keyword">const</span> <a class="code" href="classprt_1_1_resolve_map.html">ResolveMap</a>*     resolveMap = 0,</div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;                                   <a class="code" href="classprt_1_1_cache.html">Cache</a>*                cache      = 0) = 0;</div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;</div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;</div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a> resolveGeometry(<span class="keywordtype">wchar_t</span> <span class="keyword">const</span>*      key,</div>
-<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;                                   <a class="code" href="classprt_1_1_resolve_map.html">ResolveMap</a> <span class="keyword">const</span>*   resolveMap = 0,</div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;                                   <a class="code" href="classprt_1_1_cache.html">Cache</a>*              cache      = 0) = 0;</div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;</div>
-<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;</div>
-<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a> setAttributes(<span class="keywordtype">wchar_t</span> <span class="keyword">const</span>*        ruleFile,</div>
-<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;                                 <span class="keywordtype">wchar_t</span> <span class="keyword">const</span>*        startRule,</div>
-<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;                                 int32_t               randomSeed,</div>
-<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;                                 <span class="keywordtype">wchar_t</span> <span class="keyword">const</span>*        name,</div>
-<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;                                 <a class="code" href="classprt_1_1_attribute_map.html">AttributeMap</a> <span class="keyword">const</span>*   attributes,</div>
-<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;                                 <a class="code" href="classprt_1_1_resolve_map.html">ResolveMap</a> <span class="keyword">const</span>*     resolveMap) = 0;</div>
-<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;</div>
-<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;</div>
-<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a> resolveAttributes(   <span class="keywordtype">wchar_t</span> <span class="keyword">const</span>*      key,</div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;                                        <a class="code" href="classprt_1_1_resolve_map.html">ResolveMap</a> <span class="keyword">const</span>*   resolveMap  = 0,</div>
-<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;                                        <a class="code" href="classprt_1_1_cache.html">Cache</a>*              cache       = 0</div>
-<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;                                    ) = 0;</div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;};</div>
-<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;</div>
-<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;</div>
-<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;} <span class="comment">/* namespace prt */</span></div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <span class="keyword">static</span> <a class="code" href="classprt_1_1_initial_shape_builder.html">InitialShapeBuilder</a>* create(<a class="code" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a>* status = <span class="keyword">nullptr</span>);</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="classprt_1_1_initial_shape.html">InitialShape</a> <span class="keyword">const</span>* createInitialShapeAndReset(<a class="code" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a>* status = <span class="keyword">nullptr</span>) = 0;</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="classprt_1_1_initial_shape.html">InitialShape</a> <span class="keyword">const</span>* createInitialShape(<a class="code" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a>* status = <span class="keyword">nullptr</span>) = 0;</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a> setGeometry(</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;            <span class="keywordtype">double</span> <span class="keyword">const</span>*   vertexCoords,</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;            <span class="keywordtype">size_t</span>          vcCount,</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;            uint32_t <span class="keyword">const</span>* indices,</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;            <span class="keywordtype">size_t</span>          indicesCount,</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;            uint32_t <span class="keyword">const</span>* faceCounts,</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;            <span class="keywordtype">size_t</span>          faceCountsCount,</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;            <span class="keyword">const</span> uint32_t* holes      = <span class="keyword">nullptr</span>,</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;            <span class="keywordtype">size_t</span>          holesCount = 0</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;    ) = 0;</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a> setUVs(</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;            <span class="keywordtype">double</span> <span class="keyword">const</span>*   uvCoords,</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;            <span class="keywordtype">size_t</span>          uvcCount,</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;            uint32_t <span class="keyword">const</span>* uvIndices,</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;            <span class="keywordtype">size_t</span>          uvIndicesCount,</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;            uint32_t <span class="keyword">const</span>* faceCounts,</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;            <span class="keywordtype">size_t</span>          faceCountsCount,</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;            uint32_t        uvSet = 0</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;    ) = 0;</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a> resolveTextures(</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;            <span class="keywordtype">wchar_t</span> <span class="keyword">const</span>* <span class="keyword">const</span>* textureKeys,</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;            <span class="keywordtype">size_t</span>                textureCount,</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;            uint32_t <span class="keyword">const</span>*       faceTextureIndices,</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;            uint32_t              facesCount,</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;            <a class="code" href="classprt_1_1_resolve_map.html">ResolveMap</a> <span class="keyword">const</span>*     resolveMap = <span class="keyword">nullptr</span>,</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;            <a class="code" href="classprt_1_1_cache.html">Cache</a>*                cache      = <span class="keyword">nullptr</span></div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;    ) = 0;</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a> resetGeometry() = 0;</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a> resolveGeometry(</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;            <span class="keywordtype">wchar_t</span> <span class="keyword">const</span>*    key,</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;            <a class="code" href="classprt_1_1_resolve_map.html">ResolveMap</a> <span class="keyword">const</span>* resolveMap = <span class="keyword">nullptr</span>,</div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;            <a class="code" href="classprt_1_1_cache.html">Cache</a>*            cache      = <span class="keyword">nullptr</span></div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;    ) = 0;</div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;</div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a> setAttributes(</div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;            <span class="keywordtype">wchar_t</span> <span class="keyword">const</span>*      ruleFile,</div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;            <span class="keywordtype">wchar_t</span> <span class="keyword">const</span>*      startRule,</div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;            int32_t             randomSeed,</div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;            <span class="keywordtype">wchar_t</span> <span class="keyword">const</span>*      name,</div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;            <a class="code" href="classprt_1_1_attribute_map.html">AttributeMap</a> <span class="keyword">const</span>* attributes,</div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;            <a class="code" href="classprt_1_1_resolve_map.html">ResolveMap</a> <span class="keyword">const</span>*   resolveMap</div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;    ) = 0;</div>
 <div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;</div>
-<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* PRT_INITIALSHAPE_H_ */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;</div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a> resolveAttributes(</div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;            <span class="keywordtype">wchar_t</span> <span class="keyword">const</span>*    key,</div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;            <a class="code" href="classprt_1_1_resolve_map.html">ResolveMap</a> <span class="keyword">const</span>* resolveMap = <span class="keyword">nullptr</span>,</div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;            <a class="code" href="classprt_1_1_cache.html">Cache</a>*            cache      = <span class="keyword">nullptr</span></div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;    ) = 0;</div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;</div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;<span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;    <a class="code" href="classprt_1_1_initial_shape_builder.html">InitialShapeBuilder</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="classprt_1_1_initial_shape_builder.html">InitialShapeBuilder</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;};</div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;</div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;</div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;} <span class="comment">/* namespace prt */</span></div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;</div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;</div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* PRT_INITIALSHAPE_H_ */</span><span class="preprocessor"></span></div>
 <div class="ttc" id="classprt_1_1_resolve_map_html"><div class="ttname"><a href="classprt_1_1_resolve_map.html">prt::ResolveMap</a></div><div class="ttdef"><b>Definition:</b> ResolveMap.h:37</div></div>
 <div class="ttc" id="classprt_1_1_object_html"><div class="ttname"><a href="classprt_1_1_object.html">prt::Object</a></div><div class="ttdef"><b>Definition:</b> Object.h:35</div></div>
 <div class="ttc" id="classprt_1_1_cache_html"><div class="ttname"><a href="classprt_1_1_cache.html">prt::Cache</a></div><div class="ttdef"><b>Definition:</b> Cache.h:53</div></div>
@@ -222,15 +218,11 @@ $(document).ready(function(){initNavTree('_initial_shape_8h_source.html','');});
 <div class="ttc" id="namespaceprt_html_acf0b3066b48a14bccb756bee9a4700e4"><div class="ttname"><a href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">prt::Status</a></div><div class="ttdeci">Status</div><div class="ttdef"><b>Definition:</b> Status.h:31</div></div>
 <div class="ttc" id="classprt_1_1_initial_shape_builder_html"><div class="ttname"><a href="classprt_1_1_initial_shape_builder.html">prt::InitialShapeBuilder</a></div><div class="ttdef"><b>Definition:</b> InitialShape.h:89</div></div>
 </div><!-- fragment --></div><!-- contents -->
-</div><!-- doc-content -->
 <!-- start footer part -->
-<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
-  <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_e104a5fd3f1a5c6eb1edb871fc217c8e.html">prt</a></li><li class="navelem"><b>InitialShape.h</b></li>
-    <li class="footer">Generated on Tue Sep 25 2018 09:40:51 for Esri Procedural Runtime by
-    <a href="http://www.doxygen.org/index.html">
-    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.5 </li>
-  </ul>
-</div>
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue Apr 9 2019 11:56:30 for Esri Procedural Runtime by &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.5
+</small></address>
 </body>
 </html>

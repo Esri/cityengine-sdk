@@ -8,13 +8,6 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
-<link href="navtree.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="resize.js"></script>
-<script type="text/javascript" src="navtree.js"></script>
-<script type="text/javascript">
-  $(document).ready(initResizable);
-  $(window).load(resizeHeight);
-</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/search.js"></script>
 <script type="text/javascript">
@@ -31,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="esri_prt_55px.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Esri Procedural Runtime
-   &#160;<span id="projectnumber">1.10.4198</span>
+   &#160;<span id="projectnumber">2.0.5403</span>
    </div>
   </td>
  </tr>
@@ -75,21 +68,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
-</div><!-- top -->
-<div id="side-nav" class="ui-resizable side-nav-resizable">
-  <div id="nav-tree">
-    <div id="nav-tree-contents">
-      <div id="nav-sync" class="sync"></div>
-    </div>
-  </div>
-  <div id="splitbar" style="-moz-user-select:none;" 
-       class="ui-resizable-handle">
-  </div>
-</div>
-<script type="text/javascript">
-$(document).ready(function(){initNavTree('classprtx_1_1_extension.html','');});
-</script>
-<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -104,6 +82,11 @@ $(document).ready(function(){initNavTree('classprtx_1_1_extension.html','');});
 </iframe>
 </div>
 
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceprtx.html">prtx</a></li><li class="navelem"><a class="el" href="classprtx_1_1_extension.html">Extension</a></li>  </ul>
+</div>
+</div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="classprtx_1_1_extension-members.html">List of all members</a> &#124;
@@ -119,16 +102,18 @@ $(document).ready(function(){initNavTree('classprtx_1_1_extension.html','');});
 <div class="dynheader">
 Inheritance diagram for prtx::Extension:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classprtx_1_1_extension__inherit__graph.svg" width="480" height="443"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classprtx_1_1_extension__inherit__graph.svg" width="552" height="418"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
-<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
 <tr class="memitem:ad6048fac4019029ec39431db1d873801"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_extension.html#ad6048fac4019029ec39431db1d873801">ExtensionType</a> { <br/>
 &#160;&#160;<a class="el" href="classprtx_1_1_extension.html#ad6048fac4019029ec39431db1d873801a73ac5078206d850132ff3c8cfaebbbed">ET_UNDEFINED</a>, 
 <br/>
-&#160;&#160;<a class="el" href="classprtx_1_1_extension.html#ad6048fac4019029ec39431db1d873801aee23e8588611d2d46ce25e563c190e2f">ET_ADAPTOR</a>, 
+&#160;&#160;<a class="el" href="classprtx_1_1_extension.html#ad6048fac4019029ec39431db1d873801aa0e3b007bfd050b0e2aee2af757aaf4c">ET_STREAM_ADAPTOR</a>, 
+<br/>
+&#160;&#160;<a class="el" href="classprtx_1_1_extension.html#ad6048fac4019029ec39431db1d873801a99981ddf69abab12b1d72cd1ca07ab30">ET_RESOLVEMAP_PROVIDER</a>, 
 <br/>
 &#160;&#160;<a class="el" href="classprtx_1_1_extension.html#ad6048fac4019029ec39431db1d873801ad9f1197517898445d4862622805ffd94">ET_ENCODER</a>, 
 <br/>
@@ -164,7 +149,7 @@ Static Public Member Functions</h2></td></tr>
 <tr class="separator:a2aca08c64c2a4f3f8a29acfc511f7d4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Base class for all PRTX extension types: Encoders, Decoders and Adaptors. Extensions are not copyable. </p>
+<div class="textblock"><p>Base class for all PRTX extension types: Encoders, Decoders, StreamAdaptors, and ResolveMapProviders. Extensions are not copyable. </p>
 </div><h2 class="groupheader">Member Enumeration Documentation</h2>
 <a class="anchor" id="ad6048fac4019029ec39431db1d873801"></a>
 <div class="memitem">
@@ -180,8 +165,11 @@ Static Public Member Functions</h2></td></tr>
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><em><a class="anchor" id="ad6048fac4019029ec39431db1d873801a73ac5078206d850132ff3c8cfaebbbed"></a>ET_UNDEFINED</em>&nbsp;</td><td class="fielddoc">
 <p><a class="el" href="classprtx_1_1_extension.html">Extension</a> sub-class is undefined. </p>
 </td></tr>
-<tr><td class="fieldname"><em><a class="anchor" id="ad6048fac4019029ec39431db1d873801aee23e8588611d2d46ce25e563c190e2f"></a>ET_ADAPTOR</em>&nbsp;</td><td class="fielddoc">
-<p><a class="el" href="classprtx_1_1_extension.html">Extension</a> sub-class is an adaptor. </p>
+<tr><td class="fieldname"><em><a class="anchor" id="ad6048fac4019029ec39431db1d873801aa0e3b007bfd050b0e2aee2af757aaf4c"></a>ET_STREAM_ADAPTOR</em>&nbsp;</td><td class="fielddoc">
+<p><a class="el" href="classprtx_1_1_extension.html">Extension</a> sub-class is a stream adaptor. </p>
+</td></tr>
+<tr><td class="fieldname"><em><a class="anchor" id="ad6048fac4019029ec39431db1d873801a99981ddf69abab12b1d72cd1ca07ab30"></a>ET_RESOLVEMAP_PROVIDER</em>&nbsp;</td><td class="fielddoc">
+<p><a class="el" href="classprtx_1_1_extension.html">Extension</a> sub-class is a resolve map provider. </p>
 </td></tr>
 <tr><td class="fieldname"><em><a class="anchor" id="ad6048fac4019029ec39431db1d873801ad9f1197517898445d4862622805ffd94"></a>ET_ENCODER</em>&nbsp;</td><td class="fielddoc">
 <p><a class="el" href="classprtx_1_1_extension.html">Extension</a> sub-class is an encoder. </p>
@@ -220,7 +208,7 @@ Static Public Member Functions</h2></td></tr>
 <p>Specifies the supported content type. Implemented by each subclass.</p>
 <dl class="section return"><dt>Returns</dt><dd>The supported content type of a subclass instance. </dd></dl>
 
-<p>Implemented in <a class="el" href="classprtx_1_1_texture_encoder.html#a6daf7bec9fc55c476bf46535da2668f1">prtx::TextureEncoder</a>, <a class="el" href="classprtx_1_1_material_encoder.html#ad1a056cb40bc748470a39e429b8e8669">prtx::MaterialEncoder</a>, <a class="el" href="classprtx_1_1_c_g_b_decoder.html#aada1cc3916247208f0540865fc3a1dda">prtx::CGBDecoder</a>, <a class="el" href="classprtx_1_1_geometry_encoder.html#a0df8ee27a25245e33a682074ddd8a9d1">prtx::GeometryEncoder</a>, <a class="el" href="classprtx_1_1_texture_decoder.html#aa47725c1333afc4b2ffc007f2511dc66">prtx::TextureDecoder</a>, <a class="el" href="classprtx_1_1_shader_decoder.html#a5147a1390b3a1089b09e2ed09919be46">prtx::ShaderDecoder</a>, <a class="el" href="classprtx_1_1_material_decoder.html#ac120fd5c307be0f5adb4a5b13a16f620">prtx::MaterialDecoder</a>, <a class="el" href="classprtx_1_1_geometry_decoder.html#a6accea315de18f5b247a4e257a9fd1b5">prtx::GeometryDecoder</a>, and <a class="el" href="classprtx_1_1_adaptor.html#a1d052f641eef3f0796547f02a94afd48">prtx::Adaptor</a>.</p>
+<p>Implemented in <a class="el" href="classprtx_1_1_texture_encoder.html#a6daf7bec9fc55c476bf46535da2668f1">prtx::TextureEncoder</a>, <a class="el" href="classprtx_1_1_string_decoder.html#ae33847545ac692a50364ff59e5a2f5df">prtx::StringDecoder</a>, <a class="el" href="classprtx_1_1_material_encoder.html#a37448f0940b9f1a3a42ff165ba9fc7ed">prtx::MaterialEncoder</a>, <a class="el" href="classprtx_1_1_c_g_b_decoder.html#a1fcc17b63ef4441dd88918f03d667453">prtx::CGBDecoder</a>, <a class="el" href="classprtx_1_1_geometry_encoder.html#aeeeb883714a7b2bb76077fbbc2357a42">prtx::GeometryEncoder</a>, <a class="el" href="classprtx_1_1_texture_decoder.html#afa7f385e508ac31215e7e29f01d63ee1">prtx::TextureDecoder</a>, <a class="el" href="classprtx_1_1_material_decoder.html#affe357b02eb01e2583e926da32d44708">prtx::MaterialDecoder</a>, <a class="el" href="classprtx_1_1_geometry_decoder.html#a24a1f3a8486e262963bff05e560806fd">prtx::GeometryDecoder</a>, <a class="el" href="classprtx_1_1_stream_adaptor.html#a303daf4bba7823c65a672eab1afe1e87">prtx::StreamAdaptor</a>, and <a class="el" href="classprtx_1_1_resolve_map_provider.html#aeb7f4f9b4790ccdc153ae0ffae933da4">prtx::ResolveMapProvider</a>.</p>
 
 </div>
 </div>
@@ -247,7 +235,7 @@ Static Public Member Functions</h2></td></tr>
 <p>Specifies the extensions type. Implemented by each subclass.</p>
 <dl class="section return"><dt>Returns</dt><dd>The extension type of a subclass instance. </dd></dl>
 
-<p>Implemented in <a class="el" href="classprtx_1_1_encoder.html#a963fb07b165165b1b21ccd40dcd14a3a">prtx::Encoder</a>, <a class="el" href="classprtx_1_1_adaptor.html#a5a3179446d6b0eac7813ac37b1535354">prtx::Adaptor</a>, and <a class="el" href="classprtx_1_1_decoder.html#a5bd5141a4a10fa93f96addd6c50ff171">prtx::Decoder</a>.</p>
+<p>Implemented in <a class="el" href="classprtx_1_1_encoder.html#a6f2e03cc36a700b74736e06db361c36e">prtx::Encoder</a>, <a class="el" href="classprtx_1_1_stream_adaptor.html#a51a1c7b121eab48020c66e884695ef63">prtx::StreamAdaptor</a>, <a class="el" href="classprtx_1_1_decoder.html#a67747b6cbf6045b07df6c0e5f1720b42">prtx::Decoder</a>, and <a class="el" href="classprtx_1_1_resolve_map_provider.html#a1100c0bc4bc3b457997531c701e6108c">prtx::ResolveMapProvider</a>.</p>
 
 </div>
 </div>
@@ -383,15 +371,11 @@ Static Public Member Functions</h2></td></tr>
 <li><a class="el" href="_extension_8h_source.html">Extension.h</a></li>
 </ul>
 </div><!-- contents -->
-</div><!-- doc-content -->
 <!-- start footer part -->
-<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
-  <ul>
-    <li class="navelem"><a class="el" href="namespaceprtx.html">prtx</a></li><li class="navelem"><a class="el" href="classprtx_1_1_extension.html">Extension</a></li>
-    <li class="footer">Generated on Tue Sep 25 2018 09:40:51 for Esri Procedural Runtime by
-    <a href="http://www.doxygen.org/index.html">
-    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.5 </li>
-  </ul>
-</div>
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue Apr 9 2019 11:56:31 for Esri Procedural Runtime by &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.5
+</small></address>
 </body>
 </html>

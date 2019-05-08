@@ -8,13 +8,6 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
-<link href="navtree.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="resize.js"></script>
-<script type="text/javascript" src="navtree.js"></script>
-<script type="text/javascript">
-  $(document).ready(initResizable);
-  $(window).load(resizeHeight);
-</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/search.js"></script>
 <script type="text/javascript">
@@ -31,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="esri_prt_55px.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Esri Procedural Runtime
-   &#160;<span id="projectnumber">1.10.4198</span>
+   &#160;<span id="projectnumber">2.0.5403</span>
    </div>
   </td>
  </tr>
@@ -73,21 +66,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespacemembers.html"><span>Namespace&#160;Members</span></a></li>
     </ul>
   </div>
-</div><!-- top -->
-<div id="side-nav" class="ui-resizable side-nav-resizable">
-  <div id="nav-tree">
-    <div id="nav-tree-contents">
-      <div id="nav-sync" class="sync"></div>
-    </div>
-  </div>
-  <div id="splitbar" style="-moz-user-select:none;" 
-       class="ui-resizable-handle">
-  </div>
-</div>
-<script type="text/javascript">
-$(document).ready(function(){initNavTree('namespaceprtx.html','');});
-</script>
-<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -102,46 +80,70 @@ $(document).ready(function(){initNavTree('namespaceprtx.html','');});
 </iframe>
 </div>
 
+</div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#namespaces">Namespaces</a> &#124;
-<a href="#nested-classes">Classes</a> &#124;
-<a href="#typedef-members">Typedefs</a> &#124;
 <a href="#func-members">Functions</a> &#124;
-<a href="#var-members">Variables</a>  </div>
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#var-members">Variables</a> &#124;
+<a href="#typedef-members">Typedefs</a>  </div>
   <div class="headertitle">
 <div class="title">prtx Namespace Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-
-<p>The Procedural Runtime eXtension namespace. The prtx namespace contains the tools to extend the Procedural Runtime with adaptors, decoders and encoders.  
-<a href="#details">More...</a></p>
-<table class="memberdecls">
+<a name="details" id="details"></a><h2 class="groupheader">Description</h2>
+<div class="textblock"><p>The Procedural Runtime eXtension namespace. The prtx namespace contains the tools to extend the Procedural Runtime with stream adaptors, resolve map providers, decoders, and encoders. </p>
+</div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
 Namespaces</h2></td></tr>
 <tr class="memitem:namespaceprtx_1_1_annotation_argument_builder"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprtx_1_1_annotation_argument_builder.html">AnnotationArgumentBuilder</a></td></tr>
+<tr class="memdesc:namespaceprtx_1_1_annotation_argument_builder"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper functions to create combinations of annotation parameters. <br/></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:namespaceprtx_1_1_annotations"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprtx_1_1_annotations.html">Annotations</a></td></tr>
+<tr class="memdesc:namespaceprtx_1_1_annotations"><td class="mdescLeft">&#160;</td><td class="mdescRight">Supported annotation types for encoder options or encoder-supported initial shape attributes. <br/></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:namespaceprtx_1_1_data_backend"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprtx_1_1_data_backend.html">DataBackend</a></td></tr>
+<tr class="memdesc:namespaceprtx_1_1_data_backend"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides a number of functions to resolve symbolic names to actual resources. <br/></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:namespaceprtx_1_1_debug_utils"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprtx_1_1_debug_utils.html">DebugUtils</a></td></tr>
+<tr class="memdesc:namespaceprtx_1_1_debug_utils"><td class="mdescLeft">&#160;</td><td class="mdescRight">Debug utilities for various prtx classes. Useful for prtx extension authors. <br/></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:namespaceprtx_1_1_mesh_utils"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprtx_1_1_mesh_utils.html">MeshUtils</a></td></tr>
+<tr class="memdesc:namespaceprtx_1_1_mesh_utils"><td class="mdescLeft">&#160;</td><td class="mdescRight">Utility functions for <a class="el" href="classprtx_1_1_mesh.html">prtx::Mesh</a>. <br/></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:namespaceprtx_1_1_p_r_t_utils"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprtx_1_1_p_r_t_utils.html">PRTUtils</a></td></tr>
+<tr class="memdesc:namespaceprtx_1_1_p_r_t_utils"><td class="mdescLeft">&#160;</td><td class="mdescRight">Various class- and object-related utilities useful for prtx extension authors. <br/></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:namespaceprtx_1_1_shape_utils"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprtx_1_1_shape_utils.html">ShapeUtils</a></td></tr>
+<tr class="memdesc:namespaceprtx_1_1_shape_utils"><td class="mdescLeft">&#160;</td><td class="mdescRight">Utility functions for working with <a class="el" href="classprtx_1_1_shape.html">prtx::Shape</a> instances. <br/></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:namespaceprtx_1_1_u_r_i_utils"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprtx_1_1_u_r_i_utils.html">URIUtils</a></td></tr>
+<tr class="memdesc:namespaceprtx_1_1_u_r_i_utils"><td class="mdescLeft">&#160;</td><td class="mdescRight">A collection of utility functions which create or operate on <a class="el" href="classprtx_1_1_u_r_i.html">prtx::URI</a> instances. <br/></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a82f4e437d0e3e585e43d65cb81952eee"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a82f4e437d0e3e585e43d65cb81952eee"></a>
+<a class="el" href="namespaceprtx.html#a6a43e75e11aa3ef9e18d9fd8312ebb9f">Bool</a>&#160;</td><td class="memItemRight" valign="bottom"><b>boolFromString</b> (const std::wstring &amp;w)</td></tr>
+<tr class="separator:a82f4e437d0e3e585e43d65cb81952eee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5888ceb676fa36f04de5dd3a6bd0aeae"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5888ceb676fa36f04de5dd3a6bd0aeae"></a>
+<a class="el" href="namespaceprtx.html#a6a43e75e11aa3ef9e18d9fd8312ebb9f">Bool</a>&#160;</td><td class="memItemRight" valign="bottom"><b>boolFromString</b> (const std::string &amp;s)</td></tr>
+<tr class="separator:a5888ceb676fa36f04de5dd3a6bd0aeae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa12b5ce2816b6dbdb4cc53387018530b"><td class="memTemplParams" colspan="2"><a class="anchor" id="aa12b5ce2816b6dbdb4cc53387018530b"></a>
+template&lt;&gt; </td></tr>
+<tr class="memitem:aa12b5ce2816b6dbdb4cc53387018530b"><td class="memTemplItemLeft" align="right" valign="top">std::string&#160;</td><td class="memTemplItemRight" valign="bottom"><b>Texture::getFormatAsString&lt; std::string &gt;</b> (PixelFormat format)</td></tr>
+<tr class="separator:aa12b5ce2816b6dbdb4cc53387018530b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a43bd02f3f508f95806643f55846dcd7f"><td class="memTemplParams" colspan="2"><a class="anchor" id="a43bd02f3f508f95806643f55846dcd7f"></a>
+template&lt;&gt; </td></tr>
+<tr class="memitem:a43bd02f3f508f95806643f55846dcd7f"><td class="memTemplItemLeft" align="right" valign="top">std::wstring&#160;</td><td class="memTemplItemRight" valign="bottom"><b>Texture::getFormatAsString&lt; std::wstring &gt;</b> (PixelFormat format)</td></tr>
+<tr class="separator:a43bd02f3f508f95806643f55846dcd7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa3fccb565176a68f3a8203f4e89a1185"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa3fccb565176a68f3a8203f4e89a1185"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>toPrimitive</b> (<a class="el" href="namespaceprtx.html#a6a43e75e11aa3ef9e18d9fd8312ebb9f">Bool</a> b)</td></tr>
+<tr class="separator:aa3fccb565176a68f3a8203f4e89a1185"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_adaptor.html">Adaptor</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_adaptor_factory.html">AdaptorFactory</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_all_shapes_reporting_strategy.html">AllShapesReportingStrategy</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_annotation_builder.html">AnnotationBuilder</a></td></tr>
@@ -187,6 +189,8 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_comparable_content.html">ComparableContent</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_content.html">Content</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_c_t_string.html">CTString</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_decoder.html">Decoder</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -266,13 +270,15 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_resolve_map.html">ResolveMap</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_resolve_map_provider.html">ResolveMapProvider</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_resolve_map_provider_factory.html">ResolveMapProviderFactory</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_selected_shapes_iterator.html">SelectedShapesIterator</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_shader.html">Shader</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_shader_builder.html">ShaderBuilder</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_shader_decoder.html">ShaderDecoder</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_shape.html">Shape</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -287,6 +293,10 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_status_exception.html">StatusException</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_stream_adaptor.html">StreamAdaptor</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_stream_adaptor_factory.html">StreamAdaptorFactory</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_string_decoder.html">StringDecoder</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_string_enum.html">StringEnum</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -311,11 +321,23 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_write_first_reports_accumulator.html">WriteFirstReportsAccumulator</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:aa96ac5ecc2b8c3aa2ce43280a8272e07"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa96ac5ecc2b8c3aa2ce43280a8272e07"></a>
+const <a class="el" href="namespaceprtx.html#a6a43e75e11aa3ef9e18d9fd8312ebb9f">Bool</a>&#160;</td><td class="memItemRight" valign="bottom"><b>PRTX_FALSE</b> = static_cast&lt;<a class="el" href="namespaceprtx.html#a6a43e75e11aa3ef9e18d9fd8312ebb9f">Bool</a>&gt;(0u)</td></tr>
+<tr class="separator:aa96ac5ecc2b8c3aa2ce43280a8272e07"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b0a0a6941f0529e6aa9a0915cdd330c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3b0a0a6941f0529e6aa9a0915cdd330c"></a>
+const <a class="el" href="namespaceprtx.html#a6a43e75e11aa3ef9e18d9fd8312ebb9f">Bool</a>&#160;</td><td class="memItemRight" valign="bottom"><b>PRTX_NO</b> = static_cast&lt;<a class="el" href="namespaceprtx.html#a6a43e75e11aa3ef9e18d9fd8312ebb9f">Bool</a>&gt;(0u)</td></tr>
+<tr class="separator:a3b0a0a6941f0529e6aa9a0915cdd330c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a517df0bf58eba8bfce62f9ca95f81574"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a517df0bf58eba8bfce62f9ca95f81574"></a>
+const <a class="el" href="namespaceprtx.html#a6a43e75e11aa3ef9e18d9fd8312ebb9f">Bool</a>&#160;</td><td class="memItemRight" valign="bottom"><b>PRTX_TRUE</b> = static_cast&lt;<a class="el" href="namespaceprtx.html#a6a43e75e11aa3ef9e18d9fd8312ebb9f">Bool</a>&gt;(1u)</td></tr>
+<tr class="separator:a517df0bf58eba8bfce62f9ca95f81574"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac579f171e9296f5c390426294ecb8249"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac579f171e9296f5c390426294ecb8249"></a>
+const <a class="el" href="namespaceprtx.html#a6a43e75e11aa3ef9e18d9fd8312ebb9f">Bool</a>&#160;</td><td class="memItemRight" valign="bottom"><b>PRTX_YES</b> = static_cast&lt;<a class="el" href="namespaceprtx.html#a6a43e75e11aa3ef9e18d9fd8312ebb9f">Bool</a>&gt;(1u)</td></tr>
+<tr class="separator:ac579f171e9296f5c390426294ecb8249"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:acaec1dec7c272edb82742737184aacec"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acaec1dec7c272edb82742737184aacec"></a>
-typedef std::shared_ptr&lt; <a class="el" href="classprtx_1_1_adaptor.html">Adaptor</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>AdaptorPtr</b></td></tr>
-<tr class="separator:acaec1dec7c272edb82742737184aacec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7ed981acdbb13390ff7c28ea60f9bb6a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7ed981acdbb13390ff7c28ea60f9bb6a"></a>
 typedef std::shared_ptr<br class="typebreak"/>
 &lt; <a class="el" href="classprtx_1_1_asset_error.html">AssetError</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>AssetErrorPtr</b></td></tr>
@@ -328,6 +350,9 @@ typedef std::vector<br class="typebreak"/>
 typedef std::vector&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprtx.html#aee4ac5c7d055b7b7e7811e52ba7db496">BinaryVector</a></td></tr>
 <tr class="memdesc:aee4ac5c7d055b7b7e7811e52ba7db496"><td class="mdescLeft">&#160;</td><td class="mdescRight">vector to hold binary data <br/></td></tr>
 <tr class="separator:aee4ac5c7d055b7b7e7811e52ba7db496"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aefa886f351376d1c01eedf50ca1e9505"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aefa886f351376d1c01eedf50ca1e9505"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>BinaryVectorPtr</b> = std::shared_ptr&lt; <a class="el" href="namespaceprtx.html#aee4ac5c7d055b7b7e7811e52ba7db496">BinaryVector</a> &gt;</td></tr>
+<tr class="separator:aefa886f351376d1c01eedf50ca1e9505"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6a43e75e11aa3ef9e18d9fd8312ebb9f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6a43e75e11aa3ef9e18d9fd8312ebb9f"></a>
 typedef uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprtx.html#a6a43e75e11aa3ef9e18d9fd8312ebb9f">Bool</a></td></tr>
 <tr class="memdesc:a6a43e75e11aa3ef9e18d9fd8312ebb9f"><td class="mdescLeft">&#160;</td><td class="mdescRight">uint8_t based Bool type <br/></td></tr>
@@ -365,14 +390,20 @@ typedef std::shared_ptr&lt; <a class="el" href="classprtx_1_1_c_g_b.html">CGB</a
 typedef std::vector&lt; CGBPtr &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>CGBPtrVector</b></td></tr>
 <tr class="separator:a2988b1ed646c743e891122401488cf19"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3e9fa603c4bd40a37cc78dc2e5c3dfd8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3e9fa603c4bd40a37cc78dc2e5c3dfd8"></a>
-typedef std::shared_ptr&lt; <a class="el" href="classprtx_1_1_content.html">Content</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>ContentPtr</b></td></tr>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>ContentPtr</b> = std::shared_ptr&lt; <a class="el" href="classprtx_1_1_content.html">Content</a> &gt;</td></tr>
 <tr class="separator:a3e9fa603c4bd40a37cc78dc2e5c3dfd8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aee30956b394a30d336f17d7aa4cd602d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aee30956b394a30d336f17d7aa4cd602d"></a>
-typedef std::vector&lt; ContentPtr &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>ContentPtrVector</b></td></tr>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>ContentPtrVector</b> = std::vector&lt; ContentPtr &gt;</td></tr>
 <tr class="separator:aee30956b394a30d336f17d7aa4cd602d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abfd904edec69a306d37b333e2b20a3c5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abfd904edec69a306d37b333e2b20a3c5"></a>
-typedef std::shared_ptr&lt; <a class="el" href="classprtx_1_1_decoder.html">Decoder</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>DecoderPtr</b></td></tr>
-<tr class="separator:abfd904edec69a306d37b333e2b20a3c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae21bc8edb9db4424978beda79ae0ffe0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae21bc8edb9db4424978beda79ae0ffe0"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>CTStringPtr</b> = std::shared_ptr&lt; <a class="el" href="classprtx_1_1_c_t_string.html">CTString</a> &gt;</td></tr>
+<tr class="separator:ae21bc8edb9db4424978beda79ae0ffe0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a62b605ae041fdbf0d58688bd41aa6631"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a62b605ae041fdbf0d58688bd41aa6631"></a>
+typedef std::vector&lt; CTStringPtr &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>CTStringPtrVector</b></td></tr>
+<tr class="separator:a62b605ae041fdbf0d58688bd41aa6631"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaf1d05babefbedbec0cf24d18334660d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aaf1d05babefbedbec0cf24d18334660d"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>DecoderPtr</b> = std::shared_ptr&lt; <a class="el" href="classprtx_1_1_decoder.html">Decoder</a> &gt;</td></tr>
+<tr class="separator:aaf1d05babefbedbec0cf24d18334660d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a699fc1fc0908ff82975f0a83c6bfac53"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a699fc1fc0908ff82975f0a83c6bfac53"></a>
 typedef std::shared_ptr<br class="typebreak"/>
 &lt; <a class="el" href="classprtx_1_1_depth_first_iterator.html">DepthFirstIterator</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>DepthFirstIteratorPtr</b></td></tr>
@@ -390,12 +421,12 @@ typedef std::shared_ptr<br class="typebreak"/>
 typedef std::shared_ptr<br class="typebreak"/>
 &lt; <a class="el" href="classprtx_1_1_encode_preparator.html">EncodePreparator</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>EncodePreparatorPtr</b></td></tr>
 <tr class="separator:ac699dddb242da09dcc71c97c0f50e76a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ada02f7508e858f13602ef9b078749ff1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ada02f7508e858f13602ef9b078749ff1"></a>
-typedef std::shared_ptr&lt; <a class="el" href="classprtx_1_1_encoder.html">Encoder</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>EncoderPtr</b></td></tr>
-<tr class="separator:ada02f7508e858f13602ef9b078749ff1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad890a0cd8775d28ba7895b5c65232ac3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad890a0cd8775d28ba7895b5c65232ac3"></a>
-typedef std::vector&lt; EncoderPtr &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>EncoderPtrVector</b></td></tr>
-<tr class="separator:ad890a0cd8775d28ba7895b5c65232ac3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e07c011a68775616ff67d20d44ad4ca"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6e07c011a68775616ff67d20d44ad4ca"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>EncoderPtr</b> = std::shared_ptr&lt; <a class="el" href="classprtx_1_1_encoder.html">Encoder</a> &gt;</td></tr>
+<tr class="separator:a6e07c011a68775616ff67d20d44ad4ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a752fe43c4a628a71a17747c763a8d6a0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a752fe43c4a628a71a17747c763a8d6a0"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>EncoderPtrVector</b> = std::vector&lt; EncoderPtr &gt;</td></tr>
+<tr class="separator:a752fe43c4a628a71a17747c763a8d6a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a837126da564c8ec570fcd42c79d71624"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a837126da564c8ec570fcd42c79d71624"></a>
 using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprtx.html#a837126da564c8ec570fcd42c79d71624">GeometryPtr</a> = std::shared_ptr&lt; <a class="el" href="classprtx_1_1_geometry.html">Geometry</a> &gt;</td></tr>
 <tr class="memdesc:a837126da564c8ec570fcd42c79d71624"><td class="mdescLeft">&#160;</td><td class="mdescRight">shared <a class="el" href="classprtx_1_1_geometry.html">Geometry</a> pointer <br/></td></tr>
@@ -448,6 +479,9 @@ using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="nam
 typedef std::shared_ptr<br class="typebreak"/>
 &lt; <a class="el" href="classprtx_1_1_option_states.html">OptionStates</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>OptionStatesPtr</b></td></tr>
 <tr class="separator:ab75a8011681d173368a9880041ee1d2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a993881a71db4370b5a36f1ec1cb08702"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a993881a71db4370b5a36f1ec1cb08702"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>ReportDomains</b> = std::map&lt; uint32_t, prtx::ReportsPtr &gt;</td></tr>
+<tr class="separator:a993881a71db4370b5a36f1ec1cb08702"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae099828765daf6beb12a23381db537b4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae099828765daf6beb12a23381db537b4"></a>
 typedef std::shared_ptr<br class="typebreak"/>
 &lt; <a class="el" href="classprtx_1_1_reporting_strategy.html">ReportingStrategy</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>ReportingStrategyPtr</b></td></tr>
@@ -457,8 +491,11 @@ typedef std::shared_ptr<br class="typebreak"/>
 &lt; <a class="el" href="classprtx_1_1_reports_accumulator.html">ReportsAccumulator</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>ReportsAccumulatorPtr</b></td></tr>
 <tr class="separator:aefb6d2700cf8f671ed59c90cfc28ce94"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a22ab060147d45c25b6c824c31b8dce95"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a22ab060147d45c25b6c824c31b8dce95"></a>
-typedef std::shared_ptr&lt; <a class="el" href="classprtx_1_1_reports.html">Reports</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>ReportsPtr</b></td></tr>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>ReportsPtr</b> = std::shared_ptr&lt; <a class="el" href="classprtx_1_1_reports.html">Reports</a> &gt;</td></tr>
 <tr class="separator:a22ab060147d45c25b6c824c31b8dce95"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa32e0d60fe3e1d063c916d879151c6fe"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa32e0d60fe3e1d063c916d879151c6fe"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>ResolveMapProviderPtr</b> = std::shared_ptr&lt; <a class="el" href="classprtx_1_1_resolve_map_provider.html">ResolveMapProvider</a> &gt;</td></tr>
+<tr class="separator:aa32e0d60fe3e1d063c916d879151c6fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afe45f3c2b3dc484396fb67d423e17124"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afe45f3c2b3dc484396fb67d423e17124"></a>
 typedef std::shared_ptr<br class="typebreak"/>
 &lt; <a class="el" href="classprtx_1_1_selected_shapes_iterator.html">SelectedShapesIterator</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>SelectedShapesIteratorPtr</b></td></tr>
@@ -475,10 +512,9 @@ typedef std::shared_ptr&lt; <a class="el" href="classprtx_1_1_shape.html">Shape<
 typedef std::vector&lt; <a class="el" href="namespaceprtx.html#ae498291eedf7bb693154ad40acda74d0">ShapePtr</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprtx.html#aeb9d2498f3b009539aa1bf4a2e53e697">ShapePtrVector</a></td></tr>
 <tr class="memdesc:aeb9d2498f3b009539aa1bf4a2e53e697"><td class="mdescLeft">&#160;</td><td class="mdescRight">vector of shared pointers to <a class="el" href="classprtx_1_1_shape.html">Shape</a> <br/></td></tr>
 <tr class="separator:aeb9d2498f3b009539aa1bf4a2e53e697"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6d84f3fccf3f49a4751318e0ea3637c4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6d84f3fccf3f49a4751318e0ea3637c4"></a>
-typedef std::shared_ptr<br class="typebreak"/>
-&lt; <a class="el" href="classprtx_1_1_stream_adaptor.html">StreamAdaptor</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>StreamAdaptorPtr</b></td></tr>
-<tr class="separator:a6d84f3fccf3f49a4751318e0ea3637c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2c46960ed0fca96fea85e1d2eafc02bc"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2c46960ed0fca96fea85e1d2eafc02bc"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>StreamAdaptorPtr</b> = std::shared_ptr&lt; <a class="el" href="classprtx_1_1_stream_adaptor.html">StreamAdaptor</a> &gt;</td></tr>
+<tr class="separator:a2c46960ed0fca96fea85e1d2eafc02bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:accefd9f35e922e9c5b364551372aff1f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="accefd9f35e922e9c5b364551372aff1f"></a>
 typedef std::shared_ptr<br class="typebreak"/>
 &lt; std::wstring &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprtx.html#accefd9f35e922e9c5b364551372aff1f">StringPtr</a></td></tr>
@@ -521,54 +557,13 @@ template&lt;prt::LogLevel L&gt; </td></tr>
 typedef std::vector&lt; std::wstring &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprtx.html#ac5fdcb1f68c5a0ac7295260cfd20b307">WStringVector</a></td></tr>
 <tr class="memdesc:ac5fdcb1f68c5a0ac7295260cfd20b307"><td class="mdescLeft">&#160;</td><td class="mdescRight">vector of std::wstring <br/></td></tr>
 <tr class="separator:ac5fdcb1f68c5a0ac7295260cfd20b307"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:a82f4e437d0e3e585e43d65cb81952eee"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a82f4e437d0e3e585e43d65cb81952eee"></a>
-<a class="el" href="namespaceprtx.html#a6a43e75e11aa3ef9e18d9fd8312ebb9f">Bool</a>&#160;</td><td class="memItemRight" valign="bottom"><b>boolFromString</b> (const std::wstring &amp;w)</td></tr>
-<tr class="separator:a82f4e437d0e3e585e43d65cb81952eee"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5888ceb676fa36f04de5dd3a6bd0aeae"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5888ceb676fa36f04de5dd3a6bd0aeae"></a>
-<a class="el" href="namespaceprtx.html#a6a43e75e11aa3ef9e18d9fd8312ebb9f">Bool</a>&#160;</td><td class="memItemRight" valign="bottom"><b>boolFromString</b> (const std::string &amp;s)</td></tr>
-<tr class="separator:a5888ceb676fa36f04de5dd3a6bd0aeae"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa12b5ce2816b6dbdb4cc53387018530b"><td class="memTemplParams" colspan="2"><a class="anchor" id="aa12b5ce2816b6dbdb4cc53387018530b"></a>
-template&lt;&gt; </td></tr>
-<tr class="memitem:aa12b5ce2816b6dbdb4cc53387018530b"><td class="memTemplItemLeft" align="right" valign="top">std::string&#160;</td><td class="memTemplItemRight" valign="bottom"><b>Texture::getFormatAsString&lt; std::string &gt;</b> (PixelFormat format)</td></tr>
-<tr class="separator:aa12b5ce2816b6dbdb4cc53387018530b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a43bd02f3f508f95806643f55846dcd7f"><td class="memTemplParams" colspan="2"><a class="anchor" id="a43bd02f3f508f95806643f55846dcd7f"></a>
-template&lt;&gt; </td></tr>
-<tr class="memitem:a43bd02f3f508f95806643f55846dcd7f"><td class="memTemplItemLeft" align="right" valign="top">std::wstring&#160;</td><td class="memTemplItemRight" valign="bottom"><b>Texture::getFormatAsString&lt; std::wstring &gt;</b> (PixelFormat format)</td></tr>
-<tr class="separator:a43bd02f3f508f95806643f55846dcd7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa3fccb565176a68f3a8203f4e89a1185"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa3fccb565176a68f3a8203f4e89a1185"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>toPrimitive</b> (<a class="el" href="namespaceprtx.html#a6a43e75e11aa3ef9e18d9fd8312ebb9f">Bool</a> b)</td></tr>
-<tr class="separator:aa3fccb565176a68f3a8203f4e89a1185"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
-Variables</h2></td></tr>
-<tr class="memitem:aa96ac5ecc2b8c3aa2ce43280a8272e07"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa96ac5ecc2b8c3aa2ce43280a8272e07"></a>
-const <a class="el" href="namespaceprtx.html#a6a43e75e11aa3ef9e18d9fd8312ebb9f">Bool</a>&#160;</td><td class="memItemRight" valign="bottom"><b>PRTX_FALSE</b> = static_cast&lt;<a class="el" href="namespaceprtx.html#a6a43e75e11aa3ef9e18d9fd8312ebb9f">Bool</a>&gt;(0u)</td></tr>
-<tr class="separator:aa96ac5ecc2b8c3aa2ce43280a8272e07"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3b0a0a6941f0529e6aa9a0915cdd330c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3b0a0a6941f0529e6aa9a0915cdd330c"></a>
-const <a class="el" href="namespaceprtx.html#a6a43e75e11aa3ef9e18d9fd8312ebb9f">Bool</a>&#160;</td><td class="memItemRight" valign="bottom"><b>PRTX_NO</b> = static_cast&lt;<a class="el" href="namespaceprtx.html#a6a43e75e11aa3ef9e18d9fd8312ebb9f">Bool</a>&gt;(0u)</td></tr>
-<tr class="separator:a3b0a0a6941f0529e6aa9a0915cdd330c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a517df0bf58eba8bfce62f9ca95f81574"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a517df0bf58eba8bfce62f9ca95f81574"></a>
-const <a class="el" href="namespaceprtx.html#a6a43e75e11aa3ef9e18d9fd8312ebb9f">Bool</a>&#160;</td><td class="memItemRight" valign="bottom"><b>PRTX_TRUE</b> = static_cast&lt;<a class="el" href="namespaceprtx.html#a6a43e75e11aa3ef9e18d9fd8312ebb9f">Bool</a>&gt;(1u)</td></tr>
-<tr class="separator:a517df0bf58eba8bfce62f9ca95f81574"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac579f171e9296f5c390426294ecb8249"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac579f171e9296f5c390426294ecb8249"></a>
-const <a class="el" href="namespaceprtx.html#a6a43e75e11aa3ef9e18d9fd8312ebb9f">Bool</a>&#160;</td><td class="memItemRight" valign="bottom"><b>PRTX_YES</b> = static_cast&lt;<a class="el" href="namespaceprtx.html#a6a43e75e11aa3ef9e18d9fd8312ebb9f">Bool</a>&gt;(1u)</td></tr>
-<tr class="separator:ac579f171e9296f5c390426294ecb8249"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>The Procedural Runtime eXtension namespace. The prtx namespace contains the tools to extend the Procedural Runtime with adaptors, decoders and encoders. </p>
-</div></div><!-- contents -->
-</div><!-- doc-content -->
+</div><!-- contents -->
 <!-- start footer part -->
-<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
-  <ul>
-    <li class="navelem"><a class="el" href="namespaceprtx.html">prtx</a></li>
-    <li class="footer">Generated on Tue Sep 25 2018 09:40:51 for Esri Procedural Runtime by
-    <a href="http://www.doxygen.org/index.html">
-    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.5 </li>
-  </ul>
-</div>
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue Apr 9 2019 11:56:30 for Esri Procedural Runtime by &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.5
+</small></address>
 </body>
 </html>

@@ -1,0 +1,87 @@
+<html>
+
+<head>
+	<title>
+listIndex
+	</title>
+    <link rel="stylesheet" href="../../manual_style.css" type="text/css" />
+	
+	</head>
+
+<body>
+<div class="content">
+
+
+
+<!-- Don't touch -->
+
+<table summary="" class="header">
+	<tr>
+		<td align="left" class="helphead_l"><a href="../../toc.html"><div class="helplink">&nbsp;</div></a></td>
+		<td align="right" class="helphead_r"></td>
+	</tr>
+</table>
+
+
+<h1>listIndex</h1>
+<h2>Synopsis</h2>
+
+<p class="code2">float listIndex(string <span class="cga_opparam">stringList</span>, string <span class="cga_opparam">item</span>)</p>
+
+<h2>Returns</h2>
+        <p>Returns index of first occurrence of <span class="cga_opparam">item</span>.</p> 
+        <p class="info">This function returns the index of the first occurrence of the  <span class="cga_opparam">item</span> in the <span class="cga_opparam">stringList</span> or -1 if it is not found. Optional: leading or trailing * in <span class="cga_opparam">item</span> are used as wildcard.</p>
+		<p class="notes">Note.1: Indices are 0 - based.</p>
+		<p class="notes">Note: Stringlists are a series of strings stored inside one string. The elements are separated by a semicolon (";"). Each item must be followed by a semicolon, also the last one! The data type is "string", thus it is not an array as used in other scripting languages.</p>
+
+<h2>Related</h2>
+<ul>
+	<li><a href="../func_index.html"><span class="code_std">index</span></a> function</li>
+    <li><a href="listAdd.html"><span class="code_std">listAdd</span></a> function</li>
+    <li><a href="listClean.html"><span class="code_std">listClean</span></a> function</li>
+    <li><a href="listCount.html"><span class="code_std">listCount</span></a> function</li>
+    <li><a href="listFirst.html"><span class="code_std">listFirst</span></a> function</li>
+    <li><a href="listItem.html"><span class="code_std">listItem</span></a> function</li>
+    <li><a href="listLast.html"><span class="code_std">listLast</span></a> function</li>
+    <li><a href="listRandom.html"><span class="code_std">listRandom</span></a> function</li>
+    <li><a href="listRange.html"><span class="code_std">listRange</span></a> function</li>
+    <li><a href="listRemove.html"><span class="code_std">listRemove</span></a> function</li>
+    <li><a href="listRemoveAll.html"><span class="code_std">listRemoveAll</span></a> function</li>
+    <li><a href="listRetainAll.html"><span class="code_std">listRetainAll</span></a> function</li>
+    <li><a href="listSize.html"><span class="code_std">listSize</span></a> function</li>
+    <li><a href="listTerminate.html"><span class="code_std">listTerminate</span></a> function</li>
+</ul>
+
+
+<h2>Examples</h2>
+<p class="example">	
+	<pre class="code3">
+example.1
+    listIndex("rule;your;city;","city")
+    # result = 2
+
+example.2
+    listIndex("rule;your;city;","*y")
+    # result = 2
+
+example.3
+    listIndex("rule;your;city;","*y*")
+    # result = 1   
+	</pre>
+</p>
+
+
+
+
+
+
+
+
+
+
+<!-- FOOTER -->
+<p class="foot">Copyright &copy;2008-2019 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
+
+</div>
+</body>
+</html>

@@ -8,13 +8,6 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
-<link href="navtree.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="resize.js"></script>
-<script type="text/javascript" src="navtree.js"></script>
-<script type="text/javascript">
-  $(document).ready(initResizable);
-  $(window).load(resizeHeight);
-</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/search.js"></script>
 <script type="text/javascript">
@@ -31,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="esri_prt_55px.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Esri Procedural Runtime
-   &#160;<span id="projectnumber">1.10.4198</span>
+   &#160;<span id="projectnumber">2.0.5403</span>
    </div>
   </td>
  </tr>
@@ -72,21 +65,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="files.html"><span>File&#160;List</span></a></li>
     </ul>
   </div>
-</div><!-- top -->
-<div id="side-nav" class="ui-resizable side-nav-resizable">
-  <div id="nav-tree">
-    <div id="nav-tree-contents">
-      <div id="nav-sync" class="sync"></div>
-    </div>
-  </div>
-  <div id="splitbar" style="-moz-user-select:none;" 
-       class="ui-resizable-handle">
-  </div>
-</div>
-<script type="text/javascript">
-$(document).ready(function(){initNavTree('_extension_8h_source.html','');});
-</script>
-<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -101,13 +79,18 @@ $(document).ready(function(){initNavTree('_extension_8h_source.html','');});
 </iframe>
 </div>
 
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_f4d0b50486959f5b523ec02356ccf9e2.html">prtx</a></li>  </ul>
+</div>
+</div><!-- top -->
 <div class="header">
   <div class="headertitle">
 <div class="title">Extension.h</div>  </div>
 </div><!--header-->
 <div class="contents">
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">  COPYRIGHT (c) 2012-2018 Esri R&amp;D Center Zurich</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">  COPYRIGHT (c) 2012-2019 Esri R&amp;D Center Zurich</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">  TRADE SECRETS: ESRI PROPRIETARY AND CONFIDENTIAL</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">  Unpublished material - all rights reserved under the</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">  Copyright Laws of the United States and applicable international</span></div>
@@ -144,61 +127,59 @@ $(document).ready(function(){initNavTree('_extension_8h_source.html','');});
 <div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="classprtx_1_1_extension.html">   41</a></span>&#160;<span class="keyword">class </span>PRTX_EXPORTS_API <a class="code" href="classprtx_1_1_extension.html">Extension</a> {</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="keyword">public</span>:</div>
 <div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="classprtx_1_1_extension.html#ad6048fac4019029ec39431db1d873801">   46</a></span>&#160;    <span class="keyword">enum</span> <a class="code" href="classprtx_1_1_extension.html#ad6048fac4019029ec39431db1d873801">ExtensionType</a> {</div>
-<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="classprtx_1_1_extension.html#ad6048fac4019029ec39431db1d873801a73ac5078206d850132ff3c8cfaebbbed">   47</a></span>&#160;        <a class="code" href="classprtx_1_1_extension.html#ad6048fac4019029ec39431db1d873801a73ac5078206d850132ff3c8cfaebbbed">ET_UNDEFINED</a>,   </div>
-<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="classprtx_1_1_extension.html#ad6048fac4019029ec39431db1d873801aee23e8588611d2d46ce25e563c190e2f">   48</a></span>&#160;        <a class="code" href="classprtx_1_1_extension.html#ad6048fac4019029ec39431db1d873801aee23e8588611d2d46ce25e563c190e2f">ET_ADAPTOR</a>,     </div>
-<div class="line"><a name="l00049"></a><span class="lineno"><a class="line" href="classprtx_1_1_extension.html#ad6048fac4019029ec39431db1d873801ad9f1197517898445d4862622805ffd94">   49</a></span>&#160;        <a class="code" href="classprtx_1_1_extension.html#ad6048fac4019029ec39431db1d873801ad9f1197517898445d4862622805ffd94">ET_ENCODER</a>,     </div>
-<div class="line"><a name="l00050"></a><span class="lineno"><a class="line" href="classprtx_1_1_extension.html#ad6048fac4019029ec39431db1d873801a0e208db7c13f883d4d0cce98ab77ef6d">   50</a></span>&#160;        <a class="code" href="classprtx_1_1_extension.html#ad6048fac4019029ec39431db1d873801a0e208db7c13f883d4d0cce98ab77ef6d">ET_DECODER</a>,     </div>
-<div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="classprtx_1_1_extension.html#ad6048fac4019029ec39431db1d873801aa45cb845f502c461b3c0fa3f76b7fe23">   51</a></span>&#160;        ET_COUNT        </div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    };</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <a class="code" href="classprtx_1_1_extension.html">Extension</a>() { }</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    Extension(<span class="keyword">const</span> Extension&amp;) = <span class="keyword">delete</span>;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    Extension&amp; operator=(<span class="keyword">const</span> Extension&amp;) = <span class="keyword">delete</span>;</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keyword">virtual</span> ~Extension() { }</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="keyword">static</span> ExtensionType toExtensionType(<span class="keyword">const</span> std::wstring&amp; etStr);</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="keyword">static</span> <span class="keyword">const</span> std::wstring&amp; toString(<span class="keyword">const</span> ExtensionType&amp; et);</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <span class="keyword">static</span> <a class="code" href="namespaceprt.html#a0bbc8b7c3113196a20860f569f833b2d">prt::ContentType</a> toContentType(<span class="keyword">const</span> std::wstring&amp; ctStr);</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    <span class="keyword">static</span> <span class="keyword">const</span> std::wstring&amp; toString(<span class="keyword">const</span> <a class="code" href="namespaceprt.html#a0bbc8b7c3113196a20860f569f833b2d">prt::ContentType</a>&amp; ct);</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    <span class="keyword">virtual</span> ExtensionType getExtensionType() <span class="keyword">const</span> = 0;</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="namespaceprt.html#a0bbc8b7c3113196a20860f569f833b2d">prt::ContentType</a> getContentType() <span class="keyword">const</span> = 0;</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;};</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;</div>
+<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="classprtx_1_1_extension.html#ad6048fac4019029ec39431db1d873801a73ac5078206d850132ff3c8cfaebbbed">   47</a></span>&#160;        <a class="code" href="classprtx_1_1_extension.html#ad6048fac4019029ec39431db1d873801a73ac5078206d850132ff3c8cfaebbbed">ET_UNDEFINED</a>,            </div>
+<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="classprtx_1_1_extension.html#ad6048fac4019029ec39431db1d873801aa0e3b007bfd050b0e2aee2af757aaf4c">   48</a></span>&#160;        <a class="code" href="classprtx_1_1_extension.html#ad6048fac4019029ec39431db1d873801aa0e3b007bfd050b0e2aee2af757aaf4c">ET_STREAM_ADAPTOR</a>,       </div>
+<div class="line"><a name="l00049"></a><span class="lineno"><a class="line" href="classprtx_1_1_extension.html#ad6048fac4019029ec39431db1d873801a99981ddf69abab12b1d72cd1ca07ab30">   49</a></span>&#160;        <a class="code" href="classprtx_1_1_extension.html#ad6048fac4019029ec39431db1d873801a99981ddf69abab12b1d72cd1ca07ab30">ET_RESOLVEMAP_PROVIDER</a>,  </div>
+<div class="line"><a name="l00050"></a><span class="lineno"><a class="line" href="classprtx_1_1_extension.html#ad6048fac4019029ec39431db1d873801ad9f1197517898445d4862622805ffd94">   50</a></span>&#160;        <a class="code" href="classprtx_1_1_extension.html#ad6048fac4019029ec39431db1d873801ad9f1197517898445d4862622805ffd94">ET_ENCODER</a>,              </div>
+<div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="classprtx_1_1_extension.html#ad6048fac4019029ec39431db1d873801a0e208db7c13f883d4d0cce98ab77ef6d">   51</a></span>&#160;        <a class="code" href="classprtx_1_1_extension.html#ad6048fac4019029ec39431db1d873801a0e208db7c13f883d4d0cce98ab77ef6d">ET_DECODER</a>,              </div>
+<div class="line"><a name="l00052"></a><span class="lineno"><a class="line" href="classprtx_1_1_extension.html#ad6048fac4019029ec39431db1d873801aa45cb845f502c461b3c0fa3f76b7fe23">   52</a></span>&#160;        ET_COUNT                 </div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    };</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <a class="code" href="classprtx_1_1_extension.html">Extension</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <a class="code" href="classprtx_1_1_extension.html">Extension</a>(<span class="keyword">const</span> <a class="code" href="classprtx_1_1_extension.html">Extension</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <a class="code" href="classprtx_1_1_extension.html">Extension</a>&amp; operator=(<span class="keyword">const</span> <a class="code" href="classprtx_1_1_extension.html">Extension</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="classprtx_1_1_extension.html">Extension</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keyword">static</span> ExtensionType toExtensionType(<span class="keyword">const</span> std::wstring&amp; etStr);</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="keyword">static</span> <span class="keyword">const</span> std::wstring&amp; toString(<span class="keyword">const</span> ExtensionType&amp; et);</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="keyword">static</span> <a class="code" href="namespaceprt.html#a0bbc8b7c3113196a20860f569f833b2d">prt::ContentType</a> toContentType(<span class="keyword">const</span> std::wstring&amp; ctStr);</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    <span class="keyword">static</span> <span class="keyword">const</span> std::wstring&amp; toString(<span class="keyword">const</span> <a class="code" href="namespaceprt.html#a0bbc8b7c3113196a20860f569f833b2d">prt::ContentType</a>&amp; ct);</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    <span class="keyword">virtual</span> ExtensionType getExtensionType() <span class="keyword">const</span> = 0;</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="namespaceprt.html#a0bbc8b7c3113196a20860f569f833b2d">prt::ContentType</a> getContentType() <span class="keyword">const</span> = 0;</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;};</div>
 <div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;} <span class="comment">// namespace prtx</span></div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;} <span class="comment">// namespace prtx</span></div>
 <div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;<span class="preprocessor">#ifdef _MSC_VER</span></div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#   pragma warning(pop)</span></div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* PRTX_EXTENSION_H_ */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="preprocessor">#ifdef _MSC_VER</span></div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#   pragma warning(pop)</span></div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* PRTX_EXTENSION_H_ */</span><span class="preprocessor"></span></div>
 <div class="ttc" id="classprtx_1_1_extension_html_ad6048fac4019029ec39431db1d873801a73ac5078206d850132ff3c8cfaebbbed"><div class="ttname"><a href="classprtx_1_1_extension.html#ad6048fac4019029ec39431db1d873801a73ac5078206d850132ff3c8cfaebbbed">prtx::Extension::ET_UNDEFINED</a></div><div class="ttdoc">Extension sub-class is undefined. </div><div class="ttdef"><b>Definition:</b> Extension.h:47</div></div>
 <div class="ttc" id="classprtx_1_1_extension_html_ad6048fac4019029ec39431db1d873801"><div class="ttname"><a href="classprtx_1_1_extension.html#ad6048fac4019029ec39431db1d873801">prtx::Extension::ExtensionType</a></div><div class="ttdeci">ExtensionType</div><div class="ttdef"><b>Definition:</b> Extension.h:46</div></div>
-<div class="ttc" id="classprtx_1_1_extension_html_ad6048fac4019029ec39431db1d873801ad9f1197517898445d4862622805ffd94"><div class="ttname"><a href="classprtx_1_1_extension.html#ad6048fac4019029ec39431db1d873801ad9f1197517898445d4862622805ffd94">prtx::Extension::ET_ENCODER</a></div><div class="ttdoc">Extension sub-class is an encoder. </div><div class="ttdef"><b>Definition:</b> Extension.h:49</div></div>
-<div class="ttc" id="classprtx_1_1_extension_html_ad6048fac4019029ec39431db1d873801aee23e8588611d2d46ce25e563c190e2f"><div class="ttname"><a href="classprtx_1_1_extension.html#ad6048fac4019029ec39431db1d873801aee23e8588611d2d46ce25e563c190e2f">prtx::Extension::ET_ADAPTOR</a></div><div class="ttdoc">Extension sub-class is an adaptor. </div><div class="ttdef"><b>Definition:</b> Extension.h:48</div></div>
+<div class="ttc" id="classprtx_1_1_extension_html_ad6048fac4019029ec39431db1d873801ad9f1197517898445d4862622805ffd94"><div class="ttname"><a href="classprtx_1_1_extension.html#ad6048fac4019029ec39431db1d873801ad9f1197517898445d4862622805ffd94">prtx::Extension::ET_ENCODER</a></div><div class="ttdoc">Extension sub-class is an encoder. </div><div class="ttdef"><b>Definition:</b> Extension.h:50</div></div>
 <div class="ttc" id="classprtx_1_1_extension_html"><div class="ttname"><a href="classprtx_1_1_extension.html">prtx::Extension</a></div><div class="ttdef"><b>Definition:</b> Extension.h:41</div></div>
 <div class="ttc" id="namespaceprt_html_a0bbc8b7c3113196a20860f569f833b2d"><div class="ttname"><a href="namespaceprt.html#a0bbc8b7c3113196a20860f569f833b2d">prt::ContentType</a></div><div class="ttdeci">ContentType</div><div class="ttdef"><b>Definition:</b> ContentType.h:28</div></div>
-<div class="ttc" id="classprtx_1_1_extension_html_ad6048fac4019029ec39431db1d873801a0e208db7c13f883d4d0cce98ab77ef6d"><div class="ttname"><a href="classprtx_1_1_extension.html#ad6048fac4019029ec39431db1d873801a0e208db7c13f883d4d0cce98ab77ef6d">prtx::Extension::ET_DECODER</a></div><div class="ttdoc">Extension sub-class is a decoder. </div><div class="ttdef"><b>Definition:</b> Extension.h:50</div></div>
+<div class="ttc" id="classprtx_1_1_extension_html_ad6048fac4019029ec39431db1d873801a0e208db7c13f883d4d0cce98ab77ef6d"><div class="ttname"><a href="classprtx_1_1_extension.html#ad6048fac4019029ec39431db1d873801a0e208db7c13f883d4d0cce98ab77ef6d">prtx::Extension::ET_DECODER</a></div><div class="ttdoc">Extension sub-class is a decoder. </div><div class="ttdef"><b>Definition:</b> Extension.h:51</div></div>
+<div class="ttc" id="classprtx_1_1_extension_html_ad6048fac4019029ec39431db1d873801aa0e3b007bfd050b0e2aee2af757aaf4c"><div class="ttname"><a href="classprtx_1_1_extension.html#ad6048fac4019029ec39431db1d873801aa0e3b007bfd050b0e2aee2af757aaf4c">prtx::Extension::ET_STREAM_ADAPTOR</a></div><div class="ttdoc">Extension sub-class is a stream adaptor. </div><div class="ttdef"><b>Definition:</b> Extension.h:48</div></div>
+<div class="ttc" id="classprtx_1_1_extension_html_ad6048fac4019029ec39431db1d873801a99981ddf69abab12b1d72cd1ca07ab30"><div class="ttname"><a href="classprtx_1_1_extension.html#ad6048fac4019029ec39431db1d873801a99981ddf69abab12b1d72cd1ca07ab30">prtx::Extension::ET_RESOLVEMAP_PROVIDER</a></div><div class="ttdoc">Extension sub-class is a resolve map provider. </div><div class="ttdef"><b>Definition:</b> Extension.h:49</div></div>
 </div><!-- fragment --></div><!-- contents -->
-</div><!-- doc-content -->
 <!-- start footer part -->
-<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
-  <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_f4d0b50486959f5b523ec02356ccf9e2.html">prtx</a></li><li class="navelem"><b>Extension.h</b></li>
-    <li class="footer">Generated on Tue Sep 25 2018 09:40:51 for Esri Procedural Runtime by
-    <a href="http://www.doxygen.org/index.html">
-    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.5 </li>
-  </ul>
-</div>
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue Apr 9 2019 11:56:30 for Esri Procedural Runtime by &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.5
+</small></address>
 </body>
 </html>

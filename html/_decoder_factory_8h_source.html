@@ -8,13 +8,6 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
-<link href="navtree.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="resize.js"></script>
-<script type="text/javascript" src="navtree.js"></script>
-<script type="text/javascript">
-  $(document).ready(initResizable);
-  $(window).load(resizeHeight);
-</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/search.js"></script>
 <script type="text/javascript">
@@ -31,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="esri_prt_55px.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Esri Procedural Runtime
-   &#160;<span id="projectnumber">1.10.4198</span>
+   &#160;<span id="projectnumber">2.0.5403</span>
    </div>
   </td>
  </tr>
@@ -72,21 +65,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="files.html"><span>File&#160;List</span></a></li>
     </ul>
   </div>
-</div><!-- top -->
-<div id="side-nav" class="ui-resizable side-nav-resizable">
-  <div id="nav-tree">
-    <div id="nav-tree-contents">
-      <div id="nav-sync" class="sync"></div>
-    </div>
-  </div>
-  <div id="splitbar" style="-moz-user-select:none;" 
-       class="ui-resizable-handle">
-  </div>
-</div>
-<script type="text/javascript">
-$(document).ready(function(){initNavTree('_decoder_factory_8h_source.html','');});
-</script>
-<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -101,13 +79,18 @@ $(document).ready(function(){initNavTree('_decoder_factory_8h_source.html','');}
 </iframe>
 </div>
 
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_f4d0b50486959f5b523ec02356ccf9e2.html">prtx</a></li>  </ul>
+</div>
+</div><!-- top -->
 <div class="header">
   <div class="headertitle">
 <div class="title">DecoderFactory.h</div>  </div>
 </div><!--header-->
 <div class="contents">
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">  COPYRIGHT (c) 2012-2018 Esri R&amp;D Center Zurich</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">  COPYRIGHT (c) 2012-2019 Esri R&amp;D Center Zurich</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">  TRADE SECRETS: ESRI PROPRIETARY AND CONFIDENTIAL</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">  Unpublished material - all rights reserved under the</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">  Copyright Laws of the United States and applicable international</span></div>
@@ -148,57 +131,56 @@ $(document).ready(function(){initNavTree('_decoder_factory_8h_source.html','');}
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="keyword">namespace </span>prtx {</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;</div>
 <div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="classprtx_1_1_decoder_factory.html">   47</a></span>&#160;<span class="keyword">class </span>PRTX_EXPORTS_API <a class="code" href="classprtx_1_1_decoder_factory.html">DecoderFactory</a> : <span class="keyword">public</span> <a class="code" href="classprtx_1_1_extension_factory.html">ExtensionFactory</a> {</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <a class="code" href="classprtx_1_1_decoder_factory.html">DecoderFactory</a>();</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <a class="code" href="classprtx_1_1_decoder_factory.html">DecoderFactory</a>() = <span class="keyword">delete</span>;</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <a class="code" href="classprtx_1_1_decoder_factory.html">DecoderFactory</a>(</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            <a class="code" href="namespaceprt.html#a0bbc8b7c3113196a20860f569f833b2d">prt::ContentType</a>        type,                       </div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;            <span class="keyword">const</span> std::wstring&amp;     <span class="keywordtype">id</span>,                         </div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            <span class="keyword">const</span> std::wstring&amp;     name,                       </div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;            <span class="keyword">const</span> std::wstring&amp;     desc,                       </div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;            <span class="keyword">const</span> <a class="code" href="classprtx_1_1_file_extensions.html">FileExtensions</a>&amp;   exts    = <a class="code" href="classprtx_1_1_file_extensions.html">FileExtensions</a>(), </div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">char</span>*             icon    = 0                 </div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    );</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="classprtx_1_1_decoder_factory.html">DecoderFactory</a>();</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <a class="code" href="classprt_1_1_decoder_info.html">prt::DecoderInfo</a>* createDecoderInfo() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">bool</span> canHandleURI(<a class="code" href="namespaceprtx.html#a2f661d48bd64c0c84f0e66fcbcba51e5">prtx::URIPtr</a> uri) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="classprtx_1_1_extension.html#ad6048fac4019029ec39431db1d873801">prtx::Extension::ExtensionType</a> getExtensionType() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    DecoderInfoImpl* mInfo;</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;};</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <a class="code" href="classprtx_1_1_decoder_factory.html">DecoderFactory</a>(</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;            <a class="code" href="namespaceprt.html#a0bbc8b7c3113196a20860f569f833b2d">prt::ContentType</a>        type,                       </div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;            <span class="keyword">const</span> std::wstring&amp;     <span class="keywordtype">id</span>,                         </div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            <span class="keyword">const</span> std::wstring&amp;     name,                       </div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            <span class="keyword">const</span> std::wstring&amp;     desc,                       </div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            <span class="keyword">const</span> <a class="code" href="classprtx_1_1_file_extensions.html">FileExtensions</a>&amp;   exts    = <a class="code" href="classprtx_1_1_file_extensions.html">FileExtensions</a>(), </div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">char</span>*             icon    = 0                 </div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    );</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="classprtx_1_1_decoder_factory.html">DecoderFactory</a>();</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <a class="code" href="classprt_1_1_decoder_info.html">prt::DecoderInfo</a>* createDecoderInfo() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">bool</span> canHandleURI(<a class="code" href="namespaceprtx.html#a2f661d48bd64c0c84f0e66fcbcba51e5">prtx::URIPtr</a> uri) <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;</div>
+<div class="line"><a name="l00077"></a><span class="lineno"><a class="line" href="classprtx_1_1_decoder_factory.html#af6ab78774bde4a3fb05a3809537c1f8e">   77</a></span>&#160;    <span class="keyword">virtual</span> <a class="code" href="classprtx_1_1_extension.html#ad6048fac4019029ec39431db1d873801">prtx::Extension::ExtensionType</a> <a class="code" href="classprtx_1_1_decoder_factory.html#af6ab78774bde4a3fb05a3809537c1f8e">getExtensionType</a>() const final<span class="keyword"> override </span>{</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="classprtx_1_1_extension.html#ad6048fac4019029ec39431db1d873801a0e208db7c13f883d4d0cce98ab77ef6d">Extension::ET_DECODER</a>;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    }</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    DecoderInfoImpl* mInfo {<span class="keyword">nullptr</span>};</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;};</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;} <span class="comment">/* namespace prtx */</span></div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;} <span class="comment">/* namespace prtx */</span></div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="preprocessor">#ifdef _MSC_VER</span></div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#   pragma warning(pop)</span></div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* PRTX_DECODERFACTORY_H_ */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="preprocessor">#ifdef _MSC_VER</span></div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#   pragma warning(pop)</span></div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* PRTX_DECODERFACTORY_H_ */</span><span class="preprocessor"></span></div>
 <div class="ttc" id="classprtx_1_1_extension_html_ad6048fac4019029ec39431db1d873801"><div class="ttname"><a href="classprtx_1_1_extension.html#ad6048fac4019029ec39431db1d873801">prtx::Extension::ExtensionType</a></div><div class="ttdeci">ExtensionType</div><div class="ttdef"><b>Definition:</b> Extension.h:46</div></div>
 <div class="ttc" id="classprtx_1_1_file_extensions_html"><div class="ttname"><a href="classprtx_1_1_file_extensions.html">prtx::FileExtensions</a></div><div class="ttdef"><b>Definition:</b> FileExtensions.h:40</div></div>
 <div class="ttc" id="classprt_1_1_decoder_info_html"><div class="ttname"><a href="classprt_1_1_decoder_info.html">prt::DecoderInfo</a></div><div class="ttdef"><b>Definition:</b> DecoderInfo.h:30</div></div>
-<div class="ttc" id="classprtx_1_1_extension_factory_html"><div class="ttname"><a href="classprtx_1_1_extension_factory.html">prtx::ExtensionFactory</a></div><div class="ttdef"><b>Definition:</b> ExtensionFactory.h:51</div></div>
+<div class="ttc" id="classprtx_1_1_extension_factory_html"><div class="ttname"><a href="classprtx_1_1_extension_factory.html">prtx::ExtensionFactory</a></div><div class="ttdef"><b>Definition:</b> ExtensionFactory.h:48</div></div>
 <div class="ttc" id="classprtx_1_1_decoder_factory_html"><div class="ttname"><a href="classprtx_1_1_decoder_factory.html">prtx::DecoderFactory</a></div><div class="ttdef"><b>Definition:</b> DecoderFactory.h:47</div></div>
-<div class="ttc" id="namespaceprtx_html_a2f661d48bd64c0c84f0e66fcbcba51e5"><div class="ttname"><a href="namespaceprtx.html#a2f661d48bd64c0c84f0e66fcbcba51e5">prtx::URIPtr</a></div><div class="ttdeci">std::shared_ptr&lt; URI &gt; URIPtr</div><div class="ttdoc">shared pointer implementation of prtx::URI </div><div class="ttdef"><b>Definition:</b> URI.h:36</div></div>
+<div class="ttc" id="namespaceprtx_html_a2f661d48bd64c0c84f0e66fcbcba51e5"><div class="ttname"><a href="namespaceprtx.html#a2f661d48bd64c0c84f0e66fcbcba51e5">prtx::URIPtr</a></div><div class="ttdeci">std::shared_ptr&lt; URI &gt; URIPtr</div><div class="ttdoc">shared pointer implementation of prtx::URI </div><div class="ttdef"><b>Definition:</b> URI.h:37</div></div>
 <div class="ttc" id="namespaceprt_html_a0bbc8b7c3113196a20860f569f833b2d"><div class="ttname"><a href="namespaceprt.html#a0bbc8b7c3113196a20860f569f833b2d">prt::ContentType</a></div><div class="ttdeci">ContentType</div><div class="ttdef"><b>Definition:</b> ContentType.h:28</div></div>
+<div class="ttc" id="classprtx_1_1_extension_html_ad6048fac4019029ec39431db1d873801a0e208db7c13f883d4d0cce98ab77ef6d"><div class="ttname"><a href="classprtx_1_1_extension.html#ad6048fac4019029ec39431db1d873801a0e208db7c13f883d4d0cce98ab77ef6d">prtx::Extension::ET_DECODER</a></div><div class="ttdoc">Extension sub-class is a decoder. </div><div class="ttdef"><b>Definition:</b> Extension.h:51</div></div>
+<div class="ttc" id="classprtx_1_1_decoder_factory_html_af6ab78774bde4a3fb05a3809537c1f8e"><div class="ttname"><a href="classprtx_1_1_decoder_factory.html#af6ab78774bde4a3fb05a3809537c1f8e">prtx::DecoderFactory::getExtensionType</a></div><div class="ttdeci">virtual prtx::Extension::ExtensionType getExtensionType() const finaloverride</div><div class="ttdef"><b>Definition:</b> DecoderFactory.h:77</div></div>
 </div><!-- fragment --></div><!-- contents -->
-</div><!-- doc-content -->
 <!-- start footer part -->
-<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
-  <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_f4d0b50486959f5b523ec02356ccf9e2.html">prtx</a></li><li class="navelem"><b>DecoderFactory.h</b></li>
-    <li class="footer">Generated on Tue Sep 25 2018 09:40:51 for Esri Procedural Runtime by
-    <a href="http://www.doxygen.org/index.html">
-    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.5 </li>
-  </ul>
-</div>
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue Apr 9 2019 11:56:30 for Esri Procedural Runtime by &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.5
+</small></address>
 </body>
 </html>

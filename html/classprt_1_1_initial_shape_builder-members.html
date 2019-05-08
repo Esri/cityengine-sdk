@@ -8,13 +8,6 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
-<link href="navtree.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="resize.js"></script>
-<script type="text/javascript" src="navtree.js"></script>
-<script type="text/javascript">
-  $(document).ready(initResizable);
-  $(window).load(resizeHeight);
-</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/search.js"></script>
 <script type="text/javascript">
@@ -31,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="esri_prt_55px.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Esri Procedural Runtime
-   &#160;<span id="projectnumber">1.10.4198</span>
+   &#160;<span id="projectnumber">2.0.5403</span>
    </div>
   </td>
  </tr>
@@ -75,21 +68,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
-</div><!-- top -->
-<div id="side-nav" class="ui-resizable side-nav-resizable">
-  <div id="nav-tree">
-    <div id="nav-tree-contents">
-      <div id="nav-sync" class="sync"></div>
-    </div>
-  </div>
-  <div id="splitbar" style="-moz-user-select:none;" 
-       class="ui-resizable-handle">
-  </div>
-</div>
-<script type="text/javascript">
-$(document).ready(function(){initNavTree('classprt_1_1_initial_shape_builder.html','');});
-</script>
-<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -104,6 +82,11 @@ $(document).ready(function(){initNavTree('classprt_1_1_initial_shape_builder.htm
 </iframe>
 </div>
 
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceprt.html">prt</a></li><li class="navelem"><a class="el" href="classprt_1_1_initial_shape_builder.html">InitialShapeBuilder</a></li>  </ul>
+</div>
+</div><!-- top -->
 <div class="header">
   <div class="headertitle">
 <div class="title">prt::InitialShapeBuilder Member List</div>  </div>
@@ -112,31 +95,30 @@ $(document).ready(function(){initNavTree('classprt_1_1_initial_shape_builder.htm
 
 <p>This is the complete list of members for <a class="el" href="classprt_1_1_initial_shape_builder.html">prt::InitialShapeBuilder</a>, including all inherited members.</p>
 <table class="directory">
-  <tr class="even"><td class="entry"><a class="el" href="classprt_1_1_initial_shape_builder.html#a9542fa980c9822a5d333e4961e49b326">create</a>(Status *status=0)</td><td class="entry"><a class="el" href="classprt_1_1_initial_shape_builder.html">prt::InitialShapeBuilder</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
-  <tr><td class="entry"><a class="el" href="classprt_1_1_initial_shape_builder.html#a787a537907d67e4a226bf2056798175c">createInitialShapeAndReset</a>(Status *status=0)=0</td><td class="entry"><a class="el" href="classprt_1_1_initial_shape_builder.html">prt::InitialShapeBuilder</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classprt_1_1_object.html#acc54db5c6d262525ed65a6edad804e34">destroy</a>() const </td><td class="entry"><a class="el" href="classprt_1_1_object.html">prt::Object</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0"><td class="entry"><b>InitialShapeBuilder</b>() (defined in <a class="el" href="classprt_1_1_initial_shape_builder.html">prt::InitialShapeBuilder</a>)</td><td class="entry"><a class="el" href="classprt_1_1_initial_shape_builder.html">prt::InitialShapeBuilder</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>Object</b>() (defined in <a class="el" href="classprt_1_1_object.html">prt::Object</a>)</td><td class="entry"><a class="el" href="classprt_1_1_object.html">prt::Object</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">protected</span></td></tr>
-  <tr bgcolor="#f0f0f0"><td class="entry"><b>Object</b>(const Object &amp;) (defined in <a class="el" href="classprt_1_1_object.html">prt::Object</a>)</td><td class="entry"><a class="el" href="classprt_1_1_object.html">prt::Object</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">protected</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classprt_1_1_initial_shape_builder.html#aa7247c6919971623581271fc0bf9d1b2">resolveAttributes</a>(wchar_t const *key, ResolveMap const *resolveMap=0, Cache *cache=0)=0</td><td class="entry"><a class="el" href="classprt_1_1_initial_shape_builder.html">prt::InitialShapeBuilder</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
-  <tr><td class="entry"><a class="el" href="classprt_1_1_initial_shape_builder.html#aa82c5c07b2ceca8b1c9527764976e28c">resolveGeometry</a>(wchar_t const *key, ResolveMap const *resolveMap=0, Cache *cache=0)=0</td><td class="entry"><a class="el" href="classprt_1_1_initial_shape_builder.html">prt::InitialShapeBuilder</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classprt_1_1_initial_shape_builder.html#a7538cea31af66f052d71b0df8cde25e5">resolveTextures</a>(wchar_t const *const *textureKeys, size_t textureCount, uint32_t const *faceTextureIndices, uint32_t facesCount, const ResolveMap *resolveMap=0, Cache *cache=0)=0</td><td class="entry"><a class="el" href="classprt_1_1_initial_shape_builder.html">prt::InitialShapeBuilder</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classprt_1_1_initial_shape_builder.html#a2c237964945feaf56d9146874cbf04d7">create</a>(Status *status=nullptr)</td><td class="entry"><a class="el" href="classprt_1_1_initial_shape_builder.html">prt::InitialShapeBuilder</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
+  <tr><td class="entry"><a class="el" href="classprt_1_1_initial_shape_builder.html#a218010b46ef3b622ec571bd70683742b">createInitialShape</a>(Status *status=nullptr)=0</td><td class="entry"><a class="el" href="classprt_1_1_initial_shape_builder.html">prt::InitialShapeBuilder</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classprt_1_1_initial_shape_builder.html#af04648c7afeb07747f2bc55e35dc3ab8">createInitialShapeAndReset</a>(Status *status=nullptr)=0</td><td class="entry"><a class="el" href="classprt_1_1_initial_shape_builder.html">prt::InitialShapeBuilder</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
+  <tr><td class="entry"><a class="el" href="classprt_1_1_object.html#acc54db5c6d262525ed65a6edad804e34">destroy</a>() const </td><td class="entry"><a class="el" href="classprt_1_1_object.html">prt::Object</a></td><td class="entry"></td></tr>
+  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>InitialShapeBuilder</b>()=default (defined in <a class="el" href="classprt_1_1_initial_shape_builder.html">prt::InitialShapeBuilder</a>)</td><td class="entry"><a class="el" href="classprt_1_1_initial_shape_builder.html">prt::InitialShapeBuilder</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
+  <tr bgcolor="#f0f0f0"><td class="entry"><b>Object</b>() (defined in <a class="el" href="classprt_1_1_object.html">prt::Object</a>)</td><td class="entry"><a class="el" href="classprt_1_1_object.html">prt::Object</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">protected</span></td></tr>
+  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>Object</b>(const Object &amp;) (defined in <a class="el" href="classprt_1_1_object.html">prt::Object</a>)</td><td class="entry"><a class="el" href="classprt_1_1_object.html">prt::Object</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">protected</span></td></tr>
+  <tr><td class="entry"><a class="el" href="classprt_1_1_initial_shape_builder.html#a051902426cd41e4421d4d86001abbe43">resetGeometry</a>()=0</td><td class="entry"><a class="el" href="classprt_1_1_initial_shape_builder.html">prt::InitialShapeBuilder</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classprt_1_1_initial_shape_builder.html#a1624754eb26d9c0d6d7faaa26d408160">resolveAttributes</a>(wchar_t const *key, ResolveMap const *resolveMap=nullptr, Cache *cache=nullptr)=0</td><td class="entry"><a class="el" href="classprt_1_1_initial_shape_builder.html">prt::InitialShapeBuilder</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
+  <tr><td class="entry"><a class="el" href="classprt_1_1_initial_shape_builder.html#a3662f9060ce6e402e66030409ec1a2e9">resolveGeometry</a>(wchar_t const *key, ResolveMap const *resolveMap=nullptr, Cache *cache=nullptr)=0</td><td class="entry"><a class="el" href="classprt_1_1_initial_shape_builder.html">prt::InitialShapeBuilder</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classprt_1_1_initial_shape_builder.html#ab57fabb5720ed0a1437cca48682ab9ef">resolveTextures</a>(wchar_t const *const *textureKeys, size_t textureCount, uint32_t const *faceTextureIndices, uint32_t facesCount, ResolveMap const *resolveMap=nullptr, Cache *cache=nullptr)=0</td><td class="entry"><a class="el" href="classprt_1_1_initial_shape_builder.html">prt::InitialShapeBuilder</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
   <tr><td class="entry"><a class="el" href="classprt_1_1_initial_shape_builder.html#a54112771964d72bdad2ce9d6a28fe20a">setAttributes</a>(wchar_t const *ruleFile, wchar_t const *startRule, int32_t randomSeed, wchar_t const *name, AttributeMap const *attributes, ResolveMap const *resolveMap)=0</td><td class="entry"><a class="el" href="classprt_1_1_initial_shape_builder.html">prt::InitialShapeBuilder</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classprt_1_1_initial_shape_builder.html#a8aaaeb3847425721bc36328761693e6e">setGeometry</a>(double const *vertexCoords, size_t vcCount, uint32_t const *indices, size_t indicesCount, uint32_t const *faceCounts, size_t faceCountsCount, const uint32_t *holes=0, size_t holesCount=0)=0</td><td class="entry"><a class="el" href="classprt_1_1_initial_shape_builder.html">prt::InitialShapeBuilder</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classprt_1_1_initial_shape_builder.html#a97a8d8b4edc6f82dd6c4b46cb3f7d646">setGeometry</a>(double const *vertexCoords, size_t vcCount, uint32_t const *indices, size_t indicesCount, uint32_t const *faceCounts, size_t faceCountsCount, const uint32_t *holes=nullptr, size_t holesCount=0)=0</td><td class="entry"><a class="el" href="classprt_1_1_initial_shape_builder.html">prt::InitialShapeBuilder</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
   <tr><td class="entry"><a class="el" href="classprt_1_1_initial_shape_builder.html#a729f84a86dbcfc5af3ae9d59cea39743">setUVs</a>(double const *uvCoords, size_t uvcCount, uint32_t const *uvIndices, size_t uvIndicesCount, uint32_t const *faceCounts, size_t faceCountsCount, uint32_t uvSet=0)=0</td><td class="entry"><a class="el" href="classprt_1_1_initial_shape_builder.html">prt::InitialShapeBuilder</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="classprt_1_1_object.html#af48f27c9b1da0b89a73db63498f6af9b">toXML</a>(char *result, size_t *resultSize, Status *stat=0) const =0</td><td class="entry"><a class="el" href="classprt_1_1_object.html">prt::Object</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
   <tr><td class="entry"><a class="el" href="classprt_1_1_object.html#aad4fc94d171bb772d9571416812aa2b2">toXMLDocument</a>(char *result, size_t *resultSize, Status *stat=0) const </td><td class="entry"><a class="el" href="classprt_1_1_object.html">prt::Object</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>~InitialShapeBuilder</b>() (defined in <a class="el" href="classprt_1_1_initial_shape_builder.html">prt::InitialShapeBuilder</a>)</td><td class="entry"><a class="el" href="classprt_1_1_initial_shape_builder.html">prt::InitialShapeBuilder</a></td><td class="entry"><span class="mlabel">protected</span><span class="mlabel">virtual</span></td></tr>
+  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>~InitialShapeBuilder</b>()=default (defined in <a class="el" href="classprt_1_1_initial_shape_builder.html">prt::InitialShapeBuilder</a>)</td><td class="entry"><a class="el" href="classprt_1_1_initial_shape_builder.html">prt::InitialShapeBuilder</a></td><td class="entry"><span class="mlabel">protected</span><span class="mlabel">virtual</span></td></tr>
   <tr bgcolor="#f0f0f0"><td class="entry"><b>~Object</b>() (defined in <a class="el" href="classprt_1_1_object.html">prt::Object</a>)</td><td class="entry"><a class="el" href="classprt_1_1_object.html">prt::Object</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">virtual</span></td></tr>
 </table></div><!-- contents -->
-</div><!-- doc-content -->
 <!-- start footer part -->
-<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
-  <ul>
-    <li class="footer">Generated on Tue Sep 25 2018 09:40:51 for Esri Procedural Runtime by
-    <a href="http://www.doxygen.org/index.html">
-    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.5 </li>
-  </ul>
-</div>
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue Apr 9 2019 11:56:30 for Esri Procedural Runtime by &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.5
+</small></address>
 </body>
 </html>

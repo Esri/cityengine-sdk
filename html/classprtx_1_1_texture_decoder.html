@@ -8,13 +8,6 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
-<link href="navtree.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="resize.js"></script>
-<script type="text/javascript" src="navtree.js"></script>
-<script type="text/javascript">
-  $(document).ready(initResizable);
-  $(window).load(resizeHeight);
-</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/search.js"></script>
 <script type="text/javascript">
@@ -31,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="esri_prt_55px.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Esri Procedural Runtime
-   &#160;<span id="projectnumber">1.10.4198</span>
+   &#160;<span id="projectnumber">2.0.5403</span>
    </div>
   </td>
  </tr>
@@ -75,21 +68,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
-</div><!-- top -->
-<div id="side-nav" class="ui-resizable side-nav-resizable">
-  <div id="nav-tree">
-    <div id="nav-tree-contents">
-      <div id="nav-sync" class="sync"></div>
-    </div>
-  </div>
-  <div id="splitbar" style="-moz-user-select:none;" 
-       class="ui-resizable-handle">
-  </div>
-</div>
-<script type="text/javascript">
-$(document).ready(function(){initNavTree('classprtx_1_1_texture_decoder.html','');});
-</script>
-<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -104,6 +82,11 @@ $(document).ready(function(){initNavTree('classprtx_1_1_texture_decoder.html',''
 </iframe>
 </div>
 
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceprtx.html">prtx</a></li><li class="navelem"><a class="el" href="classprtx_1_1_texture_decoder.html">TextureDecoder</a></li>  </ul>
+</div>
+</div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="classprtx_1_1_texture_decoder-members.html">List of all members</a> &#124;
@@ -119,17 +102,17 @@ Inheritance diagram for prtx::TextureDecoder:</div>
 <div class="dyncontent">
 <div class="center"><iframe scrolling="no" frameborder="0" src="classprtx_1_1_texture_decoder__inherit__graph.svg" width="155" height="187"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
-<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aa47725c1333afc4b2ffc007f2511dc66"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespaceprt.html#a0bbc8b7c3113196a20860f569f833b2d">prt::ContentType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_texture_decoder.html#aa47725c1333afc4b2ffc007f2511dc66">getContentType</a> () const </td></tr>
-<tr class="separator:aa47725c1333afc4b2ffc007f2511dc66"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa7f385e508ac31215e7e29f01d63ee1"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespaceprt.html#a0bbc8b7c3113196a20860f569f833b2d">prt::ContentType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_texture_decoder.html#afa7f385e508ac31215e7e29f01d63ee1">getContentType</a> () const finaloverride</td></tr>
+<tr class="separator:afa7f385e508ac31215e7e29f01d63ee1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classprtx_1_1_decoder"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classprtx_1_1_decoder')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classprtx_1_1_decoder.html">prtx::Decoder</a></td></tr>
 <tr class="memitem:aada4efadfd30442edb5664af028e0aec inherit pub_methods_classprtx_1_1_decoder"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_decoder.html#aada4efadfd30442edb5664af028e0aec">decode</a> (ContentPtrVector &amp;results, std::istream &amp;stream, <a class="el" href="classprt_1_1_cache.html">prt::Cache</a> *cache, const std::wstring &amp;key, <a class="el" href="classprtx_1_1_resolve_map.html">prtx::ResolveMap</a> const *resolveMap, std::wstring &amp;warnings)=0</td></tr>
 <tr class="separator:aada4efadfd30442edb5664af028e0aec inherit pub_methods_classprtx_1_1_decoder"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5bd5141a4a10fa93f96addd6c50ff171 inherit pub_methods_classprtx_1_1_decoder"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classprtx_1_1_extension.html#ad6048fac4019029ec39431db1d873801">ExtensionType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_decoder.html#a5bd5141a4a10fa93f96addd6c50ff171">getExtensionType</a> () const </td></tr>
-<tr class="separator:a5bd5141a4a10fa93f96addd6c50ff171 inherit pub_methods_classprtx_1_1_decoder"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a67747b6cbf6045b07df6c0e5f1720b42 inherit pub_methods_classprtx_1_1_decoder"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classprtx_1_1_extension.html#ad6048fac4019029ec39431db1d873801">ExtensionType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_decoder.html#a67747b6cbf6045b07df6c0e5f1720b42">getExtensionType</a> () const finaloverride</td></tr>
+<tr class="separator:a67747b6cbf6045b07df6c0e5f1720b42 inherit pub_methods_classprtx_1_1_decoder"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classprtx_1_1_extension"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classprtx_1_1_extension')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classprtx_1_1_extension.html">prtx::Extension</a></td></tr>
 <tr class="memitem:a1d7478e72a33b585c1f999fc63e17f0c inherit pub_methods_classprtx_1_1_extension"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1d7478e72a33b585c1f999fc63e17f0c"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>Extension</b> (const <a class="el" href="classprtx_1_1_extension.html">Extension</a> &amp;)=delete</td></tr>
@@ -144,7 +127,9 @@ Additional Inherited Members</h2></td></tr>
 <tr class="memitem:ad6048fac4019029ec39431db1d873801 inherit pub_types_classprtx_1_1_extension"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_extension.html#ad6048fac4019029ec39431db1d873801">ExtensionType</a> { <br/>
 &#160;&#160;<a class="el" href="classprtx_1_1_extension.html#ad6048fac4019029ec39431db1d873801a73ac5078206d850132ff3c8cfaebbbed">ET_UNDEFINED</a>, 
 <br/>
-&#160;&#160;<a class="el" href="classprtx_1_1_extension.html#ad6048fac4019029ec39431db1d873801aee23e8588611d2d46ce25e563c190e2f">ET_ADAPTOR</a>, 
+&#160;&#160;<a class="el" href="classprtx_1_1_extension.html#ad6048fac4019029ec39431db1d873801aa0e3b007bfd050b0e2aee2af757aaf4c">ET_STREAM_ADAPTOR</a>, 
+<br/>
+&#160;&#160;<a class="el" href="classprtx_1_1_extension.html#ad6048fac4019029ec39431db1d873801a99981ddf69abab12b1d72cd1ca07ab30">ET_RESOLVEMAP_PROVIDER</a>, 
 <br/>
 &#160;&#160;<a class="el" href="classprtx_1_1_extension.html#ad6048fac4019029ec39431db1d873801ad9f1197517898445d4862622805ffd94">ET_ENCODER</a>, 
 <br/>
@@ -168,7 +153,7 @@ Additional Inherited Members</h2></td></tr>
 <div class="textblock"><p>Helper base class for all decoders which return <a class="el" href="classprtx_1_1_texture.html">prtx::Texture</a> as main decode result.</p>
 <dl class="section see"><dt>See Also</dt><dd><a class="el" href="classprtx_1_1_texture.html">prtx::Texture</a> </dd></dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="aa47725c1333afc4b2ffc007f2511dc66"></a>
+<a class="anchor" id="afa7f385e508ac31215e7e29f01d63ee1"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -184,7 +169,7 @@ Additional Inherited Members</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">final</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -199,15 +184,11 @@ Additional Inherited Members</h2></td></tr>
 <li><a class="el" href="_decoder_8h_source.html">Decoder.h</a></li>
 </ul>
 </div><!-- contents -->
-</div><!-- doc-content -->
 <!-- start footer part -->
-<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
-  <ul>
-    <li class="navelem"><a class="el" href="namespaceprtx.html">prtx</a></li><li class="navelem"><a class="el" href="classprtx_1_1_texture_decoder.html">TextureDecoder</a></li>
-    <li class="footer">Generated on Tue Sep 25 2018 09:40:51 for Esri Procedural Runtime by
-    <a href="http://www.doxygen.org/index.html">
-    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.5 </li>
-  </ul>
-</div>
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue Apr 9 2019 11:56:31 for Esri Procedural Runtime by &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.5
+</small></address>
 </body>
 </html>

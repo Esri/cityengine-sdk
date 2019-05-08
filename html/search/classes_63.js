@@ -11,5 +11,6 @@ var searchData=
   ['cgbdecoder',['CGBDecoder',['../classprtx_1_1_c_g_b_decoder.html',1,'prtx']]],
   ['comparablecontent',['ComparableContent',['../classprtx_1_1_comparable_content.html',1,'prtx']]],
   ['consoleloghandler',['ConsoleLogHandler',['../classprt_1_1_console_log_handler.html',1,'prt']]],
-  ['content',['Content',['../classprtx_1_1_content.html',1,'prtx']]]
+  ['content',['Content',['../classprtx_1_1_content.html',1,'prtx']]],
+  ['ctstring',['CTString',['../classprtx_1_1_c_t_string.html',1,'prtx']]]
 ];

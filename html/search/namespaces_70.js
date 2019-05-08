@@ -9,5 +9,6 @@ var searchData=
   ['prtutils',['PRTUtils',['../namespaceprtx_1_1_p_r_t_utils.html',1,'prtx']]],
   ['prtx',['prtx',['../namespaceprtx.html',1,'']]],
   ['shapeutils',['ShapeUtils',['../namespaceprtx_1_1_shape_utils.html',1,'prtx']]],
+  ['stringutils',['StringUtils',['../namespaceprt_1_1_string_utils.html',1,'prt']]],
   ['uriutils',['URIUtils',['../namespaceprtx_1_1_u_r_i_utils.html',1,'prtx']]]
 ];

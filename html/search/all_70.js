@@ -9,7 +9,7 @@ var searchData=
   ['parsememoryuri',['parseMemoryURI',['../namespaceprtx_1_1_u_r_i_utils.html#a3f905a014e186055fecbc8ae1d68a861',1,'prtx::URIUtils']]],
   ['pass',['PASS',['../structprtx_1_1_vertex_normal_processor.html#adc6143060777d55047c4ecef45a13a98ae0bf234e73960fc9e9419488bf58b63a',1,'prtx::VertexNormalProcessor::PASS()'],['../structprtx_1_1_hole_processor.html#a0574b2cb10749ba92314b05a5f52f032a266d9e0de0a6a88d375fefcd90b57d50',1,'prtx::HoleProcessor::PASS()']]],
   ['percentdecode',['percentDecode',['../namespaceprtx_1_1_u_r_i_utils.html#a94b8a0bb79cf3ac0f60cb1ef3c7db3c0',1,'prtx::URIUtils']]],
-  ['percentencode',['percentEncode',['../namespaceprtx_1_1_u_r_i_utils.html#ad805721d1a7b5647b0981fb8fe212043',1,'prtx::URIUtils::percentEncode(const std::string &amp;s)'],['../namespaceprtx_1_1_u_r_i_utils.html#a5e19b857c52fc88fbab18c4d2cf6effe',1,'prtx::URIUtils::percentEncode(const std::wstring &amp;s)']]],
+  ['percentencode',['percentEncode',['../namespaceprt_1_1_string_utils.html#a53335d564ff2cfe09526efb21743b0e4',1,'prt::StringUtils::percentEncode()'],['../namespaceprtx_1_1_u_r_i_utils.html#ad805721d1a7b5647b0981fb8fe212043',1,'prtx::URIUtils::percentEncode(const std::string &amp;s)'],['../namespaceprtx_1_1_u_r_i_utils.html#a5e19b857c52fc88fbab18c4d2cf6effe',1,'prtx::URIUtils::percentEncode(const std::wstring &amp;s)']]],
   ['perlayer',['PERLAYER',['../namespaceprtx_1_1_annotations.html#a92986bd2f4ad68494ac006e253b1087b',1,'prtx::Annotations']]],
   ['persistentblobtype',['PersistentBlobType',['../classprt_1_1_cache.html#a020dc8dff4e3472571fed593f40eccdf',1,'prt::Cache']]],
   ['pixelformat',['PixelFormat',['../classprtx_1_1_texture.html#a6fe2bc87ecf768fa3b470981ede648bc',1,'prtx::Texture']]],
@@ -40,5 +40,6 @@ var searchData=
   ['pt_5ftexture',['PT_TEXTURE',['../classprtx_1_1_material.html#a40fbd0505ee54f14b54306754b8801e1',1,'prtx::Material']]],
   ['pt_5fundefined',['PT_UNDEFINED',['../classprt_1_1_attributable.html#aaa464b033212c723bf25b39383b19012ab5ace444aafb3402d3423cec0ae8ac04',1,'prt::Attributable']]],
   ['shapeutils',['ShapeUtils',['../namespaceprtx_1_1_shape_utils.html',1,'prtx']]],
+  ['stringutils',['StringUtils',['../namespaceprt_1_1_string_utils.html',1,'prt']]],
   ['uriutils',['URIUtils',['../namespaceprtx_1_1_u_r_i_utils.html',1,'prtx']]]
 ];

@@ -8,13 +8,6 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
-<link href="navtree.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="resize.js"></script>
-<script type="text/javascript" src="navtree.js"></script>
-<script type="text/javascript">
-  $(document).ready(initResizable);
-  $(window).load(resizeHeight);
-</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/search.js"></script>
 <script type="text/javascript">
@@ -31,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="esri_prt_55px.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Esri Procedural Runtime
-   &#160;<span id="projectnumber">1.10.4198</span>
+   &#160;<span id="projectnumber">2.0.5403</span>
    </div>
   </td>
  </tr>
@@ -72,21 +65,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="files.html"><span>File&#160;List</span></a></li>
     </ul>
   </div>
-</div><!-- top -->
-<div id="side-nav" class="ui-resizable side-nav-resizable">
-  <div id="nav-tree">
-    <div id="nav-tree-contents">
-      <div id="nav-sync" class="sync"></div>
-    </div>
-  </div>
-  <div id="splitbar" style="-moz-user-select:none;" 
-       class="ui-resizable-handle">
-  </div>
-</div>
-<script type="text/javascript">
-$(document).ready(function(){initNavTree('_material_8h_source.html','');});
-</script>
-<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -101,13 +79,18 @@ $(document).ready(function(){initNavTree('_material_8h_source.html','');});
 </iframe>
 </div>
 
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_f4d0b50486959f5b523ec02356ccf9e2.html">prtx</a></li>  </ul>
+</div>
+</div><!-- top -->
 <div class="header">
   <div class="headertitle">
 <div class="title">Material.h</div>  </div>
 </div><!--header-->
 <div class="contents">
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">  COPYRIGHT (c) 2012-2018 Esri R&amp;D Center Zurich</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">  COPYRIGHT (c) 2012-2019 Esri R&amp;D Center Zurich</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">  TRADE SECRETS: ESRI PROPRIETARY AND CONFIDENTIAL</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">  Unpublished material - all rights reserved under the</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">  Copyright Laws of the United States and applicable international</span></div>
@@ -154,92 +137,92 @@ $(document).ready(function(){initNavTree('_material_8h_source.html','');});
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="keyword">typedef</span> std::shared_ptr&lt;Material&gt; <a class="code" href="namespaceprtx.html#ad9a3abc5331b1d26abd6344f333a1295">MaterialPtr</a>;          </div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="keyword">typedef</span> std::vector&lt;MaterialPtr&gt;  <a class="code" href="namespaceprtx.html#aa6c11702b7730c359cfaa80bb4ef8d2a">MaterialPtrVector</a>;        </div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;</div>
-<div class="line"><a name="l00152"></a><span class="lineno"><a class="line" href="classprtx_1_1_material.html">  152</a></span>&#160;<span class="keyword">class </span>PRTX_EXPORTS_API <a class="code" href="classprtx_1_1_material.html">Material</a> : <span class="keyword">public</span> <a class="code" href="classprtx_1_1_attributable.html">Attributable</a>, <span class="keyword">public</span> <a class="code" href="classprtx_1_1_comparable_content.html">ComparableContent</a>, <span class="keyword">public</span> <a class="code" href="classprtx_1_1_builtin_material_attributes.html">BuiltinMaterialAttributes</a> {</div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00157"></a><span class="lineno"><a class="line" href="classprtx_1_1_material.html#a40fbd0505ee54f14b54306754b8801e1">  157</a></span>&#160;    <span class="keyword">static</span> <span class="keyword">const</span> PrimitiveType PT_TEXTURE       = PT_BLIND_DATA_ARRAY + 1;</div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;    <span class="keyword">static</span> <span class="keyword">const</span> PrimitiveType PT_TEXTURE_ARRAY = PT_TEXTURE + 1;</div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;    <span class="keyword">static</span> <span class="keyword">const</span> PrimitiveType PT_COUNT         = prtx::Attributable::PT_COUNT + 2;</div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;</div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="classprtx_1_1_material.html">Material</a>();</div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;</div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;    <span class="keyword">virtual</span> <span class="keyword">const</span> <a class="code" href="namespaceprtx.html#ac5fdcb1f68c5a0ac7295260cfd20b307">WStringVector</a>&amp;    getKeys()                                       <span class="keyword">const</span> = 0;</div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">bool</span>                    hasKey              (<span class="keyword">const</span> std::wstring&amp; key)   <span class="keyword">const</span> = 0;</div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;    <span class="keyword">virtual</span> PrimitiveType           getType             (<span class="keyword">const</span> std::wstring&amp; key)   <span class="keyword">const</span> = 0;</div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="namespaceprtx.html#a6a43e75e11aa3ef9e18d9fd8312ebb9f">Bool</a>                    getBool             (<span class="keyword">const</span> std::wstring&amp; key)   <span class="keyword">const</span> = 0;</div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;    <span class="keyword">virtual</span> int32_t                 getInt              (<span class="keyword">const</span> std::wstring&amp; key)   <span class="keyword">const</span> = 0;</div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">double</span>                  getFloat            (<span class="keyword">const</span> std::wstring&amp; key)   <span class="keyword">const</span> = 0;</div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;    <span class="keyword">virtual</span> <span class="keyword">const</span> std::wstring&amp;     getString           (<span class="keyword">const</span> std::wstring&amp; key)   <span class="keyword">const</span> = 0;</div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;    <span class="keyword">virtual</span> <span class="keyword">const</span> <a class="code" href="namespaceprtx.html#afb8abeb6630c0959e01b1e174d7ecc88">BoolVector</a>&amp;       getBoolArray        (<span class="keyword">const</span> std::wstring&amp; key)   <span class="keyword">const</span> = 0;</div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;    <span class="keyword">virtual</span> <span class="keyword">const</span> <a class="code" href="namespaceprtx.html#a997ead27a2a1a9b685b1e57f1e0188a2">Int32Vector</a>&amp;      getIntArray         (<span class="keyword">const</span> std::wstring&amp; key)   <span class="keyword">const</span> = 0;</div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;    <span class="keyword">virtual</span> <span class="keyword">const</span> <a class="code" href="namespaceprtx.html#acfbb1262ed21fac2e362179f92993c81">DoubleVector</a>&amp;     getFloatArray       (<span class="keyword">const</span> std::wstring&amp; key)   <span class="keyword">const</span> = 0;</div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;    <span class="keyword">virtual</span> <span class="keyword">const</span> <a class="code" href="namespaceprtx.html#ac5fdcb1f68c5a0ac7295260cfd20b307">WStringVector</a>&amp;    getStringArray      (<span class="keyword">const</span> std::wstring&amp; key)   <span class="keyword">const</span> = 0;</div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span>*                   getBlindData        (<span class="keyword">const</span> std::wstring&amp; key)   <span class="keyword">const</span> = 0;</div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="namespaceprtx.html#a8186d5b74483a2ca28ae6ef489dd4152">ShaderPtr</a> getShader() <span class="keyword">const</span> = 0;</div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;</div>
-<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="namespaceprtx.html#acc7afcec4e6a1bd29692bdc1f45d36df">TexturePtr</a> getTexture(<span class="keyword">const</span> std::wstring&amp; key) <span class="keyword">const</span> = 0;</div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;</div>
-<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;    <span class="keyword">virtual</span> <span class="keyword">const</span> <a class="code" href="namespaceprtx.html#a9842945f020c6906455bcf07686fffc2">TexturePtrVector</a>&amp; getTextureArray(<span class="keyword">const</span> std::wstring&amp; key) <span class="keyword">const</span> = 0;</div>
-<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;</div>
-<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="namespaceprtx.html#acc7afcec4e6a1bd29692bdc1f45d36df">TexturePtr</a> getTextureArrayItem(<span class="keyword">const</span> std::wstring&amp; key, <span class="keywordtype">size_t</span> index) <span class="keyword">const</span> = 0;</div>
-<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;</div>
-<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;    <span class="keyword">virtual</span> <span class="keyword">const</span> <a class="code" href="namespaceprtx.html#ac5fdcb1f68c5a0ac7295260cfd20b307">WStringVector</a>&amp; getBlindDataKeys() <span class="keyword">const</span> = 0;</div>
-<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;</div>
-<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;<span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;    <span class="comment">// @cond</span></div>
-<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;    <a class="code" href="classprtx_1_1_material.html">Material</a>();</div>
-<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;    <span class="comment">// @endcond</span></div>
-<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;};</div>
-<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;</div>
-<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;</div>
-<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;<span class="keyword">class </span><a class="code" href="classprtx_1_1_material_builder.html">MaterialBuilder</a>;</div>
-<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;<span class="keyword">typedef</span> std::shared_ptr&lt;MaterialBuilder&gt; MaterialBuilderPtr;</div>
-<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;</div>
-<div class="line"><a name="l00235"></a><span class="lineno"><a class="line" href="classprtx_1_1_material_builder.html">  235</a></span>&#160;<span class="keyword">class </span>PRTX_EXPORTS_API <a class="code" href="classprtx_1_1_material_builder.html">MaterialBuilder</a> : <span class="keyword">public</span> <a class="code" href="classprtx_1_1_shared_ptr_builder.html">SharedPtrBuilder</a>&lt;Material&gt;, <span class="keyword">public</span> <a class="code" href="classprtx_1_1_attributable_setter.html">AttributableSetter</a>, <span class="keyword">public</span> <a class="code" href="classprtx_1_1_builtin_material_attributes_builder.html">BuiltinMaterialAttributesBuilder</a> {</div>
-<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;    <a class="code" href="classprtx_1_1_material_builder.html">MaterialBuilder</a>();</div>
-<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;</div>
-<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;    <a class="code" href="classprtx_1_1_material_builder.html">MaterialBuilder</a>(<span class="keyword">const</span> <a class="code" href="namespaceprtx.html#a8186d5b74483a2ca28ae6ef489dd4152">ShaderPtr</a>&amp; shader);</div>
-<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;</div>
-<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="classprtx_1_1_material_builder.html">MaterialBuilder</a>();</div>
-<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;</div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;    <span class="comment">// SharedPtrBuilder interface implementation</span></div>
-<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="namespaceprtx.html#ad9a3abc5331b1d26abd6344f333a1295">MaterialPtr</a> createSharedAndReset(std::wstring* warnings = 0);</div>
-<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="namespaceprtx.html#ad9a3abc5331b1d26abd6344f333a1295">MaterialPtr</a> createShared(std::wstring* warnings = 0) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00195"></a><span class="lineno"><a class="line" href="classprtx_1_1_material.html">  195</a></span>&#160;<span class="keyword">class </span>PRTX_EXPORTS_API <a class="code" href="classprtx_1_1_material.html">Material</a> : <span class="keyword">public</span> <a class="code" href="classprtx_1_1_attributable.html">Attributable</a>, <span class="keyword">public</span> <a class="code" href="classprtx_1_1_comparable_content.html">ComparableContent</a>, <span class="keyword">public</span> <a class="code" href="classprtx_1_1_builtin_material_attributes.html">BuiltinMaterialAttributes</a> {</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00200"></a><span class="lineno"><a class="line" href="classprtx_1_1_material.html#a40fbd0505ee54f14b54306754b8801e1">  200</a></span>&#160;    <span class="keyword">static</span> <span class="keyword">const</span> PrimitiveType PT_TEXTURE       = PT_BLIND_DATA_ARRAY + 1;</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;    <span class="keyword">static</span> <span class="keyword">const</span> PrimitiveType PT_TEXTURE_ARRAY = PT_TEXTURE + 1;</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;    <span class="keyword">static</span> <span class="keyword">const</span> PrimitiveType PT_COUNT         = prtx::Attributable::PT_COUNT + 2;</div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="classprtx_1_1_material.html">Material</a>();</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;</div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;    <span class="keyword">virtual</span> <span class="keyword">const</span> <a class="code" href="namespaceprtx.html#ac5fdcb1f68c5a0ac7295260cfd20b307">WStringVector</a>&amp;    getKeys()                                       <span class="keyword">const</span> = 0;</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">bool</span>                    hasKey              (<span class="keyword">const</span> std::wstring&amp; key)   <span class="keyword">const</span> = 0;</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;    <span class="keyword">virtual</span> PrimitiveType           getType             (<span class="keyword">const</span> std::wstring&amp; key)   <span class="keyword">const</span> = 0;</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="namespaceprtx.html#a6a43e75e11aa3ef9e18d9fd8312ebb9f">Bool</a>                    getBool             (<span class="keyword">const</span> std::wstring&amp; key)   <span class="keyword">const</span> = 0;</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;    <span class="keyword">virtual</span> int32_t                 getInt              (<span class="keyword">const</span> std::wstring&amp; key)   <span class="keyword">const</span> = 0;</div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">double</span>                  getFloat            (<span class="keyword">const</span> std::wstring&amp; key)   <span class="keyword">const</span> = 0;</div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;    <span class="keyword">virtual</span> <span class="keyword">const</span> std::wstring&amp;     getString           (<span class="keyword">const</span> std::wstring&amp; key)   <span class="keyword">const</span> = 0;</div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;    <span class="keyword">virtual</span> <span class="keyword">const</span> <a class="code" href="namespaceprtx.html#afb8abeb6630c0959e01b1e174d7ecc88">BoolVector</a>&amp;       getBoolArray        (<span class="keyword">const</span> std::wstring&amp; key)   <span class="keyword">const</span> = 0;</div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;    <span class="keyword">virtual</span> <span class="keyword">const</span> <a class="code" href="namespaceprtx.html#a997ead27a2a1a9b685b1e57f1e0188a2">Int32Vector</a>&amp;      getIntArray         (<span class="keyword">const</span> std::wstring&amp; key)   <span class="keyword">const</span> = 0;</div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;    <span class="keyword">virtual</span> <span class="keyword">const</span> <a class="code" href="namespaceprtx.html#acfbb1262ed21fac2e362179f92993c81">DoubleVector</a>&amp;     getFloatArray       (<span class="keyword">const</span> std::wstring&amp; key)   <span class="keyword">const</span> = 0;</div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;    <span class="keyword">virtual</span> <span class="keyword">const</span> <a class="code" href="namespaceprtx.html#ac5fdcb1f68c5a0ac7295260cfd20b307">WStringVector</a>&amp;    getStringArray      (<span class="keyword">const</span> std::wstring&amp; key)   <span class="keyword">const</span> = 0;</div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span>*                   getBlindData        (<span class="keyword">const</span> std::wstring&amp; key)   <span class="keyword">const</span> = 0;</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="namespaceprtx.html#a8186d5b74483a2ca28ae6ef489dd4152">ShaderPtr</a> getShader() <span class="keyword">const</span> = 0;</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="namespaceprtx.html#acc7afcec4e6a1bd29692bdc1f45d36df">TexturePtr</a> getTexture(<span class="keyword">const</span> std::wstring&amp; key) <span class="keyword">const</span> = 0;</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;</div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;    <span class="keyword">virtual</span> <span class="keyword">const</span> <a class="code" href="namespaceprtx.html#a9842945f020c6906455bcf07686fffc2">TexturePtrVector</a>&amp; getTextureArray(<span class="keyword">const</span> std::wstring&amp; key) <span class="keyword">const</span> = 0;</div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;</div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="namespaceprtx.html#acc7afcec4e6a1bd29692bdc1f45d36df">TexturePtr</a> getTextureArrayItem(<span class="keyword">const</span> std::wstring&amp; key, <span class="keywordtype">size_t</span> index) <span class="keyword">const</span> = 0;</div>
 <div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;</div>
-<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;</div>
-<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> setBool        (<span class="keyword">const</span> std::wstring&amp; key, <a class="code" href="namespaceprtx.html#a6a43e75e11aa3ef9e18d9fd8312ebb9f">Bool</a>                  val);</div>
-<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> setInt         (<span class="keyword">const</span> std::wstring&amp; key, int32_t               val);</div>
-<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> setFloat       (<span class="keyword">const</span> std::wstring&amp; key, <span class="keywordtype">double</span>                val);</div>
-<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> setString      (<span class="keyword">const</span> std::wstring&amp; key, <span class="keyword">const</span> std::wstring&amp;   val);</div>
-<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> setBoolArray   (<span class="keyword">const</span> std::wstring&amp; key, <span class="keyword">const</span> <a class="code" href="namespaceprtx.html#afb8abeb6630c0959e01b1e174d7ecc88">BoolVector</a>&amp;     val);</div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> setIntArray    (<span class="keyword">const</span> std::wstring&amp; key, <span class="keyword">const</span> <a class="code" href="namespaceprtx.html#a997ead27a2a1a9b685b1e57f1e0188a2">Int32Vector</a>&amp;    val);</div>
-<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> setFloatArray  (<span class="keyword">const</span> std::wstring&amp; key, <span class="keyword">const</span> <a class="code" href="namespaceprtx.html#acfbb1262ed21fac2e362179f92993c81">DoubleVector</a>&amp;   val);</div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> setStringArray (<span class="keyword">const</span> std::wstring&amp; key, <span class="keyword">const</span> <a class="code" href="namespaceprtx.html#ac5fdcb1f68c5a0ac7295260cfd20b307">WStringVector</a>&amp;  val);</div>
-<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> setBlindData   (<span class="keyword">const</span> std::wstring&amp; key, <span class="keywordtype">void</span>*                 val);</div>
-<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> setTexture(<span class="keyword">const</span> std::wstring&amp; key, <span class="keyword">const</span> <a class="code" href="namespaceprtx.html#acc7afcec4e6a1bd29692bdc1f45d36df">TexturePtr</a>&amp; val, <span class="keyword">const</span> std::wstring&amp; resolveMapKey);</div>
-<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;</div>
-<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> setTextureArray(<span class="keyword">const</span> std::wstring&amp; key, <span class="keyword">const</span> <a class="code" href="namespaceprtx.html#a9842945f020c6906455bcf07686fffc2">TexturePtrVector</a>&amp; val, <span class="keyword">const</span> <a class="code" href="namespaceprtx.html#ac5fdcb1f68c5a0ac7295260cfd20b307">WStringVector</a>&amp; resolveMapKeys);</div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;    <span class="keyword">virtual</span> <span class="keyword">const</span> <a class="code" href="namespaceprtx.html#ac5fdcb1f68c5a0ac7295260cfd20b307">WStringVector</a>&amp; getBlindDataKeys() <span class="keyword">const</span> = 0;</div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;</div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;<span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;    <span class="comment">// @cond</span></div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;    <a class="code" href="classprtx_1_1_material.html">Material</a>();</div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;    <span class="comment">// @endcond</span></div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;};</div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;</div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;<span class="keyword">class </span><a class="code" href="classprtx_1_1_material_builder.html">MaterialBuilder</a>;</div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;<span class="keyword">typedef</span> std::shared_ptr&lt;MaterialBuilder&gt; MaterialBuilderPtr;</div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;</div>
+<div class="line"><a name="l00278"></a><span class="lineno"><a class="line" href="classprtx_1_1_material_builder.html">  278</a></span>&#160;<span class="keyword">class </span>PRTX_EXPORTS_API <a class="code" href="classprtx_1_1_material_builder.html">MaterialBuilder</a> : <span class="keyword">public</span> <a class="code" href="classprtx_1_1_shared_ptr_builder.html">SharedPtrBuilder</a>&lt;Material&gt;, <span class="keyword">public</span> <a class="code" href="classprtx_1_1_attributable_setter.html">AttributableSetter</a>, <span class="keyword">public</span> <a class="code" href="classprtx_1_1_builtin_material_attributes_builder.html">BuiltinMaterialAttributesBuilder</a> {</div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;    <a class="code" href="classprtx_1_1_material_builder.html">MaterialBuilder</a>();</div>
 <div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;</div>
-<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> setTextureArrayItem(<span class="keyword">const</span> std::wstring&amp; key, <span class="keywordtype">size_t</span> index, <span class="keyword">const</span> <a class="code" href="namespaceprtx.html#acc7afcec4e6a1bd29692bdc1f45d36df">TexturePtr</a>&amp; val, <span class="keyword">const</span> std::wstring&amp; resolveMapKey);</div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;    <a class="code" href="classprtx_1_1_material_builder.html">MaterialBuilder</a>(<span class="keyword">const</span> <a class="code" href="namespaceprtx.html#a8186d5b74483a2ca28ae6ef489dd4152">ShaderPtr</a>&amp; shader);</div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;</div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="classprtx_1_1_material_builder.html">MaterialBuilder</a>();</div>
 <div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;</div>
-<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;<span class="preprocessor">    #include &quot;prtx/generated/BuiltinMaterialAttributesBuilder_impl_decl.h&quot;</span></div>
-<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;</div>
-<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;    MaterialImpl* mMaterial;</div>
-<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;};</div>
-<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;</div>
-<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;</div>
-<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;} <span class="comment">// namespace prtx</span></div>
-<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;</div>
-<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;</div>
-<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;<span class="preprocessor">#ifdef _MSC_VER</span></div>
-<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#   pragma warning(pop)</span></div>
-<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;</div>
-<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* PRTX_MATERIAL_H_ */</span><span class="preprocessor"></span></div>
-<div class="ttc" id="classprtx_1_1_builtin_material_attributes_builder_html"><div class="ttname"><a href="classprtx_1_1_builtin_material_attributes_builder.html">prtx::BuiltinMaterialAttributesBuilder</a></div><div class="ttdef"><b>Definition:</b> BuiltinMaterialAttributes.h:124</div></div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;    <span class="comment">// SharedPtrBuilder interface implementation</span></div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="namespaceprtx.html#ad9a3abc5331b1d26abd6344f333a1295">MaterialPtr</a> createSharedAndReset(std::wstring* warnings = 0);</div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="namespaceprtx.html#ad9a3abc5331b1d26abd6344f333a1295">MaterialPtr</a> createShared(std::wstring* warnings = 0) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;</div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;</div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> setBool        (<span class="keyword">const</span> std::wstring&amp; key, <a class="code" href="namespaceprtx.html#a6a43e75e11aa3ef9e18d9fd8312ebb9f">Bool</a>                  val);</div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> setInt         (<span class="keyword">const</span> std::wstring&amp; key, int32_t               val);</div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> setFloat       (<span class="keyword">const</span> std::wstring&amp; key, <span class="keywordtype">double</span>                val);</div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> setString      (<span class="keyword">const</span> std::wstring&amp; key, <span class="keyword">const</span> std::wstring&amp;   val);</div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> setBoolArray   (<span class="keyword">const</span> std::wstring&amp; key, <span class="keyword">const</span> <a class="code" href="namespaceprtx.html#afb8abeb6630c0959e01b1e174d7ecc88">BoolVector</a>&amp;     val);</div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> setIntArray    (<span class="keyword">const</span> std::wstring&amp; key, <span class="keyword">const</span> <a class="code" href="namespaceprtx.html#a997ead27a2a1a9b685b1e57f1e0188a2">Int32Vector</a>&amp;    val);</div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> setFloatArray  (<span class="keyword">const</span> std::wstring&amp; key, <span class="keyword">const</span> <a class="code" href="namespaceprtx.html#acfbb1262ed21fac2e362179f92993c81">DoubleVector</a>&amp;   val);</div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> setStringArray (<span class="keyword">const</span> std::wstring&amp; key, <span class="keyword">const</span> <a class="code" href="namespaceprtx.html#ac5fdcb1f68c5a0ac7295260cfd20b307">WStringVector</a>&amp;  val);</div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> setBlindData   (<span class="keyword">const</span> std::wstring&amp; key, <span class="keywordtype">void</span>*                 val);</div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> setTexture(<span class="keyword">const</span> std::wstring&amp; key, <span class="keyword">const</span> <a class="code" href="namespaceprtx.html#acc7afcec4e6a1bd29692bdc1f45d36df">TexturePtr</a>&amp; val, <span class="keyword">const</span> std::wstring&amp; resolveMapKey);</div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;</div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> setTextureArray(<span class="keyword">const</span> std::wstring&amp; key, <span class="keyword">const</span> <a class="code" href="namespaceprtx.html#a9842945f020c6906455bcf07686fffc2">TexturePtrVector</a>&amp; val, <span class="keyword">const</span> <a class="code" href="namespaceprtx.html#ac5fdcb1f68c5a0ac7295260cfd20b307">WStringVector</a>&amp; resolveMapKeys);</div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;</div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> setTextureArrayItem(<span class="keyword">const</span> std::wstring&amp; key, <span class="keywordtype">size_t</span> index, <span class="keyword">const</span> <a class="code" href="namespaceprtx.html#acc7afcec4e6a1bd29692bdc1f45d36df">TexturePtr</a>&amp; val, <span class="keyword">const</span> std::wstring&amp; resolveMapKey);</div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;</div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;<span class="preprocessor">    #include &quot;prtx/generated/BuiltinMaterialAttributesBuilder_impl_decl.h&quot;</span></div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;</div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;    MaterialImpl* mMaterial;</div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;};</div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;</div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;</div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;} <span class="comment">// namespace prtx</span></div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;</div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;</div>
+<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;<span class="preprocessor">#ifdef _MSC_VER</span></div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#   pragma warning(pop)</span></div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;</div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* PRTX_MATERIAL_H_ */</span><span class="preprocessor"></span></div>
+<div class="ttc" id="classprtx_1_1_builtin_material_attributes_builder_html"><div class="ttname"><a href="classprtx_1_1_builtin_material_attributes_builder.html">prtx::BuiltinMaterialAttributesBuilder</a></div><div class="ttdef"><b>Definition:</b> BuiltinMaterialAttributes.h:159</div></div>
 <div class="ttc" id="classprtx_1_1_shared_ptr_builder_html"><div class="ttname"><a href="classprtx_1_1_shared_ptr_builder.html">prtx::SharedPtrBuilder</a></div><div class="ttdef"><b>Definition:</b> Builder.h:65</div></div>
 <div class="ttc" id="namespaceprtx_html_a6a43e75e11aa3ef9e18d9fd8312ebb9f"><div class="ttname"><a href="namespaceprtx.html#a6a43e75e11aa3ef9e18d9fd8312ebb9f">prtx::Bool</a></div><div class="ttdeci">uint8_t Bool</div><div class="ttdoc">uint8_t based Bool type </div><div class="ttdef"><b>Definition:</b> Types.h:30</div></div>
 <div class="ttc" id="namespaceprtx_html_acc7afcec4e6a1bd29692bdc1f45d36df"><div class="ttname"><a href="namespaceprtx.html#acc7afcec4e6a1bd29692bdc1f45d36df">prtx::TexturePtr</a></div><div class="ttdeci">std::shared_ptr&lt; Texture &gt; TexturePtr</div><div class="ttdoc">shared Texture pointer </div><div class="ttdef"><b>Definition:</b> Texture.h:37</div></div>
@@ -248,25 +231,21 @@ $(document).ready(function(){initNavTree('_material_8h_source.html','');});
 <div class="ttc" id="classprtx_1_1_attributable_html"><div class="ttname"><a href="classprtx_1_1_attributable.html">prtx::Attributable</a></div><div class="ttdef"><b>Definition:</b> /Attributable.h:37</div></div>
 <div class="ttc" id="namespaceprtx_html_acfbb1262ed21fac2e362179f92993c81"><div class="ttname"><a href="namespaceprtx.html#acfbb1262ed21fac2e362179f92993c81">prtx::DoubleVector</a></div><div class="ttdeci">std::vector&lt; double &gt; DoubleVector</div><div class="ttdoc">vector of double </div><div class="ttdef"><b>Definition:</b> Types.h:32</div></div>
 <div class="ttc" id="namespaceprtx_html_a9842945f020c6906455bcf07686fffc2"><div class="ttname"><a href="namespaceprtx.html#a9842945f020c6906455bcf07686fffc2">prtx::TexturePtrVector</a></div><div class="ttdeci">std::vector&lt; TexturePtr &gt; TexturePtrVector</div><div class="ttdoc">vector of shared Texture pointers </div><div class="ttdef"><b>Definition:</b> Texture.h:39</div></div>
-<div class="ttc" id="namespaceprtx_html_ad9a3abc5331b1d26abd6344f333a1295"><div class="ttname"><a href="namespaceprtx.html#ad9a3abc5331b1d26abd6344f333a1295">prtx::MaterialPtr</a></div><div class="ttdeci">std::shared_ptr&lt; Material &gt; MaterialPtr</div><div class="ttdoc">shared Material pointer </div><div class="ttdef"><b>Definition:</b> DataBackend.h:43</div></div>
+<div class="ttc" id="namespaceprtx_html_ad9a3abc5331b1d26abd6344f333a1295"><div class="ttname"><a href="namespaceprtx.html#ad9a3abc5331b1d26abd6344f333a1295">prtx::MaterialPtr</a></div><div class="ttdeci">std::shared_ptr&lt; Material &gt; MaterialPtr</div><div class="ttdoc">shared Material pointer </div><div class="ttdef"><b>Definition:</b> DataBackend.h:44</div></div>
 <div class="ttc" id="classprtx_1_1_attributable_setter_html"><div class="ttname"><a href="classprtx_1_1_attributable_setter.html">prtx::AttributableSetter</a></div><div class="ttdef"><b>Definition:</b> /Attributable.h:139</div></div>
-<div class="ttc" id="classprtx_1_1_material_html"><div class="ttname"><a href="classprtx_1_1_material.html">prtx::Material</a></div><div class="ttdef"><b>Definition:</b> Material.h:152</div></div>
+<div class="ttc" id="classprtx_1_1_material_html"><div class="ttname"><a href="classprtx_1_1_material.html">prtx::Material</a></div><div class="ttdef"><b>Definition:</b> Material.h:195</div></div>
 <div class="ttc" id="classprtx_1_1_builtin_material_attributes_html"><div class="ttname"><a href="classprtx_1_1_builtin_material_attributes.html">prtx::BuiltinMaterialAttributes</a></div><div class="ttdef"><b>Definition:</b> BuiltinMaterialAttributes.h:39</div></div>
 <div class="ttc" id="classprtx_1_1_comparable_content_html"><div class="ttname"><a href="classprtx_1_1_comparable_content.html">prtx::ComparableContent</a></div><div class="ttdef"><b>Definition:</b> Content.h:88</div></div>
-<div class="ttc" id="namespaceprtx_html_aa6c11702b7730c359cfaa80bb4ef8d2a"><div class="ttname"><a href="namespaceprtx.html#aa6c11702b7730c359cfaa80bb4ef8d2a">prtx::MaterialPtrVector</a></div><div class="ttdeci">std::vector&lt; MaterialPtr &gt; MaterialPtrVector</div><div class="ttdoc">vector of shared Material pointers </div><div class="ttdef"><b>Definition:</b> DataBackend.h:44</div></div>
+<div class="ttc" id="namespaceprtx_html_aa6c11702b7730c359cfaa80bb4ef8d2a"><div class="ttname"><a href="namespaceprtx.html#aa6c11702b7730c359cfaa80bb4ef8d2a">prtx::MaterialPtrVector</a></div><div class="ttdeci">std::vector&lt; MaterialPtr &gt; MaterialPtrVector</div><div class="ttdoc">vector of shared Material pointers </div><div class="ttdef"><b>Definition:</b> DataBackend.h:45</div></div>
 <div class="ttc" id="namespaceprtx_html_a997ead27a2a1a9b685b1e57f1e0188a2"><div class="ttname"><a href="namespaceprtx.html#a997ead27a2a1a9b685b1e57f1e0188a2">prtx::Int32Vector</a></div><div class="ttdeci">std::vector&lt; int32_t &gt; Int32Vector</div><div class="ttdoc">vector of int32_t </div><div class="ttdef"><b>Definition:</b> Types.h:33</div></div>
 <div class="ttc" id="namespaceprtx_html_ac5fdcb1f68c5a0ac7295260cfd20b307"><div class="ttname"><a href="namespaceprtx.html#ac5fdcb1f68c5a0ac7295260cfd20b307">prtx::WStringVector</a></div><div class="ttdeci">std::vector&lt; std::wstring &gt; WStringVector</div><div class="ttdoc">vector of std::wstring </div><div class="ttdef"><b>Definition:</b> Types.h:35</div></div>
-<div class="ttc" id="classprtx_1_1_material_builder_html"><div class="ttname"><a href="classprtx_1_1_material_builder.html">prtx::MaterialBuilder</a></div><div class="ttdef"><b>Definition:</b> Material.h:235</div></div>
+<div class="ttc" id="classprtx_1_1_material_builder_html"><div class="ttname"><a href="classprtx_1_1_material_builder.html">prtx::MaterialBuilder</a></div><div class="ttdef"><b>Definition:</b> Material.h:278</div></div>
 </div><!-- fragment --></div><!-- contents -->
-</div><!-- doc-content -->
 <!-- start footer part -->
-<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
-  <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_f4d0b50486959f5b523ec02356ccf9e2.html">prtx</a></li><li class="navelem"><b>Material.h</b></li>
-    <li class="footer">Generated on Tue Sep 25 2018 09:40:51 for Esri Procedural Runtime by
-    <a href="http://www.doxygen.org/index.html">
-    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.5 </li>
-  </ul>
-</div>
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue Apr 9 2019 11:56:30 for Esri Procedural Runtime by &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.5
+</small></address>
 </body>
 </html>

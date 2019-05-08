@@ -8,13 +8,6 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
-<link href="navtree.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="resize.js"></script>
-<script type="text/javascript" src="navtree.js"></script>
-<script type="text/javascript">
-  $(document).ready(initResizable);
-  $(window).load(resizeHeight);
-</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/search.js"></script>
 <script type="text/javascript">
@@ -31,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="esri_prt_55px.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Esri Procedural Runtime
-   &#160;<span id="projectnumber">1.10.4198</span>
+   &#160;<span id="projectnumber">2.0.5403</span>
    </div>
   </td>
  </tr>
@@ -75,21 +68,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
-</div><!-- top -->
-<div id="side-nav" class="ui-resizable side-nav-resizable">
-  <div id="nav-tree">
-    <div id="nav-tree-contents">
-      <div id="nav-sync" class="sync"></div>
-    </div>
-  </div>
-  <div id="splitbar" style="-moz-user-select:none;" 
-       class="ui-resizable-handle">
-  </div>
-</div>
-<script type="text/javascript">
-$(document).ready(function(){initNavTree('classprtx_1_1_extension_manager.html','');});
-</script>
-<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -104,6 +82,11 @@ $(document).ready(function(){initNavTree('classprtx_1_1_extension_manager.html',
 </iframe>
 </div>
 
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceprtx.html">prtx</a></li><li class="navelem"><a class="el" href="classprtx_1_1_extension_manager.html">ExtensionManager</a></li>  </ul>
+</div>
+</div><!-- top -->
 <div class="header">
   <div class="headertitle">
 <div class="title">prtx::ExtensionManager Member List</div>  </div>
@@ -118,25 +101,23 @@ $(document).ready(function(){initNavTree('classprtx_1_1_extension_manager.html',
   <tr><td class="entry"><a class="el" href="classprtx_1_1_extension_manager.html#a65d5f08c23e9f8d0241dbc284ada38fd">createDecoderInfo</a>(const std::wstring &amp;id) const =0</td><td class="entry"><a class="el" href="classprtx_1_1_extension_manager.html">prtx::ExtensionManager</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="classprtx_1_1_extension_manager.html#a53f51cd6419b01db98af0f26c565ccfd">createEncoder</a>(const std::wstring &amp;id, const prt::AttributeMap *options, prt::Callbacks *const callbacks) const =0</td><td class="entry"><a class="el" href="classprtx_1_1_extension_manager.html">prtx::ExtensionManager</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
   <tr><td class="entry"><a class="el" href="classprtx_1_1_extension_manager.html#a109c6664a53ebba97ece3097efab5bef">createEncoderInfo</a>(const std::wstring &amp;id) const =0</td><td class="entry"><a class="el" href="classprtx_1_1_extension_manager.html">prtx::ExtensionManager</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classprtx_1_1_extension_manager.html#a28593c0c8e3353a4a8052e461272ea24">createStreamAdaptor</a>(const prtx::URIPtr &amp;uri) const =0</td><td class="entry"><a class="el" href="classprtx_1_1_extension_manager.html">prtx::ExtensionManager</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
-  <tr bgcolor="#f0f0f0"><td class="entry"><b>ExtensionManager</b>(const ExtensionManager &amp;)=delete (defined in <a class="el" href="classprtx_1_1_extension_manager.html">prtx::ExtensionManager</a>)</td><td class="entry"><a class="el" href="classprtx_1_1_extension_manager.html">prtx::ExtensionManager</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>ExtensionManager</b>() (defined in <a class="el" href="classprtx_1_1_extension_manager.html">prtx::ExtensionManager</a>)</td><td class="entry"><a class="el" href="classprtx_1_1_extension_manager.html">prtx::ExtensionManager</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
-  <tr bgcolor="#f0f0f0"><td class="entry"><b>init</b>(const wchar_t *const *prtPlugins, size_t prtPluginsCount)=0 (defined in <a class="el" href="classprtx_1_1_extension_manager.html">prtx::ExtensionManager</a>)</td><td class="entry"><a class="el" href="classprtx_1_1_extension_manager.html">prtx::ExtensionManager</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classprtx_1_1_extension_manager.html#a8a8c3f3befafd05f80995c151a57807e">instance</a>()</td><td class="entry"><a class="el" href="classprtx_1_1_extension_manager.html">prtx::ExtensionManager</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
-  <tr><td class="entry"><a class="el" href="classprtx_1_1_extension_manager.html#ae143960188e40f1faba768a123001a50">listDecoderIds</a>(std::vector&lt; std::wstring &gt; &amp;result) const =0</td><td class="entry"><a class="el" href="classprtx_1_1_extension_manager.html">prtx::ExtensionManager</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classprtx_1_1_extension_manager.html#aabb3ad10867d219143db62941c9ac602">listEncoderIds</a>(std::vector&lt; std::wstring &gt; &amp;result) const =0</td><td class="entry"><a class="el" href="classprtx_1_1_extension_manager.html">prtx::ExtensionManager</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
-  <tr bgcolor="#f0f0f0"><td class="entry"><b>operator=</b>(const ExtensionManager &amp;)=delete (defined in <a class="el" href="classprtx_1_1_extension_manager.html">prtx::ExtensionManager</a>)</td><td class="entry"><a class="el" href="classprtx_1_1_extension_manager.html">prtx::ExtensionManager</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>setInstance</b>(ExtensionManager *theInstance) (defined in <a class="el" href="classprtx_1_1_extension_manager.html">prtx::ExtensionManager</a>)</td><td class="entry"><a class="el" href="classprtx_1_1_extension_manager.html">prtx::ExtensionManager</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
-  <tr bgcolor="#f0f0f0"><td class="entry"><b>~ExtensionManager</b>() (defined in <a class="el" href="classprtx_1_1_extension_manager.html">prtx::ExtensionManager</a>)</td><td class="entry"><a class="el" href="classprtx_1_1_extension_manager.html">prtx::ExtensionManager</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classprtx_1_1_extension_manager.html#ad7028adb9238e7123b02bd20ffb936de">createResolveMapProvider</a>(const prtx::URIPtr &amp;uri) const =0</td><td class="entry"><a class="el" href="classprtx_1_1_extension_manager.html">prtx::ExtensionManager</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
+  <tr><td class="entry"><a class="el" href="classprtx_1_1_extension_manager.html#a28593c0c8e3353a4a8052e461272ea24">createStreamAdaptor</a>(const prtx::URIPtr &amp;uri) const =0</td><td class="entry"><a class="el" href="classprtx_1_1_extension_manager.html">prtx::ExtensionManager</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
+  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>ExtensionManager</b>(const ExtensionManager &amp;)=delete (defined in <a class="el" href="classprtx_1_1_extension_manager.html">prtx::ExtensionManager</a>)</td><td class="entry"><a class="el" href="classprtx_1_1_extension_manager.html">prtx::ExtensionManager</a></td><td class="entry"></td></tr>
+  <tr bgcolor="#f0f0f0"><td class="entry"><b>ExtensionManager</b>()=default (defined in <a class="el" href="classprtx_1_1_extension_manager.html">prtx::ExtensionManager</a>)</td><td class="entry"><a class="el" href="classprtx_1_1_extension_manager.html">prtx::ExtensionManager</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
+  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>init</b>(const wchar_t *const *prtPlugins, size_t prtPluginsCount)=0 (defined in <a class="el" href="classprtx_1_1_extension_manager.html">prtx::ExtensionManager</a>)</td><td class="entry"><a class="el" href="classprtx_1_1_extension_manager.html">prtx::ExtensionManager</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
+  <tr><td class="entry"><a class="el" href="classprtx_1_1_extension_manager.html#a8a8c3f3befafd05f80995c151a57807e">instance</a>()</td><td class="entry"><a class="el" href="classprtx_1_1_extension_manager.html">prtx::ExtensionManager</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classprtx_1_1_extension_manager.html#ae143960188e40f1faba768a123001a50">listDecoderIds</a>(std::vector&lt; std::wstring &gt; &amp;result) const =0</td><td class="entry"><a class="el" href="classprtx_1_1_extension_manager.html">prtx::ExtensionManager</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
+  <tr><td class="entry"><a class="el" href="classprtx_1_1_extension_manager.html#aabb3ad10867d219143db62941c9ac602">listEncoderIds</a>(std::vector&lt; std::wstring &gt; &amp;result) const =0</td><td class="entry"><a class="el" href="classprtx_1_1_extension_manager.html">prtx::ExtensionManager</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
+  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>operator=</b>(const ExtensionManager &amp;)=delete (defined in <a class="el" href="classprtx_1_1_extension_manager.html">prtx::ExtensionManager</a>)</td><td class="entry"><a class="el" href="classprtx_1_1_extension_manager.html">prtx::ExtensionManager</a></td><td class="entry"></td></tr>
+  <tr bgcolor="#f0f0f0"><td class="entry"><b>setInstance</b>(ExtensionManager *theInstance) (defined in <a class="el" href="classprtx_1_1_extension_manager.html">prtx::ExtensionManager</a>)</td><td class="entry"><a class="el" href="classprtx_1_1_extension_manager.html">prtx::ExtensionManager</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
+  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>~ExtensionManager</b>()=default (defined in <a class="el" href="classprtx_1_1_extension_manager.html">prtx::ExtensionManager</a>)</td><td class="entry"><a class="el" href="classprtx_1_1_extension_manager.html">prtx::ExtensionManager</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
 </table></div><!-- contents -->
-</div><!-- doc-content -->
 <!-- start footer part -->
-<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
-  <ul>
-    <li class="footer">Generated on Tue Sep 25 2018 09:40:51 for Esri Procedural Runtime by
-    <a href="http://www.doxygen.org/index.html">
-    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.5 </li>
-  </ul>
-</div>
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue Apr 9 2019 11:56:31 for Esri Procedural Runtime by &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.5
+</small></address>
 </body>
 </html>

@@ -1,0 +1,85 @@
+<html>
+
+<head>
+    <title>
+    projectUV Operation
+    </title>
+    <link rel="stylesheet" href="../manual_style.css" type="text/css" />
+</head>
+
+<body>
+<div class="content">
+
+<!-- HEADER (use only on bookchapters) -->
+
+    <table summary="" class="header">
+        <tr>
+            <td align="left" class="helphead_l"><a href="../toc.html"><div class="helplink">&nbsp;</div></a></td>
+            <td align="right" class="helphead_r"></td>
+        </tr>
+    </table>
+
+
+<!-- CONTENT -->
+
+        <h1>
+        projectUV operation
+        </h1>
+        <h2>
+        Synopsis
+        </h2>
+        <p class="code2">projectUV(uvSet)</p>
+    </span></p>
+        
+        <h2>
+        Parameters
+        </h2>
+        <ul>
+	  	<li><span class="cga_opparam">uvSet</span><br>
+			Number of texture coordinates set (integer number in [0,9]). The
+			numbering corresponds to the texture layers of the <a href="attr_material.html">material attribute</a>, see also <a href="cga_texturing.html"> Texturing: Essential Knowledge</a>.
+</li>
+        </ul>
+
+
+<p class="info">
+The <span class="codelight">projectUV</span> operation creates the final texture coordinates of the selected uv-set by applying the corresponding projection matrix. Thus, this operation 'bakes' the texture projection into the texture coordinates of the geometry of the current shape.<br>
+The projection is based on the uvw-coordinate system specified by the <a href="op_setupProjection.html">setupProjection</a>
+operation.</p>
+
+		<p class="notes">Note: colormap has uvSet 0, bumpmap will have uvSet 1, dirtmap has uvSet 2</span>.</p>
+
+
+<p class="text">&nbsp;</p>
+
+        <h2>
+        Related
+        </h2>        
+        
+<ul>
+  <li><a class="normw" href="op_deleteUV.html">deleteUV operation</a></li>
+  <li><a class="normw" href="op_normalizeUV.html">normalizeUV operation</a></li>
+  <li><a class="normw" href="op_rotateUV.html">rotateUV operation</a></li>
+  <li><a class="normw" href="op_scaleUV.html">scaleUV operation</a></li>
+  <li><a class="normw" href="op_setupProjection.html">setupProjection operation</a></li>
+  <li><a class="normw" href="op_texture.html">texture operation</a></li>
+  <li><a class="normw" href="op_translateUV.html">translateUV operation</a></li>
+  <li><a class="normw" href="attr_scope.html">scope attribute</a></li>
+  <li><a class="normw" href="attr_material_map.html"> material.map attribute</a></li>
+</ul>
+
+        
+                
+<h2>Example</h2>
+<p class="text">Please refer to the examples in the <a href="op_setupProjection.html">setupProjection</a> reference.</p>
+
+
+
+<!-- FOOTER -->
+<p class="foot">Copyright &copy;2008-2019 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
+
+<!-- END CENTERED CONTENT -->
+
+</div>
+</body>
+</html>

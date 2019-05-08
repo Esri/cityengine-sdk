@@ -8,13 +8,6 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
-<link href="navtree.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="resize.js"></script>
-<script type="text/javascript" src="navtree.js"></script>
-<script type="text/javascript">
-  $(document).ready(initResizable);
-  $(window).load(resizeHeight);
-</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/search.js"></script>
 <script type="text/javascript">
@@ -31,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="esri_prt_55px.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Esri Procedural Runtime
-   &#160;<span id="projectnumber">1.10.4198</span>
+   &#160;<span id="projectnumber">2.0.5403</span>
    </div>
   </td>
  </tr>
@@ -72,21 +65,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="files.html"><span>File&#160;List</span></a></li>
     </ul>
   </div>
-</div><!-- top -->
-<div id="side-nav" class="ui-resizable side-nav-resizable">
-  <div id="nav-tree">
-    <div id="nav-tree-contents">
-      <div id="nav-sync" class="sync"></div>
-    </div>
-  </div>
-  <div id="splitbar" style="-moz-user-select:none;" 
-       class="ui-resizable-handle">
-  </div>
-</div>
-<script type="text/javascript">
-$(document).ready(function(){initNavTree('_annotation_8h_source.html','');});
-</script>
-<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -101,13 +79,18 @@ $(document).ready(function(){initNavTree('_annotation_8h_source.html','');});
 </iframe>
 </div>
 
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_e104a5fd3f1a5c6eb1edb871fc217c8e.html">prt</a></li>  </ul>
+</div>
+</div><!-- top -->
 <div class="header">
   <div class="headertitle">
 <div class="title">Annotation.h</div>  </div>
 </div><!--header-->
 <div class="contents">
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">  COPYRIGHT (c) 2012-2018 Esri R&amp;D Center Zurich</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">  COPYRIGHT (c) 2012-2019 Esri R&amp;D Center Zurich</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">  TRADE SECRETS: ESRI PROPRIETARY AND CONFIDENTIAL</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">  Unpublished material - all rights reserved under the</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">  Copyright Laws of the United States and applicable international</span></div>
@@ -133,63 +116,65 @@ $(document).ready(function(){initNavTree('_annotation_8h_source.html','');});
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;</div>
 <div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="namespaceprt.html#a2ed198d15e4532984f5cddcbefb38984">   30</a></span>&#160;<span class="keyword">enum</span> <a class="code" href="namespaceprt.html#a2ed198d15e4532984f5cddcbefb38984">AnnotationArgumentType</a> {</div>
-<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="namespaceprt.html#a2ed198d15e4532984f5cddcbefb38984addf0da8547d137091e2ed017ea8a20a5">   31</a></span>&#160;    <a class="code" href="namespaceprt.html#a2ed198d15e4532984f5cddcbefb38984addf0da8547d137091e2ed017ea8a20a5">AAT_VOID</a>,   </div>
-<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="namespaceprt.html#a2ed198d15e4532984f5cddcbefb38984aef57ff228541b3dc0361e9cec46ea5bb">   32</a></span>&#160;    <a class="code" href="namespaceprt.html#a2ed198d15e4532984f5cddcbefb38984aef57ff228541b3dc0361e9cec46ea5bb">AAT_BOOL</a>,   </div>
-<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="namespaceprt.html#a2ed198d15e4532984f5cddcbefb38984ad73c861d2d34de2649944dd62580c8e1">   33</a></span>&#160;    <a class="code" href="namespaceprt.html#a2ed198d15e4532984f5cddcbefb38984ad73c861d2d34de2649944dd62580c8e1">AAT_FLOAT</a>,  </div>
-<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="namespaceprt.html#a2ed198d15e4532984f5cddcbefb38984aeb5488fa4edb0f2bb07f1d6649b72f9d">   34</a></span>&#160;    <a class="code" href="namespaceprt.html#a2ed198d15e4532984f5cddcbefb38984aeb5488fa4edb0f2bb07f1d6649b72f9d">AAT_STR</a>,    </div>
-<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="namespaceprt.html#a2ed198d15e4532984f5cddcbefb38984a133b17643e584a9ac15ad457e499dc39">   35</a></span>&#160;    <a class="code" href="namespaceprt.html#a2ed198d15e4532984f5cddcbefb38984a133b17643e584a9ac15ad457e499dc39">AAT_INT</a>,    </div>
-<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="namespaceprt.html#a2ed198d15e4532984f5cddcbefb38984a62edc302ef859377f25482b821f1573b">   36</a></span>&#160;    <a class="code" href="namespaceprt.html#a2ed198d15e4532984f5cddcbefb38984a62edc302ef859377f25482b821f1573b">AAT_UNKNOWN</a> </div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;};</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;</div>
-<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="classprt_1_1_annotation_argument.html">   40</a></span>&#160;<span class="keyword">class </span>PRT_EXPORTS_API <a class="code" href="classprt_1_1_annotation_argument.html">AnnotationArgument</a> : <span class="keyword">public</span> <a class="code" href="classprt_1_1_object.html">Object</a> {</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="namespaceprt.html#a2ed198d15e4532984f5cddcbefb38984">AnnotationArgumentType</a>      getType()               <span class="keyword">const</span> = 0;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keyword">virtual</span> <span class="keyword">const</span> <span class="keywordtype">wchar_t</span>*              getKey()                <span class="keyword">const</span> = 0;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">bool</span>                        getBool()               <span class="keyword">const</span> = 0;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">double</span>                      getFloat()              <span class="keyword">const</span> = 0;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keyword">virtual</span> <span class="keyword">const</span> <span class="keywordtype">wchar_t</span>*              getStr()                <span class="keyword">const</span> = 0;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="classprt_1_1_annotation_argument.html">AnnotationArgument</a>() { }</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;};</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;</div>
-<div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="classprt_1_1_annotation.html">   53</a></span>&#160;<span class="keyword">class </span>PRT_EXPORTS_API <a class="code" href="classprt_1_1_annotation.html">Annotation</a> : <span class="keyword">public</span> <a class="code" href="classprt_1_1_object.html">Object</a> {</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="keyword">virtual</span> <span class="keyword">const</span> <span class="keywordtype">wchar_t</span>*              getName()               <span class="keyword">const</span> = 0;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">size_t</span>                      getNumArguments()       <span class="keyword">const</span> = 0;</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="keyword">virtual</span> <span class="keyword">const</span> <a class="code" href="classprt_1_1_annotation_argument.html">AnnotationArgument</a>*   getArgument(<span class="keywordtype">size_t</span> i)   <span class="keyword">const</span> = 0;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="classprt_1_1_annotation.html">Annotation</a>() { }</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;};</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;} <span class="comment">// namespace prt</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="namespaceprt.html#a2ed198d15e4532984f5cddcbefb38984addf0da8547d137091e2ed017ea8a20a5">   31</a></span>&#160;    <a class="code" href="namespaceprt.html#a2ed198d15e4532984f5cddcbefb38984addf0da8547d137091e2ed017ea8a20a5">AAT_VOID</a>,        </div>
+<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="namespaceprt.html#a2ed198d15e4532984f5cddcbefb38984aef57ff228541b3dc0361e9cec46ea5bb">   32</a></span>&#160;    <a class="code" href="namespaceprt.html#a2ed198d15e4532984f5cddcbefb38984aef57ff228541b3dc0361e9cec46ea5bb">AAT_BOOL</a>,        </div>
+<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="namespaceprt.html#a2ed198d15e4532984f5cddcbefb38984ad73c861d2d34de2649944dd62580c8e1">   33</a></span>&#160;    <a class="code" href="namespaceprt.html#a2ed198d15e4532984f5cddcbefb38984ad73c861d2d34de2649944dd62580c8e1">AAT_FLOAT</a>,       </div>
+<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="namespaceprt.html#a2ed198d15e4532984f5cddcbefb38984aeb5488fa4edb0f2bb07f1d6649b72f9d">   34</a></span>&#160;    <a class="code" href="namespaceprt.html#a2ed198d15e4532984f5cddcbefb38984aeb5488fa4edb0f2bb07f1d6649b72f9d">AAT_STR</a>,         </div>
+<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="namespaceprt.html#a2ed198d15e4532984f5cddcbefb38984a133b17643e584a9ac15ad457e499dc39">   35</a></span>&#160;    <a class="code" href="namespaceprt.html#a2ed198d15e4532984f5cddcbefb38984a133b17643e584a9ac15ad457e499dc39">AAT_INT</a>,         </div>
+<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="namespaceprt.html#a2ed198d15e4532984f5cddcbefb38984a62edc302ef859377f25482b821f1573b">   36</a></span>&#160;    <a class="code" href="namespaceprt.html#a2ed198d15e4532984f5cddcbefb38984a62edc302ef859377f25482b821f1573b">AAT_UNKNOWN</a>,     </div>
+<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="namespaceprt.html#a2ed198d15e4532984f5cddcbefb38984acc1eddcf93b53a18c74506ac340e98ed">   37</a></span>&#160;    <a class="code" href="namespaceprt.html#a2ed198d15e4532984f5cddcbefb38984acc1eddcf93b53a18c74506ac340e98ed">AAT_BOOL_ARRAY</a>,  </div>
+<div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="namespaceprt.html#a2ed198d15e4532984f5cddcbefb38984aa97a1d392e85c50851b90f5135368df7">   38</a></span>&#160;    <a class="code" href="namespaceprt.html#a2ed198d15e4532984f5cddcbefb38984aa97a1d392e85c50851b90f5135368df7">AAT_FLOAT_ARRAY</a>, </div>
+<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="namespaceprt.html#a2ed198d15e4532984f5cddcbefb38984a013269a536cad34353dd5eb4e5c9a74e">   39</a></span>&#160;    <a class="code" href="namespaceprt.html#a2ed198d15e4532984f5cddcbefb38984a013269a536cad34353dd5eb4e5c9a74e">AAT_STR_ARRAY</a>,   </div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;};</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;</div>
+<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="classprt_1_1_annotation_argument.html">   43</a></span>&#160;<span class="keyword">class </span>PRT_EXPORTS_API <a class="code" href="classprt_1_1_annotation_argument.html">AnnotationArgument</a> : <span class="keyword">public</span> <a class="code" href="classprt_1_1_object.html">Object</a> {</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="namespaceprt.html#a2ed198d15e4532984f5cddcbefb38984">AnnotationArgumentType</a>      getType()               <span class="keyword">const</span> = 0;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keyword">virtual</span> <span class="keyword">const</span> <span class="keywordtype">wchar_t</span>*              getKey()                <span class="keyword">const</span> = 0;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">bool</span>                        getBool()               <span class="keyword">const</span> = 0;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">double</span>                      getFloat()              <span class="keyword">const</span> = 0;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keyword">virtual</span> <span class="keyword">const</span> <span class="keywordtype">wchar_t</span>*              getStr()                <span class="keyword">const</span> = 0;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="classprt_1_1_annotation_argument.html">AnnotationArgument</a>() { }</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;};</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;</div>
+<div class="line"><a name="l00056"></a><span class="lineno"><a class="line" href="classprt_1_1_annotation.html">   56</a></span>&#160;<span class="keyword">class </span>PRT_EXPORTS_API <a class="code" href="classprt_1_1_annotation.html">Annotation</a> : <span class="keyword">public</span> <a class="code" href="classprt_1_1_object.html">Object</a> {</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keyword">virtual</span> <span class="keyword">const</span> <span class="keywordtype">wchar_t</span>*              getName()               <span class="keyword">const</span> = 0;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">size_t</span>                      getNumArguments()       <span class="keyword">const</span> = 0;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keyword">virtual</span> <span class="keyword">const</span> <a class="code" href="classprt_1_1_annotation_argument.html">AnnotationArgument</a>*   getArgument(<span class="keywordtype">size_t</span> i)   <span class="keyword">const</span> = 0;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="classprt_1_1_annotation.html">Annotation</a>() { }</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;};</div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;</div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* PRT_ANNOTATION_H_ */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;} <span class="comment">// namespace prt</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* PRT_ANNOTATION_H_ */</span><span class="preprocessor"></span></div>
+<div class="ttc" id="namespaceprt_html_a2ed198d15e4532984f5cddcbefb38984acc1eddcf93b53a18c74506ac340e98ed"><div class="ttname"><a href="namespaceprt.html#a2ed198d15e4532984f5cddcbefb38984acc1eddcf93b53a18c74506ac340e98ed">prt::AAT_BOOL_ARRAY</a></div><div class="ttdoc">Boolean array type. </div><div class="ttdef"><b>Definition:</b> Annotation.h:37</div></div>
 <div class="ttc" id="namespaceprt_html_a2ed198d15e4532984f5cddcbefb38984ad73c861d2d34de2649944dd62580c8e1"><div class="ttname"><a href="namespaceprt.html#a2ed198d15e4532984f5cddcbefb38984ad73c861d2d34de2649944dd62580c8e1">prt::AAT_FLOAT</a></div><div class="ttdoc">Float type. </div><div class="ttdef"><b>Definition:</b> Annotation.h:33</div></div>
 <div class="ttc" id="namespaceprt_html_a2ed198d15e4532984f5cddcbefb38984a133b17643e584a9ac15ad457e499dc39"><div class="ttname"><a href="namespaceprt.html#a2ed198d15e4532984f5cddcbefb38984a133b17643e584a9ac15ad457e499dc39">prt::AAT_INT</a></div><div class="ttdoc">Integer type. </div><div class="ttdef"><b>Definition:</b> Annotation.h:35</div></div>
-<div class="ttc" id="classprt_1_1_annotation_argument_html"><div class="ttname"><a href="classprt_1_1_annotation_argument.html">prt::AnnotationArgument</a></div><div class="ttdef"><b>Definition:</b> Annotation.h:40</div></div>
+<div class="ttc" id="namespaceprt_html_a2ed198d15e4532984f5cddcbefb38984a013269a536cad34353dd5eb4e5c9a74e"><div class="ttname"><a href="namespaceprt.html#a2ed198d15e4532984f5cddcbefb38984a013269a536cad34353dd5eb4e5c9a74e">prt::AAT_STR_ARRAY</a></div><div class="ttdoc">String array type. </div><div class="ttdef"><b>Definition:</b> Annotation.h:39</div></div>
+<div class="ttc" id="classprt_1_1_annotation_argument_html"><div class="ttname"><a href="classprt_1_1_annotation_argument.html">prt::AnnotationArgument</a></div><div class="ttdef"><b>Definition:</b> Annotation.h:43</div></div>
 <div class="ttc" id="namespaceprt_html_a2ed198d15e4532984f5cddcbefb38984aef57ff228541b3dc0361e9cec46ea5bb"><div class="ttname"><a href="namespaceprt.html#a2ed198d15e4532984f5cddcbefb38984aef57ff228541b3dc0361e9cec46ea5bb">prt::AAT_BOOL</a></div><div class="ttdoc">Boolean type. </div><div class="ttdef"><b>Definition:</b> Annotation.h:32</div></div>
 <div class="ttc" id="namespaceprt_html_a2ed198d15e4532984f5cddcbefb38984"><div class="ttname"><a href="namespaceprt.html#a2ed198d15e4532984f5cddcbefb38984">prt::AnnotationArgumentType</a></div><div class="ttdeci">AnnotationArgumentType</div><div class="ttdef"><b>Definition:</b> Annotation.h:30</div></div>
 <div class="ttc" id="namespaceprt_html_a2ed198d15e4532984f5cddcbefb38984addf0da8547d137091e2ed017ea8a20a5"><div class="ttname"><a href="namespaceprt.html#a2ed198d15e4532984f5cddcbefb38984addf0da8547d137091e2ed017ea8a20a5">prt::AAT_VOID</a></div><div class="ttdoc">Void type. </div><div class="ttdef"><b>Definition:</b> Annotation.h:31</div></div>
 <div class="ttc" id="classprt_1_1_object_html"><div class="ttname"><a href="classprt_1_1_object.html">prt::Object</a></div><div class="ttdef"><b>Definition:</b> Object.h:35</div></div>
-<div class="ttc" id="classprt_1_1_annotation_html"><div class="ttname"><a href="classprt_1_1_annotation.html">prt::Annotation</a></div><div class="ttdef"><b>Definition:</b> Annotation.h:53</div></div>
+<div class="ttc" id="classprt_1_1_annotation_html"><div class="ttname"><a href="classprt_1_1_annotation.html">prt::Annotation</a></div><div class="ttdef"><b>Definition:</b> Annotation.h:56</div></div>
 <div class="ttc" id="namespaceprt_html_a2ed198d15e4532984f5cddcbefb38984a62edc302ef859377f25482b821f1573b"><div class="ttname"><a href="namespaceprt.html#a2ed198d15e4532984f5cddcbefb38984a62edc302ef859377f25482b821f1573b">prt::AAT_UNKNOWN</a></div><div class="ttdoc">Unknown type. </div><div class="ttdef"><b>Definition:</b> Annotation.h:36</div></div>
 <div class="ttc" id="namespaceprt_html_a2ed198d15e4532984f5cddcbefb38984aeb5488fa4edb0f2bb07f1d6649b72f9d"><div class="ttname"><a href="namespaceprt.html#a2ed198d15e4532984f5cddcbefb38984aeb5488fa4edb0f2bb07f1d6649b72f9d">prt::AAT_STR</a></div><div class="ttdoc">String type. </div><div class="ttdef"><b>Definition:</b> Annotation.h:34</div></div>
+<div class="ttc" id="namespaceprt_html_a2ed198d15e4532984f5cddcbefb38984aa97a1d392e85c50851b90f5135368df7"><div class="ttname"><a href="namespaceprt.html#a2ed198d15e4532984f5cddcbefb38984aa97a1d392e85c50851b90f5135368df7">prt::AAT_FLOAT_ARRAY</a></div><div class="ttdoc">Float array type. </div><div class="ttdef"><b>Definition:</b> Annotation.h:38</div></div>
 </div><!-- fragment --></div><!-- contents -->
-</div><!-- doc-content -->
 <!-- start footer part -->
-<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
-  <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_e104a5fd3f1a5c6eb1edb871fc217c8e.html">prt</a></li><li class="navelem"><b>Annotation.h</b></li>
-    <li class="footer">Generated on Tue Sep 25 2018 09:40:51 for Esri Procedural Runtime by
-    <a href="http://www.doxygen.org/index.html">
-    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.5 </li>
-  </ul>
-</div>
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue Apr 9 2019 11:56:30 for Esri Procedural Runtime by &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.5
+</small></address>
 </body>
 </html>

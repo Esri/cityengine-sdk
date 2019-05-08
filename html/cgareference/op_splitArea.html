@@ -1,0 +1,426 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+
+<head>
+    <title>
+    splitArea Operation
+    </title>
+    <link rel="stylesheet" href="../manual_style.css" type="text/css">
+	<style type="text/css">
+		<!--
+		.style1 {
+				font-size: 9px
+		}
+
+		.style2 {
+				font-size: 10px
+		}
+		-->
+	</style>
+</head>
+
+<body>
+<div class="content">
+
+<!-- HEADER (use only on bookchapters) -->
+
+    <table summary="" class="header">
+        <tr>
+            <td align="left" class="helphead_l"><a href="../toc.html"><div class="helplink">&nbsp;</div></a></td>
+            <td align="right" class="helphead_r"></td>
+        </tr>
+    </table>
+
+
+<!-- CONTENT -->
+
+	<h1>splitArea operation</h1>
+	
+	<h2>Synopsis</h2>
+	
+	<p class="code2">
+		splitArea(<span class="cga_opparam">splitAxis</span>) {
+		<span class="cga_opparam">area<span class="style2">1</span></span>
+		: <span class="cga_opparam">operations<span class=
+		"style2">1</span></span> | ... | <span class=
+		"cga_opparam">area</span><span class="style2">n-1</span> :
+		<span class="cga_opparam">operations</span><span class=
+		"text style1">n-1</span> }
+	</p>
+
+	<p class="code2">
+		splitArea(<span class="cga_opparam">splitAxis</span>) {
+		<span class="cga_opparam">area</span><span class="style2">1</span>
+		: <span class="cga_opparam">operations</span><span class=
+		"style2">1</span> | ... | <span class=
+		"cga_opparam">area</span><span class="style2">n-1</span> :
+		<span class="cga_opparam">operations</span><span class=
+		"text style1">n-1</span> }*
+	</p>
+
+	<p class="code2">
+		splitArea(<span class="cga_opparam">splitAxis, adjustSelector</span>) {
+		<span class="cga_opparam">area<span class="style2">1</span></span>
+		: <span class="cga_opparam">operations<span class=
+		"style2">1</span></span> | ... | <span class=
+		"cga_opparam">area</span><span class="style2">n-1</span> :
+		<span class="cga_opparam">operations</span><span class=
+		"text style1">n-1</span> }
+	</p>
+
+	<p class="code2">
+		splitArea(<span class="cga_opparam">splitAxis, adjustSelector</span>) {
+		<span class="cga_opparam">area</span><span class="style2">1</span>
+		: <span class="cga_opparam">operations</span><span class=
+		"style2">1</span> | ... | <span class=
+		"cga_opparam">area</span><span class="style2">n-1</span> :
+		<span class="cga_opparam">operations</span><span class=
+		"text style1">n-1</span> }*
+	</p>
+
+	<h2>Parameters</h2>
+    
+	<ul>
+		<li>
+			<span class="cga_opparam">splitAxis</span> (selstring)<br>
+			(<span class="cga_codelight">x | y | z</span>) - Name of axis to split along. This is relative to the local coordinate system (i.e.
+			the <span class="cga_keyword">scope</span>).
+		</li>
+
+		<li>
+			<span class="cga_opparam">adjustSelector</span><br>
+			(<span class="cga_codelight">adjust | noAdjust</span>) - Optional selector to control scope calculation of the calculated shapes. The default is to adjust the scope to the geometry's bounding box. Using <span class="cga_codelight">noAdjust</span> avoids this, and therefore, the scopes of the resulting shapes fill the parent's scope without gaps.
+		</li>
+
+		<li>
+			<span class="cga_opparam">area</span> (float)<br>
+			Split area.  The current shape is split such that the resulting shape has the specified area.  Depending on the prefix, <span class="cga_opparam">area</span> is interpreted in
+			the following way:
+			<dl>
+			<dt>no prefix (absolute)</dt> <dd> The new shape's area will be exactly
+			<span class="cga_opparam">area</span>.</dd>
+			<dt>' (relative)</dt> <dd>The new shape's area will be <span class="cga_opparam">area</span> 
+			<i>* current geometry's area.</i></dd>
+			<dt>~ (floating)</dt> <dd> With the ~ prefix, the remaining spaces between the split parts with absolute dimensions are automatically adapted. If multiple floating parts are defined within a split, the dimensions are weighed proportionally.</p> </dd>
+			</dl>
+		</li>
+
+		<li>
+			<span class="cga_opparam">operations</span><br>
+			A sequence of shape operations to execute on the newly created
+			shape.
+		</li>
+
+		<li>
+			<span class="cga_opparam">*</span><br>
+			Repeat switch: the repeat switch triggers the repetition of the defined split into the current shape's
+			<span class="cga_keyword">scope</span>, as many times as possible. The number of repetitions and floating dimensions are adapted to the best solution (best number of repetitions and least stretching).
+		</li>
+	</ul>
+        
+	<p class="info text">The <span class="cga_keyword">splitArea</span> operation subdivides the geometry of the current shape along the specified <span class="cga_keyword">scope</span> axis into a set of shapes with geometric areas specified by the <span class="cga_opparam">area</span> parameter.  This operation works on planar 2D geometry and almost planar geometry.  The area accuracy breaks down with nonplanar geometry.  This operation does not apply to 3D geometry such as meshes or highly nonplanar geometry.</p>
+
+	<p class="text">For each specified <span class="cga_opparam">area</span>, the current shape's geometry is cut with planes perpendicular to the split axis such that the resulting shape contains geometry with the specified area.</p>
+
+	<p class="text">The optional repeat switch <span class="cga_opparam">*</span> can be used to repeat the content within a <span class="inlinedcode">{...}*</span> block as many times as it fully fits into the scope's dimension along the selected axis.</p>
+
+    </p>
+	<p class="text">&nbsp;</p>
+ 	<h2>Related</h2>
+    
+	<ul>
+		<li>
+			<a class="normw" href="op_split.html">split operation</a>
+		</li>
+		<li>
+			<a class="normw" href="attr_split.html">split attribute</a>
+		</li>
+		<li>
+			<a class="normw" href="func_geometry.html#area">geometry.area function</a>
+		</li>
+	</ul>
+
+<!--  Sample Code Formatting -->
+
+	<h2>Examples</h2>
+
+	<h3>Colors</h3>
+
+	<table summary="" class="twocol">
+		<tr>
+			<td class="twocol_l"><br/>
+				<p>
+					These are the rules for the colors used in the following examples.
+				</p>
+				<pre class="code3">
+Red     --> color(1, 0, 0)                       // red
+            print("area(R) = " + geometry.area)
+
+Yellow  --> color(1, 1, 0)                       // yellow
+            print("area(Y) = " + geometry.area)
+
+Green   --> color(0, 1, 0)                       // green
+            print("area(G) = " + geometry.area)
+
+Cyan    --> color(0, 1, 1)                       // cyan
+            print("area(C) = " + geometry.area)
+
+Blue    --> color(0, 0, 1)                       // blue
+            print("area(B) = " + geometry.area)
+
+Magenta --> color(1, 0, 1)                       // magenta
+            print("area(M) = " + geometry.area)
+
+Pink    -->                                      // semi-transparent pink
+            color(1, 0.5, 0.5, 0.3)
+				</pre>
+			</td>
+		</tr>
+	</table>
+
+	<h3>Relative Split</h3>
+
+	<table summary="" class="twocol">
+		<tr>
+			<td class="twocol_l"><br/>
+				<img src="images/splitArea_relative.png" width="300"><br/>
+				<img src="images/splitArea_relative_console.png">
+			</td>
+			<td>
+				<pre class="code3">
+Lot -->
+   print("total area = " + geometry.area)
+   splitArea(x) { '0.7 : Green
+                | '0.3 : Yellow }
+				</pre>
+				<em>
+					This shape is split into two parts.  The first part is 70% of the original area, and the second part is 30% of the original area.  Note that the specified <span class="cga_opparam">area</span> amounts do not need to sum to 1.  For sums less than 1, the rest of the shape is discarded, and split sections greater than 1 are ignored.
+				</em>
+			</td>
+		</tr>
+	</table>
+
+
+	<h3>Repeating Split</h3>
+
+	<table summary="" class="twocol">
+		<tr>
+			<td class="twocol_l"><br/>
+				<img src="images/splitArea_repeat.png" width="300"><br/>
+				<img src="images/splitArea_repeat_console.png">
+			</td>
+			<td>
+				<pre class="code3">
+Lot -->
+   print("total area = " + geometry.area)
+   splitArea(x) { '0.2 : ColorMe }*
+
+ColorMe -->
+   case split.index == 0 :
+      Red
+   case split.index == 1 :
+      Yellow
+   case split.index == 2 :
+      Green
+   case split.index == 3 :
+      Cyan
+   else :
+      Blue
+				</pre>
+				<em>
+					This split divides the shape into five equal area parts using a repeat split.  It repeatedly splits the shape into parts with area equal to 20% of the original area.  Note that if <span class="cga_opparam">area</span> were set to <span class="inlinedcode">'0.3</span>, we would get four parts with areas equal to 30%, 30%, 30%, and 10% of the original area.
+				</em>
+			</td>
+		</tr>
+	</table>
+
+	<h3>Split with Mixture of Floating and Absolute Areas</h3>
+
+	<table summary="" class="twocol">
+		<tr>
+			<td class="twocol_l"><br/>
+				<img src="images/splitArea_floatingAbsolute.png" width="300"><br/>
+				<img src="images/splitArea_floatingAbsolute_console.png">
+			</td>
+			<td>
+				<pre class="code3">
+Lot -->
+   print("total area = " + geometry.area)	
+   splitArea(x) { ~1  : Green
+                | 600 : Yellow
+                | ~1  : Blue }
+				</pre>
+				<em>
+					This split divides the shape into a middle part (yellow) that has an absolute area of 600 and two side parts each with the same area.  The yellow part consists of two pieces since there is a hole in the original shape, and the split cuts the shape along the hole boundary.
+				</em>
+			</td>
+		</tr>
+	</table>
+
+	<h3>Nested Split</h3>
+
+	<table summary="" class="twocol">
+		<tr>
+			<td class="twocol_l"><br/>
+				<img src="images/splitArea_nested.png" width="300"><br/>
+				<img src="images/splitArea_nested_console.png">
+			</td>
+			<td>
+				<pre class="code3">
+Lot -->
+   print("total area = " + geometry.area)	
+   splitArea(x) { ~1 : splitArea(z) { '0.5 : Red
+                                    | '0.5 : Yellow }
+                | ~1 : splitArea(z) { '0.5 : Green
+                                    | '0.5 : Cyan }
+                | ~1 : splitArea(z) { '0.5 : Blue
+                                    | '0.5 : Magenta }
+                }
+				</pre>
+				<em>
+					This nested split divides the shape first in <span class="inlinedcode">x</span> to get three equal area parts.  Then, each part is divided in <span class="inlinedcode">z</span> into two equal parts.  This yields six equal area parts.
+				</em>
+			</td>
+		</tr>
+	</table>
+
+	<h3>adjust vs. noAdjust</h3>
+
+	<table summary="" class="twocol">
+		<tr>
+			<td class="twocol_l"><br/>
+				<img src="images/splitArea_shapes.png" width="300">
+			</td>
+			<td>
+				<em>
+					This is the original shape and its scope.
+				</em>
+			</td>
+		</tr>
+		<tr>
+			<td class="twocol_l"><br/>
+				<img src="images/splitArea_shapes_adjust.png" width="300">
+			</td>
+			<td>
+				<pre class="code3">
+SplitAdjust -->
+   splitArea(x) { '0.2 : splitArea(z) { '0.2 : SplitLeaf }* }*
+
+SplitLeaf-->
+   color(0.5, 0.5, 0.5)
+   Geometry.
+   primitiveQuad()
+   t(0, 0.02, 0)
+   Pink
+   comp(e) { all : color(0, 0, 0) Edge. }					  
+				</pre>
+				<em>
+					Without specifying a value for <span class="cga_opparam">adjustSelector</span>, the default behavior is to adjust the scope size to the geometry of each split part.  Each pink box shows the scope of each split part.  The scope maintains the original scope's orientation but shrinks to the bounding box of the geometry.
+				</em>
+			</td>
+		</tr>
+		<tr>
+			<td class="twocol_l"><br/>
+				<img src="images/splitArea_shapes_noAdjust.png" width="300">
+			</td>
+			<td>
+				<pre class="code3">
+SplitNoAdjust -->
+   splitArea(x, noAdjust) { '0.2 : splitArea(z, noAdjust) { '0.2 : SplitLeaf }* }* 
+				</pre>
+				<em>
+					With <span class="inlinedcode">noAdjust</span>, the union of the scopes of each split part make up the original scope.  The scopes are not adjusted to the geometry inside.
+				</em>
+			</td>
+		</tr>
+	</table>
+                
+	<h3>Divide a Block into Equal Parts</h3>
+
+	<table summary="" class="twocol">
+		<tr>
+			<td class="twocol_l"><br/>
+				<img src="images/splitArea_block.png" width="300">
+			</td>
+			<td>
+				<em>
+					This is the original shape and its scope.  Here is an example of how the <span class="cga_keyword">splitArea</span> operation can be used to divide a street block into lots with equal areas.
+				</em>
+			</td>
+		</tr>
+		<tr>
+			<td class="twocol_l"><br/>
+				<img src="images/splitArea_block_useSplitArea.png" width="300"><br/>
+				<img src="images/splitArea_block_useSplitArea_console.png">
+			</td>
+			<td>
+				<pre class="code3">
+Lot -->
+   SplitArea(3)
+
+SplitArea(n) -->
+   case n == 0 :
+      A
+   case scope.sz > scope.sx :
+      splitArea(z) { ~1 : SplitArea(n-1)
+                   | ~1 : SplitArea(n-1) }
+   else :
+      splitArea(x) { ~1 : SplitArea(n-1)
+                   | ~1 : SplitArea(n-1) }
+
+A -->
+   color(getColor)
+   print("area(A) = " + geometry.area)
+	
+// color by area (so that lots with same area get same color)
+const minArea = 243
+const maxArea = 1255
+alpha = (geometry.area - minArea)/(maxArea - minArea)
+getColor = colorRamp("spectrum", alpha)
+				</pre>
+				<em>
+					The block is divided recursively three times using <span class="cga_keyword">splitArea</span>.  Each split divides the shape perpendicular to its longest axis into two parts of equal area.  Each lot is colored by its area such that lots with the same area have the same color.  Using <span class="cga_keyword">splitArea</span>, all the lots are yellow because the block is divided into equal area lots.
+				</em>
+			</td>
+		</tr>
+		<tr>
+			<td class="twocol_l"><br/>
+				<img src="images/splitArea_block_useSplit.png" width="300"><br/>
+				<img src="images/splitArea_block_useSplit_console.png">
+			</td>
+			<td>
+				<pre class="code3">
+Lot2 -->
+   Split(3)
+
+Split(n) -->
+   case n == 0 :
+      B
+   case scope.sz > scope.sx :
+      split(z) { ~1 : Split(n-1)
+               | ~1 : Split(n-1) }
+   else :
+      split(x) { ~1 : Split(n-1)
+               | ~1 : Split(n-1) }
+
+B -->
+   color(getColor)
+   print("area(B) = " + geometry.area)
+
+				</pre>
+				<em>
+					In comparison, when using the <span class="cga_keyword">split</span> operation, the lots are different colors because the block is divided into lots with different areas.
+				</em>
+			</td>
+		</tr>
+	</table>
+
+<!-- FOOTER -->
+
+<p class="foot">Copyright &copy;2008-2019 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
+
+<!-- END CENTERED CONTENT -->
+
+</div>
+</body>
+</html>

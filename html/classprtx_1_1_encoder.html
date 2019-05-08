@@ -8,13 +8,6 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
-<link href="navtree.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="resize.js"></script>
-<script type="text/javascript" src="navtree.js"></script>
-<script type="text/javascript">
-  $(document).ready(initResizable);
-  $(window).load(resizeHeight);
-</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/search.js"></script>
 <script type="text/javascript">
@@ -31,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="esri_prt_55px.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Esri Procedural Runtime
-   &#160;<span id="projectnumber">1.10.4198</span>
+   &#160;<span id="projectnumber">2.0.5403</span>
    </div>
   </td>
  </tr>
@@ -75,21 +68,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
-</div><!-- top -->
-<div id="side-nav" class="ui-resizable side-nav-resizable">
-  <div id="nav-tree">
-    <div id="nav-tree-contents">
-      <div id="nav-sync" class="sync"></div>
-    </div>
-  </div>
-  <div id="splitbar" style="-moz-user-select:none;" 
-       class="ui-resizable-handle">
-  </div>
-</div>
-<script type="text/javascript">
-$(document).ready(function(){initNavTree('classprtx_1_1_encoder.html','');});
-</script>
-<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -104,6 +82,11 @@ $(document).ready(function(){initNavTree('classprtx_1_1_encoder.html','');});
 </iframe>
 </div>
 
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceprtx.html">prtx</a></li><li class="navelem"><a class="el" href="classprtx_1_1_encoder.html">Encoder</a></li>  </ul>
+</div>
+</div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="classprtx_1_1_encoder-members.html">List of all members</a> &#124;
@@ -120,7 +103,7 @@ Inheritance diagram for prtx::Encoder:</div>
 <div class="dyncontent">
 <div class="center"><iframe scrolling="no" frameborder="0" src="classprtx_1_1_encoder__inherit__graph.svg" width="507" height="187"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
-<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -132,8 +115,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a4bed7a687c3edf7967c9823c631c4e32"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af64bcbbeb6522f48009fa9d8a90bd61d"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_encoder.html#af64bcbbeb6522f48009fa9d8a90bd61d">finish</a> (<a class="el" href="classprtx_1_1_generate_context.html">prtx::GenerateContext</a> &amp;context)</td></tr>
 <tr class="separator:af64bcbbeb6522f48009fa9d8a90bd61d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a963fb07b165165b1b21ccd40dcd14a3a"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classprtx_1_1_extension.html#ad6048fac4019029ec39431db1d873801">ExtensionType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_encoder.html#a963fb07b165165b1b21ccd40dcd14a3a">getExtensionType</a> () const </td></tr>
-<tr class="separator:a963fb07b165165b1b21ccd40dcd14a3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f2e03cc36a700b74736e06db361c36e"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classprtx_1_1_extension.html#ad6048fac4019029ec39431db1d873801">ExtensionType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_encoder.html#a6f2e03cc36a700b74736e06db361c36e">getExtensionType</a> () const finaloverride</td></tr>
+<tr class="separator:a6f2e03cc36a700b74736e06db361c36e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a184a0cb86001f1493954d66f181b9444"><td class="memItemLeft" align="right" valign="top">const std::wstring &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_encoder.html#a184a0cb86001f1493954d66f181b9444">getID</a> () const </td></tr>
 <tr class="separator:a184a0cb86001f1493954d66f181b9444"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad354a15d21c18920da7a9b208482db5c"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_encoder.html#ad354a15d21c18920da7a9b208482db5c">init</a> (<a class="el" href="classprtx_1_1_generate_context.html">GenerateContext</a> &amp;context)</td></tr>
@@ -163,7 +146,9 @@ Additional Inherited Members</h2></td></tr>
 <tr class="memitem:ad6048fac4019029ec39431db1d873801 inherit pub_types_classprtx_1_1_extension"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_extension.html#ad6048fac4019029ec39431db1d873801">ExtensionType</a> { <br/>
 &#160;&#160;<a class="el" href="classprtx_1_1_extension.html#ad6048fac4019029ec39431db1d873801a73ac5078206d850132ff3c8cfaebbbed">ET_UNDEFINED</a>, 
 <br/>
-&#160;&#160;<a class="el" href="classprtx_1_1_extension.html#ad6048fac4019029ec39431db1d873801aee23e8588611d2d46ce25e563c190e2f">ET_ADAPTOR</a>, 
+&#160;&#160;<a class="el" href="classprtx_1_1_extension.html#ad6048fac4019029ec39431db1d873801aa0e3b007bfd050b0e2aee2af757aaf4c">ET_STREAM_ADAPTOR</a>, 
+<br/>
+&#160;&#160;<a class="el" href="classprtx_1_1_extension.html#ad6048fac4019029ec39431db1d873801a99981ddf69abab12b1d72cd1ca07ab30">ET_RESOLVEMAP_PROVIDER</a>, 
 <br/>
 &#160;&#160;<a class="el" href="classprtx_1_1_extension.html#ad6048fac4019029ec39431db1d873801ad9f1197517898445d4862622805ffd94">ET_ENCODER</a>, 
 <br/>
@@ -360,7 +345,7 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a963fb07b165165b1b21ccd40dcd14a3a"></a>
+<a class="anchor" id="a6f2e03cc36a700b74736e06db361c36e"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -376,7 +361,7 @@ Additional Inherited Members</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">final</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -504,15 +489,11 @@ Additional Inherited Members</h2></td></tr>
 <li><a class="el" href="_encoder_8h_source.html">Encoder.h</a></li>
 </ul>
 </div><!-- contents -->
-</div><!-- doc-content -->
 <!-- start footer part -->
-<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
-  <ul>
-    <li class="navelem"><a class="el" href="namespaceprtx.html">prtx</a></li><li class="navelem"><a class="el" href="classprtx_1_1_encoder.html">Encoder</a></li>
-    <li class="footer">Generated on Tue Sep 25 2018 09:40:51 for Esri Procedural Runtime by
-    <a href="http://www.doxygen.org/index.html">
-    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.5 </li>
-  </ul>
-</div>
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue Apr 9 2019 11:56:31 for Esri Procedural Runtime by &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.5
+</small></address>
 </body>
 </html>

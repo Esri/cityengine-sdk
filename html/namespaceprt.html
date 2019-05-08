@@ -8,13 +8,6 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
-<link href="navtree.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="resize.js"></script>
-<script type="text/javascript" src="navtree.js"></script>
-<script type="text/javascript">
-  $(document).ready(initResizable);
-  $(window).load(resizeHeight);
-</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/search.js"></script>
 <script type="text/javascript">
@@ -31,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="esri_prt_55px.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Esri Procedural Runtime
-   &#160;<span id="projectnumber">1.10.4198</span>
+   &#160;<span id="projectnumber">2.0.5403</span>
    </div>
   </td>
  </tr>
@@ -73,21 +66,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespacemembers.html"><span>Namespace&#160;Members</span></a></li>
     </ul>
   </div>
-</div><!-- top -->
-<div id="side-nav" class="ui-resizable side-nav-resizable">
-  <div id="nav-tree">
-    <div id="nav-tree-contents">
-      <div id="nav-sync" class="sync"></div>
-    </div>
-  </div>
-  <div id="splitbar" style="-moz-user-select:none;" 
-       class="ui-resizable-handle">
-  </div>
-</div>
-<script type="text/javascript">
-$(document).ready(function(){initNavTree('namespaceprt.html','');});
-</script>
-<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -102,19 +80,69 @@ $(document).ready(function(){initNavTree('namespaceprt.html','');});
 </iframe>
 </div>
 
+</div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#namespaces">Namespaces</a> &#124;
+<a href="#func-members">Functions</a> &#124;
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#enum-members">Enumerations</a> &#124;
-<a href="#func-members">Functions</a>  </div>
+<a href="#enum-members">Enumerations</a>  </div>
   <div class="headertitle">
 <div class="title">prt Namespace Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-
-<p>The Procedural Runtime API namespace. The prt namespace contains the top level entry points into the Procedural Runtime API.  
-<a href="#details">More...</a></p>
-<table class="memberdecls">
+<a name="details" id="details"></a><h2 class="groupheader">Description</h2>
+<div class="textblock"><p>The Procedural Runtime API namespace. The prt namespace contains the top level entry points into the Procedural Runtime API. </p>
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:namespaceprt_1_1_string_utils"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprt_1_1_string_utils.html">StringUtils</a></td></tr>
+<tr class="memdesc:namespaceprt_1_1_string_utils"><td class="mdescLeft">&#160;</td><td class="mdescRight">Utilities for string encoding. <br/></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a89e46749c5dc39f359a2eb0d0e970c20"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprt.html#a89e46749c5dc39f359a2eb0d0e970c20">addLogHandler</a> (<a class="el" href="classprt_1_1_log_handler.html">LogHandler</a> *logHandler)</td></tr>
+<tr class="separator:a89e46749c5dc39f359a2eb0d0e970c20"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaf2da61548a50cf549090a613d23ec3b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classprt_1_1_decoder_info.html">DecoderInfo</a> const *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprt.html#aaf2da61548a50cf549090a613d23ec3b">createDecoderInfo</a> (const wchar_t *decoderId, <a class="el" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a> *stat=nullptr)</td></tr>
+<tr class="separator:aaf2da61548a50cf549090a613d23ec3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a139ddfbf80758a1e4fbbcff7bd55d404"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classprt_1_1_encoder_info.html">EncoderInfo</a> const *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprt.html#a139ddfbf80758a1e4fbbcff7bd55d404">createEncoderInfo</a> (const wchar_t *encoderId, <a class="el" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a> *stat=nullptr)</td></tr>
+<tr class="separator:a139ddfbf80758a1e4fbbcff7bd55d404"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a26fc77ff5cc864b72c542114245ad1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classprt_1_1_resolve_map.html">ResolveMap</a> const *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprt.html#a4a26fc77ff5cc864b72c542114245ad1">createResolveMap</a> (const wchar_t *rpkURI, const wchar_t *unpackFileSystemPath=nullptr, <a class="el" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a> *stat=nullptr)</td></tr>
+<tr class="separator:a4a26fc77ff5cc864b72c542114245ad1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c6125100b4deb1273c0e81cda996d89"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classprt_1_1_rule_file_info.html">RuleFileInfo</a> const *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprt.html#a7c6125100b4deb1273c0e81cda996d89">createRuleFileInfo</a> (const wchar_t *ruleFileURI, <a class="el" href="classprt_1_1_cache.html">Cache</a> *cache=nullptr, <a class="el" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a> *stat=nullptr)</td></tr>
+<tr class="separator:a7c6125100b4deb1273c0e81cda996d89"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a785b02f26edd5ec806607ab98d5761ae"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classprt_1_1_attribute_map.html">AttributeMap</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprt.html#a785b02f26edd5ec806607ab98d5761ae">createTextureMetadata</a> (const wchar_t *uri, <a class="el" href="classprt_1_1_cache.html">Cache</a> *cache=nullptr, <a class="el" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a> *stat=nullptr)</td></tr>
+<tr class="separator:a785b02f26edd5ec806607ab98d5761ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abfe8090353f524a61fcf36af4a99e645"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprt.html#abfe8090353f524a61fcf36af4a99e645">encodeTexture</a> (const <a class="el" href="classprt_1_1_attribute_map.html">AttributeMap</a> *metadata, const uint8_t *pixeldata, const wchar_t *encoderId, const <a class="el" href="classprt_1_1_attribute_map.html">AttributeMap</a> *encoderOptions, <a class="el" href="classprt_1_1_simple_output_callbacks.html">SimpleOutputCallbacks</a> *soc)</td></tr>
+<tr class="separator:abfe8090353f524a61fcf36af4a99e645"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a310381e586ced8f4b08efd472a6f0782"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprt.html#a310381e586ced8f4b08efd472a6f0782">generate</a> (const <a class="el" href="classprt_1_1_initial_shape.html">InitialShape</a> *const *initialShapes, size_t initialShapeCount, const OcclusionSet::Handle *occlusionHandles, const wchar_t *const *encoders, size_t encodersCount, const <a class="el" href="classprt_1_1_attribute_map.html">AttributeMap</a> *const *encoderOptions, <a class="el" href="classprt_1_1_callbacks.html">Callbacks</a> *callbacks, <a class="el" href="classprt_1_1_cache.html">Cache</a> *cache, const <a class="el" href="classprt_1_1_occlusion_set.html">OcclusionSet</a> *occlSet, const <a class="el" href="classprt_1_1_attribute_map.html">AttributeMap</a> *generateOptions=nullptr)</td></tr>
+<tr class="separator:a310381e586ced8f4b08efd472a6f0782"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af5da776d9c068f14224cf52a902582c8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprt.html#af5da776d9c068f14224cf52a902582c8">generate</a> (const <a class="el" href="classprt_1_1_initial_shape.html">InitialShape</a> *const *initialShapes, size_t initialShapeCount, const OcclusionSet::Handle *occlusionHandles, const wchar_t *const *encoders, size_t encodersCount, const <a class="el" href="classprt_1_1_attribute_map.html">AttributeMap</a> *const *encoderOptions, <a class="el" href="classprt_1_1_callbacks.html">Callbacks</a> *callbacks, <a class="el" href="classprt_1_1_cache.html">Cache</a> *cache, const <a class="el" href="classprt_1_1_occlusion_set.html">OcclusionSet</a> *const *occlSets, const size_t *occlSetCounts, const <a class="el" href="classprt_1_1_attribute_map.html">AttributeMap</a> *generateOptions=nullptr)</td></tr>
+<tr class="separator:af5da776d9c068f14224cf52a902582c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a73afacb3ccae1d1c9f1af5521a79fefa"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprt.html#a73afacb3ccae1d1c9f1af5521a79fefa">generateOccluders</a> (const <a class="el" href="classprt_1_1_initial_shape.html">InitialShape</a> *const *initialShapes, size_t initialShapeCount, OcclusionSet::Handle *occlusionHandles, const wchar_t *const *encoders, size_t encodersCount, const <a class="el" href="classprt_1_1_attribute_map.html">AttributeMap</a> *const *encoderOptions, <a class="el" href="classprt_1_1_callbacks.html">Callbacks</a> *callbacks, <a class="el" href="classprt_1_1_cache.html">Cache</a> *cache, <a class="el" href="classprt_1_1_occlusion_set.html">OcclusionSet</a> *occlSet, const <a class="el" href="classprt_1_1_attribute_map.html">AttributeMap</a> *generateOptions=nullptr)</td></tr>
+<tr class="separator:a73afacb3ccae1d1c9f1af5521a79fefa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af25a90488eeae74f63442d12ac0583a2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceprt.html#ac35a3cef5502bd6490d1742bd427916a">LogLevel</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprt.html#af25a90488eeae74f63442d12ac0583a2">getLogLevel</a> (<a class="el" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a> *status=nullptr)</td></tr>
+<tr class="separator:af25a90488eeae74f63442d12ac0583a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a356d4059266a53b3ab45fe1ff6a66a4d"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprt.html#a356d4059266a53b3ab45fe1ff6a66a4d">getStatusDescription</a> (<a class="el" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a> stat)</td></tr>
+<tr class="separator:a356d4059266a53b3ab45fe1ff6a66a4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b2c3b2fef77f2d7da8ab5919687507c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprt.html#a2b2c3b2fef77f2d7da8ab5919687507c">getTexturePixeldata</a> (const wchar_t *uri, uint8_t *buffer, size_t bufferSize, <a class="el" href="classprt_1_1_cache.html">Cache</a> *cache=nullptr)</td></tr>
+<tr class="separator:a2b2c3b2fef77f2d7da8ab5919687507c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6694b33fa488d9eaf0ff21ac43dec3e5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structprt_1_1_version.html">Version</a> const *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprt.html#a6694b33fa488d9eaf0ff21ac43dec3e5">getVersion</a> ()</td></tr>
+<tr class="separator:a6694b33fa488d9eaf0ff21ac43dec3e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac11b9812a98def24f4ad792bf5be2371"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classprt_1_1_object.html">Object</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprt.html#ac11b9812a98def24f4ad792bf5be2371">init</a> (const wchar_t *const *prtPlugins, size_t prtPluginsCount, <a class="el" href="namespaceprt.html#ac35a3cef5502bd6490d1742bd427916a">LogLevel</a> logLevel, <a class="el" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a> *stat=nullptr)</td></tr>
+<tr class="separator:ac11b9812a98def24f4ad792bf5be2371"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c181e1d9092e6ace287a8c951b36a97"><td class="memItemLeft" align="right" valign="top">wchar_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprt.html#a4c181e1d9092e6ace287a8c951b36a97">listDecoderIds</a> (wchar_t *result, size_t *resultSize, <a class="el" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a> *stat=nullptr)</td></tr>
+<tr class="separator:a4c181e1d9092e6ace287a8c951b36a97"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad45926fb4d54c985c1af7bcd904bf212"><td class="memItemLeft" align="right" valign="top">wchar_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprt.html#ad45926fb4d54c985c1af7bcd904bf212">listEncoderIds</a> (wchar_t *result, size_t *resultSize, <a class="el" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a> *stat=nullptr)</td></tr>
+<tr class="separator:ad45926fb4d54c985c1af7bcd904bf212"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b4337b6cedb6d554afe1875c874047f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprt.html#a0b4337b6cedb6d554afe1875c874047f">log</a> (const wchar_t *msg, <a class="el" href="namespaceprt.html#ac35a3cef5502bd6490d1742bd427916a">LogLevel</a> level)</td></tr>
+<tr class="separator:a0b4337b6cedb6d554afe1875c874047f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0e58922795880d9c4e5200f05ca0ae07"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprt.html#a0e58922795880d9c4e5200f05ca0ae07">removeLogHandler</a> (<a class="el" href="classprt_1_1_log_handler.html">LogHandler</a> *logHandler)</td></tr>
+<tr class="separator:a0e58922795880d9c4e5200f05ca0ae07"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a134acce0e87126ded51dcbe9b1f9299b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprt.html#a134acce0e87126ded51dcbe9b1f9299b">setLogLevel</a> (<a class="el" href="namespaceprt.html#ac35a3cef5502bd6490d1742bd427916a">LogLevel</a> level)</td></tr>
+<tr class="separator:a134acce0e87126ded51dcbe9b1f9299b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprt_1_1_annotation.html">Annotation</a></td></tr>
@@ -145,13 +173,9 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprt_1_1_file_output_callbacks.html">FileOutputCallbacks</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structprt_1_1_flex_lic_params.html">FlexLicParams</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprt_1_1_initial_shape.html">InitialShape</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprt_1_1_initial_shape_builder.html">InitialShapeBuilder</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structprt_1_1_lic_params.html">LicParams</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprt_1_1_log_handler.html">LogHandler</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -185,7 +209,13 @@ Enumerations</h2></td></tr>
 <br/>
 &#160;&#160;<a class="el" href="namespaceprt.html#a2ed198d15e4532984f5cddcbefb38984a133b17643e584a9ac15ad457e499dc39">AAT_INT</a>, 
 <br/>
-&#160;&#160;<a class="el" href="namespaceprt.html#a2ed198d15e4532984f5cddcbefb38984a62edc302ef859377f25482b821f1573b">AAT_UNKNOWN</a>
+&#160;&#160;<a class="el" href="namespaceprt.html#a2ed198d15e4532984f5cddcbefb38984a62edc302ef859377f25482b821f1573b">AAT_UNKNOWN</a>, 
+<br/>
+&#160;&#160;<a class="el" href="namespaceprt.html#a2ed198d15e4532984f5cddcbefb38984acc1eddcf93b53a18c74506ac340e98ed">AAT_BOOL_ARRAY</a>, 
+<br/>
+&#160;&#160;<a class="el" href="namespaceprt.html#a2ed198d15e4532984f5cddcbefb38984aa97a1d392e85c50851b90f5135368df7">AAT_FLOAT_ARRAY</a>, 
+<br/>
+&#160;&#160;<a class="el" href="namespaceprt.html#a2ed198d15e4532984f5cddcbefb38984a013269a536cad34353dd5eb4e5c9a74e">AAT_STR_ARRAY</a>
 <br/>
  }</td></tr>
 <tr class="separator:a2ed198d15e4532984f5cddcbefb38984"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -222,6 +252,8 @@ Enumerations</h2></td></tr>
 &#160;&#160;<a class="el" href="namespaceprt.html#a0bbc8b7c3113196a20860f569f833b2da93dc48bccb81d983e47a7b4ee355c85f">CT_ATTRIBUTE</a>, 
 <br/>
 &#160;&#160;<a class="el" href="namespaceprt.html#a0bbc8b7c3113196a20860f569f833b2da19c5a6fd7403ad949537fbcd32dab9a0">CT_SHAPETREE</a>, 
+<br/>
+&#160;&#160;<a class="el" href="namespaceprt.html#a0bbc8b7c3113196a20860f569f833b2da24fc267f4f36845c7beaa115415def18">CT_STRING</a>, 
 <br/>
 &#160;&#160;<a class="el" href="namespaceprt.html#a0bbc8b7c3113196a20860f569f833b2dac4a5b07eb9e5ceae5c6cf7657a9fbcb9">CT_COUNT</a>
 <br/>
@@ -277,7 +309,9 @@ Enumerations</h2></td></tr>
 <br/>
 &#160;&#160;<a class="el" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4a6c99141b89a3975f80bb3561a8e9b79d">STATUS_INVALID_URI</a>, 
 <br/>
-&#160;&#160;<a class="el" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4ad4e4b02136b6b64c41971413d58cc220">STATUS_ADAPTOR_NOT_FOUND</a>, 
+&#160;&#160;<a class="el" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4a1a6c30cfeb4eb0e4aa8ec730dccb51e8">STATUS_STREAM_ADAPTOR_NOT_FOUND</a>, 
+<br/>
+&#160;&#160;<a class="el" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4aff935194c8436257b98a306a7bf3c665">STATUS_RESOLVEMAP_PROVIDER_NOT_FOUND</a>, 
 <br/>
 &#160;&#160;<a class="el" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4aeafeff4a4070ef12684be07c66ae870e">STATUS_DECODER_NOT_FOUND</a>, 
 <br/>
@@ -341,53 +375,8 @@ Enumerations</h2></td></tr>
 <br/>
  }</td></tr>
 <tr class="separator:acf0b3066b48a14bccb756bee9a4700e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:a89e46749c5dc39f359a2eb0d0e970c20"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprt.html#a89e46749c5dc39f359a2eb0d0e970c20">addLogHandler</a> (<a class="el" href="classprt_1_1_log_handler.html">LogHandler</a> *logHandler)</td></tr>
-<tr class="separator:a89e46749c5dc39f359a2eb0d0e970c20"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaf2da61548a50cf549090a613d23ec3b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classprt_1_1_decoder_info.html">DecoderInfo</a> const *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprt.html#aaf2da61548a50cf549090a613d23ec3b">createDecoderInfo</a> (const wchar_t *decoderId, <a class="el" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a> *stat=nullptr)</td></tr>
-<tr class="separator:aaf2da61548a50cf549090a613d23ec3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a139ddfbf80758a1e4fbbcff7bd55d404"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classprt_1_1_encoder_info.html">EncoderInfo</a> const *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprt.html#a139ddfbf80758a1e4fbbcff7bd55d404">createEncoderInfo</a> (const wchar_t *encoderId, <a class="el" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a> *stat=nullptr)</td></tr>
-<tr class="separator:a139ddfbf80758a1e4fbbcff7bd55d404"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4a26fc77ff5cc864b72c542114245ad1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classprt_1_1_resolve_map.html">ResolveMap</a> const *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprt.html#a4a26fc77ff5cc864b72c542114245ad1">createResolveMap</a> (const wchar_t *rpkURI, const wchar_t *unpackFileSystemPath=nullptr, <a class="el" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a> *stat=nullptr)</td></tr>
-<tr class="separator:a4a26fc77ff5cc864b72c542114245ad1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7c6125100b4deb1273c0e81cda996d89"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classprt_1_1_rule_file_info.html">RuleFileInfo</a> const *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprt.html#a7c6125100b4deb1273c0e81cda996d89">createRuleFileInfo</a> (const wchar_t *ruleFileURI, <a class="el" href="classprt_1_1_cache.html">Cache</a> *cache=nullptr, <a class="el" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a> *stat=nullptr)</td></tr>
-<tr class="separator:a7c6125100b4deb1273c0e81cda996d89"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a785b02f26edd5ec806607ab98d5761ae"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classprt_1_1_attribute_map.html">AttributeMap</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprt.html#a785b02f26edd5ec806607ab98d5761ae">createTextureMetadata</a> (const wchar_t *uri, <a class="el" href="classprt_1_1_cache.html">Cache</a> *cache=nullptr, <a class="el" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a> *stat=nullptr)</td></tr>
-<tr class="separator:a785b02f26edd5ec806607ab98d5761ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abfe8090353f524a61fcf36af4a99e645"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprt.html#abfe8090353f524a61fcf36af4a99e645">encodeTexture</a> (const <a class="el" href="classprt_1_1_attribute_map.html">AttributeMap</a> *metadata, const uint8_t *pixeldata, const wchar_t *encoderId, const <a class="el" href="classprt_1_1_attribute_map.html">AttributeMap</a> *encoderOptions, <a class="el" href="classprt_1_1_simple_output_callbacks.html">SimpleOutputCallbacks</a> *soc)</td></tr>
-<tr class="separator:abfe8090353f524a61fcf36af4a99e645"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a310381e586ced8f4b08efd472a6f0782"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprt.html#a310381e586ced8f4b08efd472a6f0782">generate</a> (const <a class="el" href="classprt_1_1_initial_shape.html">InitialShape</a> *const *initialShapes, size_t initialShapeCount, const OcclusionSet::Handle *occlusionHandles, const wchar_t *const *encoders, size_t encodersCount, const <a class="el" href="classprt_1_1_attribute_map.html">AttributeMap</a> *const *encoderOptions, <a class="el" href="classprt_1_1_callbacks.html">Callbacks</a> *callbacks, <a class="el" href="classprt_1_1_cache.html">Cache</a> *cache, const <a class="el" href="classprt_1_1_occlusion_set.html">OcclusionSet</a> *occlSet, const <a class="el" href="classprt_1_1_attribute_map.html">AttributeMap</a> *generateOptions=nullptr)</td></tr>
-<tr class="separator:a310381e586ced8f4b08efd472a6f0782"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af5da776d9c068f14224cf52a902582c8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprt.html#af5da776d9c068f14224cf52a902582c8">generate</a> (const <a class="el" href="classprt_1_1_initial_shape.html">InitialShape</a> *const *initialShapes, size_t initialShapeCount, const OcclusionSet::Handle *occlusionHandles, const wchar_t *const *encoders, size_t encodersCount, const <a class="el" href="classprt_1_1_attribute_map.html">AttributeMap</a> *const *encoderOptions, <a class="el" href="classprt_1_1_callbacks.html">Callbacks</a> *callbacks, <a class="el" href="classprt_1_1_cache.html">Cache</a> *cache, const <a class="el" href="classprt_1_1_occlusion_set.html">OcclusionSet</a> *const *occlSets, const size_t *occlSetCounts, const <a class="el" href="classprt_1_1_attribute_map.html">AttributeMap</a> *generateOptions=nullptr)</td></tr>
-<tr class="separator:af5da776d9c068f14224cf52a902582c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a73afacb3ccae1d1c9f1af5521a79fefa"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprt.html#a73afacb3ccae1d1c9f1af5521a79fefa">generateOccluders</a> (const <a class="el" href="classprt_1_1_initial_shape.html">InitialShape</a> *const *initialShapes, size_t initialShapeCount, OcclusionSet::Handle *occlusionHandles, const wchar_t *const *encoders, size_t encodersCount, const <a class="el" href="classprt_1_1_attribute_map.html">AttributeMap</a> *const *encoderOptions, <a class="el" href="classprt_1_1_callbacks.html">Callbacks</a> *callbacks, <a class="el" href="classprt_1_1_cache.html">Cache</a> *cache, <a class="el" href="classprt_1_1_occlusion_set.html">OcclusionSet</a> *occlSet, const <a class="el" href="classprt_1_1_attribute_map.html">AttributeMap</a> *generateOptions=nullptr)</td></tr>
-<tr class="separator:a73afacb3ccae1d1c9f1af5521a79fefa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af25a90488eeae74f63442d12ac0583a2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceprt.html#ac35a3cef5502bd6490d1742bd427916a">LogLevel</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprt.html#af25a90488eeae74f63442d12ac0583a2">getLogLevel</a> (<a class="el" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a> *status=nullptr)</td></tr>
-<tr class="separator:af25a90488eeae74f63442d12ac0583a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a356d4059266a53b3ab45fe1ff6a66a4d"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprt.html#a356d4059266a53b3ab45fe1ff6a66a4d">getStatusDescription</a> (<a class="el" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a> stat)</td></tr>
-<tr class="separator:a356d4059266a53b3ab45fe1ff6a66a4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2b2c3b2fef77f2d7da8ab5919687507c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprt.html#a2b2c3b2fef77f2d7da8ab5919687507c">getTexturePixeldata</a> (const wchar_t *uri, uint8_t *buffer, size_t bufferSize, <a class="el" href="classprt_1_1_cache.html">Cache</a> *cache=nullptr)</td></tr>
-<tr class="separator:a2b2c3b2fef77f2d7da8ab5919687507c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6694b33fa488d9eaf0ff21ac43dec3e5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structprt_1_1_version.html">Version</a> const *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprt.html#a6694b33fa488d9eaf0ff21ac43dec3e5">getVersion</a> ()</td></tr>
-<tr class="separator:a6694b33fa488d9eaf0ff21ac43dec3e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a389d6191a10c5ae7dfc86dcce24c311d"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classprt_1_1_object.html">Object</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprt.html#a389d6191a10c5ae7dfc86dcce24c311d">init</a> (const wchar_t *const *prtPlugins, size_t prtPluginsCount, <a class="el" href="namespaceprt.html#ac35a3cef5502bd6490d1742bd427916a">LogLevel</a> logLevel, const <a class="el" href="structprt_1_1_lic_params.html">LicParams</a> *lic, <a class="el" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a> *stat=nullptr)</td></tr>
-<tr class="separator:a389d6191a10c5ae7dfc86dcce24c311d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4c181e1d9092e6ace287a8c951b36a97"><td class="memItemLeft" align="right" valign="top">wchar_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprt.html#a4c181e1d9092e6ace287a8c951b36a97">listDecoderIds</a> (wchar_t *result, size_t *resultSize, <a class="el" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a> *stat=nullptr)</td></tr>
-<tr class="separator:a4c181e1d9092e6ace287a8c951b36a97"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad45926fb4d54c985c1af7bcd904bf212"><td class="memItemLeft" align="right" valign="top">wchar_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprt.html#ad45926fb4d54c985c1af7bcd904bf212">listEncoderIds</a> (wchar_t *result, size_t *resultSize, <a class="el" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a> *stat=nullptr)</td></tr>
-<tr class="separator:ad45926fb4d54c985c1af7bcd904bf212"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0b4337b6cedb6d554afe1875c874047f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprt.html#a0b4337b6cedb6d554afe1875c874047f">log</a> (const wchar_t *msg, <a class="el" href="namespaceprt.html#ac35a3cef5502bd6490d1742bd427916a">LogLevel</a> level)</td></tr>
-<tr class="separator:a0b4337b6cedb6d554afe1875c874047f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0e58922795880d9c4e5200f05ca0ae07"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprt.html#a0e58922795880d9c4e5200f05ca0ae07">removeLogHandler</a> (<a class="el" href="classprt_1_1_log_handler.html">LogHandler</a> *logHandler)</td></tr>
-<tr class="separator:a0e58922795880d9c4e5200f05ca0ae07"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a134acce0e87126ded51dcbe9b1f9299b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprt.html#a134acce0e87126ded51dcbe9b1f9299b">setLogLevel</a> (<a class="el" href="namespaceprt.html#ac35a3cef5502bd6490d1742bd427916a">LogLevel</a> level)</td></tr>
-<tr class="separator:a134acce0e87126ded51dcbe9b1f9299b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>The Procedural Runtime API namespace. The prt namespace contains the top level entry points into the Procedural Runtime API. </p>
-</div><h2 class="groupheader">Enumeration Type Documentation</h2>
+<h2 class="groupheader">Enumeration Type Documentation</h2>
 <a class="anchor" id="a2ed198d15e4532984f5cddcbefb38984"></a>
 <div class="memitem">
 <div class="memproto">
@@ -416,6 +405,15 @@ Functions</h2></td></tr>
 </td></tr>
 <tr><td class="fieldname"><em><a class="anchor" id="a2ed198d15e4532984f5cddcbefb38984a62edc302ef859377f25482b821f1573b"></a>AAT_UNKNOWN</em>&nbsp;</td><td class="fielddoc">
 <p>Unknown type. </p>
+</td></tr>
+<tr><td class="fieldname"><em><a class="anchor" id="a2ed198d15e4532984f5cddcbefb38984acc1eddcf93b53a18c74506ac340e98ed"></a>AAT_BOOL_ARRAY</em>&nbsp;</td><td class="fielddoc">
+<p>Boolean array type. </p>
+</td></tr>
+<tr><td class="fieldname"><em><a class="anchor" id="a2ed198d15e4532984f5cddcbefb38984aa97a1d392e85c50851b90f5135368df7"></a>AAT_FLOAT_ARRAY</em>&nbsp;</td><td class="fielddoc">
+<p>Float array type. </p>
+</td></tr>
+<tr><td class="fieldname"><em><a class="anchor" id="a2ed198d15e4532984f5cddcbefb38984a013269a536cad34353dd5eb4e5c9a74e"></a>AAT_STR_ARRAY</em>&nbsp;</td><td class="fielddoc">
+<p>String array type. </p>
 </td></tr>
 </table>
 
@@ -457,7 +455,7 @@ Functions</h2></td></tr>
 <p>Encodes the types handled by Decoders and Encoders. </p>
 <table class="fieldtable">
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><em><a class="anchor" id="a0bbc8b7c3113196a20860f569f833b2da521d06c4691563e0b22211ab302bc237"></a>CT_UNDEFINED</em>&nbsp;</td><td class="fielddoc">
-<p>Extension does not make use of specific content type, e.g. adaptor extensions. </p>
+<p>Extension does not make use of specific content type. </p>
 </td></tr>
 <tr><td class="fieldname"><em><a class="anchor" id="a0bbc8b7c3113196a20860f569f833b2daf5830e04b7c669cca996e5c15f81d113"></a>CT_GEOMETRY</em>&nbsp;</td><td class="fielddoc">
 <p>Extension can handle geometries (and potentially also materials and textures). </p>
@@ -491,6 +489,9 @@ Functions</h2></td></tr>
 </td></tr>
 <tr><td class="fieldname"><em><a class="anchor" id="a0bbc8b7c3113196a20860f569f833b2da19c5a6fd7403ad949537fbcd32dab9a0"></a>CT_SHAPETREE</em>&nbsp;</td><td class="fielddoc">
 <p>Extension can handle shape trees. </p>
+</td></tr>
+<tr><td class="fieldname"><em><a class="anchor" id="a0bbc8b7c3113196a20860f569f833b2da24fc267f4f36845c7beaa115415def18"></a>CT_STRING</em>&nbsp;</td><td class="fielddoc">
+<p>Extension can handle strings. </p>
 </td></tr>
 <tr><td class="fieldname"><em><a class="anchor" id="a0bbc8b7c3113196a20860f569f833b2dac4a5b07eb9e5ceae5c6cf7657a9fbcb9"></a>CT_COUNT</em>&nbsp;</td><td class="fielddoc">
 <p>Sentinel value. </p>
@@ -595,8 +596,11 @@ Functions</h2></td></tr>
 <tr><td class="fieldname"><em><a class="anchor" id="acf0b3066b48a14bccb756bee9a4700e4a6c99141b89a3975f80bb3561a8e9b79d"></a>STATUS_INVALID_URI</em>&nbsp;</td><td class="fielddoc">
 <p>Invalid URI. </p>
 </td></tr>
-<tr><td class="fieldname"><em><a class="anchor" id="acf0b3066b48a14bccb756bee9a4700e4ad4e4b02136b6b64c41971413d58cc220"></a>STATUS_ADAPTOR_NOT_FOUND</em>&nbsp;</td><td class="fielddoc">
-<p>Adaptor not found. </p>
+<tr><td class="fieldname"><em><a class="anchor" id="acf0b3066b48a14bccb756bee9a4700e4a1a6c30cfeb4eb0e4aa8ec730dccb51e8"></a>STATUS_STREAM_ADAPTOR_NOT_FOUND</em>&nbsp;</td><td class="fielddoc">
+<p>StreamAdaptor not found. </p>
+</td></tr>
+<tr><td class="fieldname"><em><a class="anchor" id="acf0b3066b48a14bccb756bee9a4700e4aff935194c8436257b98a306a7bf3c665"></a>STATUS_RESOLVEMAP_PROVIDER_NOT_FOUND</em>&nbsp;</td><td class="fielddoc">
+<p>ResolveMapProvider not found. </p>
 </td></tr>
 <tr><td class="fieldname"><em><a class="anchor" id="acf0b3066b48a14bccb756bee9a4700e4aeafeff4a4070ef12684be07c66ae870e"></a>STATUS_DECODER_NOT_FOUND</em>&nbsp;</td><td class="fielddoc">
 <p>Decoder not found. </p>
@@ -706,7 +710,7 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Register a log handler, can be called at any time (also before <a class="el" href="namespaceprt.html#a389d6191a10c5ae7dfc86dcce24c311d">init()</a>). Is thread-safe.</p>
+<p>Register a log handler, can be called at any time (also before <a class="el" href="namespaceprt.html#ac11b9812a98def24f4ad792bf5be2371">init()</a>). Is thread-safe.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">logHandler</td><td><a class="el" href="classprt_1_1_log_handler.html">LogHandler</a> to register. </td></tr>
@@ -741,11 +745,11 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Creates an <a class="el" href="classprt_1_1_decoder_info.html">DecoderInfo</a> instance for the given decoder id.</p>
-<p>Must be called after <a class="el" href="namespaceprt.html#a389d6191a10c5ae7dfc86dcce24c311d">init()</a>, will return STATUS_NOT_INITIALIZED else. Is thread-safe. The returned instance must be destroyed by the caller.</p>
+<p>Must be called after <a class="el" href="namespaceprt.html#ac11b9812a98def24f4ad792bf5be2371">init()</a>, will return STATUS_NOT_INITIALIZED else. Is thread-safe. The returned instance must be destroyed by the caller.</p>
 <dl class="section see"><dt>See Also</dt><dd><a class="el" href="classprt_1_1_decoder_info.html">DecoderInfo</a>, <a class="el" href="namespaceprt.html#a4c181e1d9092e6ace287a8c951b36a97">listDecoderIds</a></dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir"></td><td class="paramname">encoderID</td><td>ID of encoder to get <a class="el" href="classprt_1_1_encoder_info.html">EncoderInfo</a> for. </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">decoderId</td><td>ID of decoder to get <a class="el" href="classprt_1_1_decoder_info.html">DecoderInfo</a> for. </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">stat</td><td>Optional pointer to return the <a class="el" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a>. </td></tr>
   </table>
   </dd>
@@ -778,11 +782,11 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Creates an <a class="el" href="classprt_1_1_encoder_info.html">EncoderInfo</a> instance for the given encoder id.</p>
-<p>Must be called after <a class="el" href="namespaceprt.html#a389d6191a10c5ae7dfc86dcce24c311d">init()</a>, will return STATUS_NOT_INITIALIZED else. Is thread-safe. The returned instance must be destroyed by the caller.</p>
+<p>Must be called after <a class="el" href="namespaceprt.html#ac11b9812a98def24f4ad792bf5be2371">init()</a>, will return STATUS_NOT_INITIALIZED else. Is thread-safe. The returned instance must be destroyed by the caller.</p>
 <dl class="section see"><dt>See Also</dt><dd><a class="el" href="classprt_1_1_encoder_info.html">EncoderInfo</a>, <a class="el" href="namespaceprt.html#ad45926fb4d54c985c1af7bcd904bf212">listEncoderIds</a></dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir"></td><td class="paramname">encoderID</td><td>ID of encoder to get <a class="el" href="classprt_1_1_encoder_info.html">EncoderInfo</a> for. </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">encoderId</td><td>ID of encoder to get <a class="el" href="classprt_1_1_encoder_info.html">EncoderInfo</a> for. </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">stat</td><td>Optional pointer to return the <a class="el" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a>. </td></tr>
   </table>
   </dd>
@@ -821,7 +825,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Create a <a class="el" href="classprt_1_1_resolve_map.html">ResolveMap</a> for a rpk. The entries will point into the rpk.</p>
-<p>Must be called after <a class="el" href="namespaceprt.html#a389d6191a10c5ae7dfc86dcce24c311d">init()</a>, will return STATUS_NOT_INITIALIZED else. Is thread-safe. The returned instance must be destroyed by the caller.</p>
+<p>Must be called after <a class="el" href="namespaceprt.html#ac11b9812a98def24f4ad792bf5be2371">init()</a>, will return STATUS_NOT_INITIALIZED else. Is thread-safe. The returned instance must be destroyed by the caller.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir"></td><td class="paramname">rpkURI</td><td>URI to the rpk, see <a class="el" href="_app_notes.html">Application Notes</a> for URI creation. </td></tr>
@@ -864,7 +868,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Creates a <a class="el" href="classprt_1_1_rule_file_info.html">RuleFileInfo</a> instance for a cgb file.</p>
-<p>Must be called after <a class="el" href="namespaceprt.html#a389d6191a10c5ae7dfc86dcce24c311d">init()</a>, will return STATUS_NOT_INITIALIZED else. Is thread-safe. The returned instance must be destroyed by the caller.</p>
+<p>Must be called after <a class="el" href="namespaceprt.html#ac11b9812a98def24f4ad792bf5be2371">init()</a>, will return STATUS_NOT_INITIALIZED else. Is thread-safe. The returned instance must be destroyed by the caller.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir"></td><td class="paramname">ruleFileURI</td><td>URI to the cgb file, see <a class="el" href="_app_notes.html">Application Notes</a> for URI creation. </td></tr>
@@ -907,7 +911,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Creates a <a class="el" href="classprt_1_1_attribute_map.html">AttributeMap</a> with the metadata for a given texture URI. See <a class="el" href="classprtx_1_1_texture.html">prtx::Texture</a> for a list of supported metadata attributes.</p>
-<p>Must be called after <a class="el" href="namespaceprt.html#a389d6191a10c5ae7dfc86dcce24c311d">init()</a>, will return STATUS_NOT_INITIALIZED else. Is thread-safe. The returned instance must be destroyed by the caller.</p>
+<p>Must be called after <a class="el" href="namespaceprt.html#ac11b9812a98def24f4ad792bf5be2371">init()</a>, will return STATUS_NOT_INITIALIZED else. Is thread-safe. The returned instance must be destroyed by the caller.</p>
 <dl class="section see"><dt>See Also</dt><dd><a class="el" href="namespaceprt.html#a2b2c3b2fef77f2d7da8ab5919687507c">getTexturePixeldata()</a>, <a class="el" href="classprt_1_1_attributable.html#aaa464b033212c723bf25b39383b19012">Attributable::PrimitiveType</a>, <a class="el" href="classprtx_1_1_texture.html">prtx::Texture</a></dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -1049,7 +1053,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Generate and encode procedural models for a number of initial shapes.</p>
-<p>Must be called after <a class="el" href="namespaceprt.html#a389d6191a10c5ae7dfc86dcce24c311d">init()</a>, will return STATUS_NOT_INITIALIZED else. Is thread-safe.</p>
+<p>Must be called after <a class="el" href="namespaceprt.html#ac11b9812a98def24f4ad792bf5be2371">init()</a>, will return STATUS_NOT_INITIALIZED else. Is thread-safe.</p>
 <dl class="section see"><dt>See Also</dt><dd><a class="el" href="classprt_1_1_callbacks.html">Callbacks</a>.</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -1150,7 +1154,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Generate and encode procedural models for a number of initial shapes.</p>
-<p>Must be called after <a class="el" href="namespaceprt.html#a389d6191a10c5ae7dfc86dcce24c311d">init()</a>, will return STATUS_NOT_INITIALIZED else. Is thread-safe.</p>
+<p>Must be called after <a class="el" href="namespaceprt.html#ac11b9812a98def24f4ad792bf5be2371">init()</a>, will return STATUS_NOT_INITIALIZED else. Is thread-safe.</p>
 <dl class="section see"><dt>See Also</dt><dd><a class="el" href="classprt_1_1_callbacks.html">Callbacks</a>.</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -1246,7 +1250,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Populate an <a class="el" href="classprt_1_1_occlusion_set.html">OcclusionSet</a> with occluder geometries for each initial shape and return an occlusion handle for each one. These handles (and the <a class="el" href="classprt_1_1_occlusion_set.html">OcclusionSet</a>) can then be used to <a class="el" href="namespaceprt.html#a310381e586ced8f4b08efd472a6f0782">generate()</a> models based on rules with inter-model context and occlusion queries.</p>
-<p>Must be called after <a class="el" href="namespaceprt.html#a389d6191a10c5ae7dfc86dcce24c311d">init()</a>, will return STATUS_NOT_INITIALIZED else. Is thread-safe.</p>
+<p>Must be called after <a class="el" href="namespaceprt.html#ac11b9812a98def24f4ad792bf5be2371">init()</a>, will return STATUS_NOT_INITIALIZED else. Is thread-safe.</p>
 <dl class="section see"><dt>See Also</dt><dd><a class="el" href="classprt_1_1_callbacks.html">Callbacks</a>.</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -1337,7 +1341,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Reads and decodes a texture and copies the pixel data to the passed buffer.</p>
-<p>Must be called after <a class="el" href="namespaceprt.html#a389d6191a10c5ae7dfc86dcce24c311d">init()</a>, will return STATUS_NOT_INITIALIZED else. Is thread-safe.</p>
+<p>Must be called after <a class="el" href="namespaceprt.html#ac11b9812a98def24f4ad792bf5be2371">init()</a>, will return STATUS_NOT_INITIALIZED else. Is thread-safe.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir"></td><td class="paramname">uri</td><td>URI of the texture, see <a class="el" href="_app_notes.html">Application Notes</a> for URI creation. </td></tr>
@@ -1367,7 +1371,7 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a389d6191a10c5ae7dfc86dcce24c311d"></a>
+<a class="anchor" id="ac11b9812a98def24f4ad792bf5be2371"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -1392,12 +1396,6 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const LicParams *&#160;</td>
-          <td class="paramname"><em>lic</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
           <td class="paramtype">Status *&#160;</td>
           <td class="paramname"><em>stat</em> = <code>nullptr</code>&#160;</td>
         </tr>
@@ -1408,19 +1406,17 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Performs global Procedural Runtime initialization. Must only be called once per process, else will fail with STATUS_ALREADY_INITIALIZED. Is thread-safe. Blocks until initialization is done. </p>
-<dl class="section see"><dt>See Also</dt><dd><a class="el" href="structprt_1_1_flex_lic_params.html">FlexLicParams</a></dd></dl>
+<p>Performs global Procedural Runtime initialization. Must only be called once per process, else calls will fail with STATUS_ALREADY_INITIALIZED. Is thread-safe. Blocks until initialization is done.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir"></td><td class="paramname">prtPlugins</td><td>List of paths to shared libraries or paths of directories to scan for shared libraries. </td></tr>
     <tr><td class="paramdir"></td><td class="paramname">prtPluginsCount</td><td>Number of plugin paths provided. </td></tr>
     <tr><td class="paramdir"></td><td class="paramname">logLevel</td><td><a class="el" href="namespaceprt.html#ac35a3cef5502bd6490d1742bd427916a">LogLevel</a> to use. </td></tr>
-    <tr><td class="paramdir"></td><td class="paramname">lic</td><td>Licensing Information (loader dependent). </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">stat</td><td>Optional pointer to return the <a class="el" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a>. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>A "license handle" object which must be destroyed to release the license. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>A "library handle" object which must be destroyed to unload the library and release resources. </dd></dl>
 
 </div>
 </div>
@@ -1454,7 +1450,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Lists all registered decoders. If the result does not fit into the allocated buffer, the result is truncated. the INOUT parameter resultSize must be compared to the original buffer size after the call to detect this situation.</p>
-<p>Must be called after <a class="el" href="namespaceprt.html#a389d6191a10c5ae7dfc86dcce24c311d">init()</a>, will return STATUS_NOT_INITIALIZED else. Is thread-safe.</p>
+<p>Must be called after <a class="el" href="namespaceprt.html#ac11b9812a98def24f4ad792bf5be2371">init()</a>, will return STATUS_NOT_INITIALIZED else. Is thread-safe.</p>
 <dl class="section see"><dt>See Also</dt><dd><a class="el" href="classprt_1_1_decoder_info.html">DecoderInfo</a>, <a class="el" href="namespaceprt.html#aaf2da61548a50cf549090a613d23ec3b">createDecoderInfo</a></dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -1498,7 +1494,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Lists all registered encoders. If the result does not fit into the allocated buffer, the result is truncated. the INOUT parameter resultSize must be compared to the original buffer size after the call to detect this situation.</p>
-<p>Must be called after <a class="el" href="namespaceprt.html#a389d6191a10c5ae7dfc86dcce24c311d">init()</a>, will return STATUS_NOT_INITIALIZED else. Is thread-safe.</p>
+<p>Must be called after <a class="el" href="namespaceprt.html#ac11b9812a98def24f4ad792bf5be2371">init()</a>, will return STATUS_NOT_INITIALIZED else. Is thread-safe.</p>
 <dl class="section see"><dt>See Also</dt><dd><a class="el" href="classprt_1_1_encoder_info.html">EncoderInfo</a>, <a class="el" href="namespaceprt.html#a139ddfbf80758a1e4fbbcff7bd55d404">createEncoderInfo</a></dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -1535,7 +1531,7 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Injects a log message into the PRT log dispatcher, can be called at any time (also before <a class="el" href="namespaceprt.html#a389d6191a10c5ae7dfc86dcce24c311d">init()</a>). Is thread-safe.</p>
+<p>Injects a log message into the PRT log dispatcher, can be called at any time (also before <a class="el" href="namespaceprt.html#ac11b9812a98def24f4ad792bf5be2371">init()</a>). Is thread-safe.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">msg</td><td>Message to log. </td></tr>
@@ -1560,7 +1556,7 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Remove a previously registered log handler, can be called at any time (also before <a class="el" href="namespaceprt.html#a389d6191a10c5ae7dfc86dcce24c311d">init()</a>). Is thread-safe.</p>
+<p>Remove a previously registered log handler, can be called at any time (also before <a class="el" href="namespaceprt.html#ac11b9812a98def24f4ad792bf5be2371">init()</a>). Is thread-safe.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">logHandler</td><td><a class="el" href="classprt_1_1_log_handler.html">LogHandler</a> to remove. </td></tr>
@@ -1589,15 +1585,11 @@ Functions</h2></td></tr>
 </div>
 </div>
 </div><!-- contents -->
-</div><!-- doc-content -->
 <!-- start footer part -->
-<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
-  <ul>
-    <li class="navelem"><a class="el" href="namespaceprt.html">prt</a></li>
-    <li class="footer">Generated on Tue Sep 25 2018 09:40:51 for Esri Procedural Runtime by
-    <a href="http://www.doxygen.org/index.html">
-    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.5 </li>
-  </ul>
-</div>
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue Apr 9 2019 11:56:30 for Esri Procedural Runtime by &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.5
+</small></address>
 </body>
 </html>

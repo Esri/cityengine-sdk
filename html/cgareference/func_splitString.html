@@ -1,0 +1,153 @@
+<html>
+
+<head>
+<title>splitString Function</title>
+<link rel="stylesheet" href="../manual_style.css" type="text/css" /></head>
+
+<body>
+<div class="content">
+
+<table summary="" class="header">
+	<tr>
+		<td align="left" class="helphead_l"><a href="../toc.html"><div class="helplink">&nbsp;</div></a></td>
+		<td align="right" class="helphead_r"></td>
+	</tr>
+</table>
+
+<h1>splitString function</h1>
+<h2>Synopsis</h2>
+<p class="code2">string[] splitString(string <span class="cga_opparam">inputString</span>, string <span class="cga_opparam">delimiter</span>)</p>
+
+<h2>Parameters</h2>
+<ul>
+	<li><span class="cga_opparam">inputString</span><br>String to be split into separate substrings.</li>
+	<li><span class="cga_opparam">delimiter</span><br>Delimiter string that separates substrings. The delimiter may also be specified as a regular expression using a preceding '$' as the <em>first</em> character of the delimiter string. A split by '$' must be expressed by a regular expression (see example below).</li>
+</ul>
+
+
+<h2>Returns</h2>
+
+<p>Array of substrings of given input string.</p> 
+
+<p class="notes">Arrays can not be declared as <span class="codelight">attr</span> or <span class="codelight">const</span>.</p>
+		
+<p class="info">Splits a string into several substrings separated by a given delimiter string.</p>
+
+<h2>Related</h2>
+<ul>
+    <li><a href="func_substring.html"><span class="code_std">substring</span></a> function</li>
+    <li><a href="func_readTextFile.html"><span class="code_std">readTextFile</span></a> function</li>
+	<li><a href="func_fileSearch.html"><span class="code_std">fileSearch</span></a> function</li>
+</ul>
+
+
+<h2>Examples</h2>
+
+<h3>Delimiter string</h3>
+
+<table class="twocol">
+	<thead>
+		<th width="20%">Input</th>
+		<th width="15%">Delimiter</th>
+		<th width="40%">CGA</th>
+		<th>Result</th>
+	</thead>
+	<tr>
+		<td><pre class="code2">a.b.c</pre></td>
+		<td><pre class="code2">.</pre></td>
+		<td><pre class="code2">splitString("a.b.c", ".")</pre></td>
+		<td><pre class="code2">["a", "b", "c"]</pre></td>
+	</tr>
+	<tr>
+		<td><pre class="code2">.b.</pre></td>
+		<td><pre class="code2">.</pre></td>
+		<td><pre class="code2">splitString(".b.", ".")</pre></td>
+		<td><pre class="code2">["", "b", ""]</pre></td>
+	</tr>
+	<tr>
+		<td><pre class="code2">a.b&crarr;<br>c.d</pre></td>
+		<td><pre class="code2">\n</pre></td>
+		<td><pre class="code2">splitString("a.b\nc.d", "\n")</pre></td>
+		<td><pre class="code2">["a.b", "c.d"]</pre></td>
+	</tr>
+	<tr>
+		<td><pre class="code2">a\b\c</pre></td>
+		<td><pre class="code2">\</pre></td>
+		<td><pre class="code2">splitString("a\\b\\c", "\\")</pre></td>
+		<td><pre class="code2">["a", "b", "c"]</pre></td>
+	</tr>
+</table>
+
+<h3>Regular expression</h3>
+
+<table class="twocol">
+	<thead>
+		<th width="20%">Input</th>
+		<th width="15%">Reg. expr.</th>
+		<th width="40%">CGA</th>
+		<th>Result</th>
+	</thead>
+	<tr>
+		<td><pre class="code2">a;b;c</pre></td>
+		<td><pre class="code2">;</pre></td>
+		<td><pre class="code2">splitString("a;b;c", "$;")</pre></td>
+		<td><pre class="code2">["a", "b", "c"]</pre></td>
+	</tr>
+	<tr>
+		<td><pre class="code2">a.b.c</pre></td>
+		<td><pre class="code2">\.</pre></td>
+		<td><pre class="code2">splitString("a.b.c", "$\\.")</pre></td>
+		<td><pre class="code2">["a", "b", "c"]</pre></td>
+	</tr>
+	<tr>
+		<td><pre class="code2">a&rarr; &rarr;  b&rarr; c</pre></td>
+		<td><pre class="code2">\t+</pre></td>
+		<td><pre class="code2">splitString("a\t\tb\tc", "$\t+")</pre></td>
+		<td><pre class="code2">["a", "b", "c"]</pre></td>
+	</tr>
+	<tr>
+		<td><pre class="code2">a b  c</pre></td>
+		<td><pre class="code2">\s+</pre></td>
+		<td><pre class="code2">splitString("a b  c", "$\\s+")</pre></td>
+		<td><pre class="code2">["a", "b", "c"]</pre></td>
+	</tr>
+	<tr>
+		<td><pre class="code2">a$b$c</pre></td>
+		<td><pre class="code2">\$</pre></td>
+		<td><pre class="code2">splitString("a$b$c", "$\\$")</pre></td>
+		<td><pre class="code2">["a", "b", "c"]</pre></td>
+	</tr>
+	<tr>
+		<td><pre class="code2">abc</pre></td>
+		<td><pre class="code2">\B</pre></td>
+		<td><pre class="code2">splitString("abc", "$\\B")</pre></td>
+		<td><pre class="code2">["a", "b", "c"]</pre></td>
+	</tr>
+	<tr>
+		<td><pre class="code2">abacba</pre></td>
+		<td><pre class="code2">(?<=a)b(?=a)</pre></td>
+		<td><pre class="code2">splitString("abacba", "$(?<=a)b(?=a)")</pre></td>
+		<td><pre class="code2">["a", "acba"]</pre></td>
+	</tr>
+</table>
+
+<h3>Parsing files</h3>
+
+<pre class="code3">
+// table.csv
+// a;b&crarr;
+// c;d&crarr;
+
+const file = readTextFile("table.csv")
+rows       = splitString(file, "\n")
+headers    = splitString(rows[0], ";")
+
+Lot --> print(rows)     // (3)[a;b,c;d,]
+        print(headers)  // (2)[a,b]
+</pre>
+
+<p class="foot">Copyright &copy;2008-2019 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
+
+</div>
+</body>
+</html>

@@ -8,13 +8,6 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
-<link href="navtree.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="resize.js"></script>
-<script type="text/javascript" src="navtree.js"></script>
-<script type="text/javascript">
-  $(document).ready(initResizable);
-  $(window).load(resizeHeight);
-</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/search.js"></script>
 <script type="text/javascript">
@@ -31,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="esri_prt_55px.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Esri Procedural Runtime
-   &#160;<span id="projectnumber">1.10.4198</span>
+   &#160;<span id="projectnumber">2.0.5403</span>
    </div>
   </td>
  </tr>
@@ -73,21 +66,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespacemembers.html"><span>Namespace&#160;Members</span></a></li>
     </ul>
   </div>
-</div><!-- top -->
-<div id="side-nav" class="ui-resizable side-nav-resizable">
-  <div id="nav-tree">
-    <div id="nav-tree-contents">
-      <div id="nav-sync" class="sync"></div>
-    </div>
-  </div>
-  <div id="splitbar" style="-moz-user-select:none;" 
-       class="ui-resizable-handle">
-  </div>
-</div>
-<script type="text/javascript">
-$(document).ready(function(){initNavTree('namespaceprtx_1_1_u_r_i_utils.html','');});
-</script>
-<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -102,6 +80,11 @@ $(document).ready(function(){initNavTree('namespaceprtx_1_1_u_r_i_utils.html',''
 </iframe>
 </div>
 
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceprtx.html">prtx</a></li><li class="navelem"><a class="el" href="namespaceprtx_1_1_u_r_i_utils.html">URIUtils</a></li>  </ul>
+</div>
+</div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#func-members">Functions</a>  </div>
@@ -109,11 +92,21 @@ $(document).ready(function(){initNavTree('namespaceprtx_1_1_u_r_i_utils.html',''
 <div class="title">prtx::URIUtils Namespace Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<table class="memberdecls">
+<a name="details" id="details"></a><h2 class="groupheader">Description</h2>
+<div class="textblock"><p>A collection of utility functions which create or operate on <a class="el" href="classprtx_1_1_u_r_i.html">prtx::URI</a> instances. </p>
+</div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:a8d67b1cf120fd2128a33bcbdebb7bf5c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceprtx.html#a2f661d48bd64c0c84f0e66fcbcba51e5">URIPtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprtx_1_1_u_r_i_utils.html#a8d67b1cf120fd2128a33bcbdebb7bf5c">addFragment</a> (const <a class="el" href="namespaceprtx.html#a2f661d48bd64c0c84f0e66fcbcba51e5">URIPtr</a> &amp;uri, const std::wstring &amp;key, const std::wstring &amp;value)</td></tr>
+<tr class="separator:a8d67b1cf120fd2128a33bcbdebb7bf5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0485adb09f3ddfbf00497d3a653079a1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceprtx.html#a2f661d48bd64c0c84f0e66fcbcba51e5">URIPtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprtx_1_1_u_r_i_utils.html#a0485adb09f3ddfbf00497d3a653079a1">addFragment</a> (const <a class="el" href="namespaceprtx.html#a2f661d48bd64c0c84f0e66fcbcba51e5">URIPtr</a> &amp;uri, const std::map&lt; std::wstring, std::wstring &gt; &amp;fragments)</td></tr>
+<tr class="separator:a0485adb09f3ddfbf00497d3a653079a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac0db7f4491572546f178decd26ba4a73"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceprtx.html#a2f661d48bd64c0c84f0e66fcbcba51e5">URIPtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprtx_1_1_u_r_i_utils.html#ac0db7f4491572546f178decd26ba4a73">addFragment</a> (const <a class="el" href="namespaceprtx.html#a2f661d48bd64c0c84f0e66fcbcba51e5">URIPtr</a> &amp;uri, const std::wstring &amp;fragment)</td></tr>
+<tr class="separator:ac0db7f4491572546f178decd26ba4a73"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af51629ad70a1b337d5f1a4af0da7b3af"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceprtx.html#a2f661d48bd64c0c84f0e66fcbcba51e5">URIPtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprtx_1_1_u_r_i_utils.html#af51629ad70a1b337d5f1a4af0da7b3af">addQuery</a> (const <a class="el" href="namespaceprtx.html#a2f661d48bd64c0c84f0e66fcbcba51e5">URIPtr</a> &amp;uri, const std::wstring &amp;key, const std::wstring &amp;value)</td></tr>
 <tr class="separator:af51629ad70a1b337d5f1a4af0da7b3af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac6105bd3aaa266a4111185cb9c208716"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceprtx.html#a2f661d48bd64c0c84f0e66fcbcba51e5">URIPtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprtx_1_1_u_r_i_utils.html#ac6105bd3aaa266a4111185cb9c208716">addQuery</a> (const <a class="el" href="namespaceprtx.html#a2f661d48bd64c0c84f0e66fcbcba51e5">URIPtr</a> &amp;uri, const std::map&lt; std::wstring, std::wstring &gt; &amp;queries)</td></tr>
+<tr class="separator:ac6105bd3aaa266a4111185cb9c208716"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad80ab42ceffa495191ef7c7bd848a5ae"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceprtx.html#a2f661d48bd64c0c84f0e66fcbcba51e5">URIPtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprtx_1_1_u_r_i_utils.html#ad80ab42ceffa495191ef7c7bd848a5ae">createBuiltinURI</a> (const std::wstring &amp;name)</td></tr>
 <tr class="separator:ad80ab42ceffa495191ef7c7bd848a5ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acf9abbed076d6a5ab68b9cfd5878f785"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceprtx.html#a2f661d48bd64c0c84f0e66fcbcba51e5">URIPtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprtx_1_1_u_r_i_utils.html#acf9abbed076d6a5ab68b9cfd5878f785">createCompositeURI</a> (const <a class="el" href="namespaceprtx.html#a2f661d48bd64c0c84f0e66fcbcba51e5">URIPtr</a> &amp;nestedURI, const std::wstring &amp;outerScheme, const std::wstring &amp;outerPath)</td></tr>
@@ -136,6 +129,8 @@ Functions</h2></td></tr>
 <tr class="separator:ad805721d1a7b5647b0981fb8fe212043"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5e19b857c52fc88fbab18c4d2cf6effe"><td class="memItemLeft" align="right" valign="top">std::wstring&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprtx_1_1_u_r_i_utils.html#a5e19b857c52fc88fbab18c4d2cf6effe">percentEncode</a> (const std::wstring &amp;s)</td></tr>
 <tr class="separator:a5e19b857c52fc88fbab18c4d2cf6effe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a42f1f82582b7a1375697d513441e4aff"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceprtx.html#a2f661d48bd64c0c84f0e66fcbcba51e5">URIPtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprtx_1_1_u_r_i_utils.html#a42f1f82582b7a1375697d513441e4aff">removeFragment</a> (const <a class="el" href="namespaceprtx.html#a2f661d48bd64c0c84f0e66fcbcba51e5">URIPtr</a> &amp;uri)</td></tr>
+<tr class="separator:a42f1f82582b7a1375697d513441e4aff"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a83543cfe5b67025b514db5ce4d8459a7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceprtx.html#a2f661d48bd64c0c84f0e66fcbcba51e5">URIPtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprtx_1_1_u_r_i_utils.html#a83543cfe5b67025b514db5ce4d8459a7">removeQuery</a> (const <a class="el" href="namespaceprtx.html#a2f661d48bd64c0c84f0e66fcbcba51e5">URIPtr</a> &amp;uri)</td></tr>
 <tr class="separator:a83543cfe5b67025b514db5ce4d8459a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3997ca016b3c6203f1923168a167c4c1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceprtx.html#a2f661d48bd64c0c84f0e66fcbcba51e5">URIPtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprtx_1_1_u_r_i_utils.html#a3997ca016b3c6203f1923168a167c4c1">replaceExtension</a> (const <a class="el" href="namespaceprtx.html#a2f661d48bd64c0c84f0e66fcbcba51e5">URIPtr</a> &amp;uri, const std::wstring &amp;newExtWithSep)</td></tr>
@@ -143,9 +138,97 @@ Functions</h2></td></tr>
 <tr class="memitem:a1405c32410f562864b9d47922c916031"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceprtx.html#a2f661d48bd64c0c84f0e66fcbcba51e5">URIPtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprtx_1_1_u_r_i_utils.html#a1405c32410f562864b9d47922c916031">replaceFilename</a> (const <a class="el" href="namespaceprtx.html#a2f661d48bd64c0c84f0e66fcbcba51e5">URIPtr</a> &amp;uri, const std::wstring &amp;newFileName)</td></tr>
 <tr class="separator:a1405c32410f562864b9d47922c916031"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>A collection of utility functions which create or operate on <a class="el" href="classprtx_1_1_u_r_i.html">prtx::URI</a> instances. </p>
-</div><h2 class="groupheader">Function Documentation</h2>
+<h2 class="groupheader">Function Documentation</h2>
+<a class="anchor" id="a8d67b1cf120fd2128a33bcbdebb7bf5c"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceprtx.html#a2f661d48bd64c0c84f0e66fcbcba51e5">URIPtr</a> prtx::URIUtils::addFragment </td>
+          <td>(</td>
+          <td class="paramtype">const URIPtr &amp;&#160;</td>
+          <td class="paramname"><em>uri</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::wstring &amp;&#160;</td>
+          <td class="paramname"><em>key</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::wstring &amp;&#160;</td>
+          <td class="paramname"><em>value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Appends to the fragment part in the form "[&amp;]key=value" and returns a new <a class="el" href="classprtx_1_1_u_r_i.html">URI</a> instance.</p>
+<p>Note: Key and value must be UTF-16 encoded and not contain percent-encoded characters. </p>
+
+</div>
+</div>
+<a class="anchor" id="a0485adb09f3ddfbf00497d3a653079a1"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceprtx.html#a2f661d48bd64c0c84f0e66fcbcba51e5">URIPtr</a> prtx::URIUtils::addFragment </td>
+          <td>(</td>
+          <td class="paramtype">const URIPtr &amp;&#160;</td>
+          <td class="paramname"><em>uri</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::map&lt; std::wstring, std::wstring &gt; &amp;&#160;</td>
+          <td class="paramname"><em>fragments</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Appends to the fragment part in the form "[&amp;]key=value" and returns a new <a class="el" href="classprtx_1_1_u_r_i.html">URI</a> instance.</p>
+<p>Note: The map entries are used as key and value and must be UTF-16 encoded and not contain percent-encoded characters. </p>
+
+</div>
+</div>
+<a class="anchor" id="ac0db7f4491572546f178decd26ba4a73"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceprtx.html#a2f661d48bd64c0c84f0e66fcbcba51e5">URIPtr</a> prtx::URIUtils::addFragment </td>
+          <td>(</td>
+          <td class="paramtype">const URIPtr &amp;&#160;</td>
+          <td class="paramname"><em>uri</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::wstring &amp;&#160;</td>
+          <td class="paramname"><em>fragment</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Appends a complete fragment of the form "key=value[&amp;key1=value1&amp;...]" and returns a new <a class="el" href="classprtx_1_1_u_r_i.html">URI</a> instance.</p>
+<p>Note: The fragment string must be UTF-16 encoded and not contain percent-encoded characters. </p>
+
+</div>
+</div>
 <a class="anchor" id="af51629ad70a1b337d5f1a4af0da7b3af"></a>
 <div class="memitem">
 <div class="memproto">
@@ -177,6 +260,34 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>Appends to the query part in the form "[&amp;]key=value" and returns a new <a class="el" href="classprtx_1_1_u_r_i.html">URI</a> instance.</p>
 <p>Note: Key and value must be UTF-16 encoded and not contain percent-encoded characters. </p>
+
+</div>
+</div>
+<a class="anchor" id="ac6105bd3aaa266a4111185cb9c208716"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceprtx.html#a2f661d48bd64c0c84f0e66fcbcba51e5">URIPtr</a> prtx::URIUtils::addQuery </td>
+          <td>(</td>
+          <td class="paramtype">const URIPtr &amp;&#160;</td>
+          <td class="paramname"><em>uri</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::map&lt; std::wstring, std::wstring &gt; &amp;&#160;</td>
+          <td class="paramname"><em>queries</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Appends to the query part in the form "[&amp;]key=value" and returns a new <a class="el" href="classprtx_1_1_u_r_i.html">URI</a> instance.</p>
+<p>Note: The map entries are used as key and value and must be UTF-16 encoded and not contain percent-encoded characters. </p>
 
 </div>
 </div>
@@ -528,6 +639,23 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a42f1f82582b7a1375697d513441e4aff"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceprtx.html#a2f661d48bd64c0c84f0e66fcbcba51e5">URIPtr</a> prtx::URIUtils::removeFragment </td>
+          <td>(</td>
+          <td class="paramtype">const URIPtr &amp;&#160;</td>
+          <td class="paramname"><em>uri</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Returns a copy of the <a class="el" href="classprtx_1_1_u_r_i.html">URI</a> with the the whole fragment component removed. If uri does not contain any fragment component, it is returned as-is. </p>
+
+</div>
+</div>
 <a class="anchor" id="a83543cfe5b67025b514db5ce4d8459a7"></a>
 <div class="memitem">
 <div class="memproto">
@@ -602,15 +730,11 @@ Functions</h2></td></tr>
 </div>
 </div>
 </div><!-- contents -->
-</div><!-- doc-content -->
 <!-- start footer part -->
-<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
-  <ul>
-    <li class="navelem"><a class="el" href="namespaceprtx.html">prtx</a></li><li class="navelem"><a class="el" href="namespaceprtx_1_1_u_r_i_utils.html">URIUtils</a></li>
-    <li class="footer">Generated on Tue Sep 25 2018 09:40:51 for Esri Procedural Runtime by
-    <a href="http://www.doxygen.org/index.html">
-    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.5 </li>
-  </ul>
-</div>
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue Apr 9 2019 11:56:31 for Esri Procedural Runtime by &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.5
+</small></address>
 </body>
 </html>

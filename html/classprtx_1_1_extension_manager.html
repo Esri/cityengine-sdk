@@ -8,13 +8,6 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
-<link href="navtree.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="resize.js"></script>
-<script type="text/javascript" src="navtree.js"></script>
-<script type="text/javascript">
-  $(document).ready(initResizable);
-  $(window).load(resizeHeight);
-</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/search.js"></script>
 <script type="text/javascript">
@@ -31,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="esri_prt_55px.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Esri Procedural Runtime
-   &#160;<span id="projectnumber">1.10.4198</span>
+   &#160;<span id="projectnumber">2.0.5403</span>
    </div>
   </td>
  </tr>
@@ -75,21 +68,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
-</div><!-- top -->
-<div id="side-nav" class="ui-resizable side-nav-resizable">
-  <div id="nav-tree">
-    <div id="nav-tree-contents">
-      <div id="nav-sync" class="sync"></div>
-    </div>
-  </div>
-  <div id="splitbar" style="-moz-user-select:none;" 
-       class="ui-resizable-handle">
-  </div>
-</div>
-<script type="text/javascript">
-$(document).ready(function(){initNavTree('classprtx_1_1_extension_manager.html','');});
-</script>
-<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -104,6 +82,11 @@ $(document).ready(function(){initNavTree('classprtx_1_1_extension_manager.html',
 </iframe>
 </div>
 
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceprtx.html">prtx</a></li><li class="navelem"><a class="el" href="classprtx_1_1_extension_manager.html">ExtensionManager</a></li>  </ul>
+</div>
+</div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="classprtx_1_1_extension_manager-members.html">List of all members</a> &#124;
@@ -130,6 +113,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a53f51cd6419b01db98af0f26c565ccfd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a109c6664a53ebba97ece3097efab5bef"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classprt_1_1_encoder_info.html">prt::EncoderInfo</a> const *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_extension_manager.html#a109c6664a53ebba97ece3097efab5bef">createEncoderInfo</a> (const std::wstring &amp;id) const =0</td></tr>
 <tr class="separator:a109c6664a53ebba97ece3097efab5bef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad7028adb9238e7123b02bd20ffb936de"><td class="memItemLeft" align="right" valign="top">virtual ResolveMapProviderPtr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_extension_manager.html#ad7028adb9238e7123b02bd20ffb936de">createResolveMapProvider</a> (const <a class="el" href="namespaceprtx.html#a2f661d48bd64c0c84f0e66fcbcba51e5">prtx::URIPtr</a> &amp;uri) const =0</td></tr>
+<tr class="separator:ad7028adb9238e7123b02bd20ffb936de"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a28593c0c8e3353a4a8052e461272ea24"><td class="memItemLeft" align="right" valign="top">virtual StreamAdaptorPtr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_extension_manager.html#a28593c0c8e3353a4a8052e461272ea24">createStreamAdaptor</a> (const <a class="el" href="namespaceprtx.html#a2f661d48bd64c0c84f0e66fcbcba51e5">prtx::URIPtr</a> &amp;uri) const =0</td></tr>
 <tr class="separator:a28593c0c8e3353a4a8052e461272ea24"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a53eabb740508e4491d58f2a89a070106"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a53eabb740508e4491d58f2a89a070106"></a>
@@ -155,14 +140,16 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><b>setInstance</b
 <tr class="separator:a44653d67a6042672c7f5bdbee8bd682c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>The PRT plugin (extension) manager. This class is used as a singleton, see <a class="el" href="classprtx_1_1_extension_manager.html#a8a8c3f3befafd05f80995c151a57807e">instance()</a>. Its main use case is the creation of Adaptors, Decoders and Encoders based on their extension IDs and URIs.</p>
+<div class="textblock"><p>The PRT plugin (extension) manager. This class is used as a singleton, see <a class="el" href="classprtx_1_1_extension_manager.html#a8a8c3f3befafd05f80995c151a57807e">instance()</a>. Its main use case is the creation of StreamAdaptors, ResolveMapProviders, Decoders and Encoders based on their extension IDs and URIs.</p>
 <dl class="section see"><dt>See Also</dt><dd><a class="el" href="classprtx_1_1_extension.html">prtx::Extension</a> </dd>
 <dd>
 <a class="el" href="classprtx_1_1_encoder.html">prtx::Encoder</a> </dd>
 <dd>
 <a class="el" href="classprtx_1_1_decoder.html">prtx::Decoder</a> </dd>
 <dd>
-<a class="el" href="classprtx_1_1_adaptor.html">prtx::Adaptor</a> </dd></dl>
+<a class="el" href="classprtx_1_1_stream_adaptor.html">prtx::StreamAdaptor</a> </dd>
+<dd>
+<a class="el" href="classprtx_1_1_resolve_map_provider.html">prtx::ResolveMapProvider</a> </dd></dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a class="anchor" id="ac64bbc446ff2604bcdd6f83b3b00bae9"></a>
 <div class="memitem">
@@ -185,7 +172,7 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><b>setInstance</b
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Registers an extension factory class. Use this member function to register any custom extensions. Factories will be released on PRT shutdown (i.e. on destruction of the PRT license handle, see <a class="el" href="namespaceprt.html#a389d6191a10c5ae7dfc86dcce24c311d">prt::init</a>).</p>
+<p>Registers an extension factory class. Use this member function to register any custom extensions. Factories will be released on PRT shutdown (i.e. on destruction of the PRT license handle, see <a class="el" href="namespaceprt.html#ac11b9812a98def24f4ad792bf5be2371">prt::init</a>).</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">factory</td><td>The instance of the factory to register. Ownership is transferred to the <a class="el" href="classprtx_1_1_extension_manager.html">ExtensionManager</a>. </td></tr>
@@ -379,6 +366,38 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><b>setInstance</b
 
 </div>
 </div>
+<a class="anchor" id="ad7028adb9238e7123b02bd20ffb936de"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual ResolveMapProviderPtr prtx::ExtensionManager::createResolveMapProvider </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="namespaceprtx.html#a2f661d48bd64c0c84f0e66fcbcba51e5">prtx::URIPtr</a> &amp;&#160;</td>
+          <td class="paramname"><em>uri</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Create a resolve map provider which matches the <a class="el" href="classprtx_1_1_u_r_i.html">URI</a>. If multiple resolve map providers can handle the <a class="el" href="classprtx_1_1_u_r_i.html">URI</a> the one with the highest merit is returned.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">uri</td><td>The uri which the resolve map provider must be able to handle. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A shared pointer to the new resolve map provider instance. </dd></dl>
+
+</div>
+</div>
 <a class="anchor" id="a28593c0c8e3353a4a8052e461272ea24"></a>
 <div class="memitem">
 <div class="memproto">
@@ -400,14 +419,14 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><b>setInstance</b
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Create a stream adaptor which matches the <a class="el" href="classprtx_1_1_u_r_i.html">URI</a>. If multiple adaptors can handle the <a class="el" href="classprtx_1_1_u_r_i.html">URI</a> the one with the highest merit is returned.</p>
+<p>Create a stream adaptor which matches the <a class="el" href="classprtx_1_1_u_r_i.html">URI</a>. If multiple stream adaptors can handle the <a class="el" href="classprtx_1_1_u_r_i.html">URI</a> the one with the highest merit is returned.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">uri</td><td>The uri which the adaptor must be able to handle. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">uri</td><td>The uri which the stream adaptor must be able to handle. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>A shared pointer to the new adaptor instance. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>A shared pointer to the new stream adaptor instance. </dd></dl>
 
 </div>
 </div>
@@ -489,15 +508,11 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><b>setInstance</b
 <li><a class="el" href="_extension_manager_8h_source.html">ExtensionManager.h</a></li>
 </ul>
 </div><!-- contents -->
-</div><!-- doc-content -->
 <!-- start footer part -->
-<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
-  <ul>
-    <li class="navelem"><a class="el" href="namespaceprtx.html">prtx</a></li><li class="navelem"><a class="el" href="classprtx_1_1_extension_manager.html">ExtensionManager</a></li>
-    <li class="footer">Generated on Tue Sep 25 2018 09:40:51 for Esri Procedural Runtime by
-    <a href="http://www.doxygen.org/index.html">
-    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.5 </li>
-  </ul>
-</div>
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue Apr 9 2019 11:56:31 for Esri Procedural Runtime by &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.5
+</small></address>
 </body>
 </html>

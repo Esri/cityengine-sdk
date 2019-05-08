@@ -8,13 +8,6 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
-<link href="navtree.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="resize.js"></script>
-<script type="text/javascript" src="navtree.js"></script>
-<script type="text/javascript">
-  $(document).ready(initResizable);
-  $(window).load(resizeHeight);
-</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/search.js"></script>
 <script type="text/javascript">
@@ -31,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="esri_prt_55px.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Esri Procedural Runtime
-   &#160;<span id="projectnumber">1.10.4198</span>
+   &#160;<span id="projectnumber">2.0.5403</span>
    </div>
   </td>
  </tr>
@@ -72,21 +65,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="files.html"><span>File&#160;List</span></a></li>
     </ul>
   </div>
-</div><!-- top -->
-<div id="side-nav" class="ui-resizable side-nav-resizable">
-  <div id="nav-tree">
-    <div id="nav-tree-contents">
-      <div id="nav-sync" class="sync"></div>
-    </div>
-  </div>
-  <div id="splitbar" style="-moz-user-select:none;" 
-       class="ui-resizable-handle">
-  </div>
-</div>
-<script type="text/javascript">
-$(document).ready(function(){initNavTree('_encode_preparator_8h_source.html','');});
-</script>
-<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -101,13 +79,18 @@ $(document).ready(function(){initNavTree('_encode_preparator_8h_source.html','')
 </iframe>
 </div>
 
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_f4d0b50486959f5b523ec02356ccf9e2.html">prtx</a></li>  </ul>
+</div>
+</div><!-- top -->
 <div class="header">
   <div class="headertitle">
 <div class="title">EncodePreparator.h</div>  </div>
 </div><!--header-->
 <div class="contents">
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">  COPYRIGHT (c) 2012-2018 Esri R&amp;D Center Zurich</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">  COPYRIGHT (c) 2012-2019 Esri R&amp;D Center Zurich</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">  TRADE SECRETS: ESRI PROPRIETARY AND CONFIDENTIAL</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">  Unpublished material - all rights reserved under the</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">  Copyright Laws of the United States and applicable international</span></div>
@@ -429,7 +412,7 @@ $(document).ready(function(){initNavTree('_encode_preparator_8h_source.html','')
 <div class="ttc" id="structprtx_1_1_hole_processor_html_a0574b2cb10749ba92314b05a5f52f032aee5c516502420a76faa9660d68281ac0"><div class="ttname"><a href="structprtx_1_1_hole_processor.html#a0574b2cb10749ba92314b05a5f52f032aee5c516502420a76faa9660d68281ac0">prtx::HoleProcessor::TRIANGULATE_FACES_WITH_HOLES</a></div><div class="ttdoc">Faces with holes will be triangulated. </div><div class="ttdef"><b>Definition:</b> EncodePreparator.h:60</div></div>
 <div class="ttc" id="namespaceprtx_html_acfbb1262ed21fac2e362179f92993c81"><div class="ttname"><a href="namespaceprtx.html#acfbb1262ed21fac2e362179f92993c81">prtx::DoubleVector</a></div><div class="ttdeci">std::vector&lt; double &gt; DoubleVector</div><div class="ttdoc">vector of double </div><div class="ttdef"><b>Definition:</b> Types.h:32</div></div>
 <div class="ttc" id="structprtx_1_1_hole_processor_html_a0574b2cb10749ba92314b05a5f52f032a7cc143e66ce6a9fe39eea26207d1623f"><div class="ttname"><a href="structprtx_1_1_hole_processor.html#a0574b2cb10749ba92314b05a5f52f032a7cc143e66ce6a9fe39eea26207d1623f">prtx::HoleProcessor::CONVERT_HOLES_TO_FACES</a></div><div class="ttdoc">Holes will be converted to regular faces. </div><div class="ttdef"><b>Definition:</b> EncodePreparator.h:62</div></div>
-<div class="ttc" id="namespaceprtx_html_ad9a3abc5331b1d26abd6344f333a1295"><div class="ttname"><a href="namespaceprtx.html#ad9a3abc5331b1d26abd6344f333a1295">prtx::MaterialPtr</a></div><div class="ttdeci">std::shared_ptr&lt; Material &gt; MaterialPtr</div><div class="ttdoc">shared Material pointer </div><div class="ttdef"><b>Definition:</b> DataBackend.h:43</div></div>
+<div class="ttc" id="namespaceprtx_html_ad9a3abc5331b1d26abd6344f333a1295"><div class="ttname"><a href="namespaceprtx.html#ad9a3abc5331b1d26abd6344f333a1295">prtx::MaterialPtr</a></div><div class="ttdeci">std::shared_ptr&lt; Material &gt; MaterialPtr</div><div class="ttdoc">shared Material pointer </div><div class="ttdef"><b>Definition:</b> DataBackend.h:44</div></div>
 <div class="ttc" id="structprtx_1_1_hole_processor_html_a0574b2cb10749ba92314b05a5f52f032ad825e1a466beea202b68f659472e5d4b"><div class="ttname"><a href="structprtx_1_1_hole_processor.html#a0574b2cb10749ba92314b05a5f52f032ad825e1a466beea202b68f659472e5d4b">prtx::HoleProcessor::DELETE_HOLES</a></div><div class="ttdoc">Any holes will be deleted. </div><div class="ttdef"><b>Definition:</b> EncodePreparator.h:61</div></div>
 <div class="ttc" id="classprtx_1_1_encode_preparator_1_1_preparation_flags_html_a96855c329760c6162aca2e824b869f62"><div class="ttname"><a href="classprtx_1_1_encode_preparator_1_1_preparation_flags.html#a96855c329760c6162aca2e824b869f62">prtx::EncodePreparator::PreparationFlags::IndexSharing</a></div><div class="ttdeci">IndexSharing</div><div class="ttdef"><b>Definition:</b> EncodePreparator.h:396</div></div>
 <div class="ttc" id="structprtx_1_1_vertex_normal_processor_html_adc6143060777d55047c4ecef45a13a98"><div class="ttname"><a href="structprtx_1_1_vertex_normal_processor.html#adc6143060777d55047c4ecef45a13a98">prtx::VertexNormalProcessor::Action</a></div><div class="ttdeci">Action</div><div class="ttdef"><b>Definition:</b> EncodePreparator.h:46</div></div>
@@ -441,7 +424,7 @@ $(document).ready(function(){initNavTree('_encode_preparator_8h_source.html','')
 <div class="ttc" id="namespaceprtx_html_a837126da564c8ec570fcd42c79d71624"><div class="ttname"><a href="namespaceprtx.html#a837126da564c8ec570fcd42c79d71624">prtx::GeometryPtr</a></div><div class="ttdeci">std::shared_ptr&lt; Geometry &gt; GeometryPtr</div><div class="ttdoc">shared Geometry pointer </div><div class="ttdef"><b>Definition:</b> DebugUtils.h:37</div></div>
 <div class="ttc" id="classprt_1_1_simple_output_callbacks_html"><div class="ttname"><a href="classprt_1_1_simple_output_callbacks.html">prt::SimpleOutputCallbacks</a></div><div class="ttdef"><b>Definition:</b> Callbacks.h:229</div></div>
 <div class="ttc" id="classprt_1_1_cache_html"><div class="ttname"><a href="classprt_1_1_cache.html">prt::Cache</a></div><div class="ttdef"><b>Definition:</b> Cache.h:53</div></div>
-<div class="ttc" id="namespaceprtx_html_aa6c11702b7730c359cfaa80bb4ef8d2a"><div class="ttname"><a href="namespaceprtx.html#aa6c11702b7730c359cfaa80bb4ef8d2a">prtx::MaterialPtrVector</a></div><div class="ttdeci">std::vector&lt; MaterialPtr &gt; MaterialPtrVector</div><div class="ttdoc">vector of shared Material pointers </div><div class="ttdef"><b>Definition:</b> DataBackend.h:44</div></div>
+<div class="ttc" id="namespaceprtx_html_aa6c11702b7730c359cfaa80bb4ef8d2a"><div class="ttname"><a href="namespaceprtx.html#aa6c11702b7730c359cfaa80bb4ef8d2a">prtx::MaterialPtrVector</a></div><div class="ttdeci">std::vector&lt; MaterialPtr &gt; MaterialPtrVector</div><div class="ttdoc">vector of shared Material pointers </div><div class="ttdef"><b>Definition:</b> DataBackend.h:45</div></div>
 <div class="ttc" id="structprtx_1_1_vertex_normal_processor_html_adc6143060777d55047c4ecef45a13a98af0772d91fa5dc02303ce9c9b9a3e0ab6"><div class="ttname"><a href="structprtx_1_1_vertex_normal_processor.html#adc6143060777d55047c4ecef45a13a98af0772d91fa5dc02303ce9c9b9a3e0ab6">prtx::VertexNormalProcessor::SET_ALL_TO_FACE_NORMALS</a></div><div class="ttdoc">All vertex normals will be replaced with the corresponding face normal. </div><div class="ttdef"><b>Definition:</b> EncodePreparator.h:50</div></div>
 <div class="ttc" id="structprtx_1_1_vertex_normal_processor_html_adc6143060777d55047c4ecef45a13a98ae0bf234e73960fc9e9419488bf58b63a"><div class="ttname"><a href="structprtx_1_1_vertex_normal_processor.html#adc6143060777d55047c4ecef45a13a98ae0bf234e73960fc9e9419488bf58b63a">prtx::VertexNormalProcessor::PASS</a></div><div class="ttdoc">The vertex normals are not modified. </div><div class="ttdef"><b>Definition:</b> EncodePreparator.h:47</div></div>
 <div class="ttc" id="namespaceprtx_html_ae498291eedf7bb693154ad40acda74d0"><div class="ttname"><a href="namespaceprtx.html#ae498291eedf7bb693154ad40acda74d0">prtx::ShapePtr</a></div><div class="ttdeci">std::shared_ptr&lt; Shape &gt; ShapePtr</div><div class="ttdoc">shared pointer to a Shape </div><div class="ttdef"><b>Definition:</b> Shape.h:36</div></div>
@@ -454,17 +437,13 @@ $(document).ready(function(){initNavTree('_encode_preparator_8h_source.html','')
 <div class="ttc" id="classprtx_1_1_reports_html"><div class="ttname"><a href="classprtx_1_1_reports.html">prtx::Reports</a></div><div class="ttdef"><b>Definition:</b> EncodePreparator.h:89</div></div>
 <div class="ttc" id="structprtx_1_1_vertex_normal_processor_html_adc6143060777d55047c4ecef45a13a98aef1b61a8fe3a2b5256653fab8721d9e2"><div class="ttname"><a href="structprtx_1_1_vertex_normal_processor.html#adc6143060777d55047c4ecef45a13a98aef1b61a8fe3a2b5256653fab8721d9e2">prtx::VertexNormalProcessor::DELETE_NORMALS</a></div><div class="ttdoc">The vertex normals are deleted. </div><div class="ttdef"><b>Definition:</b> EncodePreparator.h:48</div></div>
 <div class="ttc" id="classprtx_1_1_encode_preparator_html_a3851fbecbcaea1ece14e355a90877ecd"><div class="ttname"><a href="classprtx_1_1_encode_preparator.html#a3851fbecbcaea1ece14e355a90877ecd">prtx::EncodePreparator::MeshProperties</a></div><div class="ttdeci">MeshProperties</div><div class="ttdef"><b>Definition:</b> EncodePreparator.h:294</div></div>
-<div class="ttc" id="classprtx_1_1_material_builder_html"><div class="ttname"><a href="classprtx_1_1_material_builder.html">prtx::MaterialBuilder</a></div><div class="ttdef"><b>Definition:</b> Material.h:235</div></div>
+<div class="ttc" id="classprtx_1_1_material_builder_html"><div class="ttname"><a href="classprtx_1_1_material_builder.html">prtx::MaterialBuilder</a></div><div class="ttdef"><b>Definition:</b> Material.h:278</div></div>
 </div><!-- fragment --></div><!-- contents -->
-</div><!-- doc-content -->
 <!-- start footer part -->
-<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
-  <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_f4d0b50486959f5b523ec02356ccf9e2.html">prtx</a></li><li class="navelem"><b>EncodePreparator.h</b></li>
-    <li class="footer">Generated on Tue Sep 25 2018 09:40:51 for Esri Procedural Runtime by
-    <a href="http://www.doxygen.org/index.html">
-    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.5 </li>
-  </ul>
-</div>
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue Apr 9 2019 11:56:30 for Esri Procedural Runtime by &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.5
+</small></address>
 </body>
 </html>

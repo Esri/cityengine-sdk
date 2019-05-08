@@ -1,0 +1,739 @@
+<html>
+
+<head>
+<title>Material Shape Attribute</title>
+<link rel="stylesheet" href="../manual_style.css" type="text/css" />
+</head>
+
+<body>
+<div class="content"><!-- HEADER (use only on bookchapters) -->
+
+<table summary="" class="header">
+  <tr>
+    <td align="left" class="helphead_l"><a href="../toc.html">
+    <div class="helplink">&nbsp;</div>
+    </a></td>
+    <td align="right" class="helphead_r"></td>
+  </tr>
+</table>
+
+<!-- CONTENT -->
+
+<h1>Material Shape Attributes</h1>
+
+<p class="text">The material shape attributes control the shading, texturing
+and export of the shape's geometry. CityEngine supports ten texture
+channels with a fixed semantic.</p>
+
+<p class="info">All of
+these attributes can be changed using the <a href="op_set.html">set</a> shape
+operation. You can use the <a href="op_print.html">print</a> operation to output
+the value of a certain material attribute, eg. <span class="inlinedcode">print(material.colormap.r)</span>.</p>
+
+<h2>Synopsis</h2>
+<table class="twocol">
+  <thead>
+    <th class="params">Attribute</th>
+    <th class="params">Description</th>
+  </thead>
+  <tr>
+    <td><pre class="code2"><a name="name"></a>string material.name</pre></td>
+    <td>The name of the material.</td>
+  </tr>  
+  <tr>
+    <td><pre class="code2"><a name="shader"></a>string material.shader</pre></td>
+    <td>The shader name.<br>
+    Default is "CityEngineShader". Setting it to "CityEnginePBRShader" signals that the physically-based rendering attributes should be used, see <a href="#PBRMaterialAttributes">below.</a></td>
+  </tr>  
+  <tr>
+    <td><pre class="code2"><a name="color"></a>float material.color.{r|g|b}</pre></td>
+    <td>Diffuse color. Individual access to each color component. Default is white. <a href="attr_material_color.html">More details.</a></td>
+  </tr>  
+  <tr>
+    <td><pre class="code2">string material.color.rgb</pre></td>
+    <td>Diffuse color. Access to the complete color as hex-formatted string, eg. <span class="inlinedcode">RED = "#ff0000"</span>. <a href="attr_material_color.html">More details.</a></td>
+  </tr>  
+  <tr>
+    <td><pre class="code2"><a name="ambient"></a>float material.ambient.{r|g|b}</pre></td>
+    <td>Ambient color. Individual access to each color component. Default is black.</td>
+  </tr>  
+  <tr>
+    <td><pre class="code2"><a name="specular"></a>float material.specular.{r|g|b}</pre></td>
+    <td>Specular color. Individual access to each color component. Default is black.</td>
+  </tr>  
+  <tr>
+    <td><pre class="code2"><a name="emissive"></a>float material.emissive{r|g|b}</pre></td>
+    <td><p>Emissive color. Individual access to each color component. Default is black.</p></td>
+  </tr>
+  <tr>
+    <td><pre class="code2"><a name="opacity"></a>float material.opacity</pre></td>
+    <td>Opacity factor. 1 is fully opaque, 0 is fully transparent. Default is 1.</td>
+  </tr>  
+  <tr>
+    <td><pre class="code2"><a name="reflectivity"></a>float material.reflectivity</pre></td>
+    <td>Reflectivity factor. 0 is no reflection, 1 is full reflection (of the Reflection Map set in the <a href="../manual/ui/layer_light.html">Panorama Settings</a>). Note that reflection depends on the specular color: the default black color means no reflection!</td>
+  </tr>  
+  <tr>
+    <td><pre class="code2"><a name="shininess"></a>float material.shininess</pre></td>
+    <td>Phong specular exponent in the range [0, 128].</td>
+  </tr>
+  <tr>
+    <td><pre class="code2"><a name="bumpValue"></a>float material.bumpValue</pre></td>
+    <td><p>Controls the bump scaling factor (if material.bumpmap is set).</p></td>
+  </tr>
+  
+  <tr>
+    <td><pre class="code2"><a name="metallic"></a>float material.metallic<pre></td>
+    <td><p>Controls the metallic factor (if material.metallicmap is set). 0 is a dielectric material, 1 is a metallic material. Default is 0.</p></td>
+  </tr>
+  <tr>
+    <td><pre class="code2"><a name="roughness"></a>float material.roughness<pre></td>
+    <td><p>Controls the roughness factor (if material.roughnessmap is set). 0 is a completely smooth material, 1 is a completely rough material. Default is 1.</p></td>
+  </tr>
+  <tr>
+    <td>
+    	<pre class="code2"><a name="colormap"></a>string material.colormap</pre>
+    	<pre class="code2"><a name="bumpmap"></a>string material.bumpmap</pre>
+        <pre class="code2"><a name="dirtmap"></a>string material.dirtmap</pre>
+        <pre class="code2"><a name="specularmap"></a>string material.specularmap</pre>
+        <pre class="code2"><a name="opacitymap"></a>string material.opacitymap</pre>
+        <pre class="code2"><a name="normalmap"></a>string material.normalmap</pre>
+        <pre class="code2"><a name="emissivemap"></a>string material.emissivemap</pre>
+        <pre class="code2"><a name="occlusionmap"></a>string material.occlusionmap</pre>
+        <pre class="code2"><a name="roughnessmap"></a>string material.roughnessmap</pre>
+        <pre class="code2"><a name="metallicmap"></a>string material.metallicmap</pre>
+   </td>
+    <td>Texture file paths for the texture channels. <a href="attr_material_map.html">More details.</a></td>
+  </tr>  
+  <tr>
+    <td><pre class="code2">float material.{colormap|...|metallicmap}.s{u|v}</pre></td>
+    <td>Per-channel texture scaling factors.</td>
+  </tr>  
+  <tr>
+    <td><pre class="code2">float material.{colormap|...|metallicmap}.t{u|v}</pre></td>
+    <td>Per-channel texture translation factors.</td>
+  </tr>  
+  <tr>
+    <td><pre class="code2">float material.{colormap|...|metallicmap}.rw</pre></td>
+    <td>Per-channel texture rotation factors. The texture is rotated around the w-axis (w is the cross product of u and v).</td>
+  </tr>  
+    <tr>
+    <td><pre class="code2">string material.opacitymap.mode</pre></td>
+    <td>Controls how the opacitymap is combined with the colormap. Valid values are "blend", "mask" and "opaque". Default is "blend".</td>
+  </tr>  
+
+</table>
+
+ <h2 id="PBRMaterialAttributes">PBR Material Attributes</h2>
+ <p>Some material attributes are designed to be exclusively used for physically-based rendering shaders. These are:
+	<ul>
+	 	<li><pre class="code2">material.emissivemap</pre></li>
+ 		<li><pre class="code2">material.occlusionmap</pre></li>
+ 		<li><pre class="code2">material.roughnessmap</pre></li>
+ 		<li><pre class="code2">material.metallicmap</pre></li>
+ 		<li><pre class="code2">material.emissive</pre></li>
+ 		<li><pre class="code2">material.metallic</pre></li>
+ 		<li><pre class="code2">material.roughness</pre></li>
+   </ul>
+ 
+ If the shader name is set to "CityEnginePBRShader", encoders which support PBR materials use those attributes as well as the
+	<ul>
+		<li><pre class="code2">material.color</pre></li>
+ 		<li><pre class="code2">material.colormap</pre></li>
+  	    <li><pre class="code2">material.opacity</pre></li>
+   	    <li><pre class="code2">material.opacitymap</pre></li>
+ 		<li><pre class="code2">material.normalmap</pre></li>
+   </ul>
+ attributes.
+ </p>
+ 
+
+ <a name="RenderingAndExport"></a><h2>Rendering and Export</h2>
+<p>For asset preview, importing and exporting the generated
+	models, the material attributes need to be mapped to and from the
+	respective format. The following table shows what format implements
+	which feature. Please note that this table only lists the formats
+	relevant for CGA, not general CityEngine.</p>
+
+
+<table class="twocol" cellpadding="3">
+  <thead>
+    <th class="params">Material&nbsp;Attribute</th>
+    <th class="params">Asset Preview</th>
+    <th class="params" colspan="4">Import</th>
+    <th class="params" colspan="11">Export</th>
+  </thead>
+  <thead>
+    <th class="params" />
+    <th class="params" />
+ 	<!-- read -->
+    <th class="params">Khronos Collada</th>
+    <th class="params">Wavefront OBJ</th>
+    <th class="params">Autodesk FBX</th>
+    <th class="params">Khronos glTF</th>
+    <!-- write -->
+    <th class="params">Khronos Collada</th>
+    <th class="params">Autodesk FBX</th>
+    <th class="params">Wavefront OBJ</th>
+    <th class="params">SceneLayer Package (i3s)</th>
+    <th class="params">Alembic</th>
+    <th class="params">CityEngine WebScene</th>
+    <th class="params">Unreal Datasmith</th>
+    <th class="params">Khronos glTF</th>
+    <th class="params">RenderMan</th>
+    <th class="params">Vue</th>
+    <th class="params">FileGDB</th>
+  </thead>
+  <thead>
+    <th class="params" />
+    <th class="params" />
+ 	<!-- read -->
+    <th class="params">.dae/.kml/.kmz</th>
+    <th class="params">.obj</th>
+    <th class="params">.fbx</th>
+    <th class="params">.gltf/.bin/.glb</th>
+    <!-- write -->
+    <th class="params">.dae/.kml/.kmz</th>
+    <th class="params">.fbx</th>
+    <th class="params">.obj</th>
+    <th class="params">.slpk</th>
+    <th class="params">.abc</th>
+    <th class="params">.3ws</th>
+    <th class="params">.udatasmith</th>
+    <th class="params">.gltf/.bin/.glb</th>
+    <th class="params">.rib</th>
+    <th class="params">.vob</th>
+    <th class="params">.gdb</th>
+  </thead>
+  <tr>
+    <td>name</td>
+    <td><span style="color:red;">&#10008;</span></td><!-- Preview -->
+    <td><span style="color:green;">&#10004;</span></td><!-- DAE  read -->
+    <td><span style="color:green;">&#10004;</span></td><!-- OBJ  read -->
+    <td><span style="color:green;">&#10004;</span></td><!-- FBX  read -->
+    <td><span style="color:green;">&#10004;</span></td><!-- glTF read -->
+    <td><span style="color:green;">&#10004;</span></td><!-- DAE  write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- FBX  write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- OBJ  write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- SLPK write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- ABC  write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- 3WS  write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- DS   write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- GLTF write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- RIB  write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- VOB  write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- GDB  write -->
+  </tr>
+  <tr>
+    <td>shader</td>
+    <td><span style="color:red;">&#10008;</span></td><!-- Preview -->
+    <td><span style="color:red;">&#10008;</span></td><!-- DAE  read -->
+    <td><span style="color:red;">&#10008;</span></td><!-- OBJ  read -->
+    <td><span style="color:red;">&#10008;</span></td><!-- FBX  read -->
+    <td><span style="color:red;">&#10008;</span></td><!-- glTF read -->
+    <td><span style="color:red;">&#10008;</span></td><!-- DAE  write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- FBX  write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- OBJ  write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- SLPK write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- ABC  write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- 3WS  write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- DS   write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- GLTF write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- RIB  write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- VOB  write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- GDB  write -->
+  </tr>
+  <tr>
+    <td>color</td>
+    <td><span style="color:green;">&#10004;</span> (2)</td><!-- Preview -->
+    <td><span style="color:green;">&#10004;</span> (1)</td><!-- DAE  read -->
+    <td><span style="color:green;">&#10004;</span></td>    <!-- OBJ  read -->
+    <td><span style="color:green;">&#10004;</span></td>    <!-- FBX  read -->
+    <td><span style="color:green;">&#10004;</span></td>    <!-- glTF read -->
+    <td><span style="color:green;">&#10004;</span> (1)</td><!-- DAE  write -->
+    <td><span style="color:green;">&#10004;</span></td>    <!-- FBX  write -->
+    <td><span style="color:green;">&#10004;</span></td>    <!-- OBJ  write -->
+    <td><span style="color:green;">&#10004;</span></td>    <!-- SLPK write -->
+    <td><span style="color:green;">&#10004;</span></td>    <!-- ABC  write -->
+    <td><span style="color:green;">&#10004;</span></td>    <!-- 3WS  write -->
+    <td><span style="color:green;">&#10004;</span></td>    <!-- DS   write -->
+    <td><span style="color:green;">&#10004;</span></td>    <!-- GLTF write -->
+    <td><span style="color:green;">&#10004;</span></td>    <!-- RIB  write -->
+    <td><span style="color:green;">&#10004;</span></td>    <!-- VOB  write -->
+    <td><span style="color:green;">&#10004;</span></td>    <!-- GDB  write -->
+  </tr>
+  <tr>
+    <td>ambient</td>
+    <td><span style="color:green;">&#10004;</span></td><!-- Preview -->
+    <td><span style="color:green;">&#10004;</span></td><!-- DAE  read -->
+    <td><span style="color:green;">&#10004;</span></td><!-- OBJ  read -->
+    <td><span style="color:green;">&#10004;</span></td><!-- FBX  read -->
+    <td><span style="color:red;">&#10008;</span></td><!-- glTF read -->
+    <td><span style="color:green;">&#10004;</span></td><!-- DAE  write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- FBX  write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- OBJ  write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- SLPK write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- ABC  write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- 3WS  write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- DS   write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- GLTF write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- RIB  write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- VOB  write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- GDB  write -->
+  </tr>
+  <tr>
+    <td>specular</td>
+    <td><span style="color:green;">&#10004;</span></td><!-- Preview -->
+    <td><span style="color:green;">&#10004;</span></td><!-- DAE  read -->
+    <td><span style="color:green;">&#10004;</span></td><!-- OBJ  read -->
+    <td><span style="color:green;">&#10004;</span></td><!-- FBX  read -->
+    <td><span style="color:red;">&#10008;</span></td><!-- glTF read -->
+    <td><span style="color:green;">&#10004;</span></td><!-- DAE  write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- FBX  write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- OBJ  write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- SLPK write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- ABC  write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- 3WS  write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- DS   write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- GLTF write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- RIB  write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- VOB  write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- GDB  write -->
+  </tr>
+  <tr>
+    <td>emissive</td>
+    <td><span style="color:red;">&#10008;</span></td><!-- Preview -->
+    <td><span style="color:red;">&#10008;</span></td><!-- DAE  read -->
+    <td><span style="color:red;">&#10008;</span></td><!-- OBJ  read-->
+    <td><span style="color:red;">&#10008;</span></td><!-- FBX  read -->
+    <td><span style="color:green;">&#10004;</span></td><!-- glTF read -->
+    <td><span style="color:red;">&#10008;</span></td><!-- DAE  write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- FBX  write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- OBJ  write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- SLPK write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- ABC  write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- 3WS  write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- DS   write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- GLTF write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- RIB  write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- VOB  write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- GDB  write -->
+  </tr>
+  <tr>
+    <td>opacity</td>
+    <td><span style="color:green;">&#10004;</span></td><!-- Preview -->
+    <td><span style="color:green;">&#10004;</span></td><!-- DAE  read -->
+    <td><span style="color:green;">&#10004;</span></td><!-- OBJ  read -->
+    <td><span style="color:green;">&#10004;</span></td><!-- FBX  read -->
+    <td><span style="color:green;">&#10004;</span></td><!-- glTF read -->
+    <td><span style="color:green;">&#10004;</span></td><!-- DAE  write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- FBX  write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- OBJ  write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- SLPK write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- ABC  write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- 3WS  write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- DS   write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- GLTF write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- RIB  write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- VOB  write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- GDB  write -->
+  </tr>  
+  <tr>
+    <td>reflectivity</td>
+    <td><span style="color:green;">&#10004;</span></td><!-- Preview -->
+    <td><span style="color:green;">&#10004;</span></td><!-- DAE  read -->
+    <td><span style="color:green;">&#10004;</span></td><!-- OBJ  read -->
+    <td><span style="color:green;">&#10004;</span></td><!-- FBX  read -->
+    <td><span style="color:red;">&#10008;</span></td><!-- glTF read -->
+    <td><span style="color:green;">&#10004;</span></td><!-- DAE  write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- FBX  write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- OBJ  write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- SLPK write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- ABC  write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- 3WS  write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- DS   write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- GLTF write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- RIB  write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- VOB  write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- GDB  write -->
+  </tr>
+  <tr>
+    <td>shininess</td>
+    <td><span style="color:green;">&#10004;</span></td><!-- Preview -->
+    <td><span style="color:green;">&#10004;</span></td><!-- DAE read -->
+    <td><span style="color:green;">&#10004;</span></td><!-- OBJ read -->
+    <td><span style="color:green;">&#10004;</span></td><!-- FBX read -->
+    <td><span style="color:red;">&#10008;</span></td><!-- glTF read -->
+    <td><span style="color:green;">&#10004;</span></td><!-- DAE -->
+    <td><span style="color:green;">&#10004;</span></td><!-- FBX -->
+    <td><span style="color:green;">&#10004;</span></td><!-- OBJ -->
+    <td><span style="color:green;">&#10004;</span></td><!-- SLPK write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- ABC  write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- 3WS  write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- DS   write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- GLTF write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- RIB -->
+    <td><span style="color:green;">&#10004;</span></td><!-- VOB -->
+    <td><span style="color:red;">&#10008;</span></td><!-- GDB -->
+  </tr>
+  <tr>
+    <td>bumpValue</td>
+    <td><span style="color:green;">&#10004;</span></td><!-- Preview -->
+    <td><span style="color:green;">&#10004;</span></td><!-- DAE  read -->
+    <td><span style="color:green;">&#10004;</span></td><!-- OBJ  read -->
+    <td><span style="color:red;">&#10008;</span></td><!-- FBX  read -->
+    <td><span style="color:red;">&#10008;</span></td><!-- glTF read -->
+    <td><span style="color:green;">&#10004;</span></td><!-- DAE  write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- FBX  write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- OBJ  write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- SLPK write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- ABC  write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- 3WS  write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- DS   write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- GLTF write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- RIB  write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- VOB  write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- GDB  write -->
+  </tr>
+  <tr>
+    <td>metallic</td>
+    <td><span style="color:red;">&#10008;</span></td><!-- Preview -->
+    <td><span style="color:red;">&#10008;</span></td><!-- DAE  read -->
+    <td><span style="color:red;">&#10008;</span></td><!-- OBJ  read-->
+    <td><span style="color:red;">&#10008;</span></td><!-- FBX  read -->
+    <td><span style="color:green;">&#10004;</span></td><!-- glTF read -->
+    <td><span style="color:red;">&#10008;</span></td><!-- DAE  write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- FBX  write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- OBJ  write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- SLPK write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- ABC  write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- 3WS  write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- DS   write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- GLTF write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- RIB  write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- VOB  write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- GDB  write -->
+  </tr>
+  <tr>
+    <td>roughness</td>
+    <td><span style="color:red;">&#10008;</span></td><!-- Preview -->
+    <td><span style="color:red;">&#10008;</span></td><!-- DAE  read -->
+    <td><span style="color:red;">&#10008;</span></td><!-- OBJ  read-->
+    <td><span style="color:red;">&#10008;</span></td><!-- FBX  read -->
+    <td><span style="color:green;">&#10004;</span></td><!-- glTF read -->
+    <td><span style="color:red;">&#10008;</span></td><!-- DAE  write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- FBX  write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- OBJ  write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- SLPK write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- ABC  write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- 3WS  write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- DS   write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- GLTF write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- RIB  write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- VOB  write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- GDB  write -->
+  </tr>
+  <tr>
+    <td>colormap</td>
+    <td><span style="color:green;">&#10004;</span> (2)</td><!-- Preview -->
+    <td><span style="color:green;">&#10004;</span> (1)</td><!-- DAE  read -->
+    <td><span style="color:green;">&#10004;</span></td>    <!-- OBJ  read -->
+    <td><span style="color:green;">&#10004;</span></td>    <!-- FBX  read -->
+    <td><span style="color:green;">&#10004;</span></td>    <!-- glTF read -->
+    <td><span style="color:green;">&#10004;</span> (1)</td><!-- DAE  write -->
+    <td><span style="color:green;">&#10004;</span></td>    <!-- FBX  write -->
+    <td><span style="color:green;">&#10004;</span></td>    <!-- OBJ  write -->
+    <td><span style="color:green;">&#10004;</span></td>    <!-- SLPK write -->
+    <td><span style="color:green;">&#10004;</span></td>    <!-- ABC  write -->
+    <td><span style="color:green;">&#10004;</span></td>    <!-- 3WS  write -->
+    <td><span style="color:green;">&#10004;</span></td>    <!-- DS   write -->
+    <td><span style="color:green;">&#10004;</span></td>    <!-- GLTF write -->
+    <td><span style="color:green;">&#10004;</span></td>    <!-- RIB  write -->
+    <td><span style="color:green;">&#10004;</span></td>    <!-- VOB  write -->
+    <td><span style="color:green;">&#10004;</span></td>    <!-- GDB  write -->
+  </tr>
+  <tr>
+    <td>bumpmap</td>
+    <td><span style="color:green;">&#10004;</span></td><!-- Preview -->
+    <td><span style="color:green;">&#10004;</span></td><!-- DAE  read -->
+    <td><span style="color:green;">&#10004;</span></td><!-- OBJ  read -->
+    <td><span style="color:green;">&#10004;</span></td><!-- FBX  read -->
+    <td><span style="color:red;">&#10008;</span></td><!-- glTF read -->
+    <td><span style="color:green;">&#10004;</span></td><!-- DAE  read -->
+    <td><span style="color:green;">&#10004;</span></td><!-- FBX  read -->
+    <td><span style="color:green;">&#10004;</span></td><!-- OBJ  read -->
+    <td><span style="color:red;">&#10008;</span></td><!-- SLPK write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- ABC  write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- 3WS  write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- DS   write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- GLTF write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- RIB  write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- VOB  write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- GDB  write -->
+  </tr>
+  <tr>
+    <td>dirtmap</td>
+    <td><span style="color:green;">&#10004;</span> (2)</td><!-- Preview -->
+    <td><span style="color:green;">&#10004;</span></td>    <!-- DAE  read -->
+    <td><span style="color:red;">&#10008;</span></td>    <!-- OBJ  read -->
+    <td><span style="color:green;">&#10004;</span></td>    <!-- FBX  read -->
+    <td><span style="color:red;">&#10008;</span></td>    <!-- glTF read -->
+    <td><span style="color:green;">&#10004;</span></td>    <!-- DAE  write -->
+    <td><span style="color:green;">&#10004;</span></td>    <!-- FBX  write -->
+    <td><span style="color:red;">&#10008;</span></td>    <!-- OBJ  write -->
+    <td><span style="color:red;">&#10008;</span></td>    <!-- SLPK write -->
+    <td><span style="color:green;">&#10004;</span></td>    <!-- ABC  write -->
+    <td><span style="color:red;">&#10008;</span></td>    <!-- 3WS  write -->
+    <td><span style="color:green;">&#10004;</span></td>    <!-- DS   write -->
+    <td><span style="color:red;">&#10008;</span></td>    <!-- GLTF write -->
+    <td><span style="color:green;">&#10004;</span></td>    <!-- RIB  write -->
+    <td><span style="color:green;">&#10004;</span></td>    <!-- VOB  write -->
+    <td><span style="color:red;">&#10008;</span></td>    <!-- GDB  write -->
+  </tr>  
+  <tr>
+    <td>specularmap</td>
+    <td><span style="color:green;">&#10004;</span></td><!-- Preview -->
+    <td><span style="color:green;">&#10004;</span></td><!-- DAE  read -->
+    <td><span style="color:green;">&#10004;</span></td><!-- OBJ  read -->
+    <td><span style="color:green;">&#10004;</span></td><!-- FBX  read -->
+    <td><span style="color:red;">&#10008;</span></td><!-- glTF read -->
+    <td><span style="color:green;">&#10004;</span></td><!-- DAE  write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- FBX  write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- OBJ  write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- SLPK write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- ABC  write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- 3WS  write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- DS   write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- GLTF write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- RIB  write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- VOB  write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- GDB  write -->
+  </tr>  
+  <tr>
+    <td>opacitymap</td>
+    <td><span style="color:green;">&#10004;</span></td><!-- Preview -->
+    <td><span style="color:green;">&#10004;</span></td><!-- DAE  read -->
+    <td><span style="color:green;">&#10004;</span></td><!-- OBJ  read -->
+    <td><span style="color:green;">&#10004;</span></td><!-- FBX  read -->
+    <td><span style="color:green;">&#10004;</span></td><!-- glTF read -->
+    <td><span style="color:green;">&#10004;</span></td><!-- DAE  write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- FBX  write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- OBJ  write -->
+    <td><span style="color:green;">&#10004;</span> (3)</td><!-- SLPK write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- ABC  write -->
+    <td><span style="color:green;">&#10004;</span> (3)</td><!-- 3WS  write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- DS   write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- GLTF write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- RIB  write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- VOB  write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- GDB  write -->
+  </tr>  
+  <tr>
+    <td>opacitymap.mode</td>
+    <td><span style="color:red;">&#10008;</span></td><!-- Preview -->
+    <td><span style="color:red;">&#10008;</span></td><!-- DAE  read -->
+    <td><span style="color:red;">&#10008;</span></td><!-- OBJ  read -->
+    <td><span style="color:red;">&#10008;</span></td><!-- FBX  read -->
+    <td><span style="color:green;">&#10004;</span></td><!-- glTF read -->
+    <td><span style="color:red;">&#10008;</span></td><!-- DAE  write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- FBX  write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- OBJ  write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- SLPK write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- ABC  write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- 3WS  write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- DS   write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- GLTF write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- RIB  write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- VOB  write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- GDB  write -->
+  </tr>  
+  <tr>
+    <td>normalmap</td>
+    <td><span style="color:green;">&#10004;</span></td><!-- Preview -->
+    <td><span style="color:green;">&#10004;</span></td><!-- DAE  read -->
+    <td><span style="color:red;">&#10008;</span></td><!-- OBJ  read -->
+    <td><span style="color:green;">&#10004;</span></td><!-- FBX  read -->
+    <td><span style="color:green;">&#10004;</span></td><!-- glTF read -->
+    <td><span style="color:green;">&#10004;</span></td><!-- DAE  write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- FBX  write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- OBJ  write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- SLPK write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- ABC  write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- 3WS  write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- DS   write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- GLTF write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- RIB  write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- VOB  write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- GDB  write -->
+  </tr>
+  <tr>
+    <td>emissivemap</td>
+    <td><span style="color:red;">&#10008;</span></td><!-- Preview -->
+    <td><span style="color:red;">&#10008;</span></td><!-- DAE  read -->
+    <td><span style="color:red;">&#10008;</span></td><!-- OBJ  read-->
+    <td><span style="color:red;">&#10008;</span></td><!-- FBX  read -->
+    <td><span style="color:green;">&#10004;</span></td><!-- glTF read -->
+    <td><span style="color:red;">&#10008;</span></td><!-- DAE  write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- FBX  write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- OBJ  write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- SLPK write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- ABC  write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- 3WS  write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- DS   write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- GLTF write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- RIB  write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- VOB  write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- GDB  write -->
+  </tr>
+  <tr>
+    <td>occlusionmap</td>
+    <td><span style="color:red;">&#10008;</span></td><!-- Preview -->
+    <td><span style="color:red;">&#10008;</span></td><!-- DAE  read -->
+    <td><span style="color:red;">&#10008;</span></td><!-- OBJ  read-->
+    <td><span style="color:red;">&#10008;</span></td><!-- FBX  read -->
+    <td><span style="color:green;">&#10004;</span></td><!-- glTF read -->
+    <td><span style="color:red;">&#10008;</span></td><!-- DAE  write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- FBX  write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- OBJ  write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- SLPK write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- ABC  write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- 3WS  write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- DS   write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- GLTF write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- RIB  write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- VOB  write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- GDB  write -->
+  </tr>
+  <tr>
+    <td>roughnessmap</td>
+    <td><span style="color:red;">&#10008;</span></td><!-- Preview -->
+    <td><span style="color:red;">&#10008;</span></td><!-- DAE  read -->
+    <td><span style="color:red;">&#10008;</span></td><!-- OBJ  read-->
+    <td><span style="color:red;">&#10008;</span></td><!-- FBX  read -->
+    <td><span style="color:green;">&#10004;</span></td><!-- glTF read -->
+    <td><span style="color:red;">&#10008;</span></td><!-- DAE  write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- FBX  write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- OBJ  write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- SLPK write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- ABC  write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- 3WS  write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- DS   write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- GLTF write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- RIB  write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- VOB  write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- GDB  write -->
+  </tr>
+  <tr>
+    <td>metallicmap</td>
+    <td><span style="color:red;">&#10008;</span></td><!-- Preview -->
+    <td><span style="color:red;">&#10008;</span></td><!-- DAE  read -->
+    <td><span style="color:red;">&#10008;</span></td><!-- OBJ  read-->
+    <td><span style="color:red;">&#10008;</span></td><!-- FBX  read -->
+    <td><span style="color:green;">&#10004;</span></td><!-- glTF read -->
+    <td><span style="color:red;">&#10008;</span></td><!-- DAE  write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- FBX  write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- OBJ  write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- SLPK write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- ABC  write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- 3WS  write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- DS   write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- GLTF write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- RIB  write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- VOB  write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- GDB  write -->
+  </tr>
+  <tr>
+    <td>map.tu/.tv</td>
+    <td><span style="color:green;">&#10004;</span></td><!-- Preview -->
+    <td><span style="color:green;">&#10004;</span></td><!-- DAE  read -->
+    <td><span style="color:red;">&#10008;</span></td><!-- OBJ  read -->
+    <td><span style="color:green;">&#10004;</span></td><!-- FBX  read -->
+    <td><span style="color:red;">&#10008;</span></td><!-- glTF read -->
+    <td><span style="color:green;">&#10004;</span></td><!-- DAE  write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- FBX  write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- OBJ  write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- SLPK write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- ABC  write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- 3WS  write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- DS   write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- GLTF write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- RIB  write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- VOB  write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- GDB  write -->
+  </tr>  
+  <tr>
+    <td>map.su/.sv</td>
+    <td><span style="color:green;">&#10004;</span></td><!-- Preview -->
+    <td><span style="color:green;">&#10004;</span></td><!-- DAE  read -->
+    <td><span style="color:green;">&#10004;</span></td><!-- OBJ  read -->
+    <td><span style="color:green;">&#10004;</span></td><!-- FBX  read -->
+    <td><span style="color:red;">&#10008;</span></td><!-- glTF read -->
+    <td><span style="color:green;">&#10004;</span></td><!-- DAE  write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- FBX  write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- OBJ  write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- SLPK write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- ABC  write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- 3WS  write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- DS   write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- GLTF write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- RIB  write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- VOB  write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- GDB  write -->
+  </tr>
+  <tr>
+    <td>map.rw</td>
+    <td><span style="color:green;">&#10004;</span></td><!-- Preview -->
+    <td><span style="color:green;">&#10004;</span></td><!-- DAE  read -->
+    <td><span style="color:red;">&#10008;</span></td><!-- OBJ  read -->
+    <td><span style="color:green;">&#10004;</span></td><!-- FBX  read -->
+    <td><span style="color:red;">&#10008;</span></td><!-- glTF read -->
+    <td><span style="color:green;">&#10004;</span></td><!-- DAE  write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- FBX  write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- OBJ  write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- SLPK write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- ABC  write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- 3WS  write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- DS   write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- GLTF write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- RIB  write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- VOB  write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- GDB  write -->
+  </tr>
+</table>
+
+<h3>Remarks:</h3>
+<table>
+<tr><td>(1)</td><td>The official COLLADA standard does not support a diffuse solid color and a diffuse texture at the same time.</td></tr>
+<tr><td>(2)</td><td>In the CityEngine viewport, the colormap and dirtmap values are multiplied with the (diffuse) color.</td></tr>
+<tr><td>(3)</td><td>The opacitymap attribute is exported if it is pointing to the same image as the colormap attribute and if the image has an alpha channel.</td></tr>
+</table>
+
+<h2>Related</h2>
+
+<ul>
+	<li><a class="normw" href="op_set.html">set operation</a></li>
+	<li><a class="normw" href="op_setupProjection.html">setupProjection operation</a></li>
+	<li><a class="normw" href="op_projectUV.html">projectUV operation</a></li>
+	<li><a class="normw" href="op_print.html">print operation</a></li>
+	<li><a class="normw" href="cga_texturing.html">Texturing: Essential Knowledge</a></li>
+</ul>
+
+<h2>Example</h2>
+
+<pre class="code1"> 
+attr wallC       = "#FFFFFF"
+attr wallTexture = "facade/walls/wall.c.09.tif"
+attr dirtTexture = "dirtmaps/dirtmap.16.tif"
+...
+Wall --> 
+    primitiveCube() color(wallC)
+    set(material.colormap, wallTexture) projectUV(0)
+    set(material.dirtmap, dirtTexture) projectUV(2)
+</pre>
+
+<!-- FOOTER -->
+<p class="foot">Copyright &copy;2008-2019 Esri R&amp;D Center Zurich. All rights reserved.</p>                  
+
+</div>
+</body>
+</html>

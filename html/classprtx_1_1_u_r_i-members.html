@@ -8,13 +8,6 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
-<link href="navtree.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="resize.js"></script>
-<script type="text/javascript" src="navtree.js"></script>
-<script type="text/javascript">
-  $(document).ready(initResizable);
-  $(window).load(resizeHeight);
-</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/search.js"></script>
 <script type="text/javascript">
@@ -31,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="esri_prt_55px.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Esri Procedural Runtime
-   &#160;<span id="projectnumber">1.10.4198</span>
+   &#160;<span id="projectnumber">2.0.5403</span>
    </div>
   </td>
  </tr>
@@ -75,21 +68,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
-</div><!-- top -->
-<div id="side-nav" class="ui-resizable side-nav-resizable">
-  <div id="nav-tree">
-    <div id="nav-tree-contents">
-      <div id="nav-sync" class="sync"></div>
-    </div>
-  </div>
-  <div id="splitbar" style="-moz-user-select:none;" 
-       class="ui-resizable-handle">
-  </div>
-</div>
-<script type="text/javascript">
-$(document).ready(function(){initNavTree('classprtx_1_1_u_r_i.html','');});
-</script>
-<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -104,6 +82,11 @@ $(document).ready(function(){initNavTree('classprtx_1_1_u_r_i.html','');});
 </iframe>
 </div>
 
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceprtx.html">prtx</a></li><li class="navelem"><a class="el" href="classprtx_1_1_u_r_i.html">URI</a></li>  </ul>
+</div>
+</div><!-- top -->
 <div class="header">
   <div class="headertitle">
 <div class="title">prtx::URI Member List</div>  </div>
@@ -115,11 +98,13 @@ $(document).ready(function(){initNavTree('classprtx_1_1_u_r_i.html','');});
   <tr class="even"><td class="entry"><a class="el" href="classprtx_1_1_u_r_i.html#a8cad35fe40ef9537026131f4ee4222cc">create</a>()</td><td class="entry"><a class="el" href="classprtx_1_1_u_r_i.html">prtx::URI</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
   <tr><td class="entry"><a class="el" href="classprtx_1_1_u_r_i.html#a96ea4280f0878019f256f407dd01b107">create</a>(const std::wstring &amp;fullURI)</td><td class="entry"><a class="el" href="classprtx_1_1_u_r_i.html">prtx::URI</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="classprtx_1_1_u_r_i.html#ae1359e5e7fdfa438a884d6dbb0afa52e">DELIM_ENTRY</a></td><td class="entry"><a class="el" href="classprtx_1_1_u_r_i.html">prtx::URI</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
-  <tr><td class="entry"><a class="el" href="classprtx_1_1_u_r_i.html#a4e26aa715f74e7e5c1c8fca36dec0528">DELIM_QUERY_ITEM</a></td><td class="entry"><a class="el" href="classprtx_1_1_u_r_i.html">prtx::URI</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classprtx_1_1_u_r_i.html#a7fd8bf198bd715530514e598bbe73a17">DELIM_SCHEME</a></td><td class="entry"><a class="el" href="classprtx_1_1_u_r_i.html">prtx::URI</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
-  <tr><td class="entry"><a class="el" href="classprtx_1_1_u_r_i.html#a8cae29273c83efe324da21e8fbf4ac8d">getBaseName</a>() const =0</td><td class="entry"><a class="el" href="classprtx_1_1_u_r_i.html">prtx::URI</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classprtx_1_1_u_r_i.html#a3676f094276f26f6b794cec5de981c58">getExtension</a>() const =0</td><td class="entry"><a class="el" href="classprtx_1_1_u_r_i.html">prtx::URI</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
-  <tr><td class="entry"><a class="el" href="classprtx_1_1_u_r_i.html#a4b1d85574851e27bd9bd2680420d69e1">getFragment</a>() const =0</td><td class="entry"><a class="el" href="classprtx_1_1_u_r_i.html">prtx::URI</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
+  <tr><td class="entry"><a class="el" href="classprtx_1_1_u_r_i.html#adfec37fd9c439ae88299179129f983c0">DELIM_FRAGMENT_ITEM</a></td><td class="entry"><a class="el" href="classprtx_1_1_u_r_i.html">prtx::URI</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classprtx_1_1_u_r_i.html#a4e26aa715f74e7e5c1c8fca36dec0528">DELIM_QUERY_ITEM</a></td><td class="entry"><a class="el" href="classprtx_1_1_u_r_i.html">prtx::URI</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
+  <tr><td class="entry"><a class="el" href="classprtx_1_1_u_r_i.html#a7fd8bf198bd715530514e598bbe73a17">DELIM_SCHEME</a></td><td class="entry"><a class="el" href="classprtx_1_1_u_r_i.html">prtx::URI</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classprtx_1_1_u_r_i.html#a8cae29273c83efe324da21e8fbf4ac8d">getBaseName</a>() const =0</td><td class="entry"><a class="el" href="classprtx_1_1_u_r_i.html">prtx::URI</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
+  <tr><td class="entry"><a class="el" href="classprtx_1_1_u_r_i.html#a3676f094276f26f6b794cec5de981c58">getExtension</a>() const =0</td><td class="entry"><a class="el" href="classprtx_1_1_u_r_i.html">prtx::URI</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classprtx_1_1_u_r_i.html#a4b1d85574851e27bd9bd2680420d69e1">getFragment</a>() const =0</td><td class="entry"><a class="el" href="classprtx_1_1_u_r_i.html">prtx::URI</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
+  <tr><td class="entry"><a class="el" href="classprtx_1_1_u_r_i.html#a3d3e7d0d8fa296801c767e1f4e9a4640">getFragment</a>(const std::wstring &amp;key) const =0</td><td class="entry"><a class="el" href="classprtx_1_1_u_r_i.html">prtx::URI</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="classprtx_1_1_u_r_i.html#adbbc2c4a17e5c1079f70fc3542df808e">getHost</a>() const =0</td><td class="entry"><a class="el" href="classprtx_1_1_u_r_i.html">prtx::URI</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
   <tr><td class="entry"><a class="el" href="classprtx_1_1_u_r_i.html#acb930735fc93d556537e1ad2210539d9">getNativeFormat</a>() const =0</td><td class="entry"><a class="el" href="classprtx_1_1_u_r_i.html">prtx::URI</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="classprtx_1_1_u_r_i.html#a3e9fb9470691462f90fb650092eea2fd">getNestedURI</a>() const =0</td><td class="entry"><a class="el" href="classprtx_1_1_u_r_i.html">prtx::URI</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
@@ -127,8 +112,10 @@ $(document).ready(function(){initNavTree('classprtx_1_1_u_r_i.html','');});
   <tr class="even"><td class="entry"><a class="el" href="classprtx_1_1_u_r_i.html#a8f75564b9dc2f4f1300f147ac8af1f60">getQuery</a>() const =0</td><td class="entry"><a class="el" href="classprtx_1_1_u_r_i.html">prtx::URI</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
   <tr><td class="entry"><a class="el" href="classprtx_1_1_u_r_i.html#a8025bd6197007d2a9c925f5d2a3a3d48">getQuery</a>(const std::wstring &amp;key) const =0</td><td class="entry"><a class="el" href="classprtx_1_1_u_r_i.html">prtx::URI</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="classprtx_1_1_u_r_i.html#a4380be8c34fc876e46cb3efff021db42">getScheme</a>() const =0</td><td class="entry"><a class="el" href="classprtx_1_1_u_r_i.html">prtx::URI</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
-  <tr><td class="entry"><a class="el" href="classprtx_1_1_u_r_i.html#ad6d0779d90b6e0f114f4c07a2d23fb47">hasQuery</a>() const =0</td><td class="entry"><a class="el" href="classprtx_1_1_u_r_i.html">prtx::URI</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classprtx_1_1_u_r_i.html#a40678c585cdf947916ce8551b96cdabe">isComposite</a>() const =0</td><td class="entry"><a class="el" href="classprtx_1_1_u_r_i.html">prtx::URI</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
+  <tr><td class="entry"><a class="el" href="classprtx_1_1_u_r_i.html#a5479b24559b5514c62caa3db39603de1">hasFragment</a>() const =0</td><td class="entry"><a class="el" href="classprtx_1_1_u_r_i.html">prtx::URI</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classprtx_1_1_u_r_i.html#ad6d0779d90b6e0f114f4c07a2d23fb47">hasQuery</a>() const =0</td><td class="entry"><a class="el" href="classprtx_1_1_u_r_i.html">prtx::URI</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
+  <tr><td class="entry"><a class="el" href="classprtx_1_1_u_r_i.html#a40678c585cdf947916ce8551b96cdabe">isComposite</a>() const =0</td><td class="entry"><a class="el" href="classprtx_1_1_u_r_i.html">prtx::URI</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classprtx_1_1_u_r_i.html#a4d816d0a934e72fb7fbca9c10ca2c109">isFilePath</a>() const =0</td><td class="entry"><a class="el" href="classprtx_1_1_u_r_i.html">prtx::URI</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
   <tr><td class="entry"><a class="el" href="classprtx_1_1_u_r_i.html#a8b2136ba62ed9a879d2a921e8e809e42">isValid</a>() const =0</td><td class="entry"><a class="el" href="classprtx_1_1_u_r_i.html">prtx::URI</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
   <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>QUERY_TEXTURE_FORMAT</b> (defined in <a class="el" href="classprtx_1_1_u_r_i.html">prtx::URI</a>)</td><td class="entry"><a class="el" href="classprtx_1_1_u_r_i.html">prtx::URI</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
   <tr bgcolor="#f0f0f0"><td class="entry"><b>QUERY_TEXTURE_HEIGHT</b> (defined in <a class="el" href="classprtx_1_1_u_r_i.html">prtx::URI</a>)</td><td class="entry"><a class="el" href="classprtx_1_1_u_r_i.html">prtx::URI</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
@@ -143,19 +130,16 @@ $(document).ready(function(){initNavTree('classprtx_1_1_u_r_i.html','');});
   <tr class="even"><td class="entry"><a class="el" href="classprtx_1_1_u_r_i.html#ac30f58033158660e1245450b0baed8d9">SCHEME_UNC</a></td><td class="entry"><a class="el" href="classprtx_1_1_u_r_i.html">prtx::URI</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
   <tr><td class="entry"><a class="el" href="classprtx_1_1_u_r_i.html#aa6d3592dc0a0650ae9615c9a57fd2b3a">SCHEME_ZIP</a></td><td class="entry"><a class="el" href="classprtx_1_1_u_r_i.html">prtx::URI</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="classprtx_1_1_u_r_i.html#a51c27e1b2f3e595be1924ef02c3930eb">string</a>() const =0</td><td class="entry"><a class="el" href="classprtx_1_1_u_r_i.html">prtx::URI</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
-  <tr bgcolor="#f0f0f0"><td class="entry"><b>URI</b>() (defined in <a class="el" href="classprtx_1_1_u_r_i.html">prtx::URI</a>)</td><td class="entry"><a class="el" href="classprtx_1_1_u_r_i.html">prtx::URI</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">protected</span></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>URI</b>(const URI &amp;) (defined in <a class="el" href="classprtx_1_1_u_r_i.html">prtx::URI</a>)</td><td class="entry"><a class="el" href="classprtx_1_1_u_r_i.html">prtx::URI</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">protected</span></td></tr>
+  <tr bgcolor="#f0f0f0"><td class="entry"><b>URI</b>()=default (defined in <a class="el" href="classprtx_1_1_u_r_i.html">prtx::URI</a>)</td><td class="entry"><a class="el" href="classprtx_1_1_u_r_i.html">prtx::URI</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
+  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>URI</b>(const URI &amp;)=default (defined in <a class="el" href="classprtx_1_1_u_r_i.html">prtx::URI</a>)</td><td class="entry"><a class="el" href="classprtx_1_1_u_r_i.html">prtx::URI</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
   <tr><td class="entry"><a class="el" href="classprtx_1_1_u_r_i.html#a2af094fd04eadd9fceb8e0b10503de8b">wstring</a>() const =0</td><td class="entry"><a class="el" href="classprtx_1_1_u_r_i.html">prtx::URI</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>~URI</b>() (defined in <a class="el" href="classprtx_1_1_u_r_i.html">prtx::URI</a>)</td><td class="entry"><a class="el" href="classprtx_1_1_u_r_i.html">prtx::URI</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
+  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>~URI</b>()=default (defined in <a class="el" href="classprtx_1_1_u_r_i.html">prtx::URI</a>)</td><td class="entry"><a class="el" href="classprtx_1_1_u_r_i.html">prtx::URI</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
 </table></div><!-- contents -->
-</div><!-- doc-content -->
 <!-- start footer part -->
-<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
-  <ul>
-    <li class="footer">Generated on Tue Sep 25 2018 09:40:51 for Esri Procedural Runtime by
-    <a href="http://www.doxygen.org/index.html">
-    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.5 </li>
-  </ul>
-</div>
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue Apr 9 2019 11:56:31 for Esri Procedural Runtime by &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.5
+</small></address>
 </body>
 </html>

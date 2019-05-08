@@ -8,13 +8,6 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
-<link href="navtree.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="resize.js"></script>
-<script type="text/javascript" src="navtree.js"></script>
-<script type="text/javascript">
-  $(document).ready(initResizable);
-  $(window).load(resizeHeight);
-</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/search.js"></script>
 <script type="text/javascript">
@@ -31,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="esri_prt_55px.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Esri Procedural Runtime
-   &#160;<span id="projectnumber">1.10.4198</span>
+   &#160;<span id="projectnumber">2.0.5403</span>
    </div>
   </td>
  </tr>
@@ -75,21 +68,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
-</div><!-- top -->
-<div id="side-nav" class="ui-resizable side-nav-resizable">
-  <div id="nav-tree">
-    <div id="nav-tree-contents">
-      <div id="nav-sync" class="sync"></div>
-    </div>
-  </div>
-  <div id="splitbar" style="-moz-user-select:none;" 
-       class="ui-resizable-handle">
-  </div>
-</div>
-<script type="text/javascript">
-$(document).ready(function(){initNavTree('classprtx_1_1_u_r_i.html','');});
-</script>
-<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -104,6 +82,11 @@ $(document).ready(function(){initNavTree('classprtx_1_1_u_r_i.html','');});
 </iframe>
 </div>
 
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceprtx.html">prtx</a></li><li class="navelem"><a class="el" href="classprtx_1_1_u_r_i.html">URI</a></li>  </ul>
+</div>
+</div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="classprtx_1_1_u_r_i-members.html">List of all members</a> &#124;
@@ -126,6 +109,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a3676f094276f26f6b794cec5de981c58"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4b1d85574851e27bd9bd2680420d69e1"><td class="memItemLeft" align="right" valign="top">virtual const std::wstring &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_u_r_i.html#a4b1d85574851e27bd9bd2680420d69e1">getFragment</a> () const =0</td></tr>
 <tr class="separator:a4b1d85574851e27bd9bd2680420d69e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3d3e7d0d8fa296801c767e1f4e9a4640"><td class="memItemLeft" align="right" valign="top">virtual std::wstring&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_u_r_i.html#a3d3e7d0d8fa296801c767e1f4e9a4640">getFragment</a> (const std::wstring &amp;key) const =0</td></tr>
+<tr class="separator:a3d3e7d0d8fa296801c767e1f4e9a4640"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adbbc2c4a17e5c1079f70fc3542df808e"><td class="memItemLeft" align="right" valign="top">virtual const std::wstring &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_u_r_i.html#adbbc2c4a17e5c1079f70fc3542df808e">getHost</a> () const =0</td></tr>
 <tr class="separator:adbbc2c4a17e5c1079f70fc3542df808e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acb930735fc93d556537e1ad2210539d9"><td class="memItemLeft" align="right" valign="top">virtual std::wstring&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_u_r_i.html#acb930735fc93d556537e1ad2210539d9">getNativeFormat</a> () const =0</td></tr>
@@ -140,10 +125,14 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a8025bd6197007d2a9c925f5d2a3a3d48"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4380be8c34fc876e46cb3efff021db42"><td class="memItemLeft" align="right" valign="top">virtual const std::wstring &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_u_r_i.html#a4380be8c34fc876e46cb3efff021db42">getScheme</a> () const =0</td></tr>
 <tr class="separator:a4380be8c34fc876e46cb3efff021db42"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5479b24559b5514c62caa3db39603de1"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_u_r_i.html#a5479b24559b5514c62caa3db39603de1">hasFragment</a> () const =0</td></tr>
+<tr class="separator:a5479b24559b5514c62caa3db39603de1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad6d0779d90b6e0f114f4c07a2d23fb47"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_u_r_i.html#ad6d0779d90b6e0f114f4c07a2d23fb47">hasQuery</a> () const =0</td></tr>
 <tr class="separator:ad6d0779d90b6e0f114f4c07a2d23fb47"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a40678c585cdf947916ce8551b96cdabe"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_u_r_i.html#a40678c585cdf947916ce8551b96cdabe">isComposite</a> () const =0</td></tr>
 <tr class="separator:a40678c585cdf947916ce8551b96cdabe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4d816d0a934e72fb7fbca9c10ca2c109"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_u_r_i.html#a4d816d0a934e72fb7fbca9c10ca2c109">isFilePath</a> () const =0</td></tr>
+<tr class="separator:a4d816d0a934e72fb7fbca9c10ca2c109"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8b2136ba62ed9a879d2a921e8e809e42"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_u_r_i.html#a8b2136ba62ed9a879d2a921e8e809e42">isValid</a> () const =0</td></tr>
 <tr class="separator:a8b2136ba62ed9a879d2a921e8e809e42"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a51c27e1b2f3e595be1924ef02c3930eb"><td class="memItemLeft" align="right" valign="top">virtual std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_u_r_i.html#a51c27e1b2f3e595be1924ef02c3930eb">string</a> () const =0</td></tr>
@@ -164,6 +153,10 @@ Static Public Attributes</h2></td></tr>
 static const std::wstring&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_u_r_i.html#ae1359e5e7fdfa438a884d6dbb0afa52e">DELIM_ENTRY</a></td></tr>
 <tr class="memdesc:ae1359e5e7fdfa438a884d6dbb0afa52e"><td class="mdescLeft">&#160;</td><td class="mdescRight">composite/nested <a class="el" href="classprtx_1_1_u_r_i.html">URI</a> delimiting character '!' <br/></td></tr>
 <tr class="separator:ae1359e5e7fdfa438a884d6dbb0afa52e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adfec37fd9c439ae88299179129f983c0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="adfec37fd9c439ae88299179129f983c0"></a>
+static const std::wstring&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_u_r_i.html#adfec37fd9c439ae88299179129f983c0">DELIM_FRAGMENT_ITEM</a></td></tr>
+<tr class="memdesc:adfec37fd9c439ae88299179129f983c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">fragment item delimiting character '&amp;' <br/></td></tr>
+<tr class="separator:adfec37fd9c439ae88299179129f983c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4e26aa715f74e7e5c1c8fca36dec0528"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4e26aa715f74e7e5c1c8fca36dec0528"></a>
 static const std::wstring&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_u_r_i.html#a4e26aa715f74e7e5c1c8fca36dec0528">DELIM_QUERY_ITEM</a></td></tr>
 <tr class="memdesc:a4e26aa715f74e7e5c1c8fca36dec0528"><td class="mdescLeft">&#160;</td><td class="mdescRight">query item delimiting character '&amp;' <br/></td></tr>
@@ -210,7 +203,7 @@ static const std::wstring&#160;</td><td class="memItemRight" valign="bottom"><a 
 <tr class="separator:a7378d9e0711a923cf3349e86eaa3e7ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac30f58033158660e1245450b0baed8d9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac30f58033158660e1245450b0baed8d9"></a>
 static const std::wstring&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_u_r_i.html#ac30f58033158660e1245450b0baed8d9">SCHEME_UNC</a></td></tr>
-<tr class="memdesc:ac30f58033158660e1245450b0baed8d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">UNC scheme, e.g. \host syntax. <br/></td></tr>
+<tr class="memdesc:ac30f58033158660e1245450b0baed8d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">UNC scheme, e.g. \ syntax. <br/></td></tr>
 <tr class="separator:ac30f58033158660e1245450b0baed8d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa6d3592dc0a0650ae9615c9a57fd2b3a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa6d3592dc0a0650ae9615c9a57fd2b3a"></a>
 static const std::wstring&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_u_r_i.html#aa6d3592dc0a0650ae9615c9a57fd2b3a">SCHEME_ZIP</a></td></tr>
@@ -219,12 +212,12 @@ static const std::wstring&#160;</td><td class="memItemRight" valign="bottom"><a 
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:acfface30bf7dd5a41855afcfcb4165f9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acfface30bf7dd5a41855afcfcb4165f9"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>URI</b> (const <a class="el" href="classprtx_1_1_u_r_i.html">URI</a> &amp;)</td></tr>
-<tr class="separator:acfface30bf7dd5a41855afcfcb4165f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a756d8c0fa300254797dfebb572f68c5e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a756d8c0fa300254797dfebb572f68c5e"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>URI</b> (const <a class="el" href="classprtx_1_1_u_r_i.html">URI</a> &amp;)=default</td></tr>
+<tr class="separator:a756d8c0fa300254797dfebb572f68c5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p><a class="el" href="classprtx_1_1_u_r_i.html">URI</a> class based on RFC 3986. <a class="el" href="classprtx_1_1_u_r_i.html">URI</a> instances are immutable. See <a class="el" href="namespaceprtx_1_1_u_r_i_utils.html">prtx::URIUtils</a> namespace for factory member functions and operations on <a class="el" href="classprtx_1_1_u_r_i.html">URI</a>.</p>
+<div class="textblock"><p><a class="el" href="classprtx_1_1_u_r_i.html">URI</a> class based on RFC 3986. <a class="el" href="classprtx_1_1_u_r_i.html">URI</a> instances are immutable. See <a class="el" href="namespaceprtx_1_1_u_r_i_utils.html" title="A collection of utility functions which create or operate on prtx::URI instances. ...">prtx::URIUtils</a> namespace for factory member functions and operations on <a class="el" href="classprtx_1_1_u_r_i.html">URI</a>.</p>
 <p>The observer member functions return UTF-16 strings <em>without</em> percent-encoding if not stated otherwise. Additionally, all wchar_t/std::wstring arguments are encoded as UTF-16 if not stated otherwise.</p>
 <p>This class supports <a class="el" href="classprtx_1_1_u_r_i.html">URI</a> nesting inspired by the Java JAR syntax defined in: <a href="https://www.iana.org/assignments/uri-schemes/prov/jar">https://www.iana.org/assignments/uri-schemes/prov/jar</a></p>
 <p>Definitions:</p>
@@ -357,6 +350,37 @@ Protected Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 <p>Returns the fragment part (potentially an empty string). </p>
+
+</div>
+</div>
+<a class="anchor" id="a3d3e7d0d8fa296801c767e1f4e9a4640"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual std::wstring prtx::URI::getFragment </td>
+          <td>(</td>
+          <td class="paramtype">const std::wstring &amp;&#160;</td>
+          <td class="paramname"><em>key</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Returns the fragment component specified by key or an empty string.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">key</td><td>If key is not empty, look for key=val part in fragment component and return val, else return empty string. Note: key must not contain percent-encoded characters. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -535,6 +559,30 @@ Protected Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a5479b24559b5514c62caa3db39603de1"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool prtx::URI::hasFragment </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Returns true if the fragment part has non-zero length. </p>
+
+</div>
+</div>
 <a class="anchor" id="ad6d0779d90b6e0f114f4c07a2d23fb47"></a>
 <div class="memitem">
 <div class="memproto">
@@ -580,6 +628,30 @@ Protected Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 <p>Returns true, if this <a class="el" href="classprtx_1_1_u_r_i.html">URI</a> contains a valid nested <a class="el" href="classprtx_1_1_u_r_i.html">URI</a>. Else, returns false. </p>
+
+</div>
+</div>
+<a class="anchor" id="a4d816d0a934e72fb7fbca9c10ca2c109"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool prtx::URI::isFilePath </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Returns true, if this <a class="el" href="classprtx_1_1_u_r_i.html">URI</a> is pointing to a file i.e. "file:/path/to/ff.ext" </p>
 
 </div>
 </div>
@@ -659,15 +731,11 @@ Protected Member Functions</h2></td></tr>
 <li><a class="el" href="_u_r_i_8h_source.html">URI.h</a></li>
 </ul>
 </div><!-- contents -->
-</div><!-- doc-content -->
 <!-- start footer part -->
-<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
-  <ul>
-    <li class="navelem"><a class="el" href="namespaceprtx.html">prtx</a></li><li class="navelem"><a class="el" href="classprtx_1_1_u_r_i.html">URI</a></li>
-    <li class="footer">Generated on Tue Sep 25 2018 09:40:51 for Esri Procedural Runtime by
-    <a href="http://www.doxygen.org/index.html">
-    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.5 </li>
-  </ul>
-</div>
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue Apr 9 2019 11:56:31 for Esri Procedural Runtime by &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.5
+</small></address>
 </body>
 </html>

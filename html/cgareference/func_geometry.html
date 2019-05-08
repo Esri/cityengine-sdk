@@ -1,0 +1,526 @@
+<html>
+
+<head>
+    <title>
+     geometry Functions
+    </title>
+    <link rel="stylesheet" href="../manual_style.css" type="text/css" /></head>
+
+<body>
+<div class="content">
+
+<!-- HEADER (use only on bookchapters) -->
+
+    <table summary="" class="header">
+        <tr>
+            <td align="left" class="helphead_l"><a href="../toc.html"><div class="helplink">&nbsp;</div></a></td>
+            <td align="right" class="helphead_r"></td>
+        </tr>
+    </table>
+
+<!-- CONTENT -->
+
+
+
+        <h1>
+        <a name="angle"></a>geometry.angle function        </h1>
+    <h2>Synopsis</h2>
+        <p class="code2">float geometry.angle(<span class="cga_opparam">angleSelector</span>)</p>
+
+        <h2>Parameters</h2>
+        <li><span class="cga_opparam">angleSelector</span><br>
+      Selector for the angle calculation. Valid selectors are:
+      <ul>
+        <li><span class="cga_opparam">maxSlope</span></li>Calculates the maximum slope of the shape, relative to the xz-plane, in degrees. <br>
+        <li><span class="cga_opparam">azimuth</span></li>Calculates the azimuth of the direction of the current shape's maximum slope, in degrees. <br>
+        <li><span class="cga_opparam">zenith</span></li>Calculates the difference between 90 degrees (zenith) and the maximum slope. <br>
+      </ul>
+        </li>
+         <h2>Returns</h2>
+         
+        <p>Angle of the current shape's geometry, depending on the selector, in degrees.</p>
+        <p class="info">
+      Azimuth is the horizontal angle measured clockwise from the north, i.e. 90 degrees is east, 180 degrees is south and 270 degrees is west. Azimuth is in the range [0, 360[.
+      <br>The geometry.angle(zenith) function returns the same value as ( 90 - geometry.angle(maxSlope) )</p>
+        
+ 
+  <h2>Examples </h2>
+    <img src="images/angle_maxSlope.jpg" alt="nada" width="298" ></td>
+    <pre class="code">Cone--&gt;
+    comp(f) { all : color(geometry.angle(maxSlope) / 90, 0.0, 0.0) Shape. }</pre>
+    <img src="images/angle_azimuth.jpg" alt="nada" width="298" ></td>
+    <pre class="code">Cone--&gt;
+    comp(f) { all : color(0.5, geometry.angle(azimuth) / 360, 0.5) Shape. }</pre>
+
+
+
+
+        <br><br><br><br><br>
+
+
+
+
+        <h1>
+        <a name="area"></a>geometry.area function        </h1>
+<h2>
+        Synopsis
+        </h2>
+        <p class="code2">float geometry.area()</p>
+        <p class="code2">float geometry.area(<span class="cga_opparam">areaSelector</span>)</p>
+
+        <h2>Parameters</h2>
+        <li><span class="cga_opparam">areaSelector</span><br>
+      Selector for the faces to include in the area calculation. Valid selectors are:
+      <ul>
+        <li>all/surface (default),</li>
+        <li>back, bottom, front, top, left, right, side,</li>
+        <li>object.front, object.back, object.bottom, object.top, object.left, object.right, object.side,</li>
+        <li>world.north, world.south, world.west, world.east, world.up, world.down, world.side,</li>
+        <li>street.front, street.back, street.right, street.left, street.side</li>
+      </ul>
+        </li>
+         <h2>Returns</h2>
+        <p>Surface area of the current shape's geometry, depending on the provided area selector.</p>
+        <p class="info">The surface area of the geometry is the sum of the area of all its faces.</p>
+        
+<br><br><br><br><br>
+
+<h1><a name="boundaryLength"></a>geometry.boundaryLength function</h1>
+<h2>Synopsis</h2>
+<p class="code2">float geometry.boundaryLength()</p>
+
+<h2>Returns</h2>
+<p class="content">The sum of all boundary edge lengths. An edge is considered a boundary edge if it belongs to no more than one face.</p>
+
+<h2>Related</h2>
+<ul>
+	<li><a class="normw" href="func_geometry.html#isClosedSurface">geometry.isClosedSurface function</a></li>
+</ul>
+
+<br><br><br><br><br>
+
+        <h1>
+        <a name="du"></a><a name="dv"></a>geometry.du/dv functions        </h1>
+<h2>
+        Synopsis
+        </h2>
+        <p class="code2">float geometry.du(float <span class="cga_opparam">uvSet, surfaceParameterization</span>)</p>
+        <p class="code2">float geometry.dv(float <span class="cga_opparam">uvSet, surfaceParameterization</span>)</p>
+        <h2>Parameters </h2>
+        <ul>
+	  	<li><span class="cga_opparam">uvSet</span><br>
+			Number of texture coordinates set (integer number in [0,9]). The
+			numbering corresponds to the texture layers of the <a href="attr_material.html">material attribute</a>, see also <a href="cga_texturing.html"> Texturing: Essential Knowledge</a>.
+  		</li>
+          <li> <span class="cga_opparam">surfaceParameterization</span> (selstr)<br>
+		  The surface parameter space: <span class="code_std">uvSpace</span> or <span class="code_std">unitSpace</span>. While <span class="code_std">uvSpace</span> selects the actual texture coordinates (typically in the range [0,1]), <span class="code_std">unitSpace</span> calculates the geometry-dependent surface stretch along the u- or v- axis and calculates an approximation in world coordinate units (e.g. meters).<br>
+        </ul>
+
+        <h2>
+        Returns</h2>
+		The range (i.e. max - min) spanned by the u- or the v-coordinate, respectively, of the selected uvset. 
+
+  <h2>
+        Related
+  </h2>
+  <ul>
+        <li>
+        <a class="normw" href="op_split.html">
+        split operation</a>        </li>
+  </ul>
+
+
+
+<br/><br/><br/><br/><br/>
+
+<h1 id="height">geometry.height function</h1>
+<h2>Synopsis</h2>
+<p class="code2">float geometry.height()</p>
+<h2>Returns</h2>
+<p class="content">The height of the geometry in world coordinates.</p>
+<h2>Related</h2>
+<ul>
+	<li><a class="normw" href="attr_scope.html">scope attribute</a></li>
+</ul>
+
+<br><br><br><br><br>
+		
+        <h1>
+        <a name="isClosedSurface"></a>geometry.isClosedSurface function
+        </h1>
+        <h2>
+        Synopsis
+        </h2>
+        <p class="code2">bool geometry.isClosedSurface()</p>
+
+
+         <h2>
+        Returns</h2>
+         <p class="content"><span class="cga_keyword">true</span> if the geometry contains at least one face and all edges belong to exactly 2 faces, <span class="cga_keyword">false</span> otherwise.</p>
+      <h2>
+        Related
+  </h2>
+  <ul>
+        <li>
+        <a class="normw" href="func_geometry.html#isConcave">
+        geometry.isConcave function</a>        </li>
+        <li>
+        <a class="normw" href="func_geometry.html#isRectangular">
+        geometry.isRectangular function</a>        </li>
+        <li>
+	    <a class="normw" href="func_geometry.html#isPlanar">
+        geometry.isPlanar function</a>        </li>
+  </ul>
+
+
+		<br><br><br><br><br>
+
+
+        <h1>
+        <a name="isConcave"></a>geometry.isConcave function
+        </h1>
+        <h2>
+        Synopsis
+        </h2>
+        <p class="code2">bool geometry.isConcave()</p>
+
+
+         <h2>
+        Returns</h2>
+         <p class="content"><span class="cga_keyword">true</span> if the geometry contains at least one concave face, <span class="cga_keyword">false</span> otherwise.</p>
+      <h2>
+        Related
+  </h2>
+  <ul>
+        <li>
+	    <a class="normw" href="func_geometry.html#isClosedSurface">
+        geometry.isClosedSurface function</a>        </li>
+        <li>
+        <a class="normw" href="func_geometry.html#isRectangular">
+        geometry.isRectangular function</a>        </li>
+        <li>
+	    <a class="normw" href="func_geometry.html#isPlanar">
+        geometry.isPlanar function</a>        </li>
+  </ul>
+
+
+
+
+
+		<br><br><br><br><br>
+        <h1>
+        <a name="isInstanced"></a>geometry.isInstanced function        </h1>
+    <h2>Synopsis</h2>
+        <p class="code2">bool geometry.isInstanced()</p>
+
+         <h2>Returns</h2>
+         
+        <p><span class="code_std">True</span> if the current shape's geometry is the instance of an asset, i.e. the geometry has not been altered since the <a class="normw" href="op_i.html">insert operation</a>, <span class="code_std">false</span> otherwise.</p>
+        <p class="info">The <span class="code_std">geometry.isInstanced()</span> function can be used to e.g. check if an inserted asset was trimmed.</p>
+
+
+        <h2>Related</h2>
+		<ul>
+			<li><a class="normw" href="op_i.html">insert operation</a></li>
+			<li><a class="normw" href="op_trim.html">trim operation</a></li>
+			<li><a class="normw" href="attr_trim.html">trim attribute</a></li>
+		</ul>
+
+
+        <br><br><br><br><br>
+
+
+
+
+
+        <h1>
+        <a name="isOriented"></a>geometry.isOriented function
+        </h1>
+        <h2>
+        Synopsis
+        </h2>
+        <p class="code2">bool geometry.isOriented(<span class="cga_opparam">orientationSelector</span>)</p>
+
+		<h2>Parameters</h2>
+		<li><span class="cga_opparam">orientationSelector</span><br>
+      Selector for the faces to check for. Valid selectors are:
+      <ul>
+      	<li>back, bottom, front, top, left, right, side,</li>
+      	<li>object.front,object.back,object.bottom,object.top,object.left,object.right,object.side,</li>
+      	<li>world.north,world.south,world.west,world.east,world.up,world.down,world.side</li>
+        <li>street.front, street.back, street.right, street.left, street.side</li>
+      </ul>
+    	</li>
+		
+         <h2>
+        Returns</h2>
+        <p><span class="code_std">True</span> if at least one of the geometry's faces matches the <span class="cga_opparam">orientationSelector</span>, 
+        <span class="code_std">false</span> otherwise.</p>
+        <p class="info">The <span class="code_std">geometry.isOriented</span> function can be used to determine a shape's orientation.</p>
+        
+        <h2>Related</h2>
+  <ul>
+        <li>
+        <a class="normw" href="op_comp.html">
+        comp operation</a>        </li>
+
+  </ul>
+
+
+		<br><br><br><br><br>
+
+
+
+        <h1>
+        <a name="isPlanar"></a>geometry.isPlanar function
+        </h1>
+        <h2>
+        Synopsis
+        </h2>
+        <p class="code2">bool geometry.isPlanar(float <span class="cga_opparam">tolerance</span>)</p>
+        <h2>Parameters </h2>
+        <ul>
+          <li><span class="cga_opparam">tolerance</span><br>
+          The tolerance in degrees for deciding if an face is planar or not. The face normal is compared to the edges' crossproduct (''local normal'') at every vertex; if the angle between a ''local normal'' and the face normal is larger than the tolerance the face is non-planar. A reasonable value is 0.25 degrees.</li>
+        </ul>
+        <h2>
+        Returns</h2>
+        <span class="cga_keyword">true</span> if the geometry contains at least one face and all faces of are planar (within <span class="cga_opparam">tolerance</span>), <span class="cga_keyword">false</span> otherwise.
+  
+  <h2>
+        Related
+  </h2>
+  <ul>
+        <li>
+	    <a class="normw" href="func_geometry.html#isClosedSurface">
+        geometry.isClosedSurface function</a>        </li>
+        <li>
+        <a class="normw" href="func_geometry.html#isConcave">
+        geometry.isConcave function</a>        </li>
+        <li>
+        <a class="normw" href="func_geometry.html#isRectangular">
+        geometry.isRectangular function</a>        </li>
+
+  </ul>
+
+
+		<br><br><br><br><br>
+
+
+
+        <h1>
+        <a name="isRectangular"></a>geometry.isRectangular function
+        </h1>
+        <h2>
+        Synopsis
+        </h2>
+        <p class="code2">bool geometry.isRectangular(float <span class="cga_opparam">tolerance</span>)</p>
+        <h2>Parameters </h2>
+        <ul>
+          <li><span class="cga_opparam">tolerance</span><br>
+          The tolerance in degrees for deciding if an angle is a right one or not. </li>
+        </ul>
+        <h2>
+        Returns</h2>
+         <p class="content"><span class="cga_keyword">true</span> if the geometry contains at least one face and all faces consist of 4 vertices and contain only right angles, <span class="cga_keyword">false</span> otherwise. Angles in the range [90-<span class="cga_opparam">tolerance</span>, 90+<span class="cga_opparam">tolerance</span>] are considered to be &quot;right&quot;.</p>  
+  <h2>
+        Related
+  </h2>
+  <ul>
+        <li>
+	    <a class="normw" href="func_geometry.html#isClosedSurface">
+        geometry.isClosedSurface function</a>        </li>
+        <li>
+        <a class="normw" href="func_geometry.html#isConcave">
+        geometry.isConcave function</a>        </li>
+        <li>
+	    <a class="normw" href="func_geometry.html#isPlanar">
+        geometry.isPlanar function</a>        </li>
+  </ul>
+
+
+		<br><br><br><br><br>
+
+
+        <h1>
+        <a name="nEdges"></a>geometry.nEdges function
+        </h1>
+        <h2>
+        Synopsis
+        </h2>
+        <p class="code2">float geometry.nEdges()</p>
+        <h2>Returns</h2>
+        <p class="content">The (integral) number of edges of the current shape's geometry.</p>
+         <p class="text">
+  
+  <h2>
+        Related
+  </h2>
+  <ul>
+        <li>
+        <a class="normw" href="func_geometry.html#nFaces">
+        geometry.nFaces function</a>        </li>
+        <li>
+        <a class="normw" href="func_geometry.html#nHoles">
+        geometry.nHoles function</a>        </li>
+        <li>
+        <a class="normw" href="func_geometry.html#nVertices">
+        geometry.nVertices function</a>        </li>
+  </ul>
+
+
+
+		<br><br><br><br>
+
+
+        <h1>
+        <a name="nFaces"></a>geometry.nFaces function
+        </h1>
+        <h2>
+        Synopsis
+        </h2>
+        <p class="code2">float geometry.nFaces()</p>
+        <h2>Returns</h2>
+        <p class="content">The (integral) number of faces of the current shape's geometry.</p>
+         <p class="text">
+  <h2>
+        Related
+  </h2>
+  <ul>
+        <li>
+        <a class="normw" href="func_geometry.html#nEdges">
+        geometry.nEdges function</a>        </li>
+        <li>
+        <a class="normw" href="func_geometry.html#nHoles">
+        geometry.nHoles function</a>        </li>
+        <li>
+        <a class="normw" href="func_geometry.html#nVertices">
+        geometry.nVertices function</a>        </li>
+
+  </ul>
+
+
+		<br><br><br><br>
+
+
+        <h1>
+        <a name="nHoles"></a>geometry.nHoles function
+        </h1>
+        <h2>
+        Synopsis
+        </h2>
+        <p class="code2">float geometry.nHoles()</p>
+        <h2>Returns</h2>
+        <p class="content">The (integral) number of holes (i.e holes in faces) of the current shape's geometry.</p>
+         <p class="text">
+  <h2>
+        Related
+  </h2>
+  <ul>
+        <li>
+        <a class="normw" href="func_geometry.html#nEdges">
+        geometry.nEdges function</a>        </li>
+        <li>
+        <a class="normw" href="func_geometry.html#nFaces">
+        geometry.nFaces function</a>        </li>
+        <li>
+        <a class="normw" href="func_geometry.html#nVertices">
+        geometry.nVertices function</a>        </li>
+
+  </ul>
+
+		<br><br><br><br><br>
+
+
+        <h1>
+        <a name="nVertices"></a>geometry.nVertices function
+        </h1>
+        <h2>
+        Synopsis
+        </h2>
+        <p class="code2">float geometry.nVertices()</p>
+        <h2>Returns</h2>
+        <p class="content">The (integral) number of vertices of the current shape's geometry.</p>
+         <p class="text"> 
+  <h2>
+        Related
+  </h2>
+  <ul>
+         <li>
+        <a class="normw" href="func_geometry.html#nEdges">
+        geometry.nEdges function</a>        </li>
+        <li>
+        <a class="normw" href="func_geometry.html#nHoles">
+        geometry.nHoles function</a>        </li>
+        <li>
+        <a class="normw" href="func_geometry.html#nFaces">
+        geometry.nFaces function</a>        </li>
+
+  </ul>
+
+
+		<br><br><br><br><br>
+
+
+        <h1>
+        <a name="uMin"></a><a name="uMax"></a><a name="vMin"></a><a name="vMax"></a>geometry.{uMin|uMax|vMin|vMax} functions
+        </h1>
+        <h2>
+        Synopsis
+        </h2>
+        <p class="code2">float geometry.uMin()</p>
+        <p class="code2">float geometry.uMax()</p>
+        <p class="code2">float geometry.vMin()</p>
+        <p class="code2">float geometry.vMax()</p>
+        <p class="code2">float geometry.uMin(float <span class="cga_opparam">uvSet)</p>
+        <p class="code2">float geometry.uMax(float <span class="cga_opparam">uvSet)</p>
+        <p class="code2">float geometry.vMin(float <span class="cga_opparam">uvSet)</p>
+        <p class="code2">float geometry.vMax(float <span class="cga_opparam">uvSet)</p>
+        <h2>Parameters </h2>
+        <ul>
+	  	<li><span class="cga_opparam">uvSet</span><br>
+			Number of texture coordinates set (integer number in [0,9]). The
+			numbering corresponds to the texture layers of the <a href="attr_material.html">material attribute</a>, see also <a href="cga_texturing.html"> Texturing: Essential Knowledge</a>.
+  		</li>
+        </ul>
+
+        <h2>
+        Returns</h2>
+		The minimal or maximal u or v value of the selected uvset (the versions without parameter use uvset 0). 
+
+
+
+
+
+		<br><br><br><br><br>
+
+
+        <h1>
+        <a name="volume"></a>geometry.volume function
+        </h1>
+        <h2>
+        Synopsis
+        </h2>
+        <p class="code2">float geometry.volume()</p>
+
+         <h2>
+        Returns</h2>
+        <p>Volume  of the current shape's geometry.        </p>
+        <h2>
+        Related
+  </h2>
+  <ul>
+        <li>
+        <a class="normw" href="func_geometry.html#area">
+        geometry.area function</a>        </li>
+
+  </ul>
+
+<!-- FOOTER -->
+<p class="foot">Copyright &copy;2008-2019 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
+
+<!-- END CENTERED CONTENT -->
+
+</div>
+</body>
+</html>

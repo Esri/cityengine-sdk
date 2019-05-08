@@ -1,0 +1,1133 @@
+<html>
+
+<head>
+<title>
+    CGA Changelog
+</title>
+    <link rel="stylesheet" href="../manual_style.css" type="text/css" />
+</head>
+
+<body>
+<div class="content">
+
+<!-- HEADER (use only on bookchapters) -->
+
+    <table summary="" class="header">
+        <tr>
+            <td align="left" class="helphead_l"><a href="../toc.html"><div class="helplink">&nbsp;</div></a></td>
+            <td align="right" class="helphead_r"></td>
+        </tr>
+    </table>
+
+
+<!-- CONTENT -->
+
+        
+  <h1>CGA Changelog</h1>
+  
+  <table border="outset">
+  <tr>
+  <td width="12%"><strong>City Engine version<br>(= CGA version)</strong></td>
+  <td><strong>Changes</strong></td>
+  </tr>
+	<tr>
+		<td>2019.0 <br>CGAC 1.12</td>
+		<td>
+			New operations:
+			<ul>
+				<li><a href="op_rectify.html"><span class="code_std">rectify</span></a> operation.</li> <!-- CE-1867 -->
+				<li><a href="op_resetGeometry.html"><span class="code_std">resetGeometry</span></a> operation.</li> <!-- CE-6123 -->
+				<li><a href="op_setbackPerEdge.html"><span class="code_std">setbackPerEdge</span></a> operation.</li>
+				<li><a href="op_setbackToArea.html"><span class="code_std">setbackToArea</span></a> operation.</li>
+			</ul>
+			New functions:
+			<ul>
+				<li><a href="func_readTextFile.html"><span class="code_std">readTextFile</span></a> function.</li> <!-- CE-6112 -->
+				<li><a href="func_geometry.html#boundaryLength"><span class="code_std">geometry.boundaryLength</span></a> function.</li> <!-- CE-5690 -->
+				<li><a href="func_splitString.html"><span class="code_std">splitString</span></a> function.</li> <!-- CE-6115 -->
+				<li><a href="func_comp.html"><span class="code_std">comp</span></a> function.</li>
+				<li>Array util functions: <a href="func_index.html"><span class="code_std">index</span></a>, <a href="func_item.html"><span class="code_std">item</span></a> and <a href="func_size.html"><span class="code_std">size</span></a>.</li>
+				<li><a href="func_edgeAttr.html">Edge attribute functions</a>: <span class="codelight">edgeAttr.getFloat</span>, <span class="codelight">edgeAttr.getString</span>, <span class="codelight">edgeAttr.getBool</span>.</li>
+			</ul>
+   			New attributes:
+			<ul>
+				<li><a href="attr_material.html">Material attributes</a>:</li>
+				<ul>
+					<li><span class="codelight">material.emissive.{r|g|b}</span>, <span class="codelight">material.metallic</span>, <span class="codelight">material.roughness</span>.</li>
+					<li><span class="codelight">material.{emissive|occlusion|roughness|metallic}map</span> and corresponding <span class="codelight">.{su|sv|tu|tv|rw}</span>.</li> <!-- CE-6123 -->
+					<li><span class="codelight">material.opacitymap.mode</span>.</li> <!-- CE-6123 -->
+				</ul>
+			</ul>
+			Changes to existing features:
+			<ul>
+				<li><a href="op_alignScopeToAxes.html"><span class="code_std">alignScopeToAxes</span></a> operation: New axis selectors for alignment in the object coordinate system were added.</li> <!-- CE-6170 -->
+				<li><a href="op_print.html"><span class="code_std">print</span></a> operation and <a href="func_print.html"><span class="code_std">print</span></a> function: Support for arrays.</li>
+				<li><a href="op_comp.html"><span class="code_std">comp</span></a> operation: New component selector <span class="codelight">fe</span> for face edges.</li>
+				<li><a href="op_setback.html"><span class="code_std">setback</span></a> operation: Supports individual distances per edge.</li>
+			</ul>
+			Bugfixes:
+			<ul>
+				<li><a href="op_convexify.html"><span class="code_std">convexify</span></a> operation: Fixed incorrect results on shapes with holes.</li> <!-- CE-5408 -->
+				<li><a href="op_softenNormals.html"><span class="code_std">softenNormals</span></a>, <a href="op_setNormals.html"><span class="code_std">setNormals(auto)</span></a> operation: Compute correct soft normals for vertices bordering a hole. This bug only appeared when the threshold angle was set to a value less than 180 degrees.</li> <!-- CE-5894 -->
+				<li><a href="op_comp.html"><span class="code_std">comp(v)</span></a>, <a href="op_comp.html"><span class="code_std">comp(e)</span></a> operation: Compute correct orientation of the scope z axis for vertex/edge components bordering a hole.</li> <!-- CE-5894 -->
+				<li><a href="op_comp.html"><span class="code_std">comp(v)</span></a>, <a href="op_comp.html"><span class="code_std">comp(e)</span></a>, <a href="op_alignScopeToGeometry.html"><span class="code_std">alignScopeToGeometry</span></a> operation: Fixed resulting scopes when applied on edges or vertices.</li> <!-- CE-5702 -->
+				<li><a href="op_roofHip.html"><span class="code_std">roofHip</span></a>, <a href="op_roofGable.html"><span class="code_std">roofGable</span></a> operation: Corrected the resulting order and first edge of roof faces if the initial shape contained collinear vertices.</li> <!-- CE-6013 -->
+				<li><a href="op_roofGable.html"><span class="code_std">roofGable</span></a> operation:</li>
+				<ul>
+					<li>Fixed a crash in subsequent operations or functions if the initial shape contained near-identical vertices.</li> <!-- CE-6013 -->
+					<li>Corrected trim plane generation if the initial shape contained several faces.</li> <!-- CE-6013 -->
+				</ul>
+				<li><a href="op_cleanupGeometry.html"><span class="code_std">cleanupGeometry</span></a> operation: Fixed a crash in vertex merge. This happened when hole vertices were within tolerance to vertices that belonged to both another hole and an encircling face.</li> <!-- CE-5972 -->
+				<li>Internal geometry cleanup (CityEngine only): Preserve first edge of holes.</li> <!-- CE-6006 -->
+				<li>Fixed a bug where normal and bump maps were applied in the inverse normal direction (CityEngine rendering only).</li>
+				<li><a href="op_setback.html"><span class="code_std">setback</span></a> operation: Enhanced result at concave vertices.</li> <!-- CE-6420 -->
+				<li>CGA Compiler:</li>
+				<ul>
+					<li><a href="op_comp.html"><span class="code_std">comp</span></a>, <a href="op_setback.html"><span class="code_std">setback</span></a> operation: Index selectors passed with a float function name "idx" were always evaluated to 0.</li> <!-- CE-5896 -->
+					<li><a href="op_innerRectangle.html"><span class="code_std">innerRectangle</span></a>, <a href="op_shapeLUO.html"><span class="code_std">shapeLUO</span></a> operation: Do not accept float function names as selector.</li> <!-- CE-5896 -->
+ 					<li><a href="op_comp.html"><span class="code_std">comp</span></a>, 
+ 						<a href="op_split.html"><span class="code_std">split</span></a>, 
+ 						<a href="op_setback.html"><span class="code_std">setback</span></a>,
+                        <a href="op_innerRectangle.html"><span class="code_std">innerRectangle</span></a>, 
+                        <a href="op_scatter.html"><span class="code_std">scatter</span></a>,
+                        <a href="op_setback.html"><span class="code_std">setback</span></a>,
+                        <a href="op_shapeLUO.html"><span class="code_std">shapeL</span></a>,
+                        <a href="op_shapeLUO.html"><span class="code_std">shapeU</span></a>,
+                        <a href="op_shapeLUO.html"><span class="code_std">shapeO</span></a> operations: Fixed a bug where a wrong follow-up rule was used (in case of identical rule names except a numerical suffix + very bad luck).</li>  
+				</ul>
+			</ul>
+		</td>
+	</tr>
+	<tr>
+		<td>2018.1 <br>CGAC 1.11</td>
+		<td>
+			Changes to existing features:
+			<ul>
+				<li><a href="op_setback.html"><span class="code_std">setback</span></a> operation: The first edge of setback faces is set at the outline of the initial face. For remainder faces the first edge is the closest to the first edge of the initial shape. This fix potentially changes your existing models.</li> <!-- CE-5592 -->
+				<li><a href="op_alignScopeToGeometry.html"><span class="code_std">alignScopeToGeometry</span></a> operation: Fixed a numerical instability when <span class="codelight">world.lowest</span> is used. In case multiple faces or edges are candidates for the lowest component, the one with the lowest index is chosen. This fix potentially changes your existing models.</li> <!-- CE-4828 -->
+				<li><a href="op_innerRectangle.html"><span class="code_std">innerRectangle</span></a> operation: Fixed a numerical instability. In case several rectangles are candidates for the largest, the one with the lowest distance to the shape's centroid is chosen. This fix potentially changes your existing models.</li> <!-- CE-4788 -->
+			</ul>
+			Bugfixes:
+			<ul>
+				<li><a href="op_setback.html"><span class="code_std">setback</span></a> operation:</li>
+				<ul>
+					<li>Avoid creation of slivers, especially at rounded corners with short edges.</li> <!-- CE-4463 -->
+					<li>Fixed a possible crash for invalid uv-sets.</li> <!-- CE-4123 -->
+				</ul>
+			</ul>
+		</td>
+	</tr>
+	<tr>
+		<td>2018.0 <br>CGAC 1.10</td>
+		<td>
+			Changed fundamental behaviour:
+			<ul>
+				<li><strong>Random evaluation of attr/const functions</strong>:<br> The initialization of the random number generator was affected by the mutual dependency of attr/const functions.<br>This could lead to the undesired behaviour that an attribute A which is initialized using probability functions (<a href="func_rand.html"><span class="code_std">rand</span></a>, <a href="func_p.html"><span class="code_std">p</span></a>), stochastic conditions or related utility functions (<a href="celib/listRandom.html"><span class="code_std">listRandom</span></a>, <a href="celib/fileRandom.html"><span class="code_std">fileRandom</span></a>, <a href="celib/assetFitSize.html"><span class="code_std">assetFitSize</span></a>,
+				<a href="celib/assetApproxSize.html"><span class="code_std">assetApproxSize</span></a>, <a href="celib/imageApproxRatio.html"><span class="code_std">imageApproxRatio</span></a>) could change its random value
+				<ul>
+					<li>if another attribute B was added that calls A or</li>
+					<li>if a call to another attribute B was added to A where B is also randomly evaluated.</li>
+				</ul>
+				This fix potentially changes your existing models even with the same <a href="attr_seedian.html"><span class="code_std">seedian</span></a> on the initial shape.</li> <!-- CE-3187 -->
+			</ul>
+			New operations:
+			<ul>
+				<li><a href="op_insertAlongUV.html"><span class="code_std">insertAlongUV</span></a> operation.</li> <!-- CE-2329 -->
+			</ul>
+			New functions:
+			<ul>
+				<li><a href="func_assetNamingInfo.html"><span class="code_std">assetNamingInfo</span></a> function.</li> <!-- CE-3850 -->
+			</ul>
+			Changes to existing features:
+			<ul>
+				<li><a href="func_acos.html"><span class="code_std">acos</span></a>, <a href="func_asin.html"><span class="code_std">asin</span></a> and <a href="func_sqrt.html"><span class="code_std">sqrt</span></a> function: A warning is issued if the parameter is outside of the valid range.</li> <!-- CE-4902 -->
+			</ul>
+			Bugfixes:
+			<ul>
+				<li>CGA Compiler:</li>
+				<ul>
+					<li>The compiler now checks for matching return types of attributes and functions with the same name across styles. Prior, inconsistent return types resulted in a crash when switching styles or displaying all styles in the file preview.</li> <!-- CE-1565 -->
+					<li>Matching parameter types for rules and functions across styles are now also checked for unused definitions.</li> <!-- CE-1565 -->
+					<li>Compiler now checks if a definition type (attribute, const, function or rule) is consistent across styles.</li> <!-- CE-1565 -->
+					<li>Fixed wrong line reference of incompatible version warnings. This happened for rules that imported other rule files.</li> <!-- CE-3362 -->
+				</ul>
+				<li><a href="op_comp.html"><span class="code_std">comp</span></a> operation:</li>
+				<ul>
+					<li>Re-evaluate random generator for each group (<span class="codelight">g</span>) and material (<span class="codelight">m</span>) component. Before this fix <a href="func_rand.html"><span class="code_std">rand</span></a> returned the same value for each component.</li> <!-- CE-2329 -->
+					<li>Group components (<span class="codelight">g</span>): Fixed wrong per-face materials for meshes with holes.</li> <!-- CE-2329 -->
+				</ul>
+				<li><a href="op_trim.html"><span class="code_std">trim</span></a>, <a href="op_i.html"><span class="code_std">i</span></a> operation: Trim planes now respect holes in assets.</li> <!-- CE-2329 -->
+				<li><a href="op_trim.html"><span class="code_std">trim</span></a>, <a href="op_i.html"><span class="code_std">i</span></a>, <a href="op_split.html"><span class="code_std">split</span></a> operation: Trim planes and splits now respect per-face materials.</li> <!-- CE-2329 -->
+				<li><a href="op_split.html"><span class="code_std">split</span></a> operation: Fixed missing filling face when faces with near zero area were present at the split position.</li> <!-- CE-2329 -->
+			</ul>
+		</td>
+	</tr>
+  
+	<tr>
+		<td>2017.1 <br>CGAC 1.9</td>
+		<td>
+			New annotations:
+			<ul>
+				<li><a href="cga_annotations.html#enum"><span class="code_std">@Enum</span></a> annotation.</li>
+			</ul>
+			New functions:
+			<ul>
+				<li><a href="func_geometry.html#height"><span class="code_std">geometry.height</span></a> function.</li>
+			</ul>
+			Changes to existing features:
+			<ul>
+				<li><a href="op_cleanupGeometry.html"><span class="code_std">cleanupGeometry</span></a> operation: Merge vertices: Vertices of holes are now merged within tolerance. As a consequence, neighboring holes could be merged to a single hole and small holes could be removed.</li>
+				<li>Prior usage of <span class="code_std">@Range</span> annotation is deprecated. Instead use new parameterized version of <a href="cga_annotations.html#range"><span class="code_std">@Range</span></a> annotation and new <a href="cga_annotations.html#enum"><span class="code_std">@Enum</span></a> annotation.</li>
+				<li><a href="cga_annotations.html#angle"><span class="code_std">@Angle</span></a>, <a href="cga_annotations.html#dist"><span class="code_std">@Distance</span></a> and <a href="cga_annotations.html#percent"><span class="code_std">@Percent</span></a> annotations are supported in CityEngine.</li>
+			</ul>
+			Bugfixes:
+			<ul>
+				<li><a href="func_occlusion.html">Occlusion queries</a>: Improved accuracy in cases when the query geometry lies on the surface of an occluder shape.</li>
+				<li>All <em>intra</em> <a href="cga_context.html">context/occlusion queries</a>: Fixed a bug where queries did not respect occluder/context shapes and therefore returned a wrong value. This happened for labels (including the empty label) which were not encountered in the first evaluation pass (<a href="cga_context.html#twopass">two-pass generation process</a>).</li>
+				<li><a href="op_cleanupGeometry.html"><span class="code_std">cleanupGeometry</span></a> operation:</li>
+				<ul>
+					<li>Merge vertices: Prevent creation of small holes and inverted faces.</li>
+					<li>Remove duplicate faces: Correct consideration of holes.</li>
+					<li>Remove shared edges between coplanar faces: Enhanced overall robustness and results for holes.</li>
+					<li>Remove degenerate faces with small area: Applied at the end in order to reduce impact.</li>
+				</ul>
+				<li>CGA Compiler: Fixed an issue where names and values were not matched correctly in an annotation <span class="code_std">@Annotation(name=value).</span></li>
+				<li><a href="op_scatter.html"><span class="code_std">scatter</span></a> operation: Gaussian standard deviation can be specified in relative coordinates.</li>
+				<li><a href="op_tileUV.html"><span class="code_std">tileUV</span></a> operation: Fixed creation of invalid UVs in case of near zero area geometry.</li>
+			</ul>
+		</td>
+	</tr>
+  
+  <tr>
+	<td>2017.0 <br>CGAC 1.8</td>
+	<td>
+		New operations:
+		<ul>
+			<li><a href="op_label.html"><span class="code_std">label</span></a> operation.</li>
+		</ul>
+		New functions:
+		<ul>
+			<li>New basic functions: <a href="celib/min.html"><span class="code_std">min</span></a>, <a href="celib/max.html"><span class="code_std">max</span></a> and <a href="celib/clamp.html"><span class="code_std">clamp</span></a>.</li>
+			<li>New functions for color conversion: <a href="celib/colorHexToB.html"><span class="code_std">colorHexToB</span></a>, <a href="celib/colorHexToG.html"><span class="code_std">colorHexToG</span></a>, <a href="celib/colorHexToH.html"><span class="code_std">colorHexToH</span></a>, <a href="celib/colorHexToO.html"><span class="code_std">colorHexToO</span></a>, <a href="celib/colorHexToR.html"><span class="code_std">colorHexToR</span></a>, <a href="celib/colorHexToS.html"><span class="code_std">colorHexToS</span></a>, <a href="celib/colorHexToV.html"><span class="code_std">colorHexToV</span></a>, <a href="celib/colorHSVToHex.html"><span class="code_std">colorHSVToHex</span></a>, <a href="celib/colorHSVOToHex.html"><span class="code_std">colorHSVOToHex</span></a>, <a href="celib/colorRGBToHex.html"><span class="code_std">colorRGBToHex</span></a> and <a href="celib/colorRGBOToHex.html"><span class="code_std">colorRGBOToHex</span></a>.</li>
+			<li>New functions for <a href="cga_context.html">context queries</a> to <a href="op_label.html">labeled</a> shapes: <a href="func_minimumDistance.html"><span class="code_std">minimumDistance</span></a>, <a href="func_contextCompare.html"><span class="code_std">contextCompare</span></a> and <a href="func_contextCount.html"><span class="code_std">contextCount</span></a>.</li>
+		</ul>
+		Changes to existing features:
+		<ul>
+			<li><a href="op_primitive.html#quad"><span class="code_std">primitiveQuad</span></a>, <a href="op_primitive.html#disk"><span class="code_std">primitiveDisk</span></a>, <a href="op_primitive.html#cube"><span class="code_std">primitiveCube</span></a> operation: Removed vertex normals because they do not influence shading. Vertex normals can still be created using <a href="op_setNormals.html"><span class="code_std">setNormals</span></a> or <a href="op_softenNormals.html"><span class="code_std">softenNormals</span></a> operation.</li>
+			<li>CGA compiler: Improved compile time in case of errors due to naming conflicts, especially when rules with many parameters are present.</li>
+			<li><a href="op_comp.html"><span class="code_std">comp</span></a> operation: New component selectors <span class="codelight">g</span> for groups, <span class="codelight">m</span> for materials and <span class="codelight">h</span> for holes.</li>
+			<li><a href="func_occlusion.html"><span class="code_std">inside</span></a>, <a href="func_occlusion.html"><span class="code_std">overlaps</span></a> and <a href="func_occlusion.html"><span class="code_std">touches</span></a> functions:</li>
+			<ul>
+				<li>New optional label identifier for performing occlusion queries on <a href="op_label.html">labeled</a> occluder shapes.</li>
+				<li>Geometries only slightly lying outside an occluder shape are considered inside (adjusted threshold behavior due to floating point limitations).</li>
+				<li>Surfaces touch also when normals point in same direction.</li>
+			</ul>
+			<li>Support shapes consisting of vertices or edges (coming from <a href="op_comp.html"><span class="code_std">comp</span></a> or <a href="op_scatter.html"><span class="code_std">scatter</span></a> operation):</li>
+			<ul>
+				<li><a href="func_geometry.html#isClosedSurface"><span class="code_std">geometry.isClosedSurface</span></a>, <a href="func_geometry.html#isPlanar"><span class="code_std">geometry.isPlanar</span></a>, <a href="func_geometry.html#isRectangular"><span class="code_std">geometry.isRectangular</span></a> functions: Return <span class="cga_keyword">false</span>.</li>
+				<li><a href="func_geometry.html#nEdges"><span class="code_std">geometry.nEdges</span></a> function: Counts edges.</li>
+				<li><a href="func_geometry.html#isOriented"><span class="code_std">geometry.isOriented</span></a> function: Consider vertex/edge normal.</li>
+			</ul>
+		</ul>
+		Bugfixes:
+		<ul>
+			<li><a href="op_setback.html"><span class="code_std">setback</span></a> operation: In some cases self-intersecting faces on concave shapes were created. That could lead to a failure of subsequent operations.</li>
+			<li><a href="op_comp.html"><span class="code_std">comp</span></a> operation:</li>
+			<ul>
+				<li>Combined (<span class="codelight">=</span>) face component split now respects per-face materials.</li>
+				<li>Fixed wrong edge component split for edges with opposing adjacent faces.</li>
+				<li>Fixed wrong result of combined (<span class="codelight">=</span>) vertex and edge component split.</li>
+				<li>Fixed (deprecated) <span class="codelight">noStreetSide</span> comp split selector handling.</li>
+			</ul>
+			<li><a href="func_geometry.html#area"><span class="code_std">geometry.area</span></a> and <a href="func_geometry.html#isOriented"><span class="code_std">geometry.isOriented</span></a> function: Corrected scope selectors for negative scope sizes (e.g. front becomes back if scope.sz is < 0).</li>
+			<li><a href="op_alignScopeToGeometry.html"><span class="code_std">alignScopeToGeometry</span></a> operation: <span class="codelight">zUp</span> mode: Fixed wrong pivot for meshes that only consist of vertices (for example from vertex splits or <a href="op_scatter.html"><span class="code_std">scatter</span></a>).</li>
+			<li>CGA compiler:</li>
+			<ul>
+				<li><a href="import.html"><span class="code_std">Overriding</span></a> of <a href="const.html"><span class="code_std">const</span></a> is avoided or gives error.</li>
+				<li>Fixed missing rule line reference of incompatible <a href="version.html"><span class="code_std">version</span></a> warnings.</li>
+				<li>Fixed an issue where a rule file could not be recompiled correctly after fixing errors.</li>
+				<li>Fixed wrong rule line references of compile errors.</li>
+			</ul>
+			<li><a href="func_occlusion.html"><span class="code_std">inside</span></a>, <a href="func_occlusion.html"><span class="code_std">overlaps</span></a> and <a href="func_occlusion.html"><span class="code_std">touches</span></a> functions:</li>
+			<ul>
+				<li>Fixed a bug where a closed shape were not touching and not overlapping another geometry that lied inside.</li>
+				<li>Intra-occlusion: Fixed a bug where component split shapes which are children of the current shape were considered for occlusion.</li>
+				<li>Inter-occlusion: Fixed a bug where occlusion-queries were not considered when defined in consts or functions.</li>
+				<li>Fixed a bug that mistakenly returned true in rare situations due to near zero-area triangles.</li>
+				<li>Inter-ccclusion: Fixed a bug that created an occluder shape by a <a href="op_comp.html">component split</a> or <a href="op_offset.html">offset</a> operation during the intra ghost tree generation which was then mistakenly considered also for inter occlusion.</li>
+				<li>Fixed correct behavior in exports.</li>
+			</ul>
+			<li><a href="op_set.html"><span class="code_std">set</span></a> operation: fixed a bug: trying to set the <a href="attr_initialShape.html"><span class="code_std">initialShape.pz</span></a> attribute resulted in inconsistent behaviour (mismatch with initialShape.pa).</li>
+			<li><a href="op_alignScopeToAxes.html"><span class="code_std">alignScopeToAxes</span></a>, <a href="op_rotateScope.html"><span class="code_std">rotateScope</span></a>, <a href="op_mirrorScope.html"><span class="code_std">mirrorScope</span></a>, <a href="op_setPivot.html"><span class="code_std">setPivot</span></a>, <a href="op_cleanupGeometry.html"><span class="code_std">cleanupGeometry</span></a>, <a href="op_reduceGeometry.html"><span class="code_std">reduceGeometry</span></a>, <a href="op_convexify.html"><span class="code_std">convexify</span></a>, <a href="op_split.html"><span class="code_std">split</span></a> operations: Correctly consider a non-adjusted scope coming from a <a href="op_split.html"><span class="code_std">split</span></a> operation.</li>
+			<li><a href="op_offset.html"><span class="code_std">offset</span></a> operation: Now keeps asset materials and groups.</li>
+			<li><a href="op_scatter.html"><span class="code_std">scatter</span></a> operation: Issue warning for negative or zero number of points.</li>
+			<li><a href="func_occlusion.html"><span class="code_std">inside</span></a>, <a href="func_occlusion.html"><span class="code_std">overlaps</span></a>, <a href="func_occlusion.html"><span class="code_std">touches</span></a>, <a href="func_geometry.html#angle"><span class="code_std">geometry.angle</span></a> functions, <a href="op_alignScopeToGeometry.html"><span class="code_std">alignScopeToGeometry</span></a>, <a href="op_alignScopeToAxes.html"><span class="code_std">alignScopeToAxes</span></a> operations: Fixed for shapes consisting of vertices or edges (coming from <a href="op_comp.html"><span class="code_std">comp</span></a> or <a href="op_scatter.html"><span class="code_std">scatter</span></a> operation).</li>
+			<li><a href="celib/assetApproxRatio.html"><span class="code_std">assetApproxRatio</span></a>,
+				<a href="celib/assetApproxSize.html"><span class="code_std">assetApproxSize</span></a>,
+				<a href="celib/assetBestRatio.html"><span class="code_std">assetBestRatio</span></a>,
+				<a href="celib/assetBestSize.html"><span class="code_std">assetBestSize</span></a>,
+				<a href="celib/assetFitSize.html"><span class="code_std">assetFitSize</span></a>,
+				<a href="celib/fileRandom.html"><span class="code_std">fileRandom</span></a>,
+				<a href="celib/imageApproxRatio.html"><span class="code_std">imageApproxRatio</span></a>,
+				<a href="celib/imageBestRatio.html"><span class="code_std">imageBestRatio</span></a>,
+				<a href="func_fileSearch.html"><span class="code_std">fileSearch</span></a> functions: Fixed a bug which led to wrong asset lookups if used in RPKs.</li>
+		</ul>
+	</td>
+  </tr>
+  
+  <tr>
+	<td>2016.1 <br>CGAC 1.7</td>
+	<td>
+		Changes to existing features:
+		<ul>
+			<li><a href="op_innerRectangle.html"><span class="code_std">innerRectangle</span></a> operation:</li>
+			<ul>
+				<li>Enhanced overall performance.</li>
+				<li>Correct largest rectangle is now also found for large concave polygons with high vertex count.</li>
+				<li>The <span class="codelight">edge</span> mode does not consider negligible short edges.</li>
+				<li>More accurate consideration of near collinear edges.</li>
+				<li>Very thin remainder faces are prevented.</li>
+			</ul>
+		</ul>
+		Bugfixes:
+        <ul>
+			<li><a href="op_trim.html"><span class="code_std">trim</span></a>, <a href="op_i.html"><span class="code_std">i</span></a> operation: Fixed various issues for trim planes on concave faces:</li>
+			<ul>
+				<li>Fixed issues where parts of a mesh are not trimmed away.</li>
+				<li>Fixed an issue where the trimmed mesh contained unnecessary edges.</li>
+				<li>Fixed an issue where the trimmed mesh on a roof face contained holes.</li>
+			</ul>
+			<li><a href="op_cleanupGeometry.html"><span class="code_std">cleanupGeometry</span></a>, <a href="op_reduceGeometry.html"><span class="code_std">reduceGeometry</span></a> operation: Fixed wrong result if scope contained rotational part.</li>
+			<li><a href="op_cleanupGeometry.html"><span class="code_std">cleanupGeometry</span></a> operation: Fixed a bug that led to inconsistent meshes which could led to a crash on some subsequent operations, e.g. <a href="op_setNormals.html"><span class="code_std">setNormals(soft)</span></a> or <a href="op_softenNormals.html"><span class="code_std">softenNormals</span></a>.</li>
+	        <li><a href="op_offset.html"><span class="code_std">offset</span></a> operation: Fixed undefined behaviour for negative offsets on polygons with holes.</li>
+			<li><a href="op_envelope.html"><span class="code_std">envelope</span></a> operation: Fixed a bug that could led to a crash when vertices were collinear.</li>
+          	<li><a href="func_getGeoCoord.html"><span class="code_std">getGeoCoord</span></a> function: <span class="code_std">X</span>, <span class="code_std">Y</span> selectors: Fixed to-meter conversion for non-metrical coordinate systems.</li> 
+			<li><a href="op_innerRectangle.html"><span class="code_std">innerRectangle</span></a> operation:</li>
+			<ul>
+				<li>Improved stability in remainder computation.</li>
+				<li>Fixed failing remainder computation when rectangle edge coincided with collinear vertices of the face.</li>
+				<li>Fixed errors and wrong largest rectangles on very small faces.</li>
+				<li>Improved accuracy of rectangle alignment in <span class="code_std">edge</span> mode.</li>
+			</ul>
+			<li><a href="op_roofHip.html"><span class="code_std">roofHip</span></a>, <a href="op_roofGable.html"><span class="code_std">roofGable</span></a> operation:</li>
+			<ul>
+				<li>Solved issues that led to wrong results on exact square lots as well as exact rectangular lots with collinear vertices.</li>
+				<li>Solved an issue on roofs with overhangs and small pediments where trim planes were missing and scopes of face components were wrong.</li>
+			</ul>
+			<li><a href="op_comp.html"><span class="code_std">comp</span></a> operation: Fixed wrong edge component split when adjacent faces were non-planar.</li>
+			<li>CGA compiler: Fixed several issues related to attribute propagation/overwriting using <a href="import.html"><span class="code_std">import</span></a>:</li>
+			<ul>
+				<li>Importing a rule that in turn imports another rule and propagates attributes now works correctly.</li>
+				<li>Fixed an issue where attributes from 2nd (and higher) level imports were overwritten although not defined in 1st level import.</li>
+				<li>Fixed an issue where the specification of a new attribute value of a 2nd (and higher) level import was not working although not defined in 1st level import.</li>
+				<li>Fixed an issue where an attribute was not propagated to 1st level import where it was used to overwrite another attribute in 2nd (and higher) level import.</li>
+			</ul>
+			<li> Fixed a CGB decoder initialization problem on Linux and OSX.</li>
+        </ul>
+	</td>
+  </tr>
+  
+  <tr>
+  	<td>2016.0 <br>CGAC 1.6 </td>
+    <td>
+		New operations:
+        <ul>
+			<li><a href="op_softenNormals.html"><span class="code_std">softenNormals</span></a> operation.</li>
+			<li><a href="op_innerRectangle.html"><span class="code_std">innerRectangle</span></a> operation with alignment and remainder options. It replaces the <a href="op_innerRect.html"><span class="code_std">innerRect</span></a> operation that is deprecated.</li>
+			<li><a href="op_primitive.html#quad"><span class="code_std">primitiveQuad</span></a>, <a href="op_primitive.html#disk"><span class="code_std">primitiveDisk</span></a>, <a href="op_primitive.html#cube"><span class="code_std">primitiveCube</span></a>, <a href="op_primitive.html#sphere"><span class="code_std">primitiveSphere</span></a>, <a href="op_primitive.html#cylinder"><span class="code_std">primitiveCylinder</span></a> and <a href="op_primitive.html#cone"><span class="code_std">primitiveCone</span></a> operations. The <a href="op_primitive.html#cube"><span class="code_std">primitiveCube</span></a> operation replaces <span class="code_std">"builtin:cube"</span> and <span class="code_std">"builtin:cube:notex"</span> that are deprecated.</li>
+			<li><a href="op_splitArea.html"><span class="code_std">splitArea</span></a> operation.</li>
+        </ul>
+		Changes to existing features:
+		<ul>
+			<li><a href="op_setNormals.html"><span class="code_std">setNormals</span></a> operation:</li>
+			<ul>
+				<li>New mode <span class="codelight">auto</span> that uses <a href="op_softenNormals.html"><span class="code_std">softenNormals</span></a> functionality.</li>
+				<li>New mode <span class="codelight">conform</span> that computes consistent normals.</li>
+			</ul>
+			<li>The <a href="op_innerRect.html"><span class="code_std">innerRect</span></a> operation is deprecated. Use <a href="op_innerRectangle.html"><span class="code_std">innerRectangle</span></a> operation instead.</li>
+			<li><a href="op_cleanupGeometry.html"><span class="code_std">cleanupGeometry</span></a> operation: Mode <span class="code_std">all</span>/<span class="code_std">faces</span>: All duplicate/inverse faces are removed except one (independent from orientation).</li>
+			<li><a href="op_i.html"><span class="code_std">i</span></a> operation:</li>
+			<ul>
+				<li>New parameter <span class="cga_opparam">upAxisOfGeometry</span> that specifies the up axis of the geometry.</li>
+				<li>New parameter <span class="cga_opparam">insertMode</span> that specifies the alignment and positioning of the geometry in the scope. The option <span class="codelight">keepSizeAndPosition</span> is the same as using <a href="op_i.html#insertionZeroScope"><span class="code_std">s(0,0,0)</span></a>.</li>
+			</ul>
+			<li><span class="code_std">"builtin:cube"</span> and <span class="code_std">"builtin:cube:notex"</span> are deprecated. Use <a href="op_primitive.html#cube"><span class="code_std">primitiveCube</span></a> instead.</li>
+			<li><a href="op_extrude.html"><span class="code_std">extrude</span></a> operation:</li>
+			<ul>
+				<li>The paramater <span class="cga_opparam">axisWorld</span> is deprecated and changed to a parameter <span class="cga_opparam">extrusionType</span>.</li>
+				<li>New types <span class="codelight">face.normal</span>, <span class="codelight">vertex.normal</span>, <span class="codelight">world.up</span> and <span class="codelight">world.up.flatTop</span>.</li>
+				<li>The axes <span class="codelight">x</span>, <span class="codelight">y</span>, <span class="codelight">z</span>, <span class="codelight">world.x</span>, <span class="codelight">world.y</span> and <span class="codelight">world.z</span> are deprecated. Use type <span class="codelight">world.up</span> instead of axis <span class="codelight">world.y</span>.</li>
+			</ul>
+			<li><a href="op_roofGable.html"><span class="code_std">roofGable</span></a>, <a href="op_roofHip.html"><span class="code_std">roofHip</span></a>, <a href="op_roofPyramid.html"><span class="code_std">roofPyramid</span></a> and <a href="op_roofShed.html"><span class="code_std">roofShed</span></a> operation:</li>
+			<ul>
+				<li>Roofs can be generated wrt. a given height.</li>
+				<li>New parameter <span class="cga_opparam">valueType</span> to switch beetween a roof generation <span class="codelight">byAngle</span> or <span class="codelight">byHeight</span>.</li>
+			</ul>
+			<li><a href="op_roofShed.html"><span class="code_std">roofShed</span></a> operation: For shed roofs on shapes with <i>one</i> face no horizontal trim planes, hip, valley and ridge edges are generated. This was already the case for shapes with more than one face.</li>
+		</ul>
+		Bugfixes:
+        <ul>
+			<li><a href="op_split.html"><span class="code_std">split</span></a>, <a href="op_trim.html"><span class="code_std">trim</span></a> and <a href="op_i.html"><span class="code_std">i</span></a> operation: Fixed a bug that led to wrong results when vertices or edges lie in the respective split/trim plane.</li>
+			<li><a href="func_geometry.html#isInstanced"><span class="code_std">geometry.isInstanced</span></a> function: Fixed for builtin primitives (<span class="code_std">"builtin:cube"</span> and <span class="code_std">"builtin:cube:notex"</span>). Also supports <a href="op_primitive.html#quad"><span class="code_std">primitiveQuad</span></a>, <a href="op_primitive.html#disk"><span class="code_std">primitiveDisk</span></a>, <a href="op_primitive.html#cube"><span class="code_std">primitiveCube</span></a>, <a href="op_primitive.html#sphere"><span class="code_std">primitiveSphere</span></a>, <a href="op_primitive.html#cylinder"><span class="code_std">primitiveCylinder</span></a> and <a href="op_primitive.html#cone"><span class="code_std">primitiveCone</span></a>.</li>
+			<li><a href="op_roofHip.html"><span class="code_std">roofHip</span></a>, <a href="op_roofGable.html"><span class="code_std">roofGable</span></a> operation: Fixed a bug that occured on rectangular shapes and led to a wrong shading due to double vertices.</li>
+			<li><a href="op_roofShed.html"><span class="code_std">roofShed</span></a> operation: Fixed a bug that generated wrong shed roofs for shapes with more than one face, at least one hole and a non-zero edge index set.</li>
+			<li><a href="op_cleanupGeometry.html"><span class="code_std">cleanupGeometry</span></a> operation: Fixed an issue that prevented vertices to merge when they were the first vertex in a face.</li>
+            <li><a href="func_geometry.html#area"><span class="code_std">geometry.area</span></a> and normal calculation became more accurate; floating point precision got improved in general.</li>    
+        </ul>
+    </td>
+  </tr>  
+  
+  <tr>
+  	<td>2015.2 <br>CGAC 1.5 </td>
+    <td>
+    
+        bugfixes:
+        <ul>
+          <li><a href="func_getGeoCoord.html"><span class="code_std">getGeoCoord</span></a> function: fixed a bug where selectors <span class="code_std">lat</span>, <span class="code_std">lon</span> did not return the correct WGS84 coordinates for some coordinate systems. 
+    	  </li>    
+     </td>
+  </tr>
+
+  <tr>
+  	<td>2015.1 <br>CGAC 1.5 </td>
+  	<td>
+  	    new features:
+        <ul>
+          <li>Support for reading FBX assets.</li>
+        </ul>
+               
+       bugfixes:
+        <ul>
+   			<li><a href="op_comp.html"><span class="code_std">comp</span></a> operation: fixed a numerical issue which led to missaligned faces after <span class="code_std">comp(f)</span>.</li>        	
+            <li><a href="op_cleanupGeometry.html"><span class="code_std">cleanupGeometry</span></a> operation: made it behave the same on edge cleanup for geometries with per-mesh-materials and per-face-materials.</li> 
+		</ul>       
+    </td>
+  </tr>
+
+
+
+  <tr>
+  	<td>2015.0 <br>CGAC 1.5 </td>
+  	<td>
+  	    new functions:
+        <ul>
+          <li><a href="func_getTreeKey.html"><span class="code_std">getTreeKey</span></a> function.</li>
+         <li><a href="func_isnull.html"><span class="code_std">isNull</span></a> function.</li>
+         </ul>
+        
+        changes to existing features:    
+        <ul>
+           <li><a href="op_split.html"><span class="code_std">split</span></a> operations: 
+           <ul>
+           	<li>missing sizes are not allowed any longer. For instance, <span class="code_std">split(x)&nbsp;{&nbsp;A&nbsp;}</span> does not compile anymore. The correct equivalent is <span class="code_std">split(x)&nbsp;{&nbsp;~1:&nbsp;A&nbsp;}</span>.</li> 
+           	<li>functions in size expression do not need extra parantheses anymore.</li>
+            </ul>
+			</li> 
+           <li><a href="cga_annotations.html"><span class="code_std">@Hidden annotation</span></a>: changed propagation across imports. A hidden import hides all its imports recursively.</li>
+            <li><span class="code_std">uid</span> shape attribute deprecated. 
+               Use the <a href="func_getTreeKey.html"><span class="code_std">getTreeKey</span></a> function instead.
+          </li>
+           
+       </ul>
+       
+       bugfixes:
+        <ul>
+        <li>Fixed a bug in the cgb decoder which failed to read compiled cga files with a large number of attributes/rules/splits.</li>
+        <li>Vertexmerger: fixed a bug which prevented hole vertices to be merged with vertices of other faces.</li>
+        <li><a href="func_float.html"><span class="code_std">float()</span></a> function: made string-to-float conversion independent of locale.</li>
+        <li><a href="op_split.html"><span class="code_std">split</span></a> operations: intensified internal mesh cleanup to reduce memory load, fixed a bug which led to undesired vertex-merges.</li>
+        <li><a href="op_roofHip.html"><span class="code_std">roofHip</span></a> operation: avoid duplicate vertices.</li>    
+        <li><a href="op_offset.html"><span class="code_std">offset</span></a>, <a href="op_roofGable.html"><span class="code_std">roofGable</span></a> and <a href="op_roofHip.html"><span class="code_std">roofHip</span></a> operations: made offset / roof construction more stable on polygons with co-linear vertices and fixed a memory explosion bug.</li>
+        <li><a href="op_cleanupGeometry.html"><span class="code_std">cleanupGeometry</span></a> operation: fixed bug which led to illegal material assignements ("filled holes rendering bug") on edge cleanup for geometries with per-face-materials.</li> 
+		<li>Fixed undefined behaviour if the same name was used for a scalar attr and a map attr.</li>  
+          <li>CGA compiler: Parameteric rules and functions with a large number of parameters do not hang the compiler / CityEngine anymore.</li>       
+		</ul>       
+    </td>
+  </tr>
+  <tr>
+  	<td>2014.1 QF1<br>CGAC 1.4 </td>
+  	<td>
+        bugfixes:
+        <ul>
+          <li>CGA compiler: Fixed a bug in code generation for styles which led to mixed-up styles in the .cgb files.</li>
+           <li><a href="op_offset.html"><span class="code_std">offset</span></a>, 
+                      <a href="op_roofGable.html"><span class="code_std">roofGable</span></a>,
+             <a href="op_roofHip.html"><span class="code_std">roofHip</span></a>
+             and <a href="op_roofShed.html"><span class="code_std">roofShed</span></a>
+             operations: made polygons with holes handling more stable for illegal holes (hole vertices identical to vertices of enclosing polygon - hangers).</li>
+        </ul>
+    </td>    
+  </tr>
+  <tr>
+  	<td>2014.1<br>CGAC 1.3 </td>
+    <td>                    
+    	new operations:
+        <ul>
+          <li><a href="op_deleteHoles.html"><span class="code_std">deleteHoles</span></a> operation.</li>
+        </ul>
+
+
+    	new functions:
+        <ul>
+          <li><a href="func_geometry.html#nHoles"><span class="code_std">geometry.nHoles</span></a> function.</li>
+          <li><a href="func_geometry.html#isClosedSurface"><span class="code_std">geometry.isClosedSurface</span></a> function.</li>
+        </ul>
+
+
+    	new CGA Utility Library functions:
+        <ul>
+        	<li><a href="celib/listTerminate.html"><span class="code_std">listTerminate</span></a> function</li>
+        </ul>
+
+
+        new features:
+        <ul>
+          <li><a href="op_alignScopeToGeometry.html"><span class="code_std">alignScopeToGeometry</span></a>, <a href="op_convexify.html"><span class="code_std">convexify</span></a>, <a href="op_envelope.html"><span class="code_std">envelope</span></a>, <a href="op_cleanupGeometry.html"><span class="code_std">cleanupGeometry</span></a>, <a href="op_innerRect.html"><span class="code_std">innerRect</span></a>, <a href="op_scatter.html"><span class="code_std">scatter</span></a>, <a href="op_setback.html"><span class="code_std">setback</span></a>, <a href="op_shapeLUO.html"><span class="code_std">shape{L|U|O}</span> and <a href="op_reduceGeometry.html"><span class="code_std">reduceGeometry</span></a> operations and <a href="func_geometry.html#isClosedSurface"><span class="code_std">geometry.isClosedSurface</span></a>, <a href="func_geometry.html#area"><span class="code_std">geometry.area</span></a> (with selector) functions: holes in polygons are now supported.</li>
+
+          <li><a href="op_convexify.html"><span class="code_std">convexify</span></a>, <a href="op_innerRect.html"><span class="code_std">innerRect</span></a>, <a href="op_offset.html"><span class="code_std">offset</span></a>, <a href="op_shapeLUO.html"><span class="code_std">shape{L|U|O}</span></a> operations: uv coordinates and vertex normals are not deleted anymore but interpolated for new inner vertices.</li>
+
+		  <li><a href="op_convexify.html"><span class="code_std">convexify</span></a>, <a href="op_innerRect.html"><span class="code_std">innerRect</span></a>, <a href="op_offset.html"><span class="code_std">offset</span></a> operations: result is not planarized anymore.</li>
+   		  <li><a href="op_color.html"><span class="code_std">color</span></a>, operation: support for setting opacity (alpha).</li>
+
+        </ul>
+
+
+        <p>changes to existing features:</p>
+    	<ul> 
+            <li>Changed the defaults for recursion detection:
+            <ul>
+	            <li>Maximum derivation depth: from 99 to 1024.</li>
+                <li>Maximum derivation width: from 50000 to 100000.</li>
+                <li>Maximum function call depth: from 256 to 1024.</li>
+             </ul>
+             <li>Optimized function memory overhead (i.e. more interleaved functions beyond the default limit are possible now before crash - actual limit depends on platform & function).</li>
+             </li>          
+        	<li>Collada reader: added support for polygons with holes.</li>
+            <li><a href="func_str.html"><span class="code_std">str</span></a> function and <a href="op_print.html"><span class="code_std">print</span></a>, <a href="op_report.html"><span class="code_std">report</span></a> operations: made float-to-string conversion independent of locale (some numbers might be formatted differently now).</li>
+			<li>Internal geometry cleanup: improved handling of illegal holes (overlapping holes, wrong vertex order).</li>
+ 		</ul>
+
+        bugfixes:
+        <ul>
+           <li><a href="op_extrude.html"><span class="code_std">extrude</span></a> operation: fixed polygon with holes handling.</li>
+           <li><a href="op_convexify.html"><span class="code_std">convexify</span></a> operation: fixed face consistency if several edges have identical length.</li>
+           <li><a href="op_envelope.html"><span class="code_std">envelope</span></a> operation: fixed border cases which led to "open volumes".</li>
+           <li><a href="op_alignScopeToGeometry.html"><span class="code_std">alignScopeToGeometry</span></a> operation: fixed points/edge shapes support: scope size was set to 1 rather than 0, pivot orientation was not set to vertex/edge normal, fixed a crash if illegal edge index was used on edge geometry.</li>
+
+          <li><a href="op_setback.html"><span class="code_std">setback</span></a> and <a href="op_shapeLUO.html"><span class="code_std">shape{L|U|O}</span></a> operations: fixed memory leak.</li>
+          <li><a href="op_split.html"><span class="code_std">split</span></a> operations: fixed hole handling (produced illegal holes in certain cases).</li>
+
+           <li><a href="op_offset.html"><span class="code_std">offset</span></a>, 
+                      <a href="op_roofGable.html"><span class="code_std">roofGable</span></a>,
+             <a href="op_roofHip.html"><span class="code_std">roofHip</span></a>
+             and <a href="op_roofShed.html"><span class="code_std">roofShed</span></a>
+             operations: made polygons with holes handling more stable for illegal holes (hangers).</li>
+  
+           <li><a href="func_assetInfo.html"><span class="code_std">assetInfo</span></a>, <a href="func_assetsSortRatio.html"><span class="code_std">assetsSortRatio</span></a> and <a href="func_assetsSortSize.html"><span class="code_std">assetsSortSize</span></a> functions: fixed behaviour for unknown/unloadable assets.</li>        	
+  
+            <li><a href="attr_material.html"><span class="code_std">material</span></a> shape attribute: material.XXXmap returns <span class="code_std">&quot;builtin:unknowntexture.png&quot;</span> if texture not found.</li>
+          <li>Fixed (deprecated) noStreetSide comp split selector handling.</li>
+          <li>Fixed a bug regarding edge/point geometry normals (CityEngine rendering only).</li>
+          <li>Fixed a bug in handling edges in empty geometries.</li>
+          <li><a href="op_i.html"><span class="code_std">i</span></a> operation: fixed a race condition in handling unknown assets which led to a crash.</li>
+          <li>Fixed an internal illegal pointer access which led to a crash.</li>
+          
+          <li><a href="op_print.html"><span class="code_std">print</span></a>, <a href="op_report.html"><span class="code_std">report</span></a>, <a href="op_set.html"><span class="code_std">set</span></a> operations: fixed nan handling (avoid checks) and removed excess newline (bool).</li>
+          <li><a href="func_str.html"><span class="code_std">str</span></a> function: fixed inf/nan handling.</li>
+          <li><a href="celib/listRange.html"><span class="code_std">listRange</span></a> function: fixed a bug reading (illegal) non-&acute;;&acute;-terminated string list handling.</li>
+          <li>improved internal rad-to-degree conversion precision.</li>
+		  <li>AssetErrors: report warnings from geometry conversion of inserted assets.</li>
+          <li>Fixed a vertex merge issue in trim/split (identical vertices were not merged).</li>
+          <li>CGA compiler:
+          	<ul>
+            	<li>Fixed a bug in <a href="style.html"><span class="code_std">extends</span></a> (attribute values were not always propagated).</li>
+                <li>Fixed bugs in <a href="style.html"><span class="code_std">import</span></a> (wrong attributes copied, protecting selected attributes did protect all attributes).</a>
+                <li>Fixed a bug which led to a compile error if a rule had the same name as a CGA Utility Library function.</a>
+            </ul>
+          </li>	
+        </ul>
+    </td>
+  </tr>
+
+
+  <tr>
+  	<td>2014.0<br>CGAC 1.2 </td>
+    <td>
+                    
+        new features:
+        <ul>
+           	<li>
+             <a href="op_offset.html"><span class="code_std">offset</span></a>,
+             <a href="op_roofGable.html"><span class="code_std">roofGable</span></a>,
+             <a href="op_roofHip.html"><span class="code_std">roofHip</span></a>,
+             <a href="op_roofShed.html"><span class="code_std">roofShed</span></a>
+             operations: holes in polygons are now supported.  
+            </li>        
+           	<li>
+             <a href="op_setback.html"><span class="code_std">setback</span></a> operation: new syntax for selecting uv sets and new uv-based selectors <span class="cga_opparam">uv.left, uv.right, uv.bottom, uv.top</span>; uv coordinates and vertex normals are not deleted anymore but interpolated for new inner vertices.
+             </li>
+             <li>
+             <a href="op_tileUV.html"><span class="code_std">tileUV</span></a> operation: using 0 for the <span class="cga_opparam">textureWidth</span> or the <span class="cga_opparam">textureHeight</span> parameter protects that coordinate from beeing touched.
+             </li>
+
+
+        </ul>
+
+        <p>changes to existing features:</p>
+    	<ul>        
+   			<li><a href="import.html"><span class="code_std">import</span></a>: attr value propagation logic was simplified.</li>
+ 		</ul>
+
+        bugfixes:
+        <ul>
+           	<li><a href="import.html"><span class="code_std">import</span></a>: resolving assets from cross-project imports failed in some cases (imports which imported a cga file from the same directory). This was fixed in the cga compiler (CGAC), so existing rpks should be updated.</li>
+
+             <li><a href="celib/assetApproxRatio.html"><span class="code_std">assetApproxRatio</span></a>,
+             <a href="celib/assetApproxSize.html"><span class="code_std">assetApproxSize</span></a>,
+             <a href="celib/assetBestRatio.html"><span class="code_std">assetBestRatio</span></a>,
+             <a href="celib/assetBestSize.html"><span class="code_std">assetBestSize</span></a>,
+             <a href="celib/assetFitSize.html"><span class="code_std">assetFitSize</span></a>,
+             <a href="celib/fileRandom.html"><span class="code_std">fileRandom</span></a>,
+             <a href="celib/imageApproxRatio.html"><span class="code_std">imageApproxRatio</span></a>,
+             <a href="celib/imageBestRatio.html"><span class="code_std">imageBestRatio</span></a> functions: fixed a bug which led to wrong asset lookups if imported from a different project.</li>        	
+
+             <li><a href="func_geometry.html#angle.html"><span class="code_std">geometry.angle</span></a> function: fixed a bug which led to wrong results.</li>
+
+             <li><a href="func_fileSearch.html"><span class="code_std">fileSearch</span></a> function:  
+             <ul>
+             	<li>hits in the current project were reported in relative path notation; this got changed to absolute workspace paths again.</li>
+				<li>crash fixed if illegal regexps were used in attr initialization</li>
+                <li>spaces within qoutes were broken</li> 
+       		</ul>
+            </li> 
+            <li><a href="attr_initialShape.html"><span class="code_std">initialShape</span></a> attributes returned wrong values if used in <span class="code_std">const</span> / <span class="code_std">attr</span> functions.</li>
+   			<li><a href="op_comp.html"><span class="code_std">comp</span></a> operation: for polygons with holes, the <span class="cga_opparam">border, insider</span> selectors and the <span class="cga_opparam">=</span> operator were buggy.</li>        	
+             <li><a href="func_imageInfo.html"><span class="code_std">imageInfo</span></a> function: does not crash anymore on empty <span class="cga_opparam">filename</span>.</li>        	
+             <li><a href="func_imagesSortRatio.html"><span class="code_std">imagesSortRatio</span></a> function: does not crash anymore on empty <span class="cga_opparam">fileList</span>.</li>        	
+             <li><a href="op_split.html"><span class="code_std">split</span></a> operation: fixed a bug which led to deletion of the last leaf of a uv-split in some cases.</li>
+
+             <li><a href="func_occlusion.html"><span class="code_std">inside</span></a> function: fixed a bug which led to wrong results.</li> 
+             
+             <li>Fixed a bug connected to inter-model occlusion of vertically distant initial shapes: ignore neighborhood distance on y-axis for finding potential occlusions.</li>
+        </ul>
+    </td>
+  </tr>
+
+
+
+
+  <tr>
+  	<td>2013.1<br>CGAC 1.1</td>
+    <td>
+    	changed fundamental behaviour:
+        <ul>
+        	<li><strong>attr/const functions evaluation order:</strong> In previous CGA versions, <span class="code_std">attr</span> and <span class="code_std">const</span> functions were evaluated lazily, i.e. when they were used for the first time. Remember that <span class="code_std">attr</span> and <span class="code_std">const</span> functions are evaluated only once. This approach gave rise to the non-intuitive behaviour that changing the code of some rule potentially changed the value of an attr. Keep in mind that some functions (and obviously shape attributes) depend on the current shape's geometry, and some even change the state of the current shape (e.g. <a href="func_rand.html"><span class="code_std">rand</span></a>). Therefore (non-)evaluation of a const function cold have an influence on rule execution.<br>
+            Starting with 2013.1, all <span class="code_std">attr/const</span> functions are evaluated before the start rule is applied, on the initial shape with a <span class="code_std">seedian</span> derived from the initial shape's <span class="code_std">seedian</span>. The initial shape's random number generator state is not affected.<br>
+            While the new approach makes CGA coding more &quot;intuitive&quot;, it changes the behaviour compared to older versions.</li>
+            
+            <li><strong>inf/nan checks</strong>: In previous CGA versions, a number of operation and function float parameters were tested for not-a-number / infinity (nan/inf) values at runtime. In most cases, such values were replaced with 0 and a warning was issued. In others, the operation was aborted.<br>
+            CGA 2013.1 introduces a unified inf/nan behaviour: checking of <strong>all</strong> float paramers of builtin functionality can be set to either &quotignore&quot (= don't check), &quotabort with error&quot or &quotreplace with zero&quot see <a href="../manual/ui/cep/grammarcore.html">Grammarcore Preferences</a>). The default behaviour is &quotreplace with zero&quot, which comes closest to the classic behaviour.<br>
+            While CGA 2013.1 provides more debugging capabilities regarding inf/nan values, the behaviour is different than in previous versions.</li>
+            <li><strong>Intra-occlusion and reports, print output, CGA error reporting:</strong> During resolving inta-occlusion-queries, some shapes and sub-shapetrees get deleted (and re-evaluated). The reports issued by <a href="op_report.html"><span class="code_std">report</span></a> operations by the rule of that shapes (and the output of <a href="op_print.html"><span class="code_std">print</span></a> operations and functions plus all CGA errors/warnings) are deleted along with those shapes.<br>
+            While the new behaviour makes more sense (each report/print-output/error has associated a shape in the model hierarchy), it is different than in previous versions.</li>
+        </ul>
+
+    	new CGA Utility Library functions:
+        <ul>
+           	<li><a href="celib/listCount.html"><span class="code_std">listCount</span></a> function</li>
+           	<li><a href="celib/listRemove.html"><span class="code_std">listRemove</span></a> function</li>
+           	<li><a href="celib/listRemoveAll.html"><span class="code_std">listRemoveAll</span></a> function</li>
+           	<li><a href="celib/listRetainAll.html"><span class="code_std">listRetainAll</span></a> function</li>
+        </ul>
+                    
+        new features:
+        <ul>
+          	<li><a href="op_envelope.html"><span class="code_std">envelope</span></a>, operation: added <span class="cga_opparam">direction</span> parameter, allowing for world up-axis aligned envelopes.</li>
+           	<li>
+             <a href="op_cleanupGeometry.html"><span class="code_std">cleanupGeometry</span></a>,
+             <a href="op_comp.html"><span class="code_std">comp</span></a>,
+             <a href="op_extrude.html"><span class="code_std">extrude</span></a>,
+             <a href="op_split.html"><span class="code_std">split</span></a>
+             operations and 
+             <a href="func_geometry.html#nFaces"><span class="code_std">geometry.nFaces</span></a>,
+             <a href="func_geometry.html#area"><span class="code_std">geometry.area</span></a>,
+             <a href="func_geometry.html#volume"><span class="code_std">geometry.volume</span></a>
+              functions: holes in polygons are now supported. However, other operations might drop holes (and issue a CGA warning).  
+            </li>        
+	        
+        </ul>
+
+        <p>changes to existing features:</p>
+    	<ul>        
+   			<li><a href="op_report.html"><span class="code_std">report</span></a> operation: available with all licenses.</li>
+            <li><a href="op_reduceGeometry.html"><span class="code_std">reduceGeometry</span></a> operation: new, more efficient implementation - resulting geometry might differ to previous version.</li>
+            <li><a href="func_fileExists.html"><span class="code_std">fileExists</span></a> function: now returns true fo all builtins.</li>
+   			<li><a href="attr_material.html"><span class="code_std">material.color.rgb</span></a> attribute: return a hex string (see <a href="op_color.html"><span class="code_std">color</span></a> operation) rather than a three-floats-in -[0,1]-string.</li>
+            
+            <li><a href="celib/listClean.html"><span class="code_std">listClean</span></a> utility function: empty entries are filtered now. </li>
+            <li><a href="celib/listIndex.html"><span class="code_std">listIndex</span></a> utility function: support for wildcards. </li>
+          	<li><a href="op_envelope.html"><span class="code_std">envelope</span></a> operation: deprecated signatures without <span class="cga_opparam">direction</span> parameter.</li>
+ 		</ul>
+
+        bugfixes:
+        <ul>
+        	<li><a href="op_alignScopeToGeometry.html"><span class="code_std">alignScopeToGeometry</span></a> operation: more robust regarding bad geometry (fixes a crash) and better face material support.</li>
+          	<li><a href="func_assetsSortRatio.html"><span class="code_std">assetsSortRatio</span></a> function: fixed <span class="cga_opparam">axisSelectorRatio</span> parameter (crashed if <span class="code_std">yz</span> was used).</li>
+          	<li><a href="func_assetsSortSize.html"><span class="code_std">assetsSortSize</span></a> function: fixed <span class="cga_opparam">axisSelectorSize</span> parameter (<span class="code_std">yz</span> was ignored).</li>
+           	<li><a href="op_envelope.html"><span class="code_std">envelope</span></a> operation: 
+                <ul>
+                    <li>fixed missing top faces if one some of the <span class="cga_opparam">baseHeights</span> were equal to <span class="cga_opparam">maxHeight</span>.</li>	        
+                    <li>support for non-planar polygons.</li>	    
+                    <li>fixed several numerical issues (crashes, incorrect geometry).</li>
+                </ul>    
+			</li>
+            <li><a href="op_i.html"><span class="code_std">i</span></a> operation and initial shape handling: added zero-angle removal and better face material support.</li>
+            
+            <li><a href="func_print.html"><span class="code_std">print</span></a> function: a newline is added after each invocation (like in the <a href="op_print.html"><span class="code_std">print</span></a> operation.</li>
+            
+             <li><a href="op_comp.html"><span class="code_std">comp</span></a>, <a href="op_envelope.html"><span class="code_std">envelope</span></a> <a href="op_setback.html"><span class="code_std">setback</span></a>, <a href="func_geometry.html#area"><span class="code_std">geometry.area</span></a>, and <a href="func_geometry.html#isOriented"><span class="code_std">geometry.isOriented</span></a> operations/functions:  <span class="code_std">street.xxx</span> selectors: do not fallback to <span class="code_std">object.xxx</span> selectors if streetWith sttribute is not defined for index 0 but for other indics.</li>  
+            <li>Vertex meger (export + internal to a number of operations): more robust regarding bad geometry (fixes a crash).</li>
+            <li>Triangulator (export, rendering and internal to a number of operations): correctly handle near-identical vertices (led to inconsistent geometry and crashes).</li>
+            <li>Fixed a number of compiler bugs related to <a href="import.html"><span class="code_std">import</span></a>, most important a bug which prevented setting of imported generic attributes.</li>
+        </ul>
+    </td>
+  </tr>
+
+
+
+
+
+
+  <tr>
+  	<td>2012.1</td>
+    <td>
+       	new operations:
+        <ul>
+        	<li><a href="op_cleanupGeometry.html"><span class="code_std">cleanupGeometry</span></a> operation</li>
+        	<li><a href="op_envelope.html"><span class="code_std">envelope</span></a> operation</li>
+        	<li><a href="op_reduceGeometry.html"><span class="code_std">reduceGeometry</span></a> operation</li>
+        	<li><a href="op_setNormals.html"><span class="code_std">setNormals</span></a> operation</li>
+        </ul>
+
+    	new functions:
+        <ul>
+        	<li><a href="func_geometry.html#angle"><span class="code_std">geometry.angle</span></a> function</li>
+        	<li><a href="func_geometry.html#isInstanced"><span class="code_std">geometry.isInstanced</span></a> function</li>
+        </ul>
+
+    	new attributes:
+        <ul>
+         	<li><span class="code_std">uid</span> attribute</li>       	
+		</ul>
+
+    	new CGA Utility Library functions:
+        <ul>
+        	<li><a href="celib/colorRamp.html"><span class="code_std">colorRamp</span></a> function</li>
+        </ul>
+                    
+        new features:
+        <ul>
+          	<li><a href="op_comp.html"><span class="code_std">comp</span></a>, <a href="op_setback.html"><span class="code_std">setback</span></a>, <a href="func_geometry.html#area"><span class="code_std">geometry.area</span></a>, and <a href="func_geometry.html#isOriented"><span class="code_std">geometry.isOriented</span></a> operations: added <span class="code_std">street.front, street.back, street.left, street.right, street.side</span> selectors; these selectors will fallback to the according <span class="code_std">object.xxx</span> selectors if no streetWidth attribute is present.</li>	        
+          	<li><a href="op_setback.html"><span class="code_std">setback</span></a>, <a href="func_geometry.html#area"><span class="code_std">geometry.area</span></a>, and <a href="func_geometry.html#isOriented"><span class="code_std">geometry.isOriented</span></a> operations: added <span class="code_std">world.side, object.side</span> selectors.</li>	        
+        	<li>Edges and vertices resulting from <span class="code_std">comp(e)</span> or <span class="code_std">comp(v)</span> are now rendered in the viewport (the size can be controlled in the <a href="../manual/ui/cep/grammarcore.html">Grammarcore Preferences</a>); only some formats support exporting edges/vertices, see <a href="attr_material.html#RenderingAndExport">Rendering and Export feature table.</a></li>
+        </ul>
+
+        <p>changes to existing features:</p>
+    	<ul>
+   			<li><a href="op_report.html"><span class="code_std">report</span></a> operation: only available with advanced license.</li>
+			<li><a href="op_reverseNormals.html"><span class="code_std">reverseNormals</span></a> operation: support for vertex normals.</li>
+			<li><a href="op_setback.html"><span class="code_std">setback</span></a>, <a href="op_shapeLUO.html"><span class="code_std">shapeL, shapeU, shapeO</span></a>  operations: New implementation.</li>
+			<li><a href="op_scatter.html"><span class="code_std">scatter</span></a> operation: No geometry is inserted anymore (a builtin:cube used to be inserted), but the vertices are visible in the 3D Viewport.</li>
+           	<li><a href="op_comp.html"><span class="code_std">comp</span></a>, <a href="op_setback.html"><span class="code_std">setback</span></a>, <a href="func_geometry.html#area"><span class="code_std">geometry.area</span></a>, and <a href="func_geometry.html#isOriented"><span class="code_std">geometry.isOriented</span></a> operations: <span class="code_std">streedSide, noStreetSide</span> selectors deprecated.</li>	  
+            <li><a href="cga_assetSearch.html"><span class="code_std">Asset Search</span></a>: added the current project to the search path if rule file is in the Utility Library.</li>    
+ 		</ul>
+
+        bugfixes:
+        <ul>
+        	<li><a href="op_comp.html"><span class="code_std">comp</span></a> operation: using the combine (=) operator in conjunction with edges and vertices (e|v) led to undefined behaviour. fixed.</li>
+            <li><a href="func_geometry.html#isOriented"><span class="code_std">geometry.isOriented</span></a> operation: <span class="code_std">world.x</span> selectors were inverted. fixed.</li>
+            <li><a href="op_i.html"><span class="code_std">i</span></a> (trimming) and <a href="op_split.html"><span class="code_std">split</span></a> operations: fixed some bugs which led to inconsistent geometry and increased performance for large geometries. This also speeds up export if vertex merger is on.</li>         
+        	<li><a href="op_alignScopeToAxes.html"><span class="code_std">alignScopeToAxes</span></a> operation: works now also if the current shapes' geometry is empty (e.g. after a <span class="code_std">scatter</span> or <span class="code_std">comp(e|v)</span> operation), and multi-mesh geometries do not loose materials anymore.</li>
+        </ul>
+    </td>
+  </tr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <tr>
+  	<td>2011.1</td>
+    <td>
+    	new functions:
+        <ul>
+        	<li><a href="func_getGeoCoord.html"><span class="code_std">getGeoCoord</span></a> function</li>
+        	<li><a href="func_geometry.html#isOriented"><span class="code_std">geometry.isOriented</span></a> function</li>
+        	<li><a href="func_geometry.html#uMin"><span class="code_std">geometry.{uMin|uMax|vMin|vMax}</span></a> functions</li>
+        	<li><a href="func_print.html"><span class="code_std">print</span></a> functions</li>
+        </ul>
+
+    	new attributes:
+        <ul>
+         	<li><a href="attr_scope.html"><span class="code_std">scope.elevation</span></a> attribute</li>       	
+        	<li><a href="attr_material.html"><span class="code_std">material.reflectivity, material.opacity, material.opacitymap, material.opacitymap.{su|sv|tu|tv|rw}
+material.normalmap, material.normalmap.{su|sv|tu|tv|rw}</span></a> attributes</li>
+		</ul>
+                    
+        new features:
+        <ul>
+            <li>Added support for generic shape attributes: each shape can have its own copy of an attribute, and the value is passed on to the successors. Values can be set with the <a href="op_set.html"><span class="code_std">set</span></a> operation.</li>
+            <li>Added support for <a href="style.html"><span class="code_std">styles</span></a>: Rules and attributes can be bundled and named to form a style. All styles derive from the default style. This is somewhat similar to inheritance in OOP.</li>
+            <li>On <a href="import.html"><span class="code_std">import</span></a> of a rule file, attributes can now be protected and styles can be chosen.</li>
+           	<li><a href="op_color.html"><span class="code_std">color</span></a> operation: added an overload which takes a float tripple.</li>	
+            <li><a href="func_geometry.html#area"><span class="code_std">geometry.area</span></a> function: added <span class="code_std">object.front, streetSide</span> and <span class="code_std">noStreedSide</span> selectors.</li>
+			<li><span class="code_std">case</span> blocks can now be used between <a href="op_pushpop.html"><span class="code_std">push [</span></a> and <a href="op_pushpop.html"><span class="code_std">pop ]</span></a> operations, i.e. a new scope can be conditional.</li>
+            <li>CGA executen trace for debugging, see <a href="../manual/ui/cep/grammarcore.html">Grammarcore Preferences</a>.</li>
+           	<li><a href="op_alignScopeToAxes.html"><span class="code_std">alignScopeToAxes</span></a> operation: added <span class="code_std">x</span> and <span class="code_std">z</span> selectors.</li>	
+        </ul>
+
+        <p>changes to existing features:</p>
+    	<ul>
+            <li><a href="attr_material.html"><span class="code_std">material attributes</span></a>: 
+            <ul>
+         		<li>if the shape material attribute is not modified: return attribute from first geometry asset mesh material (i.e. always return the current value; on older versions, always the shape material value was returned)</li>
+                <li>removed <span class="code_std">material.ambient.a</span></a> attribute</li> 
+                <li>deprecated <span class="code_std">material.color.a</span> (replaced by <span class="code_std">material.opacity</span>) and <span class="code_std">material.map{3,4,5}</span></a> (replaced by <span class="code_std">material.specularmap, material.opacitymap, material.normalmap</span>) attributes</li>
+                <li>changed <span class="code_std">material.bump</span> to <span class="code_std">material.bumpValue</span></li>
+                <li>fundamental changes to transparency handling: the alpha channel of <span class="code_std">material.colormap</span> is always ignored now; alpha-maps must be set using the <span class="code_std">material.opacitymap</span> texture layer; similarly, <span class="code_std">material.opacity</span> must be used instead of <span class="code_std">material.color.a</span>; rendering: CityEngine's GL preview now drops fragments with alpha < 0.1, that used to be 0.3. note: all materials with opacity are rendered after all other materials.</li>
+                <li>textures can be disabled by setting the filename to the empty string (i.e. <span class="code_std">texture(&quot;&quot;)</span> or <span class="code_std">set(material.opacitymap, &quot;&quot;)</span>); in previous versions, this led to usage of <span class="code_std">&quot;builtin:unknowntexture.png&quot;</span>; the default materials's textures are set to the empty string instead of &quot;not available&quot;.</li>
+                <li>If a texture can not be found, the texture name is always set to <span class="code_std">&quot;builtin:unknowntexture.png&quot;</span>. This is also the case for misspelled <span class="code_std">&quot;builtin:XXX&quot;</span> textures (which were set to <span class="code_std">&quot;builtin:default&quot;</span> in previous versions).</li> 
+            </ul>
+			</li>
+            <li><span class="code_std">&quot;builtin:cube&quot;</span> now has texture coordinates for uv-set 0 (colormap) only (was 3: uv-sets 0, 1, 2 in previous versions).</li> 
+            <li>For rendering and export, undefined uv-sets default to set 0 now (if 0 is defined), i.e. if e.g. <span class="code_std">material.opacitymap</span> is set to a valid texture, but uv-set 3 is undefined, the coordinates form uv-set 0 are re-used. This was only the case for specular map before. See also <a href="cga_texturing.html">Texturing: Essential Knowledge</a>.</li>
+            
+            <li><a href="func_fileSearch.html"><span class="code_std">fileSearch</span></a> function (and all related functions in the Utility Library) got reworked:
+            <ul>
+            	<li>search logic is more strict now (if searchQuery is not an absolute workspace path, match relative to assets and root folders of current project (in old versions, it was tried to match all folders and subfolders)</li>
+                <li>better performance</li>
+                </ul>
+            </li> 
+            
+          	<li>Geometry asset readers: extended consistency checks to handle polygons with collapsed edges and dropped checking for non-planar faces.</li>
+            <li>Removed &quot;drop shapes fully trimmed away&quot; optimization in createShape operation: in older versions, new shapes were not created if they would be completly behind an enabled trimplane.</li>
+		</ul>
+
+        bugfixes:
+        <ul>
+        	<li><a href="op_scatter.html"><span class="code_std">scatter</span></a> operation: gaussian distribution: fixed wrong mean calculation for right / bottom cases; led to endless loops in certain cases.</li>
+            <li>vertex merger now respects topology (i.e. export with vertex merging option and all cga-operations are o-shape safe).</li>
+      
+            <li>The <a href="op_setback.html"><span class="code_std">setback</span></a>, <a href="op_shapeLUO.html"><span class="code_std">shapeL</span></a>, <a href="op_shapeLUO.html"><span class="code_std">shapeU</span></a> and <a href="op_shapeLUO.html"><span class="code_std">shapeO</span></a> operations received a facelift, fixing many issues. Notably <a href="op_shapeLUO.html"><span class="code_std">shapeO</span></a> is much more stable now.</li>
+            <li>Fixed a fatal recursion-not-detected error in user-defined functions with arguments.</li>            
+
+			<li><a href="op_split.html"><span class="code_std">uv split</span></a> operation:
+            <ul>
+                <li>fixed crash on geometries w/o uvsets.</li>
+	            <li>fixed a precision bug.</li>
+			</ul>
+            </li>
+            <li><a href="op_innerRect.html"><span class="code_std">innerRect</span></a> operation: fixed shape placement if scope contains rotation.</li>
+        	<li>Self-intersecting polygons are handled properly now (<a href="op_scatter.html"><span class="code_std">scatter</span></a>, <a href="op_split.html"><span class="code_std">uv split</span></a> operations and rendering).</li>
+            <li><a href="op_roofHip.html"><span class="code_std">roofHip</span></a> operation: fixed a crash in a specific situation (with overhang, on collinear vertices).</li>
+            <li>fixed <a href="attr_comp.html"><span class="code_std">comp.sel</span></a> (only contained last word, e.g &quot;front&quot; instead of &quot;object.front&quot;).</li>
+            <li>fixed a bug in <a href="op_convexify.html"><span class="code_std">convexify</span></a>: check resulting polys for zero area, remove degenerate ones - led to crashes in follow-op operations in some cases.</li>
+            <li><a href="op_rotate.html"><span class="code_std">rotate</span></a> operation: fixed a bug in scope case (was rotated around pivot, not scope).</li>
+            <li><a href="func_convert.html"><span class="code_std">convert</span></a> function: fixed a bug in <span class="code_std">convert((x|y|z), scope, pivot, orient, x, y, z)</span> (was size-sensitive).</li>
+            <li>material-per-face assets: improved support, material now survives deletion of zero-area faces.</li>
+            <li>split / trim fix: cut-exactly-throug-edges situations with >1 points (o-shapes etc.).</li>
+            <li>fixed a bug in intra-occlusion geometry caching (led to wrong results).</li>            
+			<li>Collada reader: 
+            	<ul>
+                   <li>lines and points are ignored now (they were treaten as polygons in older versions)</li>
+			       <li>meshes consisting of textured and non-textured polygons are handled better now (non-textured polygons receive (0,0) uvs on all vertices).</li>
+            </ul> </li>
+            <li>Image reader handles 16bit grayscale textures properly now.</li>
+            <li>faster and more stable <a href="func_geometry.html#area"><span class="code_std">geometry.area</span></a>.</li>    
+        </ul>
+    </td>
+  </tr>
+
+
+  <tr>
+  	<td>2010.3</td>
+    <td>
+    	new operations:
+        <ul>
+        	<li><a href="op_scatter.html"><span class="code_std">scatter</span></a> operation</li>
+        	<li><a href="op_setback.html"><span class="code_std">setback</span></a> operation</li>
+        	<li><a href="op_shapeLUO.html"><span class="code_std">shapeL</span></a> operation</li>
+        	<li><a href="op_shapeLUO.html"><span class="code_std">shapeU</span></a> operation</li>
+        	<li><a href="op_shapeLUO.html"><span class="code_std">shapeO</span></a> operation</li>
+        	<li><a href="op_tileUV.html"><span class="code_std">tileUV</span></a> operation</li>
+        </ul>
+            
+        new features:
+        <ul>
+           	<li><a href="op_comp.html"><span class="code_std">comp</span></a> operation: added world.xxx, object.xxx and streetSide selectors.</li>	
+        	<li><a href="func_geometry.html#area"><span class="code_std">geometry.area()</span></a> function now supports component split-style selectors to calculate area of only a subset of the geometry's faces.</li>
+		</ul>
+        <p>changes to existing features:</p>
+    	<ul>
+    	    <li><a href="op_extrude.html"><span class="code_std">extrude</span></a> and <a href="op_taper.html"><span class="code_std">taper</span></a> operation: negative heights do not change the pivot anymore but result in negative scope size.</li>
+        </ul>
+
+        bugfixes:
+        <ul>
+			<li>Fixed a bug in trimming a negative sized scope.</li>
+	        <li><a href="op_color.html"><span class="code_std">color</span></a> does not touch alpha (used to set it to 1.0).</li>             
+           	<li><a href="op_comp.html"><span class="code_std">comp</span></a> operation: corrected scope selectors for negative scope sizes (e.g. front becomes back if scope.sz is < 0).</li>
+	        <li><a href="op_convexify.html"><span class="code_std">convexify</span></a> and <a href="op_convexify.html"><span class="code_std">innerRect</span></a> operations: fixed a numerical problem concerning collinear vertices: remove'em before the operations.</li>             
+	        <li><a href="op_mirrorScope.html"><span class="code_std">mirrorScope</span></a> operation: fixed a bug which resulted in wrong translations.</li>             
+	        <li><a href="op_roofShed.html"><span class="code_std">roofShed</span></a> operation: fixed vertex indices for shed roofs on multi-face shapes.</li>
+			<li><a href="op_offset.html"><span class="code_std">offset</span></a> operation: fixed a bug in the case where no inside/border geometry was generated (due to a too large offset) and the according selector was used.</li>
+            <li> Fixed a compiler bug: functions beginning with &amp;const&amp; or &amp;attr&amp; (eg. construction) were parsed wrongly.</li>		
+          </ul>
+    </td>
+  </tr>
+  
+  <tr>
+  	<td>2010.2</td>
+    <td>
+       	new operations:
+    	<ul>
+            <li><a href="op_deleteUV.html"><span class="code_std">deleteUV</span></a> operation</li>
+            <li><a href="op_mirror.html"><span class="code_std">mirror</span></a> operation</li>
+            <li><a href="op_mirrorScope.html"><span class="code_std">mirrorScope</span></a> operation</li>
+            <li><a href="op_normalizeUV.html"><span class="code_std">normalizeUV</span></a> operation</li>
+            <li><a href="op_rotateScope.html"><span class="code_std">rotateScope</span></a> operation</li>
+            <li><a href="op_trim.html"><span class="code_std">trim</span></a> operation</li>
+        </ul>
+        new functions:
+        <ul>
+            <li><a href="func_geometry.html#du"><span class="code_std">geometry.du/dv</span></a> functions</li>
+		</ul>
+        new features:
+        <ul>
+            <li><a href="op_split.html"><span class="code_std">split</span></a> operation now supports splits in the uv (texture coordinates) domain including support for the &quot;unwarped&quot; domain (<span class="code_std">unitSpace</span> surface parameterization).</li>
+            <li><a href="op_offset.html"><span class="code_std">offset</span></a> operation: a new overload allows for keeping only <span class="code_std">inside</span> or <span class="code_std">border</span> faces.</li>
+            <li><a href="op_setupProjection.html"><span class="code_std">setupProjection</span></a> operation: a new overload allows for adding a translation offset to the setup scope.</li>
+		</ul>
+        <p>changes to existing features:</p>
+    	<ul>
+            <li><a href="op_extrude.html"><span class="code_std">extrude</span></a> and <a href="op_taper.html"><span class="code_std">taper</span></a> operations now keep texture coordinates.</li>
+            <li><a href="op_extrude.html"><span class="code_std">extrude</span></a>, <a href="op_taper.html"><span class="code_std">taper</span></a>, <a href="op_roofGable.html"><span class="code_std">roofGable</span></a>, <a href="op_roofHip.html"><span class="code_std">roofHip</span></a>, <a href="op_roofPyramid.html"><span class="code_std">roofPyramid</span></a> and <a href="op_roofShed.html"><span class="code_std">roofShed</span></a> operations do net set the pivot anymore and try to maintain the scope's x-axis orientation as much as possible (i.e. the scope and pivot orientation is different now).</li>
+            <li><a href="op_alignScopeToGeometry.html"><span class="code_std">alignScopeToGeometry</span></a> operation: negative indices are supported now (modulo, i.e. -1 is the last face/edge; was unspecified behaviour before).</li>
+			<li><a href="op_comp.html"><span class="code_std">comp(e)</span></a> operation: edges have now a defined index, i.e. edge 0 is always guaranteed to be the first edge of the first face.</li>
+            <li><a href="op_roofGable.html"><span class="code_std">roofGable</span></a>, <a href="op_roofHip.html"><span class="code_std">roofHip</span></a> and <a href="op_roofShed.html"><span class="code_std">roofShed</span></a> operations are now guaranteed to put first roof face on first edge of input face in all cases and to put all roof faces on corresponding edge if current geometry consists of one face only.</li>
+
+            <li><a href="op_setupProjection.html"><span class="code_std">setupProjection</span></a> operation: deprecated <p class="code2">setupProjection(<span class="cga_opparam">uvSet</span>, <span
+  class="cga_opparam">axesSelector, width, height, uwFactor</span>)</p>
+overload  .</li>
+
+			<li>changed recursion detection: control shape tree width rather than active nodes</li>
+
+		</ul>
+       <p>bugfixes:</p>
+       <ul>
+       		<li>Recursive functions did not compile if the arguments were not float.</li>
+            <li><a href="celib/replace.html"><span class="code_std">replace</span></a> function: did replace only the first occurrence, now replaces all occurrences.</li>
+	       	<li><a href="op_split.html"><span class="code_std">split</span></a> and <a href="op_trim.html"><span class="code_std">trim</span></a> operations:
+            <ul>
+             	<li>now handle concave polygons.</li>
+                <li>now handle negative-sized scopes.</li>
+            </ul>
+            </li>
+            <li>Fixed a bug in intra-occlusion (in some cases wrong pre-component-split volume was taken to check against).</li>
+  	       	<li><a href="func_geometry.html#isPlanar"><span class="code_std">geometry.isPlanar</span></a> function: in case of collinear edges nonplanarity was reported.</li>
+            <li><a href="op_innerRect.html"><span class="code_std">innerRect</span></a>, <a href="op_convexify.html"><span class="code_std">convexify</span></a>, <a href="op_roofGable.html"><span class="code_std">roofGable</span></a>, <a href="op_roofHip.html"><span class="code_std">roofHip</span></a>, <a href="op_roofPyramid.html"><span class="code_std">roofPyramid</span></a>operations and <a href="op_roofShed.html"><span class="code_std">roofShed</span></a> operations:  fixed a numerical issue.</li>
+            <li><a href="op_alignScopeToGeometry.html"><span class="code_std">alignScopeToGeometry</span></a> operation: <span class="code_std">world.lowest</span> selector: if all vertices had y-coordinate exactly on 0.0 result was random.</li>
+			<li><a href="op_comp.html"><span class="code_std">comp</span></a> operation: if the &quot;=&quot; operator was used in conjunction with a rotated scope, the resulting shape had wrong scope and pivot position.</li>
+			<li><a href="op_center.html"><span class="code_std">center</span></a> operation: did not work properly if scope was rotated.</li>
+		</ul>
+	</td>
+  </tr>
+  
+  <tr>
+  	<td>2010.1</td>
+    <td>SR1 new functions:
+    	<ul>
+        <li><a href="func_sel.html"><span class="code_std">sel</span></a> function</li>
+        </ul>
+        <p>SR1 changes to existing features:</p>
+		<ul>
+		<li>fixed signature matching bug (false syntax errors, eg. with alignScopeToGeometry)</li>
+		<li>fixed wrong asset search path in imported rule files</li>
+		<li>fixed cgalib replace() issue</li>
+        <li>fixed a bug in <a href="op_translate.html"><span class="code_std">translate(rel, object, ...)</span></a> operation</li>
+        <li>fixed a bug which led to unreferenced vertices in <a href="op_extrude.html"><span class="code_std">extrude </span></a> and roofXXX operations (connected to very thin features).</li>
+		<li>fixed a bug in multi-face-extrude: in special cases some faces got deleted</li>
+		</ul>
+
+    	new operations:
+    	<ul>
+            <li><a href="op_convexify.html"><span class="code_std">convexify</span></a> operation</li>
+            <li><a href="op_rotateUV.html"><span class="code_std">rotateUV</span></a> operation</li>
+            <li><a href="op_reverseNormals.html"><span class="code_std">reverseNormals</span></a> operation</li>
+            <li><a href="op_texture.html"><span class="code_std">texture</span></a> operation</li>
+        </ul>
+        new functions:
+        <ul>
+            <li><a href="func_pow.html"><span class="code_std">pow</span></a> function</li>
+            <li><a href="func_exp.html"><span class="code_std">exp</span></a> function</li>
+            <li><a href="func_log10.html"><span class="code_std">log10</span></a> function</li>
+            <li><a href="func_ln.html"><span class="code_std">ln</span></a> function</li>
+            <li><a href="func_len.html"><span class="code_std">len</span></a> function</li>
+            <li><a href="func_count.html"><span class="code_std">count</span></a> function</li>
+            <li><a href="func_find.html"><span class="code_std">find</span></a> function</li>
+            <li><a href="func_substring.html"><span class="code_std">substring</span></a> function            <li><a href="func_isnan.html"><span class="code_std">isnan</span></a> function</li>
+            <li><a href="func_isinf.html"><span class="code_std">isinf</span></a> function        
+       		<li><a href="func_assetInfo.html"><span class="code_std">assetInfo</span></a></li>
+			<li><a href="func_assetsSortRatio.html"><span class="code_std">assetsSortRatio</span></a></li>
+			<li><a href="func_assetsSortSize.html"><span class="code_std">assetsSortSize</span></a></li>
+    		<li><a href="func_count.html"><span class="code_std">count</span></a> function</li>  
+
+		    <li><a href="func_fileExists.html"><span class="code_std">fileExists</span></a> function</li>
+    		<li><a href="func_fileSearch.html"><span class="code_std">fileSearch</span></a> function</li>
+    		<li><a href="func_find.html"><span class="code_std">find</span></a> function</li>
+
+    		<li><a href="func_float.html"><span class="code_std">float</span></a> function</li>
+    		<li><a href="func_str.html"><span class="code_std">str</span></a> function</li>
+    		<li><a href="func_bool.html"><span class="code_std">bool</span></a> function</li>
+
+    		<li><a href="func_imageInfo.html"><span class="code_std">imageInfo</span></a> function</li>
+    		<li><a href="func_imagesSortRatio.html"><span class="code_std">imagesSortRatio</span></a> function</li>
+        </ul>
+        new features:
+        <ul>
+        	<li><a href="cgaindex.html#CGAUtilFuncLib">CGA Utility Functions Library</a> with utility functions for <a href="cgaindex.html#StringUtilFunc">string handling</a>, <a href="cgaindex.html#StringListUtilFunc">string list handling</a> and <a href="cgaindex.html#FileUtilFunc">file, assets and image handling</a>.</li>
+            <li>Support for reading Collada assets.</li>
+            <li>Limited support for material-per-face assets</li>
+            <li><a href="op_split.html"><span class="code_std">split</span></a> operation: added optional <span class="cga_opparam">noAdjust</span> selector to avoid scope being set to the geometry's bounding box.</li>
+       </ul>
+        <p>changes to existing features:</p>
+    	<ul>
+        	<li><a href="attr_initialShape.html"><span class="code_std">initialShape.startRule</span></a> is new and replaces the deprecated <span class="code_std">initialShape.symbol</span></a>.</li>
+        
+        	<li><a href="cga_assetSearch.html">Asset and texture search</a>: Now the search for an inserted asset (or texture) is always relative to the rule file and the search locations changed. No search heuristcs are applied anymore, so for instance the asset "assets/windows/window1.obj" must be inserted as <span class="code_std">i(&quot;windows/window1.obj&quot;)</span>; in older versions, <span class="code_std">i(&quot;window1.obj&quot;)</span> would have found the file (but maybe another one instead, with the same file name, but at a different location in the workspace).</li>
+        	<li><a href="op_s.html"><span class="code_std">s</span></a> operation: a negative size now leads to a mirrored geometry (with reversed normals) rather than to an implicit translation. Converting rules which used negative sizes is straight-forward: use the posive value and add a <span class="code_std">t</span> operation, for example this cga code <span class="code_std">s('1,'1,-1.2) OpeningWall("door") Door</span> has to be converted to this: <span class="code_std">s('1,'1,1.2) t(0,0,-1.2) OpeningWall("door") Door</span></li>
+        	<li>fixed reverse face and mesh order of inserted obj assets - face ids are reversed (comp split!)</li>
+            <li><a href="attr_initialShape.html"><span class="code_std">initialShape.symbol</span></a> attribute: the signature string (''${}'') was dropped</li>
+            <li><a href="op_alignScopeToGeometry.html"><span class="code_std">alignScopeToGeometry</span></a>: (a) New face selectors <span class="cga_opparam">world.lowest, largest, any</span>. (b) New edge selectors <span class="cga_opparam">world.lowest, largest</span> and new syntax (combinations of face and edge selectors and indices). (c) Deprecated <span class="code_std">alignScopeToGeometry</span>(<span class="cga_opparam">upAxis, faceIndex</span>) and <span class="code_std">alignScopeToGeometry</span>(<span class="cga_opparam">upAxis, auto</span>).</li>
+            <li><a href="op_innerRect.html"><span class="code_std">innerRect</span></a> operation:(a) Now operates on each face of the geometry (instead of just the first face). (b) Concave faces are handled (they get convexified first and the innerRect is computed on the largest rectangle). (c) Only keeps rectangular faces if they are aligned to x-axis.</li>
+            <li>It is not possible to use the ~ operator anymore in the <span class="code_std">s, r, t</span> operations - it did not do anything anyway.</li>
+            <li><a href="op_setupProjection.html"><span class="code_std">setupProjection</span></a> operators ~ and ' can now be used.</li>
+            <li><a href="op_setPivot.html"><span class="code_std">setPivot</span></a>: no support anymore for "yUp" and "zUp" selectors (use <span class="code_std">xyz</span> and <span class="code_std">yzx</span>).
+		</ul>
+        
+        <p>bugfixes:</p>
+        <ul>
+        <li>Occlusion: (a) fixed a bug which led to wrong results (b) fixed an intra-occlusion memory leak (c) fixed a bug which could have led to inconsitencies in the exported models.</li>
+        <li><a href="func_geometry.html#isConcave"><span class="code_std">geometry.isConcave</span></a> function: fixed a numerical issue which led to wrong results.</li>
+        <li>changed const expression evaluation - they are always evaluated &rarr; numbers are consistent, also if overriden by inspector value</li>
+        <li><a href="op_comp.html">Component split</a>: fixed a bug which led to lost materials if asset contained more than one mesh / material</li> 
+        <li><a href="op_innerRect.html"><span class="code_std">innerRect</span></a> operation: fixed some numerical issues which led to wrong results.</li>
+        <li>The obj asset reader now handles negative indices (max files)</li>
+        <li><a href="op_color.html"><span class="code_std">color</span> does not touch alpha (used to set it to 1.0).</a></li>             
+        <li>Better name clashes handling of imported rule files.</li>
+        <li>Stricter type handling, some errors which were only detected during generation before are now detected at complie time.</li>
+        <li><a href="op_split.html"><span class="code_std">split</span></a> operation: in some cases (extruded geometry), texture coordinates were repeated rather than split.</li> 
+         </ul>
+    </td>
+  </tr>
+  
+  <tr>
+    <td>2009.3</td>
+  <td>new features:
+    <ul>
+        <li><a href="op_roofGable.html"><span class="code_std">roofGable</span></a> operation</li>
+        <li><a href="op_roofHip.html"><span class="code_std">roofHip</span></a> operation</li>
+        <li><a href="op_roofPyramid.html"><span class="code_std">roofPyramid</span></a> operation</li>
+        <li><a href="op_roofShed.html"><span class="code_std">roofShed</span></a> operation</li>
+        <li><a href="op_translateUV.html"><span class="code_std">translateUV</span></a> operation (was <span class="code_std">offsetUV</span>)</li>
+        <li><a href="op_innerRect.html"><span class="code_std">innerRect</span></a> operation</li>
+        <li><a href="func_geometry.html#nEdges"><span class="code_std">geometry.nEdges</span></a> function</li>
+        <li><a href="op_setupProjection.html"><span class="code_std">setupProjection</span></a> operation</li>
+        <li><a href="op_projectUV.html"><span class="code_std">projectUV</span></a> operation</li>
+        <li><a href="op_comp.html">Component split</a>: (1) Added ''='' operator. This Operator combines all selected components into one new shape. (2) New selectors: <span class="cga_opparam">border, inside</span> and <span class="cga_opparam">eave, hip, valley, ridge</span>. (3) New shape attributes <span class="code_std">comp.index, comp.total</span>.</li> 
+    </ul>
+    changes to existing features:    
+    <ul>
+      <li>Support for trim-planes along concave faces. Trim planes are not infinite anymore, their extent can be controlled in the <a href="../manual/ui/cep/grammarcore.html" class="internlink">Grammarcore preferences</a>.</li>
+        <li><span class="code_std">roof</span> operation deprecated.</li>
+        <li><span class="code_std">offsetUV</span> operation deprecated (is now <a href="op_translateUV.html"><span class="code_std">translateUV</span></a>).</li>
+        <li><span class="code_std">setupUV, bakeUV</span> deprecated (use <a href="op_setupProjection.html"><span class="code_std">setupProjection</span></a> and <a href="op_projectUV.html"><span class="code_std">projectUV</span></a> operations instead).</li> 
+        <li><a href="op_extrude.html"><span class="code_std">extrude</span></a>, <a href="op_roofGable.html"><span class="code_std">roofGable</span></a>, <a href="op_roofHip.html"><span class="code_std">roofHip</span></a> and <a href="op_roofShed.html"><span class="code_std">roofShed</span></a> now handle multi-face initial shapes.</li>
+        <li><a href="func_occlusion.html"><span class="code_std">inside, overlaps, touches</span></a> functions: (1) added <span class="cga_opparam">inter, intra, all</span> selectors. (2) A special configuration (''face is completely covered by a side of a volume'') is now included in the inside case.</li>
+        <li>New settings to control endless recursion detection: (1) limit function call depth, (2) limit nr. of active shapes (detect shapetrees-breadth-explosion), see <a href="../manual/ui/cep/grammarcore.html" class="internlink">Grammarcore preferences</a>.</li>
+    </ul> 
+    bugfixes:
+    <ul>
+        <li><a href="op_alignScopeToAxes.html"><span class="code_std">alignScopeToAxes()</span></a> (only the no-selector default case) did not work properly, fixed.</li>
+        <li>Non-boolean expressions are no longer valid in <span class="code_std">case</span> statements (led to a run-time error before).</li> 
+        <li>Fixed a bug connected to usage of <span class="code_std">convert()</span> in <span class="code_std">import</span>ed cga files.</li>
+        <li>Using <a href="op_alignScopeToAxes.html"><span class="code_std">alignScopeToAxes()</span></a> or <a href="op_alignScopeToGeometry.html"><span class="code_std">alignScopeToGeometry()</span></a> between <span class="code_std">setupUV()</span> and <span class="code_std">bakeUV()</span> resulted in incorrect texture coordinates, fixed with new operations.</li>
+        <li>Fixed a bug in euler angle extraction which sabotaged e.g. <span class="code_std">convert()</span>.</li>
+        <li><a href="op_extrude.html"><span class="code_std">extrude</span></a> operation: fixed indexing of first face.</li>
+        <li><a href="func_convert.html"><span class="code_std">convert</span></a> function: <span class="code_std">convert(orient, scope, world | object, ...)</span> did not work correctly</li>
+        <li><a href="op_comp.html">Component split</a>: (1) using indices on an empty selection no longer crashes. (2) interleaved edge/vertex-comp-splits did not work (resulted in empty selection), fixed</li>
+        <li><a href="func_occlusion.html"><span class="code_std">inside, overlaps, touches</span></a> functions: fixed several bugs (dislocated intersection volumes, wrong touches results, lost inter-occluders).</li>
+
+    </ul>
+  
+  </td>
+  </tr>
+
+
+  <tr>
+  <td>2009.2</td>
+  <td>new features:
+    <ul>
+        <li><a href="op_translate.html"><span class="code_std">translate</span></a> operation</li>
+        <li><a href="op_rotate.html"><span class="code_std">rotate</span></a> operation</li>
+        <li><span class="code_std">offsetUV</span> operation</li>
+        <li><a href="op_scaleUV.html"><span class="code_std">scaleUV</span></a> operation</li>
+        <li><a href="attr_initialShape.html"><span class="code_std">initialShape.origin</span></a> shape attribute</li
+        ><li><a href="func_convert.html"><span class="code_std">convert</span></a> function</li>
+        <li><a href="func_atan2.html"><span class="code_std">atan2</span></a> function</li>
+        <li><a href="version.html"><span class="code_std">version</span></a> keyword</li>
+    </ul>
+    changes to existing features:
+    <ul>
+    <li>object coordinate system: a shape's <span class="code_std">pivot</span> is now relative to <span class="code_std">initialShape.origin</span> and not relative to the world coordinate system anymore. </li>
+    <li><a href="op_extrude.html"><span class="code_std">extrude(axis, h)</span>:</a> axis selectors (<span class="code_std">x | y | z</span>) deprecated; new selectors (<span class="code_std">world.x | world.y | world.z</span>) change pivot orientation after operation to be the same as after <span class="code_std">extrude(h)</span>.</li>
+    <li><a href="op_alignScopeToGeometry.html"><span class="code_std">alignScopeToGeometry</span>:</a> "auto" mode: (1) if all edges are on the same y-coordinate, the longest edge is taken and (2) fixed a bug which led to undefined behaviour in rare cases.</li>
+     </ul>
+  
+  </td>
+  </tr>
+  <tr>
+  <td>2009.1 and older (<em>keyword <span class="code_std">version</span> not supported</em>)</td>
+  <td>-</td>
+  </tr>
+  </table>
+
+  
+
+  <h3><!-- FOOTER --> </h3>
+        <p class="foot">Copyright &copy;2008-2019 Esri R&amp;D Center Zurich. All rights reserved.</p>                  
+
+<!-- END CENTERED CONTENT -->
+
+</div>
+</body>
+</html>

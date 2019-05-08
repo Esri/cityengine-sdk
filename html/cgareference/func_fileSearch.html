@@ -1,0 +1,199 @@
+<html>
+
+<head>
+    <title>
+    fileSearch Function
+    </title>
+    <link rel="stylesheet" href="../manual_style.css" type="text/css" />
+</head>
+
+<body>
+<div class="content">
+
+<!-- HEADER (use only on bookchapters) -->
+
+    <table summary="" class="header">
+        <tr>
+            <td align="left" class="helphead_l"><a href="../toc.html"><div class="helplink">&nbsp;</div></a></td>
+            <td align="right" class="helphead_r"></td>
+        </tr>
+    </table>
+
+
+<!-- CONTENT -->
+
+        <h1>
+        fileSearch function
+        </h1>
+        <h2>
+        Synopsis
+        </h2>
+        <p class="code2">string fileSearch(string <span class="cga_opparam">searchQuery</span>)</p>
+        
+        
+        <h2> Parameters </h2>
+	  	<ul>
+    	<li><span class="cga_opparam">searchQuery</span><br>
+    	   Search query to apply on list of all files in the workspace. See below for details.
+    	</li>
+  		</ul>
+
+        
+<h2>
+        Returns</h2>
+        <p>An alphabetically sorted string list with all files in the workspace matching the <span class="cga_opparam">searchQuery</span>. Each entry is terminated with a &quot;;&quot; (semicolon). 
+        </p>
+        
+
+
+        <p class="info">The <span class="cga_keyword">fileSearch</span> function lists all files in the workspace and matches their absolute path with the <span class="cga_opparam">searchQuery</span>. Search queries are relative to the current project (i.e. the project in which the current rule file resides) except if the <span class="cga_opparam">searchQuery</span> is based on an absolute workspace path (i.e. starts with a slash (&quot;/&quot;) or a wildcard (* or ?). Pseudocode of the matching algorithm:</p>
+  <pre>
+        result = ""
+        for all open projects in workspace :
+           if project == current project:
+              result +=  all matching files in project, relative to assets folder
+              result +=  all matching files in project, relative to project folder
+           fi
+           
+           result += all matching files in project, relative to workspace root
+           sort result
+        end
+        </pre>
+  <br>
+  <h3>Search Queries</h3>
+        The CityEngine features advanced search queries supporting wildcards, regular expressions and file properties such as filetype.
+        All files in the workspace are filtered with the query and the absolute workspace path is returned.
+        Whitespace means AND. 
+ 
+        <h4>Wildcards</h4>
+        The common wildcards characters '*' (asterisk character) and '?' (question mark) are supported. The asterisk substitutes for any zero or more characters, and the question mark substitutes for any one character.
+ 
+        <h4>Regular Expressions</h4>
+        Regular expressions allow for complex string patterns descriptions. A comprehensive introduction to regular expressions is out of scope for this manual, please refer to other sources such as <a class="normw" href="http://en.wikipedia.org/wiki/Regular_expression">Wikipedia</a> or the specifiaction from the <a class="normw" href="http://www.opengroup.org/onlinepubs/007908799/xbd/re.html">Open Group</a>. <br>
+		Regular expressions start with '$'. Always put the '$' as the FIRST character if your <span class="cga_opparam">searchQuery</span> is a regular expression! Note that with regular expressions, the semantics of the wildcards "*" and "?" changes. "*" matches the preceding element zero or more times, therefore use ".*" to emulate the "match anything" behaviour.
+ 
+  <h4>File Properties</h4>
+		 Following file properties can be querried:
+         <ul>
+         <li><strong>Name</strong>: Filename</li>
+         <li><strong>Ext</strong>: File extension</li>
+         <li><strong>Project</strong>: Project name</li>
+         <li><strong>Path</strong>: Filepath</li>
+  </ul>       
+            
+<h2>Related</h2>
+<ul>
+	<li><a href="func_splitString.html"><span class="code_std">splitString</span></a> function</li>
+</ul>
+
+<h2>Examples</h2>
+In the following examples, we use a basic workspace with two projects and a few files. The examples are in rule.cga, i.e. MyProject is the current project.
+<center>
+<img src="images/fileSearchWorkspace.png"></img>
+</center>
+
+
+
+<h4>Example 1: Wildcards</h4>
+<pre class="code3">
+	print(fileSearch("*.png"))
+	# result ="/MyProject/assets/textures/1.png;/MyProject/assets/textures/2.png;
+                   /MyProject/assets/textures/4.png;/MyProject/assets/tower.png;
+                   /OtherProject/assets/glass.png;"
+</pre>
+<i>Because the searchQuery starts with an asterisk, all projects are included in the search.</i>
+<br><br>
+
+	<h4>Example 2: Wildcards</h4>
+<pre class="code3">
+	print(fileSearch("?.png"))
+	# result = ";"
+</pre>
+<i>There is no png file with a 1-character-name in the root directory or the asset directory of the current project.</i>
+<br><br>
+
+	<h4>Example 3: Wildcards</h4>
+<pre class="code3">
+	print(fileSearch("*/?.png"))
+	# result = "/MyProject/assets/textures/1.png;/MyProject/assets/textures/2.png;
+                    /MyProject/assets/textures/4.png;"
+</pre>
+<i>Because of the leading asterisk, all folders are searched for a png file with a 1-character-name.</i>
+<br><br>
+
+	<h4>Example 4: Wildcards</h4>
+<pre class="code3">
+	print(fileSearch("textures/*"))
+	# result = "/MyProject/assets/textures/1.png;/MyProject/assets/textures/2.png;/MyProject/assets/textures/4.png;"
+</pre>
+<i>All files in the "textures" subfolder of the asset folder in the current project match.</i>
+<br><br>
+
+	<h4>Example 5: Regular Expression to select specific characters</h4>
+<pre class="code3">
+	print(fileSearch("$[12].png"))
+	# result = ";"
+</pre>
+<i>There is no png file with name "1" or "2" in the root directory or the asset directory of the current project.</i>
+<br><br>
+
+	<h4>Example 6: Regular Expression to select specific characters, part 2</h4>
+<pre class="code3">
+	print(fileSearch("$textures/[12].png"))
+	# result = "/MyProject/assets/textures/1.png;/MyProject/assets/textures/2.png;"
+</pre>
+<i>All png files with name "1" or "2" in the "textures" subfolder of the asset folder in the current project match.</i>
+<br><br>
+
+	<h4>Example 7: Regular Expression + Wildcard</h4>
+<pre class="code3">
+	print(fileSearch("$.*/[12].png"))
+	# result = "/MyProject/assets/textures/1.png;/MyProject/assets/textures/2.png;"
+</pre>
+<i>All png files with name "1" or "2" match. Note the period before the asterisk!</i>
+<br><br>
+
+	<h4>Example 8: Regular Expression to select a range of characters</h4>
+<pre class="code3">
+	print(fileSearch("$textures/[2-5].png"))
+	# result = "/MyProject/assets/textures/2.png;/MyProject/assets/textures/4.png;"
+</pre>
+<i>All png files with name "2", "3, "4" or "5" in the "textures" subfolder of the asset folder in the current project match.</i>
+<br><br>
+
+	<h4>Example 9: Regular Expression + OR</h4>
+<pre class="code3">
+	print(fileSearch("$textures/[12].png|.*.obj"))
+	# /MyProject/assets/textures/1.png;/MyProject/assets/textures/2.png;/MyProject/assets/tower.obj;/OtherProject/assets/brick.obj;
+</pre>
+<i>All png files with name "1" or "2" in the "textures" subfolder of the asset folder in the current project and all obj files in the workspace match.</i>
+<br><br>
+
+	<h4>Example 10: File Properties</h4>
+<pre class="code3">
+	print(fileSearch("Name=1.png"))
+	# result = "/MyProject/assets/textures/1.png;"
+</pre>
+<i>Only one file matches the name excatly.</i>
+<br><br>
+
+	<h4>Example 11: File Properties, AND</h4>
+<pre class="code3">
+	print(fileSearch("Project=OtherProject Ext=obj"))
+	# result = "/OtherProject/assets/brick.obj;"
+</pre>
+
+
+<i>Using white space, two or more queries can be anded. Here the only file matching the project name and the file extension is matched.</i>
+<br><br>
+
+
+
+<!-- FOOTER -->
+<p class="foot">Copyright &copy;2008-2019 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
+
+<!-- END CENTERED CONTENT -->
+
+</div>
+</body>
+</html>

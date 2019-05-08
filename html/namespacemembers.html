@@ -8,13 +8,6 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
-<link href="navtree.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="resize.js"></script>
-<script type="text/javascript" src="navtree.js"></script>
-<script type="text/javascript">
-  $(document).ready(initResizable);
-  $(window).load(resizeHeight);
-</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/search.js"></script>
 <script type="text/javascript">
@@ -31,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="esri_prt_55px.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Esri Procedural Runtime
-   &#160;<span id="projectnumber">1.10.4198</span>
+   &#160;<span id="projectnumber">2.0.5403</span>
    </div>
   </td>
  </tr>
@@ -105,20 +98,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     </ul>
   </div>
 </div><!-- top -->
-<div id="side-nav" class="ui-resizable side-nav-resizable">
-  <div id="nav-tree">
-    <div id="nav-tree-contents">
-      <div id="nav-sync" class="sync"></div>
-    </div>
-  </div>
-  <div id="splitbar" style="-moz-user-select:none;" 
-       class="ui-resizable-handle">
-  </div>
-</div>
-<script type="text/javascript">
-$(document).ready(function(){initNavTree('namespacemembers.html','');});
-</script>
-<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -140,8 +119,14 @@ $(document).ready(function(){initNavTree('namespacemembers.html','');});
 <li>AAT_BOOL
 : <a class="el" href="namespaceprt.html#a2ed198d15e4532984f5cddcbefb38984aef57ff228541b3dc0361e9cec46ea5bb">prt</a>
 </li>
+<li>AAT_BOOL_ARRAY
+: <a class="el" href="namespaceprt.html#a2ed198d15e4532984f5cddcbefb38984acc1eddcf93b53a18c74506ac340e98ed">prt</a>
+</li>
 <li>AAT_FLOAT
 : <a class="el" href="namespaceprt.html#a2ed198d15e4532984f5cddcbefb38984ad73c861d2d34de2649944dd62580c8e1">prt</a>
+</li>
+<li>AAT_FLOAT_ARRAY
+: <a class="el" href="namespaceprt.html#a2ed198d15e4532984f5cddcbefb38984aa97a1d392e85c50851b90f5135368df7">prt</a>
 </li>
 <li>AAT_INT
 : <a class="el" href="namespaceprt.html#a2ed198d15e4532984f5cddcbefb38984a133b17643e584a9ac15ad457e499dc39">prt</a>
@@ -149,11 +134,17 @@ $(document).ready(function(){initNavTree('namespacemembers.html','');});
 <li>AAT_STR
 : <a class="el" href="namespaceprt.html#a2ed198d15e4532984f5cddcbefb38984aeb5488fa4edb0f2bb07f1d6649b72f9d">prt</a>
 </li>
+<li>AAT_STR_ARRAY
+: <a class="el" href="namespaceprt.html#a2ed198d15e4532984f5cddcbefb38984a013269a536cad34353dd5eb4e5c9a74e">prt</a>
+</li>
 <li>AAT_UNKNOWN
 : <a class="el" href="namespaceprt.html#a2ed198d15e4532984f5cddcbefb38984a62edc302ef859377f25482b821f1573b">prt</a>
 </li>
 <li>AAT_VOID
 : <a class="el" href="namespaceprt.html#a2ed198d15e4532984f5cddcbefb38984addf0da8547d137091e2ed017ea8a20a5">prt</a>
+</li>
+<li>addFragment()
+: <a class="el" href="namespaceprtx_1_1_u_r_i_utils.html#a0485adb09f3ddfbf00497d3a653079a1">prtx::URIUtils</a>
 </li>
 <li>addLogHandler()
 : <a class="el" href="namespaceprt.html#a89e46749c5dc39f359a2eb0d0e970c20">prt</a>
@@ -163,6 +154,9 @@ $(document).ready(function(){initNavTree('namespacemembers.html','');});
 </li>
 <li>AnnotationArgumentType
 : <a class="el" href="namespaceprt.html#a2ed198d15e4532984f5cddcbefb38984">prt</a>
+</li>
+<li>AttributeMapUPtr
+: <a class="el" href="namespaceprtx_1_1_p_r_t_utils.html#a522a2d58968c4bfe45969aad5a531cad">prtx::PRTUtils</a>
 </li>
 </ul>
 
@@ -193,6 +187,9 @@ $(document).ready(function(){initNavTree('namespacemembers.html','');});
 <li>CGAWARNING
 : <a class="el" href="namespaceprt.html#a4b29d4b042552859e22f878ca115c3f4a96c27c216f1be8e44d3828eff2c08a3b">prt</a>
 </li>
+<li>combineMaterials()
+: <a class="el" href="namespaceprtx_1_1_shape_utils.html#a98598daa539165e6fc666062a300e3f3">prtx::ShapeUtils</a>
+</li>
 <li>ContentType
 : <a class="el" href="namespaceprt.html#a0bbc8b7c3113196a20860f569f833b2d">prt</a>
 </li>
@@ -200,7 +197,7 @@ $(document).ready(function(){initNavTree('namespacemembers.html','');});
 : <a class="el" href="namespaceprtx_1_1_u_r_i_utils.html#ad80ab42ceffa495191ef7c7bd848a5ae">prtx::URIUtils</a>
 </li>
 <li>createCompositeURI()
-: <a class="el" href="namespaceprtx_1_1_u_r_i_utils.html#a429966f99e5613bd606f4028eedec779">prtx::URIUtils</a>
+: <a class="el" href="namespaceprtx_1_1_u_r_i_utils.html#acf9abbed076d6a5ab68b9cfd5878f785">prtx::URIUtils</a>
 </li>
 <li>createDataURI()
 : <a class="el" href="namespaceprtx_1_1_u_r_i_utils.html#a18b163e96f805bc93c0465f144b6dbae">prtx::URIUtils</a>
@@ -261,6 +258,9 @@ $(document).ready(function(){initNavTree('namespacemembers.html','');});
 </li>
 <li>CT_SHAPETREE
 : <a class="el" href="namespaceprt.html#a0bbc8b7c3113196a20860f569f833b2da19c5a6fd7403ad949537fbcd32dab9a0">prt</a>
+</li>
+<li>CT_STRING
+: <a class="el" href="namespaceprt.html#a0bbc8b7c3113196a20860f569f833b2da24fc267f4f36845c7beaa115415def18">prt</a>
 </li>
 <li>CT_TEXTURE
 : <a class="el" href="namespaceprt.html#a0bbc8b7c3113196a20860f569f833b2da3c9387bc42237c8350f24ea6aa02e1fc">prt</a>
@@ -367,7 +367,7 @@ $(document).ready(function(){initNavTree('namespacemembers.html','');});
 : <a class="el" href="namespaceprtx.html#aec8649472e2f0dd643251cd38f7e6a9f">prtx</a>
 </li>
 <li>init()
-: <a class="el" href="namespaceprt.html#a389d6191a10c5ae7dfc86dcce24c311d">prt</a>
+: <a class="el" href="namespaceprt.html#ac11b9812a98def24f4ad792bf5be2371">prt</a>
 </li>
 <li>Int32Vector
 : <a class="el" href="namespaceprtx.html#a997ead27a2a1a9b685b1e57f1e0188a2">prtx</a>
@@ -458,7 +458,8 @@ $(document).ready(function(){initNavTree('namespacemembers.html','');});
 : <a class="el" href="namespaceprtx_1_1_u_r_i_utils.html#a94b8a0bb79cf3ac0f60cb1ef3c7db3c0">prtx::URIUtils</a>
 </li>
 <li>percentEncode()
-: <a class="el" href="namespaceprtx_1_1_u_r_i_utils.html#a5e19b857c52fc88fbab18c4d2cf6effe">prtx::URIUtils</a>
+: <a class="el" href="namespaceprtx_1_1_u_r_i_utils.html#ad805721d1a7b5647b0981fb8fe212043">prtx::URIUtils</a>
+, <a class="el" href="namespaceprt_1_1_string_utils.html#a53335d564ff2cfe09526efb21743b0e4">prt::StringUtils</a>
 </li>
 <li>PERLAYER
 : <a class="el" href="namespaceprtx_1_1_annotations.html#a92986bd2f4ad68494ac006e253b1087b">prtx::Annotations</a>
@@ -479,6 +480,9 @@ $(document).ready(function(){initNavTree('namespacemembers.html','');});
 <li>readURI()
 : <a class="el" href="namespaceprtx_1_1_data_backend.html#ab6a1f1ba79ef6f5d759a28fff660c441">prtx::DataBackend</a>
 </li>
+<li>removeFragment()
+: <a class="el" href="namespaceprtx_1_1_u_r_i_utils.html#a42f1f82582b7a1375697d513441e4aff">prtx::URIUtils</a>
+</li>
 <li>removeLogHandler()
 : <a class="el" href="namespaceprt.html#a0e58922795880d9c4e5200f05ca0ae07">prt</a>
 </li>
@@ -491,17 +495,23 @@ $(document).ready(function(){initNavTree('namespacemembers.html','');});
 <li>replaceFilename()
 : <a class="el" href="namespaceprtx_1_1_u_r_i_utils.html#a1405c32410f562864b9d47922c916031">prtx::URIUtils</a>
 </li>
+<li>resolveBinaryData()
+: <a class="el" href="namespaceprtx_1_1_data_backend.html#ae169d38e1daa0300c2776d46b9d0a11f">prtx::DataBackend</a>
+</li>
 <li>resolveCGB()
-: <a class="el" href="namespaceprtx_1_1_data_backend.html#acb88ef999826db0c40f130f0e4d862e7">prtx::DataBackend</a>
+: <a class="el" href="namespaceprtx_1_1_data_backend.html#a8773fd993f7985f462e7e632a84a23f8">prtx::DataBackend</a>
 </li>
 <li>resolveGeometry()
-: <a class="el" href="namespaceprtx_1_1_data_backend.html#ad3cddfe6acda2319b8b842ec662094a1">prtx::DataBackend</a>
+: <a class="el" href="namespaceprtx_1_1_data_backend.html#afd9b71e6857e7bcacdca78f079c8d8d1">prtx::DataBackend</a>
 </li>
 <li>resolveMaterial()
-: <a class="el" href="namespaceprtx_1_1_data_backend.html#a238be003bce8cfae2f16a6212fe4666c">prtx::DataBackend</a>
+: <a class="el" href="namespaceprtx_1_1_data_backend.html#ac551dae38f06232179f16a270713dc35">prtx::DataBackend</a>
+</li>
+<li>resolveText()
+: <a class="el" href="namespaceprtx_1_1_data_backend.html#acf8c54f3d39859a1a80e06c0d360f8c6">prtx::DataBackend</a>
 </li>
 <li>resolveTexture()
-: <a class="el" href="namespaceprtx_1_1_data_backend.html#a73ca563e24376766aa3c999a4d20f86f">prtx::DataBackend</a>
+: <a class="el" href="namespaceprtx_1_1_data_backend.html#aebce94232114ac08473494d2277d938d">prtx::DataBackend</a>
 </li>
 </ul>
 
@@ -521,9 +531,6 @@ $(document).ready(function(){initNavTree('namespacemembers.html','');});
 </li>
 <li>Status
 : <a class="el" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">prt</a>
-</li>
-<li>STATUS_ADAPTOR_NOT_FOUND
-: <a class="el" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4ad4e4b02136b6b64c41971413d58cc220">prt</a>
 </li>
 <li>STATUS_ALREADY_INITIALIZED
 : <a class="el" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4a18584d63a5230bed928d3d9ec3be476b">prt</a>
@@ -645,6 +652,12 @@ $(document).ready(function(){initNavTree('namespacemembers.html','');});
 <li>STATUS_OUT_OF_MEM
 : <a class="el" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4a043f7702d2fcf3fb4238726d3c590d77">prt</a>
 </li>
+<li>STATUS_RESOLVEMAP_PROVIDER_NOT_FOUND
+: <a class="el" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4aff935194c8436257b98a306a7bf3c665">prt</a>
+</li>
+<li>STATUS_STREAM_ADAPTOR_NOT_FOUND
+: <a class="el" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4a1a6c30cfeb4eb0e4aa8ec730dccb51e8">prt</a>
+</li>
 <li>STATUS_STRING_TRUNCATED
 : <a class="el" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4a807660d4fd4adce21248d6fbbacf247a">prt</a>
 </li>
@@ -682,6 +695,18 @@ $(document).ready(function(){initNavTree('namespacemembers.html','');});
 <li>toGeometry()
 : <a class="el" href="namespaceprtx_1_1_debug_utils.html#aaa0435b1837443b386e7be75187fd75c">prtx::DebugUtils</a>
 </li>
+<li>toOSNarrowFromUTF16()
+: <a class="el" href="namespaceprt_1_1_string_utils.html#a28e30cbe5dd22bf674ac25d33ca9b45b">prt::StringUtils</a>
+</li>
+<li>toUTF16FromOSNarrow()
+: <a class="el" href="namespaceprt_1_1_string_utils.html#a5054cbc58ae66d4f1629940ec08ca901">prt::StringUtils</a>
+</li>
+<li>toUTF16FromUTF8()
+: <a class="el" href="namespaceprt_1_1_string_utils.html#a81889b15bcaa84ab6b86ff38a2364dc1">prt::StringUtils</a>
+</li>
+<li>toUTF8FromUTF16()
+: <a class="el" href="namespaceprt_1_1_string_utils.html#ace42554fab82f85564e9979a11240289">prt::StringUtils</a>
+</li>
 <li>transformCoords()
 : <a class="el" href="namespaceprtx_1_1_mesh_utils.html#a587281189a0556ffc2adeaafd99d0116">prtx::MeshUtils</a>
 </li>
@@ -713,14 +738,11 @@ $(document).ready(function(){initNavTree('namespacemembers.html','');});
 </li>
 </ul>
 </div><!-- contents -->
-</div><!-- doc-content -->
 <!-- start footer part -->
-<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
-  <ul>
-    <li class="footer">Generated on Tue Sep 25 2018 09:40:51 for Esri Procedural Runtime by
-    <a href="http://www.doxygen.org/index.html">
-    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.5 </li>
-  </ul>
-</div>
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue Apr 9 2019 11:56:31 for Esri Procedural Runtime by &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.5
+</small></address>
 </body>
 </html>

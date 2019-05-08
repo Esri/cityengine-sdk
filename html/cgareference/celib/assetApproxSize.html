@@ -1,0 +1,123 @@
+<html>
+
+<head>
+	<title>
+assetApproxSize
+	</title>
+    <link rel="stylesheet" href="../../manual_style.css" type="text/css" />
+	
+	</head>
+
+<body>
+<div class="content">
+
+
+
+<!-- Don't touch -->
+
+<table summary="" class="header">
+	<tr>
+		<td align="left" class="helphead_l"><a href="../../toc.html"><div class="helplink">&nbsp;</div></a></td>
+		<td align="right" class="helphead_r"></td>
+	</tr>
+</table>
+
+
+<h1>assetApproxSize</h1>
+<h2>Synopsis</h2>
+
+<p class="code2">string assetApproxSize(string <span class="cga_opparam">searchQuery</span>, string <span class="cga_opparam">axisSelector</span>, float <span class="cga_opparam">n</span>)</p>
+
+  <h2> Parameters </h2>
+  <ul>
+   	<li><span class="cga_opparam">searchQuery</span><br>
+   	   Search query to apply on list of all files in the workspace. See <a class="normw" href="../func_fileSearch.html">fileSearch</a> for details about the syntax.</li>
+    <li><span class="cga_opparam">axisSelector</span><br>
+      Selector of axes for the currect scope. Supported values are:
+      <span class="codelight">"x"</span>,<span class="codelight">"y"</span>,<span class="codelight">"z"</span>,<span class="codelight">"xy"</span>,<span class="codelight">"xz"</span>,<span class="codelight">"yz"</span>,<span class="codelight">"xyz"</span>
+    </li>
+	<li><span class="cga_opparam">n</span><br>
+      Number (integer >= 1) of possible returned result strings. (1 returned randomly out of <span class="cga_opparam">n</span> possibilities)
+    </li>
+  </ul>
+
+<h2>Returns</h2>
+        <p>Asset with one of the best <span class="cga_opparam">n</span> size fits (according to <span class="cga_opparam">axisSelector</span>).</p> 
+        <p class="info">This function returns one of the <span class="cga_opparam">n</span> best size fitting assets, from the file list specified in <span class="cga_opparam">string</span>, according to the specified <span class="cga_opparam">axisSelector</span>.</p>
+		<p class="notes">Note: assetApproxSize(<span class="cga_opparam">string</span>, <span class="cga_opparam">axisSelector</span>, 1) = assetBestSize(<span class="cga_opparam">string</span>, <span class="cga_opparam">axisSelector</span>)</p>
+
+
+<h2>Related</h2>
+<ul>
+    <li><a href="assetApproxRatio.html"><span class="code_std">assetApproxRatio</span></a> function</li>
+    <li><a href="assetBestRatio.html"><span class="code_std">assetBestRatio</span></a> function</li>
+    <li><a href="assetBestSize.html"><span class="code_std">assetBestSize</span></a> function</li>
+    <li><a href="assetFitSize.html"><span class="code_std">assetFitSize</span></a> function</li>
+    <li><a href="fileBasename.html"><span class="code_std">fileBasename</span></a> function</li>
+    <li><a href="fileDirectory.html"><span class="code_std">fileDirectory</span></a> function</li>
+    <li><a href="fileExtension.html"><span class="code_std">fileExtension</span></a> function</li>
+    <li><a href="fileName.html"><span class="code_std">fileName</span></a> function</li>
+    <li><a href="fileRandom.html"><span class="code_std">fileRandom</span></a> function</li>
+    <li><a href="imageApproxRatio.html"><span class="code_std">imageApproxRatio</span></a> function</li>
+    <li><a href="imageBestRatio.html"><span class="code_std">imageBestRatio</span></a> function</li>
+</ul>
+
+		
+<h2>Examples</h2>
+<h3>Inserting assets based on their (physical) size</h3>
+<p>The goal is to insert assets from a pool, depending on their (physical) size. The pool of assets is seen in the following image. Colors are (only) used to visually emphasize the size ratio.</p>
+<img src="images/assetRatioPool.jpg"></img>
+
+
+<p>
+<pre>
+
+
+CGA examples with <span class="cga_opparam">n</span> = 1, <span class="cga_opparam">n</span> = 2 and <span class="cga_opparam">n</span> = 3:
+</pre>
+</p>
+<p class="notes">Note.1: Note the geometry variations in the next 3 images by using only the <span class="cga_opparam">n</span> parameter.</p>
+<p class="notes">Note.2: Note that small parts get blue assets while large parts get red assets.</p>
+
+<pre class="code3">
+n = 1:
+Lot -->
+	s('.9,'.9,'.9) center(xz) recursiveSplit(0)
+recursiveSplit(n) -->
+	case scope.sx >= 1.5 && scope.sz >= 1.5:
+		split(x){~scope.sx/3: split(z){~scope.sz/3: recursiveSplit(n+1)}*}*
+	else: innerRectangle(scope) { shape : doInsert }
+doInsert -->
+	alignScopeToAxes(y)
+	i(assetApproxSize("/myProject/assets/cube_*.obj","xz",1))
+</pre>
+<img src="images/assetApproxSize_n1.jpg"></img>
+
+<pre class="code3">
+n = 2:
+
+..
+	i(assetApproxSize("/myProject/assets/cube_*.obj","xz",2))
+</pre>
+<img src="images/assetApproxSize_n2.jpg"></img>
+
+<pre class="code3">
+n = 3:
+
+..
+	i(assetApproxSize("/myProject/assets/cube_*.obj","xz",3))
+</pre>
+<img src="images/assetApproxSize_n3.jpg"></img>
+
+
+
+
+
+
+
+<!-- FOOTER -->
+<p class="foot">Copyright &copy;2008-2019 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
+
+</div>
+</body>
+</html>

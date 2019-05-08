@@ -8,13 +8,6 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
-<link href="navtree.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="resize.js"></script>
-<script type="text/javascript" src="navtree.js"></script>
-<script type="text/javascript">
-  $(document).ready(initResizable);
-  $(window).load(resizeHeight);
-</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/search.js"></script>
 <script type="text/javascript">
@@ -31,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="esri_prt_55px.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Esri Procedural Runtime
-   &#160;<span id="projectnumber">1.10.4198</span>
+   &#160;<span id="projectnumber">2.0.5403</span>
    </div>
   </td>
  </tr>
@@ -75,21 +68,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
-</div><!-- top -->
-<div id="side-nav" class="ui-resizable side-nav-resizable">
-  <div id="nav-tree">
-    <div id="nav-tree-contents">
-      <div id="nav-sync" class="sync"></div>
-    </div>
-  </div>
-  <div id="splitbar" style="-moz-user-select:none;" 
-       class="ui-resizable-handle">
-  </div>
-</div>
-<script type="text/javascript">
-$(document).ready(function(){initNavTree('classprtx_1_1_extension_factory.html','');});
-</script>
-<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -104,6 +82,11 @@ $(document).ready(function(){initNavTree('classprtx_1_1_extension_factory.html',
 </iframe>
 </div>
 
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceprtx.html">prtx</a></li><li class="navelem"><a class="el" href="classprtx_1_1_extension_factory.html">ExtensionFactory</a></li>  </ul>
+</div>
+</div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="classprtx_1_1_extension_factory-members.html">List of all members</a> &#124;
@@ -118,9 +101,9 @@ $(document).ready(function(){initNavTree('classprtx_1_1_extension_factory.html',
 <div class="dynheader">
 Inheritance diagram for prtx::ExtensionFactory:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classprtx_1_1_extension_factory__inherit__graph.svg" width="491" height="112"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classprtx_1_1_extension_factory__inherit__graph.svg" width="398" height="206"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
-<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -154,7 +137,7 @@ Static Public Member Functions</h2></td></tr>
 <tr class="separator:a94de375c55a0073dd7e4a753c2138cb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>This is the base class for all extension factories. Usually it should not be sub-classed directly, use <a class="el" href="classprtx_1_1_adaptor_factory.html">AdaptorFactory</a>, <a class="el" href="classprtx_1_1_decoder_factory.html">DecoderFactory</a> or <a class="el" href="classprtx_1_1_encoder_factory.html">EncoderFactory</a> for your own extensions.</p>
+<div class="textblock"><p>This is the base class for all extension factories. Usually it should not be sub-classed directly, use <a class="el" href="classprtx_1_1_stream_adaptor_factory.html">StreamAdaptorFactory</a>, <a class="el" href="classprtx_1_1_resolve_map_provider_factory.html">ResolveMapProviderFactory</a>, <a class="el" href="classprtx_1_1_decoder_factory.html">DecoderFactory</a>, or <a class="el" href="classprtx_1_1_encoder_factory.html">EncoderFactory</a> for your own extensions.</p>
 <p>All <a class="el" href="classprtx_1_1_extension_factory.html">ExtensionFactory</a> subclasses must be used as singletons and are typically directly passed into <a class="el" href="classprtx_1_1_extension_manager.html#ac64bbc446ff2604bcdd6f83b3b00bae9">prtx::ExtensionManager::addFactory</a>.</p>
 <p>ExtensionFactories and subclasses must be immutable.</p>
 <dl class="section see"><dt>See Also</dt><dd><a class="el" href="classprtx_1_1_extension_manager.html">prtx::ExtensionManager</a> </dd>
@@ -184,7 +167,7 @@ prtx::ClassUtils::Singleton </dd></dl>
 </div><div class="memdoc">
 <p>Returns true, if the extension can handle the resource described by the <a class="el" href="classprtx_1_1_u_r_i.html">URI</a>. Returns false, if the uri is invalid. </p>
 
-<p>Implemented in <a class="el" href="classprtx_1_1_encoder_factory.html#a328917142c07dd32f7c61e85f4b49432">prtx::EncoderFactory</a>, and <a class="el" href="classprtx_1_1_decoder_factory.html#aa9640498e7e4bdf9cbca4e99772a11fc">prtx::DecoderFactory</a>.</p>
+<p>Implemented in <a class="el" href="classprtx_1_1_encoder_factory.html#a1b18c5c0bf49b1157b3fb881c3e09359">prtx::EncoderFactory</a>, and <a class="el" href="classprtx_1_1_decoder_factory.html#a0df8b98f7bc45c8eeb3431f438916668">prtx::DecoderFactory</a>.</p>
 
 </div>
 </div>
@@ -234,7 +217,7 @@ prtx::ClassUtils::Singleton </dd></dl>
 </div><div class="memdoc">
 <p>Returns the content type of this extension. </p>
 
-<p>Implemented in <a class="el" href="classprtx_1_1_encoder_factory.html#af382c2ebb214c9de04add06c28756381">prtx::EncoderFactory</a>, and <a class="el" href="classprtx_1_1_adaptor_factory.html#a5adb892e27494377d7715f1a94449e3c">prtx::AdaptorFactory</a>.</p>
+<p>Implemented in <a class="el" href="classprtx_1_1_encoder_factory.html#aac5f8998f6d3e277d82d39963a7e55e1">prtx::EncoderFactory</a>, <a class="el" href="classprtx_1_1_resolve_map_provider_factory.html#a05c2da4d505df780506da1dc38abe777">prtx::ResolveMapProviderFactory</a>, and <a class="el" href="classprtx_1_1_stream_adaptor_factory.html#a82d45de606fe005291597cc769a0a109">prtx::StreamAdaptorFactory</a>.</p>
 
 </div>
 </div>
@@ -284,7 +267,7 @@ prtx::ClassUtils::Singleton </dd></dl>
 </div><div class="memdoc">
 <p>Returns a human readable description of the extension </p>
 
-<p>Implemented in <a class="el" href="classprtx_1_1_encoder_factory.html#ae3c832df5df6f57b731311eae1ac1452">prtx::EncoderFactory</a>.</p>
+<p>Implemented in <a class="el" href="classprtx_1_1_encoder_factory.html#a67349bc658051b0b0df9240da5f2f09f">prtx::EncoderFactory</a>.</p>
 
 </div>
 </div>
@@ -310,7 +293,7 @@ prtx::ClassUtils::Singleton </dd></dl>
 </div><div class="memdoc">
 <p>Returns the type of this extension. </p>
 
-<p>Implemented in <a class="el" href="classprtx_1_1_encoder_factory.html#ae14e04707691ac888d196ca52f382f2c">prtx::EncoderFactory</a>, <a class="el" href="classprtx_1_1_decoder_factory.html#a30ad012df0f074c0977913b15ebef902">prtx::DecoderFactory</a>, and <a class="el" href="classprtx_1_1_adaptor_factory.html#ae6035a5daa07b970e73c6b76b824f79c">prtx::AdaptorFactory</a>.</p>
+<p>Implemented in <a class="el" href="classprtx_1_1_encoder_factory.html#abffd8c681be7a7a1d54718bf2ed25de6">prtx::EncoderFactory</a>, <a class="el" href="classprtx_1_1_decoder_factory.html#af6ab78774bde4a3fb05a3809537c1f8e">prtx::DecoderFactory</a>, <a class="el" href="classprtx_1_1_resolve_map_provider_factory.html#acfcb765a4c3f27408154920f660fffa2">prtx::ResolveMapProviderFactory</a>, and <a class="el" href="classprtx_1_1_stream_adaptor_factory.html#a77844f19197a683a02e15092c0e492be">prtx::StreamAdaptorFactory</a>.</p>
 
 </div>
 </div>
@@ -336,7 +319,7 @@ prtx::ClassUtils::Singleton </dd></dl>
 </div><div class="memdoc">
 <p>Returns the unique ID of the extension instances this factory will create. </p>
 
-<p>Implemented in <a class="el" href="classprtx_1_1_encoder_factory.html#a90c946dd9fd138a41886e4978ad96101">prtx::EncoderFactory</a>.</p>
+<p>Implemented in <a class="el" href="classprtx_1_1_encoder_factory.html#afa02e04f6578fc844687a4b3a9f87823">prtx::EncoderFactory</a>.</p>
 
 </div>
 </div>
@@ -386,7 +369,7 @@ prtx::ClassUtils::Singleton </dd></dl>
 </div><div class="memdoc">
 <p>Returns the human readable name of the extension. </p>
 
-<p>Implemented in <a class="el" href="classprtx_1_1_encoder_factory.html#a4b28a24c2d61d5cd09cb1a846dbceeec">prtx::EncoderFactory</a>.</p>
+<p>Implemented in <a class="el" href="classprtx_1_1_encoder_factory.html#ac5467caa6d882df0718088b7031d55ca">prtx::EncoderFactory</a>.</p>
 
 </div>
 </div>
@@ -394,15 +377,11 @@ prtx::ClassUtils::Singleton </dd></dl>
 <li><a class="el" href="_extension_factory_8h_source.html">ExtensionFactory.h</a></li>
 </ul>
 </div><!-- contents -->
-</div><!-- doc-content -->
 <!-- start footer part -->
-<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
-  <ul>
-    <li class="navelem"><a class="el" href="namespaceprtx.html">prtx</a></li><li class="navelem"><a class="el" href="classprtx_1_1_extension_factory.html">ExtensionFactory</a></li>
-    <li class="footer">Generated on Tue Sep 25 2018 09:40:51 for Esri Procedural Runtime by
-    <a href="http://www.doxygen.org/index.html">
-    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.5 </li>
-  </ul>
-</div>
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue Apr 9 2019 11:56:31 for Esri Procedural Runtime by &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.5
+</small></address>
 </body>
 </html>

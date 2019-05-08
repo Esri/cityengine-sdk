@@ -8,13 +8,6 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
-<link href="navtree.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="resize.js"></script>
-<script type="text/javascript" src="navtree.js"></script>
-<script type="text/javascript">
-  $(document).ready(initResizable);
-  $(window).load(resizeHeight);
-</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/search.js"></script>
 <script type="text/javascript">
@@ -31,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="esri_prt_55px.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Esri Procedural Runtime
-   &#160;<span id="projectnumber">1.10.4198</span>
+   &#160;<span id="projectnumber">2.0.5403</span>
    </div>
   </td>
  </tr>
@@ -73,21 +66,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespacemembers.html"><span>Namespace&#160;Members</span></a></li>
     </ul>
   </div>
-</div><!-- top -->
-<div id="side-nav" class="ui-resizable side-nav-resizable">
-  <div id="nav-tree">
-    <div id="nav-tree-contents">
-      <div id="nav-sync" class="sync"></div>
-    </div>
-  </div>
-  <div id="splitbar" style="-moz-user-select:none;" 
-       class="ui-resizable-handle">
-  </div>
-</div>
-<script type="text/javascript">
-$(document).ready(function(){initNavTree('namespaceprtx_1_1_shape_utils.html','');});
-</script>
-<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -102,6 +80,11 @@ $(document).ready(function(){initNavTree('namespaceprtx_1_1_shape_utils.html',''
 </iframe>
 </div>
 
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceprtx.html">prtx</a></li><li class="navelem"><a class="el" href="namespaceprtx_1_1_shape_utils.html">ShapeUtils</a></li>  </ul>
+</div>
+</div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#func-members">Functions</a>  </div>
@@ -109,11 +92,12 @@ $(document).ready(function(){initNavTree('namespaceprtx_1_1_shape_utils.html',''
 <div class="title">prtx::ShapeUtils Namespace Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<table class="memberdecls">
+<a name="details" id="details"></a><h2 class="groupheader">Description</h2>
+<div class="textblock"><p>Utility functions for working with <a class="el" href="classprtx_1_1_shape.html">prtx::Shape</a> instances. </p>
+</div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a98598daa539165e6fc666062a300e3f3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a98598daa539165e6fc666062a300e3f3"></a>
-<a class="el" href="namespaceprtx.html#ad9a3abc5331b1d26abd6344f333a1295">MaterialPtr</a>&#160;</td><td class="memItemRight" valign="bottom"><b>combineMaterials</b> (const <a class="el" href="classprtx_1_1_material.html">Material</a> &amp;shapeMat, const <a class="el" href="classprtx_1_1_material.html">Material</a> &amp;meshMat)</td></tr>
+<tr class="memitem:a98598daa539165e6fc666062a300e3f3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceprtx.html#ad9a3abc5331b1d26abd6344f333a1295">MaterialPtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprtx_1_1_shape_utils.html#a98598daa539165e6fc666062a300e3f3">combineMaterials</a> (const <a class="el" href="classprtx_1_1_material.html">Material</a> &amp;shapeMat, const <a class="el" href="classprtx_1_1_material.html">Material</a> &amp;meshMat)</td></tr>
 <tr class="separator:a98598daa539165e6fc666062a300e3f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a425a48ddaf8bf9d4d83c7fa5ba681c79"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprtx_1_1_shape_utils.html#a425a48ddaf8bf9d4d83c7fa5ba681c79">getBoundingBoxWorld</a> (const <a class="el" href="classprtx_1_1_shape.html">prtx::Shape</a> &amp;shape, <a class="el" href="namespaceprtx.html#acfbb1262ed21fac2e362179f92993c81">prtx::DoubleVector</a> &amp;bbMinMaxExtent)</td></tr>
 <tr class="separator:a425a48ddaf8bf9d4d83c7fa5ba681c79"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -136,9 +120,44 @@ Functions</h2></td></tr>
 <tr class="memitem:a7f5846848a76b565e9a3a7cd98a3d7e5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprtx_1_1_shape_utils.html#a7f5846848a76b565e9a3a7cd98a3d7e5">transformPoint</a> (const <a class="el" href="namespaceprtx.html#acfbb1262ed21fac2e362179f92993c81">prtx::DoubleVector</a> &amp;trafo, const double vIn[3], double vOut[3])</td></tr>
 <tr class="separator:a7f5846848a76b565e9a3a7cd98a3d7e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Utility functions for working with shapes. </p>
-</div><h2 class="groupheader">Function Documentation</h2>
+<h2 class="groupheader">Function Documentation</h2>
+<a class="anchor" id="a98598daa539165e6fc666062a300e3f3"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceprtx.html#ad9a3abc5331b1d26abd6344f333a1295">MaterialPtr</a> prtx::ShapeUtils::combineMaterials </td>
+          <td>(</td>
+          <td class="paramtype">const Material &amp;&#160;</td>
+          <td class="paramname"><em>shapeMat</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Material &amp;&#160;</td>
+          <td class="paramname"><em>meshMat</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Combine a shape's material with the material of the shape's geometry. The shape's material is written during cga generation. It defaults to "CityEngineMaterial". As long as it isn't changed, it is overridden by it's geometry's material (e.g. if you insert [i()] a textured asset, material.colormap is set to that texture). As soon as it is changed (via set(material.colormap, "myPic.jpg")), the shape material "wins".</p>
+<p>In other words, you will get the material you see in the CityEngine renderer.</p>
+<p>It is not trivial, use this function.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">shapeMat</td><td>The shape material. </td></tr>
+    <tr><td class="paramname">meshMat</td><td>The mesh material. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The combined material. </dd></dl>
+
+</div>
+</div>
 <a class="anchor" id="a425a48ddaf8bf9d4d83c7fa5ba681c79"></a>
 <div class="memitem">
 <div class="memproto">
@@ -199,8 +218,8 @@ Functions</h2></td></tr>
 <p>Extracts the transformation matrix which transforms a shape's geometry to world coordinates. This matrix depends on the actual geometry, the shape's attributes (scope, pivot) and the intialShape's origin.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">shape</td><td></td></tr>
-    <tr><td class="paramname">trafoMatrix[out]</td><td>4x4 harmonic transformation matrix, column major (OpenGL) </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">shape</td><td></td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">trafoMatrix</td><td>4x4 harmonic transformation matrix, column major (OpenGL) </td></tr>
   </table>
   </dd>
 </dl>
@@ -233,8 +252,8 @@ Functions</h2></td></tr>
 <p>Extracts the transformation matrix which transforms from object coordinates to world coordinates. This matrix depends on the intialShape's origin.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">shape</td><td></td></tr>
-    <tr><td class="paramname">trafoMatrix[out]</td><td>4x4 harmonic transformation matrix, column major (OpenGL) </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">shape</td><td></td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">trafoMatrix</td><td>4x4 harmonic transformation matrix, column major (OpenGL) </td></tr>
   </table>
   </dd>
 </dl>
@@ -267,8 +286,8 @@ Functions</h2></td></tr>
 <p>Extracts the transformation matrix which transforms from a shape's pivot coordinates to world coordinates. This matrix depends on the shape's attributes (pivot) and the intialShape's origin.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">shape</td><td></td></tr>
-    <tr><td class="paramname">trafoMatrix[out]</td><td>4x4 harmonic transformation matrix, column major (OpenGL) </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">shape</td><td></td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">trafoMatrix</td><td>4x4 harmonic transformation matrix, column major (OpenGL) </td></tr>
   </table>
   </dd>
 </dl>
@@ -435,9 +454,9 @@ Functions</h2></td></tr>
 <p>Transforms vIn (3 components) with the transformation matrix trafo (column first).</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">trafo</td><td>Transformation matrix. </td></tr>
-    <tr><td class="paramname">vIn</td><td>vertex to transform (x,y,z) </td></tr>
-    <tr><td class="paramname">vOut[out]</td><td>location to write transformed vertex (x,y,z) </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">trafo</td><td>Transformation matrix. </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">vIn</td><td>vertex to transform (x,y,z) </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">vOut</td><td>location to write transformed vertex (x,y,z) </td></tr>
   </table>
   </dd>
 </dl>
@@ -445,15 +464,11 @@ Functions</h2></td></tr>
 </div>
 </div>
 </div><!-- contents -->
-</div><!-- doc-content -->
 <!-- start footer part -->
-<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
-  <ul>
-    <li class="navelem"><a class="el" href="namespaceprtx.html">prtx</a></li><li class="navelem"><a class="el" href="namespaceprtx_1_1_shape_utils.html">ShapeUtils</a></li>
-    <li class="footer">Generated on Tue Sep 25 2018 09:40:51 for Esri Procedural Runtime by
-    <a href="http://www.doxygen.org/index.html">
-    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.5 </li>
-  </ul>
-</div>
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue Apr 9 2019 11:56:31 for Esri Procedural Runtime by &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.5
+</small></address>
 </body>
 </html>
