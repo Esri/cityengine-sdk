@@ -8,8 +8,7 @@ if(NOT CMAKE_BUILD_TYPE)
 	set(CMAKE_BUILD_TYPE "Release" CACHE STRING "Choose one of: Debug Release RelWithDebInfo MinSizeRel")
 endif()
 
-set(PROJECT prt4cmd)
-project(${PROJECT})
+project(prt4cmd CXX)
 
 
 ### dependencies
@@ -69,20 +68,21 @@ if(NOT ${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
 	endif()
 endif()
 
-add_executable(${PROJECT} prt4cmd.cpp utils.cpp)
+add_executable(${PROJECT_NAME} prt4cmd.cpp utils.cpp)
 
 if(${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
-	target_compile_definitions(${PROJECT} PRIVATE _CRT_SECURE_NO_WARNINGS)
+	target_compile_definitions(${PROJECT_NAME} PRIVATE _CRT_SECURE_NO_WARNINGS)
 elseif(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
-	target_compile_options(${PROJECT} PRIVATE
+	target_compile_options(${PROJECT_NAME} PRIVATE
 		-std=c++11 -march=nocona -fvisibility=hidden -fvisibility-inlines-hidden
 		-Wl,--exclude-libs,ALL -Wall -Wextra -Wunused-parameter -Wl,-rpath,'\$ORIGIN'
 	)
 elseif(${CMAKE_SYSTEM_NAME} STREQUAL "Darwin")
-	target_compile_options(${PROJECT} PRIVATE -std=c++14 -stdlib=libc++)
+	target_compile_options(${PROJECT_NAME} PRIVATE -std=c++14 -stdlib=libc++)
 endif()
 
-target_link_libraries(${PROJECT} ${PRT_LINK_LIBRARIES})
+target_include_directories(${PROJECT_NAME} PRIVATE ${PRT_INCLUDE_PATH})
+target_link_libraries(${PROJECT_NAME} PRIVATE ${PRT_LINK_LIBRARIES})
 
 
 ### install target
@@ -90,7 +90,7 @@ target_link_libraries(${PROJECT} ${PRT_LINK_LIBRARIES})
 set(CMAKE_INSTALL_PREFIX "${PROJECT_SOURCE_DIR}/../install" CACHE PATH "default install prefix" FORCE)
 
 install(CODE "file(REMOVE_RECURSE ${CMAKE_INSTALL_PREFIX}/*)")
-install(TARGETS ${PROJECT} RUNTIME DESTINATION bin)
+install(TARGETS ${PROJECT_NAME} RUNTIME DESTINATION bin)
 install(FILES ${PRT_LIBRARIES} DESTINATION bin OPTIONAL)
 install(FILES ${PRT_EXT_LIBRARIES} DESTINATION lib)
 install(CODE "FILE(MAKE_DIRECTORY ${CMAKE_INSTALL_PREFIX}/output)")
