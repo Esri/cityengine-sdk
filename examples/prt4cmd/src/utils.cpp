@@ -153,6 +153,7 @@ InputArgs::InputArgs(int argc, char *argv[]) : mStatus(RunStatus::FAILED) {
 	mEncoderID  = ENCODER_ID_OBJ;
 	mLogLevel   = 2;
 	mOutputPath = mWorkDir / "output";
+	mInitialShapeAttrs = createAttributeMapFromTypedKeyValues({}); // PRT requires this in case no arguments are given
 
 	// setup arg handling callbacks
 	const CLI::callback_t convertShapeAttrs = [this](std::vector<std::string> argShapeAttrs) {
