@@ -69,8 +69,9 @@ A quick overview:
 * stlenc: demonstrates how to write a custom encoder, in this case for the STL geometry format.
 * stldec: demonstrates how to write a custom decoder for the STL geometry format.
 
-External Use Cases:
-* [Palladio](https://github.com/esri/palladio): a CityEngine plugin for SideFX Houdini
+Related external Apps and Examples:
+* [Palladio](https://github.com/esri/palladio): CityEngine plugin for SideFX Houdini
+* [Serlio](https://github.com/esri/serlio): CityEngine plugin for Autodesk Maya
 
 
 ## General Software Requirements
