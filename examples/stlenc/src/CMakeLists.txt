@@ -8,8 +8,7 @@ if(NOT CMAKE_BUILD_TYPE)
 	set(CMAKE_BUILD_TYPE "Release" CACHE STRING "Choose one of: Debug Release RelWithDebInfo MinSizeRel")
 endif()
 
-set(PROJECT prt_stlenc)
-project(${PROJECT})
+project(prt_stlenc)
 
 
 ### dependencies
@@ -58,16 +57,16 @@ message(STATUS "Using prt_DIR = ${prt_DIR} with version ${PRT_VERSION_MAJOR}.${P
 
 ### build target
 
-add_library(${PROJECT} SHARED main.cpp STLEncoder.cpp)
+add_library(${PROJECT_NAME} SHARED main.cpp STLEncoder.cpp)
 add_definitions(-DPRT_VERSION_MAJOR=${PRT_VERSION_MAJOR} -DPRT_VERSION_MINOR=${PRT_VERSION_MINOR})
 
 target_include_directories(${PROJECT_NAME} PRIVATE ${PRT_INCLUDE_PATH})
 if(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
-	target_compile_options(${PROJECT} PRIVATE -std=c++11 -march=nocona -fvisibility=hidden -fvisibility-inlines-hidden -Wl,--exclude-libs,ALL -Wall -Wextra -Wunused-parameter -Wl,-rpath,'$ORIGIN')
+	target_compile_options(${PROJECT_NAME} PRIVATE -std=c++11 -march=nocona -fvisibility=hidden -fvisibility-inlines-hidden -Wl,--exclude-libs,ALL -Wall -Wextra -Wunused-parameter -Wl,-rpath,'$ORIGIN')
 elseif(${CMAKE_SYSTEM_NAME} STREQUAL "Darwin")
-	target_compile_options(${PROJECT} PRIVATE -std=c++14 -stdlib=libc++ -fvisibility=hidden -fvisibility-inlines-hidden -Wl,--exclude-libs,ALL -Wall -Wextra -Wunused-parameter)
+	target_compile_options(${PROJECT_NAME} PRIVATE -std=c++14 -stdlib=libc++ -fvisibility=hidden -fvisibility-inlines-hidden -Wl,--exclude-libs,ALL -Wall -Wextra -Wunused-parameter)
 endif()
-target_link_libraries(${PROJECT} ${PRT_CORE_LIBRARY})
+target_link_libraries(${PROJECT_NAME} ${PRT_CORE_LIBRARY})
 
 
 ### install target
@@ -75,7 +74,7 @@ target_link_libraries(${PROJECT} ${PRT_CORE_LIBRARY})
 set(CMAKE_INSTALL_PREFIX "${PROJECT_SOURCE_DIR}/../install" CACHE PATH "default install prefix" FORCE)
 
 install(CODE "file(REMOVE_RECURSE ${CMAKE_INSTALL_PREFIX}/*)")
-install(TARGETS ${PROJECT} RUNTIME DESTINATION lib LIBRARY DESTINATION lib)
+install(TARGETS ${PROJECT_NAME} RUNTIME DESTINATION lib LIBRARY DESTINATION lib)
 install(FILES ${PROJECT_SOURCE_DIR}/../../../LICENSE DESTINATION .)
 if(WIN32)
 	install(FILES ${PROJECT_SOURCE_DIR}/../README_windows.md DESTINATION .)
