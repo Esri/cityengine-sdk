@@ -26,6 +26,7 @@ The archives are available for download at the corresponding github release page
 
 
 ## CityEngine SDK Releases
+- [v2.1.XXXX (2019-YY-YY, CityEngine 2019.1)](https://github.com/Esri/esri-cityengine-sdk/releases/tag/2.1.XXXX)
 - [v2.0.5403 (2019-05-08, CityEngine 2019.0)](https://github.com/Esri/esri-cityengine-sdk/releases/tag/2.0.5403)
 - [v1.10.4198 (2018-09-17, CityEngine 2018.1)](https://github.com/Esri/esri-cityengine-sdk/releases/tag/1.10.4198)
 - [v1.10.4051 (2018-05-11, CityEngine 2018.0)](https://github.com/Esri/esri-cityengine-sdk/releases/tag/1.10.4051)
@@ -71,7 +72,7 @@ Please note that the individual example READMEs may include further requirements
 
 
 #### All Platforms
-* To load custom encoders built with the latest SDK, CityEngine 2019.0 is required. For older versions of CityEngine an older version of the SDK might have to be used, see list above.
+* To load custom encoders built with the latest SDK, CityEngine 2019.1 is required. For older versions of CityEngine an older version of the SDK might have to be used, see list above.
 * License for matching CityEngine, e.g. to author Rule Packages.
 * CMake 3.13 or later (http://www.cmake.org)
 
