@@ -1,3 +1,66 @@
+ESRI CITYENGINE SDK 2.1.XXXX CHANGELOG
+======================================
+
+This section lists changes compared to CityEngine SDK 2.0.5403.
+
+
+General Info
+------------
+* CityEngine SDK 2.X.XXXX is used in CityEngine 2019.1.YYYY
+
+
+PRT API
+-------
+* Added `Callbacks::attrBoolArray`, `Callbacks::attrFloatArray`, `Callbacks::attrStringArray` for array attributes. [CE-6277]
+
+
+PRTX API
+--------
+* Removed deprecated functions for logging wide strings: `log_wtrace`, `log_wdebug`, etc.
+
+
+CGA
+---
+* New functions:
+  * array initialization function (create arrays via initialization list).
+* Changes to existing features:
+  * `set` operation: Added set operations for array attributes.
+* Bugfixes:
+  * Maximum recursion level for CGA functions: Fixed crash if recursion level was chosen too high. The maximum recursion level is set via attribute `/cgaenv/maxFuncCallDepth`.
+  * `roofShed(byHeight)` operation: Fixed wrong height in some situations.
+
+
+Built-In Codecs Changes and Fixes
+---------------------------------
+* I3S/SLPK Encoder:
+  * Update to I3S Version 1.7. [CE-6178, CE-6258, CE-6260, CE-6261]
+  * Reduced memory consumption with many/large textures. [CE-6330]
+  * Write PBR materials. [CE-6576]
+  * Use Domains for boolean attributes. [CE-6060]
+  * Removed texture quality option. [CE-6750]
+  * Improved screen size heuristic. [CE-6751]
+  * Improved texture size in atlas. [CE-6752]
+* Unreal Encoder:
+  * Updated datasmith library for Unreal 4.23. [CE-6817]
+  * Removed FBX dependency. [CE-5562]
+  * Create Unreal PBR material instances in CE exporter. [CE-6600]
+  * Improved Instance (HISMC) Caching Behaviour. [CE-6635]
+  * Removed unnecessary heightmap scaling. [CE-6889]
+  * Correctly handle absence of UV sets. [CE-6780]
+  * Fixed precision issue with instances. [CE-6731]
+  * Create Unreal Materials during export to remove dependency on predefined Master Materials. [CE-6600]
+  * Improved automatic Material Blend Mode selection. [CE-6512]
+* Alembic Encoder
+  * Fix: Add the global export offset to pre-computed bounds.
+* ShapeBuffer Encoder:
+ *  Multipatch: Use "triangles" part type for triangles. [CE-5913]
+
+
+Misc Changes and Fixes
+----------------------
+* Updated Whitepaper / Architecture documents. [CE-6741]
+
+
 ESRI CITYENGINE SDK 2.0.5403 CHANGELOG
 ======================================
 
@@ -97,10 +160,9 @@ Built-In Codecs Changes and Fixes
 * OBJ/MTL Decoder:
   * Speedup for large material counts.
 * I3S/SLPK Encoder:
-  * Update to SLPK Version 1.6. [CE-5950]
+  * Update to I3S Version 1.6. [CE-5950]
   * Fixed faulty texture mime types. [CE-5578]
   * Removed DDS Texture option (always writes them). [CE-6184]
-  * Writes node pages, speeds up the scene tree parsing. [CE-6178]
   * Improved speed for DDS compression. [CE-6034]
   * Reduced memory consumption. [CE-6035]
   * Aligned MBS center and OBB center. [CE-6290]
