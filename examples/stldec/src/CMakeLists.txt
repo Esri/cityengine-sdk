@@ -24,11 +24,50 @@ endif()
 
 ### dependencies
 
-if (NOT prt_DIR)
-	set(prt_DIR ${PROJECT_SOURCE_DIR}/../../../prt/cmake)
+include(FetchContent)
+
+if(${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
+    set(P4C_WINDOWS 1)
+elseif(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
+    set(P4C_LINUX 1)
+elseif(${CMAKE_SYSTEM_NAME} STREQUAL "Darwin")
+    set(P4C_MACOS 1)
 endif()
+
+# if prt_DIR is not provided, download PRT from its github home
+if(NOT prt_DIR)
+	if(P4C_WINDOWS)
+		set(PRT_OS "win10")
+		set(PRT_TC "vc141")
+	elseif(P4C_LINUX)
+		set(PRT_OS "rhel7")
+		set(PRT_TC "gcc63")
+	elseif(P4C_MACOS)
+		set(PRT_OS "osx12")
+		set(PRT_TC "ac81")
+	endif()
+
+	set(PRT_VERSION "2.0.5403")
+	set(PRT_CLS     "${PRT_OS}-${PRT_TC}-x86_64-rel-opt")
+	set(PRT_URL     "https://github.com/esri/esri-cityengine-sdk/releases/download/${PRT_VERSION}/esri_ce_sdk-${PRT_VERSION}-${PRT_CLS}.zip")
+
+	FetchContent_Declare(prt URL ${PRT_URL})
+	FetchContent_GetProperties(prt)
+	if(NOT prt_POPULATED)
+		message(STATUS "Fetching PRT from ${PRT_URL}...")
+		FetchContent_Populate(prt)
+	endif()
+
+	set(prt_DIR "${prt_SOURCE_DIR}/cmake")
+endif()
+
 find_package(prt CONFIG REQUIRED)
 set(CESDK_VERSION "cesdk_${PRT_VERSION_MAJOR}_${PRT_VERSION_MINOR}_${PRT_VERSION_MICRO}")
+message(STATUS "Using prt_DIR = ${prt_DIR} with version ${PRT_VERSION_MAJOR}.${PRT_VERSION_MINOR}.${PRT_VERSION_MICRO}")
+
+
+### build target
+
 target_include_directories(${PROJECT_NAME} PRIVATE ${PRT_INCLUDE_PATH})
 target_link_libraries(${PROJECT_NAME} PRIVATE ${PRT_CORE_LIBRARY})
 target_compile_definitions(${PROJECT_NAME} PRIVATE
