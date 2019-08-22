@@ -12,7 +12,7 @@ General Info
 PRT API
 -------
 * Added `Callbacks::attrBoolArray`, `Callbacks::attrFloatArray`, `Callbacks::attrStringArray` for array attributes. [CE-6277]
-
+* Fixed createResolveMap() (unpack to filesystem case): in rare cases there were filename clashes. [CE-6569]
 
 PRTX API
 --------
@@ -34,12 +34,18 @@ Built-In Codecs Changes and Fixes
 ---------------------------------
 * I3S/SLPK Encoder:
   * Update to I3S Version 1.7. [CE-6178, CE-6258, CE-6260, CE-6261]
-  * Reduced memory consumption with many/large textures. [CE-6330]
+  * Reduced memory consumption with many/large textures and improved texture atlas composition. [CE-6330]
   * Write PBR materials. [CE-6576]
   * Use Domains for boolean attributes. [CE-6060]
-  * Removed texture quality option. [CE-6750]
+  * Removed texture quality option and replaced it with the "Max Tree Depth" option [CE-6750, CE-6654]
   * Improved screen size heuristic. [CE-6751]
   * Improved texture size in atlas. [CE-6752]
+  * Improved handling of degenerated texture coordinates. [CE-6969]
+  * Fixed a bug which led to wrong materials in intermediate levels. [CE-6984]
+  * Fixed a bug in "Features per leaf shape" - crashed in some cases if reports were emitted. [CE-6805] 
+  * Fixed a bug where temporary files were not deleted from disk.
+  * Fixed a bug which led to crashes if the resulting slpk file was too large to fit into memory.
+  * Fixed bugs which led to errors in ArcGIS Pro. [CE-6897]
 * Unreal Encoder:
   * Updated datasmith library for Unreal 4.23. [CE-6817]
   * Removed FBX dependency. [CE-5562]
@@ -50,10 +56,11 @@ Built-In Codecs Changes and Fixes
   * Fixed precision issue with instances. [CE-6731]
   * Create Unreal Materials during export to remove dependency on predefined Master Materials. [CE-6600]
   * Improved automatic Material Blend Mode selection. [CE-6512]
+  * Fixed filename legalizer bug which led to "_png" instead of ".png". [CE-6485]
 * Alembic Encoder
   * Fix: Add the global export offset to pre-computed bounds.
 * ShapeBuffer Encoder:
- *  Multipatch: Use "triangles" part type for triangles. [CE-5913]
+  * Multipatch: Use "triangles" part type for triangles. [CE-5913]
 
 
 Misc Changes and Fixes
