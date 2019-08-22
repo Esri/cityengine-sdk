@@ -63,8 +63,8 @@ A quick overview:
 * stldec: demonstrates how to write a custom decoder for the STL geometry format.
 
 Related external Apps and Examples:
-* [Palladio](https://github.com/esri/palladio): CityEngine plugin for SideFX Houdini
-* [Serlio](https://github.com/esri/serlio): CityEngine plugin for Autodesk Maya
+* [Palladio](https://esri.github.io/palladio): CityEngine plugin for SideFX Houdini
+* [Serlio](https://esri.github.io/serlio): CityEngine plugin for Autodesk Maya
 
 
 ## General Software Requirements
