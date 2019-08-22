@@ -42,7 +42,6 @@ Map getTasks(String branchName = null) {
 	tasks << taskGenPRT4CMD()
 	tasks << taskGenSTLENC()
 	tasks << taskGenSTLDEC()
-	tasks << taskGenPRT4MAYA()
 	return tasks
 }
 
@@ -59,10 +58,6 @@ Map taskGenSTLENC() {
 
 Map taskGenSTLDEC() {
 	return cepl.generateTasks('stldec', this.&taskBuildSTLDEC, CONFIGS)
-}
-
-Map taskGenPRT4MAYA() {
-	return cepl.generateTasks('prt4maya', this.&taskBuildPRT4MAYA, CONFIGS.findAll{ it.os != cepl.CFG_OS_OSX12 }) // TODO: implement macos support
 }
 
 
@@ -98,20 +93,6 @@ def taskBuildSTLDEC(cfg) {
 	List defs = [
 		[ key: 'prt_DIR',              val: PrtAppPipelineLibrary.Dependencies.CESDK.p ],
 		[ key: 'STLDEC_VERSION_MICRO', val: env.BUILD_NUMBER ]
-	]
-	papl.buildConfig(REPO, myBranch, "${SOURCES}/${appName}/src", BUILD_TARGET, cfg, DEPS, defs, REPO_CREDS)
-	papl.publish(appName, myBranch, "esri_${appName}*.zip", { "0.0.${env.BUILD_NUMBER}" }, cfg)
-}
-
-def taskBuildPRT4MAYA(cfg) {
-	final String appName = 'prt4maya'
-	final List DEPS = [ PrtAppPipelineLibrary.Dependencies.CESDK, PrtAppPipelineLibrary.Dependencies.MAYA2018 ]
-	List defs = [
-		[ key: 'prt_DIR',                val: PrtAppPipelineLibrary.Dependencies.CESDK.p ],
-		[ key: 'maya_DIR',               val: PrtAppPipelineLibrary.Dependencies.MAYA2018.p ],
-		[ key: 'PRT4MAYA_VERSION_MAJOR', val: 0 ],
-		[ key: 'PRT4MAYA_VERSION_MINOR', val: 0 ],
-		[ key: 'PRT4MAYA_VERSION_MICRO', val: env.BUILD_NUMBER ]
 	]
 	papl.buildConfig(REPO, myBranch, "${SOURCES}/${appName}/src", BUILD_TARGET, cfg, DEPS, defs, REPO_CREDS)
 	papl.publish(appName, myBranch, "esri_${appName}*.zip", { "0.0.${env.BUILD_NUMBER}" }, cfg)
