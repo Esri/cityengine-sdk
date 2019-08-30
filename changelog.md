@@ -12,7 +12,7 @@ General Info
 PRT API
 -------
 * Added `Callbacks::attrBoolArray`, `Callbacks::attrFloatArray`, `Callbacks::attrStringArray` for array attributes. [CE-6277]
-* Fixed createResolveMap() (unpack to filesystem case): in rare cases there were filename clashes. [CE-6569]
+* Fixed `createResolveMap()` (unpack to filesystem case): in rare cases there were filename clashes. [CE-6569]
 
 PRTX API
 --------
