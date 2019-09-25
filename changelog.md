@@ -6,7 +6,7 @@ This section lists changes compared to CityEngine SDK 2.0.5403.
 
 General Info
 ------------
-* CityEngine SDK 2.X.XXXX is used in CityEngine 2019.1.YYYY
+* CityEngine SDK 2.1.5704 is used in CityEngine 2019.1.5704
 
 
 PRT API
