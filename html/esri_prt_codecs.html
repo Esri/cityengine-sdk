@@ -5,7 +5,7 @@
 </head>
 <body>
 <h1>Esri Procedural Runtime Encoder/Decoder Reference</h1>
-<small>(Automatically generated from PRT 2.0.5403; Build Date: Tue 04/09/2019 10:26 AM; Build Configuration: PRT_BC_REL PRT_CC_OPT)</small><p>This is the PRT reference documentation for all built-in encoders and decoders.</p>
+<small>(Automatically generated from PRT 2.1.5704; Build Date: Tue 09/03/2019 06:40 PM; Build Configuration: PRT_BC_REL PRT_CC_OPT)</small><p>This is the PRT reference documentation for all built-in encoders and decoders.</p>
 <p>The encoder documentation lists for each encoder its supported encoder options. In PRT, the encoder options
 	are stored in an object of type prt::AttributeMap, therefore the term "attribute" is used synonymously in this
 	document for a single encoder option. Each attribute consists of a type, a default value and (optional)
@@ -3535,43 +3535,6 @@
 </tr>
 	</table></td>
 </tr>
-	<tr>
-<td>layerTextureEncoding</td>
-<td>str_array</td>
-<td></td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Textures<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Specifies whether and how the textures should be encoded.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 22000<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = Layer Settings<br>order:float = 6<br>
-</td>
-</tr>
-		<tr>
-<td>@Range</td>
-<td>SKIP:str = No textures<br>TRY_TO_REUSE_SOURCE:str = Try to keep source texture data; reencode only if necessary<br>REENCODE:str = Reencode textures<br>
-</td>
-</tr>
-		<tr>
-<td>@PerLayer</td>
-<td>layerDefault:float = 2<br>
-</td>
-</tr>
-	</table></td>
-</tr>
 	
 	<tr>
 <td>applicationVendor</td>
@@ -3995,33 +3958,29 @@
 </tr>
 	
 	<tr>
-<td>forceLoading</td>
-<td>bool</td>
-<td>false</td>
+<td>maxDepth</td>
+<td>int</td>
+<td>2</td>
 <td><table class="doxtable">
 		<tr>
 <td>@Label</td>
-<td>:str = Force Layer loading<br>
+<td>:str = Maximum Tree Depth<br>
 </td>
 </tr>
 		<tr>
 <td>@Description</td>
-<td>:str = Force loading of this layer in clients.<br>
+<td>:str = Specifies how deep the tree should be at most. This limits the package size.<br>
 </td>
 </tr>
 		<tr>
 <td>@Order</td>
-<td>:float = 7230<br>
+<td>:float = 7220<br>
 </td>
 </tr>
 		<tr>
 <td>@Group</td>
 <td>name:str = Advanced Settings<br>order:float = 5<br>
 </td>
-</tr>
-		<tr>
-<td>@Hidden</td>
-<td></td>
 </tr>
 	</table></td>
 </tr>
@@ -4089,156 +4048,6 @@
 		<tr>
 <td>@PerLayer</td>
 <td>layerDefault:str = <br>
-</td>
-</tr>
-	</table></td>
-</tr>
-	<tr>
-<td>layerTextureQuality</td>
-<td>float_array</td>
-<td></td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Texture Quality<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Set texture quality for lossy texture encoders.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 22010<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = Layer Settings<br>order:float = 6<br>
-</td>
-</tr>
-		<tr>
-<td>@Range</td>
-<td>0:float = 0.1<br>1:float = 1<br>
-</td>
-</tr>
-		<tr>
-<td>@PerLayer</td>
-<td>layerDefault:float = 1<br>
-</td>
-</tr>
-	</table></td>
-</tr>
-	
-	<tr>
-<td>layerTextureCompression</td>
-<td>int_array</td>
-<td></td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Texture Compression<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Set texture compression for lossless texture encoders.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 22020<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = Layer Settings<br>order:float = 6<br>
-</td>
-</tr>
-		<tr>
-<td>@Range</td>
-<td>0:float = 1<br>1:float = 9<br>
-</td>
-</tr>
-		<tr>
-<td>@PerLayer</td>
-<td>layerDefault:float = 9<br>
-</td>
-</tr>
-	</table></td>
-</tr>
-	<tr>
-<td>layerTextureScaling</td>
-<td>float_array</td>
-<td></td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Texture Scaling<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Scale all textures in layer by a factor.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 22030<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = Layer Settings<br>order:float = 6<br>
-</td>
-</tr>
-		<tr>
-<td>@Range</td>
-<td>0:float = 0.1<br>1:float = 1<br>
-</td>
-</tr>
-		<tr>
-<td>@PerLayer</td>
-<td>layerDefault:float = 1<br>
-</td>
-</tr>
-	</table></td>
-</tr>
-	
-	<tr>
-<td>layerTextureMaxDimension</td>
-<td>int_array</td>
-<td></td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Max Texture Dimension<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Limit maximum texture dimension (i.e. scale proportionally)<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 22040<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = Layer Settings<br>order:float = 6<br>
-</td>
-</tr>
-		<tr>
-<td>@Range</td>
-<td>0:float = 0<br>1:float = 16384<br>
-</td>
-</tr>
-		<tr>
-<td>@PerLayer</td>
-<td>layerDefault:float = 2048<br>
 </td>
 </tr>
 	</table></td>
@@ -4312,9 +4121,6 @@
 </tr>
 	</table></td>
 </tr>
-	
-	
-	
 	
 	
 	
@@ -10950,7 +10756,7 @@
 	
 <tr><td colspan="4"></td></tr>
 <tr><td colspan="4"><h3><a name="com.esri.prt.unreal.encoder">Unreal Engine (Beta) (com.esri.prt.unreal.encoder)</a></h3></td></tr>
-<tr><td colspan="4">Export selected models to Unreal Editor</td></tr>
+<tr><td colspan="4">Encodes geometry into the Datasmith (4.23E0) format.</td></tr>
 <tr><td colspan="4"><h4>Known Initial Shape Attributes</h4></td></tr>
 <tr>
 <th>Key</th>
@@ -11122,7 +10928,7 @@
 </tr>
 		<tr>
 <td>@Range</td>
-<td>disabled:str = Disabled<br>useInstancing:str = Use Instancing<br>instancingHISM:str = Use Instancing with Hierarchical Instanced Static Mesh Components<br>
+<td>disabled:str = Disabled<br>useInstancing:str = Use Instanced Meshes<br>instancingHISM:str = Use Instanced Static Mesh Actors<br>
 </td>
 </tr>
 	</table></td>

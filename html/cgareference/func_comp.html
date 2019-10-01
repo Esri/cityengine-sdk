@@ -33,8 +33,6 @@
 
 <p>An array that contains the returned values of <span class="cga_opparam">expression</span> for each component.</p> 
 
-<p class="notes">Arrays can not be declared as <span class="codelight">attr</span> or <span class="codelight">const</span>.</p>
-
 <p class="info">Very much like the <a class="cga_op" href="op_comp.html">comp</a> operation the <span class="codelight">comp</span> function divides a shape into topological components (wrt. <span class="cga_opparam">compSelector, selector, operator</span>) which result in new component shapes. But in contrast to the operation the function does not process the selected components by a sequence of shape operations. Instead a functional <span class="cga_opparam">expression</span> is evaluated on each selected component shape. The respective return values are organized in an ordered array which is returned as the result of the <span class="codelight">comp</span> function. Refer to the documentation of the <a class="cga_op" href="op_comp.html">comp</a> operation for details on available <span class="cga_opparam">compSelector</span>s, <span class="cga_opparam">selector</span>s and <span class="cga_opparam">operator</span>s.</p>
 
 <p>The returned array has a number of properties:
@@ -67,7 +65,7 @@
 <tr>
 	<td class="twocol_l"><br><img src="images/func-comp-vertices.png" width="298" alt="func-comp-vertices"/></td>
 	<td><pre class="code3">
-array = comp(v) { all : comp.index }
+const array = comp(v) { all : comp.index }
 
 Lot --> print(array)
 
@@ -86,7 +84,7 @@ Lot --> print(array)
 	<td><pre class="code3">
 edgeLength = scope.sx
 	
-array = comp(e) { border : edgeLength }
+const array = comp(e) { border : edgeLength }
 
 (7)[<font color="red">7</font>,<font color="red">15</font>,0,<font color="red">17</font>,<font color="red">15</font>,<font color="red">10</font>,<font color="red">16</font>]
 	</pre>
@@ -101,8 +99,8 @@ array = comp(e) { border : edgeLength }
 <tr>
 	<td class="twocol_l"><br><img src="images/func-comp-faceedges.png" width="298" alt="func-comp-faceedges"/></td>
 	<td><pre class="code3">
-array = comp(fe) { front : comp.sel + comp.index |
-                   back  = str(comp.index)       }
+const array = comp(fe) { front : comp.sel + comp.index |
+                         back  = str(comp.index)       }
 		   
 (8)[<font color="red">front0</font>,,<font color="blue">0</font>,,,<font color="blue">0</font>,,<font color="red">front1</font>]
 	</pre>
@@ -117,7 +115,7 @@ array = comp(fe) { front : comp.sel + comp.index |
 <tr>
 	<td class="twocol_l"><br><img src="images/func-comp-faces.png" width="298" alt="func-comp-faces"/></td>
 	<td><pre class="code3">
-array = comp(f) { side = touches }
+const array = comp(f) { side = touches }
 		   
 (6)[false,<font color="red">true</font>,<font color="red">true</font>,<font color="red">true</font>,<font color="red">true</font>,false]
 	</pre>

@@ -38,6 +38,7 @@
 
 <ul>
 	<li><a href="celib/listSize.html"><span class="code_std">listSize</span></a> function</li>
+	<li><a href="func_array.html">array initialization</a> function</li>
 	<li><a href="func_item.html"><span class="code_std">item</span></a> operator</li>
 	<li><a href="func_index.html"><span class="code_std">index</span></a> function</li>
 	<li><a href="func_comp.html"><span class="code_std">comp</span></a> function</li>
@@ -49,9 +50,9 @@
 
 <p class="example">	
 <pre class="code3">
-edgeLengths = comp(e) { all : scope.sx }
+const edgeLengths = comp(e) { all : scope.sx }
 
-faceAreas   = comp(f) { all : geometry.area() }
+const faceAreas   = comp(f) { all : geometry.area() }
 
 Example --> print(edgeLengths)       // (4)[2,2,2,2]
             print(faceAreas)         // (1)[4]

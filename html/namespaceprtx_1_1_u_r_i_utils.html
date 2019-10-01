@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="esri_prt_55px.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Esri Procedural Runtime
-   &#160;<span id="projectnumber">2.0.5403</span>
+   &#160;<span id="projectnumber">2.1.5704</span>
    </div>
   </td>
  </tr>
@@ -107,6 +107,8 @@ Functions</h2></td></tr>
 <tr class="separator:af51629ad70a1b337d5f1a4af0da7b3af"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac6105bd3aaa266a4111185cb9c208716"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceprtx.html#a2f661d48bd64c0c84f0e66fcbcba51e5">URIPtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprtx_1_1_u_r_i_utils.html#ac6105bd3aaa266a4111185cb9c208716">addQuery</a> (const <a class="el" href="namespaceprtx.html#a2f661d48bd64c0c84f0e66fcbcba51e5">URIPtr</a> &amp;uri, const std::map&lt; std::wstring, std::wstring &gt; &amp;queries)</td></tr>
 <tr class="separator:ac6105bd3aaa266a4111185cb9c208716"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0feb1f2854e7197fb1f98eac2e8d8801"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceprtx.html#a2f661d48bd64c0c84f0e66fcbcba51e5">URIPtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprtx_1_1_u_r_i_utils.html#a0feb1f2854e7197fb1f98eac2e8d8801">addQuery</a> (const <a class="el" href="namespaceprtx.html#a2f661d48bd64c0c84f0e66fcbcba51e5">URIPtr</a> &amp;uri, const std::wstring &amp;query)</td></tr>
+<tr class="separator:a0feb1f2854e7197fb1f98eac2e8d8801"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad80ab42ceffa495191ef7c7bd848a5ae"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceprtx.html#a2f661d48bd64c0c84f0e66fcbcba51e5">URIPtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprtx_1_1_u_r_i_utils.html#ad80ab42ceffa495191ef7c7bd848a5ae">createBuiltinURI</a> (const std::wstring &amp;name)</td></tr>
 <tr class="separator:ad80ab42ceffa495191ef7c7bd848a5ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acf9abbed076d6a5ab68b9cfd5878f785"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceprtx.html#a2f661d48bd64c0c84f0e66fcbcba51e5">URIPtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprtx_1_1_u_r_i_utils.html#acf9abbed076d6a5ab68b9cfd5878f785">createCompositeURI</a> (const <a class="el" href="namespaceprtx.html#a2f661d48bd64c0c84f0e66fcbcba51e5">URIPtr</a> &amp;nestedURI, const std::wstring &amp;outerScheme, const std::wstring &amp;outerPath)</td></tr>
@@ -288,6 +290,34 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>Appends to the query part in the form "[&amp;]key=value" and returns a new <a class="el" href="classprtx_1_1_u_r_i.html">URI</a> instance.</p>
 <p>Note: The map entries are used as key and value and must be UTF-16 encoded and not contain percent-encoded characters. </p>
+
+</div>
+</div>
+<a class="anchor" id="a0feb1f2854e7197fb1f98eac2e8d8801"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceprtx.html#a2f661d48bd64c0c84f0e66fcbcba51e5">URIPtr</a> prtx::URIUtils::addQuery </td>
+          <td>(</td>
+          <td class="paramtype">const URIPtr &amp;&#160;</td>
+          <td class="paramname"><em>uri</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::wstring &amp;&#160;</td>
+          <td class="paramname"><em>query</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Appends a complete query part and returns a new <a class="el" href="classprtx_1_1_u_r_i.html">URI</a> instance.</p>
+<p>Note: The query string must be UTF-16 encoded and not contain percent-encoded characters. </p>
 
 </div>
 </div>
@@ -732,7 +762,7 @@ Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Apr 9 2019 11:56:31 for Esri Procedural Runtime by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Sep 3 2019 19:31:20 for Esri Procedural Runtime by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.5
 </small></address>

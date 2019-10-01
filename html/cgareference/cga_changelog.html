@@ -31,6 +31,58 @@
   <td><strong>Changes</strong></td>
   </tr>
 	<tr>
+		<td>2019.1<br>CGAC 1.13</td>
+		<td>
+			New functions:
+			<ul>
+				<li><a href="func_array.html">array initialization</a> function (create arrays via initialization list).</li> <!-- CE-6213 -->
+				<li>Layer attributes (CityEngine only):</li>
+				<ul>
+					<li><a href="https://doc.arcgis.com/en/cityengine/latest/help/help-inspector.htm#ESRI_SECTION1_45B62C2C902E446993B6AFF902FC5090" target="_blank"><span class="code_std">getFloatObjectAttr</span></a>, <a href="https://doc.arcgis.com/en/cityengine/latest/help/help-inspector.htm#ESRI_SECTION1_45B62C2C902E446993B6AFF902FC5090" target="_blank"><span class="code_std">getStringObjectAttr</span></a>, <a href="https://doc.arcgis.com/en/cityengine/latest/help/help-inspector.htm#ESRI_SECTION1_45B62C2C902E446993B6AFF902FC5090" target="_blank"><span class="code_std">getBoolObjectAttr</span></a> function: Added typed functions for object attribute mapping and sampling. The <span class="code_std">getObjectAttr</span> function is still supported but deprecated.</li> <!-- CE-6702 -->
+				</ul>
+			</ul>
+			Changes to existing features:
+			<ul>
+				<li><a href="op_set.html"><span class="code_std">set</span></a> operation: Added set operations for array attributes.</li> <!-- CE-6277 -->
+				<li>The usage of misspelled annotations (wrong lower/upper case) is not supported for RPK creation anymore (CityEngine only).</li> <!-- CE-2903 -->
+				<li>All <em>inter</em> <a href="cga_context.html">context/occlusion queries</a>: Improved performance if many shapes are involved (CityEngine only).</li> <!-- CE-6784 -->
+				<li>CGA Compiler:</li>
+					<ul>
+						<li>Arrays can now be const or attr.</li> <!-- CE-6277 -->
+						<li>New compilation error <em>"Function call cycle"</em> if a return type of a recursive function definition can not be determined. A functional recursion must contain a <a href="https://doc.arcgis.com/en/cityengine/latest/help/help-rules-functions.htm" target="_blank">conditional</a> with at least one stop criterion. Any other case would lead to an endless function call cycle.</li> <!-- CE-5103, CE-2969 -->
+						<li>Invocations to operations with wrong types do not compile anymore (type mismatch) unless a rule with same signature was defined. Before, an <em>"undefined rule"</em> warning was issued.</li> <!-- CE-6278 -->
+						<li>Attributes with one parameter are not allowed anymore (except <span class="code_std">streetwidth</span>).</li> <!-- CE-6277 -->
+						<!-- Enhanced error and warning messages: CE-5103, CE-5046, CE-6468, CE-6278, CE-2903 -->
+						<li>More useful type mismatch errors with expected types are issued instead of a no such function error.</li>
+						<li>More selective unused warnings. Also shown for unused attributes and functions with no parameters. If errors are present no unused warnings are issued.</li>
+						<li>Calls to functions that are unresolved due to a type mismatch in another function are reported as information instead of an error, indicating an inherited problem. This helps to identify the source of the error. In CityEngine the visualization of an information problem level can be configured in the preferences (General > Editiors > Text Editors > Annotations).</li>
+						<li>A warning is issued if annotation names are misspelled (wrong lower/upper case) or if deprecated annotations, functions or operations are used.</li> <!-- CE-6703 -->
+					</ul>
+				</ul>
+			</ul>
+			Bugfixes:
+			<ul>
+				<li>Maximum recursion level for CGA functions: Fixed crash if recursion level was chosen too high. The maximum recursion level is set via attribute <span class="code_std">/cgaenv/maxFuncCallDepth</span> or via CityEngine preferences (General > Procedural Runtime > Maximum function call depth).</li> <!-- CE-6779 -->
+				<li><a href="op_roofShed.html"><span class="code_std">roofShed(byHeight)</span></a> operation: Fixed wrong height in some situations.</li> <!-- CE-3489 -->
+				<li><a href="op_print.html"><span class="code_std">print</span></a> operation, <a href="func_print.html"><span class="code_std">print</span></a> function: Fixed print of 2 line breaks if an empty string was printed (CityEngine only).</li> <!-- CE-6779 -->
+				<li>CGA Compiler:</li>
+				<ul>
+					<li>Fixed recursive function definitions. Before, an incorrect compilation error was shown in some cases (1. recursion loops with more than one function; 2. <a href="https://doc.arcgis.com/en/cityengine/latest/help/help-rules-functions.htm" target="_blank">conditionals</a> and 3. <a href="func_comp.html">comp</a> function depending on the order of involved expressions).</li> <!-- CE-5103 -->
+					<li>Enhanced response time when code contains errors.</li> <!-- CE-6437, CE-5103, CE-6278 -->
+					<li>An undefined rule warning is not shown if a matching rule definition can be found in <em>any</em> style.</li> <!-- CE-5046 -->
+				</ul>
+				<li>Layer attributes compiler:</li>
+				<ul>
+					<li><span class="code_std">getObjectAttr</span> function (deprecated): Fixed usage in <a href="https://doc.arcgis.com/en/cityengine/latest/help/help-rules-functions.htm" target="_blank">conditionals</a>. Before an incorrect error was reported in some cases (depending on the order of involved expressions).</li> <!-- CE-5103 -->
+					<li><span class="code_std">getObjectAttr</span> function (deprecated): Automatic type matching for object attributes with same name (when given as a literal). This is only supported within the same function or attribute definition.</li> <!-- CE-5103 -->
+					<li>Fixed a bug that did not update problem markers in the editor after the text was edited.</li> <!-- CE-6688 -->
+				</ul>
+			</ul>
+		</td>
+	</tr>
+  </tr>
+  </tr>
+	<tr>
 		<td>2019.0 <br>CGAC 1.12</td>
 		<td>
 			New operations:
@@ -626,7 +678,7 @@
             While the new approach makes CGA coding more &quot;intuitive&quot;, it changes the behaviour compared to older versions.</li>
             
             <li><strong>inf/nan checks</strong>: In previous CGA versions, a number of operation and function float parameters were tested for not-a-number / infinity (nan/inf) values at runtime. In most cases, such values were replaced with 0 and a warning was issued. In others, the operation was aborted.<br>
-            CGA 2013.1 introduces a unified inf/nan behaviour: checking of <strong>all</strong> float paramers of builtin functionality can be set to either &quotignore&quot (= don't check), &quotabort with error&quot or &quotreplace with zero&quot see <a href="../manual/ui/cep/grammarcore.html">Grammarcore Preferences</a>). The default behaviour is &quotreplace with zero&quot, which comes closest to the classic behaviour.<br>
+            CGA 2013.1 introduces a unified inf/nan behaviour: checking of <strong>all</strong> float paramers of builtin functionality can be set to either &quotignore&quot (= don't check), &quotabort with error&quot or &quotreplace with zero&quot see <a href="https://doc.arcgis.com/en/cityengine/latest/help/get-started-preferences-prt.htm" target="_blank">Procedural Runtime preferences</a>). The default behaviour is &quotreplace with zero&quot, which comes closest to the classic behaviour.<br>
             While CGA 2013.1 provides more debugging capabilities regarding inf/nan values, the behaviour is different than in previous versions.</li>
             <li><strong>Intra-occlusion and reports, print output, CGA error reporting:</strong> During resolving inta-occlusion-queries, some shapes and sub-shapetrees get deleted (and re-evaluated). The reports issued by <a href="op_report.html"><span class="code_std">report</span></a> operations by the rule of that shapes (and the output of <a href="op_print.html"><span class="code_std">print</span></a> operations and functions plus all CGA errors/warnings) are deleted along with those shapes.<br>
             While the new behaviour makes more sense (each report/print-output/error has associated a shape in the model hierarchy), it is different than in previous versions.</li>
@@ -729,7 +781,7 @@
         <ul>
           	<li><a href="op_comp.html"><span class="code_std">comp</span></a>, <a href="op_setback.html"><span class="code_std">setback</span></a>, <a href="func_geometry.html#area"><span class="code_std">geometry.area</span></a>, and <a href="func_geometry.html#isOriented"><span class="code_std">geometry.isOriented</span></a> operations: added <span class="code_std">street.front, street.back, street.left, street.right, street.side</span> selectors; these selectors will fallback to the according <span class="code_std">object.xxx</span> selectors if no streetWidth attribute is present.</li>	        
           	<li><a href="op_setback.html"><span class="code_std">setback</span></a>, <a href="func_geometry.html#area"><span class="code_std">geometry.area</span></a>, and <a href="func_geometry.html#isOriented"><span class="code_std">geometry.isOriented</span></a> operations: added <span class="code_std">world.side, object.side</span> selectors.</li>	        
-        	<li>Edges and vertices resulting from <span class="code_std">comp(e)</span> or <span class="code_std">comp(v)</span> are now rendered in the viewport (the size can be controlled in the <a href="../manual/ui/cep/grammarcore.html">Grammarcore Preferences</a>); only some formats support exporting edges/vertices, see <a href="attr_material.html#RenderingAndExport">Rendering and Export feature table.</a></li>
+        	<li>Edges and vertices resulting from <span class="code_std">comp(e)</span> or <span class="code_std">comp(v)</span> are now rendered in the viewport (the size can be controlled in the <a href="https://doc.arcgis.com/en/cityengine/latest/help/get-started-preferences-prt.htm" target="_blank">Procedural Runtime preferences</a>); only some formats support exporting edges/vertices, see <a href="attr_material.html#RenderingAndExport">Rendering and Export feature table.</a></li>
         </ul>
 
         <p>changes to existing features:</p>
@@ -801,7 +853,7 @@ material.normalmap, material.normalmap.{su|sv|tu|tv|rw}</span></a> attributes</l
            	<li><a href="op_color.html"><span class="code_std">color</span></a> operation: added an overload which takes a float tripple.</li>	
             <li><a href="func_geometry.html#area"><span class="code_std">geometry.area</span></a> function: added <span class="code_std">object.front, streetSide</span> and <span class="code_std">noStreedSide</span> selectors.</li>
 			<li><span class="code_std">case</span> blocks can now be used between <a href="op_pushpop.html"><span class="code_std">push [</span></a> and <a href="op_pushpop.html"><span class="code_std">pop ]</span></a> operations, i.e. a new scope can be conditional.</li>
-            <li>CGA executen trace for debugging, see <a href="../manual/ui/cep/grammarcore.html">Grammarcore Preferences</a>.</li>
+            <li>CGA executen trace for debugging, see <a href="https://doc.arcgis.com/en/cityengine/latest/help/get-started-preferences-prt.htm" target="_blank">Procedural Runtime preferences</a>.</li>
            	<li><a href="op_alignScopeToAxes.html"><span class="code_std">alignScopeToAxes</span></a> operation: added <span class="code_std">x</span> and <span class="code_std">z</span> selectors.</li>	
         </ul>
 
@@ -1067,13 +1119,13 @@ overload  .</li>
     </ul>
     changes to existing features:    
     <ul>
-      <li>Support for trim-planes along concave faces. Trim planes are not infinite anymore, their extent can be controlled in the <a href="../manual/ui/cep/grammarcore.html" class="internlink">Grammarcore preferences</a>.</li>
+      <li>Support for trim-planes along concave faces. Trim planes are not infinite anymore, their extent can be controlled in the <a href="https://doc.arcgis.com/en/cityengine/latest/help/get-started-preferences-prt.htm" target="_blank">Procedural Runtime preferences</a>.</li>
         <li><span class="code_std">roof</span> operation deprecated.</li>
         <li><span class="code_std">offsetUV</span> operation deprecated (is now <a href="op_translateUV.html"><span class="code_std">translateUV</span></a>).</li>
         <li><span class="code_std">setupUV, bakeUV</span> deprecated (use <a href="op_setupProjection.html"><span class="code_std">setupProjection</span></a> and <a href="op_projectUV.html"><span class="code_std">projectUV</span></a> operations instead).</li> 
         <li><a href="op_extrude.html"><span class="code_std">extrude</span></a>, <a href="op_roofGable.html"><span class="code_std">roofGable</span></a>, <a href="op_roofHip.html"><span class="code_std">roofHip</span></a> and <a href="op_roofShed.html"><span class="code_std">roofShed</span></a> now handle multi-face initial shapes.</li>
         <li><a href="func_occlusion.html"><span class="code_std">inside, overlaps, touches</span></a> functions: (1) added <span class="cga_opparam">inter, intra, all</span> selectors. (2) A special configuration (''face is completely covered by a side of a volume'') is now included in the inside case.</li>
-        <li>New settings to control endless recursion detection: (1) limit function call depth, (2) limit nr. of active shapes (detect shapetrees-breadth-explosion), see <a href="../manual/ui/cep/grammarcore.html" class="internlink">Grammarcore preferences</a>.</li>
+        <li>New settings to control endless recursion detection: (1) limit function call depth, (2) limit nr. of active shapes (detect shapetrees-breadth-explosion), see <a href="https://doc.arcgis.com/en/cityengine/latest/help/get-started-preferences-prt.htm" target="_blank">Procedural Runtime preferences</a>.</li>
     </ul> 
     bugfixes:
     <ul>

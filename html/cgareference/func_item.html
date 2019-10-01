@@ -39,6 +39,7 @@
 
 <ul>
 	<li><a href="celib/listItem.html"><span class="code_std">listItem</span></a> function</li>
+	<li><a href="func_array.html">array initialization</a> function</li>
 	<li><a href="func_index.html"><span class="code_std">index</span></a> function</li>
 	<li><a href="func_size.html"><span class="code_std">size</span></a> function</li>
 	<li><a href="func_comp.html"><span class="code_std">comp</span></a> function</li>
@@ -50,7 +51,7 @@
 
 <p class="example">	
 <pre class="code3">
-array = comp(fe) { all : comp.index + 1 }
+const array = comp(fe) { all : comp.index + 1 }
 
 Example --> print(array)       // (4)[1,2,3,4]
             print(size(array)) // 4
@@ -73,7 +74,7 @@ largestIndex(array, i, iLargest) =
         case array[i] > array[iLargest] : largestIndex(array, i+1, i)
         else                            : largestIndex(array, i+1, iLargest)
 
-edgeLengths = comp(e) { all : scope.sx }
+const edgeLengths = comp(e) { all : scope.sx }
 
 longestEdge = largestIndex(edgeLengths)
                                         

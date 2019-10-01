@@ -101,8 +101,8 @@ Building -->
     ... Frontfacade ...
     
 Frontfacade -->
-    setupProjection(0, scope.xy, 1.5, 1, 1) # setup 1.5m x 1m texture tiles 
-    setupProjection(2, scope.xy, scope.sx, scope.sy, 1)  # using dirtmap (uvSet #2)	
+    setupProjection(0, scope.xy, 1.5, 1, 0, 0, 1) # setup 1.5m x 1m texture tiles 
+    setupProjection(2, scope.xy, scope.sx, scope.sy, 0, 0, 1)  # using dirtmap (uvSet #2)	
 
     split(y){ groundfloor_height    : Groundfloor 
             | {~floor_height : Floor}* }
@@ -146,8 +146,8 @@ the whole facade anymore; there are visible seams.
     <td><img src="images/setupuv_simplebuilding_1.png" /></td>
     <td><pre class="code2">
 Frontfacade -->
-  setupProjection(0, scope.xy, 1.5, 1, 1) 
-  setupProjection(2, scope.xy, scope.sx, scope.sy, 1)  
+  setupProjection(0, scope.xy, 1.5, 1, 0, 0, 1) 
+  setupProjection(2, scope.xy, scope.sx, scope.sy, 0, 0, 1)  
   ...
   ...
 Wall -->
@@ -161,12 +161,12 @@ Wall -->
     <td><img src="images/setupuv_simplebuilding_2.png" /></td>
     <td><pre class="code2">
 Frontfacade -->
-  setupProjection(2, scope.xy, scope.sx, scope.sy, 1)  
+  setupProjection(2, scope.xy, scope.sx, scope.sy, 0, 0, 1)  
   ...
   ...
 Wall -->
   color(wallColor)
-  setupProjection(0, scope.xy, 1.5, 1, 1) 
+  setupProjection(0, scope.xy, 1.5, 1, 0, 0, 1) 
   set(material.colormap, wall_tex)
   set(material.dirtmap, dirt_tex)
   projectUV(0) projectUV(2)

@@ -51,7 +51,7 @@ the value of a certain material attribute, eg. <span class="inlinedcode">print(m
   </tr>  
   <tr>
     <td><pre class="code2">string material.color.rgb</pre></td>
-    <td>Diffuse color. Access to the complete color as hex-formatted string, eg. <span class="inlinedcode">RED = "#ff0000"</span>. <a href="attr_material_color.html">More details.</a></td>
+    <td>Diffuse color. Access to the complete color as hex-formatted string, eg. <span class="inlinedcode">RED = "#ff0000"</span>. Default is <span class="inlinedcode">"#ffffff"</span>. <a href="attr_material_color.html">More details.</a></td>
   </tr>  
   <tr>
     <td><pre class="code2"><a name="ambient"></a>float material.ambient.{r|g|b}</pre></td>
@@ -71,15 +71,15 @@ the value of a certain material attribute, eg. <span class="inlinedcode">print(m
   </tr>  
   <tr>
     <td><pre class="code2"><a name="reflectivity"></a>float material.reflectivity</pre></td>
-    <td>Reflectivity factor. 0 is no reflection, 1 is full reflection (of the Reflection Map set in the <a href="../manual/ui/layer_light.html">Panorama Settings</a>). Note that reflection depends on the specular color: the default black color means no reflection!</td>
+    <td>Reflectivity factor. 0 is no reflection, 1 is full reflection (of the Reflection Map set in the <a href="https://doc.arcgis.com/en/cityengine/latest/help/help-scene-light-panorama.htm" target="_blank">Scene light and panorama settings</a>). Note that reflection depends on the specular color: the default black color means no reflection!</td>
   </tr>  
   <tr>
     <td><pre class="code2"><a name="shininess"></a>float material.shininess</pre></td>
-    <td>Phong specular exponent in the range [0, 128].</td>
+    <td>Phong specular exponent in the range [0, 128]. Default is 1.</td>
   </tr>
   <tr>
     <td><pre class="code2"><a name="bumpValue"></a>float material.bumpValue</pre></td>
-    <td><p>Controls the bump scaling factor (if material.bumpmap is set).</p></td>
+    <td><p>Controls the bump scaling factor (if material.bumpmap is set). Default is 1.</p></td>
   </tr>
   
   <tr>

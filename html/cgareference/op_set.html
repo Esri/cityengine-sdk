@@ -28,23 +28,20 @@
         <h2>
         Synopsis
         </h2>
-        <p class="code2"><span class="cga_op">set</span>(<span class="cga_opparam">attribute</span>, bool <span class="cga_opparam">value</span>)</p>
-        <p class="code2"><span class="cga_op">set</span>(<span class="cga_opparam">attribute</span>, float <span class="cga_opparam">value</span>)</p>
-        <p class="code2"><span class="cga_op">set</span>(<span class="cga_opparam">attribute</span>, string <span class="cga_opparam">value</span>)</p>
-        
+        <p class="code2"><span class="cga_op">set</span>(<span class="cga_opparam">attribute</span>, <span class="cga_opparam">value</span>)</p>
          <h2>
         Parameters
         </h2>
         <ul>
-        <li><span class="cga_opparam">attribute</span> (keyword)<br>
+        <li><span class="cga_opparam">attribute</span> (selector)<br>
           Name of shape attribute to set.</li>
-        <li><span class="cga_value">value</span> (bool, float or string - same type as attribute)<br />
+        <li><span class="cga_value">value</span> (bool, float, string, bool[], float[], string[] - same type as attribute)<br />
           Value to assign to shape attribute. <i>Note: Not all shape attributes are writable!</i></li>
         </ul>
         
 
         
-        <p class="info">The set operation assigns a value to a shape attribute of the current shape. There are two kinds of shape attributes: <em>builtin</em> attributes such as <span class="code3">material.color</span> or <span class="code3">scope.tx</span> and <em>generic</em> attributes, which are declared as rule attributes (see <a href="../manual/cga/writing_rules/cga_wr_attributes.html">Attributes</a>).</p>
+        <p class="info">The set operation assigns a value to a shape attribute of the current shape. There are two kinds of shape attributes: <em>builtin</em> attributes such as <span class="code3">material.color</span> or <span class="code3">scope.tx</span> and <em>generic</em> attributes, which are declared as rule attributes (see <a href="https://doc.arcgis.com/en/cityengine/latest/help/help-rules-attributes.htm" target="_blank">CGA attributes</a>).</p>
         <p class="text">&nbsp;</p>
 
 <h2>Related</h2>

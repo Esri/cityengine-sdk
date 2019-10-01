@@ -29,8 +29,6 @@
 
 <p>Array of substrings of given input string.</p> 
 
-<p class="notes">Arrays can not be declared as <span class="codelight">attr</span> or <span class="codelight">const</span>.</p>
-		
 <p class="info">Splits a string into several substrings separated by a given delimiter string.</p>
 
 <h2>Related</h2>
@@ -138,9 +136,9 @@
 // a;b&crarr;
 // c;d&crarr;
 
-const file = readTextFile("table.csv")
-rows       = splitString(file, "\n")
-headers    = splitString(rows[0], ";")
+const file    = readTextFile("table.csv")
+const rows    = splitString(file, "\n")
+const headers = splitString(rows[0], ";")
 
 Lot --> print(rows)     // (3)[a;b,c;d,]
         print(headers)  // (2)[a,b]
