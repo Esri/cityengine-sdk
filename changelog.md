@@ -1,4 +1,4 @@
-ESRI CITYENGINE SDK 2.1.XXXX CHANGELOG
+ESRI CITYENGINE SDK 2.1.5704 CHANGELOG
 ======================================
 
 This section lists changes compared to CityEngine SDK 2.0.5403.
