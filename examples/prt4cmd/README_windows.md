@@ -27,7 +27,7 @@ SOFTWARE REQUIREMENTS
 BUILD INSTRUCTIONS
 ------------------
 
-1. Open a `VS2017 x64 Native Tools Command Prompt`
+1. Open a `VS2019 x64 Native Tools Command Prompt`
 1. Change into the example directory: `cd <your path to>\esri-cityengine-sdk\examples\prt4cmd`
 1. Prepare build directory: `mkdir build`
 1. And change into it: `cd build`
