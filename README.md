@@ -74,7 +74,7 @@ Please note that the individual example READMEs may include further requirements
 #### All Platforms
 * To load custom encoders built with the latest SDK, CityEngine 2019.1 is required. For older versions of CityEngine an older version of the SDK might have to be used, see list above.
 * License for matching CityEngine, e.g. to author Rule Packages.
-* CMake 3.13 or later (http://www.cmake.org)
+* CMake 3.3 or later (http://www.cmake.org)
 
 
 #### Windows
