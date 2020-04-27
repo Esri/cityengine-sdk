@@ -37,3 +37,4 @@ build
 *.tar.bz2
 *.tbz
 *.tbz2
+*ce_sdk*
