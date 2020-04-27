@@ -56,6 +56,13 @@ void tokenize(const std::basic_string<C>& str, std::vector<std::basic_string<C>>
 		tokens.emplace_back(str.cbegin() + start, str.cend());
 }
 
+template <typename C>
+std::vector<const C*> toPtrVec(const std::vector<std::basic_string<C>>& sv) {
+	std::vector<const C*> pv(sv.size());
+	std::transform(sv.begin(), sv.end(), pv.begin(), [](const std::basic_string<C>& s) { return s.c_str(); });
+	return pv;
+}
+
 #if defined(_WIN32)
 #	include <Windows.h>
 #elif defined(__APPLE__)
@@ -136,6 +143,61 @@ AttributeMapPtr createAttributeMapFromTypedKeyValues(const std::vector<std::stri
 				else
 					std::wcerr << L"cannot set bool attribute " << tokens[0] << std::endl;
 			}
+			else if (tokens[1] == L"string[]") {
+				std::vector<std::wstring> elems;
+				tokenize<wchar_t>(tokens[2], elems, L",", true);
+				const std::vector<const wchar_t*> stringArray = toPtrVec(elems);
+				bld->setStringArray(tokens[0].c_str(), stringArray.data(), stringArray.size());
+			}
+			else if (tokens[1] == L"float[]") {
+				std::vector<std::wstring> elems;
+				tokenize<wchar_t>(tokens[2], elems, L",", true);
+				std::vector<double> floatArray;
+				floatArray.reserve(elems.size());
+				for(const std::wstring& elem : elems) {
+					try {
+						floatArray.push_back(std::stod(elem));
+					} catch (const std::exception& e) {
+						std::wcerr << L"cannot set float array attribute " << tokens[0] << ": " << e.what() << std::endl;
+						break;
+					}
+				}
+				if(floatArray.size() == elems.size())
+					bld->setFloatArray(tokens[0].c_str(), floatArray.data(), floatArray.size());
+			} else if (tokens[1] == L"int[]") {
+				std::vector<std::wstring> elems;
+				tokenize<wchar_t>(tokens[2], elems, L",", true);
+				std::vector<int32_t> intArray;
+				intArray.reserve(elems.size());
+				for(const std::wstring& elem : elems) {
+					try {
+						intArray.push_back(std::stoi(elem));
+					} catch (const std::exception& e) {
+						std::wcerr << L"cannot set int array attribute " << tokens[0] << ": " << e.what() << std::endl;
+						break;
+					}
+				}
+				if(intArray.size() == elems.size())
+					bld->setIntArray(tokens[0].c_str(), intArray.data(), intArray.size());
+			} else if (tokens[1] == L"bool[]") {
+				std::vector<std::wstring> elems;
+				tokenize<wchar_t>(tokens[2], elems, L",", true);
+				std::vector<uint8_t> boolArray;
+				boolArray.reserve(elems.size());
+				bool v;
+				for(const std::wstring& elem : elems) {
+					std::wistringstream istr(elem);
+					istr >> std::boolalpha >> v;
+					if (istr.fail()) {
+						std::wcerr << L"cannot set bool array attribute " << tokens[0] << std::endl;
+						break;
+					}
+					boolArray.push_back(v ? 1 : 0);
+				}
+				if(boolArray.size() == elems.size())
+					bld->setBoolArray(tokens[0].c_str(), (const bool*)boolArray.data(), boolArray.size());
+			} else
+				std::wcout << L"warning: ignored key/value item: " << wa << std::endl;
 		}
 		else
 			std::wcout << L"warning: ignored key/value item: " << wa << std::endl;
@@ -183,14 +245,14 @@ InputArgs::InputArgs(int argc, char *argv[]) : mStatus(RunStatus::FAILED) {
 	// setup options
 	CLI::App app{"prt4cmd - command line example for the CityEngine Procedural RunTime"};
 	const auto optVer =  app.add_flag  ("-v,--version",                                     "Show CityEngine SDK version.");
-	                     app.add_option("-l,--log-level",       mLogLevel,                  "Set log filter level: 1 = debug, 2 = info, 3 = warning, 4 = error, 5 = fatal, >5 = no output");
+	                     app.add_option("-l,--log-level",       mLogLevel,                  "Set log filter level:\n                              1 = debug, 2 = info, 3 = warning, 4 = error, 5 = fatal, >5 = no output");
 	                     app.add_option("-o,--output",          convertOutputPath,          "Set the output path for the callbacks.");
 	                     app.add_option("-e,--encoder",         mEncoderID,                 "The encoder ID, e.g. 'com.esri.prt.codecs.OBJEncoder'.");
 	const auto optRPK =  app.add_option("-p,--rule-package",    mRulePackage,               "Set the rule package path.");
-	                     app.add_option("-a,--shape-attr",      convertShapeAttrs,          "Set a initial shape attribute (syntax is <name>:<type>=<value>, type = {string,float,int,bool}).");
-	                     app.add_option("-g,--shape-geo",       convertInitialShapeGeoPath, "(Optional) Path to a file with shape geometry");
-	                     app.add_option("-z,--encoder-option",  convertEncOpts,             "Set a encoder option (syntax is <name>:<type>=<value>, type = {string,float,int,bool}).");
-	const auto optInfo = app.add_option("-i,--info",            mInfoFile,                  "Write XML Extension Information to file");
+	                     app.add_option("-a,--shape-attr",      convertShapeAttrs,          "Set a initial shape attribute.\n                              syntax is <name>:<type>=<value>\n                              type = {string,float,int,bool,string[],float[],int[],bool[]}\n                              (array elements are comma-separated)");
+	                     app.add_option("-g,--shape-geo",       convertInitialShapeGeoPath, "(Optional) Path to a file with shape geometry.");
+	                     app.add_option("-z,--encoder-option",  convertEncOpts,             "Set a encoder option.\n                              syntax is <name>:<type>=<value>\n                              type = {string,float,int,bool,string[],float[],int[],bool[]}");
+	const auto optInfo = app.add_option("-i,--info",            mInfoFile,                  "Write XML Extension Information to file.");
 
 	// setup option requirements
 	optInfo->excludes(optRPK);
