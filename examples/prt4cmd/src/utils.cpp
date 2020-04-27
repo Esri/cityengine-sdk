@@ -44,14 +44,16 @@ namespace {
 const char* ENCODER_ID_OBJ = "com.esri.prt.codecs.OBJEncoder";
 
 template<typename C>
-void tokenize(const std::basic_string<C>& str, std::vector<std::basic_string<C>>& tokens, const std::basic_string<C>& delimiters) {
-	auto lastPos = str.find_first_not_of(delimiters, 0);
-	auto pos     = str.find_first_of(delimiters, lastPos);
-	while (std::basic_string<C>::npos != pos || std::basic_string<C>::npos != lastPos) {
-		tokens.push_back(str.substr(lastPos, pos - lastPos));
-		lastPos = str.find_first_not_of(delimiters, pos);
-		pos = str.find_first_of(delimiters, lastPos);
+void tokenize(const std::basic_string<C>& str, std::vector<std::basic_string<C>>& tokens, const std::basic_string<C>& delimiters, bool allowEmpty = false) {
+	size_t start = 0;
+	size_t found = 0;
+	while((found = str.find_first_of(delimiters, start)) != std::basic_string<C>::npos) {
+		if(allowEmpty || start < found)
+			tokens.emplace_back(str.cbegin() + start, str.cbegin() + found);
+		start = found + 1;
 	}
+	if(allowEmpty || start < str.size())
+		tokens.emplace_back(str.cbegin() + start, str.cend());
 }
 
 #if defined(_WIN32)
