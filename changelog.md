@@ -1,3 +1,14 @@
+ESRI CITYENGINE SDK 2.2.xxxx CHANGELOG
+======================================
+
+This section lists changes compared to CityEngine SDK 2.1.5704.
+
+
+General Info
+------------
+* CityEngine SDK 2.2.xxxx is used in CityEngine 2020.0.xxxx
+
+
 ESRI CITYENGINE SDK 2.1.5704 CHANGELOG
 ======================================
 

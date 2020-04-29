@@ -59,7 +59,7 @@ USING PRT4CMD
 LICENSING
 ---------
 
-Copyright (c) 2019 Esri
+Copyright (c) 2020 Esri
 
 You may not use the content of this repository except in compliance with the following Licenses:
   1. All content of all directories **except "examples"** is licensed under the Esri [Terms of Use](http://www.esri.com/legal/licensing-translations).
