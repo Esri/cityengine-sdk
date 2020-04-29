@@ -1,6 +1,6 @@
-# Esri CityEngine SDK
+# CityEngine SDK
 
-This is the official site for the SDK of [Esri CityEngine](https://www.esri.com/en-us/arcgis/products/esri-cityengine/overview), a 3D city modeling software for urban design, visual effects, and VR/AR production.
+This is the official site for the SDK of [CityEngine](https://www.esri.com/en-us/arcgis/products/esri-cityengine/overview), a 3D city modeling software for urban design, visual effects, and VR/AR production.
 
 The CityEngine SDK can be used for the development of:
 

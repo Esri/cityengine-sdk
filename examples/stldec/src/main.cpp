@@ -1,5 +1,5 @@
 /**
- * Esri CityEngine SDK Custom STL Decoder Example
+ * CityEngine SDK Custom STL Decoder Example
  *
  * This example demonstrates the usage of the PRTX interface
  * to write custom decoders.

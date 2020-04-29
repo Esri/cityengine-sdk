@@ -1,5 +1,5 @@
 /**
- * Esri CityEngine SDK CLI Example
+ * CityEngine SDK CLI Example
  *
  * This example demonstrates the main functionality of the Procedural Runtime API.
  *
