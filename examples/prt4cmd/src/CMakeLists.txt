@@ -70,15 +70,17 @@ endif()
 
 add_executable(${PROJECT_NAME} prt4cmd.cpp utils.cpp)
 
+set_target_properties(${PROJECT_NAME} PROPERTIES CXX_STANDARD 14)
+
 if(${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
 	target_compile_definitions(${PROJECT_NAME} PRIVATE _CRT_SECURE_NO_WARNINGS)
 elseif(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
 	target_compile_options(${PROJECT_NAME} PRIVATE
-		-std=c++11 -march=nocona -fvisibility=hidden -fvisibility-inlines-hidden
+		-march=nocona -fvisibility=hidden -fvisibility-inlines-hidden
 		-Wl,--exclude-libs,ALL -Wall -Wextra -Wunused-parameter -Wl,-rpath,'\$ORIGIN'
 	)
 elseif(${CMAKE_SYSTEM_NAME} STREQUAL "Darwin")
-	target_compile_options(${PROJECT_NAME} PRIVATE -std=c++14 -stdlib=libc++)
+	target_compile_options(${PROJECT_NAME} PRIVATE -stdlib=libc++)
 endif()
 
 target_include_directories(${PROJECT_NAME} PRIVATE ${PRT_INCLUDE_PATH})
