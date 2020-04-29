@@ -22,7 +22,7 @@ BUILD INSTRUCTIONS
 ------------------
 
 1. Open a `VS2019 x64 Native Tools Command Prompt`
-1. Change into the example directory: `cd <your path to>\esri-cityengine-sdk\examples\stldec`
+1. Change into the example directory: `cd <your path to>\cityengine-sdk\examples\stldec`
 1. Create a build directory: `mkdir build`
 1. Change into the build directory: `cd build`
 1. Run cmake: `cmake -G "NMake Makefiles" ..\src`
@@ -34,7 +34,7 @@ INSTALLATION INSTRUCTIONS FOR CITYENGINE
 ----------------------------------------
 
 1. Locate the `stldec` extension library in the `install` directory above, e.g. at:
-   `<your path to>\esri-cityengine-sdk\examples\stldec\install\lib\prt_stldec.dll`
+   `<your path to>\cityengine-sdk\examples\stldec\install\lib\prt_stldec.dll`
 1. Copy `prt_stldec.dll` into `<CityEngine installation location>\plugins\com.esri.prt.clients.ce.win32.win32.x86_64_1.0.0\lib\`
 1. Start CityEngine and verify that STL files are now previewed in the file navigator.
 

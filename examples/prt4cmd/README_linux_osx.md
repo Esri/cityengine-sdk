@@ -28,7 +28,7 @@ BUILD INSTRUCTIONS
 ------------------
 
 1. Open a terminal (e.g. bash)
-1. Change into the example directory: `cd <your path to>/esri-cityengine-sdk/examples/prt4cmd`
+1. Change into the example directory: `cd <your path to>/cityengine-sdk/examples/prt4cmd`
 1. Prepare build directory: `mkdir build && cd build`
 1. Run cmake: `cmake ../src`
 1. Compile: `make install`
@@ -43,7 +43,7 @@ USING PRT4CMD
 1. Type `mkdir output` to create the default directory for the generated models (this can be configured with the `-o` option).
 1. Type the following to generate the "candler" building model in the wavefront obj format (replace `<your path to>` with the _absolute_ path to the corresponding directory):
    ```
-   bin/prt4cmd -l 3 -g <your path to>/esri-cityengine-sdk/data/candler_footprint.obj -p <your path to>/esri-cityengine-sdk/data/candler.rpk -a ruleFile:string=bin/candler.cgb -a startRule:string=Default\$Footprint -e com.esri.prt.codecs.OBJEncoder -z baseName:string=theCandler
+   bin/prt4cmd -l 3 -g <absolute path to>/cityengine-sdk/data/candler_footprint.obj -p <absolue path to>/cityengine-sdk/data/candler.rpk -a ruleFile:string=bin/candler.cgb -a startRule:string=Default\$Footprint -e com.esri.prt.codecs.OBJEncoder -z baseName:string=theCandler
    ```
 1. The result is placed in the `output` directory:
    - `theCandler.obj`
@@ -52,7 +52,7 @@ USING PRT4CMD
 
 1. To regenerate the same model with a different height, use the following command (note the additional `-a BuildingHeight...` statement):
    ```
-   bin/prt4cmd -l 3 -g <your path to>/esri-cityengine-sdk/data/candler_footprint.obj -p <your path to>/esri-cityengine-sdk/data/candler.rpk -a ruleFile:string=bin/candler.cgb -a startRule:string=Default\$Footprint -a BuildingHeight:float=30 -e com.esri.prt.codecs.OBJEncoder -z baseName:string=theCandler
+   bin/prt4cmd -l 3 -g <your path to>/cityengine-sdk/data/candler_footprint.obj -p <your path to>/cityengine-sdk/data/candler.rpk -a ruleFile:string=bin/candler.cgb -a startRule:string=Default\$Footprint -a BuildingHeight:float=30 -e com.esri.prt.codecs.OBJEncoder -z baseName:string=theCandler
    ```
 1. The obj file will now contain a model which is 30m high instead of the default 62m.
 

@@ -22,7 +22,7 @@ BUILD INSTRUCTIONS
 ------------------
 
 1. Open a `bash` shell
-1. Change into the example directory: `cd <your path to>/esri-cityengine-sdk/examples/stldec`
+1. Change into the example directory: `cd <your path to>/cityengine-sdk/examples/stldec`
 1. Create a build directory and change into it: `mkdir build && cd build`
 1. Run cmake: `cmake ../src`
 1. Compile: `make install`
@@ -33,7 +33,7 @@ INSTALLATION INSTRUCTIONS FOR CITYENGINE
 ----------------------------------------
 
 1. Locate the `stldec` extension library in the `install` directory above, e.g. at:
-   `<your path to>/esri-cityengine-sdk/examples/stldec/install/lib/libprt_stldec.so`
+   `<your path to>/cityengine-sdk/examples/stldec/install/lib/libprt_stldec.so`
 1. Copy `libprt_stldec.so` into `<CityEngine installation location>/plugins/com.esri.prt.clients.ce.gtk.linux.x86_64_1.0.0/lib/`
 1. Start CityEngine and verify that STL files are now previewed in the file navigator.
 

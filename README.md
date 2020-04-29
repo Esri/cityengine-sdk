@@ -26,21 +26,21 @@ The archives are available for download at the corresponding github release page
 
 
 ## CityEngine SDK Releases
-- [v2.2.xxxx (2020-xx-xx, CityEngine 2020.0)](https://github.com/Esri/esri-cityengine-sdk/releases/tag/2.2.xxxx)
-- [v2.1.5705 (2019-12-11, CityEngine 2019.1)](https://github.com/Esri/esri-cityengine-sdk/releases/tag/2.1.5705)
+- [v2.2.xxxx (2020-xx-xx, CityEngine 2020.0)](https://github.com/Esri/cityengine-sdk/releases/tag/2.2.xxxx)
+- [v2.1.5705 (2019-12-11, CityEngine 2019.1)](https://github.com/Esri/cityengine-sdk/releases/tag/2.1.5705)
 - v2.1.5704 (2019-09-25, CityEngine 2019.1
-- [v2.0.5403 (2019-05-08, CityEngine 2019.0)](https://github.com/Esri/esri-cityengine-sdk/releases/tag/2.0.5403)
-- [v1.10.4198 (2018-09-17, CityEngine 2018.1)](https://github.com/Esri/esri-cityengine-sdk/releases/tag/1.10.4198)
-- [v1.10.4051 (2018-05-11, CityEngine 2018.0)](https://github.com/Esri/esri-cityengine-sdk/releases/tag/1.10.4051)
-- [v1.9.3786 (2017-11-06, CityEngine 2017.1)](https://github.com/Esri/esri-cityengine-sdk/releases/tag/1.9.3786)
-- [v1.8.3501 (2017-06-29, CityEngine 2017.0)](https://github.com/Esri/esri-cityengine-sdk/releases/tag/1.8.3501)
-- [v1.7.2915 (2016-10-03, CityEngine 2016.1)](https://github.com/Esri/esri-cityengine-sdk/releases/tag/1.7.2915)
-- [v1.6.2663 (2016-06-21, CityEngine 2016.0)](https://github.com/Esri/esri-cityengine-sdk/releases/tag/1.6.2663)
-- [v1.4.2074 (2015-10-06, CityEngine 2015.2)](https://github.com/Esri/esri-cityengine-sdk/releases/tag/1.4.2074)
-- [v1.3.1969 (2015-06-17, CityEngine 2015.1)](https://github.com/Esri/esri-cityengine-sdk/releases/tag/1.3.1969)
-- [v1.3.1888 (2015-03-31, CityEngine 2015.0)](https://github.com/Esri/esri-cityengine-sdk/releases/tag/1.3.1888)
-- [v1.2.1591 (2014-09-01, CityEngine 2014.1)](https://github.com/Esri/esri-cityengine-sdk/releases/tag/1.2.1591)
-- [v1.1.1471 (2014-05-29, CityEngine 2014.0)](https://github.com/Esri/esri-cityengine-sdk/releases/tag/1.1.1471)
+- [v2.0.5403 (2019-05-08, CityEngine 2019.0)](https://github.com/Esri/cityengine-sdk/releases/tag/2.0.5403)
+- [v1.10.4198 (2018-09-17, CityEngine 2018.1)](https://github.com/Esri/cityengine-sdk/releases/tag/1.10.4198)
+- [v1.10.4051 (2018-05-11, CityEngine 2018.0)](https://github.com/Esri/cityengine-sdk/releases/tag/1.10.4051)
+- [v1.9.3786 (2017-11-06, CityEngine 2017.1)](https://github.com/Esri/cityengine-sdk/releases/tag/1.9.3786)
+- [v1.8.3501 (2017-06-29, CityEngine 2017.0)](https://github.com/Esri/cityengine-sdk/releases/tag/1.8.3501)
+- [v1.7.2915 (2016-10-03, CityEngine 2016.1)](https://github.com/Esri/cityengine-sdk/releases/tag/1.7.2915)
+- [v1.6.2663 (2016-06-21, CityEngine 2016.0)](https://github.com/Esri/cityengine-sdk/releases/tag/1.6.2663)
+- [v1.4.2074 (2015-10-06, CityEngine 2015.2)](https://github.com/Esri/cityengine-sdk/releases/tag/1.4.2074)
+- [v1.3.1969 (2015-06-17, CityEngine 2015.1)](https://github.com/Esri/cityengine-sdk/releases/tag/1.3.1969)
+- [v1.3.1888 (2015-03-31, CityEngine 2015.0)](https://github.com/Esri/cityengine-sdk/releases/tag/1.3.1888)
+- [v1.2.1591 (2014-09-01, CityEngine 2014.1)](https://github.com/Esri/cityengine-sdk/releases/tag/1.2.1591)
+- [v1.1.1471 (2014-05-29, CityEngine 2014.0)](https://github.com/Esri/cityengine-sdk/releases/tag/1.1.1471)
 - v1.0.1209 (2014-01-15, CityEngine 2013.1)
 
 
@@ -50,7 +50,7 @@ The archives are available for download at the corresponding github release page
 
 The final directory layout should look like this:
 ```
-/esri-cityengine-sdk/
+/cityengine-sdk/
     examples/...
     data/...
 ```
@@ -100,7 +100,7 @@ Please note that the individual example READMEs may include further requirements
 ## Further Resources
 * Documentation:
     * [Changelog](changelog.md)
-    * Online reference: https://esri.github.io/esri-cityengine-sdk
+    * Online reference: https://esri.github.io/cityengine-sdk
     * Offline reference: see /doc subdirectory inside the release archive
 * Forum:
     * General CityEngine: https://geonet.esri.com/community/gis/3d/cityengine
