@@ -60,17 +60,6 @@ message(STATUS "Using prt_DIR = ${prt_DIR} with version ${PRT_VERSION_MAJOR}.${P
 
 ### build target
 
-if(NOT P4C_WINDOWS)
-	set(CMAKE_INSTALL_RPATH_USE_LINK_PATH FALSE)
-	set(CMAKE_SKIP_RPATH FALSE)
-	set(CMAKE_BUILD_WITH_INSTALL_RPATH TRUE)
-	if(P4C_LINUX)
-		set(CMAKE_INSTALL_RPATH "\$ORIGIN")
-	elseif(P4C_MACOS)
-		set(CMAKE_INSTALL_RPATH "@loader_path")
-	endif()
-endif()
-
 add_executable(${PROJECT_NAME} prt4cmd.cpp utils.cpp)
 
 set_target_properties(${PROJECT_NAME} PROPERTIES CXX_STANDARD 14)
@@ -89,6 +78,18 @@ endif()
 
 target_include_directories(${PROJECT_NAME} PRIVATE ${PRT_INCLUDE_PATH})
 target_link_libraries(${PROJECT_NAME} PRIVATE ${PRT_LINK_LIBRARIES})
+
+if(NOT P4C_WINDOWS)
+	set_target_properties(${PROJECT_NAME} PROPERTIES
+		INSTALL_RPATH_USE_LINK_PATH FALSE
+		SKIP_RPATH FALSE
+		BUILD_WITH_INSTALL_RPATH TRUE)
+	if(P4C_LINUX)
+		set_target_properties(${PROJECT_NAME} PROPERTIES INSTALL_RPATH "\$ORIGIN")
+	elseif(P4C_MACOS)
+		set_target_properties(${PROJECT_NAME} PROPERTIES INSTALL_RPATH "@loader_path")
+	endif()
+endif()
 
 
 ### install target
