@@ -9,6 +9,13 @@ General Info
 * CityEngine SDK 2.2.xxxx is used in CityEngine 2020.0.xxxx
 
 
+ESRI CITYENGINE SDK 2.1.5705 CHANGELOG
+======================================
+
+Minor update to fix broken links in the CGA reference documentation.
+Otherwise this release is identical to 2.1.5704.
+
+
 ESRI CITYENGINE SDK 2.1.5704 CHANGELOG
 ======================================
 
