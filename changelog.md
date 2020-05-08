@@ -1,4 +1,4 @@
-ESRI CITYENGINE SDK 2.2.xxxx CHANGELOG
+ESRI CITYENGINE SDK 2.2.6331 CHANGELOG
 ======================================
 
 This section lists changes compared to CityEngine SDK 2.1.5704.
@@ -6,7 +6,103 @@ This section lists changes compared to CityEngine SDK 2.1.5704.
 
 General Info
 ------------
-* CityEngine SDK 2.2.xxxx is used in CityEngine 2020.0.xxxx
+* CityEngine SDK 2.2.6331 is used in CityEngine 2020.0.6331
+
+PRT API
+-------
+* FileOutputCallbacks, MemoryOutputCallbacks: the create() function has a new optional parameter to allow for logging generate errors to file / block. [CE-7126]
+* Callbacks: 
+  * The array attr eval callbacks attrBoolArray(), attrFloatArray(), attrStringArray() now have an additional parameter nRows (for 2D array dimensions) which is set by the AttributeEvalEncoder. [CE-7218]
+  * The AttributeEvalEncoder does not report values of CGA const functions anymore (via Callbacks::attrXXX()) [CE-7124]
+* generate(): 
+  * attributes of InitialShapes are now checked for a match in the CGA attributes of the connected rule. Both name and type must match. Mismatches used to result in undefined behaviour. [CE-1600]
+  * IntArray attributes of InitialShapes are now passed-through to the encoders (used to cause an exception). 
+* New content type prt::CT_TABLE (for prt::ContentType enum)[CE-7217]
+* InitialShapes: added '/arrayDimRows/' namespace to attribute key for setting dimensions of CGA 2D array attrs [CE-7220] 
+* SimpleOutputCallbacks: made attrFloat(), attrXXXArray() write strings consistent to other attrXXX() implementations (int format) 
+
+
+PRTX API
+--------
+* new content class prtx::Table
+* new function prtx::Databackend::resolveTable()
+* prtx::DebugUtils::dump(mesh): extended to print UV coordinates as well
+* renamed prtx::NamePreparator::legalizedAndUniquifed() to prtx::NamePreparator::legalizedAndUniquified()
+* improved robustness of extension loader [CE-7368]
+* use '/arrayDimRows/' namespace to extract dimensions of CGA 2D array attrs from prtx::Shape via Attributable interface [CE-7220] 
+* removed CGA const functions from the prtx::Shape via Attributable interface [CE-7220]
+
+CGA
+---
+* New functions:
+  * Operators for arrays. [CE-7262, CE-7258, CE-7263]
+  * colon operator. [CE-7149]
+  * readStringTable, readFloatTable: Functions to read CSV files. [CE-7217]
+  * nRows, nColumns Functions to access dimensions of an array. [CE-7212]
+  * floatArray, stringArray, boolArray: Functions to convert arrays and create empty arrays. [CE-7256, CE-6863]
+* New attributes:
+  * material.opacitymap.cutoff attribute [CE-7773]
+* Changes to existing features:
+  * envelope operation: 
+    * Added a version which takes per-edge arrays for baseHeight and angles. [CE-7586]
+    * Fixed non-deterministic behaviour in rare border cases. [CE-7603]
+  * array initialization function: Added notation to create 2d arrays with several rows. [CE-7212]
+  * index operator:
+    * Access elements by index arrays or logical arrays. [CE-7150, CE-7349]
+    * Added row and column indexing for 2d arrays. [CE-7214]
+  * index function: This function is deprecated. Use the findFirst function instead. [CE-7519]
+  * readTextFile function: .csv extension not supported anymore (see new readTable functions) - if you want to read a .csv file as text you will need to rename it to .txt. [CE-7217]
+  * array initialization, splitString, comp function: The size of the returned array is limited. It can be configured in the Procedural Runtime preferences (Default: 100000).
+  * texture operation: Reset opacitymap if no alpha channel present. [CE-6941]
+  * str, abs function: Support for arrays. [CE-7276, CE-7520]
+  * @Enum, @Range annotation: These annotations can now be applied to array attributes to specify enumeration values or ranges for array elements. [CE-7290, CE-7291]
+  * @Enum annotation: Enumeration values can now be specified dynamically by an attribute. [CE-7144]
+* Bugfixes:
+  * bool function: Excluded the float-to-bool conversion from inf/nan checks (Procedural Runtime preferences). [CE-6667]
+  * setupProjection operation: Fixed blurry and discontinuous textures at very large world coordinate magnitudes or very large offset values. [CE-6667]
+  * find function: Fixed wrong index if matchString was empty. [CE-7311]
+  * str, print function: Fixed printing the sign for negative infinity.[CE-7625]
+  * Fixed performance problems when generating shapes that contain holes and a large number of vertices. [CE-5818]
+
+
+
+Built-In Codecs Changes and Fixes
+---------------------------------
+* New decoder to read .csv tables: CSVDecoder [CE-7217]
+* New encoder: added support for Pixar's Unversal Scene Description (USD) format [CE-6130]
+* Unreal Encoder:
+  * Updated to use Datasmith 4.24. This makes the Unreal encoder stable and it is not beta anymore. [CE-7337]
+  * Added Hierarchical Instanced Static Mesh Component support for per Initial Shape export [CE-6481]
+  * Add Full Path of Inserted Assets as Metadata to Actors [CE-7021]
+  * Added support for Texture Atlasses [CE-5268, CE-7106, CE-7127]
+  * Fixed a bug where a wrong opacity map was used.
+  * Optimized textures by combining individual PBR maps into one and diffuse & opacity maps into one [CE-6698]
+* SLPK Encoder:
+  * Removed "Layer Enabled" option [CE-7138]
+  * Added support for material.opacitymap [CE-5973]
+  * Fixed a crash on models that contained UV Coordinates only on some faces. [CE-7581]
+  * Fixed a crash when using default encoder options [CE-6951]
+  * Fixed a bug which led to materials having alpha mode "opaque" instead of "blend"
+  * Fixed writing of emissive factors [CE-7089]
+  * Fixed wrong vertical coord system unit [CE-7043]
+  * Fixed a bug where a too long attributes file led to illegal offsets [CE-7097]
+  * Fixed a bug in degenerated uvs handling which led to nodes not being unloaded in the SceneViewer. [CE-7581]
+  * Optimize empty pbr textures (do not write them) [CE-6690]
+  * Optimized texture atlas sizes [CE-6689]
+  * Use opacity mode "mask" instead of "opaque" for internal node materials if they are a mix of opaque and blend materials [CE-7866]
+* FBX:
+  * Decoder/Encoder: Update to FBX 2019 [CE-6329]
+  * Decoder: Improved texture file lookup heuristic (handle '\') [CE-7588]
+* GLTF Decoder and Encoder now read / write alpha cutoff value to CGA attribute material.opacitymap.cutoff
+  
+Misc Changes and Fixes
+----------------------
+* Windows: 
+  * Switched to Visual Studio 2019, Toolchain 14.23 [CE-7325]
+  * Raised minimal Windows API to Server 2012 / Windows 8.1 [CE-7325]
+* CMake Support Script: Prevent searching PRT and its dependencies on system path [CE-6850]
+* Increased minimal cmake to 3.14 [CE-7325]
+* Update PRT name and description: "ArcGIS" instead of "Esri".  [CE-7565]
 
 
 ESRI CITYENGINE SDK 2.1.5705 CHANGELOG
@@ -29,7 +125,7 @@ General Info
 
 PRT API
 -------
-* Added `Callbacks::attrBoolArray`, `Callbacks::attrFloatArray`, `Callbacks::attrStringArray` for array attributes. [CE-6277]
+* Added `Callbacks::attrBoolArray()`, `Callbacks::attrFloatArray()`, `Callbacks::attrStringArray()` for array attributes. [CE-6277]
 * Fixed `createResolveMap()` (unpack to filesystem case): in rare cases there were filename clashes. [CE-6569]
 
 PRTX API
