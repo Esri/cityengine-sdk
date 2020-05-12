@@ -1,4 +1,4 @@
-ESRI CITYENGINE SDK 2.2.6331 CHANGELOG
+ESRI CITYENGINE SDK 2.2.6332 CHANGELOG
 ======================================
 
 This section lists changes compared to CityEngine SDK 2.1.5704.
@@ -6,7 +6,7 @@ This section lists changes compared to CityEngine SDK 2.1.5704.
 
 General Info
 ------------
-* CityEngine SDK 2.2.6331 is used in CityEngine 2020.0.6331
+* CityEngine SDK 2.2.6332 is used in CityEngine 2020.0.6332
 
 PRT API
 -------
@@ -21,16 +21,15 @@ PRT API
 * InitialShapes: added '/arrayDimRows/' namespace to attribute key for setting dimensions of CGA 2D array attrs [CE-7220] 
 * SimpleOutputCallbacks: made attrFloat(), attrXXXArray() write strings consistent to other attrXXX() implementations (int format) 
 
-
 PRTX API
 --------
-* new content class prtx::Table
-* new function prtx::Databackend::resolveTable()
+* New content class prtx::Table
+* New function prtx::Databackend::resolveTable()
 * prtx::DebugUtils::dump(mesh): extended to print UV coordinates as well
-* renamed prtx::NamePreparator::legalizedAndUniquifed() to prtx::NamePreparator::legalizedAndUniquified()
-* improved robustness of extension loader [CE-7368]
-* use '/arrayDimRows/' namespace to extract dimensions of CGA 2D array attrs from prtx::Shape via Attributable interface [CE-7220] 
-* removed CGA const functions from the prtx::Shape via Attributable interface [CE-7220]
+* Renamed prtx::NamePreparator::legalizedAndUniquifed() to prtx::NamePreparator::legalizedAndUniquified()
+* Improved robustness of extension loader [CE-7368]
+* Use '/arrayDimRows/' namespace to extract dimensions of CGA 2D array attrs from prtx::Shape via Attributable interface [CE-7220] 
+* Removed CGA const functions from the prtx::Shape via Attributable interface [CE-7220]
 
 CGA
 ---
@@ -64,17 +63,15 @@ CGA
   * str, print function: Fixed printing the sign for negative infinity.[CE-7625]
   * Fixed performance problems when generating shapes that contain holes and a large number of vertices. [CE-5818]
 
-
-
 Built-In Codecs Changes and Fixes
 ---------------------------------
 * New decoder to read .csv tables: CSVDecoder [CE-7217]
 * New encoder: added support for Pixar's Unversal Scene Description (USD) format [CE-6130]
 * Unreal Encoder:
   * Updated to use Datasmith 4.24. This makes the Unreal encoder stable and it is not beta anymore. [CE-7337]
-  * Added Hierarchical Instanced Static Mesh Component support for per Initial Shape export [CE-6481]
-  * Add Full Path of Inserted Assets as Metadata to Actors [CE-7021]
-  * Added support for Texture Atlasses [CE-5268, CE-7106, CE-7127]
+  * Added Hierarchical Instanced Static Mesh (HISM) component support for per initial shape export [CE-6481]
+  * Add full path of inserted assets as metadata to actors [CE-7021]
+  * Added support for texture atlasses [CE-5268, CE-7106, CE-7127]
   * Fixed a bug where a wrong opacity map was used.
   * Optimized textures by combining individual PBR maps into one and diffuse & opacity maps into one [CE-6698]
 * SLPK Encoder:
@@ -100,9 +97,9 @@ Misc Changes and Fixes
 * Windows: 
   * Switched to Visual Studio 2019, Toolchain 14.23 [CE-7325]
   * Raised minimal Windows API to Server 2012 / Windows 8.1 [CE-7325]
-* CMake Support Script: Prevent searching PRT and its dependencies on system path [CE-6850]
+* CMake Support Script: Prevent searching for PRT and its dependencies on the system path [CE-6850]
 * Increased minimal cmake to 3.14 [CE-7325]
-* Update PRT name and description: "ArcGIS" instead of "Esri".  [CE-7565]
+* Updated PRT name and description: "ArcGIS" instead of "Esri".  [CE-7565]
 
 
 ESRI CITYENGINE SDK 2.1.5705 CHANGELOG
