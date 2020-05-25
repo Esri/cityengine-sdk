@@ -42,7 +42,7 @@ USING PRT4CMD
 1. Type `bin/prt4cmd` or `bin/prt4cmd -h` to see the list of options.
 1. Type the following to generate the "candler" building model in the wavefront obj format (replace `<your path to>` with the absolute path to the corresponding directory):
    ```
-   bin/prt4cmd -f CityEngAdvFx -l 3 -g <your path to>/esri-cityengine-sdk/data/candler_footprint.obj -p <your path to>/esri-cityengine-sdk/data/candler.rpk -a ruleFile:string=bin/candler.cgb -a startRule:string=Default\$Footprint -e com.esri.prt.codecs.OBJEncoder -z baseName:string=theCandler
+   bin/prt4cmd -l 3 -g <your path to>/esri-cityengine-sdk/data/candler_footprint.obj -p <your path to>/esri-cityengine-sdk/data/candler.rpk -a ruleFile:string=bin/candler.cgb -a startRule:string=Default\$Footprint -e com.esri.prt.codecs.OBJEncoder -z baseName:string=theCandler
    ```
 1. The result is placed in the output directory:
    - `theCandler.obj`
