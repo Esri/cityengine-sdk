@@ -86,7 +86,7 @@ pcu::Path getExecutablePath() {
     char path[1024];
     uint32_t size = sizeof(path);
 	if (_NSGetExecutablePath(path, &size) == 0)
-    	return (size > 0) ? pcu::Path(std::string(path, path+size)) : pcu::Path();
+    	return pcu::Path(std::string(path));
 	else
     	return {};
 #elif defined(__linux__)
