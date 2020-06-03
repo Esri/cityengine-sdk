@@ -77,8 +77,12 @@ pcu::Path getExecutablePath() {
     HMODULE hModule = GetModuleHandle(nullptr);
     if (hModule != NULL) {
     	char path[MAX_PATH];
-    	const auto pathSize = GetModuleFileName(hModule, path, sizeof(path));
-        return (pathSize > 0) ? pcu::Path(std::string(path, path+pathSize)) : pcu::Path();
+    	const DWORD pathSize = GetModuleFileName(hModule, path, sizeof(path));
+        if(pathSize > 0 && pathSize < MAX_PATH) 
+			return pcu::Path(std::string(path, path+pathSize));
+		else 
+			return {};
+		}
     }
     else
         return {};
@@ -94,7 +98,11 @@ pcu::Path getExecutablePath() {
 	char path[1024];
 	const size_t len = sizeof(path);
 	const ssize_t bytes = readlink(proc.c_str(), path, len);
-	return (bytes > 0) ? pcu::Path(std::string(path, path+bytes)) : pcu::Path();
+	if(bytes > 0 && bytes < len) {
+		return pcu::Path(std::string(path, path+bytes))
+	else {
+		return {};
+	}					
 #else
 #	error unsupported build platform
 #endif
