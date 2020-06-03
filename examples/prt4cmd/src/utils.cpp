@@ -82,7 +82,6 @@ pcu::Path getExecutablePath() {
 			return pcu::Path(std::string(path, path+pathSize));
 		else 
 			return {};
-		}
     }
     else
         return {};
@@ -98,11 +97,10 @@ pcu::Path getExecutablePath() {
 	char path[1024];
 	const size_t len = sizeof(path);
 	const ssize_t bytes = readlink(proc.c_str(), path, len);
-	if(bytes > 0 && bytes < len) {
-		return pcu::Path(std::string(path, path+bytes))
-	else {
+	if(bytes > 0 && bytes < (ssize_t)len) 
+		return pcu::Path(std::string(path, path+bytes));
+	else 
 		return {};
-	}					
 #else
 #	error unsupported build platform
 #endif
