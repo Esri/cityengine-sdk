@@ -14,7 +14,7 @@ import com.esri.zrh.jenkins.ce.PrtAppPipelineLibrary
 // -- GLOBAL DEFINITIONS
 
 @Field final String REPO         = cepl.GIT_REPO_CESDK
-@Field final String REPO_CREDS   = 'cityengine-sdk-deployer-key'
+@Field final String REPO_CREDS   = 'esri-cityengine-sdk-deployer-key'
 @Field final String SOURCES      = "cityengine-sdk.git/examples"
 @Field final String BUILD_TARGET = 'package'
 
