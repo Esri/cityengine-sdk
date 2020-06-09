@@ -38,21 +38,21 @@ BUILD INSTRUCTIONS
 USING PRT4CMD
 -------------
 
-1. Open a bash shell and cd in to the above install directory: `cd ../install`
-1. Type `bin/prt4cmd` or `bin/prt4cmd -h` to see the list of options.
+1. Open a bash shell and `cd` in to the above `install` directory
+1. Type `bin/prt4cmd -h` to see the list of options.
 1. Type `mkdir output` to create the default directory for the generated models (this can be configured with the `-o` option).
-1. Type the following to generate the "candler" building model in the wavefront obj format (replace `<your path to>` with the _absolute_ path to the corresponding directory):
+1. Type the following to generate the "candler" building model in the wavefront obj format:
    ```
    bin/prt4cmd -l 3 -g <absolute path to>/cityengine-sdk/data/candler_footprint.obj -p <absolue path to>/cityengine-sdk/data/candler.rpk -a ruleFile:string=bin/candler.cgb -a startRule:string=Default\$Footprint -e com.esri.prt.codecs.OBJEncoder -z baseName:string=theCandler
    ```
 1. The result is placed in the `output` directory:
-   - `theCandler.obj`
+   - `theCandler_0.obj`
    - `theCandler.mtl`
    - Bunch of texture files
 
 1. To regenerate the same model with a different height, use the following command (note the additional `-a BuildingHeight...` statement):
    ```
-   bin/prt4cmd -l 3 -g <your path to>/cityengine-sdk/data/candler_footprint.obj -p <your path to>/cityengine-sdk/data/candler.rpk -a ruleFile:string=bin/candler.cgb -a startRule:string=Default\$Footprint -a BuildingHeight:float=30 -e com.esri.prt.codecs.OBJEncoder -z baseName:string=theCandler
+   bin/prt4cmd -l 3 -g <absolute path to>/cityengine-sdk/data/candler_footprint.obj -p <absolute path to>/cityengine-sdk/data/candler.rpk -a ruleFile:string=bin/candler.cgb -a startRule:string=Default\$Footprint -a BuildingHeight:float=30 -e com.esri.prt.codecs.OBJEncoder -z baseName:string=theCandler
    ```
 1. The obj file will now contain a model which is 30m high instead of the default 62m.
 
