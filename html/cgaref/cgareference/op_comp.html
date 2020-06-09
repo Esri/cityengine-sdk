@@ -1,32 +1,32 @@
 <html>
 
 <head>
-<title>Component Split Operation</title>
-<link rel="stylesheet" href="../manual_style.css" type="text/css" />
+	<title>Component Split Operation</title>
+	<link rel="stylesheet" href="../manual_style.css" type="text/css" />
 </head>
 
 <body>
 <div class="content">
 
 <table summary="" class="header">
-<tr>
-	<td align="left" class="helphead_l"><a href="../toc.html"><div class="helplink">&nbsp;</div></a></td>
-	<td align="right" class="helphead_r"></td>
-</tr>
+	<tr>
+		<td align="left" class="helphead_l"><a href="../toc.html"><div class="helplink">&nbsp;</div></a></td>
+		<td align="right" class="helphead_r"></td>
+	</tr>
 </table>
 
 <h1>comp operation</h1>
 
-<h2>Synopsis</h2>
+<h2>Syntax</h2>
 
-<p class="code2">comp(compSelector) { selector operator operations | selector operator operations ... }</p>
+<p class="code2">comp(<span class="cga_opparam">component</span>) { <span class="cga_opparam">selector</span> <span class="cga_opparam">operator</span> <span class="cga_opparam">operations</span> | <span class="cga_opparam">selector</span> <span class="cga_opparam">operator</span> <span class="cga_opparam">operations</span> ... }</p>
 
 <h2 id="params">Parameters</h2>
 
 <ul>
-	<li><span class="cga_opparam">compSelector</span> (keyword)<br>The component into which to split:
+	<li><span class="cga_opparam">component</span> (selector)<br>The component into which to split:
 		<table cellspacing="5">
-		<tr><td><span class="codelight">f</span></td><td>faces</td></tr>
+		<tr><td width="30%"><span class="codelight">f</span></td><td>faces</td></tr>
 		<tr><td><span class="codelight">e</span></td><td>edges</td></tr>
 		<tr><td><span class="codelight">fe</span></td><td>face edges</td></tr>
 		<tr><td><span class="codelight">v</span></td><td>vertices</td></tr>
@@ -35,12 +35,19 @@
 		<tr><td><span class="codelight">h</span></td><td>holes</td></tr>
 		</table>
 	</li>
-	<li><span class="cga_opparam">selector</span> (keyword)<br>Semantic selection keyword:
+	<li><span class="cga_opparam">selector</span> (selector, float)
 		<table cellspacing="5">
 		<tr><td width="40%"><span class="codelight">front, back, left, right, top, bottom</span></td><td>The y-normals of the components are analyzed by classifying their directions into the corresponding quadrants (in relation to the local coordinate system of the current shape).</td></tr>
 		<tr><td><span class="codelight">object.front, object.back, object.left, object.right, object.top, object.bottom, object.side</span></td><td>The y-normals of the components are analyzed by classifying their directions into the corresponding quadrants (in relation to the local coordinate system of the current shape).</td></tr>
 		<tr><td><span class="codelight">world.south, world.north, world.west, world.east, world.up, world.down, world.side</span></td><td>The y-normals of the components are analyzed by classifying their directions into the corresponding quadrants (in relation to the world coordinate system).</td></tr>
-		<tr><td><span class="codelight">vertical, horizontal, aslant, nutant</span></td><td>The y-normals are analyzed in relation to the xz-plane of the current shape's local coordinate system. The the angle between normals and xz-plane is used to classify the components. The exact ranges are (in degrees):<ul><li>horizontal: ]78.75, 90]</li><li>aslant: ]11.25, 78.75]</li><li>vertical: ]-11.25, 11.25]</li><li>nutant: ]-78.55, -11.25]</li><li>horizontal: [-90, -78.75]</li></ul></td></tr>
+		<tr><td><span class="codelight">vertical, horizontal, aslant, nutant</span></td><td>The y-normals are analyzed in relation to the xz-plane of the current shape's local coordinate system. The the angle between normals and xz-plane is used to classify the components. The exact ranges are (in degrees):
+		<table cellspacing="5">
+		<tr><td><span class="codelight">horizontal</span></td><td>]78.75, 90]</td></tr>
+		<tr><td><span class="codelight">aslant</span></td><td>]11.25, 78.75]</td></tr>
+		<tr><td><span class="codelight">vertical</span></td><td>]-11.25, 11.25]</td></tr>
+		<tr><td><span class="codelight">nutant</span></td><td>]-78.55, -11.25]</td></tr>
+		<tr><td><span class="codelight">horizontal</span></td><td>[-90, -78.75]</td></tr>
+		</table></td></tr>
 		<tr><td><span class="codelight">side</span></td><td>Selects all but the horizontal components.</td></tr>
 		<tr><td><span class="codelight">border, inside</span></td><td>Components at the border of or fully inside the geometry respectively. Border edges are connected to only one face; border faces contain one or more border edges; border vertices are start or end point of one or more border edges. This selector does not work on holes.</td></tr>
 		<tr><td><span class="codelight">eave, hip, valley, ridge</span></td><td>These selectors work on edges only and are designed to be used in conjunction with roofs. See the <a href="op_comp.html#roofEdges" class="xref">section below</a> for more details.</td></tr>
@@ -49,17 +56,18 @@
 		<tr><td> <i>index (float)</i></td><td> Selects the <i>index</i>-th component (0-based).</td></tr>
 		</table>
 	</li>
-	<li><span class="cga_opparam">operator</span><br>The operator defines how the selected components are used to generate successor shapes. Valid operators are:
-		<ul>
-			<li><span class="codelight">:</span> Each selected component is put into a new shape</li>
-			<li><span class="codelight">=</span> All selected components are combined into one new shape</li>
-		</ul>
+	<li><span class="cga_opparam">operator</span><br>The operator defines how the selected components are used to generate successor shapes.
+		<table cellspacing="5">
+		<tr><td width="10%"><span class="codelight">:</span></td><td>Each selected component is put into a new shape.</td></tr>
+		<tr><td><span class="codelight">=</span></td><td>All selected components are combined into one new shape.</td></tr>
+		</table>
 	</li>
 	<li><span class="cga_opparam">operations</span><br>A sequence of CGA operations to execute.</li>
 </ul>
 
+<h2>Description</h2>
 
-<p class="info">The <span class="codelight">comp</span> operation (component split) allows to divide a shape into its topological components, which are either faces, edges, face edges, vertices, groups, materials or holes. The components can be selected using either their <i>index</i> or a set of semantic selection keywords. Group and material components satisfy a specific selection keyword if at least one geometric component (usually a face) satifies it. The selected components are transformed to a new shape and processed by a sequence of shape operations. Depending on the <span class="cga_opparam">operator</span>, either one shape is created for each individual selected component (&quot;:&quot;) ore one shape for the whole set of selected components (&quot;=&quot;).</p>
+<p>The <span class="codelight">comp</span> operation (component split) allows to divide a shape into its topological components, which are either faces, edges, face edges, vertices, groups, materials or holes. The components can be selected using either their <i>index</i> or a set of selectors. Group and material components satisfy a specific selection keyword if at least one geometric component (usually a face) satifies it. The selected components are transformed to a new shape and processed by a sequence of shape operations. Depending on the <span class="cga_opparam">operator</span>, either one shape is created for each individual selected component (&quot;:&quot;) ore one shape for the whole set of selected components (&quot;=&quot;).</p>
 
 <p class="text">The selection parameters of a component split work in a excluding manner: if a parameter has selected a specific component, this component cannot be part of another selection (from left to right).</p>
 
@@ -398,7 +406,7 @@ Lot -->
 </tr>
 </table>
                               
-<p class="foot">Copyright &copy;2008-2019 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
+<p class="foot">Copyright &copy;2008-2020 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
 
 </div>
 </body>

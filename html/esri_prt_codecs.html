@@ -4,8 +4,8 @@
 <link href="doxygen.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-<h1>Esri Procedural Runtime Encoder/Decoder Reference</h1>
-<small>(Automatically generated from PRT 2.1.5705; Build Date: Tue 12/10/2019 03:02 PM; Build Configuration: PRT_BC_REL PRT_CC_OPT)</small><p>This is the PRT reference documentation for all built-in encoders and decoders.</p>
+<h1>ArcGIS Procedural Runtime Encoder/Decoder Reference</h1>
+<small>(Automatically generated from PRT 2.2.6332; Build Date: Sat 05/09/2020 06:13 PM; Build Configuration: PRT_BC_REL)</small><p>This is the PRT reference documentation for all built-in encoders and decoders.</p>
 <p>The encoder documentation lists for each encoder its supported encoder options. In PRT, the encoder options
 	are stored in an object of type prt::AttributeMap, therefore the term "attribute" is used synonymously in this
 	document for a single encoder option. Each attribute consists of a type, a default value and (optional)
@@ -33,6 +33,7 @@
 <li><a href="#com.esri.prt.codecs.RenderManEncoder">Pixar RenderMan</a></li>
 <li><a href="#com.esri.prt.codecs.ShapeBufferEncoder">Esri Shapebuffer Encoder</a></li>
 <li><a href="#com.esri.prt.codecs.TIFFEncoder">TIFF Encoder</a></li>
+<li><a href="#com.esri.prt.codecs.USDEncoder">Universal Scene Description (USD)</a></li>
 <li><a href="#com.esri.prt.codecs.VOBEncoder">E-On Software Vue</a></li>
 <li><a href="#com.esri.prt.codecs.WebSceneEncoder">CityEngine WebScene</a></li>
 <li><a href="#com.esri.prt.codecs.WebSceneObjectEncoder">CityEngine WebScene Object Encoder</a></li>
@@ -41,7 +42,7 @@
 <li><a href="#com.esri.prt.core.CGAPrintEncoder">CGA Print Encoder</a></li>
 <li><a href="#com.esri.prt.core.CGAReportEncoder">CGA Report Encoder</a></li>
 <li><a href="#com.esri.prt.core.OcclusionEncoder">Occlusion Encoder</a></li>
-<li><a href="#com.esri.prt.unreal.encoder">Unreal Engine (Beta)</a></li>
+<li><a href="#com.esri.prt.unreal.encoder">Unreal Engine</a></li>
 </ul>
 </li>
 <li>
@@ -91,6 +92,7 @@
 <li><a href="#com.esri.prt.codecs.XPMDecoder">X11 PixMap Format Image Decoder</a></li>
 <li><a href="#com.esri.prt.codecs.XYZDecoder">ASCII Gridded XYZ Image Decoder</a></li>
 <li><a href="#com.esri.prt.core.CGBDecoder">CGB Decoder</a></li>
+<li><a href="#com.esri.prt.core.CSVDecoder">CSV decoder</a></li>
 <li><a href="#com.esri.prt.core.RawTextureDecoder">Raw Image Decoder</a></li>
 <li><a href="#com.esri.prt.core.TextDecoder">Text decoder</a></li>
 </ul>
@@ -189,39 +191,6 @@
 </tr>
 	</table></td>
 </tr>
-	<tr>
-<td>facesWithHoles</td>
-<td>str</td>
-<td>TRIANGULATE_FACES_WITH_HOLES</td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Faces With Holes<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Specifies how faces with holes should be handled during the export.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 9080<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = Geometry Settings<br>order:float = 2<br>
-</td>
-</tr>
-		<tr>
-<td>@Range</td>
-<td>TRIANGULATE_FACES_WITH_HOLES:str = Triangulate faces with holes<br>DISCARD_HOLES:str = Discard holes<br>CONVERT_HOLES_TO_FACES:str = Convert holes to faces<br>
-</td>
-</tr>
-	</table></td>
-</tr>
-	
 	<tr>
 <td>author</td>
 <td>str</td>
@@ -404,6 +373,39 @@
 </tr>
 	</table></td>
 </tr>
+	<tr>
+<td>facesWithHoles</td>
+<td>str</td>
+<td>TRIANGULATE_FACES_WITH_HOLES</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Faces With Holes<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Specifies how faces with holes should be handled during the export.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 9080<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Geometry Settings<br>order:float = 2<br>
+</td>
+</tr>
+		<tr>
+<td>@Range</td>
+<td>TRIANGULATE_FACES_WITH_HOLES:str = Triangulate faces with holes<br>DISCARD_HOLES:str = Discard holes<br>CONVERT_HOLES_TO_FACES:str = Convert holes to faces<br>
+</td>
+</tr>
+	</table></td>
+</tr>
+	
 	<tr>
 <td>createTextureAtlases</td>
 <td>bool</td>
@@ -603,34 +605,6 @@
 <th>Type</th>
 <th>Default Value</th>
 <th>Annotations</th>
-</tr>
-	
-	<tr>
-<td>memoryBudget</td>
-<td>int</td>
-<td>500</td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Memory Budget (MBytes)<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Specifies the size limit in megabytes per exported file (value 0 = unlimited). Please note: The size is measured on the unoptimized geometry, i.e. the final size may vary. The check is only performed per input shape.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 3020<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = Granularity Settings<br>order:float = 1<br>
-</td>
-</tr>
-	</table></td>
 </tr>
 	
 	<tr>
@@ -1001,6 +975,34 @@
 		<tr>
 <td>@Group</td>
 <td>name:str = General Settings<br>order:float = 0<br>
+</td>
+</tr>
+	</table></td>
+</tr>
+	
+	<tr>
+<td>memoryBudget</td>
+<td>int</td>
+<td>500</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Memory Budget (MBytes)<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Specifies the size limit in megabytes per exported file (value 0 = unlimited). Please note: The size is measured on the unoptimized geometry, i.e. the final size may vary. The check is only performed per input shape.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 3020<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Granularity Settings<br>order:float = 1<br>
 </td>
 </tr>
 	</table></td>
@@ -2094,66 +2096,6 @@
 </tr>
 	</table></td>
 </tr>
-	
-	<tr>
-<td>texcoordPrecision</td>
-<td>float</td>
-<td>1.0e-04</td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Texture Coordinate Precision<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Specifies the minimal distance between texels.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 9030<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = Geometry Settings<br>order:float = 2<br>
-</td>
-</tr>
-		<tr>
-<td>@Range</td>
-<td>0:float = 1e-05<br>1:float = 1<br>
-</td>
-</tr>
-	</table></td>
-</tr>
-	<tr>
-<td>baseName</td>
-<td>str</td>
-<td>base_name</td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Base Name<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = The base name for all files.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 1010<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = General Settings<br>order:float = 0<br>
-</td>
-</tr>
-	</table></td>
-</tr>
 	<tr>
 <td>outputPath</td>
 <td>str</td>
@@ -2226,6 +2168,66 @@
 		<tr>
 <td>@Order</td>
 <td>:float = 0.202<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = General Settings<br>order:float = 0<br>
+</td>
+</tr>
+	</table></td>
+</tr>
+	
+	<tr>
+<td>texcoordPrecision</td>
+<td>float</td>
+<td>1.0e-04</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Texture Coordinate Precision<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Specifies the minimal distance between texels.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 9030<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Geometry Settings<br>order:float = 2<br>
+</td>
+</tr>
+		<tr>
+<td>@Range</td>
+<td>0:float = 1e-05<br>1:float = 1<br>
+</td>
+</tr>
+	</table></td>
+</tr>
+	<tr>
+<td>baseName</td>
+<td>str</td>
+<td>base_name</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Base Name<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = The base name for all files.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 1010<br>
 </td>
 </tr>
 		<tr>
@@ -3859,38 +3861,6 @@
 </tr>
 	</table></td>
 </tr>
-	<tr>
-<td>layerEnabled</td>
-<td>bool_array</td>
-<td></td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Layer Enabled<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Layer enabled.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 2090<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = Layer Settings<br>order:float = 6<br>
-</td>
-</tr>
-		<tr>
-<td>@PerLayer</td>
-<td>layerDefault:bool = true<br>
-</td>
-</tr>
-	</table></td>
-</tr>
 	
 	
 	<tr>
@@ -4047,7 +4017,7 @@
 </tr>
 		<tr>
 <td>@PerLayer</td>
-<td>layerDefault:str = <br>
+<td>layerDefault:str = Layer<br>
 </td>
 </tr>
 	</table></td>
@@ -4121,7 +4091,6 @@
 </tr>
 	</table></td>
 </tr>
-	
 	
 	
 	
@@ -4354,7 +4323,6 @@
 </tr>
 	</table></td>
 </tr>
-	
 	<tr>
 <td>textureAddAlphaMask</td>
 <td>bool</td>
@@ -4382,6 +4350,7 @@
 </tr>
 	</table></td>
 </tr>
+	
 	
 	
 	
@@ -4673,34 +4642,6 @@
 <th>Default Value</th>
 <th>Annotations</th>
 </tr>
-	<tr>
-<td>memoryBudget</td>
-<td>int</td>
-<td>500</td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Memory Budget (MBytes)<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Specifies the size limit in megabytes per exported file (value 0 = unlimited). Please note: The size is measured on the unoptimized geometry, i.e. the final size may vary. The check is only performed per input shape.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 3020<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = Granularity Settings<br>order:float = 1<br>
-</td>
-</tr>
-	</table></td>
-</tr>
-	
 	<tr>
 <td>errorFallback</td>
 <td>bool</td>
@@ -5074,6 +5015,34 @@
 </tr>
 	</table></td>
 </tr>
+	<tr>
+<td>memoryBudget</td>
+<td>int</td>
+<td>500</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Memory Budget (MBytes)<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Specifies the size limit in megabytes per exported file (value 0 = unlimited). Please note: The size is measured on the unoptimized geometry, i.e. the final size may vary. The check is only performed per input shape.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 3020<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Granularity Settings<br>order:float = 1<br>
+</td>
+</tr>
+	</table></td>
+</tr>
+	
 	<tr>
 <td>meshGranularity</td>
 <td>str</td>
@@ -5785,7 +5754,6 @@
 </tr>
 	</table></td>
 </tr>
-	
 	<tr>
 <td>textureCompression</td>
 <td>int</td>
@@ -5818,6 +5786,7 @@
 </tr>
 	</table></td>
 </tr>
+	
 	
 	
 	
@@ -5986,7 +5955,6 @@
 </tr>
 	</table></td>
 </tr>
-	
 	<tr>
 <td>textureFlipH</td>
 <td>bool</td>
@@ -6014,6 +5982,7 @@
 </tr>
 	</table></td>
 </tr>
+	
 	
 	
 	
@@ -6348,6 +6317,33 @@
 	</table></td>
 </tr>
 	<tr>
+<td>outputPath</td>
+<td>str</td>
+<td></td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Output Path<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Path to the output location.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 0.201<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = General Settings<br>order:float = 0<br>
+</td>
+</tr>
+	</table></td>
+</tr>
+	<tr>
 <td>texcoordPrecision</td>
 <td>float</td>
 <td>1.0e-04</td>
@@ -6397,33 +6393,6 @@
 		<tr>
 <td>@Order</td>
 <td>:float = 1010<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = General Settings<br>order:float = 0<br>
-</td>
-</tr>
-	</table></td>
-</tr>
-	<tr>
-<td>outputPath</td>
-<td>str</td>
-<td></td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Output Path<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Path to the output location.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 0.201<br>
 </td>
 </tr>
 		<tr>
@@ -6493,7 +6462,6 @@
 </tr>
 	</table></td>
 </tr>
-	
 	<tr>
 <td>memoryBudget</td>
 <td>int</td>
@@ -7275,6 +7243,7 @@
 	
 	
 	
+	
 <tr><td colspan="4"></td></tr>
 <tr><td colspan="4"><h3><a name="com.esri.prt.codecs.ShapeBufferEncoder">Esri Shapebuffer Encoder (com.esri.prt.codecs.ShapeBufferEncoder)</a></h3></td></tr>
 <tr><td colspan="4">Encodes geometry into the esri shape buffer format (revision 2012-02-17).</td></tr>
@@ -7339,39 +7308,6 @@
 </tr>
 	</table></td>
 </tr>
-	<tr>
-<td>emitReports</td>
-<td>str</td>
-<td>FULL</td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Emit Reports<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Whether and how to emit GA reports reports on models.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 1030<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = General Settings<br>order:float = 0<br>
-</td>
-</tr>
-		<tr>
-<td>@Range</td>
-<td>NONE:str = Do not export any reports<br>SUM_ONLY:str = Only export the sum of the reports<br>FULL:str = Export the full summary of the reports<br>
-</td>
-</tr>
-	</table></td>
-</tr>
-	
 	<tr>
 <td>featureGranularity</td>
 <td>str_array</td>
@@ -7615,6 +7551,39 @@
 		<tr>
 <td>@Hidden</td>
 <td></td>
+</tr>
+	</table></td>
+</tr>
+	
+	<tr>
+<td>emitReports</td>
+<td>str</td>
+<td>FULL</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Emit Reports<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Whether and how to emit GA reports reports on models.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 1030<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = General Settings<br>order:float = 0<br>
+</td>
+</tr>
+		<tr>
+<td>@Range</td>
+<td>NONE:str = Do not export any reports<br>SUM_ONLY:str = Only export the sum of the reports<br>FULL:str = Export the full summary of the reports<br>
+</td>
 </tr>
 	</table></td>
 </tr>
@@ -7969,7 +7938,6 @@
 </tr>
 	</table></td>
 </tr>
-	
 	<tr>
 <td>textureFlipH</td>
 <td>bool</td>
@@ -7998,6 +7966,208 @@
 	</table></td>
 </tr>
 	
+	
+	
+	
+<tr><td colspan="4"></td></tr>
+<tr><td colspan="4"><h3><a name="com.esri.prt.codecs.USDEncoder">Universal Scene Description (USD) (com.esri.prt.codecs.USDEncoder)</a></h3></td></tr>
+<tr><td colspan="4">Encodes geometry into the Universal Scene Description.</td></tr>
+<tr><td colspan="4"><h4>Known Initial Shape Attributes</h4></td></tr>
+<tr>
+<th>Key</th>
+<th>Type</th>
+<th>Default Value</th>
+<th>Annotations</th>
+</tr>
+<tr><td colspan="4"><h4>Default Encoder Options</h4></td></tr>
+<tr>
+<th>Key</th>
+<th>Type</th>
+<th>Default Value</th>
+<th>Annotations</th>
+</tr>
+	
+	<tr>
+<td>errorFallback</td>
+<td>bool</td>
+<td>true</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Error Fallback<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Fall back to start shape geometry, if generation fails. Else, ignore failed start shapes.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 1020<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = General Settings<br>order:float = 0<br>
+</td>
+</tr>
+		<tr>
+<td>@Hidden</td>
+<td></td>
+</tr>
+	</table></td>
+</tr>
+	
+	<tr>
+<td>baseName</td>
+<td>str</td>
+<td>base_name</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Base Name<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = The base name for all files.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 1010<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = General Settings<br>order:float = 0<br>
+</td>
+</tr>
+	</table></td>
+</tr>
+	
+	<tr>
+<td>outputPath</td>
+<td>str</td>
+<td></td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Output Path<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Path to the output location.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 0.201<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = General Settings<br>order:float = 0<br>
+</td>
+</tr>
+	</table></td>
+</tr>
+	<tr>
+<td>layerMapping</td>
+<td>int_array</td>
+<td></td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Layer Names<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Layer Names.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 20101<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Layer Settings<br>order:float = 6<br>
+</td>
+</tr>
+		<tr>
+<td>@Hidden</td>
+<td></td>
+</tr>
+	</table></td>
+</tr>
+	
+	<tr>
+<td>layerNames</td>
+<td>str_array</td>
+<td></td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Layer Names<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Layer Names.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 20100<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Layer Settings<br>order:float = 6<br>
+</td>
+</tr>
+		<tr>
+<td>@Hidden</td>
+<td></td>
+</tr>
+	</table></td>
+</tr>
+	<tr>
+<td>globalOffset</td>
+<td>float_array</td>
+<td></td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Global Offset<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Global (= for all shapes/models) offset for exported geometry.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 7020<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Geometry Settings<br>order:float = 2<br>
+</td>
+</tr>
+		<tr>
+<td>@Point3D</td>
+<td></td>
+</tr>
+	</table></td>
+</tr>
 	
 	
 <tr><td colspan="4"></td></tr>
@@ -8272,66 +8442,6 @@
 	</table></td>
 </tr>
 	<tr>
-<td>fileGranularity</td>
-<td>str</td>
-<td>MEMORY_BUDGET</td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = File Granularity<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Specifies the partition of the generated geometry into files.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 3010<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = Granularity Settings<br>order:float = 1<br>
-</td>
-</tr>
-		<tr>
-<td>@Range</td>
-<td>MEMORY_BUDGET:str = One file as long as Memory Budget is not exceeded<br>START_SHAPE:str = One file per start shape<br>
-</td>
-</tr>
-	</table></td>
-</tr>
-	<tr>
-<td>atlasAddWrapBorder</td>
-<td>bool</td>
-<td>true</td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Texture Atlas Border<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Add a border of clamped pixels to protect against wrap mode bleeding.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 4060<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = Texture Settings<br>order:float = 4<br>
-</td>
-</tr>
-	</table></td>
-</tr>
-	
-	<tr>
 <td>baseName</td>
 <td>str</td>
 <td>base_name</td>
@@ -8418,6 +8528,66 @@
 </tr>
 	</table></td>
 </tr>
+	<tr>
+<td>fileGranularity</td>
+<td>str</td>
+<td>MEMORY_BUDGET</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = File Granularity<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Specifies the partition of the generated geometry into files.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 3010<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Granularity Settings<br>order:float = 1<br>
+</td>
+</tr>
+		<tr>
+<td>@Range</td>
+<td>MEMORY_BUDGET:str = One file as long as Memory Budget is not exceeded<br>START_SHAPE:str = One file per start shape<br>
+</td>
+</tr>
+	</table></td>
+</tr>
+	<tr>
+<td>atlasAddWrapBorder</td>
+<td>bool</td>
+<td>true</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Texture Atlas Border<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Add a border of clamped pixels to protect against wrap mode bleeding.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 4060<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Texture Settings<br>order:float = 4<br>
+</td>
+</tr>
+	</table></td>
+</tr>
+	
 	<tr>
 <td>memoryBudget</td>
 <td>int</td>
@@ -9022,33 +9192,6 @@
 </tr>
 	
 	<tr>
-<td>geometryBase64</td>
-<td>bool</td>
-<td>true</td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Geometry As Base64<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Encode geometry data into Base64.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 2040<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = Geometry Settings<br>order:float = 2<br>
-</td>
-</tr>
-	</table></td>
-</tr>
-	<tr>
 <td>author</td>
 <td>str</td>
 <td></td>
@@ -9361,6 +9504,33 @@
 	</table></td>
 </tr>
 	
+	<tr>
+<td>geometryBase64</td>
+<td>bool</td>
+<td>true</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Geometry As Base64<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Encode geometry data into Base64.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 2040<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Geometry Settings<br>order:float = 2<br>
+</td>
+</tr>
+	</table></td>
+</tr>
 	<tr>
 <td>vertexPrecision</td>
 <td>float</td>
@@ -10281,38 +10451,6 @@
 	</table></td>
 </tr>
 	<tr>
-<td>textureEnable</td>
-<td>str</td>
-<td>REENCODE</td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Object Metadata<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Specifies whether and how the textures should be encoded.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 4030<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = Texture Settings<br>order:float = 4<br>
-</td>
-</tr>
-		<tr>
-<td>@Range</td>
-<td>SKIP:str = No textures<br>TRY_TO_REUSE_SOURCE:str = Try to keep source texture data; reencode only if necessary<br>REENCODE:str = Reencode textures<br>
-</td>
-</tr>
-	</table></td>
-</tr>
-	<tr>
 <td>vertexPrecision</td>
 <td>float</td>
 <td>0.001</td>
@@ -10372,6 +10510,38 @@
 		<tr>
 <td>@Range</td>
 <td>0:float = 1e-05<br>1:float = 1<br>
+</td>
+</tr>
+	</table></td>
+</tr>
+	<tr>
+<td>textureEnable</td>
+<td>str</td>
+<td>REENCODE</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Object Metadata<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Specifies whether and how the textures should be encoded.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 4030<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Texture Settings<br>order:float = 4<br>
+</td>
+</tr>
+		<tr>
+<td>@Range</td>
+<td>SKIP:str = No textures<br>TRY_TO_REUSE_SOURCE:str = Try to keep source texture data; reencode only if necessary<br>REENCODE:str = Reencode textures<br>
 </td>
 </tr>
 	</table></td>
@@ -10755,8 +10925,8 @@
 </tr>
 	
 <tr><td colspan="4"></td></tr>
-<tr><td colspan="4"><h3><a name="com.esri.prt.unreal.encoder">Unreal Engine (Beta) (com.esri.prt.unreal.encoder)</a></h3></td></tr>
-<tr><td colspan="4">Encodes geometry into the Datasmith (4.23E0) format.</td></tr>
+<tr><td colspan="4"><h3><a name="com.esri.prt.unreal.encoder">Unreal Engine (com.esri.prt.unreal.encoder)</a></h3></td></tr>
+<tr><td colspan="4">Encodes geometry into the Datasmith (4.24) format.</td></tr>
 <tr><td colspan="4"><h4>Known Initial Shape Attributes</h4></td></tr>
 <tr>
 <th>Key</th>
@@ -10890,18 +11060,6 @@
 <td><table class="doxtable"></table></td>
 </tr>
 	<tr>
-<td>errorFallback</td>
-<td>bool</td>
-<td>true</td>
-<td><table class="doxtable">
-		<tr>
-<td>@Hidden</td>
-<td></td>
-</tr>
-	</table></td>
-</tr>
-	
-	<tr>
 <td>instancing</td>
 <td>str</td>
 <td>instancingHISM</td>
@@ -10930,6 +11088,45 @@
 <td>@Range</td>
 <td>disabled:str = Disabled<br>useInstancing:str = Use Instanced Meshes<br>instancingHISM:str = Use Instanced Static Mesh Actors<br>
 </td>
+</tr>
+	</table></td>
+</tr>
+	
+	<tr>
+<td>useTextureAtlas</td>
+<td>bool</td>
+<td>false</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Use Texture Atlases<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 0<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Texture Settings<br>order:float = 2<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Creates texture atlases which combine a set of textures into one, thus reducing the number of textures and materials.<br>
+</td>
+</tr>
+	</table></td>
+</tr>
+	<tr>
+<td>errorFallback</td>
+<td>bool</td>
+<td>true</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Hidden</td>
+<td></td>
 </tr>
 	</table></td>
 </tr>
@@ -10987,6 +11184,7 @@
 </tr>
 	</table></td>
 </tr>
+	
 	
 	
 	
@@ -11132,12 +11330,15 @@
 <h3><a name="com.esri.prt.core.CGBDecoder">CGB Decoder (com.esri.prt.core.CGBDecoder)</a></h3>
 <p>CGB Byte Stream Reader</p>
 <p>Supported URI extensions: .cgb;.class;</p>
+<h3><a name="com.esri.prt.core.CSVDecoder">CSV decoder (com.esri.prt.core.CSVDecoder)</a></h3>
+<p>Decodes csv files (in ASCII, UTF-8, UTF-16) to a table</p>
+<p>Supported URI extensions: .csv;</p>
 <h3><a name="com.esri.prt.core.RawTextureDecoder">Raw Image Decoder (com.esri.prt.core.RawTextureDecoder)</a></h3>
 <p>Reads raw (uncompressed) images into textures.</p>
 <p>Supported URI extensions: .raw;</p>
 <h3><a name="com.esri.prt.core.TextDecoder">Text decoder (com.esri.prt.core.TextDecoder)</a></h3>
 <p>Decodes text (ASCII, UTF-8, UTF-16) to a UTF-16 string.</p>
-<p>Supported URI extensions: .txt;.csv;</p>
+<p>Supported URI extensions: .txt;</p>
 </div>
 </body>
 </html>

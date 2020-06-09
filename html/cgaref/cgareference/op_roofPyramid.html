@@ -1,9 +1,7 @@
 <html>
 
 <head>
-    <title>
-    roofPyramid Operation
-    </title>
+    <title>roofPyramid Operation</title>
     <link rel="stylesheet" href="../manual_style.css" type="text/css" />
 </head>
 
@@ -17,47 +15,41 @@
     </tr>
 </table>
 
-
 <!-- CONTENT -->
 
 <h1>roofPyramid operation</h1>
 
-<h2>Synopsis</h2>
+<h2>Syntax</h2>
 
 <p class="code2">roofPyramid(<span class="cga_opparam">angle</span>)</p>
 <p class="code2">roofPyramid(<span class="cga_opparam">valueType, value</span>)</p>
 
 <h2>Parameters</h2>
 <ul>
-	<li><span class="cga_opparam">valueType</span> (selstring)<br>
-	Type of roof generation (<span class="codelight">byAngle | byHeight</span>).</li>
-	<li><span class="cga_opparam">value</span> (float)<br>
-	Angle or height of the roof-planes as specified by <span class="cga_opparam">valueType</span>.</li>
-    <li><span class="cga_opparam">angle</span> (float)<br>
-    Angle of the roof-planes (generation <span class="codelight">byAngle).</li>
+	<li><span class="cga_opparam">valueType</span> (selector)
+	<table cellspacing="5">
+		<tr><td width="50%"><span class="codelight">byAngle, byHeight</span></td><td>Type of roof generation</td></tr>
+	</table>
+	</li>
+	<li><span class="cga_opparam">value</span> (float)<br>Angle or height of the roof-planes as specified by <span class="cga_opparam">valueType</span>.</li>
+    <li><span class="cga_opparam">angle</span> (float)<br>Angle of the roof-planes (generation <span class="codelight">byAngle).</li>
 </ul>
+
+<h2>Description</h2>
     
-<p class="info">The roofPyramid operation builds a pyramid roof perpendicular to each 
-face of the current shape's geometry. The polygon center (average of all vertices) 
-gets extruded along the face normal by the given height and connected to all polygon vertices. The new 
-triangles are the roof faces. If an angle is given the height is chosen such that the angle between roof 
-triangle 1 and the polygon is as specified.</p>
+<p>The roofPyramid operation builds a pyramid roof perpendicular to each face of the current shape's geometry. The polygon center (average of all vertices) gets extruded along the face normal by the given height and connected to all polygon vertices. The new triangles are the roof faces. If an angle is given the height is chosen such that the angle between roof triangle 1 and the polygon is as specified.</p>
 
-<p class="notes">The connectivity of the roof mesh is optimized for trim plane
-generation to cut bricks inserted into the roof planes (see examples
-below).</p>
+<p class="notes">The connectivity of the roof mesh is optimized for trim plane generation to cut bricks inserted into the roof planes (see examples below).</p>
 
+<h3>Scope</h3>
 
-<h2>Scope</h2>
-
-<p class="text">
-  The scope orientation is set in the following way:</p> 
- 		<ul>
- 		<li>x-axis direction is kept as much as possible (old x-axis is projected to plane orthogonal to face normal of the first face)</li>
- 		<li>y-axis along the face normal of the first face</li>
- 		<li>z-axis normal to the two above</li>
-  </ul>
-  The scope's sizes are adjusted to tighly fit the extruded geometry.
+<p class="text">The scope orientation is set in the following way:</p> 
+<ul>
+	<li>x-axis direction is kept as much as possible (old x-axis is projected to plane orthogonal to face normal of the first face)</li>
+	<li>y-axis along the face normal of the first face</li>
+	<li>z-axis normal to the two above</li>
+</ul>
+<p>The scope's sizes are adjusted to tighly fit the extruded geometry.</p>
 
 <h2>Related</h2>
 <ul>
@@ -70,9 +62,7 @@ below).</p>
     <li><a class="normw" href="op_taper.html"> taper operation</a></li> 
 </ul>
 
-
 <h2>Examples</h2>
-
 
 <h3>Simple Pyramid Roof</h3>
 
@@ -121,7 +111,7 @@ Roof --> comp(f) { all : X }
 
 
 <!-- FOOTER -->
-<p class="foot">Copyright &copy;2008-2019 Esri R&amp;D Center Zurich. All rights reserved.</p>                  
+<p class="foot">Copyright &copy;2008-2020 Esri R&amp;D Center Zurich. All rights reserved.</p>                  
 
 </div>
 </body>

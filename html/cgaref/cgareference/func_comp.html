@@ -1,8 +1,9 @@
 <html>
 
 <head>
-<title>comp Function</title>
-<link rel="stylesheet" href="../manual_style.css" type="text/css" /></head>
+	<title>comp Function</title>
+	<link rel="stylesheet" href="../manual_style.css" type="text/css" />
+</head>
 
 <body>
 <div class="content">
@@ -16,16 +17,16 @@
 
 <h1>comp function</h1>
 
-<h2>Synopsis</h2>
+<h2>Syntax</h2>
 
-<p class="code2">float[] comp(compSelector) { selector operator expression | selector operator expression ... }</p>
-<p class="code2">string[] comp(compSelector) { selector operator expression | selector operator expression ... }</p>
-<p class="code2">bool[] comp(compSelector) { selector operator expression | selector operator expression ... }</p>
+<p class="code2"><span class="codelight">float[]</span>&nbsp&nbspcomp(<span class="cga_opparam">component</span>) { <span class="cga_opparam">selector</span> <span class="cga_opparam">operator</span> <span class="cga_opparam">expression</span> | <span class="cga_opparam">selector</span> <span class="cga_opparam">operator</span> <span class="cga_opparam">expression</span> ... }</p>
+<p class="code2"><span class="codelight">string[]</span>&nbspcomp(<span class="cga_opparam">component</span>) { <span class="cga_opparam">selector</span> <span class="cga_opparam">operator</span> <span class="cga_opparam">expression</span> | <span class="cga_opparam">selector</span> <span class="cga_opparam">operator</span> <span class="cga_opparam">expression</span> ... }</p>
+<p class="code2"><span class="codelight">bool[]</span>&nbsp&nbsp&nbspcomp(<span class="cga_opparam">component</span>) { <span class="cga_opparam">selector</span> <span class="cga_opparam">operator</span> <span class="cga_opparam">expression</span> | <span class="cga_opparam">selector</span> <span class="cga_opparam">operator</span> <span class="cga_opparam">expression</span> ... }</p>
 
 <h2>Parameters</h2>
 
 <ul>
-	<li><span class="cga_opparam">compSelector, selector, operator</span><br>These parameters are the same as for the  <a class="cga_op" href="op_comp.html#params">comp</a> operation.</li>
+	<li><span class="cga_opparam">component, selector, operator</span><br>These parameters are the same as for the  <a class="cga_op" href="op_comp.html#params">comp</a> operation.</li>
 	<li><span class="cga_opparam">expression</span> (float, string, bool)<br>An expression evaluated per component. All expressions must be of the same type.</li>
 </ul>
 
@@ -33,12 +34,14 @@
 
 <p>An array that contains the returned values of <span class="cga_opparam">expression</span> for each component.</p> 
 
-<p class="info">Very much like the <a class="cga_op" href="op_comp.html">comp</a> operation the <span class="codelight">comp</span> function divides a shape into topological components (wrt. <span class="cga_opparam">compSelector, selector, operator</span>) which result in new component shapes. But in contrast to the operation the function does not process the selected components by a sequence of shape operations. Instead a functional <span class="cga_opparam">expression</span> is evaluated on each selected component shape. The respective return values are organized in an ordered array which is returned as the result of the <span class="codelight">comp</span> function. Refer to the documentation of the <a class="cga_op" href="op_comp.html">comp</a> operation for details on available <span class="cga_opparam">compSelector</span>s, <span class="cga_opparam">selector</span>s and <span class="cga_opparam">operator</span>s.</p>
+<h2>Description</h2>
+
+<p>Very much like the <a class="cga_op" href="op_comp.html">comp</a> operation the <span class="codelight">comp</span> function divides a shape into topological components (wrt. <span class="cga_opparam">component</span>, <span class="cga_opparam">selector</span>, <span class="cga_opparam">operator</span>) which result in new component shapes. But in contrast to the operation the function does not process the selected components by a sequence of shape operations. Instead a functional <span class="cga_opparam">expression</span> is evaluated on each selected component shape. The respective return values are organized in an ordered array which is returned as the result of the <span class="codelight">comp</span> function. Refer to the documentation of the <a class="cga_op" href="op_comp.html">comp</a> operation for details on available <span class="cga_opparam">component</span> selectors, <span class="cga_opparam">selector</span>s and <span class="cga_opparam">operator</span>s.</p>
 
 <p>The returned array has a number of properties:
 <ul>
-	<li>Its size is equal to the number of faces, edges, etc. for a <span class="cga_opparam">compSelector</span> set to <span class="codelight">f</span>, <span class="codelight">e</span>, etc. respectively.</li>
-	<li>For example, for <span class="cga_opparam">compSelector</span> set to <span class="codelight">f</span>, the array contains the returned value of <span class="cga_opparam">expression</span> for each face: the value for face index 0 at position 0, for face index 1 at position 1, and so on.</li>
+	<li>Its size is equal to the number of faces, edges, etc. for <span class="cga_opparam">component</span> set to <span class="codelight">f</span>, <span class="codelight">e</span>, etc. respectively.</li>
+	<li>For example, for <span class="cga_opparam">component</span> set to <span class="codelight">f</span>, the array contains the returned value of <span class="cga_opparam">expression</span> for each face: the value for face index 0 at position 0, for face index 1 at position 1, and so on.</li>
 	<li>Evaluated <span class="cga_opparam">expressions</span>s of combined component shapes (<span class="cga_opparam">operator</span> <span class="codelight">=</span>) are copied and inserted for each respective topological entity at the relevant index positions.</li>
 	<li>Topological entities which are not selected by a <span class="cga_opparam">selector</span> are inserted with a default value (<span class="codelight">0</span>, <span class="codelight">""</span>, <span class="codelight">false</span> respectively) at the relevant index positions.
 </ul>
@@ -46,13 +49,16 @@
 
 <p class="notes">The <span class="codelight">comp</span> function allows you to gather information about the current shape and its components without changing the current shape or adding successor shapes to the shape tree.</p>
 
+<p class="notes">The size of the returned array is limited. It can be configured in the <a href="https://doc.arcgis.com/en/cityengine/latest/help/get-started-preferences-prt.htm" target="_blank">Procedural Runtime preferences</a> (Default: 100000).</p>
+
 <h2>Related</h2>
 
 <ul>
 	<li><a href="op_comp.html">comp operation</a></li>
 	<li><a href="op_setback.html">setback operation</a></li>
-	<li><a href="func_item.html">item operator</a></li>
-	<li><a href="func_size.html">size function</a></li>
+	<li><a href="func_size.html"><span class="code_std">size</span></a> function</li>
+	<li><a href="arrayTypes.html">Array types operators</a></li>
+	<li><a href="func_findFirst.html"><span class="code_std">findFirst</span></a> function</li>
 	<li><a href="attr_comp.html">comp attribute</a></li>
 	<li><a href="func_edgeAttr.html">Edge attribute functions</a></li>
 </ul>
@@ -71,7 +77,7 @@ Lot --> print(array)
 
 (6)[<font color="red">0</font>, <font color="red">1</font>, <font color="red">2</font>, <font color="red">3</font>, <font color="red">4</font>, <font color="red">5</font>]
 	</pre>
-	<em>A shape is split into <span class="codelight">all</span> of its 6 vertices. Each vertex component is asked for its <a href="attr_comp.html">component index</a>. These values are then organized in an array in edge index order.</em>
+	<em>A shape is split into <span class="codelight">all</span> of its 6 vertices. Each vertex component is asked for its <a href="attr_comp.html">component index</a>. These values are then organized in an array in vertex index order.</em>
 	</td>
 </tr>
 </table>
@@ -128,7 +134,7 @@ const array = comp(f) { side = touches }
 
 <p>See for example the <a class="cga_op" href="op_setback.html#examples">setback</a> operation for applications.</p>
 
-<p class="foot">Copyright &copy;2008-2019 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
+<p class="foot">Copyright &copy;2008-2020 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
 
 </div>
 </body>

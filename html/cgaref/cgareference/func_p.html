@@ -1,62 +1,50 @@
 <html>
 
 <head>
-    <title>
-     p Function
-    </title>
-    <link rel="stylesheet" href="../manual_style.css" type="text/css" /></head>
+    <title>p Function</title>
+    <link rel="stylesheet" href="../manual_style.css" type="text/css" />
+</head>
 
 <body>
 <div class="content">
 
 <!-- HEADER (use only on bookchapters) -->
 
-    <table summary="" class="header">
-        <tr>
-            <td align="left" class="helphead_l"><a href="../toc.html"><div class="helplink">&nbsp;</div></a></td>
-            <td align="right" class="helphead_r"></td>
-        </tr>
-    </table>
-
+<table summary="" class="header">
+	<tr>
+		<td align="left" class="helphead_l"><a href="../toc.html"><div class="helplink">&nbsp;</div></a></td>
+		<td align="right" class="helphead_r"></td>
+	</tr>
+</table>
 
 <!-- CONTENT -->
 
-        <h1>
-        p function
-        </h1>
-        <h2>
-        Synopsis
-        </h2>
-        <p class="code2">bool p(float <span class="cga_opparam">prob</span>)</p>
+<h1>p function</h1>
 
+<h2>Syntax</h2>
 
-         <h2>
-        Parameters
-        </h2>
-        <ul>
-        <li><span class="cga_opparam">prob</span><br>
-          Probablity for <span class="cga_keyword">true</span>, in [0, 1].</li>
-  </ul>
+<p class="code2"><span class="codelight">bool</span> p(<span class="cga_opparam">probability</span>)</p>
 
-        <h2>
-        Returns</h2>
-        <p><span class="cga_keyword">true</span> or<span class="cga_keyword"> false</span>, depending on <span class="cga_opparam">prob</span> and the current shape's <span class="cga_keyword">seedian</span>. if <span class="cga_opparam">prob</span> &lt; 0, <span class="cga_keyword">false</span> is returned, and if <span class="cga_opparam">prob</span> &gt; 1, <span class="cga_keyword">true</span> is returned.</p>
-        <p class="text">&nbsp;           </p>
-        <p class="info">This function returns <span class="cga_keyword">true</span> with probablity <span class="cga_opparam">prob</span>, or in other words, it returns <span class="cga_keyword">false</span> with probability (1 - <span class="cga_opparam">prob</span>).</p>
+<h2>Parameters</h2>
+
+<ul>
+	<li><span class="cga_opparam">probability</span> (float)<br>Probability for <span class="cga_keyword">true</span>, in [0, 1].</li>
+</ul>
+
+<h2>Returns</h2>
+
+<p><span class="cga_keyword">true</span> or<span class="cga_keyword"> false</span>, depending on <span class="cga_opparam">probability</span> and the current shape's <span class="cga_keyword">seedian</span>. if <span class="cga_opparam">probability</span> &lt; 0, <span class="cga_keyword">false</span> is returned, and if <span class="cga_opparam">probability</span> &gt; 1, <span class="cga_keyword">true</span> is returned.</p>
+
+<h2>Description</h2>
+
+<p>This function returns <span class="cga_keyword">true</span> with probability <span class="cga_opparam">probability</span>, or in other words, it returns <span class="cga_keyword">false</span> with probability (1 - <span class="cga_opparam">probability</span>).</p>
         
-        <h2>
-        Related
-  </h2>
-  <ul>
-        <li>
-        <a class="normw" href="func_rand.html">
-        rand function</a>        </li>
-        <li>
-        <a class="normw" href="attr_seedian.html">
-        seedian attribute</a></li>
+<h2>Related</h2>
 
-  </ul>
-               
+<ul>
+	<li><a class="normw" href="func_rand.html">rand function</a></li>
+	<li><a class="normw" href="attr_seedian.html">seedian attribute</a></li>
+</ul>            
  
 <h2>Examples</h2>
 <p class="example">	
@@ -91,7 +79,7 @@ example.6
 
 
 <!-- FOOTER -->
-<p class="foot">Copyright &copy;2008-2019 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
+<p class="foot">Copyright &copy;2008-2020 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
 
 <!-- END CENTERED CONTENT -->
 

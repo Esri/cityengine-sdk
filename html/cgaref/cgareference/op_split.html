@@ -1,198 +1,158 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
 <html>
-<head>
-<title>split Operation</title>
-<link rel="stylesheet" href="../manual_style.css" type="text/css">
-<style type="text/css">
-<!--
-.style1 {
-        font-size: 9px
-}
 
-.style2 {
-        font-size: 10px
-}
--->
-</style>
+<head>
+	<title>split Operation</title>
+	<link rel="stylesheet" href="../manual_style.css" type="text/css">
+	<style type="text/css">
+		<!--
+		.style1 {
+				font-size: 9px
+		}
+
+		.style2 {
+				font-size: 10px
+		}
+		-->
+	</style>
 </head>
+
 <body>
-<div class="content"><!-- HEADER (use only on bookchapters) -->
+<div class="content">
+
+<!-- HEADER (use only on bookchapters) -->
+
 <table summary="" class="header">
-<tr>
-<td align="left" class="helphead_l"><a href="../toc.html"></a>
-<div class="helplink">&nbsp;</div>
-</td>
-<td align="right" class="helphead_r"></td>
-</tr>
+	<tr>
+		<td align="left" class="helphead_l"><a href="../toc.html"></a><div class="helplink">&nbsp;</div></td>
+		<td align="right" class="helphead_r"></td>
+	</tr>
 </table>
+
 <!-- CONTENT -->
+
 <h1>split operation</h1>
-<h2>Synopsis</h2>
+
+<h2>Syntax</h2>
 
 <h5>XYZ Split (Cartesian Space)</h5>
 
-<p class="code2">split(<span class="cga_opparam">splitAxis</span>) {
-<span class="cga_opparam">size<span class="style2">1</span></span>
-: <span class="cga_opparam">operations<span class=
-"style2">1</span></span> | <span class=
-"cga_opparam">size<span class="style2">2</span></span> :
-<span class="cga_opparam">operations</span><span class=
-"style2">2</span> | ... | <span class=
-"cga_opparam">size</span><span class="style2">n-1</span> :
-<span class="cga_opparam">operations</span><span class=
-"text style1">n-1</span> }</p>
+<p class="code2">split(<span class="cga_opparam">axis</span>) { <span class="cga_opparam">size<span class="style2">1</span></span> : <span class="cga_opparam">operations<span class="style2">1</span></span> | <span class="cga_opparam">size<span class="style2">2</span></span> : <span class="cga_opparam">operations<span class="style2">2</span></span> | ... | <span class="cga_opparam">size<span class="style2">n-1</span></span> : <span class="cga_opparam">operations<span class="style2">n-1</span></span> }</p>
 
-<p class="code2">split(<span class="cga_opparam">splitAxis</span>) {
-<span class="cga_opparam">size</span><span class="style2">1</span>
-: <span class="cga_opparam">operations</span><span class=
-"style2">1</span> | <span class=
-"cga_opparam">size</span><span class="style2">2</span> :
-<span class="cga_opparam">operations<span class=
-"style2">2</span></span> | ... | <span class=
-"cga_opparam">size</span><span class="style2">n-1</span> :
-<span class="cga_opparam">operations</span><span class=
-"text style1">n-1</span> }*</p>
+<p class="code2">split(<span class="cga_opparam">axis</span>) { <span class="cga_opparam">size<span class="style2">1</span></span> : <span class="cga_opparam">operations<span class="style2">1</span></span> | <span class="cga_opparam">size<span class="style2">2</span></span> : <span class="cga_opparam">operations<span class="style2">2</span></span> | ... | <span class="cga_opparam">size<span class="style2">n-1</span></span> : <span class="cga_opparam">operations<span class="style2">n-1</span></span> }<span class="cga_opparam">*</span></p>
 
-<p class="code2">split(<span class="cga_opparam">splitAxis, adjustSelector</span>) {
-<span class="cga_opparam">size<span class="style2">1</span></span>
-: <span class="cga_opparam">operations<span class=
-"style2">1</span></span> | ... | <span class=
-"cga_opparam">size</span><span class="style2">n-1</span> :
-<span class="cga_opparam">operations</span><span class=
-"text style1">n-1</span> }</p>
+<p class="code2">split(<span class="cga_opparam">axis</span>, <span class="cga_opparam">adjustMode</span>) { <span class="cga_opparam">size<span class="style2">1</span></span> : <span class="cga_opparam">operations<span class="style2">1</span></span> | ... | <span class="cga_opparam">size<span class="style2">n-1</span></span> : <span class="cga_opparam">operations<span class=
+"style2">n-1</span></span> }</p>
 
-<p class="code2">split(<span class="cga_opparam">splitAxis, adjustSelector</span>) {
-<span class="cga_opparam">size</span><span class="style2">1</span>
-: <span class="cga_opparam">operations</span><span class=
-"style2">1</span> | ... | <span class=
-"cga_opparam">size</span><span class="style2">n-1</span> :
-<span class="cga_opparam">operations</span><span class=
-"text style1">n-1</span> }*</p>
-
+<p class="code2">split(<span class="cga_opparam">axis</span>, <span class="cga_opparam">adjustMode</span>) { <span class="cga_opparam">size<span class="style2">1</span></span> : <span class="cga_opparam">operations<span class="style2">1</span></span> | ... | <span class="cga_opparam">size<span class="style2">n-1</span></span> : <span class="cga_opparam">operations<span class=
+"style2">n-1</span></span> }<span class="cga_opparam">*</span></p>
 
 <h5>UV Split (Texture Space)</h5>
 
-<p class="code2">split(<span class="cga_opparam">splitDirection, surfaceParameterization, uvSet</span>) {
-<span class="cga_opparam">size</span><span class="style2">1</span>
-: <span class="cga_opparam">operations</span><span class=
-"style2">1</span> | ... | <span class=
-"cga_opparam">size</span><span class="style2">n-1</span> :
-<span class="cga_opparam">operations</span><span class=
-"text style1">n-1</span> }*</p>
-
+<p class="code2">split(<span class="cga_opparam">direction</span>, <span class="cga_opparam">surfaceParameterization</span>, <span class="cga_opparam">uvSet</span>) { <span class="cga_opparam">size<span class="style2">1</span></span> : <span class="cga_opparam">operations<span class="style2">1</span></span> | ... | <span class="cga_opparam">size<span class="style2">n-1</span></span> : <span class="cga_opparam">operations<span class="style2">n-1</span></span> }<span class="cga_opparam">*</span></p>
 
 <h2>Parameters</h2>
 
 <h5>XYZ Split (Cartesian Space)</h5>
 
 <ul>
-<li><span class="cga_opparam">splitAxis</span> (selstring)<br>
-	(<span class="cga_codelight">x | y | z</span>) - Name of axis to split along. This is relative to the local coordinate system (i.e.
-	the <span class="cga_keyword">scope</span>).</li>
-<li><span class="cga_opparam">adjustSelector</span><br>
-	(<span class="cga_codelight">adjust | noAdjust </span>) - optional selector to control scope calculation of the calculated shapes: the default is to adjust the scope to the geometry's bounding box; noAdjust avoids this, therefore the scopes of the resulting shapes fill the parent's scope without gaps.
-</li>
+	<li><span class="cga_opparam">axis</span> (selector)
+	<table cellspacing="5">
+		<tr><td width="10%"><span class="codelight">x, y, z</span></td><td>Name of axis to split along. This is relative to the local coordinate system (i.e. the <span class="cga_keyword">scope</span>).</td></tr>
+	</table>
+	</li>
+	<li><span class="cga_opparam">adjustMode</span>
+	<table cellspacing="5">
+		<tr><td width="20%"><span class="codelight">adjust, noAdjust</span></td><td>Optional selector to control scope calculation of the calculated shapes: the default is to adjust the scope to the geometry's bounding box; noAdjust avoids this, therefore the scopes of the resulting shapes fill the parent's scope without gaps.</td></tr>
+	</table>
+	</li>
 </ul>
 
 <h5>UV Split (Texture Space)</h5>
 
 <ul>
-<li><span class="cga_opparam">splitDirection</span> (selstring)<br>
-	(<span class="cga_codelight">u | v </span>) - Name of axis to split along.</li>
-<li><span class="cga_opparam">surfaceParameterization</span> (selstring)<br>
-	(<span class="cga_codelight">uvSpace | unitSpace</span>) - <span class="cga_codelight">uvSpace</span> is the planar texture space, defined by the uv coordinates; <span class="cga_codelight">unitSpace</span> is the 2d space on the 3d geometry surface, measured in units (e.g. meters).</li> 
-<span class="cga_opparam">uvSet</span> (float)<br>    
-	Number of texture a set/layer (integer number in [0,9]). The numbering corresponds to the texture layers of the material attribute.</ul>
-See <a class="normw" href="cga_texturing.html">Texturing</a> for
-information about the texture layer IDs.</a>
+	<li><span class="cga_opparam">direction</span> (selector)
+	<table cellspacing="5">
+		<tr><td width="25%"><span class="codelight">u, v</span></td><td>Name of axis to split along.</td></tr>
+	</table>
+	</li>
+	<li><span class="cga_opparam">surfaceParameterization</span> (selector)
+	<table cellspacing="5">
+		<tr><td width="15%"><span class="codelight">uvSpace</span></td><td>Planar texture space, defined by the uv coordinates.</td></tr>
+		<tr><td><span class="codelight">unitSpace</span></td><td>2d space on the 3d geometry surface, measured in units (e.g. meters).</td></tr>
+	</table>
+	</li> 
+	<li><span class="cga_opparam">uvSet</span> (float)<br>Number of texture a set/layer (integer number in [0,9]). The numbering corresponds to the texture layers of the material attribute.</li> 
+</ul>
+
+<p>See <a class="normw" href="cga_texturing.html">Texturing</a> for information about the texture layer IDs.</p>
 
 <h5>General</h5>
+
 <ul>
-<li>
-	<span class="cga_opparam">size</span> (float)<br>
-	Split width. Depending on the prefix, the widths along <span class="cga_opparam">axis</span> are interpreted in
-	the following way:
-	<dl>
-	<dt>no prefix (absolute)</dt> <dd> the new shape will have exactly size
-	<span class="cga_opparam">size</span>.</dd>
-	<dt>' (relative)</dt> <dd>the new shape's size will be <span class="cga_opparam">size</span> 
-	<i>* current scope size.</i></dd>
-    <dt>~ (floating)</dt> <dd> with the ~ prefix, the remaining spaces between the split parts with absolute dimensions are automatically adapted. If multiple floating parts are defined within a split, the dimensions are weighed proportionally.</p> </dd>
-	</dl>
-</li>
-<li>
-	<span class="cga_opparam">operations</span><br>
-	A sequence of shape operations to execute on the newly created
-	shape.</li>
-<li>
-    <span class="cga_opparam">*</span><br>
-    Repeat switch: the repeat switch triggers the repetition of the defined split into the current shape's
-    <span class="cga_keyword">scope</span>, as many times as possible. The number of repetitions and floating dimensions are adapted to the best solution (best number of repetitions and least stretching).</li>
+	<li><span class="cga_opparam">size</span> (float)<br>Split width. Depending on the prefix, the widths along <span class="cga_opparam">axis</span> are interpreted in the following way:
+	<table cellspacing="5">
+		<tr><td width="25%">no prefix (absolute)</td><td>The new shape will have exactly size <span class="cga_opparam">size</span>.</td></tr>
+		<tr><td><span class="codelight">'</span> (relative)</td><td>The new shape's size will be <span class="cga_opparam">size</span> <i>* current scope size.</i>.</td></tr>
+		<tr><td><span class="codelight">~</span> (floating)</td><td>With the <span class="codelight">~</span> prefix, the remaining spaces between the split parts with absolute dimensions are automatically adapted. If multiple floating parts are defined within a split, the dimensions are weighed proportionally.</td></tr>
+	</table>
+	</li>
+	<li><span class="cga_opparam">operations</span><br>A sequence of shape operations to execute on the newly created shape.</li>
+	<li><span class="cga_opparam">*</span><br>Repeat switch: the repeat switch triggers the repetition of the defined split into the current shape's <span class="cga_keyword">scope</span>, as many times as possible. The number of repetitions and floating dimensions are adapted to the best solution (best number of repetitions and least stretching).</li>
 </ul>
+
+<h2>Description</h2>
 
 <h5>XYZ Split (Cartesian Space)</h5>
 
-<p class="info">The split operation subdivides the
-current shape along the specified <span class=
-"cga_keyword">scope</span> axis into a set of smaller shapes. For
-each <span class="cga_opparam">size</span>-<span class=
-"cga_opparam">operation</span> block inside the curly brackets, a
-new shape is pushed onto the shape stack, a number of shape
-operations is executed and the shape on top of the shape stack is
-popped again.</p>
-<p class="text">If the optional repeat switch <span class=
-"cga_opparam">*</span> is appended to the split operation, the
-content of {...} is repeated as often as it fully fits into the
-<span class="cga_keyword">scope</span>'s dimension along the
-selected axis.</p>
+<p>The split operation subdivides the current shape along the specified <span class="cga_keyword">scope</span> axis into a set of smaller shapes. For each <span class="cga_opparam">size</span>-<span class="cga_opparam">operation</span> block inside the curly brackets, a new shape is pushed onto the shape stack, a number of shape operations is executed and the shape on top of the shape stack is popped again.</p>
 
-<p class="text">The <span class="cga_keyword">geometry</span> of
-the current shape is cut with a plane perpendicular to the split
-axis at every intersection between two blocks (i.e. at <span class=
-"cga_opparam">size</span><span class="style2">1</span>,
-<span class="cga_opparam">size</span><span class="style2">2</span>,
-... <span class="cga_opparam">size</span><span class=
-"style2">n-1</span>). Hollow meshes are closed after the cut, i.e.
-cutting planes introduce new surfaces to preserve the volume.
-</p>
-<p>Splits can be nested, i.e. a <span class=
-"cga_opparam">size : operation</span> block can be replaced by a {...} block. In theory, the 
-nested level is unlimited.</p>
+<p class="text">If the optional repeat switch <span class="cga_opparam">*</span> is appended to the split operation, the content of {...} is repeated as often as it fully fits into the <span class="cga_keyword">scope</span>'s dimension along the selected axis.</p>
+
+<p class="text">The <span class="cga_keyword">geometry</span> of the current shape is cut with a plane perpendicular to the split axis at every intersection between two blocks (i.e. at <span class="cga_opparam">size</span><span class="style2">1</span>, <span class="cga_opparam">size</span><span class="style2">2</span>, ... <span class="cga_opparam">size</span><span class="style2">n-1</span>). Hollow meshes are closed after the cut, i.e. cutting planes introduce new surfaces to preserve the volume.</p>
+
+<p>Splits can be nested, i.e. a <span class="cga_opparam">size : operation</span> block can be replaced by a {...} block. In theory, the nested level is unlimited.</p>
 
 <h5>UV Split (Texture Space)</h5>
-Splits can also be applied in the 2d uv texture domain. Texture coordinates define a 2d parameter space on a 3d surface. Examples of such parameterizations are streets (u along thew street direction, v along the width) and facades (generated with <span class="cga_keyword">setupProjection()</span> and <span class="cga_keyword">projectUV()</span>, u along the width and v along the height). This permits to operate directly on the surface. In general, uv coordinates are in the [0,1] range and not connected to a unit like meters or yards on the surface (defined by the underlying mesh). Setting the <span class="cga_opparam">splitDirection</span> parameter to <span class="cga_codelight">unitSpace</span> permits to operate directly on the surface, i.e. work in units (e.g. meters or yards). Depending on the geometry and type of parameterization there is some inherent distortion in this conversion.<br>
-Borders (start, end) of the uv split are defined by the minimal and maximal values found in the selected uv coordinates. The genral syntax of the split is the same as in the cartesian case described above, i.e. relative and floating operators (' and ~) can be used as well as the repeat operator (*). Please check out the <a href="#uvsplitbasic">examples below</a>.
 
-  <h3 class="text">Shape attributes</h3>
-  <p class="text">Each generated shape will have a number of attributes set:</p>
-  <ul>
-    <li>split.index: The zero-based index of the selected component.</li>
-    <li>split.total: The total number of components selected by the selector.</li>
-  </ul>
-  <p>Index and total are global; for instance</p>
-  <pre class="code3">
+<p>Splits can also be applied in the 2d uv texture domain. Texture coordinates define a 2d parameter space on a 3d surface. Examples of such parameterizations are streets (u along thew street direction, v along the width) and facades (generated with <span class="cga_keyword">setupProjection()</span> and <span class="cga_keyword">projectUV()</span>, u along the width and v along the height). This permits to operate directly on the surface. In general, uv coordinates are in the [0,1] range and not connected to a unit like meters or yards on the surface (defined by the underlying mesh). Setting the split <span class="cga_opparam">direction</span> parameter to <span class="cga_codelight">unitSpace</span> permits to operate directly on the surface, i.e. work in units (e.g. meters or yards). Depending on the geometry and type of parameterization there is some inherent distortion in this conversion.<br>
+Borders (start, end) of the uv split are defined by the minimal and maximal values found in the selected uv coordinates. The genral syntax of the split is the same as in the cartesian case described above, i.e. relative and floating operators (' and ~) can be used as well as the repeat operator (*). Please check out the <a href="#uvsplitbasic">examples below</a>.</p>
+
+<h3 class="text">Shape attributes</h3>
+
+<p class="text">Each generated shape will have a number of attributes set:</p>
+
+<ul>
+	<li>split.index: The zero-based index of the selected component.</li>
+	<li>split.total: The total number of components selected by the selector.</li>
+</ul>
+
+<p>Index and total are global; for instance</p>
+
+<pre class="code3">
      ...
      primitiveCube()
      split(x) { '0.1 : A | '0.1 : B }*
-  </pre>
-  <p>will create 5 shapes with rule A interleaved with 5 shapes with rule B where split.index goes from 0 to 9 with all even numbers on rule A and all odd numbers on rule B while split.total will be 10.</p>
-  <p>For more information see <a class="normw" href="attr_split.html">split attribute</a>.</p>
+</pre>
+
+<p>will create 5 shapes with rule A interleaved with 5 shapes with rule B where split.index goes from 0 to 9 with all even numbers on rule A and all odd numbers on rule B while split.total will be 10.</p>
+
+<p>For more information see <a class="normw" href="attr_split.html">split attribute</a>.</p>
 
 <h2>Related</h2>
+
 <ul>
-<li><a class="normw" href="attr_scope.html">scope
-attribute</a></li>
-<li><a class="normw" href="attr_pivot.html">pivot
-attribute</a></li>
-<li><a class="normw" href="attr_split.html">split
-attribute</a></li>
-<li><a class="normw" href="op_splitArea.html">splitArea operation</a></li>
+	<li><a class="normw" href="attr_scope.html">scope attribute</a></li>
+	<li><a class="normw" href="attr_pivot.html">pivot attribute</a></li>
+	<li><a class="normw" href="attr_split.html">split attribute</a></li>
+	<li><a class="normw" href="op_splitArea.html">splitArea operation</a></li>
 </ul>
 
 <h2>Examples</h2>
 <!-- 2 Column Formatting (for Tutorials) -->
 
 <h3>Setup</h3>
+
 <table summary="" class="twocol">
 <tr>
 <td class="twocol_l"><br>
@@ -223,6 +183,7 @@ Z(h)-->
 </table>
 
 <h3>Relative Sizes</h3>
+
 <table summary="" class="twocol">
 <tr>
 <td class="twocol_l"><br>
@@ -263,8 +224,8 @@ Note how the whole initial scope is filled (no gap at the end), and the ratios a
 </tr>
 </table>
 
-
 <h3>Absolute and Floating Sizes</h3>
+
 <table summary="" class="twocol">
 <tr>
 <td class="twocol_l"><br>
@@ -285,8 +246,8 @@ from 3 to 1.7 to fulfill the absolute constraints.
 </tr>
 </table>
 
-
 <h3>Oversized</h3>
+
 <table summary="" class="twocol">
 <tr>
 <td class="twocol_l"><br>
@@ -309,8 +270,8 @@ The X never gets created because there is no space left.
 </tr>
 </table>
 
-
 <h3>Repeat Split with Absolute Sizes</h3>
+
 <table summary="" class="twocol">
 <tr>
 <td class="twocol_l"><br>
@@ -330,8 +291,8 @@ filled with half a X, i.e. the geometry of the last X is cut off.
 </tr>
 </table>
 
-
 <h3>Repeat Split with Floating Sizes</h3>
+
 <table summary="" class="twocol">
 <tr>
 <td class="twocol_l"><br>
@@ -355,6 +316,7 @@ be filled.
 </table>
 
 <h3>Interleaved Repeat Split</h3>
+
 <table summary="" class="twocol">
 <tr>
 <td class="twocol_l"><br>
@@ -381,8 +343,8 @@ Y shapes have floating sizes which turn out to be 0.9.
 </tr>
 </table>
 
-
 <h3>Rhythm</h3>
+
 <table summary="" class="twocol">
 <tr>
 <td class="twocol_l"><br>
@@ -406,9 +368,8 @@ size of the yellow Y shapes.
 </tr>
 </table>
 
-
-
 <h3>Cutting Geometry</h3>
+
 <table summary="" class="twocol">
 <tr>
 <td class="twocol_l"><br>
@@ -450,8 +411,6 @@ are closed.
 </td>
 </tr>
 </table>
-
-
 
 <a name="uvsplitbasic"></a><h3>UV Split Basics</h3>
 <table summary="" class="twocol">
@@ -503,15 +462,10 @@ u split in unitSpace - the splits happen at u = 5, dependent of facade size.
 </td>
 </tr>
 
-
 </table>
 
-
-
-
-
-
 <h3>UV Split on Streets</h3>
+
 <table summary="" class="twocol">
 <tr>
 <td class="twocol_l"><br>
@@ -556,12 +510,10 @@ The same street after a u-split in unitSpace. Every 20 meters a 3 meter wide ban
 </td>
 </tr>
 
-
 </table>
 
-
 <!-- FOOTER -->
-<p class="foot">Copyright &copy;2008-2019 Esri R&amp;D Center Zurich. All rights reserved.</p>
+<p class="foot">Copyright &copy;2008-2020 Esri R&amp;D Center Zurich. All rights reserved.</p>
 <!-- END CENTERED CONTENT --></div>
 </body>
 </html>

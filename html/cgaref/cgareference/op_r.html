@@ -1,52 +1,62 @@
 <html>
 
 <head>
-    <title>
-    r Operation
-    </title>
+    <title>r Operation</title>
     <link rel="stylesheet" href="../manual_style.css" type="text/css" />
 </head>
 
 <body>
 <div class="content">
-  <!-- HEADER (use only on bookchapters) -->
-  <table summary="" class="header">
-    <tr>
-      <td align="left" class="helphead_l"><a href="../toc.html">
-  <div class="helplink">&nbsp;</div>
-  </a></td>
-  <td align="right" class="helphead_r"></td>
-  </tr>
-  </table>
-  <!-- CONTENT -->
-  <h1> r operation </h1>
-  <h2> Synopsis </h2>
-  <p class="code2">r(<span class="cga_opparam">xAngle, yAngle, zAngle</span>)</p>
-  <p class="code2">r<span class="cga_opparam">(centerSelector</span>, <span class="cga_opparam">xAngle, yAngle, zAngle</span>)</p>
-  </span>
-  </p>
-  <h2> Parameters </h2>
-  <ul>
-    <li> <span class="cga_opparam">xAngle</span> (float), <span class="cga_opparam">yAngle</span> (float), <span class="cga_opparam">zAngle</span> (float)<br>
-  Angles in degrees to rotate about each axis. </li>
-  <li> <span class="cga_opparam">centerSelector</span> (selstr)<br>
-  The rotation center: <span class="code_std">scopeOrigin</span> or <span class="code_std">scopeCenter</span>. <br>
-  Note: <span class="code_std">scopeOrigin</span> is the default (used if no <span class="cga_opparam">centerSelector</span> is given).</li>
-  </ul>
-  <p class="info">The <span class="code_std">r</span> operation rotates the <span class="code_std">scope</span> of the current shape around the pivot-axes in xyz order. The center of rotation is either the <span class="code_std">scopeOrigin</span> (<span class="code_std">scope.t</span>) of the current shape or the <span class="code_std">scopeCenter</span> of the current shape.</p>
-  Note: <span class="code_std">r(x, y, z)</span> is the same as <span class="code_std">rotate(rel, pivot, x, y, z)</span>.
+
+<!-- HEADER (use only on bookchapters) -->
+<table summary="" class="header">
+	<tr>
+		<td align="left" class="helphead_l"><a href="../toc.html"><div class="helplink">&nbsp;</div></a></td>
+		<td align="right" class="helphead_r"></td>
+	</tr>
+</table>
   
-  <h2> Related </h2>
-  <ul>
-  <li> <a class="normw" href="op_rotate.html">rotate operation</a></li>
-  <li> <a class="normw" href="op_s.html">s operation</a></li>
-  <li> <a class="normw" href="op_t.html">t operation</a></li>
-  <li> <a class="normw" href="op_translate.html">translate operation</a></li>
-  <li> <a class="normw" href="attr_pivot.html"> pivot attribute</a></li>
-  <li> <a class="normw" href="attr_scope.html"> scope attribute</a> </li>
-  </ul>
-  <h2>Examples</h2>
-  <h3>Rotation Centers</h3>
+<!-- CONTENT -->
+
+<h1>r operation</h1>
+
+<h2>Syntax</h2>
+
+<p class="code2">r(<span class="cga_opparam">xAngle</span>, <span class="cga_opparam">yAngle</span>, <span class="cga_opparam">zAngle</span>)</p>
+<p class="code2">r(<span class="cga_opparam">center</span>, <span class="cga_opparam">xAngle</span>, <span class="cga_opparam">yAngle</span>, <span class="cga_opparam">zAngle</span>)</p>
+
+<h2>Parameters</h2>
+
+<ul>
+	<li> <span class="cga_opparam">xAngle</span>, <span class="cga_opparam">yAngle</span>, <span class="cga_opparam">zAngle</span> (float)<br>Angles in degrees to rotate about each axis. </li>
+	<li> <span class="cga_opparam">center</span> (selector)
+	<table cellspacing="5">
+		<tr><td width="35%"><span class="codelight">scopeOrigin, scopeCenter</span></td><td>The rotation center.<br><span class="codelight">scopeOrigin</span> is the default (used if no <span class="cga_opparam">center</span> selector is given).</td></tr>
+	</table>
+	</li>
+</ul>
+
+<h2>Description</h2>
+
+<p>The <span class="code_std">r</span> operation rotates the <span class="code_std">scope</span> of the current shape around the pivot-axes in xyz order. The center of rotation is either the <span class="code_std">scopeOrigin</span> (<span class="code_std">scope.t</span>) of the current shape or the <span class="code_std">scopeCenter</span> of the current shape.</p>
+
+<p>Note: <span class="code_std">r(x, y, z)</span> is the same as <span class="code_std">rotate(rel, pivot, x, y, z)</span>.</p>
+  
+<h2>Related</h2>
+
+<ul>
+	<li><a class="normw" href="op_rotate.html">rotate operation</a></li>
+	<li><a class="normw" href="op_s.html">s operation</a></li>
+	<li><a class="normw" href="op_t.html">t operation</a></li>
+	<li><a class="normw" href="op_translate.html">translate operation</a></li>
+	<li><a class="normw" href="attr_pivot.html"> pivot attribute</a></li>
+	<li><a class="normw" href="attr_scope.html"> scope attribute</a> </li>
+</ul>
+
+<h2>Examples</h2>
+
+<h3>Rotation Centers</h3>
+
   <table summary="" class="twocol">
     <tr>
       <td class="twocol_l"><br/>
@@ -83,9 +93,10 @@ Lot-->
         <em> The same example as above, but this time the rotations are around the scope center. </em> </td>
   </tr>
   </table>
-  <!-- FOOTER -->
-  <p class="foot">Copyright &copy;2008-2019 Esri R&amp;D Center Zurich. All rights reserved.</p>
-  <!-- END CENTERED CONTENT -->
+  
+<!-- FOOTER -->
+<p class="foot">Copyright &copy;2008-2020 Esri R&amp;D Center Zurich. All rights reserved.</p>
+<!-- END CENTERED CONTENT -->
 </div>
 </body>
 </html>

@@ -1,7 +1,7 @@
 <html>
 
 <head>
-    <title>Simple Types Operators</title>
+    <title>Simple types operators</title>
     <link rel="stylesheet" href="../manual_style.css" type="text/css" />
 </head>
 
@@ -20,213 +20,156 @@
 
 <!-- CONTENT -->
 
-<h1>Boolean Operators</h1>
+<h1>Simple types operators</h1>
 
-<table width="600" border="1">
+<h2>Logical operators</h2>
+
+<p>Logical operations on <span class="code_std">bool</span>.</p>
+
+<p>Return type: <span class="code_std">bool</span></p>
+
+<table class="twocol" cellspacing=20>
 <tr>
-	<td width="20%"><strong>Operator</strong></td>
-	<td width="50%"><strong>Name</strong></td>
-	<td><strong>Example</strong></td>
+	<td width="10%"><span class="code_std">!</span></td>
+	<td width="17%">Negation</td>
+	<td><pre class="code3">case !a</pre></td>
 </tr>
 <tr>
-	<td>!</td>
-	<td>logical negation operator</td>
-	<td>case(!(f(x))</td>
+	<td><span class="code_std">||</span></td>
+	<td>Logical Or</td>
+	<td><pre class="code3">case a || b || f(x)</pre></td>
 </tr>
 <tr>
-	<td>||</td>
-	<td>logical OR operator</td>
-	<td>case(a || b || f(x))</td>
-</tr>
-<tr>
-	<td>&amp;&amp;</td>
-	<td>logical AND operator</td>
-	<td>case(a &amp;&amp; f(x))</td>
-</tr>
-<tr>
-	<td>==</td>
-	<td>equality operator</td>
-	<td>case(a == b)</td>
-</tr>
-<tr>
-	<td>!=</td>
-	<td>inequality operator</td>
-	<td>case(a != b)</td>
+	<td><span class="code_std">&amp;&amp;</span></td>
+	<td>Logical And</td>
+	<td><pre class="code3">case a &amp;&amp; f(x)</pre></td>
 </tr>
 </table>
 
-<p></p>
+<h2>Arithmetic operators</h2>
 
-<h1>Float Operators</h1>
+<p>Arithmetic operations on <span class="code_std">float</span>.</p>
 
-<table width="600" border="1">
+<p>Return type: <span class="code_std">float</span></p>
+
+<table class="twocol" cellspacing=20>
 <tr>
-	<td width="20%"><strong>Operator</strong></td>
-	<td width="50%"><strong>Name</strong></td>
-	<td><strong>Example</strong></td>
+	<td width="10%"><span class="code_std">+</span></td>
+	<td width="17%">Plus</td>
+	<td><pre class="code3">a = c + b</pre></td>
 </tr>
 <tr>
-	<td>-</td>
-	<td>unary minus operator</td>
-	<td>a = -b</td>
+	<td> </td>
+	<td>Unary plus</td>
+	<td><pre class="code3">a = +b</pre></td>
 </tr>
 <tr>
-	<td>-</td>
-	<td>binary minus operator</td>
-	<td>a = b - c</td>
+	<td><span class="code_std">-</span></td>
+	<td>Minus</td>
+	<td><pre class="code3">a = b - c</pre></td>
 </tr>
 <tr>
-	<td>+</td>
-	<td>plus operator</td>
-	<td>a = c + b</td>
+	<td> </td>
+	<td>Unary minus</td>
+	<td><pre class="code3">a = -b</pre></td>
+</tr>
+
+<tr>
+	<td><span class="code_std">*</span></td>
+	<td>Multiplication</td>
+	<td><pre class="code3">x = y * f(x)</pre></td>
 </tr>
 <tr>
-	<td>*</td>
-	<td>multiply  operator</td>
-	<td>x = y*f(x)</td>
+	<td><span class="code_std">/</span></td>
+	<td>Division</td>
+	<td><pre class="code3">x = 4 / d</pre></td>
 </tr>
 <tr>
-	<td>/</td>
-	<td>division  operator</td>
-	<td>x = 4 / d</td>
-</tr>
-<tr>
-	<td>%</td>
-	<td>modulus operator (remainder)</td>
-	<td>a = b % 10</td>
+	<td><span class="code_std">%</span></td>
+	<td>Modulus (remainder)</td>
+	<td><pre class="code3">a = b % 10</pre></td>
 </tr>
 </table>
 
-<p></p>
+<h2>Equality operators</h2>
 
-<h1>Float Comparison Operators</h1>
+<p>Check <span class="code_std">float</span>, <span class="code_std">bool</span> or <span class="code_std">string</span> for equality.</p>
 
-<table width="600" border="1">
+<p>Return type: <span class="code_std">bool</span></p>
+
+<table class="twocol" cellspacing=20>
 <tr>
-	<td width="20%"><strong>Operator</strong></td>
-	<td width="50%"><strong>Name</strong></td>
-	<td><strong>Example</strong></td>
+	<td width="10%"><span class="code_std">==</span></td>
+	<td width="17%">Equality</td>
+	<td><pre class="code3">case a == b</pre></td>
 </tr>
 <tr>
-	<td>&lt;</td>
-	<td>less than operator</td>
-	<td>case(a &lt; b)</td>
-</tr>
-<tr>
-	<td>&lt;=</td>
-	<td>less than or equal operator</td>
-	<td>case(a &lt;= b)</td>
-</tr>
-<tr>
-	<td>&gt;</td>
-	<td>greater than operator</td>
-	<td>case(a &gt; b)</td>
-</tr>
-<tr>
-	<td>&gt;=</td>
-	<td>greater than or equal operator</td>
-	<td>case(a &gt;= b)</td>
-</tr>
-<tr>
-	<td>==</td>
-	<td>equality  operator</td>
-	<td>case(a == b)</td>
-</tr>
-<tr>
-	<td>!=</td>
-	<td>inequality operator</td>
-	<td>case(a != b)</td>
+	<td><span class="code_std">!=</span></td>
+	<td>Inequality</td>
+	<td><pre class="code3">case a != b</pre></td>
 </tr>
 </table>
 
-<p></p>
+<h2>Relational operators</h2>
 
-<h1>String Operators</h1>
+<p>Compare <span class="code_std">float</span> or <span class="code_std">string</span>.</p>
 
-<table width="600" border="1">
+<p>Return type: <span class="code_std">bool</span></p>
+
+<table class="twocol" cellspacing=20>
 <tr>
-	<td width="20%"><strong>Operator</strong></td>
-	<td width="50%"><strong>Name</strong></td>
-	<td><strong>Example</strong></td>
+	<td width="10%"><span class="code_std"><</span></td>
+	<td width="17%">Less</td>
+	<td><pre class="code3">case a <  b</pre></td>
 </tr>
 <tr>
-	<td>+</td>
-	<td>string concatenate</td>
-	<td>a = &quot;City&quot; + &quot;Engine&quot;</td>
+	<td><span class="code_std"><=</span></td>
+	<td>Less or equal</td>
+	<td><pre class="code3">case a <= b</pre></td>
 </tr>
 <tr>
-	<td>+</td>
-	<td>string-float concatenate</td>
-	<td><p>a = &quot;Rule:&quot; + 1</p>
-<p>a = 1 + &quot;th Rule&quot;</p></td>
+	<td><span class="code_std">></span></td>
+	<td>Greater</td>
+	<td><pre class="code3">case a >  b</pre></td>
+</tr>
+<tr>
+	<td><span class="code_std">>=</span></td>
+	<td>Greater or equal</td>
+	<td><pre class="code3">case a >= b</pre></td>
 </tr>
 </table>
 
-<p></p>
+<h2>String concatenation operators</h2>
 
-<h1>String Comparison Operators</h1>
+<p>Concatenate <span class="code_std">string</span> with <span class="code_std">string</span>, <span class="code_std">float</span> or <span class="code_std">bool</span>.</p>
 
-<table width="600" border="1">
+<p>Return type: <span class="code_std">string</span></p>
+
+<table class="twocol" cellspacing=20>
 <tr>
-	<td width="20%"><strong>Operator</strong></td>
-	<td width="50%"><strong>Name</strong></td>
-	<td><strong>Example</strong></td>
+	<td width="10%"><span class="code_std">+</span></td>
+	<td width="17%">String-string concatenation</td>
+	<td><pre class="code3">a = "City" + "Engine"</pre></td>
 </tr>
 <tr>
-	<td>&lt;</td>
-	<td>less than operator</td>
-	<td>case(a &lt; b)</td>
+	<td> </td>
+	<td>String-float concatenation</td>
+	<td><pre class="code3">a = "Rule: " + 1<br>a = 1 + "th Rule"</pre></td>
 </tr>
 <tr>
-	<td>&lt;=</td>
-	<td>less than or equal operator</td>
-	<td>case(a &lt;= b)</td>
-</tr>
-<tr>
-	<td>&gt;</td>
-	<td>greater than operator</td>
-	<td>case(a &gt; b)</td>
-</tr>
-<tr>
-	<td>&gt;=</td>
-	<td>greater than or equal operator</td>
-	<td>case(a &gt;= b)</td>
-</tr>
-<tr>
-	<td>==</td>
-	<td>equality  operator</td>
-	<td>case(a == b)</td>
-</tr>
-<tr>
-	<td>!=</td>
-	<td>inequality operator</td>
-	<td>case(a != b)</td>
+	<td> </td>
+	<td>String-boolean concatenation</td>
+	<td><pre class="code3">a = "Result: " + true<br>a = true + " is the result"</pre></td>
 </tr>
 </table>
 
-<p></p>
-
-<h1>Array Operators</h1>
-
-<table width="600" border="1">
-<tr>
-	<td width="20%"><strong>Operator</strong></td>
-	<td width="50%"><strong>Name</strong></td>
-	<td><strong>Example</strong></td>
-</tr>
-<tr>
-	<td>[ ]</td>
-	<td><a href="func_item.html">item operator</a></td>
-	<td>array[index]</td>
-</tr>
-</table>
-
-<p></p>
-<p></p>
-<p></p>
+<h2>Related</h2>
+<ul>
+	<li><a href="arrayTypes.html">Array types operators</a></li>
+</ul>
 
 <!-- FOOTER -->
-<p class="foot">Copyright &copy;2008-2019 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
+<p class="foot">Copyright &copy;2008-2020 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
 
 <!-- END CENTERED CONTENT -->
 

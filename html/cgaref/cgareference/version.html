@@ -1,9 +1,7 @@
 <html>
 
 <head>
-<title>
-    version
-</title>
+	<title>version</title>
     <link rel="stylesheet" href="../manual_style.css" type="text/css" />
 </head>
 
@@ -12,50 +10,39 @@
 
 <!-- HEADER (use only on bookchapters) -->
 
-    <table summary="" class="header">
-        <tr>
-            <td align="left" class="helphead_l"><a href="../toc.html"><div class="helplink">&nbsp;</div></a></td>
-            <td align="right" class="helphead_r"></td>
-        </tr>
-    </table>
-
+<table summary="" class="header">
+	<tr>
+		<td align="left" class="helphead_l"><a href="../toc.html"><div class="helplink">&nbsp;</div></a></td>
+		<td align="right" class="helphead_r"></td>
+	</tr>
+</table>
 
 <!-- CONTENT -->
+       
+<h1>version</h1>
+  
+<h2>Syntax</h2>
+        
+<p class="code2">version <span class="cga_opparam">versionString</span></p>
+        
+<h2>Parameters</h2>
 
-        
-  <h1>version</h1>
-        <h2>
-        Synopsis        </h2>
-        
-  <p class="code2">version <i>version-string</i> </p>
-    <p></p>
-        
-
-        <h2>
-        Parameters
-        </h2>
 <ul>
-  <li><span class="cga_opparam">version-string</span><br>
-  CGA version for which this rule file is written. The CGA version always corresponds to the City Engine version, e.g. City Engine 2009.2 has CGA version "2009.2".<br>
-  <br>
+	<li><span class="cga_opparam">versionString</span> (string)<br>CGA version for which this rule file is written. The CGA version always corresponds to the City Engine version, e.g. City Engine 2009.2 has CGA version "2009.2".
 </ul>
 
-     
+<h2>Description</h2>
         
-  <p class="info">
-  The <span class="code_std">version</span> cga keyword is used to define the cga version for which the rules are written. This permits detection of potential incompatibilities; warnings about potential incompatibilities are written to the log.<br>
-  Such incompabilities come in two sorts: <em>new features</em> and <em>changes to exisiting features</em>. While the former are relatively unproblematic, the latter are generally not desired and only occur when an obvious bug or other shortcoming needs to be corrected. See <a href="cga_changelog.html">CGA Changelog</a> for an overview of the changes between CGA versions.<br>   
-  The <span class="code_std">version</span> statement has to be the first code line of a cga file. If there is no <span class="code_std">version</span> statement, the version defaults to "2009.1". 
+<p>The <span class="code_std">version</span> cga keyword is used to define the cga version for which the rules are written. This permits detection of potential incompatibilities; warnings about potential incompatibilities are written to the log.<br>Such incompabilities come in two sorts: <em>new features</em> and <em>changes to exisiting features</em>. While the former are relatively unproblematic, the latter are generally not desired and only occur when an obvious bug or other shortcoming needs to be corrected. See <a href="cga_changelog.html">CGA Changelog</a> for an overview of the changes between CGA versions.<br>The <span class="code_std">version</span> statement has to be the first code line of a cga file. If there is no <span class="code_std">version</span> statement, the version defaults to "2009.1".</p>
 
 <h2>Related</h2>
 <ul>
     <li><a class="normw" href="cga_changelog.html"> CGA Changelog</a></li>
 </ul>
 
-  
+<h3><!-- FOOTER --> </h3>
 
-  <h3><!-- FOOTER --> </h3>
-        <p class="foot">Copyright &copy;2008-2019 Esri R&amp;D Center Zurich. All rights reserved.</p>                  
+<p class="foot">Copyright &copy;2008-2020 Esri R&amp;D Center Zurich. All rights reserved.</p>                  
 
 <!-- END CENTERED CONTENT -->
 

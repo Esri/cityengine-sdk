@@ -6,24 +6,22 @@
 </head>
 
 <body>
-    <div class="content">
+<div class="content">
 
-        <!-- HEADER (use only on bookchapters) -->
-        <table summary="" class="header">
-            <tr>
-                <td align="left" class="helphead_l">
-                    <a href="../toc.html">
-                        <div class="helplink">&nbsp;</div>
-                    </a>
-                </td>
-                <td align="right" class="helphead_r"></td>
-            </tr>
-        </table>
+<!-- HEADER (use only on bookchapters) -->
+<table summary="" class="header">
+	<tr>
+		<td align="left" class="helphead_l"><a href="../toc.html"><div class="helplink">&nbsp;</div></a></td>
+		<td align="right" class="helphead_r"></td>
+	</tr>
+</table>
 
-        <!-- CONTENT -->
-        <h1>import</h1>
+<!-- CONTENT -->
 
-        <h2>Synopsis</h2>
+<h1>import</h1>
+
+<h2>Syntax</h2>
+
         <ol>
           <li><span class="code2">import <span class="cga_opparam">id</span> : <span class="cga_opparam">filePath</span></span></li>
           <li><span class="code2">import <span class="cga_opparam">id</span> (style-id_1, ... , style-id_n) : <span class="cga_opparam">filePath</span></span></li>
@@ -35,10 +33,10 @@
         <h2>Parameters</h2>
         <ul>
           <li><span class="cga_opparam">id</span><br/>Unique prefix for the imported rules, attributes and functions.</li>
-          <li><span class="cga_opparam">filePath</span><br/>Absolute or relative path to a CGA rule file (e.g. "file.cga"). See <a class="normw" href="cga_assetSearch.html">Asset Search</a> for details about the supported syntax.</li>
+          <li><span class="cga_opparam">filePath</span> (string)<br/>Absolute or relative path to a CGA rule file (e.g. "file.cga"). See <a class="normw" href="cga_assetSearch.html">Asset Search</a> for details about the supported syntax.</li>
         </ul>
 
-        <h2>Remarks</h2>
+        <h2>Description</h2>
 
         <p class="text">Rules, attributes and functions from an existing rule file can be imported by a rule file through &quot;import&quot; (syntax 1). Importing a rule file makes all rules, attributes and functions of the <i>imported</i> rule file available prefixed by &quot;id&quot;. If the <i>imported</i> rule file contains multiple styles (syntax 2), by default all styles are imported and visible in the style manager. In order to limit the styles available in an <i>importing</i> rule file, the set of imported styles can be specified by enumerating the imported styles in parenthesis after the import id (syntax 2).</p>
 
@@ -131,7 +129,7 @@ st.Facade-->
         </table>
 
         <h3><!-- FOOTER --> </h3>
-        <p class="foot">Copyright &copy;2008-2019 Esri R&amp;D Center Zurich. All rights reserved.</p>
+        <p class="foot">Copyright &copy;2008-2020 Esri R&amp;D Center Zurich. All rights reserved.</p>
 
         <!-- END CENTERED CONTENT -->
 

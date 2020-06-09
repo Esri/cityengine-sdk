@@ -1,9 +1,7 @@
 <html>
 
 <head>
-    <title>
-    extrude Operation
-    </title>
+    <title>extrude Operation</title>
     <link rel="stylesheet" href="../manual_style.css" type="text/css" />
 </head>
 
@@ -12,188 +10,182 @@
 
 <!-- HEADER (use only on bookchapters) -->
 
-    <table summary="" class="header">
-        <tr>
-            <td align="left" class="helphead_l"><a href="../toc.html"><div class="helplink">&nbsp;</div></a></td>
-            <td align="right" class="helphead_r"></td>
-        </tr>
-    </table>
-
+<table summary="" class="header">
+	<tr>
+		<td align="left" class="helphead_l"><a href="../toc.html"><div class="helplink">&nbsp;</div></a></td>
+		<td align="right" class="helphead_r"></td>
+	</tr>
+</table>
 
 <!-- CONTENT -->
 
-	<h1>extrude operation</h1>
+<h1>extrude operation</h1>
 
-	<h2>Synopsis</h2>
+<h2>Syntax</h2>
         
-	<p class="code2">extrude(<span class="cga_opparam">distance</span>)</p>
-	<p class="code2">extrude(<span class="cga_opparam">extrusionType</span>, <span class="cga_opparam">distance</span>)</p>
+<p class="code2">extrude(<span class="cga_opparam">distance</span>)</p>
+<p class="code2">extrude(<span class="cga_opparam">extrusionType</span>, <span class="cga_opparam">distance</span>)</p>
 
-	<p class="info">
-		Extrudes the shape. Each face polygon of all meshes in the geometry asset is taken and extruded along the face normal or a given direction as specified by the extrusion type. 
-		The scope orientation is set in the following way:
-		<ul>
-			<li>x-axis direction is kept as much as possible (old x-axis is projected to plane orthogonal to extrusion direction)</li>
-			<li>y-axis along the extrusion direction</li>
-			<li>z-axis normal to the two above</li>
-		</ul>
-		The scope's sizes are adjusted to tightly fit the extruded geometry.
-		If <span class="cga_opparam">distance</span> is negative, the scope.sy attribute will be negative.<br><br>
-		Texture coordinates are inherited from the shape.
-	</p>
-	
-	<h2>Parameters</h2>
-	
-	<ul>
-		<li><span class="cga_opparam">distance</span> (float)<br>How many units to extrude.</li>
-		<li><span class="cga_opparam">extrusionType</span> (keyword)<br>
-			Semantic extrusion type keyword:
-			<ul>
-			   <li><span class="codelight">world.up</span>: Extrudes faces along the world coordinate system's y-axis.</li>
-			   <li><span class="codelight">world.up.flatTop</span>: Same as <span class="cga_opparam">world.up</span> but creates a flat top surface.</li>
-			   <li><span class="codelight">face.normal</span>: Default. Each face is extruded along its normal.</li>
-			   <li><span class="codelight">vertex.normal</span>: Extrudes face vertices along their normals.
-			   <p class="notes">Duplicate vertices must be merged in order to compute vertex normals using adjacent face normals.</p></li>
-			</ul>
-		</li>
-	</ul>
+<h2>Parameters</h2>
 
-	<h2>Related</h2>
-	<ul>
-		<li><a class="normw" href="op_envelope.html">envelope operation</a></li>
-		<li><a class="normw" href="op_offset.html">offset operation</a></li>       
-		<li><a class="normw" href="op_roofGable.html">roofGable operation</a></li>
-		<li><a class="normw" href="op_roofHip.html">roofHip operation</a></li>
-		<li><a class="normw" href="op_roofPyramid.html">roofPyramid operation</a></li>
-		<li><a class="normw" href="op_roofShed.html">roofShed operation</a></li>
-		<li><a class="normw" href="op_taper.html">taper operation</a></li>
-	</ul>
+<ul>
+	<li><span class="cga_opparam">distance</span> (float)<br>How many units to extrude.</li>
+	<li><span class="cga_opparam">extrusionType</span> (selector)<br>
+	<table cellspacing="5">
+		<tr><td width="25%"><span class="codelight">world.up</span></td><td>Extrudes faces along the world coordinate system's y-axis.</td></tr>
+		<tr><td><span class="codelight">world.up.flatTop</span></td><td>Same as <span class="cga_opparam">world.up</span> but creates a flat top surface.</td></tr>
+		<tr><td><span class="codelight">face.normal</span></td><td>Default. Each face is extruded along its normal.</td></tr>
+		<tr><td><span class="codelight">vertex.normal</span></td><td>Extrudes face vertices along their normals.<p class="notes">Duplicate vertices must be merged in order to compute vertex normals using adjacent face normals.</p></td></tr>
+	</table>
+	</li>
+</ul>
 
-	<h2>Examples</h2>
-	
-	<h3>Extrusion along Normals</h3>
-	
-	<br><br>
-	
-	<table summary="" class="twocol">
-	<tr>
-		<td class="twocol_l"><img src="images/extrude_normal_1.png" alt="Initial shape" width="298"/></td>
-		<td><em>On the left, an initial shape consisting of 2 faces and the initial scope is shown.</em></td>
-	</tr>
-	
-	<tr><td><br><br><br><br></td></tr>
-	
-	<tr>
-		<td class="twocol_l"><img src="images/extrude_normal_2.png" alt="Extrusion along one face normal" width="298"/></td>
-		<td>
-		<pre class="code3">
+<h2>Description</h2>
+
+<p>Extrudes the shape. Each face polygon of all meshes in the geometry asset is taken and extruded along the face normal or a given direction as specified by the extrusion type. The scope orientation is set in the following way:
+<ul>
+	<li>x-axis direction is kept as much as possible (old x-axis is projected to plane orthogonal to extrusion direction)</li>
+	<li>y-axis along the extrusion direction</li>
+	<li>z-axis normal to the two above</li>
+</ul>
+The scope's sizes are adjusted to tightly fit the extruded geometry. If <span class="cga_opparam">distance</span> is negative, the scope.sy attribute will be negative.<br><br>Texture coordinates are inherited from the shape.</p>
+
+<h2>Related</h2>
+<ul>
+	<li><a class="normw" href="op_envelope.html">envelope operation</a></li>
+	<li><a class="normw" href="op_offset.html">offset operation</a></li>       
+	<li><a class="normw" href="op_roofGable.html">roofGable operation</a></li>
+	<li><a class="normw" href="op_roofHip.html">roofHip operation</a></li>
+	<li><a class="normw" href="op_roofPyramid.html">roofPyramid operation</a></li>
+	<li><a class="normw" href="op_roofShed.html">roofShed operation</a></li>
+	<li><a class="normw" href="op_taper.html">taper operation</a></li>
+</ul>
+
+<h2>Examples</h2>
+
+<h3>Extrusion along Normals</h3>
+
+<br><br>
+
+<table summary="" class="twocol">
+<tr>
+	<td class="twocol_l"><img src="images/extrude_normal_1.png" alt="Initial shape" width="298"/></td>
+	<td><em>On the left, an initial shape consisting of 2 faces and the initial scope is shown.</em></td>
+</tr>
+
+<tr><td><br><br><br><br></td></tr>
+
+<tr>
+	<td class="twocol_l"><img src="images/extrude_normal_2.png" alt="Extrusion along one face normal" width="298"/></td>
+	<td>
+	<pre class="code3">
 Lot-->
 	extrude(10)					
-		</pre>
-		<em>The extrude operation extrudes all faces along their normals and combines the results. No internal lamina faces are created.<br><br>
-		    The scope's y-axis is set to the extrusion direction.</em>
-		</td>
-	</tr>
-	
-	<tr><td><br><br><br><br></td></tr>
-	
-	<tr>
-		<td class="twocol_l"><img src="images/extrude_normal_3.png" alt="Extrusion along several face normals" width="298"/></td>
-		<td>
-		<pre class="code3">
+	</pre>
+	<em>The extrude operation extrudes all faces along their normals and combines the results. No internal lamina faces are created.<br><br>
+		The scope's y-axis is set to the extrusion direction.</em>
+	</td>
+</tr>
+
+<tr><td><br><br><br><br></td></tr>
+
+<tr>
+	<td class="twocol_l"><img src="images/extrude_normal_3.png" alt="Extrusion along several face normals" width="298"/></td>
+	<td>
+	<pre class="code3">
 Lot-->
 	extrude(face.normal,10)					
-		</pre>
-		<em>For uneven shapes the extrusion is performed for each face individually and internal faces are created.<br><br>
-			The scope's y-axis is set to the normal of the first face.<br><br>
-			Using <span class="codelight">face.normal</span> is the default and the same as <span class="codelight">extrude(10)</span>.
-		</em>
-		</td>
-	</tr>
-	
-	<tr><td><br><br><br><br></td></tr>
-	
-	<tr>
-		<td class="twocol_l"><img src="images/extrude_normal_4.png" alt="Extrusion along vertex normals" width="298"/></td>
-		<td>
-		<pre class="code3">
+	</pre>
+	<em>For uneven shapes the extrusion is performed for each face individually and internal faces are created.<br><br>
+		The scope's y-axis is set to the normal of the first face.<br><br>
+		Using <span class="codelight">face.normal</span> is the default and the same as <span class="codelight">extrude(10)</span>.
+	</em>
+	</td>
+</tr>
+
+<tr><td><br><br><br><br></td></tr>
+
+<tr>
+	<td class="twocol_l"><img src="images/extrude_normal_4.png" alt="Extrusion along vertex normals" width="298"/></td>
+	<td>
+	<pre class="code3">
 Lot-->
 	extrude(vertex.normal,10)					
-		</pre>
-		<em>The extrusion along vertex normals keeps faces together and no internal faces are created.<br><br>
-			The scope's y-axis is set to the normal of the first vertex.
-		</em>
-		</td>
-	</tr>
-	</table>
-	
-	<br><br>
-	
-	<h3>Extrusion along world coordinate axis</h3>
-	
-	<br><br>
-	
-	<table>
-	<tr>
-		<td class="twocol_l"><img src="images/extrude_world_1.png" alt="Extrusion along world axis" width="298"/></td>
-		<td>
-		<pre class="code3">
+	</pre>
+	<em>The extrusion along vertex normals keeps faces together and no internal faces are created.<br><br>
+		The scope's y-axis is set to the normal of the first vertex.
+	</em>
+	</td>
+</tr>
+</table>
+
+<br><br>
+
+<h3>Extrusion along world coordinate axis</h3>
+
+<br><br>
+
+<table>
+<tr>
+	<td class="twocol_l"><img src="images/extrude_world_1.png" alt="Extrusion along world axis" width="298"/></td>
+	<td>
+	<pre class="code3">
 Lot-->
 	innerRectangle(scope) { shape : Shape | remainder : Remainder }
 Shape-->
 	extrude(world.up,10)
 Remainder-->
 	color(0,1,0)
-		</pre>
-		<em>Each face is extruded along the world coordinate's y-axis. No internal lamina faces are created.<br><br>
-		The scope's y-axis is set to the world's y-axis.
-		</em>
-		</td>
-	</tr>
-	
-	<tr><td><br><br><br><br></td></tr>
-	
-	<tr>
-		<td class="twocol_l"><img src="images/extrude_world_2.png" alt="Extrusion with flat top" width="298"/></td>
-		<td>
-		<pre class="code3">
+	</pre>
+	<em>Each face is extruded along the world coordinate's y-axis. No internal lamina faces are created.<br><br>
+	The scope's y-axis is set to the world's y-axis.
+	</em>
+	</td>
+</tr>
+
+<tr><td><br><br><br><br></td></tr>
+
+<tr>
+	<td class="twocol_l"><img src="images/extrude_world_2.png" alt="Extrusion with flat top" width="298"/></td>
+	<td>
+	<pre class="code3">
 Shape-->
 	extrude(world.up.flatTop,10)
-		</pre>
-		<em>A flat top surface is created. The extrusion distance is measured from the lowest vertex of each shape wrt. to the world's y-axis.
-		</em>
-		</td>
-	</tr>
-	
-	<tr><td><br><br><br><br></td></tr>
-	
-	<tr>
-		<td class="twocol_l"><img src="images/extrude_world_3.png" alt="Extrusion with zero distance" width="298"/></td>
-		<td>
-		<pre class="code3">
+	</pre>
+	<em>A flat top surface is created. The extrusion distance is measured from the lowest vertex of each shape wrt. to the world's y-axis.
+	</em>
+	</td>
+</tr>
+
+<tr><td><br><br><br><br></td></tr>
+
+<tr>
+	<td class="twocol_l"><img src="images/extrude_world_3.png" alt="Extrusion with zero distance" width="298"/></td>
+	<td>
+	<pre class="code3">
 Shape-->
 	extrude(world.up.flatTop,0)
-		</pre>
-		<em>The extrusion distance is set to at least the maximum extent of the shape along the world's y-axis. If the distance is zero the extrusion is positive.
-		</em>
-		</td>
-	</tr>
-	
-	<tr><td><br><br><br><br></td></tr>
-	
-	<tr>
-		<td class="twocol_l"><img src="images/extrude_world_4.png" alt="Extrusion with negative distance" width="298"/></td>
-		<td>
-		<pre class="code3">
+	</pre>
+	<em>The extrusion distance is set to at least the maximum extent of the shape along the world's y-axis. If the distance is zero the extrusion is positive.
+	</em>
+	</td>
+</tr>
+
+<tr><td><br><br><br><br></td></tr>
+
+<tr>
+	<td class="twocol_l"><img src="images/extrude_world_4.png" alt="Extrusion with negative distance" width="298"/></td>
+	<td>
+	<pre class="code3">
 Shape-->
 	extrude(world.up.flatTop,-10)
-		</pre>
-		<em>If the distance is negative the extrusion is measured from the highest vertex of each shape wrt. to the world's y-axis.<br><br>
-		The scope's y-size becomes negative.
-		</em>
-		</td>
-	</tr>
-	</table>
+	</pre>
+	<em>If the distance is negative the extrusion is measured from the highest vertex of each shape wrt. to the world's y-axis.<br><br>
+	The scope's y-size becomes negative.
+	</em>
+	</td>
+</tr>
+</table>
             
 <!-- FOOTER -->
 

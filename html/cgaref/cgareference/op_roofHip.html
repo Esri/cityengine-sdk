@@ -1,9 +1,7 @@
 <html>
 
 <head>
-    <title>
-    roofHip Operation
-    </title>
+    <title>roofHip Operation</title>
     <link rel="stylesheet" href="../manual_style.css" type="text/css" />
 </head>
 
@@ -17,12 +15,11 @@
     </tr>
 </table>
 
-
 <!-- CONTENT -->
 
 <h1>roofHip operation</h1>
 
-<h2>Synopsis</h2>
+<h2>Syntax</h2>
 
 <p class="code2">roofHip(<span class="cga_opparam">angle</span>)</p>
 <p class="code2">roofHip(<span class="cga_opparam">angle, overhang</span>)</p>
@@ -33,40 +30,36 @@
 
 <h2>Parameters</h2>
 <ul>
-	<li><span class="cga_opparam">valueType</span> (selstring)<br>
-	Type of roof generation (<span class="codelight">byAngle | byHeight</span>).</li>
-	<li><span class="cga_opparam">value</span> (float)<br>
-	Angle or height of the roof-planes as specified by <span class="cga_opparam">valueType</span>.</li>
-	<li><span class="cga_opparam">angle</span> (float)<br>
-	Angle of the roof-planes (generation <span class="codelight">byAngle).</li>
-	<li><span class="cga_opparam">overhang</span> (float)<br>
-	Overhang distance, measured perpendicular to the shape edges (on the roof).</li>
-	<li><span class="cga_opparam">even</span> (bool)<br>
-	Whether to make the ridges even or not. If true, non-planar faces originate.
+	<li><span class="cga_opparam">valueType</span> (selector)
+	<table cellspacing="5">
+		<tr><td width="50%"><span class="codelight">byAngle, byHeight</span></td><td>Type of roof generation</td></tr>
+	</table>
+	</li>
+	<li><span class="cga_opparam">value</span> (float)<br>Angle or height of the roof-planes as specified by <span class="cga_opparam">valueType</span>.</li>
+	<li><span class="cga_opparam">angle</span> (float)<br>Angle of the roof-planes (generation <span class="codelight">byAngle).</li>
+	<li><span class="cga_opparam">overhang</span> (float)<br>Overhang distance, measured perpendicular to the shape edges (on the roof).</li>
+	<li><span class="cga_opparam">even</span> (bool)<br>Whether to make the ridges even or not. If true, non-planar faces originate.
 </ul>
-	
-<p class="info">The roofHip operation builds a hip roof perpendicular to each face of the current shape's geometry. At every edge, a plane is generated with a given angle or height wrt.
-the polygon plane. All planes are cut with each other to form the roof faces.</p>
 
-<p>If <span class="cga_opparam">overhang</span> is set, the roof faces overlap the original shape by this distance. Overhang distances are measured perpendicular to the shape edges (on the roof planes).  
+<h2>Description</h2>
+	
+<p>The roofHip operation builds a hip roof perpendicular to each face of the current shape's geometry. At every edge, a plane is generated with a given angle or height wrt. the polygon plane. All planes are cut with each other to form the roof faces.</p>
+
+<p>If <span class="cga_opparam">overhang</span> is set, the roof faces overlap the original shape by this distance. Overhang distances are measured perpendicular to the shape edges (on the roof planes).</p>
 
 <p>If <span class="cga_opparam">even</span> is set to true, the gable edges are forced to be horizontal. In this case, non-planar roof faces originate.</p>
 
-<p class="notes">The connectivity of the roof mesh is optimized for trim plane
-generation to cut bricks inserted into the roof planes (see examples
-below).</p>
+<p class="notes">The connectivity of the roof mesh is optimized for trim plane generation to cut bricks inserted into the roof planes (see examples below).</p>
 
+<h3>Scope</h3>
 
-<h2>Scope</h2>
-
-<p class="text">
-  The scope orientation is set in the following way:</p> 
- 		<ul>
- 		<li>x-axis direction is kept as much as possible (old x-axis is projected to plane orthogonal to face normal of the first face)</li>
- 		<li>y-axis along the face normal of the first face</li>
- 		<li>z-axis normal to the two above</li>
-  </ul>
-  The scope's sizes are adjusted to tighly fit the extruded geometry.
+<p class="text">The scope orientation is set in the following way:</p> 
+<ul>
+	<li>x-axis direction is kept as much as possible (old x-axis is projected to plane orthogonal to face normal of the first face)</li>
+	<li>y-axis along the face normal of the first face</li>
+	<li>z-axis normal to the two above</li>
+</ul>
+<p>The scope's sizes are adjusted to tighly fit the extruded geometry.</p>
 
 <h2>Related</h2>
 <ul>
@@ -79,9 +72,7 @@ below).</p>
 	<li><a class="normw" href="op_taper.html"> taper operation</a></li>	
 </ul>
 
-
 <h2>Examples</h2>
-
 
 <h3>Simple Hip Roof</h3>
 
@@ -181,10 +172,8 @@ When using the above rule for the<span class="code">Top</span> shape, the ridge 
 <p class="info"> For many shapes, ridges get implicitly even and hence the even option doesn't change anything.</p>
 
 
-
-
 <!-- FOOTER -->
-<p class="foot">Copyright &copy;2008-2019 Esri R&amp;D Center Zurich. All rights reserved.</p>                  
+<p class="foot">Copyright &copy;2008-2020 Esri R&amp;D Center Zurich. All rights reserved.</p>                  
 
 </div>
 </body>

@@ -1,31 +1,28 @@
 <html>
 
 <head>
-    <title>
-    Annotations
-    </title>
-    <link rel="stylesheet" href="../manual_style.css" type="text/css" /></head>
+    <title>Annotations</title>
+    <link rel="stylesheet" href="../manual_style.css" type="text/css" />
+</head>
 
 <body>
 <div class="content">
 
 <!-- HEADER (use only on bookchapters) -->
 
-    <table summary="" class="header">
-        <tr>
-            <td align="left" class="helphead_l"><a href="../toc.html"><div class="helplink">&nbsp;</div></a></td>
-            <td align="right" class="helphead_r"></td>
-        </tr>
-    </table>
-
+<table summary="" class="header">
+	<tr>
+		<td align="left" class="helphead_l"><a href="../toc.html"><div class="helplink">&nbsp;</div></a></td>
+		<td align="right" class="helphead_r"></td>
+	</tr>
+</table>
 
 <!-- CONTENT -->
 <h1>Annotations</h1>
-<h2>Synopsis </h2>
              
-  <p class="text"><img alt="" class="icon" src="../images/info_icon.jpg"> Annotations are used to add additional information to a rule or an attribute. Annotations are optional and do not affect the semantics of a rule and thus have no influence on the model generation. Annotations are mostly used to give additional hints for user interface elements such as the Inspector on how to present attributes or rules.
+<p>Annotations are used to add additional information to a rule or an attribute. Annotations are optional and do not affect the semantics of a rule and thus have no influence on the model generation. Annotations are mostly used to give additional hints for user interface elements such as the Inspector on how to present attributes or rules.</p>
  
- <br>
+<h2>Syntax</h2>
  
  	<table class="w3-table erdz-api-table">
 			<tr style="border:0px">
@@ -39,13 +36,15 @@
 						<li><code><a class="erdz-api-anchor" href="#desc"     >@Description("description")</a></code></li>
 						<li><code><a class="erdz-api-anchor" href="#dir"      >@Directory</a></code></li>
 						<li><code><a class="erdz-api-anchor" href="#dist"     >@Distance</a></code></li>
-						<li><code><a class="erdz-api-anchor" href="#enum"     >@Enum(value_1, value_2, ..., restricted=true)</a></code></li>
+						<li><code><a class="erdz-api-anchor" href="#enum1"    >@Enum(value_1, value_2, ..., restricted=true)</a></code></li>
+						<li><code><a class="erdz-api-anchor" href="#enum2"    >@Enum(valuesAttr=name, restricted=true)</a></code></li>
 						<li><code><a class="erdz-api-anchor" href="#file1"    >@File</a></code></li>
 						<li><code><a class="erdz-api-anchor" href="#file2"    >@File("ext_1", ..., "ext_n")</a></code></li>
 						<li><code><a class="erdz-api-anchor" href="#group1"   >@Group("level_1-group", ..., "level_n-group")</a></code></li>
 						<li><code><a class="erdz-api-anchor" href="#group2"   >@Group("level_1-group", ..., "level_n-group, order")</a></code></li>
 						<li><code><a class="erdz-api-anchor" href="#handle"   >@Handle(handle_params)</a></code></li>
-						<li><code><a class="erdz-api-anchor" href="#hidden"   >@Hidden</a></code></li>
+						<li><code><a class="erdz-api-anchor" href="#hidden1"  >@Hidden</a></code></li>
+						<li><code><a class="erdz-api-anchor" href="#hidden2"  >@Hidden(attribute_1, ... , attribute_n)</a></code></li>
 						<li><code><a class="erdz-api-anchor" href="#inmesh"   >@InLine</a></code></li>
 						<li><code><a class="erdz-api-anchor" href="#inmesh"   >@InMesh</a></code></li>
 						<li><code><a class="erdz-api-anchor" href="#inmesh"   >@InPoint</a></code></li>
@@ -70,11 +69,11 @@
 				<td class="erdz-api-text">Adds a &#xb0; (degree) unit in Inspector and an unrestricted [0,360] range by default with slider.  Use <code>@Range</code> to specify a different range.</td>
 			</tr>
 			<tr>
-				<td class="erdz-api-example">Example:<br>
-				<ul>
-					<li><code>@Angle</code></li>
-					<li><code>attr angle = 180</code></li>
-				</ul>
+				<td class="erdz-api-example">Example:
+				<pre class="code3">
+@Angle
+attr angle = 180
+				</pre>
 				</td>
 			</tr>
 	</table>
@@ -87,8 +86,11 @@
 				<td class="erdz-api-text">Mark an attribute as a color attribute which will present a color picker in the inspector.</td>
 			</tr>
 			<tr>
-				<td class="erdz-api-example">Example:<br>
-				<ul><li><code>@Color</code></li><li><code>attr userColor = "#000000"</code></li></ul>
+				<td class="erdz-api-example">Example:
+				<pre class="code3">
+@Color
+attr userColor = "#000000"
+				</pre>
 				</td>
 			</tr>
 	</table>
@@ -101,11 +103,11 @@
 				<td class="erdz-api-text">Adds a description to an attribute or rule which will be displayed as tooltip in the inspector or as description in the start rule chooser or style manager. Use <code>\n</code> for linebreaks.</td>
 			</tr>
 			<tr>
-				<td class="erdz-api-example">Example:<br>
-				<ul>
-					<li><code>@Description("The building width")</code></li>
-					<li><code>attr width = 40</code></li>
-				</ul>
+				<td class="erdz-api-example">Example:
+				<pre class="code3">
+@Description("The building width")
+attr width = 40
+				</pre>
 				</td>
 			</tr>
 	</table>
@@ -118,8 +120,11 @@
 				<td class="erdz-api-text">Mark an attribute as a directory name. The inspector will present a directory chooser.</td>
 			</tr>
 			<tr>
-				<td class="erdz-api-example">Example:<br>
-				<ul><li><code>@Directory</code></li><li><code>attr assets = "/assets/lod" + lod</code></li></ul>
+				<td class="erdz-api-example">Example:
+				<pre class="code3">
+@Directory
+attr assets = "/assets/lod" + lod
+				</pre>
 				</td>
 			</tr>
 	</table>
@@ -133,30 +138,79 @@
 				<td class="erdz-api-text">Adds a meter or foot unit (depending on the Coordinate System used by the scene) in Inspector.</td>
 			</tr>
 			<tr>
-				<td class="erdz-api-example">Example:<br>
-				<ul>
-					<li><code>@Distance</code></li>
-					<li><code>attr distance = 1852</code></li>
-				</ul>
+				<td class="erdz-api-example">Example:
+				<pre class="code3">
+@Distance
+attr distance = 1852
+				</pre>
 				</td>
 			</tr>
 	</table>
 	
-	<table id="enum" class="w3-table erdz-api-table">
+	<table id="enum1" class="w3-table erdz-api-table">
 			<tr>
 				<th class="erdz-api-proto"><code>@Enum(value_1, value_2, ..., restricted=true)</code></th>
 			</tr>
 			<tr>
-				<td class="erdz-api-text">Sets an enum with specific values. Values can be numeric or string. Parameter restricted is optional (default is true). If true no other values can be entered in the inspector or set by a handle.</td>
+				<td class="erdz-api-text">Sets an enumeration with specific values. Values can be <code>float</code> or <code>string</code>. Parameter <code>restricted</code> is optional (default is <code>true</code>). If <code>true</code> no other values can be entered in the inspector or set by a handle.</td>
 			</tr>
 			<tr>
 				<td class="erdz-api-example">Examples:<br>
-				<ul>
-					<li><code>@Enum("low", "mid", "high")</code></li>
-					<li><code>attr lod = "low"</code></li>
-					<li><code>@Enum(10, 20, 30, restricted = false)</code></li>
-					<li><code>attr height = 20</code></li>
-				</ul>
+				<pre class="code3">
+@Enum("low", "mid", "high")
+attr lod = "low"
+
+@Enum(10, 20, 30, restricted = false)
+attr height = 20
+				</pre>
+				</td>
+			</tr>
+			<tr>
+				<td class="erdz-api-text">If the <code>@Enum</code> annotation is applied to an array attribute, the enumeration is defined for the elements of the array.</td>
+			</tr>
+			<tr>
+				<td class="erdz-api-example">Example:<br>
+				<pre class="code3">
+@Enum("Residential", "Commercial")
+attr floorUsage = ["Residential"]
+				</pre>
+				</td>
+			</tr>
+	</table>
+	
+	<table id="enum2" class="w3-table erdz-api-table">
+			<tr>
+				<th class="erdz-api-proto"><code>@Enum(valuesAttr=name, restricted=true)</code></th>
+			</tr>
+			<tr>
+				<td class="erdz-api-text">Sets an enumeration with specific values. The values are dynamically set by an attribute with name <code>valuesAttr</code> (of type <code>float</code>, <code>float[]</code>, <code>string</code> or <code>string[]</code>). Parameter <code>restricted</code> is optional (default is <code>true</code>). If <code>true</code> no other values can be entered in the inspector or set by a handle.</td>
+			</tr>
+			<tr>
+				<td class="erdz-api-example">Examples:
+				<pre class="code3">
+@Enum(valuesAttr = lods)
+attr lod = lods[0]
+@Hidden
+attr lods = ["low", "mid", "high"]
+
+@Enum(valuesAttr = heights, restricted = false)
+attr height = heights[1]
+@Hidden
+attr heights = [10, 20, 30]
+				</pre>
+				</td>
+			</tr>
+			<tr>
+				<td class="erdz-api-text">If the <code>@Enum</code> annotation is applied to an array attribute, the enumeration is defined for the elements of the array.</td>
+			</tr>
+			<tr>
+				<td class="erdz-api-example">Example:<br>
+				<pre class="code3">
+@Enum(valuesAttr = usage)
+attr floorUsage = [usage[0]]
+@Hidden
+attr usage = ["Residential", "Commercial"]
+				</pre>
 				</td>
 			</tr>
 	</table>
@@ -169,8 +223,11 @@
 				<td class="erdz-api-text">Mark an attribute as a file name. The inspector will present a file chooser.</td>
 			</tr>
 			<tr>
-				<td class="erdz-api-example">Example:<br>
-				<ul><li><code>@File</code></li><li><code>attr asset = "myfile.obj"</code></li></ul>
+				<td class="erdz-api-example">Example:
+				<pre class="code3">
+@File
+attr asset = "myfile.obj"
+				</pre>
 				</td>
 			</tr>
 	</table>
@@ -183,8 +240,11 @@
 				<td class="erdz-api-text">Mark an attribute as a file name. The inspector will present a file chooser for the given file extensions ("ext_1", ... , "ext_n").</td>
 			</tr>
 			<tr>
-				<td class="erdz-api-example">Example:<br>
-				<ul><li><code>@File("tif", "tiff")</code></li><li><code>attr texture = "tex0.tiff"</code></li></ul>
+				<td class="erdz-api-example">Example:
+				<pre class="code3">
+@File("tif", "tiff")
+attr texture = "tex0.tiff"
+				</pre>
 				</td>
 			</tr>
 	</table>
@@ -198,8 +258,11 @@
 				<td class="erdz-api-text">Set the group of the following attributes (the inspector will group attributes accordingly). The current group is maintained accross imports. To leave the current group, use <span class="codelight">@Group</span>.</td>
 			</tr>
 			<tr>
-				<td class="erdz-api-example">Example:<br>
-				<ul><li><code>@Group("First", "Second", "Third")</code></li><li><code>attr grouped = 0</code></li></ul>
+				<td class="erdz-api-example">Example:
+				<pre class="code3">
+@Group("First", "Second", "Third")
+attr grouped = 0
+				</pre>
 				</td>
 			</tr>
 	</table>
@@ -212,8 +275,11 @@
 				<td class="erdz-api-text">Set the group and the sort order for groups/subgroups in the inspector (similar to <code>@Order</code> for attributes). Where <code>order</code> is a numeric value.</td>
 			</tr>
 			<tr>
-				<td class="erdz-api-example">Example:<br>
-				<ul><li><code>@Group("First", "Second", "Third",1)</code></li><li><code>attr grouped = 0</code></li></ul>
+				<td class="erdz-api-example">Example:
+				<pre class="code3">
+@Group("First", "Second", "Third",1)
+attr grouped = 0
+				</pre>
 				</td>
 			</tr>
 	</table>	
@@ -226,31 +292,52 @@
 				<td class="erdz-api-text">Adds an <a href="https://doc.arcgis.com/en/cityengine/latest/help/help-handles-overview.htm" target="_blank">interactive handle</a> to the following attribute.</td>
 			</tr>
 			<tr>
-				<td class="erdz-api-example">Example:<br>
-				<ul>
-					<li><code>@Handle(shape=Solid, align=right)</code></li>
-					<li><code>attr dimension = 40</code></li>
-				</ul>
+				<td class="erdz-api-example">Example:
+				<pre class="code3">
+@Handle(shape=Solid, align=right)
+attr dimension = 40
+				</pre>
 				</td>
 			</tr>
 	</table>
 	
-	<table id="hidden" class="w3-table erdz-api-table">
+	<table id="hidden1" class="w3-table erdz-api-table">
 			<tr style="border:0px">
 				<th class="erdz-api-proto"><code>@Hidden</code></th>
 			</tr>
 			<tr>
-				<td class="erdz-api-text">Mark an attribute or rule as hidden. Hidden attributes won't appear in the CityEngine inspector or start rule chooser, but they will be connected to matching object attributes automatically. 
-<code>@Hidden</code> can also be used to hide a set of attributes (as in its second form with a list of attribute names) before
- an <code>import</code> statement. Without explicitly naming the attributes, <code>@Hidden</code> before an import statement will hide all
- imported attributes in the inspector; the hidden annotation will be recusively propagated to the imports of the hidden import.</td>
+				<td class="erdz-api-text">Mark an attribute or rule as hidden. Hidden attributes won't appear in CityEngine's inspector, but they will still be connected to matching object attributes automatically. Hidden rules won't appear in the start rule chooser. <code>@Hidden</code> before an <a href="import.html"><span class="code_std">import</span></a> statement will hide all imported attributes in the inspector. The <code>@Hidden</code> annotation will be recusively propagated to the imports of the hidden import.</td>
 			</tr>
 			<tr>
-				<td class="erdz-api-example">Example:<br>
-				<ul><li><code>@Hidden</code></li><li><code>attr hide_me = 0</code></li></ul>
+				<td class="erdz-api-example">Examples:
+				<pre class="code3">
+@Hidden
+attr hide_me = 0
+
+@Hidden
+import hide_me: "rule.cga"
+				</pre>
 				</td>
 			</tr>
 	</table>
+
+	<table id="hidden2" class="w3-table erdz-api-table">
+			<tr style="border:0px">
+				<th class="erdz-api-proto"><code>@Hidden(attribute_1, ... , attribute_n)</code></th>
+			</tr>
+			<tr>
+				<td class="erdz-api-text"><code>@Hidden</code> can also be used to hide a set of imported attributes before an <code>import</code> statement.</td>
+			</tr>
+			<tr>
+				<td class="erdz-api-example">Example:
+				<pre class="code3">
+@Hidden(attribute_1, attribute_2)
+import rule: "rule.cga"
+				</pre>
+				</td>
+			</tr>
+	</table>
+
 	
 	<table id="inmesh" class="w3-table erdz-api-table">
 			<tr>
@@ -270,15 +357,15 @@
 				<td class="erdz-api-text">Sets the sort order for an attribute in the Inspector, where <code>order</code> is a numeric value.</td>
 			</tr>
 			<tr>
-				<td class="erdz-api-example">Example:<br>
-				<ul>
-					<li><code>@Order(1)</code></li>
-					<li><code>attr i_m_1st = 0</code></li>
-					<li><code>@Order(2)</code></li>
-					<li><code>attr i_m_2nd = 0</code></li>
-					<li><code>@Order(13)</code></li>
-					<li><code>attr i_m_3rd = 0</code></li>
-				</ul>
+				<td class="erdz-api-example">Example:
+				<pre class="code3">
+@Order(1)
+attr i_m_1st = 0
+@Order(2)
+attr i_m_2nd = 0
+@Order(13)
+attr i_m_3rd = 0
+				</pre>
 				</td>
 			</tr>
 	</table>
@@ -300,11 +387,11 @@
 				<td class="erdz-api-text">Adds a % unit in Inspector and an unrestricted [0,1] range that displays as [0,100]. Use <code>@Range</code> to specify a different range. In the CGA File, the value has to be initialized to the real value (e.g. 0.1 for 10%). The Inspector will display the value in percent (e.g. 10%). The user has to enter the value in percent in the inspector.</td>
 			</tr>
 			<tr>
-				<td class="erdz-api-example">Example:<br>
-				<ul>
-					<li><code>@Percent</code></li>
-					<li><code>attr inflation = 0.012</code></li>
-				</ul>
+				<td class="erdz-api-example">Example:
+				<pre class="code3">
+@Percent
+attr inflation = 0.012
+				</pre>
 				</td>
 			</tr>
 	</table>
@@ -317,15 +404,28 @@
 				<td class="erdz-api-text">Sets the numeric range of an attribute by parameters <code>min</code> and <code>max</code> (inclusive). Parameter <code>stepsize</code> is optional (default is 0). If set to >0, possible values are set in respective steps starting from the minimum value. Sliders in the Inspector respect the step size. Parameter <code>restricted</code> is optional (default is true). If set to true, any numerical input value is set to the nearest possible value in the Inspector.</td>
 			</tr>
 			<tr>
-				<td class="erdz-api-example">Examples:<br>
-				<ul>
-					<li><code>@Range(min=5, max=50)</code></li>
-					<li><code>attr height = 20</code></li>
-					<li><code>@Range(min=0, max=45, stepsize=15, restricted=false)</code></li>
-					<li><code>attr angle = 30</code></li>
-				</ul>
+				<td class="erdz-api-example">Examples:
+				<pre class="code3">
+@Range(min=5, max=50)
+attr height = 20
+
+@Range(min=0, max=45, stepsize=15, restricted=false)
+attr angle = 30
+				</pre>
 				</td>
 			</tr>
+			<tr>
+				<td class="erdz-api-text">If the <code>@Range</code> annotation is applied to an array attribute, the range is defined for the elements of the array.</td>
+			</tr>
+			<tr>
+				<td class="erdz-api-example">Example:<br>
+				<pre class="code3">
+@Range(min=2.5, max=7)
+attr floorHeights = [4, 5.5, 5.5]
+				</pre>
+				</td>
+			</tr>
+
 	</table>
 	
 	<table id="startrule" class="w3-table erdz-api-table">
@@ -336,14 +436,17 @@
 				<td class="erdz-api-text">Mark a rule as a start rule for the start rule chooser.</td>
 			</tr>
 			<tr>
-				<td class="erdz-api-example">Example:<br>
-				<ul><li><code>@StartRule</code></li><li><code>Start-->NIL</code></li></ul>
+				<td class="erdz-api-example">Example:
+				<pre class="code3">
+@StartRule
+Start-->NIL
+				</pre>
 				</td>
 			</tr>		
 	</table>
 
 <!-- FOOTER -->
-<p class="foot">Copyright &copy;2008-2019 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
+<p class="foot">Copyright &copy;2008-2020 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
 
 <!-- END CENTERED CONTENT -->
 

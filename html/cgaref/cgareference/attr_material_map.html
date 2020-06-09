@@ -17,34 +17,32 @@
 	</tr>
 </table>
 
-
-
-<!-- PAGE TITLE -->
-<p class="pagetitle">CGA Shape Reference</p>
-<!-- CONTENT -->
-
 <h1>material.map shape attribute</h1>
-<h2>Synopsis</h2>
-<p class="code2">string material.colormap</p>
-<p class="code2">string material.bumpmap</p>
-<p class="code2">string material.dirtmap</p>
-<p class="code2">string material.specularmap</p>
-<p class="code2">string material.opacitymap</p>
-<p class="code2">string material.normalmap</p>
-<p class="code2">string material.emissivemap</p>
-<p class="code2">string material.occlusionmap</p>
-<p class="code2">string material.roughnessmap</p>
-<p class="code2">string material.metallicmap</p>
-<p class="code2">float material.{colormap|...|metallicmap}.s{u|v}</p>
-<p class="code2">float material.{colormap|...|metallicmap}.t{u|v}</p>
-<p class="code2">float material.{colormap|...|metallicmap}.rw</p>
 
-<p class="info">The material shape attribute consists of 10 texture layers.</p>
+<h2>Syntax</h2>
+
+<p class="code2"><span class="codelight">string</span> material.colormap</p>
+<p class="code2"><span class="codelight">string</span> material.bumpmap</p>
+<p class="code2"><span class="codelight">string</span> material.dirtmap</p>
+<p class="code2"><span class="codelight">string</span> material.specularmap</p>
+<p class="code2"><span class="codelight">string</span> material.opacitymap</p>
+<p class="code2"><span class="codelight">string</span> material.normalmap</p>
+<p class="code2"><span class="codelight">string</span> material.emissivemap</p>
+<p class="code2"><span class="codelight">string</span> material.occlusionmap</p>
+<p class="code2"><span class="codelight">string</span> material.roughnessmap</p>
+<p class="code2"><span class="codelight">string</span> material.metallicmap</p>
+<p class="code2"><span class="codelight">float</span> material.{colormap|...|metallicmap}.s{u|v}</p>
+<p class="code2"><span class="codelight">float</span> material.{colormap|...|metallicmap}.t{u|v}</p>
+<p class="code2"><span class="codelight">float</span> material.{colormap|...|metallicmap}.rw</p>
+
+<h2>Description</h2>
+
+<p>The material shape attribute consists of 10 texture layers.</p>
 
 <p class="text">Each texture layer consists of the file name of the
 associated texture <br>(<span class="cga_keyword">material</span><span class="code2">.{</span><span
 	class="cga_keyword">colormap|...|metallicmap}</span>), <br> scaling factors in u and v
-directions (<span class="cga_keyword">material.{colormap|...|metallicmap}.s{u|v]}</span>), <br>
+directions (<span class="cga_keyword">material.{colormap|...|metallicmap}.s{u|v}</span>), <br>
 offsets in u and v directions (<span class="cga_keyword">float material.{colormap|...|metallicmap}.t{u|v}</span>)<br> and rotation around the w-axis (<span
 	class="cga_keyword">material.{colormap|...|metallicmap}.rw</span>).</p>
 <p class="text">All these attributes can be set and read.</p>
@@ -57,10 +55,7 @@ offsets in u and v directions (<span class="cga_keyword">float material.{colorma
 <p class="text">The metallic map only uses the blue channel.</p>
 <p class="text">The occlusion map only uses the red channel.</p>
 
-See <a class="normw" href="cga_assetSearch.html">Asset Search</a> for
-information about where the texture is searched and <a class="normw"
-	href="cga_builtinAssets.html">Built-in Assets</a> for a list of built-in
-textures.
+<p>See <a class="normw" href="cga_assetSearch.html">Asset Search</a> for information about where the texture is searched and <a class="normw" href="cga_builtinAssets.html">Built-in Assets</a> for a list of built-in textures.</p>
 
 <h2>Related</h2>
 
@@ -72,10 +67,8 @@ textures.
 	<li><a class="normw" href="cga_texturing.html">Texturing: Essential Knowledge</a></li>
 </ul>
 
-
-
 <p><!-- FOOTER --></p>
-<p class="foot">Copyright &copy;2008-2019 Esri R&amp;D Center Zurich. All rights reserved.</p>
+<p class="foot">Copyright &copy;2008-2020 Esri R&amp;D Center Zurich. All rights reserved.</p>
 
 <!-- END CENTERED CONTENT --></div>
 </body>

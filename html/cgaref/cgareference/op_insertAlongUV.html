@@ -21,44 +21,37 @@
 
 <h1>insertAlongUV operation</h1>
         
-<h2>Synopsis</h2>
-<p class="code2">insertAlongUV(<span class="cga_opparam">uvSet</span>, <span class="cga_opparam">geometryPath</span>, <span class="cga_opparam">height</span>)</p>
-<p class="code2">insertAlongUV(<span class="cga_opparam">uvSet</span>, <span class="cga_opparam">geometryPath</span>, <span class="cga_opparam">height</span>, <span class="cga_opparam">heightDirection</span>, <span class="cga_opparam">heightAlignment</span>)</p>
+<h2>Syntax</h2>
+
+<p class="code2">insertAlongUV(<span class="cga_opparam">uvSet</span>, <span class="cga_opparam">filePath</span>, <span class="cga_opparam">height</span>)</p>
+<p class="code2">insertAlongUV(<span class="cga_opparam">uvSet</span>, <span class="cga_opparam">filePath</span>, <span class="cga_opparam">height</span>, <span class="cga_opparam">heightDirection</span>, <span class="cga_opparam">heightAlignment</span>)</p>
 
 <h2>Parameters</h2>
 
 <ul>
-	<li><span class="cga_opparam">uvSet</span> (float)<br>
-		Number of texture coordinates set (integer number in [0,9]). The numbering corresponds to the texture layers of the <a href="attr_material.html">material attribute</a>, see also <a href="cga_texturing.html"> Texturing: Essential Knowledge</a>.
-	</li>	
-	<li><span class="cga_opparam">geometryPath</span> (string)<br>
-		File path of the geometry asset to insert. See <a class="normw" href="cga_assetSearch.html">
-		Asset Search</a> for information about search locations.<br>
-		The remarks about <a class="normw" href="op_i.html#supported_formats">supported asset formats</a> for the <a class="normw" href="op_i.html">i operation</a> also apply here.
+	<li><span class="cga_opparam">uvSet</span> (float)<br>Number of texture coordinates set (integer number in [0,9]). The numbering corresponds to the texture layers of the <a href="attr_material.html">material attribute</a>, see also <a href="cga_texturing.html"> Texturing: Essential Knowledge</a>.</li>	
+	<li><span class="cga_opparam">filePath</span> (string)<br>File path of the geometry asset to insert. See <a class="normw" href="cga_assetSearch.html">Asset Search</a> for information about search locations.<br>The remarks about <a class="normw" href="op_i.html#supported_formats">supported asset formats</a> for the <a class="normw" href="op_i.html">i operation</a> also apply here.</li>
+	<li><span class="cga_opparam">height</span> (float)<br>The height of the inserted geometry in the world coordinate system.</li>
+	<li><span class="cga_opparam">heightDirection</span> (selector)
+	<table cellspacing="5">
+		<tr><td width="18%"><span class="codelight">scope.y</span></td><td>Default. The height is projected along the scope's y axis. Use for example <a class="normw" href="op_alignScopeToAxes.html">alignScopeToAxes</a> or <a class="normw" href="op_alignScopeToGeometry.html">alignScopeToGeometry</a> to adjust the y axis.</td></tr>
+		<tr><td><span class="codelight">vertex.normal</span></td><td>The height is projected along (interpolated) vertex normals of the current shape.<p class="notes">Duplicate vertices must be merged in order to compute vertex normals using adjacent face normals.</p></td></tr>
+	</table>
 	</li>
-	<li><span class="cga_opparam">height</span> (float)<br>
-		The height of the inserted geometry in the world coordinate system.
-	</li>
-	<li><span class="cga_opparam">heightDirection</span> (keyword)<br>
-		<ul>
-			<li><span class="codelight">scope.y</span>: Default. The height is projected along the scope's y axis. Use for example <a class="normw" href="op_alignScopeToAxes.html">alignScopeToAxes</a> or <a class="normw" href="op_alignScopeToGeometry.html">alignScopeToGeometry</a> to adjust the y axis.</li>
-			<li><span class="codelight">vertex.normal</span>: The height is projected along (interpolated) vertex normals of the current shape.
-				<p class="notes">Duplicate vertices must be merged in order to compute vertex normals using adjacent face normals.</p></li>
-		</ul>
-	</li>
-	<li><span class="cga_opparam">heightAlignment</span> (keyword)<br>
-		<ul>
-			<li><span class="codelight">alignPosition</span>: Default. The asset is placed onto the current shape's faces.</li>
-			<li><span class="codelight">keepPosition</span>: The asset's position along the height dimension is placed relative to its origin.</li>
-		</ul>
+	<li><span class="cga_opparam">heightAlignment</span> (selector)
+	<table cellspacing="5">
+		<tr><td width="19%"><span class="codelight">alignPosition</span></td><td>Default. The asset is placed onto the current shape's faces.</td></tr>
+		<tr><td><span class="codelight">keepPosition</span></td><td>The asset's position along the height dimension is placed relative to its origin.</td></tr>
+	</table>
 	</li>
 </ul>
 
+<h2>Description</h2>
 
 <table>
 <tr>
 	<td>
-	<p class="info">Reads a geometry asset (3D model, polygon mesh) from a file and inserts it along the current shape's uv coordinates by mapping the width and depth of the asset to the chosen uv-set. Specifically,</p>
+	<p>Reads a geometry asset (3D model, polygon mesh) from a file and inserts it along the current shape's uv coordinates by mapping the width and depth of the asset to the chosen uv-set. Specifically,</p>
 	<ul>
 		<li>the x-span of the asset is mapped to u in [0,1] and is repeated,</li>
 		<li>the z-span is mapped to -v,</li>
@@ -285,7 +278,7 @@ Sphere -->
 
 
 <!-- FOOTER -->
-<p class="foot">Copyright &copy;2008-2019 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
+<p class="foot">Copyright &copy;2008-2020 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
 
 <!-- END CENTERED CONTENT -->
 </div>

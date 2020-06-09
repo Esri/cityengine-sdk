@@ -3,7 +3,7 @@ var searchData=
   ['mandatory',['MANDATORY',['../namespaceprtx_1_1_annotations.html#aecf5ad6c693d3596e8895aa5749310f8',1,'prtx::Annotations']]],
   ['material',['Material',['../classprtx_1_1_material.html',1,'prtx']]],
   ['materialbuilder',['MaterialBuilder',['../classprtx_1_1_material_builder.html',1,'prtx']]],
-  ['materialbuilder',['MaterialBuilder',['../classprtx_1_1_material_builder.html#a56bb5627b72ffb85880ba89d26e56c4d',1,'prtx::MaterialBuilder::MaterialBuilder()'],['../classprtx_1_1_material_builder.html#a22f9de7591d4316f98e0d4e2fc0960db',1,'prtx::MaterialBuilder::MaterialBuilder(const ShaderPtr &amp;shader)']]],
+  ['materialbuilder',['MaterialBuilder',['../classprtx_1_1_material_builder.html#a56bb5627b72ffb85880ba89d26e56c4d',1,'prtx::MaterialBuilder::MaterialBuilder()'],['../classprtx_1_1_material_builder.html#a22f9de7591d4316f98e0d4e2fc0960db',1,'prtx::MaterialBuilder::MaterialBuilder(const ShaderPtr &amp;shader)'],['../classprtx_1_1_material_builder.html#a682c0ef20656f4ff1523312935e56c4a',1,'prtx::MaterialBuilder::MaterialBuilder(const MaterialPtr &amp;material)']]],
   ['materialdecoder',['MaterialDecoder',['../classprtx_1_1_material_decoder.html',1,'prtx']]],
   ['materialencoder',['MaterialEncoder',['../classprtx_1_1_material_encoder.html',1,'prtx']]],
   ['materialptr',['MaterialPtr',['../namespaceprtx.html#ad9a3abc5331b1d26abd6344f333a1295',1,'prtx']]],

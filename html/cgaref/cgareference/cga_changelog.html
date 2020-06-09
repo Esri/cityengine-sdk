@@ -31,6 +31,85 @@
   <td><strong>Changes</strong></td>
   </tr>
 	<tr>
+		<td>2020.0<br>CGAC 1.14</td>
+		<td>
+			New functions:
+			<ul>
+				<li><a href="arrayTypes.html">Operators</a> for arrays.</li> <!-- CE-7262, CE-7258, CE-7263 -->
+				<li><a href="func_colon.html">colon</a> operator.</li> <!-- CE-7149, CE-7233 -->
+                <li><a href="func_readTable.html"><span class="code_std">readStringTable</span></a>, <a href="func_readTable.html"><span class="code_std">readFloatTable</span></a>: Functions to read CSV files.</li> <!-- CE-7217 -->
+				<li><a href="func_nRows.html"><span class="code_std">nRows</span></a>, <a href="func_nColumns.html"><span class="code_std">nColumns</span></a>: Functions to access dimensions of an array.</li> <!-- CE-7212 -->
+                <li><a href="func_floatArray.html"><span class="code_std">floatArray</span></a>, <a href="func_stringArray.html"><span class="code_std">stringArray</span></a>, <a href="func_boolArray.html"><span class="code_std">boolArray</span></a>: Functions to convert arrays and create empty arrays.</li> <!-- CE-7259, CE-6863 -->
+				<li>Layer attributes (CityEngine only):</li> <!-- CE-6794 -->
+				<ul>
+					<li>Support for 1D arrays. Arrays with several rows are not supported.</li>
+					<li>Array object attribute mapping and sampling: <a href="https://doc.arcgis.com/en/cityengine/latest/help/help-inspector.htm#ESRI_SECTION1_45B62C2C902E446993B6AFF902FC5090" target="_blank"><span class="code_std">getFloatArrayObjectAttr</span></a>, <a href="https://doc.arcgis.com/en/cityengine/latest/help/help-inspector.htm#ESRI_SECTION1_45B62C2C902E446993B6AFF902FC5090" target="_blank"><span class="code_std">getStringArrayObjectAttr</span></a> and <a href="https://doc.arcgis.com/en/cityengine/latest/help/help-inspector.htm#ESRI_SECTION1_45B62C2C902E446993B6AFF902FC5090" target="_blank"><span class="code_std">getBoolArrayObjectAttr</span></a>.</li>
+				</ul>
+			</ul>            
+   			New attributes:
+			<ul>
+				<li><a href="attr_material.html"><span class="code_std">material.opacitymap.cutoff</span></a> attribute</li> <!-- CE-7773 -->
+			</ul>
+			Changes to existing features:
+			<ul>
+   				<li><a href="op_envelope.html">envelope</a> operation:</li>
+				<ul>
+   					 <li>Added a version which takes per-edge arrays for baseHeight and angles.</li> <!-- CE-7586 -->
+   					 <li>Fixed non-deterministic behaviour in rare border cases.</li>  <!-- CE-7603 -->
+   				</ul>
+				<li><a href="func_array.html">array initialization</a> function: Added notation to create 2d arrays with several rows.</li> <!-- CE-7212 -->
+				<li><a href="func_index.html">index</a> operator:</li>
+				<ul>
+					<li>Access elements by index arrays or logical arrays.</li> <!-- CE-7150, CE-7349 -->
+					<li>Added row and column indexing for 2d arrays.</li> <!-- CE-7214 -->
+				</ul>
+				<li><span class="code_std">index</span> function: This function is deprecated. Use the <a href="func_findFirst.html"><span class="code_std">findFirst</span></a> function instead.</li> <!-- CE-7519 -->
+				<li><a href="func_readTextFile.html"><span class="code_std">readTextFile</span></a> function: .csv extension not supported anymore (see new <a href="func_readTable.html">readTable</a> functions) - if you want to read a .csv file as text you will need to rename it to .txt.</li> <!-- CE-7217 -->
+				<li><a href="func_array.html">array initialization</a>, <a href="func_splitString.html"><span class="code_std">splitString</span></a>, <a href="func_comp.html"><span class="code_std">comp</span></a> function: The size of the returned array is limited. It can be configured in the <a href="https://doc.arcgis.com/en/cityengine/latest/help/get-started-preferences-prt.htm" target="_blank">Procedural Runtime preferences</a> (Default: 100000).</li> <!-- CE-7149 -->
+				<li><a href="op_texture.html"><span class="code_std">texture</span></a> operation: Reset opacitymap if no alpha channel present.</li> <!-- CE-6941 -->
+				<li><a href="func_str.html"><span class="code_std">str</span></a>, <a href="func_abs.html"><span class="code_std">abs</span></a> function: Support for arrays.</li> <!-- CE-7520, CE-7276 -->
+				<li><a href="cga_annotations.html#enum1"><span class="code_std">@Enum</span></a>, <a href="cga_annotations.html#range"><span class="code_std">@Range</span></a> annotation: These annotations can now be applied to array attributes to specify enumeration values or ranges for array elements.</li> <!--CE-7290, CE-7291 -->
+				<li><a href="cga_annotations.html#enum1"><span class="code_std">@Enum</span></a> annotation: Enumeration values can now be specified dynamically by an attribute.</li> <!-- CE-7144 -->
+				<li>CGA Compiler:</li>
+				<ul>
+					<li><a href="import.html"><span class="code_std">import</span></a>: Each import must start with the <span class="codelight">import</span> keyword. Annotations must be placed before the <span class="codelight">import</span> statement. Before it was possible to set several imports and annotations after only one <span class="codelight">import</span> keyword.</li> <!-- CE-7341 -->
+					<li>Conditional and stochastic <a href="https://doc.arcgis.com/en/cityengine/latest/help/help-rules-functions.htm" target="_blank">functions</a> as well as literals can be directly used inline as parameters. Before this was not possible for some operations and <a href="simpleTypes.html">operators</a>.</li> <!-- CE-6024 -->
+					<li>Rule identifiers must not contain successive dots ("<span class="codelight">Ex..ample --></span>").<br>A digit after a dot is not allowed anymore ("<span class="codelight">Example.1 --></span>").</li> <!-- CE-7262 -->
+					<li>Expressions like "<span class="codelight">1.==1</span>" that use the short floating point notation "<span class="codelight">1.</span>" and do not have any spaces in front of the operator (in this example <span class="codelight">"=="</span>) are interpreted as the new element-wise array <a href="arrayTypes.html">operators</a> (in this example <span class="codelight">".=="</span>).</li> <!-- CE-7262 -->
+					<li><a href="op_t.html"><span class="code_std">t</span></a>, <a href="op_s.html"><span class="code_std">s</span></a>, <a href="op_tileUV.html"><span class="code_std">tileUV</span></a>, <a href="op_setupProjection.html"><span class="code_std">setupProjection</span></a> operation: Invocations to user defined rule overloads (with different types) are not possible anymore but lead to a type mismatch.</li> <!-- CE-7197 -->
+				</ul>
+			</ul>
+			Bugfixes:
+			<ul>
+				<li><a href="func_array.html">array initialization</a>: Fixed a crash when initializing a string array by the concatenation of a string array and an empty string literal.</li> <!-- CE-7942 -->
+				<li><a href="func_bool.html"><span class="code_std">bool</span></a> function: Excluded the float-to-bool conversion from inf/nan checks (<a href="https://doc.arcgis.com/en/cityengine/latest/help/get-started-preferences-prt.htm" target="_blank">Procedural Runtime preferences</a>).</li> <!-- CE-6667 -->
+				<li><a href="op_setupProjection.html"><span class="code_std">setupProjection</span></a> operation: Fixed blurry and discontinuous textures at very large world coordinate magnitudes or very large offset values.</li> <!-- CE-6667 -->
+				<li><a href="func_find.html"><span class="code_std">find</span></a> function: Fixed wrong index if <span class="cga_opparam">matchString</span> was empty.</li> <!-- CE-7311 -->
+				<li><a href="func_str.html"><span class="code_std">str</span></a>, <a href="func_str.html"><span class="code_std">print</span></a> function: Fixed printing the sign for negative infinity.</li> <!-- CE-7625 -->
+				<li>CGA Compiler: </li>
+				<ul>
+					<li>Improved performance of type deduction. Improved type mismatch messages.</li> <!-- CE-7197, CE-7829, CE-7755, CE-6679 -->
+					<li>Fixed incorrect compilation error for some recursive function definitions.</li> <!-- CE-7646 -->
+					<li>Unary plus <a href="simpleTypes.html">operator</a>: Fixed type check. Before its was possible to apply unary plus operator to string and bool.</li> <!-- CE-7262 -->
+					<li>Fixed a bug which led to unnecessary occluder generation in rare cases.</li> <!-- CE-7197 -->
+					<li>The compiler now issues an error if huge rule files hit an internal limit. Before this led to a crash when generating.</li> <!-- CE-7343 -->
+				</ul>
+				<li>Layer attributes (CityEngine only):</li>
+				<ul>
+					<li><a href="func_p.html"><span class="code_std">p</span></a> (probability) function and <a href="https://doc.arcgis.com/en/cityengine/latest/help/help-rules-functions.htm" target="_blank">stochastic functions</a>: Fixed wrong reversed consideration of parameter <span class="cga_opparam">prob</span> or <span class="cga_opparam">percentage</span>. Before the fix the function returned <span class="cga_keyword">true</span> for <span class="codelight">prob<0</span> or <span class="codelight">percentage<0%</span> and <span class="cga_keyword">false</span> for <span class="codelight">prob>1</span> or <span class="codelight">percentage>100%</span>.</li> <!-- CE-7309 -->
+					<li><a href="func_find.html"><span class="code_std">find</span></a> function: Fixed a bug where overlapping occurrences of <span class="cga_opparam">matchString</span> were found. For example <span class="codelight">"aba"</span> was found 2 times in <span class="codelight">"ababa"</span>.</li> <!-- CE-7311 -->
+				</ul>
+				<li>Fixed performance problems when generating shapes that contain holes and a large number of vertices.</li> <!-- CE-5818 -->
+			</ul>
+			Misc:
+  			<ul>
+            <li>The CityEngine 3D viewport now renders all <a href="attr_material.html#PBRMaterialAttributes"><span class="code_std">PBR material attributes</span></a> and <a href="attr_material.html"><span class="code_std">material.opacitymap.{mode|cutoff}</span></a> attributes.</li> <!-- CE-7774 -->
+			</ul>
+		</td>
+	</tr>
+  </tr>
+  </tr>
+	<tr>
 		<td>2019.1<br>CGAC 1.13</td>
 		<td>
 			New functions:
@@ -51,7 +130,7 @@
 						<li>Arrays can now be const or attr.</li> <!-- CE-6277 -->
 						<li>New compilation error <em>"Function call cycle"</em> if a return type of a recursive function definition can not be determined. A functional recursion must contain a <a href="https://doc.arcgis.com/en/cityengine/latest/help/help-rules-functions.htm" target="_blank">conditional</a> with at least one stop criterion. Any other case would lead to an endless function call cycle.</li> <!-- CE-5103, CE-2969 -->
 						<li>Invocations to operations with wrong types do not compile anymore (type mismatch) unless a rule with same signature was defined. Before, an <em>"undefined rule"</em> warning was issued.</li> <!-- CE-6278 -->
-						<li>Attributes with one parameter are not allowed anymore (except <span class="code_std">streetwidth</span>).</li> <!-- CE-6277 -->
+						<li>Attributes with one parameter are not allowed anymore (except <span class="codelight">streetwidth</span>).</li> <!-- CE-6277 -->
 						<!-- Enhanced error and warning messages: CE-5103, CE-5046, CE-6468, CE-6278, CE-2903 -->
 						<li>More useful type mismatch errors with expected types are issued instead of a no such function error.</li>
 						<li>More selective unused warnings. Also shown for unused attributes and functions with no parameters. If errors are present no unused warnings are issued.</li>
@@ -98,7 +177,7 @@
 				<li><a href="func_geometry.html#boundaryLength"><span class="code_std">geometry.boundaryLength</span></a> function.</li> <!-- CE-5690 -->
 				<li><a href="func_splitString.html"><span class="code_std">splitString</span></a> function.</li> <!-- CE-6115 -->
 				<li><a href="func_comp.html"><span class="code_std">comp</span></a> function.</li>
-				<li>Array util functions: <a href="func_index.html"><span class="code_std">index</span></a>, <a href="func_item.html"><span class="code_std">item</span></a> and <a href="func_size.html"><span class="code_std">size</span></a>.</li>
+				<li>Array util functions: <span class="code_std">index</span> function, <a href="func_size.html"><span class="code_std">size</span></a> function and <a href="func_index.html">index</a> operator.</li>
 				<li><a href="func_edgeAttr.html">Edge attribute functions</a>: <span class="codelight">edgeAttr.getFloat</span>, <span class="codelight">edgeAttr.getString</span>, <span class="codelight">edgeAttr.getBool</span>.</li>
 			</ul>
    			New attributes:
@@ -1055,7 +1134,6 @@ overload  .</li>
 
 		    <li><a href="func_fileExists.html"><span class="code_std">fileExists</span></a> function</li>
     		<li><a href="func_fileSearch.html"><span class="code_std">fileSearch</span></a> function</li>
-    		<li><a href="func_find.html"><span class="code_std">find</span></a> function</li>
 
     		<li><a href="func_float.html"><span class="code_std">float</span></a> function</li>
     		<li><a href="func_str.html"><span class="code_std">str</span></a> function</li>
@@ -1176,7 +1254,7 @@ overload  .</li>
   
 
   <h3><!-- FOOTER --> </h3>
-        <p class="foot">Copyright &copy;2008-2019 Esri R&amp;D Center Zurich. All rights reserved.</p>                  
+        <p class="foot">Copyright &copy;2008-2020 Esri R&amp;D Center Zurich. All rights reserved.</p>                  
 
 <!-- END CENTERED CONTENT -->
 

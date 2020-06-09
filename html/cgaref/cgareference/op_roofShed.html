@@ -1,9 +1,7 @@
 <html>
 
 <head>
-    <title>
-    roofShed Operation
-    </title>
+    <title>roofShed Operation</title>
     <link rel="stylesheet" href="../manual_style.css" type="text/css" />
 </head>
 
@@ -17,12 +15,11 @@
     </tr>
 </table>
 
-
 <!-- CONTENT -->
 
 <h1>roofShed operation</h1>
 
-<h2>Synopsis</h2>
+<h2>Syntax</h2>
 
 <p class="code2">roofShed(<span class="cga_opparam">angle</span>)</p>
 <p class="code2">roofShed(<span class="cga_opparam">angle, index</span>)</p>
@@ -31,17 +28,19 @@
 
 <h2>Parameters</h2>
 <ul>
-	<li><span class="cga_opparam">valueType</span> (selstring)<br>
-	Type of roof generation (<span class="codelight">byAngle | byHeight</span>).</li>
-	<li><span class="cga_opparam">value</span> (float)<br>
-	Angle or height of the roof-planes as specified by <span class="cga_opparam">valueType</span>.</li>
-    <li><span class="cga_opparam">angle</span> (float)<br>
-    Angle of the roof plane (generation <span class="codelight">byAngle).</li>
-    <li><span class="cga_opparam">index</span> (float)<br>
-    Edge index (thus integral value) to specify the orientation of the shed roof.
+	<li><span class="cga_opparam">valueType</span> (selector)
+	<table cellspacing="5">
+		<tr><td width="50%"><span class="codelight">byAngle, byHeight</span></td><td>Type of roof generation</td></tr>
+	</table>
+	</li>
+	<li><span class="cga_opparam">value</span> (float)<br>Angle or height of the roof-planes as specified by <span class="cga_opparam">valueType</span>.</li>
+    <li><span class="cga_opparam">angle</span> (float)<br>Angle of the roof plane (generation <span class="codelight">byAngle).</li>
+    <li><span class="cga_opparam">index</span> (float)<br>Edge index (thus integral value) to specify the orientation of the shed roof.
 </ul>
     
-<p class="info">The roofShed operation builds a shed roof perpendicular to each face of the current shape's geometry. At edge <span class="cga_opparam">index</span> (default value 0), a plane is generated with a given angle or height wrt. 
+<h2>Description</h2>
+
+<p>The roofShed operation builds a shed roof perpendicular to each face of the current shape's geometry. At edge <span class="cga_opparam">index</span> (default value 0), a plane is generated with a given angle or height wrt. 
 the polygon plane.</p>
 
 <p>If <span class="cga_opparam">index</span> is set, the roof plane is oriented to the specified edge.  
@@ -50,16 +49,16 @@ the polygon plane.</p>
 generation to cut bricks inserted into the roof planes (see examples
 below).</p>
 
-<h2>Scope</h2>
+<h3>Scope</h3>
 
-<p class="text">
-  The scope orientation is set in the following way:</p> 
- 		<ul>
- 		<li>x-axis direction is kept as much as possible (old x-axis is projected to plane orthogonal to face normal of the first face)</li>
- 		<li>y-axis along the face normal of the first face</li>
- 		<li>z-axis normal to the two above</li>
-  </ul>
-  The scope's sizes are adjusted to tighly fit the extruded geometry.
+<p class="text">The scope orientation is set in the following way:</p> 
+<ul>
+	<li>x-axis direction is kept as much as possible (old x-axis is projected to plane orthogonal to face normal of the first face)</li>
+	<li>y-axis along the face normal of the first face</li>
+	<li>z-axis normal to the two above</li>
+</ul>
+
+<p>The scope's sizes are adjusted to tighly fit the extruded geometry.</p>
 
 <h2>Related</h2>
 <ul>
@@ -72,9 +71,7 @@ below).</p>
     <li><a class="normw" href="op_taper.html"> taper operation</a></li> 
 </ul>
 
-
 <h2>Examples</h2>
-
 
 <h3>Simple Shed Roof</h3>
 
@@ -122,10 +119,8 @@ Roof --> comp(f) { all : X }
 
 <p class="notes"> Edge index should not be a concave edge! </p>
 
-
-
 <!-- FOOTER -->
-<p class="foot">Copyright &copy;2008-2019 Esri R&amp;D Center Zurich. All rights reserved.</p>                  
+<p class="foot">Copyright &copy;2008-2020 Esri R&amp;D Center Zurich. All rights reserved.</p>                  
 
 </div>
 </body>

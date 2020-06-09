@@ -30,6 +30,7 @@ var searchData=
   ['resolvemapprovider',['ResolveMapProvider',['../classprtx_1_1_resolve_map_provider.html',1,'prtx']]],
   ['resolvemapproviderfactory',['ResolveMapProviderFactory',['../classprtx_1_1_resolve_map_provider_factory.html',1,'prtx']]],
   ['resolvematerial',['resolveMaterial',['../namespaceprtx_1_1_data_backend.html#ac551dae38f06232179f16a270713dc35',1,'prtx::DataBackend']]],
+  ['resolvetable',['resolveTable',['../namespaceprtx_1_1_data_backend.html#a61947ecf071d5311771ebced40216c22',1,'prtx::DataBackend']]],
   ['resolvetext',['resolveText',['../namespaceprtx_1_1_data_backend.html#acf8c54f3d39859a1a80e06c0d360f8c6',1,'prtx::DataBackend']]],
   ['resolvetexture',['resolveTexture',['../namespaceprtx_1_1_data_backend.html#aebce94232114ac08473494d2277d938d',1,'prtx::DataBackend']]],
   ['resolvetextures',['resolveTextures',['../classprt_1_1_initial_shape_builder.html#ab57fabb5720ed0a1437cca48682ab9ef',1,'prt::InitialShapeBuilder']]],

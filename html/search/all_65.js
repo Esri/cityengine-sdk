@@ -23,6 +23,5 @@ var searchData=
   ['extension',['Extension',['../classprtx_1_1_extension.html',1,'prtx']]],
   ['extensionfactory',['ExtensionFactory',['../classprtx_1_1_extension_factory.html',1,'prtx']]],
   ['extensionmanager',['ExtensionManager',['../classprtx_1_1_extension_manager.html',1,'prtx']]],
-  ['extensiontype',['ExtensionType',['../classprtx_1_1_extension.html#ad6048fac4019029ec39431db1d873801',1,'prtx::Extension']]],
-  ['esri_20procedural_20runtime',['Esri Procedural Runtime',['../index.html',1,'']]]
+  ['extensiontype',['ExtensionType',['../classprtx_1_1_extension.html#ad6048fac4019029ec39431db1d873801',1,'prtx::Extension']]]
 ];

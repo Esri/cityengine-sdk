@@ -1,17 +1,12 @@
 <html>
 
 <head>
-	<title>
-assetFitSize
-	</title>
+	<title>assetFitSize</title>
     <link rel="stylesheet" href="../../manual_style.css" type="text/css" />
-	
-	</head>
+</head>
 
 <body>
 <div class="content">
-
-
 
 <!-- Don't touch -->
 
@@ -22,28 +17,30 @@ assetFitSize
 	</tr>
 </table>
 
-
 <h1>assetFitSize</h1>
-<h2>Synopsis</h2>
 
-<p class="code2">string assetFitSize(string <span class="cga_opparam">searchQuery</span>, string <span class="cga_opparam">axisSelector</span>, float <span class="cga_opparam">maxScaleError</span>)</p>
+<h2>Syntax</h2>
+
+<p class="code2"><span class="codelight">string</span> assetFitSize(<span class="cga_opparam">searchQuery</span>, <span class="cga_opparam">axisSize</span>, <span class="cga_opparam">maxScaleError</span>)</p>
 
 <h2> Parameters </h2>
-  <ul>
-   	<li><span class="cga_opparam">searchQuery</span><br>
-   	   Search query to apply on list of all files in the workspace. See <a class="normw" href="../func_fileSearch.html">fileSearch</a> for details about the syntax.</li>
-    <li><span class="cga_opparam">axisSelector</span><br>
-      Selector of axes for the currect scope. Supported values are:
-      <span class="codelight">"x"</span>,<span class="codelight">"y"</span>,<span class="codelight">"z"</span>,<span class="codelight">"xy"</span>,<span class="codelight">"xz"</span>,<span class="codelight">"yz"</span>,<span class="codelight">"xyz"</span>
-    </li>
-    <li><span class="cga_opparam">maxScaleError</span><br>Float value to control file selection. If it is 0 all input files are returned, sorted depending on their size. If the value is &gt; 0, only a subset of the input files is returned: 0.1  means that maximum +-10% scaling is allowed.</li>
+<ul>
+   	<li><span class="cga_opparam">searchQuery</span> (string)<br>Search query to apply on list of all files in the workspace. See <a class="normw" href="../func_fileSearch.html">fileSearch</a> for details about the syntax.</li>
+    <li><span class="cga_opparam">axisSize</span> (string)
+	<table cellspacing="5">
+		<tr><td width="60%"><span class="codelight">"x"</span>, <span class="codelight">"y"</span>, <span class="codelight">"z"</span>, <span class="codelight">"xy"</span>, <span class="codelight">"xz"</span>, <span class="codelight">"yz"</span>, <span class="codelight">"xyz"</span></td><td>Axes for the currect scope.</td></tr>
+	</table>
+	</li>
+    <li><span class="cga_opparam">maxScaleError</span> (float)<br>Float value to control file selection. If it is 0 all input files are returned, sorted depending on their size. If the value is &gt; 0, only a subset of the input files is returned: 0.1  means that maximum +-10% scaling is allowed.</li>
 </ul>
 
-
 <h2>Returns</h2>
-        <p>Random asset (according to <span class="cga_opparam">axisSelector</span>) which is in the <span class="cga_opparam">maxScaleError</span> range.</p> 
-        <p class="info">This function returns one of the assets in the <span class="cga_opparam">maxScaleError</span> range, from the file list specified in <span class="cga_opparam">searchQuery</span>, according to the specified <span class="cga_opparam">axisSelector</span>.</p>
 
+<p>Random asset (according to <span class="cga_opparam">axisSize</span>) which is in the <span class="cga_opparam">maxScaleError</span> range.</p> 
+
+<h2>Description</h2>
+
+<p>This function returns one of the assets in the <span class="cga_opparam">maxScaleError</span> range, from the file list specified in <span class="cga_opparam">searchQuery</span>, according to the specified <span class="cga_opparam">axisSize</span> string.</p>
 
 <h2>Related</h2>
 <ul>
@@ -59,9 +56,8 @@ assetFitSize
     <li><a href="imageBestRatio.html"><span class="code_std">imageBestRatio</span></a> function</li>
 </ul>
 
-
-
 <h2>Examples</h2>
+
 <pre class="code3">
 	assetFitSize("assets/*.obj","xz",0.2)
 	# result = "assets/chosenAsset.obj"
@@ -79,7 +75,7 @@ assetFitSize
 
 
 <!-- FOOTER -->
-<p class="foot">Copyright &copy;2008-2019 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
+<p class="foot">Copyright &copy;2008-2020 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
 
 </div>
 </body>

@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.5"/>
-<title>Esri Procedural Runtime: prtx::MaterialBuilder Class Reference</title>
+<title>ArcGIS Procedural Runtime: prtx::MaterialBuilder Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -23,8 +23,8 @@
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="esri_prt_55px.png"/></td>
   <td style="padding-left: 0.5em;">
-   <div id="projectname">Esri Procedural Runtime
-   &#160;<span id="projectnumber">2.1.5705</span>
+   <div id="projectname">ArcGIS Procedural Runtime
+   &#160;<span id="projectnumber">2.2.6332</span>
    </div>
   </td>
  </tr>
@@ -114,6 +114,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a56bb5627b72ffb85880ba89d26e56c4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a22f9de7591d4316f98e0d4e2fc0960db"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_material_builder.html#a22f9de7591d4316f98e0d4e2fc0960db">MaterialBuilder</a> (const <a class="el" href="namespaceprtx.html#a8186d5b74483a2ca28ae6ef489dd4152">ShaderPtr</a> &amp;shader)</td></tr>
 <tr class="separator:a22f9de7591d4316f98e0d4e2fc0960db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a682c0ef20656f4ff1523312935e56c4a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_material_builder.html#a682c0ef20656f4ff1523312935e56c4a">MaterialBuilder</a> (const <a class="el" href="namespaceprtx.html#ad9a3abc5331b1d26abd6344f333a1295">MaterialPtr</a> &amp;material)</td></tr>
+<tr class="separator:a682c0ef20656f4ff1523312935e56c4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af45a19ba443a6025cb5de31f5983395f"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_material_builder.html#af45a19ba443a6025cb5de31f5983395f">setTexture</a> (const std::wstring &amp;key, const <a class="el" href="namespaceprtx.html#acc7afcec4e6a1bd29692bdc1f45d36df">TexturePtr</a> &amp;val, const std::wstring &amp;resolveMapKey)</td></tr>
 <tr class="separator:af45a19ba443a6025cb5de31f5983395f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a93afc7a44ce3417e6dd16e6a7a1477bc"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_material_builder.html#a93afc7a44ce3417e6dd16e6a7a1477bc">setTextureArray</a> (const std::wstring &amp;key, const <a class="el" href="namespaceprtx.html#a9842945f020c6906455bcf07686fffc2">TexturePtrVector</a> &amp;val, const <a class="el" href="namespaceprtx.html#ac5fdcb1f68c5a0ac7295260cfd20b307">WStringVector</a> &amp;resolveMapKeys)</td></tr>
@@ -321,6 +323,9 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>opacity</b> (
 <tr class="memitem:a9d6b4c0bf4ac307917178ec595e3dcff inherit pub_methods_classprtx_1_1_builtin_material_attributes_builder"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9d6b4c0bf4ac307917178ec595e3dcff"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>opacityMap</b> (const std::vector&lt; <a class="el" href="namespaceprtx.html#acc7afcec4e6a1bd29692bdc1f45d36df">prtx::TexturePtr</a> &gt; &amp;val, const std::vector&lt; std::wstring &gt; &amp;resolveMapKeys)=0</td></tr>
 <tr class="separator:a9d6b4c0bf4ac307917178ec595e3dcff inherit pub_methods_classprtx_1_1_builtin_material_attributes_builder"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afc803367e827f67661dbc1a3053be2af inherit pub_methods_classprtx_1_1_builtin_material_attributes_builder"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afc803367e827f67661dbc1a3053be2af"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>opacitymap_cutoff</b> (double val)=0</td></tr>
+<tr class="separator:afc803367e827f67661dbc1a3053be2af inherit pub_methods_classprtx_1_1_builtin_material_attributes_builder"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a19cb1f6fa87a6e4bf78aef83b293c371 inherit pub_methods_classprtx_1_1_builtin_material_attributes_builder"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a19cb1f6fa87a6e4bf78aef83b293c371"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>opacitymap_mode</b> (const std::wstring &amp;val)=0</td></tr>
 <tr class="separator:a19cb1f6fa87a6e4bf78aef83b293c371 inherit pub_methods_classprtx_1_1_builtin_material_attributes_builder"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -450,6 +455,29 @@ virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>setBuiltinStr
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">shader</td><td>The <a class="el" href="classprtx_1_1_shader.html">Shader</a> for the <a class="el" href="classprtx_1_1_material.html">Material</a>. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a682c0ef20656f4ff1523312935e56c4a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">prtx::MaterialBuilder::MaterialBuilder </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="namespaceprtx.html#ad9a3abc5331b1d26abd6344f333a1295">MaterialPtr</a> &amp;&#160;</td>
+          <td class="paramname"><em>material</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Constructs a <a class="el" href="classprtx_1_1_material_builder.html">MaterialBuilder</a> from an existing <a class="el" href="classprtx_1_1_material.html">Material</a>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">material</td><td>The existing <a class="el" href="classprtx_1_1_material.html">Material</a>. </td></tr>
   </table>
   </dd>
 </dl>
@@ -1073,7 +1101,7 @@ virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>setBuiltinStr
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Dec 10 2019 16:17:45 for Esri Procedural Runtime by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat May 9 2020 18:52:26 for ArcGIS Procedural Runtime by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.5
 </small></address>
