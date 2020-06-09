@@ -55,16 +55,14 @@ The final directory layout should look like this:
     data/...
 ```
 
-
 ## Examples
-This repository contains a number of source code examples. Each example contains a README with detailed instructions how to build and use it.
-
-A quick overview:
+This repository contains a number of source code examples in the "examples" directory. Each example contains a README with detailed instructions how to build and use it:
 * prt4cmd: a simple command line utility to apply rule packages onto initial shapes and generate models.
 * stlenc: demonstrates how to write a custom encoder, in this case for the STL geometry format.
 * stldec: demonstrates how to write a custom decoder for the STL geometry format.
 
-Related external Apps and Examples:
+## Related Projects
+* [PyPRT](https://esri.github.io/pyprt): Python language bindings for the Procedural Runtime (PRT)
 * [Palladio](https://esri.github.io/palladio): CityEngine plugin for SideFX Houdini
 * [Serlio](https://esri.github.io/serlio): CityEngine plugin for Autodesk Maya
 
