@@ -26,7 +26,7 @@ The archives are available for download at the corresponding github release page
 
 
 ## CityEngine SDK Releases
-- [v2.2.xxxx (2020-xx-xx, CityEngine 2020.0)](https://github.com/Esri/cityengine-sdk/releases/tag/2.2.xxxx)
+- [v2.2.6332 (2020-06-09, CityEngine 2020.0)](https://github.com/Esri/cityengine-sdk/releases/tag/2.2.6332)
 - [v2.1.5705 (2019-12-11, CityEngine 2019.1)](https://github.com/Esri/cityengine-sdk/releases/tag/2.1.5705)
 - v2.1.5704 (2019-09-25, CityEngine 2019.1
 - [v2.0.5403 (2019-05-08, CityEngine 2019.0)](https://github.com/Esri/cityengine-sdk/releases/tag/2.0.5403)
