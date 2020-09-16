@@ -41,7 +41,6 @@ USING PRT4CMD
 
 1. Open a cmd shell and `cd` into the above `install` directory.
 1. Type `bin\prt4cmd.exe -h` to see the list of options.
-1. Type `mkdir output` to create the default directory for the generated models (this can be configured with the `-o` option).
 1. Type the following to generate the "candler" building model in the wavefront obj format:
    ```
    bin\prt4cmd.exe -l 3 -g <absolute path to>\cityengine-sdk\data\candler_footprint.obj -p <absolute path to>\cityengine-sdk\data\candler.rpk -a ruleFile:string=bin/candler.cgb -a startRule:string=Default$Footprint -e com.esri.prt.codecs.OBJEncoder -z baseName:string=theCandler
