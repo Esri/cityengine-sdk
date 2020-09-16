@@ -4,6 +4,61 @@ CITYENGINE SDK 2.3.XXXX CHANGELOG
 This section lists changes compared to CityEngine SDK 2.2.6332
 
 
+General Info
+------------
+* CityEngine SDK 2.3.XXXX is used in CityEngine 2020.1.XXXX
+
+PRT API
+-------
+* `ResolveMap::searchKey`: Fixed a bug where no terminating 0 character was returned.
+* Added `Status::STATUS_NO_GEOMETRY`. [CE-8283]
+
+PRTX API
+--------
+* `EncodePreparator`: Fixed uv calculation for `HoleProcessor::DELETE_HOLES`.
+* Fixed a crash in case prtx geometry encoder extension fail to create geometry.
+* `OpaquePtr`: Implemented copy, assignment and const dereference operators. [CE-7351]
+* Added `Texture.getChannelCount()`. [CE-7932]
+* Fixed a bug in `MeshBuilder` where illegal material indices were set. [CE-8078]
+* Fixed a crash if decoder returned no geometry. [CE-8283]
+* Added template method `LogFormatter.getMessage()` that enables message access for subclasses. [CE-8109]
+* Fixed a bug in `MeshBuilder` constructors where materials were not copied from the source mesh.
+
+CGA
+---
+* New features:
+  * Support for reading USD assets. [CE-8089]
+* New functions:
+  * `transpose` function. [CE-7346]
+* Bugfixes:
+  * Improved numerical accuracy in pivot and scope calculation. [CE-6972]
+  * `comp(f)`: Improved performance for shapes with many faces. [CE-7935]
+ *  Fixed incorrect conversions returned by the `convert` function. [CE-2300]
+  * `split` operation: Fixed bugs in the automatic cut closing which led to missing faces or illegal hole faces in the cut-plane. [CE-7457, CE-1574, CE-5272]
+  * Runtime errors occuring in the initialization phase (`attr` and `const` evaluation) are now visible in the Problems view. [CE-1563]
+  * `print` function: Output from initialization phase (`attr` and `const` evaluation) is now printed to the CGA Console. [CE-1563]
+
+Built-In Codecs Changes and Fixes
+---------------------------------
+* New decoder for Pixar's Universal Scene Description (USD) format: `com.esri.prt.codecs.USDDecoder`. [CE-8089]
+* FBX Encoder:
+  * Added support for polygon holes. [CE-7635]
+* I3S/SLPK Encoder:
+  * Adapted projection of normals to longitudinal squashing of global coordinate systems. [CE-7171]
+  * Ensure ordering of textures in atlases is consistent over multiple exports. [CE-7351]
+  * Ensure ordering of attributes is the same as for features. [CE-8268]
+* GLTF Encoder:
+  * In absence of UV set 0, write the first present UV set. [CE-7063]
+* GLTF Decoder:
+  * Support decoding embedded textures from MemoryURI. [CE-8079]
+  * Properly decode the opacity map attribute. [CE-8081]
+* Unreal Encoder:
+  * Added LOD support. [CE-5904, CE-8100]
+  * Fixed crash for degenerated triangles. [CE-8240]
+  * Fixed wrong Actor offset for globally merged exports. [CE-7582] 
+  * Do not write empty mesh if instancing is on and no un-instanced geometry is present. [CE-7857]
+
+
 CITYENGINE SDK 2.2.6332 CHANGELOG
 =================================
 
