@@ -4,14 +4,14 @@ cmake_policy(SET CMP0015 NEW)
 
 ### project definition
 
+if(NOT CMAKE_BUILD_TYPE)
+	set(CMAKE_BUILD_TYPE "Release" CACHE STRING "Choose one of: Debug Release RelWithDebInfo MinSizeRel")
+endif()
+
 project(prt4cmd CXX)
 
 
 ### environment
-
-if(NOT CMAKE_BUILD_TYPE)
-	set(CMAKE_BUILD_TYPE "Release" CACHE STRING "Choose one of: Debug Release RelWithDebInfo MinSizeRel")
-endif()
 
 if(${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
     set(P4C_WINDOWS 1)
