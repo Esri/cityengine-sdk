@@ -1,4 +1,4 @@
-CITYENGINE SDK 2.3.XXXX CHANGELOG
+CITYENGINE SDK 2.3.6821 CHANGELOG
 =================================
 
 This section lists changes compared to CityEngine SDK 2.2.6332
@@ -6,7 +6,7 @@ This section lists changes compared to CityEngine SDK 2.2.6332
 
 General Info
 ------------
-* CityEngine SDK 2.3.XXXX is used in CityEngine 2020.1.XXXX
+* CityEngine SDK 2.3.6821 is used in CityEngine 2020.1.6821
 
 PRT API
 -------
