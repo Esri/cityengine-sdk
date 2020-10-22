@@ -38,7 +38,7 @@
 
 <p>This function returns the number of occurrences of <span class="cga_opparam">searchString</span> in the <span class="cga_opparam">stringList</span>. Optional: Leading or trailing * in <span class="cga_opparam">searchString</span> are used as wildcard.</p>
 
-<p class="notes">Note: Stringlists are a series of strings stored inside one string. The elements are separated by a semicolon (";"). Each item must be followed by a semicolon, also the last one! The data type is "string", thus it is not an array as used in other scripting languages.</p>
+<p class="notes">Note: String lists are a series of strings stored inside one string. The elements are separated by a semicolon (";"). Each item must be followed by a semicolon, also the last one! The data type is "string", thus it is not an array as used in other scripting languages.</p>
 
 <h2>Related</h2>
 <ul>
@@ -61,21 +61,17 @@
 
 <p class="example">	
 <pre class="code3">
-example.1
-    listCount("rule;your;city;","city")
-    # result = 1
+listCount("rule;your;city;","city")
+# result = 1
 
-example.2
-    listCount("city;cityengine;city;", "city")
-    # result = 2
+listCount("city;cityengine;city;", "city")
+# result = 2
 
-example.3
-    listCount("rule;your;city;","*y*")
-    # result = 2
+listCount("rule;your;city;","*y*")
+# result = 2
 
-example.4
-    listCount("rule;your;city;","*y")
-    # result = 1
+listCount("rule;your;city;","*y")
+# result = 1
 </pre>
 </p>
 

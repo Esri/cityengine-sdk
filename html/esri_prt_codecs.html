@@ -5,7 +5,7 @@
 </head>
 <body>
 <h1>ArcGIS Procedural Runtime Encoder/Decoder Reference</h1>
-<small>(Automatically generated from PRT 2.2.6332; Build Date: Sat 05/09/2020 06:13 PM; Build Configuration: PRT_BC_REL)</small><p>This is the PRT reference documentation for all built-in encoders and decoders.</p>
+<small>(Automatically generated from PRT 2.3.6821; Build Date: Mon 09/28/2020 05:58 PM; Build Configuration: PRT_BC_REL)</small><p>This is the PRT reference documentation for all built-in encoders and decoders.</p>
 <p>The encoder documentation lists for each encoder its supported encoder options. In PRT, the encoder options
 	are stored in an object of type prt::AttributeMap, therefore the term "attribute" is used synonymously in this
 	document for a single encoder option. Each attribute consists of a type, a default value and (optional)
@@ -88,6 +88,7 @@
 <li><a href="#com.esri.prt.codecs.SDATDecoder">SAGA GIS Binary Grid (.sdat) Image Decoder</a></li>
 <li><a href="#com.esri.prt.codecs.ShapeBufferDecoder">Esri Shape Buffer Decoder</a></li>
 <li><a href="#com.esri.prt.codecs.TIFDecoder">GeoTIFF Image Decoder</a></li>
+<li><a href="#com.esri.prt.codecs.USDDecoder">Universal Scene Description (USD)</a></li>
 <li><a href="#com.esri.prt.codecs.VRTDecoder">Virtual Raster Image Decoder</a></li>
 <li><a href="#com.esri.prt.codecs.XPMDecoder">X11 PixMap Format Image Decoder</a></li>
 <li><a href="#com.esri.prt.codecs.XYZDecoder">ASCII Gridded XYZ Image Decoder</a></li>
@@ -2750,7 +2751,7 @@
 </tr>
 		<tr>
 <td>@Range</td>
-<td>TRIANGULATE_FACES_WITH_HOLES:str = Triangulate faces with holes<br>DISCARD_HOLES:str = Discard holes<br>CONVERT_HOLES_TO_FACES:str = Convert holes to faces<br>
+<td>PASS:str = Write as holes<br>TRIANGULATE_FACES_WITH_HOLES:str = Triangulate faces with holes<br>DISCARD_HOLES:str = Discard holes<br>CONVERT_HOLES_TO_FACES:str = Convert holes to faces<br>
 </td>
 </tr>
 	</table></td>
@@ -11120,6 +11121,33 @@
 	</table></td>
 </tr>
 	<tr>
+<td>exportLod</td>
+<td>bool</td>
+<td>false</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Export LOD<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 0<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = LOD Settings<br>order:float = 4<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Export level of details (LOD) based on an attribute with an @Enum annotation specifying the different LODs.<br>
+</td>
+</tr>
+	</table></td>
+</tr>
+	<tr>
 <td>errorFallback</td>
 <td>bool</td>
 <td>true</td>
@@ -11184,6 +11212,7 @@
 </tr>
 	</table></td>
 </tr>
+	
 	
 	
 	
@@ -11318,6 +11347,9 @@
 <h3><a name="com.esri.prt.codecs.TIFDecoder">GeoTIFF Image Decoder (com.esri.prt.codecs.TIFDecoder)</a></h3>
 <p>Reads GeoTIFF images into textures</p>
 <p>Supported URI extensions: .tif;.tiff;</p>
+<h3><a name="com.esri.prt.codecs.USDDecoder">Universal Scene Description (USD) (com.esri.prt.codecs.USDDecoder)</a></h3>
+<p>Decodes geometry from the Universal Scene Description.</p>
+<p>Supported URI extensions: .usd;.usda;.usdc;</p>
 <h3><a name="com.esri.prt.codecs.VRTDecoder">Virtual Raster Image Decoder (com.esri.prt.codecs.VRTDecoder)</a></h3>
 <p>Reads Virtual Raster images into textures</p>
 <p>Supported URI extensions: .vrt;</p>

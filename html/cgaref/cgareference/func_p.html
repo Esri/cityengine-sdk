@@ -37,7 +37,7 @@
 
 <h2>Description</h2>
 
-<p>This function returns <span class="cga_keyword">true</span> with probability <span class="cga_opparam">probability</span>, or in other words, it returns <span class="cga_keyword">false</span> with probability (1 - <span class="cga_opparam">probability</span>).</p>
+<p>This function returns <span class="cga_keyword">true</span> with probability <span class="cga_opparam">probability</span>, or in other words, it returns <span class="cga_keyword">false</span> with probability <span class="codelight">1 - probability</span>.</p>
         
 <h2>Related</h2>
 
@@ -49,32 +49,26 @@
 <h2>Examples</h2>
 <p class="example">	
 <pre class="code3">
-example.1
-	p(0.5)
-	# result = true with probability 0.5
-	# result = false with probability 0.5
+p(0.5)
+# result = true with probability 0.5
+# result = false with probability 0.5
 
-example.2
-	p(0.3)
-	# result = true with probability 0.3
-	# result = false with probability 0.7
+p(0.3)
+# result = true with probability 0.3
+# result = false with probability 0.7
 
-example.3
-	p(1)
-	# result = true	 
-   
-example.4
-	p(0)
-	# result = false	    
+p(1)
+# result = true	 
 
-example.5
-	p(2)
-	# result = true	    
+p(0)
+# result = false	    
 
-example.6
-	p(-1)
-	# result = false	    
-	</pre>
+p(2)
+# result = true	    
+
+p(-1)
+# result = false	    
+</pre>
 </p>
 
 

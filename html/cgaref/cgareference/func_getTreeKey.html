@@ -32,39 +32,37 @@
 <p class="notes">Note: the TreeKey stays the same during derivation of the whole rule, see example 2 below.</p>
    
 <!-- FOOTER -->
-  <h2>Examples  </h2>
-  <h3>1. Simple Example
-  <table summary="" class="twocol">
-    <tr>
-    <td>
-    <em>CGA Code</em><br>
-    <pre class="code3">
+<h2>Examples</h2>
+
+<h3>Simple Example</h3>
+
+<h4>CGA Code</h4>
+
+<pre class="code3">
 Init-->
     print(getTreeKey() + " - Init") 
-	center(xz)
-	extrude(10)
-	comp(f) { front: Facade}
+    center(xz)
+    extrude(10)
+    comp(f) { front: Facade}
 	
 Facade-->
-	print(getTreeKey() + " - Facade")
-	split(y) {'0.5 : Floor }*
+    print(getTreeKey() + " - Facade")
+    split(y) {'0.5 : Floor }*
 	
 Floor-->
-	print(getTreeKey() + " - Floor")
-	split(x) { '0.1 : Wall | '0.3 : Window | '0.1 : Wall }*
+    print(getTreeKey() + " - Floor")
+    split(x) { '0.1 : Wall | '0.3 : Window | '0.1 : Wall }*
 		
 Wall-->
-	print(getTreeKey() + " - Wall")
+    print(getTreeKey() + " - Wall")
 
 Window-->
-	print(getTreeKey() + " - Window")
-    </pre></td>
-    <td></td>
-    </tr>
-    <tr>
-      <td>
-    <em>CGA Console Output</em><br>
-    <pre class="code3"> 
+    print(getTreeKey() + " - Window")
+</pre>
+
+<h4>CGA Console Output</h4>
+
+<pre class="code3"> 
 0; - Init
 0;0; - Facade
 0;0;0; - Floor
@@ -81,41 +79,29 @@ Window-->
 0;0;1;3; - Wall
 0;0;1;4; - Window
 0;0;1;5; - Wall
-	</pre>
-    </td>
-    
-          <td>
-     <em>Model Hierarchy</em><br>
-   	 <img src="images/getTreeKey.png" alt="treeKey" >
-   	  </td>
-    
-    </tr>
-  </table>
+</pre>
 
-  <h3>2. The TreeKey stays the same during Derivation of the whole Rule
-  <table summary="" class="twocol">
-    <tr>
-    <td>
-    <em>CGA Code</em><br>
-    <pre class="code3">
+<h4>Model Hierarchy</h4>
+
+<img src="images/getTreeKey.png" alt="treeKey" >
+
+<h3>The TreeKey stays the same during Derivation of the whole Rule</h3>
+
+<h4>CGA Code</h4>
+
+<pre class="code3">
 ShapeA --> 
-	print(getTreeKey) 
-	split(x){ 2: ShapeB print(getTreeKey) | 3: ShapeC print(getTreeKey) } 	
-    </pre></td>
-    <td></td>
-    </tr>
-    <tr>
-      <td>
-    <em>CGA Console Output</em><br>
-    <pre class="code3"> 
-0;
-0;
-0;
-	</pre>
-    </tr>
-  </table>
-    
+    print(getTreeKey) 
+    split(x){ 2: ShapeB print(getTreeKey) | 3: ShapeC print(getTreeKey) } 	
+</pre>
 
+<h4>CGA Console Output</h4>
+
+<pre class="code3"> 
+0;
+0;
+0;
+</pre>
 
 <p class="foot">Copyright &copy;2008-2020 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
 

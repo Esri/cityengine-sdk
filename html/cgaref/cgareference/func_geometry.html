@@ -43,7 +43,7 @@
 
 <h2>Description</h2>
 
-<p>Azimuth is the horizontal angle measured clockwise from the north, i.e. 90 degrees is east, 180 degrees is south and 270 degrees is west. Azimuth is in the range [0, 360[.<br>The geometry.angle(zenith) function returns the same value as ( 90 - geometry.angle(maxSlope) )</p>
+<p><span class="codelight">azimuth</span> is the horizontal angle measured clockwise from the north, i.e. 90 degrees is east, 180 degrees is south and 270 degrees is west. Azimuth is in the range [0, 360[.<br>The geometry.angle(zenith) function returns the same value as <span class="codelight">90 - geometry.angle(maxSlope)</span>.</p>
         
 <h2>Examples </h2>
 
@@ -84,7 +84,7 @@ Cone--&gt;
 
 <h2>Returns</h2>
 
-<p>Surface area of the current shape's geometry, depending on the provided area selector.</p>
+<p>Surface area of the current shape's geometry, depending on the provided <span class="cga_opparam">faceOrientation</span> selector.</p>
 
 <h2>Description</h2>
 
@@ -130,7 +130,7 @@ Cone--&gt;
 
 <h2>Returns</h2>
 
-<p>The range (i.e. max - min) spanned by the u- or the v-coordinate, respectively, of the selected uvset.</p>
+<p>The range (i.e. max - min) spanned by the u- or the v-coordinate, respectively, of the selected <span class="cga_opparam">uvSet</span>.</p>
 
 <h2>Related</h2>
 
@@ -210,7 +210,7 @@ Cone--&gt;
 
 <h2>Description</h2>
 
-<p>The <span class="code_std">geometry.isInstanced()</span> function can be used to e.g. check if an inserted asset was trimmed.</p>
+<p>The <span class="code_std">geometry.isInstanced</span> function can be used to e.g. check if an inserted asset was trimmed.</p>
 
 <h2>Related</h2>
 
@@ -409,7 +409,7 @@ Cone--&gt;
 
 <h2>Returns</h2>
 
-<p>The minimal or maximal u or v value of the selected uvset (the versions without parameter use uvset 0).</p>
+<p>The minimal or maximal u or v value of the selected <span class="cga_opparam">uvSet</span> (the versions without parameter use uv set 0).</p>
 
 <br><br><br><br><br>
 

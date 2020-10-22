@@ -37,7 +37,7 @@
 
 <p>This function returns the first item in the <span class="cga_opparam">stringList</span>.</p>
 
-<p class="notes">Note: Stringlists are a series of strings stored inside one string. The elements are separated by a semicolon (";"). Each item must be followed by a semicolon, also the last one! The data type is "string", thus it is not an array as used in other scripting languages.</p>
+<p class="notes">Note: String lists are a series of strings stored inside one string. The elements are separated by a semicolon (";"). Each item must be followed by a semicolon, also the last one! The data type is "string", thus it is not an array as used in other scripting languages.</p>
 
 <h2>Related</h2>
 <ul>
@@ -60,13 +60,11 @@
 
 <p class="example">	
 <pre class="code3">
-example.1
-	listFirst("rule;your;city;")
-	# result = "rule"
+listFirst("rule;your;city;")
+# result = "rule"
 
-example.2
-	listFirst(fileSearch("/myProject/assets/image*.jpg"))
-	# result = the image from that directory with the lowest index
+listFirst(fileSearch("/myProject/assets/image*.jpg"))
+# result = the image from that directory with the lowest index
 </pre>
 </p>
 

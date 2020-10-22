@@ -20,29 +20,31 @@
 <!-- CONTENT -->
 <h1>CGA Euler Angles</h1>
 <h2>How to calculate a 3x3 rotation matrix R from CGA Euler Angles </h2>
-alpha, beta, gamma = angles in radians<br>
-<br>
-R = Rx(alpha) * Ry(beta) * Rz(gamma)<br>
-<br>
-sa = sin(alpha);<br>
-ca = cos(alpha);<br>
-sb = sin(beta);<br>
-cb = cos(beta);<br>
-sg = sin(gamma);<br>
-cg = cos(gamma);<br>
-<br>
-R[0][0] = cb*cg;<br>
-R[0][1] = sa*sb*cg - ca*sg;<br>
-R[0][2] = sa*sg + ca*sb*cg;<br>
-<br>
-R[1][0] = cb*sg;<br>
-R[1][1] = ca*cg + sa*sb*sg;<br>
-R[1][2] = ca*sb*sg - sa*cg;<br>
-<br>
-R[2][0] = -sb;<br>
-R[2][1] = sa*cb;<br>
-R[2][2] = ca*cb;<br>
-<br>
+
+<pre class="code3">
+// alpha, beta, gamma = angles in radians
+
+R = Rx(alpha) * Ry(beta) * Rz(gamma)
+
+sa = sin(alpha);
+ca = cos(alpha);
+sb = sin(beta);
+cb = cos(beta);
+sg = sin(gamma);
+cg = cos(gamma);
+
+R[0][0] = cb*cg;
+R[0][1] = sa*sb*cg - ca*sg;
+R[0][2] = sa*sg + ca*sb*cg;
+
+R[1][0] = cb*sg;
+R[1][1] = ca*cg + sa*sb*sg;
+R[1][2] = ca*sb*sg - sa*cg;
+
+R[2][0] = -sb;
+R[2][1] = sa*cb;
+R[2][2] = ca*cb;
+</pre>
 
 <h2>Related</h2>
 <ul>

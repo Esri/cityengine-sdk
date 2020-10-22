@@ -134,7 +134,7 @@ Context queries are functions that return information about contextual shapes in
 
 <p>In the case of <em>inter</em> context, a deterministic behavior is achieved by similiar means. All inter queries of models in the neighborhood of the current initial shape return default values. The described method proved to be satisfactory in most practical use case scenarios.</p>
 
-<p class="notes">Shapes that are generated conditionally by a non-default case in an <em>intra</em> occlusion query are not considered for <em>intra</em> occlusion. Shapes that are generated conditionally by a non-default case in an <em>inter</em> occlusion query are not considered for <em>inter</em> occlusion.</p>
+<p class="notes">Shapes that are generated conditionally by a non-default case in an <span class="codelight">intra</span> occlusion query are not considered for <span class="codelight">intra</span> occlusion. Shapes that are generated conditionally by a non-default case in an <span class="codelight">inter</span> occlusion query are not considered for <span class="codelight">inter</span> occlusion.</p>
 
 <h2>Related</h2>
 <ul>
@@ -163,7 +163,7 @@ Lot --> label("label")
         print(contextCount(intra, "label"))
         label("label")
 	</pre>
-	<em>In a first generation process each <span class="cga_keyword">label()</span> operation creates a labeled copy of the current shape. In the second pass, the <a class="normw" href="func_contextCompare.html">contextCompare</a> query function is used to retrieve the number of all shapes with label <span class="codelight">"label"</span>.</em></td>
+	<em>In a first generation process each <span class="cga_keyword">label</span> operation creates a labeled copy of the current shape. In the second pass, the <a class="normw" href="func_contextCompare.html">contextCompare</a> query function is used to retrieve the number of all shapes with label <span class="codelight">"label"</span>.</em></td>
 </tr>
 </table>
 
@@ -182,7 +182,7 @@ Test  --> case overlaps(intra) :                         Red
 Red   --> color(1,0,0)
 Green --> color(0,1,0)		  
 	</pre>
-	<em>In this example the Lot rule is applied to an initial single shape with two faces (intra occlusion). The default <span class="cga_keyword">false</span> case of the <span class="cga_keyword">overlaps()</span> enlarges the extruded volume. Therefore, the geometry intersects the neighboring extruded volume, and the <span class="cga_keyword">overlaps()</span> query returns <span class="cga_keyword">true</span>. The enlarged occluder shape is not visible.</em>
+	<em>In this example the Lot rule is applied to an initial single shape with two faces (intra occlusion). The default <span class="cga_keyword">false</span> case of the <span class="cga_keyword">overlaps</span> enlarges the extruded volume. Therefore, the geometry intersects the neighboring extruded volume, and the <span class="cga_keyword">overlaps</span> query returns <span class="cga_keyword">true</span>. The enlarged occluder shape is not visible.</em>
 	<pre class="code3">
 	
 	
@@ -190,7 +190,7 @@ Green --> color(0,1,0)
 Test --> case overlaps(intra) : s('2,'1,'2) center(xyz) Red
          else :                                         Green
 	</pre>
-	<em>In contrast, if we enlarge the extruded volume in the non-default <span class="cga_keyword">true</span> case, the <span class="cga_keyword">overlaps()</span> query returns <span class="cga_keyword">false</span></em>
+	<em>In contrast, if we enlarge the extruded volume in the non-default <span class="cga_keyword">true</span> case, the <span class="cga_keyword">overlaps</span> query returns <span class="cga_keyword">false</span></em>
 	</td>
 </tr>
 </table>

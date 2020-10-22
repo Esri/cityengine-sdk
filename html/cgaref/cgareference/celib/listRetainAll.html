@@ -38,7 +38,7 @@
 
 <p>This function retains only occurrences of <span class="cga_opparam">searchString</span> in <span class="cga_opparam">stringList</span>. Optional: Leading or trailing * in <span class="cga_opparam">searchString</span> are used as wildcard.</p>
 
-<p class="notes">Note: Stringlists are a series of strings stored inside one string. The elements are separated by a semicolon (";"). Each item must be followed by a semicolon, also the last one! The data type is "string", thus it is not an array as used in other scripting languages.</p>
+<p class="notes">Note: String lists are a series of strings stored inside one string. The elements are separated by a semicolon (";"). Each item must be followed by a semicolon, also the last one! The data type is "string", thus it is not an array as used in other scripting languages.</p>
 
 <h2>Related</h2>
 
@@ -62,13 +62,11 @@
 
 <p class="example">	
 <pre class="code3">
-example.1
-    listRetainAll("rule;your;designs;and;your;cities;","*s")
-    # result = "designs;cities;"
+listRetainAll("rule;your;designs;and;your;cities;","*s")
+# result = "designs;cities;"
 
-example.2
-    listRetainAll("floor;floor_1;floor_2;", "*_*")
-    # result = "floor_1;floor_2;"
+listRetainAll("floor;floor_1;floor_2;", "*_*")
+# result = "floor_1;floor_2;"
 </pre>
 </p>
 

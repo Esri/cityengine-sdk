@@ -106,6 +106,7 @@ var searchData=
   ['status_5fkey_5falready_5ftaken',['STATUS_KEY_ALREADY_TAKEN',['../namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4a5c4ed76cd763b2818aa1c275da293144',1,'prt']]],
   ['status_5fkey_5fnot_5ffound',['STATUS_KEY_NOT_FOUND',['../namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4af93cd6c2a6f1a1c5742a2750077bc842',1,'prt']]],
   ['status_5fkey_5fnot_5fsupported',['STATUS_KEY_NOT_SUPPORTED',['../namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4ab53d71d6db4ffb583cc5354e2dae0a11',1,'prt']]],
+  ['status_5fno_5fgeometry',['STATUS_NO_GEOMETRY',['../namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4a51c0753ba49c37e84d4d25018fe5aad9',1,'prt']]],
   ['status_5fno_5finitial_5fshape',['STATUS_NO_INITIAL_SHAPE',['../namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4a48d2995de915c6e855ea239beebb5b85',1,'prt']]],
   ['status_5fno_5flicense',['STATUS_NO_LICENSE',['../namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4a0964fb396564cdceb8d4ac73d3768afc',1,'prt']]],
   ['status_5fno_5frulefile',['STATUS_NO_RULEFILE',['../namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4a9a685709e1d19e71f72f50d1e6354257',1,'prt']]],

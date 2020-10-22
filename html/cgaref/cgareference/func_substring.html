@@ -37,7 +37,7 @@
 
 <h2>Description</h2>
 
-<p>This function returns a substring of the  of the <span class="cga_opparam">inputString</span>, starting at the index <span class="cga_opparam">startPos</span> and ending WITHOUT the character at index <span class="cga_opparam">endPos</span>. (<span class="cga_opparam">endPos</span> excluded)</p>
+<p>This function returns a substring of the  of the <span class="cga_opparam">inputString</span>, starting at the index <span class="cga_opparam">startPos</span> and ending WITHOUT the character at index <span class="cga_opparam">endPos</span> (<span class="cga_opparam">endPos</span> excluded).</p>
 
 <p class="notes">Note: The indices <span class="cga_opparam">startPos</span> and <span class="cga_opparam">endPos</span> are 0-based.</p>	
     
@@ -53,25 +53,20 @@
 
 <p class="example">	
 <pre class="code3">
-example.1
-	substring("0123456789", 0, 5)
-	# result = "01234"
+substring("0123456789", 0, 5)
+# result = "01234"
 
-example.2
-	substring("0123456789", 2, 5)
-	# result = "234"
-	
-example.3
-	substring("0123456789", -20, 5) # startPos < 0
-	# result = "01234"
+substring("0123456789", 2, 5)
+# result = "234"
 
-example.4
-	substring("0123456789", 0, 20)	# endPos >= len(<span class="cga_opparam">inputString</span>)
-	# result = "0123456789"
-	
-example.5
-	substring("0123456789", 5, 0)	# startPos >= endPos
-	# result = ""
+substring("0123456789", -20, 5) # startPos < 0
+# result = "01234"
+
+substring("0123456789", 0, 20)	# endPos >= len(<span class="cga_opparam">inputString</span>)
+# result = "0123456789"
+
+substring("0123456789", 5, 0)	# startPos >= endPos
+# result = ""
 </pre>
 </p>
 

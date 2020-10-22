@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="esri_prt_55px.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">ArcGIS Procedural Runtime
-   &#160;<span id="projectnumber">2.2.6332</span>
+   &#160;<span id="projectnumber">2.3.6821</span>
    </div>
   </td>
  </tr>
@@ -194,6 +194,8 @@ virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>operator==</b
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:aea4279a5b3455dd1da30234281cf64c6"><td class="memItemLeft" align="right" valign="top">static uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_texture.html#aea4279a5b3455dd1da30234281cf64c6">getBytesPerPixel</a> (<a class="el" href="classprtx_1_1_texture.html#a6fe2bc87ecf768fa3b470981ede648bc">PixelFormat</a> format)</td></tr>
 <tr class="separator:aea4279a5b3455dd1da30234281cf64c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a96b91f0789a2cbd31414f2ffd2d845c5"><td class="memItemLeft" align="right" valign="top">static uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_texture.html#a96b91f0789a2cbd31414f2ffd2d845c5">getChannelCount</a> (<a class="el" href="classprtx_1_1_texture.html#a6fe2bc87ecf768fa3b470981ede648bc">PixelFormat</a> format)</td></tr>
+<tr class="separator:a96b91f0789a2cbd31414f2ffd2d845c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3586fc299a57e5d83079cbec668b6f76"><td class="memTemplParams" colspan="2">template&lt;typename S &gt; </td></tr>
 <tr class="memitem:a3586fc299a57e5d83079cbec668b6f76"><td class="memTemplItemLeft" align="right" valign="top">static S&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classprtx_1_1_texture.html#a3586fc299a57e5d83079cbec668b6f76">getFormatAsString</a> (<a class="el" href="classprtx_1_1_texture.html#a6fe2bc87ecf768fa3b470981ede648bc">PixelFormat</a> format)</td></tr>
 <tr class="separator:a3586fc299a57e5d83079cbec668b6f76"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -415,6 +417,37 @@ static const <a class="el" href="classprtx_1_1_attributable.html#a3db87e4f064fd8
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>number of bytes per pixel used by the format. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a96b91f0789a2cbd31414f2ffd2d845c5"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static uint8_t prtx::Texture::getChannelCount </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classprtx_1_1_texture.html#a6fe2bc87ecf768fa3b470981ede648bc">PixelFormat</a>&#160;</td>
+          <td class="paramname"><em>format</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">format</td><td>PixelFormat to query. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>number of channels provided in by the format. </dd></dl>
 
 </div>
 </div>
@@ -664,7 +697,7 @@ template&lt;typename S &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat May 9 2020 18:52:26 for ArcGIS Procedural Runtime by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Sep 28 2020 18:43:33 for ArcGIS Procedural Runtime by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.5
 </small></address>

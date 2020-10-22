@@ -72,9 +72,9 @@ Lot --> split(x) { ~0.1 : Lot(split.index) }*
 	
 Lot(x) --> split(z) { ~0.1 : Lot(x, split.index) }*
 	
-Lot(x, z)--> [ case (x == 12) && (z == 12) : label("label")
-               else : NIL ]
-             Extrude(minimumDistance(intra, "label"))
+Lot(x, z) --> [ case (x == 12) && (z == 12) : label("label")
+                else : NIL ]
+              Extrude(minimumDistance(intra, "label"))
 	  
 Extrude(dist) --> case dist < 1 : extrude(1-dist) X.
                   else : NIL

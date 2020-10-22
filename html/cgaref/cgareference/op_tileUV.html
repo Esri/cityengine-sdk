@@ -29,12 +29,12 @@
 <ul>
 	<li><span class="cga_opparam">uvSet</span> (float)<br>Number of texture coordinates set (integer number in [0,9]). The numbering corresponds to the texture layers of the <a href="attr_material.html">material attribute</a>, see also <a href="cga_texturing.html"> Texturing: Essential Knowledge</a>.</li>
 	<li><span class="cga_opparam">textureWidth</span> (float)<br>The texture width in world coordinate system units (e.g. meters). Values < 0 are allowed and mirror the texture. The operators ~ (floating) and &rsquo; (relative) can be used, see below. 0 is allowed and means &#8220;don't touch this axis&#8221;.</li>
-	<li><span class="cga_opparam">textureHeight</span> (float)<br>The texture texHeight in world coordinate system units (e.g. meters). Values < 0 are allowed and mirror the texture. The operators ~ (floating) and &rsquo; (relative) can be used, see below. 0 is allowed and means &#8220;don't touch this axis&#8221;.</li>
+	<li><span class="cga_opparam">textureHeight</span> (float)<br>The texture height in world coordinate system units (e.g. meters). Values < 0 are allowed and mirror the texture. The operators ~ (floating) and &rsquo; (relative) can be used, see below. 0 is allowed and means &#8220;don't touch this axis&#8221;.</li>
 </ul>
 
 <h2>Description</h2>
 
-<p>The <span class="codelight">tileUV</span> operation rescales the texture coordinates of the selected uv-set such that the uv space gets tiled with tiles of a given width and height. The <span class="cga_opparam">textureWidth</span> and <span class="cga_opparam">textureHeight</span> parameters support usage of the floating and relative operators to avoid complex calculations with the texture space dimension. For example, if the parameter <span class="cga_opparam">textureWidth</span> is set to ~20, the projection matrix is initialized such that the surface of the current shape's geometry is exactly spanned with texture tiles of approximately size 20 along the u direction. Or if the paramter <span class="cga_opparam">texHeight</span> is set to &rsquo;0.5, the texture will be repeated twice along the height.</p>
+<p>The <span class="codelight">tileUV</span> operation rescales the texture coordinates of the selected uv-set such that the uv space gets tiled with tiles of a given width and height. The <span class="cga_opparam">textureWidth</span> and <span class="cga_opparam">textureHeight</span> parameters support usage of the floating and relative operators to avoid complex calculations with the texture space dimension. For example, if the parameter <span class="cga_opparam">textureWidth</span> is set to ~20, the projection matrix is initialized such that the surface of the current shape's geometry is exactly spanned with texture tiles of approximately size 20 along the u direction. Or if the paramter <span class="cga_opparam">textureHeight</span> is set to &rsquo;0.5, the texture will be repeated twice along the height.</p>
 
 <h2>Related</h2>
 <ul>

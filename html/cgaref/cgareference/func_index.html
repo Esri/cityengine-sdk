@@ -171,7 +171,7 @@ array[ [0,1;
 </tr>
 </table>
 
-<h3>Linear indexing</h3>
+<h3 id="linear">Linear indexing</h3>
 
 <p>If a 2d <span class="cga_opparam">array</span> is indexed in 1d, linear indexing is used. Indexing is performed row-wise starting with elements in the first row and continuing on successive rows.</p> 
 
@@ -278,7 +278,7 @@ const firstCol = table[0 : nRows(table)-1, 0]     // [a,d,g]
 </pre>
 <em>A CSV file is read and elements are indexed using the 2d index operator.</em>
 
-<h3>Indexing by 2D arrays</h3>
+<h3>Indexing by 2d arrays</h3>
 
 <pre class="code3">
 const a = ["_", "d", "i", "a", "g"]
@@ -297,6 +297,18 @@ const c = a[b]
 </pre>
 
 <em>The result of the 1d index operator is an array that has the same dimensions as the <span class="cga_opparam">indices</span> array.</em>
+
+<h3>Indexing out of bounds</h3>
+
+<pre class="code3">
+zeros(elems)    = floatArray[1:elems]
+ones(rows,cols) = floatArray[1:rows,1:cols] .+ 1
+
+const a = zeros(4)  // [0,0,0,0]
+const b = ones(2,3) // [1,1,1 ; 1,1,1]
+</pre>
+
+<em>An empty <a href="func_floatArray.html"><span class="code_std">floatArray</span></a> is indexed by index <a href="func_colon.html">sequences</a>. This creates a new array filled with default values (which is zero for float).</em>
 
 <h3>Prime numbers</h3>
 

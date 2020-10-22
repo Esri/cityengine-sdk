@@ -41,7 +41,7 @@
 
 <p class="notes">Note.1: Indices are 0 - based.</p>
 
-<p class="notes">Note.2: Stringlists are a series of strings stored inside one string. The elements are separated by a semicolon (";"). Each item must be followed by a semicolon, also the last one! The data type is "string", thus it is not an array as used in other scripting languages.</p>
+<p class="notes">Note.2: String lists are a series of strings stored inside one string. The elements are separated by a semicolon (";"). Each item must be followed by a semicolon, also the last one! The data type is "string", thus it is not an array as used in other scripting languages.</p>
 
 <h2>Related</h2>
 <ul>
@@ -64,13 +64,11 @@
 
 <p class="example">	
 <pre class="code3">
-example.1
-	listRange("rule;your;city;with;cityengine;",0,3)
-	# result = "rule;your;city;"
+listRange("rule;your;city;with;cityengine;",0,3)
+# result = "rule;your;city;"
 
-example.2
-	listRange("texture_1;texture_2;texture_3;texture_4;texture_5;texture_6;",2,3)
-	# result = "texture_3"
+listRange("texture_1;texture_2;texture_3;texture_4;texture_5;texture_6;",2,3)
+# result = "texture_3"
 </pre>
 </p>
 

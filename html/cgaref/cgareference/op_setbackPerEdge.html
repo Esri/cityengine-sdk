@@ -78,13 +78,17 @@ Lot2 --> setbackPerEdge(rand(5))
 <tr>
 	<td class="twocol_l"><br><img src="images/setbackPerEdge-compattr-1.png" width="298" alt="setbackPerEdge-compattr-1"/></td>
 	<td><pre class="code3">
-const dists = "3;2;1;0;0;1;2;3;"
+const dists = [3,2,1,0,0,1,2,3]
 
-dist = float(listItem(dists, comp.index))
+dist = dists[comp.index]
 
 Lot --> setbackPerEdge(dist) { all = Green }
 	</pre>
-	<em>The <a class="cga_op" href="attr_comp.html">comp.index</a> attribute is used to extract the distance from an ordered string list. Note that indexing is done in face-edge order (first edges are highlighted in orange). The first distance is applied on the first edge of the first face (left) and the 5th distance is applied on the first edge of the second face (right). Also note that <span class="codelight">dist</span> is a function that is evaluated several times. If <span class="codelight">dist</span> was an <span class="codelight">attr</span> or <span class="codelight">const</span> it would only be evaluated once at rule start with <a class="cga_op" href="attr_comp.html">comp.index</a> being <span class="codelight">-1</span>.</em>
+	<em>The <a class="cga_op" href="attr_comp.html">comp.index</a> attribute is used to extract the distance from an ordered float array. Note that indexing is done in face-edge order (first edges are highlighted in orange). The first distance is applied on the first edge of the first face (left) and the 5th distance is applied on the first edge of the second face (right). Also note that <span class="codelight">dist</span> is a function that is evaluated several times. If <span class="codelight">dist</span> was an <span class="codelight">attr</span> or <span class="codelight">const</span> it would only be evaluated once at rule start with <a class="cga_op" href="attr_comp.html">comp.index</a> being <span class="codelight">-1</span>.<br>The same result can be achieved by</em>
+	<pre class="code3">
+Lot --> setback(comp(fe){all:dist}) { all = Green }
+Lot --> setback(dists)              { all = Green }
+	</pre>
 	</td>
 </tr>
 </table>

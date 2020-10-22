@@ -37,7 +37,7 @@
 
 <p>This function returns the number of elements in the <span class="cga_opparam">stringList</span>.</p>
 
-<p class="notes">Note: Stringlists are a series of strings stored inside one string. The elements are separated by a semicolon (";"). Each item must be followed by a semicolon, also the last one! The data type is "string", thus it is not an array as used in other scripting languages.</p>
+<p class="notes">Note: String lists are a series of strings stored inside one string. The elements are separated by a semicolon (";"). Each item must be followed by a semicolon, also the last one! The data type is "string", thus it is not an array as used in other scripting languages.</p>
 
 <h2>Related</h2>
 <ul>
@@ -59,13 +59,11 @@
 
 <p class="example">	
 <pre class="code3">
-example.1
-	listSize("cityengine;rules;")
-	# result = 2
+listSize("cityengine;rules;")
+# result = 2
 
-example.2
-	listSize(fileSearch("/myProject/assets/*.jpg"))
-	# result = the number of .jpg files in that directory.
+listSize(fileSearch("/myProject/assets/*.jpg"))
+# result = the number of .jpg files in that directory.
 </pre>
 </p>
 

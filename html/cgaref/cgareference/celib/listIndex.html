@@ -40,7 +40,7 @@
 
 <p class="notes">Note.1: Indices are 0 - based.</p>
 
-<p class="notes">Note: Stringlists are a series of strings stored inside one string. The elements are separated by a semicolon (";"). Each item must be followed by a semicolon, also the last one! The data type is "string", thus it is not an array as used in other scripting languages.</p>
+<p class="notes">Note: String lists are a series of strings stored inside one string. The elements are separated by a semicolon (";"). Each item must be followed by a semicolon, also the last one! The data type is "string", thus it is not an array as used in other scripting languages.</p>
 
 <h2>Related</h2>
 <ul>
@@ -62,19 +62,16 @@
 <h2>Examples</h2>
 
 <p class="example">	
-	<pre class="code3">
-example.1
-    listIndex("rule;your;city;","city")
-    # result = 2
+<pre class="code3">
+listIndex("rule;your;city;","city")
+# result = 2
 
-example.2
-    listIndex("rule;your;city;","*y")
-    # result = 2
+listIndex("rule;your;city;","*y")
+# result = 2
 
-example.3
-    listIndex("rule;your;city;","*y*")
-    # result = 1   
-	</pre>
+listIndex("rule;your;city;","*y*")
+# result = 1   
+</pre>
 </p>
 
 <!-- FOOTER -->

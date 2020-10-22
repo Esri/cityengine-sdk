@@ -114,24 +114,22 @@ Lot --> setbackToArea(100) { all       = Blue  |
 	<td><pre class="code3">
 attr area = 300
 
-minDists = comp(fe) { all : rand(3)    }
-maxDists = comp(fe) { all : rand(3, 6) }
+const minDists = comp(fe) { all : rand(3)    }
+const maxDists = comp(fe) { all : rand(3, 6) }
 
 ShowDists(dists) -->
     setback(dists) { all       = NIL |
                      remainder = 
                        comp(e) { all = Red } }
 
-Lot --> Lot(minDists, maxDists) 
-
-Lot(minD, maxD) -->
-    ShowDists(minD)
-    ShowDists(maxD)
-    setbackToArea(area, minD, maxD)
+Lot -->
+    ShowDists(minDists)
+    ShowDists(maxDists)
+    setbackToArea(area, minDists, maxDists)
                            { all       = NIL   |
                              remainder = Green }
 	</pre>
-	<em>The setback to restricted by minimum and maximum distances (highlighted in red). Note that by passing the arrays to a parameterized <span class="codelight">Lot</span> rule the <a class="cga_op" href="func_comp.html">comp</a> function is evaluated only once per array.</em>
+	<em>The setback to restricted by minimum and maximum distances (highlighted in red).</em>
 	</td>
 </tr>
 </table>

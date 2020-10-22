@@ -38,7 +38,7 @@
 
 <p>This function removes the first occurrence of <span class="cga_opparam">searchString</span> from the <span class="cga_opparam">stringList</span>. Optional: Leading or trailing * in <span class="cga_opparam">searchString</span> are used as wildcard.</p>
 
-<p class="notes">Note: Stringlists are a series of strings stored inside one string. The elements are separated by a semicolon (";"). Each item must be followed by a semicolon, also the last one! The data type is "string", thus it is not an array as used in other scripting languages.</p>
+<p class="notes">Note: String lists are a series of strings stored inside one string. The elements are separated by a semicolon (";"). Each item must be followed by a semicolon, also the last one! The data type is "string", thus it is not an array as used in other scripting languages.</p>
 
 <h2>Related</h2>
 <ul>
@@ -61,17 +61,14 @@
 
 <p class="example">	
 <pre class="code3">
-example.1
-    listRemove("rule;your;city;","your")
-    # result = "rule;city;"
+listRemove("rule;your;city;","your")
+# result = "rule;city;"
 
-example.2
-    listRemove("rule;your;city;","*u*")
-    # result = "your;city;"
+listRemove("rule;your;city;","*u*")
+# result = "your;city;"
 
-example.3
-    listRemove("floor_1;floor_2;floor_3;", "*_2")
-    # result = "floor_1;floor_3;"
+listRemove("floor_1;floor_2;floor_3;", "*_2")
+# result = "floor_1;floor_3;"
 </pre>
 </p>
 

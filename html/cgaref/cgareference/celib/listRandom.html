@@ -37,10 +37,10 @@
 
 <p>This function returns a random item of the <span class="cga_opparam">stringList</span>.</p>
 
-<p class="notes">Note.1: Getting a random element often is directly combined with a wildcard search. See example.2</p>
+<p class="notes">Note.1: Getting a random element often is directly combined with a wildcard search. See examples.</p>
 
 
-<p class="notes">Note.2: Stringlists are a series of strings stored inside one string. The elements are separated by a semicolon (";"). Each item must be followed by a semicolon, also the last one! The data type is "string", thus it is not an array as used in other scripting languages.</p>
+<p class="notes">Note.2: String lists are a series of strings stored inside one string. The elements are separated by a semicolon (";"). Each item must be followed by a semicolon, also the last one! The data type is "string", thus it is not an array as used in other scripting languages.</p>
 
 <h2>Related</h2>
 <ul>
@@ -63,18 +63,14 @@
 
 <p class="example">	
 <pre class="code3">
-example.1
-	listRandom("rule;your;city;")
-	# result = "rule" or "your" or "city" 
+listRandom("rule;your;city;")
+# result = "rule" or "your" or "city" 
 
-example.2
-	listRandom(fileSearch("/myProject/assets/*.jpg"))
-	# result = a random .jpg image from that directory.
-	
-example.3
-	listRandom(fileSearch("*.obj"))
-	# result = a random asset from the whole workspace.
-	
+listRandom(fileSearch("/myProject/assets/*.jpg"))
+# result = a random .jpg image from that directory.
+
+listRandom(fileSearch("*.obj"))
+# result = a random asset from the whole workspace.
 </pre>
 </p>
 

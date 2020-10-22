@@ -39,7 +39,7 @@
 
 <h2>Description</h2>
 
-<p>The <span class="cga_keyword">alignScopeToAxes</span> operation manipulates the <span class="cga_keyword">scope</span>, the <span class="cga_keyword">pivot</span> and the <span class="cga_keyword">geometry</span> attributes such that the <span class="cga_keyword">scope</span>'s axes are parallel to the corresponding axis/axes selected with <span class="cga_opparam">alignAxes</span> selector. If no <span class="cga_opparam">alignAxes</span> selector is specified, then <span class="codelight">world.xyz</span> is used. After this operation, the <span class="cga_keyword">scope.r</span> and the <span class="cga_keyword">scope.t</span> vectors are zero and the <span class="cga_keyword">geometry</span> is projected to the new <span class="cga_keyword">scope</span> (i.e. stays at the same place in world coordinates).
+<p>The <span class="cga_keyword">alignScopeToAxes</span> operation manipulates the <span class="cga_keyword">scope</span>, the <span class="cga_keyword">pivot</span> and the <span class="cga_keyword">geometry</span> attributes such that the <span class="cga_keyword">scope</span>'s axes are parallel to the corresponding axis/axes selected with <span class="cga_opparam">alignAxes</span> selector. If no <span class="cga_opparam">alignAxes</span> selector is specified, then <span class="codelight">world.xyz</span> is used. After this operation, the <span class="cga_keyword">scope.r</span> and the <span class="cga_keyword">scope.t</span> vectors are zero and the geometry is projected to the new <span class="cga_keyword">scope</span> (i.e. stays at the same place in world coordinates).
 <br>
 If <span class="cga_opparam">alignAxes</span> selects a single axis, the second axis is created as follows:
 <table cellspacing="5">
@@ -81,7 +81,7 @@ A-->
    alignScopeToAxes()
   <br>
   </pre>
-        <em>Applying alignScopeToAxes() 
+        <em>Applying <span class="codelight">alignScopeToAxes</span>
         removes the scope translation and rotation, rotates the pivot such that all pivot axes are parallel to the world coordinate axes and projects the geometry to the new scope such that it stays at the same place in world coordinates.
         Note that the pivot lies at a corner of the bounding box (which is the new scope). </em></td>
     </tr>

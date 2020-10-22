@@ -39,7 +39,7 @@
 
 <p>This function extracts the <span class="cga_opparam">inputString</span> from the end of the <span class="cga_opparam">leftMatchString</span> up to the beginning of the <span class="cga_opparam">rightMatchString</span>.</p>
 
-<p class="notes">Note: overlapping <span class="cga_opparam"> l+r matchStrings</span> return an empty string (see example.4) </p>
+<p class="notes">Note: overlapping <span class="cga_opparam">left/rightMatchStrings</span> return an empty string (see examples).</p>
 
 <h2>Related</h2>
 
@@ -55,21 +55,17 @@
 
 <p class="example">	
 <pre class="code3">
-example.1
-	getRange("rule your city with cityengine","y","city")
-	# result = "our city with "
+getRange("rule your city with cityengine","y","city")
+# result = "our city with "
 
-example.2
-	getRange("myTexture.hasName.001.jpg","hasName.",".jpg")
-	# result = "001"
-	
-example.3
-	getRange("myTexture.hasName.001.jpg",".",".")
-	# result = "hasName.001"
+getRange("myTexture.hasName.001.jpg","hasName.",".jpg")
+# result = "001"
 
-example.4	
-	getRange("CityEngine","CityEn","tyEngine")
-	# result = ""
+getRange("myTexture.hasName.001.jpg",".",".")
+# result = "hasName.001"
+
+getRange("CityEngine","CityEn","tyEngine")
+# result = ""
 </pre>
 </p>
 

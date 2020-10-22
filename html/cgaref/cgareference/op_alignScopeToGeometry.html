@@ -61,7 +61,7 @@
     <li>transform the geometry into this new coordinate system.</li>
 </ol>
 <p>The parameters let you choose an edge of a face in the geometry. The new x-axis of the scope will be parallel to this edge, and the up-axis will be the face's normal.</p>
-<p>The <span class="cga_keyword">geometry</span> is projected to the new <span class="cga_keyword">scope</span> (i.e. stays at the same place in world coordinates).</p>
+<p>The geometry is projected to the new <span class="cga_keyword">scope</span> (i.e. stays at the same place in world coordinates).</p>
 
 <h2>Related</h2>
 
@@ -91,7 +91,7 @@
         <pre class="code">     alignScopeToGeometry(zUp, any, world.lowest)</pre>
         <pre class="code">&nbsp;</pre>
         <pre class="code">&nbsp;</pre>
-        <p><em>Applying alignScopeToGeometry() with the <span class="codelight">any</span> and <span class="codelight">world.lowest</span> selectors guarantees that the y-axis of the scope points upwards.</em></p>
+        <p><em>Applying <span class="codelight">alignScopeToGeometry</span> with the <span class="codelight">any</span> and <span class="codelight">world.lowest</span> selectors guarantees that the y-axis of the scope points upwards.</em></p>
         <p><em>This is very useful e.g. for placing bricks on a roof.</em></p></td>
     </tr>
   </table>
@@ -120,7 +120,7 @@
       <td><pre class="code">B -->
      alignScopeToGeometry(zUp, 1) 
     </pre>
-        <p><em>After alignScopeToGeometry(),the pivot's (and the scope's) x-axis points along edge 1 of face 0 (red); the z-axis points along the face normal and the x-axis is normal to the two others. The pivot is positioned at the edges starting point and the scope is the pivot-aligned bounding box of the geometry.</em></p></td>
+        <p><em>After <span class="codelight">alignScopeToGeometry</span>, the pivot's (and the scope's) x-axis points along edge 1 of face 0 (red); the z-axis points along the face normal and the x-axis is normal to the two others. The pivot is positioned at the edges starting point and the scope is the pivot-aligned bounding box of the geometry.</em></p></td>
     </tr>
     <tr>
       <td class="twocol_l"><img src="images/alignScopeToGeometry-cylinder-d.png" alt="after alignScopeToGeometry with auto" width="298" ></td>

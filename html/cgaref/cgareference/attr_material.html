@@ -77,16 +77,16 @@ channels with a fixed semantic.</p>
   </tr>
   <tr>
     <td><pre class="code_std"><a name="bumpValue"></a><span class="codelight">float</span> material.bumpValue</pre></td>
-    <td><p>Controls the bump scaling factor (if material.bumpmap is set). Default is 1.</p></td>
+    <td><p>Controls the bump scaling factor (if <span class="codelight">material.bumpmap</span> is set). Default is 1.</p></td>
   </tr>
   
   <tr>
     <td><pre class="code_std"><a name="metallic"></a><span class="codelight">float</span> material.metallic<pre></td>
-    <td><p>Controls the metallic factor (if material.metallicmap is set). 0 is a dielectric material, 1 is a metallic material. Default is 0.</p></td>
+    <td><p>Controls the metallic factor (if <span class="codelight">material.metallicmap</span> is set). 0 is a dielectric material, 1 is a metallic material. Default is 0.</p></td>
   </tr>
   <tr>
     <td><pre class="code_std"><a name="roughness"></a><span class="codelight">float</span> material.roughness<pre></td>
-    <td><p>Controls the roughness factor (if material.roughnessmap is set). 0 is a completely smooth material, 1 is a completely rough material. Default is 1.</p></td>
+    <td><p>Controls the roughness factor (if <span class="codelight">material.roughnessmap</span> is set). 0 is a completely smooth material, 1 is a completely rough material. Default is 1.</p></td>
   </tr>
   <tr>
     <td>
@@ -150,6 +150,71 @@ channels with a fixed semantic.</p>
    </ul>
  attributes.
  </p>
+
+<p>Here is how the CGA material attributes correspond to the GLTF material specification, which is based on Physically-Based Rendering (PBR).</p>
+
+<table class="twocol">
+  <thead>
+    <th class="params">CGA material attributes</th>
+    <th class="params">GLTF material specification</th>
+  </thead>
+  <tr>
+    <td><span class="code_std">material.color.{r|g|b}</span></td>
+    <td><span class="code_std">pbrMetallicRoughness.baseColorFactor</span>, RGB components</td>
+  </tr>
+  <tr>
+    <td><span class="code_std">material.opacity</span></td>
+    <td><span class="code_std">pbrMetallicRoughness.baseColorFactor</span>, A component</td>
+  </tr>
+  <tr>
+    <td><span class="code_std">material.colormap</span></td>
+    <td><span class="code_std">pbrMetallicRoughness.baseColorTexture</span>, RGB channels</td>
+  </tr>
+  <tr>
+    <td><span class="code_std">material.opacitymap</span></td>
+    <td><span class="code_std">pbrMetallicRoughness.baseColorTexture</span>, A channel</td>
+  </tr>
+  <tr>
+    <td><span class="code_std">material.metallic</span></td>
+    <td><span class="code_std">pbrMetallicRoughness.metallicFactor</span></td>
+  </tr>
+  <tr>
+    <td><span class="code_std">material.roughness</span></td>
+    <td><span class="code_std">pbrMetallicRoughness.roughnessFactor</span></td>
+  </tr>
+  <tr>
+    <td><span class="code_std">material.metallicmap</span>, B channel</td>
+    <td><span class="code_std">pbrMetallicRoughness.metallicRoughnessTexture</span>, B channel</td>
+  </tr>
+  <tr>
+    <td><span class="code_std">material.roughnessmap</span>, G channel</td>
+    <td><span class="code_std">pbrMetallicRoughness.metallicRoughnessTexture</span>, G channel</td>
+  </tr>
+  <tr>
+    <td><span class="code_std">material.normalmap</span></td>
+    <td><span class="code_std">normalTexture</span></td>
+  </tr>
+  <tr>
+    <td><span class="code_std">material.occlusionmap</span>, R channel</td>
+    <td><span class="code_std">occlusionTexture</span>, R channel</td>
+  </tr>
+  <tr>
+    <td><span class="code_std">material.emissivemap</span></td>
+    <td><span class="code_std">emissiveTexture</span></td>
+  </tr>
+  <tr>
+    <td><span class="code_std">material.emissive</span></td>
+    <td><span class="code_std">emissiveFactor</span></td>
+  </tr>
+  <tr>
+    <td><span class="code_std">material.opacitymap.mode</span></td>
+    <td><span class="code_std">alphaMode</span></td>
+  </tr>
+  <tr>
+    <td><span class="code_std">material.opacitymap.cutoff</span></td>
+    <td><span class="code_std">alphaCutoff</span></td>
+  </tr>
+</table>
  
 
  <a name="RenderingAndExport"></a><h2>Rendering and Export</h2>
@@ -271,7 +336,7 @@ channels with a fixed semantic.</p>
     <td><span style="color:green;">&#10004;</span></td>    <!-- GDB  write -->
     <td><span style="color:green;">&#10004;</span> (6)</td><!-- USD  write -->
   </tr>
-  <tr>
+  <tr style="background-color: #F8F8F8;">
     <td>ambient</td>
     <td><span style="color:green;">&#10004;</span></td><!-- Preview -->
     <td><span style="color:green;">&#10004;</span></td><!-- DAE  read -->
@@ -301,7 +366,7 @@ channels with a fixed semantic.</p>
     <td><span style="color:green;">&#10004;</span></td><!-- DAE  write -->
     <td><span style="color:green;">&#10004;</span></td><!-- FBX  write -->
     <td><span style="color:green;">&#10004;</span></td><!-- OBJ  write -->
-    <td><span style="color:green;">&#10004;</span></td><!-- SLPK write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- SLPK write -->
     <td><span style="color:green;">&#10004;</span></td><!-- ABC  write -->
     <td><span style="color:green;">&#10004;</span></td><!-- 3WS  write -->
     <td><span style="color:green;">&#10004;</span></td><!-- DS   write -->
@@ -321,7 +386,7 @@ channels with a fixed semantic.</p>
     <td><span style="color:red;">&#10008;</span></td><!-- DAE  write -->
     <td><span style="color:red;">&#10008;</span></td><!-- FBX  write -->
     <td><span style="color:red;">&#10008;</span></td><!-- OBJ  write -->
-    <td><span style="color:red;">&#10008;</span></td><!-- SLPK write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- SLPK write -->
     <td><span style="color:green;">&#10004;</span></td><!-- ABC  write -->
     <td><span style="color:red;">&#10008;</span></td><!-- 3WS  write -->
     <td><span style="color:green;">&#10004;</span></td><!-- DS   write -->
@@ -351,7 +416,7 @@ channels with a fixed semantic.</p>
     <td><span style="color:green;">&#10004;</span></td><!-- GDB  write -->
     <td><span style="color:green;">&#10004;</span> (6)</td><!-- USD  write -->
   </tr>  
-  <tr>
+  <tr style="background-color: #F8F8F8;">
     <td>reflectivity</td>
     <td><span style="color:green;">&#10004;</span></td><!-- Preview -->
     <td><span style="color:green;">&#10004;</span></td><!-- DAE  read -->
@@ -361,7 +426,7 @@ channels with a fixed semantic.</p>
     <td><span style="color:green;">&#10004;</span></td><!-- DAE  write -->
     <td><span style="color:green;">&#10004;</span></td><!-- FBX  write -->
     <td><span style="color:red;">&#10008;</span></td><!-- OBJ  write -->
-    <td><span style="color:green;">&#10004;</span></td><!-- SLPK write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- SLPK write -->
     <td><span style="color:green;">&#10004;</span></td><!-- ABC  write -->
     <td><span style="color:green;">&#10004;</span></td><!-- 3WS  write -->
     <td><span style="color:green;">&#10004;</span></td><!-- DS   write -->
@@ -381,7 +446,7 @@ channels with a fixed semantic.</p>
     <td><span style="color:green;">&#10004;</span></td><!-- DAE -->
     <td><span style="color:green;">&#10004;</span></td><!-- FBX -->
     <td><span style="color:green;">&#10004;</span></td><!-- OBJ -->
-    <td><span style="color:green;">&#10004;</span></td><!-- SLPK write -->
+    <td><span style="color:red;">&#10008;</span></td><!-- SLPK write -->
     <td><span style="color:green;">&#10004;</span></td><!-- ABC  write -->
     <td><span style="color:green;">&#10004;</span></td><!-- 3WS  write -->
     <td><span style="color:green;">&#10004;</span></td><!-- DS   write -->
@@ -421,7 +486,7 @@ channels with a fixed semantic.</p>
     <td><span style="color:red;">&#10008;</span></td><!-- DAE  write -->
     <td><span style="color:red;">&#10008;</span></td><!-- FBX  write -->
     <td><span style="color:red;">&#10008;</span></td><!-- OBJ  write -->
-    <td><span style="color:red;">&#10008;</span></td><!-- SLPK write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- SLPK write -->
     <td><span style="color:green;">&#10004;</span></td><!-- ABC  write -->
     <td><span style="color:red;">&#10008;</span></td><!-- 3WS  write -->
     <td><span style="color:green;">&#10004;</span></td><!-- DS   write -->
@@ -431,7 +496,7 @@ channels with a fixed semantic.</p>
     <td><span style="color:red;">&#10008;</span></td><!-- GDB  write -->
     <td><span style="color:green;">&#10004;</span> (6)</td><!-- USD  write -->
   </tr>
-  <tr>
+  <tr style="background-color: #F8F8F8;">
     <td>roughness</td>
     <td><span style="color:green;">&#10004;</span></td><!-- Preview -->
     <td><span style="color:red;">&#10008;</span></td><!-- DAE  read -->
@@ -441,7 +506,7 @@ channels with a fixed semantic.</p>
     <td><span style="color:red;">&#10008;</span></td><!-- DAE  write -->
     <td><span style="color:red;">&#10008;</span></td><!-- FBX  write -->
     <td><span style="color:red;">&#10008;</span></td><!-- OBJ  write -->
-    <td><span style="color:red;">&#10008;</span></td><!-- SLPK write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- SLPK write -->
     <td><span style="color:green;">&#10004;</span></td><!-- ABC  write -->
     <td><span style="color:red;">&#10008;</span></td><!-- 3WS  write -->
     <td><span style="color:green;">&#10004;</span></td><!-- DS   write -->
@@ -511,7 +576,7 @@ channels with a fixed semantic.</p>
     <td><span style="color:red;">&#10008;</span></td>    <!-- GDB  write -->
     <td><span style="color:red;">&#10008;</span></td><!-- USD  write -->
   </tr>  
-  <tr>
+  <tr style="background-color: #F8F8F8;">
     <td>specularmap</td>
     <td><span style="color:green;">&#10004;</span></td><!-- Preview -->
     <td><span style="color:green;">&#10004;</span></td><!-- DAE  read -->
@@ -541,7 +606,7 @@ channels with a fixed semantic.</p>
     <td><span style="color:green;">&#10004;</span></td><!-- DAE  write -->
     <td><span style="color:green;">&#10004;</span></td><!-- FBX  write -->
     <td><span style="color:green;">&#10004;</span></td><!-- OBJ  write -->
-    <td><span style="color:green;">&#10004;</span> (3)</td><!-- SLPK write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- SLPK write -->
     <td><span style="color:green;">&#10004;</span></td><!-- ABC  write -->
     <td><span style="color:green;">&#10004;</span> (3)</td><!-- 3WS  write -->
     <td><span style="color:green;">&#10004;</span></td><!-- DS   write -->
@@ -591,7 +656,7 @@ channels with a fixed semantic.</p>
     <td><span style="color:red;">&#10008;</span></td><!-- GDB  write -->
     <td><span style="color:green;">&#10004;</span></td><!-- USD  write -->
   </tr>  
-  <tr>
+  <tr style="background-color: #F8F8F8;">
     <td>normalmap</td>
     <td><span style="color:green;">&#10004;</span></td><!-- Preview -->
     <td><span style="color:green;">&#10004;</span></td><!-- DAE  read -->
@@ -601,7 +666,7 @@ channels with a fixed semantic.</p>
     <td><span style="color:green;">&#10004;</span></td><!-- DAE  write -->
     <td><span style="color:green;">&#10004;</span></td><!-- FBX  write -->
     <td><span style="color:red;">&#10008;</span></td><!-- OBJ  write -->
-    <td><span style="color:red;">&#10008;</span></td><!-- SLPK write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- SLPK write -->
     <td><span style="color:green;">&#10004;</span></td><!-- ABC  write -->
     <td><span style="color:red;">&#10008;</span></td><!-- 3WS  write -->
     <td><span style="color:green;">&#10004;</span></td><!-- DS   write -->
@@ -621,7 +686,7 @@ channels with a fixed semantic.</p>
     <td><span style="color:red;">&#10008;</span></td><!-- DAE  write -->
     <td><span style="color:red;">&#10008;</span></td><!-- FBX  write -->
     <td><span style="color:red;">&#10008;</span></td><!-- OBJ  write -->
-    <td><span style="color:red;">&#10008;</span></td><!-- SLPK write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- SLPK write -->
     <td><span style="color:green;">&#10004;</span></td><!-- ABC  write -->
     <td><span style="color:red;">&#10008;</span></td><!-- 3WS  write -->
     <td><span style="color:green;">&#10004;</span></td><!-- DS   write -->
@@ -641,7 +706,7 @@ channels with a fixed semantic.</p>
     <td><span style="color:red;">&#10008;</span></td><!-- DAE  write -->
     <td><span style="color:red;">&#10008;</span></td><!-- FBX  write -->
     <td><span style="color:red;">&#10008;</span></td><!-- OBJ  write -->
-    <td><span style="color:red;">&#10008;</span></td><!-- SLPK write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- SLPK write -->
     <td><span style="color:green;">&#10004;</span></td><!-- ABC  write -->
     <td><span style="color:red;">&#10008;</span></td><!-- 3WS  write -->
     <td><span style="color:green;">&#10004;</span></td><!-- DS   write -->
@@ -661,7 +726,7 @@ channels with a fixed semantic.</p>
     <td><span style="color:red;">&#10008;</span></td><!-- DAE  write -->
     <td><span style="color:red;">&#10008;</span></td><!-- FBX  write -->
     <td><span style="color:red;">&#10008;</span></td><!-- OBJ  write -->
-    <td><span style="color:red;">&#10008;</span></td><!-- SLPK write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- SLPK write -->
     <td><span style="color:green;">&#10004;</span></td><!-- ABC  write -->
     <td><span style="color:red;">&#10008;</span></td><!-- 3WS  write -->
     <td><span style="color:green;">&#10004;</span></td><!-- DS   write -->
@@ -671,7 +736,7 @@ channels with a fixed semantic.</p>
     <td><span style="color:red;">&#10008;</span></td><!-- GDB  write -->
     <td><span style="color:green;">&#10004;</span></td><!-- USD  write -->
   </tr>
-  <tr>
+  <tr style="background-color: #F8F8F8;">
     <td>metallicmap</td>
     <td><span style="color:green;">&#10004;</span></td><!-- Preview -->
     <td><span style="color:red;">&#10008;</span></td><!-- DAE  read -->
@@ -681,7 +746,7 @@ channels with a fixed semantic.</p>
     <td><span style="color:red;">&#10008;</span></td><!-- DAE  write -->
     <td><span style="color:red;">&#10008;</span></td><!-- FBX  write -->
     <td><span style="color:red;">&#10008;</span></td><!-- OBJ  write -->
-    <td><span style="color:red;">&#10008;</span></td><!-- SLPK write -->
+    <td><span style="color:green;">&#10004;</span></td><!-- SLPK write -->
     <td><span style="color:green;">&#10004;</span></td><!-- ABC  write -->
     <td><span style="color:red;">&#10008;</span></td><!-- 3WS  write -->
     <td><span style="color:green;">&#10004;</span></td><!-- DS   write -->

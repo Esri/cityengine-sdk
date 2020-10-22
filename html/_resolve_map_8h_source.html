@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="esri_prt_55px.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">ArcGIS Procedural Runtime
-   &#160;<span id="projectnumber">2.2.6332</span>
+   &#160;<span id="projectnumber">2.3.6821</span>
    </div>
   </td>
  </tr>
@@ -118,40 +118,40 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;</div>
 <div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="classprt_1_1_resolve_map.html">   37</a></span>&#160;<span class="keyword">class </span>PRT_EXPORTS_API <a class="code" href="classprt_1_1_resolve_map.html">ResolveMap</a>: <span class="keyword">public</span> <a class="code" href="classprt_1_1_attributable.html">Attributable</a>, <span class="keyword">public</span> <a class="code" href="classprt_1_1_object.html">Object</a> {</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">wchar_t</span>* searchKey(<span class="keyword">const</span> <span class="keywordtype">wchar_t</span>* project, <span class="keyword">const</span> <span class="keywordtype">wchar_t</span>* query, <span class="keywordtype">wchar_t</span>* result, <span class="keywordtype">size_t</span>* resultSize, <a class="code" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a>* stat = 0) <span class="keyword">const</span> = 0;</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <a class="code" href="classprt_1_1_resolve_map.html">ResolveMap</a>();</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="classprt_1_1_resolve_map.html">ResolveMap</a>();</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;};</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">wchar_t</span>* searchKey(<span class="keyword">const</span> <span class="keywordtype">wchar_t</span>* project, <span class="keyword">const</span> <span class="keywordtype">wchar_t</span>* query, <span class="keywordtype">wchar_t</span>* result, <span class="keywordtype">size_t</span>* resultSize, <a class="code" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a>* stat = 0) <span class="keyword">const</span> = 0;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <a class="code" href="classprt_1_1_resolve_map.html">ResolveMap</a>();</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="classprt_1_1_resolve_map.html">ResolveMap</a>();</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;};</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;</div>
-<div class="line"><a name="l00072"></a><span class="lineno"><a class="line" href="classprt_1_1_resolve_map_builder.html">   72</a></span>&#160;<span class="keyword">class </span>PRT_EXPORTS_API <a class="code" href="classprt_1_1_resolve_map_builder.html">ResolveMapBuilder</a> : <span class="keyword">public</span> <a class="code" href="classprt_1_1_object.html">Object</a> {</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="keyword">static</span> <a class="code" href="classprt_1_1_resolve_map_builder.html">ResolveMapBuilder</a>* create(<a class="code" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a>* status = 0);</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    <span class="keyword">static</span> <a class="code" href="classprt_1_1_resolve_map_builder.html">ResolveMapBuilder</a>* createFromResolveMap(<a class="code" href="classprt_1_1_resolve_map.html">ResolveMap</a> <span class="keyword">const</span>* resolveMap, <a class="code" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a>* status = 0);</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="classprt_1_1_resolve_map.html">ResolveMap</a> <span class="keyword">const</span>* <a class="code" href="namespaceprt.html#a4a26fc77ff5cc864b72c542114245ad1">createResolveMap</a>(<a class="code" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a>* status = 0) <span class="keyword">const</span> = 0;</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="classprt_1_1_resolve_map.html">ResolveMap</a> <span class="keyword">const</span>* createResolveMapAndReset(<a class="code" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a>* status = 0) = 0;</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a> addEntry(<span class="keyword">const</span> <span class="keywordtype">wchar_t</span>* key, <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> *uri) = 0;</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a> setDownstreamMap(<span class="keyword">const</span> <a class="code" href="classprt_1_1_resolve_map.html">ResolveMap</a>* map) = 0;</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    <a class="code" href="classprt_1_1_resolve_map_builder.html">ResolveMapBuilder</a>();</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="classprt_1_1_resolve_map_builder.html">ResolveMapBuilder</a>();</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;};</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;</div>
+<div class="line"><a name="l00073"></a><span class="lineno"><a class="line" href="classprt_1_1_resolve_map_builder.html">   73</a></span>&#160;<span class="keyword">class </span>PRT_EXPORTS_API <a class="code" href="classprt_1_1_resolve_map_builder.html">ResolveMapBuilder</a> : <span class="keyword">public</span> <a class="code" href="classprt_1_1_object.html">Object</a> {</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="keyword">static</span> <a class="code" href="classprt_1_1_resolve_map_builder.html">ResolveMapBuilder</a>* create(<a class="code" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a>* status = 0);</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    <span class="keyword">static</span> <a class="code" href="classprt_1_1_resolve_map_builder.html">ResolveMapBuilder</a>* createFromResolveMap(<a class="code" href="classprt_1_1_resolve_map.html">ResolveMap</a> <span class="keyword">const</span>* resolveMap, <a class="code" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a>* status = 0);</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="classprt_1_1_resolve_map.html">ResolveMap</a> <span class="keyword">const</span>* <a class="code" href="namespaceprt.html#a4a26fc77ff5cc864b72c542114245ad1">createResolveMap</a>(<a class="code" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a>* status = 0) <span class="keyword">const</span> = 0;</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="classprt_1_1_resolve_map.html">ResolveMap</a> <span class="keyword">const</span>* createResolveMapAndReset(<a class="code" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a>* status = 0) = 0;</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a> addEntry(<span class="keyword">const</span> <span class="keywordtype">wchar_t</span>* key, <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> *uri) = 0;</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a> setDownstreamMap(<span class="keyword">const</span> <a class="code" href="classprt_1_1_resolve_map.html">ResolveMap</a>* map) = 0;</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    <a class="code" href="classprt_1_1_resolve_map_builder.html">ResolveMapBuilder</a>();</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="classprt_1_1_resolve_map_builder.html">ResolveMapBuilder</a>();</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;};</div>
 <div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;} <span class="comment">// namespace prt</span></div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;} <span class="comment">// namespace prt</span></div>
 <div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* PRT_RESOLVEMAP_H_ */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* PRT_RESOLVEMAP_H_ */</span><span class="preprocessor"></span></div>
 <div class="ttc" id="classprt_1_1_resolve_map_html"><div class="ttname"><a href="classprt_1_1_resolve_map.html">prt::ResolveMap</a></div><div class="ttdef"><b>Definition:</b> ResolveMap.h:37</div></div>
-<div class="ttc" id="classprt_1_1_resolve_map_builder_html"><div class="ttname"><a href="classprt_1_1_resolve_map_builder.html">prt::ResolveMapBuilder</a></div><div class="ttdef"><b>Definition:</b> ResolveMap.h:72</div></div>
+<div class="ttc" id="classprt_1_1_resolve_map_builder_html"><div class="ttname"><a href="classprt_1_1_resolve_map_builder.html">prt::ResolveMapBuilder</a></div><div class="ttdef"><b>Definition:</b> ResolveMap.h:73</div></div>
 <div class="ttc" id="classprt_1_1_attributable_html"><div class="ttname"><a href="classprt_1_1_attributable.html">prt::Attributable</a></div><div class="ttdef"><b>Definition:</b> Attributable.h:38</div></div>
 <div class="ttc" id="classprt_1_1_object_html"><div class="ttname"><a href="classprt_1_1_object.html">prt::Object</a></div><div class="ttdef"><b>Definition:</b> Object.h:35</div></div>
 <div class="ttc" id="namespaceprt_html_a4a26fc77ff5cc864b72c542114245ad1"><div class="ttname"><a href="namespaceprt.html#a4a26fc77ff5cc864b72c542114245ad1">prt::createResolveMap</a></div><div class="ttdeci">ResolveMap const * createResolveMap(const wchar_t *rpkURI, const wchar_t *unpackFileSystemPath=nullptr, Status *stat=nullptr)</div></div>
@@ -159,7 +159,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat May 9 2020 18:52:25 for ArcGIS Procedural Runtime by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Sep 28 2020 18:43:33 for ArcGIS Procedural Runtime by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.5
 </small></address>

@@ -31,6 +31,45 @@
   <td><strong>Changes</strong></td>
   </tr>
 	<tr>
+		<td>2020.1<br>CGAC 1.15</td>
+		<td>
+		    New features:
+			<ul>        
+		        <li>Support for reading USD assets. </li> <!-- CE-8089 -->
+            </ul>
+		    New functions:
+			<ul>
+				<li><a href="func_transpose.html"><span class="code_std">transpose</span></a> function.</li> <!-- CE-7346 -->
+			</ul>
+			Changes to existing features:
+			<ul>
+				<li>CGA Compiler: Syntactic errors ("unexpected token") stop the compilation process. No definition errors or type mismatch errors are shown before grammatical errors are fixed.</li> <!-- CE-7650 -->
+			</ul>
+		    Bugfixes:
+			<ul>
+				<li>Improved numerical accuracy in pivot and scope calculation.</li> <!-- CE-6972 -->
+				<li><a href="op_comp.html"><span class="code_std">comp(f)</span></a>: Improved performance for shapes with many faces.</li> <!-- CE-7935 -->
+				<li><a href="func_convert.html"><span class="code_std">convert</span></a> function: The following conversions did not work correctly:<br><span class="code_std">convert(pos, object, scope|pivot, ...)</span><br><span class="code_std">convert(pos, world, scope|pivot|object, ...)</span><br><span class="code_std">convert(orient, pivot, scope, ...)</span></li> <!-- CE-2300 -->
+                <li><a href="op_split.html"><span class="code_std">split</span></a> operation: Fixed bugs in the automatic cut closing which led to missing faces or illegal hole faces in the cut-plane.</li>  <!-- CE-7457, CE-1574, CE-5272-->
+   				<li>Runtime errors occuring in the initialization phase (<span class="code_std">attr</span> and <span class="code_std">const</span> evaluation) are now visible in the Problems view.</li> <!-- CE-1563 -->
+   				<li><a href="func_print.html"><span class="code_std">print</span></a> function: Output from initialization phase (<span class="code_std">attr</span> and <span class="code_std">const</span> evaluation) is now printed to the CGA Console.</li> <!-- CE-1563 -->
+				<li>CGA Compiler:</li>
+				<ul>
+					<li>Fixed error when overrides for <a href="import.html"><span class="code_std">import</span></a> were stated in separate lines.</li> <!-- CE-8202 -->
+					<li>Fixed missing type check in rare cases for definitions that match a builtin signature.</li> <!-- CE-8255 -->
+					<li>Fixed incorrect error message for illegal parent styles.</li> <!-- CE-8254 -->
+					<li>Fixed a bug where the error was not correctly shown when huge rule files hit an internal limit.</li> <!-- CE-8299 -->
+					<li>Fixed an unhandled error for styles with missing <span class="cga_opparam">styleId</span>.</li> <!-- CE-7650 -->
+					<li>Fixed incorrect error in the presence of multi-line strings.</li> <!-- CE-8340 -->
+					<li>Fixed missing tooltip for duplicate definition error markers.</li> <!-- CE-5122 -->
+				</ul>
+			</ul>
+		</td>
+	</tr>
+  </tr>
+			
+  </tr>
+	<tr>
 		<td>2020.0<br>CGAC 1.14</td>
 		<td>
 			New functions:

@@ -70,10 +70,10 @@ u-coordinate can be set. Note that it defaults to 0 if not provided.</p>
 
 <h4>Default Use Case</h4>
 
-<p class="text">The first rule snippet shows how the setupProjection
-operation is used <i>in the facade rule</i> to define the texture
+<p class="text">The first rule snippet shows how the <span class="codelight">setupProjection</span>
+operation is used in the <span class="codelight">Frontfacade</span> rule to define the texture
 coordinate system (also called "uvw" system to avoid confusion with the
-xyz system for the geometry) for the subsequent projectUV operations (=
+xyz system for the geometry) for the subsequent <span class="codelight">projectUV</span> operations (=
 texture projections).</p>
 <pre class="code3">
 Lot -->
@@ -91,10 +91,10 @@ Frontfacade -->
 
 </pre>
 
-<p class="text">In the second snippet we show how the projectUV operation computes
+<p class="text">In the second snippet we show how the <span class="codelight">projectUV</span> operation computes
 new texture coordinates for the wall asset. Already existing texture coordinates
-on this channel are replaced. projectUV uses the uvw coordinate system previously
-defined by setupProjection and projects the assets vertices along the w-axis to get the
+on this channel are replaced. <span class="codelight">projectUV</span> uses the uvw coordinate system previously
+defined by <span class="codelight">setupProjection</span> and projects the assets vertices along the w-axis to get the
 new texture coordinates.</p>
 <pre class="code3">
 ... rules for floors and facade tiles ...
@@ -107,7 +107,7 @@ Wall -->
 </pre>
 
 <p class="text">In contrast, note how the rule for the door does not use any
-projectUV operation to apply the texture, it just uses the generic texture
+<span class="codelight">projectUV</span> operation to apply the texture, it just uses the generic texture
 coordinates from the cube asset.</p>
 <pre class="code3">
 Door -->
@@ -117,10 +117,10 @@ Door -->
     primitiveCube()    
 </pre>
 
-<h4>Scope vs. setupUV</h4>
+<h4>Scope vs. setupProjection</h4>
 
 <p class="text">The example below shows the difference if we put the
-setupProjection command next to the projectUV in the wall rule instead in the rule on the
+<span class="codelight">setupProjection</span> command next to the <span class="cga_opparam">projectUV</span> in the <span class="codelight">Wall</span> rule instead in the rule on the
 facade level. Please note that in the bottom picture, the brick texture does not span over
 the whole facade anymore; there are visible seams.
 
@@ -163,7 +163,7 @@ Wall -->
 results in artifacts like on this doorframe:<br/>
 <img src="images/setupuv_ztrick_1.png" /></p>
 
-<p class="text">For this reason the <span class="">setupProjection</span>
+<p class="text">For this reason the <span class="codelight">setupProjection</span>
 command has an optional parameter <span class="cga_opparam">uwFactor</span>
 which allows for the projection of the texture also along the
 w-direction. The value of the <span class="cga_opparam">uwFactor</span>
@@ -248,7 +248,7 @@ Roof-->
    scaleUV(0, 1, -1)
    set(material.colormap, "test_0102_ortho.jpg")
 </pre>
-                <em> The Roof rule is added. It projects the same texture as shown in the attribute layer onto the top faces of the mass models. The global x-axis is chosen as the u-axis, and the global z-axis as the v-axis. This results in an inverted texture along the v-axis and is corrected with the scaleUV() operation.                </em>   	</td>
+                <em> The <span class="codelight">Roof</span> rule is added. It projects the same texture as shown in the attribute layer onto the top faces of the mass models. The global x-axis is chosen as the u-axis, and the global z-axis as the v-axis. This results in an inverted texture along the v-axis and is corrected with the <span class="codelight">scaleUV()</span> operation.</em>   	</td>
     </tr>
 
 
@@ -284,7 +284,7 @@ Roof-->
    set(material.colormap, "test_0102_ortho.jpg")
 </pre>
                 <em>Depending on the coordinate system there might be artifacts in the texture due to numerical issues. These can be avoided by using the offset parameters
-                of the setupProjection() operation.</em>   	</td>
+                of the <span class="codelight">setupProjection</span> operation.</em>   	</td>
     </tr>
                     
   </table>
