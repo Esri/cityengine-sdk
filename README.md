@@ -80,8 +80,8 @@ Please note that the individual example READMEs may include further requirements
 
 #### Windows
 * Windows 8.1 or 10 (64bit)
-* Required C++ compiler: Visual Studio 2019 with Toolset MSVC 14.23 or later
-* Required flags for extension libraries release mode: `/bigobj /GR /EHsc /MD` (use `/MDd` to debug)
+* Required C++ compiler: Visual Studio 2019 with Toolset MSVC 14.27 or later
+* Required flags for extension libraries release mode: `/std:c++17 /bigobj /GR /EHsc /MD` (use `/MDd` to debug)
 
 
 #### macOS
@@ -92,8 +92,8 @@ Please note that the individual example READMEs may include further requirements
 
 #### Linux
 * RedHat Enterprise Linux 7.x or compatible
-* Required C++ compiler: GCC 6.3 or later (RedHat Enterprise Linux DevToolSet 6.1)
-* Required flags for extension libraries: `-std=c++14 -D_GLIBCXX_USE_CXX11_ABI=0 -march=nocona -fvisibility=hidden -fvisibility-inlines-hidden -Wl,--exclude-libs,ALL`
+* Required C++ compiler: GCC 9.3 or later (RedHat Enterprise Linux DevToolSet 9)
+* Required flags for extension libraries: `-std=c++17 -D_GLIBCXX_USE_CXX11_ABI=0 -march=nocona -fvisibility=hidden -fvisibility-inlines-hidden -Wl,--exclude-libs,ALL`
 
 
 ## Further Resources
