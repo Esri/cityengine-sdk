@@ -63,9 +63,10 @@ This repository contains a number of source code examples in the "examples" dire
 * stldec: demonstrates how to write a custom decoder for the STL geometry format.
 
 ## Related Projects
-* [PyPRT](https://esri.github.io/pyprt): Python language bindings for the Procedural Runtime (PRT)
-* [Palladio](https://esri.github.io/palladio): CityEngine plugin for SideFX Houdini
-* [Serlio](https://esri.github.io/serlio): CityEngine plugin for Autodesk Maya
+* [PyPRT](https://esri.github.io/cityengine/pyprt): Python language bindings for the Procedural Runtime (PRT)
+* [Palladio](https://esri.github.io/cityengine/palladio): CityEngine plugin for SideFX Houdini
+* [Serlio](https://esri.github.io/cityengine/serlio): CityEngine plugin for Autodesk Maya
+* [Vitruvio](https://esri.github.io/cityengine/vitruvio): CityEngine plugin for Epic Unreal Engine
 
 
 ## General Software Requirements
