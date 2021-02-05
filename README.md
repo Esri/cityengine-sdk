@@ -98,14 +98,15 @@ Please note that the individual example READMEs may include further requirements
 
 
 ## Further Resources
-* Documentation:
+* Documentation
     * [Changelog](changelog.md)
     * Online reference: https://esri.github.io/cityengine-sdk
     * Offline reference: see /doc subdirectory inside the release archive
-* Forum:
-    * General CityEngine: https://geonet.esri.com/community/gis/3d/cityengine
-* Facebook: https://www.facebook.com/CityEngine
-* Twitter: https://twitter.com/CityEngine
+* Community
+    * Forum: https://geonet.esri.com/community/gis/3d/cityengine
+    * Youtube: https://www.youtube.com/c/CityEngineTV
+    * Facebook: https://www.facebook.com/CityEngine
+    * Twitter: https://twitter.com/CityEngine
 
 
 ## Issues
