@@ -1,3 +1,10 @@
+CITYENGINE SDK 2.4.XXXX CHANGELOG
+=================================
+
+This section lists changes compared to CityEngine SDK 2.3.6821
+
+
+
 CITYENGINE SDK 2.3.6821 CHANGELOG
 =================================
 
