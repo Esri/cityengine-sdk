@@ -34,6 +34,7 @@
 #include "prtx/EncoderInfoBuilder.h"
 
 #include <sstream>
+#include <cassert>
 
 
 namespace {
