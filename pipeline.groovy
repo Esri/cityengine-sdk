@@ -66,9 +66,9 @@ Map taskGenSTLDEC() {
 
 def taskBuildPRT4CMD(cfg) {
 	final String appName = 'prt4cmd'
-	final List DEPS = [ PrtAppPipelineLibrary.Dependencies.CESDK20201 ]
+	final List DEPS = [ PrtAppPipelineLibrary.Dependencies.CESDK20210 ]
 	final List defs = [
-		[ key: 'prt_DIR',               val: PrtAppPipelineLibrary.Dependencies.CESDK20201.p ],
+		[ key: 'prt_DIR',               val: PrtAppPipelineLibrary.Dependencies.CESDK20210.p ],
 		[ key: 'PRT4CMD_VERSION_MAJOR', val: 0 ],
 		[ key: 'PRT4CMD_VERSION_MINOR', val: 0 ],
 		[ key: 'PRT4CMD_VERSION_MICRO', val: env.BUILD_NUMBER ]
@@ -79,9 +79,9 @@ def taskBuildPRT4CMD(cfg) {
 
 def taskBuildSTLENC(cfg) {
 	final String appName = 'stlenc'
-	final List DEPS = [ PrtAppPipelineLibrary.Dependencies.CESDK20201 ]
+	final List DEPS = [ PrtAppPipelineLibrary.Dependencies.CESDK20210 ]
 	List defs = [
-		[ key: 'prt_DIR',              val: PrtAppPipelineLibrary.Dependencies.CESDK20201.p ],
+		[ key: 'prt_DIR',              val: PrtAppPipelineLibrary.Dependencies.CESDK20210.p ],
 		[ key: 'STLENC_VERSION_MICRO', val: env.BUILD_NUMBER ]
 	]
 	papl.buildConfig(REPO, myBranch, "${SOURCES}/${appName}/src", BUILD_TARGET, cfg, DEPS, defs, REPO_CREDS)
@@ -90,9 +90,9 @@ def taskBuildSTLENC(cfg) {
 
 def taskBuildSTLDEC(cfg) {
 	final String appName = 'stldec'
-	final List DEPS = [ PrtAppPipelineLibrary.Dependencies.CESDK20201 ]
+	final List DEPS = [ PrtAppPipelineLibrary.Dependencies.CESDK20210 ]
 	List defs = [
-		[ key: 'prt_DIR',              val: PrtAppPipelineLibrary.Dependencies.CESDK20201.p ],
+		[ key: 'prt_DIR',              val: PrtAppPipelineLibrary.Dependencies.CESDK20210.p ],
 		[ key: 'STLDEC_VERSION_MICRO', val: env.BUILD_NUMBER ]
 	]
 	papl.buildConfig(REPO, myBranch, "${SOURCES}/${appName}/src", BUILD_TARGET, cfg, DEPS, defs, REPO_CREDS)
