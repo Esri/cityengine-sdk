@@ -118,7 +118,7 @@ Anyone and everyone is welcome to contribute and to extend and improve the examp
 
 
 ## Licensing
-Copyright (c) 2020 Esri
+Copyright (c) 2021 Esri
 
 You may not use the content of this repository except in compliance with the following Licenses:
 1. All content in the "examples" directory tree is licensed under the APACHE 2.0 license. You may obtain a copy of this license at http://www.apache.org/licenses/LICENSE-2.0.
