@@ -19,14 +19,11 @@ import com.esri.zrh.jenkins.ce.PrtAppPipelineLibrary
 @Field final String BUILD_TARGET = 'package'
 @Field final Map    CESDK_LATEST = PrtAppPipelineLibrary.Dependencies.CESDK_LATEST
 
-@Field final List CONFIGS_LATEST = [		
-	[ os: cepl.CFG_OS_RHEL7, bc: cepl.CFG_BC_REL, tc: cepl.CFG_TC_GCC93,  cc: cepl.CFG_CC_OPT, arch: cepl.CFG_ARCH_X86_64, deps: [ CESDK_LATEST ] ],
-	[ os: cepl.CFG_OS_WIN10, bc: cepl.CFG_BC_REL, tc: cepl.CFG_TC_VC1427, cc: cepl.CFG_CC_OPT, arch: cepl.CFG_ARCH_X86_64, deps: [ CESDK_LATEST ] ],
-]
-
-@Field final List CONFIGS_DEFAULT = [
-	[ os: cepl.CFG_OS_RHEL7, bc: cepl.CFG_BC_REL, tc: cepl.CFG_TC_GCC93,  cc: cepl.CFG_CC_OPT, arch: cepl.CFG_ARCH_X86_64, deps: [] ],
-	[ os: cepl.CFG_OS_WIN10, bc: cepl.CFG_BC_REL, tc: cepl.CFG_TC_VC1427, cc: cepl.CFG_CC_OPT, arch: cepl.CFG_ARCH_X86_64, deps: [] ],
+@Field final List CONFIGS = [		
+	[ grp: 'latest', os: cepl.CFG_OS_RHEL7, bc: cepl.CFG_BC_REL, tc: cepl.CFG_TC_GCC93,  cc: cepl.CFG_CC_OPT, arch: cepl.CFG_ARCH_X86_64, deps: [ CESDK_LATEST ] ],
+	[ grp: 'latest', os: cepl.CFG_OS_WIN10, bc: cepl.CFG_BC_REL, tc: cepl.CFG_TC_VC1427, cc: cepl.CFG_CC_OPT, arch: cepl.CFG_ARCH_X86_64, deps: [ CESDK_LATEST ] ],
+	[ grp: 'default', os: cepl.CFG_OS_RHEL7, bc: cepl.CFG_BC_REL, tc: cepl.CFG_TC_GCC93,  cc: cepl.CFG_CC_OPT, arch: cepl.CFG_ARCH_X86_64, deps: [] ],
+	[ grp: 'default', os: cepl.CFG_OS_WIN10, bc: cepl.CFG_BC_REL, tc: cepl.CFG_TC_VC1427, cc: cepl.CFG_CC_OPT, arch: cepl.CFG_ARCH_X86_64, deps: [] ],
 ]
 
 
@@ -45,28 +42,25 @@ Map getTasks(String branchName = null) {
 	if (branchName) myBranch = branchName
 
 	Map tasks = [:]
-	tasks << taskGenPRT4CMD(CONFIGS_LATEST, 'latest')
-	tasks << taskGenPRT4CMD(CONFIGS_DEFAULT, 'default')
-	tasks << taskGenSTLENC(CONFIGS_LATEST, 'latest')
-	tasks << taskGenSTLENC(CONFIGS_DEFAULT, 'default')
-	tasks << taskGenSTLDEC(CONFIGS_LATEST, 'latest')
-	tasks << taskGenSTLDEC(CONFIGS_DEFAULT, 'default')
+	tasks << taskGenPRT4CMD(CONFIGS)
+	tasks << taskGenSTLENC(CONFIGS)
+	tasks << taskGenSTLDEC(CONFIGS)
 	return tasks
 }
 
 
 // -- TASK GENERATORS
 
-Map taskGenPRT4CMD(configs, suffix) {
-	return cepl.generateTasks('prt4cmd-'+suffix, this.&taskBuildPRT4CMD, configs)
+Map taskGenPRT4CMD(configs) {
+	return cepl.generateTasks('prt4cmd', this.&taskBuildPRT4CMD, configs)
 }
 
-Map taskGenSTLENC(configs, suffix) {
-	return cepl.generateTasks('stlenc-'+suffix, this.&taskBuildSTLENC, configs)
+Map taskGenSTLENC(configs) {
+	return cepl.generateTasks('stlenc', this.&taskBuildSTLENC, configs)
 }
 
-Map taskGenSTLDEC(configs, suffix) {
-	return cepl.generateTasks('stldec-'+suffix, this.&taskBuildSTLDEC, configs)
+Map taskGenSTLDEC(configs) {
+	return cepl.generateTasks('stldec', this.&taskBuildSTLDEC, configs)
 }
 
 
@@ -80,7 +74,7 @@ def taskBuildPRT4CMD(cfg) {
 		[ key: 'PRT4CMD_VERSION_MICRO', val: env.BUILD_NUMBER ]
 	]
 	papl.buildConfig(REPO, myBranch, "${SOURCES}/${appName}/src", BUILD_TARGET, cfg, cfg.deps, defs, REPO_CREDS)
-	papl.publish(appName, myBranch, "esri_${appName}*.zip", { "0.0.${env.BUILD_NUMBER}" }, cfg)
+	papl.publish(appName, myBranch, "esri_${appName}*.zip", { "0.0.${env.BUILD_NUMBER}" }, cfg, { cepl.getArchiveClassifier(cfg) + '-cesdk_' + cfg.grp })
 }
 
 def taskBuildSTLENC(cfg) {
@@ -89,7 +83,7 @@ def taskBuildSTLENC(cfg) {
 		[ key: 'STLENC_VERSION_MICRO', val: env.BUILD_NUMBER ]
 	]
 	papl.buildConfig(REPO, myBranch, "${SOURCES}/${appName}/src", BUILD_TARGET, cfg, cfg.deps, defs, REPO_CREDS)
-	papl.publish(appName, myBranch, "esri_${appName}*.zip", { "0.0.${env.BUILD_NUMBER}" }, cfg)
+	papl.publish(appName, myBranch, "esri_${appName}*.zip", { "0.0.${env.BUILD_NUMBER}" }, cfg, { cepl.getArchiveClassifier(cfg) + '-cesdk_' + cfg.grp })
 }
 
 def taskBuildSTLDEC(cfg) {
@@ -98,7 +92,7 @@ def taskBuildSTLDEC(cfg) {
 		[ key: 'STLDEC_VERSION_MICRO', val: env.BUILD_NUMBER ]
 	]
 	papl.buildConfig(REPO, myBranch, "${SOURCES}/${appName}/src", BUILD_TARGET, cfg, cfg.deps, defs, REPO_CREDS)
-	papl.publish(appName, myBranch, "esri_${appName}*.zip", { "0.0.${env.BUILD_NUMBER}" }, cfg)
+	papl.publish(appName, myBranch, "esri_${appName}*.zip", { "0.0.${env.BUILD_NUMBER}" }, cfg, { cepl.getArchiveClassifier(cfg) + '-cesdk_' + cfg.grp })
 }
 
 
