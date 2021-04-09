@@ -17,10 +17,16 @@ import com.esri.zrh.jenkins.ce.PrtAppPipelineLibrary
 @Field final String REPO_CREDS   = 'esri-cityengine-sdk-deployer-key'
 @Field final String SOURCES      = "cityengine-sdk.git/examples"
 @Field final String BUILD_TARGET = 'package'
+@Field final Map    CESDK_LATEST = PrtAppPipelineLibrary.Dependencies.CESDK_LATEST
 
-@Field final List CONFIGS = [		
-	[ os: cepl.CFG_OS_RHEL7, bc: cepl.CFG_BC_REL, tc: cepl.CFG_TC_GCC93,  cc: cepl.CFG_CC_OPT, arch: cepl.CFG_ARCH_X86_64 ],
-	[ os: cepl.CFG_OS_WIN10, bc: cepl.CFG_BC_REL, tc: cepl.CFG_TC_VC1427, cc: cepl.CFG_CC_OPT, arch: cepl.CFG_ARCH_X86_64 ],
+@Field final List CONFIGS_LATEST = [		
+	[ os: cepl.CFG_OS_RHEL7, bc: cepl.CFG_BC_REL, tc: cepl.CFG_TC_GCC93,  cc: cepl.CFG_CC_OPT, arch: cepl.CFG_ARCH_X86_64, deps: [ CESDK_LATEST ] ],
+	[ os: cepl.CFG_OS_WIN10, bc: cepl.CFG_BC_REL, tc: cepl.CFG_TC_VC1427, cc: cepl.CFG_CC_OPT, arch: cepl.CFG_ARCH_X86_64, deps: [ CESDK_LATEST ] ],
+]
+
+@Field final List CONFIGS_DEFAULT = [
+	[ os: cepl.CFG_OS_RHEL7, bc: cepl.CFG_BC_REL, tc: cepl.CFG_TC_GCC93,  cc: cepl.CFG_CC_OPT, arch: cepl.CFG_ARCH_X86_64, deps: [] ],
+	[ os: cepl.CFG_OS_WIN10, bc: cepl.CFG_BC_REL, tc: cepl.CFG_TC_VC1427, cc: cepl.CFG_CC_OPT, arch: cepl.CFG_ARCH_X86_64, deps: [] ],
 ]
 
 
@@ -39,25 +45,28 @@ Map getTasks(String branchName = null) {
 	if (branchName) myBranch = branchName
 
 	Map tasks = [:]
-	tasks << taskGenPRT4CMD()
-	tasks << taskGenSTLENC()
-	tasks << taskGenSTLDEC()
+	tasks << taskGenPRT4CMD(CONFIGS_LATEST, 'latest')
+	tasks << taskGenPRT4CMD(CONFIGS_DEFAULT, 'default')
+	tasks << taskGenSTLENC(CONFIGS_LATEST, 'latest')
+	tasks << taskGenSTLENC(CONFIGS_DEFAULT, 'default')
+	tasks << taskGenSTLDEC(CONFIGS_LATEST, 'latest')
+	tasks << taskGenSTLDEC(CONFIGS_DEFAULT, 'default')
 	return tasks
 }
 
 
 // -- TASK GENERATORS
 
-Map taskGenPRT4CMD() {
-	return cepl.generateTasks('prt4cmd', this.&taskBuildPRT4CMD, CONFIGS)
+Map taskGenPRT4CMD(configs, suffix) {
+	return cepl.generateTasks('prt4cmd-'+suffix, this.&taskBuildPRT4CMD, configs)
 }
 
-Map taskGenSTLENC() {
-	return cepl.generateTasks('stlenc', this.&taskBuildSTLENC, CONFIGS)
+Map taskGenSTLENC(configs, suffix) {
+	return cepl.generateTasks('stlenc-'+suffix, this.&taskBuildSTLENC, configs)
 }
 
-Map taskGenSTLDEC() {
-	return cepl.generateTasks('stldec', this.&taskBuildSTLDEC, CONFIGS)
+Map taskGenSTLDEC(configs, suffix) {
+	return cepl.generateTasks('stldec-'+suffix, this.&taskBuildSTLDEC, configs)
 }
 
 
@@ -65,37 +74,41 @@ Map taskGenSTLDEC() {
 
 def taskBuildPRT4CMD(cfg) {
 	final String appName = 'prt4cmd'
-	final List DEPS = [ PrtAppPipelineLibrary.Dependencies.CESDK20210 ]
-	final List defs = [
-		[ key: 'prt_DIR',               val: PrtAppPipelineLibrary.Dependencies.CESDK20210.p ],
+	final List defs = getPrtDirDefinition(cfg.deps) + [
 		[ key: 'PRT4CMD_VERSION_MAJOR', val: 0 ],
 		[ key: 'PRT4CMD_VERSION_MINOR', val: 0 ],
 		[ key: 'PRT4CMD_VERSION_MICRO', val: env.BUILD_NUMBER ]
 	]
-	papl.buildConfig(REPO, myBranch, "${SOURCES}/${appName}/src", BUILD_TARGET, cfg, DEPS, defs, REPO_CREDS)
+	papl.buildConfig(REPO, myBranch, "${SOURCES}/${appName}/src", BUILD_TARGET, cfg, cfg.deps, defs, REPO_CREDS)
 	papl.publish(appName, myBranch, "esri_${appName}*.zip", { "0.0.${env.BUILD_NUMBER}" }, cfg)
 }
 
 def taskBuildSTLENC(cfg) {
 	final String appName = 'stlenc'
-	final List DEPS = [ PrtAppPipelineLibrary.Dependencies.CESDK20210 ]
-	List defs = [
-		[ key: 'prt_DIR',              val: PrtAppPipelineLibrary.Dependencies.CESDK20210.p ],
+	final List defs = getPrtDirDefinition(cfg.deps) + [
 		[ key: 'STLENC_VERSION_MICRO', val: env.BUILD_NUMBER ]
 	]
-	papl.buildConfig(REPO, myBranch, "${SOURCES}/${appName}/src", BUILD_TARGET, cfg, DEPS, defs, REPO_CREDS)
+	papl.buildConfig(REPO, myBranch, "${SOURCES}/${appName}/src", BUILD_TARGET, cfg, cfg.deps, defs, REPO_CREDS)
 	papl.publish(appName, myBranch, "esri_${appName}*.zip", { "0.0.${env.BUILD_NUMBER}" }, cfg)
 }
 
 def taskBuildSTLDEC(cfg) {
 	final String appName = 'stldec'
-	final List DEPS = [ PrtAppPipelineLibrary.Dependencies.CESDK20210 ]
-	List defs = [
-		[ key: 'prt_DIR',              val: PrtAppPipelineLibrary.Dependencies.CESDK20210.p ],
+	final List defs = getPrtDirDefinition(cfg.deps) + [
 		[ key: 'STLDEC_VERSION_MICRO', val: env.BUILD_NUMBER ]
 	]
-	papl.buildConfig(REPO, myBranch, "${SOURCES}/${appName}/src", BUILD_TARGET, cfg, DEPS, defs, REPO_CREDS)
+	papl.buildConfig(REPO, myBranch, "${SOURCES}/${appName}/src", BUILD_TARGET, cfg, cfg.deps, defs, REPO_CREDS)
 	papl.publish(appName, myBranch, "esri_${appName}*.zip", { "0.0.${env.BUILD_NUMBER}" }, cfg)
+}
+
+
+// -- HELPER FUNCTIONS
+
+List getPrtDirDefinition(deps) {
+	if (deps.contains(CESDK_LATEST)) {
+		return [ [ key: 'prt_DIR', val: CESDK_LATEST.p ] ]
+	}
+	return []
 }
 
 
