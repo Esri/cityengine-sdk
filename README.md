@@ -86,12 +86,6 @@ Please note that the individual example READMEs may include further requirements
 * Required flags for extension libraries release mode: `/std:c++17 /bigobj /GR /EHsc /MD` (use `/MDd` to debug)
 
 
-#### macOS
-* macOS Sierra (10.12) or later
-* Required C++ compiler: Apple Clang 8.1 or later (i.e. XCode 8.3 or later)
-* Required flags for extension libraries: `-std=c++14 -stdlib=libc++ -fvisibility=hidden -fvisibility-inlines-hidden -Wl,--exclude-libs,ALL`
-
-
 #### Linux
 * RedHat Enterprise Linux 7.x or compatible
 * Required C++ compiler: GCC 9.3 or later (RedHat Enterprise Linux DevToolSet 9)

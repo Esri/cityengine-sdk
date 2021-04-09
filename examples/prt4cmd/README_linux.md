@@ -21,7 +21,7 @@ explain how to get the sdk binaries and example data.
 SOFTWARE REQUIREMENTS
 ---------------------
 
-- See "General Software Requirements" (Linux or macOS)
+- See "General Software Requirements" (Linux)
 
 
 BUILD INSTRUCTIONS

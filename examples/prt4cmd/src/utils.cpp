@@ -65,8 +65,6 @@ std::vector<const C*> toPtrVec(const std::vector<std::basic_string<C>>& sv) {
 
 #if defined(_WIN32)
 #	include <Windows.h>
-#elif defined(__APPLE__)
-#	include <mach-o/dyld.h>
 #elif defined(__linux__)
 #	include <sys/types.h>
 #	include <unistd.h>
@@ -85,13 +83,6 @@ pcu::Path getExecutablePath() {
     }
     else
         return {};
-#elif defined(__APPLE__)
-    char path[1024];
-    uint32_t size = sizeof(path);
-	if (_NSGetExecutablePath(path, &size) == 0)
-    	return pcu::Path(std::string(path));
-	else
-    	return {};
 #elif defined(__linux__)
 	const std::string proc = "/proc/" + std::to_string(getpid()) + "/exe";
 	char path[1024];
