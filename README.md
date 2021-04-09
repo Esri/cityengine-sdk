@@ -29,7 +29,7 @@ The archives are available for download at the corresponding github release page
 - [v2.3.6821 (2020-10-22, CityEngine 2020.1)](https://github.com/Esri/cityengine-sdk/releases/tag/2.3.6821)
 - [v2.2.6332 (2020-06-09, CityEngine 2020.0)](https://github.com/Esri/cityengine-sdk/releases/tag/2.2.6332)
 - [v2.1.5705 (2019-12-11, CityEngine 2019.1)](https://github.com/Esri/cityengine-sdk/releases/tag/2.1.5705)
-- v2.1.5704 (2019-09-25, CityEngine 2019.1
+- v2.1.5704 (2019-09-25, CityEngine 2019.1, replaced by v2.1.5705 with minor documentation fix)
 - [v2.0.5403 (2019-05-08, CityEngine 2019.0)](https://github.com/Esri/cityengine-sdk/releases/tag/2.0.5403)
 - [v1.10.4198 (2018-09-17, CityEngine 2018.1)](https://github.com/Esri/cityengine-sdk/releases/tag/1.10.4198)
 - [v1.10.4051 (2018-05-11, CityEngine 2018.0)](https://github.com/Esri/cityengine-sdk/releases/tag/1.10.4051)
@@ -63,9 +63,10 @@ This repository contains a number of source code examples in the "examples" dire
 * stldec: demonstrates how to write a custom decoder for the STL geometry format.
 
 ## Related Projects
-* [PyPRT](https://esri.github.io/pyprt): Python language bindings for the Procedural Runtime (PRT)
-* [Palladio](https://esri.github.io/palladio): CityEngine plugin for SideFX Houdini
-* [Serlio](https://esri.github.io/serlio): CityEngine plugin for Autodesk Maya
+* [PyPRT](https://esri.github.io/cityengine/pyprt): Python language bindings for the Procedural Runtime (PRT)
+* [Palladio](https://esri.github.io/cityengine/palladio): CityEngine plugin for SideFX Houdini
+* [Serlio](https://esri.github.io/cityengine/serlio): CityEngine plugin for Autodesk Maya
+* [Vitruvio](https://esri.github.io/cityengine/vitruvio): CityEngine plugin for Epic Unreal Engine
 
 
 ## General Software Requirements
@@ -97,14 +98,15 @@ Please note that the individual example READMEs may include further requirements
 
 
 ## Further Resources
-* Documentation:
+* Documentation
     * [Changelog](changelog.md)
     * Online reference: https://esri.github.io/cityengine-sdk
     * Offline reference: see /doc subdirectory inside the release archive
-* Forum:
-    * General CityEngine: https://geonet.esri.com/community/gis/3d/cityengine
-* Facebook: https://www.facebook.com/CityEngine
-* Twitter: https://twitter.com/CityEngine
+* Community
+    * Forum: https://geonet.esri.com/community/gis/3d/cityengine
+    * Youtube: https://www.youtube.com/c/CityEngineTV
+    * Facebook: https://www.facebook.com/CityEngine
+    * Twitter: https://twitter.com/CityEngine
 
 
 ## Issues
