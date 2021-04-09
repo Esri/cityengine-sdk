@@ -26,6 +26,6 @@ node {
 	impl = load('pipeline.groovy')
 }
 
-stage('esri-cityengine-sdk') {
+stage('cityengine-sdk') {
 	impl.pipeline()
 }
