@@ -1,3 +1,165 @@
+CITYENGINE SDK 2.4.xxxx CHANGELOG
+=================================
+
+This section lists changes compared to CityEngine SDK 2.3.6821.
+
+
+General Info
+------------
+* CityEngine SDK 2.4.xxxx is used in CityEngine 2021.0.xxxx.
+* MacOS is not supported anymore.
+
+PRT API
+-------
+
+* We added functionality for dealing with **embedded resources** in general and specifically in geometry files. Modern 3D formats like glb or usdz allow for embedding all referenced data (e.g. textures) into one file. First, support for using such files in a PRT client application has been simplified (e.g., when building a ResolveMap with the ResolveMapBuilder). Second, tools for writing extensions (i.e. GeometryDecoders) which can handle embedded resources have been added to the API.      
+
+
+* `EncoderInfo`:
+  * added `getExtensions()` function.
+  * added `getMerit()` function.
+  * added `getType()` function.
+* `DecoderInfo`:
+  * added `canHandleEmbeddedResources()` function.
+  * added `getMerit()` function.
+  * added `getType()` function.
+* `ResolveMapBuilder`: `addEntry()` function: an optional parameter was added to control embedded resources handling (`EmbeddedEntriesMode` enum). By default, to-be-added entries are now inspected if they contain embeded resources, and these are automatically added to the resolvemap. This was not the case before. 
+* `ResolveMap`: `getString()`: Bugfix: `stat` was not set to `STATUS_OK` if the call succeeded.
+* `createResolveMap()`: 
+  * This also works for content types with embedded resorces (such as glb) which was not documented before.
+  * Bugfix: unpacking to file system did not work for types with embedded resources.
+* `Status`: new status code `STATUS_FILE_READ_FAILED`
+* `FileOutputCallbacks`: Bugfix: the class did not correctly handle Unicode (UTF-16) paths on windows.
+* `InitialShapeBuilder`: `setAttributes()` function: added documentation about how to set up 2D array CGA attributes.
+* architecture.pdf: fixed wrong function names in "Extension Lifetime" section.
+
+PRTX API
+--------
+* A general note for decoder implementors about how to deal with embedded resources: Typically, a `Decoder` for a format which supports embedded resources needs a matching `ResolveMapProvider` implementation which scans the resource and creates a `ResolveMap` with the embedded entries. Each entry maps a "human readable" key to a "complex" `URI` with the format in the scheme part. In order to decode such an URI (i.e. extracting the raw data the URI is referring to), a matching `StreamAdaptor` needs to be implemented and registered. Let's take the GLTFDecoder as example:
+  * The GLTFDecoder decodes the actual format into a `Geometry`,
+  * the GLTFResolveMapProvider creates the `ResolveMap` which contains embedded textures identifired by URIs having the "gltf" scheme and
+  * the GLTFAdaptor uses the "gltf" scheme URIs to extract the binary data of the embedded items. 
+* `DecoderFactory`: added optional `canHandleER` parameter to constructor. If this parameter is set to true, the Decoder can handle embedded resources and a matching `ResolveMapProvider` and `StreamAdaptor` must be registered.  
+* `ResolveMap`: 
+  * added `anchorEmbeddedKey()` function.
+  * added `anchorRelativeKey()` function.
+  * deprecated `replaceLastKeySegment()` function (use `anchorRelativeKey()` instead).
+* `URI`: added `DELIM_FRAGMENT` and `DELIM_QUERY` constants.
+* `URIUtils`
+  * `createCompositeURI()`:
+    * replaced the two function overloads with one function with default values.
+    * Bugfix: it did not work for >2 nesting levels.
+  * `addFragment()`: Bugfix: in some cases, an empty host componet was unexpectedly added to the URI.
+* `EncoderInfoBuilder`: added `setMerit()` function.
+* `FileExtension`: Bugfix: fixed a rare crash in copy constructor / destructor.
+* `Shape`: added documentation about how to extract the number of rows for 2D CGA array attributes.
+
+CGA
+---
+* New features:
+  * Local variables can be defined using the with keyword.
+  * Support for reading DWG assets.
+* New operations:
+  * setMaterial operation.
+  * resetMaterial operation.
+  * roofRidge operation.
+  * alignScopeToGeometryBBox operation.
+  * footprint operation.
+* New functions:
+  * getMaterial function.
+  * sum function.
+  * listToArray, listFromArray functions.
+  * geometry.groups function.
+  * geometry.materials function.
+  * filesSearch function: In contrast to fileSearch this function returns an array of strings instead of a stringlist.
+  * assetNamingInfos function: In contrast to assetNamingInfo this function returns an array of strings instead of a stringlist.
+* Changes to existing features:
+  * i operation and initial shapes: Improved automatic removal of 0-area faces, 0-length edges and 0-angles. The cleanup is less invasive now.
+  * roofShed operation: Negative angles are now supported. Note that face and vertex indices of a shed roof are different now. 
+  * USD reader: added support for USDZ files.
+  * convert function: Added a version which takes the coordinate values as array.
+  * assetsSortSize, assetsSortRatio, imagesSortRatio functions: Added versions which take the list of files as array of strings instead of a stringlist.
+  * imageBestRatio, imageApproxRatio, assetBestSize, assetApproxSize, assetFitSize, assetBestRatio, assetApproxRatio functions: An invalid string selector does not fall back to a default value but now leads to a runtime error. 
+  * ceil, floor, rint, isinf, isnan, isNull functions: Support for arrays.
+  * comp, offset, extrude, roofHip, roofGable, roofPyramid, roofShed, taper, split, setback, setbackPerEdge, setbackToArea, shapeLUO, innerRectangle, convexify operations: Asset groups are now kept. 
+  * extrude, taper, setback, setbackPerEdge, setbackToArea, shapeLUO, innerRectangle, convexify operations: Asset face materials are now kept.
+  * comp(v) operation: The material of vertex components is now set to default. 
+  * CGA Compiler: Identifiers for parameters must not contain a '$' character. 
+* Bugfixes:
+  * offset operation: In case of a failure a crash is prevented or a resulting degenerated geometry is avoided. This happened in rare cases with positive offset distance and collinear vertices. 
+  * geometry.angle function: Fixed wrong azimuth. It was incorrectly shifted by 180 degrees. 
+  * Fixed an issue where the group name of the geometry was not set to initialShape.name for initial shapes with 1 face.
+  * setback, setbackToArea, setbackPerEdge operation: Avoid creating an unnecessary edge for O-shaped setback geometry. 
+  * roofHip, roofGable, roofPyramid, roofShed operations: Fixed a bug which led to a wrong geometry or a wrong scope in rare cases on shapes with holes. 
+  * roofShed operation:
+    * Fixed incorrect consideration of negative indexes. 
+    * Fixed a bug that led to self-intersected roofs on concave faces.
+  * taper operation: Fixed a wrongly aligned geometry on non-planar shapes with holes. 
+  * splitString function: A split of an empty string now returns [""] instead of an empty array. 
+  * fileSearch function: If no matching files are found the function now returns an empty string "" which is the correct representation of an empty string list. Before a string ";" was returned which corresponds to a string list with one empty string element. 
+  * isinf function: Fixed a bug for values that are not a number: isinf(ln(-1)) wrongly returned true, now returns false. 
+
+Built-In Codecs Changes and Fixes
+---------------------------------
+* Added Decoder and Encoder for Autodesk's DWG format (com.esri.prt.codecs.DWGDecoder, com.esri.prt.codecs.DWGEncoder).
+* Removed Encoder for Pixar's RenderMan format.
+* USD Encoder & Decoders:
+  * Added support for USDZ in both the USD decoder and encoder.
+  * Updated to USD 21.02 library.
+  * Decoder: Bugfix: Sometimes, temporary files were still locked after usage.
+* SLPK Encoder: 
+  * The node hierarchy and texture resolutions got optimized for improved rendering performance in the ArcGIS Online Scene Viewer.
+  * The geometry LODs are more fine-grained now, resulting in a smoother viewing experience in the ArcGIS Online Scene Viewer.
+* Unreal Encoder: 
+  * Updated to Datasmith 4.26 library.
+  * Support for exporting multiple (CityEngine) scenarios in one export session.
+  * Support for multiple UV sets.
+  * Changed PBR textures export from srgb to linear color space and removed obsolete color space conversion shader.
+  * Bugfix: Texture modes are now correctly set if the same texture is exported both as normalmap and diffusemap. Before such textures were exported as normalmaps only.
+* GLTFDecoder: 
+  * Changed embedded resources URI handling from fragments to the "gltf" scheme. Note that legacy URIs encountered in old rpks are converted automatically during the resolvemap extraction from the rpk. 
+  * Does not abort anymore if GLTF exrtension "KHR_materials_SpecularGlossiness" is encountered. It now just reads the geometry and supported material parts. 
+  * Improved data URI handling.
+  * Bugfix: Percent encode URI in exotic fallback handling.
+* GLTFEncoder: 
+  * Deactivated merging for vertices/uvs/normals. This might give small differencies in coordinates/normals/uvs and tiny faces are not removed anymore.
+* VUE Encoder:
+  * Moved VUE encoder to a separate PRT extension library (so it can be loaded independently).
+  * Updated to VueExport 15.0.0.0 library.
+* ShapeBufferDecoder:
+  * Support ".multipatch" extension.
+  * Fixed invalid embedded texture URIs. Memory URIs now point to the original multipatch buffer (rather than some temporary buffer) and are therefore valid as long the passed-in mutipatch buffer is valid. 
+* Unreal, SLPK Encoders: Bugfix: Avoid upscaling textures in atlas generation.
+* Alembic Encoder: Updated to Alembic 1.7.16 and OpenEXR 2.5.2 libraries.
+* FBX Encoder: Updated to fbxsdk 2020.2.
+
+* All image Encoders: 
+  * Added "existingFiles" option. 
+  * Select encoder based on texture extension, not the pixelformat. This leads to e.g. "builtin:uvtest.png" being actually writen as png, not jpg.
+  *	Throw exception if encode failed, i.e. the whole geometry export is aborted if an image can not be encoded. 
+* JPGEncoder:
+  * In some cases (lossy) re-encoding of images can be avoided and the original file can just be copied. This has been extended to memory URIs and flipped textures. 
+  * Added "forceJFIFHeaders" option. Default is false. If set to true it is guaranteed that all written files have a JFIF header, even if the original file had an EXIF
+   header and re-encoding was avoided. This option is enabled in the ShapeBufferEncoder. 
+  * Removed "textureAddAlphaMask" option. That functionality was extracted into the specific JPGAEncoder.
+* PNGEncoder, TIFFEncoder: In some cases re-encoding of images can be avoided and the original file can just be copied. This has been extended to memory URIs. 
+* RAWEncoder, TIFFEncoders: Bugfix: The option "textureBase64" was just ignored.
+* All image Decoders: Bugfix: improved error handling when decoding images (in some cases there were duplicate errors & re-reported errors from a different asset).
+
+Misc Changes and Fixes
+----------------------
+* Windows: Switched to Visual Studio 2019, Toolchain 14.27.
+* Linux: Switched to GCC 9.3.1.
+* Enable C++17 language standard.
+* Updated 3rd party libraries:
+  * CE-8486: update to zlib 1.2.11.
+  * CE-8490: update to libpng 1.6.37.
+  * CE-8490: update to libtiff 4.1.0.
+  * CE-8490: update to giflib 5.2.1.
+  * CE-8019: update to boost 1.73.
+
+
+
 CITYENGINE SDK 2.3.6821 CHANGELOG
 =================================
 
