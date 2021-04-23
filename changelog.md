@@ -23,7 +23,7 @@ PRT API
   * added `canHandleEmbeddedResources()` function.
   * added `getMerit()` function.
   * added `getType()` function.
-* `ResolveMapBuilder`: `addEntry()` function: an optional parameter was added to control embedded resources handling (`EmbeddedEntriesMode` enum). By default, to-be-added entries are now inspected if they contain embeded resources, and these are automatically added to the resolvemap. This was not the case before. 
+* `ResolveMapBuilder`: `addEntry()` function: an optional parameter was added to control embedded resources handling (`EmbeddedEntriesMode` enum). By default, to-be-added entries are now inspected if they contain embeded resources, and these are automatically added to the `ResolveMap`. This was not the case before. 
 * `ResolveMap`: `getString()`: Bugfix: `stat` was not set to `STATUS_OK` if the call succeeded.
 * `createResolveMap()`: 
   * This also works for content types with embedded resorces (such as glb) which was not documented before.
@@ -37,7 +37,7 @@ PRTX API
 --------
 * A general note for decoder implementors about how to deal with embedded resources: Typically, a `Decoder` for a format which supports embedded resources needs a matching `ResolveMapProvider` implementation which scans the resource and creates a `ResolveMap` with the embedded entries. Each entry maps a "human readable" key to a "complex" `URI` with the format in the scheme part. In order to decode such an URI (i.e. extracting the raw data the URI is referring to), a matching `StreamAdaptor` needs to be implemented and registered. Let's take the GLTFDecoder as example:
   * The GLTFDecoder decodes the actual format into a `Geometry`,
-  * the GLTFResolveMapProvider creates the `ResolveMap` which contains embedded textures identifired by URIs having the "gltf" scheme and
+  * the GLTFResolveMapProvider creates the `ResolveMap` which contains embedded textures as entries with a key created with `ResolveMap::anchorEmbeddedKey()` and an URI having the "gltf" scheme, and
   * the GLTFAdaptor uses the "gltf" scheme URIs to extract the binary data of the embedded items. 
 * `DecoderFactory`: added optional `canHandleER` parameter to constructor. If this parameter is set to true, the Decoder can handle embedded resources and a matching `ResolveMapProvider` and `StreamAdaptor` must be registered.  
 * `ResolveMap`: 
@@ -84,7 +84,6 @@ CGA
   * comp, offset, extrude, roofHip, roofGable, roofPyramid, roofShed, taper, split, setback, setbackPerEdge, setbackToArea, shapeLUO, innerRectangle, convexify operations: Asset groups are now kept. 
   * extrude, taper, setback, setbackPerEdge, setbackToArea, shapeLUO, innerRectangle, convexify operations: Asset face materials are now kept.
   * comp(v) operation: The material of vertex components is now set to default. 
-  * CGA Compiler: Identifiers for parameters must not contain a '$' character. 
 * Bugfixes:
   * offset operation: In case of a failure a crash is prevented or a resulting degenerated geometry is avoided. This happened in rare cases with positive offset distance and collinear vertices. 
   * geometry.angle function: Fixed wrong azimuth. It was incorrectly shifted by 180 degrees. 
@@ -117,10 +116,10 @@ Built-In Codecs Changes and Fixes
   * Changed PBR textures export from srgb to linear color space and removed obsolete color space conversion shader.
   * Bugfix: Texture modes are now correctly set if the same texture is exported both as normalmap and diffusemap. Before such textures were exported as normalmaps only.
 * GLTFDecoder: 
-  * Changed embedded resources URI handling from fragments to the "gltf" scheme. Note that legacy URIs encountered in old rpks are converted automatically during the resolvemap extraction from the rpk. 
-  * Does not abort anymore if GLTF exrtension "KHR_materials_SpecularGlossiness" is encountered. It now just reads the geometry and supported material parts. 
+  * Changed embedded resources URI handling from fragments to the "gltf" scheme. Note that legacy URIs encountered in old rpks are converted automatically during the `ResolveMap` extraction from the rpk. 
+  * Does not abort anymore if GLTF extension "KHR_materials_SpecularGlossiness" is encountered. It now just reads the geometry and supported material parts. 
   * Improved data URI handling.
-  * Bugfix: Percent encode URI in exotic fallback handling.
+  * Bugfix: Percent encode texture key for URI fallback handling.
 * GLTFEncoder: 
   * Deactivated merging for vertices/uvs/normals. This might give small differencies in coordinates/normals/uvs and tiny faces are not removed anymore.
 * VUE Encoder:
@@ -128,22 +127,22 @@ Built-In Codecs Changes and Fixes
   * Updated to VueExport 15.0.0.0 library.
 * ShapeBufferDecoder:
   * Support ".multipatch" extension.
-  * Fixed invalid embedded texture URIs. Memory URIs now point to the original multipatch buffer (rather than some temporary buffer) and are therefore valid as long the passed-in mutipatch buffer is valid. 
+  * Fixed invalid embedded texture URIs. Embedded texture now use "shp" scheme instead of a temporary memory URI. The URIs are therefore valid as long as the passed-in mutipatch buffer is valid. 
 * Unreal, SLPK Encoders: Bugfix: Avoid upscaling textures in atlas generation.
 * Alembic Encoder: Updated to Alembic 1.7.16 and OpenEXR 2.5.2 libraries.
 * FBX Encoder: Updated to fbxsdk 2020.2.
+* All geometry Encoders:
+  * Select encoder based on texture extension, not the pixelformat. This leads to e.g. "builtin:uvtest.png" being actually writen as png, not jpg.
 
 * All image Encoders: 
   * Added "existingFiles" option. 
-  * Select encoder based on texture extension, not the pixelformat. This leads to e.g. "builtin:uvtest.png" being actually writen as png, not jpg.
-  *	Throw exception if encode failed, i.e. the whole geometry export is aborted if an image can not be encoded. 
+  * Throw exception if encode failed, i.e. the whole geometry export is aborted if an image can not be encoded. 
 * JPGEncoder:
   * In some cases (lossy) re-encoding of images can be avoided and the original file can just be copied. This has been extended to memory URIs and flipped textures. 
-  * Added "forceJFIFHeaders" option. Default is false. If set to true it is guaranteed that all written files have a JFIF header, even if the original file had an EXIF
-   header and re-encoding was avoided. This option is enabled in the ShapeBufferEncoder. 
+  * Added "forceJFIFHeaders" option. Default is false. If set to true it is guaranteed that all written files have a JFIF header, even if the original file had an EXIF header and re-encoding was avoided. This option is enabled in the ShapeBufferEncoder. 
   * Removed "textureAddAlphaMask" option. That functionality was extracted into the specific JPGAEncoder.
 * PNGEncoder, TIFFEncoder: In some cases re-encoding of images can be avoided and the original file can just be copied. This has been extended to memory URIs. 
-* RAWEncoder, TIFFEncoders: Bugfix: The option "textureBase64" was just ignored.
+* RAWEncoder, TIFFEncoder: Bugfix: The option "textureBase64" was just ignored.
 * All image Decoders: Bugfix: improved error handling when decoding images (in some cases there were duplicate errors & re-reported errors from a different asset).
 
 Misc Changes and Fixes
