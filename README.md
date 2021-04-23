@@ -26,10 +26,11 @@ The archives are available for download at the corresponding github release page
 
 
 ## CityEngine SDK Releases
+- [v2.4.XXXX (2021-XX-XX, CityEngine 2021.0)](https://github.com/Esri/cityengine-sdk/releases/tag/2.4.XXXX)
 - [v2.3.6821 (2020-10-22, CityEngine 2020.1)](https://github.com/Esri/cityengine-sdk/releases/tag/2.3.6821)
 - [v2.2.6332 (2020-06-09, CityEngine 2020.0)](https://github.com/Esri/cityengine-sdk/releases/tag/2.2.6332)
 - [v2.1.5705 (2019-12-11, CityEngine 2019.1)](https://github.com/Esri/cityengine-sdk/releases/tag/2.1.5705)
-- v2.1.5704 (2019-09-25, CityEngine 2019.1
+- v2.1.5704 (2019-09-25, CityEngine 2019.1, replaced by v2.1.5705 with minor documentation fix)
 - [v2.0.5403 (2019-05-08, CityEngine 2019.0)](https://github.com/Esri/cityengine-sdk/releases/tag/2.0.5403)
 - [v1.10.4198 (2018-09-17, CityEngine 2018.1)](https://github.com/Esri/cityengine-sdk/releases/tag/1.10.4198)
 - [v1.10.4051 (2018-05-11, CityEngine 2018.0)](https://github.com/Esri/cityengine-sdk/releases/tag/1.10.4051)
@@ -63,9 +64,10 @@ This repository contains a number of source code examples in the "examples" dire
 * stldec: demonstrates how to write a custom decoder for the STL geometry format.
 
 ## Related Projects
-* [PyPRT](https://esri.github.io/pyprt): Python language bindings for the Procedural Runtime (PRT)
-* [Palladio](https://esri.github.io/palladio): CityEngine plugin for SideFX Houdini
-* [Serlio](https://esri.github.io/serlio): CityEngine plugin for Autodesk Maya
+* [PyPRT](https://esri.github.io/cityengine/pyprt): Python language bindings for the Procedural Runtime (PRT)
+* [Palladio](https://esri.github.io/cityengine/palladio): CityEngine plugin for SideFX Houdini
+* [Serlio](https://esri.github.io/cityengine/serlio): CityEngine plugin for Autodesk Maya
+* [Vitruvio](https://esri.github.io/cityengine/vitruvio): CityEngine plugin for Epic Unreal Engine
 
 
 ## General Software Requirements
@@ -73,38 +75,33 @@ Please note that the individual example READMEs may include further requirements
 
 
 #### All Platforms
-* To load custom encoders built with the latest SDK, CityEngine 2020.1 is required. For older versions of CityEngine an older version of the SDK might have to be used, see list above.
+* To load custom encoders built with the latest SDK, CityEngine 2021.0 is required. For older versions of CityEngine an older version of the SDK might have to be used, see list above.
 * License for matching CityEngine, e.g. to author Rule Packages.
 * CMake 3.3 or later (http://www.cmake.org)
 
 
 #### Windows
 * Windows 8.1 or 10 (64bit)
-* Required C++ compiler: Visual Studio 2019 with Toolset MSVC 14.23 or later
-* Required flags for extension libraries release mode: `/bigobj /GR /EHsc /MD` (use `/MDd` to debug)
-
-
-#### macOS
-* macOS Sierra (10.12) or later
-* Required C++ compiler: Apple Clang 8.1 or later (i.e. XCode 8.3 or later)
-* Required flags for extension libraries: `-std=c++14 -stdlib=libc++ -fvisibility=hidden -fvisibility-inlines-hidden -Wl,--exclude-libs,ALL`
+* Required C++ compiler: Visual Studio 2019 with Toolset MSVC 14.27 or later
+* Required flags for extension libraries release mode: `/std:c++17 /bigobj /GR /EHsc /MD` (use `/MDd` to debug)
 
 
 #### Linux
 * RedHat Enterprise Linux 7.x or compatible
-* Required C++ compiler: GCC 6.3 or later (RedHat Enterprise Linux DevToolSet 6.1)
-* Required flags for extension libraries: `-std=c++14 -D_GLIBCXX_USE_CXX11_ABI=0 -march=nocona -fvisibility=hidden -fvisibility-inlines-hidden -Wl,--exclude-libs,ALL`
+* Required C++ compiler: GCC 9.3 or later (RedHat Enterprise Linux DevToolSet 9)
+* Required flags for extension libraries: `-std=c++17 -D_GLIBCXX_USE_CXX11_ABI=0 -march=nocona -fvisibility=hidden -fvisibility-inlines-hidden -Wl,--exclude-libs,ALL`
 
 
 ## Further Resources
-* Documentation:
+* Documentation
     * [Changelog](changelog.md)
     * Online reference: https://esri.github.io/cityengine-sdk
     * Offline reference: see /doc subdirectory inside the release archive
-* Forum:
-    * General CityEngine: https://geonet.esri.com/community/gis/3d/cityengine
-* Facebook: https://www.facebook.com/CityEngine
-* Twitter: https://twitter.com/CityEngine
+* Community
+    * Forum: https://geonet.esri.com/community/gis/3d/cityengine
+    * Youtube: https://www.youtube.com/c/CityEngineTV
+    * Facebook: https://www.facebook.com/CityEngine
+    * Twitter: https://twitter.com/CityEngine
 
 
 ## Issues
@@ -116,7 +113,7 @@ Anyone and everyone is welcome to contribute and to extend and improve the examp
 
 
 ## Licensing
-Copyright (c) 2020 Esri
+Copyright (c) 2021 Esri
 
 You may not use the content of this repository except in compliance with the following Licenses:
 1. All content in the "examples" directory tree is licensed under the APACHE 2.0 license. You may obtain a copy of this license at http://www.apache.org/licenses/LICENSE-2.0.

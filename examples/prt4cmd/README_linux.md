@@ -21,7 +21,7 @@ explain how to get the sdk binaries and example data.
 SOFTWARE REQUIREMENTS
 ---------------------
 
-- See "General Software Requirements" (Linux or macOS)
+- See "General Software Requirements" (Linux)
 
 
 BUILD INSTRUCTIONS
@@ -59,7 +59,7 @@ USING PRT4CMD
 LICENSING
 ---------
 
-Copyright (c) 2020 Esri
+Copyright (c) 2021 Esri
 
 You may not use the content of this repository except in compliance with the following Licenses:
   1. All content of all directories **except "examples"** is licensed under the Esri [Terms of Use](http://www.esri.com/legal/licensing-translations).

@@ -19,24 +19,19 @@ if(${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
     set(P4C_WINDOWS 1)
 elseif(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
     set(P4C_LINUX 1)
-elseif(${CMAKE_SYSTEM_NAME} STREQUAL "Darwin")
-    set(P4C_MACOS 1)
 endif()
 
 # if prt_DIR is not provided, download PRT from its github home
 if(NOT prt_DIR)
 	if(P4C_WINDOWS)
 		set(PRT_OS "win10")
-		set(PRT_TC "vc142")
+		set(PRT_TC "vc1427")
 	elseif(P4C_LINUX)
 		set(PRT_OS "rhel7")
-		set(PRT_TC "gcc63")
-	elseif(P4C_MACOS)
-		set(PRT_OS "osx12")
-		set(PRT_TC "ac81")
+		set(PRT_TC "gcc93")
 	endif()
 
-	set(PRT_VERSION "2.3.6821")
+	set(PRT_VERSION "2.4.XXXX")
 	set(PRT_CLS     "${PRT_OS}-${PRT_TC}-x86_64-rel-opt")
 	set(PRT_URL     "https://github.com/esri/cityengine-sdk/releases/download/${PRT_VERSION}/esri_ce_sdk-${PRT_VERSION}-${PRT_CLS}.zip")
 
@@ -58,15 +53,18 @@ message(STATUS "Using prt_DIR = ${prt_DIR} with version ${PRT_VERSION_MAJOR}.${P
 ### build target
 
 add_library(${PROJECT_NAME} SHARED main.cpp STLEncoder.cpp)
-add_definitions(-DPRT_VERSION_MAJOR=${PRT_VERSION_MAJOR} -DPRT_VERSION_MINOR=${PRT_VERSION_MINOR})
+target_compile_definitions(${PROJECT_NAME} PRIVATE -DPRT_VERSION_MAJOR=${PRT_VERSION_MAJOR} -DPRT_VERSION_MINOR=${PRT_VERSION_MINOR})
+
+set_target_properties(${PROJECT_NAME} PROPERTIES CXX_STANDARD 17 CXX_EXTENSIONS OFF CXX_STANDARD_REQUIRED ON)
 
 target_include_directories(${PROJECT_NAME} PRIVATE ${PRT_INCLUDE_PATH})
 if(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
-	target_compile_options(${PROJECT_NAME} PRIVATE -std=c++11 -march=nocona -fvisibility=hidden -fvisibility-inlines-hidden -Wl,--exclude-libs,ALL -Wall -Wextra -Wunused-parameter -Wl,-rpath,'$ORIGIN')
+	target_compile_options(${PROJECT_NAME} PRIVATE -march=nocona -fvisibility=hidden -fvisibility-inlines-hidden -Wl,--exclude-libs,ALL -Wall -Wextra -Wunused-parameter -Wl,-rpath,'$ORIGIN')
+	target_compile_definitions(${PROJECT_NAME} PRIVATE -D_GLIBCXX_USE_CXX11_ABI=0)
 elseif(${CMAKE_SYSTEM_NAME} STREQUAL "Darwin")
-	target_compile_options(${PROJECT_NAME} PRIVATE -std=c++14 -stdlib=libc++ -fvisibility=hidden -fvisibility-inlines-hidden -Wl,--exclude-libs,ALL -Wall -Wextra -Wunused-parameter)
+	target_compile_options(${PROJECT_NAME} PRIVATE -stdlib=libc++ -fvisibility=hidden -fvisibility-inlines-hidden -Wl,--exclude-libs,ALL -Wall -Wextra -Wunused-parameter)
 endif()
-target_link_libraries(${PROJECT_NAME} ${PRT_CORE_LIBRARY})
+target_link_libraries(${PROJECT_NAME} PRIVATE ${PRT_CORE_LIBRARY})
 
 
 ### install target
@@ -79,7 +77,7 @@ install(FILES ${PROJECT_SOURCE_DIR}/../../../LICENSE DESTINATION .)
 if(WIN32)
 	install(FILES ${PROJECT_SOURCE_DIR}/../README_windows.md DESTINATION .)
 else()
-	install(FILES ${PROJECT_SOURCE_DIR}/../README_linux_osx.md DESTINATION .)
+	install(FILES ${PROJECT_SOURCE_DIR}/../README_linux.md DESTINATION .)
 endif()
 
 
@@ -109,10 +107,6 @@ if(${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
 	set(CPACK_GENERATOR					ZIP)
 	set(CPACK_SOURCE_GENERATOR			ZIP)
 	set(CPACK_ZIP_COMPONENT_INSTALL		1)
-elseif(${CMAKE_SYSTEM_NAME} STREQUAL "Darwin")
-	set(CPACK_GENERATOR					ZIP)
-	set(CPACK_SOURCE_GENERATOR			ZIP)
-	set(CPACK_TGZ_COMPONENT_INSTALL		1)
 elseif(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
 	set(CPACK_GENERATOR					ZIP)
 	set(CPACK_SOURCE_GENERATOR			ZIP)

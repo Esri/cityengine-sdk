@@ -5,7 +5,7 @@
  *
  * See README.md in https://github.com/Esri/cityengine-sdk for build instructions.
  *
- * Copyright (c) 2012-2020 Esri R&D Center Zurich
+ * Copyright (c) 2012-2021 Esri R&D Center Zurich
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -65,8 +65,6 @@ std::vector<const C*> toPtrVec(const std::vector<std::basic_string<C>>& sv) {
 
 #if defined(_WIN32)
 #	include <Windows.h>
-#elif defined(__APPLE__)
-#	include <mach-o/dyld.h>
 #elif defined(__linux__)
 #	include <sys/types.h>
 #	include <unistd.h>
@@ -85,13 +83,6 @@ pcu::Path getExecutablePath() {
     }
     else
         return {};
-#elif defined(__APPLE__)
-    char path[1024];
-    uint32_t size = sizeof(path);
-	if (_NSGetExecutablePath(path, &size) == 0)
-    	return pcu::Path(std::string(path));
-	else
-    	return {};
 #elif defined(__linux__)
 	const std::string proc = "/proc/" + std::to_string(getpid()) + "/exe";
 	char path[1024];
@@ -255,13 +246,14 @@ InputArgs::InputArgs(int argc, char *argv[]) : mStatus(RunStatus::FAILED) {
 	                     app.add_option("-o,--output",          convertOutputPath,          "Set the output path for the callbacks.");
 	                     app.add_option("-e,--encoder",         mEncoderID,                 "The encoder ID, e.g. 'com.esri.prt.codecs.OBJEncoder'.");
 	const auto optRPK =  app.add_option("-p,--rule-package",    mRulePackage,               "Set the rule package path.");
-	                     app.add_option("-a,--shape-attr",      convertShapeAttrs,          "Set a initial shape attribute.\n                              syntax is <name>:<type>=<value>\n                              type = {string,float,int,bool,string[],float[],int[],bool[]}\n                              (array elements are comma-separated)");
+	const auto optAttr=  app.add_option("-a,--shape-attr",      convertShapeAttrs,          "Set a initial shape attribute.\n                              syntax is <name>:<type>=<value>\n                              type = {string,float,int,bool,string[],float[],int[],bool[]}\n                              (array elements are comma-separated)");
 	                     app.add_option("-g,--shape-geo",       convertInitialShapeGeoPath, "(Optional) Path to a file with shape geometry.");
 	                     app.add_option("-z,--encoder-option",  convertEncOpts,             "Set a encoder option.\n                              syntax is <name>:<type>=<value>\n                              type = {string,float,int,bool,string[],float[],int[],bool[]}");
 	const auto optInfo = app.add_option("-i,--info",            mInfoFile,                  "Write XML Extension Information to file.");
 
 	// setup option requirements
 	optInfo->excludes(optRPK);
+	optAttr->expected(0, 10);
 
 	// parse options
 	try {

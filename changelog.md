@@ -158,7 +158,6 @@ Misc Changes and Fixes
   * CE-8019: update to boost 1.73.
 
 
-
 CITYENGINE SDK 2.3.6821 CHANGELOG
 =================================
 
