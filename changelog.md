@@ -127,7 +127,7 @@ Built-In Codecs Changes and Fixes
   * Updated to VueExport 15.0.0.0 library.
 * ShapeBufferDecoder:
   * Support ".multipatch" extension.
-  * Fixed invalid embedded texture URIs. Embedded texture now use "shp" scheme instead of a temporary memory URI. The URIs are therefore valid as long as the passed-in mutipatch buffer is valid. 
+  * Fixed invalid embedded texture URIs. Embedded textures now use "shp" scheme instead of a temporary memory URI. The URIs are therefore valid as long as the passed-in mutipatch buffer is valid. 
 * Unreal, SLPK Encoders: Bugfix: Avoid upscaling textures in atlas generation.
 * Alembic Encoder: Updated to Alembic 1.7.16 and OpenEXR 2.5.2 libraries.
 * FBX Encoder: Updated to fbxsdk 2020.2.
