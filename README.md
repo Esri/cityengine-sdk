@@ -75,7 +75,7 @@ Please note that the individual example READMEs may include further requirements
 #### All Platforms
 * To load custom encoders built with the latest SDK, CityEngine 2021.0 is required. For older versions of CityEngine an older version of the SDK might have to be used, see list above.
 * License for matching CityEngine, e.g. to author Rule Packages.
-* CMake 3.3 or later (http://www.cmake.org)
+* CMake 3.3 or later (https://www.cmake.org)
 
 
 #### Windows
@@ -117,5 +117,5 @@ The CityEngine SDK is free for personal, educational, and non-commercial use. Co
 The CityEngine SDK is licensed under the Esri Terms of Use:
 * https://www.esri.com/en-us/legal/terms/full-master-agreement
 * https://www.esri.com/en-us/legal/terms/product-specific-scope-of-use
-* All content in the "Examples" directory/section is licensed under the APACHE 2.0 license. You may obtain a copy of this license at http://www.apache.org/licenses/LICENSE-2.0.
+* All content in the "Examples" directory/section is licensed under the APACHE 2.0 license. You may obtain a copy of this license at https://www.apache.org/licenses/LICENSE-2.0.
 * For questions or enquiries regarding licensing, please contact the CityEngine team at cityengine-info@esri.com.
