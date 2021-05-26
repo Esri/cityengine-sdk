@@ -415,7 +415,7 @@ General Info
 
 Licensing
 ---------
-* The CityEngine SDK is now free for non-commercial use and we removed the technical requirement to have a CityEngine license, i.e. the CityEngine SDK runs without a license now. All content of all directories is licensed under the [Esri Terms of Use](http://www.esri.com/legal/licensing-translations).
+* The CityEngine SDK is now free for non-commercial use and we removed the technical requirement to have a CityEngine license, i.e. the CityEngine SDK runs without a license now. All content of all directories is licensed under the [Esri Terms of Use](https://www.esri.com/legal/licensing-translations).
 
 
 PRT API
@@ -681,7 +681,7 @@ PRTX API
 
 CGA
 ---
-(Please also refer to the CGA ChangeLog for 2017.1 in the [CityEngine Online Help](http://cehelp.esri.com/help/index.jsp?topic=/com.procedural.cityengine.help/html/cgareference/cga_changelog.html) for new operations and bug-fixes.)
+(Please also refer to the CGA ChangeLog for 2017.1 in the [CityEngine Online Help](https://doc.arcgis.com/en/cityengine/latest/cga/cga-changelog.htm#ESRI_SECTION1_55189CF7B3C348FDAA21F896A7410FF8) for new operations and bug-fixes.)
 * Increased CGA language version to `2017.1`
 * New annotations:
   * @Enum annotation.
@@ -748,7 +748,7 @@ PRTX API
 
 CGA
 ---
-(Please also refer to the CGA ChangeLog for 2017.0 in the [CityEngine Online Help](http://cehelp.esri.com/help/index.jsp?topic=/com.procedural.cityengine.help/html/cgareference/cga_changelog.html) for new operations and bug-fixes.)
+(Please also refer to the CGA ChangeLog for 2017.0 in the [CityEngine Online Help](https://doc.arcgis.com/en/cityengine/latest/cga/cga-changelog.htm#ESRI_SECTION1_3E7E56C4F1BE44E6905547E4F10C1DF5) for new operations and bug-fixes.)
 * Increased CGA language version to `2017.0`
 *  New operations:
   * label operation.

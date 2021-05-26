@@ -12,8 +12,6 @@ The CityEngine SDK can be used for the development of:
 
    The core of CityEngine is its unique geometry generation engine, called Procedural Runtime (PRT). PRT takes as input an initial geometry and then applies a given rule package (= CGA rules authored in CityEngine) to generate more detailed 3D geometry as output. For example, PRT can generate - based on given rules - a 3D model of a building out of a parcel polygon. With the SDK you can integrate PRT in your own 3D applications taking full advantage of the procedural geometry generation without running CityEngine. An interesting use case example is [Palladio](https://github.com/esri/palladio), a plugin for SideFX’s Houdini software. Palladio includes PRT and therefore extends Houdini with the procedural geometry engine of CityEngine. Another use case example could be a specific cultural heritage 3D application which automatically generates detailed 3D models of temples based on input attributes.
 
-The CityEngine SDK is free for non-commercial use. Commercial use requires at least one commercial license of the latest CityEngine version installed in the organization. Please refer to the licensing section below for more detailed licensing information.
-
 
 ## Preamble
 
@@ -77,7 +75,7 @@ Please note that the individual example READMEs may include further requirements
 #### All Platforms
 * To load custom encoders built with the latest SDK, CityEngine 2021.0 is required. For older versions of CityEngine an older version of the SDK might have to be used, see list above.
 * License for matching CityEngine, e.g. to author Rule Packages.
-* CMake 3.3 or later (http://www.cmake.org)
+* CMake 3.3 or later (https://www.cmake.org)
 
 
 #### Windows
@@ -113,8 +111,11 @@ Anyone and everyone is welcome to contribute and to extend and improve the examp
 
 
 ## Licensing
-Copyright (c) 2021 Esri
 
-You may not use the content of this repository except in compliance with the following Licenses:
-1. All content in the "examples" directory tree is licensed under the APACHE 2.0 license. You may obtain a copy of this license at http://www.apache.org/licenses/LICENSE-2.0.
-1. All other content is licensed under the [Esri Terms of Use](https://www.esri.com/legal/licensing-translations) (also see [Product-Specific Terms of Use](https://assets.esri.com/content/dam/esrisites/en-us/media/legal/product-specific-terms-of-use/e300.pdf)).
+The CityEngine SDK is free for personal, educational, and non-commercial use. Commercial use requires at least one commercial license of the latest CityEngine version installed in the organization. Redistribution or web service offerings are not allowed unless expressly permitted.
+
+The CityEngine SDK is licensed under the Esri Terms of Use:
+* https://www.esri.com/en-us/legal/terms/full-master-agreement
+* https://www.esri.com/en-us/legal/terms/product-specific-scope-of-use
+* All content in the "Examples" directory/section is licensed under the APACHE 2.0 license. You may obtain a copy of this license at https://www.apache.org/licenses/LICENSE-2.0.
+* For questions or enquiries regarding licensing, please contact the CityEngine team at cityengine-info@esri.com.
