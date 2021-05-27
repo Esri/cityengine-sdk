@@ -1,31 +1,18 @@
-PRT4CMD - CityEngine SDK Command Line Utility
----------------------------------------------
+# PRT4CMD - CityEngine SDK Command Line Utility
 
+## DISCLAIMER
 
-DISCLAIMER
-----------
+This is an example for using the CityEngine SDK. There is no support for this application. If you find a bug or want to enhance functionality you have to fix/do this yourself.
 
-This is an example for using the CityEngine SDK. There is no support for this application. 
-If you find a bug or want to enhance functionality you have to fix/do this yourself.
+## PREREQUISITES
 
+Before you start working with this example, please make sure you follow the main installation instructions for the CityEngine SDK in the README.md file at the root of this example repository. This will  explain how to get the sdk binaries and example data.
 
-PREREQUISITES
--------------
+## SOFTWARE REQUIREMENTS
 
-Before you start working with this example, please make sure you follow
-the main installation instructions for the CityEngine SDK in the
-README.md file at the root of this example repository. This will 
-explain how to get the sdk binaries and example data.
+* See "General Software Requirements" (Windows)
 
-
-SOFTWARE REQUIREMENTS
----------------------
-
-- See "General Software Requirements" (Windows)
-
-
-BUILD INSTRUCTIONS
-------------------
+## BUILD INSTRUCTIONS
 
 1. Open a `VS2019 x64 Native Tools Command Prompt`
 1. Change into the example directory: `cd <your path to>\cityengine-sdk\examples\prt4cmd`
@@ -35,32 +22,35 @@ BUILD INSTRUCTIONS
 1. Compile: `nmake install`
 1. The build result will appear in an `install` directory in parallal to the `build` directory.
 
-
-USING PRT4CMD
--------------
+## USING PRT4CMD
 
 1. Open a cmd shell and `cd` into the above `install` directory.
 1. Type `bin\prt4cmd.exe -h` to see the list of options.
 1. Type the following to generate the "candler" building model in the wavefront obj format:
-   ```
+
+   ```text
    bin\prt4cmd.exe -l 3 -g <absolute path to>\cityengine-sdk\data\candler_footprint.obj -p <absolute path to>\cityengine-sdk\data\candler.rpk -a ruleFile:string=bin/candler.cgb -a startRule:string=Default$Footprint -e com.esri.prt.codecs.OBJEncoder -z baseName:string=theCandler
    ```
+
 1. The result is placed in the `output` directory:
-   - `theCandler_0.obj`
-   - `theCandler.mtl`
-   - Bunch of texture files
+    * `theCandler_0.obj`
+    * `theCandler.mtl`
+    * Bunch of texture files
 1. To regenerate the same model with a different height, use the following command (note the additional `-a BuildingHeight...` statement):
-   ```
+
+   ```text
    bin\prt4cmd.exe -l 3 -g <absolute path to>\esri-cityengine-sdk\data\candler_footprint.obj -p <absolute path to>\esri-cityengine-sdk\data\candler.rpk -a ruleFile:string=bin/candler.cgb -a startRule:string=Default$Footprint -a BuildingHeight:float=30 -e com.esri.prt.codecs.OBJEncoder -z baseName:string=theCandler
    ```
+
 1. The obj file will now contain a model which is 30m high instead of the default 62m.
 
+## LICENSING
 
-LICENSING
----------
+The CityEngine SDK is free for personal, educational, and non-commercial use. Commercial use requires at least one commercial license of the latest CityEngine version installed in the organization. Redistribution or web service offerings are not allowed unless expressly permitted.
 
-Copyright (c) 2021 Esri
+The CityEngine SDK is licensed under the Esri Terms of Use:
 
-You may not use the content of this repository except in compliance with the following Licenses:
-  1. All content of all directories **except "examples"** is licensed under the Esri [Terms of Use](http://www.esri.com/legal/licensing-translations).
-  2. All content in the "examples" directory tree is licensed under the APACHE 2.0 license. You may obtain a copy of this license at http://www.apache.org/licenses/LICENSE-2.0.
+* <https://www.esri.com/en-us/legal/terms/full-master-agreement>
+* <https://www.esri.com/en-us/legal/terms/product-specific-scope-of-use>
+* All content in the "Examples" directory/section is licensed under the APACHE 2.0 license. You may obtain a copy of this license at <https://www.apache.org/licenses/LICENSE-2.0>.
+* For questions or enquiries regarding licensing, please contact the CityEngine team at cityengine-info@esri.com.
