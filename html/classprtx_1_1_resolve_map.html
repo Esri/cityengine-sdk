@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="esri_prt_55px.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">ArcGIS Procedural Runtime
-   &#160;<span id="projectnumber">2.3.6821</span>
+   &#160;<span id="projectnumber">2.4.7316</span>
    </div>
   </td>
  </tr>
@@ -149,6 +149,10 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
+<tr class="memitem:a6f1908c0092df860dc49c0991a9c56c8"><td class="memItemLeft" align="right" valign="top">static std::wstring&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_resolve_map.html#a6f1908c0092df860dc49c0991a9c56c8">anchorEmbeddedKey</a> (const std::wstring &amp;containerKey, const std::wstring &amp;embeddedKey)</td></tr>
+<tr class="separator:a6f1908c0092df860dc49c0991a9c56c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f2fb1a89b581874cfcf4a4eded52f92"><td class="memItemLeft" align="right" valign="top">static std::wstring&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_resolve_map.html#a3f2fb1a89b581874cfcf4a4eded52f92">anchorRelativeKey</a> (const std::wstring &amp;anchorKey, const std::wstring &amp;relativeKey)</td></tr>
+<tr class="separator:a3f2fb1a89b581874cfcf4a4eded52f92"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a418c8909032803a54d1a5983063bcaa5"><td class="memItemLeft" align="right" valign="top">static std::wstring&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_resolve_map.html#a418c8909032803a54d1a5983063bcaa5">replaceLastKeySegment</a> (const std::wstring &amp;key, const std::wstring &amp;newSegment)</td></tr>
 <tr class="separator:a418c8909032803a54d1a5983063bcaa5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a51d5eba682871ff783b3ddd5f2fda461"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="namespaceprtx.html#a2f661d48bd64c0c84f0e66fcbcba51e5">prtx::URIPtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_resolve_map.html#a51d5eba682871ff783b3ddd5f2fda461">resolveKeyWithURIFallback</a> (<a class="el" href="classprtx_1_1_resolve_map.html">ResolveMap</a> const *resolveMap, const std::wstring &amp;key)</td></tr>
@@ -192,6 +196,96 @@ Additional Inherited Members</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The prtx specialization of the <a class="el" href="classprt_1_1_resolve_map.html">prt::ResolveMap</a> adds convenience functions to directly support STL strings and URIs. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a6f1908c0092df860dc49c0991a9c56c8"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static std::wstring prtx::ResolveMap::anchorEmbeddedKey </td>
+          <td>(</td>
+          <td class="paramtype">const std::wstring &amp;&#160;</td>
+          <td class="paramname"><em>containerKey</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::wstring &amp;&#160;</td>
+          <td class="paramname"><em>embeddedKey</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Creates a resolve map key from a container asset key and an embedded resource key, typically a texture.</p>
+<p>This is useful in e.g. custom decoders to lookup texture URIs in resolve maps that have been created recursively, e.g. for assets like GLB or USDZ that contain embedded textures.</p>
+<p>PRT is using the same logic internally when creating the resolve maps.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">containerKey</td><td>A key representing a container resource. </td></tr>
+    <tr><td class="paramname">embeddedKey</td><td>A "relative" key uniquely identifying an embedded resource within the container. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The combined key identifying the resource within the container. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a3f2fb1a89b581874cfcf4a4eded52f92"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static std::wstring prtx::ResolveMap::anchorRelativeKey </td>
+          <td>(</td>
+          <td class="paramtype">const std::wstring &amp;&#160;</td>
+          <td class="paramname"><em>anchorKey</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::wstring &amp;&#160;</td>
+          <td class="paramname"><em>relativeKey</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Resolvemap keys are often based on file paths, and often files are referenced relative to a "base file". This is a helper function to anchor such a relative path at a key and thereby create the absolute key corresponding to the relative path.</p>
+<p>An example is the obj file 'assets/elements/window.obj' which contains a reference to the texture 'glass.jpg': the actual key for the texture must contain the base path of the referring file, i.e. 'assets/elements/glass.jpg'. In the more complex case that "../glass.jpg" is referenced the resulting absolute key is "/assets/glass.jpg".</p>
+<p>Note: This function converts all backslashes to forward slashes.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">anchorKey</td><td>The key that is the anchor point for the relative key. </td></tr>
+    <tr><td class="paramname">relativeKey</td><td>The key of the asset referenced relatively from the base key asset. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>key constructed relative to baseKey </dd></dl>
+
+</div>
+</div>
 <a class="anchor" id="a418c8909032803a54d1a5983063bcaa5"></a>
 <div class="memitem">
 <div class="memproto">
@@ -223,7 +317,7 @@ Additional Inherited Members</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Helper function to replace the last segment in a key. Keys are often separated by '/' characters, for instance 'assets/elements/window.obj', and relative keys need to be constructed, e.g. 'assets/elements/glass.jpg'. </p>
+<p>[DEPRECATED, use <a class="el" href="classprtx_1_1_resolve_map.html#a3f2fb1a89b581874cfcf4a4eded52f92">anchorRelativeKey()</a>] Helper function to replace the last segment in a key. Keys are often separated by '/' characters, for instance 'assets/elements/window.obj', and relative keys need to be constructed, e.g. 'assets/elements/glass.jpg'. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">key</td><td>The key whose last '/' separated segment needs to be replaced. </td></tr>
@@ -378,7 +472,7 @@ Additional Inherited Members</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Sep 28 2020 18:43:33 for ArcGIS Procedural Runtime by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon May 3 2021 12:45:01 for ArcGIS Procedural Runtime by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.5
 </small></address>

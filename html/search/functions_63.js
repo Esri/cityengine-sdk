@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['canhandleembeddedresources',['canHandleEmbeddedResources',['../classprt_1_1_decoder_info.html#a158d79f7e8e96be6de457b8b8050648d',1,'prt::DecoderInfo']]],
   ['canhandleuri',['canHandleURI',['../classprtx_1_1_decoder_factory.html#a0df8b98f7bc45c8eeb3431f438916668',1,'prtx::DecoderFactory::canHandleURI()'],['../classprtx_1_1_encoder_factory.html#a1b18c5c0bf49b1157b3fb881c3e09359',1,'prtx::EncoderFactory::canHandleURI()'],['../classprtx_1_1_extension_factory.html#af7bb42d356d24c085dad8f344e2387aa',1,'prtx::ExtensionFactory::canHandleURI()']]],
   ['canseek',['canSeek',['../classprt_1_1_simple_output_callbacks.html#a446e9486b28e31359cc595e89caaa6df',1,'prt::SimpleOutputCallbacks']]],
   ['cgaerror',['cgaError',['../classprt_1_1_callbacks.html#a3f9de9c73e577bb786771c3fa6dec6b7',1,'prt::Callbacks']]],
@@ -21,7 +22,7 @@ var searchData=
   ['createattributemap',['createAttributeMap',['../classprt_1_1_attribute_map_builder.html#ad3250e6f6764512780abddf7c6e372f6',1,'prt::AttributeMapBuilder']]],
   ['createattributemapandreset',['createAttributeMapAndReset',['../classprt_1_1_attribute_map_builder.html#a6c6cb065e52b63a2b47d5cd8ae516d70',1,'prt::AttributeMapBuilder']]],
   ['createbuiltinuri',['createBuiltinURI',['../namespaceprtx_1_1_u_r_i_utils.html#ad80ab42ceffa495191ef7c7bd848a5ae',1,'prtx::URIUtils']]],
-  ['createcompositeuri',['createCompositeURI',['../namespaceprtx_1_1_u_r_i_utils.html#acf9abbed076d6a5ab68b9cfd5878f785',1,'prtx::URIUtils::createCompositeURI(const URIPtr &amp;nestedURI, const std::wstring &amp;outerScheme, const std::wstring &amp;outerPath)'],['../namespaceprtx_1_1_u_r_i_utils.html#a429966f99e5613bd606f4028eedec779',1,'prtx::URIUtils::createCompositeURI(const URIPtr &amp;nestedURI, const std::wstring &amp;outerScheme, const std::wstring &amp;outerPath, const std::wstring &amp;outerQuery, const std::wstring &amp;outerFragment)']]],
+  ['createcompositeuri',['createCompositeURI',['../namespaceprtx_1_1_u_r_i_utils.html#a40f7f12c27829f13290cbb2e6d971cf3',1,'prtx::URIUtils']]],
   ['createdatauri',['createDataURI',['../namespaceprtx_1_1_u_r_i_utils.html#a18b163e96f805bc93c0465f144b6dbae',1,'prtx::URIUtils']]],
   ['createdecoder',['createDecoder',['../classprtx_1_1_extension_manager.html#a1029c2bed0c75e9e31ceb369de998e5d',1,'prtx::ExtensionManager::createDecoder(prt::ContentType ct, const prtx::URIPtr &amp;uri) const =0'],['../classprtx_1_1_extension_manager.html#adbb42095526c446dad9bab74d3c82ebc',1,'prtx::ExtensionManager::createDecoder(const std::wstring &amp;id) const =0']]],
   ['createdecoderinfo',['createDecoderInfo',['../classprtx_1_1_decoder_factory.html#aad8fd91cf7fb9be46a7020757c7bbced',1,'prtx::DecoderFactory::createDecoderInfo()'],['../classprtx_1_1_extension_manager.html#a65d5f08c23e9f8d0241dbc284ada38fd',1,'prtx::ExtensionManager::createDecoderInfo()'],['../namespaceprt.html#aaf2da61548a50cf549090a613d23ec3b',1,'prt::createDecoderInfo()']]],
@@ -34,7 +35,7 @@ var searchData=
   ['createinitialshapeandreset',['createInitialShapeAndReset',['../classprt_1_1_initial_shape_builder.html#af04648c7afeb07747f2bc55e35dc3ab8',1,'prt::InitialShapeBuilder']]],
   ['createinstance',['createInstance',['../classprtx_1_1_singleton.html#a2b444deb4d7b9ab9e928967d3634ddd8',1,'prtx::Singleton']]],
   ['creatememoryuri',['createMemoryURI',['../namespaceprtx_1_1_u_r_i_utils.html#a0765a51c54f554a746701b552a96e7e6',1,'prtx::URIUtils']]],
-  ['createresolvemap',['createResolveMap',['../classprt_1_1_resolve_map_builder.html#a0d28b0f42d6b0e561e242053d46fa6f4',1,'prt::ResolveMapBuilder::createResolveMap()'],['../classprtx_1_1_resolve_map_provider.html#a0d1322801dd0de554c53e48aa3291120',1,'prtx::ResolveMapProvider::createResolveMap()'],['../namespaceprt.html#a4a26fc77ff5cc864b72c542114245ad1',1,'prt::createResolveMap()']]],
+  ['createresolvemap',['createResolveMap',['../classprt_1_1_resolve_map_builder.html#a0d28b0f42d6b0e561e242053d46fa6f4',1,'prt::ResolveMapBuilder::createResolveMap()'],['../classprtx_1_1_resolve_map_provider.html#a0d1322801dd0de554c53e48aa3291120',1,'prtx::ResolveMapProvider::createResolveMap()'],['../namespaceprt.html#afb9d1bffc2bd7859022de33544a39061',1,'prt::createResolveMap()']]],
   ['createresolvemapandreset',['createResolveMapAndReset',['../classprt_1_1_resolve_map_builder.html#adf0b515dc7f59ef17aedee8c4b63bd7f',1,'prt::ResolveMapBuilder']]],
   ['createresolvemapprovider',['createResolveMapProvider',['../classprtx_1_1_extension_manager.html#ad7028adb9238e7123b02bd20ffb936de',1,'prtx::ExtensionManager']]],
   ['createrulefileinfo',['createRuleFileInfo',['../namespaceprt.html#a7c6125100b4deb1273c0e81cda996d89',1,'prt']]],

@@ -26,7 +26,7 @@
 <h2>Parameters</h2>
 
 <ul>
-   	<li><span class="cga_opparam">searchQuery</span> (string)<br>Search query to apply on list of all files in the workspace. See <a class="normw" href="../func_fileSearch.html">fileSearch</a> for details about the syntax.</li>
+   	<li><span class="cga_opparam">searchQuery</span> (string)<br>Search query to apply on list of all files in the workspace. See <a class="normw" href="../func_fileSearch.html">fileSearch / filesSearch</a> for details about the syntax.</li>
     <li><span class="cga_opparam">axesRatio</span> (string)
 	<table cellspacing="5">
 		<tr><td width="50%"><span class="codelight">"xy"</span>, <span class="codelight">"xz"</span>, <span class="codelight">"yz"</span>, <span class="codelight">"xyz"</span></td><td>Axes for the currect scope.</td></tr>
@@ -60,44 +60,27 @@
 <h2>Examples</h2>
 
 <h3>Inserting assets based on the best ratio</h3>
+
 <p>The goal is to insert assets from a pool, depending on their (physical) size ratio. The pool of assets is seen in the following image. Colors are (only) used to visually emphasize the physical size ratio.</p>
+
 <img src="images/assetRatioPool.jpg"></img>
 
-
-
-<p>
-<pre>
-
-
-CGA example:
-</pre>
-</p>
 <p class="notes">Note: Since the assets are color coded with their ratio, it is visible that "long" and "wide" Lots utilize black and pink assets, while "square-ish" Lots utilize red and blue assets.</p>
 
 <pre class="code3">
 Lot -->
-	innerRectangle(scope) { shape : doInsert }
-doInsert -->
-	alignScopeToAxes(y)
-	s('1,0,'1)
-	i(assetBestRatio("/myProject/assets/cube_*.obj", "xz"))
+    innerRectangle(scope) { shape : Insert }
+
+Insert -->
+    alignScopeToAxes(y)
+    s('1,0,'1)
+    i(assetBestRatio("/myProject/assets/cube_*.obj", "xz"))
 </pre>
+
 <img src="images/assetBestRatio.jpg"></img>
 
-
-
-
-
-
-
-
-
-
-
-
-
 <!-- FOOTER -->
-<p class="foot">Copyright &copy;2008-2020 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
+<p class="foot">Copyright &copy;2008-2021 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
 
 </div>
 </body>

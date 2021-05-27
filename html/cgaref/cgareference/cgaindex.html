@@ -53,17 +53,20 @@
 		<td class="overview"><a href="op_roofGable.html"><img src="images/roofGable.png"><br>roofGable</a></td>     
 		<td class="overview"><a href="op_roofHip.html"><img src="images/roofHip.png"><br>roofHip</a></td>              
 		<td class="overview"><a href="op_roofPyramid.html"><img src="images/roofPyramid.png"><br>roofPyramid</a></td>
-		<td class="overview"><a href="op_roofShed.html"><img src="images/roofShed.png"><br>roofShed</a></td>      
+		<td class="overview"><a href="op_roofRidge.html"><img src="images/roofRidge.png"><br>roofRidge</a></td>      
 	</tr><tr>
+		<td class="overview"><a href="op_roofShed.html"><img src="images/roofShed.png"><br>roofShed</a></td>      
 		<td class="overview"><a href="op_innerRectangle.html"><img src="images/icon_innerRectangle.png"><br>innerRectangle</a></td>
 		<td class="overview"><a href="op_primitive.html#quad"><img src="images/primitiveQuad.png"><br>primitiveQuad</a></td>
 		<td class="overview"><a href="op_primitive.html#disk"><img src="images/primitiveDisk.png"><br>primitiveDisk</a></td>
-		<td class="overview"><a href="op_primitive.html#cube"><img src="images/primitiveCube.png"><br>primitiveCube</a></td>
 	</tr><tr>
+		<td class="overview"><a href="op_primitive.html#cube"><img src="images/primitiveCube.png"><br>primitiveCube</a></td>
 		<td class="overview"><a href="op_primitive.html#sphere"><img src="images/primitiveSphere.png"><br>primitiveSphere</a></td>
 		<td class="overview"><a href="op_primitive.html#cylinder"><img src="images/primitiveCylinder.png"><br>primitiveCylinder</a></td>
 		<td class="overview"><a href="op_primitive.html#cone"><img src="images/primitiveCone.png"><br>primitiveCone</a></td>
+	</tr><tr>
 		<td class="overview"><a href="op_insertAlongUV.html"><img src="images/insertAlongUV.png"><br>insertAlongUV</a></td>
+		<td class="overview"><a href="op_footprint.html"><img src="images/footprint.png"><br>footprint</a></td>
 	</tr>
 </table>
 
@@ -144,10 +147,11 @@
 <table summary="" class="cga">
 	<tr>
 		<td class="overview"><a href="op_alignScopeToAxes.html"><img src="images/alignScopeToAxes.png"><br>alignScopeToAxes</a></td>   
-		<td class="overview"><a href="op_alignScopeToGeometry.html"><img src="images/alignScopeToGeo.png"><br>alignScopeToGeometry</a></td>    
+		<td class="overview"><a href="op_alignScopeToGeometry.html"><img src="images/alignScopeToGeo.png"><br>alignScopeToGeometry</a></td>
+		<td class="overview"><a href="op_alignScopeToGeometryBBox.html"><img src="images/alignScopeToGeoBBox.png"><br><small>alignScopeToGeometryBBox</small></a></td>
 		<td class="overview"><a href="op_rotateScope.html"><img src="images/rotateScope.png"><br>rotateScope</a></td>      
-		<td class="overview"><a href="op_setPivot.html"><img src="images/setPivot.png"><br>setPivot</a></td>   
 	</tr><tr>
+		<td class="overview"><a href="op_setPivot.html"><img src="images/setPivot.png"><br>setPivot</a></td>   
 		<td class="overview"><a href="op_mirrorScope.html"><img src="images/mirrorScope.png"><br>mirrorScope</a></td>  
 	</tr>
 </table>
@@ -180,6 +184,9 @@
 	<tr>
 		<td class="overview"><a href="op_set.html"><img src="images/set.png"><br>set</a></td>
 		<td class="overview"><a href="op_color.html"><img src="images/color.png"><br>color</a></td>
+		<td class="overview"><a href="op_resetMaterial.html"><img src="images/resetMaterial.png"><br>resetMaterial</a></td>  
+		<td class="overview"><a href="op_setMaterial.html"><img src="images/setMaterial.png"><br>setMaterial</a></td>  
+	</tr><tr>
 		<td class="overview"><a href="op_report.html"><img src="images/report.png"><br>report</a></td>   
 		<td class="overview"><a href="op_print.html"><img src="images/print.png"><br>print</a></td>      
 	</tr>
@@ -282,37 +289,46 @@
     <td class="overview"><a href="func_geometry.html#boundaryLength" >geometry.boundaryLength</a></td>
     <td class="overview"><a href="func_geometry.html#du" >geometry.{du|dv}</a></td>
   </tr><tr>
+    <td class="overview"><a href="func_geometry.html#groups" >geometry.groups</a></td>
     <td class="overview"><a href="func_geometry.html#height" >geometry.height</a></td>
-	  <td class="overview"><a href="func_geometry.html#isClosedSurface" >geometry.isClosedSurface</a></td>
+	<td class="overview"><a href="func_geometry.html#isClosedSurface" >geometry.isClosedSurface</a></td>
     <td class="overview"><a href="func_geometry.html#isConcave" >geometry.isConcave</a></td>
-    <td class="overview"><a href="func_geometry.html#isInstanced" >geometry.isInstanced</a></td>
   </tr><tr> 
+    <td class="overview"><a href="func_geometry.html#isInstanced" >geometry.isInstanced</a></td>
     <td class="overview"><a href="func_geometry.html#isOriented" >geometry.isOriented</a></td>  
-	  <td class="overview"><a href="func_geometry.html#isPlanar" >geometry.isPlanar</a></td>  
+	<td class="overview"><a href="func_geometry.html#isPlanar" >geometry.isPlanar</a></td>  
     <td class="overview"><a href="func_geometry.html#isRectangular" >geometry.isRectangular</a></td>
-    <td class="overview"><a href="func_geometry.html#nEdges" >geometry.nEdges</a></td>
   </tr><tr>
+    <td class="overview"><a href="func_geometry.html#materials" >geometry.materials</a></td>
+    <td class="overview"><a href="func_geometry.html#nEdges" >geometry.nEdges</a></td>
     <td class="overview"><a href="func_geometry.html#nFaces" >geometry.nFaces</a></td>
     <td class="overview"><a href="func_geometry.html#nHoles" >geometry.nHoles</a></td>
+  </tr><tr>
     <td class="overview"><a href="func_geometry.html#nVertices" >geometry.nVertices</a></td>  
     <td class="overview"><a href="func_geometry.html#uMin" >geometry.{uMin|uMax|vMin|vMax}</a></td>
-  </tr><tr>
     <td class="overview"><a href="func_geometry.html#volume" >geometry.volume</a></td>
   </tr>
 </table>
+
+<h3><a name="material"></a>Material Functions</h3>
+<table summary="" class="cga">
+  <tr>
+    <td class="overview"><a href="func_getMaterial.html">getMaterial</a></td>
+	<td> </td>
+	<td> </td>
+	<td> </td>
+  </tr>
+ </table>
 
 <h3><a name="file"></a>File Functions</h3>
 <table summary="" class="cga">
   <tr>
     <td class="overview"><a href="func_fileExists.html" >fileExists</a></td>
-    <td class="overview"><a href="func_fileSearch.html" >fileSearch</a></td>
+    <td class="overview"><a href="func_fileSearch.html" >fileSearch / filesSearch</a></td>
     <td class="overview"><a href="func_readTable.html" >readFloatTable</a></td>
     <td class="overview"><a href="func_readTable.html" >readStringTable</a></td>
   </tr><tr>
     <td class="overview"><a href="func_readTextFile.html" >readTextFile</a></td>
-	<td> </td>
-	<td> </td>
-	<td> </td>
   </tr>
 </table>
 
@@ -320,7 +336,7 @@
 <table summary="" class="cga">
   <tr>
 	<td class="overview"><a href="func_assetInfo.html" >assetInfo</a></td>
-	<td class="overview"><a href="func_assetNamingInfo.html" >assetNamingInfo</a></td>
+	<td class="overview"><a href="func_assetNamingInfo.html" >assetNamingInfo / assetNamingInfos</a></td>
 	<td class="overview"><a href="func_assetsSortRatio.html" >assetsSortRatio</a></td>
 	<td class="overview"><a href="func_assetsSortSize.html" >assetsSortSize</a></td>
   </tr><tr>
@@ -363,10 +379,8 @@
 	<td class="overview"><a href="func_size.html">size</a></td>
   </tr>
   </tr><tr> 
+	<td class="overview"><a href="func_sum.html">sum</a></td>
 	<td class="overview"><a href="func_transpose.html">transpose</a></td>
-    <td> </td>
-    <td> </td>
-	<td> </td>
   </tr>
 </table>
 
@@ -405,10 +419,8 @@
     <td class="overview"><a href="style.html" >style</a></td>
   </tr>
   <tr>
+    <td class="overview"><a href="with.html" >with</a></td>
     <td class="overview"><a href="version.html" >version</a></td>
-    <td> </td>
-    <td> </td>
-    <td> </td>
   </tr>
 </table>
 
@@ -438,18 +450,20 @@
     <td class="overview"><a href="celib/listCount.html" >listCount</a></td>
     <td class="overview"><a href="celib/listFirst.html" >listFirst</a></td>
   </tr><tr>
+    <td class="overview"><a href="celib/listFromArray.html" >listFromArray</a></td>
     <td class="overview"><a href="celib/listIndex.html" >listIndex</a></td>
     <td class="overview"><a href="celib/listItem.html" >listItem</a></td>
     <td class="overview"><a href="celib/listLast.html" >listLast</a></td>
-    <td class="overview"><a href="celib/listRandom.html" >listRandom</a></td>
   </tr><tr>
+    <td class="overview"><a href="celib/listRandom.html" >listRandom</a></td>
     <td class="overview"><a href="celib/listRange.html" >listRange</a></td>
     <td class="overview"><a href="celib/listRemove.html" >listRemove</a></td>
     <td class="overview"><a href="celib/listRemoveAll.html" >listRemoveAll</a></td>
-    <td class="overview"><a href="celib/listRetainAll.html" >listRetainAll</a></td>
   </tr><tr>
+    <td class="overview"><a href="celib/listRetainAll.html" >listRetainAll</a></td>
     <td class="overview"><a href="celib/listSize.html" >listSize</a></td>
     <td class="overview"><a href="celib/listTerminate.html" >listTerminate</a></td>
+    <td class="overview"><a href="celib/listToArray.html" >listToArray</a></td>
   </tr>
 </table>
 
@@ -525,7 +539,7 @@
   <!-- FOOTER -->
 </p>
 <p>&nbsp; </p>
-<p class="foot">Copyright &copy;2008-2020 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
+<p class="foot">Copyright &copy;2008-2021 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
 
 </div>
 </body>

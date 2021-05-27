@@ -26,7 +26,7 @@
 <h2>Parameters</h2>
 
 <ul>
-	<li><span class="cga_opparam">searchQuery</span> (string)<br>Search query to apply on list of all files in the workspace. See <a class="normw" href="../func_fileSearch.html">fileSearch</a> for details about the syntax.</li>
+	<li><span class="cga_opparam">searchQuery</span> (string)<br>Search query to apply on list of all files in the workspace. See <a class="normw" href="../func_fileSearch.html">fileSearch / filesSearch</a> for details about the syntax.</li>
     <li><span class="cga_opparam">axesRatio</span> (string)
 	<table cellspacing="5">
 		<tr><td width="50%"><span class="codelight">"xy"</span>, <span class="codelight">"xz"</span>, <span class="codelight">"yz"</span>, <span class="codelight">"xyz"</span></td><td>Axes for the currect scope.</td></tr>
@@ -43,7 +43,7 @@
 
 <p>This function returns one of the <span class="cga_opparam">n</span> best assets of the best ratio, from the files specified by <span class="cga_opparam">searchQuery</span>, according to the specified <span class="cga_opparam">axesRatio</span> string.</p>
 
-<p class="notes">Note: assetApproxRatio(<span class="cga_opparam">searchQuery</span>, <span class="cga_opparam">axesRatio</span>, 1) = assetBestRatio(<span class="cga_opparam">searchQuery</span>, <span class="cga_opparam">axesRatio</span>)</p>
+<p class="notes"><span class="codelight">assetApproxRatio(<span class="cga_opparam">searchQuery</span>, <span class="cga_opparam">axesRatio</span>, 1) == assetBestRatio(<span class="cga_opparam">searchQuery</span>, <span class="cga_opparam">axesRatio</span>)</span></p>
 
 <h2>Related</h2>
 <ul>
@@ -62,45 +62,47 @@
 
 
 <h2>Examples</h2>
+
 <h3>Inserting assets based on their approximate ratio</h3>
+
 <p>The goal is to insert assets from a pool, depending on their (physical) size ratio. The pool of assets is seen in the following image. Colors are (only) used to visually emphasize the physical size ratio.</p>
+
 <img src="images/assetRatioPool.jpg"></img>
 
+<p class="notes">Since the assets are color coded with their ratio, it is visible that "long" and "wide" Lots utilize black and pink assets, while "square-ish" Lots utilize red and blue assets.</p>
 
-<p>
-<pre>
+<p class="notes">Note the color variations in the next two images.</p>
 
-
-CGA examples with <span class="cga_opparam">n</span> = 1 and <span class="cga_opparam">n</span> = 3:
-</pre>
-</p>
-<p class="notes">Note.1: Since the assets are color coded with their ratio, it is visible that "long" and "wide" Lots utilize black and pink assets, while "square-ish" Lots utilize red and blue assets.</p>
-<p class="notes">Note.2: Note the color variations in the next two images by using only the "best ratio" (<span class="cga_opparam">n</span> = 1) and "choose randomly one of the best three ratios" (<span class="cga_opparam">n</span> = 3).</p>
+<h3>n = 1: "best ratio"</h3>
 
 <pre class="code3">
-n = 1:
 Lot -->
-	innerRectangle(scope) { shape : doInsert }
-doInsert -->
-	alignScopeToAxes(y)
-	s('1,0,'1)
-	i(assetApproxRatio("/myProject/assets/cube_*.obj", "xz", 1))
+    innerRectangle(scope) { shape : Insert }
+
+Insert -->
+    alignScopeToAxes(y)
+    s('1,0,'1)
+    i(assetApproxRatio("/myProject/assets/cube_*.obj", "xz", 1))
 </pre>
+
 <img src="images/assetApproxRatioLots_n1.jpg"></img>
 
+<h3>n = 3: "choose randomly one of the best three ratios"</h3>
+
 <pre class="code3">
-n = 3:
 Lot -->
-	innerRectangle(scope) { shape : doInsert }
-doInsert -->
-	alignScopeToAxes(y)
-	s('1,0,'1)
-	i(assetApproxRatio("/myProject/assets/cube_*.obj", "xz", 3))
+    innerRectangle(scope) { shape : Insert }
+
+Insert -->
+    alignScopeToAxes(y)
+    s('1, 0, '1)
+    i(assetApproxRatio("/myProject/assets/cube_*.obj", "xz", 3))
 </pre>
+
 <img src="images/assetApproxRatioLots_n3.jpg"></img>
 
 <!-- FOOTER -->
-<p class="foot">Copyright &copy;2008-2020 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
+<p class="foot">Copyright &copy;2008-2021 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
 
 </div>
 </body>

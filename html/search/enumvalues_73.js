@@ -24,6 +24,7 @@ var searchData=
   ['status_5fencoder_5fnot_5ffound',['STATUS_ENCODER_NOT_FOUND',['../namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4a5f05c98ed63b35505187803f8c181445',1,'prt']]],
   ['status_5ffile_5falready_5fexists',['STATUS_FILE_ALREADY_EXISTS',['../namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4af84438083a130e9a362f9e16c9fd6c7c',1,'prt']]],
   ['status_5ffile_5fnot_5ffound',['STATUS_FILE_NOT_FOUND',['../namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4acba9dae3359f049d57426e5deed04234',1,'prt']]],
+  ['status_5ffile_5fread_5ffailed',['STATUS_FILE_READ_FAILED',['../namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4ad8cba860905f90a3c7647351c3c4b243',1,'prt']]],
   ['status_5ffile_5fseek_5ffailed',['STATUS_FILE_SEEK_FAILED',['../namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4a46124c2afa793519441a9991444cc9f6',1,'prt']]],
   ['status_5ffile_5ftell_5ffailed',['STATUS_FILE_TELL_FAILED',['../namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4a7cd1cf4fa86ed1d001e92369d41bb2a9',1,'prt']]],
   ['status_5ffile_5fwrite_5ffailed',['STATUS_FILE_WRITE_FAILED',['../namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4a9e3247be27e19281510d1678e6fe5c0b',1,'prt']]],

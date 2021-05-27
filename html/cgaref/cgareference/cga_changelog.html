@@ -31,6 +31,81 @@
   <td><strong>Changes</strong></td>
   </tr>
 	<tr>
+		<td>2021.0<br>CGAC 1.16</td>
+		<td>
+			New features:
+			<ul>        
+		        <li>Local variables can be defined using the <a href="with.html"><span class="code_std">with</span></a> keyword.</li> <!-- CE-8665 -->
+		        <li>Support for reading DWG assets. </li> 
+            </ul>
+
+            </ul>
+			New operations:
+			<ul>
+                <li><a href="op_setMaterial.html"><span class="code_std">setMaterial</span></a> operation.</li> <!-- CE-8499 -->
+				<li><a href="op_resetMaterial.html"><span class="code_std">resetMaterial</span></a> operation.</li> <!-- CE-1864 -->
+				<li><a href="op_roofRidge.html"><span class="code_std">roofRidge</span></a> operation.</li> <!-- CE-8739 -->
+				<li><a href="op_alignScopeToGeometryBBox.html"><span class="code_std">alignScopeToGeometryBBox</span></a> operation.</li> <!-- CE-8738 -->
+				<li><a href="op_footprint.html"><span class="code_std">footprint</span></a> operation.</li> <!-- CE-8390 -->
+			</ul>
+		    New functions:
+			<ul>
+                <li><a href="func_getMaterial.html"><span class="code_std">getMaterial</span></a> function.</li> <!-- CE-8500 -->
+				<li><a href="func_sum.html"><span class="code_std">sum</span></a> function.</li> <!-- CE-8448 -->
+				<li><a href="celib/listToArray.html"><span class="code_std">listToArray</span></a>, <a href="celib/listFromArray.html"><span class="code_std">listFromArray</span></a> functions.</li> <!-- CE-8411 -->
+				<li><a href="func_geometry.html#groups"><span class="code_std">geometry.groups</span></a> function.</li> <!-- CE-3847 -->
+				<li><a href="func_geometry.html#materials"><span class="code_std">geometry.materials</span></a> function.</li> <!-- CE-3849 -->
+				<li><a href="func_fileSearch.html"><span class="code_std">filesSearch</span></a> function: In contrast to <a href="func_fileSearch.html"><span class="code_std">fileSearch</span></a> this function returns an array of strings instead of a stringlist.</li> <!-- CE-8157 -->
+				<li><a href="func_assetNamingInfo.html"><span class="code_std">assetNamingInfos</span></a> function: In contrast to <a href="func_assetNamingInfo.html"><span class="code_std">assetNamingInfo</span></a> this function returns an array of strings instead of a stringlist.</li> <!-- CE-8157 -->
+				<li>Layer attributes (CityEngine only): <a href="func_isnull.html"><span class="code_std">isNull</span></a> function.</li> <!-- CE-8153 -->
+			</ul>
+			Changes to existing features:
+			<ul>
+				<li><a href="op_i.html"><span class="code_std">i</span></a> operation and initial shapes: Improved automatic removal of 0-area faces, 0-length edges and 0-angles. The cleanup is less invasive now.</li> <!-- CE-8579 -->
+				<li><a href="op_roofShed.html"><span class="code_std">roofShed</span></a> operation: Negative angles are now supported. Note that face and vertex indices of a shed roof are different now.</li> <!-- CE-4094 -->
+                <li> USD reader: added support for USDZ files.</li>
+   				<li><a href="func_convert.html"><span class="code_std">convert</span></a> function: Added a version which takes the coordinate values as array.</li> <!-- CE-8462 -->
+				<li><a href="func_assetsSortSize.html"><span class="code_std">assetsSortSize</span></a>, <a href="func_assetsSortRatio.html"><span class="code_std">assetsSortRatio</span></a>, <a href="func_imagesSortRatio.html"><span class="code_std">imagesSortRatio</span></a> functions: Added versions which take the list of files as array of strings instead of a stringlist.</li> <!-- CE-8157 -->
+				<li><a href="celib/imageBestRatio.html"><span class="code_std">imageBestRatio</span></a>, <a href="celib/imageApproxRatio.html"><span class="code_std">imageApproxRatio</span></a>, <a href="celib/assetBestSize.html"><span class="code_std">assetBestSize</span></a>, <a href="celib/assetApproxSize.html"><span class="code_std">assetApproxSize</span></a>, <a href="celib/assetFitSize.html"><span class="code_std">assetFitSize</span></a>, <a href="celib/assetBestRatio.html"><span class="code_std">assetBestRatio</span></a>, <a href="celib/assetApproxRatio.html"><span class="code_std">assetApproxRatio</span></a> functions: An invalid string selector does not fall back to a default value but now leads to a runtime error.</li> <!-- CE-8605 -->
+				<li><a href="func_ceil.html"><span class="code_std">ceil</span></a>, <a href="func_floor.html"><span class="code_std">floor</span></a>, <a href="func_rint.html"><span class="code_std">rint</span></a>, <a href="func_isinf.html"><span class="code_std">isinf</span></a>, <a href="func_isnan.html"><span class="code_std">isnan</span></a>, <a href="func_isnull.html"><span class="code_std">isNull</span></a> functions: Support for arrays.</li> <!-- CE-8153 -->
+				<li><a href="op_comp.html"><span class="code_std">comp</span></a>, <a href="op_offset.html"><span class="code_std">offset</span></a>, <a href="op_extrude.html"><span class="code_std">extrude</span></a>, <a href="op_roofHip.html"><span class="code_std">roofHip</span></a>, <a href="op_roofGable.html"><span class="code_std">roofGable</span></a>, <a href="op_roofPyramid.html"><span class="code_std">roofPyramid</span></a>, <a href="op_roofShed.html"><span class="code_std">roofShed</span></a>, <a href="op_taper.html"><span class="code_std">taper</span></a>, <a href="op_split.html"><span class="code_std">split</span></a>, <a href="op_setback.html"><span class="code_std">setback</span></a>, <a href="op_setbackPerEdge.html"><span class="code_std">setbackPerEdge</span></a>, <a href="op_setbackToArea.html"><span class="code_std">setbackToArea</span></a>, <a href="op_shapeLUO.html"><span class="code_std">shapeLUO</span></a>, <a href="op_innerRectangle.html"><span class="code_std">innerRectangle</span></a>, <a href="op_convexify.html"><span class="code_std">convexify</span></a> operations: Asset groups are now kept.</li> <!-- CE-8543, CE-4000, CE-8569, CE-8567, CE-8571, CE-8575, CE-8814 -->
+				<li><a href="op_extrude.html"><span class="code_std">extrude</span></a>, <a href="op_taper.html"><span class="code_std">taper</span></a>, <a href="op_setback.html"><span class="code_std">setback</span></a>, <a href="op_setbackPerEdge.html"><span class="code_std">setbackPerEdge</span></a>, <a href="op_setbackToArea.html"><span class="code_std">setbackToArea</span></a>, <a href="op_shapeLUO.html"><span class="code_std">shapeLUO</span></a>, <a href="op_innerRectangle.html"><span class="code_std">innerRectangle</span></a>, <a href="op_convexify.html"><span class="code_std">convexify</span></a> operations: Asset face materials are now kept.</li> <!-- CE-4000, CE-8569, CE-8567, CE-8571, CE-8575 -->
+				<li><a href="op_comp.html"><span class="code_std">comp(v)</span></a> operation: The material of vertex components is now set to default.</li> <!-- CE-8543 -->
+				<li>CGA Compiler: Identifiers for parameters must not contain a '<span class="code_std">$</span>' character.</li> <!-- CE-8717 -->
+			</ul>	
+		    Bugfixes:
+			<ul>
+				<li><a href="op_offset.html"><span class="code_std">offset</span></a> operation: In case of a failure a crash is prevented or a resulting degenerated geometry is avoided. This happened in rare cases with positive offset distance and collinear vertices.</li> <!-- CE-8969 -->
+  				<li><a href="func_geometry.html#angle"><span class="code_std">geometry.angle</span></a> function: Fixed wrong azimuth. It was incorrectly shifted by 180 degrees.</li> <!-- CE-8799 -->
+				<li>Fixed an issue where the group name of the geometry was not set to <a href="attr_initialShape.html"><span class="code_std">initialShape.name</span></a> for initial shapes with 1 face.</li> <!-- CE-8564 -->
+				<li><a href="op_setback.html"><span class="code_std">setback</span></a>, <a href="op_setbackToArea.html"><span class="code_std">setbackToArea</span></a>, <a href="op_setbackPerEdge.html"><span class="code_std">setbackPerEdge</span></a> operation: Avoid creating an unnecessary edge for O-shaped setback geometry.</li> <!-- CE-4453 -->
+				<li><a href="op_roofHip.html"><span class="code_std">roofHip</span></a>, <a href="op_roofGable.html"><span class="code_std">roofGable</span></a>, <a href="op_roofPyramid.html"><span class="code_std">roofPyramid</span></a>, <a href="op_roofShed.html"><span class="code_std">roofShed</span></a> operations: Fixed a bug which led to a wrong geometry or a wrong scope in rare cases on shapes with holes.</li> <!-- CE-8749 -->
+				<li><a href="op_roofShed.html"><span class="code_std">roofShed</span></a> operation: </li>
+				<ul>
+					<li>Fixed incorrect consideration of negative indexes.</li> <!-- CE-8870 -->
+					<li>Fixed a bug that led to self-intersected roofs on concave faces.</li> <!-- CE-2363 -->
+				</ul>
+				<li><a href="op_taper.html"><span class="code_std">taper</span></a> operation: Fixed a wrongly aligned geometry on non-planar shapes with holes.</li> <!-- CE-8819 -->
+				<li><a href="func_splitString.html"><span class="code_std">splitString</span></a> function: A split of an empty string now returns <span class="codelight">[""]</span> instead of an empty array.</li> <!-- CE-8481 -->
+				<li><a href="func_fileSearch.html"><span class="code_std">fileSearch</span></a> function: If no matching files are found the function now returns an empty string <span class="codelight">""</span> which is the correct representation of an empty string list. Before a string <span class="codelight">";"</span> was returned which corresponds to a string list with one empty string element.</li> <!-- CE-8599 -->
+				<li><a href="func_isinf.html"><span class="code_std">isinf</span></a> function: Fixed a bug for values that are not a number:<br><span class="codelight">isinf(ln(-1))</span> wrongly returned <span class="codelight">true</span>, now returns <span class="codelight">false</span>.</li> <!-- CE-8613 -->
+				<li>CGA Compiler:</li>
+				<ul>
+					<li>Fixed non-responsive compiler. This happened when an imported rule file has many functions and styles and contains a call to a non-existing function (no such function error).</li> <!-- CE-8908 -->
+					<li><a href="func_findFirst.html"><span class="code_std">findFirst</span></a> (builtin), <a href="celib/findFirst.html"><span class="code_std">findFirst</span></a> (utility library) function: Fixed long compile time in rare cases.</li> <!-- CE-7804 -->
+					<li>Improved type mismatch messages for utility library functions.</li> <!-- CE-7804 -->
+					<li><a href="celib/max.html"><span class="code_std">max</span></a>, <a href="celib/min.html"><span class="code_std">min</span></a>, <a href="celib/clamp.html"><span class="code_std">clamp</span></a>, <a href="celib/replace.html"><span class="code_std">replace</span></a> functions: Fixed wrong type mismatch error in rare cases when function is also present as user definition.</li> <!-- CE-7785 -->
+					<li>Fixed wrong unused warning in rare cases for definitions that have the same name and parameter count as a builtin.</li> <!-- CE-7785 -->
+					<li>Fixed a bug where a rule was not called when its name equals a parameter name.</li> <!-- CE-8693 -->
+					<li>Fixed wrong error marker location for duplicate parameters.</li> <!-- CE-8694 -->
+				</ul>
+			</ul>
+		</td>
+	</tr>
+  </tr>
+  
+  </tr>
+	<tr>
 		<td>2020.1<br>CGAC 1.15</td>
 		<td>
 		    New features:
@@ -49,10 +124,10 @@
 			<ul>
 				<li>Improved numerical accuracy in pivot and scope calculation.</li> <!-- CE-6972 -->
 				<li><a href="op_comp.html"><span class="code_std">comp(f)</span></a>: Improved performance for shapes with many faces.</li> <!-- CE-7935 -->
-				<li><a href="func_convert.html"><span class="code_std">convert</span></a> function: The following conversions did not work correctly:<br><span class="code_std">convert(pos, object, scope|pivot, ...)</span><br><span class="code_std">convert(pos, world, scope|pivot|object, ...)</span><br><span class="code_std">convert(orient, pivot, scope, ...)</span></li> <!-- CE-2300 -->
+				<li><a href="func_convert.html"><span class="code_std">convert</span></a> function: The following conversions did not work correctly:<br><span class="codelight">convert(pos, object, scope|pivot, ...)</span><br><span class="codelight">convert(pos, world, scope|pivot|object, ...)</span><br><span class="codelight">convert(orient, pivot, scope, ...)</span></li> <!-- CE-2300 -->
                 <li><a href="op_split.html"><span class="code_std">split</span></a> operation: Fixed bugs in the automatic cut closing which led to missing faces or illegal hole faces in the cut-plane.</li>  <!-- CE-7457, CE-1574, CE-5272-->
-   				<li>Runtime errors occuring in the initialization phase (<span class="code_std">attr</span> and <span class="code_std">const</span> evaluation) are now visible in the Problems view.</li> <!-- CE-1563 -->
-   				<li><a href="func_print.html"><span class="code_std">print</span></a> function: Output from initialization phase (<span class="code_std">attr</span> and <span class="code_std">const</span> evaluation) is now printed to the CGA Console.</li> <!-- CE-1563 -->
+   				<li>Runtime errors occuring in the initialization phase (<span class="codelight">attr</span> and <span class="codelight">const</span> evaluation) are now visible in the Problems view.</li> <!-- CE-1563 -->
+   				<li><a href="func_print.html"><span class="code_std">print</span></a> function: Output from initialization phase (<span class="codelight">attr</span> and <span class="codelight">const</span> evaluation) is now printed to the CGA Console.</li> <!-- CE-1563 -->
 				<li>CGA Compiler:</li>
 				<ul>
 					<li>Fixed error when overrides for <a href="import.html"><span class="code_std">import</span></a> were stated in separate lines.</li> <!-- CE-8202 -->
@@ -524,7 +599,7 @@
 			<li><span class="code_std">"builtin:cube"</span> and <span class="code_std">"builtin:cube:notex"</span> are deprecated. Use <a href="op_primitive.html#cube"><span class="code_std">primitiveCube</span></a> instead.</li>
 			<li><a href="op_extrude.html"><span class="code_std">extrude</span></a> operation:</li>
 			<ul>
-				<li>The paramater <span class="cga_opparam">axisWorld</span> is deprecated and changed to a parameter <span class="cga_opparam">extrusionType</span>.</li>
+				<li>The parameter <span class="cga_opparam">axisWorld</span> is deprecated and changed to a parameter <span class="cga_opparam">extrusionType</span>.</li>
 				<li>New types <span class="codelight">face.normal</span>, <span class="codelight">vertex.normal</span>, <span class="codelight">world.up</span> and <span class="codelight">world.up.flatTop</span>.</li>
 				<li>The axes <span class="codelight">x</span>, <span class="codelight">y</span>, <span class="codelight">z</span>, <span class="codelight">world.x</span>, <span class="codelight">world.y</span> and <span class="codelight">world.z</span> are deprecated. Use type <span class="codelight">world.up</span> instead of axis <span class="codelight">world.y</span>.</li>
 			</ul>
@@ -1293,7 +1368,7 @@ overload  .</li>
   
 
   <h3><!-- FOOTER --> </h3>
-        <p class="foot">Copyright &copy;2008-2020 Esri R&amp;D Center Zurich. All rights reserved.</p>                  
+        <p class="foot">Copyright &copy;2008-2021 Esri R&amp;D Center Zurich. All rights reserved.</p>                  
 
 <!-- END CENTERED CONTENT -->
 

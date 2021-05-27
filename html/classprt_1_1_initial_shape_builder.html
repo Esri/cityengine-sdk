@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="esri_prt_55px.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">ArcGIS Procedural Runtime
-   &#160;<span id="projectnumber">2.3.6821</span>
+   &#160;<span id="projectnumber">2.4.7316</span>
    </div>
   </td>
  </tr>
@@ -490,6 +490,10 @@ Additional Inherited Members</h2></td></tr>
 <tr>
 <td>streetWidth </td><td>float array </td><td></td><td>A semantic attribute to transport information about streets adjacent to the initial shape. If present it is used to evaluate the street.xxx selectors in cga (for instance in the comp() operation). The index into the array corresponds to the edge-index, and the value corresponds to the width of the street on that side. 0 means no street, a value &gt; 0 means street. </td></tr>
 <tr>
+<td>/edgeattr/name </td><td>float/bool/string array </td><td></td><td>A semantic attribute to transport information of edges of the initial shape. It can be sampled by edgeAttr.getFloat/Bool/String() functions. The array is filled in face-edge-order. </td></tr>
+<tr>
+<td>/arrayDimRows/&lt;array attr name&gt; </td><td>int </td><td></td><td>Allows to set the number of rows for 2D arrays. &lt;array attr name&gt; must be the name of a float/bool/string array in attributes. </td></tr>
+<tr>
 <td>/cgaenv/ </td><td></td><td></td><td>Reserved namespace for controlling cga execution. </td></tr>
 <tr>
 <td>/cgaenv/occlDisableIntra </td><td>bool </td><td>false </td><td>Disable intra-model occlusion queries (i.e. they all return false) </td></tr>
@@ -513,8 +517,6 @@ Additional Inherited Members</h2></td></tr>
 <td>/cache/key </td><td>string </td><td></td><td>Set the cache key associated to this initial shape. This allows e.g. for re-using an initial shape's cache key with a different instance. See also the generateOptions parameter of <a class="el" href="namespaceprt.html#a310381e586ced8f4b08efd472a6f0782">generate()</a>. </td></tr>
 <tr>
 <td>/enc/ </td><td></td><td></td><td>Reserved namespace for encoders. The <a href="esri_prt_codecs.html">encoder documentation</a> lists the known initial shape attributes per encoder. Typically, these attributes are used to control encoder behavior on a per-initial-shape basis, i.e. they are the per-initial-shape counterpart to the encoder options. Also see the <a class="el" href="_app_notes.html">Application Notes</a> for an usage example. </td></tr>
-<tr>
-<td>/edgeattr/name </td><td>float/bool/string array </td><td></td><td>A semantic attribute to transport information of edges of the initial shape. It can be sampled by edgeAttr.getFloat/Bool/String() functions. The array is filled in face-edge-order. </td></tr>
 </table>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -702,7 +704,7 @@ Additional Inherited Members</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Sep 28 2020 18:43:33 for ArcGIS Procedural Runtime by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon May 3 2021 12:45:00 for ArcGIS Procedural Runtime by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.5
 </small></address>

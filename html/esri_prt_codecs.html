@@ -5,7 +5,7 @@
 </head>
 <body>
 <h1>ArcGIS Procedural Runtime Encoder/Decoder Reference</h1>
-<small>(Automatically generated from PRT 2.3.6821; Build Date: Mon 09/28/2020 05:58 PM; Build Configuration: PRT_BC_REL)</small><p>This is the PRT reference documentation for all built-in encoders and decoders.</p>
+<small>(Automatically generated from PRT 2.4.7316; Build Date: Mon 05/03/2021 12:04 PM; Build Configuration: PRT_BC_REL)</small><p>This is the PRT reference documentation for all built-in encoders and decoders.</p>
 <p>The encoder documentation lists for each encoder its supported encoder options. In PRT, the encoder options
 	are stored in an object of type prt::AttributeMap, therefore the term "attribute" is used synonymously in this
 	document for a single encoder option. Each attribute consists of a type, a default value and (optional)
@@ -20,17 +20,18 @@
 <a href="#aEncoders">Built-In Encoders</a><ul>
 <li><a href="#com.esri.prt.codecs.AlembicEncoder">ALEMBIC</a></li>
 <li><a href="#com.esri.prt.codecs.ColladaEncoder">COLLADA</a></li>
+<li><a href="#com.esri.prt.codecs.DWGEncoder">Autodesk DWG Encoder</a></li>
 <li><a href="#com.esri.prt.codecs.DxtEncoder">DXT Encoder</a></li>
 <li><a href="#com.esri.prt.codecs.FBXEncoder">Autodesk FBX</a></li>
 <li><a href="#com.esri.prt.codecs.GLTFEncoder">Khronos Group glTF</a></li>
 <li><a href="#com.esri.prt.codecs.I3SEncoder">Esri Scene Layer Package</a></li>
+<li><a href="#com.esri.prt.codecs.JPGAEncoder">JPEG with Alpha Encoder</a></li>
 <li><a href="#com.esri.prt.codecs.JPGEncoder">JPEG Encoder</a></li>
 <li><a href="#com.esri.prt.codecs.LercEncoder">LERC Encoder</a></li>
 <li><a href="#com.esri.prt.codecs.MTLEncoder">Wavefront MTL Material Encoder</a></li>
 <li><a href="#com.esri.prt.codecs.OBJEncoder">Wavefront OBJ</a></li>
 <li><a href="#com.esri.prt.codecs.PNGEncoder">PNG Encoder</a></li>
 <li><a href="#com.esri.prt.codecs.RAWEncoder">RAW Encoder</a></li>
-<li><a href="#com.esri.prt.codecs.RenderManEncoder">Pixar RenderMan</a></li>
 <li><a href="#com.esri.prt.codecs.ShapeBufferEncoder">Esri Shapebuffer Encoder</a></li>
 <li><a href="#com.esri.prt.codecs.TIFFEncoder">TIFF Encoder</a></li>
 <li><a href="#com.esri.prt.codecs.USDEncoder">Universal Scene Description (USD)</a></li>
@@ -56,6 +57,7 @@
 <li><a href="#com.esri.prt.codecs.DATDecoder">ZMap Plus Grid Image Decoder</a></li>
 <li><a href="#com.esri.prt.codecs.DDFDecoder">SDTS Raster Image Decoder</a></li>
 <li><a href="#com.esri.prt.codecs.DEMDecoder">USGS Optional ASCII DEM (and CDED) Image Decoder</a></li>
+<li><a href="#com.esri.prt.codecs.DWGDecoder">Autodesk DWG Decoder</a></li>
 <li><a href="#com.esri.prt.codecs.E00Decoder">Arc/Info Export E00 GRID Image Decoder</a></li>
 <li><a href="#com.esri.prt.codecs.FBXDecoder">Autodesk FBX Decoder</a></li>
 <li><a href="#com.esri.prt.codecs.GENDecoder">ARC Digitized Raster Graphics Image Decoder</a></li>
@@ -1695,6 +1697,123 @@
 	
 	
 <tr><td colspan="4"></td></tr>
+<tr><td colspan="4"><h3><a name="com.esri.prt.codecs.DWGEncoder">Autodesk DWG Encoder (com.esri.prt.codecs.DWGEncoder)</a></h3></td></tr>
+<tr><td colspan="4">Encodes geometry into the Autodesk DWG format</td></tr>
+<tr><td colspan="4"><h4>Known Initial Shape Attributes</h4></td></tr>
+<tr>
+<th>Key</th>
+<th>Type</th>
+<th>Default Value</th>
+<th>Annotations</th>
+</tr>
+<tr><td colspan="4"><h4>Default Encoder Options</h4></td></tr>
+<tr>
+<th>Key</th>
+<th>Type</th>
+<th>Default Value</th>
+<th>Annotations</th>
+</tr>
+	<tr>
+<td>baseName</td>
+<td>str</td>
+<td>dwg_default_name</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Base Name<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 0<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = General Settings<br>order:float = 0<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = The base name for all files.<br>
+</td>
+</tr>
+	</table></td>
+</tr>
+	
+	<tr>
+<td>errorFallback</td>
+<td>bool</td>
+<td>true</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Hidden</td>
+<td></td>
+</tr>
+	</table></td>
+</tr>
+	
+	<tr>
+<td>globalOffset</td>
+<td>float_array</td>
+<td></td>
+<td><table class="doxtable">
+		<tr>
+<td>@Point3D</td>
+<td></td>
+</tr>
+		<tr>
+<td>@Label</td>
+<td>:str = Global Offset<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 1<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Geometry Settings<br>order:float = 1<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Global (= for all shapes/models) offset for exported geometry.<br>
+</td>
+</tr>
+	</table></td>
+</tr>
+	
+	<tr>
+<td>flipV</td>
+<td>bool</td>
+<td>false</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Flip vertical axis of textures<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 2<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Geometry Settings<br>order:float = 1<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Depending on the loading tool textures need to be flipped to match the geometry.<br>
+</td>
+</tr>
+	</table></td>
+</tr>
+	
+<tr><td colspan="4"></td></tr>
 <tr><td colspan="4"><h3><a name="com.esri.prt.codecs.DxtEncoder">DXT Encoder (com.esri.prt.codecs.DxtEncoder)</a></h3></td></tr>
 <tr><td colspan="4">Encodes images and textures into the DXT format.</td></tr>
 <tr><td colspan="4"><h4>Known Initial Shape Attributes</h4></td></tr>
@@ -1762,6 +1881,39 @@
 		<tr>
 <td>@Group</td>
 <td>name:str = Texture Settings<br>order:float = 4<br>
+</td>
+</tr>
+	</table></td>
+</tr>
+	
+	<tr>
+<td>existingFiles</td>
+<td>str</td>
+<td>OVERWRITE</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Existing Files<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Specifies how files should be written during the export run. The log file will be written anyways.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 7100<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Advanced Settings<br>order:float = 5<br>
+</td>
+</tr>
+		<tr>
+<td>@Range</td>
+<td>OVERWRITE:str = Overwrite existing files<br>SKIP:str = Skip existing files<br>
 </td>
 </tr>
 	</table></td>
@@ -4104,6 +4256,294 @@
 	
 	
 <tr><td colspan="4"></td></tr>
+<tr><td colspan="4"><h3><a name="com.esri.prt.codecs.JPGAEncoder">JPEG with Alpha Encoder (com.esri.prt.codecs.JPGAEncoder)</a></h3></td></tr>
+<tr><td colspan="4">Encodes images and textures into the internal JPEG with zlib compressed alpha format.</td></tr>
+<tr><td colspan="4"><h4>Known Initial Shape Attributes</h4></td></tr>
+<tr>
+<th>Key</th>
+<th>Type</th>
+<th>Default Value</th>
+<th>Annotations</th>
+</tr>
+<tr><td colspan="4"><h4>Default Encoder Options</h4></td></tr>
+<tr>
+<th>Key</th>
+<th>Type</th>
+<th>Default Value</th>
+<th>Annotations</th>
+</tr>
+	<tr>
+<td>textureBase64</td>
+<td>bool</td>
+<td>false</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Base64 Encoding<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Convert to Base64 after encoding.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 15130<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Texture Settings<br>order:float = 4<br>
+</td>
+</tr>
+	</table></td>
+</tr>
+	<tr>
+<td>textureName</td>
+<td>str</td>
+<td>texture.jpg</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Texture Name<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Texture base name.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 15100<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Texture Settings<br>order:float = 4<br>
+</td>
+</tr>
+	</table></td>
+</tr>
+	
+	<tr>
+<td>textureMaxDimension</td>
+<td>int</td>
+<td>0</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Maximum Size<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Maximum size of texture resolution (0 = no limit).<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 15110<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Texture Settings<br>order:float = 4<br>
+</td>
+</tr>
+	</table></td>
+</tr>
+	<tr>
+<td>textureScalingFactor</td>
+<td>float</td>
+<td>1.0</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Scaling Factor<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Texture scaling factor.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 15120<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Texture Settings<br>order:float = 4<br>
+</td>
+</tr>
+		<tr>
+<td>@Range</td>
+<td>0:float = 0.1<br>1:float = 1<br>
+</td>
+</tr>
+	</table></td>
+</tr>
+	<tr>
+<td>forceJFIFHeaders</td>
+<td>bool</td>
+<td>false</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Force JFIF Header creation<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Creates a JFIF Header and removes any EXIF header.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 16200<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Texture Settings<br>order:float = 4<br>
+</td>
+</tr>
+	</table></td>
+</tr>
+	<tr>
+<td>textureQuality</td>
+<td>float</td>
+<td>1.0</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = JPG Quality<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = JPG image quality factor.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 16100<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Texture Settings<br>order:float = 4<br>
+</td>
+</tr>
+		<tr>
+<td>@Range</td>
+<td>0:float = 0.1<br>1:float = 1<br>
+</td>
+</tr>
+	</table></td>
+</tr>
+	<tr>
+<td>textureFixedDimensions</td>
+<td>int_array</td>
+<td></td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Fixed Size<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Fixed texture width and height (priority over scaling option).<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 15125<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Texture Settings<br>order:float = 4<br>
+</td>
+</tr>
+		<tr>
+<td>@Point2D</td>
+<td></td>
+</tr>
+	</table></td>
+</tr>
+	<tr>
+<td>textureFlipH</td>
+<td>bool</td>
+<td>false</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Flip Horizontally<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Flip texture horizontally before encoding.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 15140<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Texture Settings<br>order:float = 4<br>
+</td>
+</tr>
+	</table></td>
+</tr>
+	<tr>
+<td>existingFiles</td>
+<td>str</td>
+<td>OVERWRITE</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Existing Files<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Specifies how files should be written during the export run. The log file will be written anyways.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 7100<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Advanced Settings<br>order:float = 5<br>
+</td>
+</tr>
+		<tr>
+<td>@Range</td>
+<td>OVERWRITE:str = Overwrite existing files<br>SKIP:str = Skip existing files<br>
+</td>
+</tr>
+	</table></td>
+</tr>
+	
+	
+	
+	
+	
+	
+	
+	
+<tr><td colspan="4"></td></tr>
 <tr><td colspan="4"><h3><a name="com.esri.prt.codecs.JPGEncoder">JPEG Encoder (com.esri.prt.codecs.JPGEncoder)</a></h3></td></tr>
 <tr><td colspan="4">Encodes images and textures into the JPEG format.</td></tr>
 <tr><td colspan="4"><h4>Known Initial Shape Attributes</h4></td></tr>
@@ -4235,6 +4675,33 @@
 	</table></td>
 </tr>
 	<tr>
+<td>forceJFIFHeaders</td>
+<td>bool</td>
+<td>false</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Force JFIF Header creation<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Creates a JFIF Header and removes any EXIF header.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 16200<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Texture Settings<br>order:float = 4<br>
+</td>
+</tr>
+	</table></td>
+</tr>
+	<tr>
 <td>textureQuality</td>
 <td>float</td>
 <td>1.0</td>
@@ -4325,32 +4792,38 @@
 	</table></td>
 </tr>
 	<tr>
-<td>textureAddAlphaMask</td>
-<td>bool</td>
-<td>false</td>
+<td>existingFiles</td>
+<td>str</td>
+<td>OVERWRITE</td>
 <td><table class="doxtable">
 		<tr>
 <td>@Label</td>
-<td>:str = Append zipped alpha mask.<br>
+<td>:str = Existing Files<br>
 </td>
 </tr>
 		<tr>
 <td>@Description</td>
-<td>:str = Append alpha channel as zipped byte array.<br>
+<td>:str = Specifies how files should be written during the export run. The log file will be written anyways.<br>
 </td>
 </tr>
 		<tr>
 <td>@Order</td>
-<td>:float = 16200<br>
+<td>:float = 7100<br>
 </td>
 </tr>
 		<tr>
 <td>@Group</td>
-<td>name:str = Texture Settings<br>order:float = 4<br>
+<td>name:str = Advanced Settings<br>order:float = 5<br>
+</td>
+</tr>
+		<tr>
+<td>@Range</td>
+<td>OVERWRITE:str = Overwrite existing files<br>SKIP:str = Skip existing files<br>
 </td>
 </tr>
 	</table></td>
 </tr>
+	
 	
 	
 	
@@ -4402,7 +4875,6 @@
 </tr>
 	</table></td>
 </tr>
-	
 	<tr>
 <td>textureMaxError</td>
 <td>float</td>
@@ -4491,6 +4963,40 @@
 </tr>
 	</table></td>
 </tr>
+	
+	<tr>
+<td>existingFiles</td>
+<td>str</td>
+<td>OVERWRITE</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Existing Files<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Specifies how files should be written during the export run. The log file will be written anyways.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 7100<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Advanced Settings<br>order:float = 5<br>
+</td>
+</tr>
+		<tr>
+<td>@Range</td>
+<td>OVERWRITE:str = Overwrite existing files<br>SKIP:str = Skip existing files<br>
+</td>
+</tr>
+	</table></td>
+</tr>
+	
 	
 <tr><td colspan="4"></td></tr>
 <tr><td colspan="4"><h3><a name="com.esri.prt.codecs.MTLEncoder">Wavefront MTL Material Encoder (com.esri.prt.codecs.MTLEncoder)</a></h3></td></tr>
@@ -5583,34 +6089,6 @@
 <th>Default Value</th>
 <th>Annotations</th>
 </tr>
-	
-	<tr>
-<td>textureName</td>
-<td>str</td>
-<td>texture.png</td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Texture Name<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Texture base name.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 15100<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = Texture Settings<br>order:float = 4<br>
-</td>
-</tr>
-	</table></td>
-</tr>
 	<tr>
 <td>textureBase64</td>
 <td>bool</td>
@@ -5638,6 +6116,34 @@
 </tr>
 	</table></td>
 </tr>
+	<tr>
+<td>textureName</td>
+<td>str</td>
+<td>texture.png</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Texture Name<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Texture base name.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 15100<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Texture Settings<br>order:float = 4<br>
+</td>
+</tr>
+	</table></td>
+</tr>
+	
 	<tr>
 <td>textureMaxDimension</td>
 <td>int</td>
@@ -5788,6 +6294,39 @@
 	</table></td>
 </tr>
 	
+	<tr>
+<td>existingFiles</td>
+<td>str</td>
+<td>OVERWRITE</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Existing Files<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Specifies how files should be written during the export run. The log file will be written anyways.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 7100<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Advanced Settings<br>order:float = 5<br>
+</td>
+</tr>
+		<tr>
+<td>@Range</td>
+<td>OVERWRITE:str = Overwrite existing files<br>SKIP:str = Skip existing files<br>
+</td>
+</tr>
+	</table></td>
+</tr>
+	
 	
 	
 	
@@ -5809,34 +6348,6 @@
 <th>Type</th>
 <th>Default Value</th>
 <th>Annotations</th>
-</tr>
-	
-	<tr>
-<td>textureName</td>
-<td>str</td>
-<td>texture.mem</td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Texture Name<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Texture base name.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 15100<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = Texture Settings<br>order:float = 4<br>
-</td>
-</tr>
-	</table></td>
 </tr>
 	<tr>
 <td>textureBase64</td>
@@ -5865,6 +6376,34 @@
 </tr>
 	</table></td>
 </tr>
+	<tr>
+<td>textureName</td>
+<td>str</td>
+<td>texture.mem</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Texture Name<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Texture base name.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 15100<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Texture Settings<br>order:float = 4<br>
+</td>
+</tr>
+	</table></td>
+</tr>
+	
 	<tr>
 <td>textureMaxDimension</td>
 <td>int</td>
@@ -5924,7 +6463,6 @@
 </tr>
 	</table></td>
 </tr>
-	
 	<tr>
 <td>textureFixedDimensions</td>
 <td>int_array</td>
@@ -5984,1074 +6522,6 @@
 	</table></td>
 </tr>
 	
-	
-	
-	
-<tr><td colspan="4"></td></tr>
-<tr><td colspan="4"><h3><a name="com.esri.prt.codecs.RenderManEncoder">Pixar RenderMan (com.esri.prt.codecs.RenderManEncoder)</a></h3></td></tr>
-<tr><td colspan="4">Encodes geometry to Pixar RenderMan.</td></tr>
-<tr><td colspan="4"><h4>Known Initial Shape Attributes</h4></td></tr>
-<tr>
-<th>Key</th>
-<th>Type</th>
-<th>Default Value</th>
-<th>Annotations</th>
-</tr>
-<tr><td colspan="4"><h4>Default Encoder Options</h4></td></tr>
-<tr>
-<th>Key</th>
-<th>Type</th>
-<th>Default Value</th>
-<th>Annotations</th>
-</tr>
-	<tr>
-<td>riLib</td>
-<td>str</td>
-<td></td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = RenderMan Library<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Filename of library that implements the RenderMan Interface.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 0.19<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = General Settings<br>order:float = 0<br>
-</td>
-</tr>
-	</table></td>
-</tr>
-	
-	<tr>
-<td>errorFallback</td>
-<td>bool</td>
-<td>true</td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Error Fallback<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Fall back to start shape geometry, if generation fails. Else, ignore failed start shapes.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 1020<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = General Settings<br>order:float = 0<br>
-</td>
-</tr>
-		<tr>
-<td>@Hidden</td>
-<td></td>
-</tr>
-	</table></td>
-</tr>
-	
-	<tr>
-<td>author</td>
-<td>str</td>
-<td></td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Author<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Author of data.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 0.11<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = General Settings<br>order:float = 0<br>
-</td>
-</tr>
-		<tr>
-<td>@Hidden</td>
-<td></td>
-</tr>
-	</table></td>
-</tr>
-	<tr>
-<td>applicationName</td>
-<td>str</td>
-<td></td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Application Name<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Name of application.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 0.101<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = General Settings<br>order:float = 0<br>
-</td>
-</tr>
-		<tr>
-<td>@Hidden</td>
-<td></td>
-</tr>
-	</table></td>
-</tr>
-	<tr>
-<td>applicationString</td>
-<td>str</td>
-<td></td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Application<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Name and version of application.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 0.103<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = General Settings<br>order:float = 0<br>
-</td>
-</tr>
-		<tr>
-<td>@Hidden</td>
-<td></td>
-</tr>
-	</table></td>
-</tr>
-	
-	
-	<tr>
-<td>localOffset</td>
-<td>str</td>
-<td>NONE</td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Local Offset<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Local (= per shape or model) offset for exported geometry.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 7010<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = Geometry Settings<br>order:float = 2<br>
-</td>
-</tr>
-		<tr>
-<td>@Range</td>
-<td>NONE:str = None<br>MODEL_CENTROID:str = Model Centroid<br>MODEL_CENTROID_BOTTOM:str = Model Centroid Bottom<br>SHAPE_CENTROID:str = Shape Centroid<br>SHAPE_CENTROID_BOTTOM:str = Shape Centroid Bottom<br>
-</td>
-</tr>
-	</table></td>
-</tr>
-	<tr>
-<td>applicationVersion</td>
-<td>str</td>
-<td></td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Application Version<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Version of application.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 0.102<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = General Settings<br>order:float = 0<br>
-</td>
-</tr>
-		<tr>
-<td>@Hidden</td>
-<td></td>
-</tr>
-	</table></td>
-</tr>
-	<tr>
-<td>textureCoordinates</td>
-<td>str</td>
-<td>ALL</td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Texture Coordinates<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Choose which - if any - texture coordinate layers to export.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 5040<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = Geometry Settings<br>order:float = 2<br>
-</td>
-</tr>
-		<tr>
-<td>@Range</td>
-<td>NONE:str = Do not write any UVs<br>FIRST:str = Only write first layer of UVs<br>ALL:str = Write all UV layers<br>
-</td>
-</tr>
-	</table></td>
-</tr>
-	<tr>
-<td>objectMode</td>
-<td>str</td>
-<td>OBJECT</td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Mesh Enclosure<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Select the kind of statement to enclose geometry.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 3100<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = Granularity Settings<br>order:float = 1<br>
-</td>
-</tr>
-		<tr>
-<td>@Range</td>
-<td>OBJECT:str = Use objects<br>ARCHIVE:str = Use inline archives<br>
-</td>
-</tr>
-	</table></td>
-</tr>
-	<tr>
-<td>applicationVendor</td>
-<td>str</td>
-<td></td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Application Vendor<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Vendor of application.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 0.104<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = General Settings<br>order:float = 0<br>
-</td>
-</tr>
-		<tr>
-<td>@Hidden</td>
-<td></td>
-</tr>
-	</table></td>
-</tr>
-	<tr>
-<td>outputPath</td>
-<td>str</td>
-<td></td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Output Path<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Path to the output location.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 0.201<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = General Settings<br>order:float = 0<br>
-</td>
-</tr>
-	</table></td>
-</tr>
-	<tr>
-<td>texcoordPrecision</td>
-<td>float</td>
-<td>1.0e-04</td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Texture Coordinate Precision<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Specifies the minimal distance between texels.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 9030<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = Geometry Settings<br>order:float = 2<br>
-</td>
-</tr>
-		<tr>
-<td>@Range</td>
-<td>0:float = 1e-05<br>1:float = 1<br>
-</td>
-</tr>
-	</table></td>
-</tr>
-	<tr>
-<td>baseName</td>
-<td>str</td>
-<td>base_name</td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Base Name<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = The base name for all files.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 1010<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = General Settings<br>order:float = 0<br>
-</td>
-</tr>
-	</table></td>
-</tr>
-	
-	<tr>
-<td>atlasAddWrapBorder</td>
-<td>bool</td>
-<td>true</td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Texture Atlas Border<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Add a border of clamped pixels to protect against wrap mode bleeding.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 4060<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = Texture Settings<br>order:float = 4<br>
-</td>
-</tr>
-	</table></td>
-</tr>
-	<tr>
-<td>fileGranularity</td>
-<td>str</td>
-<td>MEMORY_BUDGET</td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = File Granularity<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Specifies the partition of the generated geometry into files.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 3010<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = Granularity Settings<br>order:float = 1<br>
-</td>
-</tr>
-		<tr>
-<td>@Range</td>
-<td>MEMORY_BUDGET:str = One file as long as Memory Budget is not exceeded<br>START_SHAPE:str = One file per start shape<br>
-</td>
-</tr>
-	</table></td>
-</tr>
-	<tr>
-<td>memoryBudget</td>
-<td>int</td>
-<td>500</td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Memory Budget (MBytes)<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Specifies the size limit in megabytes per exported file (value 0 = unlimited). Please note: The size is measured on the unoptimized geometry, i.e. the final size may vary. The check is only performed per input shape.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 3020<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = Granularity Settings<br>order:float = 1<br>
-</td>
-</tr>
-	</table></td>
-</tr>
-	
-	<tr>
-<td>meshGranularity</td>
-<td>str</td>
-<td>INSTANCED</td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Mesh Granularity<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Specifies the processing of meshes.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 3040<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = Granularity Settings<br>order:float = 1<br>
-</td>
-</tr>
-		<tr>
-<td>@Range</td>
-<td>AS_GENERATED:str = Do not merge any meshes<br>PER_MATERIAL:str = Merge meshes by material<br>INSTANCED:str = Reuse asset instances, merge generated meshes by material<br>
-</td>
-</tr>
-	</table></td>
-</tr>
-	
-	<tr>
-<td>writeLog</td>
-<td>bool</td>
-<td>false</td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Write Log<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Write log file with statistics about this export session.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 7005<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = Advanced Settings<br>order:float = 5<br>
-</td>
-</tr>
-	</table></td>
-</tr>
-	<tr>
-<td>mergeNormals</td>
-<td>bool</td>
-<td>true</td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Merge Normals Within Precision<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Finds parallel normals (using the precision distance) and shares their index.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 9050<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = Geometry Settings<br>order:float = 2<br>
-</td>
-</tr>
-	</table></td>
-</tr>
-	<tr>
-<td>vertexNormals</td>
-<td>str</td>
-<td>PASS</td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Vertex Normals<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Controls the export of vertex normals.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 5020<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = Geometry Settings<br>order:float = 2<br>
-</td>
-</tr>
-		<tr>
-<td>@Range</td>
-<td>PASS:str = Write vertex normals<br>NONE:str = Do not write any vertex normals<br>SET_MISSING:str = Write face normal if vertex normal is missing<br>SET_ALL:str = Always write face normal<br>
-</td>
-</tr>
-	</table></td>
-</tr>
-	
-	<tr>
-<td>globalOffset</td>
-<td>float_array</td>
-<td></td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Global Offset<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Global (= for all shapes/models) offset for exported geometry.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 7020<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = Geometry Settings<br>order:float = 2<br>
-</td>
-</tr>
-		<tr>
-<td>@Point3D</td>
-<td></td>
-</tr>
-	</table></td>
-</tr>
-	
-	
-	<tr>
-<td>templateShaderName</td>
-<td>str</td>
-<td></td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Template Shader Name<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Name of shader in RenderMan shader template file.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 7096<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = Advanced Settings<br>order:float = 5<br>
-</td>
-</tr>
-	</table></td>
-</tr>
-	<tr>
-<td>camRotate</td>
-<td>float_array</td>
-<td></td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Camera Rotation<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Rotation of the camera.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 7092<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = Advanced Settings<br>order:float = 5<br>
-</td>
-</tr>
-	</table></td>
-</tr>
-	<tr>
-<td>createTextureAtlases</td>
-<td>bool</td>
-<td>false</td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Create Texture Atlases<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Creates texture atlases which combine a set of textures into one, thus reducing the number of textures and materials. All textures except COLORMAPs are removed.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 4030<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = Texture Settings<br>order:float = 4<br>
-</td>
-</tr>
-	</table></td>
-</tr>
-	<tr>
-<td>vertexPrecision</td>
-<td>float</td>
-<td>0.001</td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Vertex Precision<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Specifies the minimal distance between vertices.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 9010<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = Geometry Settings<br>order:float = 2<br>
-</td>
-</tr>
-		<tr>
-<td>@Range</td>
-<td>0:float = 1e-05<br>1:float = 1<br>
-</td>
-</tr>
-	</table></td>
-</tr>
-	
-	<tr>
-<td>facesWithHoles</td>
-<td>str</td>
-<td>PASS</td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Faces With Holes<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Specifies how faces with holes should be handled during the export.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 9080<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = Geometry Settings<br>order:float = 2<br>
-</td>
-</tr>
-		<tr>
-<td>@Range</td>
-<td>PASS:str = Write as holes<br>TRIANGULATE_FACES_WITH_HOLES:str = Triangulate faces with holes<br>DISCARD_HOLES:str = Discard holes<br>CONVERT_HOLES_TO_FACES:str = Convert holes to faces<br>
-</td>
-</tr>
-	</table></td>
-</tr>
-	<tr>
-<td>normalPrecision</td>
-<td>float</td>
-<td>0.001</td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Normal Precision<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Specifies the minimal difference between normals.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 9020<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = Geometry Settings<br>order:float = 2<br>
-</td>
-</tr>
-		<tr>
-<td>@Range</td>
-<td>0:float = 1e-05<br>1:float = 1<br>
-</td>
-</tr>
-	</table></td>
-</tr>
-	<tr>
-<td>shaderTemplate</td>
-<td>str</td>
-<td></td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Shader Template<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Name of RenderMan shader template file.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 7095<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = Advanced Settings<br>order:float = 5<br>
-</td>
-</tr>
-	</table></td>
-</tr>
-	<tr>
-<td>mergeVertices</td>
-<td>bool</td>
-<td>true</td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Merge Vertices Within Precision<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Finds co-incidental vertices (using the precision distance) and shares their index.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 9040<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = Geometry Settings<br>order:float = 2<br>
-</td>
-</tr>
-	</table></td>
-</tr>
-	<tr>
-<td>mergeTexcoords</td>
-<td>bool</td>
-<td>true</td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Merge Texture Coordinates Within Precision<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Finds identical texture coordinates (using the precision distance) and shares their index.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 9060<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = Geometry Settings<br>order:float = 2<br>
-</td>
-</tr>
-	</table></td>
-</tr>
-	<tr>
-<td>triangulateMeshes</td>
-<td>bool</td>
-<td>false</td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Triangulate Meshes<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Triangulate resulting meshes.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 9070<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = Geometry Settings<br>order:float = 2<br>
-</td>
-</tr>
-	</table></td>
-</tr>
-	
-	<tr>
-<td>includeMaterials</td>
-<td>bool</td>
-<td>true</td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Include Materials<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Exports material definitions (e.g. color, textures, ...).<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 4010<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = Material Settings<br>order:float = 3<br>
-</td>
-</tr>
-	</table></td>
-</tr>
-	
-	
-	<tr>
-<td>collectTextures</td>
-<td>bool</td>
-<td>true</td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Collect Textures<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Collects all used textures and copies them into the target folder. All texture references are adjusted accordingly.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 4020<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = Texture Settings<br>order:float = 4<br>
-</td>
-</tr>
-	</table></td>
-</tr>
-	<tr>
-<td>maxAtlasDim</td>
-<td>int</td>
-<td>11</td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Texture Atlas Max Dimension (2^n)<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Specifies the maximal dimension of the texture atlases in power-of-2 pixels, e.g. 11 gives a 2048x2048 Atlas.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 4040<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = Texture Settings<br>order:float = 4<br>
-</td>
-</tr>
-		<tr>
-<td>@Range</td>
-<td>0:float = 4<br>1:float = 16<br>
-</td>
-</tr>
-	</table></td>
-</tr>
-	
-	<tr>
-<td>fileType</td>
-<td>str</td>
-<td>TEXT</td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = File Type<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Specifies geometry file type.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 7030<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = Advanced Settings<br>order:float = 5<br>
-</td>
-</tr>
-		<tr>
-<td>@Range</td>
-<td>TEXT:str = Text<br>BINARY:str = Binary<br>
-</td>
-</tr>
-	</table></td>
-</tr>
 	<tr>
 <td>existingFiles</td>
 <td>str</td>
@@ -7084,162 +6554,6 @@
 </tr>
 	</table></td>
 </tr>
-	<tr>
-<td>compression</td>
-<td>bool</td>
-<td>false</td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Compression<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Compress exported files.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 7040<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = Advanced Settings<br>order:float = 5<br>
-</td>
-</tr>
-	</table></td>
-</tr>
-	<tr>
-<td>shapeNameDelimiter</td>
-<td>str</td>
-<td>_</td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Shape Name Delimiter<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Delimiting character for resolution of shape name clashes.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 7060<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = Advanced Settings<br>order:float = 5<br>
-</td>
-</tr>
-	</table></td>
-</tr>
-	
-	<tr>
-<td>masterFile</td>
-<td>bool</td>
-<td>false</td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Master File<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Write master scene file.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 7070<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = Advanced Settings<br>order:float = 5<br>
-</td>
-</tr>
-	</table></td>
-</tr>
-	
-	<tr>
-<td>addCameraData</td>
-<td>bool</td>
-<td>true</td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Include Camera Data<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Adds the minimal set of commands (e.g. camera) to the master file to make it directly renderable.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 7090<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = Advanced Settings<br>order:float = 5<br>
-</td>
-</tr>
-	</table></td>
-</tr>
-	<tr>
-<td>camTranslate</td>
-<td>float_array</td>
-<td></td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Camera Translation<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Translation of the camera.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 7091<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = Advanced Settings<br>order:float = 5<br>
-</td>
-</tr>
-	</table></td>
-</tr>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	
@@ -7793,34 +7107,6 @@
 <th>Default Value</th>
 <th>Annotations</th>
 </tr>
-	
-	<tr>
-<td>textureName</td>
-<td>str</td>
-<td>texture.tif</td>
-<td><table class="doxtable">
-		<tr>
-<td>@Label</td>
-<td>:str = Texture Name<br>
-</td>
-</tr>
-		<tr>
-<td>@Description</td>
-<td>:str = Texture base name.<br>
-</td>
-</tr>
-		<tr>
-<td>@Order</td>
-<td>:float = 15100<br>
-</td>
-</tr>
-		<tr>
-<td>@Group</td>
-<td>name:str = Texture Settings<br>order:float = 4<br>
-</td>
-</tr>
-	</table></td>
-</tr>
 	<tr>
 <td>textureBase64</td>
 <td>bool</td>
@@ -7848,6 +7134,34 @@
 </tr>
 	</table></td>
 </tr>
+	<tr>
+<td>textureName</td>
+<td>str</td>
+<td>texture.tif</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Texture Name<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Texture base name.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 15100<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Texture Settings<br>order:float = 4<br>
+</td>
+</tr>
+	</table></td>
+</tr>
+	
 	<tr>
 <td>textureMaxDimension</td>
 <td>int</td>
@@ -7907,7 +7221,6 @@
 </tr>
 	</table></td>
 </tr>
-	
 	<tr>
 <td>textureFixedDimensions</td>
 <td>int_array</td>
@@ -7967,6 +7280,40 @@
 	</table></td>
 </tr>
 	
+	<tr>
+<td>existingFiles</td>
+<td>str</td>
+<td>OVERWRITE</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Existing Files<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Specifies how files should be written during the export run. The log file will be written anyways.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 7100<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Advanced Settings<br>order:float = 5<br>
+</td>
+</tr>
+		<tr>
+<td>@Range</td>
+<td>OVERWRITE:str = Overwrite existing files<br>SKIP:str = Skip existing files<br>
+</td>
+</tr>
+	</table></td>
+</tr>
+	
+	
 	
 	
 	
@@ -7987,7 +7334,6 @@
 <th>Default Value</th>
 <th>Annotations</th>
 </tr>
-	
 	<tr>
 <td>errorFallback</td>
 <td>bool</td>
@@ -8019,6 +7365,7 @@
 </tr>
 	</table></td>
 </tr>
+	
 	
 	<tr>
 <td>baseName</td>
@@ -8166,6 +7513,39 @@
 		<tr>
 <td>@Point3D</td>
 <td></td>
+</tr>
+	</table></td>
+</tr>
+	
+	<tr>
+<td>fileType</td>
+<td>str</td>
+<td>USDC</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = File Type<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Choose the USD file output type.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 7030<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Advanced Settings<br>order:float = 5<br>
+</td>
+</tr>
+		<tr>
+<td>@Range</td>
+<td>USDC:str = Multiple USDC and texture files<br>USDZ:str = One single USDZ file<br>
+</td>
 </tr>
 	</table></td>
 </tr>
@@ -10927,7 +10307,7 @@
 	
 <tr><td colspan="4"></td></tr>
 <tr><td colspan="4"><h3><a name="com.esri.prt.unreal.encoder">Unreal Engine (com.esri.prt.unreal.encoder)</a></h3></td></tr>
-<tr><td colspan="4">Encodes geometry into the Datasmith (4.24) format.</td></tr>
+<tr><td colspan="4">Encodes geometry into the Datasmith (4.26.0) format.</td></tr>
 <tr><td colspan="4"><h4>Known Initial Shape Attributes</h4></td></tr>
 <tr>
 <th>Key</th>
@@ -10948,6 +10328,7 @@
 <td></td>
 <td><table class="doxtable"></table></td>
 </tr>
+	
 	<tr>
 <td>baseName</td>
 <td>str</td>
@@ -11148,6 +10529,33 @@
 	</table></td>
 </tr>
 	<tr>
+<td>exportScenarios</td>
+<td>bool</td>
+<td>false</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Export Scenarios<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 0<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Scenario Settings<br>order:float = 5<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Export scenarios as Datasmith Variants.<br>
+</td>
+</tr>
+	</table></td>
+</tr>
+	<tr>
 <td>errorFallback</td>
 <td>bool</td>
 <td>true</td>
@@ -11186,6 +10594,7 @@
 </tr>
 	</table></td>
 </tr>
+	
 	<tr>
 <td>globalOffset</td>
 <td>float_array</td>
@@ -11212,6 +10621,29 @@
 </tr>
 	</table></td>
 </tr>
+	<tr>
+<td>scenarioNames</td>
+<td>str_array</td>
+<td></td>
+<td><table class="doxtable">
+		<tr>
+<td>@Hidden</td>
+<td></td>
+</tr>
+	</table></td>
+</tr>
+	<tr>
+<td>scenarioIds</td>
+<td>str_array</td>
+<td></td>
+<td><table class="doxtable">
+		<tr>
+<td>@Hidden</td>
+<td></td>
+</tr>
+	</table></td>
+</tr>
+	
 	
 	
 	
@@ -11251,6 +10683,9 @@
 <h3><a name="com.esri.prt.codecs.DEMDecoder">USGS Optional ASCII DEM (and CDED) Image Decoder (com.esri.prt.codecs.DEMDecoder)</a></h3>
 <p>Reads USGS Optional ASCII DEM (and CDED) images into textures</p>
 <p>Supported URI extensions: .dem;</p>
+<h3><a name="com.esri.prt.codecs.DWGDecoder">Autodesk DWG Decoder (com.esri.prt.codecs.DWGDecoder)</a></h3>
+<p>Decodes geometry from the Autodesk DWG format</p>
+<p>Supported URI extensions: .dwg;</p>
 <h3><a name="com.esri.prt.codecs.E00Decoder">Arc/Info Export E00 GRID Image Decoder (com.esri.prt.codecs.E00Decoder)</a></h3>
 <p>Reads Arc/Info Export E00 GRID images into textures</p>
 <p>Supported URI extensions: .e00;</p>
@@ -11343,13 +10778,13 @@
 <p>Supported URI extensions: .sdat;</p>
 <h3><a name="com.esri.prt.codecs.ShapeBufferDecoder">Esri Shape Buffer Decoder (com.esri.prt.codecs.ShapeBufferDecoder)</a></h3>
 <p>Reads Esri shape buffer geometry (only extended MultiPatch buffer).</p>
-<p>Supported URI extensions: .shapebuffer;</p>
+<p>Supported URI extensions: .shapebuffer;.multipatch;</p>
 <h3><a name="com.esri.prt.codecs.TIFDecoder">GeoTIFF Image Decoder (com.esri.prt.codecs.TIFDecoder)</a></h3>
 <p>Reads GeoTIFF images into textures</p>
 <p>Supported URI extensions: .tif;.tiff;</p>
 <h3><a name="com.esri.prt.codecs.USDDecoder">Universal Scene Description (USD) (com.esri.prt.codecs.USDDecoder)</a></h3>
 <p>Decodes geometry from the Universal Scene Description.</p>
-<p>Supported URI extensions: .usd;.usda;.usdc;</p>
+<p>Supported URI extensions: .usd;.usda;.usdc;.usdz;</p>
 <h3><a name="com.esri.prt.codecs.VRTDecoder">Virtual Raster Image Decoder (com.esri.prt.codecs.VRTDecoder)</a></h3>
 <p>Reads Virtual Raster images into textures</p>
 <p>Supported URI extensions: .vrt;</p>

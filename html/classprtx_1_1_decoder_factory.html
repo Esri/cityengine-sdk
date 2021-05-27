@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="esri_prt_55px.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">ArcGIS Procedural Runtime
-   &#160;<span id="projectnumber">2.3.6821</span>
+   &#160;<span id="projectnumber">2.4.7316</span>
    </div>
   </td>
  </tr>
@@ -90,6 +90,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="header">
   <div class="summary">
 <a href="classprtx_1_1_decoder_factory-members.html">List of all members</a> &#124;
+<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a>  </div>
   <div class="headertitle">
@@ -105,14 +106,24 @@ Inheritance diagram for prtx::DecoderFactory:</div>
 </div>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:a80236b27390124dc52bbbc5dbd713276"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_decoder_factory.html#a80236b27390124dc52bbbc5dbd713276">EmbeddedResources</a> { <br/>
+&#160;&#160;<a class="el" href="classprtx_1_1_decoder_factory.html#a80236b27390124dc52bbbc5dbd713276ac229573f80aee5f7f78dacb6553a0dd7">ER_NO</a>, 
+<br/>
+&#160;&#160;<a class="el" href="classprtx_1_1_decoder_factory.html#a80236b27390124dc52bbbc5dbd713276a6a9bfe1283b064a05b396be3167d555f">ER_CAN_HANDLE</a>
+<br/>
+ }</td></tr>
+<tr class="separator:a80236b27390124dc52bbbc5dbd713276"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a0df8b98f7bc45c8eeb3431f438916668"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_decoder_factory.html#a0df8b98f7bc45c8eeb3431f438916668">canHandleURI</a> (<a class="el" href="namespaceprtx.html#a2f661d48bd64c0c84f0e66fcbcba51e5">prtx::URIPtr</a> uri) const override</td></tr>
 <tr class="separator:a0df8b98f7bc45c8eeb3431f438916668"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aad8fd91cf7fb9be46a7020757c7bbced"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classprt_1_1_decoder_info.html">prt::DecoderInfo</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_decoder_factory.html#aad8fd91cf7fb9be46a7020757c7bbced">createDecoderInfo</a> () const </td></tr>
 <tr class="separator:aad8fd91cf7fb9be46a7020757c7bbced"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4a4d066d6485a126b707edfa85f5b33f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_decoder_factory.html#a4a4d066d6485a126b707edfa85f5b33f">DecoderFactory</a> (<a class="el" href="namespaceprt.html#a0bbc8b7c3113196a20860f569f833b2d">prt::ContentType</a> type, const std::wstring &amp;id, const std::wstring &amp;name, const std::wstring &amp;desc, const <a class="el" href="classprtx_1_1_file_extensions.html">FileExtensions</a> &amp;exts=<a class="el" href="classprtx_1_1_file_extensions.html">FileExtensions</a>(), const char *icon=0)</td></tr>
-<tr class="separator:a4a4d066d6485a126b707edfa85f5b33f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab53dfd290b562e0847d165adb1f9c530"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_decoder_factory.html#ab53dfd290b562e0847d165adb1f9c530">DecoderFactory</a> (<a class="el" href="namespaceprt.html#a0bbc8b7c3113196a20860f569f833b2d">prt::ContentType</a> type, const std::wstring &amp;id, const std::wstring &amp;name, const std::wstring &amp;desc, const <a class="el" href="classprtx_1_1_file_extensions.html">FileExtensions</a> &amp;exts=<a class="el" href="classprtx_1_1_file_extensions.html">FileExtensions</a>(), const char *icon=0, <a class="el" href="classprtx_1_1_decoder_factory.html#a80236b27390124dc52bbbc5dbd713276">EmbeddedResources</a> canHandleER=<a class="el" href="classprtx_1_1_decoder_factory.html#a80236b27390124dc52bbbc5dbd713276ac229573f80aee5f7f78dacb6553a0dd7">ER_NO</a>)</td></tr>
+<tr class="separator:ab53dfd290b562e0847d165adb1f9c530"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af6ab78774bde4a3fb05a3809537c1f8e"><td class="memItemLeft" align="right" valign="top">virtual <br class="typebreak"/>
 <a class="el" href="classprtx_1_1_extension.html#ad6048fac4019029ec39431db1d873801">prtx::Extension::ExtensionType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_decoder_factory.html#af6ab78774bde4a3fb05a3809537c1f8e">getExtensionType</a> () const finaloverride</td></tr>
 <tr class="separator:af6ab78774bde4a3fb05a3809537c1f8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -150,8 +161,29 @@ Additional Inherited Members</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This is the base class for all decoder factories. A subclass may want to override <a class="el" href="classprtx_1_1_extension_factory.html#aa36af76d4cb41ff19408a87161f2587d">getMerit()</a> to control the resolve order of multiple decoders with the same type and id. </p>
-</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a4a4d066d6485a126b707edfa85f5b33f"></a>
+</div><h2 class="groupheader">Member Enumeration Documentation</h2>
+<a class="anchor" id="a80236b27390124dc52bbbc5dbd713276"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="classprtx_1_1_decoder_factory.html#a80236b27390124dc52bbbc5dbd713276">prtx::DecoderFactory::EmbeddedResources</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><em><a class="anchor" id="a80236b27390124dc52bbbc5dbd713276ac229573f80aee5f7f78dacb6553a0dd7"></a>ER_NO</em>&nbsp;</td><td class="fielddoc">
+<p><a class="el" href="classprtx_1_1_decoder.html">Decoder</a> or the underlying format does not have support for embedded resources. </p>
+</td></tr>
+<tr><td class="fieldname"><em><a class="anchor" id="a80236b27390124dc52bbbc5dbd713276a6a9bfe1283b064a05b396be3167d555f"></a>ER_CAN_HANDLE</em>&nbsp;</td><td class="fielddoc">
+<p>Format has embedded resources, and <a class="el" href="classprtx_1_1_decoder.html">Decoder</a> can handle it. </p>
+</td></tr>
+</table>
+
+</div>
+</div>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="ab53dfd290b562e0847d165adb1f9c530"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -189,7 +221,13 @@ Additional Inherited Members</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>icon</em> = <code>0</code>&#160;</td>
+          <td class="paramname"><em>icon</em> = <code>0</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classprtx_1_1_decoder_factory.html#a80236b27390124dc52bbbc5dbd713276">EmbeddedResources</a>&#160;</td>
+          <td class="paramname"><em>canHandleER</em> = <code><a class="el" href="classprtx_1_1_decoder_factory.html#a80236b27390124dc52bbbc5dbd713276ac229573f80aee5f7f78dacb6553a0dd7">ER_NO</a></code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -206,6 +244,7 @@ Additional Inherited Members</h2></td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">desc</td><td>A human-readable description of this extension. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">exts</td><td>Supported file extensions of this extension. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">icon</td><td>An icon as Base64-encoded PNG byte array. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">canHandleER</td><td>ER_CAN_HANDLE if the associated decoder can handle embedded resources. </td></tr>
   </table>
   </dd>
 </dl>
@@ -289,7 +328,7 @@ Additional Inherited Members</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Sep 28 2020 18:43:33 for ArcGIS Procedural Runtime by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon May 3 2021 12:45:00 for ArcGIS Procedural Runtime by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.5
 </small></address>

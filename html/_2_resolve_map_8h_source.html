@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="esri_prt_55px.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">ArcGIS Procedural Runtime
-   &#160;<span id="projectnumber">2.3.6821</span>
+   &#160;<span id="projectnumber">2.4.7316</span>
    </div>
   </td>
  </tr>
@@ -90,7 +90,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!--header-->
 <div class="contents">
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">  COPYRIGHT (c) 2012-2020 Esri R&amp;D Center Zurich</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">  COPYRIGHT (c) 2012-2021 Esri R&amp;D Center Zurich</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">  TRADE SECRETS: ESRI PROPRIETARY AND CONFIDENTIAL</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">  Unpublished material - all rights reserved under the</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">  Copyright Laws of the United States and applicable international</span></div>
@@ -138,29 +138,33 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="keyword">static</span> <a class="code" href="namespaceprtx.html#a2f661d48bd64c0c84f0e66fcbcba51e5">prtx::URIPtr</a> resolveKeyWithURIFallback(<a class="code" href="classprtx_1_1_resolve_map.html">ResolveMap</a> <span class="keyword">const</span>* resolveMap, <span class="keyword">const</span> std::wstring&amp; key);</div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    <span class="keyword">static</span> std::wstring replaceLastKeySegment(<span class="keyword">const</span> std::wstring&amp; key, <span class="keyword">const</span> std::wstring&amp; newSegment);</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="classprtx_1_1_resolve_map.html">ResolveMap</a>() {}</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;};</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;} <span class="comment">// namespace prtx</span></div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="preprocessor">#ifdef __clang__</span></div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#   pragma clang diagnostic pop</span></div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* PRTX_RESOLVEMAP_H_ */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    [[deprecated]] <span class="keyword">static</span> std::wstring replaceLastKeySegment(<span class="keyword">const</span> std::wstring&amp; key, <span class="keyword">const</span> std::wstring&amp; newSegment);</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    <span class="keyword">static</span> std::wstring anchorRelativeKey(<span class="keyword">const</span> std::wstring&amp; anchorKey, <span class="keyword">const</span> std::wstring&amp; relativeKey);</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    <span class="keyword">static</span> std::wstring anchorEmbeddedKey(<span class="keyword">const</span> std::wstring&amp; containerKey, <span class="keyword">const</span> std::wstring&amp; embeddedKey);</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="classprtx_1_1_resolve_map.html">ResolveMap</a>() {}</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;};</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;} <span class="comment">// namespace prtx</span></div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;<span class="preprocessor">#ifdef __clang__</span></div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#   pragma clang diagnostic pop</span></div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* PRTX_RESOLVEMAP_H_ */</span><span class="preprocessor"></span></div>
 <div class="ttc" id="classprt_1_1_resolve_map_html"><div class="ttname"><a href="classprt_1_1_resolve_map.html">prt::ResolveMap</a></div><div class="ttdef"><b>Definition:</b> ResolveMap.h:37</div></div>
 <div class="ttc" id="namespaceprtx_html_a2f661d48bd64c0c84f0e66fcbcba51e5"><div class="ttname"><a href="namespaceprtx.html#a2f661d48bd64c0c84f0e66fcbcba51e5">prtx::URIPtr</a></div><div class="ttdeci">std::shared_ptr&lt; URI &gt; URIPtr</div><div class="ttdoc">shared pointer implementation of prtx::URI </div><div class="ttdef"><b>Definition:</b> URI.h:37</div></div>
 <div class="ttc" id="classprtx_1_1_resolve_map_html"><div class="ttname"><a href="classprtx_1_1_resolve_map.html">prtx::ResolveMap</a></div><div class="ttdef"><b>Definition:</b> /ResolveMap.h:40</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Sep 28 2020 18:43:33 for ArcGIS Procedural Runtime by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon May 3 2021 12:45:00 for ArcGIS Procedural Runtime by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.5
 </small></address>

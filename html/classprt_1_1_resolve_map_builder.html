@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="esri_prt_55px.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">ArcGIS Procedural Runtime
-   &#160;<span id="projectnumber">2.3.6821</span>
+   &#160;<span id="projectnumber">2.4.7316</span>
    </div>
   </td>
  </tr>
@@ -90,6 +90,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="header">
   <div class="summary">
 <a href="classprt_1_1_resolve_map_builder-members.html">List of all members</a> &#124;
+<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a>  </div>
   <div class="headertitle">
@@ -105,10 +106,20 @@ Inheritance diagram for prt::ResolveMapBuilder:</div>
 </div>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:ae8e088afe08dfab89f3ff38c81421499"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprt_1_1_resolve_map_builder.html#ae8e088afe08dfab89f3ff38c81421499">EmbeddedEntriesMode</a> { <br/>
+&#160;&#160;<a class="el" href="classprt_1_1_resolve_map_builder.html#ae8e088afe08dfab89f3ff38c81421499aeb7359a73e3fe43eb310be083b8742b4">EEM_INSPECT_AND_ADD</a>, 
+<br/>
+&#160;&#160;<a class="el" href="classprt_1_1_resolve_map_builder.html#ae8e088afe08dfab89f3ff38c81421499aa4d9936c5bb1fce31862748e8770bb75">EEM_IGNORE</a>
+<br/>
+ }</td></tr>
+<tr class="separator:ae8e088afe08dfab89f3ff38c81421499"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a8819eae78f0190e6f913c39ae7017d84"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprt_1_1_resolve_map_builder.html#a8819eae78f0190e6f913c39ae7017d84">addEntry</a> (const wchar_t *key, const wchar_t *uri)=0</td></tr>
-<tr class="separator:a8819eae78f0190e6f913c39ae7017d84"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2bffcf7eea073d566fd2368ac56eaa9f"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprt_1_1_resolve_map_builder.html#a2bffcf7eea073d566fd2368ac56eaa9f">addEntry</a> (const wchar_t *key, const wchar_t *uri, <a class="el" href="classprt_1_1_resolve_map_builder.html#ae8e088afe08dfab89f3ff38c81421499">EmbeddedEntriesMode</a> embeddedEntries=<a class="el" href="classprt_1_1_resolve_map_builder.html#ae8e088afe08dfab89f3ff38c81421499aeb7359a73e3fe43eb310be083b8742b4">EEM_INSPECT_AND_ADD</a>)=0</td></tr>
+<tr class="separator:a2bffcf7eea073d566fd2368ac56eaa9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0d28b0f42d6b0e561e242053d46fa6f4"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classprt_1_1_resolve_map.html">ResolveMap</a> const *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprt_1_1_resolve_map_builder.html#a0d28b0f42d6b0e561e242053d46fa6f4">createResolveMap</a> (<a class="el" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a> *status=0) const =0</td></tr>
 <tr class="separator:a0d28b0f42d6b0e561e242053d46fa6f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adf0b515dc7f59ef17aedee8c4b63bd7f"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classprt_1_1_resolve_map.html">ResolveMap</a> const *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprt_1_1_resolve_map_builder.html#adf0b515dc7f59ef17aedee8c4b63bd7f">createResolveMapAndReset</a> (<a class="el" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a> *status=0)=0</td></tr>
@@ -139,8 +150,30 @@ Additional Inherited Members</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Used for building a <a class="el" href="classprt_1_1_resolve_map.html">ResolveMap</a> instance. </p>
-</div><h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="a8819eae78f0190e6f913c39ae7017d84"></a>
+</div><h2 class="groupheader">Member Enumeration Documentation</h2>
+<a class="anchor" id="ae8e088afe08dfab89f3ff38c81421499"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="classprt_1_1_resolve_map_builder.html#ae8e088afe08dfab89f3ff38c81421499">prt::ResolveMapBuilder::EmbeddedEntriesMode</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Enum for embedded entries mode in <a class="el" href="classprt_1_1_resolve_map_builder.html#a2bffcf7eea073d566fd2368ac56eaa9f">addEntry()</a> </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><em><a class="anchor" id="ae8e088afe08dfab89f3ff38c81421499aeb7359a73e3fe43eb310be083b8742b4"></a>EEM_INSPECT_AND_ADD</em>&nbsp;</td><td class="fielddoc">
+<p>inspect uri and add embedded resources </p>
+</td></tr>
+<tr><td class="fieldname"><em><a class="anchor" id="ae8e088afe08dfab89f3ff38c81421499aa4d9936c5bb1fce31862748e8770bb75"></a>EEM_IGNORE</em>&nbsp;</td><td class="fielddoc">
+<p>do not try to resolve and add embedded resources </p>
+</td></tr>
+</table>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a2bffcf7eea073d566fd2368ac56eaa9f"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -157,7 +190,13 @@ Additional Inherited Members</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const wchar_t *&#160;</td>
-          <td class="paramname"><em>uri</em>&#160;</td>
+          <td class="paramname"><em>uri</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classprt_1_1_resolve_map_builder.html#ae8e088afe08dfab89f3ff38c81421499">EmbeddedEntriesMode</a>&#160;</td>
+          <td class="paramname"><em>embeddedEntries</em> = <code><a class="el" href="classprt_1_1_resolve_map_builder.html#ae8e088afe08dfab89f3ff38c81421499aeb7359a73e3fe43eb310be083b8742b4">EEM_INSPECT_AND_ADD</a></code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -175,7 +214,8 @@ Additional Inherited Members</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">key</td><td>The (unique) key string. </td></tr>
-    <tr><td class="paramname">uri</td><td>The uri. </td></tr>
+    <tr><td class="paramname">uri</td><td>The percent-encded URI to the (embedded) asset or texture. See <a class="el" href="_app_notes.html">Application Notes</a> for URI creation. </td></tr>
+    <tr><td class="paramname">embeddedEntries</td><td>If mode is EEM_INSPECT_AND_ADD (default), the uri is inspected if it points to a resource for which a Decoder with a ResolveMapProvider which can handle embedded resources is registered in the ExtensionManager. If so, and the resource is inspected and embedded resources are added as (key, uri) pairs too.</td></tr>
   </table>
   </dd>
 </dl>
@@ -360,7 +400,7 @@ Additional Inherited Members</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Sep 28 2020 18:43:33 for ArcGIS Procedural Runtime by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon May 3 2021 12:45:00 for ArcGIS Procedural Runtime by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.5
 </small></address>

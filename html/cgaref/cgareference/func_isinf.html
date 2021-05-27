@@ -21,21 +21,22 @@
 
 <h2>Syntax</h2>
 
-<p class="code2"><span class="codelight">bool</span> isinf(<span class="cga_opparam">value</span>)</p>
+<p class="code2"><span class="codelight">bool</span>&nbsp&nbsp&nbspisinf(<span class="cga_opparam">value</span>)</p>
+
+<p class="code2"><span class="codelight">bool[]</span>&nbspisinf(<span class="cga_opparam">values</span>)</p>
 
 <h2>Parameters</h2>
 
 <ul>
    	<li><span class="cga_opparam">value</span> (float)</li>
+	<li><span class="cga_opparam">values</span> (float[])</li>
 </ul>
 
 <h2>Returns</h2>
 
-<p>true if <span class="cga_opparam">value</span> is infinite, false otherwise</p> 
+<p><span class="code_std">true</span> if <span class="cga_opparam">value</span> is infinite, <span class="code_std">false</span> otherwise.</p>
 
-<h2>Description</h2>
-
-<p>This function checks if <span class="cga_opparam">value</span> is an infinite value.</p>	
+<p>For an array <span class="cga_opparam">values</span> a new array is returned containing the result of each element.</p>
 	
 <h2>Related</h2>
 
@@ -46,16 +47,22 @@
 <h2>Examples</h2>
 <p class="example">	
 <pre class="code3">
+isinf(1)
+# result = false
+
 isinf(1/0)
 # result = true
 
 isinf(ln(0))
 # result = true
+
+isinf([1, 1/0])
+# result = [false, true]
 </pre>
 </p>
 
 <!-- FOOTER -->
-<p class="foot">Copyright &copy;2008-2020 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
+<p class="foot">Copyright &copy;2008-2021 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
 
 </div>
 </body>

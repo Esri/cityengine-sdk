@@ -1,0 +1,101 @@
+<html>
+
+<head>
+<title>setMaterial Operation</title>
+<link rel="stylesheet" href="../manual_style.css" type="text/css" />
+</head>
+
+<body>
+<div class="content">
+
+<table summary="" class="header">
+	<tr>
+		<td align="left" class="helphead_l"><a href="../toc.html"><div class="helplink">&nbsp;</div></a></td>
+		<td align="right" class="helphead_r"></td>
+	</tr>
+</table>
+
+<h1>setMaterial operation</h1>
+
+<h2>Syntax</h2>
+
+<p class="code2"><span class="cga_op">setMaterial(<span class="cga_opparam">material</span>)</span></p>
+
+<h2>Parameters</h2>
+<ul>
+	<li><span class="cga_opparam">material</span> (string[])<br>A string array containing key-value pairs in the form of [ attr-name0, value0, attr-name1, value1, ... ]. The names of the <a class="normw" href="attr_material.html">material attributes</a> are <stong>without</strong> the <span class="code_std">"material."</span> prefix.</li>
+</ul>
+
+
+<h2>Description</h2>
+
+<p>Sets the <a class="normw" href="attr_material.html">material attributes</a> of the current shape's material according to <span class="cga_opparam">material</span>. This operation allows for setting of multiple (all) material attributes in one operation.<br>
+The result will be the same as using <a class="normw" href="op_set.html">set()</a> to set each material attribute individually.</p>
+
+<h2>Related</h2>
+<ul>
+	<li><a class="normw" href="func_getMaterial.html">getMaterial function</a></li>
+	<li><a class="normw" href="op_resetMaterial.html">resetMaterial operation</a></li>
+	<li><a class="normw" href="op_set.html">set operation</a></li>
+	<li><a class="normw" href="attr_material.html">material attributes</a></li>
+	<li><a class="normw" href="attr_material_color.html">material.color attribute</a></li>
+    <li><a class="normw" href="attr_material_map.html">material.map texture layers</a></li> 
+	<li><a class="normw" href="op_color.html">color operation</a></li>
+	<li><a class="normw" href="op_texture.html">texture operation</a></li>
+	<li><a class="normw" href="cga_texturing.html">Texturing: Essential Knowledge</a></li>
+</ul>
+
+<h2>Example 1</h2>
+
+<table summary="" class="twocol">
+<tr>
+	<td class="twocol_l"><img src="images/setMaterial-example.png" alt="setMaterial-example"/></td>
+	<td><pre class="code3">
+
+myMaterial = [ "color.r",    "1.0", 
+               "color.g",    "0.0", 
+               "color.b",    "0.0", 
+               "opacitymap", "builtin:default" ]
+
+Lot --> primitiveCube() 
+        scaleUV(0,0.25,0.25)
+        setMaterial(myMaterial)
+        </pre>
+    
+    </pre> <em>Using <span class="code_std">setMaterial()</span> to set a number of material attributes in one operation.</em></td>
+	</td>
+</tr>
+</table>
+
+
+
+<h2>Example 2: using a CSV file to define a material</h2>
+
+<table summary="" class="twocol">
+<tr>
+	<td class="twocol_l"><img src="images/setMaterial-example2.png" alt="setMaterial-example"/></td>
+	<td><pre class="code3">
+RefExampleCSV-->
+	primitiveCube()
+	setMaterial(readStringTable("exampleMaterial.csv"))    
+    <br>
+    <br>
+<em>exampleMaterial.csv:</em>    
+color.r,1
+color.g,0.5
+color.b,0
+colormap,builtin:default
+
+        </pre> <em>Material descriptions in CSV files can be used via <span class="code_std">readStringTable()</span>.</em>    
+    </td>
+    
+	</td>
+</tr>
+</table>
+
+
+<p class="foot">Copyright &copy;2008-2021 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
+
+</div>
+</body>
+</html>

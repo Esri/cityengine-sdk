@@ -69,6 +69,8 @@
 	<li>Khronos COLLADA (dae)</li>
 	<li>Autodesk FBX</li>
 	<li>Khronos glTF</li>
+    <li>Pixar USD</li>
+    <li>Autodesk DWG</li>
 </ul>
 
 <p>The OBJ reader imports the material description file (.mtl) and also understands negative indices (referencing from current position backwards). It will silently drop unsupported geometry/material tags and also deletes normals or texture coordinates of inconsistent meshes.</p>
@@ -78,6 +80,10 @@
 <p>The FBX reader imports whole scene graphs including transformation nodes. Additionally, coordinate unit and up-vector information are handled. Custom attributes are ignored and normals and texture coordinates of inconsistent meshes are deleted. Embedded textures are currently not supported.</p>
 
 <p>The glTF reader supports <a href="https://github.com/KhronosGroup/glTF/blob/master/specification/2.0/README.md" target="_blank">glTF 2.0</a> and is able to read glTF JSON (<span class="codelight">.gltf</span>), and GLB binary (<span class="codelight">.glb</span>) formats. For geometry data, external <span class="codelight">.bin</span> files, GLB-stored buffer, and base64-encoded buffers are all supported. For texture data, external JPEG and PNG images stored externally or inside the GLB buffer are the two supported options (base64-encoded images are not supported). The full scene graph will be imported including transformation nodes and multiple texture coordinate sets. Skinned mesh attributes and animations are ignored. The CGA <span class="codelight">material.shader</span> attribute will be set to <span class="codelight">CityEnginePBRShader</span>. Please see <a href="attr_material.html#PBRMaterialAttributes">PBR Material Attributes</a> for details.</p>
+
+<p>The USD reader imports all objects of type UsdGeomMesh. Material nodes of type UsdPreviewSurface are automatically converted to CityEnginePBRShader materials.</p>
+
+<p>The Autodesk DWG Importer only imports 3D aspects of the file. It silently drops all 2D only elements.</p>
 
 <p>Remarks:</p>
 <ul>
@@ -97,6 +103,7 @@
 	<li><a class="normw" href="op_primitive.html#cylinder">primitiveCylinder operation</a></li>
 	<li><a class="normw" href="op_primitive.html#cone">primitiveCone operation</a></li>
 	<li><a class="normw" href="op_trim.html">trim operation</a></li>
+	<li><a class="normw" href="op_footprint.html">footprint operation</a></li>
 	<li><a class="normw" href="op_resetGeometry.html">resetGeometry operation</a></li>
 	<li><a class="normw" href="func_geometry.html#isInstanced">geometry.isInstanced function</a></li>
 	<li><a class="normw" href="attr_scope.html">scope attribute</a></li>
@@ -249,7 +256,7 @@ Side--&gt;
 
 
 <!-- FOOTER -->
-<p class="foot">Copyright &copy;2008-2020 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
+<p class="foot">Copyright &copy;2008-2021 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
 
 <!-- END CENTERED CONTENT -->
 </div>

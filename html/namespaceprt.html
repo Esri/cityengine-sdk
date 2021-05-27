@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="esri_prt_55px.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">ArcGIS Procedural Runtime
-   &#160;<span id="projectnumber">2.3.6821</span>
+   &#160;<span id="projectnumber">2.4.7316</span>
    </div>
   </td>
  </tr>
@@ -108,8 +108,8 @@ Functions</h2></td></tr>
 <tr class="separator:aaf2da61548a50cf549090a613d23ec3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a139ddfbf80758a1e4fbbcff7bd55d404"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classprt_1_1_encoder_info.html">EncoderInfo</a> const *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprt.html#a139ddfbf80758a1e4fbbcff7bd55d404">createEncoderInfo</a> (const wchar_t *encoderId, <a class="el" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a> *stat=nullptr)</td></tr>
 <tr class="separator:a139ddfbf80758a1e4fbbcff7bd55d404"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4a26fc77ff5cc864b72c542114245ad1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classprt_1_1_resolve_map.html">ResolveMap</a> const *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprt.html#a4a26fc77ff5cc864b72c542114245ad1">createResolveMap</a> (const wchar_t *rpkURI, const wchar_t *unpackFileSystemPath=nullptr, <a class="el" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a> *stat=nullptr)</td></tr>
-<tr class="separator:a4a26fc77ff5cc864b72c542114245ad1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb9d1bffc2bd7859022de33544a39061"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classprt_1_1_resolve_map.html">ResolveMap</a> const *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprt.html#afb9d1bffc2bd7859022de33544a39061">createResolveMap</a> (const wchar_t *rpkOrResURI, const wchar_t *unpackFileSystemPath=nullptr, <a class="el" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a> *stat=nullptr)</td></tr>
+<tr class="separator:afb9d1bffc2bd7859022de33544a39061"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7c6125100b4deb1273c0e81cda996d89"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classprt_1_1_rule_file_info.html">RuleFileInfo</a> const *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprt.html#a7c6125100b4deb1273c0e81cda996d89">createRuleFileInfo</a> (const wchar_t *ruleFileURI, <a class="el" href="classprt_1_1_cache.html">Cache</a> *cache=nullptr, <a class="el" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a> *stat=nullptr)</td></tr>
 <tr class="separator:a7c6125100b4deb1273c0e81cda996d89"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a785b02f26edd5ec806607ab98d5761ae"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classprt_1_1_attribute_map.html">AttributeMap</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprt.html#a785b02f26edd5ec806607ab98d5761ae">createTextureMetadata</a> (const wchar_t *uri, <a class="el" href="classprt_1_1_cache.html">Cache</a> *cache=nullptr, <a class="el" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a> *stat=nullptr)</td></tr>
@@ -300,6 +300,8 @@ Enumerations</h2></td></tr>
 &#160;&#160;<a class="el" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4ad42dcce6b299e747d68b47aa21e2fbbc">STATUS_COULD_NOT_CLOSE_FILE</a>, 
 <br/>
 &#160;&#160;<a class="el" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4a9e3247be27e19281510d1678e6fe5c0b">STATUS_FILE_WRITE_FAILED</a>, 
+<br/>
+&#160;&#160;<a class="el" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4ad8cba860905f90a3c7647351c3c4b243">STATUS_FILE_READ_FAILED</a>, 
 <br/>
 &#160;&#160;<a class="el" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4a46124c2afa793519441a9991444cc9f6">STATUS_FILE_SEEK_FAILED</a>, 
 <br/>
@@ -588,6 +590,9 @@ Enumerations</h2></td></tr>
 <tr><td class="fieldname"><em><a class="anchor" id="acf0b3066b48a14bccb756bee9a4700e4a9e3247be27e19281510d1678e6fe5c0b"></a>STATUS_FILE_WRITE_FAILED</em>&nbsp;</td><td class="fielddoc">
 <p>Could not write to file. </p>
 </td></tr>
+<tr><td class="fieldname"><em><a class="anchor" id="acf0b3066b48a14bccb756bee9a4700e4ad8cba860905f90a3c7647351c3c4b243"></a>STATUS_FILE_READ_FAILED</em>&nbsp;</td><td class="fielddoc">
+<p>Could not read from file. </p>
+</td></tr>
 <tr><td class="fieldname"><em><a class="anchor" id="acf0b3066b48a14bccb756bee9a4700e4a46124c2afa793519441a9991444cc9f6"></a>STATUS_FILE_SEEK_FAILED</em>&nbsp;</td><td class="fielddoc">
 <p>Could not seek in file. </p>
 </td></tr>
@@ -805,7 +810,7 @@ Enumerations</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a4a26fc77ff5cc864b72c542114245ad1"></a>
+<a class="anchor" id="afb9d1bffc2bd7859022de33544a39061"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -813,7 +818,7 @@ Enumerations</h2></td></tr>
           <td class="memname"><a class="el" href="classprt_1_1_resolve_map.html">ResolveMap</a> const* prt::createResolveMap </td>
           <td>(</td>
           <td class="paramtype">const wchar_t *&#160;</td>
-          <td class="paramname"><em>rpkURI</em>, </td>
+          <td class="paramname"><em>rpkOrResURI</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -834,12 +839,12 @@ Enumerations</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Create a <a class="el" href="classprt_1_1_resolve_map.html">ResolveMap</a> for a rpk. The entries will point into the rpk.</p>
+<p>Create a <a class="el" href="classprt_1_1_resolve_map.html">ResolveMap</a> for a rpk or a resource which contains embedded resources. The entries will point into the rpk or the passed resource.</p>
 <p>Must be called after <a class="el" href="namespaceprt.html#ac11b9812a98def24f4ad792bf5be2371">init()</a>, will return STATUS_NOT_INITIALIZED else. Is thread-safe. The returned instance must be destroyed by the caller.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir"></td><td class="paramname">rpkURI</td><td>URI to the rpk, see <a class="el" href="_app_notes.html">Application Notes</a> for URI creation. </td></tr>
-    <tr><td class="paramdir"></td><td class="paramname">unpackFileSystemPath</td><td>Optional. If non-null, the rpk gets unpacked to the given directory in the filesystem and the <a class="el" href="classprt_1_1_resolve_map.html">ResolveMap</a> entries will point to those files. </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">rpkOrResURI</td><td>URI to the rpk or the resource, see <a class="el" href="_app_notes.html">Application Notes</a> for URI creation. </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">unpackRPKToFileSystemPath</td><td>Optional. If non-null, the rpk / resource gets unpacked to the given directory in the filesystem and the <a class="el" href="classprt_1_1_resolve_map.html">ResolveMap</a> entries will point to those files. </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">stat</td><td>Optional pointer to return the <a class="el" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a>. </td></tr>
   </table>
   </dd>
@@ -1597,7 +1602,7 @@ Enumerations</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Sep 28 2020 18:43:33 for ArcGIS Procedural Runtime by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon May 3 2021 12:45:00 for ArcGIS Procedural Runtime by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.5
 </small></address>

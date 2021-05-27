@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="esri_prt_55px.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">ArcGIS Procedural Runtime
-   &#160;<span id="projectnumber">2.3.6821</span>
+   &#160;<span id="projectnumber">2.4.7316</span>
    </div>
   </td>
  </tr>
@@ -150,7 +150,9 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:a2aca08c64c2a4f3f8a29acfc511f7d4c inherit pub_static_methods_classprtx_1_1_extension"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Base class for all PRTX extensions which can resolve a <a class="el" href="classprtx_1_1_u_r_i.html">prtx::URI</a> to a <a class="el" href="classprtx_1_1_content.html">prtx::Content</a> based object. </p>
+<div class="textblock"><p>A <a class="el" href="classprtx_1_1_resolve_map_provider.html">ResolveMapProvider</a> scans a resource identified by a <a class="el" href="classprtx_1_1_u_r_i.html">prtx::URI</a> and creates a <a class="el" href="classprt_1_1_resolve_map.html">prt::ResolveMap</a> of "embedded" resources. The resulting <a class="el" href="classprtx_1_1_resolve_map.html">ResolveMap</a> will contain composite URIs addressing the individual embedded resources.</p>
+<p>A typical use case is to scan for embedded textures within a self-contained asset format like GLB (GLTF) or USDZ.</p>
+<p>Generally, a <a class="el" href="classprtx_1_1_resolve_map_provider.html">ResolveMapProvider</a> is used with a corresponding prtx::Adaptor which can open an input stream from a composite <a class="el" href="classprtx_1_1_u_r_i.html">URI</a>. See <a class="el" href="classprtx_1_1_resolve_map_provider.html#a0d1322801dd0de554c53e48aa3291120">prtx::ResolveMapProvider::createResolveMap</a> for examples of the two most typical forms of composite URIs. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a class="anchor" id="a0d1322801dd0de554c53e48aa3291120"></a>
 <div class="memitem">
@@ -174,6 +176,12 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 <p>Scans the resource tree specified by uri and populates a resolve map with the found keys and URIs.</p>
+<p>Typically, a zip-like container "foo" would produce entries like: assets/resource.foo/internal/path/file.ext -&gt; foo:file:/abs/path/assets/resource.foo!/internal/path/file.ext</p>
+<p>A resource "bar" with sequential buffers would produce entries like: assets/resource.bar/file_1.ext -&gt; bar:file:/abs/path/assets/resource.bar!/&lt;off&gt;/&lt;len&gt;/file_1.ext</p>
+<ul>
+<li>off = offset in bytes from start of resource</li>
+<li>len = size in bytes of the corresponding buffer</li>
+</ul>
 <dl class="section return"><dt>Returns</dt><dd>Returns a new resolve map which must be destroyed by the caller.</dd></dl>
 <dl class="section see"><dt>See Also</dt><dd><a class="el" href="classprt_1_1_resolve_map.html">prt::ResolveMap</a> </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
@@ -247,7 +255,7 @@ Additional Inherited Members</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Sep 28 2020 18:43:33 for ArcGIS Procedural Runtime by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon May 3 2021 12:45:01 for ArcGIS Procedural Runtime by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.5
 </small></address>

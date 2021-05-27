@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="esri_prt_55px.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">ArcGIS Procedural Runtime
-   &#160;<span id="projectnumber">2.3.6821</span>
+   &#160;<span id="projectnumber">2.4.7316</span>
    </div>
   </td>
  </tr>
@@ -145,6 +145,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>CANCEL_ASAP
 : <a class="el" href="classprt_1_1_callbacks.html#a0f26a9045559ca8cfe9ae8843ba6ba0aa767964ec1d64c14033e93677fc41cda5">prt::Callbacks</a>
 </li>
+<li>canHandleEmbeddedResources()
+: <a class="el" href="classprt_1_1_decoder_info.html#a158d79f7e8e96be6de457b8b8050648d">prt::DecoderInfo</a>
+</li>
 <li>canHandleURI()
 : <a class="el" href="classprtx_1_1_decoder_factory.html#a0df8b98f7bc45c8eeb3431f438916668">prtx::DecoderFactory</a>
 , <a class="el" href="classprtx_1_1_encoder_factory.html#a1b18c5c0bf49b1157b3fb881c3e09359">prtx::EncoderFactory</a>
@@ -202,7 +205,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 : <a class="el" href="classprt_1_1_callbacks.html#a5d293cfb6f32162d77094834208137e3">prt::Callbacks</a>
 </li>
 <li>create()
-: <a class="el" href="classprt_1_1_console_log_handler.html#a5f1dbe2b5f3b63479b079e3326b7c065">prt::ConsoleLogHandler</a>
+: <a class="el" href="classprt_1_1_initial_shape_builder.html#a2c237964945feaf56d9146874cbf04d7">prt::InitialShapeBuilder</a>
+, <a class="el" href="classprt_1_1_console_log_handler.html#a5f1dbe2b5f3b63479b079e3326b7c065">prt::ConsoleLogHandler</a>
 , <a class="el" href="classprt_1_1_file_log_handler.html#a227db06a4ae4963c371c85aa7d894df1">prt::FileLogHandler</a>
 , <a class="el" href="classprt_1_1_memory_output_callbacks.html#a7fe2b65f51dd99a5bcee6839e08cea81">prt::MemoryOutputCallbacks</a>
 , <a class="el" href="classprt_1_1_occlusion_set.html#af8534ea0c4dfc71d25e9c00f97216281">prt::OcclusionSet</a>
@@ -224,15 +228,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 , <a class="el" href="classprtx_1_1_u_r_i.html#a8cad35fe40ef9537026131f4ee4222cc">prtx::URI</a>
 , <a class="el" href="classprt_1_1_attribute_map_builder.html#abfa8aab0cfb370af0438d1833c36b9fa">prt::AttributeMapBuilder</a>
 , <a class="el" href="classprt_1_1_file_output_callbacks.html#af3a6237e53b05dadea0fd8da852ff8b3">prt::FileOutputCallbacks</a>
-, <a class="el" href="classprt_1_1_initial_shape_builder.html#a2c237964945feaf56d9146874cbf04d7">prt::InitialShapeBuilder</a>
 </li>
 <li>createAndReset()
-: <a class="el" href="classprtx_1_1_encoder_info_builder.html#a11990ad5ac43a20031752fb13d2bf297">prtx::EncoderInfoBuilder</a>
+: <a class="el" href="classprtx_1_1_builder.html#a3a7c0aeb6d453d61767ec7255378e02f">prtx::Builder&lt; C &gt;</a>
 , <a class="el" href="classprtx_1_1_annotation_builder.html#ad9034f48726ac0e033a7645fc761c81e">prtx::AnnotationBuilder</a>
-, <a class="el" href="classprtx_1_1_builder.html#a3a7c0aeb6d453d61767ec7255378e02f">prtx::Builder&lt; C &gt;</a>
+, <a class="el" href="classprtx_1_1_encoder_info_builder.html#a11990ad5ac43a20031752fb13d2bf297">prtx::EncoderInfoBuilder</a>
 </li>
 <li>createAnnotation()
-: <a class="el" href="classprtx_1_1_annotation_builder.html#a4eed9360579e033bfedd9f3b26fa487d">prtx::AnnotationBuilder</a>
+: <a class="el" href="classprtx_1_1_annotation_builder.html#aa5f4062937291a5d0e8c55d3bf67ef4d">prtx::AnnotationBuilder</a>
 </li>
 <li>createAttributeMap()
 : <a class="el" href="classprt_1_1_attribute_map_builder.html#ad3250e6f6764512780abddf7c6e372f6">prt::AttributeMapBuilder</a>
@@ -241,7 +244,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 : <a class="el" href="classprt_1_1_attribute_map_builder.html#a6c6cb065e52b63a2b47d5cd8ae516d70">prt::AttributeMapBuilder</a>
 </li>
 <li>createDecoder()
-: <a class="el" href="classprtx_1_1_extension_manager.html#a1029c2bed0c75e9e31ceb369de998e5d">prtx::ExtensionManager</a>
+: <a class="el" href="classprtx_1_1_extension_manager.html#adbb42095526c446dad9bab74d3c82ebc">prtx::ExtensionManager</a>
 </li>
 <li>createDecoderInfo()
 : <a class="el" href="classprtx_1_1_decoder_factory.html#aad8fd91cf7fb9be46a7020757c7bbced">prtx::DecoderFactory</a>
@@ -251,8 +254,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 : <a class="el" href="classprtx_1_1_extension_manager.html#a53f51cd6419b01db98af0f26c565ccfd">prtx::ExtensionManager</a>
 </li>
 <li>createEncoderInfo()
-: <a class="el" href="classprtx_1_1_extension_manager.html#a109c6664a53ebba97ece3097efab5bef">prtx::ExtensionManager</a>
-, <a class="el" href="classprtx_1_1_encoder_factory.html#a8320209800767f77815fa95579191690">prtx::EncoderFactory</a>
+: <a class="el" href="classprtx_1_1_encoder_factory.html#a8320209800767f77815fa95579191690">prtx::EncoderFactory</a>
+, <a class="el" href="classprtx_1_1_extension_manager.html#a109c6664a53ebba97ece3097efab5bef">prtx::ExtensionManager</a>
 </li>
 <li>createFromAttributeMap()
 : <a class="el" href="classprt_1_1_attribute_map_builder.html#a5d53ea81b4c6693738c511fa5fe66093">prt::AttributeMapBuilder</a>
@@ -282,16 +285,16 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>createShared()
 : <a class="el" href="classprtx_1_1_shared_ptr_builder.html#aca30702c52bdb0775f6369556426e8e1">prtx::SharedPtrBuilder&lt; C &gt;</a>
 , <a class="el" href="classprtx_1_1_geometry_builder.html#a9a27fc0bf6d1c9eddd4191e663b8a401">prtx::GeometryBuilder</a>
-, <a class="el" href="classprtx_1_1_material_builder.html#a0bfe9715ed494c4325607750d5cddf86">prtx::MaterialBuilder</a>
 , <a class="el" href="classprtx_1_1_shader_builder.html#a3064125cda24ad50b161d981f075a610">prtx::ShaderBuilder</a>
+, <a class="el" href="classprtx_1_1_material_builder.html#a0bfe9715ed494c4325607750d5cddf86">prtx::MaterialBuilder</a>
 , <a class="el" href="classprtx_1_1_mesh_builder.html#a8e86a80b1bf7a54ea48f6412b0559d75">prtx::MeshBuilder</a>
 </li>
 <li>createSharedAndReset()
-: <a class="el" href="classprtx_1_1_mesh_builder.html#ab9069d307b3a3d8cf98ed1b067a75614">prtx::MeshBuilder</a>
+: <a class="el" href="classprtx_1_1_material_builder.html#a7f95d28923892b79dcdf217c19a5ac56">prtx::MaterialBuilder</a>
 , <a class="el" href="classprtx_1_1_geometry_builder.html#a48cbe38be314e93db381e19717bf2226">prtx::GeometryBuilder</a>
-, <a class="el" href="classprtx_1_1_shared_ptr_builder.html#a17ffce3a40b5528b1c63e4a3c0454b4a">prtx::SharedPtrBuilder&lt; C &gt;</a>
-, <a class="el" href="classprtx_1_1_material_builder.html#a7f95d28923892b79dcdf217c19a5ac56">prtx::MaterialBuilder</a>
+, <a class="el" href="classprtx_1_1_mesh_builder.html#ab9069d307b3a3d8cf98ed1b067a75614">prtx::MeshBuilder</a>
 , <a class="el" href="classprtx_1_1_shader_builder.html#a19b0f79c52e0593da6d567cae22fc4a8">prtx::ShaderBuilder</a>
+, <a class="el" href="classprtx_1_1_shared_ptr_builder.html#a17ffce3a40b5528b1c63e4a3c0454b4a">prtx::SharedPtrBuilder&lt; C &gt;</a>
 </li>
 <li>createStream()
 : <a class="el" href="classprtx_1_1_stream_adaptor.html#a3c7e74973264a7fac4becdf0853beacc">prtx::StreamAdaptor</a>
@@ -318,7 +321,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Sep 28 2020 18:43:33 for ArcGIS Procedural Runtime by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon May 3 2021 12:45:01 for ArcGIS Procedural Runtime by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.5
 </small></address>

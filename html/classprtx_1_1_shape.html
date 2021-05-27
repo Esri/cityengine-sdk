@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="esri_prt_55px.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">ArcGIS Procedural Runtime
-   &#160;<span id="projectnumber">2.3.6821</span>
+   &#160;<span id="projectnumber">2.4.7316</span>
    </div>
   </td>
  </tr>
@@ -585,7 +585,7 @@ virtual <br class="typebreak"/>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The <a class="el" href="classprtx_1_1_shape.html">Shape</a> class represents a node of the shape tree. A cga rule is applied on a shape, resulting in a number of new shapes, the successors (which have the original shape set as their parent). Each shape has a unique ID, and the tree structure is encoded in the parent ID of the shapes.</p>
 <p><a class="el" href="classprtx_1_1_shape.html">Shape</a> attributes can be read either through the <a class="el" href="classprtx_1_1_attributable.html">Attributable</a> interface (via their cga name, e.g. L"scope.sx" or L"material.colormap") or through the dedicated getters in the <a class="el" href="classprtx_1_1_builtin_shape_attributes.html">BuiltinShapeAttributes</a> interface (e.g. scope_sx() or material_colormap()). If possible use the latter because they are faster.</p>
-<p>Generic CGA attributes can be read through the <a class="el" href="classprtx_1_1_attributable.html">Attributable</a> interface.</p>
+<p>Generic CGA attributes can be read through the <a class="el" href="classprtx_1_1_attributable.html">Attributable</a> interface. CGA array attributes can be 2 dimensional. If an array attribute has more than 1 row, an additional int attribute is present, containing the number of rows. Its name is /arrayDimRows/&lt;array attr name&gt;.</p>
 <p>The built-ins CGA attribute keys are:</p>
 <ul>
 <li>bool:<ul>
@@ -1002,7 +1002,7 @@ virtual <br class="typebreak"/>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Sep 28 2020 18:43:33 for ArcGIS Procedural Runtime by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon May 3 2021 12:45:01 for ArcGIS Procedural Runtime by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.5
 </small></address>
