@@ -1,25 +1,15 @@
-STLENC - CityEngine SDK Custom STL Encoder
-------------------------------------------
+# STLENC - CityEngine SDK Custom STL Encoder
 
+## PREREQUISITES
 
-PREREQUISITES
--------------
+Before you start working with this example, please make sure you follow the main installation instructions for the CityEngine SDK in the README.md file at the root of this example repository. This will explain how to get the sdk binaries and example data.
 
-Before you start working with this example, please make sure you follow
-the main installation instructions for the CityEngine SDK in the
-README.md file at the root of this example repository. This will 
-explain how to get the sdk binaries and example data.
+## SOFTWARE REQUIREMENTS
 
+* See "General Software Requirements" (Windows)
+* Make sure you use the **exact** compiler for PRT extensions
 
-SOFTWARE REQUIREMENTS
----------------------
-
-- see "General Software Requirements" (Windows)
-- Make sure you use the **exact** compiler for PRT extensions
-
-
-BUILD INSTRUCTIONS
-------------------
+## BUILD INSTRUCTIONS
 
 1. Open a `VS2019 x64 Native Tools Command Prompt`
 1. Change into the example directory: `cd <your path to>\cityengine-sdk\examples\stlenc`
@@ -29,18 +19,14 @@ BUILD INSTRUCTIONS
 1. Compile: `nmake install`
 1. The build result will appear in the `install` directory in parallel to the `build` directory.
 
-
-INSTALLATION INSTRUCTIONS FOR CITYENGINE
-----------------------------------------
+## INSTALLATION INSTRUCTIONS FOR CITYENGINE
 
 1. Locate the `stlenc` extension library in the `install` directory above, e.g. at:
    `<your path to>\cityengine-sdk\examples\stlenc\install\lib\prt_stlenc.dll`
 1. Copy `prt_stlenc.dll` into `<CityEngine installation location>\plugins\com.esri.prt.clients.ce.win32.win32.x86_64_1.0.0\lib\`
 1. Start CityEngine and verify that the new `STL Encoder` appears in the model export format list.
 
-
-LICENSING
----------
+## LICENSING
 
 Copyright (c) 2021 Esri
 

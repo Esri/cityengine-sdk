@@ -1,31 +1,18 @@
-PRT4CMD - CityEngine SDK Command Line Utility
----------------------------------------------
+# PRT4CMD - CityEngine SDK Command Line Utility
 
+## DISCLAIMER
 
-DISCLAIMER
-----------
+This is an example for using the CityEngine SDK. There is no support for this application. If you find a bug or want to enhance functionality you have to do this yourself.
 
-This is an example for using the CityEngine SDK. There is no support for this application. 
-If you find a bug or want to enhance functionality you have to do this yourself.
+## PREREQUISITES
 
+Before you start working with this example, please make sure you follow the main installation instructions for the CityEngine SDK in the README.md file at the root of this example repository. This will explain how to get the sdk binaries and example data.
 
-PREREQUISITES
--------------
+## SOFTWARE REQUIREMENTS
 
-Before you start working with this example, please make sure you follow
-the main installation instructions for the CityEngine SDK in the
-README.md file at the root of this example repository. This will 
-explain how to get the sdk binaries and example data.
+* See "General Software Requirements" (Linux)
 
-
-SOFTWARE REQUIREMENTS
----------------------
-
-- See "General Software Requirements" (Linux)
-
-
-BUILD INSTRUCTIONS
-------------------
+## BUILD INSTRUCTIONS
 
 1. Open a terminal (e.g. bash)
 1. Change into the example directory: `cd <your path to>/cityengine-sdk/examples/prt4cmd`
@@ -34,30 +21,29 @@ BUILD INSTRUCTIONS
 1. Compile: `make install`
 1. The build result will appear in a `install` directory in parallel to the `build` directory.
 
-
-USING PRT4CMD
--------------
+## USING PRT4CMD
 
 1. Open a bash shell and `cd` in to the above `install` directory
 1. Type `bin/prt4cmd -h` to see the list of options.
 1. Type the following to generate the "candler" building model in the wavefront obj format:
-   ```
+
+   ```text
    bin/prt4cmd -l 3 -g <absolute path to>/cityengine-sdk/data/candler_footprint.obj -p <absolue path to>/cityengine-sdk/data/candler.rpk -a ruleFile:string=bin/candler.cgb -a startRule:string=Default\$Footprint -e com.esri.prt.codecs.OBJEncoder -z baseName:string=theCandler
    ```
-1. The result is placed in the `output` directory:
-   - `theCandler_0.obj`
-   - `theCandler.mtl`
-   - Bunch of texture files
 
+1. The result is placed in the `output` directory:
+    * `theCandler_0.obj`
+    * `theCandler.mtl`
+    * Bunch of texture files
 1. To regenerate the same model with a different height, use the following command (note the additional `-a BuildingHeight...` statement):
-   ```
+
+   ```text
    bin/prt4cmd -l 3 -g <absolute path to>/cityengine-sdk/data/candler_footprint.obj -p <absolute path to>/cityengine-sdk/data/candler.rpk -a ruleFile:string=bin/candler.cgb -a startRule:string=Default\$Footprint -a BuildingHeight:float=30 -e com.esri.prt.codecs.OBJEncoder -z baseName:string=theCandler
    ```
+
 1. The obj file will now contain a model which is 30m high instead of the default 62m.
 
-
-LICENSING
----------
+## LICENSING
 
 Copyright (c) 2021 Esri
 
