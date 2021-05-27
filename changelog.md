@@ -1,4 +1,4 @@
-CITYENGINE SDK 2.4.xxxx CHANGELOG
+CITYENGINE SDK 2.4.7316 CHANGELOG
 =================================
 
 This section lists changes compared to CityEngine SDK 2.3.6821.
@@ -6,7 +6,7 @@ This section lists changes compared to CityEngine SDK 2.3.6821.
 
 General Info
 ------------
-* CityEngine SDK 2.4.xxxx is used in CityEngine 2021.0.xxxx.
+* CityEngine SDK 2.4.7316 is used in CityEngine 2021.0.7316.
 * MacOS is not supported anymore.
 
 PRT API
