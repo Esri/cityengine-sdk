@@ -28,8 +28,11 @@ Before you start working with this example, please make sure you follow the main
 
 ## LICENSING
 
-Copyright (c) 2021 Esri
+The CityEngine SDK is free for personal, educational, and non-commercial use. Commercial use requires at least one commercial license of the latest CityEngine version installed in the organization. Redistribution or web service offerings are not allowed unless expressly permitted.
 
-You may not use the content of this repository except in compliance with the following Licenses:
-  1. All content of all directories **except "examples"** is licensed under the Esri [Terms of Use](http://www.esri.com/legal/licensing-translations).
-  2. All content in the "examples" directory tree is licensed under the APACHE 2.0 license. You may obtain a copy of this license at http://www.apache.org/licenses/LICENSE-2.0.
+The CityEngine SDK is licensed under the Esri Terms of Use:
+
+* <https://www.esri.com/en-us/legal/terms/full-master-agreement>
+* <https://www.esri.com/en-us/legal/terms/product-specific-scope-of-use>
+* All content in the "Examples" directory/section is licensed under the APACHE 2.0 license. You may obtain a copy of this license at <https://www.apache.org/licenses/LICENSE-2.0>.
+* For questions or enquiries regarding licensing, please contact the CityEngine team at cityengine-info@esri.com.
