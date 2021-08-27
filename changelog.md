@@ -1,3 +1,73 @@
+# CITYENGINE SDK 2.5.XXXX CHANGELOG
+
+This section lists changes compared to CityEngine SDK 2.4.7316.
+
+## General Info
+* CityEngine SDK 2.5.XXXX is used in CityEngine 2021.1.XXXX.
+
+## PRT API
+* Enhanced the `prt::FileOutputCallbacks` class. [CE-7207]
+  * Added support for creating intermediate directories specified in the `open` function.
+  * Improved robustness when closing files. 
+  * Fixed a small memory leak.
+* Fixed wrong syntax in the output of `prt::ResolveMap::toXML`.
+
+## PRTX API
+* Prevent the creation of small holes when merging vertices in `prtx::EncodePreparator`. [CE-8784]
+* Added a new utility function `prtx::MaterialUtils::getMaterialAsCGAStrings` to get the string representation of a `prtx::Material`. [CE-9218]
+* Extended the list of managed pointer types in `prtx/PRTUtils.h`. [CE-7207]
+* Fixed a caching issue when setting values in the `prtx::MaterialBuilder`. [CE-9285]
+* Updated the list of shader keys in the API documentation of `prtx::Shader` and `prtx::Material`. [CE-9217]
+
+## CGA
+* New functions
+  * `sortIndices` [CE-9080]
+  * `sortRowIndices` [CE-9173]
+  * `setElems` [CE-9153]
+  * `readMaterial` [CE-9182]
+* Changes to existing features
+	* String concatenation operator: Strings can now be concatenated with arrays. [CE-7369]
+	* `envelope` operation: Asset groups are now kept. [CE-8570]
+	* `splitArea` operation: Asset groups and asset face materials are now kept. [CE-8574]
+	* `scatter` operation: The group name of scattered points is set to `builtin:point`. [CE-8572]
+* Bug Fixes
+	* `envelope` operation: Fixed wrong resulting scope translation. This happened on non-planar shapes with a scope rotation applied. [CE-9075]
+	* `convexify`, `setback` operations: Fixed a bug which led to wrong uv coordinates and normals in some self-touching and self-intersecting polygon situations. [CE-8821]
+	* `split`, `trim`, `insertAlongUV` operations: Fixed a rare crash when face materials are present.
+
+## Built-In Codecs Changes and Fixes
+* Added a new decoder for "Industry Foundation Classes" (`.ifc`) with id `com.esri.prt.codecs.IFCDecoder`. [CE-9048]
+* Added encoder and decoder for CGA material files (`.cgamat`) with ids `com.esri.prt.codecs.CGAMatEncoder` and `com.esri.prt.codecs.CGAMatDecoder`. [CE-9217]
+* All Encoders
+  * Assets with transparent textures imported from MultiPatches will not write unusual `.jpga` textures anymore but `.jpg` or `.png` instead. [CE-9394]
+* FBX Decoder
+  * Added support for reading embedded textures in (binary) FBX files. [CE-8998]
+  * Added support for FBX opacity textures. [CE-9287]
+  * Fixed support for reading FBX assets from memory. [CE-9287]
+  * Do not abort decoding if a texture cannot be read. [CE-9287]
+  * Do not restrict reading of layered textures to `eAdditive`. [CE-9287]
+  * Fixed a bug where transformations on geometry nodes where not considered. [CE-7119]
+* DWG Decoder
+  * Add support for reading vertex normals. [CE-9085]
+  * Improved the heuristic to find textures referenced in a moved DWG. [CE-9113]
+  * Fixed a crash when trying to read files with unsupported types "Spline" and "Region". [CE-9109]
+* I3S Encoder
+  * Added support for the `fullExtent` scene object attribute. [CE-8651]
+  * Increased the written I3S version to 1.8. [CE-8651]
+* ShapeBuffer Decoder
+  * Fixed a bug in the MultiPatch reader where material properties oder than color and texture were likely ignored. [CE-9395]
+* Text Decoder
+  * Added support for reading the new `.cgamat` files introduced above. [CE-9217]
+* Unreal Encoder
+  * Added support to add metadata to all static mesh actors, not just the initial shape nodes. [CE-6634]
+  * Fixed a regression in PRT 2.4 where exporting of "dirtmap" UVs (uv set 2) got lost. [CE-9357]
+  * Improved the heuristic to set the texture blend modes. To reduce rendering artifacts in Unreal, transparency mode for a texture is only enabled if `material.opacitymap.mode` is set to default and more than 98% of the pixels are transparent. [CE-9327]
+* USD Encoder
+  * Added a new option to control triangulation of the encoded meshes. [CE-9309]
+
+## Misc Changes and Fixes
+* USD 3rd-party library `libusd_ms.dll`: added version info to DLL. [CE-9278]
+
 # CITYENGINE SDK 2.4.7316 CHANGELOG
 
 This section lists changes compared to CityEngine SDK 2.3.6821.
@@ -145,7 +215,7 @@ This section lists changes compared to CityEngine SDK 2.3.6821.
 
 * Windows: Switched to Visual Studio 2019, Toolchain 14.27.
 * Linux: Switched to GCC 9.3.1.
-* Enable C++17 language standard.
+* Enabled C++17 language standard.
 * Updated 3rd party libraries:
   * CE-8486: update to zlib 1.2.11.
   * CE-8490: update to libpng 1.6.37.
