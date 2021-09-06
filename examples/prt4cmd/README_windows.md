@@ -1,18 +1,18 @@
-# PRT4CMD - CityEngine SDK Command Line Utility
+# prt4cmd - CityEngine SDK Command Line Utility
 
-## DISCLAIMER
+## Disclaimer
 
 This is an example for using the CityEngine SDK. There is no support for this application. If you find a bug or want to enhance functionality you have to fix/do this yourself.
 
-## PREREQUISITES
+## Prerequisites
 
 Before you start working with this example, please make sure you follow the main installation instructions for the CityEngine SDK in the README.md file at the root of this example repository. This will  explain how to get the sdk binaries and example data.
 
-## SOFTWARE REQUIREMENTS
+## Software Requirements
 
 * See "General Software Requirements" (Windows)
 
-## BUILD INSTRUCTIONS
+## Build Instructions
 
 1. Open a `VS2019 x64 Native Tools Command Prompt`
 1. Change into the example directory: `cd <your path to>\cityengine-sdk\examples\prt4cmd`
@@ -22,7 +22,7 @@ Before you start working with this example, please make sure you follow the main
 1. Compile: `nmake install`
 1. The build result will appear in an `install` directory in parallal to the `build` directory.
 
-## USING PRT4CMD
+## Using prt4cmd
 
 1. Open a cmd shell and `cd` into the above `install` directory.
 1. Type `bin\prt4cmd.exe -h` to see the list of options.
@@ -44,7 +44,7 @@ Before you start working with this example, please make sure you follow the main
 
 1. The obj file will now contain a model which is 30m high instead of the default 62m.
 
-## LICENSING
+## Licensing
 
 The CityEngine SDK is free for personal, educational, and non-commercial use. Commercial use requires at least one commercial license of the latest CityEngine version installed in the organization. Redistribution or web service offerings are not allowed unless expressly permitted.
 

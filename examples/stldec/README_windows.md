@@ -1,15 +1,15 @@
-# STLDEC - CityEngine SDK Custom STL Decoder
+# stldec - CityEngine SDK Custom STL Decoder
 
-## PREREQUISITES
+## Prerequisites
 
 Before you start working with this example, please make sure you follow the main installation instructions for the CityEngine SDK in the README.md file at the root of this example repository. This will explain how to get the sdk binaries and example data.
 
-## SOFTWARE REQUIREMENTS
+## Software Requirements
 
 * see "General Software Requirements" (Windows)
 * Make sure you use the **exact** compiler for PRT extensions
 
-## BUILD INSTRUCTIONS
+## Build Instructions
 
 1. Open a `VS2019 x64 Native Tools Command Prompt`
 1. Change into the example directory: `cd <your path to>\cityengine-sdk\examples\stldec`
@@ -19,14 +19,14 @@ Before you start working with this example, please make sure you follow the main
 1. Compile: `nmake install`
 1. The build result will appear in the `install` directory in parallel to the `build` directory.
 
-## INSTALLATION INSTRUCTIONS FOR CITYENGINE
+## Installation Instructions for CityEngine
 
 1. Locate the `stldec` extension library in the `install` directory above, e.g. at:
    `<your path to>\cityengine-sdk\examples\stldec\install\lib\prt_stldec.dll`
 1. Copy `prt_stldec.dll` into `<CityEngine installation location>\plugins\com.esri.prt.clients.ce.win32.win32.x86_64_1.0.0\lib\`
 1. Start CityEngine and verify that STL files are now previewed in the file navigator.
 
-## LICENSING
+## Licensing
 
 The CityEngine SDK is free for personal, educational, and non-commercial use. Commercial use requires at least one commercial license of the latest CityEngine version installed in the organization. Redistribution or web service offerings are not allowed unless expressly permitted.
 
