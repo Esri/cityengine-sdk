@@ -52,8 +52,8 @@ The final directory layout should look like this:
 
 ```text
 /cityengine-sdk/
-    examples/...
     data/...
+    examples/...
 ```
 
 ## Examples
