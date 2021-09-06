@@ -16,8 +16,9 @@ This section lists changes compared to CityEngine SDK 2.4.7316.
 * Prevent the creation of small holes when merging vertices in `prtx::EncodePreparator`. [CE-8784]
 * Added a new utility function `prtx::MaterialUtils::getMaterialAsCGAStrings` to get the string representation of a `prtx::Material`. [CE-9218]
 * Extended the list of managed pointer types in `prtx/PRTUtils.h`. [CE-7207]
-* Fixed a caching issue when setting values in the `prtx::MaterialBuilder`. [CE-9285]
+* Fixed resized texure array when using `prtx::MaterialBuilder::setTextureArrayItem(L"diffuseMap", 0)`. [CE-9285]
 * Updated the list of shader keys in the API documentation of `prtx::Shader` and `prtx::Material`. [CE-9217]
+* Added a new convenience function `prtx::Material::getShaderTextureArrayKeyAndIndexFromCGAMapName()` to find the shader key and array index for a given CGA map attribute.
 
 ## CGA
 * New functions
@@ -55,15 +56,15 @@ This section lists changes compared to CityEngine SDK 2.4.7316.
   * Added support for the `fullExtent` scene object attribute. [CE-8651]
   * Increased the written I3S version to 1.8. [CE-8651]
 * ShapeBuffer Decoder
-  * Fixed a bug in the MultiPatch reader where material properties oder than color and texture were likely ignored. [CE-9395]
-* Text Decoder
+  * Fixed a bug in the MultiPatch reader where material properties other than color and texture were likely to be ignored. [CE-9395]
+* CSV Decoder
   * Added support for reading the new `.cgamat` files introduced above. [CE-9217]
 * Unreal Encoder
   * Added support to add metadata to all static mesh actors, not just the initial shape nodes. [CE-6634]
   * Fixed a regression in PRT 2.4 where exporting of "dirtmap" UVs (uv set 2) got lost. [CE-9357]
   * Improved the heuristic to set the texture blend modes. To reduce rendering artifacts in Unreal, transparency mode for a texture is only enabled if `material.opacitymap.mode` is set to default and more than 98% of the pixels are transparent. [CE-9327]
 * USD Encoder
-  * Added a new option to control triangulation of the encoded meshes. [CE-9309]
+  * Added support for triangulation of the encoded meshes. [CE-9309]
 
 ## Misc Changes and Fixes
 * USD 3rd-party library `libusd_ms.dll`: added version info to DLL. [CE-9278]
