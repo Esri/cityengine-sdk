@@ -46,7 +46,7 @@ The archives are available for download at the corresponding github release page
 ## Installation Instructions
 
 1. Clone or download this repository
-1. For the prt4cmd example download the SDK example data archive from the release page and unzip into the cloned repository into a "data" directory.
+1. We provide some demo files to run the prt4cmd example. They can be found in the SDK example data archive attached to the release. Unpack the archive into a "data" directory inside the cloned repository.
 
 The final directory layout should look like this:
 
