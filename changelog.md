@@ -53,6 +53,7 @@ This section lists changes compared to CityEngine SDK 2.4.7316.
   * Improved the heuristic to find textures referenced in a moved DWG.
   * Fixed a crash when trying to read files with unsupported types "Spline" and "Region".
 * I3S Encoder
+  * Fixed handling of transparent materials in intermediate nodes.
   * Added support for the `fullExtent` scene object attribute.
   * Increased the written I3S version to 1.8.
 * ShapeBuffer Decoder
