@@ -1,9 +1,9 @@
-# CITYENGINE SDK 2.5.XXXX CHANGELOG
+# CITYENGINE SDK 2.5.7799 CHANGELOG
 
 This section lists changes compared to CityEngine SDK 2.4.7316.
 
 ## General Info
-* CityEngine SDK 2.5.XXXX is used in CityEngine 2021.1.XXXX.
+* CityEngine SDK 2.5.7799 is used in CityEngine 2021.1.7799.
 
 ## PRT API
 * Enhanced the `prt::FileOutputCallbacks` class.
