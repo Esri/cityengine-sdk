@@ -37,7 +37,7 @@ This section lists changes compared to CityEngine SDK 2.4.7316.
 	* `split`, `trim`, `insertAlongUV` operations: Fixed a rare crash when face materials are present.
 
 ## Built-In Codecs Changes and Fixes
-* Added a new decoder for "Industry Foundation Classes" (`.ifc`) with id `com.esri.prt.codecs.IFCDecoder`.
+* Added a new encoder and decoder for "Industry Foundation Classes" (`.ifc`) with id `com.esri.prt.codecs.IFCEncoder` and `com.esri.prt.codecs.IFCDecoder`.
 * Added encoder and decoder for CGA material files (`.cgamat`) with ids `com.esri.prt.codecs.CGAMatEncoder` and `com.esri.prt.codecs.CGAMatDecoder`.
 * All Encoders
   * Assets with transparent textures imported from MultiPatches will not write unusual `.jpga` textures anymore but `.jpg` or `.png` instead.
