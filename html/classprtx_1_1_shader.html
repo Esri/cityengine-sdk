@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="esri_prt_55px.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">ArcGIS Procedural Runtime
-   &#160;<span id="projectnumber">2.4.7316</span>
+   &#160;<span id="projectnumber">2.5.7799</span>
    </div>
   </td>
  </tr>
@@ -159,18 +159,21 @@ Static Public Member Functions</h2></td></tr>
 <tr class="separator:adb989d5e360f57df8fcf830909f0c226"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>A <a class="el" href="classprtx_1_1_shader.html">Shader</a> defines the names and types of the attributes for a <a class="el" href="classprtx_1_1_material.html">Material</a>. There is a default <a class="el" href="classprtx_1_1_shader.html">Shader</a> called 'CityEngineShader' which can be extended using the <a class="el" href="classprtx_1_1_shader_builder.html">ShaderBuilder</a> class.</p>
+<div class="textblock"><p>A <a class="el" href="classprtx_1_1_shader.html">Shader</a> defines the names and types of the attributes for a <a class="el" href="classprtx_1_1_material.html">Material</a>. There is a default <a class="el" href="classprtx_1_1_shader.html">Shader</a> called which can be extended using the <a class="el" href="classprtx_1_1_shader_builder.html">ShaderBuilder</a> class.</p>
 <p>Default shader keys:</p>
 <ul>
 <li>float type:<ul>
 <li>bumpValue</li>
 <li>opacity</li>
 <li>reflectivity</li>
+<li>roughness</li>
 <li>shininess</li>
+<li>opacityMap.cutoff</li>
 </ul>
 </li>
 <li>string type:<ul>
 <li>name</li>
+<li>opacityMap.mode</li>
 </ul>
 </li>
 <li>float array type:<ul>
@@ -179,8 +182,13 @@ Static Public Member Functions</h2></td></tr>
 <li>colormapTrafo</li>
 <li>diffuseColor</li>
 <li>dirtmapTrafo</li>
+<li>emissiveColor</li>
+<li>emissivemapTrafo</li>
+<li>metallicmapTrafo</li>
 <li>normalmapTrafo</li>
+<li>occlusionmapTrafo</li>
 <li>opacitymapTrafo</li>
+<li>roughnessmapTrafo</li>
 <li>specularColor</li>
 <li>specularmapTrafo</li>
 </ul>
@@ -188,8 +196,12 @@ Static Public Member Functions</h2></td></tr>
 <li><a class="el" href="classprtx_1_1_texture.html">Texture</a> array type:<ul>
 <li>bumpMap</li>
 <li>diffuseMap</li>
+<li>emissiveMap</li>
+<li>metallicMap</li>
 <li>normalMap</li>
+<li>occlusionMap</li>
 <li>opacityMap</li>
+<li>roughnessMap</li>
 <li>specularMap</li>
 </ul>
 </li>
@@ -362,7 +374,7 @@ Static Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon May 3 2021 12:45:01 for ArcGIS Procedural Runtime by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Sep 30 2021 09:47:24 for ArcGIS Procedural Runtime by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.5
 </small></address>

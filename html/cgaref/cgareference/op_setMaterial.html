@@ -35,6 +35,7 @@ The result will be the same as using <a class="normw" href="op_set.html">set()</
 <h2>Related</h2>
 <ul>
 	<li><a class="normw" href="func_getMaterial.html">getMaterial function</a></li>
+	<li><a class="normw" href="func_readMaterial.html">readMaterial function</a></li>
 	<li><a class="normw" href="op_resetMaterial.html">resetMaterial operation</a></li>
 	<li><a class="normw" href="op_set.html">set operation</a></li>
 	<li><a class="normw" href="attr_material.html">material attributes</a></li>
@@ -68,12 +69,30 @@ Lot --> primitiveCube()
 </table>
 
 
-
-<h2>Example 2: using a CSV file to define a material</h2>
-
+<h2>Example 2: loading a .cgamat file</h2>
 <table summary="" class="twocol">
 <tr>
 	<td class="twocol_l"><img src="images/setMaterial-example2.png" alt="setMaterial-example"/></td>
+	<td><pre class="code3">
+
+Lot --> primitiveSphere()
+        setMaterial(readMaterial("materials/Metal2/Metal2.cgamat"))
+        </pre>
+    
+    </pre> <em>Using <span class="code_std">setMaterial()</span> and <span class="code_std">readMaterial()</span> to load a .cgamat material description (including textures) from disk.</em>
+    <p class="notes">CityEngine's CGA Material Encoder allows for writing cgamat files via model export.</p>
+    
+    </td>
+	</td>
+</tr>
+</table>
+
+
+<h2>Example 3: using a CSV file to define a material</h2>
+
+<table summary="" class="twocol">
+<tr>
+	<td class="twocol_l"><img src="images/setMaterial-example3.png" alt="setMaterial-example"/></td>
 	<td><pre class="code3">
 RefExampleCSV-->
 	primitiveCube()

@@ -58,7 +58,7 @@ end
 
 <h3>Search Queries</h3>
 
-<p>The CityEngine features advanced search queries supporting wildcards, regular expressions and file properties such as filetype. All files in the workspace are filtered with the query and the absolute workspace path is returned. Whitespace means AND.</p>
+<p>The CityEngine features advanced search queries supporting wildcards, regular expressions and file properties such as filetype. All files in the workspace are filtered with the query and the absolute workspace path is returned. Whitespace means AND; queries with filepaths containing a space character need special treatment.
  
 <h4>Wildcards</h4>
 
@@ -68,7 +68,15 @@ end
 
 <p>Regular expressions allow for complex string patterns descriptions. A comprehensive introduction to regular expressions is out of scope for this manual, please refer to other sources such as <a class="normw" href="http://en.wikipedia.org/wiki/Regular_expression" target="_blank">Wikipedia</a> or the specification from the <a class="normw" href="http://www.opengroup.org/onlinepubs/007908799/xbd/re.html" target="_blank">Open Group</a>.<br>
 Regular expressions start with '$'. Always put the '$' as the FIRST character if your <span class="cga_opparam">searchQuery</span> is a regular expression! Note that with regular expressions, the semantics of the wildcards "*" and "?" changes. "*" matches the preceding element zero or more times, therefore use ".*" to emulate the "match anything" behaviour.</p>
- 
+
+<h4>Whitespace Characters</h4>
+Because whitespace means AND, searchqueries containing an actual space need to be put into single quotes.
+For example
+<pre class="code3">filesSearch("'facade pictures/greek style *.png'")</pre> 
+Alternatively, spaces can be escaped in regexps with "\s" or "\x20":
+<pre class="code3">filesSearch("$facade\\spictures/greek\\sstyle\\s.*.png")</pre> 
+<em>Note the double backslashes - this is needed because the CGA compiler also interpretes the '\' character on compilation.
+</em> 
 <h4>File Properties</h4>
 
 <p>Following file properties can be querried:
@@ -249,7 +257,7 @@ In the following examples, we use a basic workspace with two projects and a few 
 </tr>
 </table>
 
-<i>Using white space, two or more queries can be anded. Here the only file matching the project name and the file extension is matched.</i>
+<i>Using whitespace, two or more queries can be combined. Here, a file must match both the project name and the file extension.</i>
 
 <!-- FOOTER -->
 <p class="foot">Copyright &copy;2008-2021 Esri R&amp;D Center Zurich. All rights reserved.</p>				  

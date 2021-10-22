@@ -71,6 +71,8 @@
 	<li>Khronos glTF</li>
     <li>Pixar USD</li>
     <li>Autodesk DWG</li>
+    <li>buildingSMART IFC</li>
+
 </ul>
 
 <p>The OBJ reader imports the material description file (.mtl) and also understands negative indices (referencing from current position backwards). It will silently drop unsupported geometry/material tags and also deletes normals or texture coordinates of inconsistent meshes.</p>
@@ -84,6 +86,8 @@
 <p>The USD reader imports all objects of type UsdGeomMesh. Material nodes of type UsdPreviewSurface are automatically converted to CityEnginePBRShader materials.</p>
 
 <p>The Autodesk DWG Importer only imports 3D aspects of the file. It silently drops all 2D only elements.</p>
+
+<p>The buildingSMART IFC Importer supports version 2x3. It converts the element structure to named groups.</p>
 
 <p>Remarks:</p>
 <ul>
@@ -106,6 +110,7 @@
 	<li><a class="normw" href="op_footprint.html">footprint operation</a></li>
 	<li><a class="normw" href="op_resetGeometry.html">resetGeometry operation</a></li>
 	<li><a class="normw" href="func_geometry.html#isInstanced">geometry.isInstanced function</a></li>
+	<li><a class="normw" href="attr_material.html#RenderingImportAndExport">material attribute</a> (Import/Export section)</li>
 	<li><a class="normw" href="attr_scope.html">scope attribute</a></li>
 	<li><a class="normw" href="attr_trim.html">trim attribute</a></li>
 </ul>

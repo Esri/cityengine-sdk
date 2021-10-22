@@ -23,13 +23,54 @@
 <!-- CONTENT -->
 
         
-  <h1>CGA Changelog</h1>
+<h1>CGA Changelog</h1>
   
-  <table border="outset">
-  <tr>
-  <td width="12%"><strong>City Engine version<br>(= CGA version)</strong></td>
-  <td><strong>Changes</strong></td>
-  </tr>
+<table border="outset">
+	<tr>
+		<td width="12%"><strong>CityEngine version<br>(= CGA version)</strong></td>
+		<td><strong>Changes</strong></td>
+	</tr>
+	<tr>
+		<td>2021.1<br>CGAC 1.17</td>
+		<td>
+        	New features:
+   			<ul>        
+		        <li>Support for reading IFC assets.</li> 
+            </ul>
+
+ 		    New functions:
+			<ul>
+                <li><a href="func_sortIndices.html"><span class="code_std">sortIndices</span></a> function.</li> <!-- CE-9080 -->	
+				<li><a href="func_sortRowIndices.html"><span class="code_std">sortRowIndices</span></a> function.</li> <!-- CE-9173 -->	
+                <li><a href="func_setElems.html"><span class="code_std">setElems</span></a> function.</li> <!-- CE-9153 -->	
+                <li><a href="func_readMaterial.html"><span class="code_std">readMaterial</span></a> function.</li> <!-- CE-9182 -->
+			</ul>	
+			Changes to existing features:
+			<ul>
+				<li>String concatenation operator: Strings can now be <a href="arrayTypes.html#stringConcatenation">concatenated with arrays</a>.</li> <!-- CE-7369 -->
+				<li><a href="op_envelope.html"><span class="code_std">envelope</span></a> operation: Asset groups are now kept.</li> <!-- CE-8570 -->
+				<li><a href="op_splitArea.html"><span class="code_std">splitArea</span></a> operation: Asset groups and asset face materials are now kept.</li> <!-- CE-8574 -->
+				<li><a href="op_scatter.html"><span class="code_std">scatter</span></a> operation: The group name of scattered points is set to <span class="codelight">"builtin:point"</span>.</li> <!--CE-8572 -->
+				<li>CGA Compiler:</li>
+				<ul>
+					<li><a href="with.html">Local variables</a>: Usage of <a href="func_comp.html"><span class="code_std">comp</span></a> function in a local variable definition is not supported anymore and leads to a compiler time error. Instead, use a separate function that contains the <span class="code_std">comp</span> function.</li> <!-- CE-9293 -->
+					<li>Unused rules and functions are not written to the CGB anymore. Besides reducing CGB size, this avoids unnecessary dependencies on the builtin operation and function set, thus maximizing compatibility for older procedural runtime versions.</li> <!-- CE-5134 -->
+					<li>Warnings for unused declarations (attributes, functions, const functions, rules) were removed. This is due to the fact that a declaration is potentially referenced by another rule file via imports. A new option "Find Ununsed Declarations" is available in the CGA Editor.</li> <!-- CE-9145  -->
+				</ul>
+			</ul>
+			Bugfixes:
+			<ul>
+				<li><a href="op_envelope.html"><span class="code_std">envelope</span></a> operation: Fixed wrong resulting scope translation. This happened on non-planar shapes with a scope rotation applied.</li> <!-- CE-9075 -->
+				<li>Rendering (CityEngine), <a href="op_convexify.html"><span class="code_std">convexify</span></a>, <a href="op_setback.html"><span class="code_std">setback</span></a> operations: Fixed a bug which led to wrong uv coordinates and normals in some self-touching and self-intersecting polygon situations.</li> <!--  CE-8821 --> 
+				<li><a href="op_split.html"><span class="code_std">split</span></a>, <a href="op_trim.html"><span class="code_std">trim</span></a>, <a href="op_insertAlongUV.html"><span class="code_std">insertAlongUV</span></a>: Fixed a rare crash when face materials are present.</li> <!-- CE-NONE -->
+				<li>CGA Compiler:</li>
+				<ul>
+					<li>Fixed a bug which led to an unhandled error. This happenend in rare cases when a recursive function was also defined in another style.</li> <!-- CE-8999 -->
+					<li>Fixed a bug where, in imports, non-matching return types of attributes and functions across styles were not detected. This resulted in a crash when switching styles.</li> <!-- CE-8959 -->
+				</ul>
+			</ul>
+ 		</td>
+	</tr>
 	<tr>
 		<td>2021.0<br>CGAC 1.16</td>
 		<td>
@@ -37,8 +78,6 @@
 			<ul>        
 		        <li>Local variables can be defined using the <a href="with.html"><span class="code_std">with</span></a> keyword.</li> <!-- CE-8665 -->
 		        <li>Support for reading DWG assets. </li> 
-            </ul>
-
             </ul>
 			New operations:
 			<ul>

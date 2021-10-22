@@ -5,7 +5,7 @@
 </head>
 <body>
 <h1>ArcGIS Procedural Runtime Encoder/Decoder Reference</h1>
-<small>(Automatically generated from PRT 2.4.7316; Build Date: Mon 05/03/2021 12:04 PM; Build Configuration: PRT_BC_REL)</small><p>This is the PRT reference documentation for all built-in encoders and decoders.</p>
+<small>(Automatically generated from PRT 2.5.7799; Build Date: Thu 09/30/2021 09:02 AM; Build Configuration: PRT_BC_REL)</small><p>This is the PRT reference documentation for all built-in encoders and decoders.</p>
 <p>The encoder documentation lists for each encoder its supported encoder options. In PRT, the encoder options
 	are stored in an object of type prt::AttributeMap, therefore the term "attribute" is used synonymously in this
 	document for a single encoder option. Each attribute consists of a type, a default value and (optional)
@@ -19,12 +19,14 @@
 <li>
 <a href="#aEncoders">Built-In Encoders</a><ul>
 <li><a href="#com.esri.prt.codecs.AlembicEncoder">ALEMBIC</a></li>
+<li><a href="#com.esri.prt.codecs.CGAMatEncoder">CityEngine CGA Material Encoder</a></li>
 <li><a href="#com.esri.prt.codecs.ColladaEncoder">COLLADA</a></li>
 <li><a href="#com.esri.prt.codecs.DWGEncoder">Autodesk DWG Encoder</a></li>
 <li><a href="#com.esri.prt.codecs.DxtEncoder">DXT Encoder</a></li>
 <li><a href="#com.esri.prt.codecs.FBXEncoder">Autodesk FBX</a></li>
 <li><a href="#com.esri.prt.codecs.GLTFEncoder">Khronos Group glTF</a></li>
 <li><a href="#com.esri.prt.codecs.I3SEncoder">Esri Scene Layer Package</a></li>
+<li><a href="#com.esri.prt.codecs.IFCEncoder">IFC</a></li>
 <li><a href="#com.esri.prt.codecs.JPGAEncoder">JPEG with Alpha Encoder</a></li>
 <li><a href="#com.esri.prt.codecs.JPGEncoder">JPEG Encoder</a></li>
 <li><a href="#com.esri.prt.codecs.LercEncoder">LERC Encoder</a></li>
@@ -53,6 +55,7 @@
 <li><a href="#com.esri.prt.codecs.BINDecoder">NOAA NGS Geoid Height Grids Image Decoder</a></li>
 <li><a href="#com.esri.prt.codecs.BMPDecoder">MS Windows Device Independent Bitmap Image Decoder</a></li>
 <li><a href="#com.esri.prt.codecs.BTDecoder">VTP .bt (Binary Terrain) 1.3 Format Image Decoder</a></li>
+<li><a href="#com.esri.prt.codecs.CGAMatDecoder">CityEngine CGA Material Decoder</a></li>
 <li><a href="#com.esri.prt.codecs.ColladaDecoder">COLLADA 1.4.1/1.5.x Decoder</a></li>
 <li><a href="#com.esri.prt.codecs.DATDecoder">ZMap Plus Grid Image Decoder</a></li>
 <li><a href="#com.esri.prt.codecs.DDFDecoder">SDTS Raster Image Decoder</a></li>
@@ -72,6 +75,7 @@
 <li><a href="#com.esri.prt.codecs.HDRDecoder">Snow Data Assimilation System Image Decoder</a></li>
 <li><a href="#com.esri.prt.codecs.HF2Decoder">HF2/HFZ heightfield raster Image Decoder</a></li>
 <li><a href="#com.esri.prt.codecs.HGTDecoder">SRTMHGT File Format Image Decoder</a></li>
+<li><a href="#com.esri.prt.codecs.IFCDecoder">IFC Decoder</a></li>
 <li><a href="#com.esri.prt.codecs.IMGDecoder">Erdas Imagine Images (.img) Image Decoder</a></li>
 <li><a href="#com.esri.prt.codecs.JPGDecoder">JPEG JFIF Image Decoder</a></li>
 <li><a href="#com.esri.prt.codecs.LCPDecoder">FARSITE v.4 Landscape File (.lcp) Image Decoder</a></li>
@@ -591,6 +595,63 @@
 	
 	
 	
+	
+<tr><td colspan="4"></td></tr>
+<tr><td colspan="4"><h3><a name="com.esri.prt.codecs.CGAMatEncoder">CityEngine CGA Material Encoder (com.esri.prt.codecs.CGAMatEncoder)</a></h3></td></tr>
+<tr><td colspan="4">Writes materials in CityEngine's cgamat format.</td></tr>
+<tr><td colspan="4"><h4>Known Initial Shape Attributes</h4></td></tr>
+<tr>
+<th>Key</th>
+<th>Type</th>
+<th>Default Value</th>
+<th>Annotations</th>
+</tr>
+<tr><td colspan="4"><h4>Default Encoder Options</h4></td></tr>
+<tr>
+<th>Key</th>
+<th>Type</th>
+<th>Default Value</th>
+<th>Annotations</th>
+</tr>
+	<tr>
+<td>baseName</td>
+<td>str</td>
+<td>cgamat_default_name</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Base Name<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 0<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = General Settings<br>order:float = 0<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = The base name for all files.<br>
+</td>
+</tr>
+	</table></td>
+</tr>
+	
+	<tr>
+<td>errorFallback</td>
+<td>bool</td>
+<td>true</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Hidden</td>
+<td></td>
+</tr>
+	</table></td>
+</tr>
 	
 <tr><td colspan="4"></td></tr>
 <tr><td colspan="4"><h3><a name="com.esri.prt.codecs.ColladaEncoder">COLLADA (com.esri.prt.codecs.ColladaEncoder)</a></h3></td></tr>
@@ -4256,6 +4317,95 @@
 	
 	
 <tr><td colspan="4"></td></tr>
+<tr><td colspan="4"><h3><a name="com.esri.prt.codecs.IFCEncoder">IFC (com.esri.prt.codecs.IFCEncoder)</a></h3></td></tr>
+<tr><td colspan="4">Encodes geometry into the IFC format</td></tr>
+<tr><td colspan="4"><h4>Known Initial Shape Attributes</h4></td></tr>
+<tr>
+<th>Key</th>
+<th>Type</th>
+<th>Default Value</th>
+<th>Annotations</th>
+</tr>
+<tr><td colspan="4"><h4>Default Encoder Options</h4></td></tr>
+<tr>
+<th>Key</th>
+<th>Type</th>
+<th>Default Value</th>
+<th>Annotations</th>
+</tr>
+	<tr>
+<td>baseName</td>
+<td>str</td>
+<td>ifc_default_name</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Base Name<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 0<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = General Settings<br>order:float = 0<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = The base name for all files.<br>
+</td>
+</tr>
+	</table></td>
+</tr>
+	
+	<tr>
+<td>errorFallback</td>
+<td>bool</td>
+<td>true</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Hidden</td>
+<td></td>
+</tr>
+	</table></td>
+</tr>
+	
+	<tr>
+<td>globalOffset</td>
+<td>float_array</td>
+<td></td>
+<td><table class="doxtable">
+		<tr>
+<td>@Point3D</td>
+<td></td>
+</tr>
+		<tr>
+<td>@Label</td>
+<td>:str = Global Offset<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 1<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Geometry Settings<br>order:float = 1<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Global (= for all shapes/models) offset for exported geometry.<br>
+</td>
+</tr>
+	</table></td>
+</tr>
+	
+<tr><td colspan="4"></td></tr>
 <tr><td colspan="4"><h3><a name="com.esri.prt.codecs.JPGAEncoder">JPEG with Alpha Encoder (com.esri.prt.codecs.JPGAEncoder)</a></h3></td></tr>
 <tr><td colspan="4">Encodes images and textures into the internal JPEG with zlib compressed alpha format.</td></tr>
 <tr><td colspan="4"><h4>Known Initial Shape Attributes</h4></td></tr>
@@ -7366,7 +7516,6 @@
 	</table></td>
 </tr>
 	
-	
 	<tr>
 <td>baseName</td>
 <td>str</td>
@@ -7549,6 +7698,35 @@
 </tr>
 	</table></td>
 </tr>
+	
+	<tr>
+<td>triangulateMeshes</td>
+<td>bool</td>
+<td>false</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Triangulate Meshes<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Triangulate resulting meshes.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 9070<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Geometry Settings<br>order:float = 2<br>
+</td>
+</tr>
+	</table></td>
+</tr>
+	
 	
 	
 <tr><td colspan="4"></td></tr>
@@ -10671,6 +10849,9 @@
 <h3><a name="com.esri.prt.codecs.BTDecoder">VTP .bt (Binary Terrain) 1.3 Format Image Decoder (com.esri.prt.codecs.BTDecoder)</a></h3>
 <p>Reads VTP .bt (Binary Terrain) 1.3 Format images into textures</p>
 <p>Supported URI extensions: .bt;</p>
+<h3><a name="com.esri.prt.codecs.CGAMatDecoder">CityEngine CGA Material Decoder (com.esri.prt.codecs.CGAMatDecoder)</a></h3>
+<p>Reads materials in CityEngine's cgamat format.</p>
+<p>Supported URI extensions: .cgamat;</p>
 <h3><a name="com.esri.prt.codecs.ColladaDecoder">COLLADA 1.4.1/1.5.x Decoder (com.esri.prt.codecs.ColladaDecoder)</a></h3>
 <p>Decodes geometry in COLLADA DAE format.</p>
 <p>Supported URI extensions: .dae;</p>
@@ -10728,6 +10909,9 @@
 <h3><a name="com.esri.prt.codecs.HGTDecoder">SRTMHGT File Format Image Decoder (com.esri.prt.codecs.HGTDecoder)</a></h3>
 <p>Reads SRTMHGT File Format images into textures</p>
 <p>Supported URI extensions: .hgt;</p>
+<h3><a name="com.esri.prt.codecs.IFCDecoder">IFC Decoder (com.esri.prt.codecs.IFCDecoder)</a></h3>
+<p>Decoder for the IFC format</p>
+<p>Supported URI extensions: .ifc;</p>
 <h3><a name="com.esri.prt.codecs.IMGDecoder">Erdas Imagine Images (.img) Image Decoder (com.esri.prt.codecs.IMGDecoder)</a></h3>
 <p>Reads Erdas Imagine Images (.img) images into textures</p>
 <p>Supported URI extensions: .img;</p>
@@ -10799,7 +10983,7 @@
 <p>Supported URI extensions: .cgb;.class;</p>
 <h3><a name="com.esri.prt.core.CSVDecoder">CSV decoder (com.esri.prt.core.CSVDecoder)</a></h3>
 <p>Decodes csv files (in ASCII, UTF-8, UTF-16) to a table</p>
-<p>Supported URI extensions: .csv;</p>
+<p>Supported URI extensions: .csv;.cgamat;</p>
 <h3><a name="com.esri.prt.core.RawTextureDecoder">Raw Image Decoder (com.esri.prt.core.RawTextureDecoder)</a></h3>
 <p>Reads raw (uncompressed) images into textures.</p>
 <p>Supported URI extensions: .raw;</p>

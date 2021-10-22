@@ -4,6 +4,7 @@ var searchData=
   ['annotations',['Annotations',['../namespaceprtx_1_1_annotations.html',1,'prtx']]],
   ['databackend',['DataBackend',['../namespaceprtx_1_1_data_backend.html',1,'prtx']]],
   ['debugutils',['DebugUtils',['../namespaceprtx_1_1_debug_utils.html',1,'prtx']]],
+  ['materialutils',['MaterialUtils',['../namespaceprtx_1_1_material_utils.html',1,'prtx']]],
   ['meshutils',['MeshUtils',['../namespaceprtx_1_1_mesh_utils.html',1,'prtx']]],
   ['prt',['prt',['../namespaceprt.html',1,'']]],
   ['prtutils',['PRTUtils',['../namespaceprtx_1_1_p_r_t_utils.html',1,'prtx']]],

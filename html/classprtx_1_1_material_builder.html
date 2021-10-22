@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="esri_prt_55px.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">ArcGIS Procedural Runtime
-   &#160;<span id="projectnumber">2.4.7316</span>
+   &#160;<span id="projectnumber">2.5.7799</span>
    </div>
   </td>
  </tr>
@@ -979,15 +979,16 @@ virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>setBuiltinStr
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Sets a <a class="el" href="classprtx_1_1_texture.html">Texture</a>. </p>
+<p>Sets a <a class="el" href="classprtx_1_1_texture.html">Texture</a>.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">key</td><td>The key of the <a class="el" href="classprtx_1_1_texture.html">Texture</a>. </td></tr>
+    <tr><td class="paramname">key</td><td>The key of the <a class="el" href="classprtx_1_1_texture.html">Texture</a>. Valid keys are listed in <a class="el" href="classprtx_1_1_material.html#ShaderTextureKeys">ShaderTextureKeys</a>. </td></tr>
     <tr><td class="paramname">val</td><td>The <a class="el" href="classprtx_1_1_texture.html">Texture</a> to set. </td></tr>
-    <tr><td class="paramname">resolveMapKey</td><td>The <a class="el" href="classprtx_1_1_resolve_map.html">ResolveMap</a> key for the texture. </td></tr>
+    <tr><td class="paramname">resolveMapKey</td><td>The <a class="el" href="classprtx_1_1_resolve_map.html">ResolveMap</a> key for the texture. The resolveMapKey is visible in CGA via the matching material.XXXmap attribute.</td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="classprtx_1_1_material.html#ae508998e35cb04fe241d792269bfd42d">Material::getShaderTextureArrayKeyAndIndexFromCGAMapName()</a>. </dd></dl>
 
 </div>
 </div>
@@ -1028,15 +1029,16 @@ virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>setBuiltinStr
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Sets a <a class="el" href="classprtx_1_1_texture.html">Texture</a> array. </p>
+<p>Sets a <a class="el" href="classprtx_1_1_texture.html">Texture</a> array. Note that for convenience, <a class="el" href="classprtx_1_1_material_builder.html#a93afc7a44ce3417e6dd16e6a7a1477bc">setTextureArray()</a> can also be used to set attributes of type PT_TEXTURE (just use a vector with exactly 1 element).</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">key</td><td>The key of the <a class="el" href="classprtx_1_1_texture.html">Texture</a> array. </td></tr>
-    <tr><td class="paramname">val</td><td>The <a class="el" href="classprtx_1_1_texture.html">Texture</a> to set. </td></tr>
-    <tr><td class="paramname">resolveMapKey</td><td>The <a class="el" href="classprtx_1_1_resolve_map.html">ResolveMap</a> key for the texture. </td></tr>
+    <tr><td class="paramname">key</td><td>The key of the <a class="el" href="classprtx_1_1_texture.html">Texture</a> array. Valid keys are listed in <a class="el" href="classprtx_1_1_material.html#ShaderTextureKeys">ShaderTextureKeys</a>. </td></tr>
+    <tr><td class="paramname">val</td><td>The <a class="el" href="classprtx_1_1_texture.html">Texture</a> array to set. </td></tr>
+    <tr><td class="paramname">resolveMapKeys</td><td>The <a class="el" href="classprtx_1_1_resolve_map.html">ResolveMap</a> keys for the textures. Must have the same size as val. The resolveMapKey is visible in CGA via the matching material.XXXmap attribute.</td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="classprtx_1_1_material.html#ae508998e35cb04fe241d792269bfd42d">Material::getShaderTextureArrayKeyAndIndexFromCGAMapName()</a>. </dd></dl>
 
 </div>
 </div>
@@ -1083,15 +1085,17 @@ virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>setBuiltinStr
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Sets a <a class="el" href="classprtx_1_1_texture.html">Texture</a> array. </p>
+<p>Sets a <a class="el" href="classprtx_1_1_texture.html">Texture</a> array item. Note that for convenience, <a class="el" href="classprtx_1_1_material_builder.html#a21b55e51ac588a9666934cfea295d171">setTextureArrayItem()</a> can also be used to set attributes of type PT_TEXTURE (just use 0 as index).</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">key</td><td>The key of the <a class="el" href="classprtx_1_1_texture.html">Texture</a> array. </td></tr>
+    <tr><td class="paramname">key</td><td>The key of the <a class="el" href="classprtx_1_1_texture.html">Texture</a> array. Valid keys are listed in <a class="el" href="classprtx_1_1_material.html#ShaderTextureKeys">ShaderTextureKeys</a>. </td></tr>
+    <tr><td class="paramname">index</td><td>The index into the texture array. Valid indices are listed in <a class="el" href="classprtx_1_1_material.html#ShaderTextureKeys">ShaderTextureKeys</a>. </td></tr>
     <tr><td class="paramname">val</td><td>The <a class="el" href="classprtx_1_1_texture.html">Texture</a> to set. </td></tr>
-    <tr><td class="paramname">resolveMapKey</td><td>The <a class="el" href="classprtx_1_1_resolve_map.html">ResolveMap</a> key for the texture. </td></tr>
+    <tr><td class="paramname">resolveMapKey</td><td>The <a class="el" href="classprtx_1_1_resolve_map.html">ResolveMap</a> key for the texture. The resolveMapKey is visible in CGA via the matching material.XXXmap attribute.</td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="classprtx_1_1_material.html#ae508998e35cb04fe241d792269bfd42d">Material::getShaderTextureArrayKeyAndIndexFromCGAMapName()</a>. </dd></dl>
 
 </div>
 </div>
@@ -1101,7 +1105,7 @@ virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>setBuiltinStr
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon May 3 2021 12:45:00 for ArcGIS Procedural Runtime by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Sep 30 2021 09:47:24 for ArcGIS Procedural Runtime by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.5
 </small></address>

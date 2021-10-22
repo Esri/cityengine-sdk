@@ -112,6 +112,30 @@
 </tr>
 </table>
 
+<h2><a name="stringConcatenation"></a>String concatenation operators</h2>
+
+<p>Concatenate <span class="code_std">string</span> with <span class="code_std">string[]</span>, <span class="code_std">float[]</span> or <span class="code_std">bool[]</span>.</p>
+
+<p>Return type: <span class="code_std">string</span></p>
+
+<table class="twocol" cellspacing=20>
+<tr>
+	<td width="10%"><span class="code_std">+</span></td>
+	<td width="17%">String-string[] concatenation</td>
+	<td><pre class="code3">a = "array: " + ["element"]<br>a = ["element"] + " is an array"</pre></td>
+</tr>
+<tr>
+	<td> </td>
+	<td>String-float[] concatenation</td>
+	<td><pre class="code3">a = "array:\n" + [1,2;3,4]<br>a = [1,2;3,4] + "\nis an array"</pre></td>
+</tr>
+<tr>
+	<td> </td>
+	<td>String-boolean[] concatenation</td>
+	<td><pre class="code3">a = "array: " + [true,true]<br>a = [true,true] + " is an array"</pre></td>
+</tr>
+</table>
+
 <p></p>
 
 <h1>Element-wise array operators</h1>
