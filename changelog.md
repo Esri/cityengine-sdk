@@ -6,41 +6,46 @@ This section lists changes compared to CityEngine SDK 2.5.7799.
 * The focus of this release is to fix some issues which are important for certain client applications such as plugins. There is no CityEngine version using this version of the SDK.
 
 ## PRTX API
-* Fixed `prtx::ResolveMap::anchorRelativeKey` for the "key = URI" case. Note that the signature changed (new `ResolveMap` argument).
+* Fixed `prtx::ResolveMap::anchorRelativeKey` for the "key = URI" case if the anchored key contains characters that need to be percent encoded. Note that the signature changed (new `ResolveMap` argument).
 * Fixed `prtx::URI::replaceExtension()` to use the correct string encoding when percent encoding.
 * Improved `prtx::EncodePreparator` to keep the numerical precision of meshes which are far away (>10'000 m) from the initial shape's orgin. However, such meshes won't be merged to one mesh anymore if "merge by material" is enabled. 
+* Fixed a crash in `prtx::Material::getBlindData()` if an illegal key was used.
 * Fixed documentation of the texture trafo (XXXmapTrafo) keys of `prtx::Material`.
 
 
 ## CGA
 * Changes to existing features:
-  * setback, setbackToArea, setbackPerEdge, shapeLUO operation: Setback faces are now more likely to attach to neighboring edges at convex vertices. This avoids gaps in precence of altering setback distances. If the setback face cannot be attached to an edge the respective side is cut inwards in order to avoid spikes.
+  * setback, setbackToArea, setbackPerEdge, shapeLUO operation: Setback faces are now more likely to attach to neighboring edges at convex vertices. This avoids gaps in presence of altering setback distances. If the setback face cannot be attached to an edge the respective side is cut inwards in order to avoid spikes.
   * i operation: Assets with very large coordinates (> 10'000) are now handled differently on insert and export. This greatly improves numerical precision. However, such assets are not considered instanced anymore.
 
 * Bugfixes:
   * envelope, setback, setbackToArea, setbackPerEdge, shapeLUO operation: Fixed wrong result and improved performance on shapes with many holes.
-   * innerRectangle operation: Fixed wrong remainder in rare cases.
-   * offset operation: Improved support for shapes with collinear vertices.
+  * innerRectangle operation: Fixed wrong remainder in rare cases.
+  * offset operation: Improved support for shapes with collinear vertices.
 
 ## Built-In Codecs Changes and Fixes
-* All Decoders:
-  * Fixed a bug where referenced textures with non-ASCII characters in their path could not be read.
+* All Texture Decoders:
+  * Fixed a bug where textures with non-ASCII characters in their path could not be read.
 * GLTF Decoder & Encoder:
   * Support for texture transform extension (mapped to CGA attributes, e.g. material.colormap.su).
 * GLTF Encoder:
-  * Now keeps original image fomat on export instead of converting all images to png.
+  * Now keeps the format of jpg images on export instead of converting all images to png.
+ * FBX Decoder:
+   * Now correctly reads non-ASCII names (of e.g. materials, meshes and textures).
+ * Collada Decoder:
+   * Now correctly reads non-ASCII names (of e.g. materials, meshes and textures).
 * Unreal Encoder:
   * Support for exporting texture transforms (CGA attributes, e.g. material.colormap.su).
   * Added new options "Export Twinmotion Compatible" and "Use Unreal Base Materials".
   * Removed obsolete files LibRaw.dll and FreeImage317.dll from the build. 
 * OBJ Encoder:
-  * Fixed mtl definitons for textures with non-ASCII characters in their name.  
+  * Now, non-ASCII characters in texture names are legalized. This fixes broken mtl desfinitions.
 * OBJ Decoder:
   * Improved robustness for cases where referenced MTL files contain non-ASCII charactes in their path and the OBJ was written with an unknown non-ASCII encoding: Now, many "illegal" situations can be resolved with smart heuristics.  
 * VUE Encoder:  
-  * Fixed some isses with non-ASCII strings (e.g. file names). 
+  * Added support for non-ASCII strings in file names, layer names, and material names. 
 * IFC Encoder:
-  * Now supports the "ApplicationName" and "ApplicationVersion" encoder options.  
+  * Now supports the "applicationName", "applicationVersion", "applicationString, "applicationVendor" and "author" encoder options.  
 * USD Encoder & Decoders:
   * Updated to USD 21.11 library.
 
