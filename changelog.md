@@ -6,7 +6,7 @@ This section lists changes compared to CityEngine SDK 2.5.7799.
 * The focus of this release is to fix some issues which are important for certain client applications such as plugins. There is no CityEngine version using this version of the SDK.
 
 ## PRTX API
-* Fixed `prtx::ResolveMap::amnchorRelativeKey` for the "key = URI" case. Note that the signature changed (new `ResolveMap` argument).
+* Fixed `prtx::ResolveMap::anchorRelativeKey` for the "key = URI" case. Note that the signature changed (new `ResolveMap` argument).
 * Fixed `prtx::URI::replaceExtension()` to use the correct string encoding when percent encoding.
 * Improved `prtx::EncodePreparator` to keep the numerical precision of meshes which are far away (>10'000 m) from the initial shape's orgin. However, such meshes won't be merged to one mesh anymore if "merge by material" is enabled. 
 * Fixed documentation of the texture trafo (XXXmapTrafo) keys of `prtx::Material`.
