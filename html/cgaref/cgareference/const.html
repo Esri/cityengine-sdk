@@ -27,22 +27,24 @@
 
 <h2>Description</h2>        
         
-<p>A new constant can be introduced by &quot;const&quot; and is evaluated the first time it is encountered in a rule or expression. As in &quot;attr&quot;, constant expressions are evaluated only once per generation and rule file. The values of constants cannot be externally changed trough the inspector or by a map. Constant expressions do not appear in the inspector.</p>
+<p>A new constant can be introduced by the <span class="codelight">const</span> keyword. As for <a href="attr.html">attributes</a>, constant expressions are evaluated only once at the beginning of the generation process before any rule is applied.</p>
+
+<p>The values of constants cannot be externally changed trough the inspector or by a map. Constant expressions do not appear in the inspector.</p>
 
 <h2>Example</h2>
 
 <h3>Defining a constant with const</h3>
 
-        <table summary="" class="onecol">
-          <tr>            
-            <td>
-        <pre class="code3">const height = 250 // define a constant &quot;height&quot;
+<table summary="" class="onecol">
+<tr>            
+<td>
+<pre class="code3">const height = 250
 
-Lot --&gt; extrude(height)
-      </pre>
-                </td>
-          </tr>
-  </table>
+Lot --> extrude(height)
+</pre>
+</td>
+</tr>
+</table>
 
 <p class="foot">Copyright &copy;2008-2021 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
 

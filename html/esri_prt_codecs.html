@@ -5,7 +5,7 @@
 </head>
 <body>
 <h1>ArcGIS Procedural Runtime Encoder/Decoder Reference</h1>
-<small>(Automatically generated from PRT 2.5.7799; Build Date: Thu 09/30/2021 09:02 AM; Build Configuration: PRT_BC_REL)</small><p>This is the PRT reference documentation for all built-in encoders and decoders.</p>
+<small>(Automatically generated from PRT 2.6.8135; Build Date: Wed 12/22/2021 07:15 PM; Build Configuration: PRT_BC_REL)</small><p>This is the PRT reference documentation for all built-in encoders and decoders.</p>
 <p>The encoder documentation lists for each encoder its supported encoder options. In PRT, the encoder options
 	are stored in an object of type prt::AttributeMap, therefore the term "attribute" is used synonymously in this
 	document for a single encoder option. Each attribute consists of a type, a default value and (optional)
@@ -3517,7 +3517,7 @@
 	
 <tr><td colspan="4"></td></tr>
 <tr><td colspan="4"><h3><a name="com.esri.prt.codecs.I3SEncoder">Esri Scene Layer Package (com.esri.prt.codecs.I3SEncoder)</a></h3></td></tr>
-<tr><td colspan="4">Creates Scene Layer Packages that can be shared on ArcGIS Online/Portal.</td></tr>
+<tr><td colspan="4">Creates Scene Layer Packages that can be shared on Online/Portal.</td></tr>
 <tr><td colspan="4"><h4>Known Initial Shape Attributes</h4></td></tr>
 <tr>
 <th>Key</th>
@@ -4360,7 +4360,6 @@
 </tr>
 	</table></td>
 </tr>
-	
 	<tr>
 <td>errorFallback</td>
 <td>bool</td>
@@ -4373,6 +4372,37 @@
 	</table></td>
 </tr>
 	
+	<tr>
+<td>applicationVendor</td>
+<td>str</td>
+<td></td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Application Vendor<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 0.104<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = General Settings<br>order:float = 1<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Vendor of application.<br>
+</td>
+</tr>
+		<tr>
+<td>@Hidden</td>
+<td></td>
+</tr>
+	</table></td>
+</tr>
 	<tr>
 <td>globalOffset</td>
 <td>float_array</td>
@@ -4404,6 +4434,136 @@
 </tr>
 	</table></td>
 </tr>
+	<tr>
+<td>author</td>
+<td>str</td>
+<td></td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Author<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 0.11<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = General Settings<br>order:float = 0<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Author of data.<br>
+</td>
+</tr>
+		<tr>
+<td>@Hidden</td>
+<td></td>
+</tr>
+	</table></td>
+</tr>
+	
+	<tr>
+<td>applicationName</td>
+<td>str</td>
+<td></td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Application Name<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 0.101<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = General Settings<br>order:float = 1<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Name of application.<br>
+</td>
+</tr>
+		<tr>
+<td>@Hidden</td>
+<td></td>
+</tr>
+	</table></td>
+</tr>
+	<tr>
+<td>applicationVersion</td>
+<td>str</td>
+<td></td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Application Version<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 0.102<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = General Settings<br>order:float = 1<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Version of application.<br>
+</td>
+</tr>
+		<tr>
+<td>@Hidden</td>
+<td></td>
+</tr>
+	</table></td>
+</tr>
+	
+	<tr>
+<td>applicationString</td>
+<td>str</td>
+<td></td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Application<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 0.103<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = General Settings<br>order:float = 1<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Name and version of application.<br>
+</td>
+</tr>
+		<tr>
+<td>@Hidden</td>
+<td></td>
+</tr>
+	</table></td>
+</tr>
+	
+	
+	
+	
 	
 <tr><td colspan="4"></td></tr>
 <tr><td colspan="4"><h3><a name="com.esri.prt.codecs.JPGAEncoder">JPEG with Alpha Encoder (com.esri.prt.codecs.JPGAEncoder)</a></h3></td></tr>
@@ -10653,6 +10813,60 @@
 </tr>
 	
 	<tr>
+<td>twinmotionCompatible</td>
+<td>bool</td>
+<td>false</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Export Twinmotion Compatible<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 1000<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = General Settings<br>order:float = 0<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Exports the scene with Twinmotion compatible settings.<br>
+</td>
+</tr>
+	</table></td>
+</tr>
+	<tr>
+<td>useUnrealBaseMaterials</td>
+<td>bool</td>
+<td>false</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Use Unreal Base Materials<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 0<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Material Settings<br>order:float = 2<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Use the predefined Unreal Engine Base Materials as parent material for all exported materials.<br>
+</td>
+</tr>
+	</table></td>
+</tr>
+	<tr>
 <td>useTextureAtlas</td>
 <td>bool</td>
 <td>false</td>
@@ -10664,12 +10878,12 @@
 </tr>
 		<tr>
 <td>@Order</td>
-<td>:float = 0<br>
+<td>:float = 1<br>
 </td>
 </tr>
 		<tr>
 <td>@Group</td>
-<td>name:str = Texture Settings<br>order:float = 2<br>
+<td>name:str = Material Settings<br>order:float = 2<br>
 </td>
 </tr>
 		<tr>
@@ -10821,6 +11035,8 @@
 </tr>
 	</table></td>
 </tr>
+	
+	
 	
 	
 	

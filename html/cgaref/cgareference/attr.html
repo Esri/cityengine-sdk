@@ -27,26 +27,26 @@
 
 <h2>Description</h2>        
         
-<p>A new attribute can be introduced by &quot;attr&quot; and is evaluated the first time it is encountered in a rule or expression. As in &quot;const&quot;, attributes are evaluated only once per generation and rule file. The values of attributes can be externally changed through the inspector or by a map. See also <a href="https://doc.arcgis.com/en/cityengine/latest/help/help-rules-attributes.htm" target="_blank">CGA attributes</a>.</p>
-    
-<p>Attributes can be annotated to control their presentation in the inspector. See <a href="cga_annotations.html">Annotations</a>.</p>. 
+<p>A new attribute can be introduced by the <span class="codelight">attr</span> keyword. As for <a href="const.html">constants</a>, attributes are evaluated only once at the beginning of the generation process before any rule is applied.</p>
+
+<p>The values of attributes can be externally changed through the inspector or by a map. See also <a href="https://doc.arcgis.com/en/cityengine/latest/help/help-rules-attributes.htm" target="_blank">CGA attributes</a>. Attributes can be annotated to control their presentation in the inspector. See <a href="cga_annotations.html">Annotations</a>.</p>. 
 
 <h2>Example</h2>
 
-  <h3>Defining an attribute with attr</h3>
-        <table summary="" class="onecol">
-          <tr>            
-            <td>
-        <pre class="code3">attr height = 250 // define an attribute &quot;height&quot;
+<h3>Defining an attribute with attr</h3>
 
-Lot --&gt; extrude(height)
-      </pre>
-                </td>
-          </tr>
-  </table>
+<table summary="" class="onecol">
+<tr>            
+<td>
+<pre class="code3">attr height = 250
 
-  <h3><!-- FOOTER --> </h3>
-        <p class="foot">Copyright &copy;2008-2021 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
+Lot --> extrude(height)
+</pre>
+</td>
+</tr>
+</table>
+
+<p class="foot">Copyright &copy;2008-2021 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
 
 <!-- END CENTERED CONTENT -->
 

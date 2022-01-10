@@ -28,17 +28,16 @@
 <h2>Parameters</h2>
 
 <ul>
-	<li><span class="cga_opparam">versionString</span> (string)<br>CGA version for which this rule file is written. The CGA version always corresponds to the City Engine version, e.g. City Engine 2009.2 has CGA version "2009.2".
+	<li><span class="cga_opparam">versionString</span> (string)<br>CGA version for which this rule file is written. The CGA version always corresponds to the CityEngine version, e.g. CityEngine 2022.0 has CGA version <span class="codelight">"2022.0"</span>.
 </ul>
 
 <h2>Description</h2>
         
-<p>The <span class="code_std">version</span> cga keyword is used to define the cga version for which the rules are written. This permits detection of potential incompatibilities; warnings about potential incompatibilities are written to the log.<br>Such incompabilities come in two sorts: <em>new features</em> and <em>changes to exisiting features</em>. While the former are relatively unproblematic, the latter are generally not desired and only occur when an obvious bug or other shortcoming needs to be corrected. See <a href="cga_changelog.html">CGA Changelog</a> for an overview of the changes between CGA versions.<br>The <span class="code_std">version</span> statement has to be the first code line of a cga file. If there is no <span class="code_std">version</span> statement, the version defaults to "2009.1".</p>
+<p>The <span class="code_std">version</span> keyword is used to define the CGA version for which the rules are written. This permits detection of potential incompatibilities; warnings about potential incompatibilities are written to the log.</p>
 
-<h2>Related</h2>
-<ul>
-    <li><a class="normw" href="cga_changelog.html"> CGA Changelog</a></li>
-</ul>
+<p>Such incompabilities come in two sorts: <em>new features</em> and <em>changes to exisiting features</em>. While the former are relatively unproblematic, the latter are generally not desired and only occur when an obvious bug or other shortcoming needs to be corrected. See <a href="cga_changelog.html">CGA Changelog</a> for an overview of the changes between CGA versions.</p>
+
+<p>The <span class="code_std">version</span> statement has to be the first code line of a cga file. If there is no <span class="code_std">version</span> statement, the version defaults to <span class="codelight">"2009.1"</span>.</p>
 
 <h3><!-- FOOTER --> </h3>
 

@@ -31,6 +31,22 @@
 		<td><strong>Changes</strong></td>
 	</tr>
 	<tr>
+		<td>SDK 2.6<br>CGAC 1.17</td>
+		<td>
+			Changes to existing features:
+			<ul>
+				<li><a href="op_setback.html"><span class="code_std">setback</span></a>, <a href="op_setbackToArea.html"><span class="code_std">setbackToArea</span></a>, <a href="op_setbackPerEdge.html"><span class="code_std">setbackPerEdge</span></a>, <a href="op_shapeLUO.html"><span class="code_std">shapeLUO</span></a> operation: Setback faces are now more likely to attach to neighboring edges at convex vertices. This avoids gaps in precence of altering setback distances. If the setback face cannot be attached to an edge the respective side is cut inwards in order to avoid spikes.</li> <!-- CE-9422 -->
+				<li><a href="op_i.html"><span class="code_std">i</span></a> operation: Assets with very large coordinates (> 10'000) are now handled differently on insert and export. This greatly improves numerical precision. However, such assets are not considered instanced anymore.</li>
+    		</ul>
+			Bugfixes:
+			<ul>
+				<li><a href="op_envelope.html"><span class="code_std">envelope</span></a>, <a href="op_setback.html"><span class="code_std">setback</span></a>, <a href="op_setbackToArea.html"><span class="code_std">setbackToArea</span></a>, <a href="op_setbackPerEdge.html"><span class="code_std">setbackPerEdge</span></a>, <a href="op_shapeLUO.html"><span class="code_std">shapeLUO</span></a> operation: Fixed wrong result and improved performance on shapes with many holes.</li> <!-- CE-9291 -->
+				<li><a href="op_innerRectangle.html"><span class="code_std">innerRectangle</span></a> operation: Fixed wrong remainder in rare cases.</li> <!-- CE-3090 -->
+				<li><a href="op_offset.html"><span class="code_std">offset</span></a> operation: Improved support for shapes with collinear vertices.</li> <!-- CE-8214, CE-9016 -->
+			</ul>
+		</td>
+	</tr>
+	<tr>
 		<td>2021.1<br>CGAC 1.17</td>
 		<td>
         	New features:

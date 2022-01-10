@@ -25,7 +25,7 @@
 and export of the shape's geometry. CityEngine supports ten texture
 channels with a fixed semantic.</p>
 
-<p>All of these attributes can be changed using the <a href="op_set.html">set</a> or <a href="op_setMaterial.html">setMaterial</a> operations. You can use the <a href="op_print.html">print</a> operation to output the value of a certain material attribute, eg. <span class="inlinedcode">print(material.colormap.r)</span>.</p>
+<p>All of these attributes can be changed using the <a href="op_set.html">set</a> or <a href="op_setMaterial.html">setMaterial</a> operations. You can use the <a href="op_print.html">print</a> operation to output the value of a certain material attribute, eg. <span class="inlinedcode">print(material.color.r)</span>.</p>
 
 <h2>Syntax</h2>
 
@@ -1081,7 +1081,7 @@ channels with a fixed semantic.</p>
 </ol>
 
 
-<h3>Map Tansform Material Attributes</h3>
+<h3>Map Transform Material Attributes</h3>
 <table cellpadding="3">
 	<tr>
 		<td colspan="2"></td>
@@ -1117,9 +1117,9 @@ channels with a fixed semantic.</p>
 	</tr>
 	<tr>
 		<th>glTF</th>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
+		<td><span style="color:green;">&#10004;</span> (7)</td>
+		<td><span style="color:green;">&#10004;</span> (7)</td>
+		<td><span style="color:green;">&#10004;</span> (7)</td>
 	</tr>
 	<tr>
 		<th>IFC</th>
@@ -1172,9 +1172,9 @@ channels with a fixed semantic.</p>
 	</tr>
 	<tr>
 		<th>glTF</th>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
+		<td><span style="color:green;">&#10004;</span> (7)</td>
+		<td><span style="color:green;">&#10004;</span> (7)</td>
+		<td><span style="color:green;">&#10004;</span> (7)</td>
 	</tr>
 	<tr>
 		<th>IFC</th>
@@ -1196,9 +1196,9 @@ channels with a fixed semantic.</p>
 	</tr>
 	<tr>
 		<th>Unreal</th>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
+		<td><span style="color:green;">&#10004;</span></td>
+		<td><span style="color:green;">&#10004;</span></td>
+		<td><span style="color:green;">&#10004;</span></td>
 	</tr>
 	<tr>
 		<th>USD</th>
@@ -1219,6 +1219,9 @@ channels with a fixed semantic.</p>
 		<td><span style="color:red;">&#10008;</span></td>
 	</tr>
 </table>
+<ol>
+	<li value="7">Transforms are read and written using the KHR_texture_transform extension.</li>
+</ol>
 
 <h2>Related</h2>
 
