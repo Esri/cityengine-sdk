@@ -7,10 +7,10 @@ This section lists changes compared to CityEngine SDK 2.6.8135.
 
 ## PRT API
 * Fixed `prt::FileLogHandler` to correctly handle non-ascii characters instead of crashing.
-* Fixed a crash in `prt::CacheObject::CACHE_TYPE_NONREDUNDAT` cache implementation (after flushing).
+* Fixed a crash in `prt::CacheObject::CACHE_TYPE_NONREDUNDANT` cache implementation (after flushing).
 
 ## PRTX API
-* `prtx::ExtensionManager`: Improved warning if a library can not be loaded (added path to core library). 
+* `prtx::ExtensionManager`: Improved warning if a library cannot be loaded (added path to core library). 
 
 
 ## CGA
@@ -25,9 +25,8 @@ This section lists changes compared to CityEngine SDK 2.6.8135.
 
 ## Built-In Codecs Changes and Fixes
 * Unreal Encoder:
-  * Fixed "non align" bugs for multiple terrains.
+  * Fixed bugs where multiple terrains did not align.
   * Improved landscape material border handling. 
-  * Fixed an issue where the Unreal Landscape Actor scale was set wrong for terrains with negative altitudes.
   * Fixed a bug which led to undefined behaviour when mixing non-textured and textured geometry.
   * Corrected normal map amount & opacity for Base Materials / Twinmotion.
 * GLTF Decoder:
@@ -37,14 +36,16 @@ This section lists changes compared to CityEngine SDK 2.6.8135.
   * Fixed empty texture maps (empty string means "no texture").
 * USD Codecs:
   * Fixed deadlock on startup.
-  * Fixed RPATH on Linux
+  * Fixed tbb dependency loading on Linux to find library in the same folder.
 * USD Decoder:
   * Implemented a "best effort" approach for reading partly unknown assets instead of just failing. This includes empty mesh nodes with non-empty child mesh nodes, assets with unknown materials or shaders and assets with both point instances and other geometries. 
+  * Fixed a crash on mateirals with did not ahve a shader id attribute.
 * OBJ Decoder:
   * Improved performance.
   * MTL decoder: Fixed a number reading issue on some localized systems. 
 * IFC Decoder:
-  * Fixed a crash connected to degenrated polygons.  
+  * Fixed a crash connected to degenerated polygons.  
+  * Improved geometry triangulation.
 * DWG and IFC Codecs:
   * Updated to ODA 22.12 library
 * VUE Codecs:
