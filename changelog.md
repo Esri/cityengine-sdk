@@ -1,3 +1,61 @@
+# CITYENGINE SDK 2.6.XXXX CHANGELOG
+
+This section lists changes compared to CityEngine SDK 2.6.8135.
+
+## General Info
+* CityEngine SDK 2.6.XXXX is used in CityEngine 2022.0.XXXX.
+
+## PRT API
+* Fixed `prt::FileLogHandler` to correctly handle non-ascii characters instead of crashing.
+* Fixed a crash in `prt::CacheObject::CACHE_TYPE_NONREDUNDANT` cache implementation (after flushing).
+
+## PRTX API
+* `prtx::ExtensionManager`: Improved warning if a library cannot be loaded (added path to core library). 
+
+
+## CGA
+* New features:
+  * Rules with start keyword can be invoked with the start identifier.
+  * Rules with extension keyword can be redefined in an import statement.
+* Changes to existing features:
+    * resetMaterial operation: Added an overload which allows for resetting the material of the geometry.
+* Bugfixes:
+    * readMaterial function: Fixed empty maps (empty string means "no texture").
+    * alignScopeToGeometry operation: Fixed crash when faceSelector was set to largest. This happend when the current geometry had zero area.
+
+## Built-In Codecs Changes and Fixes
+* Unreal Encoder:
+  * Fixed bugs where multiple terrains did not align.
+  * Improved landscape material border handling. 
+  * Fixed a bug which led to undefined behaviour when mixing non-textured and textured geometry.
+  * Corrected normal map amount & opacity for Base Materials / Twinmotion.
+* GLTF Decoder:
+  * Bugfix: Read uvs also if no texture defined in the material.
+  * Bugfix: Avoid setting the material's texture trafo attributes (to the default) even if not used.
+* CGAMat Decoder: 
+  * Fixed empty texture maps (empty string means "no texture").
+* USD Codecs:
+  * Fixed deadlock on startup.
+  * Fixed tbb dependency loading on Linux to find library in the same folder.
+* USD Decoder:
+  * Implemented a "best effort" approach for reading partly unknown assets instead of just failing. This includes empty mesh nodes with non-empty child mesh nodes, assets with unknown materials or shaders and assets with both point instances and other geometries. 
+  * Fixed a crash on mateirals with did not ahve a shader id attribute.
+* OBJ Decoder:
+  * Improved performance.
+  * MTL decoder: Fixed a number reading issue on some localized systems. 
+* IFC Decoder:
+  * Fixed a crash connected to degenerated polygons.  
+  * Improved geometry triangulation.
+* DWG and IFC Codecs:
+  * Updated to ODA 22.12 library
+* VUE Codecs:
+  * Added versioning info to dll.
+
+## Misc Changes and Fixes
+* Linux: Fixed unwanted re-export of 3d party symbols in our extension libraries.
+
+
+
 # CITYENGINE SDK 2.6.8135 CHANGELOG
 
 This section lists changes compared to CityEngine SDK 2.5.7799.
