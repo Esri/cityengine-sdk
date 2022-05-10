@@ -31,7 +31,7 @@ if(NOT prt_DIR)
 		set(PRT_TC "gcc93")
 	endif()
 
-	set(PRT_VERSION "2.6.8135")
+	set(PRT_VERSION "2.6.xxxx")
 	set(PRT_CLS     "${PRT_OS}-${PRT_TC}-x86_64-rel-opt")
 	set(PRT_URL     "https://github.com/esri/cityengine-sdk/releases/download/${PRT_VERSION}/esri_ce_sdk-${PRT_VERSION}-${PRT_CLS}.zip")
 
