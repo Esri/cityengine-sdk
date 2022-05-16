@@ -34,7 +34,7 @@ if(NOT prt_DIR)
 		set(PRT_TC "gcc93")
 	endif()
 
-	set(PRT_VERSION "2.6.8135")
+	set(PRT_VERSION "2.6.xxxx")
 	set(PRT_CLS     "${PRT_OS}-${PRT_TC}-x86_64-rel-opt")
 	set(PRT_URL     "https://github.com/esri/cityengine-sdk/releases/download/${PRT_VERSION}/esri_ce_sdk-${PRT_VERSION}-${PRT_CLS}.zip")
 
@@ -67,8 +67,6 @@ elseif(P4C_LINUX)
 		-march=nocona -fvisibility=hidden -fvisibility-inlines-hidden
 		-Wl,--exclude-libs,ALL -Wall -Wextra -Wunused-parameter -Wl,-rpath,'\$ORIGIN')
 
-elseif(P4C_MACOS)
-	target_compile_options(${PROJECT_NAME} PRIVATE -stdlib=libc++)
 endif()
 
 target_include_directories(${PROJECT_NAME} PRIVATE ${PRT_INCLUDE_PATH})
@@ -81,8 +79,6 @@ if(NOT P4C_WINDOWS)
 		BUILD_WITH_INSTALL_RPATH TRUE)
 	if(P4C_LINUX)
 		set_target_properties(${PROJECT_NAME} PROPERTIES INSTALL_RPATH "\$ORIGIN")
-	elseif(P4C_MACOS)
-		set_target_properties(${PROJECT_NAME} PROPERTIES INSTALL_RPATH "@loader_path")
 	endif()
 endif()
 
