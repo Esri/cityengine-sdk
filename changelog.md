@@ -21,7 +21,7 @@ This section lists changes compared to CityEngine SDK 2.6.8135.
     * resetMaterial operation: Added an overload which allows for resetting the material of the geometry.
 * Bugfixes:
     * readMaterial function: Fixed empty maps (empty string means "no texture").
-    * alignScopeToGeometry operation: Fixed crash when faceSelector was set to largest. This happend when the current geometry had zero area.
+    * alignScopeToGeometry operation: Fixed crash when faceSelector was set to largest. This happened when the current geometry had zero area.
 
 ## Built-In Codecs Changes and Fixes
 * Unreal Encoder:
@@ -38,8 +38,8 @@ This section lists changes compared to CityEngine SDK 2.6.8135.
   * Fixed deadlock on startup.
   * Fixed tbb dependency loading on Linux to find library in the same folder.
 * USD Decoder:
-  * Implemented a "best effort" approach for reading partly unknown assets instead of just failing. This includes empty mesh nodes with non-empty child mesh nodes, assets with unknown materials or shaders and assets with both point instances and other geometries. 
-  * Fixed a crash on mateirals with did not have a shader id attribute.
+  * Implemented a "best effort" approach for reading partly unknown assets instead of just failing. This includes empty mesh nodes with non-empty child mesh nodes, assets with unknown materials or shaders, and assets with both point instances and other geometries. 
+  * Fixed a crash on materials which did not have a shader id attribute.
 * OBJ Decoder:
   * Improved performance.
   * MTL decoder: Fixed a number reading issue on some localized systems. 
