@@ -39,7 +39,7 @@ This section lists changes compared to CityEngine SDK 2.6.8135.
   * Fixed tbb dependency loading on Linux to find library in the same folder.
 * USD Decoder:
   * Implemented a "best effort" approach for reading partly unknown assets instead of just failing. This includes empty mesh nodes with non-empty child mesh nodes, assets with unknown materials or shaders and assets with both point instances and other geometries. 
-  * Fixed a crash on mateirals with did not ahve a shader id attribute.
+  * Fixed a crash on mateirals with did not have a shader id attribute.
 * OBJ Decoder:
   * Improved performance.
   * MTL decoder: Fixed a number reading issue on some localized systems. 
