@@ -1,7 +1,0 @@
-<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classprtx_1_1_reports_accumulator.html" title="prtx::ReportsAccumulator" alt="" coords="5,67,176,93"/>
-<area shape="rect" id="node2" href="$classprtx_1_1_appending_reports_accumulator.html" title="prtx::AppendingReportsAccumulator" alt="" coords="224,41,456,68"/>
-<area shape="rect" id="node5" href="$classprtx_1_1_write_first_reports_accumulator.html" title="prtx::WriteFirstReportsAccumulator" alt="" coords="226,92,454,119"/>
-<area shape="rect" id="node3" href="$classprtx_1_1_summarizing_reports_accumulator.html" title="prtx::SummarizingReports\lAccumulator" alt="" coords="517,5,691,46"/>
-<area shape="rect" id="node4" href="$classprtx_1_1_sum_reports_accumulator.html" title="prtx::SumReportsAccumulator" alt="" coords="505,71,703,97"/>
-</map>
