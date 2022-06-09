@@ -1,9 +1,9 @@
-# CITYENGINE SDK 2.6.XXXX CHANGELOG
+# CITYENGINE SDK 2.6.8297 CHANGELOG
 
 This section lists changes compared to CityEngine SDK 2.6.8135.
 
 ## General Info
-* CityEngine SDK 2.6.XXXX is used in CityEngine 2022.0.XXXX.
+* CityEngine SDK 2.6.8297 is used in CityEngine 2022.0.8297.
 
 ## PRT API
 * Fixed `prt::FileLogHandler` to correctly handle non-ascii characters instead of crashing.
