@@ -1,0 +1,111 @@
+<html>
+
+<head>
+    <title>reverseNormals Operation</title>
+    <link rel="stylesheet" href="../manual_style.css" type="text/css" />
+</head>
+
+<body>
+<div class="content">
+
+<!-- HEADER (use only on bookchapters) -->
+
+<table summary="" class="header">
+	<tr>
+		<td align="left" class="helphead_l"><a href="../toc.html"><div class="helplink">&nbsp;</div></a></td>
+		<td align="right" class="helphead_r"></td>
+	</tr>
+</table>
+
+<!-- CONTENT -->
+
+<h1>reverseNormals operation</h1>
+
+<h2>Syntax</h2>
+
+<p class="code2">reverseNormals()</p>
+
+<h2>Description</h2>
+
+<p>This operation reverses the face normals of the geometry of the current shape.</p>
+
+<p class="notes">Note: To check the orientation of the face normals, deactivate the "Use Two-Sided Lighting" option under Preferences/General/Grammar Core.</p>
+
+<h2>Related</h2>
+<ul>
+	<li><a class="normw" href="op_cleanupGeometry.html">cleanupGeometry operation</a></li>
+	<li><a class="normw" href="op_convexify.html">convexify operation</a></li>
+	<li><a class="normw" href="op_innerRectangle.html">innerRectangle operation</a></li>
+	<li><a class="normw" href="op_mirror.html">mirror operation</a></li>
+	<li><a class="normw" href="op_reduceGeometry.html">reduceGeometry operation</a></li>
+	<li><a class="normw" href="op_s.html">s operation</a></li>
+	<li><a class="normw" href="op_setNormals.html">setNormals operation</a></li>
+</ul>
+
+<h2>Examples</h2>
+
+<p class="notes">Note.1: Screenshots with deactivated "Two-Sided Lighting", thus the faces are black whose normals are facing away from the camera.</p>
+<p class="notes">Note.2: Note that the generated geometry only is changed, not the scope. You can see this by the fact that the translation command in the example translates both the normal and inverted geometry in the same direction. </p>
+<p><pre>Left box: face with index=0 <b>not inverted</b>         right box: face with index=0 <b>inverted</b> </pre></p>
+
+
+<table summary="" class="cga">
+		<tr>
+			<td class="overview"><p>
+			<pre class="code3">
+Lot -->
+	extrude(world.up,1)
+	comp(f){side: Facade}
+
+Facade -->
+	case comp.index == 0:
+		color("#ff0000")
+		# = red
+		t(0,0,0.1)
+	else:
+		color("#00ff00")
+		# = green
+		t(0,0,0.1)
+</pre>
+				</p> </td>
+			<td class="overview"><p>
+			<pre class="code3">
+Lot -->
+	extrude(world.up,1)
+	comp(f){side: Facade}
+
+Facade -->
+	case comp.index == 0:
+		color("#ff0000")
+		# = red
+		t(0,0,0.1)
+		<font color=blue>reverseNormals</font>
+	else:
+		color("#00ff00")
+		# = green
+		t(0,0,0.1)
+</pre>
+				</p> </td>
+		</tr>
+   </table>
+
+<img src="images/reverseNormalsExample.jpg"></img>
+
+<h2>Advanced knowledge: Understanding the reversion process</h2>
+<p>Normals: The normal of a polygonal face is defined by the vertex order. By default, the order is counter clockwise.</p>
+<p>Some advanced users may notice that after the reverseNormals command, the vertex order [<b>black</b>] is not only inverted (as in the classic mathematical definition of the normal inversion [<b><font color=blue>blue</font></b>]) but is offset by the value of 1 [<b><font color=red>red</font></b>]. The reason for this is because the CityEngine often works with the "First Edge", which is defined by the vertex indices 0 and 1. Thus, in the reverseNormals command, the "First Edge" is retained.
+</p>
+<img src="images/reverseNormalsHow.jpg"></img>
+<p>
+<b>black:</b> standard vertex order of the face (counter clockwise)</p>
+<b><font color=blue>blue:</font></b> classic reverted vertex order</p> 
+<b><font color=red>red:</font></b> reverted vertex order as used in the CityEngine, with retained first edge.</p> 
+
+<p class="notes">Note: Some game engines cannot display two-sided geometries, thus they display only those polygons whose normals are oriented towards the camera. Other polygons are not rendered. Because of this fact it is particularly important to write cga code with this fact in mind when modeling for game engines.</p>
+
+<!-- FOOTER -->
+<p class="foot">Copyright &copy;2008-2022 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
+
+</div>
+</body>
+</html>

@@ -1,0 +1,134 @@
+<html>
+
+<head>
+	<title>shapeL, shapeU, shapeO operations</title>
+	<link rel="stylesheet" href="../manual_style.css" type="text/css" />
+</head>
+
+<body>
+<div class="content">
+
+<table summary="" class="header">
+	<tr>
+		<td align="left" class="helphead_l"><a href="../toc.html"><div class="helplink">&nbsp;</div></a></td>
+		<td align="right" class="helphead_r"></td>
+	</tr>
+</table>
+
+<h1>shapeL, shapeU, shapeO operations</h1>
+
+<h2>Syntax</h2>
+
+<p class="code2"><span class="cga_op">shapeL</span>(<span class="cga_opparam">frontWidth</span>, <span class="cga_opparam">leftWidth</span>) { <span class="cga_opparam">selector</span> <span class="cga_opparam">operator</span> <span class="cga_opparam">operations</span> | <span class="cga_opparam">selector</span> <span class="cga_opparam">operator</span> <span class="cga_opparam">operations</span> }</p>
+<p class="code2"><span class="cga_op">shapeU</span>(<span class="cga_opparam">frontWidth</span>, <span class="cga_opparam">rightWidth</span>, <span class="cga_opparam">leftWidth</span>) { <span class="cga_opparam">selector</span> <span class="cga_opparam">operator</span> <span class="cga_opparam">operations</span> | <span class="cga_opparam">selector</span> <span class="cga_opparam">operator</span> <span class="cga_opparam">operations</span> }</p>
+<p class="code2"><span class="cga_op">shapeO</span>(<span class="cga_opparam">frontWidth</span>, <span class="cga_opparam">rightWidth</span>, <span class="cga_opparam">backWidth</span>, <span class="cga_opparam">leftWidth</span>) { <span class="cga_opparam">selector</span> <span class="cga_opparam">operator</span> <span class="cga_opparam">operations</span> | <span class="cga_opparam">selector</span> <span class="cga_opparam">operator</span> <span class="cga_opparam">operations</span> }</p>
+
+<h2>Parameters</h2>
+
+<ul>
+    <li><span class="cga_opparam">frontWidth</span> (float)<br>Depth of front wing.</li>
+	<li><span class="cga_opparam">leftWidth</span> (float)<br>Width of left wing.</li>
+	<li><span class="cga_opparam">rightWidth</span> (float)<br>Width of right wing.</li>
+	<li><span class="cga_opparam">backWidth</span> (float)<br>Depth of rear wing.</li>
+    <li><span class="cga_opparam">selector</span> (selector)
+	<table cellspacing="5">
+		<tr><td width="25%"><span class="codelight">shape</span></td><td>The setback polygon (i.e. the L,U or O shape).</td></tr>
+		<tr><td><span class="codelight">remainder</span></td><td>Selects the remainder of the polygon.</td></tr>
+	</table>
+	</li>
+	<li><span class="cga_opparam">operator</span><br>The operator defines how the setback polygons are used to generate successor shapes. This also applies to shapes with more than one face.
+	<table cellspacing="5">
+		<tr><td width="10%"><span class="codelight">:</span></td><td>Each polygon is put into a new shape.</td></tr>
+		<tr><td><span class="codelight">=</span></td><td>All polygons corresponding to the selector are combined into one new shape.</td></tr>
+	</table>
+	</li>
+	<li><span class="cga_opparam">operations</span><br>A sequence of CGA operations to execute.</li>
+</ul>
+
+<h2>Description</h2>
+
+<p>The <span class="codelight">shapeL, shapeU, shapeO</span> operations select a number of edges, depending on predefined spatial selectors, and set them back by a user-defined distance.</p>
+
+<p class="notes">These operations are another way of applying setbacks. For example<br>
+<span class="codelight">shapeL(frontWidth, leftWidth) { selector operator operations  | ... }</span><br>
+can also be achieved with the <a class="cga_op" href="op_setback.html">setback</a> operation and the <a class="cga_op" href="func_comp.html">comp</a> function:<br>
+<span class="codelight">setback( comp(fe) { front=frontWidth | left=leftWidth } ) { selector operator operations | ... }</span>
+</p>
+
+<h2>Related</h2>
+<ul>
+	<li><a class="normw" href="op_comp.html">comp operation</a></li>
+    <li><a class="normw" href="op_offset.html">offset operation</a></li>
+	<li><a class="normw" href="op_setback.html">setback operation</a></li>
+	<li><a class="normw" href="op_setbackPerEdge.html">setbackPerEdge operation</a></li>
+	<li><a class="normw" href="op_setbackToArea.html">setbackToArea operation</a></li>
+	<li><a class="normw" href="func_comp.html">comp function</a></li>
+</ul>
+
+<h2>Examples</h2>
+
+<h3>L-Shapes </h3>
+
+<p class="piccaptioncentered"><img src="images/shapeL-example.png"><br>A block filled with L-shapes.</p>
+<br>
+<pre class="code3">
+attr myFrontDepth = 5
+attr myLeftWidth = 11
+
+LotInner -->
+    Lot
+		
+Lot -->
+    offset(-3, inside)
+    shapeL(myFrontDepth,myLeftWidth) { shape : Footprint | remainder: NIL }
+	
+Footprint -->
+    extrude(rand(10,20)) color(1,0,0)
+</pre>
+
+<h3>U-Shapes </h3>
+
+<p class="piccaptioncentered"><img src="images/shapeU-example.png"><br>A block filled with U-shapes.</p>
+<pre class="code3">
+attr myFrontDepth = 5
+attr myRightWidth = 3
+attr myLeftWidth = 11
+
+
+LotInner -->
+    Lot
+		
+Lot -->
+    offset(-3, inside)
+    shapeU(myFrontDepth,myRightWidth,myLeftWidth) { shape : Footprint | remainder: NIL }
+	
+Footprint -->
+    extrude(rand(10,20)) color(1,0,0)
+</pre>
+
+<h3>O-Shapes </h3>
+
+<p class="piccaptioncentered"><img src="images/shapeO-example.png"><br>A block filled with O-shapes.</p>
+<pre class="code3">
+attr myFrontDepth = 5
+attr myRightWidth = 3
+attr myBackDepth = 2
+attr myLeftWidth = 11
+
+		
+LotInner -->
+    Lot
+        
+Lot -->
+    offset(-3, inside)
+    shapeO(myFrontDepth,myRightWidth,myBackDepth,myLeftWidth) { shape : Footprint | remainder: NIL }
+
+Footprint -->
+    extrude(rand(10,20)) color(1,0,0)
+</pre>
+
+<p class="foot">Copyright &copy;2008-2022 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
+
+</div>
+</body>
+</html>

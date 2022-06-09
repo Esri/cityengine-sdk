@@ -1,0 +1,65 @@
+<html>
+
+<head>
+    <title>footprint Operation</title>
+    <link rel="stylesheet" href="../manual_style.css" type="text/css">
+</head>
+
+<body>
+<div class="content">
+
+<!-- HEADER (use only on bookchapters) -->
+
+<table summary="" class="header">
+	<tr>
+		<td align="left" class="helphead_l"><a href="../toc.html"><div class="helplink">&nbsp;</div></a></td>
+		<td align="right" class="helphead_r"></td>
+	</tr>
+</table>
+
+<!-- CONTENT -->
+
+<h1>footprint operation</h1>
+
+<h2>Syntax</h2>
+
+<p class="code2">footprint()</p>
+	
+<h2>Description</h2>
+
+<p>The <span class="code_std">footprint</span> operation creates a 2d geometry that is the orthogonal projection of the current shape's geometry onto the plane <span class="code_std">scope.y=0</span>.</p>
+
+<h2>Related</h2>
+
+<ul>
+	<li><a class="normw" href="op_i.html">i operation</a></li>
+</ul>
+
+<h2>Example</h2>
+
+<table summary="" class="twocol">
+<tr>
+<td class="twocol_l"><br/><img src="images/footprint-example.png" alt="Footprint example" width="298"/></td>
+<td><pre class="code3">
+Example -->
+    i("building.obj")
+    ShowAsset.
+    Footprint(scope.sy)
+ 	
+Footprint(height) -->
+    footprint()
+    extrude(height)
+    set(material.opacity, 0.25)
+</pre>
+<em>A schematic low-poly version of a building is created by an extrusion of the footprint.</em></td>
+</tr>
+</table>
+
+<!-- FOOTER -->
+<p class="foot">Copyright &copy;2008-2022 Esri R&amp;D Center Zurich. All rights reserved.</p>			  
+
+<!-- END CENTERED CONTENT -->
+
+</div>
+</body>
+</html>

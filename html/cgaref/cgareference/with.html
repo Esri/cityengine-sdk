@@ -1,0 +1,77 @@
+<html>
+
+<head>
+    <title>with</title>
+    <link rel="stylesheet" href="../manual_style.css" type="text/css" />
+</head>
+
+<body>
+<div class="content">
+
+<!-- HEADER (use only on bookchapters) -->
+
+<table summary="" class="header">
+	<tr>
+		<td align="left" class="helphead_l"><a href="../toc.html"><div class="helplink">&nbsp;</div></a></td>
+		<td align="right" class="helphead_r"></td>
+	</tr>
+</table>
+
+<!-- CONTENT -->
+
+<h1>with</h1>
+
+<h2>Syntax</h2>
+
+<p class="code2">with ( <span class="cga_opparam">id</span> := <span class="cga_opparam">expression</span>&nbsp&nbsp<span class="cga_opparam">id</span> := <span class="cga_opparam">expression</span>&nbsp&nbsp... )</p>
+
+<h2>Parameters</h2>
+
+<ul>
+	<li><span class="cga_opparam">id</span> (identifier)<br>Name of local variable.</li>
+	<li><span class="cga_opparam">expression</span> (float, string, bool, float[], string[], bool[])<br>Value to be stored.</li>
+</ul>
+
+<h2>Description</h2>        
+
+<p>The <span class="code_std">with</span> keyword successively defines a set of local variables for a definition. Within the scope of a definition local variables can be referenced using their identider <span class="cga_opparam">id</span>. They are not accessible outside the scope of the definition.</p>
+
+<p>Local variables can be defined for functions, const functions, attributes and rules. The <span class="cga_opparam">expression</span> may reference functions, const functions and attributes which are defined outside the scope of the current definition as well as parameters and local variables which are defined prior in the list of local variables.</p>
+
+<pre class="code3">
+attr  a  with ( x := "example" )        = x
+
+const b  with ( x := [0,1,2]  y := 0 )  = x[y]
+
+f(a)     with ( x := a  y := x )        = y
+
+Lot      with ( x := f(1) )             --> extrude(x)
+</pre>
+
+<p>The <span class="cga_opparam">expression</span> of a local variable is evaluated and its value is stored as soon as the definition is called.  The <span class="cga_opparam">expression</span> is not beeing re-evaluated when a local variable is referenced.</p>
+
+<p>In the following simple example a function computes and stores intermediate results in local variables <span class="code_std">d1</span> and <span class="code_std">d2</span> at the time the function is called. Each local variable is then referenced twice in order to compute the distance between 2 points.</p>
+
+<pre class="code3">
+dist2d(x1, y1, x2, y2) with ( d1 := x2-x1  
+                              d2 := y2-y1 )
+= sqrt(d1*d1 + d2*d2) 
+
+Lot --> print("distance: " + dist2d(1,1,2,2)) // 1.414
+</pre>
+
+<p>The following rule computes the area of the current shape and stores it in a local variable. The value does not change despite the area of the shape is altered.</p>
+
+<pre class="code3">
+Lot with ( area := geometry.area() ) --> s('2,0,'2)
+                                         print("initial area: " + area)
+                                         print("altered area: " + geometry.area())
+</pre>
+
+<p class="foot">Copyright &copy;2008-2022 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
+
+<!-- END CENTERED CONTENT -->
+
+</div>
+</body>
+</html>

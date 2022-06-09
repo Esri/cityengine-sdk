@@ -1,0 +1,163 @@
+<html>
+
+<head>
+    <title>sortIndices Function</title>
+    <link rel="stylesheet" href="../manual_style.css" type="text/css" />
+</head>
+
+<body>
+<div class="content">
+
+<!-- HEADER (use only on bookchapters) -->
+
+<table summary="" class="header">
+	<tr>
+		<td align="left" class="helphead_l"><a href="../toc.html"><div class="helplink">&nbsp;</div></a></td>
+		<td align="right" class="helphead_r"></td>
+	</tr>
+</table>
+
+<!-- CONTENT -->
+
+<h1>sortIndices function</h1>
+
+<h2>Syntax</h2>
+
+<p class="code2"><span class="codelight">float[]</span> sortIndices(<span class="cga_opparam">array</span>)</p>
+
+<h2>Parameters</h2>
+
+<ul>
+	<li><span class="cga_opparam">array</span> (float[], string[])<br>Array to be sorted.</li>
+</ul>
+
+
+<h2>Description</h2>
+
+<p>The <span class="codelight">sortIndices</span> function returns the indices of sorted values in <span class="cga_opparam">array</span>.</p>
+
+<table class="twocol" cellspacing=20>
+<tr>
+	<td width="25%"><pre class="code3">array = </pre></td>
+	<td><pre class="code3">
+["c","b","d","a"]</pre></td>
+</tr>
+<tr>
+	<td><pre class="code3">sortIndices(array)</pre></td>
+	<td><pre class="code3">
+[3,1,0,2]</pre></td>
+</tr>
+<tr>
+	<td><pre class="code3">array[sortIndices(array)]</pre></td>
+	<td><pre class="code3">
+["a","b","c","d"]</pre></td>
+</tr>
+</table>
+
+<p>Duplicate values are sorted in the order of appearance.</p>
+
+<table class="twocol" cellspacing=20>
+<tr>
+	<td width="25%"><pre class="code3">array = </pre></td>
+	<td><pre class="code3">
+[2,1,3,3,1]</pre></td>
+</tr>
+<tr>
+	<td><pre class="code3">sortIndices(array)</pre></td>
+	<td><pre class="code3">
+[1,4,0,2,3]</pre></td>
+</tr>
+<tr>
+	<td><pre class="code3">array[sortIndices(array)]</pre></td>
+	<td><pre class="code3">
+[1,1,2,3,3]</pre></td>
+</tr>
+</table>
+
+<p>Each row is sorted separately. The returned index array has the same dimensions as <span class="cga_opparam">array</span>.</p>
+
+<table class="twocol" cellspacing=20>
+<tr>
+	<td width="25%"><pre class="code3">array = </pre></td>
+	<td><pre class="code3">
+["e","c","d";
+ "b","a","c";
+ "d","a","d"]</pre></td>
+</tr>
+<tr>
+	<td><pre class="code3">sortIndices(array)</pre></td>
+	<td><pre class="code3">
+[1,2,0;
+ 4,3,5;
+ 7,6,8]</pre></td>
+</tr>
+<tr>
+	<td><pre class="code3">array[sortIndices(array)]</pre></td>
+	<td><pre class="code3">
+["c","d","e";
+ "a","b","c";
+ "a","d","d"]</pre></td>
+</tr>
+</table>
+
+  
+<h2>Related</h2>
+
+<ul>
+	<li><a href="arrayTypes.html">Array types operators</a></li>
+	<li><a href="func_findFirst.html"><span class="code_std">findFirst</span></a> function</li>
+	<li><a href="func_sortRowIndices.html"><span class="code_std">sortRowIndices</span></a> function</li>
+</ul>
+
+<h2>Examples</h2>
+
+<h3>Ascending and descending sorting</h3>
+
+<p class="example">	
+<pre class="code3">
+reverse(array) = array[size(array)-1:-1:0]
+
+sortAsc(array) = array[sortIndices(array)]
+sortDesc(array) = reverse(sortAsc(array))
+
+const a = ["a", "c", "b"]
+const b = sortAsc(a)       // [a,b,c]
+const c = sortDesc(a)      // [c,b,a]
+</pre>
+</p>
+<em>An <span class="codelight">array</span> is indexed with sorted indexes which sorts all values in ascending order. The resulting array can be reversed for a descending sort order. Note that this example only applies to 1d arrays with 1 row.</em>
+
+<h3>Finding minimum and maximum</h3>
+
+<p class="example">	
+<pre class="code3">
+findMin(array) = sortIndices(array)[0]
+findMax(array) = sortIndices(array)[size(array)-1]
+
+min(array) = array[findMin(array)]
+max(array) = array[findMax(array)]
+
+const a = [1, 4, -1, 9]
+const b = min(a)           // -1
+const c = max(a)           // 9
+</pre>
+</p>
+<em>The index of the minimum value in <span class="codelight">array</span> is the first element in the sorted indexes array. Note that this example only applies to 1d arrays with 1 row. 2d arrays must be "flattened" first, i.e. reshaped to an array with one row:</em>
+<p class="example">	
+<pre class="code3">
+flatten(array) = array[0:size(array)-1]
+
+findMin(array) = sortIndices(flatten(array))[0]
+findMax(array) = sortIndices(flatten(array))[size(array)-1]
+</pre>
+</p>
+<em></em>
+
+<!-- FOOTER -->
+<p class="foot">Copyright &copy;2008-2022 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
+
+<!-- END CENTERED CONTENT -->
+
+</div>
+</body>
+</html>

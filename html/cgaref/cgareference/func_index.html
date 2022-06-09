@@ -1,0 +1,331 @@
+<html>
+
+<head>
+	<title>index Operator</title>
+	<link rel="stylesheet" href="../manual_style.css" type="text/css" />
+</head>
+
+<body>
+<div class="content">
+
+<table summary="" class="header">
+<tr>
+	<td align="left" class="helphead_l"><a href="../toc.html"><div class="helplink">&nbsp;</div></a></td>
+	<td align="right" class="helphead_r"></td>
+</tr>
+</table>
+
+<h1>index operator</h1>
+
+<h2>Syntax</h2>
+
+<p class="code2"><span class="codelight">float/string/bool</span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<span class="cga_opparam">array</span>[<span class="cga_opparam">index</span>]</p>
+<p class="code2"><span class="codelight">float/string/bool</span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<span class="cga_opparam">array</span>[<span class="cga_opparam">rowIndex</span>,&nbsp&nbsp&nbsp<span class="cga_opparam">colIndex</span>&nbsp&nbsp]</p>
+
+<br>
+
+<p class="code2"><span class="codelight">float[]/string[]/bool[]</span>&nbsp&nbsp<span class="cga_opparam">array</span>[<span class="cga_opparam">indices</span>]</p>
+<p class="code2"><span class="codelight">float[]/string[]/bool[]</span>&nbsp&nbsp<span class="cga_opparam">array</span>[<span class="cga_opparam">rowIndex</span>,&nbsp&nbsp&nbsp<span class="cga_opparam">colIndices</span>]</p>
+<p class="code2"><span class="codelight">float[]/string[]/bool[]</span>&nbsp&nbsp<span class="cga_opparam">array</span>[<span class="cga_opparam">rowIndices</span>, <span class="cga_opparam">colIndex</span>&nbsp&nbsp]</p>
+<p class="code2"><span class="codelight">float[]/string[]/bool[]</span>&nbsp&nbsp<span class="cga_opparam">array</span>[<span class="cga_opparam">rowIndices</span>, <span class="cga_opparam">colIndices</span>]</p>
+
+
+<h2>Parameters</h2>
+
+<ul>
+	<li><span class="cga_opparam">array</span> (float[], string[], bool[])<br>Array for which an element or multiple elements are requested.</li>
+	<li><span class="cga_opparam">index</span>, <span class="cga_opparam">rowIndex</span>, <span class="cga_opparam">colIndex</span> (float)<br>Zero-based linear/row/column index of <span class="cga_opparam">array</span> element.</li>
+	<li><span class="cga_opparam">indices</span>, <span class="cga_opparam">rowIndices</span>, <span class="cga_opparam">colIndices</span> (float[], bool[])<br>Array containing zero-based linear/row/column indices of <span class="cga_opparam">array</span> elements or logical values indicating whether a specific index is included.</li>
+</ul>
+
+<h2>Returns</h2>
+
+An array element or a new array.
+
+<h2>Description</h2>
+
+<h3>Indexing with index values</h3>
+
+<p>The index operator returns the array element at a specific zero-based <span class="cga_opparam">index</span> position:</p> 
+
+<table class="twocol" cellspacing=20>
+<tr>
+	<td width="50%"><pre class="code3">array =</pre></td>
+	<td><pre class="code3">[1,2,3,4]</pre></td>
+</tr>
+<tr>
+	<td><pre class="code3">array[ 0 ]</pre></td>
+	<td><pre class="code3">1</pre></td>
+</tr>
+<tr>
+	<td><pre class="code3">array[ 3 ]</pre></td>
+	<td><pre class="code3">4</pre></td>
+</tr>
+</table>
+
+<p>or the element at a specific <span class="cga_opparam">rowIndex</span> (row index) and <span class="cga_opparam">colIndex</span> (column index):</p> 
+
+<table class="twocol" cellspacing=20>
+<tr>
+	<td width="50%"><pre class="code3">array2d =</pre></td>
+	<td><pre class="code3">
+[1,2,3;
+ 4,5,6;
+ 7,8,9]</pre></td>
+</tr>
+<tr>
+	<td><pre class="code3">array2d[ 1 , 1 ]</pre></td>
+	<td><pre class="code3">5</pre></td>
+</tr>
+</table>
+
+<h3>Indexing with index arrays</h3>
+
+<p>Further, array elements can be indexed by an array (<span class="cga_opparam">indices</span>, <span class="cga_opparam">rowIndices</span>, <span class="cga_opparam">colIndices</span>). In this case the index operator returns a new array. Its dimensions are prescribed by the dimensions of the indices array.</p> 
+
+<table class="twocol" cellspacing=20>
+<tr>
+	<td width="50%"><pre class="code3">array[ [0,2] ]</pre></td>
+	<td><pre class="code3">[1,3]</pre></td>
+</tr>
+<tr>
+	<td><pre class="code3">array[ [1,1] ]</pre></td>
+	<td><pre class="code3">[2,2]</pre></td>
+</tr>
+<tr>
+	<td><pre class="code3">array[ 3:-1:1 ]</pre></td>
+	<td><pre class="code3">[4,3,2]</pre></td>
+</tr>
+<tr>
+	<td><pre class="code3">
+array[ [0,1;
+        2,3] ]</span></td>
+	<td><pre class="code3">
+[1,2;
+ 3,4]</pre></td>
+</tr>
+<tr>
+	<td><pre class="code3">array2d[ 1 , [0,2] ]</pre></td>
+	<td><pre class="code3">[4,6]</pre></td>
+</tr>
+<tr>
+	<td><pre class="code3">array2d[ [0,0,1] , 2 ]</pre></td>
+	<td><pre class="code3">
+[3;
+ 3;
+ 6]</pre></td>
+</tr>
+<tr>
+	<td><pre class="code3">array2d[ 0:2 , [0,2] ]</pre></td>
+	<td><pre class="code3">
+[1,3;
+ 4,6;
+ 7,9]</pre></td>
+</tr>
+</table>
+
+<h3>Logical indexing</h3>
+
+<p>An indices array (<span class="cga_opparam">indices</span>, <span class="cga_opparam">rowIndices</span>, <span class="cga_opparam">colIndices</span>) can also be given by logical values indicating whether a specific index is included:</p> 
+
+<table class="twocol" cellspacing=20>
+<tr>
+	<td width="50%"><pre class="code3">array[ [true,false,true] ]</pre></td>
+	<td><pre class="code3">[1,3]</pre></td>
+</tr>
+<tr>
+	<td><pre class="code3">array[ array .> 2 ]</pre></td>
+	<td><pre class="code3">[3,4]</pre></td>
+</tr>
+<tr>
+	<td><pre class="code3">array[ array .> 1 .&& array .<= 3 ]</pre></td>
+	<td><pre class="code3">[2,3]</pre></td>
+</tr>
+<tr>
+	<td><pre class="code3">array2d[ [false,true,true], 0 ]</pre></td>
+	<td><pre class="code3">
+[4;
+ 7]</pre></td>
+</tr>
+</table>
+
+<h3>Invalid indexing</h3>
+
+<p>If an index is negative or greater than or equal to the number of elements or rows or columns respectively, a default value is returned. The default value is <span class="code_std">0</span> for float arrays, <span class="code_std">false</span> for bool arrays, and <span class="code_std">""</span> for string arrays.</p>
+
+<table class="twocol" cellspacing=20>
+<tr>
+	<td width="50%"><pre class="code3">array[ -1 ]</pre></td>
+	<td><pre class="code3">0</pre></td>
+</tr>
+<tr>
+	<td><pre class="code3">array[ [false,false,true,true,true] ]</pre></td>
+	<td><pre class="code3">[3,4,0]</pre></td>
+</tr>
+<tr>
+	<td><pre class="code3">array2d[ [2,3], -1:1 ]</pre></td>
+	<td><pre class="code3">
+[0,7,8;
+ 0,0,0]</pre></td>
+	
+</tr>
+</table>
+
+<h3 id="linear">Linear indexing</h3>
+
+<p>If a 2d <span class="cga_opparam">array</span> is indexed in 1d, linear indexing is used. Indexing is performed row-wise starting with elements in the first row and continuing on successive rows.</p> 
+
+<table class="twocol" cellspacing=20>
+<tr>
+	<td width="50%"><pre class="code3">array2d[ 3 ]</pre></td>
+	<td><pre class="code3">4</pre></td>
+</tr>
+<tr>
+	<td><pre class="code3">array2d[ 0 : size(array2d)-1 ]</pre></td>
+	<td><pre class="code3">[0,1,2,3,4,5,6,7,8,9]</pre></td>
+</tr>
+<tr>
+	<td><pre class="code3">
+array2d[ [0;
+          3;
+          6] ]</pre></td>
+	<td><pre class="code3">
+[1;
+ 4;
+ 7]</pre></td>
+</tr>
+</table>
+
+<p>Similarly, if a 2d indices array is used for row/column indexing, indices in <span class="cga_opparam">rowIndices</span> or <span class="cga_opparam">colIndices</span> are interpreted in a row-wise manner.</p>
+
+<table class="twocol" cellspacing=20>
+<tr>
+	<td width="50%"><pre class="code3">
+array2d[ 0 , [0,1;
+              2,3] ]</pre></td>
+	<td><pre class="code3">[1,2,3,0]</pre></td>
+</tr>
+</table>
+
+<p>Logical indexing is always linear.</p> 
+
+<table class="twocol" cellspacing=20>
+<tr>
+	<td width="50%"><pre class="code3">
+array[ [true,false;
+        true,false] ]</pre></td>
+	<td><pre class="code3">[1,3]</pre></td>
+</tr>
+</table>
+	
+<h2>Related</h2>
+
+<ul>
+	<li><a href="arrayTypes.html">Array types operators</a></li>
+    <li><a href="func_array.html">array initialization</a> function</li>
+	<li><a href="func_size.html"><span class="code_std">size</span></a> function</li>
+    <li><a href="func_nRows.html"><span class="code_std">nRows</span></a> function</li>
+    <li><a href="func_nColumns.html"><span class="code_std">nColumns</span></a> function</li>
+	<li><a href="func_setElems.html"><span class="code_std">setElems</span></a> function</li>
+</ul>
+    
+<h2>Examples</h2>
+
+<h3>Recursive element selection</h3>
+
+<p class="example">	
+<pre class="code3">
+indexOfLargest(array) = indexOfLargest(array, 0, 0)
+
+indexOfLargest(array, i, iLargest) =
+    case i == size(array) : iLargest
+    else :
+        case array[i] > array[iLargest] : indexOfLargest(array, i+1, i)
+        else                            : indexOfLargest(array, i+1, iLargest)
+
+const edgeLengths = comp(e) { all : scope.sx }
+
+indexOfLongestEdge = indexOfLargest(edgeLengths)
+                                        
+Lot --> comp(e) { indexOfLongestEdge : LongestEdge. }
+</pre>
+
+<em>With the size function and index operator an array can be recursively parsed for a specific element value. In this example the index of the longest edge is retrieved from an array of edge lengths.</em>
+</p>
+
+<h3>Parsing text file</h3>
+
+<pre class="code3">
+// table
+// a;b;c&crarr;
+// d;e;f&crarr;
+// g;h;i
+
+const file     = readTextFile("table.txt")
+const cells    = splitString(file, "$;|\n")     // [a,b,c,d,e,f,g,h,i]
+const columns  = 3
+const indexes  = [0 : columns : size(cells)-1]  // [0:3:6]
+const firstCol = cells[indexes]                 // [a,d,g]
+</pre>
+<em>A text file containing a table is parsed and elements are indexed linearly.</em>
+
+<h3>Read CSV table</h3>
+
+<pre class="code3">
+const table    = readStringTable("table.csv")
+const firstCol = table[0 : nRows(table)-1, 0]     // [a,d,g]
+</pre>
+<em>A CSV file is read and elements are indexed using the 2d index operator.</em>
+
+<h3>Indexing by 2d arrays</h3>
+
+<pre class="code3">
+const a = ["_", "d", "i", "a", "g"]
+
+const b = [1,0,0,0;
+           0,2,0,0;
+           0,0,3,0;
+           0,0,0,4]
+		   
+const c = a[b]
+// (4x4)
+//    d   _   _   _
+//    _   i   _   _
+//    _   _   a   _
+//    _   _   _   g
+</pre>
+
+<em>The result of the 1d index operator is an array that has the same dimensions as the <span class="cga_opparam">indices</span> array.</em>
+
+<h3>Indexing out of bounds</h3>
+
+<pre class="code3">
+zeros(elems)    = floatArray[1:elems]
+ones(rows,cols) = floatArray[1:rows,1:cols] .+ 1
+
+const a = zeros(4)  // [0,0,0,0]
+const b = ones(2,3) // [1,1,1 ; 1,1,1]
+</pre>
+
+<em>An empty <a href="func_floatArray.html"><span class="code_std">floatArray</span></a> is indexed by index <a href="func_colon.html">sequences</a>. This creates a new array filled with default values (which is zero for float).</em>
+
+<h3>Prime numbers</h3>
+
+<pre class="code3">
+findPrimes(max) =
+   case max <= 1 : floatArray
+   else          : findPrimes(sqrt(max), [2 : max], floatArray)
+				  
+findPrimes(limit, a, primes) =
+   case a[0] <= limit : findPrimes(limit, a[a .% a[0] .!= 0], [primes, a[0]])
+   else               : [primes, a]
+   
+Lot --> print(findPrimes(20)) // (8)[2,3,5,7,11,13,17,19]
+</pre>
+<em>An implementation of the <a href="https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes">Sieve of Eratosthenes</a> that uses indexing by boolean arrays.</em>
+
+<p class="foot">Copyright &copy;2008-2022 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
+
+</div>
+</body>
+</html>

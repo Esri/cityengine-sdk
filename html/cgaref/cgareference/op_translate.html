@@ -1,0 +1,129 @@
+<html>
+
+<head>
+    <title>translate Operation</title>
+    <link rel="stylesheet" href="../manual_style.css" type="text/css" />
+</head>
+
+<body>
+<div class="content">
+
+<!-- HEADER (use only on bookchapters) -->
+
+<table summary="" class="header">
+	<tr>
+		<td align="left" class="helphead_l"><a href="../toc.html"><div class="helplink">&nbsp;</div></a></td>
+		<td align="right" class="helphead_r"></td>
+	</tr>
+</table>
+
+<!-- CONTENT -->
+
+<h1>translate operation</h1>
+
+<h2>Syntax</h2>
+
+<p class="code2">translate(<span class="cga_opparam">mode</span>, <span class="cga_opparam">coordSystem</span>, <span class="cga_opparam">x</span>, <span class="cga_opparam">y</span>, <span class="cga_opparam">z</span>)</p>
+
+<h2>Parameters</h2>
+
+<ul>
+	<li><span class="cga_opparam">mode</span> (selector)
+	<table cellspacing="5">
+		<tr><td width="15%"><span class="codelight">abs, rel</span></td><td>Absolute or relative mode. Absolute means the position is set to the given value, relative means the translation is added.</td></tr>
+	</table>
+	</li>
+	<li><span class="cga_opparam">coordSystem</span> (selector)
+	<table cellspacing="5">
+		<tr><td width="35%"><span class="codelight">scope, pivot, object, world</span></td><td>Name of the coordinate system in which the following coordinates are given.</td></tr>
+	</table>
+	</li>
+	<li><span class="cga_opparam">x</span>, <span class="cga_opparam">y</span>, <span class="cga_opparam">z</span> (float)<br>The coordinates define a position in the <span class="cga_opparam">coordSystem</span> to which the current shape's scope (<span class="code_std">scope.t</span>) is set if the <span class="cga_opparam">mode</span> is <span class="code_std">abs</span> or a translation vector to apply if the <span class="cga_opparam">mode</span> is <span class="code_std">rel</span>.</li>
+</ul>
+
+<h2>Description</h2>
+
+<p>The <span class="code_std">translate</span> operation translates the scope. The coordinates can be defined in any coordinate system, and the translation can either be absolute (= set to <span class="code_std">x,y,z</span>) or relative (= add the <span class="code_std">x,y,z</span> vector). This operation manipulates the scope position (<span class="code_std">scope.t</span> attribute).</p>
+
+<h2>Related</h2>
+
+<ul>
+	<li><a class="normw" href="func_convert.html">convert function</a></li>
+	<li><a class="normw" href="op_r.html">r operation</a></li>
+	<li><a class="normw" href="op_t.html">t operation</a></li>        
+	<li><a class="normw" href="op_rotate.html">rotate operation</a></li>        
+	<li><a class="normw" href="attr_scope.html">scope attribute</a></li>
+</ul>
+                
+
+<h2>Examples</h2>
+
+<h3>Translate a shape along the world x-axis</h3>
+<table summary="" class="twocol">
+	<tr>
+		<td class="twocol_l"><br />
+		<img src="images/translate-world.png" alt="translate world" /></td>
+		<td>
+		<pre class="code_std">
+version "2009.2"
+
+Init-->
+	split(x) { '0.2 : split(z) { '0.2 : PP }* }*
+	
+PP-->
+	43%:
+		primitiveCube()
+		X
+		translate(rel, world, 2, 0, 0)
+		color("#ff0000")
+		X
+	else:
+		NIL   
+	</pre>
+	<em>
+	The red cubes are copies of the white cubes, translated by two units along the x-axis of the world coordinate system (i.e. the red axis on the bottom right).
+	</em>
+	
+         </td>
+	</tr>
+	</table>
+
+<h3>Translate a shape along the object x-axis</h3>
+<table summary="" class="twocol">
+   	<tr>
+		<td class="twocol_l"><br />
+		<img src="images/translate-object.png" alt="translate object" /></td>
+		<td>
+		<pre class="code_std">
+version "2009.2"
+
+Init-->
+	split(x) { '0.2 : split(z) { '0.2 : PP }* }*
+	
+PP-->
+	43%:
+		primitiveCube()
+		X
+		translate(rel, object, 2, 0, 0)
+		color("#ff0000")
+		X
+	else:
+		NIL
+        </pre>
+       </td>  
+       
+   	<em>
+	The red cubes are copies of the white cubes, translated by two units along the x-axis of the object coordinate system (i.e. the red axis in the center).
+	</em>
+          
+	</tr>
+</table>
+
+<!-- FOOTER -->
+<p class="foot">Copyright &copy;2008-2022 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
+
+<!-- END CENTERED CONTENT -->
+
+</div>
+</body>
+</html>

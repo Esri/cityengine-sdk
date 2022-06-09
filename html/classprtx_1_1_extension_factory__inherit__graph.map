@@ -1,0 +1,6 @@
+<map id="prtx::ExtensionFactory" name="prtx::ExtensionFactory">
+<area shape="rect" id="node2" href="$classprtx_1_1_decoder_factory.html" title="prtx::DecoderFactory" alt="" coords="227,5,373,32"/>
+<area shape="rect" id="node3" href="$classprtx_1_1_encoder_factory.html" title="prtx::EncoderFactory" alt="" coords="228,56,372,83"/>
+<area shape="rect" id="node4" href="$classprtx_1_1_resolve_map_provider_factory.html" title="prtx::ResolveMapProvider\lFactory" alt="" coords="213,107,387,149"/>
+<area shape="rect" id="node5" href="$classprtx_1_1_stream_adaptor_factory.html" title="prtx::StreamAdaptorFactory" alt="" coords="209,173,391,200"/>
+</map>

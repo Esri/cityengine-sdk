@@ -1,0 +1,129 @@
+<html>
+
+<head>
+	<title>array initialization Function</title>
+	<link rel="stylesheet" href="../manual_style.css" type="text/css" />
+</head>
+
+<body>
+<div class="content">
+
+<!-- HEADER (use only on bookchapters) -->
+
+<table summary="" class="header">
+	<tr>
+		<td align="left" class="helphead_l"><a href="../toc.html"><div class="helplink">&nbsp;</div></a></td>
+		<td align="right" class="helphead_r"></td>
+	</tr>
+</table>
+
+<!-- CONTENT -->
+
+<h1>array initialization function</h1>
+		
+<h2>Syntax</h2>
+
+<p class="code2"><span class="codelight">float[]/string[]/bool[]</span>&nbsp&nbsp[<span class="cga_opparam">value</span>, <span class="cga_opparam">value</span>, ...]</p>
+<p class="code2"><span class="codelight">float[]/string[]/bool[]</span>&nbsp&nbsp[<span class="cga_opparam">value</span>, <span class="cga_opparam">value</span>, ... ; <span class="cga_opparam">value</span>, <span class="cga_opparam">value</span>, ... ; ...]</p>
+		
+<h2>Parameters</h2>
+
+<ul>
+	<li><span class="cga_opparam">value</span> (float, float[], string, string[], bool, bool[])<br>Array element values. At least one element must be specified.</li>
+</ul>
+		
+<h2>Returns</h2>
+
+<p>An array containing all elements in the specified arrangement.  The type of the array depends on the type of <span class="cga_opparam">value</span>.  For example, a float[] array can be made from a mixture of float and float[] values.</p>
+
+<h2>Description</h2>
+
+<h3>1D array</h3>
+
+<p>An array can be initialized by the concatenation of primitive values separated by <em>comma</em>:</p>
+
+<table class="twocol" cellspacing=20>
+<tr>
+	<td width="50%"><pre class="code3">const a = ["B", "C", "D"]</pre></td>
+	<td><pre class="code3">(3)[B,C,D]</pre></td>
+</tr>
+</table>
+
+Beside primitive values, also arrays can be used to create new arrays: 
+
+<table class="twocol" cellspacing=20>
+<tr>
+	<td width="50%"><pre class="code3">const b = ["A", a, "E"]</pre></td>
+	<td><pre class="code3">(5)[A,B,C,D,E]</pre></td>
+</tr>
+</table>
+
+<h3>2D array</h3>
+
+Primitive values and/or arrays can be arranged in several rows separated by <em>semicolon</em>:
+
+<table class="twocol" cellspacing=20>
+<tr>
+	<td width="50%"><pre class="code3">const a = [-1 ; -2]</pre></td>
+	<td><pre class="code3">
+(2x1)
+   -1
+   -2</pre></td>
+</tr>
+<tr>
+	<td><pre class="code3">const b = [0:2 ; 3, 3, 3]</pre></td>
+	<td><pre class="code3">
+(2x3)
+   0   1   2
+   3   3   3</pre></td>
+</tr>
+<tr>
+	<td><pre class="code3">const c = [a, b ; b, a]</pre></td>
+	<td><pre class="code3">
+(4x4)
+   -1   0   1    2
+   -2   3   3    3
+    0   1   2   -1
+    3   3   3   -2</pre></td>
+</tr>
+</table>
+
+<p class="notes">The size of the returned array is limited. It can be configured in the <a href="https://doc.arcgis.com/en/cityengine/latest/help/get-started-preferences-prt.htm" target="_blank">Procedural Runtime preferences</a> (Default: 100000).</p>
+
+<p class="notes">Empty arrays can be created using <a href="func_floatArray.html"><span class="code_std">floatArray</span></a>, <a href="func_boolArray.html"><span class="code_std">boolArray</span></a> and <a href="func_stringArray.html"><span class="code_std">stringArray</span></a>.</p>
+
+<h2>Related</h2>
+
+<ul>
+	<li><a href="arrayTypes.html">Array types operators</a></li>
+	<li><a href="func_size.html"><span class="code_std">size</span></a> function</li>
+	<li><a href="func_nColumns.html"><span class="code_std">nColumns</span></a> function</li>
+	<li><a href="func_nRows.html"><span class="code_std">nRows</span></a> function</li>
+	<li><a href="func_floatArray.html"><span class="code_std">floatArray</span></a> function</li>
+	<li><a href="func_boolArray.html"><span class="code_std">boolArray</span></a> function</li>
+	<li><a href="func_stringArray.html"><span class="code_std">stringArray</span></a> function</li>
+	<li><a href="func_setElems.html"><span class="code_std">setElems</span></a> function</li>
+</ul>
+
+<h2>Examples</h2>
+
+<h3>Fibonacci numbers</h3>
+
+<pre class="code3">
+fibonacci(n) = case n <= 2 : [0:n-1] 
+               else        : fibonacci([0,1], n)
+ 
+fibonacci(a, n) = case size(a) == n : a
+                  else              : fibonacci([a, a[size(a)-2] + a[size(a)-1]], n)
+
+Lot --> print(fibonacci(10))  // (10)[0,1,1,2,3,5,8,13,21,34]
+</pre>
+
+<!-- FOOTER -->
+<p class="foot">Copyright &copy;2008-2022 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
+
+<!-- END CENTERED CONTENT -->
+
+</div>
+</body>
+</html>

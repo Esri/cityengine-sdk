@@ -1,0 +1,234 @@
+<html>
+
+<head>
+	<title>setElems Function</title>
+	<link rel="stylesheet" href="../manual_style.css" type="text/css" />
+</head>
+
+<body>
+<div class="content">
+
+<table summary="" class="header">
+<tr>
+	<td align="left" class="helphead_l"><a href="../toc.html"><div class="helplink">&nbsp;</div></a></td>
+	<td align="right" class="helphead_r"></td>
+</tr>
+</table>
+
+<h1>setElems function</h1>
+
+<h2>Syntax</h2>
+
+<p class="code2"><span class="codelight">float[]/string[]/bool[]</span> setElems(<span class="cga_opparam">array</span>, <span class="cga_opparam">indices</span>, <span class="cga_opparam">values</span>)</p>
+<p class="code2"><span class="codelight">float[]/string[]/bool[]</span> setElems(<span class="cga_opparam">array</span>, <span class="cga_opparam">rowIndices</span>, <span class="cga_opparam">colIndices</span>, <span class="cga_opparam">values</span>)</p>
+
+<h2>Parameters</h2>
+
+<ul>
+	<li><span class="cga_opparam">array</span> (float[], string[], bool[])<br>Array for which elements are set.</li>
+	<li><span class="cga_opparam">indices</span>, <span class="cga_opparam">rowIndices</span>, <span class="cga_opparam">colIndices</span> (float, float[], bool[])<br>Zero-based index value or array of indices or array of logical values.</li>
+	<li><span class="cga_opparam">values</span> (float, string, bool, float[], string[], bool[])<br>Value or array of values to be set.</li>
+</ul>
+
+<h2>Returns</h2>
+
+An array containing new element values.
+
+<h2>Description</h2>
+
+<p>The <span class="codelight">setElems</span> function sets elements of an array to new values. Elements are selected by index values, index arrays or logical arrays. Indexing follows the same rules as for the <a href="func_index.html">index operator</a> (see therein for detailed description).</p>
+
+<h3>1d indexing</h3>
+
+<p>One element at a specific zero-based index position can be replaced by a new value. Several elements can be set at once to the new value by providing an index array.</p> 
+
+<table class="twocol" cellspacing=20>
+<tr>
+	<td width="55%"><pre class="code3">array1d =</pre></td>
+	<td><pre class="code3">[0,0,0,0,0,0]</pre></td>
+</tr>
+<tr>
+	<td><pre class="code3">setElems(array1d, 2, 1)</pre></td>
+	<td><pre class="code3">[0,0,1,0,0,0]</pre></td>
+</tr>
+<tr>
+	<td><pre class="code3">setElems(array1d, [1:4], 1)</pre></td>
+	<td><pre class="code3">[0,1,1,1,1,0]</pre></td>
+</tr>
+</table>
+
+<p>Elements selected by an index array can be replaced by a new values array. Both arrays must have the same size. Values are set at the index found at the respective position in the index array. Repeated indices override.</p>
+
+<table class="twocol" cellspacing=20>
+<tr>
+	<td width="55%"><pre class="code3">setElems(array1d, [1,3,5], [1:3])</pre></td>
+	<td><pre class="code3">[0,1,0,2,0,3]</pre></td>
+</tr>
+<tr>
+	<td><pre class="code3">setElems(array1d, [5,1,3], [1:3])</pre></td>
+	<td><pre class="code3">[0,2,0,3,0,1]</pre></td>
+</tr>
+<tr>
+	<td><pre class="code3">setElems(array1d, [1,1,1], [1:3])</pre></td>
+	<td><pre class="code3">[0,3,0,0,0,0]</pre></td>
+</tr>
+</table>
+
+<h3>2d indexing</h3>
+
+<p>2d arrays can be indexed by row indices and column indices.</p>
+
+<table class="twocol" cellspacing=20>
+<tr>
+	<td width="55%"><pre class="code3">array2d =</pre></td>
+	<td><pre class="code3">
+[0,0,0;
+ 0,0,0;
+ 0,0,0]</pre></td>
+</tr>
+<tr>
+	<td><pre class="code3">setElems(array2d, 1, 1, 5)</pre></td>
+	<td><pre class="code3">
+[0,0,0;
+ 0,5,0;
+ 0,0,0]</pre></td>
+</tr>
+<tr>
+	<td><pre class="code3">setElems(array2d, [0,2], [0:2], 1)</pre></td>
+	<td><pre class="code3">
+[1,1,1;
+ 0,0,0;
+ 1,1,1]</pre></td>
+</tr>
+</table>
+
+<p>A values array can be set. The values array must have the same dimensions (number of rows and columns) as specifed by the size of the row index array and the size of the column index array. Values are set at the row index and column index found at the respective position in the row index array and colum index array. Repeated indices override.</p>   
+
+<table class="twocol" cellspacing=20>
+<tr>
+<td width="55%"><pre class="code3">
+setElems(array2d, [1,2], [0,2], [1,2;3,4])</pre></td>
+<td><pre class="code3">
+[0,0,0;
+ 1,0,2;
+ 3,0,4]</pre></td>
+</tr>
+<td><pre class="code3">
+setElems(array2d, [2,1], [2,0], [1,2;3,4])</pre></td>
+<td><pre class="code3">
+[0,0,0;
+ 4,0,3;
+ 2,0,1]</pre></td>
+</tr>
+<td><pre class="code3">
+setElems(array2d, [1,1], [0,2], [1,2;3,4])</pre></td>
+<td><pre class="code3">
+[0,0,0;
+ 3,0,4;
+ 0,0,0]</pre></td>
+</tr>
+</table>
+
+<h3>Logical indexing</h3>
+
+Further, logical indexing can be used to select values.
+
+<table class="twocol" cellspacing=20>
+<tr>
+	<td width="55%"><pre class="code3">sequence =</pre></td>
+	<td><pre class="code3">[1:7]</pre></td>
+</tr>
+<tr>
+	<td><pre class="code3">setElems(sequence, sequence .> 4, 4)</pre></td>
+	<td><pre class="code3">[1,2,3,4,4,4,4]</pre></td>
+</tr>
+</table>
+
+Value arrays must have the same size (or dimensions for 2d indexing) as the number of elements selected by the logical array.
+
+<table class="twocol" cellspacing=20>
+<tr>
+	<td width="55%"><pre class="code3">setElems(sequence, sequence .> 4, [3,2,1])</pre></td>
+	<td><pre class="code3">[1,2,3,4,3,2,1]</pre></td>
+</tr>
+</table>
+
+<h3>Indexing out of bounds</h3>
+
+<p>Negative indexes are ignored, ie. respective values are not set. Indexes greater than or equal to the number of elements or rows or columns enlarge the array respectively. Missing elemets are filled with default values.</p>
+
+<table class="twocol" cellspacing=20>
+<tr>
+	<td width="55%"><pre class="code3">array =</pre></td>
+	<td><pre class="code3">[1,1]</pre></td>
+</tr>
+<tr>
+	<td><pre class="code3">setElems(array, 3, 5)</pre></td>
+	<td><pre class="code3">[1,1,0,5]</pre></td>
+</tr>
+<tr>
+	<td><pre class="code3">setElems(array, 2, 2, 5)</pre></td>
+	<td><pre class="code3">
+[1,1,0;
+ 0,0,0;
+ 0,0,5]</pre></td>
+</tr>
+</table>
+
+<p class="notes">The size of the returned array is limited. It can be configured in the <a href="https://doc.arcgis.com/en/cityengine/latest/help/get-started-preferences-prt.htm" target="_blank">Procedural Runtime preferences</a> (Default: 100000).</p>
+
+	
+<h2>Related</h2>
+
+<ul>
+	<li><a href="arrayTypes.html">Array types operators</a></li>
+    <li><a href="func_array.html">array initialization</a> function</li>
+	<li><a href="func_size.html"><span class="code_std">size</span></a> function</li>
+    <li><a href="func_nRows.html"><span class="code_std">nRows</span></a> function</li>
+    <li><a href="func_nColumns.html"><span class="code_std">nColumns</span></a> function</li>
+</ul>
+    
+<h2>Examples</h2>
+
+<h3>Enumerate value</h3>
+
+<p class="example">	
+<pre class="code3">
+enumerate(array, value) with( found := array .== value )
+   = setElems(floatArray, found, [1:sum(found)])
+   
+f = enumerate(["a","c","b","a","d","a"], "a") // [1,0,0,2,0,3]
+</pre>
+</p>
+
+<h3>Create diagonal matrix</h3>
+
+<p class="example">	
+<pre class="code3">
+diag(n) = setElems(floatArray[1:n,1:n], [0:n+1:n*n-1], 1)
+
+f = diag(3) // [1,0,0;
+            //  0,1,0;
+            //  0,0,1]
+</pre>
+</p>
+
+<h3>Reshape array</h3>
+
+<pre class="code3">
+reshape(array, rows, cols)
+   = setElems(floatArray[1:rows,1:cols], [0:rows*cols-1], array)
+   
+array = [1,2,3;
+         4,5,6]
+		 
+f = reshape(array, 3, 2) // [1,2;
+                         //  3,4;
+                         //  5,6]
+</pre>
+
+<p class="foot">Copyright &copy;2008-2022 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
+
+</div>
+</body>
+</html>

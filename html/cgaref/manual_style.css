@@ -1,0 +1,1183 @@
+
+
+body,table {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #000000;
+    font-size: .9rem;
+    line-height: 140%;
+
+}
+
+body,html {
+    background-attachment: fixed;
+    background-color: #fff;
+    background-repeat: repeat-x;
+    margin: 0 0 0 10px;
+    padding: 0;
+    text-align: left;
+}
+
+div.help_breadcrumbs {
+	font-size: .75rem;
+}
+
+.content{
+	/*background-image:url(images/esri/body.gif);*/
+    background-repeat:repeat-y;
+    width: 720px;/*960px;*/
+	margin-top:20px;
+	margin-bottom:20px;	
+	/*padding-left:2px;*/
+	padding-right:20px;
+	
+}
+
+
+table.header{
+    padding: 0px;
+    margin: 0px;
+    /*width: 655px;*/
+	width:100%;
+	height:44px;
+    background-color: #000000;
+	/*position:relative; left:-20px;*/
+}
+
+
+
+
+td.helphead_r {
+    /*background: url(images/helpheader_right.jpg) no-repeat right;*/
+    width: 287px;
+    /*height: 59px;*/
+    float: right;
+    background-color: #000000;
+    margin:0px;
+    padding:0px;
+	
+}
+
+td.helphead_l {
+    /*background: url(images/helpheader_left.jpg) no-repeat;*/
+    width: 170px;
+    background-color: #000000;
+    margin:0px;
+    padding:0px;
+    margin-left:15px;
+	background: url(images/esri/header_celogo_wonb.png) no-repeat left;
+	
+    
+/*    height: 59px;*/
+}
+
+div.helplink {
+    /*background: url(images/helpheader_left.jpg) no-repeat;*/
+    width: 170px;	
+    background-color: #000000;
+	    margin:0px;
+    padding:0px;
+    display:none;
+  /*  height: 59px;*/
+}
+
+a div.helplink {
+  color:#CCC;
+
+}
+
+
+h1,h2,h3 {
+    color: #000;
+	color: #014574;
+    margin: 10px 0 5px 0;
+    padding: 0;
+    text-align: left;
+    margin-left: 0px;
+}
+
+h1 {
+    /*margin-top: 30px;*/
+    margin-top: 0px;
+    margin-bottom: 15px;
+	font-size: 1.4rem;
+	
+	height: 30px;
+	background-image:url(images/esri/titleArea.png);
+	color: #FFFFFF;
+	padding: 12px 0 6px 0;
+	font-size: 1.15rem;
+	padding-left:10px;
+	/*position:relative; left:-20px;*/
+}
+
+
+
+
+
+
+h2 {
+    margin-bottom: 12px;
+    font-size: 1.15rem;
+    margin-top: 35px;
+}
+
+h3 {
+    margin-bottom: 10px;
+    font-size: 1rem;
+    margin-top: 26px;
+}
+
+h4 {
+    margin-bottom: 6px;
+    font-size: .9rem;
+    margin-top: 15px;
+}
+
+img {
+    border-width: 0px;
+}
+
+img.icon {
+    border-width: 0px;
+    width: 17px;
+    height: 17px;
+    border-right: 1px solid #CCC;
+    border-bottom: 1px solid #CCC;
+}
+
+img.imgmain {
+    border-width: 0px;
+    width: 460px;
+    text-align: center;
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+    margin-left: 0px;
+    vertical-align: top;
+}
+
+img.full {
+    border-width: 0px;
+    width: 648px;
+    text-align: center;
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+    margin-left: 0px;
+    vertical-align: top;
+}
+
+img.double {
+    border-width: 0px;
+    width: 300px;
+    text-align: center;
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+    margin-left: 0px;
+    vertical-align: top;
+}
+
+ol {
+    margin-top: 10px;
+    margin-left: 35px;
+}
+
+ul {
+    margin-top: 10px;
+    margin-left: 35px;
+    list-style-type: square;
+}
+
+
+ul.morespace li {
+	margin-bottom:15px;
+}
+
+
+dl {
+    margin-top: 10px;
+    list-style-type: square;
+    list-style-position: outside;
+    clear: both;
+    margin-left: 30px;
+    padding: 0;
+    text-align: left;
+}
+
+dt {
+    font-style: italic;
+}
+
+li {
+    margin: 0 0 0 0;
+    margin-bottom: 4px;
+    padding: 0 0 0 0;
+}
+
+li.toc {
+    color: #000;
+    font-size: .9rem;
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+    text-indent: 2px;
+    margin-left: 0px;
+    margin-bottom: 8px;
+    text-align: left;
+    margin-left: 15px;
+
+}
+
+li.twocol_r {
+    color: #000;
+    font-size: .9rem;
+    padding: 0 0 0 0;
+    text-indent: -33px;
+    margin-left: 5px;
+    text-align: left;
+}
+
+li.notes {
+    color: #000;
+    font-size: .9rem;
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+    text-indent: -50px;
+    margin-left: 0px;
+    text-align: left;
+}
+
+p.text,li.text,div.text {
+    color: #000;
+    margin: 10px 0 5px 0;
+    padding: 0;
+    margin-left: 0px;
+    text-align: left;
+}
+
+p.twocol_r {
+    color: #000;
+    font-size: .9rem;
+    margin: -0px 0 0px 0;
+    padding: 0;
+    margin-left: 5px;
+    text-align: left;
+}
+
+.center {
+    text-align: center;
+}
+
+pre.text {
+    margin: 10px 0 5px 0;
+    padding: 0;
+    margin-left: 5px;
+    text-align: left;
+}
+
+.inlinedcode {
+    font-family: "Courier New", Courier, monospace;
+}
+
+.code1 {
+    color: #000;
+    font-family: "Courier New", Courier, monospace;
+    font-size: .75rem;
+    margin-left: 5px;
+    font-weight: 700;
+    text-align: left;
+    white-space: pre;
+}
+
+p.code2 {
+    color: #000;
+    font-family: "Courier New", Courier, monospace;
+    font-size: .75rem;
+    margin-left: 5px;
+    font-weight: 700;
+    text-align: left;
+}
+
+pre.code3 {
+	font-family: "Courier New", Courier, monospace;
+	font-size: .75rem;
+	margin-left: 25px;
+	font-weight: 700;
+	text-align: left;
+}
+
+
+/* begin trying to cleanup code styles */
+
+.code_std, .code_ind {
+    font-family: "Courier New", Courier, monospace;
+    font-size: .75rem;
+    font-weight: 700;
+}
+.code_ind {
+	margin-left:25px;
+}
+
+/* end of trying to cleanup code styles */
+
+.code3border {
+    color: #000;
+    font-family: "Courier New", Courier, monospace;
+    font-size: .75rem;
+    margin-left: 25px;
+    font-weight: 700;
+    text-align: left;
+    border:1px solid #aaa;
+    padding:3px;
+	background-color:#eee;
+}
+
+.codecgaborder {
+    color: #000;
+    font-family: "Courier New", Courier, monospace;
+    margin-left: 25px;
+    font-weight: 700;
+    text-align: left;
+    border:1px solid #aaa;
+    padding:3px;
+	background-color:#F7F7F7;
+	background-image:url(images/icons/cga.gif);
+	background-position:top right;
+	background-repeat:no-repeat;
+}
+
+
+
+.codepyborder {
+    color: #000;
+    font-family: "Courier New", Courier, monospace;
+    font-size: .75rem;
+    margin-left: 25px;
+    font-weight: 700;
+    text-align: left;
+    border:1px solid #aaa;
+    padding:3px;
+	background-color:#eee;
+	background-image:url(manual/python/images/pythonlogo_21.png);
+	background-position:top right;
+	background-repeat:no-repeat;
+}
+
+
+
+
+.cga_op {
+    color: #000;
+    font-family: "Courier New", Courier, monospace;
+    font-size: .75rem;
+    font-weight: 900;
+    text-align: left;
+}
+
+.cga_keyword {
+    color: #000;
+    font-family: "Courier New", Courier, monospace;
+    font-size: .75rem;
+    font-weight: 900;
+    text-align: left;
+}
+
+.cga_opparam {
+    color: #000;
+    font-family: "Courier New", Courier, monospace;
+    font-size: .75rem;
+    font-weight: normal;
+    text-align: left;
+    font-style: italic;
+}
+
+.cga_value {
+    color: #000;
+    font-family: "Courier New", Courier, monospace;
+    font-size: .75rem;
+    font-weight: normal;
+    text-align: left;
+    font-style: italic;
+}
+
+
+.cga_rule {
+    font-style: italic;		
+}
+
+.cga_comment{color:#3f7f5f}
+.cga_commentmulti{color:#3f5fc0}
+
+
+
+p.picdesc {
+    vertical-align: top;
+    color: #666;
+    font-size: .75rem;
+    font-weight: 700;
+    margin: -10 100 0 95;
+    padding: 0 0 0 0;
+    text-align: left;
+}
+
+p.picdescdouble {
+    vertical-align: top;
+    color: #666;
+    font-size: .75rem;
+    font-weight: 700;
+    margin: 5 5 0 5;
+    padding: 0 0 0 0;
+    text-align: left;
+}
+
+.piccaptioncentered {
+    vertical-align: top;
+    color: #666;
+    font-size: .75rem;
+    font-weight: 700;
+    margin: 10 10 40 7;
+    padding: 0 0 0 0;
+    text-align: center;
+}
+.piccaptioncentered img{
+    margin-bottom:5px;
+}
+
+.caption {
+    vertical-align: top;
+    color: #666;
+    font-size: .75rem;
+    font-weight: 700;
+    margin: 0;
+    padding: 0 0 0 0;
+}
+
+
+.piccaptionleft {
+    vertical-align: top;
+    color: #666;
+    font-size: .75rem;
+    font-weight: 700;
+    margin: 10 10 0 7;
+    padding: 0 0 0 0;
+    text-align: left;
+}
+
+p.picintrodesc {
+    vertical-align: top;
+    font-size: .65rem;
+    font-weight: normal;
+    text-align: left;
+    color: #666;
+    margin: 5px 5px 0px 2px;
+}
+
+p.desc {
+    color: #666;
+    font-size: .65rem;
+    font-weight: lighter;
+    margin: 0 0 0 0;;
+    padding: 0 30 0 0;
+    margin-left: 5px;
+}
+
+p.pagetitle {
+    color: #666;
+    font-size: .85rem;
+    font-weight: 700;
+    margin-top: 0px;
+    margin-bottom: 15px;
+    margin-left: 5px;
+    text-align: left;
+}
+
+div.pagetitle {
+    color: #666;
+    font-size: .85rem;
+    font-weight: 700;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    margin-left: 5px;
+    text-align: left;
+}
+
+p.intro {
+    text-align: left;
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+    margin-left: 5px;
+}
+
+p.visible {
+    color: #000;
+    /*color:#FFF;*/
+    text-align: left;
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+    margin-left: 5px;
+}
+
+pre {
+    font-family: "Courier New", Courier, monospace;
+    font-size: .75rem;
+    font-weight: 400;
+}
+
+b.w {
+    color: ffffff;
+    font-size: .85rem;
+    font-weight: 700;
+}
+
+table.main {
+    width: 100%;
+    height: 100%;
+}
+
+table.bordered {
+	 width: 100%;
+	margin:0px;
+	padding:0px;
+	background-color:#CCC;
+}
+
+table.bordered td, table.bordered tr{
+	text-align:left;
+	background-color:#FFF;
+	margin:1px;
+	padding:4px;
+}
+
+
+
+table.norm {
+    padding: 0;
+    margin: 0;
+    width: 648px;
+    background-color: #FFFFFF;
+}
+
+table.full {
+    padding: 0px;
+    margin: 0px;
+    width: 100%;
+    background-color: #FFFFFF;
+}
+
+table.cga {
+    margin: 2px;
+    width: 100%;
+    border-width: 0px;
+    border-spacing: 0px;
+}
+
+table.cga td {
+    border-width: 1px 1px 1px 1px;
+    padding: 5px 5px 5px 5px;
+    border-style: solid;
+    border-color: #e0e0e0;
+    background-color: white;
+}
+
+table.twocol {
+    padding: 0px;
+    width: 100%;
+    margin-left: 5px;
+}
+
+td.twocol_l {
+    padding: 0px;
+    width: 140px;
+    vertical-align: top;
+    text-align: left;
+}
+
+td.twocol_r {
+    width: 450px;
+    padding: 0 0 0 0;
+    margin: 0 0 0 0;
+    vertical-align: top;
+    text-align: left;
+}
+
+
+col.leftcol{
+	background-color:eee;
+	font-style:italic;
+	width:200px;
+}
+	
+td.overview {
+    padding: 0px;
+    width: 25%;
+    vertical-align: top;
+    text-align: left;
+}
+
+tr.examples {
+    margin: 0 0 0 0;
+}
+
+.notes {
+    padding: 5px;
+    width: 98%;
+    margin-left: 5px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #ccc8c8;
+    background: #fffae7 url(images/new_icon_16px.png) no-repeat top left;
+    text-indent: 20px;
+}
+
+.info {
+    padding: 0px;
+    width: 98%;
+    margin-left: 5px;
+    background: #ffffff url(images/info_icon_16px.png) no-repeat top left;
+    text-indent: 20px;
+}
+
+
+.notesnopic {
+    padding: 3px;
+    padding-bottom: 6px;
+    width: 98%;
+    margin-left: 5px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #ccc8c8;
+    background: #fffae7
+}
+
+td.notes_l {
+    padding: 0 0 0 0;
+    width: 40px;
+    vertical-align: top;
+    text-align: left;
+}
+
+td.notes_r {
+    padding: 20 0 0 0;
+    width: 100%;
+    vertical-align: top;
+    text-align: left;
+}
+
+td.twocol_r {
+    width: 450px;
+    padding: 0 0 0 0;
+    margin: 0 0 0 0;
+    vertical-align: top;
+    text-align: left;
+}
+
+td.toccontent {
+    padding: 0px;
+    margin: 0px;
+    width: 33%;
+    height: 245px;
+    background-color: #FFFFFF;
+    vertical-align: top;
+    text-align: left;
+    margin-left: 15px;
+}
+
+td.featurelist {
+    padding: 0px;
+    margin-left: 15px;
+    /*width:150px;*/
+    background-color: #FFFFFF;
+    vertical-align: top;
+    text-align: left;
+}
+
+td.featurelist_headl {
+    padding: 0px;
+    margin-left: 15px;
+    width: 150px;
+    background-color: #FFFFFF;
+    vertical-align: top;
+    text-align: left;
+    font-size: .9rem;
+    font-weight: bold;
+}
+
+td.featurelist_headr {
+    padding: 0px;
+    margin-left: 15px;
+    width: 400px;
+    background-color: #FFFFFF;
+    vertical-align: top;
+    text-align: left;
+    font-size: .9rem;
+    font-weight: bold;
+}
+
+td.featurelist_l {
+    padding: 0px;
+    margin: 0px;
+    width: 150px;
+    background-color: #FFFFFF;
+    vertical-align: top;
+    text-align: left;
+    font-size: .75rem;
+    font-weight: normal;
+}
+
+td.featurelist_r {
+    padding: 0px;
+    margin: 0px;
+    width: 500px;
+    background-color: #FFFFFF;
+    vertical-align: top;
+    text-align: left;
+    font-size: .75rem;
+    font-weight: normal;
+}
+
+
+
+div.vspacer {
+    border: 1px solid;
+    border-color: #FFF;
+    width: 100%;
+    height: 20px;
+}
+
+td.text {
+    vertical-align: top;
+    text-align: left;
+    margin-left: 5px;
+}
+
+th { 
+	text-align:left;
+	background-color:#ccc;
+	font-weight:bold;
+}
+
+th.params {
+    background-color: #cccccc;
+    text-align: left;
+}
+
+th.params_l {
+    background-color: #cccccc;
+    text-align: left;
+    width: 225px;
+}
+
+th.params_m {
+    background-color: #cccccc;
+    text-align: left;
+    width: 125px;
+}
+
+th.params_r {
+    background-color: #cccccc;
+    text-align: left;
+    width: 200px;
+}
+
+tr.params {
+    background-color: #eeeeee;
+    text-align: left;
+}
+
+tr.index {
+    background-color: #DDDDDD;
+    text-align: left;
+}
+
+td.index {
+    background-color: #DDDDDD;
+    vertical-align: top;
+    text-align: left;
+}
+
+td.params {
+    background-color: #FFFFFF;
+    text-align: left;
+}	
+
+td{
+    vertical-align: top;
+}
+
+td.text {
+    vertical-align: top;
+    text-align: left;
+    margin-left: 5px;
+}
+
+td.term {
+    color: #036;
+    font-size: .75rem;
+    font-weight: 700;
+}
+
+.menu {
+    background: url(images/cursor.png) left no-repeat;
+    padding-left: 16px;
+    padding-right: 3px;
+    background-color: #eeeeee;
+    font-style: italic;
+}
+
+.folder {
+    background: url(images/open.png) left no-repeat;
+    padding-left: 16px;
+    padding-right: 3px;
+    background-color: #eeeeee;
+    font-style: italic;
+}
+
+.file, .pyfile {
+    background: url(images/file2.png) left no-repeat;
+    padding-left: 16px;
+    padding-right: 3px;
+    background-color: #eeeeee;
+    font-style: italic;
+}
+
+.cgafile {
+    background: url(images/icons/cga.gif) left no-repeat;
+    padding-left: 16px;
+    padding-right: 3px;
+    background-color: #eeeeee;
+    font-style: italic;
+}
+
+.cejfile {
+    background: url(images/icons/cej.gif) left no-repeat;
+    padding-left: 16px;
+    padding-right: 3px;
+    background-color: #eeeeee;
+    font-style: italic;
+}
+
+.ceprjfile {
+    background: url(images/icons/ce_prj.gif) left no-repeat;
+    padding-left: 16px;
+    padding-right: 3px;
+    background-color: #eeeeee;
+    font-style: italic;
+}
+
+.pyfile {
+    background: url(images/icons/python.gif) left no-repeat;
+    padding-left: 16px;
+    padding-right: 3px;
+    background-color: #eeeeee;
+    font-style: italic;
+}
+
+
+
+.layer {
+    background: url(images/layerarrow.png) left no-repeat;
+    padding-left: 12px;
+    padding-right: 3px;
+    background-color: #eeeeee;
+}
+
+
+.key {
+    background-color: #eeeeee;
+    font-style: italic;
+    border: 1px solid #888888;
+    padding-left: 3px;
+    padding-right: 5px;
+}
+
+.block {
+    color: #036;
+    font-size: .85rem;
+    margin-left: 30px;
+}
+
+.code {
+    color: #000;
+    font-family: "Courier New", Courier, monospace;
+    font-size: .75rem;
+    font-weight: 400;
+    margin: 5px 0 0 10px;
+}
+
+.grey {
+    color: cccccc;
+    font-size: .75rem;
+}
+
+.greybg{
+	background-color:#ccc;	
+}
+
+.brightgreybg{
+	background-color:#ddd;	
+}
+
+
+.head {
+    color: ffffff;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.ital {
+    font-size: .75rem;
+    font-style: italic;
+}
+
+.desc {
+    color: #666;
+    font-size: .8rem;
+    font-weight: lighter;
+    margin: 0 0 0 0;;
+    padding: 0 30 0 0;
+    margin-left: 5px;
+}
+
+.XXXpicdesc {
+    color: #666;
+    font-size: .8rem;
+    font-weight: lighter;
+    margin: 20 0 0 0;;
+    padding: 0 180 0 0;
+    margin-left: 5px;
+    text-align: left;
+}
+
+.foot {
+    font-size: .65rem;
+	padding:10px 0px 0px 20px;
+/*    margin-left: 5px;
+    margin-top: 70px;
+    text-align: left;*/
+
+
+
+	height: 19px;
+	/*background-image:url(images/esri/footer.gif);*/
+	background-position: left bottom;
+}
+
+.norm {
+    color: #333;
+    font-size: .8rem;
+    font-weight: lighter;
+    margin: 0 0 0 0;
+    padding: 15 0 15 0;
+}
+
+.normw {
+    color: ffffff;
+    font-size: .9rem;
+    font-weight: 400;
+}
+
+span.code {
+    color: #000;
+    font-family: "Courier New", Courier, monospace;
+    font-size: .75rem;
+    margin-left: 5px;
+    font-weight: 700;
+    text-align: left;
+}
+
+span.codelight {
+	color: #000;
+	font-family: "Courier New", Courier, monospace;
+	font-size: .75rem;
+	margin-left: 0px;
+	font-weight: normal;
+	text-align: left;
+}
+
+span.codefilename {
+    color: #000;
+    font-family: "Courier New", Courier, monospace;
+    font-style: italic;
+    font-weight: 400;
+    letter-spacing: 0;
+    margin: 0;
+    vertical-align: baseline;
+}
+
+span.codeparams {
+    color: #000;
+    font-family: "Courier New", Courier, monospace;
+    font-weight: 400;
+    letter-spacing: 0;
+    margin: 0;
+    vertical-align: baseline;
+}
+
+
+a,a:link,a:active,a:visited {
+	color: #007c00;
+    font-weight: normal;
+    text-decoration: underline;
+}
+
+a:hover {
+    /*background-color:#666;*/
+    color: #000;
+    font-weight: normal;
+    /*text-decoration: none;*/
+}
+
+
+a.black:hover,a.black:active {
+    background-color: #EEEEEE;
+    color: #0A0A0A;
+    font-size: .8rem;
+    font-weight: normal;
+    text-decoration: underline;
+    font-style: italic;
+}
+
+a.black:link,a.black:visited {
+    color: #080808;
+    font-size: .8rem;
+    text-decoration: underline;
+}
+/*
+a.normw:hover,a.normw:active {
+    background-color: #EEEEEE;
+    color: #0A0A0A;
+    font-weight: normal;
+    text-decoration: underline;
+    font-style: italic;
+}
+
+a.normw:link,a.normw:visited {
+    color: #0A0A0A;
+    font-size: .9rem;
+    font-weight: normal;
+    text-decoration: underline;
+}
+*/
+
+/* added by andi */
+
+.todo {
+    color: red;
+    font-weight: bold;
+}
+
+.red {
+    color: #ff0000;
+}
+
+.tuto_steps li {
+    list-style-image: url(images/tuto_step.png);
+    margin-bottom: 10px;
+    list-style-position: outside;
+    margin-left: 15px;
+}
+
+.leftfloater {
+    float: left;
+}
+
+.rightfloater {
+    float: right;
+}
+
+.clear {
+    clear: both;
+}
+
+.imgcontainer {
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+.right {
+    float: right;
+    margin: 4px 0px 6px 8px;
+}
+
+.left {
+    float: left;
+    margin: 4px 8px 6px 0px;
+}
+
+.imagebox {
+    border: 1px solid #CCC;
+    padding: 1px;
+    margin-bottom: 0px;
+    width: auto;
+}
+
+p {
+    clear: both;
+}
+
+.button {
+    background-color: #eeeeee;
+    border-top: 1px solid #ffffff;
+    border-left: 1px solid #ffffff;
+    border-bottom: 1px solid #aaaaaa;
+    border-right: 1px solid #aaaaaa;
+    margin-left: 2px;
+    margin-right: 2px;
+    padding: 1px 3px 1px 5px;
+}
+
+
+.comment{
+	background-color: #225293;
+	color:#ffffff;
+	padding:5px;
+	margin-top:150px;
+}
+textarea.showcode{
+	width:500px:
+	height:20px;
+	border:1px solid red;
+}
+
+
+.erdz-api-table {
+	width             : 100%; 
+	margin-top        : 15px; 
+	border            : 1px solid #ddd; 
+	margin-bottom     : 2px; 
+	border-spacing    : 0px;
+}
+
+.erdz-api-table .tr {
+	border            : 0px;
+}
+
+.erdz-api-table .erdz-api-proto{
+	background-color  : #eee; 
+	font-size         : 13px;
+}
+
+.erdz-api-table .erdz-api-text {
+	color             : #4c555a; 
+	font-size         : 13px; 
+	text-align        : justify; 
+	padding           : 5px 15px 5px 50px;
+}
+
+.erdz-api-table .erdz-api-example {
+	color             : #4c555a; 
+	font-size         : 13px; 
+	text-align        : justify; 
+	padding           : 5px 15px 5px 50px;
+}
+
+.erdz-api-table .erdz-api-example ul {
+	list-style-type   : none;
+}
+
+.deprecation-message {
+	color: red;
+	font-size: 1.3rem;
+}
+
+.deprecation-message-menu {
+	font-style: italic;
+}

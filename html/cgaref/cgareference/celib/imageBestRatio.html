@@ -1,0 +1,94 @@
+<html>
+
+<head>
+	<title>imageBestRatio</title>
+    <link rel="stylesheet" href="../../manual_style.css" type="text/css" />
+</head>
+
+<body>
+<div class="content">
+
+<!-- Don't touch -->
+
+<table summary="" class="header">
+	<tr>
+		<td align="left" class="helphead_l"><a href="../../toc.html"><div class="helplink">&nbsp;</div></a></td>
+		<td align="right" class="helphead_r"></td>
+	</tr>
+</table>
+
+<h1>imageBestRatio</h1>
+
+<h2>Syntax</h2>
+
+<p class="code2"><span class="codelight">string</span> imageBestRatio(<span class="cga_opparam">searchQuery</span>, <span class="cga_opparam">axesRatio</span>)</p>
+
+<h2>Parameters</h2>
+
+<ul>
+	<li><span class="cga_opparam">searchQuery</span> (string)<br>Search query to apply on list of all files in the workspace. See <a class="normw" href="../func_fileSearch.html">fileSearch / filesSearch</a> for details about the syntax.</li>
+	<li><span class="cga_opparam">axesRatio</span> (string)
+	<table cellspacing="5">
+		<tr><td width="40%"><span class="codelight">"xy"</span>, <span class="codelight">"xz"</span>, <span class="codelight">"yx"</span>, <span class="codelight">"yz"</span>, <span class="codelight">"zx"</span>, <span class="codelight">"zy"</span></td><td>Defines which scope axes ratio is used as a reference.</td></tr>
+	</table>
+</ul>
+
+<h2>Returns</h2>
+
+<p>Returns texture with best ratio match (according to <span class="cga_opparam">axesRatio</span>).</p> 
+
+<h2>Description</h2>
+
+<p>This function returns the texture with the best ratio match, from the files specified by <span class="cga_opparam">searchQuery</span>, according to the specified combination of axes.</p>
+
+<p class="notes">Note: In case multiple files share the best ratio, a random file is returned among those </p>
+
+<h2>Related</h2>
+
+<ul>
+    <li><a href="assetApproxRatio.html"><span class="code_std">assetApproxRatio</span></a> function</li>
+    <li><a href="assetApproxSize.html"><span class="code_std">assetApproxSize</span></a> function</li>
+    <li><a href="assetBestRatio.html"><span class="code_std">assetBestRatio</span></a> function</li>
+    <li><a href="assetBestSize.html"><span class="code_std">assetBestSize</span></a> function</li>
+    <li><a href="assetFitSize.html"><span class="code_std">assetFitSize</span></a> function</li>
+    <li><a href="fileBasename.html"><span class="code_std">fileBasename</span></a> function</li>
+    <li><a href="fileDirectory.html"><span class="code_std">fileDirectory</span></a> function</li>
+    <li><a href="fileExtension.html"><span class="code_std">fileExtension</span></a> function</li>
+    <li><a href="fileName.html"><span class="code_std">fileName</span></a> function</li>
+    <li><a href="fileRandom.html"><span class="code_std">fileRandom</span></a> function</li>
+    <li><a href="imageApproxRatio.html"><span class="code_std">imageApproxRatio</span></a> function</li>
+</ul>
+
+<h2>Examples</h2>
+
+<h3>Setting up texturing based on the best pixel ratio</h3>
+
+<p>The goal is to set up the texturing, depending on the best pixel ratio of the list of desired textures. The following textures all have different resolutions.</p>
+
+<img src="images/imageRatios.jpg"></img>
+
+<pre class="code3">
+Lot -->
+    s('0.9,'0.9,'0.9)
+    center(xz)
+    RecursiveSplit
+
+RecursiveSplit -->
+    case scope.sx >= 1.5 && scope.sz >= 1.5:
+        split(x) { ~scope.sx/3 : split(z) { ~scope.sz/3 : RecursiveSplit }* }*
+    else: Texture
+
+Texture -->
+    setupProjection(0, scope.xz, scope.sx, -scope.sz)
+    projectUV(0)
+    texture(imageBestRatio("/myProject/assets/textures/*.jpg", "xz"))
+</pre>
+
+<img src="images/imageBestRatio.jpg"></img>
+
+<!-- FOOTER -->
+<p class="foot">Copyright &copy;2008-2022 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
+
+</div>
+</body>
+</html>

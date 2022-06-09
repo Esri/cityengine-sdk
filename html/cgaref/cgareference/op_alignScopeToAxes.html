@@ -1,0 +1,108 @@
+<html>
+
+<head>
+	<title>alignScopeToAxes Operation</title>
+	<link rel="stylesheet" href="../manual_style.css" type="text/css" />
+</head>
+
+<body>
+<div class="content">
+
+<!-- HEADER (use only on bookchapters) -->
+
+<table summary="" class="header">
+	<tr>
+		<td align="left" class="helphead_l"><a href="../toc.html"><div class="helplink">&nbsp;</div></a></td>
+		<td align="right" class="helphead_r"></td>
+	</tr>
+</table>
+
+<!-- CONTENT -->
+
+<h1>alignScopeToAxes operation</h1>
+
+<h2>Syntax</h2>
+
+<p class="code2"><span class="cga_op">alignScopeToAxes</span>()</p>
+<p class="code2"><span class="cga_op">alignScopeToAxes</span>(<span class="cga_opparam">alignAxes</span>)</p>
+
+<h2>Parameters</h2>
+
+<ul>
+	<li><span class="cga_opparam">alignAxes</span> (selector)
+	<table cellspacing="5">
+		<tr><td width="53%"><span class="codelight">x</span>, <span class="codelight">y</span>, <span class="codelight">z</span>, <span class="codelight">world.x</span>, <span class="codelight">world.y</span>, <span class="codelight">world.z</span>, <span class="codelight">world.xyz</span></td><td>The world coordinate axis/axes to align to.</td></tr>
+		<tr><td><span class="codelight">object.x</span>, <span class="codelight">object.y</span>, <span class="codelight">object.z</span>, <span class="codelight">object.xyz</span></td><td>The object coordinate axis/axes to align to.</td></tr>
+	</table>
+	</li>
+</ul>
+
+<h2>Description</h2>
+
+<p>The <span class="cga_keyword">alignScopeToAxes</span> operation manipulates the <span class="cga_keyword">scope</span>, the <span class="cga_keyword">pivot</span> and the <span class="cga_keyword">geometry</span> attributes such that the <span class="cga_keyword">scope</span>'s axes are parallel to the corresponding axis/axes selected with <span class="cga_opparam">alignAxes</span> selector. If no <span class="cga_opparam">alignAxes</span> selector is specified, then <span class="codelight">world.xyz</span> is used. After this operation, the <span class="cga_keyword">scope.r</span> and the <span class="cga_keyword">scope.t</span> vectors are zero and the geometry is projected to the new <span class="cga_keyword">scope</span> (i.e. stays at the same place in world coordinates).
+<br>
+If <span class="cga_opparam">alignAxes</span> selects a single axis, the second axis is created as follows:
+<table cellspacing="5">
+	<tr><td width="25%"><span class="codelight">world.x, object.x</span></td><td>The z axis is projected onto the world/object coordinates yz-plane.</td></tr>
+	<tr><td><span class="codelight">world.y, object.y</span></td><td>The x axis is projected to the world/object coordinates xz-plane.</td></tr>
+	<tr><td><span class="codelight">world.z, object.z</span></td><td>The x axis is then projected to the world coordinates xy-plane.</td></tr>
+</table>
+The third axis is created such that the axes form a right hand system.
+</p>
+
+<h2>Related</h2>
+<ul>
+	<li><a class="normw" href="op_alignScopeToGeometry.html">alignScopeToGeometry operation</a></li>
+	<li><a class="normw" href="op_alignScopeToGeometryBBox.html">alignScopeToGeometryBBox operation</a></li>
+	<li><a class="normw" href="op_setPivot.html">setPivot operation</a></li>
+	<li><a class="normw" href="attr_scope.html">scope attribute</a></li>
+	<li><a class="normw" href="attr_pivot.html">pivot attribute</a></li>
+</ul>
+
+<h2>Examples</h2>
+  
+  <table summary="" class="twocol">
+    <tr>
+      <td class="twocol_l"></br>
+        <img src="images/alignScopeToAxes-a.png" alt="initial scene" width="298" > </td>
+      <td><pre class="code3">
+A--> 
+   t(5,0,4) s(8,24,8) r(10,20,30)
+   i("boxnewsredlowress.obj")</pre>
+        <pre class="code">&nbsp;</pre>
+        <em>The initial scene: The pivot (fat) is in the origin; the scope (yellow) contains a translation and a rotation. </em></td>
+    </tr>
+    <tr>
+      <td class="twocol_l"></br>
+        <img src="images/alignScopeToAxes-b.png" alt="after alignScopeToSxes()" width="298" > </td>
+      <td><pre class="code3">
+A--> 
+   t(5,0,4) s(8,24,8) r(10,20,30)
+   i("boxnewsredlowress.obj")
+   alignScopeToAxes()
+  <br>
+  </pre>
+        <em>Applying <span class="codelight">alignScopeToAxes</span>
+        removes the scope translation and rotation, rotates the pivot such that all pivot axes are parallel to the world coordinate axes and projects the geometry to the new scope such that it stays at the same place in world coordinates.
+        Note that the pivot lies at a corner of the bounding box (which is the new scope). </em></td>
+    </tr>
+    <tr>
+      <td class="twocol_l"></br>
+        <img src="images/alignScopeToAxes-c.png" alt="after alignScopeToAxes(y)" width="298" > </td>
+      <td><pre class="code3">
+A--> 
+   t(5,0,4) s(8,24,8) r(10,20,30)
+   i("boxnewsredlowress.obj")
+   alignScopeToAxes(y)
+   
+	</pre>
+        <em>Using the y-axis variant only aligns the pivot to the y-axis. </em>
+    </tr>
+  </table>
+  <!-- FOOTER -->
+  <p class="foot"></p>
+  <p class="foot">Copyright &copy;2008-2022 Esri R&amp;D Center Zurich. All rights reserved.</p>
+  <!-- END CENTERED CONTENT -->
+</div>
+</body>
+</html>

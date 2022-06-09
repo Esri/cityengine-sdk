@@ -1,0 +1,168 @@
+<html>
+
+<head>
+	<title>setbackPerEdge Operation</title>
+	<link rel="stylesheet" href="../manual_style.css" type="text/css" />
+</head>
+
+<body>
+<div class="content">
+
+<table summary="" class="header">
+	<tr>
+		<td align="left" class="helphead_l"><a href="../toc.html"><div class="helplink">&nbsp;</div></a></td>
+		<td align="right" class="helphead_r"></td>
+	</tr>
+</table>
+
+<h1>setbackPerEdge operation</h1>
+
+<h2>Syntax</h2>
+
+<p class="code2"><span class="cga_op">setbackPerEdge</span>(<span class="cga_opparam">distance</span>) { <span class="cga_opparam">selector</span> <span class="cga_opparam">operator</span> <span class="cga_opparam">operations</span> | ... }</p>
+<p class="code2"><span class="cga_op">setbackPerEdge</span>(<span class="cga_opparam">distance</span>, <span class="cga_opparam">uvSet</span>) { <span class="cga_opparam">selector</span> <span class="cga_opparam">operator</span> <span class="cga_opparam">operations</span> | ... }</p>
+
+<h2>Parameters</h2>
+
+<ul>
+	<li><span class="cga_opparam">distance</span> (float)<br>An expression that specifies the setback distance. It is evaluated per face edge.</li>
+	<li><span class="cga_opparam">uvSet, selector, operator, operations</span><br>All other parameters are the same as for the  <a class="cga_op" href="op_setback.html#params">setback</a> operation.</li>
+</ul>
+
+<h2>Description</h2>
+
+<p>The <span class="codelight">setbackPerEdge</span> operation is similar to the <a class="cga_op" href="op_setback.html#params">setback</a> operation. The only difference is that the setback <span class="cga_opparam">distance</span> is evaluated several times and individually for each face edge. Shared edges are considered separately for each face. Therefore, a different distance can be set for each edge.</p>
+
+<p>At the time <span class="cga_opparam">distance</span> is evaluated the current shape equals to one of the respective face edge components. More precisely, the current geometry, pivot and scope equals to the face edge component of the <a class="cga_op" href="op_comp.html">comp</a> operation (with the <span class="cga_opparam">compSelector</span> set to <span class="codelight">fe</span>). Furthermore <a class="normw" href="attr_comp.html">comp attributes</a> can be accessed.</p>
+
+<p class="notes">Note that<br>
+<span class="codelight">setbackPerEdge(distance) { selector operator operations | ... }</span><br>
+is a shortcut for<br>
+<span class="codelight">setback( comp(fe) { all : distance } ) { selector operator operations | ... }</span><br>
+This means internally an array is constructed by the <a class="cga_op" href="func_comp.html">comp</a> function and passed to the <a class="cga_op" href="op_setback.html">setback</a> operation.
+</p>
+
+<h2>Related</h2>
+
+<ul>
+<li><a class="normw" href="op_setback.html">setback operation</a></li>
+<li><a class="normw" href="op_setbackToArea.html">setbackToArea operation</a></li>
+<li><a class="normw" href="op_comp.html">comp operation</a></li>
+<li><a class="normw" href="attr_comp.html">comp attribute</a></li>
+<li><a class="normw" href="func_comp.html">comp function</a></li>
+<li><a class="normw" href="func_edgeAttr.html">Edge attribute functions</a></li>
+</ul>
+                
+<h2 id="examples">Examples</h2>
+
+<h3>setback vs. setbackPerEdge</h3>
+
+<table summary="" class="twocol">
+<tr>
+	<td class="twocol_l"><br><img src="images/setbackPerEdge-vs-setback.png" width="298" alt="setbackPerEdge-vs-setback"/></td>
+	<td><pre class="code3">
+Lot1 --> setback(rand(5))
+          { front = Red | back = Blue | left = Green }
+
+Lot2 --> setbackPerEdge(rand(5))
+          { front = Red | back = Blue | left = Green }
+	</pre>
+	<em>This simple example illustrates the difference between <a class="cga_op" href="op_setback.html">setback</a> and <span class="codelight">setbackPerEdge</span>. While for <a class="cga_op" href="op_setback.html">setback</a> the distance is evaluated once and assigned the same for all edges, <span class="codelight">setbackPerEdge</span> re-evaluates the distance for each edge.</em>
+	</td>
+</tr>
+</table>
+
+<h3>Using comp shape attributes</h3>
+
+<table summary="" class="twocol">
+<tr>
+	<td class="twocol_l"><br><img src="images/setbackPerEdge-compattr-1.png" width="298" alt="setbackPerEdge-compattr-1"/></td>
+	<td><pre class="code3">
+const dists = [3,2,1,0,0,1,2,3]
+
+dist = dists[comp.index]
+
+Lot --> setbackPerEdge(dist) { all = Green }
+	</pre>
+	<em>The <a class="cga_op" href="attr_comp.html">comp.index</a> attribute is used to extract the distance from an ordered float array. Note that indexing is done in face-edge order (first edges are highlighted in orange). The first distance is applied on the first edge of the first face (left) and the 5th distance is applied on the first edge of the second face (right). Also note that <span class="codelight">dist</span> is a function that is evaluated several times. If <span class="codelight">dist</span> was an <span class="codelight">attr</span> or <span class="codelight">const</span> it would only be evaluated once at rule start with <a class="cga_op" href="attr_comp.html">comp.index</a> being <span class="codelight">-1</span>.<br>The same result can be achieved by</em>
+	<pre class="code3">
+Lot --> setback(comp(fe){all:dist}) { all = Green }
+Lot --> setback(dists)              { all = Green }
+	</pre>
+	</td>
+</tr>
+</table>
+
+<h3>Using comp shape geometry</h3>
+
+<table summary="" class="twocol">
+<tr>
+	<td class="twocol_l"><br><img src="images/setbackPerEdge-compgeo-1.png" width="298" alt="setbackPerEdge-compgeo-1"/></td>
+	<td><pre class="code3">
+	
+	
+Lot --> setbackPerEdge(scope.sx / 7.5) { all = Green }
+	</pre>
+	<em>Setbacks are applied relative to edge lengths.</em>
+	</td>
+</tr>
+</table>
+<br>
+<table summary="" class="twocol">
+<tr>
+	<td class="twocol_l"><br><img src="images/setbackPerEdge-compgeo-2.png" width="298" alt="setbackPerEdge-compgeo-2"/></td>
+	<td><pre class="code3">
+	
+dist = case minimumDistance(inter, "Block") < 3 : 2
+       else : 0
+         
+Lot1 --> setbackPerEdge(dist)
+           { all = Green | remainder = extrude(1) Blue }
+	</pre>
+	<em>Also <a href="cga_context.html">context and occlusion queries</a> can be used to specify distances.</em>
+	</td>
+</tr>
+</table>
+<br>
+<table summary="" class="twocol">
+<tr>
+	<td class="twocol_l"><br><img src="images/setbackPerEdge-compgeo-3.png" width="298" alt="setbackPerEdge-compgeo-3"/></td>
+	<td><pre class="code3">
+
+dist(orientation) = case orientation == "park"   : 1
+                    case orientation == "street" : 7
+                    case orientation == "lot"    : 0
+                    case orientation == "back"   : 3
+                    else                         : 0
+
+dist = dist(edgeAttr.getString("orientation"))
+
+Lot --> setbackPerEdge(dist) { all = Green }
+	</pre>
+	<em>In this example edge attributes are sampled and used to set distances.</em>
+	</td>
+</tr>
+</table>
+
+<h3>setbackPerEdge as setback</h3>
+
+<table summary="" class="twocol">
+<tr>
+	<td class="twocol_l"><br><img src="images/setbackPerEdge-array.png" width="298" alt="setbackPerEdge-array"/></td>
+	<td><pre class="code3">
+	
+	
+debug = print(comp.index+5)
+
+Lot --> setbackPerEdge(debug) { front = Green }
+	</pre>
+	<em>This example illustrates the fact that <span class="codelight">setbackPerEdge</span> internally evaluates the distance for each edge, constructs an array and passes it to <a class="cga_op" href="op_setback.html">setback</a>. Although only one edge is selected by the <span class="codelight">front</span> selector the <span class="codelight">debug</span> function is evaluated 4 times, once for each edge.</em>
+	</td>
+</tr>
+</table>
+
+<p class="foot">Copyright &copy;2008-2022 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
+
+</div>
+</body>
+</html>

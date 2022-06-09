@@ -1,0 +1,110 @@
+<html>
+
+<head>
+<title>resetMaterial Operation</title>
+<link rel="stylesheet" href="../manual_style.css" type="text/css" />
+</head>
+
+<body>
+<div class="content">
+
+<table summary="" class="header">
+	<tr>
+		<td align="left" class="helphead_l"><a href="../toc.html"><div class="helplink">&nbsp;</div></a></td>
+		<td align="right" class="helphead_r"></td>
+	</tr>
+</table>
+
+<h1>resetMaterial operation</h1>
+
+<h2>Syntax</h2>
+
+<p class="code2"><span class="cga_op">resetMaterial()</span></p>
+<p class="code2"><span class="cga_op">resetMaterial(target)</span></p>
+
+<h2>Parameters</h2>
+<ul>
+	<li><span class="cga_opparam">target</span> (selector)<br>Selects which material to reset.
+	<table cellspacing="5">
+		<tr><td width="25%"><span class="codelight">shape</span></td><td>Default. Only reset the material of the shape.</td></tr>
+		<tr><td width="25%"><span class="codelight">geometry</span></td><td>Only reset the material of the geometry.</td></tr>
+		<tr><td width="25%"><span class="codelight">all</span></td><td>Reset the materials of both the shape and the geometry.</td></tr>
+	</table>
+	</li>
+</ul>
+
+<h2>Description</h2>
+
+<p>Resets the targeted material to the CGA default material (i.e. resets all <a class="normw" href="attr_material.html">material attributes</a>).
+Using <span class="cga_keyword">resetMaterial()</span> without a parameter resets only the material of the shape. If the target is <span class="codelight">geometry</span></td> or <span class="codelight">all</span></td> and the geometry consists of multiple materials all of them are reset.</p>
+
+<h2>Related</h2>
+<ul>
+	<li><a class="normw" href="op_setMaterial.html">setMaterial operation</a></li>
+	<li><a class="normw" href="op_color.html">color operation</a></li>
+	<li><a class="normw" href="op_texture.html">texture operation</a></li>
+	<li><a class="normw" href="op_set.html">set operation</a></li>
+	<li><a class="normw" href="attr_material.html">material attributes</a></li>
+	<li><a class="normw" href="attr_material_color.html">material.color attribute</a></li>
+    <li><a class="normw" href="attr_material_map.html">material.map texture layers</a></li> 
+	<li><a class="normw" href="cga_texturing.html">Texturing: Essential Knowledge</a></li>
+   	<li><a class="normw" href="func_getMaterial.html">getMaterial function</a></li>
+	<li><a class="normw" href="func_readMaterial.html">readMaterial function</a></li>
+</ul>
+
+<h2>Example</h2>
+
+<table summary="" class="twocol">
+<tr>
+	<td class="twocol_l"><img src="images/resetMaterial-example.png" alt="resetMaterial-example"/></td>
+	<td><pre class="code3">
+Lot --> primitiveQuad() 
+        texture("stones.jpg")
+        set(material.reflectivity, 0.75)
+        set(material.specular.r, 1)
+        set(material.specular.g, 1)
+        set(material.specular.b, 1)
+        Stones.
+          
+        i("plant.glb")
+        resetMaterial()
+        Flowers.
+	</pre>
+    
+    </pre> <em>Using resetMaterial() to get rid of previous changes to the shape material. This guarantees all the material attributes (e.g. the texture) of the inserted asset are used.</em></td>
+    
+	</td>
+</tr>
+</table>
+
+<h2>Example 2</h2>
+
+<table summary="" class="twocol">
+<tr>
+	<td class="twocol_l"><img src="images/resetMaterial-example2.png" alt="resetMaterial-example2"/></td>
+	<td><pre class="code3">
+Init-->
+	i("car.glb")
+	Matler(0)
+	comp(m) { 0 : Matler(0.75) | 1 : Matler(1.25) }
+	
+Matler(tx)-->
+	alignScopeToAxes()
+	t(tx,0,0) 
+	X.
+	t(0,0.5,0)
+	resetMaterial(geometry)
+	X.
+	</pre>
+    
+    </pre> <em>Using resetMaterial(geometry) to reset the materials of the geometry to the CGA default material.</em></td>
+    
+	</td>
+</tr>
+</table>
+
+<p class="foot">Copyright &copy;2008-2022 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
+
+</div>
+</body>
+</html>

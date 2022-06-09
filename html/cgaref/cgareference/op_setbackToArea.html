@@ -1,0 +1,141 @@
+<html>
+
+<head>
+	<title>setbackToArea Operation</title>
+	<link rel="stylesheet" href="../manual_style.css" type="text/css" />
+</head>
+
+<body>
+<div class="content">
+
+<table summary="" class="header">
+	<tr>
+		<td align="left" class="helphead_l"><a href="../toc.html"><div class="helplink">&nbsp;</div></a></td>
+		<td align="right" class="helphead_r"></td>
+	</tr>
+</table>
+
+<h1>setbackToArea operation</h1>
+
+<h2>Syntax</h2>
+
+<p class="code2"><span class="cga_op">setbackToArea</span>(<span class="cga_opparam">area</span>) { <span class="cga_opparam">selector</span> <span class="cga_opparam">operator</span> <span class="cga_opparam">operations</span> | ... }</p>
+<p class="code2"><span class="cga_op">setbackToArea</span>(<span class="cga_opparam">area</span>, <span class="cga_opparam">uvSet</span>) { <span class="cga_opparam">selector</span> <span class="cga_opparam">operator</span> <span class="cga_opparam">operations</span> | ... }</p>
+<br>
+<p class="code2"><span class="cga_op">setbackToArea</span>(<span class="cga_opparam">area</span>, <span class="cga_opparam">minDistances</span>) { <span class="cga_opparam">selector</span> <span class="cga_opparam">operator</span> <span class="cga_opparam">operations</span> | ... }</p>
+<p class="code2"><span class="cga_op">setbackToArea</span>(<span class="cga_opparam">area</span>, <span class="cga_opparam">minDistances</span>, <span class="cga_opparam">uvSet</span>) { <span class="cga_opparam">selector</span> <span class="cga_opparam">operator</span> <span class="cga_opparam">operations</span> | ... }</p>
+<br>
+<p class="code2"><span class="cga_op">setbackToArea</span>(<span class="cga_opparam">area</span>, <span class="cga_opparam">minDistances</span>, <span class="cga_opparam">maxDistances</span>) { <span class="cga_opparam">selector</span> <span class="cga_opparam">operator</span> <span class="cga_opparam">operations</span> | ... }</p>
+<p class="code2"><span class="cga_op">setbackToArea</span>(<span class="cga_opparam">area</span>, <span class="cga_opparam">minDistances</span>, <span class="cga_opparam">maxDistances</span>, <span class="cga_opparam">uvSet</span>) { <span class="cga_opparam">selector</span> <span class="cga_opparam">operator</span> <span class="cga_opparam">operations</span> | ... }</p>
+
+<h2>Parameters</h2>
+
+<ul>
+	<li><span class="cga_opparam">area</span> (float)<br>The desired area of the setback <span class="codelight">remainder</span>. Must be >0.</li>
+	<li><span class="cga_opparam">minDistances</span>, <span class="cga_opparam">maxDistances</span> (float[])<br>An array containing setback distances separately for each face edge. The applied setback will be in this range.</li>
+	<li><span class="cga_opparam">uvSet</span>, <span class="cga_opparam">selector</span>, <span class="cga_opparam">operator</span>, <span class="cga_opparam">operations</span><br>All other parameters are the same as for the  <a class="cga_op" href="op_setback.html#params">setback</a> operation.</li>
+</ul>
+
+<h2>Description</h2>
+
+<p>The <span class="codelight">setbackToArea</span> operation is similar to the <a class="cga_op" href="op_setback.html#params">setback</a> operation. The difference is that setback distances are automatically chosen such that the <span class="codelight">remainder</span> fulfills a given <span class="cga_opparam">area</span>.</p>
+
+<p>If no <span class="cga_opparam">minDistances</span> are given the setback distances are chosen to be equal for each edge. If <span class="cga_opparam">minDistances</span> are specified then these distances are increased by a common offset such that <span class="cga_opparam">area</span> is satisfied. Optionally, <span class="cga_opparam">maxDistances</span> define maximum values for the applied distances.</p>
+
+<p>The desired <span class="cga_opparam">area</span> cannot be achieved when the minimum distances are too large, the maximum distances are too small or the area of the current shape is smaller than the specified <span class="cga_opparam">area</span>.</p>
+
+<p class="notes">The remainder depends on the setbacks of selected edges. If you are only interested in the <span class="codelight">remainder</span> shape you still have to provide a setback <span class="cga_opparam">selector</span>:<br><br><span class="codelight">setbackToArea(area) { all = NIL | remainder = X. }</span></p>
+
+<h2>Related</h2>
+
+<ul>
+<li><a class="normw" href="op_setback.html">setback operation</a></li>
+<li><a class="normw" href="op_setbackPerEdge.html">setbackPerEdge operation</a></li>
+<li><a class="normw" href="op_comp.html">comp operation</a></li>
+<li><a class="normw" href="func_comp.html">comp function</a></li>
+</ul>
+                
+<h2>Examples</h2>
+
+<h3>Setback to area</h3>
+
+<table summary="" class="twocol">
+<tr>
+	<td class="twocol_l"><br><img src="images/setbackToArea-simple.png" width="298" alt="setbackToArea-simple"/></td>
+	<td><pre class="code3">
+	
+Left --> setbackToArea(100) { all      = NIL   |
+                             remainder = Green }
+
+Right --> setbackToArea(geometry.area - 300)
+                            { all      = Green }
+	</pre>
+	<em>Left: A square shape with an area of <span class="codelight">400</span> is setback to an area of <span class="codelight">100</span>. Right: A setback is performed such that all setback faces have an area of <span class="codelight">300</span>.</em>
+	</td>
+</tr>
+</table>
+<br>
+<table summary="" class="twocol">
+<tr>
+	<td class="twocol_l"><br><img src="images/setbackToArea-selectors.png" width="298" alt="setbackToArea-selectors"/></td>
+	<td><pre class="code3">
+	
+attr area = 100
+
+Lot --> setbackToArea(area) { front     = Blue  |
+                              left      = Red   |
+                              remainder = Green }
+    </pre>
+	<em>A L-shaped setback to area <span class="codelight">100</span> and <span class="codelight">300</span>.</em>
+	</td>
+</tr>
+</table>
+<br>
+<table summary="" class="twocol">
+<tr>
+	<td class="twocol_l"><br><img src="images/setbackToArea-scale.png" width="298" alt="setbackToArea-scale"/></td>
+	<td><pre class="code3">
+	
+	
+	
+Lot --> setbackToArea(100) { all       = Blue  |
+                             remainder = Green }
+    </pre>
+	<em>A setback to area <span class="codelight">100</span> on the same shape at different scales.</em>
+	</td>
+</tr>
+</table>
+
+<h3>Lower and upper bounds</h3>
+
+<table summary="" class="twocol">
+<tr>
+	<td class="twocol_l"><br><img src="images/setbackToArea-series.png" width="298" alt="setbackToArea-series"/></td>
+	<td><pre class="code3">
+attr area = 300
+
+const minDists = comp(fe) { all : rand(3)    }
+const maxDists = comp(fe) { all : rand(3, 6) }
+
+ShowDists(dists) -->
+    setback(dists) { all       = NIL |
+                     remainder = 
+                       comp(e) { all = Red } }
+
+Lot -->
+    ShowDists(minDists)
+    ShowDists(maxDists)
+    setbackToArea(area, minDists, maxDists)
+                           { all       = NIL   |
+                             remainder = Green }
+	</pre>
+	<em>The setback to restricted by minimum and maximum distances (highlighted in red).</em>
+	</td>
+</tr>
+</table>
+
+<p class="foot">Copyright &copy;2008-2022 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
+
+</div>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<html>
+
+<head>
+    <title>readMaterial Functions</title>
+    <link rel="stylesheet" href="../manual_style.css" type="text/css" />
+</head>
+
+<body>
+<div class="content">
+
+<!-- HEADER (use only on bookchapters) -->
+
+<table summary="" class="header">
+	<tr>
+		<td align="left" class="helphead_l"><a href="../toc.html"><div class="helplink">&nbsp;</div></a></td>
+		<td align="right" class="helphead_r"></td>
+	</tr>
+</table>
+
+<!-- CONTENT -->
+
+<h1>readMaterial function</h1>
+
+<h2>Syntax</h2>
+
+<p class="code2"><span class="codelight">string[]</span> readMaterial(<span class="cga_opparam">filePath</span>)</p>
+        
+<h2>Parameters</h2>
+
+<ul>
+	<li><span class="cga_opparam">filePath</span> (string)<br>Name of the material file to read. See <a class="normw" href="cga_assetSearch.html"> Asset Search</a> for information about search locations. Supported extensions are .cgamat and .mtl.</li>
+</ul>
+
+<p class="notes">CityEngine's CGA Material Encoder allows for writing cgamat files via model export.</p>
+
+<h2>Returns</h2>
+
+<p>The decoded material in <span class="cga_opparam">filePath</span> as 2D string array of cga material attributes.</p>
+
+<h2>Description</h2>
+
+<p>The <span class="cga_keyword">readMaterial</span> functions reads the material file <span class="cga_opparam">filePath</span> into a 2D array of material attributes, similar to the one returned from 
+<a class="normw" href="func_getMaterial.html"><span class="code_std">getMaterial()</span></a>. Referenced textures are resolved. The returned array can be used to set the current shape's material with the <a class="normw" href="op_setMaterial.html"><span class="code_std">setMaterial()</span></a> operation.</p>
+
+<h2>Related</h2>
+
+<ul>
+	<li><a class="normw" href="func_getMaterial.html"><span class="code_std">getMaterial</span></a> function</li>
+	<li><a class="normw" href="op_setMaterial.html"><span class="code_std">setMaterial</span></a> operation</li>
+</ul>
+
+
+<!-- FOOTER -->
+<p class="foot">Copyright &copy;2008-2022 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
+
+<!-- END CENTERED CONTENT -->
+
+</div>
+</body>
+</html>

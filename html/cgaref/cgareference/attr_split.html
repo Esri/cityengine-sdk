@@ -1,0 +1,80 @@
+<html>
+
+<head>
+	<title>split Shape Attribute</title>
+    <link rel="stylesheet" href="../manual_style.css" type="text/css" />
+</head>
+
+<body>
+<div class="content">
+
+<!-- HEADER (use only on bookchapters) -->
+
+<table summary="" class="header">
+	<tr>
+		<td align="left" class="helphead_l"><a href="../toc.html"><div class="helplink">&nbsp;</div></a></td>
+		<td align="right" class="helphead_r"></td>
+	</tr>
+</table>
+
+<!-- CONTENT -->
+
+<h1>split shape attribute</h1>
+		
+<h2>Syntax</h2>
+
+<p class="code2"><a name="index"></a><span class="codelight">float</span> split.index</p>
+<p class="code2"><a name="total"></a><span class="codelight">float</span> split.total</p>
+
+<h2>Description</h2>
+      	
+<p>The split shape attribute consists of two integer numbers (represented as floats because CGA does not know an integer type) describing the number of total elements in the last split and the index of the current shape.</p>
+
+<p>This attribute can not be set. It is written during the split operation.</p>
+
+<h2>Related</h2>
+<ul>
+	<li><a class="normw" href="op_split.html">split operation</a></li>
+	<li><a class="normw" href="op_splitArea.html">splitArea operation</a></li>
+</ul>
+		<!-- FOOTER -->
+		
+  <h2>Examples </h2>
+  
+  <!-- 2 Column Formatting (for Tutorials) -->
+  <table summary="" class="twocol">
+    <tr>
+      <td class="twocol_l"></br>
+          <img src="images/split_index.png" alt="nada" width="298" > </td>
+      <td><pre class="code">&nbsp;
+</pre>
+  <pre class="code">Lot --&gt;	extrude(20) A
+
+</pre>
+  <pre class="code">A --&gt; 	split(y){2 : B}*
+
+</pre>
+  <pre class="code">B --&gt;	case (split.index == 0) : 
+     		color(&quot;#ff0000&quot;) X
+   
+     	case (split.index == split.total-1) :
+     		color(&quot;#0000ff&quot;) X
+   
+     	else:
+     		X
+  </pre>
+  <pre class="code">&nbsp;
+		</pre></td>
+    </tr>
+    <tr>
+      <td class="twocol_l">&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+  </table>
+  <p class="foot">Copyright &copy;2008-2022 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
+
+<!-- END CENTERED CONTENT -->
+
+</div>
+</body>
+</html>

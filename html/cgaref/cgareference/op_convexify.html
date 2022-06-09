@@ -1,0 +1,77 @@
+<html>
+
+<head>
+    <title>convexify Operation</title>
+    <link rel="stylesheet" href="../manual_style.css" type="text/css" />
+</head>
+
+<body>
+<div class="content">
+
+<!-- HEADER (use only on bookchapters) -->
+
+<table summary="" class="header">
+	<tr>
+		<td align="left" class="helphead_l"><a href="../toc.html"><div class="helplink">&nbsp;</div></a></td>
+		<td align="right" class="helphead_r"></td>
+	</tr>
+</table>
+
+<!-- CONTENT -->
+
+<h1>convexify operation</h1>
+
+<h2>Syntax</h2>
+
+<p class="code2">convexify()</p>
+<p class="code2">convexify(<span class="cga_opparam">maxLength</span>)</p>
+
+<h2> Parameters </h2>
+<ul>
+	<li><span class="cga_opparam">maxLength</span> (float)<br>Maximum length of the split line which splits concave polygons into subpolygons. If not provided, no limit is applied, i.e. all resulting polygons are convex.</li>
+</ul>
+
+<h2>Description</h2>
+
+<p>This function splits a concave polygon into a number of convex polygons. If a <span class="cga_opparam">maxLength</span> parameter is provided, only split lines shorter than this value are applied and one of the resulting polygons might still be concave.</p>		
+
+<h2>Related</h2>
+
+<ul>
+	<li><a class="normw" href="op_cleanupGeometry.html">cleanupGeometry operation</a></li>
+	<li><a class="normw" href="op_innerRectangle.html">innerRectangle operation</a></li>
+	<li><a class="normw" href="op_mirror.html">mirror operation</a></li>
+	<li><a class="normw" href="op_reduceGeometry.html">reduceGeometry operation</a></li>
+	<li><a class="normw" href="op_reverseNormals.html">reverseNormals operation</a></li>
+	<li><a class="normw" href="op_setNormals.html">setNormals operation</a></li>
+</ul>
+        
+<h2>Examples</h2>
+
+<pre class="code3">
+attr maxLength = 1
+
+Lot -->
+	convexify(maxLength)
+	comp(f){all: SubShapes}
+	
+SubShapes -->
+	case scope.sx >= maxLength && scope.sy >= maxLength :
+		color("#00ff00")
+	else:
+		color("#ff0000")
+</pre>
+
+<p><pre>
+
+Initial shapes:                                Generated shapes:</pre></p>
+<img src="images/convexify_Lots.jpg"></img>
+<img src="images/convexify_Shapes.jpg"></img>
+
+
+<!-- FOOTER -->
+<p class="foot">Copyright &copy;2008-2022 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
+
+</div>
+</body>
+</html>

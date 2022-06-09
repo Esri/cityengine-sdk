@@ -1,0 +1,302 @@
+<html>
+
+<head>
+    <title>Array types operators</title>
+    <link rel="stylesheet" href="../manual_style.css" type="text/css" />
+</head>
+
+<body>
+<div class="content">
+
+<!-- HEADER (use only on bookchapters) -->
+
+<table summary="" class="header">
+	<tr>
+		<td align="left" class="helphead_l"><a href="../toc.html"><div class="helplink">&nbsp;</div></a></td>
+		<td align="right" class="helphead_r"></td>
+	</tr>
+</table>
+
+
+<!-- CONTENT -->
+
+<h1>Array types operators</h1>
+
+<h2>Index operator</h2>
+
+<p>Access array elements by indices or logical values.</p>
+
+<p>See <a href="func_index.html">index operator</a>.</p>
+
+<table class="twocol" cellspacing=20>
+<tr>
+	<td width="10%"><span class="code_std">[ ]</span></td>
+	<td width="17%">1d indexing</td>
+	<td><pre class="code3">array1d = [1,2,3]<br>array1d[1]          // 2</pre></td>
+</tr>
+<tr>
+	<td> </td>
+	<td>2d indexing</td>
+	<td><pre class="code3">array2d = [1,2;3,4]<br>array2d[1,0]        // 3</pre></td>
+</tr>
+</table>
+
+<h2>Colon operator</h2>
+
+<p>Create a sequence of float values.</p>
+
+<p>See <a href="func_colon.html">colon operator</a>.</p>
+
+<table class="twocol" cellspacing=20>
+<tr>
+	<td width="10%"><span class="code_std">:</span></td>
+	<td width="17%">Binary</td>
+	<td><pre class="code3">[1:5]         // [1,2,3,4,5]</pre></td>
+</tr>
+<tr>
+	<td> </td>
+	<td>Ternary</td>
+	<td><pre class="code3">[1:2:5]       // [1,3,5]</pre></td>
+</tr>
+</table>
+
+<h2>Equality operators</h2>
+
+<p>Check <span class="code_std">float[]</span>, <span class="code_std">bool[]</span> or <span class="code_std">string[]</span> for equality.</p>
+
+<p>Two arrays are equal if they have equal dimensions and equal elements.</p>
+
+<p>Return type: <span class="code_std">bool</span></p>
+
+<table class="twocol" cellspacing=20>
+<tr>
+	<td width="10%"><span class="code_std">==</span></td>
+	<td width="17%">Equality</td>
+	<td><pre class="code3">[1,2]        == [1,2]         // true<br>["a","b"]    == ["a";"b"]     // false<br>[true,false] == [true,true]   // false</pre></td>
+</tr>
+<tr>
+	<td><span class="code_std">!=</span></td>
+	<td>Inequality</td>
+	<td><pre class="code3">[1,2]        != [1;2]         // true<br>["a","b"]    != ["a";"b"]     // true<br>[true,true]  != [true,true]   // false</pre></td>
+</tr>
+</table>
+
+<h2>Relational operators</h2>
+
+<p>Compare <span class="code_std">float[]</span> or <span class="code_std">string[]</span>.</p>
+
+<p>Two arrays are element-wise compared, row by row. If an element is less, the respective array is less. If the first rows are equal, the array with less columns is less. Otherwise the array with less rows is less.</p>
+
+<p>Return type: <span class="code_std">bool</span></p>
+
+<table class="twocol" cellspacing=20>
+<tr>
+	<td width="10%"><span class="code_std"><</span></td>
+	<td width="17%">Less</td>
+	<td><pre class="code3">[1,2]        <  [1,3]         // true<br>["a","b"]    <  ["a";"b"]     // false</pre></td>
+</tr>
+<tr>
+	<td><span class="code_std"><=</span></td>
+	<td>Less or equal</td>
+	<td><pre class="code3">[1,2]        <= [1,2]         // true<br>["a";"b"]    <= ["a"]         // false</pre></td>
+</tr>
+<tr>
+	<td><span class="code_std">></span></td>
+	<td>Greater</td>
+	<td><pre class="code3">[1,3]        >  [1,2]         // true<br>["a";"b"]    >  ["a"]         // true</pre></td>
+</tr>
+<tr>
+	<td><span class="code_std">>=</span></td>
+	<td>Greater or equal</td>
+	<td><pre class="code3">[1,2,3]      >= [1,2]         // true<br>["a";"b"]    >= ["a";"b"]     // true</pre></td>
+</tr>
+</table>
+
+<h2><a name="stringConcatenation"></a>String concatenation operators</h2>
+
+<p>Concatenate <span class="code_std">string</span> with <span class="code_std">string[]</span>, <span class="code_std">float[]</span> or <span class="code_std">bool[]</span>.</p>
+
+<p>Return type: <span class="code_std">string</span></p>
+
+<table class="twocol" cellspacing=20>
+<tr>
+	<td width="10%"><span class="code_std">+</span></td>
+	<td width="17%">String-string[] concatenation</td>
+	<td><pre class="code3">a = "array: " + ["element"]<br>a = ["element"] + " is an array"</pre></td>
+</tr>
+<tr>
+	<td> </td>
+	<td>String-float[] concatenation</td>
+	<td><pre class="code3">a = "array:\n" + [1,2;3,4]<br>a = [1,2;3,4] + "\nis an array"</pre></td>
+</tr>
+<tr>
+	<td> </td>
+	<td>String-boolean[] concatenation</td>
+	<td><pre class="code3">a = "array: " + [true,true]<br>a = [true,true] + " is an array"</pre></td>
+</tr>
+</table>
+
+<p></p>
+
+<h1>Element-wise array operators</h1>
+
+<p>Element-wise operators have a preceeding dot. They perform the operator on each element and return the results in an array with the same dimensions as the input array(s). The dimensions of two arrays must be equal.</p>
+
+<h2>Logical operators</h2>
+
+<p>Element-wise logical operations on <span class="code_std">bool[]</span>.</p>
+
+<p>Return type: <span class="code_std">bool[]</span></p>
+
+<table class="twocol" cellspacing=20>
+<tr>
+	<td width="10%"><span class="code_std">.!</span></td>
+	<td width="17%">Negation</td>
+	<td><pre class="code3">.![true,false]                     // [false,true]</pre></td>
+</tr>
+<tr>
+	<td><span class="code_std">.||</span></td>
+	<td>Logical Or</td>
+	<td><pre class="code3">[true,false]  .|| true             // [true,true]<br>false         .|| [false;true]     // [false;true]<br>[false,true]  .|| [false,false]    // [false,true]</pre></td>
+</tr>
+<tr>
+	<td><span class="code_std">.&&</span></td>
+	<td>Logical And</td>
+	<td><pre class="code3">[false;true]  .&& true             // [false;true]<br>false         .&& [true;true;true] // [false;false;false]<br>[true,false]  .&& [false,true]     // [false,false]</pre></td>
+</tr>
+</table>
+
+<h2>Arithmetic operators</h2>
+
+<p>Element-wise arithmetic operations on <span class="code_std">float[]</span>.</p>
+
+<p>Return type: <span class="code_std">float[]</span></p>
+
+<table class="twocol" cellspacing=20>
+<tr>
+	<td width="10%"><span class="code_std">.+</span></td>
+	<td width="17%">Plus</td>
+	<td><pre class="code3">[1,2]         .+  1                // [2,3]<br>1             .+  [1;2]            // [2;3]<br>[1,2]         .+  [2,1]            // [3,3]</pre></td>
+</tr>
+<tr>
+	<td> </td>
+	<td>Unary plus</td>
+	<td><pre class="code3">.+[1,2]                            // [1,2]</pre></td>
+</tr>
+<tr>
+	<td><span class="code_std">.-</span></td>
+	<td>Minus</td>
+	<td><pre class="code3">[1,2;3,4]     .-  1                // [0,1;2,3]<br>3             .-  [1,2]            // [2,1]<br>[3;2]         .-  [2;1]            // [1;1]</pre></td>
+</tr>
+<tr>
+	<td> </td>
+	<td>Unary minus</td>
+	<td><pre class="code3">.-[1;2]                            // [-1;-2]</pre></td>
+</tr>
+<tr>
+	<td width="10%"><span class="code_std">.*</span></td>
+	<td width="17%">Multiplication</td>
+	<td><pre class="code3">[4,2]         .*  2.5              // [10,5]<br>-4            .*  [0.25;-0.75;-1]  // [-1;3;4]<br>[1,2;3,4]     .*  [4,3;2,1]        // [4,6;6,4]</pre></td>
+</tr>
+<tr>
+	<td width="10%"><span class="code_std">./</span></td>
+	<td width="17%">Division</td>
+	<td><pre class="code3">[4;3]         ./  2                // [2;1.5]<br>12            ./  [2,3,4]          // [6,4,3]<br>[1.6,3.8]     ./  [0.8,1.9]        // [2,2]</pre></td>
+</tr>
+<tr>
+	<td width="10%"><span class="code_std">.%</span></td>
+	<td width="17%">Modulus (remainder)</td>
+	<td><pre class="code3">[8;-5;0]      .%  3                // [2;-2;0]<br>7             .%  [2.7,-3]         // [1.6,1]<br>[-5,3.8]      .%  [-3,0.7]         // [-2,0.3]</pre></td>
+</tr>
+</table>
+
+<h2>Equality operators</h2>
+
+<p>Element-wise check <span class="code_std">float[]</span>, <span class="code_std">bool[]</span> or <span class="code_std">string[]</span> for equality.</p>
+
+<p>Return type: <span class="code_std">bool[]</span></p>
+
+<table class="twocol" cellspacing=20>
+<tr>
+	<td width="10%"><span class="code_std">.==</span></td>
+	<td width="17%">Equality</td>
+	<td><pre class="code3">1             .== [1,2]            // [true,false]<br>["a","b"]     .== "b"              // [false,true]<br>[true;false]  .== [true;false]     // [true;true]</pre></td>
+</tr>
+<tr>
+	<td><span class="code_std">.!=</span></td>
+	<td>Inequality</td>
+	<td><pre class="code3">[1,1;2,2]     .!= [1,2;1,2]        // [false,true;true,false]<br>["a"]         .!= "a"              // [false]<br>false         .!= [true]           // [true]</pre></td>
+</tr>
+</table>
+
+
+<h2>Relational operators</h2>
+
+<p>Element-wise compare <span class="code_std">float[]</span> or <span class="code_std">string[]</span>.</p>
+
+<p>Return type: <span class="code_std">bool[]</span></p>
+
+<table class="twocol" cellspacing=20>
+<tr>
+	<td width="10%"><span class="code_std">.<</span></td>
+	<td width="17%">Less</td>
+	<td><pre class="code3">1             .<  [1,2]            // [false,true]<br>["a","b"]     .<  "b"              // [true,false]<br>[1,2;2,1]     .<  [2,1;1,2]        // [true,false;false,true]</pre></td>
+</tr>
+<tr>
+	<td><span class="code_std">.<=</span></td>
+	<td>Less or equal</td>
+	<td><pre class="code3">1             .<= [1,2]            // [true,true]<br>["a";"b";"c"] .<= "b"              // [true;true;false]<br>["a","b"]     .<= ["b","a"]        // [true,false]</pre></td>
+</tr>
+<tr>
+	<td><span class="code_std">.></span></td>
+	<td>Greater</td>
+	<td><pre class="code3">[1,2;3,4]     .>  [1,1;3,3]        // [false,true;false,true]<br>"a"           .>  ["a";"a"]        // [false;false]<br>["a";"b"]     .>  "a"              // [false;true]</pre></td>
+</tr>
+<tr>
+	<td><span class="code_std">.>=</span></td>
+	<td>Greater or equal</td>
+	<td><pre class="code3">[1;2;3]       .>= [2;2;2]          // [false;true;true]<br>2             .>= [1,2,3]          // [true,true,false]<br>["a"]         .>= "a"              // [true]</pre></td>
+</tr>
+</table>
+
+<h2>String concatenation operators</h2>
+
+<p>Element-wise concatenate <span class="code_std">string</span>, <span class="code_std">string[]</span> with <span class="code_std">string[]</span>, <span class="code_std">float[]</span>, <span class="code_std">bool[]</span> or <span class="code_std">string[]</span> with <span class="code_std">string</span>, <span class="code_std">float</span>, <span class="code_std">bool</span>.</p>
+
+<p>Return type: <span class="code_std">string[]</span></p>
+
+<table class="twocol" cellspacing=20>
+<tr>
+	<td width="10%"><span class="code_std">.+</span></td>
+	<td width="17%">String-string concatenation</td>
+	<td><pre class="code3">["a","b"]     .+  "c"              // ["ac","bc"]<br>"a"           .+  ["b";"c"]        // ["ab";"ac"]<br>["a","b"]     .+  ["c","d"]        // ["ac","bd"]</pre></td>
+</tr>
+<tr>
+	<td> </td>
+	<td>String-float concatenation</td>
+	<td><pre class="code3">["a","b"]     .+  1                // ["a1","b1"]<br>"a"           .+  [1,2;3,4]        // ["a1","a2";"a3","a4"]<br>[1;2]         .+  ["a";"b"]        // ["1a";"2b"]</pre></td>
+</tr>
+<tr>
+	<td> </td>
+	<td>String-boolean concatenation</td>
+	<td><pre class="code3">[true;false]  .+  "a"              // ["truea";"falsea"]<br>"a"           .+  [true]           // ["atrue"]<br>["a";"b"]     .+  [false;true]     // ["afalse";"btrue"]</pre></td>
+</tr>
+</table>
+
+<h2>Related</h2>
+<ul>
+    <li><a href="simpleTypes.html">Simple types operators</a></li>
+    <li><a href="func_array.html">array initialization</a> function</li>
+	<li><a href="func_index.html">index</a> operator</li>
+	<li><a href="func_colon.html">colon</a> operator</li>
+</ul>
+
+
+<!-- FOOTER -->
+<p class="foot">Copyright &copy;2008-2022 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
+
+<!-- END CENTERED CONTENT -->
+
+</div>
+</body>
+</html>

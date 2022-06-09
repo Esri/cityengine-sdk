@@ -1,0 +1,11 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$classprtx_1_1_shape_iterator.html" title="prtx::ShapeIterator" alt="" coords="5,183,136,209"/>
+<area shape="rect" id="node2" href="$classprtx_1_1_breadth_first_iterator.html" title="prtx::BreadthFirstIterator" alt="" coords="197,5,361,32"/>
+<area shape="rect" id="node3" href="$classprtx_1_1_c_g_a_error_iterator.html" title="prtx::CGAErrorIterator" alt="" coords="203,56,354,83"/>
+<area shape="rect" id="node4" href="$classprtx_1_1_c_g_a_print_iterator.html" title="prtx::CGAPrintIterator" alt="" coords="204,107,353,133"/>
+<area shape="rect" id="node5" href="$classprtx_1_1_c_g_a_report_iterator.html" title="prtx::CGAReportIterator" alt="" coords="198,157,359,184"/>
+<area shape="rect" id="node6" href="$classprtx_1_1_depth_first_iterator.html" title="prtx::DepthFirstIterator" alt="" coords="201,208,356,235"/>
+<area shape="rect" id="node7" href="$classprtx_1_1_initial_shape_iterator.html" title="prtx::InitialShapeIterator" alt="" coords="198,259,359,285"/>
+<area shape="rect" id="node8" href="$classprtx_1_1_leaf_iterator.html" title="prtx::LeafIterator" alt="" coords="219,309,338,336"/>
+<area shape="rect" id="node9" href="$classprtx_1_1_selected_shapes_iterator.html" title="prtx::SelectedShapesIterator" alt="" coords="185,360,373,387"/>
+</map>

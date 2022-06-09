@@ -1,0 +1,127 @@
+<html>
+
+<head>
+	<title>edgeAttr Functions</title>
+	<link rel="stylesheet" href="../manual_style.css" type="text/css" />
+</head>
+
+<body>
+<div class="content">
+
+<table summary="" class="header">
+	<tr>
+		<td align="left" class="helphead_l"><a href="../toc.html"><div class="helplink">&nbsp;</div></a></td>
+		<td align="right" class="helphead_r"></td>
+	</tr>
+</table>
+
+<h1>edgeAttr functions</h1>
+
+<h2>Syntax</h2>
+
+<p class="code2"><span class="codelight">float</span>&nbsp&nbspedgeAttr.getFloat(<span class="cga_opparam">attributeName</span>)</p>
+<p class="code2"><span class="codelight">string</span>&nbspedgeAttr.getString(<span class="cga_opparam">attributeName</span>)</p>
+<p class="code2"><span class="codelight">bool</span>&nbsp&nbsp&nbspedgeAttr.getBool(<span class="cga_opparam">attributeName</span>)</p>
+
+<h2>Parameters</h2>
+
+<ul>
+	<li><span class="cga_opparam">attributeName</span> (string)<br>Name of edge attribute array: <span class="codelight">/edgeattr/</span><span class="cga_opparam">attributeName</span></li>
+</ul>
+
+<h2>Returns</h2>
+
+<p>One sampled element of the edge attribute array. If no attribute <span class="codelight">/edgeattr/</span><span class="cga_opparam">attributeName</span> exists or if the requested type does not match a default value is returned (<span class="codelight">0</span>, <span class="codelight">""</span>, <span class="codelight">false</span> respectively).</p>
+
+<h2>Description</h2>
+
+<p>The <span class="codelight">edgeAttr</span> functions return the element of an edge attribute array that best corresponds to the current shape geometry.</p>
+
+<h3>Edge attributes</h3>
+
+<p>Edge attributes allow to store information on face edges of an initial shape. They are specified as arrays in face-order. The first element sets an attribute for the first edge of the first face, the second element sets an attribute for the second edge of the first face, and so on. Shared edges are considered separately on following encounters. Edge attribute arrays start with a prefix <span class="codelight">/edgeattr/</span> followed by an <span class="cga_opparam">attributeName</span>. In CityEngine these arrays are set as object attributes on an initial shape.</p>  
+
+<h3>Sampling via edgeAttr functions</h3>
+
+<p>Edge attributes can be sampled in CGA. The current shape geometry is projected on the outline of the initial shape. The edge attribute with the highest projected coverage is returned as the result of a <span class="codelight">edgeAttr</span> function. The projection only works in 2D wrt. the average plane of the initial shape. The projection direction follows the general orientation of current shape geometry (average normal).<p/>
+
+<h2>Related</h2>
+
+<ul>
+    <li><a href="op_comp.html">comp operation</a></li>
+	<li><a href="func_comp.html">comp function</a></li>
+	<li><a href="op_setback.html">setback operation</a></li>
+	<li><a href="op_setbackPerEdge.html">setbackPerEdge operation</a></li>
+</ul>
+    
+    
+<h2>Examples</h2>
+
+<h3>Edge attribute array</h3>
+
+<table summary="" class="twocol">
+<tr>
+	<td class="twocol_l"><br><img src="images/edgeAttr-objAttr.png" alt="edgeAttr-objattr"/></td>
+	<td><br><br><center><img src="images/edgeAttr-array.png" alt="edgeAttr-array"/></center><br><br>
+	<em>A rectangular shape has a string array with colors set as edge attributes.</em>
+	</td>
+</tr>
+</table>
+
+<h3>Sampling on faces</h3>
+
+<table summary="" class="twocol">
+<tr>
+	<td class="twocol_l"><img src="images/edgeAttr-faces.png" alt="edgeAttr-faces"/></td>
+	<td><pre class="code3">
+	
+getColor = edgeAttr.getString("colors")
+	
+Lot --> primitiveCube(10, 10, 10)
+        comp(f) { side : color(getColor) Face. }
+	</pre>
+	<em>The <span class="codelight">side</span> faces of a cube are projected along their normals onto the face edges of the initial shape.</em>
+	</td>
+</tr>
+</table>
+
+<h3>Sampling on edges</h3>
+
+<table summary="" class="twocol">
+<tr>
+	<td class="twocol_l"><img src="images/edgeAttr-edges.png" alt="edgeAttr-faces"/></td>
+	<td><pre class="code3">
+Edge --> s('1,0,1)
+         primitiveQuad
+
+Lot --> primitiveCylinder(22, 5, 10)
+        comp(e) { vertical : color(getColor) Edge }
+	</pre>
+	<em>The <span class="codelight">vertical</span> edges of a cylinder are projected along their normals onto the face edges of the initial shape. Note that also edges (<span class="codelight">e</span>) have a normal set that points along the average of the neighboring face normals. After a component split the normal coincides with the z-axis of the component scopes.</em>
+	</td>
+</tr>
+</table>
+
+<h3>Sampling on face edges</h3>
+
+<table summary="" class="twocol">
+<tr>
+	<td class="twocol_l"><img src="images/edgeAttr-faceedges.png" alt="edgeAttr-faces"/></td>
+	<td><pre class="code3">
+Lot --> primitiveQuad(10, 10)
+        comp(fe) { all : color(getColor) Edge }
+	</pre>
+	<em><span class="codelight">All</span> face edges of a quad are projected along their normals onto the face edges of the initial shape. Note that also face edges (<span class="codelight">fe</span>) have a normal set that points out of the face orthogonally to the edge and the face normal. After a component split the normal coincides with the z-axis of the component scopes.</em>
+	</td>
+</tr>
+</table>
+
+<br>
+
+<p>See for example the <a class="cga_op" href="op_setbackPerEdge.html#examples">setbackPerEdge</a> operation for applications.</p>
+
+<p class="foot">Copyright &copy;2008-2022 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
+
+</div>
+</body>
+</html>
