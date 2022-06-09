@@ -10,8 +10,7 @@ This section lists changes compared to CityEngine SDK 2.6.8135.
 * Fixed a crash in `prt::CacheObject::CACHE_TYPE_NONREDUNDANT` cache implementation (after flushing).
 
 ## PRTX API
-* `prtx::ExtensionManager`: Improved warning if a library cannot be loaded (added path to core library). 
-
+* `prtx::ExtensionManager`: Improved warning if a library cannot be loaded (added path to core library).
 
 ## CGA
 * New features:
@@ -26,23 +25,23 @@ This section lists changes compared to CityEngine SDK 2.6.8135.
 ## Built-In Codecs Changes and Fixes
 * Unreal Encoder:
   * Fixed bugs where multiple terrains did not align.
-  * Improved landscape material border handling. 
+  * Improved landscape material border handling.
   * Fixed a bug which led to undefined behaviour when mixing non-textured and textured geometry.
   * Corrected normal map amount & opacity for Base Materials / Twinmotion.
 * GLTF Decoder:
   * Bugfix: Read uvs also if no texture defined in the material.
   * Bugfix: Avoid setting the material's texture trafo attributes (to the default) even if not used.
-* CGAMat Decoder: 
+* CGAMat Decoder:
   * Fixed empty texture maps (empty string means "no texture").
 * USD Codecs:
   * Fixed deadlock on startup.
   * Fixed tbb dependency loading on Linux to find library in the same folder.
 * USD Decoder:
-  * Implemented a "best effort" approach for reading partly unknown assets instead of just failing. This includes empty mesh nodes with non-empty child mesh nodes, assets with unknown materials or shaders, and assets with both point instances and other geometries. 
+  * Implemented a "best effort" approach for reading partly unknown assets instead of just failing. This includes empty mesh nodes with non-empty child mesh nodes, assets with unknown materials or shaders, and assets with both point instances and other geometries.
   * Fixed a crash on materials which did not have a shader id attribute.
 * OBJ Decoder:
   * Improved performance.
-  * MTL decoder: Fixed a number reading issue on some localized systems. 
+  * MTL decoder: Fixed a number reading issue on some localized systems.
 * IFC Decoder:
   * Fixed a crash connected to degenerated polygons.  
   * Improved geometry triangulation.
@@ -69,7 +68,6 @@ This section lists changes compared to CityEngine SDK 2.5.7799.
 * Improved `prtx::EncodePreparator` to keep the numerical precision of meshes which are far away (>10'000 m) from the initial shape's orgin. However, such meshes won't be merged to one mesh anymore if "merge by material" is enabled. 
 * Fixed a crash in `prtx::Material::getBlindData()` if an illegal key was used.
 * Fixed documentation of the texture trafo (XXXmapTrafo) keys of `prtx::Material`.
-
 
 ## CGA
 * Changes to existing features:
