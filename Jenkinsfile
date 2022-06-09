@@ -28,7 +28,6 @@ properties([disableConcurrentBuilds()])
 // -- GLOBAL DEFINITIONS
 
 @Field final String REPO         = cepl.GIT_REPO_CESDK
-@Field final String REPO_CREDS   = 'esri-cityengine-sdk-deployer-key'
 @Field final String SOURCES      = "cityengine-sdk.git/examples"
 @Field final String SOURCE_STASH = 'cesdk-sources'
 @Field final String BUILD_TARGET = 'package'
@@ -86,7 +85,7 @@ Map taskGenSTLDEC(configs) {
 
 def taskPrepare(cfg) {
  	cepl.cleanCurrentDir()
-	papl.checkout(REPO, env.BRANCH_NAME, REPO_CREDS)
+	papl.checkout(REPO, env.BRANCH_NAME)
 	stash(name: SOURCE_STASH)
 }
 
