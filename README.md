@@ -24,7 +24,7 @@ The archives are available for download at the corresponding github release page
 
 ## CityEngine SDK Releases
 
-* [v2.6.8297 (2022-06-09, CityEngine 2022.0)](https://github.com/Esri/cityengine-sdk/releases/tag/2.6.8297)
+* [v2.6.8300 (2022-06-16, CityEngine 2022.0)](https://github.com/Esri/cityengine-sdk/releases/tag/2.6.8300)
 * [v2.6.8135 (2022-01-07, no matching CityEngine version)](https://github.com/Esri/cityengine-sdk/releases/tag/2.6.8135)
 * [v2.5.7799 (2021-10-22, CityEngine 2021.1)](https://github.com/Esri/cityengine-sdk/releases/tag/2.5.7799)
 * [v2.4.7316 (2021-05-27, CityEngine 2021.0)](https://github.com/Esri/cityengine-sdk/releases/tag/2.4.7316)
