@@ -43,7 +43,7 @@ This section lists changes compared to CityEngine SDK 2.6.8135.
   * Improved performance.
   * MTL decoder: Fixed a number reading issue on some localized systems.
 * IFC Decoder:
-  * Fixed a crash connected to degenerated polygons.  
+  * Fixed a crash connected to degenerated polygons.
   * Improved geometry triangulation.
 * DWG and IFC Codecs:
   * Updated to ODA 22.12 library
@@ -51,7 +51,7 @@ This section lists changes compared to CityEngine SDK 2.6.8135.
   * Added versioning info to dll.
 
 ## Misc Changes and Fixes
-* Linux: Fixed unwanted re-export of 3d party symbols in our extension libraries.
+* Linux: Fixed unwanted re-export of 3rd-party symbols in our extension libraries.
 
 
 
