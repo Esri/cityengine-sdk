@@ -1,3 +1,48 @@
+# CITYENGINE SDK 2.7.85XX CHANGELOG
+
+This section lists changes compared to CityEngine SDK 2.6.8300.
+
+## General Info
+* CityEngine SDK 2.7.85XX is used in CityEngine 2022.1.85XX.
+
+## PRT API
+* `prt::generate()`: fixed a (rare) crash on Linux.
+
+## PRTX API
+* `prtx::EncodePreparator`: added `PrepartionFlags::meshMerging()` function and `MeshMerging::Action` enum. `ALL_OF_SAME_MATERIAL_AND_TYPE` corresponds to the old `mergeByMaterial()` flag; `ALL_OF_SAME_TYPE` is new functionality and allows for merging meshes with various materials into one mesh.  
+* `prtx::EncodePreparator`: deprecated `mergeByMaterial()` 
+
+## CGA
+* New operations:
+  * splitAndSetbackPerimeter operation.
+* Bugfixes:
+  * offset operation: Fixed wrong geometry in case the inside selector was used but no inside faces were created due to a too large (negative) offset. Now the original geometry is kept in such cases.
+  * deleteHoles operation: Fixed wrong geometry when deleting holes in non-planar shapes.
+  * comp operation: Fixed wrong geometry when selecting face components with non-planar holes.
+  * split operation: Fixed warnings containing the wrong operation name.
+  * Local Edits:
+    * Fixed a rare crash in deep recursive functions.
+    * split, splitArea operation: Fixed a crash in nested repeat split patterns (repeat in repeat). 
+
+## Built-In Codecs Changes and Fixes
+* Added Decoder for Esri's lerc image format (com.esri.prt.codecs.LercDecoder).
+* USD Codecs:
+  * The 3rd-party libraries (usd_ms.dll and tbb.dll) are now prefixed with 'prt_' in order to prevent clashes if these libraries are already present in a host app (e.g. Autodesk Maya) with incompatible versions.
+* USD Encoder:
+  * Now writes the initial shape attributes (e.g. start rule, random seed, OID) to the corresponding USD nodes.
+  * Now writes the CGA report values to the corresponding USD component nodes.
+  * Now uses the `prt::Callbacks` interface to write the encoded files instead of directly writing to disk.
+  * Added mesh merging option to control whether all meshes of one shape (for example a building) should be merged by material or into one single mesh (option `meshMerging`, values `perInitialShapeByMaterial` (default) and `perInitialShape`).
+  * Fixed a bug which led to a crash if Windows network shares were used in a path via UNC (Universal Naming Convention).
+* GLTF Encoder:
+  * Fixed a bug where multiple redundant occlusion/roughness/metallic maps were created.
+  * Now avoids re-encoding of occlusion/roughness/metallic maps if possible.
+* Unreal Encoder:
+  * Does not combine (and thus re-encode) roughness/metallic maps anymore.
+
+## Misc Changes and Fixes
+* Performance optimizations to speed up `prt::generate()` for rules with many attributes and consts.
+
 # CITYENGINE SDK 2.6.8300 CHANGELOG
 
 This section lists changes compared to CityEngine SDK 2.6.8135.
