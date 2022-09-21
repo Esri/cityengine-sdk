@@ -253,7 +253,7 @@ InputArgs::InputArgs(int argc, char *argv[]) : mStatus(RunStatus::FAILED) {
 
 	// setup option requirements
 	optInfo->excludes(optRPK);
-	optAttr->expected(0, 10);
+	optAttr->expected(0, -1);
 
 	// parse options
 	try {
