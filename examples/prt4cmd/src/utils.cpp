@@ -220,11 +220,11 @@ InputArgs::InputArgs(int argc, char* argv[]) : mStatus(RunStatus::FAILED) {
 	mInitialShapeAttrs = createAttributeMapFromTypedKeyValues({}); // PRT requires this in case no arguments are given
 
 	// setup arg handling callbacks
-	const CLI::callback_t convertShapeAttrs = [this](std::vector<std::string> argShapeAttrs) {
+	const CLI::callback_t convertShapeAttrs = [this](const std::vector<std::string>& argShapeAttrs) {
 		mInitialShapeAttrs = createAttributeMapFromTypedKeyValues(argShapeAttrs);
 		return true;
 	};
-	const CLI::callback_t convertEncOpts = [this](std::vector<std::string> argEncOpts) {
+	const CLI::callback_t convertEncOpts = [this](const std::vector<std::string>& argEncOpts) {
 		mEncoderOpts = createAttributeMapFromTypedKeyValues(argEncOpts);
 		return true;
 	};
