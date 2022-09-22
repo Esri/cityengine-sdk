@@ -250,13 +250,24 @@ InputArgs::InputArgs(int argc, char* argv[]) : mStatus(RunStatus::FAILED) {
 	CLI::App app{"prt4cmd - command line example for the CityEngine Procedural RunTime"};
 	// clang-format off
 	const auto optVer =  app.add_flag  ("-v,--version",                                     "Show CityEngine SDK version.");
-	                     app.add_option("-l,--log-level",       mLogLevel,                  "Set log filter level:\n                              1 = debug, 2 = info, 3 = warning, 4 = error, 5 = fatal, >5 = no output");
+	                     app.add_option("-l,--log-level",       mLogLevel,                  "Set log filter level:\n1 = debug, "
+	                                                                                        "2 = info, 3 = warning, 4 = error, "
+	                                                                                        "5 = fatal, >5 = no output");
 	                     app.add_option("-o,--output",          convertOutputPath,          "Set the output path for the callbacks.");
 	                     app.add_option("-e,--encoder",         mEncoderID,                 "The encoder ID, e.g. 'com.esri.prt.codecs.OBJEncoder'.");
 	const auto optRPK =  app.add_option("-p,--rule-package",    mRulePackage,               "Set the rule package path.");
-	const auto optAttr=  app.add_option("-a,--shape-attr",      convertShapeAttrs,          "Set a initial shape attribute.\n                              syntax is <name>:<type>=<value>\n                              type = {string,float,int,bool,string[],float[],int[],bool[]}\n                              (array elements are comma-separated)");
+	const auto optAttr=  app.add_option("-a,--shape-attr",      convertShapeAttrs,          "Set one initial shape attribute with "
+	                                                                                        "syntax <name>:<type>=<value>\n"
+	                                                                                        "type = {string,float,int,bool,"
+	                                                                                        "string[],float[],int[],bool[]}\n"
+                                                                                            "Array elements must be comma-separated.\n"
+	                                                                                        "Can be specified multiple times.");
 	                     app.add_option("-g,--shape-geo",       convertInitialShapeGeoPath, "(Optional) Path to a file with shape geometry.");
-	const auto encOpts = app.add_option("-z,--encoder-option",  convertEncOpts,             "Set a encoder option.\n                              syntax is <name>:<type>=<value>\n                              type = {string,float,int,bool,string[],float[],int[],bool[]}");
+	const auto encOpts = app.add_option("-z,--encoder-option",  convertEncOpts,             "Set one encoder option with syntax "
+	                                                                                        "<name>:<type>=<value>\n"
+	                                                                                        "type = {string,float,int,bool,"
+	                                                                                        "string[],float[],int[],bool[]}\n"
+	                                                                                        "Can be specified multiple times.");
 	const auto optInfo = app.add_option("-i,--info",            mInfoFile,                  "Write XML Extension Information to file.");
 	// clang-format on
 
