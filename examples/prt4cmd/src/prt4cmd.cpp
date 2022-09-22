@@ -47,7 +47,7 @@ const wchar_t* ENCODER_OPT_NAME = L"name";
  * Helper struct to manage PRT lifetime (e.g. the prt::init() call)
  */
 struct PRTContext {
-	PRTContext(const pcu::InputArgs& inputArgs) {
+	explicit PRTContext(const pcu::InputArgs& inputArgs) {
 		// create a console and file logger and register them with PRT
 		const std::filesystem::path fsLogPath = inputArgs.mWorkDir / FILE_LOG;
 		mLogHandler.reset(prt::ConsoleLogHandler::create(prt::LogHandler::ALL, prt::LogHandler::ALL_COUNT));
