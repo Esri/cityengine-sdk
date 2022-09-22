@@ -93,14 +93,14 @@ struct PRTLogger : public Logger {
 template <prt::LogLevel L>
 using LT = PRTLogger<L>;
 
-using _LOG_DBG = LT<prt::LOG_DEBUG>;
-using _LOG_INF = LT<prt::LOG_INFO>;
-using _LOG_WRN = LT<prt::LOG_WARNING>;
-using _LOG_ERR = LT<prt::LOG_ERROR>;
+using LOG_DBG_ = LT<prt::LOG_DEBUG>;
+using LOG_INF_ = LT<prt::LOG_INFO>;
+using LOG_WRN_ = LT<prt::LOG_WARNING>;
+using LOG_ERR_ = LT<prt::LOG_ERROR>;
 
 } // namespace logging
 
-#define LOG_DBG logging::_LOG_DBG()
-#define LOG_INF logging::_LOG_INF()
-#define LOG_WRN logging::_LOG_WRN()
-#define LOG_ERR logging::_LOG_ERR()
+#define LOG_DBG logging::LOG_DBG_()
+#define LOG_INF logging::LOG_INF_()
+#define LOG_WRN logging::LOG_WRN_()
+#define LOG_ERR logging::LOG_ERR_()
