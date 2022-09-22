@@ -54,18 +54,18 @@ const wchar_t* ENCODER_OPT_NAME     = L"name";
 struct PRTContext {
 	PRTContext(const pcu::InputArgs& inputArgs) {
 		// create a console and file logger and register them with PRT
-		const pcu::Path fsLogPath = inputArgs.mWorkDir / FILE_LOG;
+		const std::filesystem::path fsLogPath = inputArgs.mWorkDir / FILE_LOG;
 		mLogHandler.reset(prt::ConsoleLogHandler::create(prt::LogHandler::ALL, prt::LogHandler::ALL_COUNT));
-		mFileLogHandler.reset(prt::FileLogHandler::create(prt::LogHandler::ALL, prt::LogHandler::ALL_COUNT, fsLogPath.native_wstring().c_str()));
+		mFileLogHandler.reset(prt::FileLogHandler::create(prt::LogHandler::ALL, prt::LogHandler::ALL_COUNT, fsLogPath.wstring().c_str()));
 		prt::addLogHandler(mLogHandler.get());
 		prt::addLogHandler(mFileLogHandler.get());
 
 		// setup paths for plugins, assume standard SDK layout as per README.md
-		const pcu::Path rootPath = inputArgs.mWorkDir;
-		const pcu::Path extPath = rootPath / "lib";
+		const std::filesystem::path rootPath = inputArgs.mWorkDir;
+		const std::filesystem::path extPath = rootPath / "lib";
 
 		// initialize PRT with the path to its extension libraries, the desired log level
-		const std::wstring wExtPath = extPath.native_wstring();
+		const std::wstring wExtPath = extPath.wstring();
 		const std::array<const wchar_t*, 1> extPaths = { wExtPath.c_str() };
 		mPRTHandle.reset(prt::init(extPaths.data(), extPaths.size(), (prt::LogLevel)inputArgs.mLogLevel));
 	}
@@ -132,7 +132,7 @@ int main(int argc, char *argv[]) {
 		}
 
 		// -- create cache & callback
-		pcu::FileOutputCallbacksPtr foc{prt::FileOutputCallbacks::create(inputArgs.mOutputPath.native_wstring().c_str())};
+		pcu::FileOutputCallbacksPtr foc{prt::FileOutputCallbacks::create(inputArgs.mOutputPath.wstring().c_str())};
 		pcu::CachePtr cache{prt::CacheObject::create(prt::CacheObject::CACHE_TYPE_DEFAULT)};
 
 		// -- setup initial shape geometry

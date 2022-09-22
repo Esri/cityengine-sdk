@@ -70,15 +70,15 @@ std::vector<const C*> toPtrVec(const std::vector<std::basic_string<C>>& sv) {
 #	include <unistd.h>
 #endif
 
-pcu::Path getExecutablePath() {
+std::filesystem::path getExecutablePath() {
 #if defined(_WIN32)
-    HMODULE hModule = GetModuleHandle(nullptr);
-    if (hModule != NULL) {
-    	char path[MAX_PATH];
-    	const DWORD pathSize = GetModuleFileName(hModule, path, sizeof(path));
-        if(pathSize > 0 && pathSize < MAX_PATH) 
-			return pcu::Path(std::string(path, path+pathSize));
-		else 
+	HMODULE hModule = GetModuleHandle(nullptr);
+	if (hModule != NULL) {
+		char path[MAX_PATH];
+		const DWORD pathSize = GetModuleFileName(hModule, path, sizeof(path));
+		if (pathSize > 0 && pathSize < MAX_PATH)
+			return {path, path + pathSize};
+		else
 			return {};
     }
     else
@@ -88,9 +88,9 @@ pcu::Path getExecutablePath() {
 	char path[1024];
 	const size_t len = sizeof(path);
 	const ssize_t bytes = readlink(proc.c_str(), path, len);
-	if(bytes > 0 && bytes < (ssize_t)len) 
-		return pcu::Path(std::string(path, path+bytes));
-	else 
+	if (bytes > 0 && bytes < (ssize_t)len)
+		return {path, path + bytes};
+	else
 		return {};
 #else
 #	error unsupported build platform
@@ -207,8 +207,8 @@ AttributeMapPtr createAttributeMapFromTypedKeyValues(const std::vector<std::stri
  */
 InputArgs::InputArgs(int argc, char *argv[]) : mStatus(RunStatus::FAILED) {
 	// determine current path
-	const Path executable(getExecutablePath());
-	mWorkDir = executable.getParent().getParent();
+	const std::filesystem::path executable = getExecutablePath();
+	mWorkDir = executable.parent_path().parent_path(); // cmake installs the exe to install/bin
 
 	// setup default values
 	mEncoderID  = ENCODER_ID_OBJ;
@@ -234,8 +234,8 @@ InputArgs::InputArgs(int argc, char *argv[]) : mStatus(RunStatus::FAILED) {
 	const CLI::callback_t convertInitialShapeGeoPath = [this](std::vector<std::string> arg) {
 		if (arg.empty())
 			return false;
-		Path p(arg.front());
-		mInitialShapeGeo = p.getFileURI(); // we let prt deal with invalid file paths etc
+        std::filesystem::path p = arg.front();
+		mInitialShapeGeo = pcu::toFileURI(p.generic_string()); // we let prt deal with invalid file paths etc
 		return true;
 	};
 
@@ -274,7 +274,7 @@ InputArgs::InputArgs(int argc, char *argv[]) : mStatus(RunStatus::FAILED) {
 	else if (optInfo->count() == 0 && optRPK->count() == 0) {
 		std::cerr << "error: at least one of '" << optRPK->get_name() << "' or '" << optInfo->get_name() << "' is required." << std::endl;
 	}
-	else if (optRPK->count() > 0 && !mOutputPath.exists()) {
+	else if (optRPK->count() > 0 && !std::filesystem::exists(mOutputPath)) {
 		std::cerr << "output path '" << mOutputPath << "' does not exist, cannot continue." << std::endl;
 	}
 	else
@@ -406,58 +406,5 @@ AttributeMapPtr createValidatedOptions(const std::wstring& encID, const Attribut
 	encInfo->createValidatedOptionsAndStates(unvalidatedOptions.get(), &validatedOptions);
 	return AttributeMapPtr(validatedOptions);
 }
-
-
-std::string makeGeneric(const std::string& s) {
-    std::string t = s;
-    std::replace(t.begin(), t.end(), '\\', '/');
-    return t;
-}
-
-
-Path::Path(const std::string& p) : mPath(makeGeneric(p)) { }
-
-Path Path::operator/(const std::string& e) const {
-	return {mPath + '/' + makeGeneric(e)};
-}
-
-std::string Path::generic_string() const {
-	return mPath;
-}
-
-std::wstring Path::generic_wstring() const {
-	return pcu::toUTF16FromOSNarrow(mPath);
-}
-
-std::string Path::native_string() const {
-#if defined(_WIN32)
-	std::string native = mPath;
-	std::replace(native.begin(), native.end(), '/', '\\');
-	return native;
-#else
-	return mPath;
-#endif
-}
-
-std::wstring Path::native_wstring() const {
-	return pcu::toUTF16FromOSNarrow(native_string());
-}
-
-Path Path::getParent() const {
-	const auto p = mPath.find_last_of('/');
-	if (p != std::string::npos)
-		return {mPath.substr(0, p)};
-	return {};
-}
-
-URI Path::getFileURI() const {
-	return pcu::toFileURI(mPath);
-}
-
-bool Path::exists() const {
-    struct stat info;
-    return (stat(native_string().c_str(), &info) == 0);
-}
-
 
 } // namespace pcu
