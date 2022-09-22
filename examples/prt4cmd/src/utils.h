@@ -25,6 +25,7 @@
 #include "prt/FileOutputCallbacks.h"
 #include "prt/LogHandler.h"
 
+#include <filesystem>
 #include <memory>
 #include <string>
 #include <cstdlib>
@@ -96,36 +97,12 @@ const uint32_t faceCounts[]    = { 4 };
 const size_t   faceCountsCount = 1;
 }
 
-/**
- * poor man's filesystem abstraction
- */
-
-class Path {
-public:
-	Path() = default;
-	Path(const std::string& p);
-	Path(const Path&) = default;
-	virtual ~Path() = default;
-
-	Path operator/(const std::string& e) const;
-	std::string generic_string() const;
-	std::wstring generic_wstring() const;
-	std::string native_string() const;
-	std::wstring native_wstring() const;
-	Path getParent() const;
-	URI getFileURI() const;
-	bool exists() const;
-
-private:
-	std::string mPath;
-};
-
-inline std::ostream& operator<<(std::ostream& out, const Path& p) {
+inline std::ostream& operator<<(std::ostream& out, const std::filesystem::path& p) {
 	out << p.generic_string();
 	return out;
 }
 
-inline std::wostream& operator<<(std::wostream& out, const Path& p) {
+inline std::wostream& operator<<(std::wostream& out, const std::filesystem::path& p) {
 	out << p.generic_wstring();
 	return out;
 }
@@ -137,8 +114,8 @@ struct InputArgs {
 	InputArgs(int argc, char *argv[]);
     bool readyToRumble() const { return (mStatus == RunStatus::CONTINUE); }
 
-	Path            mWorkDir;
-	Path            mOutputPath;
+	std::filesystem::path mWorkDir;
+    std::filesystem::path mOutputPath;
 	std::string     mEncoderID;
 	AttributeMapPtr mEncoderOpts;
 	std::string     mRulePackage;
