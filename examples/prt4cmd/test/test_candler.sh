@@ -13,7 +13,6 @@ then
 fi
 
 rm -rf "${O}"
-mkdir "${O}"
 
 "${R}/install/bin/prt4cmd" \
      -l 3 \

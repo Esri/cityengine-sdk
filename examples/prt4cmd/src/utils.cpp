@@ -286,7 +286,10 @@ InputArgs::InputArgs(int argc, char* argv[]) : mStatus(RunStatus::FAILED) {
 		          << "' is required." << std::endl;
 	}
 	else if (optRPK->count() > 0 && !std::filesystem::exists(mOutputPath)) {
-		std::cerr << "output path '" << mOutputPath << "' does not exist, cannot continue." << std::endl;
+		if (std::filesystem::create_directories(mOutputPath))
+			mStatus = RunStatus::CONTINUE;
+		else
+			std::cerr << "error: failed to create output directory at " << mOutputPath << std::endl;
 	}
 	else
 		mStatus = RunStatus::CONTINUE;
