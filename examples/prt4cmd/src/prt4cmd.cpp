@@ -23,15 +23,11 @@
 #include "utils.h"
 
 #include "prt/API.h"
-#include "prt/ContentType.h"
-#include "prt/prt.h"
 
 #include <array>
-#include <cstdio>
 #include <cstdlib>
 #include <functional>
 #include <iostream>
-#include <iterator>
 #include <string>
 #include <vector>
 

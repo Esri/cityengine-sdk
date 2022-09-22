@@ -27,10 +27,7 @@
 #include "CLI11.hpp"
 
 #include <algorithm>
-#include <cstdlib>
 #include <iostream>
-#include <sys/stat.h>
-#include <sys/types.h>
 
 namespace {
 
@@ -66,7 +63,6 @@ std::vector<const C*> toPtrVec(const std::vector<std::basic_string<C>>& sv) {
 #if defined(_WIN32)
 #	include <Windows.h>
 #elif defined(__linux__)
-#	include <sys/types.h>
 #	include <unistd.h>
 #endif
 
