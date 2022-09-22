@@ -32,7 +32,7 @@ Before you start working with this example, please make sure you follow the main
    bin\prt4cmd.exe -l 3 -g <absolute path to>\cityengine-sdk\data\candler_footprint.obj -p <absolute path to>\cityengine-sdk\data\candler.rpk -a ruleFile:string=bin/candler.cgb -a startRule:string=Default$Footprint -e com.esri.prt.codecs.OBJEncoder -z baseName:string=theCandler
    ```
 
-1. The result is placed in the `output` directory:
+1. The result is placed in a new `output` directory next to the `install` directory:
     * `theCandler_0.obj`
     * `theCandler.mtl`
     * Bunch of texture files
