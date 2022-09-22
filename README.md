@@ -1,6 +1,6 @@
 # CityEngine SDK
 
-This is the official site for the SDK of [CityEngine](https://www.esri.com/en-us/arcgis/products/esri-cityengine/overview), a 3D city modeling software for urban design, visual effects, and VR/AR production.
+This is the official site for the SDK of [CityEngine](https://www.esri.com/en-us/arcgis/products/esri-cityengine/overview), a 3D city modeling software for urban design, visual effects, and VR/AR production. The CityEngine SDK is part of a [family of integrations](https://www.esri.com/en-us/arcgis/products/arcgis-cityengine/integrations) based on CityEngine.
 
 The CityEngine SDK can be used for the development of:
 
@@ -12,17 +12,79 @@ The CityEngine SDK can be used for the development of:
 
    The core of CityEngine is its unique geometry generation engine, called Procedural Runtime (PRT). PRT takes as input an initial geometry and then applies a given rule package (= CGA rules authored in CityEngine) to generate more detailed 3D geometry as output. For example, PRT can generate - based on given rules - a 3D model of a building out of a parcel polygon. With the SDK you can integrate PRT in your own 3D applications taking full advantage of the procedural geometry generation without running CityEngine. An interesting use case example is [Palladio](https://github.com/esri/palladio), a plugin for SideFX’s Houdini software. Palladio includes PRT and therefore extends Houdini with the procedural geometry engine of CityEngine. Another use case example could be a specific cultural heritage 3D application which automatically generates detailed 3D models of temples based on input attributes.
 
-## Preamble
-
 This document explains how to install the CityEngine SDK and how to work with the source-code examples contained in this repository. The CityEngine SDK is packaged into three parts:
 
-* This git repository with the example sources.
-* An archive per platform with the SDK binaries and documentation (whitepaper and API reference). The archives are attached to the repo release tags, see links below.
-* An archive with example data (e.g. rule packages and initial shapes).
+1. This git repository with the example sources.
+2. An archive per platform with the SDK binaries and offline documentation. The archives are attached to the [releases](https://github.com/Esri/cityengine-sdk/releases).
+3. An archive with example data (e.g. rule packages and initial shapes), attached to the [releases](https://github.com/Esri/cityengine-sdk/releases) as well.
 
-The archives are available for download at the corresponding github release page. See installation instructions below for details.
+## Quick Start
 
-## CityEngine SDK Releases
+1. Clone or download this repository.
+2. Download the [example data](https://github.com/Esri/cityengine-sdk/releases/latest/download/esri_ce_sdk-example_data-v2.zip) and unpack it into a `data` directory next to `examples` inside the repo:
+
+   ```text
+   /cityengine-sdk/
+      data/...
+      examples/...
+   ```
+
+3. Continue with building and running the `prt4cmd` example for either [Linux](examples/README_linux.md) or [Windows](examples/README_windows.md).
+
+## Table of Contents
+
+* [Downloads](https://github.com/Esri/cityengine-sdk/releases)
+* [Examples](#examples)
+* [API Documentation](https://esri.github.io/cityengine-sdk)
+* [Software Requirements](#general-software-requirements)
+* [Related Software Products](#related-software-products)
+* [Release History and Changelog](#release-history-and-changelog)
+* [CityEngine Resources](#cityengine-resources)
+* [Issues and Contributions](#issues-and-contributions)
+* [Licensing](#licensing)
+
+## Examples
+
+This repository contains a number of source code examples in the `examples` directory. Each example contains a platform-specific README with detailed instructions how to build and use it:
+
+* [prt4cmd](examples/prt4cmd): a simple command line utility to apply rule packages onto initial shapes and generate models.
+* [stlenc](examples/stlenc): demonstrates how to write a custom encoder (exporter), in this case for the STL geometry format.
+* [stldec](examples/stldec): demonstrates how to write a custom decoder (importer) for the STL geometry format.
+
+## Related Software Products
+
+* [Overview](https://www.esri.com/en-us/arcgis/products/arcgis-cityengine/integrations)
+* [PyPRT](https://esri.github.io/cityengine/pyprt): Python language bindings for the Procedural Runtime (PRT)
+* [Palladio](https://esri.github.io/cityengine/palladio): CityEngine plugin for SideFX Houdini
+* [Puma](https://esri.github.io/cityengine/puma): CityEngine plugin for McNeel Rhino3d
+* [Serlio](https://esri.github.io/cityengine/serlio): CityEngine plugin for Autodesk Maya
+* [Vitruvio](https://esri.github.io/cityengine/vitruvio): CityEngine plugin for Epic Unreal Engine
+
+## General Software Requirements
+
+Please note that the individual example READMEs may include further requirements.
+
+### All Platforms
+
+* To load custom encoders built with the latest SDK, CityEngine 2022.1 is required. For older versions of CityEngine an older version of the SDK might have to be used, see [Release History](#release-history-and-changelog). Some SDK versions don't have a matching CityEngine.
+* A license for the corresponding CityEngine version. For example, a license for CityEngine 2022.1 to author Rule Packages for the current SDK release.
+* CMake 3.3 or later (<https://www.cmake.org>)
+
+### Windows
+
+* Windows 8.1, 10 or 11 (64bit)
+* Required C++ compiler: Visual Studio 2019 with Toolset MSVC 14.27 or later
+* Required flags for extension libraries release mode: `/std:c++17 /bigobj /GR /EHsc /MD` (use `/MDd` to debug)
+
+### Linux
+
+* RedHat Enterprise Linux 7.x and 8.x and compatible
+* Required C++ compiler: GCC 9.3 or later (RedHat Enterprise Linux DevToolSet 9)
+* Required flags for extension libraries: `-std=c++17 -D_GLIBCXX_USE_CXX11_ABI=0 -march=nocona -fvisibility=hidden -fvisibility-inlines-hidden -Wl,--exclude-libs,ALL`
+
+## Release History and Changelog
+
+A detailed list of changes to the API, CGA language and built-in codecs can be found in the [Changelog](changelog.md).
 
 * [v2.6.8300 (2022-06-16, CityEngine 2022.0)](https://github.com/Esri/cityengine-sdk/releases/tag/2.6.8300)
 * [v2.6.8135 (2022-01-07, no matching CityEngine version)](https://github.com/Esri/cityengine-sdk/releases/tag/2.6.8135)
@@ -46,75 +108,20 @@ The archives are available for download at the corresponding github release page
 * [v1.1.1471 (2014-05-29, CityEngine 2014.0)](https://github.com/Esri/cityengine-sdk/releases/tag/1.1.1471)
 * v1.0.1209 (2014-01-15, CityEngine 2013.1)
 
-## Installation Instructions
+## CityEngine Resources
 
-1. Clone or download this repository
-1. We provide some demo files to run the prt4cmd example. They can be found in the SDK example data archive attached to the release. Unpack the archive into a "data" directory inside the cloned repository.
+* [CityEngine Community Forum](https://community.esri.com/t5/arcgis-cityengine/ct-p/arcgis-cityengine) 
+* [CityEngine Free Trial](https://www.esri.com/en-us/arcgis/products/arcgis-cityengine/trial)
+* [CityEngine Product Page](https://www.esri.com/en-us/arcgis/products/arcgis-cityengine/overview)
+* [CityEngine Resources, Tutorials, Examples, Release Notes](https://www.esri.com/en-us/arcgis/products/arcgis-cityengine/resources)
+* [CityEngine Integrations (Urban, Plugins)](https://www.esri.com/en-us/arcgis/products/arcgis-cityengine/integrations)
+* Youtube: <https://www.youtube.com/c/CityEngineTV>
+* Facebook: <https://www.facebook.com/CityEngine>
+* Twitter: <https://twitter.com/CityEngine>
 
-The final directory layout should look like this:
+## Issues and Contributions
 
-```text
-/cityengine-sdk/
-    data/...
-    examples/...
-```
-
-## Examples
-
-This repository contains a number of source code examples in the "examples" directory. Each example contains a README with detailed instructions how to build and use it:
-
-* prt4cmd: a simple command line utility to apply rule packages onto initial shapes and generate models.
-* stlenc: demonstrates how to write a custom encoder, in this case for the STL geometry format.
-* stldec: demonstrates how to write a custom decoder for the STL geometry format.
-
-## Related Projects
-
-* [PyPRT](https://esri.github.io/cityengine/pyprt): Python language bindings for the Procedural Runtime (PRT)
-* [Palladio](https://esri.github.io/cityengine/palladio): CityEngine plugin for SideFX Houdini
-* [Serlio](https://esri.github.io/cityengine/serlio): CityEngine plugin for Autodesk Maya
-* [Vitruvio](https://esri.github.io/cityengine/vitruvio): CityEngine plugin for Epic Unreal Engine
-
-## General Software Requirements
-
-Please note that the individual example READMEs may include further requirements.
-
-### All Platforms
-
-* To load custom encoders built with the latest SDK, CityEngine 2022.0 is required. For older versions of CityEngine an older version of the SDK might have to be used, see list above. Some SDK versions don't have a matching CityEngine.
-* A license for the corresponding CityEngine version. For example, a license for CityEngine 2022.0 to author Rule Packages for the current SDK release.
-* CMake 3.3 or later (<https://www.cmake.org>)
-
-### Windows
-
-* Windows 8.1 or 10 (64bit)
-* Required C++ compiler: Visual Studio 2019 with Toolset MSVC 14.27 or later
-* Required flags for extension libraries release mode: `/std:c++17 /bigobj /GR /EHsc /MD` (use `/MDd` to debug)
-
-### Linux
-
-* RedHat Enterprise Linux 7.x or compatible
-* Required C++ compiler: GCC 9.3 or later (RedHat Enterprise Linux DevToolSet 9)
-* Required flags for extension libraries: `-std=c++17 -D_GLIBCXX_USE_CXX11_ABI=0 -march=nocona -fvisibility=hidden -fvisibility-inlines-hidden -Wl,--exclude-libs,ALL`
-
-## Further Resources
-
-* Documentation
-  * [Changelog](changelog.md)
-  * Online reference: <https://esri.github.io/cityengine-sdk>
-  * Offline reference: see /doc subdirectory inside the release archive
-* Community
-  * Forum: <https://geonet.esri.com/community/gis/3d/cityengine>
-  * Youtube: <https://www.youtube.com/c/CityEngineTV>
-  * Facebook: <https://www.facebook.com/CityEngine>
-  * Twitter: <https://twitter.com/CityEngine>
-
-## Issues
-
-Did you find a bug or do you want to request a new feature? Please let us know by submitting an issue.
-
-## Contributing
-
-Anyone and everyone is welcome to contribute and to extend and improve the examples by sending us pull requests.
+Did you find a bug or do you want to request a new feature? Please let us know by submitting an issue. Anyone and everyone is welcome to contribute and to extend and improve the examples by sending us pull requests.
 
 ## Licensing
 
