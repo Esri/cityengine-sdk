@@ -228,7 +228,11 @@ InputArgs::InputArgs(int argc, char *argv[]) : mStatus(RunStatus::FAILED) {
 	const CLI::callback_t convertOutputPath = [this](std::vector<std::string> arg) {
 		if (arg.empty())
 			return false;
-		mOutputPath = mWorkDir / arg.front();
+        std::filesystem::path output = arg.front();
+        if (output.is_absolute())
+            mOutputPath = output;
+        else
+		    mOutputPath = mWorkDir / output;
 		return true;
 	};
 	const CLI::callback_t convertInitialShapeGeoPath = [this](std::vector<std::string> arg) {
