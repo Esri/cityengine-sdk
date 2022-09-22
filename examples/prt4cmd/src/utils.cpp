@@ -248,12 +248,13 @@ InputArgs::InputArgs(int argc, char *argv[]) : mStatus(RunStatus::FAILED) {
 	const auto optRPK =  app.add_option("-p,--rule-package",    mRulePackage,               "Set the rule package path.");
 	const auto optAttr=  app.add_option("-a,--shape-attr",      convertShapeAttrs,          "Set a initial shape attribute.\n                              syntax is <name>:<type>=<value>\n                              type = {string,float,int,bool,string[],float[],int[],bool[]}\n                              (array elements are comma-separated)");
 	                     app.add_option("-g,--shape-geo",       convertInitialShapeGeoPath, "(Optional) Path to a file with shape geometry.");
-	                     app.add_option("-z,--encoder-option",  convertEncOpts,             "Set a encoder option.\n                              syntax is <name>:<type>=<value>\n                              type = {string,float,int,bool,string[],float[],int[],bool[]}");
+	const auto encOpts = app.add_option("-z,--encoder-option",  convertEncOpts,             "Set a encoder option.\n                              syntax is <name>:<type>=<value>\n                              type = {string,float,int,bool,string[],float[],int[],bool[]}");
 	const auto optInfo = app.add_option("-i,--info",            mInfoFile,                  "Write XML Extension Information to file.");
 
 	// setup option requirements
 	optInfo->excludes(optRPK);
 	optAttr->expected(0, -1);
+    encOpts->expected(0, -1);
 
 	// parse options
 	try {
