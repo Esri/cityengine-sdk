@@ -29,30 +29,30 @@
 #include <algorithm>
 #include <cstdlib>
 #include <iostream>
-#include <sys/types.h>
 #include <sys/stat.h>
-
+#include <sys/types.h>
 
 namespace {
 
 #ifdef _WIN32
-	const std::string FILE_SCHEMA = "file:/";
+const std::string FILE_SCHEMA = "file:/";
 #else
-	const std::string FILE_SCHEMA = "file:";
+const std::string FILE_SCHEMA = "file:";
 #endif
 
 const char* ENCODER_ID_OBJ = "com.esri.prt.codecs.OBJEncoder";
 
-template<typename C>
-void tokenize(const std::basic_string<C>& str, std::vector<std::basic_string<C>>& tokens, const std::basic_string<C>& delimiters, bool allowEmpty = false) {
+template <typename C>
+void tokenize(const std::basic_string<C>& str, std::vector<std::basic_string<C>>& tokens,
+              const std::basic_string<C>& delimiters, bool allowEmpty = false) {
 	size_t start = 0;
 	size_t found = 0;
-	while((found = str.find_first_of(delimiters, start)) != std::basic_string<C>::npos) {
-		if(allowEmpty || start < found)
+	while ((found = str.find_first_of(delimiters, start)) != std::basic_string<C>::npos) {
+		if (allowEmpty || start < found)
 			tokens.emplace_back(str.cbegin() + start, str.cbegin() + found);
 		start = found + 1;
 	}
-	if(allowEmpty || start < str.size())
+	if (allowEmpty || start < str.size())
 		tokens.emplace_back(str.cbegin() + start, str.cend());
 }
 
@@ -80,9 +80,9 @@ std::filesystem::path getExecutablePath() {
 			return {path, path + pathSize};
 		else
 			return {};
-    }
-    else
-        return {};
+	}
+	else
+		return {};
 #elif defined(__linux__)
 	const std::string proc = "/proc/" + std::to_string(getpid()) + "/exe";
 	char path[1024];
@@ -99,7 +99,6 @@ std::filesystem::path getExecutablePath() {
 
 } // namespace
 
-
 namespace pcu {
 
 /**
@@ -107,7 +106,7 @@ namespace pcu {
  */
 AttributeMapPtr createAttributeMapFromTypedKeyValues(const std::vector<std::string>& args) {
 	AttributeMapBuilderPtr bld{prt::AttributeMapBuilder::create()};
-	for (const std::string& a: args) {
+	for (const std::string& a : args) {
 		const std::wstring wa = toUTF16FromOSNarrow(a);
 		std::vector<std::wstring> tokens;
 		tokenize<wchar_t>(wa, tokens, L":=");
@@ -119,7 +118,8 @@ AttributeMapPtr createAttributeMapFromTypedKeyValues(const std::vector<std::stri
 				try {
 					double d = std::stod(tokens[2]);
 					bld->setFloat(tokens[0].c_str(), d);
-				} catch (std::exception& e) {
+				}
+				catch (std::exception& e) {
 					std::wcerr << L"cannot set float attribute " << tokens[0] << ": " << e.what() << std::endl;
 				}
 			}
@@ -127,7 +127,8 @@ AttributeMapPtr createAttributeMapFromTypedKeyValues(const std::vector<std::stri
 				try {
 					int32_t v = std::stoi(tokens[2]);
 					bld->setInt(tokens[0].c_str(), v);
-				} catch (std::exception& e) {
+				}
+				catch (std::exception& e) {
 					std::wcerr << L"cannot set int attribute " << tokens[0] << ": " << e.what() << std::endl;
 				}
 			}
@@ -151,38 +152,43 @@ AttributeMapPtr createAttributeMapFromTypedKeyValues(const std::vector<std::stri
 				tokenize<wchar_t>(tokens[2], elems, L",", true);
 				std::vector<double> floatArray;
 				floatArray.reserve(elems.size());
-				for(const std::wstring& elem : elems) {
+				for (const std::wstring& elem : elems) {
 					try {
 						floatArray.push_back(std::stod(elem));
-					} catch (const std::exception& e) {
-						std::wcerr << L"cannot set float array attribute " << tokens[0] << ": " << e.what() << std::endl;
+					}
+					catch (const std::exception& e) {
+						std::wcerr << L"cannot set float array attribute " << tokens[0] << ": " << e.what()
+						           << std::endl;
 						break;
 					}
 				}
-				if(floatArray.size() == elems.size())
+				if (floatArray.size() == elems.size())
 					bld->setFloatArray(tokens[0].c_str(), floatArray.data(), floatArray.size());
-			} else if (tokens[1] == L"int[]") {
+			}
+			else if (tokens[1] == L"int[]") {
 				std::vector<std::wstring> elems;
 				tokenize<wchar_t>(tokens[2], elems, L",", true);
 				std::vector<int32_t> intArray;
 				intArray.reserve(elems.size());
-				for(const std::wstring& elem : elems) {
+				for (const std::wstring& elem : elems) {
 					try {
 						intArray.push_back(std::stoi(elem));
-					} catch (const std::exception& e) {
+					}
+					catch (const std::exception& e) {
 						std::wcerr << L"cannot set int array attribute " << tokens[0] << ": " << e.what() << std::endl;
 						break;
 					}
 				}
-				if(intArray.size() == elems.size())
+				if (intArray.size() == elems.size())
 					bld->setIntArray(tokens[0].c_str(), intArray.data(), intArray.size());
-			} else if (tokens[1] == L"bool[]") {
+			}
+			else if (tokens[1] == L"bool[]") {
 				std::vector<std::wstring> elems;
 				tokenize<wchar_t>(tokens[2], elems, L",", true);
 				std::vector<uint8_t> boolArray;
 				boolArray.reserve(elems.size());
 				bool v;
-				for(const std::wstring& elem : elems) {
+				for (const std::wstring& elem : elems) {
 					std::wistringstream istr(elem);
 					istr >> std::boolalpha >> v;
 					if (istr.fail()) {
@@ -191,9 +197,10 @@ AttributeMapPtr createAttributeMapFromTypedKeyValues(const std::vector<std::stri
 					}
 					boolArray.push_back(v ? 1 : 0);
 				}
-				if(boolArray.size() == elems.size())
+				if (boolArray.size() == elems.size())
 					bld->setBoolArray(tokens[0].c_str(), (const bool*)boolArray.data(), boolArray.size());
-			} else
+			}
+			else
 				std::wcout << L"warning: ignored key/value item: " << wa << std::endl;
 		}
 		else
@@ -205,14 +212,14 @@ AttributeMapPtr createAttributeMapFromTypedKeyValues(const std::vector<std::stri
 /**
  * Parse the command line arguments and setup the inputArgs struct.
  */
-InputArgs::InputArgs(int argc, char *argv[]) : mStatus(RunStatus::FAILED) {
+InputArgs::InputArgs(int argc, char* argv[]) : mStatus(RunStatus::FAILED) {
 	// determine current path
 	const std::filesystem::path executable = getExecutablePath();
 	mWorkDir = executable.parent_path().parent_path(); // cmake installs the exe to install/bin
 
 	// setup default values
-	mEncoderID  = ENCODER_ID_OBJ;
-	mLogLevel   = 2;
+	mEncoderID = ENCODER_ID_OBJ;
+	mLogLevel = 2;
 	mOutputPath = mWorkDir / "output";
 	mInitialShapeAttrs = createAttributeMapFromTypedKeyValues({}); // PRT requires this in case no arguments are given
 
@@ -228,23 +235,24 @@ InputArgs::InputArgs(int argc, char *argv[]) : mStatus(RunStatus::FAILED) {
 	const CLI::callback_t convertOutputPath = [this](std::vector<std::string> arg) {
 		if (arg.empty())
 			return false;
-        std::filesystem::path output = arg.front();
-        if (output.is_absolute())
-            mOutputPath = output;
-        else
-		    mOutputPath = mWorkDir / output;
+		std::filesystem::path output = arg.front();
+		if (output.is_absolute())
+			mOutputPath = output;
+		else
+			mOutputPath = mWorkDir / output;
 		return true;
 	};
 	const CLI::callback_t convertInitialShapeGeoPath = [this](std::vector<std::string> arg) {
 		if (arg.empty())
 			return false;
-        std::filesystem::path p = arg.front();
+		std::filesystem::path p = arg.front();
 		mInitialShapeGeo = pcu::toFileURI(p.generic_string()); // we let prt deal with invalid file paths etc
 		return true;
 	};
 
 	// setup options
 	CLI::App app{"prt4cmd - command line example for the CityEngine Procedural RunTime"};
+	// clang-format off
 	const auto optVer =  app.add_flag  ("-v,--version",                                     "Show CityEngine SDK version.");
 	                     app.add_option("-l,--log-level",       mLogLevel,                  "Set log filter level:\n                              1 = debug, 2 = info, 3 = warning, 4 = error, 5 = fatal, >5 = no output");
 	                     app.add_option("-o,--output",          convertOutputPath,          "Set the output path for the callbacks.");
@@ -254,20 +262,22 @@ InputArgs::InputArgs(int argc, char *argv[]) : mStatus(RunStatus::FAILED) {
 	                     app.add_option("-g,--shape-geo",       convertInitialShapeGeoPath, "(Optional) Path to a file with shape geometry.");
 	const auto encOpts = app.add_option("-z,--encoder-option",  convertEncOpts,             "Set a encoder option.\n                              syntax is <name>:<type>=<value>\n                              type = {string,float,int,bool,string[],float[],int[],bool[]}");
 	const auto optInfo = app.add_option("-i,--info",            mInfoFile,                  "Write XML Extension Information to file.");
+	// clang-format on
 
 	// setup option requirements
 	optInfo->excludes(optRPK);
 	optAttr->expected(0, -1);
-    encOpts->expected(0, -1);
+	encOpts->expected(0, -1);
 
 	// parse options
 	try {
-		if(argc <= 1)
+		if (argc <= 1)
 			throw CLI::CallForHelp();
 		app.parse(argc, argv);
-	} catch (const CLI::Error& e) {
-    	app.exit(e);
-    	return;
+	}
+	catch (const CLI::Error& e) {
+		app.exit(e);
+		return;
 	}
 
 	// basic validation of input args
@@ -276,7 +286,8 @@ InputArgs::InputArgs(int argc, char *argv[]) : mStatus(RunStatus::FAILED) {
 		mStatus = RunStatus::DONE;
 	}
 	else if (optInfo->count() == 0 && optRPK->count() == 0) {
-		std::cerr << "error: at least one of '" << optRPK->get_name() << "' or '" << optInfo->get_name() << "' is required." << std::endl;
+		std::cerr << "error: at least one of '" << optRPK->get_name() << "' or '" << optInfo->get_name()
+		          << "' is required." << std::endl;
 	}
 	else if (optRPK->count() > 0 && !std::filesystem::exists(mOutputPath)) {
 		std::cerr << "output path '" << mOutputPath << "' does not exist, cannot continue." << std::endl;
@@ -285,12 +296,11 @@ InputArgs::InputArgs(int argc, char *argv[]) : mStatus(RunStatus::FAILED) {
 		mStatus = RunStatus::CONTINUE;
 }
 
-
 /**
  * String conversion functions
  */
 
-template<typename inC, typename outC, typename FUNC>
+template <typename inC, typename outC, typename FUNC>
 std::basic_string<outC> callAPI(FUNC f, const std::basic_string<inC>& s) {
 	std::vector<outC> buffer(s.size());
 	size_t size = buffer.size();
@@ -323,12 +333,11 @@ std::string percentEncode(const std::string& utf8String) {
 	return callAPI<char, char>(prt::StringUtils::percentEncode, utf8String);
 }
 
-
 /**
  * codec info functions
  */
 
-template<typename C, typename FUNC>
+template <typename C, typename FUNC>
 std::basic_string<C> callAPI(FUNC f, size_t initialSize) {
 	std::vector<C> buffer(initialSize, ' ');
 
@@ -343,13 +352,14 @@ std::basic_string<C> callAPI(FUNC f, size_t initialSize) {
 }
 
 std::string objectToXML(const prt::Object* obj) {
-	auto toXMLFunc = std::bind(&prt::Object::toXML, obj, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
+	auto toXMLFunc =
+	        std::bind(&prt::Object::toXML, obj, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
 	return callAPI<char>(toXMLFunc, 4096);
 }
 
 RunStatus codecInfoToXML(const std::string& infoFilePath) {
-	const std::wstring encIDsStr{ callAPI<wchar_t>(prt::listEncoderIds, 1024) };
-	const std::wstring decIDsStr{ callAPI<wchar_t>(prt::listDecoderIds, 1024) };
+	const std::wstring encIDsStr{callAPI<wchar_t>(prt::listEncoderIds, 1024)};
+	const std::wstring decIDsStr{callAPI<wchar_t>(prt::listDecoderIds, 1024)};
 
 	std::vector<std::wstring> encIDs, decIDs;
 	tokenize<wchar_t>(encIDsStr, encIDs, L";");
@@ -359,13 +369,11 @@ RunStatus codecInfoToXML(const std::string& infoFilePath) {
 		std::ofstream xml(infoFilePath);
 		xml << "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n\n";
 
-		xml << "<Codecs build=\"" << prt::getVersion()->mVersion
-			<< "\" buildDate=\"" << prt::getVersion()->mBuildDate
-			<< "\" buildConfig=\"" << prt::getVersion()->mBuildConfig
-			<< "\">\n";
+		xml << "<Codecs build=\"" << prt::getVersion()->mVersion << "\" buildDate=\"" << prt::getVersion()->mBuildDate
+		    << "\" buildConfig=\"" << prt::getVersion()->mBuildConfig << "\">\n";
 
 		xml << "<Encoders>\n";
-		for (const std::wstring& encID: encIDs) {
+		for (const std::wstring& encID : encIDs) {
 			prt::Status s = prt::STATUS_UNSPECIFIED_ERROR;
 			const EncoderInfoPtr encInfo{prt::createEncoderInfo(encID.c_str(), &s)};
 			if (s == prt::STATUS_OK && encInfo)
@@ -376,7 +384,7 @@ RunStatus codecInfoToXML(const std::string& infoFilePath) {
 		xml << "</Encoders>\n";
 
 		xml << "<Decoders>\n";
-		for (const std::wstring& decID: decIDs) {
+		for (const std::wstring& decID : decIDs) {
 			prt::Status s = prt::STATUS_UNSPECIFIED_ERROR;
 			const DecoderInfoPtr decInfo{prt::createDecoderInfo(decID.c_str(), &s)};
 			if (s == prt::STATUS_OK && decInfo)
@@ -390,7 +398,8 @@ RunStatus codecInfoToXML(const std::string& infoFilePath) {
 		xml.close();
 
 		LOG_INF << "Dumped codecs info to " << infoFilePath;
-	} catch (std::exception& e) {
+	}
+	catch (std::exception& e) {
 		LOG_ERR << "Exception while dumping codec info: " << e.what();
 		return RunStatus::FAILED;
 	}
