@@ -211,12 +211,12 @@ AttributeMapPtr createAttributeMapFromTypedKeyValues(const std::vector<std::stri
 InputArgs::InputArgs(int argc, char* argv[]) : mStatus(RunStatus::FAILED) {
 	// determine current path
 	const std::filesystem::path executable = getExecutablePath();
-	mWorkDir = executable.parent_path().parent_path(); // cmake installs the exe to install/bin
+	mInstallRootPath = executable.parent_path().parent_path(); // cmake installs the exe to install/bin
 
 	// setup default values
 	mEncoderID = ENCODER_ID_OBJ;
 	mLogLevel = 2;
-	mOutputPath = mWorkDir / "output";
+	mOutputPath = mInstallRootPath / "output";
 	mInitialShapeAttrs = createAttributeMapFromTypedKeyValues({}); // PRT requires this in case no arguments are given
 
 	// setup arg handling callbacks
@@ -226,7 +226,7 @@ InputArgs::InputArgs(int argc, char* argv[]) : mStatus(RunStatus::FAILED) {
 		std::filesystem::path p = arg.front();
 		if (!p.is_absolute())
 			p = std::filesystem::current_path() / p;
-		mRulePackage = pcu::toFileURI(p.generic_string());
+		mRulePackageURI = pcu::toFileURI(p.generic_string());
 		return true;
 	};
 	const CLI::callback_t convertShapeAttrs = [this](const std::vector<std::string>& argShapeAttrs) {
@@ -244,7 +244,7 @@ InputArgs::InputArgs(int argc, char* argv[]) : mStatus(RunStatus::FAILED) {
 		if (output.is_absolute())
 			mOutputPath = output;
 		else
-			mOutputPath = mWorkDir / output;
+			mOutputPath = mInstallRootPath / output;
 		return true;
 	};
 	const CLI::callback_t convertInitialShapeGeoPath = [this](std::vector<std::string> arg) {
@@ -253,7 +253,7 @@ InputArgs::InputArgs(int argc, char* argv[]) : mStatus(RunStatus::FAILED) {
 		std::filesystem::path p = arg.front();
 		if (!p.is_absolute())
 			p = std::filesystem::current_path() / p;
-		mInitialShapeGeo = pcu::toFileURI(p.generic_string()); // we let prt deal with invalid file paths etc
+		mInitialShapeGeoURI = pcu::toFileURI(p.generic_string()); // we let prt deal with invalid file paths etc
 		return true;
 	};
 
