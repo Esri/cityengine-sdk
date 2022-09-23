@@ -242,6 +242,8 @@ InputArgs::InputArgs(int argc, char* argv[]) : mStatus(RunStatus::FAILED) {
 		if (arg.empty())
 			return false;
 		std::filesystem::path p = arg.front();
+		if (!p.is_absolute())
+			p = std::filesystem::current_path() / p;
 		mInitialShapeGeo = pcu::toFileURI(p.generic_string()); // we let prt deal with invalid file paths etc
 		return true;
 	};
