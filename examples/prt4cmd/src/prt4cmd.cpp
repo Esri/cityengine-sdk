@@ -114,9 +114,9 @@ int main(int argc, char* argv[]) {
 		if (!inputArgs.mRulePackage.empty()) {
 			LOG_INF << "Using rule package " << inputArgs.mRulePackage << std::endl;
 
-			const std::string u8rpkURI = pcu::toFileURI(inputArgs.mRulePackage);
 			prt::Status status = prt::STATUS_UNSPECIFIED_ERROR;
-			resolveMap.reset(prt::createResolveMap(pcu::toUTF16FromUTF8(u8rpkURI).c_str(), nullptr, &status));
+			resolveMap.reset(
+			        prt::createResolveMap(pcu::toUTF16FromUTF8(inputArgs.mRulePackage).c_str(), nullptr, &status));
 			if (resolveMap && (status == prt::STATUS_OK)) {
 				LOG_DBG << "resolve map = " << pcu::objectToXML(resolveMap.get());
 			}

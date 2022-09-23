@@ -226,7 +226,7 @@ InputArgs::InputArgs(int argc, char* argv[]) : mStatus(RunStatus::FAILED) {
 		std::filesystem::path p = arg.front();
 		if (!p.is_absolute())
 			p = std::filesystem::current_path() / p;
-		mRulePackage = p.string();
+		mRulePackage = pcu::toFileURI(p.generic_string());
 		return true;
 	};
 	const CLI::callback_t convertShapeAttrs = [this](const std::vector<std::string>& argShapeAttrs) {
