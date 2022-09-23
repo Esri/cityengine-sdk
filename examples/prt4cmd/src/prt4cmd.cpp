@@ -49,7 +49,7 @@ const wchar_t* ENCODER_OPT_NAME = L"name";
 struct PRTContext {
 	explicit PRTContext(const pcu::InputArgs& inputArgs) {
 		// create a console and file logger and register them with PRT
-		const std::filesystem::path fsLogPath = inputArgs.mWorkDir / FILE_LOG;
+		const std::filesystem::path fsLogPath = inputArgs.mInstallRootPath / FILE_LOG;
 		mLogHandler.reset(prt::ConsoleLogHandler::create(prt::LogHandler::ALL, prt::LogHandler::ALL_COUNT));
 		mFileLogHandler.reset(prt::FileLogHandler::create(prt::LogHandler::ALL, prt::LogHandler::ALL_COUNT,
 		                                                  fsLogPath.wstring().c_str()));
@@ -57,7 +57,7 @@ struct PRTContext {
 		prt::addLogHandler(mFileLogHandler.get());
 
 		// setup paths for plugins, assume standard SDK layout as per README.md
-		const std::filesystem::path rootPath = inputArgs.mWorkDir;
+		const std::filesystem::path rootPath = inputArgs.mInstallRootPath;
 		const std::filesystem::path extPath = rootPath / "lib";
 
 		// initialize PRT with the path to its extension libraries, the desired log level
@@ -111,17 +111,17 @@ int main(int argc, char* argv[]) {
 
 		// -- create resolve map based on rule package
 		pcu::ResolveMapPtr resolveMap;
-		if (!inputArgs.mRulePackage.empty()) {
-			LOG_INF << "Using rule package " << inputArgs.mRulePackage << std::endl;
+		if (!inputArgs.mRulePackageURI.empty()) {
+			LOG_INF << "Using rule package " << inputArgs.mRulePackageURI << std::endl;
 
 			prt::Status status = prt::STATUS_UNSPECIFIED_ERROR;
 			resolveMap.reset(
-			        prt::createResolveMap(pcu::toUTF16FromUTF8(inputArgs.mRulePackage).c_str(), nullptr, &status));
+			        prt::createResolveMap(pcu::toUTF16FromUTF8(inputArgs.mRulePackageURI).c_str(), nullptr, &status));
 			if (resolveMap && (status == prt::STATUS_OK)) {
 				LOG_DBG << "resolve map = " << pcu::objectToXML(resolveMap.get());
 			}
 			else {
-				LOG_ERR << "getting resolve map from '" << inputArgs.mRulePackage << "' failed, aborting.";
+				LOG_ERR << "getting resolve map from '" << inputArgs.mRulePackageURI << "' failed, aborting.";
 				return EXIT_FAILURE;
 			}
 		}
@@ -132,12 +132,12 @@ int main(int argc, char* argv[]) {
 
 		// -- setup initial shape geometry
 		pcu::InitialShapeBuilderPtr isb{prt::InitialShapeBuilder::create()};
-		if (!inputArgs.mInitialShapeGeo.empty()) {
-			LOG_DBG << L"trying to read initial shape geometry from " << inputArgs.mInitialShapeGeo;
-			const prt::Status s = isb->resolveGeometry(pcu::toUTF16FromOSNarrow(inputArgs.mInitialShapeGeo).c_str(),
+		if (!inputArgs.mInitialShapeGeoURI.empty()) {
+			LOG_DBG << L"trying to read initial shape geometry from " << inputArgs.mInitialShapeGeoURI;
+			const prt::Status s = isb->resolveGeometry(pcu::toUTF16FromOSNarrow(inputArgs.mInitialShapeGeoURI).c_str(),
 			                                           resolveMap.get(), cache.get());
 			if (s != prt::STATUS_OK) {
-				LOG_ERR << "could not resolve geometry from " << inputArgs.mInitialShapeGeo;
+				LOG_ERR << "could not resolve geometry from " << inputArgs.mInitialShapeGeoURI;
 				return EXIT_FAILURE;
 			}
 		}

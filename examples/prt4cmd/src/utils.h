@@ -111,13 +111,13 @@ struct InputArgs {
 		return (mStatus == RunStatus::CONTINUE);
 	}
 
-	std::filesystem::path mWorkDir;
+	std::filesystem::path mInstallRootPath;
 	std::filesystem::path mOutputPath;
 	std::string mEncoderID;
 	AttributeMapPtr mEncoderOpts;
-	std::string mRulePackage;
+	URI mRulePackageURI;
 	AttributeMapPtr mInitialShapeAttrs;
-	URI mInitialShapeGeo;
+	URI mInitialShapeGeoURI;
 	int mLogLevel;
 	std::string mInfoFile;
 	RunStatus mStatus;
