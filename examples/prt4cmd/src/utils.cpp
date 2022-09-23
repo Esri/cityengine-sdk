@@ -220,6 +220,15 @@ InputArgs::InputArgs(int argc, char* argv[]) : mStatus(RunStatus::FAILED) {
 	mInitialShapeAttrs = createAttributeMapFromTypedKeyValues({}); // PRT requires this in case no arguments are given
 
 	// setup arg handling callbacks
+	const CLI::callback_t convertRulePackagePath = [this](std::vector<std::string> arg) {
+		if (arg.empty())
+			return false;
+		std::filesystem::path p = arg.front();
+		if (!p.is_absolute())
+			p = std::filesystem::current_path() / p;
+		mRulePackage = p.string();
+		return true;
+	};
 	const CLI::callback_t convertShapeAttrs = [this](const std::vector<std::string>& argShapeAttrs) {
 		mInitialShapeAttrs = createAttributeMapFromTypedKeyValues(argShapeAttrs);
 		return true;
@@ -257,7 +266,7 @@ InputArgs::InputArgs(int argc, char* argv[]) : mStatus(RunStatus::FAILED) {
 	                                                                                        "5 = fatal, >5 = no output");
 	                     app.add_option("-o,--output",          convertOutputPath,          "Set the output path for the callbacks.");
 	                     app.add_option("-e,--encoder",         mEncoderID,                 "The encoder ID, e.g. 'com.esri.prt.codecs.OBJEncoder'.");
-	const auto optRPK =  app.add_option("-p,--rule-package",    mRulePackage,               "Set the rule package path.");
+	const auto optRPK =  app.add_option("-p,--rule-package",    convertRulePackagePath,               "Set the rule package path.");
 	const auto optAttr=  app.add_option("-a,--shape-attr",      convertShapeAttrs,          "Set one initial shape attribute with "
 	                                                                                        "syntax <name>:<type>=<value>\n"
 	                                                                                        "type = {string,float,int,bool,"
