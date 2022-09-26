@@ -78,7 +78,7 @@ URI toFileURI(const std::string& p);
  * XML helpers
  */
 std::string objectToXML(const prt::Object* obj);
-RunStatus codecInfoToXML(const std::string& infoFilePath);
+RunStatus codecInfoToXML(const std::filesystem::path& infoFilePath);
 
 /**
  * default initial shape geometry (a quad)
@@ -119,7 +119,7 @@ struct InputArgs {
 	AttributeMapPtr mInitialShapeAttrs;
 	URI mInitialShapeGeoURI;
 	int mLogLevel;
-	std::string mInfoFile;
+	std::filesystem::path mInfoFile;
 	RunStatus mStatus;
 };
 

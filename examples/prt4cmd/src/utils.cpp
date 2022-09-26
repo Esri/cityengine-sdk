@@ -256,6 +256,14 @@ InputArgs::InputArgs(int argc, char* argv[]) : mStatus(RunStatus::FAILED) {
 		mInitialShapeGeoURI = pcu::toFileURI(p.generic_string()); // we let prt deal with invalid file paths etc
 		return true;
 	};
+	const CLI::callback_t convertInfoFilePath = [this](std::vector<std::string> arg) {
+		if (arg.empty())
+			return false;
+		mInfoFile = arg.front();
+		if (!mInfoFile.is_absolute())
+			mInfoFile = std::filesystem::current_path() / mInfoFile;
+		return true;
+	};
 
 	// setup options
 	CLI::App app{"prt4cmd - command line example for the CityEngine Procedural RunTime"};
@@ -279,7 +287,7 @@ InputArgs::InputArgs(int argc, char* argv[]) : mStatus(RunStatus::FAILED) {
 	                                                                                        "type = {string,float,int,bool,"
 	                                                                                        "string[],float[],int[],bool[]}\n"
 	                                                                                        "Can be specified multiple times.");
-	const auto optInfo = app.add_option("-i,--info",            mInfoFile,                  "Write XML Extension Information to file.");
+	const auto optInfo = app.add_option("-i,--info",            convertInfoFilePath,        "Write XML Extension Information to file.");
 	// clang-format on
 
 	// setup option requirements
@@ -378,7 +386,7 @@ std::string objectToXML(const prt::Object* obj) {
 	return callAPI<char>(toXMLFunc, 4096);
 }
 
-RunStatus codecInfoToXML(const std::string& infoFilePath) {
+RunStatus codecInfoToXML(const std::filesystem::path& infoFilePath) {
 	const std::wstring encIDsStr{callAPI<wchar_t>(prt::listEncoderIds, 1024)};
 	const std::wstring decIDsStr{callAPI<wchar_t>(prt::listDecoderIds, 1024)};
 
