@@ -34,6 +34,8 @@ This section lists changes compared to CityEngine SDK 2.6.8300.
   * Now uses the `prt::Callbacks` interface to write the encoded files instead of directly writing to disk.
   * Added mesh merging option to control whether all meshes of one shape (for example a building) should be merged by material or into one single mesh (option `meshMerging`, values `perInitialShapeByMaterial` (default) and `perInitialShape`).
   * Fixed a bug which led to a crash if Windows network shares were used in a path via UNC (Universal Naming Convention).
+* USD Decoder:
+  * Fixed a crash if a usdz file was encountered in a rpk.
 * GLTF Encoder:
   * Fixed a bug where multiple redundant occlusion/roughness/metallic maps were created.
   * Now avoids re-encoding of occlusion/roughness/metallic maps if possible.
