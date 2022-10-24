@@ -1,4 +1,4 @@
-# CITYENGINE SDK 2.7.85XX CHANGELOG
+# CITYENGINE SDK 2.7.8538 CHANGELOG
 
 This section lists changes compared to CityEngine SDK 2.6.8300.
 
