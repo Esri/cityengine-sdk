@@ -45,7 +45,7 @@ This document explains how to install the CityEngine SDK and how to work with th
 
 ## Downloads
 
-Download the SDK archive, the open-source examples in this repository and the example data from the Assets section on the [Releases](https://github.com/Esri/cityengine-sdk/releases/latest) page.
+You can manually download the SDK archive, the open-source examples in this repository and the example data from the Assets section on the [Releases](https://github.com/Esri/cityengine-sdk/releases/latest) page.
 
 ## Examples
 
