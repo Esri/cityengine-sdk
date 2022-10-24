@@ -1,6 +1,6 @@
 # CityEngine SDK
 
-This is the official site for the SDK of [CityEngine](https://www.esri.com/en-us/arcgis/products/esri-cityengine/overview), a 3D city modeling software for urban design, visual effects, and VR/AR production. The CityEngine SDK is part of a [family of integrations](https://www.esri.com/en-us/arcgis/products/arcgis-cityengine/integrations) based on CityEngine.
+This is the official site for the SDK of [CityEngine](https://www.esri.com/en-us/arcgis/products/esri-cityengine/overview), a 3D city modeling software for urban design, visual effects, and VR/AR production. Using the CityEngine SDK, a number of [open source plugins and APIs](https://www.esri.com/en-us/arcgis/products/arcgis-cityengine/integrations) have been built, allowing to integrate CityEngine technology into other tools.
 
 The CityEngine SDK can be used for the development of:
 
@@ -29,19 +29,23 @@ This document explains how to install the CityEngine SDK and how to work with th
       examples/...
    ```
 
-3. Continue with building and running the `prt4cmd` example for either [Linux](examples/README_linux.md) or [Windows](examples/README_windows.md).
+3. Continue with building and running the `prt4cmd` example for either [Windows](examples/prt4cmd/README_windows.md) or [Linux](examples/prt4cmd/README_linux.md). This will automatically download the SDK archive for your platform.
 
 ## Table of Contents
 
-* [Downloads](https://github.com/Esri/cityengine-sdk/releases)
+* [Downloads](#downloads)
 * [Examples](#examples)
-* [API Documentation](https://esri.github.io/cityengine-sdk)
-* [Software Requirements](#general-software-requirements)
+* [Documentation](https://esri.github.io/cityengine-sdk)
 * [Related Software Products](#related-software-products)
+* [General Software Requirements](#general-software-requirements)
 * [Release History and Changelog](#release-history-and-changelog)
 * [CityEngine Resources](#cityengine-resources)
 * [Issues and Contributions](#issues-and-contributions)
 * [Licensing](#licensing)
+
+## Downloads
+
+Download the SDK archive, the open-source examples in this repository and the example data from the Assets section on the [Releases](https://github.com/Esri/cityengine-sdk/releases/latest) page.
 
 ## Examples
 
@@ -50,6 +54,9 @@ This repository contains a number of source code examples in the `examples` dire
 * [prt4cmd](examples/prt4cmd): a simple command line utility to apply rule packages onto initial shapes and generate models.
 * [stlenc](examples/stlenc): demonstrates how to write a custom encoder (exporter), in this case for the STL geometry format.
 * [stldec](examples/stldec): demonstrates how to write a custom decoder (importer) for the STL geometry format.
+
+## Documentation
+Read the [whitepaper](https://esri.github.io/cityengine-sdk/arcgis_prt_whitepaper.pdf) and the [architecture](https://esri.github.io/cityengine-sdk/arcgis_prt_architecture.pdf) overview pdfs or browse the [online reference](https://esri.github.io/cityengine-sdk). There is also an offline version in the downloaded sdk archive (/doc subdirectory).
 
 ## Related Software Products
 
@@ -78,7 +85,7 @@ Please note that the individual example READMEs may include further requirements
 
 ### Linux
 
-* RedHat Enterprise Linux 7.x and 8.x and compatible
+* RedHat Enterprise Linux 7.x, 8.x or compatible
 * Required C++ compiler: GCC 9.3 or later (RedHat Enterprise Linux DevToolSet 9)
 * Required flags for extension libraries: `-std=c++17 -D_GLIBCXX_USE_CXX11_ABI=0 -march=nocona -fvisibility=hidden -fvisibility-inlines-hidden -Wl,--exclude-libs,ALL`
 
