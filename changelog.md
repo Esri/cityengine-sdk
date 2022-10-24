@@ -3,7 +3,7 @@
 This section lists changes compared to CityEngine SDK 2.6.8300.
 
 ## General Info
-* CityEngine SDK 2.7.85XX is used in CityEngine 2022.1.85XX.
+* CityEngine SDK 2.7.8538 is used in CityEngine 2022.1.8538.
 
 ## PRT API
 * `prt::generate()`: fixed a (rare) crash on Linux.
