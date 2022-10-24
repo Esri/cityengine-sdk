@@ -274,7 +274,7 @@ InputArgs::InputArgs(int argc, char* argv[]) : mStatus(RunStatus::FAILED) {
 	                                                                                        "5 = fatal, >5 = no output");
 	                     app.add_option("-o,--output",          convertOutputPath,          "Set the output path for the callbacks.");
 	                     app.add_option("-e,--encoder",         mEncoderID,                 "The encoder ID, e.g. 'com.esri.prt.codecs.OBJEncoder'.");
-	const auto optRPK =  app.add_option("-p,--rule-package",    convertRulePackagePath,               "Set the rule package path.");
+	const auto optRPK =  app.add_option("-p,--rule-package",    convertRulePackagePath,     "Set the rule package path.");
 	const auto optAttr=  app.add_option("-a,--shape-attr",      convertShapeAttrs,          "Set one initial shape attribute with "
 	                                                                                        "syntax <name>:<type>=<value>\n"
 	                                                                                        "type = {string,float,int,bool,"
