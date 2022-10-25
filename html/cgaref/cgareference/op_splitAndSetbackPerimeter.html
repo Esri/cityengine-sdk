@@ -1,0 +1,211 @@
+<html>
+
+<head>
+	<title>splitAndSetbackPerimeter Operation</title>
+	<link rel="stylesheet" href="../manual_style.css" type="text/css" />
+	<style type="text/css">
+		<!--
+		.style1 {
+				font-size: 9px
+		}
+
+		.style2 {
+				font-size: 10px
+		}
+		-->
+	</style>
+</head>
+
+<body>
+<div class="content">
+
+<table summary="" class="header">
+	<tr>
+		<td align="left" class="helphead_l"><a href="../toc.html"><div class="helplink">&nbsp;</div></a></td>
+		<td align="right" class="helphead_r"></td>
+	</tr>
+</table>
+
+<h1>splitAndSetbackPerimeter operation</h1>
+
+<h2>Syntax</h2>
+
+<p class="code2"><span class="cga_op">splitAndSetbackPerimeter</span>(<span class="cga_opparam">splitOffset</span>) { <span class="cga_opparam">length<span class="style2">1</span></span> : <span class="cga_opparam">depth<span class="style2">1</span></span> : <span class="cga_opparam">operations<span class="style2">1</span></span> | ... | <span class="cga_opparam">length<span class="style2">n-1</span></span> : <span class="cga_opparam">depth<span class="style2">n-1</span></span> : <span class="cga_opparam">operations<span class="style2">n-1</span></span> } { <span class="cga_opparam">remainder</span> : <span class="cga_opparam">operations</span> } </p>
+<p class="code2"><span class="cga_op">splitAndSetbackPerimeter</span>(<span class="cga_opparam">splitOffset</span>) { <span class="cga_opparam">length<span class="style2">1</span></span> : <span class="cga_opparam">depth<span class="style2">1</span></span> : <span class="cga_opparam">operations<span class="style2">1</span></span> | ... | <span class="cga_opparam">length<span class="style2">n-1</span></span> : <span class="cga_opparam">depth<span class="style2">n-1</span></span> : <span class="cga_opparam">operations<span class="style2">n-1</span></span> }<span class="cga_opparam">*</span> { <span class="cga_opparam">remainder</span> : <span class="cga_opparam">operations</span> } </p>
+<p class="code2"><span class="cga_op">splitAndSetbackPerimeter</span>(<span class="cga_opparam">splitOffset</span>, <span class="cga_opparam">firstEdgeIndex</span>, <span class="cga_opparam">selectedEdgesMask</span>)  { <span class="cga_opparam">length<span class="style2">1</span></span> : <span class="cga_opparam">depth<span class="style2">1</span></span> : <span class="cga_opparam">operations<span class="style2">1</span></span> | ... | <span class="cga_opparam">length<span class="style2">n-1</span></span> : <span class="cga_opparam">depth<span class="style2">n-1</span></span> : <span class="cga_opparam">operations<span class="style2">n-1</span></span> } { <span class="cga_opparam">remainder</span> : <span class="cga_opparam">operations</span> } </p>
+<p class="code2"><span class="cga_op">splitAndSetbackPerimeter</span>(<span class="cga_opparam">splitOffset</span>, <span class="cga_opparam">firstEdgeIndex</span>, <span class="cga_opparam">selectedEdgesMask</span>)  { <span class="cga_opparam">length<span class="style2">1</span></span> : <span class="cga_opparam">depth<span class="style2">1</span></span> : <span class="cga_opparam">operations<span class="style2">1</span></span> | ... | <span class="cga_opparam">length<span class="style2">n-1</span></span> : <span class="cga_opparam">depth<span class="style2">n-1</span></span> : <span class="cga_opparam">operations<span class="style2">n-1</span></span> }<span class="cga_opparam">*</span> { <span class="cga_opparam">remainder</span> : <span class="cga_opparam">operations</span> } </p>
+
+<h2 id="params">Parameters</h2>
+
+<ul>
+    <li><span class="cga_opparam">splitOffset</span> (float)<br>The offset of the start of the split pattern. The relative operator ' permits values relative to the total length of all selected edges. 
+	<li><span class="cga_opparam">firstEdgeIndex</span> (float)<br>Index of the edge where the split pattern starts (0-based). Too large or negative indices are modulo wrapped to a correct index. Default is 0.</li>
+    <li><span class="cga_opparam">selectedEdgesMask</span> (bool[])<br>An array containing a Boolean value for each face edge determining whether the edge is part of the operation. By default all edges are selected.</li>
+    <li><span class="cga_opparam">length</span> (float)<br>Split length. Depending on the prefix, the lengths along the face perimeter are interpreted in the following way:
+	<table cellspacing="5">
+		<tr><td width="25%">no prefix (absolute)</td><td>The edge section's length will be exactly <span class="cga_opparam">length</span>.</td></tr>
+		<tr><td><span class="codelight">'</span> (relative)</td><td>The edge section's length will be <span class="cga_opparam">length</span> <i>* total length of all selected edges</i>.</td></tr>
+		<tr><td><span class="codelight">~</span> (floating)</td><td>With the <span class="codelight">~</span> prefix, the remaining spaces between the split parts with absolute dimensions are automatically adapted. If multiple floating parts are defined within a split, the dimensions are weighed proportionally.</td></tr>
+	</table>
+	</li>
+	<li><span class="cga_opparam">depth</span><br>The setback distance of the edge section.</li>
+	<li><span class="cga_opparam">operations</span><br>A sequence of shape operations to execute on the newly created shape.</li>
+	<li><span class="cga_opparam">*</span><br>Repeat switch: the repeat switch triggers the repetition of the defined split as many times as possible. The number of repetitions and floating dimensions are adapted to the best solution (best number of repetitions and least stretching).</li>
+	<li><span class="cga_opparam">remainder : operations</span><br>A sequence of shape operations to execute on the remainder of the polygon.</li>
+
+</ul>
+
+<h2>Description</h2>
+
+<p>The <span class="cga_opparam">splitAndSetbackPerimeter</span> operation combines concepts from the <a class="cga_op" href="op_split.html">split</a> and <a class="cga_op" href="op_setback.html">setback</a> operations: 
+First the perimeter of a polygon is split into sections according to the specified <span class="codelight">lengths</span>. 
+Then each section is setback by its respective <span class="codelight">depth</span>. Finally, a new shape is generated for each section and for the remainder of the polygon.</p> 
+
+<p>By default, the split pattern is evaluated along the entire perimeter of the polygon, starting on the first edge and going counterclockwise around the polygon.
+The start of the split pattern can be moved using a <span class="codelight">splitOffset</span>.
+To use the operation independent on the underlying geometry index order, the <span class="codelight">firstEdgeIndex</span> and <span class="codelight">selectedEdgesMask</span> can be set, typically with functions evaluating the spatial context (see examples below). Technically, the operation can be restricted to a part of the perimeter by setting the <span class="codelight">firstEdgeIndex</span> and passing a <span class="codelight">selectedEdgesMask</span>. 
+In this case, the selected edges are arranged in a chain on which the split is done. The array must be in face-edge order, i.e. the first element refers to the first edge of the first face, the second element to the second edge of the first face, and so on. Shared edges are considered separately for each face. If the array does not contain enough elements the respective missing face edges are considered not to be selected. If the array contains more elements than the number of total face edges the respective elements are ignored. Such an array could be constructed using the <a class="cga_op" href="func_comp.html">comp</a> function with the <span class="cga_opparam">component</span> selector set to <span class="codelight">fe</span> (face edges). 
+
+</p> 
+<h2>Related</h2>
+
+<ul>
+<li><a class="normw" href="op_split.html">split operation</a></li>
+<li><a class="normw" href="op_splitArea.html">splitArea operation</a></li>
+<li><a class="normw" href="attr_split.html">split attribute</a></li>
+<li><a class="normw" href="op_setback.html">setback operation</a></li>
+<li><a class="normw" href="op_setbackPerEdge.html">setbackPerEdge operation</a></li>
+<li><a class="normw" href="op_shapeLUO.html">shapeL operation</a></li>
+<li><a class="normw" href="op_shapeLUO.html">shapeU operation</a></li>
+<li><a class="normw" href="op_shapeLUO.html">shapeO operation</a></li>
+<li><a class="normw" href="func_comp.html">comp function</a></li>
+</ul>
+                
+<h2 id="examples">Examples</h2>
+
+<h3>Basic</h3>
+
+<table summary="" class="twocol">
+<tr>
+	<td class="twocol_l"><br><img src="images/splitAndSetbackPerimeter_1.png" width="298" alt="splitAndSetbackPerimeter_1"/></td>
+	<td><pre class="code3">
+Lot --> splitAndSetbackPerimeter(6) 
+    { 40 : 5 : Yellow |
+      20 : 10 : Blue  } 
+    { remainder : Grey }
+
+Yellow --> color("#F2BB1D")
+Blue   --> color("#3957A5")
+Grey   --> color("#CAC9C6") 
+	</pre>
+	</td>
+</tr>
+</table>
+
+<h3>Relative splitOffset</h3>
+
+<table summary="" class="twocol">
+<tr>
+	<td class="twocol_l"><br><img src="images/splitAndSetbackPerimeter_2.png" width="298" alt="splitAndSetbackPerimeter_2"/></td>
+	<td><pre class="code3">
+Lot --> splitAndSetbackPerimeter('0.1) 
+    { '0.5  : 10 : extrude(15) Yellow |
+      ~1    : 0  : NIL                |
+      '0.4  : 8  : extrude(10) Blue   |
+      ~1    : 0  : NIL                } 
+    { remainder : Grey }
+	</pre>
+	<em>
+	The start of the split pattern is offset by 10% (red arrow) of the length of the perimeter. Note that the <span class="codelight">splitOffset</span> allows the split pattern to start and end on an edge rather than a vertex. </em>
+	</td>
+</tr>
+</table>
+
+<h3>Using context-based functions to select edges</h3>
+
+</table>
+<br>
+<table summary="" class="twocol">
+<tr>
+	<td class="twocol_l"><br><img src="images/splitAndSetbackPerimeter_3.png" width="298" alt="splitAndSetbackPerimeter_3"/></td>
+	<td><pre class="code3">
+const INF = 100000
+
+// (8)[0.0,16.5,INF,INF,INF,INF,INF,-15.0]
+frontXCoords = comp(fe) { front : pivot.px | all : INF }
+
+// 7
+frontLeftMostEdgeIndex = sortIndices(frontXCoords)[0]
+
+// (8)[true,true,false,false,false,false,false,true]
+frontEdgesMask = comp(fe) { front : true }
+
+Lot --> splitAndSetbackPerimeter(0,
+            frontLeftMostEdgeIndex, frontEdgesMask)
+    { ~1   : 0  : NIL                |
+     '0.7  : 10 : extrude(12) Yellow | 
+      ~1   : 0  : NIL                } 
+    { remainder : Grey }
+    </pre>
+	<em>A section centered on the front edges of the perimeter is setback using the <span class="codelight">firstEdgeIndex</span> and <span class="codelight">selectedEdgesMask</span> parameters. In this example, the <a class="cga_op" href="func_comp.html">comp</a> and <a class="cga_op" href="func_sortIndices.html">sortIndices</a> functions as well as 
+	the <a class="cga_op" href="attr_pivot.html">pivot attribute</a> are used to find the index of the leftmost front edge and to construct the edge selection mask.</em>
+	</td>
+</tr>
+</table>
+
+<h3>Setback distances</h3>
+
+<br>
+<table summary="" class="twocol">
+<tr>
+	<td class="twocol_l"><br><img src="images/splitAndSetbackPerimeter_4.png" width="298" alt="splitAndSetbackPerimeter_4"/></td>
+	<td><pre class="code3">
+Lot --> splitAndSetbackPerimeter(0) 
+    { ~30 : rand(3, 15) : extrude(rand(2, 10)) Yellow }*
+    { remainder : Grey }
+    </pre>
+	<em>The perimeter is repeatedly split and setback by a random distance. Note that the setback distance is individually evaluated for each section.</em>
+	</td>
+</tr>
+</table>
+<br>
+<table summary="" class="twocol">
+<tr>
+	<td class="twocol_l"><br><img src="images/splitAndSetbackPerimeter_5.png" width="298" alt="splitAndSetbackPerimeter_5"/></td>
+	<td><pre class="code3">
+Lot --> splitAndSetbackPerimeter(0) 
+    { ~30 : split.index : extrude(split.index) Yellow }*
+    { remainder : Grey }
+    </pre>
+	<em>The perimeter is repeatedly split and setback based on the  <a class="cga_op" href="attr_split.html">split attribute</a>.</em>
+	</td>
+</tr>
+</table>
+
+<h3>Handling overlaps</h3>
+
+<br>
+<table summary="" class="twocol">
+<tr>
+	<td class="twocol_l"><br><img src="images/splitAndSetbackPerimeter_6.png" width="298" alt="splitAndSetbackPerimeter_6"/></td>
+	<td><pre class="code3">
+Left --> splitAndSetbackPerimeter(3) 
+    { 2 : 6 : Yellow | 2 : 0 : NIL | 2 : 4 : Blue }
+    {remainder : Grey }
+    
+Right --> splitAndSetbackPerimeter(3) 
+    { 2 : 4 : Yellow | 2 : 0 : NIL | 2 : 6 : Blue }
+    { remainder : Grey }
+    </pre>
+	<em>The yellow and blue shapes overlap. The overlap belongs to the shape that has been generated with larger <span class="codelight">depth</span> and is cut away from the other.</em>
+	</td>
+</tr>
+</table>
+<br>
+<p>Also see the <a class="cga_op" href="op_split.html#examples">split</a> operation for more examples on split patterns.</p>
+
+<p class="foot">Copyright &copy;2008-2022 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
+
+</div>
+</body>
+</html>
