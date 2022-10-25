@@ -35,7 +35,7 @@ This document explains how to install the CityEngine SDK and how to work with th
 
 * [Downloads](#downloads)
 * [Examples](#examples)
-* [Documentation](https://esri.github.io/cityengine-sdk)
+* [Documentation](#documentation)
 * [Related Software Products](#related-software-products)
 * [General Software Requirements](#general-software-requirements)
 * [Release History and Changelog](#release-history-and-changelog)
