@@ -33,11 +33,17 @@
 
 <h2>Returns</h2>
 
-<p>true if file <span class="cga_opparam">filePath</span> exists, false otherwise.</p>
+<p>true if file <span class="cga_opparam">filePath</span> exists and is a supported format, false otherwise.</p>
 
 <h2>Description</h2>
 
-<p>The <span class="cga_keyword">fileExists</span> function checks whether the file <span class="cga_opparam">filePath</span> exists in the workspace. The same search order as for asset insertion and texture lookups is used.</p>
+<p>The <span class="cga_keyword">fileExists</span> function checks whether the file <span class="cga_opparam">filePath</span> exists in the workspace. 
+The function only checks files with supported format, i.e., files that can be used in CGA operations and functions. 
+This includes asset formats (see <a href="op_i.html"><span class="code_std">i operation</span></a>), 
+image formats (see <a href="cga_texturing.html"><span class="code_std">texturing</span></a>), 
+material formats (see <a href="func_readMaterial.html"><span class="code_std">readMaterial</span></a>), 
+text formats (see <a href="func_readTextFile.html"><span class="code_std">readTextFile</span></a>),
+and table formats (see <a href="func_readTable.html"><span class="code_std">readTable</span></a>). The same search order as for asset insertion and texture lookups is used. </p>
       
 <h2>Related</h2>
 

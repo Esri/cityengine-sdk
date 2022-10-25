@@ -66,28 +66,28 @@ In case an offset selector is applied an occluder shape is automatically generat
 
 <h3>Offset Polygons and Border Faces</h3>
 
-The following illustration lists offset polygons (red) and border faces (green) in both the interior and exterior case.
+The following illustration lists offset polygons (blue) and border faces (yellow) in both the interior and exterior case.
 
 <p class="piccaptioncentered"><img src="images/offset_polygons_overview.png"><br> 
-The original polygon (in the middle) is downsized (negative offsets) and enlarged (positive offsets). Offset polygons are colored in red, border faces are in green. Note that in the case of enlarging, offset polygons and the border faces overlap.</p>
+The original polygon (in the middle) is downsized (negative offsets) and enlarged (positive offsets). Offset polygons are colored in blue, border faces are in yellow. Note that in the case of enlarging, offset polygons and the border faces overlap.</p>
 
 These offset polygons have been generated using the rule
 
 <pre class="code3">
-attr red   = "#FF0000"
-attr green = "#00FF00"
+attr blue    = "#3957A5"
+attr yellow  = "#F2BB1D"
 
 Lot --> offset(-3) A
 A   --> comp(f) { inside: I | border: O }
-I   --> color(red)
-O   --> color(green)
+I   --> color(blue)
+O   --> color(yellow)
 </pre>
 
 with <span class="cga_opparam">offset</span> between -3 and 3.
 
 <p class="info"> To extract the offset polygons, the <span class="cga_opparam">inside</span> selector is used for the component split. In the exterior case, this might be confusing, since offset polygons are actually outside in this case.</p>
 
-<p class="notes"> When using positive offsets, border faces (green) and offset polygons (red) overlap. In this case the normals of the border faces point down (see below).</p>
+<p class="notes"> When using positive offsets, border faces (yellow) and offset polygons (blue) overlap. In this case the normals of the border faces point down (see below).</p>
 
 <h3>Face Orientation</h3>
 
@@ -117,7 +117,7 @@ In the interior case (<span class="cga_opparam">offset</span> = -1), both the in
 <td style="vertical-align:middle">
 
 <em>
-In the exterior case (<span class="cga_opparam">offset</span> = 1), only the red face is oriented counter-clockwise. The green border faces are clockwise (negative).
+In the exterior case (<span class="cga_opparam">offset</span> = 1), only the blue face is oriented counter-clockwise. The yellow border faces are clockwise (negative).
 </em>
 
 </td>

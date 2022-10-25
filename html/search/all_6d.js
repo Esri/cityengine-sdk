@@ -28,6 +28,8 @@ var searchData=
   ['mesh',['Mesh',['../classprtx_1_1_mesh.html',1,'prtx']]],
   ['meshbuilder',['MeshBuilder',['../classprtx_1_1_mesh_builder.html',1,'prtx']]],
   ['meshbuilder',['MeshBuilder',['../classprtx_1_1_mesh_builder.html#aa081bd0885eb9a31189ae4a47ffe30d5',1,'prtx::MeshBuilder::MeshBuilder()'],['../classprtx_1_1_mesh_builder.html#a5a2411667c163b06b951a187c0eee0f6',1,'prtx::MeshBuilder::MeshBuilder(const MeshBuilder &amp;mb, const DoubleVector &amp;trafoMatrix)'],['../classprtx_1_1_mesh_builder.html#a39ddc5a410a161d72e0aaecc28228214',1,'prtx::MeshBuilder::MeshBuilder(const Mesh &amp;mesh)'],['../classprtx_1_1_mesh_builder.html#a579e04cc6d6e50a51b0510eb91d86170',1,'prtx::MeshBuilder::MeshBuilder(const Mesh &amp;mesh, const DoubleVector &amp;trafoMatrix)']]],
+  ['meshmerging',['MeshMerging',['../structprtx_1_1_mesh_merging.html',1,'prtx']]],
+  ['meshmerging',['meshMerging',['../classprtx_1_1_encode_preparator_1_1_preparation_flags.html#acde13835fe12c9384a51e71673a7b68b',1,'prtx::EncodePreparator::PreparationFlags']]],
   ['meshproperties',['MeshProperties',['../classprtx_1_1_encode_preparator.html#a3851fbecbcaea1ece14e355a90877ecd',1,'prtx::EncodePreparator']]],
   ['meshptr',['MeshPtr',['../namespaceprtx.html#a65bb021a589c1a0135bba1b6afa17047',1,'prtx']]],
   ['meshptrvector',['MeshPtrVector',['../namespaceprtx.html#a2171bec9cedf6370b18222bf7cc8de4c',1,'prtx']]],

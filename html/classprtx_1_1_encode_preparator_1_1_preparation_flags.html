@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="esri_prt_55px.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">ArcGIS Procedural Runtime
-   &#160;<span id="projectnumber">2.6.8300</span>
+   &#160;<span id="projectnumber">2.7.8538</span>
    </div>
   </td>
  </tr>
@@ -204,6 +204,11 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>mergeToleranceVertic
 <tr class="memitem:a557fa2210c1822f0a640ba9b11de7431"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a557fa2210c1822f0a640ba9b11de7431"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>mergeVertices</b> () const </td></tr>
 <tr class="separator:a557fa2210c1822f0a640ba9b11de7431"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acde13835fe12c9384a51e71673a7b68b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classprtx_1_1_encode_preparator_1_1_preparation_flags.html">PreparationFlags</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_encode_preparator_1_1_preparation_flags.html#acde13835fe12c9384a51e71673a7b68b">meshMerging</a> (<a class="el" href="structprtx_1_1_mesh_merging.html#ae3077b2d3d870b037c504f60d3e05c5d">MeshMerging::Action</a> v)</td></tr>
+<tr class="separator:acde13835fe12c9384a51e71673a7b68b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9048b0689e557a4fb154417416523964"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9048b0689e557a4fb154417416523964"></a>
+<a class="el" href="structprtx_1_1_mesh_merging.html#ae3077b2d3d870b037c504f60d3e05c5d">MeshMerging::Action</a>&#160;</td><td class="memItemRight" valign="bottom"><b>meshMerging</b> () const </td></tr>
+<tr class="separator:a9048b0689e557a4fb154417416523964"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0e16aee61e05ed3d8a3a1451cb3e71d8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classprtx_1_1_encode_preparator_1_1_preparation_flags.html">PreparationFlags</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_encode_preparator_1_1_preparation_flags.html#a0e16aee61e05ed3d8a3a1451cb3e71d8">offset</a> (double x, double y, double z)</td></tr>
 <tr class="separator:a0e16aee61e05ed3d8a3a1451cb3e71d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a44dd7f03c22dac0b87688b4cacafac1b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classprtx_1_1_encode_preparator_1_1_preparation_flags.html">PreparationFlags</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_encode_preparator_1_1_preparation_flags.html#a44dd7f03c22dac0b87688b4cacafac1b">offset</a> (const double *xyz)</td></tr>
@@ -483,7 +488,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>triangulate</b> () co
         </tr>
       </table>
 </div><div class="memdoc">
-<p>If true, meshes with the same material are combined per fetch call. </p>
+<p>[DEPRECATED, use <a class="el" href="classprtx_1_1_encode_preparator_1_1_preparation_flags.html#acde13835fe12c9384a51e71673a7b68b">meshMerging()</a>] If true, meshes with the same material are combined per fetch call. </p>
 
 </div>
 </div>
@@ -552,6 +557,23 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>triangulate</b> () co
       </table>
 </div><div class="memdoc">
 <p>If true, vertices will be merged together if they are closer than the distance specified with <a class="el" href="classprtx_1_1_encode_preparator_1_1_preparation_flags.html#a512294dc76c346a3da1adeb7f9ee6718">mergeToleranceVertices(float v)</a>. </p>
+
+</div>
+</div>
+<a class="anchor" id="acde13835fe12c9384a51e71673a7b68b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classprtx_1_1_encode_preparator_1_1_preparation_flags.html">PreparationFlags</a>&amp; prtx::EncodePreparator::PreparationFlags::meshMerging </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structprtx_1_1_mesh_merging.html#ae3077b2d3d870b037c504f60d3e05c5d">MeshMerging::Action</a>&#160;</td>
+          <td class="paramname"><em>v</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Control how new meshes should be merged with previous ones when added to the preparator. </p>
 
 </div>
 </div>
@@ -664,7 +686,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>triangulate</b> () co
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Jun 13 2022 16:53:32 for ArcGIS Procedural Runtime by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Oct 4 2022 16:52:16 for ArcGIS Procedural Runtime by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.5
 </small></address>

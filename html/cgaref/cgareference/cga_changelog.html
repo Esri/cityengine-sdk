@@ -31,6 +31,27 @@
 		<td><strong>Changes</strong></td>
 	</tr>
 	<tr>
+		<td>2022.1<br>CGAC 1.19</td>
+		<td>
+			New operations:
+			<ul>
+                <li><a href="op_splitAndSetbackPerimeter.html"><span class="code_std">splitAndSetbackPerimeter</span></a> operation.</li>
+			</ul>
+			Bugfixes:
+			<ul>
+   				<li><a href="op_offset.html"><span class="code_std">offset</span></a> operation: Fixed wrong geometry in case the <span class="codelight">inside</span> selector was used but no inside faces were created due to a too large (negative) offset. Now the original geometry is kept in such cases.</li> <!-- CE-2406 -->
+				<li><a href="op_deleteHoles.html"><span class="code_std">deleteHoles</span></a> operation: Fixed wrong geometry when deleting holes in non-planar shapes.</li> <!-- CE-8820 -->
+				<li><a href="op_comp.html"><span class="code_std">comp</span></a> operation: Fixed wrong geometry when selecting face components with non-planar holes.</li> <!-- CE-5910 -->
+                <li><a href="op_split.html"><span class="code_std">split</span></a> operation: Fixed warnings containing the wrong operation name.</li> <!-- CE-10392 -->
+                <li>Local Edits:</li>
+				<ul>
+					<li>Fixed a rare crash in deep recursive functions.</li> <!-- CE-10463 -->
+					<li><a href="op_split.html"><span class="code_std">split</span></a>, <a href="op_splitArea.html"><span class="code_std">splitArea</span></a> operation: Fixed a crash in nested repeat split patterns (repeat in repeat). <!-- CE-10539 -->
+				</ul>
+			</ul>
+		</td>
+	</tr>
+	<tr>
 		<td>2022.0<br>CGAC 1.18</td>
 		<td>
 			New features:

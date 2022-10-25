@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="esri_prt_55px.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">ArcGIS Procedural Runtime
-   &#160;<span id="projectnumber">2.6.8300</span>
+   &#160;<span id="projectnumber">2.7.8538</span>
    </div>
   </td>
  </tr>
@@ -249,8 +249,11 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>EncodePreparator</b>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Returns the finalized materials corresponding to the meshes in the geometry returned by <a class="el" href="classprtx_1_1_encode_preparator_1_1_finalized_instance.html#af84e0943e5e0638bc2d2700d5daddf86">getGeometry()</a>. Note that in the case of enabled instancing, these are the final materials as specified in the rules, whereas the materials attached to the meshes are the original asset materials. There is one material for each mesh in the geometry.</p>
-<dl class="section see"><dt>See Also</dt><dd><a class="el" href="classprtx_1_1_encode_preparator_1_1_preparation_flags.html#a9cc9153f80bd66b5763c04e9213a2d43">PreparationFlags::instancing</a> </dd></dl>
+<p>Returns the finalized materials corresponding to the meshes in the geometry returned by <a class="el" href="classprtx_1_1_encode_preparator_1_1_finalized_instance.html#af84e0943e5e0638bc2d2700d5daddf86">getGeometry()</a>. Note that in the case of enabled instancing, these are the final materials as specified in the rules, whereas the materials attached to the meshes are the original asset materials.</p>
+<p>The size and order of the returned vector corresponds to the concatenation of all materials returned by <a class="el" href="classprtx_1_1_mesh.html#a32765e438a0cd16d0caa6f97d2857ab1">prtx::Mesh::getMaterials()</a>.</p>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="classprtx_1_1_encode_preparator_1_1_preparation_flags.html#a9cc9153f80bd66b5763c04e9213a2d43">PreparationFlags::instancing</a> </dd>
+<dd>
+<a class="el" href="classprtx_1_1_mesh.html#a32765e438a0cd16d0caa6f97d2857ab1">prtx::Mesh::getMaterials</a> </dd></dl>
 
 </div>
 </div>
@@ -341,7 +344,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>EncodePreparator</b>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Jun 13 2022 16:53:32 for ArcGIS Procedural Runtime by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Oct 4 2022 16:52:16 for ArcGIS Procedural Runtime by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.5
 </small></address>
