@@ -1,3 +1,31 @@
+# CITYENGINE SDK 2.7.8603 CHANGELOG
+
+This section lists changes compared to CityEngine SDK 2.7.8538.
+
+## General Info
+* The focus of this release is to fix some issues which are important for certain client applications such as ArcGIS Pro. There is no CityEngine version using this version of the SDK.
+
+## PRT API
+* No changes.
+
+## PRTX API
+* No changes.
+
+## CGA
+* No changes.
+
+## Built-In Codecs
+* USD Decoder
+  * Ensure that all associated files of an USD asset are read through the `prtx::DataBackend` and can therefore make use of the PRT caching system.
+  * Fixed two bugs that prevented decoding of USD assets from general URIs.
+
+## Misc Changes and Fixes
+* Reduced peak memory usage when loading assets (e.g. when using the CGA `i` operation).
+* Updated 3rd-party libraries to fix security vulnerabilities:
+  * zlib 1.2.13
+  * libtiff 4.5.0
+  * libxml2 2.10.3
+
 # CITYENGINE SDK 2.7.8538 CHANGELOG
 
 This section lists changes compared to CityEngine SDK 2.6.8300.
