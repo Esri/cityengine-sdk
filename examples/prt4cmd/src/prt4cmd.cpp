@@ -147,24 +147,60 @@ int main(int argc, char* argv[]) {
 		}
 
 		// -- setup initial shape attributes
-		std::wstring ruleFile = L"bin/rule.cgb";
-		std::wstring startRule = L"default$init";
 		int32_t seed = 666;
 		const std::wstring shapeName = L"TheInitialShape";
 
+		// ---- seed
 		if (inputArgs.mInitialShapeAttrs) {
-			if (inputArgs.mInitialShapeAttrs->hasKey(L"ruleFile") &&
-			    inputArgs.mInitialShapeAttrs->getType(L"ruleFile") == prt::AttributeMap::PT_STRING)
-				ruleFile = inputArgs.mInitialShapeAttrs->getString(L"ruleFile");
-			if (inputArgs.mInitialShapeAttrs->hasKey(L"startRule") &&
-			    inputArgs.mInitialShapeAttrs->getType(L"startRule") == prt::AttributeMap::PT_STRING)
-				startRule = inputArgs.mInitialShapeAttrs->getString(L"startRule");
 			if (inputArgs.mInitialShapeAttrs->hasKey(L"seed") &&
 			    inputArgs.mInitialShapeAttrs->getType(L"seed") == prt::AttributeMap::PT_INT)
 				seed = inputArgs.mInitialShapeAttrs->getInt(L"seed");
 		}
 
-		isb->setAttributes(ruleFile.c_str(), startRule.c_str(), seed, shapeName.c_str(),
+		// ---- cgb
+		prt::Status status = prt::STATUS_UNSPECIFIED_ERROR;
+		const wchar_t* const cgbKey = resolveMap->findCGBKey(&status);
+		if (cgbKey == nullptr || status != prt::STATUS_OK) {
+			LOG_ERR << "getting CGB Key from '" << inputArgs.mRulePackageURI << "' failed, aborting.";
+			return EXIT_FAILURE;
+		}
+
+		LOG_INF << "Using rule file " << cgbKey;
+
+		// ---- start rule
+		const wchar_t* const cgbURI = resolveMap->getString(cgbKey, &status);
+		if(cgbURI == nullptr || status != prt::STATUS_OK) {
+			LOG_ERR << "getting CGB URI from '" << inputArgs.mRulePackageURI << "' failed, aborting.";
+			return EXIT_FAILURE;
+		}
+
+		pcu::RuleFileInfoPtr info{prt::createRuleFileInfo(cgbURI, cache.get(), &status)};
+		if(!info || status != prt::STATUS_OK) {
+			LOG_ERR << "getting rule file info from '" << inputArgs.mRulePackageURI << "' failed, aborting.";
+			return EXIT_FAILURE;
+		}
+
+		const prt::RuleFileInfo::Entry* startRule = nullptr;
+		for (size_t ri = 0; ri < info->getNumRules(); ri++) {
+			const prt::RuleFileInfo::Entry* const ruleEntry = info->getRule(ri);
+			if(ruleEntry->getNumParameters() > 0) continue;
+			for (size_t ai = 0; ai < ruleEntry->getNumAnnotations(); ai++) {
+				if (wcscmp(ruleEntry->getAnnotation(ai)->getName(), L"@StartRule") == 0) {
+					startRule = ruleEntry;
+					break;
+				}
+			}
+			if (startRule != nullptr) break;
+		}
+
+		if (startRule == nullptr) {
+			LOG_ERR << "getting start rule from '" << inputArgs.mRulePackageURI << "' failed, aborting.";
+			return EXIT_FAILURE;
+		}
+
+		LOG_INF << "Using start rule " << startRule->getName();
+
+		isb->setAttributes(cgbKey, startRule->getName(), seed, shapeName.c_str(),
 		                   inputArgs.mInitialShapeAttrs.get(), resolveMap.get());
 
 		// -- create initial shape

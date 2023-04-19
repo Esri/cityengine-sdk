@@ -56,6 +56,7 @@ using ConsoleLogHandlerPtr = std::unique_ptr<prt::ConsoleLogHandler, PRTDestroye
 using FileLogHandlerPtr = std::unique_ptr<prt::FileLogHandler, PRTDestroyer>;
 using EncoderInfoPtr = std::unique_ptr<const prt::EncoderInfo, PRTDestroyer>;
 using DecoderInfoPtr = std::unique_ptr<const prt::DecoderInfo, PRTDestroyer>;
+using RuleFileInfoPtr = std::unique_ptr<const prt::RuleFileInfo, PRTDestroyer>;
 
 /**
  * prt encoder options helpers

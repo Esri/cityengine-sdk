@@ -28,7 +28,7 @@ Before you start working with this example, please make sure you follow the main
 1. Type the following to generate the "candler" building model in the wavefront obj format:
 
    ```text
-   bin/prt4cmd -l 3 -g ../../../data/candler_footprint.obj -p ../../../data/candler.rpk -a ruleFile:string=bin/candler.cgb -a startRule:string=Default\$Footprint -e com.esri.prt.codecs.OBJEncoder -z baseName:string=theCandler
+   bin/prt4cmd -l 3 -g ../../../data/candler_footprint.obj -p ../../../data/candler.rpk -e com.esri.prt.codecs.OBJEncoder -z baseName:string=theCandler
    ```
 
 1. The result is placed in a new `output` directory inside the `install` directory:
@@ -38,7 +38,7 @@ Before you start working with this example, please make sure you follow the main
 1. To regenerate the same model with a different height, use the following command (note the additional `-a BuildingHeight...` statement):
 
    ```text
-   bin/prt4cmd -l 3 -g ../../../data/candler_footprint.obj -p ../../../data/candler.rpk -a ruleFile:string=bin/candler.cgb -a startRule:string=Default\$Footprint -a BuildingHeight:float=30 -e com.esri.prt.codecs.OBJEncoder -z baseName:string=theCandler
+   bin/prt4cmd -l 3 -g ../../../data/candler_footprint.obj -p ../../../data/candler.rpk -a BuildingHeight:float=30 -e com.esri.prt.codecs.OBJEncoder -z baseName:string=theCandler
    ```
 
 1. The obj file will now contain a model which is 30m high instead of the default 62m.
