@@ -1,3 +1,64 @@
+# CITYENGINE SDK 3.0.XXXX CHANGELOG
+
+This section lists changes compared to CityEngine SDK 2.7.8603.
+
+## General Info
+* CityEngine SDK 3.0.XXXX is used in CityEngine 2023.0.XXXX.
+* **Client applications must update their code** to find the cgb in a rule package, see details below. It is easy though!  
+* The CGA Compiler was upgraded to a new major version 2.0. This leads to significant changes: 
+  * New rpks might contain more than one cgb file. Only one of them can be used, and a new function has been introduced to find this main cgb. See `prt::ResolveMap:findCGBKey()` below. The old way of iterating over all keys to find the first cgb does not work anymore since there can now be inner cgbs which must not be used. This is a breaking change - you must adapt your client code! And it is actually much more convenient to use this function, so the change is trivial.
+  * Rule packages (rpks) created with CityEngine 2023.0 are not compatible with older versions of the CityEngine SDK. For minor version updates of the compiler, forward compatibility (i.e. old PRT, new rpk) is done in a best-effort manner (means: the rpk will work if no new feature of CGA is used). For major version updates this is not the case, an old PRT will refuse to use newer rpks.
+  
+## PRT API
+* New function `prt::ResolveMap:findCGBKey()`: This function **must** be used now to find the main cgb file key in the `ResolveMap` from an rpk. 
+* New function `prt::ResolveMap:findCGBKeys()`: This function is designed for advanced use cases where the `ResolveMap` is manged by the client application and can contain more than one main cgb.
+* `prt::createRuleFileInfo()`: the error handling of faulty cgb files got improved. It returns a `RuleFileInfo` also for cgb files with unexpected errors. Before, a nullptr was returned in some cases. Note that `prt::generate()` will still fail on buggy cgb files.  
+
+## PRTX API
+* `prtx::GeometryBuilder(const Geometry& geometry)`: made it more reboust (does not crash anymore on geometries created with `prtx::DebugUtils::toGeometry()`)
+* Windows: `prtx::FileSystemAdaptor::createStream()`: support for paths with length >= 260 characters.
+* Fixed a bug in `prtx::EncodePreparator` where collecting reports led to a cycle, resulting in consumption of all memory. 
+
+## CGA
+* New features:
+  * The new dynamic import feature allows to import and initialize a ruleset at the time of rule invocation. Overrides can be configured with at-runtime evaluated values.
+* New Annotations:
+  * @DisplayName annotation.
+* Changes to existing features:
+  * offset operation: Changed the topology of the resulting offset geometry for each face: At the boundary of border faces no duplicate vertices are created anymore. 
+* Bugfixes:
+  * setback, setbackPerEdge, setbackToArea operations:
+    * Fixed wrong modulo wrapping of large negative index selectors.
+    * Selectors bottom, top, object.bottom, object.top, world.down, world.up and world.side now work as expected. 
+  * Added support for reading assets and textures that are located at long (>= 260 chars) absolute paths in the filesystem (Windows only). 
+
+## Built-In Codecs
+* Unreal Encoder:
+  * Updated to Datasmith 5.1.0 library. Note that Datasmith 5.X files can not be read in Datasmith 4.X based applications. Use Unreal 5.0+ or Twinmotion 2023.1+. 
+* USD Encoder:
+  * Added support for all uv sets and texture layers specified in UsdPreviewSurface (before, only uvs 0 and the colormap were exported)
+  * Added fallback to dirtmap if there is no colormap.
+  * Fixed a crash in reports collection (see the fix in `prtx::EncodePreparator` above).
+  * Windows: Fixed crash if a too long filename was used.
+  * Fixed a bug where single-channel grey8 textures were not applied in materials.
+* USD Decoder:
+  * Added support for string-valued UsdPrimvarReader varnames (fixes Apple's USDZ sample assets where uvs / textures were missing).
+  * Added support for 'varying' uv interpolation scheme.
+  * Now reads uvs also if no texture is set.
+  * Improved performance for reading from non-file URIs.
+  * Fixed a crash if invalid face indices were encountered in the usd file. 
+* VOB Encoder:
+  * Fixed a bug which could lead to a crash on exit.  
+* Alembic Encoder:
+  * Fixed a bug which could lead to a crash on exit.  
+* CityEngine 3WS WebScene Encoder:
+  * This encoder got removed. The CityEngine Web Viewer is not available anymore, it is succeeded by the ArcGIS Scene Viewer. Use the SLPK encoder to export and publish your models for ArcGIS Scene Viewer.  
+
+## Misc Changes and Fixes
+* Windows: 3rd party symbols are now hidden in com.esri.prt.codecs.dll. 
+* prtx ExtensionManger: Clarified log messages if loading an extension fails. The warning message saying that the extension could not be loaded was hidden by underlying details which were logged as errors. These details are now logged on debug level.
+
+
 # CITYENGINE SDK 2.7.8603 CHANGELOG
 
 This section lists changes compared to CityEngine SDK 2.7.8538.
