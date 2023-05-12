@@ -46,7 +46,7 @@ const wchar_t*     WNL               = L"\n";
 
 const prtx::EncodePreparator::PreparationFlags ENC_PREP_FLAGS = prtx::EncodePreparator::PreparationFlags()
 	.instancing(false)
-	.mergeByMaterial(true)
+	.meshMerging(prtx::MeshMerging::ALL_OF_SAME_MATERIAL_AND_TYPE)
 	.triangulate(true)
 	.mergeVertices(true)
 	.cleanupVertexNormals(true)
