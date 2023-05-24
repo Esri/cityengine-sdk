@@ -49,7 +49,9 @@ This section lists changes compared to CityEngine SDK 2.7.8603.
   * Improved robustness when reading invalid USD files (e.g. fixed a crash if invalid face indices were encountered in the USD file.)
 * VOB Encoder:
   * Fixed a bug which could lead to a crash on exit.  
-* Alembic Encoder:
+* OBJ Encoder:
+  * Fixed a bug which could lead to a crash on exit.  
+* Collada Encoder:
   * Fixed a bug which could lead to a crash on exit.  
 * CityEngine 3WS WebScene Encoder:
   * This encoder got removed. The CityEngine Web Viewer is not available anymore, it is succeeded by the [ArcGIS Scene Viewer](https://www.arcgis.com/home/webscene/viewer.html). Use the SLPK encoder to export and publish your models for ArcGIS Scene Viewer.  
