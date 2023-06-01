@@ -21,7 +21,7 @@ This document explains how to install the CityEngine SDK and how to work with th
 ## Quick Start
 
 1. Clone or download this repository.
-2. Download the [example data](https://github.com/Esri/cityengine-sdk/releases/latest/download/esri_ce_sdk-example_data-v2.zip) and unpack it into a `data` directory next to `examples` inside the repo:
+2. Download the [example data](https://github.com/Esri/cityengine-sdk/releases/latest/download/esri_ce_sdk-example_data-v3.zip) and unpack it into a `data` directory next to `examples` inside the repo:
 
    ```text
    /cityengine-sdk/
