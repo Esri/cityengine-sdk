@@ -60,7 +60,6 @@ This section lists changes compared to CityEngine SDK 2.7.8603.
 * Windows: 3rd party symbols are now hidden in com.esri.prt.codecs.dll. 
 * `prtx::ExtensionManger`: Clarified log messages if loading an extension fails. The warning message saying that the extension could not be loaded was dominated by underlying details which were logged as errors. These details are now logged on debug level.
 
-
 # CITYENGINE SDK 2.7.8603 CHANGELOG
 
 This section lists changes compared to CityEngine SDK 2.7.8538.
