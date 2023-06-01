@@ -9,7 +9,7 @@
  * Written by Simon Haegler
  * Esri R&D Center Zurich, Switzerland
  *
- * Copyright 2012-2022 (c) Esri R&D Center Zurich
+ * Copyright 2012-2023 (c) Esri R&D Center Zurich
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -46,7 +46,7 @@ const wchar_t*     WNL               = L"\n";
 
 const prtx::EncodePreparator::PreparationFlags ENC_PREP_FLAGS = prtx::EncodePreparator::PreparationFlags()
 	.instancing(false)
-	.mergeByMaterial(true)
+	.meshMerging(prtx::MeshMerging::ALL_OF_SAME_MATERIAL_AND_TYPE)
 	.triangulate(true)
 	.mergeVertices(true)
 	.cleanupVertexNormals(true)

@@ -5,7 +5,7 @@
  *
  * See README.md in https://github.com/Esri/cityengine-sdk for build instructions.
  *
- * Copyright (c) 2012-2022 Esri R&D Center Zurich
+ * Copyright (c) 2012-2023 Esri R&D Center Zurich
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -56,6 +56,7 @@ using ConsoleLogHandlerPtr = std::unique_ptr<prt::ConsoleLogHandler, PRTDestroye
 using FileLogHandlerPtr = std::unique_ptr<prt::FileLogHandler, PRTDestroyer>;
 using EncoderInfoPtr = std::unique_ptr<const prt::EncoderInfo, PRTDestroyer>;
 using DecoderInfoPtr = std::unique_ptr<const prt::DecoderInfo, PRTDestroyer>;
+using RuleFileInfoPtr = std::unique_ptr<const prt::RuleFileInfo, PRTDestroyer>;
 
 /**
  * prt encoder options helpers
