@@ -60,67 +60,52 @@
 
 <h3>Translate a shape along the world x-axis</h3>
 <table summary="" class="twocol">
-	<tr>
-		<td class="twocol_l"><br />
-		<img src="images/translate-world.png" alt="translate world" /></td>
-		<td>
-		<pre class="code_std">
-version "2009.2"
-
-Init-->
-	split(x) { '0.2 : split(z) { '0.2 : PP }* }*
+<tr>
+<td class="twocol_l"><br />
+<img src="images/translate-world.png" alt="translate world" /></td>
+<td>
+<pre class="code_std">
+Init --> split(x) { '0.2 : split(z) { '0.2 : PP }* }*
 	
-PP-->
-	43%:
-		primitiveCube()
-		X
-		translate(rel, world, 2, 0, 0)
-		color("#ff0000")
-		X
-	else:
-		NIL   
-	</pre>
-	<em>
-	The red cubes are copies of the white cubes, translated by two units along the x-axis of the world coordinate system (i.e. the red axis on the bottom right).
-	</em>
-	
-         </td>
-	</tr>
-	</table>
+PP --> 43% : primitiveCube()
+             X
+             translate(rel, world, 2, 0, 0)
+             color("#ff0000")
+             X
+       else : NIL   
+</pre>
+<em>
+The red cubes are copies of the white cubes, translated by two units along the x-axis of the world coordinate system (i.e. the red axis on the bottom right).
+</em>
+</td>
+</tr>
+</table>
 
 <h3>Translate a shape along the object x-axis</h3>
 <table summary="" class="twocol">
-   	<tr>
-		<td class="twocol_l"><br />
-		<img src="images/translate-object.png" alt="translate object" /></td>
-		<td>
-		<pre class="code_std">
-version "2009.2"
-
-Init-->
-	split(x) { '0.2 : split(z) { '0.2 : PP }* }*
+<tr>
+<td class="twocol_l"><br />
+<img src="images/translate-object.png" alt="translate object" /></td>
+<td>
+<pre class="code_std">
+Init --> split(x) { '0.2 : split(z) { '0.2 : PP }* }*
 	
-PP-->
-	43%:
-		primitiveCube()
-		X
-		translate(rel, object, 2, 0, 0)
-		color("#ff0000")
-		X
-	else:
-		NIL
-        </pre>
-       </td>  
-       
-   	<em>
-	The red cubes are copies of the white cubes, translated by two units along the x-axis of the object coordinate system (i.e. the red axis in the center).
-	</em>
-          
-	</tr>
+PP --> 43% : primitiveCube()
+             X
+             translate(rel, object, 2, 0, 0)
+             color("#ff0000")
+             X
+       else : NIL
+</pre>
+<em>
+The red cubes are copies of the white cubes, translated by two units along the x-axis of the object coordinate system (i.e. the red axis in the center).
+</em>
+</td>   
+</tr>
 </table>
 
 <!-- FOOTER -->
-<p class="foot">Copyright &copy;2008-2022 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
+<p class="foot">Copyright &copy;2008-2023 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
 
 <!-- END CENTERED CONTENT -->
 

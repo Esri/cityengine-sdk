@@ -3,6 +3,8 @@ var searchData=
   ['fetchfinalizedinstances',['fetchFinalizedInstances',['../classprtx_1_1_encode_preparator.html#ac590db9fbdaf2c81bf972a9da974843c',1,'prtx::EncodePreparator']]],
   ['fileextensions',['FileExtensions',['../classprtx_1_1_file_extensions.html#ab37caaf6d8d82bf423b217cf3e7a784c',1,'prtx::FileExtensions::FileExtensions(const std::wstring &amp;e)'],['../classprtx_1_1_file_extensions.html#ad5a09b34fabc8486fdd26ab556f990f3',1,'prtx::FileExtensions::FileExtensions(const WStringVector &amp;v)']]],
   ['finalize',['finalize',['../classprtx_1_1_reports_accumulator.html#af336a21263086dddfe22f76e295acfea',1,'prtx::ReportsAccumulator']]],
+  ['findcgbkey',['findCGBKey',['../classprt_1_1_resolve_map.html#a0791d6196104a05ae101adbd43d9b284',1,'prt::ResolveMap']]],
+  ['findcgbkeys',['findCGBKeys',['../classprt_1_1_resolve_map.html#aeb5e8fe701424bd0c61e159e0b6e61d6',1,'prt::ResolveMap']]],
   ['finish',['finish',['../classprtx_1_1_encoder.html#af64bcbbeb6522f48009fa9d8a90bd61d',1,'prtx::Encoder']]],
   ['flagashidden',['flagAsHidden',['../classprtx_1_1_encode_options_annotator.html#ab1fbd90176dcfc6f2bbab116634caa59',1,'prtx::EncodeOptionsAnnotator']]],
   ['flagasmandatory',['flagAsMandatory',['../classprtx_1_1_encode_options_annotator.html#a98f7c09f26f90f410e1c5c73c4f5cfb0',1,'prtx::EncodeOptionsAnnotator']]],

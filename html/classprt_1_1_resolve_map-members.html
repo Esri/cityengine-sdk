@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="esri_prt_55px.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">ArcGIS Procedural Runtime
-   &#160;<span id="projectnumber">2.7.8603</span>
+   &#160;<span id="projectnumber">3.0.8905</span>
    </div>
   </td>
  </tr>
@@ -97,6 +97,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <table class="directory">
   <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>Attributable</b>() (defined in <a class="el" href="classprt_1_1_attributable.html">prt::Attributable</a>)</td><td class="entry"><a class="el" href="classprt_1_1_attributable.html">prt::Attributable</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">protected</span></td></tr>
   <tr><td class="entry"><a class="el" href="classprt_1_1_object.html#acc54db5c6d262525ed65a6edad804e34">destroy</a>() const </td><td class="entry"><a class="el" href="classprt_1_1_object.html">prt::Object</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classprt_1_1_resolve_map.html#a0791d6196104a05ae101adbd43d9b284">findCGBKey</a>(Status *stat=nullptr) const =0</td><td class="entry"><a class="el" href="classprt_1_1_resolve_map.html">prt::ResolveMap</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
+  <tr><td class="entry"><a class="el" href="classprt_1_1_resolve_map.html#aeb5e8fe701424bd0c61e159e0b6e61d6">findCGBKeys</a>(const wchar_t **result, size_t *resultSize, Status *stat=nullptr) const =0</td><td class="entry"><a class="el" href="classprt_1_1_resolve_map.html">prt::ResolveMap</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="classprt_1_1_attributable.html#a4905cf082cec753e00dead35a1079bda">getBool</a>(const wchar_t *key, Status *stat=0) const =0</td><td class="entry"><a class="el" href="classprt_1_1_attributable.html">prt::Attributable</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
   <tr><td class="entry"><a class="el" href="classprt_1_1_attributable.html#a3107eb779d875d6d7a76796ed485d2f0">getBoolArray</a>(const wchar_t *key, size_t *count, Status *stat=0) const =0</td><td class="entry"><a class="el" href="classprt_1_1_attributable.html">prt::Attributable</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="classprt_1_1_attributable.html#a79edd6ddb5a49a4eb1c02a92cfd49c88">getFloat</a>(const wchar_t *key, Status *stat=0) const =0</td><td class="entry"><a class="el" href="classprt_1_1_attributable.html">prt::Attributable</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
@@ -124,7 +126,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <tr class="even"><td class="entry"><a class="el" href="classprt_1_1_attributable.html#aaa464b033212c723bf25b39383b19012ae0fdd963344e239338fdcf72d905a565">PT_STRING_ARRAY</a> enum value</td><td class="entry"><a class="el" href="classprt_1_1_attributable.html">prt::Attributable</a></td><td class="entry"></td></tr>
   <tr><td class="entry"><a class="el" href="classprt_1_1_attributable.html#aaa464b033212c723bf25b39383b19012ab5ace444aafb3402d3423cec0ae8ac04">PT_UNDEFINED</a> enum value</td><td class="entry"><a class="el" href="classprt_1_1_attributable.html">prt::Attributable</a></td><td class="entry"></td></tr>
   <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>ResolveMap</b>() (defined in <a class="el" href="classprt_1_1_resolve_map.html">prt::ResolveMap</a>)</td><td class="entry"><a class="el" href="classprt_1_1_resolve_map.html">prt::ResolveMap</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
-  <tr><td class="entry"><a class="el" href="classprt_1_1_resolve_map.html#a4996b244d67134dfce4f9a7fa118a0bb">searchKey</a>(const wchar_t *project, const wchar_t *query, wchar_t *result, size_t *resultSize, Status *stat=0) const =0</td><td class="entry"><a class="el" href="classprt_1_1_resolve_map.html">prt::ResolveMap</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
+  <tr><td class="entry"><a class="el" href="classprt_1_1_resolve_map.html#a29cd0f4d56d64316fadb45bb01d66c34">searchKey</a>(const wchar_t *project, const wchar_t *query, wchar_t *result, size_t *resultSize, Status *stat=nullptr) const =0</td><td class="entry"><a class="el" href="classprt_1_1_resolve_map.html">prt::ResolveMap</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="classprt_1_1_object.html#af48f27c9b1da0b89a73db63498f6af9b">toXML</a>(char *result, size_t *resultSize, Status *stat=0) const =0</td><td class="entry"><a class="el" href="classprt_1_1_object.html">prt::Object</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
   <tr><td class="entry"><a class="el" href="classprt_1_1_object.html#aad4fc94d171bb772d9571416812aa2b2">toXMLDocument</a>(char *result, size_t *resultSize, Status *stat=0) const </td><td class="entry"><a class="el" href="classprt_1_1_object.html">prt::Object</a></td><td class="entry"></td></tr>
   <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>~Attributable</b>() (defined in <a class="el" href="classprt_1_1_attributable.html">prt::Attributable</a>)</td><td class="entry"><a class="el" href="classprt_1_1_attributable.html">prt::Attributable</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">virtual</span></td></tr>
@@ -133,7 +135,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </table></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Dec 16 2022 16:58:57 for ArcGIS Procedural Runtime by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu May 4 2023 17:05:00 for ArcGIS Procedural Runtime by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.5
 </small></address>

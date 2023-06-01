@@ -8,6 +8,8 @@ var searchData=
   ['finalize',['finalize',['../classprtx_1_1_reports_accumulator.html#af336a21263086dddfe22f76e295acfea',1,'prtx::ReportsAccumulator']]],
   ['finalizedinstance',['FinalizedInstance',['../classprtx_1_1_encode_preparator_1_1_finalized_instance.html',1,'prtx::EncodePreparator']]],
   ['finalizedinstancebase',['FinalizedInstanceBase',['../structprtx_1_1_encode_preparator_1_1_finalized_instance_base.html',1,'prtx::EncodePreparator']]],
+  ['findcgbkey',['findCGBKey',['../classprt_1_1_resolve_map.html#a0791d6196104a05ae101adbd43d9b284',1,'prt::ResolveMap']]],
+  ['findcgbkeys',['findCGBKeys',['../classprt_1_1_resolve_map.html#aeb5e8fe701424bd0c61e159e0b6e61d6',1,'prt::ResolveMap']]],
   ['finish',['finish',['../classprtx_1_1_encoder.html#af64bcbbeb6522f48009fa9d8a90bd61d',1,'prtx::Encoder']]],
   ['flagashidden',['flagAsHidden',['../classprtx_1_1_encode_options_annotator.html#ab1fbd90176dcfc6f2bbab116634caa59',1,'prtx::EncodeOptionsAnnotator']]],
   ['flagasmandatory',['flagAsMandatory',['../classprtx_1_1_encode_options_annotator.html#a98f7c09f26f90f410e1c5c73c4f5cfb0',1,'prtx::EncodeOptionsAnnotator']]],

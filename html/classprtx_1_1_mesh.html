@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="esri_prt_55px.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">ArcGIS Procedural Runtime
-   &#160;<span id="projectnumber">2.7.8603</span>
+   &#160;<span id="projectnumber">3.0.8905</span>
    </div>
   </td>
  </tr>
@@ -305,7 +305,7 @@ Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>pointer to array with all face indices of the holes for the selected face. Size of array is getFaceHolesCount(faceId). </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>pointer to array with all face indices of the holes for the selected face. Size of array is getFaceHolesCount(faceId). Returns nullptr if the mesh does not contain any holes or if faceId does not reference a hole. </dd></dl>
 
 </div>
 </div>
@@ -381,6 +381,12 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>the region index of the selected face and uv set. </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::range_error</td><td>will be thrown if the uvSet does not exist in this mesh. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -405,6 +411,12 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>vector with the index into the texture regions for each face. Size of vector is the number of faces. </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::range_error</td><td>will be thrown if the uvSet does not exist in this mesh. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -440,6 +452,12 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>the number of uvs for the selected face for the selected uv set. </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::range_error</td><td>will be thrown if the uvSet does not exist in this mesh. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -464,6 +482,12 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>the number of uvs for each face for the selected uv set. </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::range_error</td><td>will be thrown if the uvSet does not exist in this mesh. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -498,7 +522,13 @@ Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>pointer to array with all uv indices of the selected face and uv set. Size of array is getFaceUVCount(faceId, uvSet). </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>pointer to array with all uv indices of the selected face and uv set. Size of array is getFaceUVCount(faceId, uvSet). Returns nullptr if this face does not contain any UVs for uvSet. </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::range_error</td><td>will be thrown if the uvSet does not exist in this <a class="el" href="classprtx_1_1_mesh.html">Mesh</a>. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -563,7 +593,7 @@ Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>pointer to array with vertex indices; size of array is getFaceVertexCount(faceId). </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>pointer to array with vertex indices; size of array is getFaceVertexCount(faceId). Does not return nullptr. </dd></dl>
 
 </div>
 </div>
@@ -604,7 +634,7 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>A face can optionally have vertex normals. The number of vertex normals for a face is either 0 or equal to the number of vertices. Gets the number of vertex normals in each face. Size of the vector is the number of faces. </p>
-<dl class="section return"><dt>Returns</dt><dd>a vector with the number of vertex normalss for each face. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>a vector with the number of vertex normals for each face. </dd></dl>
 
 </div>
 </div>
@@ -628,7 +658,7 @@ Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>pointer to array with all vertex normal indices of the selected face. Size of array is getFaceVertexNormalCount(faceId). </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>pointer to array with all vertex normal indices of the selected face. Size of array is getFaceVertexNormalCount(faceId). Returns nullptr if this face does not contain any vertex normal indices. </dd></dl>
 
 </div>
 </div>
@@ -701,6 +731,12 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>all regions as a series of (u_min,v_min,u_max,v_max) quadruples. </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::range_error</td><td>will be thrown if the uvSet does not exist in this mesh. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -741,6 +777,12 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>all uvs as a series of (u,v) pairs. </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::range_error</td><td>will be thrown if the uvSet does not exist in this mesh. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -800,7 +842,7 @@ Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Dec 16 2022 16:58:57 for ArcGIS Procedural Runtime by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu May 4 2023 17:05:00 for ArcGIS Procedural Runtime by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.5
 </small></address>

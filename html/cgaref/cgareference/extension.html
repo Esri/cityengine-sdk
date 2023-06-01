@@ -25,6 +25,12 @@
         
 <p class="code2">extension <span class="cga_opparam">id</span> --> <span class="cga_opparam">operations</span></p>
 
+<h2>Parameters</h2>
+<ul>
+	<li><span class="cga_opparam">id</span> (identifier)<br/>Unique identifier for the extension rule.</li>
+	<li><span class="cga_opparam">operations</span><br>A sequence of shape operations to execute.</li>
+</ul>
+
 <h2>Description</h2>
 
 <p>The <span class="codelight">extension</span> keyword marks a rule as an <em>extension point</em> of the current ruleset (i.e. the cga file).</p>
@@ -34,6 +40,13 @@
 <p>If an extension point should not generate anything by default, just use one <a href="op_nil.html"><span class="code_std">NIL</span></a> operation: <pre class="code3">extension Rule --> NIL</pre></p>
 
 <p>Extension rules cannot be defined in styles other than the <span class="codelight">Default</span> style.</p>
+
+<h2>Related</h2>
+<ul>
+    <li><a href="attr.html"><span class="code_std">attr</span></a> keyword</li>
+	<li><a href="start.html"><span class="code_std">start</span></a> keyword</li>
+    <li><a href="import.html"><span class="code_std">import</span></a> keyword</li>
+</ul>
 
 <h2>Example</h2>
 
@@ -62,7 +75,7 @@ Lot --> rule.Init
 </tr>
 </table>
 
-<p class="foot">Copyright &copy;2008-2022 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
+<p class="foot">Copyright &copy;2008-2023 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
 
 <!-- END CENTERED CONTENT -->
 

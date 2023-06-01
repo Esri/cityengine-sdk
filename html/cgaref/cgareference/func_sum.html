@@ -71,6 +71,8 @@
 
 <h2>Examples</h2>
 
+<h3>Count and measure geometric properties</h3>
+
 <p class="example">	
 <pre class="code3">
 frontLength = sum( comp(fe) { street.front : scope.sx } )
@@ -79,8 +81,21 @@ numberSmallFaces = sum( comp(f) { all : geometry.area < 0.1 } )
 </pre>
 </p>
 
+<h3>Cumulative sum</h3>
+
+<p class="example">	
+<pre class="code3">
+const x = cumsum([1:5])                        // [1,3,6,10,15]
+const y = cumsum(["a","b","c","d","e"])        // [a,ab,abc,abcd,abcde]
+const z = cumsum([false,true,true,false,true]) // [0,1,2,2,3]
+
+cumsum(array) = case size(array) < 2 : [ sum(array) ]
+                else : [ cumsum(array[0:size(array)-2]), sum(array) ]
+</pre>
+</p>
+
 <!-- FOOTER -->
-<p class="foot">Copyright &copy;2008-2022 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
+<p class="foot">Copyright &copy;2008-2023 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
 
 <!-- END CENTERED CONTENT -->
 

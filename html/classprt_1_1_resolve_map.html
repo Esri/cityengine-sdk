@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="esri_prt_55px.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">ArcGIS Procedural Runtime
-   &#160;<span id="projectnumber">2.7.8603</span>
+   &#160;<span id="projectnumber">3.0.8905</span>
    </div>
   </td>
  </tr>
@@ -106,8 +106,12 @@ Inheritance diagram for prt::ResolveMap:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a4996b244d67134dfce4f9a7fa118a0bb"><td class="memItemLeft" align="right" valign="top">virtual wchar_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprt_1_1_resolve_map.html#a4996b244d67134dfce4f9a7fa118a0bb">searchKey</a> (const wchar_t *project, const wchar_t *query, wchar_t *result, size_t *resultSize, <a class="el" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a> *stat=0) const =0</td></tr>
-<tr class="separator:a4996b244d67134dfce4f9a7fa118a0bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0791d6196104a05ae101adbd43d9b284"><td class="memItemLeft" align="right" valign="top">virtual const wchar_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprt_1_1_resolve_map.html#a0791d6196104a05ae101adbd43d9b284">findCGBKey</a> (<a class="el" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a> *stat=nullptr) const =0</td></tr>
+<tr class="separator:a0791d6196104a05ae101adbd43d9b284"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb5e8fe701424bd0c61e159e0b6e61d6"><td class="memItemLeft" align="right" valign="top">virtual const wchar_t **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprt_1_1_resolve_map.html#aeb5e8fe701424bd0c61e159e0b6e61d6">findCGBKeys</a> (const wchar_t **result, size_t *resultSize, <a class="el" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a> *stat=nullptr) const =0</td></tr>
+<tr class="separator:aeb5e8fe701424bd0c61e159e0b6e61d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a29cd0f4d56d64316fadb45bb01d66c34"><td class="memItemLeft" align="right" valign="top">virtual wchar_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprt_1_1_resolve_map.html#a29cd0f4d56d64316fadb45bb01d66c34">searchKey</a> (const wchar_t *project, const wchar_t *query, wchar_t *result, size_t *resultSize, <a class="el" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a> *stat=nullptr) const =0</td></tr>
+<tr class="separator:a29cd0f4d56d64316fadb45bb01d66c34"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classprt_1_1_attributable"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classprt_1_1_attributable')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classprt_1_1_attributable.html">prt::Attributable</a></td></tr>
 <tr class="memitem:a4905cf082cec753e00dead35a1079bda inherit pub_methods_classprt_1_1_attributable"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprt_1_1_attributable.html#a4905cf082cec753e00dead35a1079bda">getBool</a> (const wchar_t *key, <a class="el" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a> *stat=0) const =0</td></tr>
 <tr class="separator:a4905cf082cec753e00dead35a1079bda inherit pub_methods_classprt_1_1_attributable"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -175,10 +179,93 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:ac96dbcd8de3255280d1d1d8692f618ee inherit pro_methods_classprt_1_1_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>A <a class="el" href="classprt_1_1_resolve_map.html">ResolveMap</a> maps an arbitrary string key to an URI. Resolve maps are used for asset lookups during CGA generation (e.g. <a href="cgaref/cgareference/op_i.html">i()</a> and <a href="cgaref/cgareference/op_texture.html">texture()</a> operations). Use the <a class="el" href="classprt_1_1_attributable.html#a89f6effbe6f4c560a3ef96f3527e0064">getString()</a> member function derived from the <a class="el" href="classprt_1_1_attributable.html">Attributable</a> interface to lookup a key. ResolveMaps can be stacked, i.e. a map can be put in place downstream. </p>
-<dl class="section see"><dt>See Also</dt><dd><a class="el" href="classprt_1_1_resolve_map_builder.html">ResolveMapBuilder</a>, <a class="el" href="classprtx_1_1_resolve_map.html">prtx::ResolveMap</a> </dd></dl>
+<div class="textblock"><p>A <a class="el" href="classprt_1_1_resolve_map.html">ResolveMap</a> maps an arbitrary string key to an URI. Resolve maps are used for asset lookups during CGA generation (e.g. <a href="cgaref/cgareference/op_i.html">i()</a> and <a href="cgaref/cgareference/op_texture.html">texture()</a> operations). Use the <a class="el" href="classprt_1_1_attributable.html#a89f6effbe6f4c560a3ef96f3527e0064">getString()</a> member function derived from the <a class="el" href="classprt_1_1_attributable.html">Attributable</a> interface to lookup a key (i.e. get it's URI). Typically, a <a class="el" href="classprt_1_1_resolve_map.html">ResolveMap</a> gets created from a RPK with the <a class="el" href="namespaceprt.html#afb9d1bffc2bd7859022de33544a39061">createResolveMap()</a> function. ResolveMaps can be stacked, i.e. a map can be put in place downstream. </p>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="classprt_1_1_resolve_map_builder.html">ResolveMapBuilder</a>, <a class="el" href="classprtx_1_1_resolve_map.html">prtx::ResolveMap</a>, <a class="el" href="namespaceprt.html#afb9d1bffc2bd7859022de33544a39061">createResolveMap()</a> </dd></dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="a4996b244d67134dfce4f9a7fa118a0bb"></a>
+<a class="anchor" id="a0791d6196104a05ae101adbd43d9b284"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual const wchar_t* prt::ResolveMap::findCGBKey </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a> *&#160;</td>
+          <td class="paramname"><em>stat</em> = <code>nullptr</code></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Finds the key of the single cgb file in the <a class="el" href="classprt_1_1_resolve_map.html">ResolveMap</a>. RPKs contain exactly one main rule file (= the cgb file) - use this function to find it. This key can then be set as an Initial Shape's ruleFile. The according URI can be obtained from the <a class="el" href="classprt_1_1_resolve_map.html">ResolveMap</a> with getString(cgbKey).</p>
+<p>Note: It is possible that the CGA compiler generates more than one cgb file which are all put into the RPK and the according <a class="el" href="classprt_1_1_resolve_map.html">ResolveMap</a>. However, only one of them, the main cgb, can actually be used to generate models. This main cgb is found by this function. The other cgbs are essential for the main cgb file to work but do not work on their own.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[out]</td><td class="paramname">stat</td><td>Optional pointer to return the status. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>pointer to the key of the cgb file or nullptr in case of error. The pointer stays valid as long as the <a class="el" href="classprt_1_1_resolve_map.html">ResolveMap</a> instance exists. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="aeb5e8fe701424bd0c61e159e0b6e61d6"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual const wchar_t** prt::ResolveMap::findCGBKeys </td>
+          <td>(</td>
+          <td class="paramtype">const wchar_t **&#160;</td>
+          <td class="paramname"><em>result</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t *&#160;</td>
+          <td class="paramname"><em>resultSize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a> *&#160;</td>
+          <td class="paramname"><em>stat</em> = <code>nullptr</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Finds all main cgb keys. While RPKs only contain exactly one rule file, ResolveMaps can in general be set to contain multiple rule files. In such cases <a class="el" href="classprt_1_1_resolve_map.html#aeb5e8fe701424bd0c61e159e0b6e61d6">findCGBKeys()</a> can be used to collect all keys of main rule files.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">result</td><td>Array to receive pointers to the keys. The pointers stay valid as long as the <a class="el" href="classprt_1_1_resolve_map.html">ResolveMap</a> instance exists. If more cgbs than resultSize are found, only the first few are written to results and STATUS_BUFFER_TO_SMALL is written to stat. </td></tr>
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">resultSize</td><td>Size of the result array, will receive the number of cgbs found. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">stat</td><td>Optional pointer to return the status. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>result </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a29cd0f4d56d64316fadb45bb01d66c34"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -213,7 +300,7 @@ Additional Inherited Members</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a> *&#160;</td>
-          <td class="paramname"><em>stat</em> = <code>0</code>&#160;</td>
+          <td class="paramname"><em>stat</em> = <code>nullptr</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -249,7 +336,7 @@ Additional Inherited Members</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Dec 16 2022 16:58:57 for ArcGIS Procedural Runtime by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu May 4 2023 17:05:00 for ArcGIS Procedural Runtime by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.5
 </small></address>

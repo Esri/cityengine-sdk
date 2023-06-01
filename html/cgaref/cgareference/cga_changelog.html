@@ -21,7 +21,6 @@
 
 
 <!-- CONTENT -->
-
         
 <h1>CGA Changelog</h1>
   
@@ -29,6 +28,74 @@
 	<tr>
 		<td width="12%"><strong>CityEngine version<br>(= CGA version)</strong></td>
 		<td><strong>Changes</strong></td>
+	</tr>
+	<tr>
+		<td>2023.0<br>CGAC 2.0</td>
+		<td>
+			Compiler Upgrade:
+			<ul>
+				<li>The Compiler was updated to a new major version 2.0. Rule packages created with CityEngine 2023.0 are not compatible with older versions of CityEngine or any client of the CityEngine SDK that is not compatible with CityEngine 2023.0. Use the latest version of ArcGIS Pro and CityEngine Plugins.</li> <!-- CE-9645 -->
+			</ul>
+			New features:
+			<ul>
+				<li>The new <a href="import.html#dynamic">dynamic import</a> feature allows to import and initialize a ruleset at the time of rule invocation. Overrides can be configured with at-runtime evaluated values.</li> <!-- CE-10138 -->
+			</ul>
+			New annotations:
+			<ul>
+				<li><a href="cga_annotations.html#displayname"><span class="code_std">@DisplayName</span></a> annotation.</li> <!-- CE-10873 -->
+			</ul>
+			Changes to existing features:
+			<ul>
+				<li><a href="op_offset.html"><span class="code_std">offset</span></a> operation: Changed the topology of the resulting offset geometry for each face: At the boundary of border faces no duplicate vertices are created anymore. <br><strong>Note:</strong> This changes the resulting vertex count and neighboring border faces now share a common edge. A subsequent <a href="op_comp.html"><span class="code_std">comp(f)</span></a> will now create trim planes at these edges depending on the <a href="attr_trim.html"><span class="code_std">trim</span></a> attribute.</li> <!-- CE-10871 --> 
+				<li>Newly created CGA files do not contain an auto-generated header anymore (CityEngine only).</li> <!-- CE-10765 -->
+				<li>CGA Compiler:</li>
+				<ul>
+					<li>The following characters are not allowed anymore in rule file names:<br><span class="codelight">$</span> (dollar), <span class="codelight">[</span> (left bracket), <span class="codelight">;</span> (semicolon), <span class="codelight">.</span> (dot, except for <span class="codelight">.cga</span> suffix).<br>Further: <span class="codelight">?</span>, <span class="codelight">"</span>, <span class="codelight">*</span>, <span class="codelight"><</span>, <span class="codelight">></span>, <span class="codelight">|</span>, <span class="codelight">:</span> and <span class="codelight">\</span> (Linux only).</li> <!-- CE-10277, CE-10909 -->
+					<li>The <a href="import.html"><span class="code_std">import</span></a> functionality was improved in a number of ways:</li>
+					<ul>
+						<li>Attribute overrides and protections: An error is shown if the imported attribute does not exist or is already overridden or protected.</li> <!-- CE-9886 -->
+						<li>The behavior of attribute overrides has been improved. The evaluation of an attribute override definition which depends on other attributes now respects overridden definitions of those other attributes. Previously, this was not always the case, depending on the alphabetical order of attribute names. This change makes attribute evaluation deterministic. However, in some cases, attributes are evaluated to different values now, leading to a different behavior than in previous versions.<br><strong>Note:</strong> If attribute overrides lead to a cycle, these cycles are now detected and lead to a compile error. While such rules did compile and work on older versions the result was inconsistent. The special case of an attribute override referring to the overridden attribute itself is still possible. This is important for a code pattern where implicit attribute propagation is used, for example<br><span class="codelight">import imp:"imp.cga"<br>attr x = .. imp.x ..</span><br>is still valid code.</li> <!-- CE-9650, CE-9846, CE-10276 --> 
+						<li>If probabilistic expressions are used in attribute overrides, the random number generator was affected by the order of appearance of overrides. This could lead to the undesired behaviour that an attribute could change its random value when another randomly evaluated override was added. This has been fixed; however, this fix potentially changes your existing models even with the same <span class="codelight">seedian</span> on the initial shape.</li> <!-- CE-9650, CE-5117 --> 
+					</ul>
+					<li>It is not allowed anymore to override attributes which are located in second-level imports, i.e. attributes which are imported in the imported rule file. For example, in an <a href="import.html"><span class="code_std">import</span></a> statement<br><span class="codelight">import imp1:"rule.cga" ( imp2.x = 1 )</span><br>the attribute override for <span class="codelight">imp2.x</span> is invalid.</li> <!-- CE-10268 -->
+					<li>Identifiers in rule definitions must not contain more than one import identifier. For example, in <span class="codelight">imp1.imp2.Lot-->Rule</span> the second import identifier <span class="codelight">imp2</span> is invalid. Rules with an import identifier are only valid in the <span class="codelight">Default</span> style.</li> <!-- CE-10268 -->
+					<li>Undefined rules must not contain more than one import identifier. For example, in <span class="codelight">Lot-->imp1.imp2.Undefined</span> the second import identifier <span class="codelight">imp2</span> is invalid.</li> <!-- CE-10268 -->
+				</ul>
+			</ul>
+			Bugfixes:
+			<ul>
+				<li><a href="op_setback.html"><span class="code_std">setback</span></a>, <a href="op_setbackPerEdge.html"><span class="code_std">setbackPerEdge</span></a>, <a href="op_setbackToArea.html"><span class="code_std">setbackToArea</span></a> operations:</li>
+				<ul>
+					<li>Fixed wrong modulo wrapping of large negative index selectors.</li> <!-- CE-10757 -->
+					<li>Selectors <span class="codelight">bottom</span>, <span class="codelight">top</span>, <span class="codelight">object.bottom</span>, <span class="codelight">object.top</span>, <span class="codelight">world.down</span>, <span class="codelight">world.up</span> and <span class="codelight">world.side</span> now work as expected.</li> <!-- CE-10768 -->
+				</ul>
+				<li>Added support for <a href="cga_assetSearch.html">reading assets and textures</a> that are located at long absolute paths (Windows only).</li> <!-- CE-10319 -->
+				<li>CGA Compiler:</li>
+				<ul>
+					<li>Fixed a bug when using rule files with a different Compiler version for the first time; for example when using an existing workspace or project in a new CityEngine version. The very first generate could lead to an error or to an incorrect result. From CityEngine 2023.0 on, rule files are always correctly recompiled when a different Compiler version is encountered.</li> <!-- CE-10756 -->
+					<li>Fixed a bug where compiled rule files (<span class="codelight">*.cgb</span>) were created at an incorrect location instead of in the project's <span class="codelight">bin</span> folder (which is hidden by default). This happened when the cga file was located in a linked folder or in a <span class="codelight">rules/rules</span> folder.</li> <!-- CE-10798, CE-11051 -->
+					<li>The <a href="import.html"><span class="code_std">import</span></a> functionality was improved in a number of ways:</li>
+					<ul>
+						<li>Rule files with many imports could hit an internal limit resulting in a compile error (&quot;constant pool size larger than limit&quot;). This has been fixed. Many imports can now be handled.</li> <!-- CE-9650 -->
+						<li>Fixed marker location for errors and warnings that are located in second-level imports, i.e. in rule files that are imported in the imported rule file.</li> <!-- CE-5039 -->
+						<li>Improved reported type mismatches for extension rule overrides.</li> <!-- CE-9650 -->
+						<li>Fixed error message and error marker location for type mismatches in attribute overrides.</li> <!-- CE-9116 -->
+						<li>Fixed error message and error marker location for import cycles.</li> <!-- CE-4857, CE-5039 -->
+						<li>Fixed failing asset lookup in import overrides when imports where done across projects.</li> <!-- CE-10804 -->
+						<li>Fixed incorrect invocation of imported rules when the imported rule was not defined in the Default style but in another style.</li> <!-- CE-6736 -->
+						<li>Fixed a bug where a call in an imported rule file to a missing function did not issue a no such function error when the function was defined in the importing rule file.</li> <!-- CE-8953 -->
+						<li>Fixed a bug where a call to an imported function was misinterpreted as a call to a builtin function when import identifier and function name matched.</li> <!-- CE-10896 -->
+						<li>Fixed a bug where a call in an imported rule file was not performed to a builtin or CGA utility library function but to a user defined function with matching signature. This fix potentially changes existing local edits.</li> <!-- CE-10896 -->
+						<li>Fixed wrong error marker and unhandled error when an unknown style was specified in an import statement.</li> <!-- CE-8320 -->
+					</ul>
+				</ul> 
+			</ul>
+   			Documentation:
+			<ul>
+   				<li><a href="op_setback.html"><span class="code_std">setback</span></a> operation: Added the description of undocumented selectors <span class="codelight">uv.uMin</span>, <span class="codelight">uv.uMax</span>, <span class="codelight">uv.vMin</span> and <span class="codelight">uv.vMax</span>.</li> <!-- CE-10616 -->
+			</ul>
+
+		</td>
 	</tr>
 	<tr>
 		<td>2022.1<br>CGAC 1.19</td>
@@ -1472,7 +1539,7 @@ overload  .</li>
   
 
   <h3><!-- FOOTER --> </h3>
-        <p class="foot">Copyright &copy;2008-2022 Esri R&amp;D Center Zurich. All rights reserved.</p>                  
+        <p class="foot">Copyright &copy;2008-2023 Esri R&amp;D Center Zurich. All rights reserved.</p>                  
 
 <!-- END CENTERED CONTENT -->
 

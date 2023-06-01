@@ -38,6 +38,7 @@
 		<tr><td><span class="codelight">world.south, world.north, world.west, world.east, world.up, world.down, world.side</span></td><td>The edges' outwards normals in the polygon plane are analyzed by classifying their directions into the corresponding world coordinate system quadrants.</td></tr>
 		<tr><td><span class="codelight">street.front, street.back, street.left, street.right</span></td><td>Edges adjacent to a street can be selected with the <span class="codelight">street.front</span> selector, rear edges can be selected with the <span class="codelight">street.back</span> selector, and edges in between front and back can be selected with the <span class="codelight">street.left</span> and <span class="codelight">street.right</span> selectors. <span class="codelight">street.side</span> combines left and right edges. These selectors depend on the availability of the streetWidth attribute map; see <a href="https://doc.arcgis.com/en/cityengine/latest/help/help-layers-block-parameters.htm#ESRI_SECTION2_5A91A7408D2240929B5EDA53D6B21FA3" target="_blank">Auto-generated street width attributes</a>. If the attribute is not available, component selection falls back to the <span class="codelight">object.xxx</span> selectors.</td></tr>
 		<tr><td><span class="codelight">uv.left, uv.right, uv.bottom, uv.top</span></td><td>Selects edges based on their uv-coordinates. The outwards-pointing normal of each edge is analyzed to classify the edge with (<span class="codelight">left, right</span>) being the negative and positive u-axis and (<span class="codelight">bottom, top</span>) being the negative and positive v-axis.</td></tr>
+		<tr><td><span class="codelight">uv.uMin, uv.uMax, uv.vMin, uv.vMax</span></td><td>Selects edges based on their uv-coordinates. An edge is selected if both endpoints have the geometry's minimal (<span class="codelight">uMin, vMin</span>) or maximal (<span class="codelight">uMax, vMax</span>) value of the respective uv-axis assigned. </td></tr>
 		<tr><td><span class="codelight">all</span></td><td>Selects all edges.</td></tr>
 		<tr><td><i>index (float)</i></td><td>Selects the <i>index</i>-th component (0-based). Too large and negative indices are modulo wrapped to a correct index.</td></tr>
 		<tr><td><span class="codelight">remainder</span></td><td>Selects the remainder of the polygon. <p class="notes">The remainder depends on the selected edges but is always the same, independent of the position of the <span class="codelight">remainder</span> selector in the selector-operator sequence!</p>.</td></tr>
@@ -49,7 +50,7 @@
 		<tr><td><span class="codelight">=</span></td><td>All polygons corresponding to the selector are combined into one new shape.</td></tr>
 	</table>
 	</li>
-	<li><span class="cga_opparam">operations</span><br>A sequence of CGA operations to execute.</li>
+	<li><span class="cga_opparam">operations</span><br>A sequence of shape operations to execute on the newly created shape.</li>
 </ul>
 
 <h2>Description</h2>
@@ -153,7 +154,7 @@ Right --> setback(dists) { all       = Garden   |
 <br>
 <p>Also see the <a class="cga_op" href="op_setbackPerEdge.html#examples">setbackPerEdge</a> operation for more examples.</p>
 
-<p class="foot">Copyright &copy;2008-2022 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
+<p class="foot">Copyright &copy;2008-2023 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
 
 </div>
 </body>
