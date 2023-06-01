@@ -1,9 +1,9 @@
-# CITYENGINE SDK 3.0.XXXX CHANGELOG
+# CITYENGINE SDK 3.0.8905 CHANGELOG
 
 This section lists changes compared to CityEngine SDK 2.7.8603.
 
 ## General Info
-* CityEngine SDK 3.0.XXXX is used in CityEngine 2023.0.XXXX.
+* CityEngine SDK 3.0.8905 is used in CityEngine 2023.0.8905.
 * **Client applications must update their code** to find the cgb in a rule package, see details below. It is easy though!  
 * The CGA Compiler was upgraded to a new major version 2.0. This leads to significant changes: 
   * New rpks might contain more than one cgb file. Only one of them can be used, and a new function has been introduced to find this main cgb. See `prt::ResolveMap:findCGBKey()` below. The old way of iterating over all keys to find the first cgb does not work anymore since there can now be inner cgbs which must not be used. This is a breaking change - you must adapt your client code! And it is actually much more convenient to use this function, so the change is trivial.
