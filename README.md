@@ -85,7 +85,7 @@ Please note that the individual example READMEs may include further requirements
 
 ### Linux
 
-* RedHat Enterprise Linux 7.x, 8.x or compatible
+* RedHat Enterprise Linux 8.x or 9.x and compatible (e.g. Alma Linux or Rocky Linux)
 * Required C++ compiler: GCC 9.3 or later (RedHat Enterprise Linux DevToolSet 9)
 * Required flags for extension libraries: `-std=c++17 -D_GLIBCXX_USE_CXX11_ABI=0 -march=nocona -fvisibility=hidden -fvisibility-inlines-hidden -Wl,--exclude-libs,ALL`
 
