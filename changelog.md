@@ -1,3 +1,46 @@
+# CITYENGINE SDK 3.0.8961 CHANGELOG
+
+This section lists changes compared to CityEngine SDK 3.0.8905.
+
+## General Info
+* The focus of this release is to fix some issues which are important for certain client applications such as ArcGIS Pro. There is no CityEngine version using this version of the SDK.
+
+## PRT API
+* Improved the error reporting of `prt::createRuleFileInfo` for CGBs compiled by a more recent version of CityEngine. (CE-10475)
+
+## PRTX API
+* `prtx::MeshBuilder` has been optimized for performance. (CE-11041, CE-11333)
+
+## CGA
+* Various improvements in performance (e.g. when triangulating polygon holes and using `comp` with many components). (CE-11279, CE-11268, CE-11333)
+* Various improvements in memory usage (e.g. reduced footprint of internal geometry containers). (CE-11212)
+* Fixed a bug where holes in triangles have been ignored by operations like `scatter` and in occlusion checks. (CE-11285)
+
+## Built-In Codecs
+* OBJ Decoder:
+  * Added a fallback heuristic to look for MTL files in the same directory as the OBJ, if the specified MTL path is incorrect. (CE-10940)
+* IFC Decoder:
+  * Enable concurrent decoding of IFC assets by ensuring unique temporary file names. (CE-11385)
+  * Improved reading speed. (CE-11201)
+* FBX Decoder:
+  * Added support for FBX assets with upper case (.FBX) extension. (CE-11339)
+* glTF Decoder:
+  * To save memory, we stop copying texture coordinates on UV set 0 to higher UV sets and rely on the "fallback to UV set 0" mechanism instead (see "Texturing: Essential knowledge" in the CGA documentation). (CE-10996)
+* glTF Encoder:
+  * Improved how the material blend mode is set by analyzing the opacitymap pixel distribution. (CE-7260)
+* Collada Decoder:
+  * Fixed a numerical imprecision in material opacity computation based on luminance. (CE-11227)
+  * Fixed an intermittent decoding failure with empty `<source_data>` and `<copyright>` tags. (CE-11142)
+  * Made the decoder more robust against invalid Collada tags. (CE-11108)
+* Collada Encoder:
+  * Fixed a bug which prevented the encoder option "globalScalingFactor" to be actually set to 0 (and write the `<unit>` tag). (CE-11042)
+* USD Decoder:
+  * Fixed the handling of texture paths with white spaces and/or UNC syntax. (CE-11249)
+
+## Misc Changes and Fixes
+* Improved code examples in the PRT "Architecture" pdf (CE-11116)
+* Applied security updates for libtiff (4.5.1) and libxml (2.10.4). (CE-11313)
+
 # CITYENGINE SDK 3.0.8905 CHANGELOG
 
 This section lists changes compared to CityEngine SDK 2.7.8603.
