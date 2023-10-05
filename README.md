@@ -79,7 +79,7 @@ Please note that the individual example READMEs may include further requirements
 
 ### Windows
 
-* Windows 8.1, 10 or 11 (64bit)
+* Windows 10 or 11 (64bit)
 * Required C++ compiler: Visual Studio 2019 with Toolset MSVC 14.27 or later
 * Required flags for extension libraries release mode: `/std:c++17 /bigobj /GR /EHsc /MD` (use `/MDd` to debug)
 
@@ -93,6 +93,7 @@ Please note that the individual example READMEs may include further requirements
 
 A detailed list of changes to the API, CGA language and built-in codecs can be found in the [Changelog](changelog.md).
 
+* [v3.0.8961 (2023-10-05, no matching CityEngine version)](https://github.com/Esri/cityengine-sdk/releases/tag/3.0.8961)
 * [v3.0.8905 (2023-06-10, CityEngine 2023.0)](https://github.com/Esri/cityengine-sdk/releases/tag/3.0.8905)
 * [v2.7.8603 (2023-02-22, no matching CityEngine version)](https://github.com/Esri/cityengine-sdk/releases/tag/2.7.8603)
 * [v2.7.8538 (2022-10-24, CityEngine 2022.1)](https://github.com/Esri/cityengine-sdk/releases/tag/2.7.8538)
