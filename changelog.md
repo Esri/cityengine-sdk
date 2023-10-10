@@ -18,8 +18,8 @@ This section lists changes compared to CityEngine SDK 3.0.8905.
 ## Built-In Codecs
 * OBJ Decoder:
   * Added a fallback heuristic to look for MTL files in the same directory as the OBJ, if the specified MTL path is incorrect.
-* IFC Decoder:
-  * Enable concurrent decoding of IFC assets by ensuring unique temporary file names.
+* IFC Encoder:
+  * Enable concurrent encoding of IFC assets by ensuring unique temporary file names.
 * FBX Decoder:
   * Added support for FBX assets with upper case (.FBX) extension.
 * glTF Decoder:
