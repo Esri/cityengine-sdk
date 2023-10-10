@@ -4,6 +4,7 @@ This section lists changes compared to CityEngine SDK 3.0.8905.
 
 ## General Info
 * The focus of this release is to fix some issues which are important for certain client applications such as ArcGIS Pro. There is no CityEngine version using this version of the SDK.
+* This release contains various improvements in performance and memory usage.
 
 ## PRT API
 * Improved the error reporting of `prt::createRuleFileInfo` for CGBs compiled by a more recent version of CityEngine. (CE-10475)
@@ -12,16 +13,13 @@ This section lists changes compared to CityEngine SDK 3.0.8905.
 * `prtx::MeshBuilder` has been optimized for performance. (CE-11041, CE-11333)
 
 ## CGA
-* Various improvements in performance (e.g. when triangulating polygon holes and using `comp` with many components). (CE-11279, CE-11268, CE-11333)
-* Various improvements in memory usage (e.g. reduced footprint of internal geometry containers). (CE-11212)
-* Fixed a bug where holes in triangles have been ignored by operations like `scatter` and in occlusion checks. (CE-11285)
+* `scatter` operation on volumes and `inside`, `overlaps`, `touches` functions: Holes in triangle faces were ignored, leading to wrong results. That is fixed now.
 
 ## Built-In Codecs
 * OBJ Decoder:
   * Added a fallback heuristic to look for MTL files in the same directory as the OBJ, if the specified MTL path is incorrect. (CE-10940)
 * IFC Decoder:
   * Enable concurrent decoding of IFC assets by ensuring unique temporary file names. (CE-11385)
-  * Improved reading speed. (CE-11201)
 * FBX Decoder:
   * Added support for FBX assets with upper case (.FBX) extension. (CE-11339)
 * glTF Decoder:
