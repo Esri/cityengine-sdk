@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="esri_prt_55px.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">ArcGIS Procedural Runtime
-   &#160;<span id="projectnumber">3.0.8905</span>
+   &#160;<span id="projectnumber">3.0.8961</span>
    </div>
   </td>
  </tr>
@@ -108,6 +108,8 @@ Inheritance diagram for prtx::MeshBuilder:</div>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a61ad9d71177e66dec04925a88a9f2aaa"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_mesh_builder.html#a61ad9d71177e66dec04925a88a9f2aaa">addFace</a> (const <a class="el" href="namespaceprtx.html#aec8649472e2f0dd643251cd38f7e6a9f">IndexVector</a> &amp;vertexIndices, const <a class="el" href="namespaceprtx.html#aec8649472e2f0dd643251cd38f7e6a9f">IndexVector</a> &amp;holeFacesIndices, uint32_t materialIndex, const <a class="el" href="namespaceprtx.html#aec8649472e2f0dd643251cd38f7e6a9f">IndexVector</a> &amp;normalIndices, const std::vector&lt; <a class="el" href="namespaceprtx.html#aec8649472e2f0dd643251cd38f7e6a9f">IndexVector</a> &gt; &amp;uvIndices)</td></tr>
 <tr class="separator:a61ad9d71177e66dec04925a88a9f2aaa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abeac760085b79be28d740d26d84388f6"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_mesh_builder.html#abeac760085b79be28d740d26d84388f6">addFace</a> (const uint32_t *vertexIndices, size_t vertexIndicesCount, const uint32_t *holeFaceIndices, size_t holeFacesIndicesCount, uint32_t materialIndex, const uint32_t *normalIndices, size_t normalIndicesCount, const std::vector&lt; const uint32_t * &gt; &amp;uvIndices, const std::vector&lt; size_t &gt; &amp;uvIndicesCounts)</td></tr>
+<tr class="separator:abeac760085b79be28d740d26d84388f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5370d59a41d863e17463b465909d874e"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_mesh_builder.html#a5370d59a41d863e17463b465909d874e">addFace</a> ()</td></tr>
 <tr class="separator:a5370d59a41d863e17463b465909d874e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3b27ce333dd6aa572706482fdb5039d6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_mesh_builder.html#a3b27ce333dd6aa572706482fdb5039d6">addFaceHoleIndex</a> (uint32_t faceId, uint32_t index)</td></tr>
@@ -351,6 +353,90 @@ Public Member Functions</h2></td></tr>
     <tr><td class="paramname">materialIndex</td><td><a class="el" href="classprtx_1_1_material.html">Material</a> index for this face. </td></tr>
     <tr><td class="paramname">normalIndices</td><td>Vector with vertex normal indices of face. Might be empty. </td></tr>
     <tr><td class="paramname">uvIndices</td><td>Vector with a vector of uv indices for face. Vectors might be empty. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>index of new face. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="abeac760085b79be28d740d26d84388f6"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t prtx::MeshBuilder::addFace </td>
+          <td>(</td>
+          <td class="paramtype">const uint32_t *&#160;</td>
+          <td class="paramname"><em>vertexIndices</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>vertexIndicesCount</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint32_t *&#160;</td>
+          <td class="paramname"><em>holeFaceIndices</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>holeFacesIndicesCount</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>materialIndex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint32_t *&#160;</td>
+          <td class="paramname"><em>normalIndices</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>normalIndicesCount</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::vector&lt; const uint32_t * &gt; &amp;&#160;</td>
+          <td class="paramname"><em>uvIndices</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::vector&lt; size_t &gt; &amp;&#160;</td>
+          <td class="paramname"><em>uvIndicesCounts</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Adds a face with the passed indices. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">vertexIndices</td><td>Pointer to array of vertex indices. </td></tr>
+    <tr><td class="paramname">vertexIndicesCount</td><td>Number of vertex indices in array. </td></tr>
+    <tr><td class="paramname">holeFacesIndices</td><td>Pointer to array with face indices of holes inside this face. </td></tr>
+    <tr><td class="paramname">holeFacesIndicesCount</td><td>Number of indices in array. Might be empty (count 0). </td></tr>
+    <tr><td class="paramname">materialIndex</td><td><a class="el" href="classprtx_1_1_material.html">Material</a> index for this face. </td></tr>
+    <tr><td class="paramname">normalIndices</td><td>Pointer to normal indices of face. Might be empty (count 0). </td></tr>
+    <tr><td class="paramname">normalIndicesCount</td><td>Number of normal indices in array. </td></tr>
+    <tr><td class="paramname">uvIndices</td><td>Vector with pointers to uv indices for face. Vector might be empty, and individual arrays might be empty. </td></tr>
+    <tr><td class="paramname">uvIndicesCounts</td><td>Vector with sizes for the uv index arrays. Same size as uvIndices. Arrays might be empty (count 0). </td></tr>
   </table>
   </dd>
 </dl>
@@ -1279,7 +1365,7 @@ Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu May 4 2023 17:05:00 for ArcGIS Procedural Runtime by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Aug 16 2023 19:16:21 for ArcGIS Procedural Runtime by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.5
 </small></address>

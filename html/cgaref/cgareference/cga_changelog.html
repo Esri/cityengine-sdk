@@ -30,6 +30,16 @@
 		<td><strong>Changes</strong></td>
 	</tr>
 	<tr>
+		<td>SDK x.x.xxxx<br>CGAC 2.1</td>
+		<td>
+			Bugfixes:
+			<ul>
+  				<li><a href="op_scatter.html"><span class="code_std">scatter</span></a> operation on volumes and <a href="func_occlusion.html"><span class="code_std">inside</span></a>, <a href="func_occlusion.html"><span class="code_std">overlaps</span></a>, <a href="func_occlusion.html"><span class="code_std">touches</span></a> functions: Holes in triangle faces were ignored, leading to wrong results. That is fixed now.</li> <!-- CE-11285 -->
+				<!--<li><a href="op_comp.html"><span class="code_std">comp</span></a> operation: Fixed a bug where using the combine operator (<span class="codelight">=</span>) created a new shape, even when no components were selected.</li>--> <!-- CE-11193 -->
+			</ul>
+		</td>
+	</tr>
+	<tr>
 		<td>2023.0<br>CGAC 2.0</td>
 		<td>
 			Compiler Upgrade:

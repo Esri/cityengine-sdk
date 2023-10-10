@@ -8,6 +8,7 @@ var searchData=
   ['offset',['offset',['../classprtx_1_1_encode_preparator_1_1_preparation_flags.html#a0e16aee61e05ed3d8a3a1451cb3e71d8',1,'prtx::EncodePreparator::PreparationFlags::offset(double x, double y, double z)'],['../classprtx_1_1_encode_preparator_1_1_preparation_flags.html#a44dd7f03c22dac0b87688b4cacafac1b',1,'prtx::EncodePreparator::PreparationFlags::offset(const double *xyz)']]],
   ['opaqueptr',['OpaquePtr',['../classprtx_1_1_opaque_ptr.html',1,'prtx']]],
   ['opaqueptr_3c_20logformatterimpl_20_3e',['OpaquePtr&lt; LogFormatterImpl &gt;',['../classprtx_1_1_opaque_ptr.html',1,'prtx']]],
+  ['opaqueptr_3c_20mbimpl_20_3e',['OpaquePtr&lt; MBImpl &gt;',['../classprtx_1_1_opaque_ptr.html',1,'prtx']]],
   ['open',['open',['../classprt_1_1_simple_output_callbacks.html#afb479768e86b1cb86515a633674157a4',1,'prt::SimpleOutputCallbacks']]],
   ['opencgaerror',['openCGAError',['../classprt_1_1_simple_output_callbacks.html#af07c0a27a169bf26129838f370621c29',1,'prt::SimpleOutputCallbacks']]],
   ['opencgaprint',['openCGAPrint',['../classprt_1_1_simple_output_callbacks.html#a4f357c8dce0c63684b7cd920b212d90d',1,'prt::SimpleOutputCallbacks']]],
