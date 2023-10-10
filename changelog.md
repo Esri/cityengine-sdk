@@ -7,37 +7,37 @@ This section lists changes compared to CityEngine SDK 3.0.8905.
 * This release contains various improvements in performance and memory usage.
 
 ## PRT API
-* Improved the error reporting of `prt::createRuleFileInfo` for CGBs compiled by a more recent version of CityEngine. (CE-10475)
+* Improved the error reporting of `prt::createRuleFileInfo` for CGBs compiled by a more recent version of CityEngine.
 
 ## PRTX API
-* `prtx::MeshBuilder` has been optimized for performance. (CE-11041, CE-11333)
+* `prtx::MeshBuilder` has been optimized for performance.
 
 ## CGA
 * `scatter` operation on volumes and `inside`, `overlaps`, `touches` functions: Holes in triangle faces were ignored, leading to wrong results. That is fixed now.
 
 ## Built-In Codecs
 * OBJ Decoder:
-  * Added a fallback heuristic to look for MTL files in the same directory as the OBJ, if the specified MTL path is incorrect. (CE-10940)
+  * Added a fallback heuristic to look for MTL files in the same directory as the OBJ, if the specified MTL path is incorrect.
 * IFC Decoder:
-  * Enable concurrent decoding of IFC assets by ensuring unique temporary file names. (CE-11385)
+  * Enable concurrent decoding of IFC assets by ensuring unique temporary file names.
 * FBX Decoder:
-  * Added support for FBX assets with upper case (.FBX) extension. (CE-11339)
+  * Added support for FBX assets with upper case (.FBX) extension.
 * glTF Decoder:
-  * To save memory, we stop copying texture coordinates on UV set 0 to higher UV sets and rely on the "fallback to UV set 0" mechanism instead (see "Texturing: Essential knowledge" in the CGA documentation). (CE-10996)
+  * To save memory, we stop copying texture coordinates on UV set 0 to higher UV sets and rely on the "fallback to UV set 0" mechanism instead (see "Texturing: Essential knowledge" in the CGA documentation).
 * glTF Encoder:
-  * Improved how the material blend mode is set by analyzing the opacitymap pixel distribution. (CE-7260)
+  * Improved how the material blend mode is set by analyzing the opacitymap pixel distribution.
 * Collada Decoder:
-  * Fixed a numerical imprecision in material opacity computation based on luminance. (CE-11227)
-  * Fixed an intermittent decoding failure with empty `<source_data>` and `<copyright>` tags. (CE-11142)
-  * Made the decoder more robust against invalid Collada tags. (CE-11108)
+  * Fixed a numerical imprecision in material opacity computation based on luminance.
+  * Fixed an intermittent decoding failure with empty `<source_data>` and `<copyright>` tags.
+  * Made the decoder more robust against invalid Collada tags.
 * Collada Encoder:
-  * Fixed a bug which prevented the encoder option "globalScalingFactor" to be actually set to 0 (and write the `<unit>` tag). (CE-11042)
+  * Fixed a bug which prevented the encoder option "globalScalingFactor" to be actually set to 0 (and write the `<unit>` tag).
 * USD Decoder:
-  * Fixed the handling of texture paths with white spaces and/or UNC syntax. (CE-11249)
+  * Fixed the handling of texture paths with white spaces and/or UNC syntax.
 
 ## Misc Changes and Fixes
-* Improved code examples in the PRT "Architecture" pdf (CE-11116)
-* Applied security updates for libtiff (4.5.1) and libxml (2.10.4). (CE-11313)
+* Improved code examples in the PRT "Architecture" pdf.
+* Applied security updates for libtiff (4.5.1) and libxml (2.10.4).
 
 # CITYENGINE SDK 3.0.8905 CHANGELOG
 
