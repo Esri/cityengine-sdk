@@ -1,3 +1,63 @@
+# CITYENGINE SDK 3.1.9666 CHANGELOG
+
+This section lists changes compared to CityEngine SDK 3.0.8961.
+
+## General Info
+* CityEngine SDK 3.1.9666 is used in CityEngine 2023.1.9666.
+
+## PRT API
+* `prt::init()`: Now ensures the current working directory does not change when loading extension libraries.
+
+## PRTX API
+* `prtx::Material`, `prtx::MaterialBuilder` : added getters, setters and keys for the new "doubleSided" attribute. The default value is true.
+* `prtx::Shape` : 
+  * added keys for the new "doubleSided" material attribute.
+  * switched `getShapeSymbol()` to in64_t and fixed a shapesymbol collision bug (repeated CGA imports).
+* `prtx::LogFormatter`:
+  * added new `operator%(const std::vector< uint32_t > &v)`.
+  * `log(uint32_t const *array, size_t count)` : switched count from uint32_t to size_t.
+
+## CGA
+* New features:
+  * With the new auto-tag feature, selected operations automatically apply semantic information to output geometry components:
+    * setback, setbackToArea, setbackPerEdge, shapeLUO, splitAndSetbackPerimeter operations: Each output edge is tagged as "setback.front", "setback.side", "setback.back" or "setback.remainder".
+    * roofGable, roofHip, roofPyramid, roofRidge, roofShed operations: Each output face is tagged as "roof.bottom", "roof.side", or "roof.top".
+    * extrude operation: Each output face is tagged as "extrude.bottom", "extrude.side.inner", "extrude.side.outer", or "extrude.top".
+    * envelope operation: Each output face is tagged as "envelope.bottom", "envelope.side.base", "envelope.side.slope", "envelope.side.inner", or "envelope.top".
+    * taper operation: Each output face is tagged as "taper.bottom" or "taper.side".
+  
+    The component tags can be queried with the new isTagged selector in the comp, setback, setbackToArea, setbackPerEdge operations and the comp function. 
+
+* New operations:
+  * deleteTags operation
+  * setTagsFromEdgeAttrs operation
+* New functions:
+  * geometry.hasTags function
+  * geometry.tags function
+* New attributes:
+  * material.doubleSided attribute
+* Changes to existing features:
+  * comp, setback, setbackToArea, setbackPerEdge operations, comp function:
+        Existing selectors can be combined in logical selector expressions (e.g. left || right).
+        User-defined functions and all built-in functions can be used in logical selector expressions.
+        Added new isTagged selector.
+* Bugfixes:
+  * comp operation: Fixed a bug where using the combine operator (=) created a new shape even when no components were selected.
+
+## Built-In Codecs
+* Collada Decoder:
+  * Now detects if a Collada file has been written by SketchUp with the "two-sided" option enabled. In this case, the decoder will set the "doubleSided" material attribute to "false". 
+  * Made the decoder more robust against invalid Collada tags.
+* USD Decoder:
+  * The USD importer has been improved to accept resolve map keys for textures which represent absolute and relative paths.
+* USD Encoder:
+  * The USD exporter now uses separate indices for all vertex attributes. This allows for "watertight" meshes with hard edges (i.e. a shared point but different vertex normals). 
+  *	The USD exporter has been improved to pass validation checks for default prims, stage up-axis and material binding API
+* GLTF Decoder & Encoder:
+  * The glTF material attribute "doubleSided" is now handled both by the exporter and importer. It is translated to and from the CGA material attribute of same name.   
+* Unreal Encoder:
+  * Does not change the curent working directory anymore when being loaded in in `prt:init()`.
+
 # CITYENGINE SDK 3.0.8961 CHANGELOG
 
 This section lists changes compared to CityEngine SDK 3.0.8905.
