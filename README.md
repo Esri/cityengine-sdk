@@ -81,7 +81,7 @@ Please note that the individual example READMEs may include further requirements
 
 * Windows 10 or 11 (64bit)
 * Required C++ compiler: Visual Studio 2019 with Toolset MSVC 14.27 or later
-* Required flags for extension libraries release mode: `/std:c++17 /bigobj /GR /EHsc /MD` (use `/MDd` to debug)
+* Required flags for extension libraries release mode: `/std:c++17 /bigobj /GR /EHsc /MD`
 
 ### Linux
 
