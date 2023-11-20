@@ -9,8 +9,8 @@ This section lists changes compared to CityEngine SDK 3.0.8961.
 * `prt::init()`: Now ensures the current working directory does not change when loading extension libraries.
 
 ## PRTX API
-* `prtx::Material`, `prtx::MaterialBuilder` : added getters, setters and keys for the new "doubleSided" attribute. The default value is true.
-* `prtx::Shape` : 
+* `prtx::Material`, `prtx::MaterialBuilder`: added getters, setters and keys for the new "doubleSided" attribute. The default value is true.
+* `prtx::Shape`: 
   * added keys for the new "doubleSided" material attribute.
   * switched `getShapeSymbol()` to in64_t and fixed a shapesymbol collision bug (repeated CGA imports).
 * `prtx::LogFormatter`:
@@ -46,17 +46,17 @@ This section lists changes compared to CityEngine SDK 3.0.8961.
 
 ## Built-In Codecs
 * Collada Decoder:
-  * Now detects if a Collada file has been written by SketchUp with the "two-sided" option enabled. In this case, the decoder will set the "doubleSided" material attribute to "false". 
+  * Now detects if a Collada file has been written by SketchUp with the "two-sided" option enabled. In this case, the decoder will set the "doubleSided" material attribute to false. 
   * Made the decoder more robust against invalid Collada tags.
 * USD Decoder:
   * The USD importer has been improved to accept resolve map keys for textures which represent absolute and relative paths.
 * USD Encoder:
   * The USD exporter now uses separate indices for all vertex attributes. This allows for "watertight" meshes with hard edges (i.e. a shared point but different vertex normals). 
-  *	The USD exporter has been improved to pass validation checks for default prims, stage up-axis and material binding API
+  *	The USD exporter has been improved to pass validation checks for default prims, stage up-axis and material binding API.
 * GLTF Decoder & Encoder:
   * The glTF material attribute "doubleSided" is now handled both by the exporter and importer. It is translated to and from the CGA material attribute of same name.   
 * Unreal Encoder:
-  * Does not change the curent working directory anymore when being loaded in in `prt:init()`.
+  * Does not change the curent working directory anymore when being loaded in `prt:init()`.
 
 # CITYENGINE SDK 3.0.8961 CHANGELOG
 
