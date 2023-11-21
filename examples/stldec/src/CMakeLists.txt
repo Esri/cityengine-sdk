@@ -1,5 +1,8 @@
-cmake_minimum_required(VERSION 3.3)
+cmake_minimum_required(VERSION 3.19)
 cmake_policy(SET CMP0015 NEW)
+if(POLICY CMP0135)
+	cmake_policy(SET CMP0135 NEW)
+endif()
 
 
 ### project definition
@@ -43,7 +46,7 @@ if(NOT prt_DIR)
 		set(PRT_TC "gcc93")
 	endif()
 
-	set(PRT_VERSION "3.0.8905")
+	set(PRT_VERSION "3.1.9666")
 	set(PRT_CLS     "${PRT_OS}-${PRT_TC}-x86_64-rel-opt")
 	set(PRT_URL     "https://github.com/esri/cityengine-sdk/releases/download/${PRT_VERSION}/esri_ce_sdk-${PRT_VERSION}-${PRT_CLS}.zip")
 

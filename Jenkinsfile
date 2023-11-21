@@ -133,6 +133,6 @@ def buildConfig(String src, String tgt, Map cfg, List deps, List defs) {
 	unstash(name: SOURCE_STASH)
 	deps.each { d -> papl.fetchDependency(d, cfg) }
 	dir(path: 'build') {
-		papl.runCMakeBuild(src, tgt, cfg, defs)
+		papl.runCMakeBuild(src, tgt, cfg, defs, JenkinsTools.CMAKE319)
 	}
 }
