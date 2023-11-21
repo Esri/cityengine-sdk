@@ -37,11 +37,11 @@
 
 <p>The <span class="codelight">edgeAttr</span> functions return the element of an edge attribute array that best corresponds to the current shape geometry.</p>
 
-<h3>Edge attributes</h3>
+<h3><a name="edgeAttr"></a>Edge attributes</h3>
 
 <p>Edge attributes allow to store information on face edges of an initial shape. They are specified as arrays in face-order. The first element sets an attribute for the first edge of the first face, the second element sets an attribute for the second edge of the first face, and so on. Shared edges are considered separately on following encounters. Edge attribute arrays start with a prefix <span class="codelight">/edgeattr/</span> followed by an <span class="cga_opparam">attributeName</span>. In CityEngine these arrays are set as object attributes on an initial shape.</p>  
 
-<h3>Sampling via edgeAttr functions</h3>
+<h3><a name="sampling"></a>Sampling via edgeAttr functions</h3>
 
 <p>Edge attributes can be sampled in CGA. The current shape geometry is projected on the outline of the initial shape. The edge attribute with the highest projected coverage is returned as the result of a <span class="codelight">edgeAttr</span> function. The projection only works in 2D wrt. the average plane of the initial shape. The projection direction follows the general orientation of current shape geometry (average normal).<p/>
 
@@ -52,6 +52,7 @@
 	<li><a href="func_comp.html">comp function</a></li>
 	<li><a href="op_setback.html">setback operation</a></li>
 	<li><a href="op_setbackPerEdge.html">setbackPerEdge operation</a></li>
+	<li><a href="op_setTagsFromEdgeAttrs.html">setTagsFromEdgeAttrs operation</a></li>
 </ul>
     
     
@@ -102,7 +103,7 @@ Lot --> primitiveCylinder(22, 5, 10)
 </tr>
 </table>
 
-<h3>Sampling on face edges</h3>
+<h3><a name="samplingFE"></a>Sampling on face edges</h3>
 
 <table summary="" class="twocol">
 <tr>

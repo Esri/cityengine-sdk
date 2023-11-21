@@ -55,12 +55,13 @@
 <p>The cleanup can be necessary for subsequent CGA operations. For example, <a class="normw" href="op_setNormals.html">setNormals</a> and <a class="normw" href="op_softenNormals.html">softenNormals</a> operations require duplicate vertices to be merged in order to compute vertex normals using adjacent face normals.</p>
 
 <p class="notes">Because discontinuous textures coordinates are preserved cleanup steps could be disabled. In some cases it might be useful to <a class="normw" href="op_deleteUV.html">delete</a> the UV coordinates beforehand.</p>
-
+<p class="notes">Because existing <a href="cga_componentTags.html">component tags</a> are preserved, tagged edges and edges between faces with different tags will not be removed. In some cases it might be useful to <a class="normw" href="op_deleteTags.html">delete</a> tags beforehand. See <a href="cga_componentTags.html#cleanup">this section</a> for more details.</p>
 <h2>Related</h2>
 <ul>
     <li><a class="normw" href="op_convexify.html">convexify operation</a></li>
     <li><a class="normw" href="op_innerRectangle.html">innerRectangle operation</a></li>
     <li><a class="normw" href="op_deleteUV.html">deleteUV operation</a></li>
+    <li><a class="normw" href="op_deleteTags.html">deleteTags operation</a></li>
     <li><a class="normw" href="op_reduceGeometry.html">reduceGeometry operation</a></li>
     <li><a class="normw" href="op_reverseNormals.html">reverseNormals operation</a></li>
     <li><a class="normw" href="op_setNormals.html">setNormals operation</a></li>

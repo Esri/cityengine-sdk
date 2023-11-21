@@ -35,7 +35,7 @@
 		<tr><td><span class="codelight">h</span></td><td>holes</td></tr>
 		</table>
 	</li>
-	<li><span class="cga_opparam">selector</span> (selector, float)
+	<li><span class="cga_opparam">selector</span> (selector, bool, float)
 		<table cellspacing="5">
 		<tr><td width="40%"><span class="codelight">front, back, left, right, top, bottom</span></td><td>The y-normals of the components are analyzed by classifying their directions into the corresponding quadrants (in relation to the local coordinate system of the current shape).</td></tr>
 		<tr><td><span class="codelight">object.front, object.back, object.left, object.right, object.top, object.bottom, object.side</span></td><td>The y-normals of the components are analyzed by classifying their directions into the corresponding quadrants (in relation to the local coordinate system of the current shape).</td></tr>
@@ -53,6 +53,21 @@
 		<tr><td><span class="codelight">eave, hip, valley, ridge</span></td><td>These selectors work on edges only and are designed to be used in conjunction with roofs. See the <a href="op_comp.html#roofEdges" class="xref">section below</a> for more details.</td></tr>
 		<tr><td><span class="codelight">street.front, street.back, street.left, street.right, street.side</span></td><td>If the streetWidth attribute is available on the initial shape, these selectors can be used to identify street-facing components. See the <a href="op_comp.html#streetSelectors" class="xref">section below</a> for more details.</td></tr>
 		<tr><td><span class="codelight">all</span></td><td>Selects all components.</td></tr>
+		<tr><td><span class="codelight">isTagged(<span class="cga_opparam">tagQuery</span>),</span> <br>
+				<span class="codelight">isTagged(<span class="cga_opparam">tagQuery, subcomponent</span>)</span></td><td>Selects tagged components. See the <a href="op_comp.html#isTagged" class="xref">section below</a> for more details.
+		<ul style="padding-left: 0px; margin-left: 20px; list-style-position: outside;">
+			<li><span class="cga_opparam">tagQuery</span> (string)<br>The <a href="cga_componentTags.html#tagQueries" class="xref">tag query</a>.
+			</li>
+			<li><span class="cga_opparam">subcomponent</span> (selector)
+				
+				<table cellspacing="5">
+					<tr><td width="15%"><span class="codelight">e, v</span></td><td>If specified, components are selected if <span class="cga_opparam">tagQuery</span> matches any of their subcomponents (edges or vertices) instead. See the <a href="op_comp.html#isTagged_advanced" class="xref">section below</a> for more details.</td></tr>
+				</table>
+			</li>
+		</ul>
+		<p class="notes"><em>Tags stored on a face also identify its edges and vertices, while tags stored on an edge also identify its two vertex endpoints.</em></p>
+		</td></tr>
+		<tr><td> <i>logical expression (bool)</i></td><td>Selects all components for which the expression evaluates to true. User-defined functions as well as the above selectors can be used in the expression.</td></tr>
 		<tr><td> <i>index (float)</i></td><td> Selects the <i>index</i>-th component (0-based).</td></tr>
 		</table>
 	</li>
@@ -67,7 +82,8 @@
 
 <h2>Description</h2>
 
-<p>The <span class="codelight">comp</span> operation (component split) allows to divide a shape into its topological components, which are either faces, edges, face edges, vertices, groups, materials or holes. The components can be selected using either their <i>index</i> or a set of selectors. Group and material components satisfy a specific selection keyword if at least one geometric component (usually a face) satifies it. The selected components are transformed to a new shape and processed by a sequence of shape operations. Depending on the <span class="cga_opparam">operator</span>, either one shape is created for each individual selected component (&quot;:&quot;) ore one shape for the whole set of selected components (&quot;=&quot;).</p>
+<p>The <span class="codelight">comp</span> operation (component split) allows to divide a shape into its topological components, which are either faces, edges, face edges, vertices, groups, materials or holes. 
+The components can be selected using either their <i>index</i> or a set of selectors. Group and material components satisfy a specific selection keyword if at least one geometric component (usually a face) satifies it. The selected components are transformed to a new shape and processed by a sequence of shape operations. Depending on the <span class="cga_opparam">operator</span>, either one shape is created for each individual selected component (&quot;:&quot;) ore one shape for the whole set of selected components (&quot;=&quot;).</p>
 
 <p class="text">The selection parameters of a component split work in a excluding manner: if a parameter has selected a specific component, this component cannot be part of another selection (from left to right).</p>
 
@@ -209,6 +225,34 @@ Sphere -->
 </tr>
 </table>
                               
+<h3>Logical selection expressions</h3>
+
+<table summary="" class="twocol">
+<tr>
+	<td class="twocol_l"><br/><img src="images/comp_selExpr_1.png" alt="comp_selExpr_1" width="298"/></td>
+	<td><pre class="code3">
+Sphere --> comp(f) { top || front = X. }
+	</pre><em>Static selectors can be used in a logical selector expression. Here both the top and front faces are combined into a single shape. </em></td>
+<tr>
+<td class="twocol_l"><br/><img src="images/comp_selExpr_2.png" alt="comp_selExpr_2" width="298"/></td>
+	<td><pre class="code3">
+
+Triangle -->
+   comp(f) { geometry.area() > 1 && !inside : X. }
+   </pre><em>Here, only faces with a surface area greater than 1 and that are not inside are selected. </em></td>
+</tr>
+<td class="twocol_l"><br/><img src="images/comp_selExpr_3.png" alt="comp_selExpr_3" width="298"/></td>
+	<td><pre class="code3">
+
+mySelectorFunc = 
+    geometry.isOriented(top) || geometry.nVertices==3
+
+Sphere -->
+   comp(f) { mySelectorFunc : X. }
+   </pre><em>Here, a custom function is used to select the top faces and all faces with exactly 3 vertices. </em></td>
+</tr>
+</table>
+                              
 <h3>Index-based Selection</h3>
 
 <table summary="" class="twocol">
@@ -336,6 +380,93 @@ VInside --> s(0.05, 0.05, 0.05) t(-0.025, -0.025, -0.025)
             color("#00ff00") primitiveCube()
 	</pre><p><em>Finally, the border and inside vertices are used to insert colored cubes.</em></p></td>
 </tr>          
+</table>
+
+<h3 id="isTagged"><em>isTagged</em> Selector</h3>
+
+<table summary="" class="twocol">
+<tr>
+	<td class="twocol_l"><br/><img src="images/comp-isTagged-faces.png" alt="Comp isTagged Faces" width="298"/></td>
+	<td><pre class="code3">
+Init --> envelope(normal,4, 0,45, 3,45, 2.5,50, 2,50)
+         ShowEnvelopeAutoTags
+         
+ShowEnvelopeAutoTags -->
+    comp(f) { isTagged("envelope.bottom")     : Blue 
+            | isTagged("envelope.side.base")  : Yellow
+            | isTagged("envelope.side.slope") : Orange
+            | isTagged("envelope.side.inner") : Red
+            | isTagged("envelope.top")        : Green } 
+	</pre><em>This example colors the face components based on the face tags applied by the <a class="cga_op" href="op_envelope.html">envelope</a> operation.</em></p></td></td>
+</tr>  
+<tr>
+	<td class="twocol_l"><br/><img src="images/comp-isTagged-faces-2.png" alt="Comp isTagged Faces 2" width="298"/></td>
+	<td><pre class="code3">
+
+
+Init --> envelope(normal,4, 0,45, 3,45, 2.5,50, 2,50)
+         comp(f) { isTagged("envelope.side") : Yellow }
+	</pre><p><em>Here, the <a href="cga_componentTags.html#tagQueries" class="xref">tag query</a> <span class="codelight">"envelope.side"</span> is used to select and color all base, slope and inner side faces at once.</em></p></td>
+</tr>  
+<tr>
+	<td class="twocol_l"><br/><img src="images/comp-isTagged-edges.png" alt="Comp isTagged Edges" width="298"/></td>
+	<td><pre class="code3">
+
+
+Init --> envelope(normal,4, 0,45, 3,45, 2.5,50, 2,50)
+         comp(e) { isTagged("envelope.top") : Edge }
+         
+Edge --> s('1, 0.5, 0.5) center(yz)
+         color("#09de1f") primitiveCube()
+	</pre><p><em>Here, the edges of the face tagged <span class="codelight">"envelope.top"</span> are selected and colored cubes are inserted.</p>.</em></p></td>
+</tr>          
+<tr>
+	<td class="twocol_l"><br/><img src="images/comp-isTagged-vertices.png" alt="Comp isTagged Vertices" width="298"/></td>
+	<td><pre class="code3">
+
+
+Init --> envelope(normal,4, 0,45, 3,45, 2.5,50, 2,50)
+         comp(v) { isTagged("envelope.top") : Edge }
+         
+Edge --> s(0.5, 0.5, 0.5) center(xyz)
+         color("#09de1f") primitiveSphere(8,6)
+	</pre><p><em>Here, the vertices of the face tagged <span class="codelight">"envelope.top"</span> are selected and colored spheres are inserted.</em></p></td>
+</tr>  
+</table>
+<p class="notes">By default, edges can be selected based on the tags of adjacent faces, while vertices can be selected based on the tags of adjacent faces and edges. However, to select faces based on the tags of their edges or vertices, the <span class="cga_opparam">subcomponent</span> parameter must be provided, as demonstrated in the <a href="op_comp.html#isTagged_advanced" class="xref">section below</a>.</p>
+<h3 id="isTagged_advanced">Advanced Tag Selection</h3>
+<table>        
+<tr>
+	<td class="twocol_l"><br/><img src="images/comp-isTagged-subcomp1.png" alt="Comp isTagged With Subcomp1" width="298"/></td>
+	<td><pre class="code3">
+            
+Init --> envelope(normal,4, 0,45, 3,45, 2.5,50, 2,50)
+         comp(f) { isTagged("envelope.bottom", e) 
+            : ShowEnvelopeAutoTags }
+	</pre><p><em>By using the <span class="codelight">e</span> subcomponent selector, all faces that share an edge with a face tagged <span class="codelight">"envelope.bottom"</span> or have an edge tagged as such, are selected. <br> <br> Note that the face tagged <span class="codelight">"envelope.bottom"</span> (blue) is selected as well.</em></p></td>
+</tr> 
+<tr>
+	<td class="twocol_l"><br/><img src="images/comp-isTagged-subcomp2.png" alt="BComp isTagged With Subcomp2" width="298"/></td>
+	<td><pre class="code3">
+            
+Init --> envelope(normal,4, 0,45, 3,45, 2.5,50, 2,50)
+         comp(f) { isTagged("envelope.bottom", e) &&
+                   isTagged("envelope.side.slope") 
+            : ShowEnvelopeAutoTags }
+	</pre><p><em>This example selects all slope faces that are edge-adjacent to the bottom face.</em></p></td>
+</tr>
+<tr>
+	<td class="twocol_l"><br/><img src="images/comp-isTagged-subcomp3.png" alt="BComp isTagged With Subcomp2" width="298"/></td>
+	<td><pre class="code3">
+            
+Init --> envelope(normal,4, 0,45, 3,45, 2.5,50, 2,50)
+         comp(e) { isTagged("envelope.bottom", v)
+            : Edge }
+            
+Edge --> s('1, 0.5, 0.5) center(yz)
+         color("#09de1f") primitiveCube()
+	</pre><p><em>This example selects all edges that share a vertex with the bottom face and inserts colored cubes.</em></p></td>
+</tr>           
 </table>
 
 <h3 id="edgeDetails">Edge Split Details</h3>

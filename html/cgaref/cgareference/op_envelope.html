@@ -64,6 +64,29 @@ as <br>
 
 <p class="piccaptioncentered"><img src="images/street_selectors.png"><br>Example of <span class="codelight">street.front, street.back, street.right, street.left, street.side</span> selectors applied on a lot of a block (with auto-generated streetWidth attributes).</p>
         
+<h3>Component tags</h3>
+
+<table summary="" class="twocol">
+<tr>
+    <td>
+		The operation automatically applies semantic <a href="cga_componentTags.html">component tags</a> to the resulting face components:
+		<table cellspacing="5">
+			<tr><td width="25%"><span class="codelight">"envelope.bottom"</span></td><td>Blue: original face.</td></tr>
+			<tr><td><span class="codelight">"envelope.side.base"</span></td><td>Yellow: vertical base faces.</td></tr>
+			<tr><td><span class="codelight">"envelope.side.slope"</span></td><td>Orange: sloped faces.</td></tr>
+			<tr><td><span class="codelight">"envelope.side.inner"</span></td><td>Red: side faces from holes.</td></tr>
+			<tr><td><span class="codelight">"envelope.top"</span></td><td>Green: top face at max height.</p></td></tr>
+		</table>
+		<br>
+		For more information on working with component tags, refer to:
+		<ul>
+			<li><a href="cga_componentTags.html#autoTags">Auto-tags</a></li>
+			<li><a href="cga_componentTags.html#tagPropagation">Tag propagation</a></li> 
+		</ul>
+	</td>
+	<td class="twocol_l"><img src="images/autotag-envelope.png" alt="edgeAttr-faces"/></td></tr>
+</table>
+
 <h2>Related</h2>
 <ul>
 	<li><a class="normw" href="op_extrude.html">extrude operation</a></li>       

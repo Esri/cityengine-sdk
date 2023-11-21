@@ -162,6 +162,33 @@ Cone--&gt;
 	<li><a class="normw" href="func_geometry.html#materials">geometry.materials function</a></li>
 </ul>
 
+<br><br><br><br><br>
+
+<h1><a name="hasTags"></a>geometry.hasTags function</h1>
+
+<h2>Syntax</h2>
+
+<p class="code2"><span class="codelight">bool</span> geometry.hasTags()</p>
+<p class="code2"><span class="codelight">bool</span> geometry.hasTags(<span class="cga_opparam">tagQuery</span>)</p>
+
+<h2>Parameters </h2>
+
+<ul>
+	<li><span class="cga_opparam">tagQuery</span> (string)<br>The query defining which tags to consider. See also <a class="normw" href="cga_componentTags.html">Geometry Tagging: Essential Knowledge</a>.</li>
+</ul>
+
+<h2>Returns</h2>
+
+<p class="content"><span class="cga_keyword">true</span> if any geometry component (face, edge or vertex) has tags, <span class="cga_keyword">false</span> otherwise. If a <span class="cga_opparam">tagQuery</span> is provided, only matching tags are considered.</p>
+
+<h2>Related</h2>
+
+<ul>
+	<li><a class="normw" href="op_deleteTags.html">deleteTags operation</a></li>
+	<li><a class="normw" href="func_geometry.html#tags">geometry.tags function</a></li>
+	<li><a class="normw" href="op_setTagsFromEdgeAttrs.html">setTagsFromEdgeAttrs operation</a></li>
+</ul>
+
 <br/><br/><br/><br/><br/>
 
 <h1 id="height">geometry.height function</h1>
@@ -432,6 +459,39 @@ Cone--&gt;
 	<li><a class="normw" href="func_geometry.html#nEdges">geometry.nEdges function</a></li>
 	<li><a class="normw" href="func_geometry.html#nHoles">geometry.nHoles function</a></li>
 	<li><a class="normw" href="func_geometry.html#nFaces">geometry.nFaces function</a></li>
+</ul>
+
+<br><br><br><br><br>
+
+<h1><a name="tags"></a>geometry.tags function</h1>
+
+<h2>Syntax</h2>
+
+<p class="code2"><span class="codelight">string[]</span> geometry.tags()</p>
+<p class="code2"><span class="codelight">string[]</span> geometry.tags(<span class="cga_opparam">tagQuery</span>)</p>
+
+<h2>Parameters </h2>
+
+<ul>
+	<li><span class="cga_opparam">tagQuery</span> (string)<br>The query defining which tags to include in the result. See also <a class="normw" href="cga_componentTags.html">Geometry Tagging: Essential Knowledge</a>.</li>
+</ul>
+
+<h2>Returns</h2>
+
+<p>An array with alphabetically sorted tags. If a <span class="cga_opparam">tagQuery</span> is provided, only matching tags are included.</p>
+
+<p class="notes">Includes each unique tag stored on a face, edge or vertex component of the geometry. </p>
+
+<h2>Related</h2>
+
+<ul>
+	<li><a class="normw" href="op_deleteTags.html">deleteTags operation</a></li>
+	<li><a class="normw" href="op_comp.html">comp operation</a></li>
+	<li><a class="normw" href="op_setback.html">setback operation</a></li>
+	<li><a class="normw" href="func_geometry.html#hasTags">geometry.hasTags function</a></li>
+	<li><a class="normw" href="op_setTagsFromEdgeAttrs.html">setTagsFromEdgeAttrs operation</a></li>
+	<li><a class="normw" href="func_geometry.html#groups">geometry.groups function</a></li>
+	<li><a class="normw" href="func_geometry.html#materials">geometry.materials function</a></li>
 </ul>
 
 <br><br><br><br><br>

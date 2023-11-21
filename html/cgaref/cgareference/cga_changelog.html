@@ -30,12 +30,80 @@
 		<td><strong>Changes</strong></td>
 	</tr>
 	<tr>
-		<td>SDK x.x.xxxx<br>CGAC 2.1</td>
+		<td>2023.1<br>CGAC 2.2</td>
+		<td>
+			New features:
+			<ul>
+				<li>With the new <a href="cga_componentTags.html">auto-tag</a> feature, selected operations automatically apply semantic information to output geometry components:</li> 
+				<ul> 
+					<li><a href="op_setback.html"><span class="code_std">setback</span></a>, <a href="op_setbackToArea.html"><span class="code_std">setbackToArea</span></a>, <a href="op_setbackPerEdge.html"><span class="code_std">setbackPerEdge</span></a>, <a href="op_shapeLUO.html"><span class="code_std">shapeLUO</span></a>, <a href="op_splitAndSetbackPerimeter.html"><span class="code_std">splitAndSetbackPerimeter</span></a> operations: 
+						Each output edge is tagged as <span class="codelight">"setback.front"</span>, <span class="codelight">"setback.side"</span>, <span class="codelight">"setback.back"</span> or <span class="codelight">"setback.remainder"</span>.
+					</li>
+					<li><a href="op_roofGable.html"><span class="code_std">roofGable</span></a>, <a href="op_roofHip.html"><span class="code_std">roofHip</span></a>, <a href="op_roofPyramid.html"><span class="code_std">roofPyramid</span></a>, <a href="op_roofRidge.html"><span class="code_std">roofRidge</span></a>, <a href="op_roofShed.html"><span class="code_std">roofShed</span></a> operations: 
+						Each output face is tagged as <span class="codelight">"roof.bottom"</span>, <span class="codelight">"roof.side"</span>, or <span class="codelight">"roof.top"</span>.
+					</li>
+					<li><a href="op_extrude.html"><span class="code_std">extrude</span></a> operation: 
+						Each output face is tagged as <span class="codelight">"extrude.bottom"</span>, <span class="codelight">"extrude.side.inner"</span>, <span class="codelight">"extrude.side.outer"</span>, or <span class="codelight">"extrude.top"</span>.
+					</li>
+					<li><a href="op_envelope.html"><span class="code_std">envelope</span></a> operation: 
+						Each output face is tagged as <span class="codelight">"envelope.bottom"</span>, <span class="codelight">"envelope.side.base"</span>, <span class="codelight">"envelope.side.slope"</span>, <span class="codelight">"envelope.side.inner"</span>, or <span class="codelight">"envelope.top"</span>.
+					</li>
+					<li><a href="op_taper.html"><span class="code_std">taper</span></a> operation: 
+						Each output face is tagged as <span class="codelight">"taper.bottom"</span> or <span class="codelight">"taper.side"</span>.
+					</li> 
+				</ul>
+				 The component tags can be queried with the new <span class="codelight">isTagged</span> selector in the <a href="op_comp.html"><span class="code_std">comp</span></a>, <a href="op_setback.html"><span class="code_std">setback</span></a>, <a href="op_setbackToArea.html"><span class="code_std">setbackToArea</span></a>, <a href="op_setbackPerEdge.html"><span class="code_std">setbackPerEdge</span></a> operations and the <a href="func_comp.html"><span class="code_std">comp</span></a> function.
+			</ul>
+			New operations:
+			<ul>
+				<li><a href="op_deleteTags.html"><span class="code_std">deleteTags</span></a> operation</li> 
+				<li><a href="op_setTagsFromEdgeAttrs.html"><span class="code_std">setTagsFromEdgeAttrs</span></a> operation</li> 
+			</ul>
+			New functions:
+			<ul>
+				<li><a href="func_geometry.html#hasTags"><span class="code_std">geometry.hasTags</span></a> function</li> 
+				<li><a href="func_geometry.html#tags"><span class="code_std">geometry.tags</span></a> function</li> 
+			</ul>
+			New attributes:
+			<ul>
+				<li><a href="attr_material.html#doubleSided"><span class="code_std">material.doubleSided</span></a> attribute</li> 
+			</ul>
+			Changes to existing features:
+			<ul>
+				<li><a href="op_comp.html"><span class="code_std">comp</span></a>, <a href="op_setback.html"><span class="code_std">setback</span></a>, <a href="op_setbackToArea.html"><span class="code_std">setbackToArea</span></a>, <a href="op_setbackPerEdge.html"><span class="code_std">setbackPerEdge</span></a> operations, <a href="func_comp.html"><span class="code_std">comp</span></a> function:
+				<ul>
+					<li>Existing selectors can be combined in logical selector expressions (e.g. <span class="codelight">left || right</span>).</li>
+					<li>User-defined functions and all built-in functions can be used in logical selector expressions.</li>
+					<li>Added new <span class="codelight">isTagged</span> selector.</li>
+				</ul>
+				<li>CGA Compiler:</li>
+				<ul>
+					<li>Imported rule files must have the <span class="codelight">*.cga</span> extension.</li> <!-- CE-11519 -->
+					<li>When CGA files are deleted, corresponding compiled rule files (<span class="codelight">*.cgb</span>) in the project's bin folder (which is hidden by default) are now also removed as they are no longer needed.</li> <!-- CE-10805 -->
+					<li><a href="import.html"><span class="code_std">import</span></a> and <a href="style.html"><span class="code_std">style</span></a> identifiers must not contain a dollar.</li> <!-- CE-11512 -->
+				</ul>
+			</ul>
+			Bugfixes:
+			<ul>
+				<li><a href="op_comp.html"><span class="code_std">comp</span></a> operation: Fixed a bug where using the combine operator (<span class="codelight">=</span>) created a new shape even when no components were selected.</li> <!-- CE-11193 -->
+				<li><a href="op_comp.html"><span class="code_std">comp</span></a>, <a href="op_setback.html"><span class="code_std">setback</span></a>, <a href="op_setbackToArea.html"><span class="code_std">setbackToArea</span></a>, <a href="op_setbackPerEdge.html"><span class="code_std">setbackPerEdge</span></a> operations, <a href="func_comp.html"><span class="code_std">comp</span></a> function: Fixed a bug where a function call was wrongly interpreted as selector.</li> <!-- CE-11265 -->
+				<li>Layer attributes (CityEngine only): <a href="func_print.html"><span class="code_std">print</span></a> function: Fixed output for very large integer values.</li> <!-- CE-11436 -->
+				<li>CGA Compiler:</li>
+				<ul>
+					<li>Fixed a bug in styles. In some cases, parameterized functions defined in a style other than the Default style resulted in a crash on generate.</li> <!-- CE-11332 -->
+					<li>Fixed a bug where changing the case in rule file names or in <a href="import.html"><span class="code_std">import</span></a> identifiers led to a state where the compilation persistently failed and changes were not effective anymore (Windows only).</li> <!-- CE-5551, CE-11556 -->
+					<li>Improved the automatic update of dependent CGA files when CGA files are edited. Prior, when dealing with imports, editing a CGA file could lead to low performance. Dependencies among CGA files are now correctly considered.</li> <!-- CE-10205 -->
+					<li>Fixed a bug where faulty compiled rule files (<span class="codelight">*.cgb</span>) were created which led to generate errors. This happened whenever a rule was defined which has the same signature as the <a href="op_s.html"><span class="code_std">s</span></a>, <a href="op_t.html"><span class="code_std">t</span></a> or <a href="op_tileUV.html"><span class="code_std">tileUV</span></a> operation.</li> <!-- CE-10986 -->
+				</ul>
+			</ul>
+		</td>
+	</tr>
+	<tr>
+		<td>SDK 3.0.8961<br>CGAC 2.1</td>
 		<td>
 			Bugfixes:
 			<ul>
   				<li><a href="op_scatter.html"><span class="code_std">scatter</span></a> operation on volumes and <a href="func_occlusion.html"><span class="code_std">inside</span></a>, <a href="func_occlusion.html"><span class="code_std">overlaps</span></a>, <a href="func_occlusion.html"><span class="code_std">touches</span></a> functions: Holes in triangle faces were ignored, leading to wrong results. That is fixed now.</li> <!-- CE-11285 -->
-				<!--<li><a href="op_comp.html"><span class="code_std">comp</span></a> operation: Fixed a bug where using the combine operator (<span class="codelight">=</span>) created a new shape, even when no components were selected.</li>--> <!-- CE-11193 -->
 			</ul>
 		</td>
 	</tr>

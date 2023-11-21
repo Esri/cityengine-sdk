@@ -65,8 +65,11 @@ Then each section is setback by its respective <span class="codelight">depth</sp
 The start of the split pattern can be moved using a <span class="codelight">splitOffset</span>.
 To use the operation independent on the underlying geometry index order, the <span class="codelight">firstEdgeIndex</span> and <span class="codelight">selectedEdgesMask</span> can be set, typically with functions evaluating the spatial context (see examples below). Technically, the operation can be restricted to a part of the perimeter by setting the <span class="codelight">firstEdgeIndex</span> and passing a <span class="codelight">selectedEdgesMask</span>. 
 In this case, the selected edges are arranged in a chain on which the split is done. The array must be in face-edge order, i.e. the first element refers to the first edge of the first face, the second element to the second edge of the first face, and so on. Shared edges are considered separately for each face. If the array does not contain enough elements the respective missing face edges are considered not to be selected. If the array contains more elements than the number of total face edges the respective elements are ignored. Such an array could be constructed using the <a class="cga_op" href="func_comp.html">comp</a> function with the <span class="cga_opparam">component</span> selector set to <span class="codelight">fe</span> (face edges). 
-
 </p> 
+
+<h3>Geometry tags</h3>
+The operation automatically applies semantic <a href="cga_componentTags.html">component tags</a> to the resulting edge components. Refer to the <a class="cga_op" href="op_setback.html#componentTags">setback</a> operation for more details.
+
 <h2>Related</h2>
 
 <ul>
@@ -75,10 +78,9 @@ In this case, the selected edges are arranged in a chain on which the split is d
 <li><a class="normw" href="attr_split.html">split attribute</a></li>
 <li><a class="normw" href="op_setback.html">setback operation</a></li>
 <li><a class="normw" href="op_setbackPerEdge.html">setbackPerEdge operation</a></li>
-<li><a class="normw" href="op_shapeLUO.html">shapeL operation</a></li>
-<li><a class="normw" href="op_shapeLUO.html">shapeU operation</a></li>
-<li><a class="normw" href="op_shapeLUO.html">shapeO operation</a></li>
+<li><a class="normw" href="op_shapeLUO.html">shapeLUO operations</a></li>
 <li><a class="normw" href="func_comp.html">comp function</a></li>
+<li><a class="normw" href="op_setTagsFromEdgeAttrs.html">setTagsFromEdgeAttrs operation</a></li>
 </ul>
                 
 <h2 id="examples">Examples</h2>

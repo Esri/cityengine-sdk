@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="esri_prt_55px.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">ArcGIS Procedural Runtime
-   &#160;<span id="projectnumber">3.0.8961</span>
+   &#160;<span id="projectnumber">3.1.9666</span>
    </div>
   </td>
  </tr>
@@ -135,55 +135,55 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="namespaceprtx.html#aeb9d2498f3b009539aa1bf4a2e53e697">   44</a></span>&#160;<span class="keyword">typedef</span> std::vector&lt;ShapePtr&gt;  <a class="code" href="namespaceprtx.html#aeb9d2498f3b009539aa1bf4a2e53e697">ShapePtrVector</a>;      </div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;</div>
-<div class="line"><a name="l00188"></a><span class="lineno"><a class="line" href="classprtx_1_1_shape.html">  188</a></span>&#160;<span class="keyword">class </span>PRTX_EXPORTS_API <a class="code" href="classprtx_1_1_shape.html">Shape</a> : <span class="keyword">public</span> <a class="code" href="classprtx_1_1_attributable.html">Attributable</a>, <span class="keyword">public</span> <a class="code" href="classprtx_1_1_builtin_shape_attributes.html">BuiltinShapeAttributes</a> {</div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;    <span class="comment">// --- prtx::Attributable</span></div>
-<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;</div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;    <span class="comment">// --- BuiltinShapeAttributes : all accessible through Attributable interface</span></div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;    <span class="comment">// with cga-name</span></div>
-<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;</div>
-<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;    <span class="comment">// --- non-cga shape attributes =&gt; simple types accessible through SPIIAttributable interface,</span></div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;    <span class="comment">// with &quot;.&quot; prefix</span></div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;</div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;    <span class="keyword">virtual</span> uint32_t                       getID() <span class="keyword">const</span> = 0;</div>
-<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;    <span class="keyword">virtual</span> uint32_t                       getParentID() <span class="keyword">const</span> = 0;</div>
-<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="namespaceprtx.html#a837126da564c8ec570fcd42c79d71624">GeometryPtr</a>                    getGeometry() <span class="keyword">const</span> = 0;</div>
-<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="namespaceprtx.html#ad9a3abc5331b1d26abd6344f333a1295">MaterialPtr</a>                    getMaterial() <span class="keyword">const</span> = 0;</div>
-<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;</div>
-<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;    <span class="keyword">virtual</span> <span class="keyword">const</span> CGAErrorPtrVector&amp;       getCGAErrors() <span class="keyword">const</span> = 0;</div>
-<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;    <span class="keyword">virtual</span> <span class="keyword">const</span> std::wstring&amp;            getCGAPrint()  <span class="keyword">const</span> = 0;</div>
-<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;</div>
-<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;    <span class="comment">// reporting</span></div>
-<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;    <span class="keyword">typedef</span> std::pair&lt;StringPtr, bool&gt;      ReportBool;</div>
-<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;    <span class="keyword">typedef</span> std::pair&lt;StringPtr, double&gt;    ReportFloat;</div>
-<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;    <span class="keyword">typedef</span> std::pair&lt;StringPtr, StringPtr&gt; ReportString;</div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;    <span class="keyword">typedef</span> std::vector&lt;ReportBool&gt;         ReportBoolVect;</div>
-<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;    <span class="keyword">typedef</span> std::vector&lt;ReportFloat&gt;        ReportFloatVect;</div>
-<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;    <span class="keyword">typedef</span> std::vector&lt;ReportString&gt;       ReportStringVect;</div>
-<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;</div>
-<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;    <span class="keyword">virtual</span> <span class="keyword">const</span> ReportBoolVect&amp;   getCGAReportsBool()   <span class="keyword">const</span> = 0;</div>
-<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;    <span class="keyword">virtual</span> <span class="keyword">const</span> ReportFloatVect&amp;  getCGAReportsFloat()  <span class="keyword">const</span> = 0;</div>
-<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;    <span class="keyword">virtual</span> <span class="keyword">const</span> ReportStringVect&amp; getCGAReportsString() <span class="keyword">const</span> = 0;</div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;</div>
-<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;</div>
-<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;    <span class="keyword">virtual</span> int32_t                   getShapeSymbol() <span class="keyword">const</span> = 0;</div>
-<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;    <span class="keyword">virtual</span> <span class="keyword">const</span> <a class="code" href="namespaceprtx.html#a90f6fa0ea3d2fca3c8650414fa099843">TrimPlanePtrVector</a>&amp; getTrimPlanes()  <span class="keyword">const</span> = 0;</div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;</div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;</div>
-<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;<span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;    <a class="code" href="classprtx_1_1_shape.html">Shape</a>() {}</div>
-<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="classprtx_1_1_shape.html">Shape</a>() {}</div>
-<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;};</div>
-<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;</div>
-<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;</div>
-<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;} <span class="comment">// namespace prtx</span></div>
+<div class="line"><a name="l00190"></a><span class="lineno"><a class="line" href="classprtx_1_1_shape.html">  190</a></span>&#160;<span class="keyword">class </span>PRTX_EXPORTS_API <a class="code" href="classprtx_1_1_shape.html">Shape</a> : <span class="keyword">public</span> <a class="code" href="classprtx_1_1_attributable.html">Attributable</a>, <span class="keyword">public</span> <a class="code" href="classprtx_1_1_builtin_shape_attributes.html">BuiltinShapeAttributes</a> {</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;    <span class="comment">// --- prtx::Attributable</span></div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;    <span class="comment">// --- BuiltinShapeAttributes : all accessible through Attributable interface</span></div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;    <span class="comment">// with cga-name</span></div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;    <span class="comment">// --- non-cga shape attributes =&gt; simple types accessible through SPIIAttributable interface,</span></div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;    <span class="comment">// with &quot;.&quot; prefix</span></div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;</div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;    <span class="keyword">virtual</span> uint32_t                       getID() <span class="keyword">const</span> = 0;</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;    <span class="keyword">virtual</span> uint32_t                       getParentID() <span class="keyword">const</span> = 0;</div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="namespaceprtx.html#a837126da564c8ec570fcd42c79d71624">GeometryPtr</a>                    getGeometry() <span class="keyword">const</span> = 0;</div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="namespaceprtx.html#ad9a3abc5331b1d26abd6344f333a1295">MaterialPtr</a>                    getMaterial() <span class="keyword">const</span> = 0;</div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;</div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;    <span class="keyword">virtual</span> <span class="keyword">const</span> CGAErrorPtrVector&amp;       getCGAErrors() <span class="keyword">const</span> = 0;</div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;    <span class="keyword">virtual</span> <span class="keyword">const</span> std::wstring&amp;            getCGAPrint()  <span class="keyword">const</span> = 0;</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;    <span class="comment">// reporting</span></div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;    <span class="keyword">typedef</span> std::pair&lt;StringPtr, bool&gt;      ReportBool;</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;    <span class="keyword">typedef</span> std::pair&lt;StringPtr, double&gt;    ReportFloat;</div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;    <span class="keyword">typedef</span> std::pair&lt;StringPtr, StringPtr&gt; ReportString;</div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;    <span class="keyword">typedef</span> std::vector&lt;ReportBool&gt;         ReportBoolVect;</div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;    <span class="keyword">typedef</span> std::vector&lt;ReportFloat&gt;        ReportFloatVect;</div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;    <span class="keyword">typedef</span> std::vector&lt;ReportString&gt;       ReportStringVect;</div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;</div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;    <span class="keyword">virtual</span> <span class="keyword">const</span> ReportBoolVect&amp;   getCGAReportsBool()   <span class="keyword">const</span> = 0;</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;    <span class="keyword">virtual</span> <span class="keyword">const</span> ReportFloatVect&amp;  getCGAReportsFloat()  <span class="keyword">const</span> = 0;</div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;    <span class="keyword">virtual</span> <span class="keyword">const</span> ReportStringVect&amp; getCGAReportsString() <span class="keyword">const</span> = 0;</div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;</div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;</div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;    <span class="keyword">virtual</span> int64_t                   getShapeSymbol() <span class="keyword">const</span> = 0;</div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;    <span class="keyword">virtual</span> <span class="keyword">const</span> <a class="code" href="namespaceprtx.html#a90f6fa0ea3d2fca3c8650414fa099843">TrimPlanePtrVector</a>&amp; getTrimPlanes()  <span class="keyword">const</span> = 0;</div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;</div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;</div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;<span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;    <a class="code" href="classprtx_1_1_shape.html">Shape</a>() {}</div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="classprtx_1_1_shape.html">Shape</a>() {}</div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;};</div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;</div>
 <div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;</div>
-<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;<span class="preprocessor">#ifdef _MSC_VER</span></div>
-<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#   pragma warning(pop)</span></div>
-<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;</div>
-<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* SPI_SHAPE_H_ */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;} <span class="comment">// namespace prtx</span></div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;</div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;<span class="preprocessor">#ifdef _MSC_VER</span></div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#   pragma warning(pop)</span></div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;</div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* SPI_SHAPE_H_ */</span><span class="preprocessor"></span></div>
 <div class="ttc" id="namespaceprtx_html_a90f6fa0ea3d2fca3c8650414fa099843"><div class="ttname"><a href="namespaceprtx.html#a90f6fa0ea3d2fca3c8650414fa099843">prtx::TrimPlanePtrVector</a></div><div class="ttdeci">std::vector&lt; TrimPlanePtr &gt; TrimPlanePtrVector</div><div class="ttdoc">vector of shared TrimPlane pointers </div><div class="ttdef"><b>Definition:</b> TrimPlane.h:36</div></div>
 <div class="ttc" id="classprtx_1_1_attributable_html"><div class="ttname"><a href="classprtx_1_1_attributable.html">prtx::Attributable</a></div><div class="ttdef"><b>Definition:</b> /Attributable.h:37</div></div>
 <div class="ttc" id="namespaceprtx_html_ad9a3abc5331b1d26abd6344f333a1295"><div class="ttname"><a href="namespaceprtx.html#ad9a3abc5331b1d26abd6344f333a1295">prtx::MaterialPtr</a></div><div class="ttdeci">std::shared_ptr&lt; Material &gt; MaterialPtr</div><div class="ttdoc">shared Material pointer </div><div class="ttdef"><b>Definition:</b> DataBackend.h:45</div></div>
@@ -191,11 +191,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="ttc" id="namespaceprtx_html_aeb9d2498f3b009539aa1bf4a2e53e697"><div class="ttname"><a href="namespaceprtx.html#aeb9d2498f3b009539aa1bf4a2e53e697">prtx::ShapePtrVector</a></div><div class="ttdeci">std::vector&lt; ShapePtr &gt; ShapePtrVector</div><div class="ttdoc">vector of shared pointers to Shape </div><div class="ttdef"><b>Definition:</b> Shape.h:44</div></div>
 <div class="ttc" id="namespaceprtx_html_ae498291eedf7bb693154ad40acda74d0"><div class="ttname"><a href="namespaceprtx.html#ae498291eedf7bb693154ad40acda74d0">prtx::ShapePtr</a></div><div class="ttdeci">std::shared_ptr&lt; Shape &gt; ShapePtr</div><div class="ttdoc">shared pointer to a Shape </div><div class="ttdef"><b>Definition:</b> Shape.h:41</div></div>
 <div class="ttc" id="classprtx_1_1_builtin_shape_attributes_html"><div class="ttname"><a href="classprtx_1_1_builtin_shape_attributes.html">prtx::BuiltinShapeAttributes</a></div><div class="ttdef"><b>Definition:</b> BuiltinShapeAttributes.h:41</div></div>
-<div class="ttc" id="classprtx_1_1_shape_html"><div class="ttname"><a href="classprtx_1_1_shape.html">prtx::Shape</a></div><div class="ttdef"><b>Definition:</b> Shape.h:188</div></div>
+<div class="ttc" id="classprtx_1_1_shape_html"><div class="ttname"><a href="classprtx_1_1_shape.html">prtx::Shape</a></div><div class="ttdef"><b>Definition:</b> Shape.h:190</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Aug 16 2023 19:16:20 for ArcGIS Procedural Runtime by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Nov 8 2023 09:45:52 for ArcGIS Procedural Runtime by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.5
 </small></address>

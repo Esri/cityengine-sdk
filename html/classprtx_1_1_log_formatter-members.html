@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="esri_prt_55px.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">ArcGIS Procedural Runtime
-   &#160;<span id="projectnumber">3.0.8961</span>
+   &#160;<span id="projectnumber">3.1.9666</span>
    </div>
   </td>
  </tr>
@@ -96,7 +96,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <p>This is the complete list of members for <a class="el" href="classprtx_1_1_log_formatter.html">prtx::LogFormatter</a>, including all inherited members.</p>
 <table class="directory">
   <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>getMessage</b>() const  (defined in <a class="el" href="classprtx_1_1_log_formatter.html">prtx::LogFormatter</a>)</td><td class="entry"><a class="el" href="classprtx_1_1_log_formatter.html">prtx::LogFormatter</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
-  <tr bgcolor="#f0f0f0"><td class="entry"><b>log</b>(uint32_t const *array, uint32_t count) (defined in <a class="el" href="classprtx_1_1_log_formatter.html">prtx::LogFormatter</a>)</td><td class="entry"><a class="el" href="classprtx_1_1_log_formatter.html">prtx::LogFormatter</a></td><td class="entry"></td></tr>
+  <tr bgcolor="#f0f0f0"><td class="entry"><b>log</b>(uint32_t const *array, size_t count) (defined in <a class="el" href="classprtx_1_1_log_formatter.html">prtx::LogFormatter</a>)</td><td class="entry"><a class="el" href="classprtx_1_1_log_formatter.html">prtx::LogFormatter</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="classprtx_1_1_log_formatter.html#accdb8984a304bb0613b8748971282ea9">LogFormatter</a>(prt::LogLevel l)</td><td class="entry"><a class="el" href="classprtx_1_1_log_formatter.html">prtx::LogFormatter</a></td><td class="entry"><span class="mlabel">explicit</span></td></tr>
   <tr><td class="entry"><a class="el" href="classprtx_1_1_log_formatter.html#a7842b2226837982224f6117eafa2edb3">LogFormatter</a>(prt::LogLevel l, const std::string &amp;s)</td><td class="entry"><a class="el" href="classprtx_1_1_log_formatter.html">prtx::LogFormatter</a></td><td class="entry"></td></tr>
   <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>LogFormatter</b>(prt::LogLevel l, const std::wstring &amp;s) (defined in <a class="el" href="classprtx_1_1_log_formatter.html">prtx::LogFormatter</a>)</td><td class="entry"><a class="el" href="classprtx_1_1_log_formatter.html">prtx::LogFormatter</a></td><td class="entry"></td></tr>
@@ -134,13 +134,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>operator%</b>(const BoundingBox &amp;x) (defined in <a class="el" href="classprtx_1_1_log_formatter.html">prtx::LogFormatter</a>)</td><td class="entry"><a class="el" href="classprtx_1_1_log_formatter.html">prtx::LogFormatter</a></td><td class="entry"></td></tr>
   <tr bgcolor="#f0f0f0"><td class="entry"><b>operator%</b>(const DoubleVector &amp;x) (defined in <a class="el" href="classprtx_1_1_log_formatter.html">prtx::LogFormatter</a>)</td><td class="entry"><a class="el" href="classprtx_1_1_log_formatter.html">prtx::LogFormatter</a></td><td class="entry"></td></tr>
   <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>operator%</b>(const ReportsPtr &amp;r) (defined in <a class="el" href="classprtx_1_1_log_formatter.html">prtx::LogFormatter</a>)</td><td class="entry"><a class="el" href="classprtx_1_1_log_formatter.html">prtx::LogFormatter</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0"><td class="entry"><b>operator=</b>(const LogFormatter &amp;)=delete (defined in <a class="el" href="classprtx_1_1_log_formatter.html">prtx::LogFormatter</a>)</td><td class="entry"><a class="el" href="classprtx_1_1_log_formatter.html">prtx::LogFormatter</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>operator=</b>(LogFormatter &amp;&amp;)=delete (defined in <a class="el" href="classprtx_1_1_log_formatter.html">prtx::LogFormatter</a>)</td><td class="entry"><a class="el" href="classprtx_1_1_log_formatter.html">prtx::LogFormatter</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0"><td class="entry"><b>~LogFormatter</b>() (defined in <a class="el" href="classprtx_1_1_log_formatter.html">prtx::LogFormatter</a>)</td><td class="entry"><a class="el" href="classprtx_1_1_log_formatter.html">prtx::LogFormatter</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
+  <tr bgcolor="#f0f0f0"><td class="entry"><b>operator%</b>(const std::vector&lt; uint32_t &gt; &amp;v) (defined in <a class="el" href="classprtx_1_1_log_formatter.html">prtx::LogFormatter</a>)</td><td class="entry"><a class="el" href="classprtx_1_1_log_formatter.html">prtx::LogFormatter</a></td><td class="entry"></td></tr>
+  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>operator=</b>(const LogFormatter &amp;)=delete (defined in <a class="el" href="classprtx_1_1_log_formatter.html">prtx::LogFormatter</a>)</td><td class="entry"><a class="el" href="classprtx_1_1_log_formatter.html">prtx::LogFormatter</a></td><td class="entry"></td></tr>
+  <tr bgcolor="#f0f0f0"><td class="entry"><b>operator=</b>(LogFormatter &amp;&amp;)=delete (defined in <a class="el" href="classprtx_1_1_log_formatter.html">prtx::LogFormatter</a>)</td><td class="entry"><a class="el" href="classprtx_1_1_log_formatter.html">prtx::LogFormatter</a></td><td class="entry"></td></tr>
+  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>~LogFormatter</b>() (defined in <a class="el" href="classprtx_1_1_log_formatter.html">prtx::LogFormatter</a>)</td><td class="entry"><a class="el" href="classprtx_1_1_log_formatter.html">prtx::LogFormatter</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
 </table></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Aug 16 2023 19:16:21 for ArcGIS Procedural Runtime by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Nov 8 2023 09:45:52 for ArcGIS Procedural Runtime by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.5
 </small></address>

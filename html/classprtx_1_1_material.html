@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="esri_prt_55px.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">ArcGIS Procedural Runtime
-   &#160;<span id="projectnumber">3.0.8961</span>
+   &#160;<span id="projectnumber">3.1.9666</span>
    </div>
   </td>
  </tr>
@@ -255,6 +255,9 @@ virtual double&#160;</td><td class="memItemRight" valign="bottom"><b>dirtmap_tu<
 <tr class="memitem:abdb7cc4f6b48a525aca48c035cdc05bc inherit pub_methods_classprtx_1_1_builtin_material_attributes"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abdb7cc4f6b48a525aca48c035cdc05bc"></a>
 virtual double&#160;</td><td class="memItemRight" valign="bottom"><b>dirtmap_tv</b> () const =0</td></tr>
 <tr class="separator:abdb7cc4f6b48a525aca48c035cdc05bc inherit pub_methods_classprtx_1_1_builtin_material_attributes"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a82a2af690be265107d4bd0fa0f7c51a3 inherit pub_methods_classprtx_1_1_builtin_material_attributes"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a82a2af690be265107d4bd0fa0f7c51a3"></a>
+virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>doubleSided</b> () const =0</td></tr>
+<tr class="separator:a82a2af690be265107d4bd0fa0f7c51a3 inherit pub_methods_classprtx_1_1_builtin_material_attributes"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1254e12b0490ea5f1a9893a15384c428 inherit pub_methods_classprtx_1_1_builtin_material_attributes"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1254e12b0490ea5f1a9893a15384c428"></a>
 virtual double&#160;</td><td class="memItemRight" valign="bottom"><b>emissive_b</b> () const =0</td></tr>
 <tr class="separator:a1254e12b0490ea5f1a9893a15384c428 inherit pub_methods_classprtx_1_1_builtin_material_attributes"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -623,6 +626,10 @@ virtual <br class="typebreak"/>
 <li>specularmap.tv</li>
 </ul>
 </li>
+<li>CGA, bool type:<ul>
+<li>doubleSided</li>
+</ul>
+</li>
 <li>CGA, string type:<ul>
 <li>bumpmap</li>
 <li>colormap</li>
@@ -647,6 +654,10 @@ virtual <br class="typebreak"/>
 <li>roughness (identical to CGA key: roughness)</li>
 <li>shininess (identical to CGA key: shininess)</li>
 <li>opacityMap.cutoff (identical to CGA key: opacitymap.cutoff)</li>
+</ul>
+</li>
+<li>Default shader, boolean type:<ul>
+<li>doubleSided (identical to CGA key: doubleSided)</li>
 </ul>
 </li>
 <li>Default shader, string type:<ul>
@@ -1310,7 +1321,7 @@ virtual <br class="typebreak"/>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Aug 16 2023 19:16:21 for ArcGIS Procedural Runtime by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Nov 8 2023 09:45:52 for ArcGIS Procedural Runtime by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.5
 </small></address>

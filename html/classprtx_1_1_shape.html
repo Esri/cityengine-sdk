@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="esri_prt_55px.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">ArcGIS Procedural Runtime
-   &#160;<span id="projectnumber">3.0.8961</span>
+   &#160;<span id="projectnumber">3.1.9666</span>
    </div>
   </td>
  </tr>
@@ -152,8 +152,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ac2b9c6f12c34166783868d527d7522a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a82b0387d5bd03ba0cd88af470aebedb9"><td class="memItemLeft" align="right" valign="top">virtual uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_shape.html#a82b0387d5bd03ba0cd88af470aebedb9">getParentID</a> () const =0</td></tr>
 <tr class="separator:a82b0387d5bd03ba0cd88af470aebedb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a52ee88c6541bc44a6610689a70299d9a"><td class="memItemLeft" align="right" valign="top">virtual int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_shape.html#a52ee88c6541bc44a6610689a70299d9a">getShapeSymbol</a> () const =0</td></tr>
-<tr class="separator:a52ee88c6541bc44a6610689a70299d9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab3594b193003b7f7088569562fb32623"><td class="memItemLeft" align="right" valign="top">virtual int64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_shape.html#ab3594b193003b7f7088569562fb32623">getShapeSymbol</a> () const =0</td></tr>
+<tr class="separator:ab3594b193003b7f7088569562fb32623"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af4c14b653f6247d53a938186432154b0"><td class="memItemLeft" align="right" valign="top">virtual const <a class="el" href="namespaceprtx.html#a90f6fa0ea3d2fca3c8650414fa099843">TrimPlanePtrVector</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_shape.html#af4c14b653f6247d53a938186432154b0">getTrimPlanes</a> () const =0</td></tr>
 <tr class="separator:af4c14b653f6247d53a938186432154b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classprtx_1_1_attributable"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classprtx_1_1_attributable')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classprtx_1_1_attributable.html">prtx::Attributable</a></td></tr>
@@ -293,6 +293,9 @@ virtual double&#160;</td><td class="memItemRight" valign="bottom"><b>material_di
 <tr class="memitem:ad8adcdf9b069d9887803e0572a222ee7 inherit pub_methods_classprtx_1_1_builtin_shape_attributes"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad8adcdf9b069d9887803e0572a222ee7"></a>
 virtual double&#160;</td><td class="memItemRight" valign="bottom"><b>material_dirtmap_tv</b> () const =0</td></tr>
 <tr class="separator:ad8adcdf9b069d9887803e0572a222ee7 inherit pub_methods_classprtx_1_1_builtin_shape_attributes"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a516a039a58759a14e959d62e7384f095 inherit pub_methods_classprtx_1_1_builtin_shape_attributes"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a516a039a58759a14e959d62e7384f095"></a>
+virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>material_doubleSided</b> () const =0</td></tr>
+<tr class="separator:a516a039a58759a14e959d62e7384f095 inherit pub_methods_classprtx_1_1_builtin_shape_attributes"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9e0bf0b080a520f788723dc61145bc2b inherit pub_methods_classprtx_1_1_builtin_shape_attributes"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9e0bf0b080a520f788723dc61145bc2b"></a>
 virtual double&#160;</td><td class="memItemRight" valign="bottom"><b>material_emissive_b</b> () const =0</td></tr>
 <tr class="separator:a9e0bf0b080a520f788723dc61145bc2b inherit pub_methods_classprtx_1_1_builtin_shape_attributes"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -591,6 +594,7 @@ virtual <br class="typebreak"/>
 <li>bool:<ul>
 <li>trim.horizontal</li>
 <li>trim.vertical</li>
+<li>material.doubleSided</li>
 </ul>
 </li>
 <li>float:<ul>
@@ -719,7 +723,8 @@ virtual <br class="typebreak"/>
 <li>int:<ul>
 <li>.ID</li>
 <li>.parentID</li>
-<li>.shapeSymbol </li>
+<li>.shapeSymbol0</li>
+<li>.shapeSymbol1 </li>
 </ul>
 </li>
 </ul>
@@ -944,7 +949,7 @@ virtual <br class="typebreak"/>
 
 </div>
 </div>
-<a class="anchor" id="a52ee88c6541bc44a6610689a70299d9a"></a>
+<a class="anchor" id="ab3594b193003b7f7088569562fb32623"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -952,7 +957,7 @@ virtual <br class="typebreak"/>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual int32_t prtx::Shape::getShapeSymbol </td>
+          <td class="memname">virtual int64_t prtx::Shape::getShapeSymbol </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -1002,7 +1007,7 @@ virtual <br class="typebreak"/>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Aug 16 2023 19:16:21 for ArcGIS Procedural Runtime by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Nov 8 2023 09:45:52 for ArcGIS Procedural Runtime by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.5
 </small></address>

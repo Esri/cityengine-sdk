@@ -89,6 +89,10 @@ channels with a fixed semantic.</p>
     <td><p>Controls the roughness factor (if <span class="codelight">material.roughnessmap</span> is set). 0 is a completely smooth material, 1 is a completely rough material. Default is 1.</p></td>
   </tr>
   <tr>
+    <td><pre class="code_std"><a name="doubleSided"></a><span class="codelight">bool</span> material.doubleSided<pre></td>
+    <td><p>Controls if the material is supposed to be seen from both sides of a polygon. If set to false the material is supposed to only be seen from the side the normal points to. Default is true.</p></td>
+  </tr>
+  <tr>
     <td>
     	<pre class="code_std"><a name="colormap"></a><span class="codelight">string</span> material.colormap</pre>
     	<pre class="code_std"><a name="bumpmap"></a><span class="codelight">string</span> material.bumpmap</pre>
@@ -435,6 +439,7 @@ channels with a fixed semantic.</p>
 		<th>opacitymap.mode</th>
 		<th>opacitymap.cutoff</th>
 		<th>normalmap</th>
+		<th>doubleSided</th>
 	</tr>
 	<tr>
 		<th>Display</th>
@@ -444,6 +449,7 @@ channels with a fixed semantic.</p>
 		<td><span style="color:green;">&#10004;</span></td>
 		<td><span style="color:green;">&#10004;</span></td>
 		<td><span style="color:green;">&#10004;</span></td>
+		<td><span style="color:red;">&#10008;</span></td>
 	</tr>
 	<tr>
 		<th rowspan="7">Import</th>
@@ -453,11 +459,13 @@ channels with a fixed semantic.</p>
 		<td><span style="color:red;">&#10008;</span></td>
 		<td><span style="color:red;">&#10008;</span></td>
 		<td><span style="color:green;">&#10004;</span></td>
+		<td><span style="color:green;">&#10004;</span> (7)</td>
 	</tr>
 	<tr>
 		<th>DWG</th>
 		<td><span style="color:green;">&#10004;</span></td>
 		<td><span style="color:green;">&#10004;</span></td>
+		<td><span style="color:red;">&#10008;</span></td>
 		<td><span style="color:red;">&#10008;</span></td>
 		<td><span style="color:red;">&#10008;</span></td>
 		<td><span style="color:red;">&#10008;</span></td>
@@ -469,9 +477,11 @@ channels with a fixed semantic.</p>
 		<td><span style="color:red;">&#10008;</span></td>
 		<td><span style="color:red;">&#10008;</span></td>
 		<td><span style="color:green;">&#10004;</span></td>
+		<td><span style="color:red;">&#10008;</span></td>
 	</tr>
 	<tr>
 		<th>glTF</th>
+		<td><span style="color:green;">&#10004;</span></td>
 		<td><span style="color:green;">&#10004;</span></td>
 		<td><span style="color:green;">&#10004;</span></td>
 		<td><span style="color:green;">&#10004;</span></td>
@@ -485,11 +495,13 @@ channels with a fixed semantic.</p>
 		<td><span style="color:red;">&#10008;</span></td>
 		<td><span style="color:red;">&#10008;</span></td>
 		<td><span style="color:red;">&#10008;</span></td>
+		<td><span style="color:red;">&#10008;</span></td>
 	</tr>
 	<tr>
 		<th>OBJ</th>
 		<td><span style="color:green;">&#10004;</span></td>
 		<td><span style="color:green;">&#10004;</span></td>
+		<td><span style="color:red;">&#10008;</span></td>
 		<td><span style="color:red;">&#10008;</span></td>
 		<td><span style="color:red;">&#10008;</span></td>
 		<td><span style="color:red;">&#10008;</span></td>
@@ -501,6 +513,7 @@ channels with a fixed semantic.</p>
 		<td><span style="color:green;">&#10004;</span></td>
 		<td><span style="color:green;">&#10004;</span></td>
 		<td><span style="color:green;">&#10004;</span></td>
+		<td><span style="color:red;">&#10008;</span></td>
 	</tr>
 	<tr>
 		<th rowspan="12">Export</th>
@@ -510,6 +523,7 @@ channels with a fixed semantic.</p>
 		<td><span style="color:green;">&#10004;</span></td>
 		<td><span style="color:red;">&#10008;</span></td>
 		<td><span style="color:green;">&#10004;</span></td>
+		<td><span style="color:red;">&#10008;</span></td>
 	</tr>
 	<tr>
 		<th>Collada</th>
@@ -518,11 +532,13 @@ channels with a fixed semantic.</p>
 		<td><span style="color:red;">&#10008;</span></td>
 		<td><span style="color:red;">&#10008;</span></td>
 		<td><span style="color:green;">&#10004;</span></td>
+		<td><span style="color:red;">&#10008;</span></td>
 	</tr>
 	<tr>
 		<th>DWG</th>
 		<td><span style="color:green;">&#10004;</span></td>
 		<td><span style="color:green;">&#10004;</span></td>
+		<td><span style="color:red;">&#10008;</span></td>
 		<td><span style="color:red;">&#10008;</span></td>
 		<td><span style="color:red;">&#10008;</span></td>
 		<td><span style="color:red;">&#10008;</span></td>
@@ -534,6 +550,7 @@ channels with a fixed semantic.</p>
 		<td><span style="color:red;">&#10008;</span></td>
 		<td><span style="color:red;">&#10008;</span></td>
 		<td><span style="color:green;">&#10004;</span></td>
+		<td><span style="color:red;">&#10008;</span></td>
 	</tr>
 	<tr>
 		<th>FileGDB</th>
@@ -542,9 +559,11 @@ channels with a fixed semantic.</p>
 		<td><span style="color:red;">&#10008;</span></td>
 		<td><span style="color:red;">&#10008;</span></td>
 		<td><span style="color:red;">&#10008;</span></td>
+		<td><span style="color:red;">&#10008;</span></td>
 	</tr>
 	<tr>
 		<th>glTF</th>
+		<td><span style="color:green;">&#10004;</span></td>
 		<td><span style="color:green;">&#10004;</span></td>
 		<td><span style="color:green;">&#10004;</span></td>
 		<td><span style="color:green;">&#10004;</span></td>
@@ -558,11 +577,13 @@ channels with a fixed semantic.</p>
 		<td><span style="color:red;">&#10008;</span></td>
 		<td><span style="color:red;">&#10008;</span></td>
 		<td><span style="color:red;">&#10008;</span></td>
+		<td><span style="color:red;">&#10008;</span></td>
 	</tr>
 	<tr>
 		<th>OBJ</th>
 		<td><span style="color:green;">&#10004;</span></td>
 		<td><span style="color:green;">&#10004;</span></td>
+		<td><span style="color:red;">&#10008;</span></td>
 		<td><span style="color:red;">&#10008;</span></td>
 		<td><span style="color:red;">&#10008;</span></td>
 		<td><span style="color:red;">&#10008;</span></td>
@@ -574,6 +595,7 @@ channels with a fixed semantic.</p>
 		<td><span style="color:red;">&#10008;</span></td>
 		<td><span style="color:red;">&#10008;</span></td>
 		<td><span style="color:green;">&#10004;</span></td>
+		<td><span style="color:red;">&#10008;</span></td>
 	</tr>
 	<tr>
 		<th>Unreal</th>
@@ -582,6 +604,7 @@ channels with a fixed semantic.</p>
 		<td><span style="color:green;">&#10004;</span></td>
 		<td><span style="color:red;">&#10008;</span></td>
 		<td><span style="color:green;">&#10004;</span></td>
+		<td><span style="color:red;">&#10008;</span></td>
 	</tr>
 	<tr>
 		<th>USD</th>
@@ -590,6 +613,7 @@ channels with a fixed semantic.</p>
 		<td><span style="color:green;">&#10004;</span></td>
 		<td><span style="color:green;">&#10004;</span></td>
 		<td><span style="color:green;">&#10004;</span></td>
+		<td><span style="color:red;">&#10008;</span></td>
 	</tr>
 	<tr>
 		<th>Vue</th>
@@ -598,10 +622,12 @@ channels with a fixed semantic.</p>
 		<td><span style="color:red;">&#10008;</span></td>
 		<td><span style="color:red;">&#10008;</span></td>
 		<td><span style="color:red;">&#10008;</span></td>
+		<td><span style="color:red;">&#10008;</span></td>
 	</tr>
 </table>
 <ol>
 	<li value="5">If a map is present the corresponding scalar value is ignored.</li>
+	<li value="7">Collada does not support the "doubleSided" parameter directly. The importer only sets it to false if the Collada file was written by "SketchUp" with the "two-sided" export option enabled (= all faces are duplicated).</li>
 </ol>
 
 

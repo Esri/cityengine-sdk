@@ -36,12 +36,16 @@
 		<tr><td width="30%"><span class="codelight">front, back, left, right, top, bottom, side</span></td><td>The edges' outwards normals in the polygon plane are analyzed by classifying their directions into the corresponding scope quadrants.</td></tr>
 		<tr><td><span class="codelight">object.front, object.back, object.left, object.right, object.top, object.bottom, object.side</span></td><td>The edges' outwards normals in the polygon plane are analyzed by classifying their directions into the corresponding object coordinate system quadrants.</td></tr>
 		<tr><td><span class="codelight">world.south, world.north, world.west, world.east, world.up, world.down, world.side</span></td><td>The edges' outwards normals in the polygon plane are analyzed by classifying their directions into the corresponding world coordinate system quadrants.</td></tr>
-		<tr><td><span class="codelight">street.front, street.back, street.left, street.right</span></td><td>Edges adjacent to a street can be selected with the <span class="codelight">street.front</span> selector, rear edges can be selected with the <span class="codelight">street.back</span> selector, and edges in between front and back can be selected with the <span class="codelight">street.left</span> and <span class="codelight">street.right</span> selectors. <span class="codelight">street.side</span> combines left and right edges. These selectors depend on the availability of the streetWidth attribute map; see <a href="https://doc.arcgis.com/en/cityengine/latest/help/help-layers-block-parameters.htm#ESRI_SECTION2_5A91A7408D2240929B5EDA53D6B21FA3" target="_blank">Auto-generated street width attributes</a>. If the attribute is not available, component selection falls back to the <span class="codelight">object.xxx</span> selectors.</td></tr>
+		<tr><td><span class="codelight">street.front, street.back, street.left, street.right, street.side</span></td><td>Edges adjacent to a street can be selected with the <span class="codelight">street.front</span> selector, rear edges can be selected with the <span class="codelight">street.back</span> selector, and edges in between front and back can be selected with the <span class="codelight">street.left</span> and <span class="codelight">street.right</span> selectors. <span class="codelight">street.side</span> combines left and right edges. These selectors depend on the availability of the streetWidth attribute map; see <a href="https://doc.arcgis.com/en/cityengine/latest/help/help-layers-block-parameters.htm#ESRI_SECTION2_5A91A7408D2240929B5EDA53D6B21FA3" target="_blank">Auto-generated street width attributes</a>. If the attribute is not available, component selection falls back to the <span class="codelight">object.xxx</span> selectors.</td></tr>
 		<tr><td><span class="codelight">uv.left, uv.right, uv.bottom, uv.top</span></td><td>Selects edges based on their uv-coordinates. The outwards-pointing normal of each edge is analyzed to classify the edge with (<span class="codelight">left, right</span>) being the negative and positive u-axis and (<span class="codelight">bottom, top</span>) being the negative and positive v-axis.</td></tr>
 		<tr><td><span class="codelight">uv.uMin, uv.uMax, uv.vMin, uv.vMax</span></td><td>Selects edges based on their uv-coordinates. An edge is selected if both endpoints have the geometry's minimal (<span class="codelight">uMin, vMin</span>) or maximal (<span class="codelight">uMax, vMax</span>) value of the respective uv-axis assigned. </td></tr>
 		<tr><td><span class="codelight">all</span></td><td>Selects all edges.</td></tr>
+		<tr><td><span class="codelight">isTagged(<span class="cga_opparam">tagQuery</span>)</span></td><td>Selects tagged edges. See also <a href="op_setTagsFromEdgeAttrs.html#setbackExample">this section</a> for more details. 
+		<p class="notes"><em>Edges can also be selected based on the tags of adjacent faces.</em></p>
+		</td></tr>
+		<tr><td> <i>logical expression (bool)</i></td><td>Selects all edges for which the expression evaluates to true. User-defined functions as well as the above selectors can be used in the expression. </td></tr>
 		<tr><td><i>index (float)</i></td><td>Selects the <i>index</i>-th component (0-based). Too large and negative indices are modulo wrapped to a correct index.</td></tr>
-		<tr><td><span class="codelight">remainder</span></td><td>Selects the remainder of the polygon. <p class="notes">The remainder depends on the selected edges but is always the same, independent of the position of the <span class="codelight">remainder</span> selector in the selector-operator sequence!</p>.</td></tr>
+		<tr><td><span class="codelight">remainder</span></td><td>Selects the remainder of the polygon. <p class="notes">The remainder depends on the selected edges but is always the same, independent of the position of the <span class="codelight">remainder</span> selector in the selector-operator sequence!</p></td></tr>
 		</table>
 	</li>
 	<li><span class="cga_opparam">operator</span><br>The operator defines how the setback polygons are used to generate successor shapes. This also applies to shapes with more than one face.
@@ -58,6 +62,46 @@
 <p>The <span class="codelight">setback</span> operation selects a number of edges and sets them back by a given distance. This is somewhat similar to the <a class="normw" href="op_offset.html">polygon offset operation</a>, with the difference that only a subset of the edges can be chosen for the setback.<br>
 A common setback <span class="cga_opparam">distance</span> can be specified for all edges. Alternatively, a separate distance for each face edge can be specified by passing an array of setback <span class="cga_opparam">distances</span> instead of a single setback <span class="cga_opparam">distance</span> to the operation. The array must be in face-edge order, i.e. the first element is the distance of the first edge of the first face, the second element is the distance of the second edge of the first face, and so on. Shared edges are considered separately for each face. If the array does not contain enough elements no setback is performed on the respective missing face edges. If the array contains more elements than the number of total face edges the respective setback distances are ignored. Such an array could be constructed using the <a class="cga_op" href="func_comp.html">comp</a> function with the <span class="cga_opparam">component</span> selector set to <span class="codelight">fe</span> (face edges). The <a class="cga_op" href="op_setbackPerEdge.html">setbackPerEdge</a> operation provides a more convenient way to set individual setback distances without having to construct an array manually.</p> 
 
+<h3><a name="componentTags"></a>Component tags</h3>
+All <span class="codelight">setback</span> operations automatically apply semantic <a href="cga_componentTags.html">component tags</a> to the resulting edge components:
+<h4>Shape</h4>
+<table summary="" class="twocol">
+<tr>
+    <td>
+		
+		<table cellspacing="5">
+			<tr><td width="25%"><span class="codelight">"setback.front"</span></td><td>Blue: original selected edges.</td></tr>
+			<tr><td><span class="codelight">"setback.back"</span></td><td>Green: new setback edges.</td></tr>
+			<tr><td><span class="codelight">"setback.side"</span></td><td>Yellow: side edges.</td></tr>
+		</table>
+	</td>
+	<td class="twocol_l">
+	<img src="images/autotag-setback-shape.png" alt="autotag-setback-shape"/>
+	<pre class="code3">setback(4) { front : Shape }</pre>
+	</td></tr>
+</table>
+<h4>Remainder</h4>
+<table summary="" class="twocol">
+<tr>
+    <td>
+		<table cellspacing="5">
+			<tr><td width="25%"><span class="codelight">"setback.back"</span></td><td>Green: new setback edges.</td></tr>
+			<tr><td><span class="codelight">"setback.side"</span></td><td>Yellow: side edges.</td></tr>
+			<tr><td><span class="codelight">"setback.remainder"</span></td><td>Purple: original edges.</td></tr>
+		</table>
+	</td>
+	<td class="twocol_l">
+		<img src="images/autotag-setback-remainder.png" alt="autotag-setback-remainder"/>
+		<pre class="code3">setback(4) { front : NIL 
+           | remainder : Remainder }</pre>
+	</td></tr>
+</table>
+For more information on working with component tags, refer to:
+	<ul>
+		<li><a href="cga_componentTags.html#autoTags">Auto-tags</a></li>
+		<li><a href="cga_componentTags.html#tagPropagation">Tag propagation</a></li> 
+	</ul>
+	
 <h2>Related</h2>
 
 <ul>
@@ -71,6 +115,7 @@ A common setback <span class="cga_opparam">distance</span> can be specified for 
 <li><a class="normw" href="op_splitAndSetbackPerimeter.html">splitAndSetbackPerimeter operation</a></li>
 <li><a class="normw" href="func_comp.html">comp function</a></li>
 <li><a class="normw" href="func_edgeAttr.html">Edge attribute functions</a></li>
+<li><a class="normw" href="op_setTagsFromEdgeAttrs.html">setTagsFromEdgeAttrs operation</a></li>
 </ul>
                 
 <h2 id="examples">Examples</h2>
