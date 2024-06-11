@@ -1,3 +1,48 @@
+# CITYENGINE SDK 3.2.9903 CHANGELOG
+
+This section lists changes compared to CityEngine SDK 3.1.9666.
+
+## General Info
+* The focus of this release is to fix some issues which are important for certain client applications such as ArcGIS Pro. There is no CityEngine version using this version of the SDK.
+* This release focuses on stability and performance for multi-threaded decode-encode usage of PRT, adds support for calling `prt::init()` multiple times to load additional custom encoders and introduces support for decoding IFC4 files. 
+
+## PRT API
+* It is now possible to call `prt::init()` multiple times to load (additional) custom extensions. Before, all extensions had to be loaded on the first call. Also, it is possible now to initialize PRT again after shutdown. PRT is (considered) shutdown when all library handles returned by `prt::init()` have been destroyed.
+
+## PRTX API
+* `prtx::DataBackend` has been optimized for performance in a multi-threaded setup. Its internal lock usage is finer-grained now, allowing parallel decodes for multiple assets.
+
+## CGA
+* New functions:
+  * assetMetadata function.
+
+## Built-In Codecs
+* IFC, DWG Decoders, Encoders:
+  * Made them thread-safe. Before, only one of these 4 codecs could run at a time - otherwise, PRT would crash.
+  * Updated to ODA 24.11 library
+* IFC Decoder:
+  * Added support for IFC4.
+* DWC Encoder:
+   * Fixed a bug where the same textures got written multiple times.
+* USD Decoder, Encoder:
+  * Made them thread-safe. Before, only one of the two could run at a time - otherwise, PRT would crash.  
+* FBX Decoder, Encoder:
+  * Made them thread-safe. Before, only one of the two could run at a time - otherwise, PRT would crash.
+  * The FBX codecs are in a separate shared library now (com.esri.prt.fbx.dll / .so).
+  * Updated to FBX 2020.3.4 library.
+  * Dropped support for FBX on 32bit.
+* GLTF Encoder:
+  * Fixed a crash: the encoder now ignores faces with less than 3 vertices.
+  * Added support for data URIs with mime type application/gltf-buffer.
+  * Updated to fx-gltf 2.0.0 and nlohmann::json 3.11.3 libraries. 
+* Vue Encoder:
+  * Made it thread-safe.
+
+## Misc Changes and Fixes
+* Applied security updates for zlib (1.3.0), libtiff (4.6.0), libxml (2.12.3), boost (1.84).
+* Windows: switched to MSVC 14.37.
+* Linux: switched to GCC 11 including new libstdc++ ABI (_GLIBCXX_USE_CXX11_ABI=1).
+
 # CITYENGINE SDK 3.1.9666 CHANGELOG
 
 This section lists changes compared to CityEngine SDK 3.0.8961.
