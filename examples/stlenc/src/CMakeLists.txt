@@ -63,7 +63,6 @@ set_target_properties(${PROJECT_NAME} PROPERTIES CXX_STANDARD 17 CXX_EXTENSIONS 
 target_include_directories(${PROJECT_NAME} PRIVATE ${PRT_INCLUDE_PATH})
 if(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
 	target_compile_options(${PROJECT_NAME} PRIVATE -march=nocona -fvisibility=hidden -fvisibility-inlines-hidden -Wl,--exclude-libs,ALL -Wall -Wextra -Wunused-parameter -Wl,-rpath,'$ORIGIN')
-	target_compile_definitions(${PROJECT_NAME} PRIVATE -D_GLIBCXX_USE_CXX11_ABI=0)
 endif()
 target_link_libraries(${PROJECT_NAME} PRIVATE ${PRT_CORE_LIBRARY})
 
