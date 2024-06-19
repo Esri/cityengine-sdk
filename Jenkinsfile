@@ -134,7 +134,5 @@ def buildConfig(String src, String tgt, Map cfg, List deps, List defs) {
 	cepl.cleanCurrentDir()
 	unstash(name: SOURCE_STASH)
 	deps.each { d -> papl.fetchDependency(d, cfg) }
-	dir(path: 'build') {
-		papl.runCMakeBuild(src, tgt, cfg, defs, JenkinsTools.CMAKE319)
-	}
+	papl.runCMakeBuild(src, 'build', tgt, cfg, defs, JenkinsTools.CMAKE319)
 }
