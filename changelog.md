@@ -6,11 +6,11 @@ This section lists changes compared to CityEngine SDK 3.2.9903.
 * CityEngine SDK 3.2.10210 is used in CityEngine 2024.0.10210.
 
 ## PRT API
-* 'prt::Object::toXML()' (including all subclasses): fixed dependency on system locale and improved performance.
+* `prt::Object::toXML()` (including all subclasses): fixed dependency on system locale and improved performance.
 
 ## PRTX API
-* 'prtx::EncodePreparator::PreparationFlags::processHoles': improved the case 'prtx::HoleProcessor::TRIANGULATE_FACES_WITH_HOLES'. Before, it was possible that tiny gaps in the connectivity were created. Now the mesh stays watertight. However, in some cases there might be faces with more than 3 vertices now. 
-* 'prtx::MaterialBuilder::setString()': fixed a rare crash when setting the shader.
+* `prtx::EncodePreparator::PreparationFlags::processHoles`: improved the case `prtx::HoleProcessor::TRIANGULATE_FACES_WITH_HOLES`. Before, it was possible that tiny gaps in the connectivity were created. Now the mesh stays watertight. However, in some cases there might be faces with more than 3 vertices now. 
+* `prtx::MaterialBuilder::setString()`: fixed a rare crash when setting the shader.
 
 ## CGA
 * New features:
@@ -73,7 +73,7 @@ This section lists changes compared to CityEngine SDK 3.2.9903.
   * Fixed a rare deadlock (which was introduced in SDK 3.2.9903). 
 
 ## Misc Changes and Fixes
-* In the CGA and the PRT reference colorspaces have been clarified. Colors are always in (non-linear) sRGB space.
+* In the CGA and the PRT reference color spaces have been clarified. Colors are always in (non-linear) sRGB space.
 
 # CITYENGINE SDK 3.2.9903 CHANGELOG
 
