@@ -33,15 +33,21 @@ This document explains how to install the CityEngine SDK and how to work with th
 
 ## Table of Contents
 
-* [Downloads](#downloads)
-* [Examples](#examples)
-* [Documentation](#documentation)
-* [Related Software Products](#related-software-products)
-* [General Software Requirements](#general-software-requirements)
-* [Release History and Changelog](#release-history-and-changelog)
-* [CityEngine Resources](#cityengine-resources)
-* [Issues and Contributions](#issues-and-contributions)
-* [Licensing](#licensing)
+- [CityEngine SDK](#cityengine-sdk)
+	- [Quick Start](#quick-start)
+	- [Table of Contents](#table-of-contents)
+	- [Downloads](#downloads)
+	- [Examples](#examples)
+	- [Documentation](#documentation)
+	- [Related Software Products](#related-software-products)
+	- [General Software Requirements](#general-software-requirements)
+		- [All Platforms](#all-platforms)
+		- [Windows](#windows)
+		- [Linux](#linux)
+	- [Release History and Changelog](#release-history-and-changelog)
+	- [CityEngine Resources](#cityengine-resources)
+	- [Issues and Contributions](#issues-and-contributions)
+	- [Licensing](#licensing)
 
 ## Downloads
 
@@ -80,14 +86,14 @@ Please note that the individual example READMEs may include further requirements
 ### Windows
 
 * Windows 10 or 11 (64bit)
-* Required C++ compiler: Visual Studio 2019 with Toolset MSVC 14.27 or later
+* Required C++ compiler: Visual Studio 2019 with Toolset MSVC 14.37 or later
 * Required flags for extension libraries release mode: `/std:c++17 /bigobj /GR /EHsc /MD`
 
 ### Linux
 
 * RedHat Enterprise Linux 8.x or 9.x and compatible (e.g. Alma Linux or Rocky Linux)
-* Required C++ compiler: GCC 9.3 or later (RedHat Enterprise Linux DevToolSet 9)
-* Required flags for extension libraries: `-std=c++17 -D_GLIBCXX_USE_CXX11_ABI=0 -march=nocona -fvisibility=hidden -fvisibility-inlines-hidden -Wl,--exclude-libs,ALL`
+* Required C++ compiler: GCC 11.2 or later (RedHat Enterprise Linux DevToolSet 11)
+* Required flags for extension libraries: `-std=c++17 -march=nocona -fvisibility=hidden -fvisibility-inlines-hidden -Wl,--exclude-libs,ALL`
 
 ## Release History and Changelog
 

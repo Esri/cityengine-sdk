@@ -22,7 +22,6 @@ set_target_properties(${PROJECT_NAME} PROPERTIES CXX_STANDARD 17 CXX_EXTENSIONS 
 
 if(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
 	target_compile_options(${PROJECT_NAME} PRIVATE -march=nocona -fvisibility=hidden -fvisibility-inlines-hidden -Wl,--exclude-libs,ALL -Wall -Wextra -Wunused-parameter -Wl,-rpath,'$ORIGIN')
-	target_compile_definitions(${PROJECT_NAME} PRIVATE -D_GLIBCXX_USE_CXX11_ABI=0)
 endif()
 
 
@@ -40,10 +39,10 @@ endif()
 if(NOT prt_DIR)
 	if(P4C_WINDOWS)
 		set(PRT_OS "win10")
-		set(PRT_TC "vc1427")
+		set(PRT_TC "vc1437")
 	elseif(P4C_LINUX)
-		set(PRT_OS "rhel7")
-		set(PRT_TC "gcc93")
+		set(PRT_OS "rhel8")
+		set(PRT_TC "gcc112")
 	endif()
 
 	set(PRT_VERSION "3.1.9666")

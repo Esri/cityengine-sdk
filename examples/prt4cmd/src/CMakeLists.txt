@@ -31,10 +31,10 @@ if(NOT prt_DIR)
 
 	if(P4C_WINDOWS)
 		set(PRT_OS "win10")
-		set(PRT_TC "vc1427")
+		set(PRT_TC "vc1437")
 	elseif(P4C_LINUX)
-		set(PRT_OS "rhel7")
-		set(PRT_TC "gcc93")
+		set(PRT_OS "rhel8")
+		set(PRT_TC "gcc112")
 	endif()
 
 	set(PRT_VERSION "3.1.9666")
