@@ -69,6 +69,7 @@ elseif(P4C_LINUX)
 	target_compile_options(${PROJECT_NAME} PRIVATE
 		-march=nocona -fvisibility=hidden -fvisibility-inlines-hidden
 		-Wl,--exclude-libs,ALL -Wall -Wextra -Wunused-parameter -Wl,-rpath,'\$ORIGIN')
+	target_link_libraries(${PROJECT_NAME} PRIVATE stdc++fs)
 
 endif()
 
