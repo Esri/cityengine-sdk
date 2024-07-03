@@ -63,6 +63,7 @@ This section lists changes compared to CityEngine SDK 3.2.9903.
   * Fixed "triangulate faces with holes" option - in some cases tiny gaps in the connectivity were created.
 * FBX Decoder:
   * Added support for normal maps.
+  * Now falls back to the first UV set when the FBX file contains a broken mapping between mesh and texture.
 * CGAMat Decoder:
   * Fixed a rare crash when decoding materials.
 * Collada Encoder:
