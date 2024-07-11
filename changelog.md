@@ -1,9 +1,9 @@
-# CITYENGINE SDK 3.2.10210 CHANGELOG
+# CITYENGINE SDK 3.2.10211 CHANGELOG
 
 This section lists changes compared to CityEngine SDK 3.2.9903.
 
 ## General Info
-* CityEngine SDK 3.2.10210 is used in CityEngine 2024.0.10210.
+* CityEngine SDK 3.2.10211 is used in CityEngine 2024.0.10211.
 
 ## PRT API
 * `prt::Object::toXML()` (including all subclasses): fixed dependency on system locale and improved performance.
