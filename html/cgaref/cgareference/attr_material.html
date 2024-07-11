@@ -45,7 +45,7 @@ channels with a fixed semantic.</p>
   </tr>  
   <tr>
     <td><pre class="code_std"><a name="color"></a><span class="codelight">float</span> material.color.{r|g|b}</pre></td>
-    <td>Diffuse color. Individual access to each color component. Default is white. <a href="attr_material_color.html">More details.</a></td>
+    <td>Diffuse color (non-linear sRGB). Individual access to each color component. Default is white. <a href="attr_material_color.html">More details.</a></td>
   </tr>  
   <tr>
     <td><pre class="code_std"><span class="codelight">string</span> material.color.rgb</pre></td>
@@ -53,15 +53,15 @@ channels with a fixed semantic.</p>
   </tr>  
   <tr>
     <td><pre class="code_std"><a name="ambient"></a><span class="codelight">float</span> material.ambient.{r|g|b}</pre></td>
-    <td>Ambient color. Individual access to each color component. Default is black.</td>
+    <td>Ambient color (non-linear sRGB). Individual access to each color component. Default is black.</td>
   </tr>  
   <tr>
     <td><pre class="code_std"><a name="specular"></a><span class="codelight">float</span> material.specular.{r|g|b}</pre></td>
-    <td>Specular color. Individual access to each color component. Default is black.</td>
+    <td>Specular color (non-linear sRGB). Individual access to each color component. Default is black.</td>
   </tr>  
   <tr>
     <td><pre class="code_std"><a name="emissive"></a><span class="codelight">float</span> material.emissive.{r|g|b}</pre></td>
-    <td><p>Emissive color. Individual access to each color component. Default is black.</p></td>
+    <td><p>Emissive color (non-linear sRGB). Individual access to each color component. Default is black.</p></td>
   </tr>
   <tr>
     <td><pre class="code_std"><a name="opacity"></a><span class="codelight">float</span> material.opacity</pre></td>
@@ -204,11 +204,11 @@ channels with a fixed semantic.</p>
   </tr>
   <tr>
     <td><span class="code_std">material.emissivemap</span></td>
-    <td><span class="code_std">emissiveTexture</span></td>
+    <td><span class="code_std">emissiveTexture</span>, RGB channels</td>
   </tr>
   <tr>
-    <td><span class="code_std">material.emissive</span></td>
-    <td><span class="code_std">emissiveFactor</span></td>
+    <td><span class="code_std">material.emissive.{r|g|b}</span></td>
+    <td><span class="code_std">emissiveFactor</span>, RGB components</td>
   </tr>
   <tr>
     <td><span class="code_std">material.opacitymap.mode</span></td>
@@ -559,7 +559,7 @@ channels with a fixed semantic.</p>
 		<td><span style="color:red;">&#10008;</span></td>
 		<td><span style="color:red;">&#10008;</span></td>
 		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
+		<td><span style="color:green;">&#10004;</span></td>
 	</tr>
 	<tr>
 		<th>glTF</th>
@@ -1087,9 +1087,9 @@ channels with a fixed semantic.</p>
 	<tr>
 		<th rowspan="7">Import</th>
 		<th>Collada</th>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
+		<td><span style="color:red;">&#10008;</span></td>
+		<td><span style="color:red;">&#10008;</span></td>
+		<td><span style="color:red;">&#10008;</span></td>
 	</tr>
 	<tr>
 		<th>DWG</th>
@@ -1099,9 +1099,9 @@ channels with a fixed semantic.</p>
 	</tr>
 	<tr>
 		<th>FBX</th>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
+		<td><span style="color:red;">&#10008;</span></td>
+		<td><span style="color:red;">&#10008;</span></td>
+		<td><span style="color:red;">&#10008;</span></td>
 	</tr>
 	<tr>
 		<th>glTF</th>
@@ -1123,22 +1123,22 @@ channels with a fixed semantic.</p>
 	</tr>
 	<tr>
 		<th>USD</th>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
+		<td><span style="color:green;">&#10004;</span></td>
+		<td><span style="color:green;">&#10004;</span></td>
+		<td><span style="color:green;">&#10004;</span></td>
 	</tr>
 	<tr>
 		<th rowspan="12">Export</th>
 		<th>Alembic</th>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
+		<td><span style="color:red;">&#10008;</span></td>
+		<td><span style="color:red;">&#10008;</span></td>
+		<td><span style="color:red;">&#10008;</span></td>
 	</tr>
 	<tr>
 		<th>Collada</th>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
+		<td><span style="color:red;">&#10008;</span></td>
+		<td><span style="color:red;">&#10008;</span></td>
+		<td><span style="color:red;">&#10008;</span></td>
 	</tr>
 	<tr>
 		<th>DWG</th>
@@ -1190,9 +1190,9 @@ channels with a fixed semantic.</p>
 	</tr>
 	<tr>
 		<th>USD</th>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
+		<td><span style="color:green;">&#10004;</span></td>
+		<td><span style="color:green;">&#10004;</span></td>
+		<td><span style="color:green;">&#10004;</span></td>
 	</tr>
 	<tr>
 		<th>Vue</th>
@@ -1233,7 +1233,7 @@ Wall -->
 </pre>
 
 <!-- FOOTER -->
-<p class="foot">Copyright &copy;2008-2023 Esri R&amp;D Center Zurich. All rights reserved.</p>                  
+<p class="foot">Copyright &copy;2008-2024 Esri R&amp;D Center Zurich. All rights reserved.</p>                  
 
 </div>
 </body>

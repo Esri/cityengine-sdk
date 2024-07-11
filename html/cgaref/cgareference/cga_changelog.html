@@ -29,6 +29,55 @@
 		<td width="12%"><strong>CityEngine version<br>(= CGA version)</strong></td>
 		<td><strong>Changes</strong></td>
 	</tr>
+    <tr>
+		<td>2024.0<br>CGAC 2.4</td>
+		<td>
+			New features:
+			<ul>
+				<li>A Visual CGA Design (*.vcga) can now be imported. You can call its <a href="start.html">start rule</a> and override its attributes and extension nodes in the <a href="import.html"><span class="code_std">import</span></a> statement.</li> <!-- CE-11881 -->
+				<li>Default extension implementation forwarding: It is now possible to reuse the default implementation of an extension rule from an imported ruleset in a new extension rule. The following code pattern defines an extension rule <span class="codelight">MyExt</span> which uses the default implementation of <span class="codelight">imp.Ext</span> as long as it is not overriden.<br><span class="codelight">import imp:"imp.cga"( Ext -> MyExt )<br>extension MyExt --> imp.Ext</span><br>For older versions of CGA this code would have led to an endless recursion.</li> <!-- CE-11872 -->
+			</ul>
+  			New annotations:
+			<ul>
+				<li><a href="cga_annotations.html#materialfile"><span class="code_std">@MaterialFile</span></a> annotation</li> <!-- CE-11746 -->
+			</ul>
+			Changes to existing features:
+			<ul>	
+				<li><a href="op_setback.html"><span class="code_std">setback</span></a>, <a href="op_setbackToArea.html"><span class="code_std">setbackToArea</span></a>, <a href="op_setbackPerEdge.html"><span class="code_std">setbackPerEdge</span></a>, <a href="op_shapeLUO.html"><span class="code_std">shapeLUO</span></a>, <a href="op_splitAndSetbackPerimeter.html"><span class="code_std">splitAndSetbackPerimeter</span></a> operations: Collinear vertices are now kept on the resulting setback edges. The setback edges will now match the initial edges.</li>		
+				<li><a href="op_convexify.html"><span class="code_std">convexify</span></a> operation:</li>
+				<ul>
+					<li>The topology of the input geometry is maintained and the resulting convex polygons are fully connected now. <strong>Note:</strong> The individual convex polygons (typically created via a subsequent <a href="op_comp.html">component split</a>) can contain collinear vertices now. These can be removed using the <a href="op_cleanupGeometry.html"><span class="code_std">cleanupGeometry</span></a> operation.</li> <!-- CE-10770 -->
+					<li>Existing <a href="cga_componentTags.html">component tags</a> are preserved now.</li> <!-- CE-11235 -->
+				</ul>
+				<li><a href="func_geometry.html#isConcave"><span class="code_std">geometry.isConcave</span></a> function and general concavity classification: Improved handling of collinear vertices. Collinear vertices are now consistently classified as convex.</li><!-- CE-3951 -->
+				<li><a href="attr_material.html"><span class="code_std">material.{colormap|...|metallicmap}.rw</span></a> attribute: changed rotation center from (0.5, 0.5) to (0,0).</li><!-- CE-11990 -->
+				<li>CGA Compiler: <a href="extension.html">Extension rules</a> with same name but different number of parameters (overloading) are not allowed anymore.</li> <!-- CE-11937 -->
+			</ul>
+			Bugfixes:
+			<ul>
+				<li><a href="func_readTable.html"><span class="code_std">readStringTable</span></a>, <a href="func_readTable.html"><span class="code_std">readFloatTable</span></a>: Fixed a crash when reading a non-existing table (Linux only).</li> <!-- CE-11751 -->
+				<li><a href="op_setupProjection.html"><span class="code_std">setupProjection</span></a> operation:</li>
+				<ul>
+					<li>Fixed a bug where <span class="cga_opparam">widthOffset</span> and <span class="cga_opparam">heightOffset</span> were not correctly considered when a uv scaling was defined for the material (for example <span class="codelight">material.colormap.su</span>).</li> <!-- CE-11870 -->
+					<li>Fixed a bug where offset values where not considered for projection axes <span class="codelight">scope.zx</span>.</li> <!-- CE-11863 -->
+				</ul>
+				<li>CGA Compiler:</li>
+				<ul>
+					<li>Fixed incorrect handling of the <a href="cga_annotations.html#hidden1"><span class="code_std">@Hidden</span></a> annotation for <a href="import.html"><span class="code_std">import</span></a> statements. <strong>Note:</strong> In the UI of older versions of CityEngine or client apps using an older version of CityEngine SDK, hidden imports will not be hidden in RPKs created with CityEngine 2024.0.</li> <!-- CE-9363, CE-9375, CE-11626 -->
+					<li>Fixed a bug where annotations were not assigned to <a href="import.html"><span class="code_std">import</span></a> statements but to subsequent statements.</li> <!-- CE-9363, CE-9375, CE-11626 -->
+				</ul>	
+			</ul>
+		</td>
+    </tr>
+    <tr>
+		<td>SDK 3.2.9903<br>CGAC 2.3</td>
+		<td>
+			New functions:
+			<ul>
+				<li><a href="func_assetMetadata.html"><span class="code_std">assetMetadata</span></a> function</li> <!-- CE-9879 -->
+			</ul>
+		</td>
+    </tr>
 	<tr>
 		<td>2023.1<br>CGAC 2.2</td>
 		<td>
@@ -70,7 +119,7 @@
 			</ul>
 			Changes to existing features:
 			<ul>
-				<li><a href="op_comp.html"><span class="code_std">comp</span></a>, <a href="op_setback.html"><span class="code_std">setback</span></a>, <a href="op_setbackToArea.html"><span class="code_std">setbackToArea</span></a>, <a href="op_setbackPerEdge.html"><span class="code_std">setbackPerEdge</span></a> operations, <a href="func_comp.html"><span class="code_std">comp</span></a> function:
+				<li><a href="op_comp.html"><span class="code_std">comp</span></a>, <a href="op_setback.html"><span class="code_std">setback</span></a>, <a href="op_setbackToArea.html"><span class="code_std">setbackToArea</span></a>, <a href="op_setbackPerEdge.html"><span class="code_std">setbackPerEdge</span></a> operations, <a href="func_comp.html"><span class="code_std">comp</span></a> function:</li>
 				<ul>
 					<li>Existing selectors can be combined in logical selector expressions (e.g. <span class="codelight">left || right</span>).</li>
 					<li>User-defined functions and all built-in functions can be used in logical selector expressions.</li>
@@ -86,13 +135,13 @@
 			Bugfixes:
 			<ul>
 				<li><a href="op_comp.html"><span class="code_std">comp</span></a> operation: Fixed a bug where using the combine operator (<span class="codelight">=</span>) created a new shape even when no components were selected.</li> <!-- CE-11193 -->
-				<li><a href="op_comp.html"><span class="code_std">comp</span></a>, <a href="op_setback.html"><span class="code_std">setback</span></a>, <a href="op_setbackToArea.html"><span class="code_std">setbackToArea</span></a>, <a href="op_setbackPerEdge.html"><span class="code_std">setbackPerEdge</span></a> operations, <a href="func_comp.html"><span class="code_std">comp</span></a> function: Fixed a bug where a function call was wrongly interpreted as selector.</li> <!-- CE-11265 -->
 				<li>Layer attributes (CityEngine only): <a href="func_print.html"><span class="code_std">print</span></a> function: Fixed output for very large integer values.</li> <!-- CE-11436 -->
 				<li>CGA Compiler:</li>
 				<ul>
 					<li>Fixed a bug in styles. In some cases, parameterized functions defined in a style other than the Default style resulted in a crash on generate.</li> <!-- CE-11332 -->
 					<li>Fixed a bug where changing the case in rule file names or in <a href="import.html"><span class="code_std">import</span></a> identifiers led to a state where the compilation persistently failed and changes were not effective anymore (Windows only).</li> <!-- CE-5551, CE-11556 -->
 					<li>Improved the automatic update of dependent CGA files when CGA files are edited. Prior, when dealing with imports, editing a CGA file could lead to low performance. Dependencies among CGA files are now correctly considered.</li> <!-- CE-10205 -->
+					<li><a href="op_comp.html"><span class="code_std">comp</span></a>, <a href="op_setback.html"><span class="code_std">setback</span></a>, <a href="op_setbackToArea.html"><span class="code_std">setbackToArea</span></a>, <a href="op_setbackPerEdge.html"><span class="code_std">setbackPerEdge</span></a> operations, <a href="func_comp.html"><span class="code_std">comp</span></a> function: Fixed a bug where a function call was wrongly interpreted as selector.</li> <!-- CE-11265 -->
 					<li>Fixed a bug where faulty compiled rule files (<span class="codelight">*.cgb</span>) were created which led to generate errors. This happened whenever a rule was defined which has the same signature as the <a href="op_s.html"><span class="code_std">s</span></a>, <a href="op_t.html"><span class="code_std">t</span></a> or <a href="op_tileUV.html"><span class="code_std">tileUV</span></a> operation.</li> <!-- CE-10986 -->
 				</ul>
 			</ul>
@@ -1617,7 +1666,7 @@ overload  .</li>
   
 
   <h3><!-- FOOTER --> </h3>
-        <p class="foot">Copyright &copy;2008-2023 Esri R&amp;D Center Zurich. All rights reserved.</p>                  
+        <p class="foot">Copyright &copy;2008-2024 Esri R&amp;D Center Zurich. All rights reserved.</p>                  
 
 <!-- END CENTERED CONTENT -->
 

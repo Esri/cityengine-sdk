@@ -33,11 +33,11 @@
 
 <h2>Returns</h2>
 
-<p><span class="cga_keyword">true</span> or<span class="cga_keyword"> false</span>, depending on <span class="cga_opparam">probability</span> and the current shape's <span class="cga_keyword">seedian</span>. if <span class="cga_opparam">probability</span> &lt; 0, <span class="cga_keyword">false</span> is returned, and if <span class="cga_opparam">probability</span> &gt; 1, <span class="cga_keyword">true</span> is returned.</p>
+<p><span class="cga_keyword">true</span> or <span class="cga_keyword">false</span>, depending on <span class="cga_opparam">probability</span> and the current shape's <span class="cga_keyword">seedian</span>.</p>
 
 <h2>Description</h2>
 
-<p>This function returns <span class="cga_keyword">true</span> with probability <span class="cga_opparam">probability</span>, or in other words, it returns <span class="cga_keyword">false</span> with probability <span class="codelight">1 - probability</span>.</p>
+<p>This function returns <span class="cga_keyword">true</span> with probability <span class="cga_opparam">probability</span>, or in other words, it returns <span class="cga_keyword">false</span> with probability <span class="codelight">1-probability</span>. If <span class="codelight">probability<=0</span>, <span class="cga_keyword">false</span> is returned, and if <span class="codelight">probability>=1</span>, <span class="cga_keyword">true</span> is returned.</p>
         
 <h2>Related</h2>
 
@@ -73,7 +73,7 @@ p(-1)
 
 
 <!-- FOOTER -->
-<p class="foot">Copyright &copy;2008-2023 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
+<p class="foot">Copyright &copy;2008-2024 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
 
 <!-- END CENTERED CONTENT -->
 

@@ -95,13 +95,17 @@ Init -->
    // orientation of scope origin relative to world axes
    print(convert(scope, world, orient, [0,0,0]))
    //(3)[-10,23.45978546142578,0]
+   
+   // position of scope center in world coordinates
+   print(convert(scope, world, pos, 
+                 [scope.sx/2,scope.sy/2,scope.sz/2]))
 </pre>
 </td>
 </tr>
 </table>
 
 <!-- FOOTER -->
-<p class="foot">Copyright &copy;2008-2023 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
+<p class="foot">Copyright &copy;2008-2024 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
 
 <!-- END CENTERED CONTENT -->
 

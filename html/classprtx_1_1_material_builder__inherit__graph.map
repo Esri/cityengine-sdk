@@ -1,6 +1,6 @@
 <map id="prtx::MaterialBuilder" name="prtx::MaterialBuilder">
-<area shape="rect" id="node2" href="$classprtx_1_1_shared_ptr_builder.html" title="prtx::SharedPtrBuilder\l\&lt; Material \&gt;" alt="" coords="261,5,411,46"/>
-<area shape="rect" id="node3" href="$classprtx_1_1_attributable_setter.html" title="prtx::AttributableSetter" alt="" coords="259,71,413,97"/>
-<area shape="rect" id="node4" href="$classprtx_1_1_builtin_material_attributes_builder.html" title="prtx::BuiltinMaterialAttributes\lBuilder" alt="" coords="241,122,431,163"/>
-<area shape="rect" id="node5" href="$classprtx_1_1_builtin_attributes_setters.html" title="prtx::BuiltinAttributesSetters" alt="" coords="5,129,192,156"/>
+<area shape="rect" id="node2" href="$classprtx_1_1_shared_ptr_builder.html" title="prtx::SharedPtrBuilder\l\&lt; Material \&gt;" alt="" coords="260,5,411,47"/>
+<area shape="rect" id="node3" href="$classprtx_1_1_attributable_setter.html" title="prtx::AttributableSetter" alt="" coords="259,71,412,98"/>
+<area shape="rect" id="node4" href="$classprtx_1_1_builtin_material_attributes_builder.html" title="prtx::BuiltinMaterialAttributes\lBuilder" alt="" coords="240,123,431,164"/>
+<area shape="rect" id="node5" href="$classprtx_1_1_builtin_attributes_setters.html" title="prtx::BuiltinAttributesSetters" alt="" coords="5,130,192,157"/>
 </map>

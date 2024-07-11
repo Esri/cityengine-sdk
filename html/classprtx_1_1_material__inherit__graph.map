@@ -1,8 +1,8 @@
 <map id="prtx::Material" name="prtx::Material">
-<area shape="rect" id="node2" href="$classprtx_1_1_attributable.html" title="prtx::Attributable" alt="" coords="5,155,123,181"/>
-<area shape="rect" id="node3" href="$classprtx_1_1_comparable_content.html" title="prtx::ComparableContent" alt="" coords="148,155,316,181"/>
-<area shape="rect" id="node4" href="$classprtx_1_1_content.html" title="prtx::Content" alt="" coords="183,80,281,107"/>
-<area shape="rect" id="node5" href="$classprtx_1_1_builtin_material_attributes.html" title="prtx::BuiltinMaterialAttributes" alt="" coords="341,155,531,181"/>
-<area shape="rect" id="node6" href="$classprtx_1_1_builtin_attributes_getters.html" title="prtx::BuiltinAttributesGetters" alt="" coords="343,80,529,107"/>
-<area shape="rect" id="node7" href="$classprtx_1_1_builtin_attributes.html" title="prtx::BuiltinAttributes" alt="" coords="364,5,508,32"/>
+<area shape="rect" id="node2" href="$classprtx_1_1_attributable.html" title="prtx::Attributable" alt="" coords="5,155,124,181"/>
+<area shape="rect" id="node3" href="$classprtx_1_1_comparable_content.html" title="prtx::ComparableContent" alt="" coords="149,155,317,181"/>
+<area shape="rect" id="node4" href="$classprtx_1_1_content.html" title="prtx::Content" alt="" coords="183,80,282,107"/>
+<area shape="rect" id="node5" href="$classprtx_1_1_builtin_material_attributes.html" title="prtx::BuiltinMaterialAttributes" alt="" coords="341,155,532,181"/>
+<area shape="rect" id="node6" href="$classprtx_1_1_builtin_attributes_getters.html" title="prtx::BuiltinAttributesGetters" alt="" coords="343,80,530,107"/>
+<area shape="rect" id="node7" href="$classprtx_1_1_builtin_attributes.html" title="prtx::BuiltinAttributes" alt="" coords="365,5,509,32"/>
 </map>

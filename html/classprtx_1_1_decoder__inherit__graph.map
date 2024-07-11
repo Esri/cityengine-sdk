@@ -1,9 +1,9 @@
 <map id="prtx::Decoder" name="prtx::Decoder">
-<area shape="rect" id="node3" href="$classprtx_1_1_c_g_b_decoder.html" title="prtx::CGBDecoder" alt="" coords="329,5,460,32"/>
-<area shape="rect" id="node4" href="$classprtx_1_1_geometry_decoder.html" title="prtx::GeometryDecoder" alt="" coords="315,56,474,83"/>
-<area shape="rect" id="node5" href="$classprtx_1_1_material_decoder.html" title="prtx::MaterialDecoder" alt="" coords="321,107,468,133"/>
-<area shape="rect" id="node6" href="$classprtx_1_1_string_decoder.html" title="prtx::StringDecoder" alt="" coords="327,157,462,184"/>
-<area shape="rect" id="node7" href="$classprtx_1_1_table_decoder.html" title="prtx::TableDecoder" alt="" coords="328,208,461,235"/>
-<area shape="rect" id="node8" href="$classprtx_1_1_texture_decoder.html" title="prtx::TextureDecoder" alt="" coords="322,259,467,285"/>
-<area shape="rect" id="node2" href="$classprtx_1_1_extension.html" title="prtx::Extension" alt="" coords="6,132,117,159"/>
+<area shape="rect" id="node3" href="$classprtx_1_1_c_g_b_decoder.html" title="prtx::CGBDecoder" alt="" coords="327,5,458,32"/>
+<area shape="rect" id="node4" href="$classprtx_1_1_geometry_decoder.html" title="prtx::GeometryDecoder" alt="" coords="313,56,472,83"/>
+<area shape="rect" id="node5" href="$classprtx_1_1_material_decoder.html" title="prtx::MaterialDecoder" alt="" coords="319,107,466,133"/>
+<area shape="rect" id="node6" href="$classprtx_1_1_string_decoder.html" title="prtx::StringDecoder" alt="" coords="325,157,460,184"/>
+<area shape="rect" id="node7" href="$classprtx_1_1_table_decoder.html" title="prtx::TableDecoder" alt="" coords="327,208,459,235"/>
+<area shape="rect" id="node8" href="$classprtx_1_1_texture_decoder.html" title="prtx::TextureDecoder" alt="" coords="321,259,465,285"/>
+<area shape="rect" id="node2" href="$classprtx_1_1_extension.html" title="prtx::Extension" alt="" coords="5,132,116,159"/>
 </map>

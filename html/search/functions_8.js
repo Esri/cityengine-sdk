@@ -1,0 +1,20 @@
+var searchData=
+[
+  ['indexsharing',['indexSharing',['../classprtx_1_1_encode_preparator_1_1_preparation_flags.html#a6a1df631d1154544270c2326a291b065',1,'prtx::EncodePreparator::PreparationFlags']]],
+  ['init',['init',['../classprtx_1_1_encoder.html#ad354a15d21c18920da7a9b208482db5c',1,'prtx::Encoder::init()'],['../namespaceprt.html#ac11b9812a98def24f4ad792bf5be2371',1,'prt::init()']]],
+  ['insertandgettransientblob',['insertAndGetTransientBlob',['../classprt_1_1_cache.html#ad2948bd4bbfb48d86f2b6e532bbc32ca',1,'prt::Cache']]],
+  ['insertpersistentblobandlock',['insertPersistentBlobAndLock',['../classprt_1_1_cache.html#aff97c1c7936e43ef9f91a6b51bb424fe',1,'prt::Cache']]],
+  ['instance',['instance',['../classprtx_1_1_extension_manager.html#a8a8c3f3befafd05f80995c151a57807e',1,'prtx::ExtensionManager']]],
+  ['instancing',['instancing',['../classprtx_1_1_encode_preparator_1_1_preparation_flags.html#a9cc9153f80bd66b5763c04e9213a2d43',1,'prtx::EncodePreparator::PreparationFlags']]],
+  ['iscached',['isCached',['../namespaceprtx_1_1_data_backend.html#a776e499499fb353b63e65800e6a3d1ea',1,'prtx::DataBackend']]],
+  ['iscomposite',['isComposite',['../classprtx_1_1_u_r_i.html#a40678c585cdf947916ce8551b96cdabe',1,'prtx::URI']]],
+  ['isempty',['isEmpty',['../classprtx_1_1_mesh_builder.html#adfca95f56c306a6d0122975c7d71f897',1,'prtx::MeshBuilder']]],
+  ['isfilepath',['isFilePath',['../classprtx_1_1_u_r_i.html#a4d816d0a934e72fb7fbca9c10ca2c109',1,'prtx::URI']]],
+  ['ishorizontal',['isHorizontal',['../classprtx_1_1_trim_plane.html#a7da05038bf0b7c7a102392d021de65d1',1,'prtx::TrimPlane']]],
+  ['islimited',['isLimited',['../classprtx_1_1_trim_plane.html#a7b7fe295f4c977b41612c17acccb2a08',1,'prtx::TrimPlane']]],
+  ['ismodified',['isModified',['../classprtx_1_1_bounding_box.html#ac144438557736ce673dc49d52e219226',1,'prtx::BoundingBox']]],
+  ['isvalid',['isValid',['../classprtx_1_1_texture.html#aec1178beeacd597097342b4c9a615c9e',1,'prtx::Texture::isValid()'],['../classprtx_1_1_u_r_i.html#a8b2136ba62ed9a879d2a921e8e809e42',1,'prtx::URI::isValid()']]],
+  ['isvertical',['isVertical',['../classprtx_1_1_trim_plane.html#abec716db4ec71ecfd308862fc8f2e753',1,'prtx::TrimPlane']]],
+  ['item',['item',['../classprtx_1_1_file_extensions.html#ac2d87313a05fa0989ef575eb57f71740',1,'prtx::FileExtensions']]],
+  ['items',['items',['../classprtx_1_1_file_extensions.html#a2f509a5fc6538b7dbec0f4aa8d631726',1,'prtx::FileExtensions']]]
+];
