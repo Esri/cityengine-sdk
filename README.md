@@ -33,15 +33,21 @@ This document explains how to install the CityEngine SDK and how to work with th
 
 ## Table of Contents
 
-* [Downloads](#downloads)
-* [Examples](#examples)
-* [Documentation](#documentation)
-* [Related Software Products](#related-software-products)
-* [General Software Requirements](#general-software-requirements)
-* [Release History and Changelog](#release-history-and-changelog)
-* [CityEngine Resources](#cityengine-resources)
-* [Issues and Contributions](#issues-and-contributions)
-* [Licensing](#licensing)
+- [CityEngine SDK](#cityengine-sdk)
+	- [Quick Start](#quick-start)
+	- [Table of Contents](#table-of-contents)
+	- [Downloads](#downloads)
+	- [Examples](#examples)
+	- [Documentation](#documentation)
+	- [Related Software Products](#related-software-products)
+	- [General Software Requirements](#general-software-requirements)
+		- [All Platforms](#all-platforms)
+		- [Windows](#windows)
+		- [Linux](#linux)
+	- [Release History and Changelog](#release-history-and-changelog)
+	- [CityEngine Resources](#cityengine-resources)
+	- [Issues and Contributions](#issues-and-contributions)
+	- [Licensing](#licensing)
 
 ## Downloads
 
@@ -80,19 +86,20 @@ Please note that the individual example READMEs may include further requirements
 ### Windows
 
 * Windows 10 or 11 (64bit)
-* Required C++ compiler: Visual Studio 2019 with Toolset MSVC 14.27 or later
+* Required C++ compiler: Visual Studio 2022 with Toolset MSVC 14.37 or later
 * Required flags for extension libraries release mode: `/std:c++17 /bigobj /GR /EHsc /MD`
 
 ### Linux
 
 * RedHat Enterprise Linux 8.x or 9.x and compatible (e.g. Alma Linux or Rocky Linux)
-* Required C++ compiler: GCC 9.3 or later (RedHat Enterprise Linux DevToolSet 9)
-* Required flags for extension libraries: `-std=c++17 -D_GLIBCXX_USE_CXX11_ABI=0 -march=nocona -fvisibility=hidden -fvisibility-inlines-hidden -Wl,--exclude-libs,ALL`
+* Required C++ compiler: GCC 11.2 or later (RedHat Enterprise Linux DevToolSet 11)
+* Required flags for extension libraries: `-std=c++17 -march=nocona -fvisibility=hidden -fvisibility-inlines-hidden -Wl,--exclude-libs,ALL`
 
 ## Release History and Changelog
 
 A detailed list of changes to the API, CGA language and built-in codecs can be found in the [Changelog](changelog.md).
 
+* [v3.2.10211 (2024-07-11, CityEngine 2024.0)](https://github.com/Esri/cityengine-sdk/releases/tag/3.2.10211)
 * [v3.2.9903 (2024-06-11, ArcGIS Pro 3.3, Enterprise 11.3)](https://github.com/Esri/cityengine-sdk/releases/tag/3.2.9903)
 * [v3.1.9666 (2023-11-20, CityEngine 2023.1)](https://github.com/Esri/cityengine-sdk/releases/tag/3.1.9666)
 * [v3.0.8961 (2023-10-05, ArcGIS Pro 3.2, Enterprise 11.2)](https://github.com/Esri/cityengine-sdk/releases/tag/3.0.8961)

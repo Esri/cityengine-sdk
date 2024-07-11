@@ -1,3 +1,81 @@
+# CITYENGINE SDK 3.2.10211 CHANGELOG
+
+This section lists changes compared to CityEngine SDK 3.2.9903.
+
+## General Info
+* CityEngine SDK 3.2.10211 is used in CityEngine 2024.0.10211.
+
+## PRT API
+* `prt::Object::toXML()` (including all subclasses): fixed dependency on system locale and improved performance.
+
+## PRTX API
+* `prtx::EncodePreparator::PreparationFlags::processHoles`: improved the case `prtx::HoleProcessor::TRIANGULATE_FACES_WITH_HOLES`. Before, it was possible that tiny gaps in the connectivity were created. Now the mesh stays watertight. However, in some cases there might be faces with more than 3 vertices now. 
+* `prtx::MaterialBuilder::setString()`: fixed a rare crash when setting the shader.
+
+## CGA
+* New features:
+    * A Visual CGA Design (*.vcga) can now be imported. You can call its start rule and override its attributes and extension nodes in the import statement.
+    * Default extension implementation forwarding: It is now possible to reuse the default implementation of an extension rule from an imported ruleset in a new extension rule. 
+* New annotations:
+    * @MaterialFile annotation
+* Changes to existing features:
+    * setback, setbackToArea, setbackPerEdge, shapeLUO, splitAndSetbackPerimeter operations: Collinear vertices are now kept on the resulting setback edges. The setback edges will now match the initial edges.
+    * convexify operation:
+      * The topology of the input geometry is maintained and the resulting convex polygons are fully connected now. Note: The individual convex polygons (typically created via a subsequent component split) can contain collinear vertices now. These can be removed using the cleanupGeometry operation.
+      * Existing component tags are preserved now.
+    * geometry.isConcave function and general concavity classification: Improved handling of collinear vertices. Collinear vertices are now consistently classified as convex.
+    * material.{colormap|...|metallicmap}.rw attribute: changed rotation center from (0.5, 0.5) to (0,0).
+* Bugfixes:
+    * readStringTable, readFloatTable: Fixed a crash when reading a non-existing table (Linux only).
+    * setupProjection operation:
+      * Fixed a bug where widthOffset and heightOffset were not correctly considered when a uv scaling was defined for the material (for example material.colormap.su).
+      * Fixed a bug where offset values where not considered for projection axes scope.zx.
+    * CGA Compiler:
+      * Fixed incorrect handling of the @Hidden annotation for import statements. Note: In the UI of older versions of CityEngine or client apps using an older version of CityEngine SDK, hidden imports will not be hidden in RPKs created with CityEngine 2024.0.
+      * Fixed a bug where annotations were not assigned to import statements but to subsequent statements.
+
+## Built-In Codecs
+* GLTF Encoder:
+  * Now correctly converts colors to linear space.
+  * Adapted to texture trafo rotation center change from (0.5, 0.5) to (0,0).
+* GLTF Decoder:
+  * Now correctly converts colors from linear space.
+  * Adapted to texture trafo rotation center change from (0.5, 0.5) to (0,0).
+* Unreal Encoder:
+  * Adapted to texture trafo rotation center change from (0.5, 0.5) to (0,0).
+* USD Encoder:
+  * Fixed "triangulate faces with holes" functionality - in some cases tiny gaps in the connectivity were created.
+  * Added support for texture map trafos. 
+* USD Decoder:
+  * Added support for texture map trafos. 
+* IFC Encoder:
+  * Fixed "triangulate faces with holes" functionality - in some cases tiny gaps in the connectivity were created.
+  * Fixed support for units in geo-referencing data for IFC4 (was fixed to meters).
+  * Addded support for WKT in geo-referencing data for IFC4. 
+* OBJ Encoder:
+  * Fixed "triangulate faces with holes" option - in some cases tiny gaps in the connectivity were created.
+* Shape Buffer Encoder:
+  * Fixed "triangulate faces with holes" option - in some cases tiny gaps in the connectivity were created.
+  * Added support for "doubleSided" material attribute.
+* Shape Buffer Decoder:
+  * Added support for "doubleSided" material attribute.
+* FBX Encoder:
+  * Fixed "triangulate faces with holes" option - in some cases tiny gaps in the connectivity were created.
+* FBX Decoder:
+  * Added support for normal maps.
+  * Now falls back to the first UV set when the FBX file contains a broken mapping between mesh and texture.
+* CGAMat Decoder:
+  * Fixed a rare crash when decoding materials.
+* Collada Encoder:
+  * Fixed "triangulate faces with holes" option - in some cases tiny gaps in the connectivity were created.
+* Alembic Encoder:
+  * Fixed "triangulate faces with holes" option - in some cases tiny gaps in the connectivity were created.
+* TIFF Decoder:
+  * Fixed a rare deadlock (which was introduced in SDK 3.2.9903). 
+
+## Misc Changes and Fixes
+* In the CGA and the PRT reference color spaces have been clarified. Colors are always in (non-linear) sRGB space.
+
 # CITYENGINE SDK 3.2.9903 CHANGELOG
 
 This section lists changes compared to CityEngine SDK 3.1.9666.
@@ -22,7 +100,7 @@ This section lists changes compared to CityEngine SDK 3.1.9666.
   * Updated to ODA 24.11 library
 * IFC Decoder:
   * Added support for IFC4.
-* DWC Encoder:
+* DWG Encoder:
    * Fixed a bug where the same textures got written multiple times.
 * USD Decoder, Encoder:
   * Made them thread-safe. Before, only one of the two could run at a time - otherwise, PRT would crash.  

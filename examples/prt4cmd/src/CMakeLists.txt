@@ -31,13 +31,13 @@ if(NOT prt_DIR)
 
 	if(P4C_WINDOWS)
 		set(PRT_OS "win10")
-		set(PRT_TC "vc1427")
+		set(PRT_TC "vc1437")
 	elseif(P4C_LINUX)
-		set(PRT_OS "rhel7")
-		set(PRT_TC "gcc93")
+		set(PRT_OS "rhel8")
+		set(PRT_TC "gcc112")
 	endif()
 
-	set(PRT_VERSION "3.1.9666")
+	set(PRT_VERSION "3.2.10211")
 	set(PRT_CLS     "${PRT_OS}-${PRT_TC}-x86_64-rel-opt")
 	set(PRT_URL     "https://github.com/esri/cityengine-sdk/releases/download/${PRT_VERSION}/esri_ce_sdk-${PRT_VERSION}-${PRT_CLS}.zip")
 
@@ -69,6 +69,7 @@ elseif(P4C_LINUX)
 	target_compile_options(${PROJECT_NAME} PRIVATE
 		-march=nocona -fvisibility=hidden -fvisibility-inlines-hidden
 		-Wl,--exclude-libs,ALL -Wall -Wextra -Wunused-parameter -Wl,-rpath,'\$ORIGIN')
+	target_link_libraries(${PROJECT_NAME} PRIVATE stdc++fs)
 
 endif()
 
