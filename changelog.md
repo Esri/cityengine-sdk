@@ -1,3 +1,78 @@
+# CITYENGINE SDK 3.2.10646 CHANGELOG
+
+This section lists changes compared to CityEngine SDK 3.2.10352.
+
+## General Info
+* CityEngine SDK 3.2.10646 is used in CityEngine 2024.1.10646.
+
+## PRT API
+* `prt::Attributable::toXML()`: fixed a bug where some float numbers were converted to wrong string values in rare cases. Further, the maximum number of digits in the string representation was reduced by 1.  
+
+## PRTX API
+* `prtx::EncodePreparator`: fixed a bug in merge-by-material setups where vertex normals for faces with holes were wrong when meshes with vertex nomals were merged with meshes without vertex normals. 
+
+## CGA
+* New features:
+  * inline keyword: Allows to immediately generate a rule and continue working on the resulting shape(s). This means any rule can be used like a builtin shape operation.
+  * union, subtract, intersect keywords: added Boolean 3D operations.
+  * extrude operation: Added support to extrude edges.
+* New operations:
+  * tag operation
+* Changes to existing features:
+  * i operation: The new parameter cleanupMode allows for disabling the numerical geometry cleanup for inserted asset. This improves the support for assets with tiny details.
+  * cleanupGeometry operation: Removing coplanar edges now preserves the first edge.
+  * Floating point precision:
+      * All internal geometry processing was switched form float to double precision. The numerical behaviour is more accurate now. It is possible that some rules change behaviour because e.g a float value comparison gives a different result now.
+      * Float to string conversion (e.g. str() function and print() operation): fixed wrong string values in rare cases. Further, the maximum number of digits in the string representation was reduced by 1.
+
+## Built-In Codecs
+* ShapeBuffer Encoder:
+   * Disabled vertex / normal / uv merging. This preserves small geometric details and improves performance.
+* USD Decoder:
+   * Fixed a race condition which led to decode failures if multiple assets with the same ResolveMap key were decoded at the same time.  
+
+
+# CITYENGINE SDK 3.2.10352 CHANGELOG
+
+This section lists changes compared to CityEngine SDK 3.2.10211.
+
+## General Info
+* The focus of this release is to fix some issues which are important for certain client applications such as ArcGIS Pro. There is no CityEngine version using this version of the SDK.
+
+## PRT API
+* `prt::RuleFileInfo`: fixed wrong rule parameter names (i.e., `prt::RuleFileInfo::Parameter::getName()` and `prt::RuleFileInfo::toXML()`).
+
+## PRTX API
+* No changes.
+
+## CGA
+* New operations:
+  * copyUV operation
+* New functions:
+  * geometry.hasUVs function
+
+## Built-In Codecs
+* IFC, DWG Decoders, Encoders:
+  * Fixed a rare deadlock if run in a multithreaded setup. 
+  * Updated to ODA 25.6 library.
+* IFC Decoder:
+  * Added support for exotic versions (like 4x1 and 4x2).
+* Shapebuffer Decoder:
+  * Fixed a crash when faces had less than 3 vertices. Such faces are ignored now.
+  * Fixed a bug where the first edge of triangle fans and strips was wrong.
+* OBJ and GLTF Encoders:
+  * Non-ASCII characters are supported now. Previously these were replaced by '_'.
+  * No '_0' suffix is added to the filename anymore if the "memory budget" option is disabled.
+* DAE, FBX and VOB Encoders:
+  * No '_0' suffix is added to the filename anymore if the "memory budget" option is disabled.
+* USD Decoder:
+  * Fixed a bug where duplicate materials were created (instead of one shared material).
+  * Fixed a bug where Material attribute overrides in USD meshes were ignored by the importer in some cases. 
+
+## Misc Changes and Fixes
+* Applied security updates for libxml (2.13.3) and giflib (5.2.2).
+
+
 # CITYENGINE SDK 3.2.10211 CHANGELOG
 
 This section lists changes compared to CityEngine SDK 3.2.9903.
