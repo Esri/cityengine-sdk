@@ -1,9 +1,9 @@
-# CITYENGINE SDK 3.2.10646 CHANGELOG
+# CITYENGINE SDK 3.2.10650 CHANGELOG
 
 This section lists changes compared to CityEngine SDK 3.2.10352.
 
 ## General Info
-* CityEngine SDK 3.2.10646 is used in CityEngine 2024.1.10646.
+* CityEngine SDK 3.2.10650 is used in CityEngine 2024.1.10650.
 
 ## PRT API
 * `prt::Attributable::toXML()`: fixed a bug where some float numbers were converted to wrong string values in rare cases. Further, the maximum number of digits in the string representation was reduced by 1.  
