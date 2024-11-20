@@ -37,8 +37,8 @@
 	</li>
 	<li><span class="cga_opparam">selector</span> (selector, bool, float)
 		<table cellspacing="5">
-		<tr><td width="40%"><span class="codelight">front, back, left, right, top, bottom</span></td><td>The y-normals of the components are analyzed by classifying their directions into the corresponding quadrants (in relation to the local coordinate system of the current shape).</td></tr>
-		<tr><td><span class="codelight">object.front, object.back, object.left, object.right, object.top, object.bottom, object.side</span></td><td>The y-normals of the components are analyzed by classifying their directions into the corresponding quadrants (in relation to the local coordinate system of the current shape).</td></tr>
+		<tr><td width="40%"><span class="codelight">front, back, left, right, top, bottom</span></td><td>The y-normals of the components are analyzed by classifying their directions into the corresponding quadrants (in relation to the scope coordinate system of the current shape).</td></tr>
+		<tr><td><span class="codelight">object.front, object.back, object.left, object.right, object.top, object.bottom, object.side</span></td><td>The y-normals of the components are analyzed by classifying their directions into the corresponding quadrants (in relation to the object coordinate system of the current shape).</td></tr>
 		<tr><td><span class="codelight">world.south, world.north, world.west, world.east, world.up, world.down, world.side</span></td><td>The y-normals of the components are analyzed by classifying their directions into the corresponding quadrants (in relation to the world coordinate system).</td></tr>
 		<tr><td><span class="codelight">vertical, horizontal, aslant, nutant</span></td><td>The y-normals are analyzed in relation to the xz-plane of the current shape's local coordinate system. The the angle between normals and xz-plane is used to classify the components. The exact ranges are (in degrees):
 		<table cellspacing="5">
@@ -154,12 +154,14 @@ The components can be selected using either their <i>index</i> or a set of selec
 <ul>
 	<li><a class="normw" href="op_i.html">i (insert) operation</a></li>
 	<li><a class="normw" href="op_trim.html">trim operation</a></li>
+	<li><a class="normw" href="op_tag.html">tag operation</a></li>
 	<li><a class="normw" href="func_comp.html">comp function</a></li>
 	<li><a class="normw" href="attr_comp.html">comp attribute</a></li>
 	<li><a class="normw" href="attr_pivot.html">pivot attribute</a></li>
 	<li><a class="normw" href="attr_scope.html">scope attribute</a></li>
 	<li><a class="normw" href="attr_trim.html">trim attribute</a></li>
 	<li><a class="normw" href="func_assetNamingInfo.html">assetNamingInfo / assetNamingInfos function</a></li>
+	<li><a class="normw" href="func_geometry.html#tags">geometry.tags function</a></li>
 	<li><a class="normw" href="func_geometry.html#groups">geometry.groups function</a></li>
 	<li><a class="normw" href="func_geometry.html#materials">geometry.materials function</a></li>
 </ul>

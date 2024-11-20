@@ -38,6 +38,7 @@ Based on the hierarchical grouping, the tag query <span class="codelight">"Name1
 <ul>
 	<li><a class="normw" href="func_geometry.html#tags">geometry.tags function</a></li>
 	<li><a class="normw" href="func_geometry.html#hasTags">geometry.hasTags function</a></li>
+	<li><a class="normw" href="op_tag.html">tag operation</a></li>
 	<li><a class="normw" href="op_deleteTags.html">deleteTags operation</a></li>
 	<li><a class="normw" href="op_setTagsFromEdgeAttrs.html">setTagsFromEdgeAttrs operation</a></li>
 	<li><a class="normw" href="op_comp.html">comp operation</a></li>
@@ -167,6 +168,49 @@ Init -->
     RoofAutoTags
 </pre>
 	<em>See <a class="cga_op" href="op_roofShed.html">roofShed</a> operation.</em>
+</td></tr>
+</table>
+
+<h4>Boolean 3D operations</h4>
+<table summary="" class="twocol">
+<tr><td class="twocol_l"><img src="images/autotag-union.png" alt="autotag-union"/></td>
+<td><pre class="code3">
+BoolAutoTags -->
+    comp(f) { isTagged("bool.A") : Blue 
+            | isTagged("bool.B") : Green } 
+
+Sphere --> t(0.3,0.3,0.3) primitiveSphere()
+
+Init --> 
+    extrude(1)
+    union Sphere
+    BoolAutoTags
+</pre>
+	<em>See <a class="cga_op" href="op_boolOp.html">union</a> operation.</em>
+</td></tr>
+
+<tr><td class="twocol_l"><img src="images/autotag-subtract.png" alt="autotag-subtract"/></td>
+<td><pre class="code3">
+Init --> 
+    extrude(1)
+    subtract Sphere
+    BoolAutoTags
+
+
+</pre>
+	<em>See <a class="cga_op" href="op_boolOp.html">subtract</a> operation.</em>
+</td></tr>
+
+<tr><td class="twocol_l"><img src="images/autotag-intersect.png" alt="autotag-intersect"/></td>
+<td><pre class="code3">
+Init --> 
+    extrude(1)
+    intersect Sphere
+    Sphere --> t(0.3,0.3,0.3) primitiveSphere()
+
+
+</pre>
+	<em>See <a class="cga_op" href="op_boolOp.html">intersect</a> operation.</em>
 </td></tr>
 </table>
 

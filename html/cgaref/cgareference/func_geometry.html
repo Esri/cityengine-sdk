@@ -184,10 +184,30 @@ Cone--&gt;
 <h2>Related</h2>
 
 <ul>
+	<li><a class="normw" href="op_tag.html">tag operation</a></li>
 	<li><a class="normw" href="op_deleteTags.html">deleteTags operation</a></li>
 	<li><a class="normw" href="func_geometry.html#tags">geometry.tags function</a></li>
 	<li><a class="normw" href="op_setTagsFromEdgeAttrs.html">setTagsFromEdgeAttrs operation</a></li>
 </ul>
+
+<br/><br/><br/><br/><br/>
+
+<h1><a name="hasUVs"></a>geometry.hasUVs function</h1>
+
+<h2>Syntax</h2>
+
+<p class="code2"><span class="codelight">bool</span> geometry.hasUVs()</p>
+<p class="code2"><span class="codelight">bool</span> geometry.hasUVs(<span class="cga_opparam">uvSet</span>)</p>
+
+<h2>Parameters </h2>
+
+<ul>
+	<li><span class="cga_opparam">uvSet</span> (float)<br>Number of texture coordinates set (integer number in [0,9]). The numbering corresponds to the texture layers of the <a href="attr_material.html">material attribute</a>, see also <a href="cga_texturing.html"> Texturing: Essential Knowledge</a>.</li>
+</ul>
+
+<h2>Returns</h2>
+
+<p><span class="cga_keyword">true</span> if the geometry has UVs, <span class="cga_keyword">false</span> otherwise. If a <span class="cga_opparam">uvSet</span> is provided, only the respective UVs are considered.</p>
 
 <br/><br/><br/><br/><br/>
 
@@ -485,6 +505,7 @@ Cone--&gt;
 <h2>Related</h2>
 
 <ul>
+	<li><a class="normw" href="op_tag.html">tag operation</a></li>
 	<li><a class="normw" href="op_deleteTags.html">deleteTags operation</a></li>
 	<li><a class="normw" href="op_comp.html">comp operation</a></li>
 	<li><a class="normw" href="op_setback.html">setback operation</a></li>

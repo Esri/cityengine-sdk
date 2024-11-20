@@ -26,6 +26,7 @@
 <p class="code2">i(<span class="cga_opparam">filePath</span>)</p>
 <p class="code2">i(<span class="cga_opparam">filePath</span>, <span class="cga_opparam">upAxisOfGeometry</span>)</p>
 <p class="code2">i(<span class="cga_opparam">filePath</span>, <span class="cga_opparam">upAxisOfGeometry</span>, <span class="cga_opparam">insertMode</span>)</p>
+<p class="code2">i(<span class="cga_opparam">filePath</span>, <span class="cga_opparam">upAxisOfGeometry</span>, <span class="cga_opparam">insertMode</span>, <span class="cga_opparam">cleanupMode</span>)</p>
 
 <h2>Parameters</h2>
 <ul>
@@ -41,6 +42,11 @@
 		<tr><td width="25%"><span class="codelight">alignSizeAndPosition</span></td><td>Default. The geometry is fit to the scope.</td></tr>
 		<tr><td><span class="codelight">keepSizeAndPosition</span></td><td>The size and the position of the geometry is kept and not aligned to the scope. This is the same as setting zero scope dimensions  <a class="normw" href="op_i.html#insertionZeroScope"><span class="code_std">s(0,0,0)</span></a>.</td></tr>
 		<tr><td><span class="codelight">keepSizeAlignPosition</span></td><td>The size of the geometry is kept. The geometry is positioned in the xz-center of the scope with its bounding box lying on y=0.</td></tr>
+	</table>
+	<li><span class="cga_opparam">cleanupMode</span> (selector)
+	<table cellspacing="5">
+		<tr><td width="25%"><span class="codelight">numericalCleanup</span></td><td>Default. Very short edges and very small angles are cleaned up. This increases numerical stability.</td></tr>
+		<tr><td><span class="codelight">noCleanup</span></td><td>The geometry is not touched (except structural errors).</td></tr>
 	</table>
 	</li>
 </ul>

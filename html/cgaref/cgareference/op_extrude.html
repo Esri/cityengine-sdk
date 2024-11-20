@@ -50,6 +50,8 @@
 </ul>
 The scope's sizes are adjusted to tightly fit the extruded geometry. If <span class="cga_opparam">distance</span> is negative, the scope.sy attribute will be negative.<br><br>Texture coordinates are inherited from the shape.</p>
 
+<p class="notes">Edges can also be extruded, e.g., when working on shapes created from <span class="codelight">comp(e|fe)</span>. See <a href="op_extrude.html#edgeExtrusion">examples</a>.</p>
+
 <h3>Component tags</h3>
 
 <table summary="" class="twocol">
@@ -86,7 +88,7 @@ The scope's sizes are adjusted to tightly fit the extruded geometry. If <span cl
 
 <h2>Examples</h2>
 
-<h3>Extrusion along Normals</h3>
+<h3>Extrusion along normals</h3>
 
 <br><br>
 
@@ -102,8 +104,7 @@ The scope's sizes are adjusted to tightly fit the extruded geometry. If <span cl
 	<td class="twocol_l"><img src="images/extrude_normal_2.png" alt="Extrusion along one face normal" width="298"/></td>
 	<td>
 	<pre class="code3">
-Lot-->
-	extrude(10)					
+Lot --> extrude(10)					
 	</pre>
 	<em>The extrude operation extrudes all faces along their normals and combines the results. No internal lamina faces are created.<br><br>
 		The scope's y-axis is set to the extrusion direction.</em>
@@ -116,8 +117,7 @@ Lot-->
 	<td class="twocol_l"><img src="images/extrude_normal_3.png" alt="Extrusion along several face normals" width="298"/></td>
 	<td>
 	<pre class="code3">
-Lot-->
-	extrude(face.normal,10)					
+Lot --> extrude(face.normal,10)					
 	</pre>
 	<em>For uneven shapes the extrusion is performed for each face individually and internal faces are created.<br><br>
 		The scope's y-axis is set to the normal of the first face.<br><br>
@@ -132,8 +132,7 @@ Lot-->
 	<td class="twocol_l"><img src="images/extrude_normal_4.png" alt="Extrusion along vertex normals" width="298"/></td>
 	<td>
 	<pre class="code3">
-Lot-->
-	extrude(vertex.normal,10)					
+Lot --> extrude(vertex.normal,10)					
 	</pre>
 	<em>The extrusion along vertex normals keeps faces together and no internal faces are created.<br><br>
 		The scope's y-axis is set to the normal of the first vertex.
@@ -153,12 +152,11 @@ Lot-->
 	<td class="twocol_l"><img src="images/extrude_world_1.png" alt="Extrusion along world axis" width="298"/></td>
 	<td>
 	<pre class="code3">
-Lot-->
-	innerRectangle(scope) { shape : Shape | remainder : Remainder }
-Shape-->
-	extrude(world.up,10)
-Remainder-->
-	color(0,1,0)
+Lot --> innerRectangle(scope) { shape: Shape | remainder: Remainder }
+
+Shape --> extrude(world.up,10)
+
+Remainder --> color(0,1,0)
 	</pre>
 	<em>Each face is extruded along the world coordinate's y-axis. No internal lamina faces are created.<br><br>
 	The scope's y-axis is set to the world's y-axis.
@@ -172,8 +170,8 @@ Remainder-->
 	<td class="twocol_l"><img src="images/extrude_world_2.png" alt="Extrusion with flat top" width="298"/></td>
 	<td>
 	<pre class="code3">
-Shape-->
-	extrude(world.up.flatTop,10)
+Shape --> extrude(world.up.flatTop,10)
+
 	</pre>
 	<em>A flat top surface is created. The extrusion distance is measured from the lowest vertex of each shape wrt. to the world's y-axis.
 	</em>
@@ -186,8 +184,8 @@ Shape-->
 	<td class="twocol_l"><img src="images/extrude_world_3.png" alt="Extrusion with zero distance" width="298"/></td>
 	<td>
 	<pre class="code3">
-Shape-->
-	extrude(world.up.flatTop,0)
+Shape --> extrude(world.up.flatTop,0)
+
 	</pre>
 	<em>The extrusion distance is set to at least the maximum extent of the shape along the world's y-axis. If the distance is zero the extrusion is positive.
 	</em>
@@ -200,8 +198,8 @@ Shape-->
 	<td class="twocol_l"><img src="images/extrude_world_4.png" alt="Extrusion with negative distance" width="298"/></td>
 	<td>
 	<pre class="code3">
-Shape-->
-	extrude(world.up.flatTop,-10)
+Shape --> extrude(world.up.flatTop,-10)
+
 	</pre>
 	<em>If the distance is negative the extrusion is measured from the highest vertex of each shape wrt. to the world's y-axis.<br><br>
 	The scope's y-size becomes negative.
@@ -209,10 +207,78 @@ Shape-->
 	</td>
 </tr>
 </table>
+
+<h3><a name="edgeExtrusion"></a>Extrusion of edges</h3>
+
+<br><br>
+
+<table>
+<tr>
+	<td class="twocol_l"><img src="images/extrude_edges_normal_1.png" alt="Edge extrusion along normal" width="298"/></td>
+	<td>
+	<pre class="code3">
+Start -->
+	InitialShape
+	comp(e) { all = Edges }
+
+Edges --> extrude(10)
+
+InitialShape --> color(0,1,0)
+	</pre>
+	<em>When edges are created using <span class="codelight">comp(e)</span>, their normal becomes the average of adjacent face normals. This is the default extrusion direction.
+	</em>
+	</td>
+</tr>
+
+<tr><td><br><br></td></tr>
+
+<tr>
+	<td class="twocol_l"><img src="images/extrude_edges_normal_2.png" alt="Edge extrusion along vertex normal" width="298"/></td>
+	<td>
+	<pre class="code3">
+Edges --> extrude(vertex.normal,10)
+	</pre>
+	<em>The edge extrusion along vertex normals keeps the resulting faces together.
+	</em>
+	</td>
+</tr>
+
+<tr><td><br><br></td></tr>
+
+<tr>
+	<td class="twocol_l"><img src="images/extrude_faceedges_normal_1.png" alt="Face edge extrusion along normal" width="298"/></td>
+	<td>
+	<pre class="code3">
+Start -->
+	InitialShape
+	comp(fe) { all = Edges }
+
+Edges --> extrude(10)
+
+InitialShape --> color(0,1,0)
+	</pre>
+	<em>When face edges are created using <span class="codelight">comp(fe)</span>, their normal is perpendicular to the face normal and points outwards of the face's boundary. This is the default extrusion direction. 
+	</em>
+	</td>
+</tr>
+
+<tr><td><br><br></td></tr>
+
+<tr>
+	<td class="twocol_l"><img src="images/extrude_faceedges_normal_2.png" alt="Face edge extrusion along vertex norma" width="298"/></td>
+	<td>
+	<pre class="code3">
+Edges --> extrude(vertex.normal, 10)
+	</pre>
+	<em>The face edge extrusion along vertex normals keeps the resulting faces together.
+	</em>
+	</td>
+</tr>
+</table>
             
 <!-- FOOTER -->
 
-<p class="foot">Copyright &copy;2008-2015 Esri R&D Center Zurich. All rights reserved.</p>				  
+<p class="foot">Copyright &copy;2008-2024 Esri R&D Center Zurich. All rights reserved.</p>				  
 
 <!-- END CENTERED CONTENT -->
 

@@ -29,7 +29,47 @@
 		<td width="12%"><strong>CityEngine version<br>(= CGA version)</strong></td>
 		<td><strong>Changes</strong></td>
 	</tr>
+	<tr>
+		<td>2024.1<br>CGAC 2.6</td>
+		<td>
+			New features:
+			<ul>
+				<li><a href="op_inline.html"><span class="code_std">inline</span></a> keyword: Allows to immediately generate a rule and continue working on the resulting shape(s). This means any rule can be used like a builtin shape operation. </li>
+				<li><a href="op_boolOp.html"><span class="code_std">union</span></a>, <a href="op_boolOp.html"><span class="code_std">subtract</span></a>, <a href="op_boolOp.html"><span class="code_std">intersect</span></a> keywords: added Boolean 3D operations.</li>
+				<li><a href="op_extrude.html"><span class="code_std">extrude</span></a> operation: Added support to extrude edges. </li>  <!-- CE-12367 -->
+			</ul>
+			New operations:
+			<ul>
+				<li><a href="op_tag.html"><span class="code_std">tag</span></a> operation</li> <!-- CE-11981 -->
+			</ul>
+        	Changes to existing features:
+			<ul>
+   				<li><a href="op_i.html"><span class="code_std">i</span></a> operation: The new parameter <span class="cga_opparam">cleanupMode</span> allows for disabling the numerical geometry cleanup for inserted asset. This improves the support for assets with tiny details.</li> <!-- CE-12882-->
+				<li><a href="op_cleanupGeometry.html"><span class="code_std">cleanupGeometry</span></a> operation: Removing coplanar edges now preserves the first edge.</li> <!-- CE-12454 -->
+			</ul>
+            <ul>
+            	<li>Floating point precision:
+                <ul>
+                	<li>All internal geometry processing was switched form float to double precision. The numerical behaviour is more accurate now. It is possible that some rules change behaviour because e.g a float value comparison gives a different result now. </li>  <!-- CE-12881-->
+                    <li>Float to string conversion (e.g. <a href="func_str.html"><span class="code_std">str()</span></a> function and <a href="op_print.html"><span class="code_std">print()</span></a> operation): fixed wrong string values in rare cases. Further, the maximum number of digits in the string representation was reduced by 1.</li>
+                </ul>
+            </ul>
+		</td>
+    </tr>
     <tr>
+		<td>SDK&nbsp;3.2.10352<br>CGAC 2.5</td>
+		<td>
+			New operations:
+			<ul>
+				<li><a href="op_copyUV.html"><span class="code_std">copyUV</span></a> operation</li> <!-- CE-7067 -->
+			</ul>
+			New functions:
+			<ul>
+                <li><a href="func_geometry.html#hasUVs"><span class="code_std">geometry.hasUVs</span></a> function</li> <!-- CE-11589 -->	
+			</ul>
+		</td>
+    </tr>
+	<tr>
 		<td>2024.0<br>CGAC 2.4</td>
 		<td>
 			New features:
