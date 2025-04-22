@@ -41,7 +41,7 @@ properties([disableConcurrentBuilds()])
 
 @Field final List CONFIGS_BUILD = [
 	DOCKER_IMAGE_LINUX_CONFIG + [ grp: 'latest',  os: cepl.CFG_OS_RHEL8, bc: cepl.CFG_BC_REL, tc: cepl.CFG_TC_GCC112,  cc: cepl.CFG_CC_OPT, arch: cepl.CFG_ARCH_X86_64, deps: [ CESDK_LATEST ] ],
-	[ grp: 'latest',  os: cepl.CFG_OS_WIN10, bc: cepl.CFG_BC_REL, tc: cepl.CFG_TC_VC1437, cc: cepl.CFG_CC_OPT, arch: cepl.CFG_ARCH_X86_64, deps: [ CESDK_LATEST ] ],
+	[ grp: 'latest',  os: cepl.CFG_OS_WIN10, bc: cepl.CFG_BC_REL, tc: cepl.CFG_TC_VC1438, cc: cepl.CFG_CC_OPT, arch: cepl.CFG_ARCH_X86_64, deps: [ CESDK_LATEST ] ],
 	DOCKER_IMAGE_LINUX_CONFIG + [ grp: 'default', os: cepl.CFG_OS_RHEL8, bc: cepl.CFG_BC_REL, tc: cepl.CFG_TC_GCC112,  cc: cepl.CFG_CC_OPT, arch: cepl.CFG_ARCH_X86_64, deps: [] ],
 	[ grp: 'default', os: cepl.CFG_OS_WIN10, bc: cepl.CFG_BC_REL, tc: cepl.CFG_TC_VC1437, cc: cepl.CFG_CC_OPT, arch: cepl.CFG_ARCH_X86_64, deps: [] ],
 ]
