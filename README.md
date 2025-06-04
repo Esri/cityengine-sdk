@@ -87,13 +87,13 @@ Please note that the individual example READMEs may include further requirements
 
 * Windows 10 or 11 (64bit)
 * Required C++ compiler: Visual Studio 2022 with Toolset MSVC 14.38 or later
-* Required flags for extension libraries release mode: `/std:c++17 /bigobj /GR /EHsc /MD`
+* Required flags for extension libraries release mode: `/std:c++20 /bigobj /GR /EHsc /MD`
 
 ### Linux
 
 * RedHat Enterprise Linux 8.x or 9.x and compatible (e.g. Alma Linux or Rocky Linux)
 * Required C++ compiler: GCC 11.2 or later (RedHat Enterprise Linux DevToolSet 11)
-* Required flags for extension libraries: `-std=c++17 -march=nocona -fvisibility=hidden -fvisibility-inlines-hidden -Wl,--exclude-libs,ALL`
+* Required flags for extension libraries: `-std=c++20 -march=nocona -fvisibility=hidden -fvisibility-inlines-hidden -Wl,--exclude-libs,ALL`
 
 ## Release History and Changelog
 

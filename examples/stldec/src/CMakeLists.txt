@@ -18,7 +18,7 @@ project(prt_stldec)
 
 add_library(${PROJECT_NAME} SHARED main.cpp STLDecoder.cpp)
 
-set_target_properties(${PROJECT_NAME} PROPERTIES CXX_STANDARD 17 CXX_EXTENSIONS OFF CXX_STANDARD_REQUIRED ON)
+set_target_properties(${PROJECT_NAME} PROPERTIES CXX_STANDARD 20 CXX_EXTENSIONS OFF CXX_STANDARD_REQUIRED ON)
 
 if(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
 	target_compile_options(${PROJECT_NAME} PRIVATE -march=nocona -fvisibility=hidden -fvisibility-inlines-hidden -Wl,--exclude-libs,ALL -Wall -Wextra -Wunused-parameter -Wl,-rpath,'$ORIGIN')
