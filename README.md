@@ -10,7 +10,7 @@ The CityEngine SDK can be used for the development of:
 
 2. *3D apps which need a procedural geometry engine.*
 
-   The core of CityEngine is its unique geometry generation engine, called Procedural Runtime (PRT). PRT takes as input an initial geometry and then applies a given rule package (= CGA rules authored in CityEngine) to generate more detailed 3D geometry as output. For example, PRT can generate - based on given rules - a 3D model of a building out of a parcel polygon. With the SDK you can integrate PRT in your own 3D applications taking full advantage of the procedural geometry generation without running CityEngine. An interesting use case example is [Palladio](https://github.com/esri/palladio), a plugin for SideFX’s Houdini software. Palladio includes PRT and therefore extends Houdini with the procedural geometry engine of CityEngine. Another use case example could be a specific cultural heritage 3D application which automatically generates detailed 3D models of temples based on input attributes.
+   The core of CityEngine is its unique geometry generation engine, called Procedural Runtime (PRT). PRT takes as input an initial geometry and then applies a given rule package (= CGA rules authored in CityEngine) to generate more detailed 3D geometry as output. For example, PRT can generate - based on given rules - a 3D model of a building out of a parcel polygon. With the SDK you can integrate PRT in your own 3D applications taking full advantage of the procedural geometry generation without running CityEngine. An interesting use case example is [ArcGIS CityEngine for Houdini](https://github.com/Esri/cityengine_for_houdini), a plugin for SideFX’s Houdini software. CityEngine for Houdini includes PRT and therefore extends Houdini with the procedural geometry engine of CityEngine. Another use case example could be a specific cultural heritage 3D application which automatically generates detailed 3D models of temples based on input attributes.
 
 This document explains how to install the CityEngine SDK and how to work with the source-code examples contained in this repository. The CityEngine SDK is packaged into three parts:
 
@@ -68,10 +68,10 @@ Read the [whitepaper](https://esri.github.io/cityengine-sdk/arcgis_prt_whitepape
 
 * [Overview](https://www.esri.com/en-us/arcgis/products/arcgis-cityengine/integrations)
 * [PyPRT](https://esri.github.io/cityengine/pyprt): Python language bindings for the Procedural Runtime (PRT)
-* [Palladio](https://esri.github.io/cityengine/palladio): CityEngine plugin for SideFX Houdini
-* [Puma](https://esri.github.io/cityengine/puma): CityEngine plugin for McNeel Rhino3d
+* [ArcGIS CityEngine for Houdini](https://esri.github.io/cityengine/houdini): CityEngine plugin for SideFX Houdini
+* [ArcGIS CityEngine for Rhino](https://esri.github.io/cityengine/rhino): CityEngine plugin for McNeel Rhino3d
+* [ArcGIS CityEngine for Unreal Engine](https://esri.github.io/cityengine/vitruvio): CityEngine plugin for Epic Unreal Engine
 * [Serlio](https://esri.github.io/cityengine/serlio): CityEngine plugin for Autodesk Maya
-* [Vitruvio](https://esri.github.io/cityengine/vitruvio): CityEngine plugin for Epic Unreal Engine
 
 ## General Software Requirements
 
