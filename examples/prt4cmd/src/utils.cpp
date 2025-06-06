@@ -5,7 +5,7 @@
  *
  * See README.md in https://github.com/Esri/cityengine-sdk for build instructions.
  *
- * Copyright (c) 2012-2024 Esri R&D Center Zurich
+ * Copyright (c) 2012-2025 Esri R&D Center Zurich
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.

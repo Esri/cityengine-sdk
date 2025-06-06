@@ -10,7 +10,7 @@ The CityEngine SDK can be used for the development of:
 
 2. *3D apps which need a procedural geometry engine.*
 
-   The core of CityEngine is its unique geometry generation engine, called Procedural Runtime (PRT). PRT takes as input an initial geometry and then applies a given rule package (= CGA rules authored in CityEngine) to generate more detailed 3D geometry as output. For example, PRT can generate - based on given rules - a 3D model of a building out of a parcel polygon. With the SDK you can integrate PRT in your own 3D applications taking full advantage of the procedural geometry generation without running CityEngine. An interesting use case example is [Palladio](https://github.com/esri/palladio), a plugin for SideFX’s Houdini software. Palladio includes PRT and therefore extends Houdini with the procedural geometry engine of CityEngine. Another use case example could be a specific cultural heritage 3D application which automatically generates detailed 3D models of temples based on input attributes.
+   The core of CityEngine is its unique geometry generation engine, called Procedural Runtime (PRT). PRT takes as input an initial geometry and then applies a given rule package (= CGA rules authored in CityEngine) to generate more detailed 3D geometry as output. For example, PRT can generate - based on given rules - a 3D model of a building out of a parcel polygon. With the SDK you can integrate PRT in your own 3D applications taking full advantage of the procedural geometry generation without running CityEngine. An interesting use case example is [ArcGIS CityEngine for Houdini](https://github.com/Esri/cityengine_for_houdini), a plugin for SideFX’s Houdini software. CityEngine for Houdini includes PRT and therefore extends Houdini with the procedural geometry engine of CityEngine. Another use case example could be a specific cultural heritage 3D application which automatically generates detailed 3D models of temples based on input attributes.
 
 This document explains how to install the CityEngine SDK and how to work with the source-code examples contained in this repository. The CityEngine SDK is packaged into three parts:
 
@@ -68,10 +68,10 @@ Read the [whitepaper](https://esri.github.io/cityengine-sdk/arcgis_prt_whitepape
 
 * [Overview](https://www.esri.com/en-us/arcgis/products/arcgis-cityengine/integrations)
 * [PyPRT](https://esri.github.io/cityengine/pyprt): Python language bindings for the Procedural Runtime (PRT)
-* [Palladio](https://esri.github.io/cityengine/palladio): CityEngine plugin for SideFX Houdini
-* [Puma](https://esri.github.io/cityengine/puma): CityEngine plugin for McNeel Rhino3d
+* [ArcGIS CityEngine for Houdini](https://esri.github.io/cityengine/houdini): CityEngine plugin for SideFX Houdini
+* [ArcGIS CityEngine for Rhino](https://esri.github.io/cityengine/rhino): CityEngine plugin for McNeel Rhino3d
+* [ArcGIS CityEngine for Unreal Engine](https://esri.github.io/cityengine/vitruvio): CityEngine plugin for Epic Unreal Engine
 * [Serlio](https://esri.github.io/cityengine/serlio): CityEngine plugin for Autodesk Maya
-* [Vitruvio](https://esri.github.io/cityengine/vitruvio): CityEngine plugin for Epic Unreal Engine
 
 ## General Software Requirements
 
@@ -79,26 +79,28 @@ Please note that the individual example READMEs may include further requirements
 
 ### All Platforms
 
-* To load custom encoders built with the latest SDK, CityEngine 2024.1 is required. For older versions of CityEngine an older version of the SDK might have to be used, see [Release History](#release-history-and-changelog). Some SDK versions don't have a matching CityEngine.
-* A license for the corresponding CityEngine version. For example, a license for CityEngine 2024.1 to author Rule Packages for the current SDK release.
+* To load custom encoders built with the latest SDK, CityEngine 2025.0 is required. For older versions of CityEngine an older version of the SDK might have to be used, see [Release History](#release-history-and-changelog). Some SDK versions don't have a matching CityEngine.
+* A license for the corresponding CityEngine version. For example, a license for CityEngine 2025.0 to author Rule Packages for the current SDK release.
 * CMake 3.19 or later (<https://www.cmake.org>)
 
 ### Windows
 
 * Windows 10 or 11 (64bit)
-* Required C++ compiler: Visual Studio 2022 with Toolset MSVC 14.37 or later
-* Required flags for extension libraries release mode: `/std:c++17 /bigobj /GR /EHsc /MD`
+* Required C++ compiler: Visual Studio 2022 with Toolset MSVC 14.38 or later
+* Required flags for extension libraries release mode: `/std:c++20 /bigobj /GR /EHsc /MD`
 
 ### Linux
 
 * RedHat Enterprise Linux 8.x or 9.x and compatible (e.g. Alma Linux or Rocky Linux)
 * Required C++ compiler: GCC 11.2 or later (RedHat Enterprise Linux DevToolSet 11)
-* Required flags for extension libraries: `-std=c++17 -march=nocona -fvisibility=hidden -fvisibility-inlines-hidden -Wl,--exclude-libs,ALL`
+* Required flags for extension libraries: `-std=c++20 -march=nocona -fvisibility=hidden -fvisibility-inlines-hidden -Wl,--exclude-libs,ALL`
 
 ## Release History and Changelog
 
 A detailed list of changes to the API, CGA language and built-in codecs can be found in the [Changelog](changelog.md).
 
+* [v3.3.11172 (2025-XX-XX, CityEngine 2025.0)](https://github.com/Esri/cityengine-sdk/releases/tag/3.3.11172)
+* [v3.2.10824 (2025-02-25, ArcGIS Pro 3.5, Enterprise 11.5)](https://github.com/Esri/cityengine-sdk/releases/tag/3.2.10824)
 * [v3.2.10650 (2024-11-20, CityEngine 2024.1)](https://github.com/Esri/cityengine-sdk/releases/tag/3.2.10650)
 * [v3.2.10352 (2024-08-23, ArcGIS Pro 3.4, Enterprise 11.4)](https://github.com/Esri/cityengine-sdk/releases/tag/3.2.10352)
 * [v3.2.10211 (2024-07-11, CityEngine 2024.0)](https://github.com/Esri/cityengine-sdk/releases/tag/3.2.10211)
