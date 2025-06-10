@@ -1,3 +1,122 @@
+
+# CITYENGINE SDK 3.3.11173 CHANGELOG
+
+This section lists changes compared to CityEngine SDK 3.2.10824.
+
+## General Info
+* CityEngine SDK 3.3.11173 is used in CityEngine 2025.0.11173.
+
+## PRT API
+* `prt::InitalShapeBuilder::setAttributes()`: Geometry cleanup of initial shapes can now be disabled.
+* `prt::generate()`: Fixed a small memory leak when CGA imports were used.
+* `prt::createRulFileInfo()`: Improved performance for cgb files with many imports.
+
+## PRTX API
+* Added `prtx::MeshUtils::transformNormals()` function.
+
+## CGA
+* Changes to existing features:
+    * union, subtract, intersect operations: The syntax was modified to explicitly state both operands. The previous syntax is now deprecated. A switch to the new syntax can be done as follows for the default mode and swap mode:
+        * subtract Rule => subtract { OperandA. | Rule }  
+        The current shape is explicitly stated with a shape symbol serving as operand A.
+        * subtract(swap) Rule => subtract { Rule | OperandB. }  
+        The current shape is explicitly stated with a shape symbol serving as operand B. Auto-tags are swapped: The geometry of Rule is tagged with "bool.A", the geometry of OperandB is tagged with "bool.B".
+    * inline keyword:
+        * Can now be used without specifying the geometryMergeStragey. The append strategy is used by default.
+        * When using the unify strategy, the geometry is unified also if there is only a single leaf shape.
+    * comp operation, comp function:
+        * Added a new operator (=:) that splits the geometry into shapes with connected components.
+        * Added scopeAlignment parameter. The new noAlign mode only adjusts the scope size and position.
+        * Vertex normals are now kept when using comp(f) with the : operator. You can remove vertex normals with setNormals(hard).
+    * deleteTags operation, geometry.tags, geometry.hasTags functions: Added overloads to only consider tags on specific components (faces, edges or vertices).
+    * split operation: Splitting edge or vertex shapes is supported now.
+    * Geometry cutting methods now better preserve the input topology:
+        * split operation: Close but distinct new vertices on cut faces are no longer merged. For example, new vertices on adjacent but disconnected faces, in which case new faces inserted to close cut volumes in these areas are now also detached.
+        * i, trim operation: When trimming at convex boundaries, close but distinct new vertices on trimmed faces are no longer merged.
+    * offset operation: Slightly improved numerical accuracy.
+    * The numerical behavior of slightly non-planar polygons changed: They are not forced to 0 height anymore.
+    * inline(unify) keyword, union, subtract, intersect operations: Improved performance.
+* Bugfixes:
+    * union, subtract, intersect operations: Fixed a bug where on overlapping non-planar faces undesired new edges were created.
+    * geometry.isPlanar function: Fixed a bug where the function wrongly returned false when a non-planar shape was flattened by setting the scope size to 0.
+    * comp operation, comp function: Fixed a bug where the initial scope and normal orientation was wrong for face edges (fe) on slightly non-planar shapes.
+    * Fixed a bug for assets with several groups: When setting the scope size to 0 the geometry could degenerate due to a numerical issue.
+    * trim, i operations:
+        * Fixed behavior in subsequent operations when the geometry is empty after it was trimmed.
+        * Fixed wrong result when scope size is negative.
+    * trim operation: Fixed wrong behavior when applied to a scope which resulted from a split operation with noAdjust mode.
+    * dynamic import functionality: Fixed a bug where attribute overrides were not applied in recursive rules.
+    * setback, setbackToArea, setbackPerEdge, shapeLUO, splitAndSetbackPerimeter, offset operations: Fixed a bug that led to degenerated geometry on non-planar polygons or at collinear vertices.
+    * split operation: Fixed a bug where existing edge and vertex tags got removed on faces in the split plane.
+    * envelope operation: Made it more stable for non-planar polygons with holes and colinear vertices.
+    * Fixed wrong behavior in the random evaluation of probabilistic expressions. This fix potentially changes your existing models even with the same seedian on the initial shape.
+        * comp operation, comp function: Fixed wrong behavior where the outcome of probabilistic expressions was not random but repetitive when using the combine operator (=).
+        * union, subtract, intersect operations: Fixed undesired behavior where the outcome of probabilistic expressions in an unrelated part of the code changed when the behavior of a Boolean operand changed.
+
+## Built-In Codecs
+* USD Codecs:
+   * Updated to USD library 24.11
+* CityGML Codecs:
+   * Updated to libcitygml 2.5.2.e3
+* CityGML Encoder:
+   * Improved performance and floating-point accuracy.
+
+## Misc Changes and Fixes
+* Windows only: removed dependency from com.esri.prt.codecs.dll on "dbghelp.dll".
+
+
+# CITYENGINE SDK 3.2.10824 CHANGELOG
+
+This section lists changes compared to CityEngine SDK 3.2.10650.
+
+## General Info
+* The focus of this release is to fix some issues which are important for certain client applications such as ArcGIS Pro. There is no CityEngine version using this version of the SDK.
+
+## PRT API
+* No changes.
+
+## PRTX API
+* `prtx::ResolveMap`: fixed a bug in `anchorEmbeddedKey()` and `anchorRelativeKey()` which could lead to an infinite loop  when nested "/../" (parent) elements were used in the keys. 
+* `prtx::Databackend::resolveGeometry()`: namespaces for optional metadata attributes have been defined. There is the "/fields/" namespace for generic metadata. The two namespaces "/georef/" and "/scale/" contain a number of well-defined metadata attributes (key and type). Geometry decoders may or may not set these attributes. Check the documentation of the function for details. Note that these attributes can be read in CGA via the assetMetadata() function, and `prt::InitialShapeBuilder::resolveAttributes()` copies the attributes from the "/fields/" space to the `prt::InitialShape`.
+
+## CGA
+* Changes to existing features:
+  * comp operation: New component selector fv for face vertices.
+  * inline(unify), union, subtract, intersect keywords: Boolean operations keep general vertex order.
+  * union, subtract, intersect keywords: Boolean operations set a new auto-tag "bool.cut" at intersection edges.
+* Bugfixes:
+  * inline, union, subtract, intersect keywords: Fixed the material of the resulting shapes for some cases where non-default materials were involved.
+  * convexify operation: Fixed a crash that could happen when small edges are present.
+  * For some operations the first edge of the resulting geometry was made more consistent and deterministic. Since the first edge often determines the scope setup this can lead to different results of existing rules.
+    * innerRectangle operation: The first edge of remainder faces is set at the outline of the initial face. The order of remainders is set wrt. the vertex order of the initial face. Before, the behavior was arbitrary.
+    * setback, setbackToArea, setbackPerEdge, shapeLUO, splitAndSetbackPerimeter operations: In rare cases the first edge of setback faces was not set at those edges selected by the setback selector. Further, the first edge of setback faces is now set only at those edges with a positive setback distance (>0). Finally, we fixed an issue where first edges and order of remainder faces were arbitrary in the presence of holes.
+    * envelope operation: Fixed an issue where first edges of slanted faces were not aligned to the outline of the initial shape when holes are present.
+    * i, trim operations: Trimming at concave boundary keeps the first edge, if not trimmed away.
+  * comp operation, comp function: Fixed numerical unstable orientation of horizontal edges when using comp(e) with logical selector expressions or static selectors eave, hip, valley, and ridge.
+
+## Built-In Codecs
+* Added decoder for the TGA image format (com.esri.prt.codecs.TGADecoder).
+* Added basic support for reading and writing CityGML files (com.esri.prt.codecs.CityGMLDecoder, com.esri.prt.codecs.CityGMLEncoder)
+* Collada (DAE) decoder:
+  * Added special handling to the Collada decoder for opacity values written with old versions of Maya and SketchUp. 
+  * Fixed a bug where the transparency was set to a wrong value.
+* Collada, GLTF, FBX, IFC, DWG, USD decoders:
+  * Added support for "/scaling/appliedUnitToMeter" metadata
+* IFC decoder:
+  * Added support for "/georef/" metadata (IFC 4).
+* DWG and IFC Codecs:
+  * Updated to ODA 25.12 library.
+* ShapeBuffer decoder and encoder:
+  * Updated to FileGDB API 1.5.3.
+  * Dropped support for ShapeBuffer on 32bit operating systems.
+* FBX decoder and encoder:
+  * Now correctly converts colors from/to linear space.
+
+## Misc Changes and Fixes
+* Applied security updates for libtiff (4.7.0), libxml (2.13.6), libpng (1.6.44), libjpeg-turbo (2.1.5).
+* Windows: switched to MSVC 14.38.
+
+
 # CITYENGINE SDK 3.2.10650 CHANGELOG
 
 This section lists changes compared to CityEngine SDK 3.2.10352.
