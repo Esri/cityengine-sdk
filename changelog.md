@@ -54,10 +54,13 @@ This section lists changes compared to CityEngine SDK 3.2.10824.
         * union, subtract, intersect operations: Fixed undesired behavior where the outcome of probabilistic expressions in an unrelated part of the code changed when the behavior of a Boolean operand changed.
 
 ## Built-In Codecs
-* USD encoder:
-  * Now writes the latest version of USDPreviewSurface materials.
 * USD codecs:
    * Updated to USD library 24.11
+* USD decoder: 
+  * Now generates UV coordinates for faces that don't have them but use textures.
+  * Fixed a bug in which cube primitives didn't receive the correct material.
+* USD encoder:
+  * Now writes the latest version of USDPreviewSurface materials.
 * CityGML codecs:
    * Updated to libcitygml 2.5.2.e3
 * CityGML decoder:
