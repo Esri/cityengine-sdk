@@ -116,7 +116,7 @@ This section lists changes compared to CityEngine SDK 3.2.10650.
   * Now correctly converts colors from/to linear space.
 
 ## Misc Changes and Fixes
-* Applied security updates for libtiff (4.7.0), libxml (2.13.6), libpng (1.6.44), libjpeg-turbo (2.1.5).
+* Applied security updates for libtiff (4.7.0), libxml (2.13.6), libpng (1.6.44), libjpeg-turbo (2.1.5.1).
 * Windows: switched to MSVC 14.38.
 
 
