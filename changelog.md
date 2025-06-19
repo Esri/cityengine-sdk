@@ -54,11 +54,13 @@ This section lists changes compared to CityEngine SDK 3.2.10824.
         * union, subtract, intersect operations: Fixed undesired behavior where the outcome of probabilistic expressions in an unrelated part of the code changed when the behavior of a Boolean operand changed.
 
 ## Built-In Codecs
-* USD Codecs:
+* USD encoder:
+  * Now writes the latest version of USDPreviewSurface materials.
+* USD codecs:
    * Updated to USD library 24.11
-* CityGML Codecs:
+* CityGML codecs:
    * Updated to libcitygml 2.5.2.e3
-* CityGML Encoder:
+* CityGML decoder:
    * Improved performance and floating-point accuracy.
 
 ## Misc Changes and Fixes
@@ -98,8 +100,9 @@ This section lists changes compared to CityEngine SDK 3.2.10650.
 * Added decoder for the TGA image format (com.esri.prt.codecs.TGADecoder).
 * Added basic support for reading and writing CityGML files (com.esri.prt.codecs.CityGMLDecoder, com.esri.prt.codecs.CityGMLEncoder)
 * Collada (DAE) decoder:
-  * Added special handling to the Collada decoder for opacity values written with old versions of Maya and SketchUp. 
-  * Fixed a bug where the transparency was set to a wrong value.
+  * Added special handling for opacity values written with old versions of Maya and SketchUp. 
+  * Added special handling to search for missing textures in the same folder as the geometry file.
+  * Fixed a bug in which Collada assets using of Controllers (Rigging) wouldn't load any geometry.
 * Collada, GLTF, FBX, IFC, DWG, USD decoders:
   * Added support for "/scaling/appliedUnitToMeter" metadata
 * IFC decoder:
