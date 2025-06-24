@@ -18,7 +18,7 @@ project(prt_stldec)
 
 add_library(${PROJECT_NAME} SHARED main.cpp STLDecoder.cpp)
 
-set_target_properties(${PROJECT_NAME} PROPERTIES CXX_STANDARD 17 CXX_EXTENSIONS OFF CXX_STANDARD_REQUIRED ON)
+set_target_properties(${PROJECT_NAME} PROPERTIES CXX_STANDARD 20 CXX_EXTENSIONS OFF CXX_STANDARD_REQUIRED ON)
 
 if(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
 	target_compile_options(${PROJECT_NAME} PRIVATE -march=nocona -fvisibility=hidden -fvisibility-inlines-hidden -Wl,--exclude-libs,ALL -Wall -Wextra -Wunused-parameter -Wl,-rpath,'$ORIGIN')
@@ -45,7 +45,7 @@ if(NOT prt_DIR)
 		set(PRT_TC "gcc112")
 	endif()
 
-	set(PRT_VERSION "3.2.10650")
+	set(PRT_VERSION "3.3.11173")
 	set(PRT_CLS     "${PRT_OS}-${PRT_TC}-x86_64-rel-opt")
 	set(PRT_URL     "https://github.com/esri/cityengine-sdk/releases/download/${PRT_VERSION}/esri_ce_sdk-${PRT_VERSION}-${PRT_CLS}.zip")
 

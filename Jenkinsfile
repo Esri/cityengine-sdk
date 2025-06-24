@@ -33,7 +33,7 @@ properties([disableConcurrentBuilds()])
 @Field final String BUILD_TARGET = 'package'
 @Field final Map    CESDK_LATEST = PrtAppPipelineLibrary.Dependencies.CESDK_LATEST
 
-@Field final Map DOCKER_IMAGE_LINUX_CONFIG = [ ba: psl.BA_LINUX_DOCKER, containerId: "build_tools/ce-tc-prt:almalinux8-gcc11-v2", containerWorkspace: "/tmp/app" ]
+@Field final Map DOCKER_IMAGE_LINUX_CONFIG = [ ba: psl.BA_LINUX_DOCKER, containerId: "build_tools/ce-tc-prt:almalinux8-gcc11-v6", containerWorkspace: "/tmp/app" ]
 
 @Field final List CONFIGS_PREPARE = [
 	DOCKER_IMAGE_LINUX_CONFIG + [ os: cepl.CFG_OS_RHEL8, bc: cepl.CFG_BC_REL, tc: cepl.CFG_TC_GCC112, cc: cepl.CFG_CC_OPT, arch: cepl.CFG_ARCH_X86_64 ],
@@ -41,7 +41,7 @@ properties([disableConcurrentBuilds()])
 
 @Field final List CONFIGS_BUILD = [
 	DOCKER_IMAGE_LINUX_CONFIG + [ grp: 'latest',  os: cepl.CFG_OS_RHEL8, bc: cepl.CFG_BC_REL, tc: cepl.CFG_TC_GCC112,  cc: cepl.CFG_CC_OPT, arch: cepl.CFG_ARCH_X86_64, deps: [ CESDK_LATEST ] ],
-	[ grp: 'latest',  os: cepl.CFG_OS_WIN10, bc: cepl.CFG_BC_REL, tc: cepl.CFG_TC_VC1437, cc: cepl.CFG_CC_OPT, arch: cepl.CFG_ARCH_X86_64, deps: [ CESDK_LATEST ] ],
+	[ grp: 'latest',  os: cepl.CFG_OS_WIN10, bc: cepl.CFG_BC_REL, tc: cepl.CFG_TC_VC1438, cc: cepl.CFG_CC_OPT, arch: cepl.CFG_ARCH_X86_64, deps: [ CESDK_LATEST ] ],
 	DOCKER_IMAGE_LINUX_CONFIG + [ grp: 'default', os: cepl.CFG_OS_RHEL8, bc: cepl.CFG_BC_REL, tc: cepl.CFG_TC_GCC112,  cc: cepl.CFG_CC_OPT, arch: cepl.CFG_ARCH_X86_64, deps: [] ],
 	[ grp: 'default', os: cepl.CFG_OS_WIN10, bc: cepl.CFG_BC_REL, tc: cepl.CFG_TC_VC1437, cc: cepl.CFG_CC_OPT, arch: cepl.CFG_ARCH_X86_64, deps: [] ],
 ]
