@@ -114,7 +114,7 @@
 <h3>Ascending and descending sorting</h3>
 
 <p class="example">	
-<pre class="code3">
+<pre class="codecga">
 reverse(array) = array[size(array)-1:-1:0]
 
 sortAsc(array) = array[sortIndices(array)]
@@ -130,7 +130,7 @@ const c = sortDesc(a)      // [c,b,a]
 <h3>Finding minimum and maximum</h3>
 
 <p class="example">	
-<pre class="code3">
+<pre class="codecga">
 findMin(array) = sortIndices(array)[0]
 findMax(array) = sortIndices(array)[size(array)-1]
 
@@ -144,7 +144,7 @@ const c = max(a)           // 9
 </p>
 <em>The index of the minimum value in <span class="codelight">array</span> is the first element in the sorted indexes array. Note that this example only applies to 1d arrays with 1 row. 2d arrays must be "flattened" first, i.e. reshaped to an array with one row:</em>
 <p class="example">	
-<pre class="code3">
+<pre class="codecga">
 flatten(array) = array[0:size(array)-1]
 
 findMin(array) = sortIndices(flatten(array))[0]
@@ -154,7 +154,7 @@ findMax(array) = sortIndices(flatten(array))[size(array)-1]
 <em></em>
 
 <!-- FOOTER -->
-<p class="foot">Copyright &copy;2008-2024 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
+<p class="foot">Copyright &copy;2008-2025 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
 
 <!-- END CENTERED CONTENT -->
 

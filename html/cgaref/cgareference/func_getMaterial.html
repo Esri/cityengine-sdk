@@ -72,13 +72,13 @@ Note that the "current material" is actually a combination of the current shape'
 <h3>Example 1: material after setting individual attributes</h3>
 <p class="example">	
 CGA Code:
-<pre class="code3">
+<pre class="codecga">
 RefExample1-->
    color(0.5, 0.6, 0.7)
    print(getMaterial(used, changed))
 </pre>
 Result:
-<pre class="code3">
+<pre class="codecga">
 (3x2)
    color.b   0.7
    color.g   0.6
@@ -89,13 +89,13 @@ Result:
 <p class="example">	
 <h3>Example 2: material after inserting an asset</h3>
 CGA Code:
-<pre class="code3">
+<pre class="codecga">
 RefExample2-->
    i("/ESRI.lib/assets/Webstyles/Vegetation/Realistic/AcerPlatanoides.glb")
    print(getMaterial(used, changed))
 </pre>
 Result:
-<pre class="code3">
+<pre class="codecga">
 (15x2)
             metallic                                                                          0
              opacity                                                                          1
@@ -122,7 +122,7 @@ Result:
 <table summary="" class="twocol">
 <tr>
 	<td class="twocol_l"><img src="images/getMaterial_example_3.png" alt="Insert a" width="298"/></td>
-	<td><pre class="code3">
+	<td class="twocol_r"><pre class="codecga">
 RefExample3-->
    i("/ESRI.lib/assets/Webstyles/StreetScene/Fire_Hydrant.glb")
    X.
@@ -135,7 +135,7 @@ CreateCylAndSetMaterial(m)-->
     t('-1.5, 0, 0)
     setMaterial(m)
     X.
-	</pre>
+</pre>
 	<em>The Fire_Hydrant asset is inserted (left). This geometry has various material attributes set. Next, a cylinder is created, which uses the CGA default material (middle). Finally, the Fire_Hydrant material is applied on the cylinder (right).</em>
 	</td>
 </tr>
@@ -145,7 +145,7 @@ CreateCylAndSetMaterial(m)-->
 <table summary="" class="twocol">
 <tr>
 	<td class="twocol_l"><img src="images/getMaterial_example_4.png" alt="Insert a" width="298"/></td>
-	<td><pre class="code3">
+	<td class="twocol_r"><pre class="codecga">
 const defaultMaterial = getMaterial(shape, all)
 
 RefExample4-->
@@ -161,7 +161,7 @@ RefExample4-->
    t('-1.5, 0, 0)
    setMaterial(defaultMaterial)
    X.
-	</pre>
+</pre>
 	<em>The Fire_Hydrant asset is inserted (left). This geometry has various material attributes set. Then some shape material attributes are set to override the geometry material, resulting in a blue, untextured model. Next the changes to the shape material are reset which gives the original material setup of the asset again. Finally, the full default CGA material, which is captured in a const function, is explicitly set, resulting in all shape material attributes being set and thus override the geometry's material.</em>
 	</td>
 </tr>
@@ -172,7 +172,7 @@ RefExample4-->
 
 
 <!-- FOOTER -->
-<p class="foot">Copyright &copy;2008-2024 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
+<p class="foot">Copyright &copy;2008-2025 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
 
 <!-- END CENTERED CONTENT -->
 

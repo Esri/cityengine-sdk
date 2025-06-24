@@ -23,7 +23,7 @@
   <td id="projectlogo"><img alt="Logo" src="esri_prt_55px.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ArcGIS Procedural Runtime
-   &#160;<span id="projectnumber">3.2.10650</span>
+   &#160;<span id="projectnumber">3.3.11173</span>
    </div>
   </td>
  </tr>
@@ -278,6 +278,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 <p>Updates initial shape attributes based on an asset (if the corresponding decoder supports it). Please refer to <a class="el" href="classprt_1_1_initial_shape_builder.html#a54112771964d72bdad2ce9d6a28fe20a">InitialShapeBuilder::setAttributes</a> for a description of the attribute key semantics. By using the same cache object as in the <a class="el" href="classprt_1_1_initial_shape_builder.html#a3662f9060ce6e402e66030409ec1a2e9">InitialShapeBuilder::resolveGeometry</a> call this can be done efficiently.</p>
+<p>If any attribute has a namespace prefix "/fields/", "/georef/", or "/scale/" only the attributes from the "/fields/" namespace will be taken into account and the namespace prefix "/fields/" will be removed.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">key</td><td>The key (into resolveMap) of the geometry asset to load. If resolveMap is 0, key is treated as a an URI. </td></tr>
@@ -503,12 +504,14 @@ Additional Inherited Members</h2></td></tr>
 <tr class="markdownTableBody" class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">/cgaenv/maxArraySize  </td><td class="markdownTableBodyNone">int  </td><td class="markdownTableBodyNone">100000  </td><td class="markdownTableBodyNone">Maximum size of arrays   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyNone">/cgaenv/isGeometryCleanup  </td><td class="markdownTableBodyNone">int  </td><td class="markdownTableBodyNone">1  </td><td class="markdownTableBodyNone">Initial shape geometry cleanup mode. See also <a href="cgaref/cgareference/op_i.html">cga i() operation cleanupMode</a>. 0 = noCleanup, 1 = numericalCleanup.   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">/cgaenv/trimPlanesComputeSize  </td><td class="markdownTableBodyNone">float  </td><td class="markdownTableBodyNone">100.0  </td><td class="markdownTableBodyNone">The size of the computed trimplanes in meters; float; default: 100.0   </td></tr>
-<tr class="markdownTableBody" class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">/cgaenv/touchesMaxDist  </td><td class="markdownTableBodyNone">float  </td><td class="markdownTableBodyNone">1e-3  </td><td class="markdownTableBodyNone">Due to floating point limitations, occlusion queries use this threshold value.   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowEven">
-<td class="markdownTableBodyNone">/cache/key  </td><td class="markdownTableBodyNone">string  </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">Set the cache key associated to this initial shape. This allows e.g. for re-using an initial shape's cache key with a different instance. See also the generateOptions parameter of <a class="el" href="namespaceprt.html#a310381e586ced8f4b08efd472a6f0782">generate()</a>.   </td></tr>
+<td class="markdownTableBodyNone">/cgaenv/touchesMaxDist  </td><td class="markdownTableBodyNone">float  </td><td class="markdownTableBodyNone">1e-3  </td><td class="markdownTableBodyNone">Due to floating point limitations, occlusion queries use this threshold value.   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">/cache/key  </td><td class="markdownTableBodyNone">string  </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">Set the cache key associated to this initial shape. This allows e.g. for re-using an initial shape's cache key with a different instance. See also the generateOptions parameter of <a class="el" href="namespaceprt.html#a310381e586ced8f4b08efd472a6f0782">generate()</a>.   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
 <td class="markdownTableBodyNone">/enc/  </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">Reserved namespace for encoders. The <a href="esri_prt_codecs.html">encoder documentation</a> lists the known initial shape attributes per encoder. Typically, these attributes are used to control encoder behavior on a per-initial-shape basis, i.e. they are the per-initial-shape counterpart to the encoder options. Also see the <a class="el" href="_app_notes.html">Application Notes</a> for an usage example.   </td></tr>
 </table>
 <dl class="params"><dt>Parameters</dt><dd>
@@ -701,7 +704,7 @@ Additional Inherited Members</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Nov 6 2024 10:59:45 for ArcGIS Procedural Runtime by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Jun 10 2025 14:40:43 for ArcGIS Procedural Runtime by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.14
 </small></address>

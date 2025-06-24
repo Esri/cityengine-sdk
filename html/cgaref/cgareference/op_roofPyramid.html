@@ -55,7 +55,7 @@
 
 <table summary="" class="twocol">
 <tr>
-    <td>
+    <td class="twocol_r">
 		The operation automatically applies semantic <a href="cga_componentTags.html">component tags</a> to the resulting face components:
 		<table cellspacing="5">
 			<tr><td width="25%"><span class="codelight">"roof.bottom"</span></td><td>Blue: original face.</td></tr>
@@ -89,13 +89,13 @@
 
 A basic pyramid roof is generated on top of an extruded L-lot.<table summary="" class="twocol">
 <tr>
-<td class="twocol_l"><br />
+<td class="twocol_l">
         
 <p class="piccentered"><img src="images/roofPyramid_pentagon.png"></p>
                 
-<td style="vertical-align:middle">
+<td class="twocol_r">
 
-<pre class="code3">
+<pre class="codecga">
 Lot  --> extrude(10) Mass
 Mass --> comp(f) { top: Top | all: X }
 Top  --> roofPyramid(30) Roof
@@ -109,13 +109,13 @@ Note the setting of the pivot and scope. </em>
 </tr>
 
 <tr>
-<td class="twocol_l"><br />
+<td class="twocol_l">
         
 <p class="piccentered"><img src="images/roofPyramid_pentagon_tp.png"></p>
         
-<td style="vertical-align:middle">
+<td class="twocol_r">
         
-<pre class="code3">
+<pre class="codecga">
 Roof --> comp(f) { all : X }
 </pre>
   
@@ -132,7 +132,7 @@ Roof --> comp(f) { all : X }
 
 
 <!-- FOOTER -->
-<p class="foot">Copyright &copy;2008-2024 Esri R&amp;D Center Zurich. All rights reserved.</p>                  
+<p class="foot">Copyright &copy;2008-2025 Esri R&amp;D Center Zurich. All rights reserved.</p>                  
 
 </div>
 </body>

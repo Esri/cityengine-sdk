@@ -68,7 +68,7 @@ as <br>
 
 <table summary="" class="twocol">
 <tr>
-    <td>
+    <td class="twocol_r">
 		The operation automatically applies semantic <a href="cga_componentTags.html">component tags</a> to the resulting face components:
 		<table cellspacing="5">
 			<tr><td width="25%"><span class="codelight">"envelope.bottom"</span></td><td>Blue: original face.</td></tr>
@@ -103,16 +103,15 @@ as <br>
 <h3>Street-facing Slope</h3>
         <table summary="">
         <tr>
-                    <td >
-            <pre class="code3">
-Lot-->
-   setback(10) { street.front : color(0,1,0) 
-                                FrontYard |
-                 remainder    : Building }	              
+                    <td class="twocol_r">
+<pre class="codecga">
+Lot -->
+   setback(10) { street.front : color(0,1,0) FrontYard
+               | remainder    : Building }	              
 
-Building-->
+Building -->
    envelope(normal, 50, 15, 30)
-			</pre>
+</pre>
 </td>
           <tr>
             <td>
@@ -129,7 +128,7 @@ Building-->
                 
 <!-- FOOTER -->
 
-<p class="foot">Copyright &copy;2008-2024 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
+<p class="foot">Copyright &copy;2008-2025 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
 
 <!-- END CENTERED CONTENT -->
 

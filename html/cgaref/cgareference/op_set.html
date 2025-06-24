@@ -34,7 +34,7 @@
         
 <h2>Description</h2>
         
-<p>The set operation assigns a value to a shape attribute of the current shape. There are two kinds of shape attributes: <em>builtin</em> attributes such as <span class="code3">material.color</span> or <span class="code3">scope.tx</span> and <em>generic</em> attributes, which are declared as rule attributes (see <a href="https://doc.arcgis.com/en/cityengine/latest/help/help-rules-attributes.htm" target="_blank">CGA attributes</a>).</p>
+<p>The set operation assigns a value to a shape attribute of the current shape. There are two kinds of shape attributes: <em>builtin</em> attributes such as <span class="codecga">material.color</span> or <span class="codecga">scope.tx</span> and <em>generic</em> attributes, which are declared as rule attributes (see <a href="https://doc.arcgis.com/en/cityengine/latest/help/help-rules-attributes.htm" target="_blank">CGA attributes</a>).</p>
 
 <h2>Related</h2>
 
@@ -55,11 +55,11 @@
 
 <table summary="" class="twocol">
 <tr>
-<td width="350">
+<td class="twocol_l">
 <em> Enable horizontal trim planes</em>
 </td>
 <td>
-<pre class="code3">
+<pre class="codecga">
 set(trim.horizontal, true)
 </pre>
 </td>
@@ -69,7 +69,7 @@ set(trim.horizontal, true)
 <em> Set x-translation of scope to 0</em>
 </td>
 <td>
-<pre class="code3">
+<pre class="codecga">
 set(scope.tx, 0)
 </pre>
 </td>
@@ -79,7 +79,7 @@ set(scope.tx, 0)
 <em> Set the material color's red component to 0.5</em>
 </td>
 <td>
-<pre class="code3">
+<pre class="codecga">
 set(material.color.r, 0.5)
 </pre>
 </td>
@@ -91,7 +91,7 @@ Assign the built-in test texture to the colormap channel
 </em>
 </td>
 <td>
-<pre class="code3">
+<pre class="codecga">
 set(material.colormap, "builtin:uvtest.png") 
 </pre>
 </td>
@@ -102,14 +102,13 @@ set(material.colormap, "builtin:uvtest.png")
 
 <table summary="" class="twocol">
 <tr>
-<td width="300">
+<td class="twocol_l">
 
 <img src="images/set-generic-a.png" alt="Setting a generic attribute." /> </td>
 </td>
-<td>
-<pre class="code3">
+<td class="twocol_r">
+<pre class="codecga">
 attr floorNumber = -1
-
 const floorHeight = 4
 
 Init --> extrude(30)
@@ -117,15 +116,19 @@ Init --> extrude(30)
 
 Side --> split(y) { ~floorHeight : Floor }*
 
-Floor --> set(floorNumber, split.index)
-          split(x) { ~1 : Wall |  {~3 : Tile}* | ~1 : Wall } 
+Floor --> 
+    set(floorNumber, split.index)
+    split(x) { ~1 : Wall |  {~3 : Tile}* | ~1 : Wall } 
 
-Tile --> split(x) { 0.5 : Wall | ~1 : MidTile | 0.5 : Wall}
+Tile --> 
+    split(x) { 0.5 : Wall | ~1 : MidTile | 0.5 : Wall}
 
-MidTile--> split(y) { 0.5 : Wall | ~1 : Window | 0.5 : Wall }
+MidTile--> 
+    split(y) { 0.5 : Wall | ~1 : Window | 0.5 : Wall }
 
-Window --> case floorNumber % 3 == 0 : color(1.0, 0.0, 1.0) X.
-           else : X.
+Window --> 
+    case floorNumber % 3 == 0 : color(1.0, 0.0, 1.0) X.
+    else : X.
 </pre>
         
 <em>Store floor index in a generic attribute, <span class="codelight">floorHeight</span>. The attribute is then used to color the windows on every 3rd floor in pink.</em>
@@ -134,7 +137,7 @@ Window --> case floorNumber % 3 == 0 : color(1.0, 0.0, 1.0) X.
 </table>
 
 <!-- FOOTER -->
-<p class="foot">Copyright &copy;2008-2024 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
+<p class="foot">Copyright &copy;2008-2025 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
 
 <!-- END CENTERED CONTENT -->
 

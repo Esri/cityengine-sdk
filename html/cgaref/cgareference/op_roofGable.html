@@ -77,7 +77,7 @@ below).</p>
 
 <table summary="" class="twocol">
 <tr>
-    <td>
+    <td class="twocol_r">
 		The operation automatically applies semantic <a href="cga_componentTags.html">component tags</a> to the resulting face components:
 		<table cellspacing="5">
 			<tr><td width="25%"><span class="codelight">"roof.bottom"</span></td><td>Blue: original face.</td></tr>
@@ -114,13 +114,13 @@ A basic gable roof is generated on top of an extruded L-lot.
 
 <table summary="" class="twocol">
 <tr>
-<td class="twocol_l"><br />
+<td class="twocol_l">
 		
 <p class="piccentered"><img src="images/roofGable_L.png"></p>
 				
-<td style="vertical-align:middle">
+<td class="twocol_r">
 
-<pre class="code3">
+<pre class="codecga">
 Lot  --> extrude(10) Mass
 Mass --> comp(f) { top: Top | all: X }
 Top  --> roofGable(30, 2, 1) Roof
@@ -134,13 +134,13 @@ Top  --> roofGable(30, 2, 1) Roof
 </tr>
 
 <tr>
-<td class="twocol_l"><br />
+<td class="twocol_l">
 		
 <p class="piccentered"><img src="images/roofGable_L_tp.png"></p>
 		
-<td style="vertical-align:middle">
+<td class="twocol_r">
 		
-<pre class="code3">
+<pre class="codecga">
 Roof --> set(trim.horizontal, true)
          comp(f) { all : X }
 </pre>
@@ -163,13 +163,13 @@ This example demonstrates the difference between a standard and an even gable ro
 
 <table summary="" class="twocol">
 <tr>
-<td class="twocol_l"><br />
+<td class="twocol_l">
         
 <p class="piccentered"><img src="images/roofGable_trapezoid.png"></p>
                 
-<td style="vertical-align:middle">
+<td class="twocol_r">
 
-<pre class="code3">
+<pre class="codecga">
 Lot  --> extrude(10) Mass
 Mass --> comp(f) { top: Top | all: X }
 Top  --> roofGable(30, 1, 1, false) Roof
@@ -183,13 +183,13 @@ Top  --> roofGable(30, 1, 1, false) Roof
 </tr>
 
 <tr>
-<td class="twocol_l"><br />
+<td class="twocol_l">
         
 <p class="piccentered"><img src="images/roofGable_trapezoid_even.png"></p>
         
-<td style="vertical-align:middle">
+<td class="twocol_r">
 
-<pre class="code3">
+<pre class="codecga">
 Top  --> roofGable(30, 1, 1, true) Roof
 </pre>
 
@@ -209,7 +209,7 @@ When using the above rule for the<span class="code">Top</span> shape, the ridge 
 
 
 <!-- FOOTER -->
-<p class="foot">Copyright &copy;2008-2024 Esri R&amp;D Center Zurich. All rights reserved.</p>                  
+<p class="foot">Copyright &copy;2008-2025 Esri R&amp;D Center Zurich. All rights reserved.</p>                  
 
 </div>
 </body>

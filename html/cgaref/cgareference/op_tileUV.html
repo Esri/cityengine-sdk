@@ -54,11 +54,11 @@
 <h2>Examples</h2>
 
 <h3>Street Tiling</h3>
-        <table summary="" class="twocol" border="1">
+        <table summary="" class="twocol">
           <tr>
-            <td class="twocol_l"><br/>
+            <td class="twocol_l">
             <img src="images/tileuv-street-shape.png" alt="Street shape"/> </td>
-            <td>
+             <td class="twocol_r">
             <br>
             <br>
 
@@ -67,42 +67,40 @@
           </tr>
 
           <tr>
-            <td class="twocol_l"><br/>
+            <td class="twocol_l">
             <img src="images/tileuv-street-default_uv.png" alt="Street shape"/> </td>
-            <td>
-            <br>
-            
-            <pre class="code3">
+<td class="twocol_r">
+<pre class="codecga">
 Street-->
-	texture("builtin:uvtest.png")
-    		</pre>
+    texture("builtin:uvtest.png")
+</pre>
             <em>The default texture coordinates.</em>
 			</td>
           </tr>
 
           <tr>
-            <td class="twocol_l"><br/>
+            <td class="twocol_l">
             <img src="images/tileuv-street-tiled_uv_bad.png" alt="Street shape"/> </td>
-            <td>
-            <pre class="code3">
+<td class="twocol_r">
+<pre class="codecga">
 Street-->
-	texture("builtin:uvtest.png")
-	tileUV(0, 20, 10)
-    		</pre>
+    texture("builtin:uvtest.png")
+    tileUV(0, 20, 10)
+</pre>
             <em>The tiled texture coordinates. The tile width (in u-direction) is exactly 20 meters and the tile height is exaclty 10 meters. Some tiles are cut.</em>
 			</td>
           </tr>
 
 
           <tr>
-            <td class="twocol_l"><br/>
+            <td class="twocol_l">
             <img src="images/tileuv-street-tiled_uv.png" alt="Street shape"/> </td>
-            <td>
-            <pre class="code3">
+<td class="twocol_r">
+<pre class="codecga">
 Street-->
-	texture("builtin:uvtest.png")
-	tileUV(0, ~20, '0.5)
-    		</pre>
+    texture("builtin:uvtest.png")
+    tileUV(0, ~20, '0.5)
+</pre>
             <em>Usage of the ~ and ' operators. The tile width is roughly 20 meters, such that the whole available space is exactly filled, and the tile height is half of the available space sucht that exaclty two tiles fit in.</em>
 			</td>
           </tr>
@@ -111,7 +109,7 @@ Street-->
   </table>
 
 <!-- FOOTER -->
-<p class="foot">Copyright &copy;2008-2024 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
+<p class="foot">Copyright &copy;2008-2025 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
 
 <!-- END CENTERED CONTENT -->
 

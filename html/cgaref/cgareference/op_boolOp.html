@@ -1,7 +1,7 @@
 <html>
 
 <head>
-	<title>Boolean 3D operations</title>
+	<title>Boolean operations</title>
 	<link rel="stylesheet" href="../manual_style.css" type="text/css" />
 </head>
 
@@ -15,116 +15,223 @@
 	</tr>
 </table>
 
-<h1>Boolean 3D operations</h1>
+<h1>union / subtract / intersect (Boolean operations)</h1>
 
 <h2>Syntax</h2>
 
-<p class="code2"><span class="cga_op">union</span> <span class="cga_opparam">B-Rule</span></p>
-<p class="code2"><span class="cga_op">union</span>(<span class="cga_opparam">swapMode</span>) <span class="cga_opparam">B-Rule</span></p>
-
-<p class="code2"><span class="cga_op">subtract</span> <span class="cga_opparam">B-Rule</span></p>
-<p class="code2"><span class="cga_op">subtract</span>(<span class="cga_opparam">swapMode</span>) <span class="cga_opparam">B-Rule</span></p>
-
-<p class="code2"><span class="cga_op">intersect</span> <span class="cga_opparam">B-Rule</span></p>
-<p class="code2"><span class="cga_op">intersect</span>(<span class="cga_opparam">swapMode</span>) <span class="cga_opparam">B-Rule</span></p>
-
+<p class="code2"><span class="cga_op">union</span>&nbsp&nbsp&nbsp&nbsp&nbsp{ <span class="cga_opparam">operationsA</span> | <span class="cga_opparam">operationsB</span> }</p>
+<p class="code2"><span class="cga_op">subtract</span>&nbsp&nbsp{ <span class="cga_opparam">operationsA</span> | <span class="cga_opparam">operationsB</span> }</p>
+<p class="code2"><span class="cga_op">intersect</span>&nbsp{ <span class="cga_opparam">operationsA</span> | <span class="cga_opparam">operationsB</span> }</p>
 
 <h2>Parameters</h2>
 
 <ul>
-    <li><span class="cga_opparam">swapMode</span> (selector)
-    <table cellspacing="5">
-		<tr><td width="20%"><span class="codelight">noSwap</span></td><td>Default. Operand A (current shape) is the target.</td></tr>
-		<tr><td width="20%"><span class="codelight">swap</span></td><td>Operand B (<span class="codelight">B-Rule</span>) is the target.</td></tr>
-	</table>
-	</li>
-	<li><span class="cga_opparam">B-Rule</span>
-	<br>A rule or sequence of operations that defines operand B using inlined derivation:  
-	<table cellspacing="5">
-		<tr><td width="20%"><span class="codelight">identifier</span></td><td>Name of a rule.</td></tr>
-		<tr><td width="20%"><span class="codelight">{ operations }</span></td><td>A sequence of shape operations in curly brackets.</td></tr>
-		
-	</table>
-	</li>
+ 	<li><span class="cga_opparam">operationsA</span><br>A sequence of operations applied on the current shape for operand A.</li>
+	<li><span class="cga_opparam">operationsB</span><br>A sequence of operations applied on the current shape for operand B.</li>
 </ul>
 
 <h2>Description</h2>
-<p>The <span class="codelight">union</span>, <span class="codelight">intersect</span>, and <span class="codelight">subtract</span> operations perform the specified Boolean 3D operations between the current shape (operand A) 
-and the result of the inlined <span class="codelight">B-Rule</span> (operand B). 
-The <span class="codelight">swapMode</span> parameter determines the target shape, which, for example, enables subtracting operand A from operand B instead. 
-It also determines the resulting shape attributes and specifies which material is used for overlapping geometry.
-Operand B is constructed analogous to using <span class="codelight">inline(unify) B-Rule</span>, meaning that the shapes resulting from the derivation of <span class="codelight">B-Rule</span> are first merged using the union operation.
-<br>In case the operands have conflicting material attributes, their materials are first written to the geometry, ensuring that all material properties are preserved.
+<p>The <span class="codelight">union</span>, <span class="codelight">intersect</span>, and <span class="codelight">subtract</span> operations perform a Boolean operation with the result of the inlined <span class="cga_opparam">operationsA</span> (operand A) and the result of the inlined <span class="cga_opparam">operationsB</span> (operand B). The operands are constructed analogous to using <a class="normw" href="op_inline.html"><span class="code_std">inline(unify)</span></a>, i.e. the shapes resulting from the derivation of <span class="cga_opparam">operationsA</span> (or <span class="cga_opparam">operationsB</span>) are first merged using a Boolean union operation.</p>
+<p>The first operand A determines the resulting shape and rule attributes and specifies which material is used for overlapping geometry. In case the operands have conflicting material attributes, their materials are first written to the geometry, ensuring that all material properties are preserved.
 </p>
-
-<p class="notes">The operations can handle both 3D and 2D inputs. When all input vertices lie on the same plane, a Boolean 2D operation is performed instead.</p>
-<p class="notes">In general, Boolean 3D operations are only defined for closed watertight meshes, as the result is determined by local inside/outside tests around the intersection segments. When using open operands, the result depends on where the intersection happens - see <a href="op_boolOp.html#openclosed">examples</a>.</p>
 <h3><a name="componentTags"></a>Component tags</h3>
-The operations automatically apply semantic <a href="cga_componentTags.html">component tags</a> to the resulting face components:
+The operations automatically apply semantic <a href="cga_componentTags.html">component tags</a> to the resulting face and edge components:
 
 <p class="piccaptioncentered"><img src="images/autotag-boolOps.png">
 
 <table summary="" class="twocol">
 <tr>
-    <td>
-		
+    <td class="twocol_l">
 		<table cellspacing="5">
-			<tr><td width="25%"><span class="codelight">"bool.A"</span></td><td>Blue: faces from operand A.</td></tr>
-			<tr><td><span class="codelight">"bool.B"</span></td><td>Green: faces from operand B.</td></tr>
+			<tr><td width="25%"><span class="codelight">"bool.A"</span></td><td>Faces of operand A (blue)</td></tr>
+			<tr><td><span class="codelight">"bool.B"</span></td><td>Faces of operand B (green)</td></tr>
+			<tr><td><span class="codelight">"bool.cut"</span></td><td>Intersection edges (orange)</td></tr>
 		</table>
 	</td>
-	<td class="twocol_l">
-<pre class="code3">
-Left   --> extrude(1) 
-           union Sphere
-           comp(f) { isTagged("bool.A"): Blue 
-                   | isTagged("bool.B"): Green }
-Sphere --> t(0.3, 0.3, 0.3) primitiveSphere()
+	<td class="twocol_r">
+<pre class="codecga">
+Left   --> union { Cube | Sphere }
+           comp(f) { isTagged("bool.A")   : Blue 
+                   | isTagged("bool.B")   : Green  }
+           comp(e) { isTagged("bool.cut") : Orange }
 
-Middle --> ... subtract Sphere ...
-Right  --> ... intersect Sphere ...</pre> </td></tr>
+Cube   --> primitiveCube
+Sphere --> t(0.3,0.3,0.3) primitiveSphere
+
+Middle --> subtract&nbsp&nbsp{ Cube | Sphere } ...
+Right  --> intersect { Cube | Sphere } ...</pre> </td></tr>
 </table>
-<p class="notes">Both <span class="codelight">"bool.A"</span> and <span class="codelight">"bool.B"</span> are applied to overlapping faces (2D case).</p>
-</p>
-For more information on working with component tags, refer to:
-	<ul>
-		<li><a href="cga_componentTags.html#autoTags">Auto-tags</a></li>
-		<li><a href="cga_componentTags.html#tagPropagation">Tag propagation</a></li> 
-	</ul>
+<p class="notes">For overlapping faces (2D intersection) both <span class="codelight">"bool.A"</span> and <span class="codelight">"bool.B"</span> are applied.</p>
+<p>For more information on working with component tags, refer to <a href="cga_componentTags.html#autoTags">Auto-tags</a> and <a href="cga_componentTags.html#tagPropagation">Tag propagation</a>.</p>
+
+<h3>Open and closed operands</h3>
+
+<p>Boolean operations are well defined in 2D (planar planes) and in 3D for closed meshes. In 3D, open operands (planes and meshes with holes) are assumed closed as long as boundaries are not intersected. See the <a href="op_boolOp.html#reftable">reference table</a> and the <a href="op_boolOp.html#openclosed">example</a> below.</p>
+
+<p>The common use cases of <em>"Plane subtract Volume"</em> and <em>"Plane intersect Volume"</em> are facilitated using the <span class="codelight">"bool"</span> auto-tags in a subsequent <a class="normw" href="op_comp.html">comp</a> operation. This is illustrated in the following example:</p>
+
+<table>
+    <colgroup>
+        <col style="width:200px;">
+        <col style="width:150px;">
+        <col style="width:150px;">
+    </colgroup>
+    
+   <tr>
+        <td style="vertical-align: middle;" rowspan="5">
+            <img width="100%" src="images/boolOp_intersection_class_input.png" alt="Reference Table Setup">
+        </td>
+   </tr>
+   <tr>
+        <td colspan="2">
+            <img width="100%" src="images/boolOp_intersection_class_result.png" alt="Reference Table Setup">
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <pre class="codecga">subtract { Blue | Green }</pre>
+        </td>
+        <td>
+            <pre class="codecga">intersect { Blue | Green }</pre>
+        </td>
+    </tr>
+   <tr>
+    <td colspan="2">
+        <img width="100%" src="images/boolOp_intersection_class_tags.png" alt="Reference Table Setup">
+    </td>
+   </tr>
+   <tr>
+    <td colspan="2">
+        <pre class="codecga">comp(f) { isTagged("bool.A") : Blue }</pre>
+    </td>
+    </tr>
+   
+
+</table>
+
+<h3><a name="reftable"></a>Reference Table</h3>
+
+<table>
+    <colgroup>
+        <col style="width:100px;">
+        <col style="width:150px;">
+        <col style="width:150px;">
+        <col style="width:150px;">
+        <col style="width:150px;">
+    </colgroup>
+    
+    <thead>
+        <tr>
+        <td></td>
+        <td style="padding:10px;"><em><p>Both operands closed</p></em></td>
+        <td style="padding:10px;"><em><p>Open and closed operand</p> <p>Plane normal pointing up</p></em></td>
+        <td style="padding:10px;"><em><p>Open and closed operand</p> <p>Plane normal pointing down</p></em></td>
+        <td style="padding:10px;"><em><p>Open and closed operand</p> <p>Only partially intersecting</p></em></td>
+        </tr>
+    </thead>
+    
+    <tbody>
+        <tr>
+        <td style="vertical-align: middle;"><em>Input operands</em></td>
+        <td colspan="4">
+            <img width="100%" src="images/boolOp_refTable_0_setup.png" alt="Reference Table Setup">
+        </td>
+        </tr>
+		<tr style="height:20px;"></tr>
+        <tr>
+        <td style="vertical-align: middle;">
+<pre class="codecga">
+union { Blue 
+      | Green }</pre>
+        </td>
+        <td colspan="4">
+            <img width="100%" src="images/boolOp_refTable_1_union.png" alt="Union">
+        </td>
+        </tr>
+        <tr>
+        <td style="vertical-align: middle;">
+    <pre class="codecga">
+subtract { Blue 
+         | Green }</pre>
+        </td>
+        <td colspan="4">
+            <img width="100%" src="images/boolOp_refTable_3_subtractBA.png" alt="Subtract B−A">
+        </td>
+        </tr>
+        <tr>
+        <td style="vertical-align: middle;">
+<pre class="codecga">
+subtract { Green 
+         | Blue }</pre>
+        </td>
+        <td colspan="4">
+            <img width="100%" src="images/boolOp_refTable_2_subtractAB.png" alt="Subtract A−B">
+        </td>
+        </tr>
+        <tr>
+        <td style="vertical-align: middle;">
+<pre class="codecga">
+intersect { Blue 
+          | Green }</pre>
+        </td>
+        <td colspan="4">
+            <img width="100%" src="images/boolOp_refTable_4_intersect.png" alt="Intersect">
+        </td>
+        </tr>
+		<tr style="height:20px;"></tr>
+		<tr>
+        <td style="vertical-align: middle;">
+<pre class="codecga">
+inline(unify) {
+    Green 
+    Blue 
+}</pre>
+        </td>
+        <td colspan="4">
+            <img width="100%" src="images/boolOp_refTable_5_unify.png" alt="Unify">
+        </td>
+        </tr>
+    </tbody>
+</table>
 
 <h2>Related</h2>
 <ul>
 	<li><a class="normw" href="op_inline.html">Rule Inlining</a></li>
 	<li><a class="normw" href="op_tag.html">tag operation</a></li>
+    <li><a class="normw" href="cga_componentTags.html">Geometry Tagging: Essential Knowledge</a></li>
 </ul>
 
 <h2><a name="examples"></a>Examples</h2>
 
-<h3>Swap Mode</h3>
+<h3>Colors</h3>
+These are the rules for the colors used in the following examples.
+<pre class="codecga">
+Blue   --> color("#0399F5")
+Green  --> color("#09DE1F")
+Yellow --> color("#FADB19")
+Purple --> color("#8D09DE")
+Red    --> color("#FF360A")
+Orange --> color("#FA9100")
+</pre>
+
+<h3>Order of operands</h3>
 
 <table>
 <tr>
-	<td class="twocol_l"><img src="images/boolOp_swapMode_subtract.png" alt="SwapMode subtract" width="298"/></td>
-	<td>
-	<pre class="code3">
+<td class="twocol_l"><img src="images/boolOp_swapMode_subtract.png" alt="SwapMode subtract" width="298"/></td>
+<td class="twocol_r">
+<pre class="codecga">
+Left     --> subtract { Cube     | Cylinder }
+Right    --> subtract { Cylinder | Cube     }
 
-Left -->
-    color("#0399F5") // blue
-    primitiveCube
-    subtract Cylinder
-    
-Right --> 
-    color("#0399F5") // blue
-    primitiveCube
-    subtract(swap) Cylinder
- 
-Cylinder -->
-    color("#09DE1F") // green
-    t(3,3,3)
-    primitiveCylinder</pre>
-	<em>The <span class="codelight">swapMode</span> parameter determines which shape is subtracted from the other. 
-	</em>
-	</td>
+Cube     --> primitiveCube 
+             Blue
+
+Cylinder --> t(3,3,3)
+             primitiveCylinder
+             Green</pre>
+<em>A cylinder is subtracted from a cube and and vice versa.</em>
+</td>
 </tr>
 </table>
 
@@ -132,25 +239,20 @@ Cylinder -->
 
 <table>
 <tr>
-	<td class="twocol_l"><img src="images/boolOp_swapMode_material.png" alt="SwapMode material" width="298"/></td>
-	<td>
-	<pre class="code3">
-Left -->
-    color("#0399F5") // blue
-    union Circle
-    
-Right --> 
-    color("#0399F5") // blue
-    union(swap) Circle
+<td class="twocol_l"><img src="images/boolOp_swapMode_material.png" alt="SwapMode material" width="298"/></td>
+<td class="twocol_r">
+<pre class="codecga">
+Left   --> union { Quad   | Circle }
+Right  --> union { Circle | Quad }
  
-Circle -->
-    color("#09DE1F") // green
-    t(3,0,3)
-    primitiveDisk</pre>
-	<em>
-	The <span class="codelight">swapMode</span> parameter determines the material of overlapping faces.
-	</em>
-	</td>
+Quad   --> primitiveQuad 
+           Blue
+
+Circle --> t(3,0,3)
+           primitiveDisk
+           Green</pre>
+<em>The first operand A determines the material of overlapping faces.</em>
+</td>
 </tr>
 </table>
 
@@ -158,55 +260,45 @@ Circle -->
 
 <table>
 <tr>
-	<td class="twocol_l"><img src="images/boolOp_swapMode_attr.png" alt="SwapMode attribute" width="298"/></td>
-	<td>
-	<pre class="code3">
-attr Height = 10
+<td class="twocol_l"><img src="images/boolOp_swapMode_attr.png" alt="SwapMode attribute" width="298"/></td>
+<td class="twocol_r">
+<pre class="codecga">
+attr Height = 0
 
-Left -->
-    intersect Circle
-    extrude(Height) // Height == 10
+Left   --> intersect { Quad   | Circle }
+           extrude(Height) // Height == 10
     
-Right --> 
-    intersect(swap) Circle
-    extrude(Height) // Height == 1
- 
-Circle -->
-    set(Height, 1)
-    t(3,0,3)
-    primitiveDisk</pre>
-	<em>The <span class="codelight">swapMode</span> parameter determines the attributes of the resulting shape.</em>
-	</td>
+Right  --> intersect { Circle | Quad   }
+           extrude(Height) // Height == 1
+
+Quad   --> set(Height, 10)
+           primitiveQuad
+
+Circle --> set(Height, 1)
+           t(3,0,3)
+           primitiveDisk</pre>
+<em>The first operand A determines the attributes of the resulting shape.</em>
+</td>
 </tr>
 </table>
 
-<h3>B-Rule</h3>
+<h3>Inlining of operands</h3>
 <table>
 <tr>
-	<td class="twocol_l"><img src="images/boolOp_BRule_single_multiple.png" alt="B-Rule illustration single vs multiple shapes" width="298"/></td>
-	<td>
-	<pre class="code3">
-
-Left -->
-    color("#0399F5") // blue
-    primitiveCube
-    union {
-        color("#09DE1F") // green
-        t(1,1,1) B.
-    }
+<td class="twocol_l"><img src="images/boolOp_BRule_single_multiple.png" alt="B-Rule illustration single vs multiple shapes" width="298"/></td>
+<td class="twocol_r">
+<pre class="codecga">
+Left  --> primitiveCube
+          union { Blue
+                | t(1,1,1) Green }
     
-Right --> 
-    color("#0399F5") // blue
-    primitiveCube
-    union {
-        color("#09DE1F") // green
-        t(1,1,1) B0.
-        t(1,1,1) B1.
-        t(1,1,1) B2.
-    }</pre>
-	<em>Operand B is determined by <span class="codelight">B-Rule</span>, which can result in a single shape (<span class="codelight">Left</span>) or multiple shapes (<span class="codelight">Right</span>). In case of multiple shapes, they are first merged analogous to using <a class="normw" href="op_inline.html">inline(unify)</a>. 
-	</em>
-	</td>
+Right --> primitiveCube
+          union { Blue
+                | t(1,1,1) Green
+                  t(1,1,1) Green
+                  t(1,1,1) Green }</pre>
+<em>An operand can result in a single shape (<span class="codelight">Left</span>) or multiple shapes (operand B in <span class="codelight">Right</span>). In case of multiple shapes, they are first merged analogous to using <a class="normw" href="op_inline.html">inline(unify)</a>.</em>
+</td>
 </tr>
 </table>
 
@@ -214,22 +306,16 @@ Right -->
 
 <table>
 <tr>
-	<td class="twocol_l"><img src="images/boolOp_BRule_multiple_nontouching.png" alt="B-Rule illustration non-touching" width="298"/></td>
-	<td>
-	<pre class="code3">
-Init -->
-    color("#0399F5") // blue
-    primitiveCube
-    union {
-        color("#09DE1F") // green
-        t(1,1,11) B0.
-        t(1,1,1) B1.
-        t(1,1,1) B2.
-    }</pre>
-	<em>
-	In case <span class="codelight">B-Rule</span> results in multiple shapes, they are unified even if they do not intersect operand A.
-	</em>
-	</td>
+<td class="twocol_l"><img src="images/boolOp_BRule_multiple_nontouching.png" alt="B-Rule illustration non-touching" width="298"/></td>
+<td class="twocol_r">
+<pre class="codecga">
+Init --> primitiveCube
+         union { Blue
+               | t(1,1,1+10) Green
+                 t(1,1,1)    Green
+                 t(1,1,1)    Green }</pre>
+<em>In case an operand results in multiple shapes, they are unified even if they do not intersect operand A.</em>
+</td>
 </tr>
 </table>
 
@@ -237,23 +323,22 @@ Init -->
 
 <table>
 <tr>
-	<td class="twocol_l"><img src="images/boolOp_halfSpheres_0_intersect.png" alt="Intersecting with Sphere" width="298"/></td>
-	<td>
-	<pre class="code3">
-
+<td class="twocol_l"><img src="images/boolOp_halfSpheres_0_intersect.png" alt="Intersecting with Sphere" width="298"/></td>
+<td class="twocol_r">
+<pre class="codecga">
 Init -->
-    extrude(45)
-    intersect Sphere
+    intersect { Envelope | Sphere }
+
+Envelope --> 
+    extrude(40)
 
 Sphere --> 
-    s('1, '1, '2)
+    s('1, 40, '2)
     center(z)
     t(0, '-0.2, 0)
-    primitiveSphere
-	</pre>
-	<em>Step 1: The extruded initial shape (current shape, acting as operand A) is intersected with an inserted sphere (result of the rule <span class="codelight">Sphere</span>, acting as operand B). 
-	</em>
-	</td>
+    primitiveSphere</pre>
+<em>Step 1: The extruded initial shape (current shape, acting as operand A) is intersected with an inserted sphere (result of the rule <span class="codelight">Sphere</span>, acting as operand B).</em>
+</td>
 </tr>
 </table>
 
@@ -261,22 +346,19 @@ Sphere -->
 
 <table>
 <tr>
-	<td class="twocol_l"><img src="images/boolOp_halfSpheres_1_unify.png" alt="Split and Unify" width="298"/></td>
-	<td>
-	<pre class="code3">
+<td class="twocol_l"><img src="images/boolOp_halfSpheres_1_unify.png" alt="Split and Unify" width="298"/></td>
+<td class="twocol_r">
+<pre class="codecga">
 Init -->
-    extrude(40)
-    intersect Sphere
+    intersect { Envelope | Sphere }
     inline(unify) split(y) { ~1: LowerHalf
                            | 20: UpperHalf }
 
 LowerHalf --> X.
-UpperHalf --> t(10,0,0) r(scopeCenter,0,7.2,0)
-	</pre>
-	<em>Step 2: The current shape is split into two parts. Using <a class="normw" href="op_inline.html">inline(unify)</a> the resulting shapes are unified (note the disappearing inner faces). 
-	<br>
-	Here we use <span class="codelight">inline(unify)</span> instead of the <span class="codelight">union</span> operation, because we do not want to add geometry to the current shape, but replace it with the union of the resulting shapes of the split operation (i.e., <span class="codelight">LowerHalf</span> and <span class="codelight">UpperHalf</span>).</em>
-	</td>
+UpperHalf --> t(10, 0, 0) 
+              r(scopeCenter, 0, 7.2, 0)</pre>
+<em>Step 2: The current shape is split into two parts. Using <a class="normw" href="op_inline.html">inline(unify)</a> the resulting shapes <span class="codelight">LowerHalf</span> and <span class="codelight">UpperHalf</span> of the split operation are unified (note the disappearing inner faces).</em>
+</td>
 </tr>
 </table>
 
@@ -284,25 +366,23 @@ UpperHalf --> t(10,0,0) r(scopeCenter,0,7.2,0)
 
 <table>
 <tr>
-	<td class="twocol_l"><img src="images/boolOp_halfSpheres_2_subtract.png" alt="Subtract a hole" width="298"/></td>
-	<td>
-	<pre class="code3">
+<td class="twocol_l"><img src="images/boolOp_halfSpheres_2_subtract.png" alt="Subtract a hole" width="298"/></td>
+<td class="twocol_r">
+<pre class="codecga">
 Init -->
-    extrude(40)
-    intersect Sphere
+    intersect { Envelope | Sphere }
     inline(unify) split(y) { ~1: LowerHalf
                            | 20: UpperHalf }
-    subtract Hole
+    subtract { CurrentMass. | Hole }
     
 Hole -->
     s(16, 16, '1.2)
     center(z)
     t(30, 5, 0)
     rotateScope(-90, 0, 0)
-    primitiveCylinder
-	</pre>
-	<em>Step 3: We continue refining the mass (current shape after Step 1 and 2, acting as operand A) by subtracting a cylinder (result of the rule <span class="codelight">Hole</span>, acting as operand B).</em>
-	</td>
+    primitiveCylinder</pre>
+<em>Step 3: We continue refining the mass (current shape after Step 1 and 2, acting as operand A) by subtracting a cylinder (result of the rule <span class="codelight">Hole</span>, acting as operand B).</em>
+</td>
 </tr>
 </table>
 
@@ -310,33 +390,35 @@ Hole -->
 
 <table>
 <tr>
-	<td class="twocol_l"><img src="images/boolOp_halfSpheres_3_tags.png" alt="Adding tags" width="298"/></td>
-	<td>
-	<pre class="code3">
+<td class="twocol_l"><img src="images/boolOp_halfSpheres_3_tags.png" alt="Adding tags" width="298"/></td>
+<td class="twocol_r">
+<pre class="codecga">
 Init -->
-    extrude(40)
-    tag("Envelope")
-    intersect Sphere
+    intersect { Envelope | Sphere }
     inline(unify) split(y) { ~1: LowerHalf
                            | 20: UpperHalf }
-    subtract Hole
-    comp(f) { isTagged("Envelope") && side: Blue
-            | isTagged("Lower") && top    : Red
-            | isTagged("Upper") && bottom : Orange
-            | isTagged("Lower")           : Green
-            | isTagged("Upper")           : Yellow
-            | isTagged("Hole")            : Purple }
+    subtract { CurrentMass. | Hole }
+    comp(f) { isTagged("Envelope") && side   : Blue
+            | isTagged("Lower")    && top    : Red
+            | isTagged("Upper")    && bottom : Orange
+            | isTagged("Lower")              : Green
+            | isTagged("Upper")              : Yellow
+            | isTagged("Hole")               : Purple }
+
+Envelope -->
+    extrude(40)
+    tag("envelope")
 
 Sphere --> 
-    s('1, '1, '2)
+    s('1, 40, '2)
     center(z)
     t(0, '-0.2, 0)
     primitiveSphere
 
 LowerHalf --> tag("Lower")
 UpperHalf --> 
-    t(10,0,0) 
-    r(scopeCenter,0,7.2,0)
+    t(10, 0, 0) 
+    r(scopeCenter, 0, 7.2, 0)
     tag("Upper")
               
 Hole --> 
@@ -346,16 +428,9 @@ Hole -->
     rotateScope(-90, 0, 0)
     primitiveCylinder
     tag("Hole")
-
-Blue -->   color("#0399F5")
-Green -->  color("#09DE1F")
-Yellow --> color("#FADB19")
-Purple --> color("#8D09DE")
-Red -->    color("#FF360A")
-Orange --> color("#FA9100")
-	</pre>
-	<em>Adding tags: Using Boolean 3D operations, it is easy to create a mass model with complex surfaces. In this example, <a class="normw" href="op_tag.html">tags</a> are added in each step, which allows to assign the correct rule to the different surfaces at the end (illustrated here by different colors).  </em>
-	</td>
+</pre>
+<em>Adding tags: Using Boolean 3D operations, it is easy to create a mass model with complex surfaces. In this example, <a class="normw" href="op_tag.html">tags</a> are added in each step, which allows to assign the correct rule to the different surfaces at the end (illustrated here by different colors).  </em>
+</td>
 </tr>
 </table>
 
@@ -363,15 +438,14 @@ Orange --> color("#FA9100")
 
 <table>
 <tr>
-	<td class="twocol_l"><img src="images/boolOp_with_autotags.png" alt="Boolean 3D with auto-tags" width="298"/></td>
-	<td>
-	<pre class="code3">
+<td class="twocol_l"><img src="images/boolOp_with_autotags.png" alt="Boolean 3D with auto-tags" width="298"/></td>
+<td class="twocol_r">
+<pre class="codecga">
 Init --> 
     extrude(40)
-    subtract {
-        t(20,-15,-15)
-        rotate(rel,scope,15,12,25)	
-    }
+    subtract { Mass.
+             | t(20, -15, -15)
+               rotate(rel, scope, 15, 12, 25) }
     SurfaceSplitter
 
 SurfaceSplitter -->
@@ -382,13 +456,9 @@ SurfaceSplitter -->
             | isTagged("extrude.side")
                   && isTagged("bool.A"): Blue
             | isTagged("extrude.side") 
-                  && isTagged("bool.B"): Yellow }
-	</pre>
-	<em>In this example, the initial shape is first extruded, which adds the <span class="codelight">"extrude"</span> <a class="normw" href="cga_componentTags.html#autoTags">auto-tags</a> to all faces. 
-	Then, a translated and rotated copy of the shape is subtracted, which additionally adds the <span class="codelight">"bool"</span> auto-tags to the resulting faces. 
-	Finally, these tags are used to extract the different surfaces and color them appropriately.  
-	</em>
-	</td>
+                  && isTagged("bool.B"): Yellow }</pre>
+<em>In this example, the initial shape is first extruded, which adds the <span class="codelight">"extrude"</span> <a class="normw" href="cga_componentTags.html#autoTags">auto-tags</a> to all faces. Then, a translated and rotated copy of the shape is subtracted, which additionally adds the <span class="codelight">"bool"</span> auto-tags to the resulting faces. Finally, these tags are used to extract the different surfaces and color them appropriately.</em>
+</td>
 </tr>
 </table>
 
@@ -396,29 +466,26 @@ SurfaceSplitter -->
 
 <table>
 <tr>
-	<td class="twocol_l"><img src="images/boolOp_layout_0.png" alt="Boolean 2D layout union" width="298"/></td>
-	<td>
-	<pre class="code3">
+<td class="twocol_l"><img src="images/boolOp_layout_0.png" alt="Boolean 2D layout union" width="298"/></td>
+<td class="twocol_r">
+<pre class="codecga">
 Init -->
     primitiveDisk(5)
-    union FrontyardFootprint
+    union { HouseFootprint. | FrontyardFootprint }
     ShowBoolAutotags
     
 FrontyardFootprint -->
-    s(10,0,10)
+    s(10, 0, 10)
     center(x)
-    t(0,0,'-0.33)
+    t(0, 0, '-0.33)
     
 ShowBoolAutotags -->
     comp(f) { isTagged("bool.A")
                   && isTagged("bool.B"): Yellow
             | isTagged("bool.A")       : Blue
-            | isTagged("bool.B")       : Green }
-	</pre>
-	<em>
-	Step 1: A pentagon (<span class="codelight">primitiveDisk(5)</span>) is inserted and then a union is done with a shrunk copy. The <span class="codelight">union</span> operation keeps all original edges, which means the resulting geometry consists of 3 faces, as shown in colors. 
-	</em>
-	</td>
+            | isTagged("bool.B")       : Green }</pre>
+<em>Step 1: A pentagon (<span class="codelight">primitiveDisk(5)</span>) is inserted and then a union is done with a shrunk copy. The <span class="codelight">union</span> operation keeps all original edges, which means the resulting geometry consists of 3 faces, as shown in colors.</em>
+</td>
 </tr>
 </table>
 
@@ -426,20 +493,21 @@ ShowBoolAutotags -->
 
 <table>
 <tr>
-	<td class="twocol_l"><img src="images/boolOp_layout_1.png" alt="Boolean 2D layout tags" width="298"/></td>
-	<td>
-	<pre class="code3">
+<td class="twocol_l"><img src="images/boolOp_layout_1.png" alt="Boolean 2D layout tags" width="298"/></td>
+<td class="twocol_r">
+<pre class="codecga">
 Init -->
     primitiveDisk(5)
-    union FrontyardFootprint
     deleteUV(0)
-    inline(append) comp(f) { isTagged("bool.B")= B
-                           | isTagged("bool.A")= A }
+    union { HouseFootprint. | FrontyardFootprint }
+    inline comp(f) { isTagged("bool.B")= B
+                   | isTagged("bool.A")= A }
     cleanupGeometry(vertices, 0) // reconnect faces
     ShowTags
    
 A --> tag("eHouse", edges)
 B --> deleteTags("bool.A")
+      deleteTags("bool.cut")
       cleanupGeometry(edges, 0) // merge faces
       tag("eFrontyard", edges)
       
@@ -447,15 +515,10 @@ ShowTags -->
     ShowBoolAutotags
     comp(e) { isTagged("eFrontyard") 
                   && isTagged("eHouse"): YellowEdge
-           | isTagged("eHouse")        : BlueEdge
-           | isTagged("eFrontyard")    : GreenEdge }
-	</pre>
-	<em>
-	Step 2: The goal is to merge the yellow and green faces and tag the edges in preparation for Step 3. The <a class="normw" href="op_comp.html">comp</a> is used to modify the respective faces and then
-	<a class="normw" href="op_inline.html">inlining</a> and <a class="normw" href="op_cleanupGeometry.html">cleanupGeometry</a> is used to merge the modified pieces back together. 
-	<br><br>Note: In order to use <a class="normw" href="op_cleanupGeometry.html">cleanupGeometry</a> to merge the faces in rule <span class="codelight">B</span>, <a class="normw" href="op_deleteUV.html">deleteUV</a> is needed to remove the UV coordinates on the inserted assets, and <a class="normw" href="op_deleteTags.html">deleteTags</a> is required to remove <span class="codelight">"bool.A"</span>, which would otherwise prevent the process. 
-	</em>
-	</td>
+            | isTagged("eHouse")       : BlueEdge
+            | isTagged("eFrontyard")   : GreenEdge }</pre>
+<em>Step 2: The goal is to merge the yellow and green faces and tag the edges in preparation for Step 3. The <a class="normw" href="op_comp.html">comp</a> is used to modify the respective faces and then <a class="normw" href="op_inline.html">inlining</a> and <a class="normw" href="op_cleanupGeometry.html">cleanupGeometry</a> is used to merge the modified pieces back together.<br><br>Note: In order to use <a class="normw" href="op_cleanupGeometry.html">cleanupGeometry</a> to merge the faces in rule <span class="codelight">B</span>, <a class="normw" href="op_deleteUV.html">deleteUV</a> is needed to remove the UV coordinates on the inserted asset, and <a class="normw" href="op_deleteTags.html">deleteTags</a> is required to remove <span class="codelight">"bool.A"</span> and <span class="codelight">"bool.cut"</span>, which would otherwise prevent the process.</em>
+</td>
 </tr>
 </table>
 
@@ -463,15 +526,15 @@ ShowTags -->
 
 <table>
 <tr>
-	<td class="twocol_l"><img src="images/boolOp_layout_2.png" alt="Boolean 2D layout continued" width="298"/></td>
-	<td>
-	<pre class="code3">
+<td class="twocol_l"><img src="images/boolOp_layout_2.png" alt="Boolean 2D layout continued" width="298"/></td>
+<td class="twocol_r">
+<pre class="codecga">
 Init -->
     primitiveDisk(5)
-    union FrontyardFootprint
     deleteUV(0)
-    inline(append) comp(f) { isTagged("bool.B")= B
-                           | isTagged("bool.A")= A }
+    union { HouseFootprint. | FrontyardFootprint }
+    inline comp(f) { isTagged("bool.B")= B
+                   | isTagged("bool.A")= A }
     cleanupGeometry(vertices, 0) // reconnect faces
     comp(f) { isTagged("bool.A"): House
             | isTagged("bool.B"): Frontyard }
@@ -482,50 +545,31 @@ House -->
             | all                   : Blue }
 
 Frontyard -->
-    offset(-1)
+    offset(-2)
     comp(f) { isTagged("eHouse"): Yellow
-            | all               : Green } 
-	</pre>
-	<em>
-		Step 3: The house footprint is <a class="normw" href="op_extrude.html">extruded</a> and the frontyard footprint is <a class="normw" href="op_offset.html">offset</a>. 
-		The edge tags from Step 2 are automatically propagated to the new faces, allowing to distinguish the facades facing the frontyard and the offset borders touching the house. 
-		
-		<br><br>This information could be used in subsequent steps to model the entrance area.
-	</em>
-	</td>
+            | all               : Green }</pre>
+<em> Step 3: The house footprint is <a class="normw" href="op_extrude.html">extruded</a> and the frontyard footprint is <a class="normw" href="op_offset.html">offset</a>. The edge tags from Step 2 are automatically propagated to the new faces, allowing to distinguish the facades facing the frontyard and the offset borders touching the house.<br><br>This information could be used in subsequent steps to model the entrance area.</em>
+</td>
 </tr>
 </table>
 
 <h3><a name="openclosed"></a>Behavior with open operands</h3>
 <table>
 <tr>
-	<td class="twocol_l"><img src="images/boolOp_closedopen_cube.png" alt="B-Rule illustration single vs multiple shapes" width="298"/></td>
-	<td>
-	<pre class="code3">
-
-Left -->
-    color("#0399F5") // blue
-    primitiveCube
-    union {
-        color("#09DE1F") // green
-        t(2,2,2) 
-        comp(f) { front: NIL | all= B. }
-    }
+<td class="twocol_l"><img src="images/boolOp_closedopen_cube.png" alt="B-Rule illustration single vs multiple shapes" width="298"/></td>
+<td class="twocol_r">
+<pre class="codecga">
+Left  --> primitiveCube
+          union { Blue
+                | t(2,2,2) 
+                  comp(f) { front: NIL | all= Green } }
     
-Right --> 
-    color("#0399F5") // blue
-    primitiveCube
-    union {
-        color("#09DE1F") // green
-        t(2,2,2) 
-        comp(f) { left: NIL | all= B. }
-    }</pre>
-	<em>Operand A is a closed cube, while operand B is an open cube. 
-	<br>Left: The open boundary of B is not intersecting operand A. 
-	<br>
-	Right: The open boundary of B is intersecting operand A.
-	</em>
-	</td>
+Right --> primitiveCube
+          union { Blue
+                | t(2,2,2) 
+                  comp(f) { left: NIL | all= Green } }</pre>
+<em>Operand A is a closed cube, while operand B is an open cube.<br>Left: The open boundary of B is not intersecting operand A.<br>Right: The open boundary of B is intersecting operand A.</em>
+</td>
 </tr>
 </table>
 
@@ -533,28 +577,22 @@ Right -->
 
 <table>
 <tr>
-	<td class="twocol_l"><img src="images/boolOp_closedopen_plane.png" alt="B-Rule illustration non-touching" width="298"/></td>
-	<td>
-	<pre class="code3">
-Left -->
-    color("#0399F5") // blue
-    primitiveCube
-    union {
-        color("#09DE1F") // green
-        primitiveQuad
-        s(12,0,12)
-        center(xyz)
-    }
+<td class="twocol_l"><img src="images/boolOp_closedopen_plane.png" alt="B-Rule illustration non-touching" width="298"/></td>
+<td class="twocol_r">
+<pre class="codecga">
+Left  --> primitiveCube
+          union { Blue
+                | primitiveQuad
+                  s(12,0,12)
+                  center(xyz)
+                  Green }
     
-Right -->
-    color("#0399F5") // blue
-    primitiveCube
-    union {
-        color("#09DE1F") // green
-        primitiveQuad
-        s(12,0,10)
-        t(-1,5,2)
-    }</pre>
+Right --> primitiveCube
+          union { Blue
+                | primitiveQuad
+                  s(12,0,10)
+                  t(-1,5,2)
+                  Green }</pre>
 	<em>Operand A is a closed cube, while operand B is a 2D quad. 
 	<br>Left: The quad fully cuts the cube. Everything below the plane is regarded as "inside" and thus disappears.
 	<br>
@@ -566,7 +604,7 @@ Right -->
 
 <!-- FOOTER -->
 
-<p class="foot">Copyright &copy;2008-2024 Esri R&D Center Zurich. All rights reserved.</p>				  
+<p class="foot">Copyright &copy;2008-2025 Esri R&D Center Zurich. All rights reserved.</p>				  
 
 <!-- END CENTERED CONTENT -->
 

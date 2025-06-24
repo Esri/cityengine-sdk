@@ -3,17 +3,6 @@
 <head>
 	<title>splitAndSetbackPerimeter Operation</title>
 	<link rel="stylesheet" href="../manual_style.css" type="text/css" />
-	<style type="text/css">
-		<!--
-		.style1 {
-				font-size: 9px
-		}
-
-		.style2 {
-				font-size: 10px
-		}
-		-->
-	</style>
 </head>
 
 <body>
@@ -89,8 +78,8 @@ The operation automatically applies semantic <a href="cga_componentTags.html">co
 
 <table summary="" class="twocol">
 <tr>
-	<td class="twocol_l"><br><img src="images/splitAndSetbackPerimeter_1.png" width="298" alt="splitAndSetbackPerimeter_1"/></td>
-	<td><pre class="code3">
+	<td class="twocol_l"><br><img src="images/splitAndSetbackPerimeter_1.png" alt="splitAndSetbackPerimeter_1"/></td>
+	<td class="twocol_r"><pre class="codecga">
 Lot --> splitAndSetbackPerimeter(6) 
     { 40 : 5 : Yellow |
       20 : 10 : Blue  } 
@@ -99,7 +88,7 @@ Lot --> splitAndSetbackPerimeter(6)
 Yellow --> color("#F2BB1D")
 Blue   --> color("#3957A5")
 Grey   --> color("#CAC9C6") 
-	</pre>
+</pre>
 	</td>
 </tr>
 </table>
@@ -108,15 +97,15 @@ Grey   --> color("#CAC9C6")
 
 <table summary="" class="twocol">
 <tr>
-	<td class="twocol_l"><br><img src="images/splitAndSetbackPerimeter_2.png" width="298" alt="splitAndSetbackPerimeter_2"/></td>
-	<td><pre class="code3">
+	<td class="twocol_l"><br><img src="images/splitAndSetbackPerimeter_2.png" alt="splitAndSetbackPerimeter_2"/></td>
+	<td class="twocol_r"><pre class="codecga">
 Lot --> splitAndSetbackPerimeter('0.1) 
     { '0.5  : 10 : extrude(15) Yellow |
       ~1    : 0  : NIL                |
       '0.4  : 8  : extrude(10) Blue   |
       ~1    : 0  : NIL                } 
     { remainder : Grey }
-	</pre>
+</pre>
 	<em>
 	The start of the split pattern is offset by 10% (red arrow) of the length of the perimeter. Note that the <span class="codelight">splitOffset</span> allows the split pattern to start and end on an edge rather than a vertex. </em>
 	</td>
@@ -129,8 +118,8 @@ Lot --> splitAndSetbackPerimeter('0.1)
 <br>
 <table summary="" class="twocol">
 <tr>
-	<td class="twocol_l"><br><img src="images/splitAndSetbackPerimeter_3.png" width="298" alt="splitAndSetbackPerimeter_3"/></td>
-	<td><pre class="code3">
+	<td class="twocol_l"><br><img src="images/splitAndSetbackPerimeter_3.png" alt="splitAndSetbackPerimeter_3"/></td>
+	<td class="twocol_r"><pre class="codecga">
 const INF = 100000
 
 // (8)[0.0,16.5,INF,INF,INF,INF,INF,-15.0]
@@ -148,7 +137,7 @@ Lot --> splitAndSetbackPerimeter(0,
      '0.7  : 10 : extrude(12) Yellow | 
       ~1   : 0  : NIL                } 
     { remainder : Grey }
-    </pre>
+</pre>
 	<em>A section centered on the front edges of the perimeter is setback using the <span class="codelight">firstEdgeIndex</span> and <span class="codelight">selectedEdgesMask</span> parameters. In this example, the <a class="cga_op" href="func_comp.html">comp</a> and <a class="cga_op" href="func_sortIndices.html">sortIndices</a> functions as well as 
 	the <a class="cga_op" href="attr_pivot.html">pivot attribute</a> are used to find the index of the leftmost front edge and to construct the edge selection mask.</em>
 	</td>
@@ -160,8 +149,8 @@ Lot --> splitAndSetbackPerimeter(0,
 <br>
 <table summary="" class="twocol">
 <tr>
-	<td class="twocol_l"><br><img src="images/splitAndSetbackPerimeter_4.png" width="298" alt="splitAndSetbackPerimeter_4"/></td>
-	<td><pre class="code3">
+	<td class="twocol_l"><br><img src="images/splitAndSetbackPerimeter_4.png" alt="splitAndSetbackPerimeter_4"/></td>
+	<td class="twocol_r"><pre class="codecga">
 Lot --> splitAndSetbackPerimeter(0) 
     { ~30 : rand(3, 15) : extrude(rand(2, 10)) Yellow }*
     { remainder : Grey }
@@ -173,12 +162,12 @@ Lot --> splitAndSetbackPerimeter(0)
 <br>
 <table summary="" class="twocol">
 <tr>
-	<td class="twocol_l"><br><img src="images/splitAndSetbackPerimeter_5.png" width="298" alt="splitAndSetbackPerimeter_5"/></td>
-	<td><pre class="code3">
+	<td class="twocol_l"><br><img src="images/splitAndSetbackPerimeter_5.png" alt="splitAndSetbackPerimeter_5"/></td>
+	<td class="twocol_r"><pre class="codecga">
 Lot --> splitAndSetbackPerimeter(0) 
     { ~30 : split.index : extrude(split.index) Yellow }*
     { remainder : Grey }
-    </pre>
+</pre>
 	<em>The perimeter is repeatedly split and setback based on the  <a class="cga_op" href="attr_split.html">split attribute</a>.</em>
 	</td>
 </tr>
@@ -189,16 +178,16 @@ Lot --> splitAndSetbackPerimeter(0)
 <br>
 <table summary="" class="twocol">
 <tr>
-	<td class="twocol_l"><br><img src="images/splitAndSetbackPerimeter_6.png" width="298" alt="splitAndSetbackPerimeter_6"/></td>
-	<td><pre class="code3">
+	<td class="twocol_l"><br><img src="images/splitAndSetbackPerimeter_6.png" alt="splitAndSetbackPerimeter_6"/></td>
+	<td class="twocol_r"><pre class="codecga">
 Left --> splitAndSetbackPerimeter(3) 
     { 2 : 6 : Yellow | 2 : 0 : NIL | 2 : 4 : Blue }
-    {remainder : Grey }
+    { remainder : Grey }
     
 Right --> splitAndSetbackPerimeter(3) 
     { 2 : 4 : Yellow | 2 : 0 : NIL | 2 : 6 : Blue }
     { remainder : Grey }
-    </pre>
+</pre>
 	<em>The yellow and blue shapes overlap. The overlap belongs to the shape that has been generated with larger <span class="codelight">depth</span> and is cut away from the other.</em>
 	</td>
 </tr>
@@ -206,7 +195,7 @@ Right --> splitAndSetbackPerimeter(3)
 <br>
 <p>Also see the <a class="cga_op" href="op_split.html#examples">split</a> operation for more examples on split patterns.</p>
 
-<p class="foot">Copyright &copy;2008-2024 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
+<p class="foot">Copyright &copy;2008-2025 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
 
 </div>
 </body>

@@ -23,7 +23,7 @@
   <td id="projectlogo"><img alt="Logo" src="esri_prt_55px.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ArcGIS Procedural Runtime
-   &#160;<span id="projectnumber">3.2.10650</span>
+   &#160;<span id="projectnumber">3.3.11173</span>
    </div>
   </td>
  </tr>
@@ -308,7 +308,25 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Resolve a geometry. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Resolve a geometry.</p>
+<p>Decoders may add metadata that's accessible through the <a class="el" href="classprtx_1_1_attributable.html">Attributable</a> interface or CGA's <code>assetMetadata</code>. Keys follow this pattern:</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Metadata Key  </th><th class="markdownTableHeadNone">Type  </th><th class="markdownTableHeadNone">Description   </th></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">/fields/  </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">Namespace containing generic metadata.   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyNone">/georef/spatialReference  </td><td class="markdownTableBodyNone">string  </td><td class="markdownTableBodyNone">The spatial reference of the geometry. The format can vary between decoders and file types. Typical formats are WKIDs ('EPSG:4326' or '<a href="http://www.opengis.net/def/crs/EPSG/0/6697'">http://www.opengis.net/def/crs/EPSG/0/6697'</a>), WKTs, URNs ('urn:adv:crs:ETRS89_UTM32*DE_DHHN2016_NH').   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">/georef/eastings  </td><td class="markdownTableBodyNone">float  </td><td class="markdownTableBodyNone">The x-offset from the origin of the spatial reference. This value is always in meters.   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyNone">/georef/northings  </td><td class="markdownTableBodyNone">float  </td><td class="markdownTableBodyNone">The minus z-offset from the origin of the spatial reference. This value is always in meters.   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">/georef/height  </td><td class="markdownTableBodyNone">float  </td><td class="markdownTableBodyNone">The y-offset from the origin of the spatial reference. This value is always in meters.   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyNone">/scale/appliedUnitToMeter  </td><td class="markdownTableBodyNone">float  </td><td class="markdownTableBodyNone">The factor the decoder used to scale the source vertices to meters.   </td></tr>
+</table>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir"></td><td class="paramname">cache</td><td>Cache to use. Set to nullptr for no cache. </td></tr>
     <tr><td class="paramdir"></td><td class="paramname">key</td><td>Key (i.e. symbolic name) into resolveMap. </td></tr>
@@ -530,7 +548,7 @@ Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Nov 6 2024 10:59:46 for ArcGIS Procedural Runtime by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Jun 10 2025 14:40:43 for ArcGIS Procedural Runtime by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.14
 </small></address>

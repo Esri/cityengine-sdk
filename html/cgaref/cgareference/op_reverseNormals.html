@@ -46,13 +46,12 @@
 
 <p class="notes">Note.1: Screenshots with deactivated "Two-Sided Lighting", thus the faces are black whose normals are facing away from the camera.</p>
 <p class="notes">Note.2: Note that the generated geometry only is changed, not the scope. You can see this by the fact that the translation command in the example translates both the normal and inverted geometry in the same direction. </p>
-<p><pre>Left box: face with index=0 <b>not inverted</b>         right box: face with index=0 <b>inverted</b> </pre></p>
 
-
-<table summary="" class="cga">
-		<tr>
-			<td class="overview"><p>
-			<pre class="code3">
+<table summary="" class="twocol">
+<tr>
+<td class="twocol_r">
+<pre>Left box: face with index=0 <b>not inverted</b> </pre>
+<pre class="codecga">
 Lot -->
 	extrude(world.up,1)
 	comp(f){side: Facade}
@@ -67,9 +66,10 @@ Facade -->
 		# = green
 		t(0,0,0.1)
 </pre>
-				</p> </td>
-			<td class="overview"><p>
-			<pre class="code3">
+</td>
+<td td class="twocol_r">
+<pre>right box: face with index=0 <b>inverted</b> </pre>
+<pre class="codecga">
 Lot -->
 	extrude(world.up,1)
 	comp(f){side: Facade}
@@ -79,17 +79,16 @@ Facade -->
 		color("#ff0000")
 		# = red
 		t(0,0,0.1)
-		<font color=blue>reverseNormals</font>
+		<b><font color=blue>reverseNormals</font></b> 
 	else:
 		color("#00ff00")
 		# = green
 		t(0,0,0.1)
 </pre>
-				</p> </td>
-		</tr>
-   </table>
-
-<img src="images/reverseNormalsExample.jpg"></img>
+</td>
+</tr>
+</table>
+<p class="piccentered"><img src="images/reverseNormalsExample.jpg"></img></p>
 
 <h2>Advanced knowledge: Understanding the reversion process</h2>
 <p>Normals: The normal of a polygonal face is defined by the vertex order. By default, the order is counter clockwise.</p>
@@ -104,7 +103,7 @@ Facade -->
 <p class="notes">Note: Some game engines cannot display two-sided geometries, thus they display only those polygons whose normals are oriented towards the camera. Other polygons are not rendered. Because of this fact it is particularly important to write cga code with this fact in mind when modeling for game engines.</p>
 
 <!-- FOOTER -->
-<p class="foot">Copyright &copy;2008-2024 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
+<p class="foot">Copyright &copy;2008-2025 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
 
 </div>
 </body>

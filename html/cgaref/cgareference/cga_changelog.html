@@ -30,13 +30,99 @@
 		<td><strong>Changes</strong></td>
 	</tr>
 	<tr>
+		<td>2025.0<br>CGAC 2.8</td>
+		<td>
+  			New features:
+            <ul>
+	            <li>Support for disabling the numerical geometry cleanup on initial shapes in the <a href="https://doc.arcgis.com/en/cityengine/latest/help/get-started-preferences-prt.htm" target="_blank">Procedural Runtime preferences</a>.</li> <!-- CE-12800 -->
+            </ul>
+  			Changes to existing features:
+			<ul>
+				<li><a href="op_boolOp.html"><span class="code_std">union</span></a>, <a href="op_boolOp.html"><span class="code_std">subtract</span></a>, <a href="op_boolOp.html"><span class="code_std">intersect</span></a> operations: The syntax was modified to explicitly state both operands. The previous syntax is now deprecated. A switch to the new syntax can be done as follows for the default mode and <span class="codelight">swap</span> mode:</li> <!-- CE-12685 -->
+				<ul>
+					<li><span class="codelight">subtract Rule</span> => <span class="codelight">subtract { OperandA. | Rule }</span><br>The current shape is explicitly stated with a shape symbol serving as operand A.</li>
+					<li><span class="codelight">subtract(swap) Rule</span> => <span class="codelight">subtract { Rule | OperandB. }</span><br>The current shape is explicitly stated with a shape symbol serving as operand B. Auto-tags are swapped: The geometry of <span class="codelight">Rule</span> is tagged with <span class="codelight">"bool.A"</span>, the geometry of <span class="codelight">OperandB</span> is tagged with <span class="codelight">"bool.B"</span>.</li>
+				</ul>
+				<li><a href="op_inline.html"><span class="code_std">inline</span></a> keyword: </li>               
+				<ul>
+					<li>Can now be used without specifying the <span class="cga_opparam">geometryMergeStragey</span>. The <span class="codelight">append</span> strategy is used by default.</li> <!-- CE-12861 -->  
+					<li>When using the <span class="cga_opparam">unify</span> strategy, the geometry is unified also if there is only a single leaf shape.</li> <!-- CE-12646 -->
+				</ul>
+				<li><a href="op_comp.html"><span class="code_std">comp</span></a> operation, <a href="func_comp.html"><span class="code_std">comp</span></a> function:</li>
+				<ul>
+					<li>Added a new <span class="cga_opparam">operator</span> (<span class="codelight">=:</span>) that splits the geometry into shapes with connected components.</li> <!-- CE-6070 -->
+					<li>Added <span class="cga_opparam">scopeAlignment</span> parameter. The new <span class="codelight">noAlign</span> mode only adjusts the scope size and position.</li> <!-- CE-12801 -->
+					<li>Vertex normals are now kept when using <span class="codelight">comp(f)</span> with the <span class="codelight">:</span> <span class="cga_opparam">operator</span>. You can remove vertex normals with <a href="op_setNormals.html"><span class="code_std">setNormals(hard)</span></a>.</li> <!-- CE-9483 -->
+				</ul>
+				<li><a href="op_deleteTags.html"><span class="code_std">deleteTags</span></a> operation, <a href="func_geometry.html#tags"><span class="code_std">geometry.tags</span></a>, <a href="func_geometry.html#hasTags"><span class="code_std">geometry.hasTags</span></a> functions: Added overloads to only consider tags on specific components (faces, edges or vertices). </li> <!-- CE-12607 --> <!-- CE-12608 -->
+           		<li><a href="op_split.html"><span class="code_std">split</span></a> operation: Splitting edge or vertex shapes is supported now. </li> <!-- CE-12368 -->
+           		<li>Geometry cutting methods now better preserve the input topology: </li> <!-- CE-12833 -->
+           		<ul>
+           			<li><a href="op_split.html"><span class="code_std">split</span></a> operation: Close but distinct new vertices on cut faces are no longer merged. For example, new vertices on adjacent but disconnected faces, in which case new faces inserted to close cut volumes in these areas are now also detached.</li>
+           			<li><a href="op_i.html"><span class="code_std">i</span></a>, <a href="op_trim.html"><span class="code_std">trim</span></a> operation: When trimming at convex boundaries, close but distinct new vertices on trimmed faces are no longer merged.</li>
+            	</ul>
+                <li><a href="op_offset.html"><span class="code_std">offset</span></a> operation: Slightly improved numerical accuracy.</li> <!-- CE-12387 --> 
+				<li>The numerical behavior of slightly non-planar polygons changed: They are not forced to 0 height anymore.</li> <!-- CE-8468 -->
+				<li><a href="op_inline.html"><span class="code_std">inline(unify)</span></a> keyword, <a href="op_boolOp.html"><span class="code_std">union</span></a>, <a href="op_boolOp.html"><span class="code_std">subtract</span></a>, <a href="op_boolOp.html"><span class="code_std">intersect</span></a> operations: Improved performance.</li> <!-- CE-12709 -->
+				<li>CGA Compiler: The <span class="cga_opparam">filePath</span> in an <a href="import.html"><span class="code_std">import</span></a> statement is now case sensitive (Windows only). Prior, this was not always the case.</li> <!-- CE-11544 -->
+            </ul>
+			Bugfixes:
+			<ul>
+				<li><a href="op_boolOp.html"><span class="code_std">union</span></a>, <a href="op_boolOp.html"><span class="code_std">subtract</span></a>, <a href="op_boolOp.html"><span class="code_std">intersect</span></a> operations: Fixed a bug where on overlapping non-planar faces undesired new edges were created.</li> <!-- CE-12479 -->
+				<li><a href="func_geometry.html#isPlanar"><span class="code_std">geometry.isPlanar</span></a> function: Fixed a bug where the function wrongly returned <span class="codelight">false</span> when a non-planar shape was flattened by setting the scope size to 0.</li> <!-- CE-8468 -->
+				<li><a href="op_comp.html"><span class="code_std">comp</span></a> operation, <a href="func_comp.html"><span class="code_std">comp</span></a> function: Fixed a bug where the initial scope and normal orientation was wrong for face edges (<span class="codelight">fe</span>) on slightly non-planar shapes.</li> <!-- CE-12795 -->
+				<li>Fixed a bug for assets with several groups: When setting the scope size to 0 the geometry could degenerate due to a numerical issue.</li> <!-- CE-8576 -->
+                <li><a href="op_trim.html"><span class="code_std">trim</span></a>, <a href="op_i.html"><span class="code_std">i</span></a> operations:</li>
+           		<ul>
+           			<li>Fixed behavior in subsequent operations when the geometry is empty after it was trimmed.</li> <!-- CE-12795 -->
+           			<li>Fixed wrong result when scope size is negative.</li> <!-- CE-12901 -->
+            	</ul>
+				<li><a href="op_trim.html"><span class="code_std">trim</span></a> operation: Fixed wrong behavior when applied to a scope which resulted from a <a href="op_split.html"><span class="code_std">split</span></a> operation with <span class="codelight">noAdjust</span> mode.</li> <!-- CE-12901 -->
+                <li><a href="import.html#dynamic">dynamic import</a> functionality: Fixed a bug where attribute overrides were not applied in recursive rules.</li>  <!-- CE-11810 -->
+				<li><a href="op_setback.html"><span class="code_std">setback</span></a>, <a href="op_setbackToArea.html"><span class="code_std">setbackToArea</span></a>, <a href="op_setbackPerEdge.html"><span class="code_std">setbackPerEdge</span></a>, <a href="op_shapeLUO.html"><span class="code_std">shapeLUO</span></a>, <a href="op_splitAndSetbackPerimeter.html"><span class="code_std">splitAndSetbackPerimeter</span></a>, <a href="op_offset.html"><span class="code_std">offset</span></a> operations: Fixed a bug that led to degenerated geometry on non-planar polygons or at collinear vertices.</li> <!-- CE-10767 -->
+				<li><a href="op_split.html"><span class="code_std">split</span></a> operation: Fixed a bug where existing edge and vertex tags got removed on faces in the split plane.</li> <!-- CE-12725 -->
+				<li><a href="op_envelope.html"><span class="code_std">envelope</span></a> operation: Made it more stable for non-planar polygons with holes and colinear vertices.</li> <!-- CE-10767 -->
+				<li>Fixed wrong behavior in the random evaluation of probabilistic expressions. This fix potentially changes your existing models even with the same seedian on the initial shape.</li>
+				<ul>
+					<li><a href="op_comp.html"><span class="code_std">comp</span></a> operation, <a href="func_comp.html"><span class="code_std">comp</span></a> function: Fixed wrong behavior where the outcome of probabilistic expressions was not random but repetitive when using the combine <span class="cga_opparam">operator</span> (<span class="codelight">=</span>).</li> <!-- CE-12003, CE-12476, CE-10350 -->
+					<li><a href="op_boolOp.html"><span class="code_std">union</span></a>, <a href="op_boolOp.html"><span class="code_std">subtract</span></a>, <a href="op_boolOp.html"><span class="code_std">intersect</span></a> operations: Fixed undesired behavior where the outcome of probabilistic expressions in an unrelated part of the code changed when the behavior of a Boolean operand changed.</li> <!-- CE-12685 -->
+				</ul>
+				<li>CGA Compiler: Fixed a bug where imported rule files could not be found when they were located in linked folders. This also fixes compilation failures when working with Visual CGA Designs.</li> <!-- CE-12650 -->
+			</ul>
+        </td>
+	</tr>
+	<tr>
+		<td>SDK&nbsp;3.2.10824<br>CGAC 2.7</td>
+		<td>
+  			Changes to existing features:
+			<ul>
+				<li><a href="op_comp.html"><span class="code_std">comp</span></a> operation: New component selector <span class="codelight">fv</span> for face vertices.</li> <!-- CE-12182 -->
+				<li><a href="op_inline.html"><span class="code_std">inline(unify)</span></a>, <a href="op_boolOp.html"><span class="code_std">union</span></a>, <a href="op_boolOp.html"><span class="code_std">subtract</span></a>, <a href="op_boolOp.html"><span class="code_std">intersect</span></a> keywords: Boolean operations keep general vertex order.</li> <!-- CE-12468 -->
+				<li><a href="op_boolOp.html"><span class="code_std">union</span></a>, <a href="op_boolOp.html"><span class="code_std">subtract</span></a>, <a href="op_boolOp.html"><span class="code_std">intersect</span></a> keywords: Boolean operations set a new auto-tag <span class="codelight">"bool.cut"</span> at intersection edges.</li> <!-- CE-12678 -->
+            </ul>
+			Bugfixes:
+			<ul>
+            	<li><a href="op_inline.html"><span class="code_std">inline</span></a>, <a href="op_boolOp.html"><span class="code_std">union</span></a>, <a href="op_boolOp.html"><span class="code_std">subtract</span></a>, <a href="op_boolOp.html"><span class="code_std">intersect</span></a> keywords: Fixed the material of the resulting shapes for some cases where non-default materials were involved.</li> <!-- CE-12681 -->
+				<li><a href="op_convexify.html"><span class="code_std">convexify</span></a> operation: Fixed a crash that could happen when small edges are present.</li> <!-- CE-12659 -->
+				<li>For some operations the first edge of the resulting geometry was made more consistent and deterministic. Since the first edge often determines the scope setup this can lead to different results of existing rules.</li>
+				<ul>
+					<li><a href="op_innerRectangle.html"><span class="code_std">innerRectangle</span></a> operation: The first edge of remainder faces is set at the outline of the initial face. The order of remainders is set wrt. the vertex order of the initial face. Before, the behavior was arbitrary.</li> <!-- CE-12475 -->
+					<li><a href="op_setback.html"><span class="code_std">setback</span></a>, <a href="op_setbackToArea.html"><span class="code_std">setbackToArea</span></a>, <a href="op_setbackPerEdge.html"><span class="code_std">setbackPerEdge</span></a>, <a href="op_shapeLUO.html"><span class="code_std">shapeLUO</span></a>, <a href="op_splitAndSetbackPerimeter.html"><span class="code_std">splitAndSetbackPerimeter</span></a> operations: In rare cases the first edge of setback faces was not set at those edges selected by the setback <span class="cga_opparam">selector</span>. Further, the first edge of setback faces is now set only at those edges with a positive setback <span class="cga_opparam">distance</span> (<span class="codelight">>0</span>). Finally, we fixed an issue where first edges and order of remainder faces were arbitrary in the presence of holes.</li>
+					<li><a href="op_envelope.html"><span class="code_std">envelope</span></a> operation: Fixed an issue where first edges of slanted faces were not aligned to the outline of the initial shape when holes are present.</li> <!-- CE-6363, CE-12475, CE-12645 -->
+					<li><a href="op_i.html"><span class="code_std">i</span></a>, <a href="op_trim.html"><span class="code_std">trim</span></a> operations: Trimming at concave boundary keeps the first edge, if not trimmed away.</li> <!-- CE-12475 -->
+				</ul>
+				<li><a href="op_comp.html"><span class="code_std">comp</span></a> operation, <a href="func_comp.html"><span class="code_std">comp</span></a> function: Fixed numerical unstable orientation of horizontal edges when using <span class="codelight">comp(e)</span> with logical selector expressions or static selectors <span class="codelight">eave</span>, <span class="codelight">hip</span>, <span class="codelight">valley</span>, and <span class="codelight">ridge</span>.</li> <!-- CE-8006 -->
+			</ul>
+        </td>
+    </tr>
+	<tr>
 		<td>2024.1<br>CGAC 2.6</td>
 		<td>
 			New features:
 			<ul>
-				<li><a href="op_inline.html"><span class="code_std">inline</span></a> keyword: Allows to immediately generate a rule and continue working on the resulting shape(s). This means any rule can be used like a builtin shape operation. </li>
-				<li><a href="op_boolOp.html"><span class="code_std">union</span></a>, <a href="op_boolOp.html"><span class="code_std">subtract</span></a>, <a href="op_boolOp.html"><span class="code_std">intersect</span></a> keywords: added Boolean 3D operations.</li>
-				<li><a href="op_extrude.html"><span class="code_std">extrude</span></a> operation: Added support to extrude edges. </li>  <!-- CE-12367 -->
+				<li><a href="op_inline.html"><span class="code_std">inline</span></a> keyword: Allows to immediately generate a rule and continue working on the resulting shape(s). This means any rule can be used like a builtin shape operation.</li>
+				<li><a href="op_boolOp.html"><span class="code_std">union</span></a>, <a href="op_boolOp.html"><span class="code_std">subtract</span></a>, <a href="op_boolOp.html"><span class="code_std">intersect</span></a> keywords: Added Boolean 3D operations.</li>
+				<li><a href="op_extrude.html"><span class="code_std">extrude</span></a> operation: Added support to extrude edges.</li> <!-- CE-12367 -->
 			</ul>
 			New operations:
 			<ul>
@@ -50,8 +136,8 @@
             <ul>
             	<li>Floating point precision:
                 <ul>
-                	<li>All internal geometry processing was switched form float to double precision. The numerical behaviour is more accurate now. It is possible that some rules change behaviour because e.g a float value comparison gives a different result now. </li>  <!-- CE-12881-->
-                    <li>Float to string conversion (e.g. <a href="func_str.html"><span class="code_std">str()</span></a> function and <a href="op_print.html"><span class="code_std">print()</span></a> operation): fixed wrong string values in rare cases. Further, the maximum number of digits in the string representation was reduced by 1.</li>
+                	<li>All internal geometry processing was switched from single to double precision. The numerical behavior is more accurate now. It is possible that some rules change behavior because e.g a float value comparison gives a different result now.</li>  <!-- CE-12881-->
+                    <li>Float to string conversion (e.g. <a href="func_str.html"><span class="code_std">str()</span></a> function and <a href="op_print.html"><span class="code_std">print()</span></a> operation): Fixed wrong string values in rare cases. Further, the maximum number of digits in the string representation was reduced by 1.</li>
                 </ul>
             </ul>
 		</td>
@@ -222,7 +308,7 @@
 					<ul>
 						<li>Attribute overrides and protections: An error is shown if the imported attribute does not exist or is already overridden or protected.</li> <!-- CE-9886 -->
 						<li>The behavior of attribute overrides has been improved. The evaluation of an attribute override definition which depends on other attributes now respects overridden definitions of those other attributes. Previously, this was not always the case, depending on the alphabetical order of attribute names. This change makes attribute evaluation deterministic. However, in some cases, attributes are evaluated to different values now, leading to a different behavior than in previous versions.<br><strong>Note:</strong> If attribute overrides lead to a cycle, these cycles are now detected and lead to a compile error. While such rules did compile and work on older versions the result was inconsistent. The special case of an attribute override referring to the overridden attribute itself is still possible. This is important for a code pattern where implicit attribute propagation is used, for example<br><span class="codelight">import imp:"imp.cga"<br>attr x = .. imp.x ..</span><br>is still valid code.</li> <!-- CE-9650, CE-9846, CE-10276 --> 
-						<li>If probabilistic expressions are used in attribute overrides, the random number generator was affected by the order of appearance of overrides. This could lead to the undesired behaviour that an attribute could change its random value when another randomly evaluated override was added. This has been fixed; however, this fix potentially changes your existing models even with the same <span class="codelight">seedian</span> on the initial shape.</li> <!-- CE-9650, CE-5117 --> 
+						<li>If probabilistic expressions are used in attribute overrides, the random number generator was affected by the order of appearance of overrides. This could lead to the undesired behavior that an attribute could change its random value when another randomly evaluated override was added. This has been fixed; however, this fix potentially changes your existing models even with the same <span class="codelight">seedian</span> on the initial shape.</li> <!-- CE-9650, CE-5117 --> 
 					</ul>
 					<li>It is not allowed anymore to override attributes which are located in second-level imports, i.e. attributes which are imported in the imported rule file. For example, in an <a href="import.html"><span class="code_std">import</span></a> statement<br><span class="codelight">import imp1:"rule.cga" ( imp2.x = 1 )</span><br>the attribute override for <span class="codelight">imp2.x</span> is invalid.</li> <!-- CE-10268 -->
 					<li>Identifiers in rule definitions must not contain more than one import identifier. For example, in <span class="codelight">imp1.imp2.Lot-->Rule</span> the second import identifier <span class="codelight">imp2</span> is invalid. Rules with an import identifier are only valid in the <span class="codelight">Default</span> style.</li> <!-- CE-10268 -->
@@ -507,7 +593,7 @@
    				<li><a href="op_envelope.html">envelope</a> operation:</li>
 				<ul>
    					 <li>Added a version which takes per-edge arrays for baseHeight and angles.</li> <!-- CE-7586 -->
-   					 <li>Fixed non-deterministic behaviour in rare border cases.</li>  <!-- CE-7603 -->
+   					 <li>Fixed non-deterministic behavior in rare border cases.</li>  <!-- CE-7603 -->
    				</ul>
 				<li><a href="func_array.html">array initialization</a> function: Added notation to create 2d arrays with several rows.</li> <!-- CE-7212 -->
 				<li><a href="func_index.html">index</a> operator:</li>
@@ -703,9 +789,9 @@
 	<tr>
 		<td>2018.0 <br>CGAC 1.10</td>
 		<td>
-			Changed fundamental behaviour:
+			Changed fundamental behavior:
 			<ul>
-				<li><strong>Random evaluation of attr/const functions</strong>:<br> The initialization of the random number generator was affected by the mutual dependency of attr/const functions.<br>This could lead to the undesired behaviour that an attribute A which is initialized using probability functions (<a href="func_rand.html"><span class="code_std">rand</span></a>, <a href="func_p.html"><span class="code_std">p</span></a>), stochastic conditions or related utility functions (<a href="celib/listRandom.html"><span class="code_std">listRandom</span></a>, <a href="celib/fileRandom.html"><span class="code_std">fileRandom</span></a>, <a href="celib/assetFitSize.html"><span class="code_std">assetFitSize</span></a>,
+				<li><strong>Random evaluation of attr/const functions</strong>:<br> The initialization of the random number generator was affected by the mutual dependency of attr/const functions.<br>This could lead to the undesired behavior that an attribute A which is initialized using probability functions (<a href="func_rand.html"><span class="code_std">rand</span></a>, <a href="func_p.html"><span class="code_std">p</span></a>), stochastic conditions or related utility functions (<a href="celib/listRandom.html"><span class="code_std">listRandom</span></a>, <a href="celib/fileRandom.html"><span class="code_std">fileRandom</span></a>, <a href="celib/assetFitSize.html"><span class="code_std">assetFitSize</span></a>,
 				<a href="celib/assetApproxSize.html"><span class="code_std">assetApproxSize</span></a>, <a href="celib/imageApproxRatio.html"><span class="code_std">imageApproxRatio</span></a>) could change its random value
 				<ul>
 					<li>if another attribute B was added that calls A or</li>
@@ -840,7 +926,7 @@
 				<li>Inter-ccclusion: Fixed a bug that created an occluder shape by a <a href="op_comp.html">component split</a> or <a href="op_offset.html">offset</a> operation during the intra ghost tree generation which was then mistakenly considered also for inter occlusion.</li>
 				<li>Fixed correct behavior in exports.</li>
 			</ul>
-			<li><a href="op_set.html"><span class="code_std">set</span></a> operation: fixed a bug: trying to set the <a href="attr_initialShape.html"><span class="code_std">initialShape.pz</span></a> attribute resulted in inconsistent behaviour (mismatch with initialShape.pa).</li>
+			<li><a href="op_set.html"><span class="code_std">set</span></a> operation: fixed a bug: trying to set the <a href="attr_initialShape.html"><span class="code_std">initialShape.pz</span></a> attribute resulted in inconsistent behavior (mismatch with initialShape.pa).</li>
 			<li><a href="op_alignScopeToAxes.html"><span class="code_std">alignScopeToAxes</span></a>, <a href="op_rotateScope.html"><span class="code_std">rotateScope</span></a>, <a href="op_mirrorScope.html"><span class="code_std">mirrorScope</span></a>, <a href="op_setPivot.html"><span class="code_std">setPivot</span></a>, <a href="op_cleanupGeometry.html"><span class="code_std">cleanupGeometry</span></a>, <a href="op_reduceGeometry.html"><span class="code_std">reduceGeometry</span></a>, <a href="op_convexify.html"><span class="code_std">convexify</span></a>, <a href="op_split.html"><span class="code_std">split</span></a> operations: Correctly consider a non-adjusted scope coming from a <a href="op_split.html"><span class="code_std">split</span></a> operation.</li>
 			<li><a href="op_offset.html"><span class="code_std">offset</span></a> operation: Now keeps asset materials and groups.</li>
 			<li><a href="op_scatter.html"><span class="code_std">scatter</span></a> operation: Issue warning for negative or zero number of points.</li>
@@ -882,7 +968,7 @@
 			</ul>
 			<li><a href="op_cleanupGeometry.html"><span class="code_std">cleanupGeometry</span></a>, <a href="op_reduceGeometry.html"><span class="code_std">reduceGeometry</span></a> operation: Fixed wrong result if scope contained rotational part.</li>
 			<li><a href="op_cleanupGeometry.html"><span class="code_std">cleanupGeometry</span></a> operation: Fixed a bug that led to inconsistent meshes which could led to a crash on some subsequent operations, e.g. <a href="op_setNormals.html"><span class="code_std">setNormals(soft)</span></a> or <a href="op_softenNormals.html"><span class="code_std">softenNormals</span></a>.</li>
-	        <li><a href="op_offset.html"><span class="code_std">offset</span></a> operation: Fixed undefined behaviour for negative offsets on polygons with holes.</li>
+	        <li><a href="op_offset.html"><span class="code_std">offset</span></a> operation: Fixed undefined behavior for negative offsets on polygons with holes.</li>
 			<li><a href="op_envelope.html"><span class="code_std">envelope</span></a> operation: Fixed a bug that could led to a crash when vertices were collinear.</li>
           	<li><a href="func_getGeoCoord.html"><span class="code_std">getGeoCoord</span></a> function: <span class="code_std">X</span>, <span class="code_std">Y</span> selectors: Fixed to-meter conversion for non-metrical coordinate systems.</li> 
 			<li><a href="op_innerRectangle.html"><span class="code_std">innerRectangle</span></a> operation:</li>
@@ -1022,7 +1108,7 @@
         <li><a href="op_roofHip.html"><span class="code_std">roofHip</span></a> operation: avoid duplicate vertices.</li>    
         <li><a href="op_offset.html"><span class="code_std">offset</span></a>, <a href="op_roofGable.html"><span class="code_std">roofGable</span></a> and <a href="op_roofHip.html"><span class="code_std">roofHip</span></a> operations: made offset / roof construction more stable on polygons with co-linear vertices and fixed a memory explosion bug.</li>
         <li><a href="op_cleanupGeometry.html"><span class="code_std">cleanupGeometry</span></a> operation: fixed bug which led to illegal material assignements ("filled holes rendering bug") on edge cleanup for geometries with per-face-materials.</li> 
-		<li>Fixed undefined behaviour if the same name was used for a scalar attr and a map attr.</li>  
+		<li>Fixed undefined behavior if the same name was used for a scalar attr and a map attr.</li>  
           <li>CGA compiler: Parameteric rules and functions with a large number of parameters do not hang the compiler / CityEngine anymore.</li>       
 		</ul>       
     </td>
@@ -1106,7 +1192,7 @@
              and <a href="op_roofShed.html"><span class="code_std">roofShed</span></a>
              operations: made polygons with holes handling more stable for illegal holes (hangers).</li>
   
-           <li><a href="func_assetInfo.html"><span class="code_std">assetInfo</span></a>, <a href="func_assetsSortRatio.html"><span class="code_std">assetsSortRatio</span></a> and <a href="func_assetsSortSize.html"><span class="code_std">assetsSortSize</span></a> functions: fixed behaviour for unknown/unloadable assets.</li>        	
+           <li><a href="func_assetInfo.html"><span class="code_std">assetInfo</span></a>, <a href="func_assetsSortRatio.html"><span class="code_std">assetsSortRatio</span></a> and <a href="func_assetsSortSize.html"><span class="code_std">assetsSortSize</span></a> functions: fixed behavior for unknown/unloadable assets.</li>        	
   
             <li><a href="attr_material.html"><span class="code_std">material</span></a> shape attribute: material.XXXmap returns <span class="code_std">&quot;builtin:unknowntexture.png&quot;</span> if texture not found.</li>
           <li>Fixed (deprecated) noStreetSide comp split selector handling.</li>
@@ -1202,17 +1288,17 @@
   <tr>
   	<td>2013.1<br>CGAC 1.1</td>
     <td>
-    	changed fundamental behaviour:
+    	changed fundamental behavior:
         <ul>
-        	<li><strong>attr/const functions evaluation order:</strong> In previous CGA versions, <span class="code_std">attr</span> and <span class="code_std">const</span> functions were evaluated lazily, i.e. when they were used for the first time. Remember that <span class="code_std">attr</span> and <span class="code_std">const</span> functions are evaluated only once. This approach gave rise to the non-intuitive behaviour that changing the code of some rule potentially changed the value of an attr. Keep in mind that some functions (and obviously shape attributes) depend on the current shape's geometry, and some even change the state of the current shape (e.g. <a href="func_rand.html"><span class="code_std">rand</span></a>). Therefore (non-)evaluation of a const function cold have an influence on rule execution.<br>
+        	<li><strong>attr/const functions evaluation order:</strong> In previous CGA versions, <span class="code_std">attr</span> and <span class="code_std">const</span> functions were evaluated lazily, i.e. when they were used for the first time. Remember that <span class="code_std">attr</span> and <span class="code_std">const</span> functions are evaluated only once. This approach gave rise to the non-intuitive behavior that changing the code of some rule potentially changed the value of an attr. Keep in mind that some functions (and obviously shape attributes) depend on the current shape's geometry, and some even change the state of the current shape (e.g. <a href="func_rand.html"><span class="code_std">rand</span></a>). Therefore (non-)evaluation of a const function cold have an influence on rule execution.<br>
             Starting with 2013.1, all <span class="code_std">attr/const</span> functions are evaluated before the start rule is applied, on the initial shape with a <span class="code_std">seedian</span> derived from the initial shape's <span class="code_std">seedian</span>. The initial shape's random number generator state is not affected.<br>
-            While the new approach makes CGA coding more &quot;intuitive&quot;, it changes the behaviour compared to older versions.</li>
+            While the new approach makes CGA coding more &quot;intuitive&quot;, it changes the behavior compared to older versions.</li>
             
             <li><strong>inf/nan checks</strong>: In previous CGA versions, a number of operation and function float parameters were tested for not-a-number / infinity (nan/inf) values at runtime. In most cases, such values were replaced with 0 and a warning was issued. In others, the operation was aborted.<br>
-            CGA 2013.1 introduces a unified inf/nan behaviour: checking of <strong>all</strong> float paramers of builtin functionality can be set to either &quotignore&quot (= don't check), &quotabort with error&quot or &quotreplace with zero&quot see <a href="https://doc.arcgis.com/en/cityengine/latest/help/get-started-preferences-prt.htm" target="_blank">Procedural Runtime preferences</a>). The default behaviour is &quotreplace with zero&quot, which comes closest to the classic behaviour.<br>
-            While CGA 2013.1 provides more debugging capabilities regarding inf/nan values, the behaviour is different than in previous versions.</li>
+            CGA 2013.1 introduces a unified inf/nan behavior: checking of <strong>all</strong> float paramers of builtin functionality can be set to either &quotignore&quot (= don't check), &quotabort with error&quot or &quotreplace with zero&quot see <a href="https://doc.arcgis.com/en/cityengine/latest/help/get-started-preferences-prt.htm" target="_blank">Procedural Runtime preferences</a>). The default behavior is &quotreplace with zero&quot, which comes closest to the classic behavior.<br>
+            While CGA 2013.1 provides more debugging capabilities regarding inf/nan values, the behavior is different than in previous versions.</li>
             <li><strong>Intra-occlusion and reports, print output, CGA error reporting:</strong> During resolving inta-occlusion-queries, some shapes and sub-shapetrees get deleted (and re-evaluated). The reports issued by <a href="op_report.html"><span class="code_std">report</span></a> operations by the rule of that shapes (and the output of <a href="op_print.html"><span class="code_std">print</span></a> operations and functions plus all CGA errors/warnings) are deleted along with those shapes.<br>
-            While the new behaviour makes more sense (each report/print-output/error has associated a shape in the model hierarchy), it is different than in previous versions.</li>
+            While the new behavior makes more sense (each report/print-output/error has associated a shape in the model hierarchy), it is different than in previous versions.</li>
         </ul>
 
     	new CGA Utility Library functions:
@@ -1327,7 +1413,7 @@
 
         bugfixes:
         <ul>
-        	<li><a href="op_comp.html"><span class="code_std">comp</span></a> operation: using the combine (=) operator in conjunction with edges and vertices (e|v) led to undefined behaviour. fixed.</li>
+        	<li><a href="op_comp.html"><span class="code_std">comp</span></a> operation: using the combine (=) operator in conjunction with edges and vertices (e|v) led to undefined behavior. fixed.</li>
             <li><a href="func_geometry.html#isOriented"><span class="code_std">geometry.isOriented</span></a> operation: <span class="code_std">world.x</span> selectors were inverted. fixed.</li>
             <li><a href="op_i.html"><span class="code_std">i</span></a> (trimming) and <a href="op_split.html"><span class="code_std">split</span></a> operations: fixed some bugs which led to inconsistent geometry and increased performance for large geometries. This also speeds up export if vertex merger is on.</li>         
         	<li><a href="op_alignScopeToAxes.html"><span class="code_std">alignScopeToAxes</span></a> operation: works now also if the current shapes' geometry is empty (e.g. after a <span class="code_std">scatter</span> or <span class="code_std">comp(e|v)</span> operation), and multi-mesh geometries do not loose materials anymore.</li>
@@ -1514,7 +1600,7 @@ material.normalmap, material.normalmap.{su|sv|tu|tv|rw}</span></a> attributes</l
     	<ul>
             <li><a href="op_extrude.html"><span class="code_std">extrude</span></a> and <a href="op_taper.html"><span class="code_std">taper</span></a> operations now keep texture coordinates.</li>
             <li><a href="op_extrude.html"><span class="code_std">extrude</span></a>, <a href="op_taper.html"><span class="code_std">taper</span></a>, <a href="op_roofGable.html"><span class="code_std">roofGable</span></a>, <a href="op_roofHip.html"><span class="code_std">roofHip</span></a>, <a href="op_roofPyramid.html"><span class="code_std">roofPyramid</span></a> and <a href="op_roofShed.html"><span class="code_std">roofShed</span></a> operations do net set the pivot anymore and try to maintain the scope's x-axis orientation as much as possible (i.e. the scope and pivot orientation is different now).</li>
-            <li><a href="op_alignScopeToGeometry.html"><span class="code_std">alignScopeToGeometry</span></a> operation: negative indices are supported now (modulo, i.e. -1 is the last face/edge; was unspecified behaviour before).</li>
+            <li><a href="op_alignScopeToGeometry.html"><span class="code_std">alignScopeToGeometry</span></a> operation: negative indices are supported now (modulo, i.e. -1 is the last face/edge; was unspecified behavior before).</li>
 			<li><a href="op_comp.html"><span class="code_std">comp(e)</span></a> operation: edges have now a defined index, i.e. edge 0 is always guaranteed to be the first edge of the first face.</li>
             <li><a href="op_roofGable.html"><span class="code_std">roofGable</span></a>, <a href="op_roofHip.html"><span class="code_std">roofHip</span></a> and <a href="op_roofShed.html"><span class="code_std">roofShed</span></a> operations are now guaranteed to put first roof face on first edge of input face in all cases and to put all roof faces on corresponding edge if current geometry consists of one face only.</li>
 
@@ -1692,7 +1778,7 @@ overload  .</li>
     <ul>
     <li>object coordinate system: a shape's <span class="code_std">pivot</span> is now relative to <span class="code_std">initialShape.origin</span> and not relative to the world coordinate system anymore. </li>
     <li><a href="op_extrude.html"><span class="code_std">extrude(axis, h)</span>:</a> axis selectors (<span class="code_std">x | y | z</span>) deprecated; new selectors (<span class="code_std">world.x | world.y | world.z</span>) change pivot orientation after operation to be the same as after <span class="code_std">extrude(h)</span>.</li>
-    <li><a href="op_alignScopeToGeometry.html"><span class="code_std">alignScopeToGeometry</span>:</a> "auto" mode: (1) if all edges are on the same y-coordinate, the longest edge is taken and (2) fixed a bug which led to undefined behaviour in rare cases.</li>
+    <li><a href="op_alignScopeToGeometry.html"><span class="code_std">alignScopeToGeometry</span>:</a> "auto" mode: (1) if all edges are on the same y-coordinate, the longest edge is taken and (2) fixed a bug which led to undefined behavior in rare cases.</li>
      </ul>
   
   </td>
@@ -1706,7 +1792,7 @@ overload  .</li>
   
 
   <h3><!-- FOOTER --> </h3>
-        <p class="foot">Copyright &copy;2008-2024 Esri R&amp;D Center Zurich. All rights reserved.</p>                  
+        <p class="foot">Copyright &copy;2008-2025 Esri R&amp;D Center Zurich. All rights reserved.</p>                  
 
 <!-- END CENTERED CONTENT -->
 

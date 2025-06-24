@@ -72,10 +72,10 @@
 			</tr>
 			<tr>
 				<td class="erdz-api-example">Example:
-				<pre class="code3">
+				<pre class="codecga">
 @Angle
 attr angle = 180
-				</pre>
+</pre>
 				</td>
 			</tr>
 	</table>
@@ -89,10 +89,10 @@ attr angle = 180
 			</tr>
 			<tr>
 				<td class="erdz-api-example">Example:
-				<pre class="code3">
+				<pre class="codecga">
 @Color
 attr userColor = "#000000"
-				</pre>
+</pre>
 				</td>
 			</tr>
 	</table>
@@ -106,10 +106,10 @@ attr userColor = "#000000"
 			</tr>
 			<tr>
 				<td class="erdz-api-example">Example:
-				<pre class="code3">
+				<pre class="codecga">
 @Description("The building width")
 attr width = 40
-				</pre>
+</pre>
 				</td>
 			</tr>
 	</table>
@@ -123,10 +123,10 @@ attr width = 40
 			</tr>
 			<tr>
 				<td class="erdz-api-example">Example:
-				<pre class="code3">
+				<pre class="codecga">
 @Directory
 attr assets = "/assets/lod" + lod
-				</pre>
+</pre>
 				</td>
 			</tr>
 	</table>
@@ -140,10 +140,10 @@ attr assets = "/assets/lod" + lod
 			</tr>
 			<tr>
 				<td class="erdz-api-example">Example:
-				<pre class="code3">
+				<pre class="codecga">
 @DisplayName("Building height")
 attr height = 20
-				</pre>
+</pre>
 				</td>
 			</tr>
 	</table>
@@ -157,10 +157,10 @@ attr height = 20
 			</tr>
 			<tr>
 				<td class="erdz-api-example">Example:
-				<pre class="code3">
+				<pre class="codecga">
 @Distance
 attr distance = 1852
-				</pre>
+</pre>
 				</td>
 			</tr>
 	</table>
@@ -174,13 +174,13 @@ attr distance = 1852
 			</tr>
 			<tr>
 				<td class="erdz-api-example">Examples:<br>
-				<pre class="code3">
+				<pre class="codecga">
 @Enum("low", "mid", "high")
 attr lod = "low"
 
 @Enum(10, 20, 30, restricted = false)
 attr height = 20
-				</pre>
+</pre>
 				</td>
 			</tr>
 			<tr>
@@ -188,10 +188,10 @@ attr height = 20
 			</tr>
 			<tr>
 				<td class="erdz-api-example">Example:<br>
-				<pre class="code3">
+				<pre class="codecga">
 @Enum("Residential", "Commercial")
 attr floorUsage = ["Residential"]
-				</pre>
+</pre>
 				</td>
 			</tr>
 	</table>
@@ -205,7 +205,7 @@ attr floorUsage = ["Residential"]
 			</tr>
 			<tr>
 				<td class="erdz-api-example">Examples:
-				<pre class="code3">
+				<pre class="codecga">
 @Enum(valuesAttr = lods)
 attr lod = lods[0]
 @Hidden
@@ -215,7 +215,7 @@ attr lods = ["low", "mid", "high"]
 attr height = heights[1]
 @Hidden
 attr heights = [10, 20, 30]
-				</pre>
+</pre>
 				</td>
 			</tr>
 			<tr>
@@ -223,12 +223,12 @@ attr heights = [10, 20, 30]
 			</tr>
 			<tr>
 				<td class="erdz-api-example">Example:<br>
-				<pre class="code3">
+				<pre class="codecga">
 @Enum(valuesAttr = usage)
 attr floorUsage = [usage[0]]
 @Hidden
 attr usage = ["Residential", "Commercial"]
-				</pre>
+</pre>
 				</td>
 			</tr>
 	</table>
@@ -242,10 +242,10 @@ attr usage = ["Residential", "Commercial"]
 			</tr>
 			<tr>
 				<td class="erdz-api-example">Example:
-				<pre class="code3">
+				<pre class="codecga">
 @File
 attr asset = "myfile.obj"
-				</pre>
+</pre>
 				</td>
 			</tr>
 	</table>
@@ -259,10 +259,10 @@ attr asset = "myfile.obj"
 			</tr>
 			<tr>
 				<td class="erdz-api-example">Example:
-				<pre class="code3">
+				<pre class="codecga">
 @File("tif", "tiff")
 attr texture = "tex0.tiff"
-				</pre>
+</pre>
 				</td>
 			</tr>
 	</table>
@@ -277,10 +277,10 @@ attr texture = "tex0.tiff"
 			</tr>
 			<tr>
 				<td class="erdz-api-example">Example:
-				<pre class="code3">
+				<pre class="codecga">
 @Group("First", "Second", "Third")
 attr grouped = 0
-				</pre>
+</pre>
 				</td>
 			</tr>
 	</table>
@@ -294,10 +294,10 @@ attr grouped = 0
 			</tr>
 			<tr>
 				<td class="erdz-api-example">Example:
-				<pre class="code3">
+				<pre class="codecga">
 @Group("First", "Second", "Third",1)
 attr grouped = 0
-				</pre>
+</pre>
 				</td>
 			</tr>
 	</table>	
@@ -311,10 +311,10 @@ attr grouped = 0
 			</tr>
 			<tr>
 				<td class="erdz-api-example">Example:
-				<pre class="code3">
+				<pre class="codecga">
 @Handle(shape=Solid, align=right)
 attr dimension = 40
-				</pre>
+</pre>
 				</td>
 			</tr>
 	</table>
@@ -328,13 +328,13 @@ attr dimension = 40
 			</tr>
 			<tr>
 				<td class="erdz-api-example">Examples:
-				<pre class="code3">
+				<pre class="codecga">
 @Hidden
 attr hide_me = 0
 
 @Hidden
 import hide_me: "rule.cga"
-				</pre>
+</pre>
 				</td>
 			</tr>
 	</table>
@@ -348,10 +348,10 @@ import hide_me: "rule.cga"
 			</tr>
 			<tr>
 				<td class="erdz-api-example">Example:
-				<pre class="code3">
+				<pre class="codecga">
 @Hidden(attribute_1, attribute_2)
 import rule: "rule.cga"
-				</pre>
+</pre>
 				</td>
 			</tr>
 	</table>
@@ -374,10 +374,10 @@ import rule: "rule.cga"
 			</tr>
 			<tr>
 				<td class="erdz-api-example">Example:
-				<pre class="code3">
+				<pre class="codecga">
 @MaterialFile
 attr mat = "myMaterial.cgamat"
-				</pre>
+</pre>
 				</td>
 			</tr>
 	</table>
@@ -391,14 +391,14 @@ attr mat = "myMaterial.cgamat"
 			</tr>
 			<tr>
 				<td class="erdz-api-example">Example:
-				<pre class="code3">
+				<pre class="codecga">
 @Order(1)
 attr i_m_1st = 0
 @Order(2)
 attr i_m_2nd = 0
 @Order(13)
 attr i_m_3rd = 0
-				</pre>
+</pre>
 				</td>
 			</tr>
 	</table>
@@ -421,10 +421,10 @@ attr i_m_3rd = 0
 			</tr>
 			<tr>
 				<td class="erdz-api-example">Example:
-				<pre class="code3">
+				<pre class="codecga">
 @Percent
 attr inflation = 0.012
-				</pre>
+</pre>
 				</td>
 			</tr>
 	</table>
@@ -438,13 +438,13 @@ attr inflation = 0.012
 			</tr>
 			<tr>
 				<td class="erdz-api-example">Examples:
-				<pre class="code3">
+				<pre class="codecga">
 @Range(min=5, max=50)
 attr height = 20
 
 @Range(min=0, max=45, stepsize=15, restricted=false)
 attr angle = 30
-				</pre>
+</pre>
 				</td>
 			</tr>
 			<tr>
@@ -452,10 +452,10 @@ attr angle = 30
 			</tr>
 			<tr>
 				<td class="erdz-api-example">Example:<br>
-				<pre class="code3">
+				<pre class="codecga">
 @Range(min=2.5, max=7)
 attr floorHeights = [4, 5.5, 5.5]
-				</pre>
+</pre>
 				</td>
 			</tr>
 
@@ -470,16 +470,16 @@ attr floorHeights = [4, 5.5, 5.5]
 			</tr>
 			<tr>
 				<td class="erdz-api-example">Example:
-				<pre class="code3">
+				<pre class="codecga">
 @StartRule
 Start-->NIL
-				</pre>
+</pre>
 				</td>
 			</tr>		
 	</table>
 
 <!-- FOOTER -->
-<p class="foot">Copyright &copy;2008-2024 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
+<p class="foot">Copyright &copy;2008-2025 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
 
 <!-- END CENTERED CONTENT -->
 

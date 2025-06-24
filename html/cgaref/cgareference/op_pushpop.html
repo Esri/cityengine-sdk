@@ -48,10 +48,9 @@
 
 <table summary="" class="twocol">
 <tr>
-	<td class="twocol_l"><br/>
+	<td class="twocol_l">
 	<img src="images/pushpop-a.png" alt="Push Pop a"/> </td>
-	<td><pre class="code3">
-
+	<td class="twocol_r"><pre class="codecga">
 Lot -->
     extrude(15)
     
@@ -60,11 +59,11 @@ Lot -->
     r(scopeCenter, 0, 22.5, 0) X.</pre>
 	<em>In this example, the extruded shape is rotated three times and assigned to a new shape (X). The rotations build on each other.</em></td>
 </tr>
-<tr>
-	<td class="twocol_l"><br/>
-	<img src="images/pushpop-b.png" alt="Push Pop b"/> </td>
-	<td><pre class="code3">
 
+<tr>
+	<td class="twocol_l"><br>
+	<img src="images/pushpop-b.png" alt="Push Pop b"/> </td>
+	<td class="twocol_r"><br><pre class="codecga">
 Lot -->
     extrude(15)
 	
@@ -79,12 +78,9 @@ Lot -->
 
 <table summary="" class="twocol">
 <tr>
-	<td class="twocol_l"><br/>
+	<td class="twocol_l">
 	<img src="images/pushpop-house.png" alt="Push Pop House"/> </td>
-	<td><pre class="code3">
-
-	
-	
+	<td class="twocol_r"><pre class="codecga">
 House -->
     extrude(10)
     comp(f) { top : roofHip(45) Roof. | all = House.}
@@ -101,11 +97,9 @@ House -->
 
 <table summary="" class="twocol">
 <tr>
-	<td class="twocol_l"><br/>
+	<td class="twocol_l">
 	<img src="images/pushpop-cylinder.png" alt="Push Pop Cylinder"/> </td>
-	<td><pre class="code3">
-
-	
+	<td class="twocol_r"><pre class="codecga">
 House-->
     Cylinder
     [ t(  0, 0, ' 1) Cylinder ]
@@ -123,21 +117,20 @@ Cylinder -->
 
 <table summary="" class="twocol">
 <tr>
-	<td class="twocol_l"><br/>
+	<td class="twocol_l">
 	<img src="images/pushpop-conditional.png" alt="Push Pop Conditional"/> </td>
-	<td><pre class="code3">
-
+	<td class="twocol_r"><pre class="codecga">
 Lot -->
     s(1,1,1)
     [ case scope.sx == 1 : primitiveCube() Cube.
       else : primitiveCylinder() Cylinder. ]
-	</pre>
+</pre>
 	<em>Conditional and stochastic statements must not have preceding operations. Use push and pop to encapsulate a case switch.</em></td>
 </tr>
 </table>
 
 <!-- FOOTER -->
-<p class="foot">Copyright &copy;2008-2024 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
+<p class="foot">Copyright &copy;2008-2025 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
 
 <!-- END CENTERED CONTENT -->
 

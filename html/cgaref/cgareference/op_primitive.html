@@ -47,24 +47,24 @@ The quad has texture coordinates on the first texture layer (COLORMAP).
 <h2>Examples</h2>
 <table summary="" class="twocol">
 <tr>
-	<td class="twocol_l"><img src="images/primitiveQuadExample1.png" alt="Insert a" width="298"/></td>
-	<td><pre class="code3">
+	<td class="twocol_l"><img src="images/primitiveQuadExample1.png" alt="Insert a"/></td>
+	<td class="twocol_r"><pre class="codecga">
 Lot-->
-	rotateScope(0, 0, 90) // scope.sx is 0
-	primitiveQuad()
-	texture("builtin:uvtest.png")
-			</pre>
+    rotateScope(0, 0, 90) // scope.sx is 0
+    primitiveQuad()
+    texture("builtin:uvtest.png")
+</pre>
 			<em>The inserted quad is fit into the current scope yz dimension.</em>
 			</td>
 		</tr>
 		<tr>
-			<td class="twocol_l"><img src="images/primitiveQuadExample2.png" alt="Insert a" width="298"/></td>
-			<td><pre class="code3">
+			<td class="twocol_l"><img src="images/primitiveQuadExample2.png" alt="Insert a"/></td>
+			<td class="twocol_r"><pre class="codecga">
 Lot-->
-	rotateScope(0, 0, 90) // scope.sx is 0
-	primitiveQuad(10,20)
-	texture("builtin:uvtest.png")
-	</pre>
+    rotateScope(0, 0, 90) // scope.sx is 0
+    primitiveQuad(10,20)
+    texture("builtin:uvtest.png")
+</pre>
 	<em>The inserted quad has a width of 10, a length of 20 and is positioned in the yz center.</em>
 	</td>
 </tr>
@@ -113,24 +113,24 @@ Lot-->
 <h2>Examples</h2>
 <table summary="" class="twocol">
 <tr>
-	<td class="twocol_l"><img src="images/primitiveDiskExample1.png" alt="Insert a" width="298"/></td>
-	<td><pre class="code3">
+	<td class="twocol_l"><img src="images/primitiveDiskExample1.png" alt="Insert a"/></td>
+	<td class="twocol_r"><pre class="codecga">
 Lot-->
-	rotateScope(-90, 0, 0) // scope.sz is 0
-	primitiveDisk()
-	texture("builtin:uvtest.png")
-			</pre>
+    rotateScope(-90, 0, 0) // scope.sz is 0
+    primitiveDisk()
+    texture("builtin:uvtest.png")
+</pre>
 			<em>The inserted disk has 16 vertices and is fit into the current scope xy dimension.</em>
 			</td>
 		</tr>
 		<tr>
-			<td class="twocol_l"><img src="images/primitiveDiskExample2.png" alt="Insert a" width="298"/></td>
-			<td><pre class="code3">
+			<td class="twocol_l"><img src="images/primitiveDiskExample2.png" alt="Insert a"/></td>
+			<td class="twocol_r"><pre class="codecga">
 Lot-->
-	rotateScope(-90, 0, 0) // scope.sz is 0
-	primitiveDisk(8,10)
-	texture("builtin:uvtest.png")
-	</pre>
+    rotateScope(-90, 0, 0) // scope.sz is 0
+    primitiveDisk(8,10)
+    texture("builtin:uvtest.png")
+</pre>
 	<em>The inserted disk has 8 vertices, a radius of 10 and is positioned in the xy center.</em>
 	</td>
 </tr>
@@ -176,22 +176,22 @@ The cube has texture coordinates on the first texture layer (COLORMAP).
 <h2>Examples</h2>
 <table summary="" class="twocol">
 <tr>
-	<td class="twocol_l"><img src="images/primitiveCubeExample1.png" alt="Insert a" width="298"/></td>
-	<td><pre class="code3">
+	<td class="twocol_l"><img src="images/primitiveCubeExample1.png" alt="Insert a"/></td>
+	<td class="twocol_r"><pre class="codecga">
 Lot-->
    primitiveCube()
    texture("builtin:uvtest.png")
-	</pre>
+</pre>
 	<em>The inserted cube is fit into the current scope. The scope's zero size is modified relative to the average of the two non-zero sizes.</em>
 	</td>
 </tr>
 <tr>
-	<td class="twocol_l"><img src="images/primitiveCubeExample2.png" alt="Insert a" width="298"/></td>
-	<td><pre class="code3">
+	<td class="twocol_l"><img src="images/primitiveCubeExample2.png" alt="Insert a"/></td>
+	<td class="twocol_r"><pre class="codecga">
 Lot-->
    primitiveCube(10,15,20)
    texture("builtin:uvtest.png")
-	</pre>
+</pre>
 	<em>The inserted cube has a width of 10, a height of 15, a depth of 20 and is positioned in the xz center.</em>
 	</td>
 </tr>
@@ -238,22 +238,22 @@ The sphere has texture coordinates on the first texture layer (COLORMAP).
 <h2>Examples</h2>
 <table summary="" class="twocol">
 <tr>
-	<td class="twocol_l"><img src="images/primitiveSphereExample1.png" alt="Insert a" width="298"/></td>
-	<td><pre class="code3">
+	<td class="twocol_l"><img src="images/primitiveSphereExample1.png" alt="Insert a"/></td>
+	<td class="twocol_r"><pre class="codecga">
 Lot-->
    primitiveSphere()
    texture("builtin:uvtest.png")
-	</pre>
+</pre>
 	<em>The inserted sphere has 16 sides, 16 divisions and is fit into the current scope. The scope's zero size is modified relative to the average of the two non-zero sizes.</em>
 	</td>
 </tr>
 <tr>
-	<td class="twocol_l"><img src="images/primitiveSphereExample2.png" alt="Insert a" width="298"/></td>
-	<td><pre class="code3">
+	<td class="twocol_l"><img src="images/primitiveSphereExample2.png" alt="Insert a"/></td>
+	<td class="twocol_r"><pre class="codecga">
 Lot-->
    primitiveSphere(8,4,10)
    texture("builtin:uvtest.png")
-	</pre>
+</pre>
 	<em>The inserted sphere has 8 sides, 4 divisions, a radius of 10 and is positioned in the xz center.</em>
 	</td>
 </tr>
@@ -300,22 +300,22 @@ The cylinder has texture coordinates on the first texture layer (COLORMAP).
 <h2>Examples</h2>
 <table summary="" class="twocol">
 <tr>
-	<td class="twocol_l"><img src="images/primitiveCylinderExample1.png" alt="Insert a" width="298"/></td>
-	<td><pre class="code3">
+	<td class="twocol_l"><img src="images/primitiveCylinderExample1.png" alt="Insert a"/></td>
+	<td class="twocol_r"><pre class="codecga">
 Lot-->
    primitiveCylinder()
    texture("builtin:uvtest.png")
-	</pre>
+</pre>
 	<em>The inserted cylinder has 16 sides and is fit into the current scope. The scope's zero size is modified relative to the average of the two non-zero sizes.</em>
 	</td>
 </tr>
 <tr>
-	<td class="twocol_l"><img src="images/primitiveCylinderExample2.png" alt="Insert a" width="298"/></td>
-	<td><pre class="code3">
+	<td class="twocol_l"><img src="images/primitiveCylinderExample2.png" alt="Insert a"/></td>
+	<td class="twocol_r"><pre class="codecga">
 Lot-->
    primitiveCylinder(8,10,15)
    texture("builtin:uvtest.png")
-	</pre>
+</pre>
 	<em>The inserted cylinder has 8 sides, a radius of 10, a height of 15 and is positioned in the xz center.</em>
 	</td>
 </tr>
@@ -362,22 +362,22 @@ The cone has texture coordinates on the first texture layer (COLORMAP).
 <h2>Examples</h2>
 <table summary="" class="twocol">
 <tr>
-	<td class="twocol_l"><img src="images/primitiveConeExample1.png" alt="Insert a" width="298"/></td>
-	<td><pre class="code3">
+	<td class="twocol_l"><img src="images/primitiveConeExample1.png" alt="Insert a"/></td>
+	<td class="twocol_r"><pre class="codecga">
 Lot-->
    primitiveCone()
    texture("builtin:uvtest.png")
-	</pre>
+</pre>
 	<em>The inserted cone has 16 sides and is fit into the current scope. The scope's zero size is modified relative to the average of the two non-zero sizes.</em>
 	</td>
 </tr>
 <tr>
-	<td class="twocol_l"><img src="images/primitiveConeExample2.png" alt="Insert a" width="298"/></td>
-	<td><pre class="code3">
+	<td class="twocol_l"><img src="images/primitiveConeExample2.png" alt="Insert a"/></td>
+	<td class="twocol_r"><pre class="codecga">
 Lot-->
    primitiveCone(8,10,15)
    texture("builtin:uvtest.png")
-	</pre>
+</pre>
 	<em>The inserted cone has 8 sides, a radius of 10, a height of 15 and is positioned in the xz center.</em>
 	</td>
 </tr>
@@ -393,7 +393,7 @@ Lot-->
 </ul>
 
 <!-- FOOTER -->
-<p class="foot">Copyright &copy;2008-2024 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
+<p class="foot">Copyright &copy;2008-2025 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
 
 <!-- END CENTERED CONTENT -->
 

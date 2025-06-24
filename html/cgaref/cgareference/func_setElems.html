@@ -193,7 +193,7 @@ Value arrays must have the same size (or dimensions for 2d indexing) as the numb
 <h3>Enumerate value</h3>
 
 <p class="example">	
-<pre class="code3">
+<pre class="codecga">
 enumerate(array, value) with( found := array .== value )
    = setElems(floatArray, found, [1:sum(found)])
    
@@ -204,7 +204,7 @@ f = enumerate(["a","c","b","a","d","a"], "a") // [1,0,0,2,0,3]
 <h3>Create diagonal matrix</h3>
 
 <p class="example">	
-<pre class="code3">
+<pre class="codecga">
 diag(n) = setElems(floatArray[1:n,1:n], [0:n+1:n*n-1], 1)
 
 f = diag(3) // [1,0,0;
@@ -215,7 +215,7 @@ f = diag(3) // [1,0,0;
 
 <h3>Reshape array</h3>
 
-<pre class="code3">
+<pre class="codecga">
 reshape(array, rows, cols)
    = setElems(floatArray[1:rows,1:cols], [0:rows*cols-1], array)
    
@@ -227,7 +227,7 @@ f = reshape(array, 3, 2) // [1,2;
                          //  5,6]
 </pre>
 
-<p class="foot">Copyright &copy;2008-2024 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
+<p class="foot">Copyright &copy;2008-2025 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
 
 </div>
 </body>

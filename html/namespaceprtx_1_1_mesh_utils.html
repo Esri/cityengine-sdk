@@ -23,7 +23,7 @@
   <td id="projectlogo"><img alt="Logo" src="esri_prt_55px.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ArcGIS Procedural Runtime
-   &#160;<span id="projectnumber">3.2.10650</span>
+   &#160;<span id="projectnumber">3.3.11173</span>
    </div>
   </td>
  </tr>
@@ -82,6 +82,8 @@ Functions</h2></td></tr>
 <tr class="separator:ac85e134acfe68559e3af8e02b63ba8fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a587281189a0556ffc2adeaafd99d0116"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprtx_1_1_mesh_utils.html#a587281189a0556ffc2adeaafd99d0116">transformCoords</a> (<a class="el" href="namespaceprtx.html#acfbb1262ed21fac2e362179f92993c81">DoubleVector</a> &amp;coords, const <a class="el" href="namespaceprtx.html#acfbb1262ed21fac2e362179f92993c81">DoubleVector</a> &amp;matrix)</td></tr>
 <tr class="separator:a587281189a0556ffc2adeaafd99d0116"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab22a3fc964fa92e0db27861a9aef5016"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprtx_1_1_mesh_utils.html#ab22a3fc964fa92e0db27861a9aef5016">transformNormals</a> (<a class="el" href="namespaceprtx.html#acfbb1262ed21fac2e362179f92993c81">DoubleVector</a> &amp;normals, const <a class="el" href="namespaceprtx.html#acfbb1262ed21fac2e362179f92993c81">DoubleVector</a> &amp;matrix)</td></tr>
+<tr class="separator:ab22a3fc964fa92e0db27861a9aef5016"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="ac85e134acfe68559e3af8e02b63ba8fd"></a>
@@ -154,10 +156,39 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="ab22a3fc964fa92e0db27861a9aef5016"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab22a3fc964fa92e0db27861a9aef5016">&#9670;&nbsp;</a></span>transformNormals()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void prtx::MeshUtils::transformNormals </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceprtx.html#acfbb1262ed21fac2e362179f92993c81">DoubleVector</a> &amp;&#160;</td>
+          <td class="paramname"><em>normals</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="namespaceprtx.html#acfbb1262ed21fac2e362179f92993c81">DoubleVector</a> &amp;&#160;</td>
+          <td class="paramname"><em>matrix</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Transforms a number of normals (i.e. (x, y, z) coordinate triples) with a transformation matrix. The normals are transformed with the inverse transpose of the matrix and then normalized. #param[in, out] normals Normals to transform. Size must be multiple of 3 (3 * number of normals). Normals must be normalized. #param matrix Matrix to transform the normals with. 4x4 harmonic transformation matrix, column major (OpenGL). Must be invertible. </p>
+
+</div>
+</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Nov 6 2024 10:59:46 for ArcGIS Procedural Runtime by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Jun 10 2025 14:40:43 for ArcGIS Procedural Runtime by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.14
 </small></address>

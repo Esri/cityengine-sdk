@@ -303,6 +303,15 @@ pre.code3 {
 	text-align: left;
 }
 
+pre.codecga {
+	font-family: "Consolas", monospace;
+    font-size: .75rem;
+	padding: 10px;
+	font-weight: normal;
+	text-align: left;
+    background-color: #fcfcfc;
+    border:1px solid #cccccc;
+}
 
 /* begin trying to cleanup code styles */
 
@@ -404,6 +413,7 @@ pre.code3 {
 
 .cga_comment{color:#3f7f5f}
 .cga_commentmulti{color:#3f5fc0}
+.cga_string{color:rgb(42, 0, 255)}
 
 
 
@@ -579,24 +589,26 @@ table.cga td {
 table.twocol {
     padding: 0px;
     width: 100%;
-    margin-left: 5px;
 }
 
 td.twocol_l {
-    padding: 0px;
-    width: 140px;
+    padding: 8px;
+    width: 298px;
     vertical-align: top;
     text-align: left;
 }
 
 td.twocol_r {
-    width: 450px;
-    padding: 0 0 0 0;
+    /* padding: 8px; */
     margin: 0 0 0 0;
     vertical-align: top;
     text-align: left;
 }
 
+.centered {
+    display: block;
+    margin: 0 auto;
+}
 
 col.leftcol{
 	background-color:eee;
@@ -656,14 +668,6 @@ td.notes_l {
 td.notes_r {
     padding: 20 0 0 0;
     width: 100%;
-    vertical-align: top;
-    text-align: left;
-}
-
-td.twocol_r {
-    width: 450px;
-    padding: 0 0 0 0;
-    margin: 0 0 0 0;
     vertical-align: top;
     text-align: left;
 }

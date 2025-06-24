@@ -63,45 +63,42 @@ The third axis is created such that the axes form a right hand system.
   
   <table summary="" class="twocol">
     <tr>
-      <td class="twocol_l"></br>
+      <td class="twocol_l">
         <img src="images/alignScopeToAxes-a.png" alt="initial scene" width="298" > </td>
-      <td><pre class="code3">
+        <td class="twocol_r"><pre class="codecga">
 A--> 
    t(5,0,4) s(8,24,8) r(10,20,30)
    i("boxnewsredlowress.obj")</pre>
-        <pre class="code">&nbsp;</pre>
         <em>The initial scene: The pivot (fat) is in the origin; the scope (yellow) contains a translation and a rotation. </em></td>
     </tr>
     <tr>
-      <td class="twocol_l"></br>
+      <td class="twocol_l">
         <img src="images/alignScopeToAxes-b.png" alt="after alignScopeToSxes()" width="298" > </td>
-      <td><pre class="code3">
+        <td class="twocol_r"><pre class="codecga">
 A--> 
    t(5,0,4) s(8,24,8) r(10,20,30)
    i("boxnewsredlowress.obj")
    alignScopeToAxes()
-  <br>
-  </pre>
+</pre>
         <em>Applying <span class="codelight">alignScopeToAxes</span>
         removes the scope translation and rotation, rotates the pivot such that all pivot axes are parallel to the world coordinate axes and projects the geometry to the new scope such that it stays at the same place in world coordinates.
         Note that the pivot lies at a corner of the bounding box (which is the new scope). </em></td>
     </tr>
     <tr>
-      <td class="twocol_l"></br>
+      <td class="twocol_l">
         <img src="images/alignScopeToAxes-c.png" alt="after alignScopeToAxes(y)" width="298" > </td>
-      <td><pre class="code3">
+        <td class="twocol_r"><pre class="codecga">
 A--> 
    t(5,0,4) s(8,24,8) r(10,20,30)
    i("boxnewsredlowress.obj")
    alignScopeToAxes(y)
-   
-	</pre>
+</pre>
         <em>Using the y-axis variant only aligns the pivot to the y-axis. </em>
     </tr>
   </table>
   <!-- FOOTER -->
   <p class="foot"></p>
-  <p class="foot">Copyright &copy;2008-2024 Esri R&amp;D Center Zurich. All rights reserved.</p>
+  <p class="foot">Copyright &copy;2008-2025 Esri R&amp;D Center Zurich. All rights reserved.</p>
   <!-- END CENTERED CONTENT -->
 </div>
 </body>

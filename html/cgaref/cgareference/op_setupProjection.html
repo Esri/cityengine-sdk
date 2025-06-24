@@ -21,11 +21,11 @@
 
 <h2>Syntax</h2>
 
-<p class="code2">setupProjection(<span class="cga_opparam">uvSet</span>, <span class="cga_opparam">axes</span>, <span class="cga_opparam">textureWidth</span>, <span class="cga_opparam">textureHeight</span>)</p>
+<p class="codecga">setupProjection(<span class="cga_opparam">uvSet</span>, <span class="cga_opparam">axes</span>, <span class="cga_opparam">textureWidth</span>, <span class="cga_opparam">textureHeight</span>)</p>
 
-<p class="code2">setupProjection(<span class="cga_opparam">uvSet, axes, textureWidth, textureHeight, widthOffset, heightOffset</span>)</p>
+<p class="codecga">setupProjection(<span class="cga_opparam">uvSet, axes, textureWidth, textureHeight, widthOffset, heightOffset</span>)</p>
 
-<p class="code2">setupProjection(<span class="cga_opparam">uvSet, axes, textureWidth, textureHeight, widthOffset, heightOffset, uwFactor</span>)</p>
+<p class="codecga">setupProjection(<span class="cga_opparam">uvSet, axes, textureWidth, textureHeight, widthOffset, heightOffset, uwFactor</span>)</p>
 
 <h2>Parameters</h2>
 
@@ -76,7 +76,7 @@ operation is used in the <span class="codelight">Frontfacade</span> rule to defi
 coordinate system (also called "uvw" system to avoid confusion with the
 xyz system for the geometry) for the subsequent <span class="codelight">projectUV</span> operations (=
 texture projections).</p>
-<pre class="code3">
+<pre class="codecga">
 Lot -->
     ... Building
     
@@ -89,7 +89,6 @@ Frontfacade -->
 
     split(y){ groundfloor_height    : Groundfloor 
             | {~floor_height : Floor}* }
-
 </pre>
 
 <p class="text">In the second snippet we show how the <span class="codelight">projectUV</span> operation computes
@@ -97,7 +96,7 @@ new texture coordinates for the wall asset. Already existing texture coordinates
 on this channel are replaced. <span class="codelight">projectUV</span> uses the uvw coordinate system previously
 defined by <span class="codelight">setupProjection</span> and projects the assets vertices along the w-axis to get the
 new texture coordinates.</p>
-<pre class="code3">
+<pre class="codecga">
 ... rules for floors and facade tiles ...
 
 Wall -->
@@ -110,7 +109,7 @@ Wall -->
 <p class="text">In contrast, note how the rule for the door does not use any
 <span class="codelight">projectUV</span> operation to apply the texture, it just uses the generic texture
 coordinates from the cube asset.</p>
-<pre class="code3">
+<pre class="codecga">
 Door -->
     s('1,'1,0.1)
     t(0,0,-0.5)
@@ -127,8 +126,8 @@ the whole facade anymore; there are visible seams.
 
 <table class="twocol">
 <tr>
-    <td><img src="images/setupuv_simplebuilding_1.png" /></td>
-    <td><pre class="code2">
+    <td class="twocol_l"><img src="images/setupuv_simplebuilding_1.png" /></td>
+    <td class="twocol_r"><pre class="codecga">
 Frontfacade -->
   setupProjection(0, scope.xy, 1.5, 1, 0, 0, 1) 
   setupProjection(2, scope.xy, scope.sx, scope.sy, 0, 0, 1)  
@@ -142,8 +141,8 @@ Wall -->
 </pre></td>
 </tr>
 <tr>
-    <td><img src="images/setupuv_simplebuilding_2.png" /></td>
-    <td><pre class="code2">
+    <td class="twocol_l"><img src="images/setupuv_simplebuilding_2.png" /></td>
+    <td class="twocol_r"><pre class="codecga">
 Frontfacade -->
   setupProjection(2, scope.xy, scope.sx, scope.sy, 0, 0, 1)  
   ...
@@ -175,27 +174,17 @@ use of component splits.<br />
 
 <br>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 
 <h3>Global Texture Projection</h3>
 This example demonstrates how to quickly create textured mass models from an areal picture.
 
 <table summary="" class="twocol">
 	<tr>
-    <td class="twocol_l"><br/>
+    <td class="twocol_l">
     <img src="images/setupProjection-global-a.png" alt="Global Texture projection" /> </td>
-    <td>
-    
-      <p>
-    	<br>
-    	<br>        
+    <td class="twocol_r">
+      <p>       
       <em>First, an attribute layer is created with the picture. This attribute layer is shown on the left. Below are the details of the attribute layer setup.</em></p>
-      <p>&nbsp;</p>
       <p>
         
           <img src="images/setupProjection-global-attrib.png" alt="Global Texture projection Attributes" /> 
@@ -205,33 +194,26 @@ This example demonstrates how to quickly create textured mass models from an are
     </tr>
           
 	<tr>
-    <td class="twocol_l"><br/>
+    <td class="twocol_l">
     <img src="images/setupProjection-global-b.png" alt="Global Texture projection" /> </td>
-    <td>
-        	<br>
-    	<br>        
-
-    	<pre class="code3">
+    <td class="twocol_r">
+    	<pre class="codecga">
 attr buildingheight = 20
  
 Lot -->
    set(trim.vertical, false)
    extrude(buildingheight)
 </pre>
-                <p>&nbsp;</p>
-                <p>&nbsp;</p>
-                <p><em>A number of initial shapes are manually drawn (following the countours of the buildings). Then the initial shapes are extruded to basic mass models using the extrude operation.
-      </em>                                      </p></td>
-    </tr>
+<p><em>A number of initial shapes are manually drawn (following the countours of the buildings). Then the initial shapes are extruded to basic mass models using the extrude operation.
+</em></p>
+</td>
+ </tr>
 
 	<tr>
-    <td class="twocol_l"><br/>
+    <td class="twocol_l">
     <img src="images/setupProjection-global-c.png" alt="Global Texture projection" /> </td>
-    <td>
-      	<br>
-    	<br>        
-
-    	<pre class="code3">
+    <td class="twocol_r">
+<pre class="codecga">
 attr buildingheight = 20
  
 Lot -->
@@ -245,18 +227,14 @@ Roof -->
    scaleUV(0, 1, -1)
    set(material.colormap, "test_0102_ortho.jpg")
 </pre>
-                <em> The <span class="codelight">Roof</span> rule is added. It projects the same texture as shown in the attribute layer onto the top faces of the mass models. The global x-axis is chosen as the u-axis, and the global z-axis as the v-axis. This results in an inverted texture along the v-axis and is corrected with the <span class="codelight">scaleUV()</span> operation.</em>   	</td>
-    </tr>
-
+<em> The <span class="codelight">Roof</span> rule is added. It projects the same texture as shown in the attribute layer onto the top faces of the mass models. The global x-axis is chosen as the u-axis, and the global z-axis as the v-axis. This results in an inverted texture along the v-axis and is corrected with the <span class="codelight">scaleUV()</span> operation.</em>   	</td>
+</tr>
 
 	<tr>
-    <td class="twocol_l"><br/>
+    <td class="twocol_l">
     <img src="images/setupProjection-global-c.png" alt="Global Texture projection" /> </td>
-    <td>
-      	<br>
-    	<br>        
-
-    	<pre class="code3">
+<td class="twocol_r">
+<pre class="codecga">
 attr buildingheight = 20
   
 const textureWidth = 586
@@ -287,7 +265,7 @@ Roof -->
 
 <!-- FOOTER -->
 
-<p class="foot">Copyright &copy;2008-2024 Esri R&amp;D Center Zurich. All rights reserved.</p>
+<p class="foot">Copyright &copy;2008-2025 Esri R&amp;D Center Zurich. All rights reserved.</p>
 
 <!-- END CENTERED CONTENT --></div>
 </body>

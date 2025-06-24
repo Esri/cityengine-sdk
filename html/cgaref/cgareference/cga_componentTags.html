@@ -23,16 +23,16 @@ Tags are string-based information stored directly on the topological components 
 <p>A tag is a string that defines its name. Example: <span class="codelight">"Name"</span></p>
 
 <h4>Tag hierarchy</h4>
-Tags are hierarchically grouped with the name separator "." (dot). Example: <span class="codelight">"Name1.Name2"</span>, <span class="codelight">"Name1.Name3"</span>
+Tags are hierarchically grouped with the name separator "." (dot). Example: <span class="codelight">"Facade.Front"</span>, <span class="codelight">"Facade.Side"</span>
 <p>The dot-separated names within a tag are referred to as <i>subtags</i>.</p>
 
 <h4><a name="tagQueries"></a>Tag queries</h4>
 A tag query is a string that may include wildcards to replace subtags. There are two wildcards:
 <table cellspacing="10">
-	<tr><td width="30%"><span class="codelight">?</span> (question mark)</td><td>Matches exactly 1 subtag. Example: <span class="codelight">"?.Name"</span> </td></tr>
-	<tr><td width="30%"><span class="codelight">*</span> (asterix)</td><td>Matches 1 or more subtags. Example: <span class="codelight">"Name1.*.Name2"</span> </td></tr>
+	<tr><td width="30%"><span class="codelight">?</span> (question mark)</td><td>Matches exactly 1 subtag. Example: <span class="codelight">"?.Front"</span> </td></tr>
+	<tr><td width="30%"><span class="codelight">*</span> (asterix)</td><td>Matches 1 or more subtags. Example: <span class="codelight">"Facade.*.Left"</span> </td></tr>
 </table>
-Based on the hierarchical grouping, the tag query <span class="codelight">"Name1"</span> matches not only the exact tag <span class="codelight">"Name1"</span> but also tags with additional subtags, such as <span class="codelight">"Name1.Name2"</span>, <span class="codelight">"Name1.Name2.Name3"</span>.
+Based on the hierarchical grouping, the tag query <span class="codelight">"Facade"</span> matches not only the exact tag <span class="codelight">"Facade"</span> but also tags with additional subtags, such as <span class="codelight">"Facade.Front"</span>, <span class="codelight">"Facade.TypeA.Side.Left"</span>.
 
 <h2>Related</h2>
 <ul>
@@ -47,171 +47,194 @@ Based on the hierarchical grouping, the tag query <span class="codelight">"Name1
 </ul>
 
 
+
 <h2><a name="autoTags"></a>Auto-Tags</h2>
 Selected geometry creation operations automatically apply predefined tags. These tags identify semantically different parts of the output geometry. 
 <p>Auto-tags applied by a certain operation remain accessible until the operation is called again, replacing them with new ones. </p>
 
+<h3>Colors</h3>
+These are the rules for the colors used in the following examples.
+<pre class="codecga">
+Blue   --> color("#0399F5")
+Green  --> color("#09DE1F")
+Yellow --> color("#FADB19")
+Purple --> color("#8D09DE")
+Red    --> color("#FF360A")
+Orange --> color("#FA9100")
+</pre>
+
 <h3>Operations applying auto-tags on faces</h3>
-Face components are categorized into three principle types: bottom, side, and top. The bottom components correspond to the original faces, while the new side faces may be further categorized as either inner or outer, depending on whether they emanate from a hole.
+Face components are categorized into three principle types: bottom, side, and top. 
+The bottom components correspond to the original faces, while the new side faces may be further categorized as either inner or outer, depending on whether they emanate from a hole.
 
 <h4>Extrude</h4>
 <table summary="" class="twocol">
-<tr><td class="twocol_l"><img src="images/autotag-extrude.png" alt="autotag-extrude"/></td>
-<td><pre class="code3">
+<tr>
+<td class="twocol_l"><img class="centered" width="220" src="images/autotag-extrude.png" alt="autotag-extrude"/></td>
+<td class="twocol_r">
+    <em>See <a class="cga_op" href="op_extrude.html">extrude</a> operation.</em>
+<pre class="codecga">
 Init --> 
     extrude(4)
-    comp(f) { isTagged("extrude.bottom")     : Blue 
-            | isTagged("extrude.side.outer") : Yellow
-            | isTagged("extrude.side.inner") : Red
-            | isTagged("extrude.top")        : Green } 
-
+    comp(f) { isTagged("extrude.bottom")    : Blue 
+            | isTagged("extrude.side.outer"): Yellow
+            | isTagged("extrude.side.inner"): Red
+            | isTagged("extrude.top")       : Green } 
 </pre>
-	<em>See <a class="cga_op" href="op_extrude.html">extrude</a> operation.</em>
-</td></tr>
+</td>
+</tr>
 </table>
 
 <h4>Envelope</h4>
 <table summary="" class="twocol">
-<tr><td class="twocol_l"><img src="images/autotag-envelope.png" alt="autotag-envelope"/></td>
-<td><pre class="code3">
+<tr>
+<td class="twocol_l"><img class="centered" width="220" src="images/autotag-envelope.png" alt="autotag-envelope"/></td>
+<td class="twocol_r">
+    <em>See <a class="cga_op" href="op_envelope.html">envelope</a> operation.</em>
+<pre class="codecga">
 Init --> 
-    envelope(normal,4, 2.5,45, 3,45, 3.5,50, 2,50)
-    comp(f) { isTagged("envelope.bottom")     : Blue 
-            | isTagged("envelope.side.base")  : Yellow
-            | isTagged("envelope.side.slope") : Orange
-            | isTagged("envelope.side.inner") : Red
-            | isTagged("envelope.top")        : Green }
-
+    envelope(normal, 4, 2.5, 45, 3, 45, 2, 50, 2, 50)
+    comp(f) { isTagged("envelope.bottom")    : Blue 
+            | isTagged("envelope.side.base") : Yellow
+            | isTagged("envelope.side.slope"): Orange
+            | isTagged("envelope.side.inner"): Red
+            | isTagged("envelope.top")       : Green }
 </pre>
-	<em>See <a class="cga_op" href="op_envelope.html">envelope</a> operation.</em>
-</td></tr>
+</td>
+</tr>
 </table>
 
 <h4>Taper</h4>
 <table summary="" class="twocol">
-<tr><td class="twocol_l"><img src="images/autotag-taper.png" alt="autotag-taper"/></td>
-<td><pre class="code3">
+<tr>
+<td class="twocol_l"><img class="centered" width="220" src="images/autotag-taper.png" alt="autotag-taper"/></td> 
+<td class="twocol_r">
+    <em>See <a class="cga_op" href="op_taper.html">taper</a> operation.</em>
+<pre class="codecga">
 Init --> 
     taper(4)
-    comp(f) { isTagged("taper.bottom") : Blue 
-            | isTagged("taper.side")   : Yellow } 
-
-
+    comp(f) { isTagged("taper.bottom"): Blue 
+            | isTagged("taper.side")  : Yellow } 
 </pre>
-	<em>See <a class="cga_op" href="op_taper.html">taper</a> operation.</em>
-</td></tr>
+</td>
+</tr>
 </table>
 
 <h4>Roofs</h4>
 <p>All roof operations apply the same base tag <span class="codelight">"roof"</span>.</p>
 <table summary="" class="twocol">
-<tr><td class="twocol_l"><img src="images/autotag-roofGable.png" alt="autotag-roofGable"/></td>
-<td><pre class="code3">
-RoofAutoTags -->
+<tr>
+<td class="twocol_l"><img class="centered" width="220" src="images/autotag-roofGable.png" alt="autotag-roofGable"/></td>  
+<td class="twocol_r">
+    <em>See <a class="cga_op" href="op_roofGable.html">roofGable</a> operation.</em>
+<pre class="codecga">
+Init --> 
+    roofGable(byHeight, 4)
+    RoofAutoTags1
+
+RoofAutoTags1 -->
     comp(f) { isTagged("roof.bottom") : Blue 
             | isTagged("roof.side")   : Yellow
             | isTagged("roof.top")    : Green } 
-
-Init --> 
-    roofGable(byHeight, 4)
-    RoofAutoTags
 </pre>
-	<em>See <a class="cga_op" href="op_roofGable.html">roofGable</a> operation.</em>
-</td></tr>
+</td>
+</tr>
+
 <tr>
-	<td class="twocol_l"><img src="images/autotag-roofHip.png" alt="autotag-roofHip"/></td>
-	<td><pre class="code3">
-	
-	
+<td class="twocol_l"><img class="centered" width="220" src="images/autotag-roofHip.png" alt="autotag-roofHip"/></td>
+<td class="twocol_r">
+    <em>See <a class="cga_op" href="op_roofHip.html">roofHip</a> operation.</em>
+<pre class="codecga">
 Init --> 
     roofHip(byHeight, 4)
-    RoofAutoTags
+    RoofAutoTags1
 </pre>
-	<em>See <a class="cga_op" href="op_roofHip.html">roofHip</a> operation.</em>
-</td></tr>
+</td>
+</tr>
+
 <tr>
-	<td class="twocol_l"><img src="images/autotag-roofPyramid.png" alt="autotag-roofPyramid"/></td>
-<td><pre class="code3">
-
-
+<td class="twocol_l"><img class="centered" width="220" src="images/autotag-roofPyramid.png" alt="autotag-roofPyramid"/></td>
+<td class="twocol_r">
+    <em>See <a class="cga_op" href="op_roofPyramid.html">roofPyramid</a> operation.</em>
+<pre class="codecga">
 Init --> 
     roofPyramid(byHeight, 4)
-    RoofAutoTags
+    RoofAutoTags1
 </pre>
-	<em>See <a class="cga_op" href="op_roofPyramid.html">roofPyramid</a> operation.</em>
-</td></tr>
+</td>
+</tr>
 </table>
+
 <br>
+
+The <a class="cga_op" href="op_roofRidge.html">roofRidge</a> and <a class="cga_op" href="op_roofShed.html">roofShed</a> operations additionally classify the sides as inner and outer.
+<br><br>
 <table summary="" class="twocol">
 <tr>
-	<td class="twocol_l"><img src="images/autotag-roofRidge.png" alt="autotag-roofRidge"/></td>
-<td><pre class="code3">
-RoofAutoTags -->
-    comp(f) { isTagged("roof.bottom")     : Blue 
-            | isTagged("roof.side.outer") : Yellow
-            | isTagged("roof.side.inner") : Red
-            | isTagged("roof.top")        : Green } 
-
+<td class="twocol_l"><img class="centered" width="220" src="images/autotag-roofRidge.png" alt="autotag-roofRidge"/></td>
+<td class="twocol_r">
+    <em>See <a class="cga_op" href="op_roofRidge.html">roofRidge</a> operation.</em>
+<pre class="codecga">
 Init --> 
     roofRidge(byHeight, 4)
-    RoofAutoTags
+    RoofAutoTags2
+
+RoofAutoTags2 -->
+    comp(f) { isTagged("roof.bottom")    : Blue 
+            | isTagged("roof.side.outer"): Yellow
+            | isTagged("roof.side.inner"): Red
+            | isTagged("roof.top")       : Green } 
 </pre>
-	<em>See <a class="cga_op" href="op_roofRidge.html">roofRidge</a> operation.</em>
-</td></tr>
+</td>
+</tr>
+
 <tr>
-	<td class="twocol_l"><img src="images/autotag-roofShed.png" alt="autotag-roofShed"/></td>
-<td><pre class="code3">
-
-
+<td class="twocol_l"><img class="centered" width="220" src="images/autotag-roofShed.png" alt="autotag-roofShed"/></td>
+<td class="twocol_r">
+    <em>See <a class="cga_op" href="op_roofShed.html">roofShed</a> operation.</em>
+<pre class="codecga">
 Init --> 
     roofShed(byHeight, 4)
-    RoofAutoTags
+    RoofAutoTags2
 </pre>
-	<em>See <a class="cga_op" href="op_roofShed.html">roofShed</a> operation.</em>
-</td></tr>
+
+</td>
+</tr>
 </table>
 
-<h4>Boolean 3D operations</h4>
+<h3>Boolean operations</h3>
+In Boolean operations, both faces and edges receive auto-tags: faces according to their source operand, and the newly created intersection edges.
+<p class="piccaptioncentered"><img src="images/autotag-boolOps.png">
+
 <table summary="" class="twocol">
-<tr><td class="twocol_l"><img src="images/autotag-union.png" alt="autotag-union"/></td>
-<td><pre class="code3">
+<tr>   
+<td class="twocol_r">
+<pre class="codecga">
 BoolAutoTags -->
-    comp(f) { isTagged("bool.A") : Blue 
-            | isTagged("bool.B") : Green } 
-
-Sphere --> t(0.3,0.3,0.3) primitiveSphere()
-
-Init --> 
-    extrude(1)
-    union Sphere
-    BoolAutoTags
-</pre>
-	<em>See <a class="cga_op" href="op_boolOp.html">union</a> operation.</em>
-</td></tr>
-
-<tr><td class="twocol_l"><img src="images/autotag-subtract.png" alt="autotag-subtract"/></td>
-<td><pre class="code3">
-Init --> 
-    extrude(1)
-    subtract Sphere
-    BoolAutoTags
+    comp(f) { isTagged("bool.A")  : Blue 
+            | isTagged("bool.B")  : Green  }
+    comp(e) { isTagged("bool.cut"): Orange }
 
 
-</pre>
-	<em>See <a class="cga_op" href="op_boolOp.html">subtract</a> operation.</em>
-</td></tr>
+Cube   --> primitiveCube
+Sphere --> t(0.3,0.3,0.3) primitiveSphere
+</pre> 
+    <em>See <a class="cga_op" href="op_boolOp.html">union</a>, <a class="cga_op" href="op_boolOp.html">subtract</a>, <a class="cga_op" href="op_boolOp.html">intersect</a> operations.</em>
+</td>
+<td class="twocol_r">
+<pre class="codecga">
+Left   --> union { Cube | Sphere }
+           BoolAutoTags
 
-<tr><td class="twocol_l"><img src="images/autotag-intersect.png" alt="autotag-intersect"/></td>
-<td><pre class="code3">
-Init --> 
-    extrude(1)
-    intersect Sphere
-    Sphere --> t(0.3,0.3,0.3) primitiveSphere()
+Middle --> subtract { Cube | Sphere }
+           BoolAutoTags
 
+Right  --> intersect { Cube | Sphere } 
+           BoolAutoTags
+</pre> 
 
-</pre>
-	<em>See <a class="cga_op" href="op_boolOp.html">intersect</a> operation.</em>
-</td></tr>
+</td>
+</tr>
 </table>
 
 <h3><a name="edgeAutoTags"></a>Operations applying auto-tags on edges</h3>
@@ -219,159 +242,238 @@ The <a class="cga_op" href="op_setback.html">setback</a> operation and its varia
 		<a class="cga_op" href="op_setbackPerEdge.html">setbackPerEdge</a>, 
 		<a class="cga_op" href="op_shapeLUO.html">shapeLUO</a> and
 		<a class="cga_op" href="op_splitAndSetbackPerimeter.html">splitAndSetbackPerimeter</a> &mdash; automatically tag edge components using the same base <span class="codelight">"setback"</span>.
+
 <h4>Shape</h4>
 <table summary="" class="twocol">
 <tr>
-	<td class="twocol_l"><img src="images/autotag-setback-shape.png" alt="autotag-setback-shape"/></td>
-<td><pre class="code3">
-ShapeAutoTags -->
-    comp(e) { isTagged("setback.front") : Blue 
-            | isTagged("setback.side")  : Yellow
-            | isTagged("setback.back")  : Green }
-
+<td class="twocol_l"><img src="images/autotag-setback-shape.png" alt="autotag-setback-shape"/></td>
+<td class="twocol_r">
+<pre class="codecga">
 Init --> 
-    setback(4) { front : ShapeAutoTags }
+    setback(4) { front: ShapeAutoTags }
+
+ShapeAutoTags -->
+    comp(e) { isTagged("setback.front"): Blue
+            | isTagged("setback.side") : Yellow
+            | isTagged("setback.back") : Green }
 </pre>
-</td></tr>
+</td>
+</tr>
 </table>
 
 <h4>Remainder</h4>
 <table>
 <tr>
-	<td class="twocol_l"><img src="images/autotag-setback-remainder.png" alt="autotag-setback-remainder"/></td>
-<td><pre class="code3">
+<td class="twocol_l"><img src="images/autotag-setback-remainder.png" alt="autotag-setback-remainder"/></td>
+<td class="twocol_r">
+<pre class="codecga">
+Init --> 
+    setback(4) { front    : NIL
+               | remainder: RemainderAutoTags }
 
 RemainderAutoTags -->
-    comp(e) { isTagged("setback.side")      : Yellow
-            | isTagged("setback.back")      : Green 
-            | isTagged("setback.remainder") : Purple }
-Init --> 
-    setback(4) { front     : NIL
-               | remainder : RemainderAutoTags }
+    comp(e) { isTagged("setback.side")     : Yellow
+            | isTagged("setback.back")     : Green 
+            | isTagged("setback.remainder"): Purple }
 </pre>
-</td></tr>
+</td>
+</tr>
 </table>
 
 <h2><a name="tagPropagation"></a>Tag propagation</h2>
-In general, geometry-modifying operations preserve tags on existing components and propagate tags to newly constructed components when applicable.
+Geometry-modifying operations preserve tags on existing components and propagate tags to newly constructed components when applicable based on consistent rules.
 
 <h3>Geometry subdivision</h3>
-<p> Subdivided edge and face components keep their tags. Newly constructed components have no initial tags.</p>
+<p> When splitting geometry, tags on existing edge and face components that were cut are kept. New components, such as new faces to close cut volumes, have no initial tags.</p>
 
 <table summary="" class="twocol">
 <tr>
-	<td class="twocol_l"><img src="images/tags-propagation-split.png" alt="tags-propagation-split"/></td>
-<td><pre class="code3">
-
+<td class="twocol_l"><img class="centered" src="images/tags-propagation-split.png" alt="tags-propagation-split"/></td>
+<td class="twocol_r">
+    <em>Setup: The faces are tagged by the <a class="cga_op" href="op_roofGable.html">roofGable</a> operation, while edge and vertex tags are added using the <a class="cga_op" href="op_tag.html">tag</a> operation.</em>
+<pre class="codecga">
 Init --> 
     roofGable(byHeight, 4)
-    split(z) { ~2 : RoofAutoTags }*
+    tag("EdgeTag", edges)
+    tag("VertexTag", vertices)
+    VisualizeTags
+
+VisualizeTags -->
+    RoofAutoTags1
+    comp(e) { isTagged("EdgeTag")  : Orange }
+    comp(v) { isTagged("VertexTag"): Purple }
 </pre>
-	<em>Here the auto-tags applied by the <a class="cga_op" href="op_roofGable.html">roofGable</a> operation are kept by the <a class="cga_op" href="op_split.html">split</a> operation.</em>
-</td></tr>
+<em>These tags are kept by subsequent operations, e.g., when using the <a class="cga_op" href="op_split.html">split</a> operation.</em>
+<pre class="codecga">
+Init --> 
+    roofGable(byHeight, 4)
+    tag("EdgeTag", edges)
+    tag("VertexTag", vertices)
+    split(x) { '0.25: t(0,split.index,0) VisualizeTags }*
+</pre>
+</td>
+</tr>
 </table>
 
 <h3>Face tag propagation</h3>
 <p> New faces constructed on top of existing ones get the tags of their source face. </p>
 <table summary="" class="twocol">
 <tr>
-	<td class="twocol_l"><img src="images/tags-facePropagation.png" alt="tags-facePropagation"/></td>
-<td><pre class="code3">
-
+<td class="twocol_l"><img src="images/tags-facePropagation.png" alt="tags-facePropagation"/></td>
+<td class="twocol_r">
+    <em>Here the auto-tags applied by the <a class="cga_op" href="op_roofGable.html">roofGable</a> operation are automatically 
+        propagated to the new faces constructed by the <a class="cga_op" href="op_extrude.html">extrude</a> operation. 
+    <br><br>
+    Note: Each face now has both extrude and roof auto-tags.</em>
+<pre class="codecga">
 Init --> 
     roofGable(byHeight, 4)
     extrude(1)
-    RoofAutoTags
+    RoofAutoTags1
 </pre>
-	<em>Here the auto-tags applied by the <a class="cga_op" href="op_roofGable.html">roofGable</a> operation are automatically propagated to the new faces constructed by the <a class="cga_op" href="op_extrude.html">extrude</a> operation. </em>
-</td></tr>
+</td>
+</tr>
 </table>
 
-<h3>Edge tag propagation</h3>
-<p> New faces emanating from existing edges get the tags of their source edge. </p>
-
+<h3>Edge and vertex tag propagation</h3>
+<p>Edge and vertex propagation follows a simple rule in all geometry-modifying operations (e.g., <span class="codelight">extrude</span>, <span class="codelight">offset</span>): any new face "emanating" from an edge inherits that edge’s tags; any new edge "emanating" from a vertex inherits that vertex’s tags.</p>
 <table summary="" class="twocol">
 <tr>
-	<td class="twocol_l"><img src="images/tags-edgePropagation-extrude.png" alt="ags-edgePropagation-extrude"/></td>
-<td><pre class="code3">
-SetbackAutoTagsOnFaces -->
-    comp(f) { isTagged("setback.side")      : Yellow
-            | isTagged("setback.back")      : Green 
-            | isTagged("setback.remainder") : Purple
-            | all                           : White }
-Init --> 
-    setback(4) { front     : NIL
-               | remainder : Extrude }
-Extrude --> extrude(4)
-            SetbackAutoTagsOnFaces
-</pre>
-	<em>Here the edge auto-tags applied by the <a class="cga_op" href="op_setback.html">setback</a> operation are automatically propagated to the extruded side faces. </em>
-</td></tr>
-<tr>
-	<td class="twocol_l"><img src="images/tags-edgePropagation-envelope.png" alt="tags-edgePropagation-envelope"/></td>
-<td><pre class="code3">
+<td class="twocol_l"><img src="images/tag-propagation-setup.png" alt="tags-propagation-setup"/></td>
+<td class="twocol_r">
+    <em>Setup: This example <a class="cga_op" href="op_boolOp.html">subtracts</a> two quads, each with distinct edge and vertex tags applied by the <a class="cga_op" href="op_tag.html">tag</a> operation. The <span class="codelight">VisualizeTags</span> rule uses <a class="cga_op" href="func_geometry.html#hasTags">geometry.hasTags</a> to color each component according to its tags.
+        <br><br>
+        Note: We avoid the <span class="codelight">isTagged</span> selector (see <a class="cga_op" href="op_comp.html">comp</a>) because it also matches inherited tags (e.g., selecting an untagged edge of a tagged face), whereas <a class="cga_op" href="func_geometry.html#hasTags">geometry.hasTags</a> restricts the test to the inspected component.
+         </em>
+<pre class="codecga">
+Init --> subtract { A | B }
+         VisualizeTags
 
-Init --> 
-    setback(4) { front     : NIL
-               | remainder : Envelope }
-Envelope --> envelope(normal, 4, 2.5, 45, 3, 45, 2, 50, 2, 50)
-             SetbackAutoTagsOnFaces
-</pre>
-	<em>Example <a class="cga_op" href="op_envelope.html">envelope</a> operation.</em>
-</td></tr>
-<tr>
-	<td class="twocol_l"><img src="images/tags-edgePropagation-offset.png" alt="tags-edgePropagation-offset"/></td>
-<td><pre class="code3">
+A --> tag("e.A", edges)
+      tag("v.A", vertices)
 
-Init --> 
-    setback(4) { front     : NIL
-               | remainder : Offset }
-Offset --> offset(-2)
-           SetbackAutoTagsOnFaces
+B --> tag("e.B", edges)
+      tag("v.B", vertices)
+      t('0.5, 0, '0.5)
+
+VisualizeTags -->
+    comp(f) { geometry.hasTags("e.A", faces): Green
+            | geometry.hasTags("e.B", faces): Blue 
+            | all                           : White. }
+
+    comp(e) { geometry.hasTags("e.A", edges): Green 
+            | geometry.hasTags("e.B", edges): Blue
+            | geometry.hasTags("v.A", edges): Orange 
+            | geometry.hasTags("v.B", edges): Purple }
+
+    comp(v) { geometry.hasTags("v.A", vertices): Orange
+            | geometry.hasTags("v.B", vertices): Purple }
 </pre>
-	<em>Example <a class="cga_op" href="op_offset.html">offset</a> operation. </em>
-</td></tr>
+</td>
+</tr>
+
+<tr>
+    <td class="twocol_l"><img src="images/tag-propagation-extrude.png" alt="tags-propagation-extrude"/></td>
+    <td class="twocol_r">
+<em>Example <a class="cga_op" href="op_extrude.html">extrude</a> operation.</em>
+<pre class="codecga">
+Init --> 
+    subtract { A | B }
+    extrude(4)
+    VisualizeTags
+</pre>
+    </td>
+    </tr>
+
+<tr>
+<td class="twocol_l"><img src="images/tag-propagation-offset.png" alt="tags-propagation-offset"/></td>
+<td class="twocol_r">
+    <em>Example <a class="cga_op" href="op_offset.html">offset</a> operation. </em>
+<pre class="codecga">
+Init --> 
+    subtract { A | B }
+    offset(-2)
+    VisualizeTags
+</pre>
+</td>
+</tr>
+
+<tr>
+    <td class="twocol_l"><img src="images/tag-propagation-taper.png" alt="tags-propagation-taper"/></td>
+    <td class="twocol_r">
+    <em>Example <a class="cga_op" href="op_taper.html">taper</a> operation. </em>
+<pre class="codecga">
+Init --> 
+    subtract { A | B }
+    taper(4)
+    VisualizeTags
+</pre>
+    </td>
+    </tr>
 </table>
 <p> Also see the <a class="cga_op" href="op_setTagsFromEdgeAttrs.html#setbackExample">setTagsFromEdgeAttrs</a> operation for more examples. </p>
 
 <h3><a name="cleanup"></a>Geometry cleanup</h3>
-<p>The <a class="cga_op" href="op_cleanupGeometry.html">cleanupGeometry</a> operation maintains existing tags, preventing the removal of tagged edges and edges between faces with different tags.</p>
-
+<p>The <a class="cga_op" href="op_cleanupGeometry.html">cleanupGeometry</a> operation maintains existing tags. This means:</p>
+<ul>
+	<li>Tagged edges and edges between coplanar faces with different tags are kept.</li>
+	<li>Tagged vertices and collinear vertices between edges with different tags are kept.</li>
+</ul>
 <table summary="" class="twocol">
 <tr>
-	<td class="twocol_l"><img src="images/tags-geometryCleanup.png" alt="tags-geometryCleanup"/></td>
-<td><pre class="code3">
+<td class="twocol_l"><img src="images/tag-propagation-offset.png" alt="tags-propagation-offset"/></td>
+<td class="twocol_r">
+    <em>Continuing the example from above: Using the <a class="cga_op" href="op_cleanupGeometry.html">cleanupGeometry</a> operation to merge coplanar faces has no effect because of the existing tags. </em>
+<pre class="codecga">
 Init --> 
-    setback(4) { front     : NIL
-               | remainder : OffsetCleanup }
-               
-OffsetCleanup --> offset(-2)
-                  cleanupGeometry(all, 0)
-                  SetbackAutoTagsOnFaces
+    subtract { A | B }
+    offset(-2)
+    Cleanup
+
+Cleanup -->
+    cleanupGeometry(edges, 0)
+    VisualizeTags
 </pre>
-	<em>The <a class="cga_op" href="op_cleanupGeometry.html">cleanupGeometry</a> operation only merges faces with the same tags. </em>
-</td></tr>
+</td>
+</tr>
+
+<tr>
+<td class="twocol_l"><img src="images/tag-propagation-cleanup.png" alt="tags-propagation-cleanup"/></td>
+<td class="twocol_r">
+    <em>After using the <a class="cga_op" href="op_deleteTags.html">deleteTags</a> operation to remove the propagated tags from the inner edges, the adjacent faces with the same tags are merged.</em>
+<pre class="codecga">
+Init --> 
+    subtract { A | B }
+    offset(-2)
+    Cleanup
+
+Cleanup -->
+    deleteTags("v", edges)
+    cleanupGeometry(edges, 0)
+    VisualizeTags
+</pre>
+</td>
+</tr>
 </table>
 
 <h3>Operations that clear all tags</h3>
 <h4>By design</h4>
 These operations replace the current shape's geometry asset, thus existing component tags are cleared.
 <ul>
-	<li><a class="normw" href="op_i.html">i (insert)</a>, <a class="normw" href="op_insertAlongUV.html">insertAlongUV</a> operations</li>
-	<li><a class="normw" href="op_primitive.html">primitiveXXX</a> operations</li>
-	<li><a class="normw" href="op_footprint.html">footprint</a> operation</li>
-	<li><a class="normw" href="op_resetGeometry.html">resetGeometry</a> operation</li>
+	<li><a class="cga_op" href="op_i.html">i (insert)</a>, <a class="cga_op" href="op_insertAlongUV.html">insertAlongUV</a> operations</li>
+	<li><a class="cga_op" href="op_primitive.html">primitiveXXX</a> operations</li>
+	<li><a class="cga_op" href="op_footprint.html">footprint</a> operation</li>
+	<li><a class="cga_op" href="op_resetGeometry.html">resetGeometry</a> operation</li>
 </ul>
 <h4>Unsupported</h4>
 These operations do (currently) not support working with component tags and clear all tags.
 <ul>
-	<li><a class="normw" href="op_splitArea.html">splitArea</a> operation</li>
-	<li><a class="normw" href="op_scatter.html">scatter</a> operation</li>
-	<li><a class="normw" href="op_reduceGeometry.html">reduceGeometry</a> operation</li>
+	<li><a class="cga_op" href="op_splitArea.html">splitArea</a> operation</li>
+	<li><a class="cga_op" href="op_reduceGeometry.html">reduceGeometry</a> operation</li>
 </ul>
 
 
-<p class="foot">Copyright &copy;2008-2024 Esri R&amp;D Center Zurich. All rights reserved.</p>
+<p class="foot">Copyright &copy;2008-2025 Esri R&amp;D Center Zurich. All rights reserved.</p>
 
 </div>
 </body>

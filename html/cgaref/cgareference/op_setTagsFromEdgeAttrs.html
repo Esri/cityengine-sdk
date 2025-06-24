@@ -49,8 +49,8 @@ It <a href="func_edgeAttr.html#sampling">samples</a> one element from each strin
 
 <table summary="" class="twocol">
 <tr>
-	<td class="twocol_l"><br><img src="images/setTagsFromEdgeAttrs_1.png" alt="edgeAttr-objattr"/></td>
-	<td><br><br><center><img src="images/setTagsFromEdgeAttrs_2.png" alt="edgeAttr-array"/></center><br><br>
+	<td class="twocol_l"><img src="images/setTagsFromEdgeAttrs_1.png" alt="edgeAttr-objattr"/></td>
+	<td class="twocol_l"><img src="images/setTagsFromEdgeAttrs_2.png" alt="edgeAttr-array"/><br><br>
 	<em>The initial shape has a string array with orientations set as edge attributes. See also <a href="https://doc.arcgis.com/en/cityengine/latest/help/help-compute-attributes.htm" target="_blank">Compute Edge Attributes tool</a>.</em>
 	</td>
 </tr>
@@ -61,7 +61,7 @@ It <a href="func_edgeAttr.html#sampling">samples</a> one element from each strin
 <table summary="" class="twocol">
 <tr>
 	<td class="twocol_l"><img src="images/setTagsFromEdgeAttrs_3.png" alt="edgeAttr-faces"/></td>
-	<td><pre class="code3">
+	<td class="twocol_r"><pre class="codecga">
 Visualizer --> 
     comp(e) { isTagged("edgeattr.orientations.front") 
                  : GreenEdge
@@ -70,19 +70,18 @@ Visualizer -->
 
 Lot --> setTagsFromEdgeAttrs()
         Visualizer
-	</pre>
+</pre>
 	<em>The string edge attributes are set as tags.</em>
 	</td>
 </tr>
 <tr>
 	<td class="twocol_l"><img src="images/setTagsFromEdgeAttrs_32.png" alt="edgeAttr-faces"/></td>
-	<td><pre class="code3">
-
+	<td class="twocol_r"><pre class="codecga">
 Lot --> s(10,0,10)
         primitiveDisk(12)
         setTagsFromEdgeAttrs()
         Visualizer
-	</pre>
+</pre>
 	<em>If the geometry has been modified, the attribute value is sampled for each face edge. See also <a href="func_edgeAttr.html#samplingFE">Sampling on face edges</a> example.</em>
 	</td>
 </tr>
@@ -93,22 +92,24 @@ Lot --> s(10,0,10)
 <table summary="" class="twocol">
 <tr>
 	<td class="twocol_l"><img src="images/setTagsFromEdgeAttrs_4.png" alt="edgeAttr-faces"/></td>
-	<td><pre class="code3">
-Lot --> setTagsFromEdgeAttrs()
-        setback(8) { isTagged("edgeattr.orientations.front")
-                        : Visualizer }
-	</pre>
+	<td class="twocol_r"><pre class="codecga">
+Lot --> 
+    setTagsFromEdgeAttrs()
+    setback(8) { isTagged("edgeattr.orientations.front")
+               : Visualizer }
+</pre>
 	<em>The edge tags stay on the geometry when applying further operations. In this example, the <a class="cga_op" href="op_setback.html">setback</a> operation also automatically copies <span class="codelight">"edgeAttr.orientations.front"</span> from the source edges to the new setback edges. This information can be combined with the <a href="cga_componentTags.html#edgeAutoTags">setback auto-tags</a>.</em>
 	</td>
 </tr>
 <tr>
 	<td class="twocol_l"><img src="images/setTagsFromEdgeAttrs_5.png" alt="edgeAttr-faces"/></td>
-	<td><pre class="code3">
-Lot --> setTagsFromEdgeAttrs()
-        setback(8) { isTagged("edgeattr.orientations.front")
-                        : NIL 
-                   | remainder : Visualizer }
-	</pre>
+	<td class="twocol_r"><pre class="codecga">
+Lot --> 
+    setTagsFromEdgeAttrs()
+    setback(8) { isTagged("edgeattr.orientations.front")
+                   : NIL 
+               | remainder : Visualizer }
+</pre>
 	<em>The edge tag <span class="codelight">"edgeAttr.orientations.front"</span> is also copied to the appropriate edges in the remainder.</em>
 	</td>
 </tr>
@@ -117,7 +118,7 @@ Lot --> setTagsFromEdgeAttrs()
 <br>
                 
 <!-- FOOTER -->
-<p class="foot">Copyright &copy;2008-2024 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
+<p class="foot">Copyright &copy;2008-2025 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
 
 <!-- END CENTERED CONTENT -->
 

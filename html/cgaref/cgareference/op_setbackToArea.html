@@ -65,15 +65,14 @@ The operation automatically applies semantic <a href="cga_componentTags.html">co
 
 <table summary="" class="twocol">
 <tr>
-	<td class="twocol_l"><br><img src="images/setbackToArea-simple.png" width="298" alt="setbackToArea-simple"/></td>
-	<td><pre class="code3">
-	
+	<td class="twocol_l"><img src="images/setbackToArea-simple.png" width="298" alt="setbackToArea-simple"/></td>
+	<td class="twocol_r"><pre class="codecga">
 Left --> setbackToArea(100) { all      = NIL   |
                              remainder = Green }
 
 Right --> setbackToArea(geometry.area - 300)
                             { all      = Green }
-	</pre>
+</pre>
 	<em>Left: A square shape with an area of <span class="codelight">400</span> is setback to an area of <span class="codelight">100</span>. Right: A setback is performed such that all setback faces have an area of <span class="codelight">300</span>.</em>
 	</td>
 </tr>
@@ -81,15 +80,14 @@ Right --> setbackToArea(geometry.area - 300)
 <br>
 <table summary="" class="twocol">
 <tr>
-	<td class="twocol_l"><br><img src="images/setbackToArea-selectors.png" width="298" alt="setbackToArea-selectors"/></td>
-	<td><pre class="code3">
-	
+	<td class="twocol_l"><img src="images/setbackToArea-selectors.png" width="298" alt="setbackToArea-selectors"/></td>
+	<td class="twocol_r"><pre class="codecga">
 attr area = 100
 
 Lot --> setbackToArea(area) { front     = Blue  |
                               left      = Red   |
                               remainder = Green }
-    </pre>
+</pre>
 	<em>A L-shaped setback to area <span class="codelight">100</span> and <span class="codelight">300</span>.</em>
 	</td>
 </tr>
@@ -97,14 +95,11 @@ Lot --> setbackToArea(area) { front     = Blue  |
 <br>
 <table summary="" class="twocol">
 <tr>
-	<td class="twocol_l"><br><img src="images/setbackToArea-scale.png" width="298" alt="setbackToArea-scale"/></td>
-	<td><pre class="code3">
-	
-	
-	
+	<td class="twocol_l"><img src="images/setbackToArea-scale.png" width="298" alt="setbackToArea-scale"/></td>
+	<td class="twocol_r"><pre class="codecga">
 Lot --> setbackToArea(100) { all       = Blue  |
                              remainder = Green }
-    </pre>
+</pre>
 	<em>A setback to area <span class="codelight">100</span> on the same shape at different scales.</em>
 	</td>
 </tr>
@@ -114,8 +109,8 @@ Lot --> setbackToArea(100) { all       = Blue  |
 
 <table summary="" class="twocol">
 <tr>
-	<td class="twocol_l"><br><img src="images/setbackToArea-series.png" width="298" alt="setbackToArea-series"/></td>
-	<td><pre class="code3">
+	<td class="twocol_l"><img src="images/setbackToArea-series.png" width="298" alt="setbackToArea-series"/></td>
+	<td class="twocol_r"><pre class="codecga">
 attr area = 300
 
 const minDists = comp(fe) { all : rand(3)    }
@@ -132,13 +127,13 @@ Lot -->
     setbackToArea(area, minDists, maxDists)
                            { all       = NIL   |
                              remainder = Green }
-	</pre>
+</pre>
 	<em>The setback to restricted by minimum and maximum distances (highlighted in red).</em>
 	</td>
 </tr>
 </table>
 
-<p class="foot">Copyright &copy;2008-2024 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
+<p class="foot">Copyright &copy;2008-2025 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
 
 </div>
 </body>

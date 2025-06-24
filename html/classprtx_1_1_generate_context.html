@@ -23,7 +23,7 @@
   <td id="projectlogo"><img alt="Logo" src="esri_prt_55px.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ArcGIS Procedural Runtime
-   &#160;<span id="projectnumber">3.2.10650</span>
+   &#160;<span id="projectnumber">3.3.11173</span>
    </div>
   </td>
  </tr>
@@ -114,16 +114,16 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:a83cac2e5fa3c92160771ed14de50a6ec"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_generate_context.html#a83cac2e5fa3c92160771ed14de50a6ec">GenerateContext</a> (const <a class="el" href="classprt_1_1_initial_shape.html">prt::InitialShape</a> *const *initialShapes, const prt::OcclusionSet::Handle *occlusionHandles, size_t initialShapeCount, <a class="el" href="classprt_1_1_callbacks.html">prt::Callbacks</a> *callbacks, <a class="el" href="classprt_1_1_cache.html">prt::Cache</a> *cache, const OcclusionSetsVector &amp;occlusionSets)</td></tr>
-<tr class="separator:a83cac2e5fa3c92160771ed14de50a6ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5dccd578edaaf57b91e4728556e8be46"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_generate_context.html#a5dccd578edaaf57b91e4728556e8be46">GenerateContext</a> (const <a class="el" href="classprt_1_1_initial_shape.html">prt::InitialShape</a> *const *initialShapes, const prt::OcclusionSet::Handle *occlusionHandles, size_t initialShapeCount, <a class="el" href="classprt_1_1_callbacks.html">prt::Callbacks</a> *callbacks, <a class="el" href="classprt_1_1_cache.html">prt::Cache</a> *cache, const <a class="el" href="classprt_1_1_occlusion_set.html">prt::OcclusionSet</a> *const *occlSets, const size_t *occlSetCounts)</td></tr>
+<tr class="separator:a5dccd578edaaf57b91e4728556e8be46"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a35809593db109b240c138e18939895c1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_generate_context.html#a35809593db109b240c138e18939895c1">GenerateContext</a> (const <a class="el" href="classprt_1_1_initial_shape.html">prt::InitialShape</a> *const *initialShapes, size_t initialShapeCount, <a class="el" href="classprt_1_1_callbacks.html">prt::Callbacks</a> *callbacks, <a class="el" href="classprt_1_1_cache.html">prt::Cache</a> *cache, <a class="el" href="classprt_1_1_occlusion_set.html">prt::OcclusionSet</a> *writableOcclusionSet)</td></tr>
 <tr class="separator:a35809593db109b240c138e18939895c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A <a class="el" href="classprtx_1_1_generate_context.html">GenerateContext</a> is created for each <a class="el" href="namespaceprt.html#a310381e586ced8f4b08efd472a6f0782">prt::generate()</a> call. It basically contains the parameters of the <a class="el" href="namespaceprt.html#a310381e586ced8f4b08efd472a6f0782">prt::generate()</a> call. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a83cac2e5fa3c92160771ed14de50a6ec"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a83cac2e5fa3c92160771ed14de50a6ec">&#9670;&nbsp;</a></span>GenerateContext() <span class="overload">[1/2]</span></h2>
+<a id="a5dccd578edaaf57b91e4728556e8be46"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5dccd578edaaf57b91e4728556e8be46">&#9670;&nbsp;</a></span>GenerateContext() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -164,8 +164,14 @@ Protected Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const OcclusionSetsVector &amp;&#160;</td>
-          <td class="paramname"><em>occlusionSets</em>&#160;</td>
+          <td class="paramtype">const <a class="el" href="classprt_1_1_occlusion_set.html">prt::OcclusionSet</a> *const *&#160;</td>
+          <td class="paramname"><em>occlSets</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const size_t *&#160;</td>
+          <td class="paramname"><em>occlSetCounts</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -422,7 +428,7 @@ Protected Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Nov 6 2024 10:59:45 for ArcGIS Procedural Runtime by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Jun 10 2025 14:40:43 for ArcGIS Procedural Runtime by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.14
 </small></address>

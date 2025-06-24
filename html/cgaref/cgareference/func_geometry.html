@@ -170,16 +170,25 @@ Cone--&gt;
 
 <p class="code2"><span class="codelight">bool</span> geometry.hasTags()</p>
 <p class="code2"><span class="codelight">bool</span> geometry.hasTags(<span class="cga_opparam">tagQuery</span>)</p>
+<p class="code2"><span class="codelight">bool</span> geometry.hasTags(<span class="cga_opparam">tagQuery</span>, <span class="cga_opparam">components</span>)</p>
 
 <h2>Parameters </h2>
 
 <ul>
 	<li><span class="cga_opparam">tagQuery</span> (string)<br>The query defining which tags to consider. See also <a class="normw" href="cga_componentTags.html">Geometry Tagging: Essential Knowledge</a>.</li>
+	<li><span class="cga_opparam">components</span> (selector)<br>
+		<table cellspacing="5">
+			<tr><td width="15%"><span class="codelight">all</span></td><td>Default. Checks tags on all components.</td></tr>
+			<tr><td><span class="codelight">faces</span></td><td>Only checks face tags.</td></tr>
+			<tr><td><span class="codelight">edges</span></td><td>Only checks edge tags.</td></tr>
+			<tr><td><span class="codelight">vertices</span></td><td>Only checks vertex tags.</td></tr>
+		</table>
+	</li>
 </ul>
 
 <h2>Returns</h2>
 
-<p class="content"><span class="cga_keyword">true</span> if any geometry component (face, edge or vertex) has tags, <span class="cga_keyword">false</span> otherwise. If a <span class="cga_opparam">tagQuery</span> is provided, only matching tags are considered.</p>
+<p class="content"><span class="cga_keyword">true</span> if there are any tags, <span class="cga_keyword">false</span> otherwise. If a <span class="cga_opparam">tagQuery</span> is provided, only matching tags are considered. If <span class="cga_opparam">components</span> are specified, only their tags are considered.</p>
 
 <h2>Related</h2>
 
@@ -489,18 +498,25 @@ Cone--&gt;
 
 <p class="code2"><span class="codelight">string[]</span> geometry.tags()</p>
 <p class="code2"><span class="codelight">string[]</span> geometry.tags(<span class="cga_opparam">tagQuery</span>)</p>
+<p class="code2"><span class="codelight">string[]</span> geometry.tags(<span class="cga_opparam">tagQuery</span>, <span class="cga_opparam">components</span>)</p>
 
 <h2>Parameters </h2>
 
 <ul>
 	<li><span class="cga_opparam">tagQuery</span> (string)<br>The query defining which tags to include in the result. See also <a class="normw" href="cga_componentTags.html">Geometry Tagging: Essential Knowledge</a>.</li>
+	<li><span class="cga_opparam">components</span> (selector)<br>
+		<table cellspacing="5">
+			<tr><td width="15%"><span class="codelight">all</span></td><td>Default. Includes tags from all components.</td></tr>
+			<tr><td><span class="codelight">faces</span></td><td>Only includes face tags.</td></tr>
+			<tr><td><span class="codelight">edges</span></td><td>Only includes edge tags.</td></tr>
+			<tr><td><span class="codelight">vertices</span></td><td>Only includes vertex tags.</td></tr>
+		</table>
+	</li>
 </ul>
 
 <h2>Returns</h2>
 
-<p>An array with alphabetically sorted tags. If a <span class="cga_opparam">tagQuery</span> is provided, only matching tags are included.</p>
-
-<p class="notes">Includes each unique tag stored on a face, edge or vertex component of the geometry. </p>
+<p>An array with alphabetically sorted tags. If a <span class="cga_opparam">tagQuery</span> is provided, only matching tags are included.If <span class="cga_opparam">components</span> are specified, only their tags are included.</p>
 
 <h2>Related</h2>
 
@@ -559,7 +575,7 @@ Cone--&gt;
 </ul>
 
 <!-- FOOTER -->
-<p class="foot">Copyright &copy;2008-2024 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
+<p class="foot">Copyright &copy;2008-2025 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
 
 <!-- END CENTERED CONTENT -->
 

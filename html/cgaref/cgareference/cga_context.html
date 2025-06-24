@@ -153,16 +153,13 @@ Context queries are functions that return information about contextual shapes in
 
 <table summary="" class="twocol">
 <tr>
-	<td class="twocol_l"><br>
+	<td class="twocol_l">
 	<img src="images/context-label.png" alt="context label" width="298"></td>
-	<td><pre class="code3">
-	
-	
-	
+	<td class="twocol_r"><pre class="codecga">
 Lot --> label("label")
         print(contextCount(intra, "label"))
         label("label")
-	</pre>
+</pre>
 	<em>In a first generation process each <span class="cga_keyword">label</span> operation creates a labeled copy of the current shape. In the second pass, the <a class="normw" href="func_contextCompare.html">contextCompare</a> query function is used to retrieve the number of all shapes with label <span class="codelight">"label"</span>.</em></td>
 </tr>
 </table>
@@ -171,31 +168,28 @@ Lot --> label("label")
 
 <table summary="" class="twocol">
 <tr>
-	<td class="twocol_l"><br>
+	<td class="twocol_l">
 	<img src="images/context-conditional.png" alt="context conditional" width="298"></td>
-	<td><pre class="code3">
+	<td class="twocol_r"><pre class="codecga">
 Lot   --> comp(f) { all : extrude(10) Test }
 
-Test  --> case overlaps(intra) :                         Red
-          else :                 s('2,'1,'2) center(xyz) Green
+Test  --> case overlaps(intra): Red
+          else: s('2,'1,'2) center(xyz) Green
 		  
 Red   --> color(1,0,0)
 Green --> color(0,1,0)		  
-	</pre>
+</pre>
 	<em>In this example the Lot rule is applied to an initial single shape with two faces (intra occlusion). The default <span class="cga_keyword">false</span> case of the <span class="cga_keyword">overlaps</span> enlarges the extruded volume. Therefore, the geometry intersects the neighboring extruded volume, and the <span class="cga_keyword">overlaps</span> query returns <span class="cga_keyword">true</span>. The enlarged occluder shape is not visible.</em>
-	<pre class="code3">
-	
-	
-	
+	<pre class="codecga">
 Test --> case overlaps(intra) : s('2,'1,'2) center(xyz) Red
          else :                                         Green
-	</pre>
+</pre>
 	<em>In contrast, if we enlarge the extruded volume in the non-default <span class="cga_keyword">true</span> case, the <span class="cga_keyword">overlaps</span> query returns <span class="cga_keyword">false</span></em>
 	</td>
 </tr>
 </table>
 
-<p class="foot">Copyright &copy;2008-2024 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
+<p class="foot">Copyright &copy;2008-2025 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
 
 </div>
 </body>

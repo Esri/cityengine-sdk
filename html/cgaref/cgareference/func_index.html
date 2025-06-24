@@ -234,7 +234,7 @@ array[ [true,false;
 <h3>Recursive element selection</h3>
 
 <p class="example">	
-<pre class="code3">
+<pre class="codecga">
 indexOfLargest(array) = indexOfLargest(array, 0, 0)
 
 indexOfLargest(array, i, iLargest) =
@@ -255,7 +255,7 @@ Lot --> comp(e) { indexOfLongestEdge : LongestEdge. }
 
 <h3>Parsing text file</h3>
 
-<pre class="code3">
+<pre class="codecga">
 // table
 // a;b;c&crarr;
 // d;e;f&crarr;
@@ -271,7 +271,7 @@ const firstCol = cells[indexes]                 // [a,d,g]
 
 <h3>Read CSV table</h3>
 
-<pre class="code3">
+<pre class="codecga">
 const table    = readStringTable("table.csv")
 const firstCol = table[0 : nRows(table)-1, 0]     // [a,d,g]
 </pre>
@@ -279,7 +279,7 @@ const firstCol = table[0 : nRows(table)-1, 0]     // [a,d,g]
 
 <h3>Indexing by 2d arrays</h3>
 
-<pre class="code3">
+<pre class="codecga">
 const a = ["_", "d", "i", "a", "g"]
 
 const b = [1,0,0,0;
@@ -299,7 +299,7 @@ const c = a[b]
 
 <h3>Indexing out of bounds</h3>
 
-<pre class="code3">
+<pre class="codecga">
 zeros(elems)    = floatArray[1:elems]
 ones(rows,cols) = floatArray[1:rows,1:cols] .+ 1
 
@@ -311,7 +311,7 @@ const b = ones(2,3) // [1,1,1 ; 1,1,1]
 
 <h3>Prime numbers</h3>
 
-<pre class="code3">
+<pre class="codecga">
 findPrimes(max) =
    case max <= 1 : floatArray
    else          : findPrimes(sqrt(max), [2 : max], floatArray)
@@ -324,7 +324,7 @@ Lot --> print(findPrimes(20)) // (8)[2,3,5,7,11,13,17,19]
 </pre>
 <em>An implementation of the <a href="https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes">Sieve of Eratosthenes</a> that uses indexing by boolean arrays.</em>
 
-<p class="foot">Copyright &copy;2008-2024 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
+<p class="foot">Copyright &copy;2008-2025 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
 
 </div>
 </body>

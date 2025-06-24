@@ -78,20 +78,19 @@
   <h3>Aligning to the lowest edge</h3>
   <table summary="" class="twocol">
     <tr>
-      <td class="twocol_l"></br>
-        <img src="images/alignScopeToGeometry-auto-a.png" alt="initial scene" width="298" > </td>
-      <td><pre class="code">A--> comp(f){ 25 : Faces }
-
+      <td class="twocol_l">
+        <img src="images/alignScopeToGeometry-auto-a.png" alt="initial scene" > </td>
+      <td class="twocol_r"><pre class="codecga">A--> comp(f){ 25 : Faces }
 </pre>
         <p><em>The initial scene: After a face component split, the  scope </em>(<em>and pivot, fat) happen to be positioned such that the y-axis points towards the ground.</em></p></td>
     </tr>
     <tr>
-      <td class="twocol_l"></br>
-        <img src="images/alignScopeToGeometry-auto-b.png" alt="after alignScopeToGeometry with auto" width="298" ></td>
-      <td><pre class="code">A--> comp(f){ 25 : Faces }</pre>
-        <pre class="code">     alignScopeToGeometry(zUp, any, world.lowest)</pre>
-        <pre class="code">&nbsp;</pre>
-        <pre class="code">&nbsp;</pre>
+      <td class="twocol_l">
+        <img src="images/alignScopeToGeometry-auto-b.png" alt="after alignScopeToGeometry with auto" ></td>
+      <td class="twocol_r">
+<pre class="codecga">
+A--> comp(f){ 25 : Faces }
+     alignScopeToGeometry(zUp, any, world.lowest)</pre>
         <p><em>Applying <span class="codelight">alignScopeToGeometry</span> with the <span class="codelight">any</span> and <span class="codelight">world.lowest</span> selectors guarantees that the y-axis of the scope points upwards.</em></p>
         <p><em>This is very useful e.g. for placing bricks on a roof.</em></p></td>
     </tr>
@@ -100,46 +99,47 @@
   <h3>Basic usage</h3>
   <table summary="" class="twocol">
     <tr>
-      <td class="twocol_l"></br>
-        <img src="images/alignScopeToGeometry-cylinder-a.png" alt="initial scene" width="298" > </td>
-      <td><pre class="code">A -->
+      <td class="twocol_l">
+        <img src="images/alignScopeToGeometry-cylinder-a.png" alt="initial scene" > </td>
+      <td class="twocol_r"><pre class="codecga">A -->
     s(2,3,2)
     i("cylinder.obj")
     B
     comp(f){ 
         0:  color("#ff0000") t(0,0,0.01) X |
         32: color("#0000ff") t(0,0,0.01) X }
- 		</pre>
+</pre>
         <p><em>The initial scene: </em><em>A mesh is inserted and two faces highlighted by applying a component split.</em></p></td>
     </tr>
     <tr>
-      <td class="twocol_l"><img src="images/alignScopeToGeometry-cylinder-b.png" alt="after alignScopeToGeometry with auto" width="298" ></td>
-      <td><em>The same scene, with scope and pivot of shape B highlighted.</em></td>
+      <td class="twocol_l"><img src="images/alignScopeToGeometry-cylinder-b.png" alt="after alignScopeToGeometry with auto" ></td>
+      <td class="twocol_r"><em>The same scene, with scope and pivot of shape B highlighted.</em></td>
     </tr>
     <tr>
-      <td class="twocol_l"><img src="images/alignScopeToGeometry-cylinder-c.png" alt="after alignScopeToGeometry with auto" width="298" ></td>
-      <td><pre class="code">B -->
-     alignScopeToGeometry(zUp, 1) 
-    </pre>
+      <td class="twocol_l"><img src="images/alignScopeToGeometry-cylinder-c.png" alt="after alignScopeToGeometry with auto" ></td>
+<td class="twocol_r"><pre class="codecga">
+B --> alignScopeToGeometry(zUp, 0, 1) 
+</pre>
         <p><em>After <span class="codelight">alignScopeToGeometry</span>, the pivot's (and the scope's) x-axis points along edge 1 of face 0 (red); the z-axis points along the face normal and the x-axis is normal to the two others. The pivot is positioned at the edges starting point and the scope is the pivot-aligned bounding box of the geometry.</em></p></td>
     </tr>
     <tr>
-      <td class="twocol_l"><img src="images/alignScopeToGeometry-cylinder-d.png" alt="after alignScopeToGeometry with auto" width="298" ></td>
-      <td><pre class="code">B -->
-    alignScopeToGeometry(yUp, 32, 2) 
-    </pre>
+      <td class="twocol_l"><img src="images/alignScopeToGeometry-cylinder-d.png" alt="after alignScopeToGeometry with auto" ></td>
+<td class="twocol_r">
+<pre class="codecga">
+B --> alignScopeToGeometry(yUp, 32, 2) 
+</pre>
         <p><em>Here, the second edge of face 32 (blue) is used, and the face-normal becomes the new y-axis. </em></p></td>
     </tr>
     <tr>
-      <td class="twocol_l"></br>
-        <img src="images/alignScopeToGeometry-cylinder-e.png" alt="after alignScopeToGeometry with auto" width="298" ></td>
-      <td><pre class="code">B -->
-      alignScopeToGeometry(yUp, any, world.lowest) 
-    </pre>
+      <td class="twocol_l">
+        <img src="images/alignScopeToGeometry-cylinder-e.png" alt="after alignScopeToGeometry with auto" ></td>
+<td class="twocol_r"><pre class="codecga">
+B --> alignScopeToGeometry(yUp, any, world.lowest) 
+</pre>
         <p><em>In this case, "any" and "world.lowest" select the edge with lowest y-position (in world coordinates), which becomes the new x-axis, and the corresponding face-normal becomes the new y-axis (because of the yUp selector). </em></p></td>
     </tr>
   </table>
-  <p class="foot">Copyright &copy;2008-2024 Esri R&amp;D Center Zurich. All rights reserved.</p>
+  <p class="foot">Copyright &copy;2008-2025 Esri R&amp;D Center Zurich. All rights reserved.</p>
   <!-- END CENTERED CONTENT -->
 </div>
 </body>

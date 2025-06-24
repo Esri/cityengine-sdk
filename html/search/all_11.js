@@ -20,6 +20,7 @@ var searchData=
   ['toxml',['toXML',['../classprt_1_1_object.html#af48f27c9b1da0b89a73db63498f6af9b',1,'prt::Object']]],
   ['toxmldocument',['toXMLDocument',['../classprt_1_1_object.html#af5c83f919a53fd94f8d0700690b7205e',1,'prt::Object']]],
   ['transformcoords',['transformCoords',['../namespaceprtx_1_1_mesh_utils.html#a587281189a0556ffc2adeaafd99d0116',1,'prtx::MeshUtils']]],
+  ['transformnormals',['transformNormals',['../namespaceprtx_1_1_mesh_utils.html#ab22a3fc964fa92e0db27861a9aef5016',1,'prtx::MeshUtils']]],
   ['transformpoint',['transformPoint',['../namespaceprtx_1_1_shape_utils.html#a7f5846848a76b565e9a3a7cd98a3d7e5',1,'prtx::ShapeUtils']]],
   ['translate',['translate',['../classprtx_1_1_bounding_box.html#aed66fd28969e5abecf598e1d2dc5a27b',1,'prtx::BoundingBox']]],
   ['triangulate',['triangulate',['../classprtx_1_1_encode_preparator_1_1_preparation_flags.html#af324c399740cba5abf69214f60fb8a04',1,'prtx::EncodePreparator::PreparationFlags']]],

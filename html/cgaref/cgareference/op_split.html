@@ -3,18 +3,7 @@
 
 <head>
 	<title>split Operation</title>
-	<link rel="stylesheet" href="../manual_style.css" type="text/css">
-	<style type="text/css">
-		<!--
-		.style1 {
-				font-size: 9px
-		}
-
-		.style2 {
-				font-size: 10px
-		}
-		-->
-	</style>
+	<link rel="stylesheet" href="../manual_style.css" type="text/css" />
 </head>
 
 <body>
@@ -129,7 +118,7 @@ Borders (start, end) of the uv split are defined by the minimal and maximal valu
 
 <p>Index and total are global; for instance</p>
 
-<pre class="code3">
+<pre class="codecga">
      ...
      primitiveCube()
      split(x) { '0.1 : A | '0.1 : B }*
@@ -156,9 +145,9 @@ Borders (start, end) of the uv split are defined by the minimal and maximal valu
 
 <table summary="" class="twocol">
 <tr>
-<td class="twocol_l"><br>
-<img src="images/split-initial.png" width="298"></td>
-<td>
+<td class="twocol_l">
+<img src="images/split-initial.png"></td>
+<td class="twocol_r">
 <em>
 This is the initial shape before the split. We will present a number of split examples
 along the x axis, the current shape's <span class="cga_keyword">scope.sx</span> is 10.<br>
@@ -166,7 +155,7 @@ along the x axis, the current shape's <span class="cga_keyword">scope.sx</span> 
 <p>
 Below are the rules used to color and size the shapes created in the split:
 </p>
-<pre class="code3">
+<pre class="codecga">
 X(h)-->
 	s('1,'h,'1)
 	color("#0000ff")
@@ -187,17 +176,17 @@ Z(h)-->
 
 <table summary="" class="twocol">
 <tr>
-<td class="twocol_l"><br>
-<img src="images/split-relative1.png" width="298"></td>
-<td>
-<pre class="code3">
+<td class="twocol_l">
+<img src="images/split-relative1.png"></td>
+<td class="twocol_r">
+<pre class="codecga">
 A-->
    split(x){ '0.5 : Z |
              '0.1 : Y(2) | 
              '0.2 : X(1) }
 </pre>
 <em>
-<br>
+
 This example shows the usage of the relative prefix. The green Z shape takes half of the
 initial shape's  size (5 units) and so on. The total sum of all shape sizes in x-direction is 8, 
 therefore the gap at the end.
@@ -207,17 +196,16 @@ therefore the gap at the end.
 </table><h3> Floating Sizes only: Ratios</h3>
 <table summary="" class="twocol">
 <tr>
-<td class="twocol_l"><br>
-<img src="images/split-ratio1.png" width="298"></td>
-<td>
-<pre class="code3">
+<td class="twocol_l">
+<img src="images/split-ratio1.png"></td>
+<td class="twocol_r">
+<pre class="codecga">
 A-->
    split(x){ ~0.5 : Z |
              ~0.1 : Y(2) | 
              ~0.2 : X(1) }
 </pre>
 <em>
-<br>
 The same example as above, but all sizes with the floating prefix. 
 Note how the whole initial scope is filled (no gap at the end), and the ratios are kept.
 </em>
@@ -229,17 +217,16 @@ Note how the whole initial scope is filled (no gap at the end), and the ratios a
 
 <table summary="" class="twocol">
 <tr>
-<td class="twocol_l"><br>
-<img src="images/split-floating1.png" width="298"></td>
-<td>
-<pre class="code3">
+<td class="twocol_l">
+<img src="images/split-floating1.png"></td>
+<td class="twocol_r">
+<pre class="codecga">
 A-->
    split(x){ 3.3 : Z(1) |
             ~3   : Y(2) | 
              5   : X(1) }			  
 </pre>
 <em>
-<br>
 Here, a floating sized shape is framed between two absolute sized shapes. Its size is adjusted
 from 3 to 1.7 to fulfill the absolute constraints.
 </em>
@@ -251,17 +238,16 @@ from 3 to 1.7 to fulfill the absolute constraints.
 
 <table summary="" class="twocol">
 <tr>
-<td class="twocol_l"><br>
-<img src="images/split-oversized.png" width="298"></td>
-<td>
-<pre class="code3">
+<td class="twocol_l">
+<img src="images/split-oversized.png"></td>
+<td class="twocol_r">
+<pre class="codecga">
 A-->
    split(x){ '0.5 : Z(1) |
              '0.6 : Y(2) | 
                 3 : X(1) }
 </pre>
 <em>
-<br>
 <p>
 The first shape Z (green) fits in, but the second one Y (yellow) is cut at size 5. 
 The X never gets created because there is no space left.
@@ -275,16 +261,15 @@ The X never gets created because there is no space left.
 
 <table summary="" class="twocol">
 <tr>
-<td class="twocol_l"><br>
-<img src="images/split-repeat1.png" width="298"></td>
-<td>
-<pre class="code3">
+<td class="twocol_l">
+<img src="images/split-repeat1.png"></td>
+<td class="twocol_r">
+<pre class="codecga">
 A--> 
    split(x){ 2 : X(2) | 
              1 : Y(1) }*
 </pre>
 <em>
-<br>
 A repeat split example. All sizes are absolute. The XY pattern is repeated 3 times, and the remaining unit is 
 filled with half a X, i.e. the geometry of the last X is cut off.
 </em>
@@ -296,16 +281,15 @@ filled with half a X, i.e. the geometry of the last X is cut off.
 
 <table summary="" class="twocol">
 <tr>
-<td class="twocol_l"><br>
-<img src="images/split-repeat-floating.png" width="298"></td>
-<td>
-<pre class="code3">
+<td class="twocol_l">
+<img src="images/split-repeat-floating.png"></td>
+<td class="twocol_r">
+<pre class="codecga">
 A--> 
    split(x){ ~2 : X(2) | 
              ~1 : Y(1) }*
 </pre>
 <em>
-<br>
 <p>
 If floating sizes are used in the repeat split, no shape is cut but the sizes are
 adjusted such that the ratio between the elements is kept and the whole scope can
@@ -320,21 +304,19 @@ be filled.
 
 <table summary="" class="twocol">
 <tr>
-<td class="twocol_l"><br>
-<img src="images/split-interleaved1.png" width="298"></td>
-<td>
-<pre class="code3">
+<td class="twocol_l">
+<img src="images/split-interleaved1.png"></td>
+<td class="twocol_r">
+<pre class="codecga">
 A-->
    split(x){ 1 : X(3) | 
                  {  ~1 : Y(2) | 
                    0.2 : Z(1) | 
                     ~1 : Y(2) }* | 
              1 : X(3) }
-
 </pre>
 <p>
 <em>
-<br>
 A interleaved split consisting of two absolute-sized shapes at both ends and 
 a repeat split in-between. Note: the green shapes Z have absolute sizes, while the yellow 
 Y shapes have floating sizes which turn out to be 0.9.
@@ -348,19 +330,17 @@ Y shapes have floating sizes which turn out to be 0.9.
 
 <table summary="" class="twocol">
 <tr>
-<td class="twocol_l"><br>
-<img src="images/split-rhythm.png" width="298"></td>
-<td>
-<pre class="code3">
+<td class="twocol_l">
+<img src="images/split-rhythm.png"></td>
+<td class="twocol_r">
+<pre class="codecga">
 A-->
    split(x){ {  1   : X(3) | 
                ~2.7 : Y(1) }* |
                 1   : X(3) }
-
 </pre>
 <p>
 <em>
-<br>
 Here it is demonstrated how a pattern ABABABA etc. can be achieved. Note the floating 
 size of the yellow Y shapes.
 </em>
@@ -373,17 +353,16 @@ size of the yellow Y shapes.
 
 <table summary="" class="twocol">
 <tr>
-<td class="twocol_l"><br>
-<img src="images/split-cylinder-initial.png" width="298"></td>
-<td>
-<pre class="code3">
+<td class="twocol_l">
+<img src="images/split-cylinder-initial.png"></td>
+<td class="twocol_r">
+<pre class="codecga">
 A-->
    i("cylinder.hor.obj")
    t(0,'0.5,0)	
 </pre>
 <p>
 <em>
-<br>
 Here it is demonstrated how a the geometry of the current shape is cut into a number
 of smaller shapes. A cylinder model is inserted into the current shape.
 </em>
@@ -392,19 +371,17 @@ of smaller shapes. A cylinder model is inserted into the current shape.
 </tr>
 
 <tr>
-<td class="twocol_l"><br>
-<img src="images/split-cylinder-cut.png" width="298"></td>
-<td>
-<pre class="code3">
+<td class="twocol_l">
+<img src="images/split-cylinder-cut.png"></td>
+<td class="twocol_r">
+<pre class="codecga">
 A-->
    i("cylinder.hor.obj")
    t(0,'0.5,0)
    split(x) { { ~0.75 : XX | ~1 : NIL }*  | ~0.5 : XX }
-	
 </pre>
 <p>
 <em>
-<br>
 Splitting the shape and using NIL in the split rule results in holes. Note how the cut surfaces
 are closed.
 </em>
@@ -416,10 +393,10 @@ are closed.
 <a name="uvsplitbasic"></a><h3>UV Split Basics</h3>
 <table summary="" class="twocol">
 <tr>
-<td class="twocol_l"><br>
-<img src="images/split-uv-example-1-1.png" width="298"></td>
-<td>
-<pre class="code3">
+<td class="twocol_l">
+<img src="images/split-uv-example-1-1.png"></td>
+<td class="twocol_r">
+<pre class="codecga">
 Init-->
 	extrude(scope.sx * 0.5)
 	comp(f) { front : Facade }
@@ -432,7 +409,6 @@ Facade-->
 </pre>
 <p>
 <em>
-<br>
 u split in uvSpace - the split happens at u = 0.5, independent of facade size.
 </em>
 
@@ -440,10 +416,10 @@ u split in uvSpace - the split happens at u = 0.5, independent of facade size.
 </tr>
 
 <tr>
-<td class="twocol_l"><br>
-<img src="images/split-uv-example-1-2.png" width="298"></td>
-<td>
-<pre class="code3">
+<td class="twocol_l">
+<img src="images/split-uv-example-1-2.png"></td>
+<td class="twocol_r">
+<pre class="codecga">
 Init-->
 	extrude(scope.sx * 0.5)
 	comp(f) { front : Facade }
@@ -456,7 +432,6 @@ Facade-->
 </pre>
 <p>
 <em>
-<br>
 u split in unitSpace - the splits happen at u = 5, dependent of facade size.
 </em>
 
@@ -469,18 +444,15 @@ u split in unitSpace - the splits happen at u = 5, dependent of facade size.
 
 <table summary="" class="twocol">
 <tr>
-<td class="twocol_l"><br>
-<img src="images/split-uv-example-2-1.png" width="298"></td>
-<td>
-<br>
-<pre class="code3">
+<td class="twocol_l">
+<img src="images/split-uv-example-2-1.png"></td>
+<td class="twocol_r">
+<pre class="codecga">
 Street-->
 	texture("builtin:uvtest.png")
 </pre>
 <p>
 <em>
-<br>
-<br>
 The test texture on a street with two segments.  The street's texture coordinates 
 are automatically generated; note that the two street segments have different lenghts 
 but are both covered by a [0,1] uv space, the u axis following the street direction
@@ -491,20 +463,15 @@ and the v axis, perpendicular to u, along the width.
 </tr>
 
 <tr>
-<td class="twocol_l"><br>
-<img src="images/split-uv-example-2-2.png" width="298"></td>
-<td>
-<br>
-<br>
-<br>
-<pre class="code3">
+<td class="twocol_l">
+<img src="images/split-uv-example-2-2.png"></td>
+<td class="twocol_r">
+<pre class="codecga">
 Street-->
 	split(u, unitSpace, 0) { ~10 : NIL | ~3 : color("#ff0000") X  |  ~10 : NIL}*
 </pre>
 <p>
 <em>
-<br>
-<br>
 The same street after a u-split in unitSpace. Every 20 meters a 3 meter wide band is drawn accross the street. 
 </em>
 
@@ -514,7 +481,7 @@ The same street after a u-split in unitSpace. Every 20 meters a 3 meter wide ban
 </table>
 
 <!-- FOOTER -->
-<p class="foot">Copyright &copy;2008-2024 Esri R&amp;D Center Zurich. All rights reserved.</p>
+<p class="foot">Copyright &copy;2008-2025 Esri R&amp;D Center Zurich. All rights reserved.</p>
 <!-- END CENTERED CONTENT --></div>
 </body>
 </html>

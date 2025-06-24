@@ -38,7 +38,7 @@
 
 <p>Local variables can be defined for functions, const functions, attributes and rules. The <span class="cga_opparam">expression</span> may reference functions, const functions and attributes which are defined outside the scope of the current definition as well as parameters and local variables which are defined prior in the list of local variables.</p>
 
-<pre class="code3">
+<pre class="codecga">
 attr  a  with ( x := "example" )        = x
 
 const b  with ( x := [0,1,2]  y := 0 )  = x[y]
@@ -52,7 +52,7 @@ Lot      with ( x := f(1) )             --> extrude(x)
 
 <p>In the following simple example a function computes and stores intermediate results in local variables <span class="code_std">d1</span> and <span class="code_std">d2</span> at the time the function is called. Each local variable is then referenced twice in order to compute the distance between 2 points.</p>
 
-<pre class="code3">
+<pre class="codecga">
 dist2d(x1, y1, x2, y2) with ( d1 := x2-x1  
                               d2 := y2-y1 )
 = sqrt(d1*d1 + d2*d2) 
@@ -62,7 +62,7 @@ Lot --> print("distance: " + dist2d(1,1,2,2)) // 1.414
 
 <p>The following rule computes the area of the current shape and stores it in a local variable. The value does not change despite the area of the shape is altered.</p>
 
-<pre class="code3">
+<pre class="codecga">
 Lot with ( area := geometry.area() ) --> s('2,0,'2)
                                          print("initial area: " + area)
                                          print("altered area: " + geometry.area())
@@ -74,7 +74,7 @@ Lot with ( area := geometry.area() ) --> s('2,0,'2)
 	<li><a href="const.html"><span class="code_std">const</span></a> keyword</li>
 </ul>
 
-<p class="foot">Copyright &copy;2008-2024 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
+<p class="foot">Copyright &copy;2008-2025 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
 
 <!-- END CENTERED CONTENT -->
 

@@ -77,7 +77,7 @@ All <span class="codelight">setback</span> operations automatically apply semant
 	</td>
 	<td class="twocol_l">
 	<img src="images/autotag-setback-shape.png" alt="autotag-setback-shape"/>
-	<pre class="code3">setback(4) { front : Shape }</pre>
+	<pre class="codecga">setback(4) { front : Shape }</pre>
 	</td></tr>
 </table>
 <h4>Remainder</h4>
@@ -92,7 +92,7 @@ All <span class="codelight">setback</span> operations automatically apply semant
 	</td>
 	<td class="twocol_l">
 		<img src="images/autotag-setback-remainder.png" alt="autotag-setback-remainder"/>
-		<pre class="code3">setback(4) { front : NIL 
+		<pre class="codecga">setback(4) { front : NIL 
            | remainder : Remainder }</pre>
 	</td></tr>
 </table>
@@ -124,8 +124,8 @@ For more information on working with component tags, refer to:
 
 <table summary="" class="twocol">
 <tr>
-	<td class="twocol_l"><br><img src="images/setback_street.front.png" width="298" alt="setback_street.front"/></td>
-	<td><pre class="code3">
+	<td class="twocol_l"><img src="images/setback_street.front.png" width="298" alt="setback_street.front"/></td>
+<td class="twocol_r"><pre class="codecga">
 LotInner --> Lot
 
 Lot --> setback(5) { street.front = Garden   |
@@ -135,7 +135,7 @@ Garden --> color("#00ff00")
 
 Building --> offset(-3, inside)
              extrude(world.up, rand(5, 15))
-	</pre>
+</pre>
 	</td>
 </tr>
 </table>
@@ -144,15 +144,15 @@ Building --> offset(-3, inside)
 
 <table summary="" class="twocol">
 <tr>
-	<td class="twocol_l"><br><img src="images/setback_array_1.png" width="298" alt="setback_array_1"/></td>
-	<td><pre class="code3">
+	<td class="twocol_l"><img src="images/setback_array_1.png" width="298" alt="setback_array_1"/></td>
+<td class="twocol_r"><pre class="codecga">
 // (9)[1,6,1,6,1,6,1,6,1]
 const dists = comp(fe) { all : case comp.index%2 == 0 : 1
                                else                   : 6 }
 
 Lot --> setback(dists) { all       = Garden   |
                          remainder : Building }
-	</pre>
+</pre>
 	<em>An array of alternating distances is created using the <a class="cga_op" href="func_comp.html">comp</a> function on a shape with 2 faces. Note that the distances in the array are applied in face-edge order. The first edge of each face is highlighted. The first distance is applied on the first edge of the first face (left) and the 5th distance is applied on the first edge of the second face (right).</em>
 	</td>
 </tr>
@@ -161,8 +161,8 @@ Lot --> setback(dists) { all       = Garden   |
 <br>
 <table summary="" class="twocol">
 <tr>
-	<td class="twocol_l"><br><img src="images/setback_array_2.png" width="298" alt="setback_array_2"/></td>
-	<td><pre class="code3">
+	<td class="twocol_l"><img src="images/setback_array_2.png" width="298" alt="setback_array_2"/></td>
+	<td class="twocol_r"><pre class="codecga">
 // (9)[4,0,2,0.5,5,0.5,2,2,0]
 const dists = comp(fe) { inside = 0   |
                          front  :
@@ -173,7 +173,7 @@ const dists = comp(fe) { inside = 0   |
 
 Lot --> setback(dists) { all       = Garden   |
                          remainder : Building }
-    </pre>
+</pre>
 	<em>In this example the <a class="cga_op" href="func_comp.html">comp</a> function is used with different <span class="cga_opparam">selectors</span> and <span class="cga_opparam">operators</span>.</em>
 	</td>
 </tr>
@@ -181,8 +181,8 @@ Lot --> setback(dists) { all       = Garden   |
 <br>
 <table summary="" class="twocol">
 <tr>
-	<td class="twocol_l"><br><img src="images/setback_array_3.png" width="298" alt="setback_array_3"/></td>
-	<td><pre class="code3">
+	<td class="twocol_l"><img src="images/setback_array_3.png" width="298" alt="setback_array_3"/></td>
+	<td class="twocol_r"><pre class="codecga">
 Left --> shapeL(5, 5) { shape     = Garden  |
                         remainder : Building }
 
@@ -191,7 +191,7 @@ const dists = comp(fe) { front = 5 | right = 5  }
 
 Right --> setback(dists) { all       = Garden   |
                            remainder : Building }
-    </pre>
+</pre>
 	<em>Left: A left-handed L shape using the <a class="cga_op" href="op_shapeLUO.html">shapeL</a> operation. Right: A right-handed L shape shape using <span class="codelight">setback</span>.</em>
 	</td>
 </tr>
@@ -199,7 +199,7 @@ Right --> setback(dists) { all       = Garden   |
 <br>
 <p>Also see the <a class="cga_op" href="op_setbackPerEdge.html#examples">setbackPerEdge</a> operation for more examples.</p>
 
-<p class="foot">Copyright &copy;2008-2024 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
+<p class="foot">Copyright &copy;2008-2025 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
 
 </div>
 </body>

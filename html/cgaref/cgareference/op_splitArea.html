@@ -4,17 +4,6 @@
 <head>
     <title>splitArea Operation</title>
     <link rel="stylesheet" href="../manual_style.css" type="text/css">
-	<style type="text/css">
-		<!--
-		.style1 {
-				font-size: 9px
-		}
-
-		.style2 {
-				font-size: 10px
-		}
-		-->
-	</style>
 </head>
 
 <body>
@@ -92,11 +81,11 @@
 
 	<table summary="" class="twocol">
 		<tr>
-			<td class="twocol_l"><br/>
+			<td class="twocol_l">
 				<p>
 					These are the rules for the colors used in the following examples.
 				</p>
-				<pre class="code3">
+<pre class="codecga">
 Red     --> color(1, 0, 0)                       // red
             print("area(R) = " + geometry.area)
 
@@ -117,7 +106,7 @@ Magenta --> color(1, 0, 1)                       // magenta
 
 Pink    -->                                      // semi-transparent pink
             color(1, 0.5, 0.5, 0.3)
-				</pre>
+</pre>
 			</td>
 		</tr>
 	</table>
@@ -126,17 +115,17 @@ Pink    -->                                      // semi-transparent pink
 
 	<table summary="" class="twocol">
 		<tr>
-			<td class="twocol_l"><br/>
-				<img src="images/splitArea_relative.png" width="300"><br/>
+			<td class="twocol_l">
+				<img src="images/splitArea_relative.png"><br/>
 				<img src="images/splitArea_relative_console.png">
 			</td>
-			<td>
-				<pre class="code3">
+			<td class="twocol_r">
+				<pre class="codecga">
 Lot -->
    print("total area = " + geometry.area)
    splitArea(x) { '0.7 : Green
                 | '0.3 : Yellow }
-				</pre>
+</pre>
 				<em>
 					This shape is split into two parts.  The first part is 70% of the original area, and the second part is 30% of the original area.  Note that the specified <span class="cga_opparam">area</span> amounts do not need to sum to 1.  For sums less than 1, the rest of the shape is discarded, and split sections greater than 1 are ignored.
 				</em>
@@ -149,12 +138,12 @@ Lot -->
 
 	<table summary="" class="twocol">
 		<tr>
-			<td class="twocol_l"><br/>
-				<img src="images/splitArea_repeat.png" width="300"><br/>
+			<td class="twocol_l">
+				<img src="images/splitArea_repeat.png"><br/>
 				<img src="images/splitArea_repeat_console.png">
 			</td>
-			<td>
-				<pre class="code3">
+			<td class="twocol_r">
+				<pre class="codecga">
 Lot -->
    print("total area = " + geometry.area)
    splitArea(x) { '0.2 : ColorMe }*
@@ -170,7 +159,7 @@ ColorMe -->
       Cyan
    else :
       Blue
-				</pre>
+</pre>
 				<em>
 					This split divides the shape into five equal area parts using a repeat split.  It repeatedly splits the shape into parts with area equal to 20% of the original area.  Note that if <span class="cga_opparam">area</span> were set to <span class="inlinedcode">'0.3</span>, we would get four parts with areas equal to 30%, 30%, 30%, and 10% of the original area.
 				</em>
@@ -182,18 +171,18 @@ ColorMe -->
 
 	<table summary="" class="twocol">
 		<tr>
-			<td class="twocol_l"><br/>
-				<img src="images/splitArea_floatingAbsolute.png" width="300"><br/>
+			<td class="twocol_l">
+				<img src="images/splitArea_floatingAbsolute.png"><br/>
 				<img src="images/splitArea_floatingAbsolute_console.png">
 			</td>
-			<td>
-				<pre class="code3">
+			<td class="twocol_r">
+				<pre class="codecga">
 Lot -->
    print("total area = " + geometry.area)	
    splitArea(x) { ~1  : Green
                 | 600 : Yellow
                 | ~1  : Blue }
-				</pre>
+</pre>
 				<em>
 					This split divides the shape into a middle part (yellow) that has an absolute area of 600 and two side parts each with the same area.  The yellow part consists of two pieces since there is a hole in the original shape, and the split cuts the shape along the hole boundary.
 				</em>
@@ -205,12 +194,12 @@ Lot -->
 
 	<table summary="" class="twocol">
 		<tr>
-			<td class="twocol_l"><br/>
-				<img src="images/splitArea_nested.png" width="300"><br/>
+			<td class="twocol_l">
+				<img src="images/splitArea_nested.png"><br/>
 				<img src="images/splitArea_nested_console.png">
 			</td>
-			<td>
-				<pre class="code3">
+			<td class="twocol_r">
+<pre class="codecga">
 Lot -->
    print("total area = " + geometry.area)	
    splitArea(x) { ~1 : splitArea(z) { '0.5 : Red
@@ -220,7 +209,7 @@ Lot -->
                 | ~1 : splitArea(z) { '0.5 : Blue
                                     | '0.5 : Magenta }
                 }
-				</pre>
+</pre>
 				<em>
 					This nested split divides the shape first in <span class="inlinedcode">x</span> to get three equal area parts.  Then, each part is divided in <span class="inlinedcode">z</span> into two equal parts.  This yields six equal area parts.
 				</em>
@@ -232,21 +221,21 @@ Lot -->
 
 	<table summary="" class="twocol">
 		<tr>
-			<td class="twocol_l"><br/>
-				<img src="images/splitArea_shapes.png" width="300">
+			<td class="twocol_l">
+				<img src="images/splitArea_shapes.png">
 			</td>
-			<td>
+			<td class="twocol_r">
 				<em>
 					This is the original shape and its scope.
 				</em>
 			</td>
 		</tr>
 		<tr>
-			<td class="twocol_l"><br/>
-				<img src="images/splitArea_shapes_adjust.png" width="300">
+			<td class="twocol_l">
+				<img src="images/splitArea_shapes_adjust.png">
 			</td>
-			<td>
-				<pre class="code3">
+			<td class="twocol_r">
+				<pre class="codecga">
 SplitAdjust -->
    splitArea(x) { '0.2 : splitArea(z) { '0.2 : SplitLeaf }* }*
 
@@ -257,21 +246,21 @@ SplitLeaf-->
    t(0, 0.02, 0)
    Pink
    comp(e) { all : color(0, 0, 0) Edge. }					  
-				</pre>
+</pre>
 				<em>
 					Without specifying a value for <span class="cga_opparam">adjustSelector</span>, the default behavior is to adjust the scope size to the geometry of each split part.  Each pink box shows the scope of each split part.  The scope maintains the original scope's orientation but shrinks to the bounding box of the geometry.
 				</em>
 			</td>
 		</tr>
 		<tr>
-			<td class="twocol_l"><br/>
-				<img src="images/splitArea_shapes_noAdjust.png" width="300">
+			<td class="twocol_l">
+				<img src="images/splitArea_shapes_noAdjust.png">
 			</td>
-			<td>
-				<pre class="code3">
+			<td class="twocol_r">
+				<pre class="codecga">
 SplitNoAdjust -->
    splitArea(x, noAdjust) { '0.2 : splitArea(z, noAdjust) { '0.2 : SplitLeaf }* }* 
-				</pre>
+</pre>
 				<em>
 					With <span class="inlinedcode">noAdjust</span>, the union of the scopes of each split part make up the original scope.  The scopes are not adjusted to the geometry inside.
 				</em>
@@ -283,22 +272,22 @@ SplitNoAdjust -->
 
 	<table summary="" class="twocol">
 		<tr>
-			<td class="twocol_l"><br/>
-				<img src="images/splitArea_block.png" width="300">
+			<td class="twocol_l">
+				<img src="images/splitArea_block.png">
 			</td>
-			<td>
+			<td class="twocol_r">
 				<em>
 					This is the original shape and its scope.  Here is an example of how the <span class="cga_keyword">splitArea</span> operation can be used to divide a street block into lots with equal areas.
 				</em>
 			</td>
 		</tr>
 		<tr>
-			<td class="twocol_l"><br/>
-				<img src="images/splitArea_block_useSplitArea.png" width="300"><br/>
+			<td class="twocol_l">
+				<img src="images/splitArea_block_useSplitArea.png"><br/>
 				<img src="images/splitArea_block_useSplitArea_console.png">
 			</td>
-			<td>
-				<pre class="code3">
+			<td class="twocol_r">
+<pre class="codecga">
 Lot -->
    SplitArea(3)
 
@@ -321,19 +310,19 @@ const minArea = 243
 const maxArea = 1255
 alpha = (geometry.area - minArea)/(maxArea - minArea)
 getColor = colorRamp("spectrum", alpha)
-				</pre>
+</pre>
 				<em>
 					The block is divided recursively three times using <span class="cga_keyword">splitArea</span>.  Each split divides the shape perpendicular to its longest axis into two parts of equal area.  Each lot is colored by its area such that lots with the same area have the same color.  Using <span class="cga_keyword">splitArea</span>, all the lots are yellow because the block is divided into equal area lots.
 				</em>
 			</td>
 		</tr>
 		<tr>
-			<td class="twocol_l"><br/>
-				<img src="images/splitArea_block_useSplit.png" width="300"><br/>
+			<td class="twocol_l">
+				<img src="images/splitArea_block_useSplit.png"><br/>
 				<img src="images/splitArea_block_useSplit_console.png">
 			</td>
-			<td>
-				<pre class="code3">
+			<td class="twocol_r">
+				<pre class="codecga">
 Lot2 -->
    Split(3)
 
@@ -350,8 +339,7 @@ Split(n) -->
 B -->
    color(getColor)
    print("area(B) = " + geometry.area)
-
-				</pre>
+</pre>
 				<em>
 					In comparison, when using the <span class="cga_keyword">split</span> operation, the lots are different colors because the block is divided into lots with different areas.
 				</em>
@@ -361,7 +349,7 @@ B -->
 
 <!-- FOOTER -->
 
-<p class="foot">Copyright &copy;2008-2024 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
+<p class="foot">Copyright &copy;2008-2025 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
 
 <!-- END CENTERED CONTENT -->
 

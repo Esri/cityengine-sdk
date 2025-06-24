@@ -55,8 +55,32 @@ can also be achieved with the <a class="cga_op" href="op_setback.html">setback</
 <span class="codelight">setback( comp(fe) { front=frontWidth | left=leftWidth } ) { selector operator operations | ... }</span>
 </p>
 
-<h3>Geometry tags</h3>
-The operations automatically apply semantic <a href="cga_componentTags.html">component tags</a> to the resulting edge components. Refer to the <a class="cga_op" href="op_setback.html#componentTags">setback</a> operation for more details.
+<h3><a name="componentTags"></a>Component tags</h3>
+The operations automatically apply semantic <a href="cga_componentTags.html">component tags</a> to the resulting edge components (exactly like the <a class="cga_op" href="op_setback.html">setback</a> operation):
+
+<p class="piccaptioncentered"><img src="images/autotag-shapeLUO.png">
+
+<table summary="" class="twocol">
+<tr>
+    <td class="twocol_r">
+		<table cellspacing="5">
+			<tr><td width="25%"><span class="codelight">"setback.front"</span></td><td>Blue: original edges in <span class="codelight">shape</span>.</td></tr>
+			<tr><td><span class="codelight">"setback.back"</span></td><td>Green: new setback edges.</td></tr>
+			<tr><td><span class="codelight">"setback.side"</span></td><td>Yellow: side edges.</td></tr>
+			<tr><td><span class="codelight">"setback.remainder"</span></td><td>Purple: original edges in <span class="codelight">remainder</span>.</td></tr>
+		</table>
+	</td>
+	<td class="twocol_l">
+<pre class="codecga">
+Left   --> shapeL(4,4) { shape    : Shape
+                       | remainder: Remainder }
+
+Middle --> shapeU(4,4,4) { ... }
+Right  --> shapeO(4,4,4,4) { ... }</pre>
+	</td>
+	</tr>
+</table>
+<p>For more information on working with component tags, refer to <a href="cga_componentTags.html#autoTags">Auto-tags</a> and <a href="cga_componentTags.html#tagPropagation">Tag propagation</a>.</p>
 
 
 <h2>Related</h2>
@@ -74,8 +98,7 @@ The operations automatically apply semantic <a href="cga_componentTags.html">com
 <h3>L-Shapes </h3>
 
 <p class="piccaptioncentered"><img src="images/shapeL-example.png"><br>A block filled with L-shapes.</p>
-<br>
-<pre class="code3">
+<pre class="codecga">
 attr myFrontDepth = 5
 attr myLeftWidth = 11
 
@@ -93,11 +116,10 @@ Footprint -->
 <h3>U-Shapes </h3>
 
 <p class="piccaptioncentered"><img src="images/shapeU-example.png"><br>A block filled with U-shapes.</p>
-<pre class="code3">
+<pre class="codecga">
 attr myFrontDepth = 5
 attr myRightWidth = 3
 attr myLeftWidth = 11
-
 
 LotInner -->
     Lot
@@ -113,13 +135,12 @@ Footprint -->
 <h3>O-Shapes </h3>
 
 <p class="piccaptioncentered"><img src="images/shapeO-example.png"><br>A block filled with O-shapes.</p>
-<pre class="code3">
+<pre class="codecga">
 attr myFrontDepth = 5
 attr myRightWidth = 3
 attr myBackDepth = 2
 attr myLeftWidth = 11
 
-		
 LotInner -->
     Lot
         
@@ -131,7 +152,7 @@ Footprint -->
     extrude(rand(10,20)) color(1,0,0)
 </pre>
 
-<p class="foot">Copyright &copy;2008-2024 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
+<p class="foot">Copyright &copy;2008-2025 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
 
 </div>
 </body>

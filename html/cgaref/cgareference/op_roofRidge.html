@@ -55,7 +55,7 @@
 
 <table summary="" class="twocol">
 <tr>
-    <td>
+    <td class="twocol_r">
 		The operation automatically applies semantic <a href="cga_componentTags.html">component tags</a> to the resulting face components:
 		<table cellspacing="5">
 			<tr><td width="25%"><span class="codelight">"roof.bottom"</span></td><td>Blue: original face.</td></tr>
@@ -91,8 +91,9 @@
 
 <table summary="" class="twocol">
 <tr>
-<td class="twocol_l"><br/><img src="images/roofRidge_scope.png"></td>
-<td style="vertical-align:middle"><pre class="code3">
+<td class="twocol_l"><img src="images/roofRidge_scope.png"></td>
+<td class="twocol_r">
+<pre class="codecga">
 Lot  --> extrude(10) Mass
 Mass --> comp(f) { top : Top | side = Sides. }
 Top  --> roofRidge(byAngle, 30) Roof
@@ -101,8 +102,9 @@ Top  --> roofRidge(byAngle, 30) Roof
 </td>
 </tr>
 <tr>
-<td class="twocol_l"><br/><img src="images/roofRidge_tp.png"></td>
-<td style="vertical-align:middle"><pre class="code3">
+<td class="twocol_l"><img src="images/roofRidge_tp.png"></td>
+<td class="twocol_r">
+<pre class="codecga">
 Roof --> set(trim.horizontal, true)
          comp(f) { all : Face. }
 </pre>
@@ -116,8 +118,8 @@ Roof --> set(trim.horizontal, true)
 
 <table summary="" class="twocol">
 <tr>
-<td class="twocol_l"><br/><img src="images/roofRidge_along.png"></td>
-<td style="vertical-align:middle"><pre class="code3">
+<td class="twocol_l"><img src="images/roofRidge_along.png"></td>
+<td class="twocol_r"><pre class="codecga">
 Lot  --> extrude(10) Mass
 Mass --> comp(f) { top : Top | side = Sides. }
 Top  --> alignScopeToGeometryBBox(xy)
@@ -127,8 +129,8 @@ Top  --> alignScopeToGeometryBBox(xy)
 </td>
 </tr>
 <tr>
-<td class="twocol_l"><br/><img src="images/roofRidge_across.png"></td>
-<td style="vertical-align:middle"><pre class="code3">
+<td class="twocol_l"><img src="images/roofRidge_across.png"></td>
+<td class="twocol_r"><pre class="codecga">
 Top  --> alignScopeToGeometryBBox(yx)
          roofRidge(byAngle, 30)
 </pre>
@@ -136,8 +138,8 @@ Top  --> alignScopeToGeometryBBox(yx)
 </td>
 </tr>
 <tr>
-<td class="twocol_l"><br/><img src="images/roofRidge_rotated.png"></td>
-<td style="vertical-align:middle"><pre class="code3">
+<td class="twocol_l"><img src="images/roofRidge_rotated.png"></td>
+<td class="twocol_r"><pre class="codecga">
 Top  --> alignScopeToGeometryBBox(xy)
          rotateScope(0, 0, 45)
          roofRidge(byAngle, 30)
@@ -148,7 +150,7 @@ Top  --> alignScopeToGeometryBBox(xy)
 </table>
 
 <!-- FOOTER -->
-<p class="foot">Copyright &copy;2008-2024 Esri R&amp;D Center Zurich. All rights reserved.</p>                  
+<p class="foot">Copyright &copy;2008-2025 Esri R&amp;D Center Zurich. All rights reserved.</p>                  
 
 </div>
 </body>

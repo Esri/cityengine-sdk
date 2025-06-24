@@ -71,74 +71,73 @@
 <h3>Inner Rectangles of Lot Shapes</h3>
 <table summary="" class="twocol">
 	<tr>
-		<td class="twocol_l"><br/>
+		<td class="twocol_l">
 			<img src="images/innerRectangle_scope.png" alt="InnerRectangle Scope" width="298"/>
 		</td>
-		<td>
-			<pre class="code3">
-				
+		<td class="twocol_r">
+<pre class="codecga">
 Lot-->	
    innerRectangle(scope) {shape : Color | remainder : Color}
 Color-->
    color(rand(1),rand(1),rand(1))
-			</pre>
+</pre>
 			<em>This example shows the largest inner rectangle aligned to the scope axes. Each polygon is a separate shape.</em>
 		</td>
 	</tr>
 	<tr>
-		<td class="twocol_l"><br/>
+		<td class="twocol_l">
 			<img src="images/innerRectangle_edge.png" alt="InnerRectangle Edge" width="298"/>
 		</td>
-		<td>
-			<pre class="code3">
+		<td class="twocol_r">
+<pre class="codecga">
 Lot-->
    innerRectangle(edge) {shape : Color | remainder = Color}
-			</pre>
+</pre>
 			<em>This example shows the largest inner rectangle aligned to one edge. All polygons corresponding to the remainder are combined into one shape.</em>
 		</td>
 	</tr>
 	<tr>
-		<td class="twocol_l"><br/>
+		<td class="twocol_l">
 			<img src="images/innerRectangle_lot1.png" alt="InnerRectangle Lot 1" width="298"/>
 		</td>
-		<td>
-			<pre class="code3">
+		<td class="twocol_r">
+<pre class="codecga">
 Lot-->
    innerRectangle(scope) { shape : Extrude | remainder : Color }
 Extrude-->
    extrude(5)
 Color-->
    color(0,1,0)
-			</pre>
+</pre>
 			<em>This example shows how to use innerRectangle to place mass volumes in planar lots. Each rectangle has sides parallel to the scope axes.</em>
 		</td>
 	</tr>
 	<tr>
-		<td class="twocol_l"><br/>
+		<td class="twocol_l">
 			<img src="images/innerRectangle_lot2.png" alt="InnerRectangle Lot 2" width="298"/>
 		</td>
-		<td>
-			<pre class="code3">
+		<td class="twocol_r">
+<pre class="codecga">
 Lot-->
    comp(f) { all : Rectangle }
 Rectangle-->
    innerRectangle(scope) { shape : Extrude | remainder : Color }
-			</pre>
+</pre>
 			<em>In this example the component split is used to generate a separate scope for each slanting face. Each generated inner shape is a rectangle seen from the face normal.</em>
 		</td>
 	</tr>
 	<tr>
-		<td class="twocol_l"><br/>
+		<td class="twocol_l">
 			<img src="images/innerRectangle_lot3.png" alt="InnerRectangle Lot 3" width="298"/>
 		</td>
-		<td>
-			<pre class="code3">
+		<td class="twocol_r">
+<pre class="codecga">
 Lot-->
    alignScopeToAxes()
    innerRectangle(scope) { shape : Extrude | remainder : Color }
 Extrude-->
    extrude(world.up.flatTop, 10)
-			</pre>
+</pre>
 			<em>When the scope is aligned to the world coordinate system each inner shape is a rectangle seen from the world's y axis.</em>
 		</td>
 	</tr>
@@ -147,7 +146,7 @@ Extrude-->
                
 <!-- FOOTER -->
 
-<p class="foot">Copyright &copy;2008-2024 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
+<p class="foot">Copyright &copy;2008-2025 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
 
 <!-- END CENTERED CONTENT -->
 

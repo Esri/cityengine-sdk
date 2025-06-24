@@ -19,7 +19,8 @@
 
 <h2>Syntax</h2>
 
-<p class="code2">comp(<span class="cga_opparam">component</span>) { <span class="cga_opparam">selector</span> <span class="cga_opparam">operator</span> <span class="cga_opparam">operations</span> | <span class="cga_opparam">selector</span> <span class="cga_opparam">operator</span> <span class="cga_opparam">operations</span> ... }</p>
+<p class="code2">comp(<span class="cga_opparam">component</span>)&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{ <span class="cga_opparam">selector</span> <span class="cga_opparam">operator</span> <span class="cga_opparam">operations</span> | <span class="cga_opparam">selector</span> <span class="cga_opparam">operator</span> <span class="cga_opparam">operations</span> ... }</p>
+<p class="code2">comp(<span class="cga_opparam">component</span>, <span class="cga_opparam">scopeAlignment</span>) { <span class="cga_opparam">selector</span> <span class="cga_opparam">operator</span> <span class="cga_opparam">operations</span> | <span class="cga_opparam">selector</span> <span class="cga_opparam">operator</span> <span class="cga_opparam">operations</span> ... }</p>
 
 <h2 id="params">Parameters</h2>
 
@@ -30,9 +31,16 @@
 		<tr><td><span class="codelight">e</span></td><td>edges</td></tr>
 		<tr><td><span class="codelight">fe</span></td><td>face edges</td></tr>
 		<tr><td><span class="codelight">v</span></td><td>vertices</td></tr>
+		<tr><td><span class="codelight">fv</span></td><td>face vertices</td></tr>
 		<tr><td><span class="codelight">g</span></td><td>groups</td></tr>
 		<tr><td><span class="codelight">m</span></td><td>materials</td></tr>
 		<tr><td><span class="codelight">h</span></td><td>holes</td></tr>
+		</table>
+	</li>
+	<li><span class="cga_opparam">scopeAlignment</span> (selector)<br>
+		<table cellspacing="5">
+		<tr><td width="10%"><span class="codelight">zUp</span></td><td>Default. Pivot and scope are aligned. See <a href="op_comp.html#scopeAlignment">below</a>.</td></tr>
+		<tr><td><span class="codelight">noAlign</span></td><td>Pivot and scope do not change. The scope size and position are adjusted though to fit the component.</td></tr>
 		</table>
 	</li>
 	<li><span class="cga_opparam">selector</span> (selector, bool, float)
@@ -71,10 +79,11 @@
 		<tr><td> <i>index (float)</i></td><td> Selects the <i>index</i>-th component (0-based).</td></tr>
 		</table>
 	</li>
-	<li><span class="cga_opparam">operator</span><br>The operator defines how the selected components are used to generate successor shapes.
+	<li><span class="cga_opparam">operator</span><br>The operator defines how the selected components are combined to generate successor shapes.
 		<table cellspacing="5">
-		<tr><td width="10%"><span class="codelight">:</span></td><td>Each selected component is put into a new shape.</td></tr>
+		<tr><td width="5%"><span class="codelight">:</span></td><td>Each selected component is put into a new shape.</td></tr>
 		<tr><td><span class="codelight">=</span></td><td>All selected components are combined into one new shape.</td></tr>
+		<tr><td><span class="codelight">=:</span></td><td>Each connected set of selected compontents is combined into a new shape.</td></tr>
 		</table>
 	</li>
 	<li><span class="cga_opparam">operations</span><br>A sequence of shape operations to execute on the newly created shape.</li>
@@ -83,17 +92,18 @@
 <h2>Description</h2>
 
 <p>The <span class="codelight">comp</span> operation (component split) allows to divide a shape into its topological components, which are either faces, edges, face edges, vertices, groups, materials or holes. 
-The components can be selected using either their <i>index</i> or a set of selectors. Group and material components satisfy a specific selection keyword if at least one geometric component (usually a face) satifies it. The selected components are transformed to a new shape and processed by a sequence of shape operations. Depending on the <span class="cga_opparam">operator</span>, either one shape is created for each individual selected component (&quot;:&quot;) ore one shape for the whole set of selected components (&quot;=&quot;).</p>
+The components can be selected using either their <i>index</i> or a set of selectors. Group and material components satisfy a specific selection keyword if at least one geometric component (usually a face) satifies it. The selected components are transformed to a new shape and processed by a sequence of shape operations. Depending on the <span class="cga_opparam">operator</span>, either one shape is created for each individual selected component (<span class="codelight">:</span>), one shape is created for the whole set of selected components (<span class="codelight">=</span>) or one shape is created for each connected subset of selected components (<span class="codelight">=:</span>). Two components are connected if their faces share an edge. Components without faces are connected if they share a vertex.</p>
 
 <p class="text">The selection parameters of a component split work in a excluding manner: if a parameter has selected a specific component, this component cannot be part of another selection (from left to right).</p>
 
-<p class="text">The local coordinate systems (<span class="codelight">pivot</span> and <span class="codelight">scope</span>) of the newly generated shapes are aligned according to the geometry's topology; the component split is one of the few shape operations which manipulate the pivot of a shape.</p>
+<a name="scopeAlignment"></a><p class="text">The local coordinate systems (<span class="codelight">pivot</span> and <span class="codelight">scope</span>) of the newly generated shapes are aligned according to the geometry's topology. The component split is one of the few shape operations which manipulate the pivot of a shape. This behavior is deactivated when <span class="cga_opparam">scopeAlignment</span> is set to <span class="codelight">noAlign</span>.</p>
 
 <table cellspacing="5">
 <tr><td><span class="codelight">f</span></td><td>In the case of a face component split, the x-axis is directed as the first edge of the face and the z-axis points along the face normal. The pivot is positioned at the first vertex of the first edge of the face; the scope is the bounding box of the face, i.e. the z-dimension of the emerging shape's scope is set to zero. See an <a href="#faceDetails">example</a>.</td></tr>
 <tr><td><span class="codelight">e</span></td><td>In the case of an edge component split, the x-axes of the pivot and scope are along the edge and the z-axes points along the average of the neighboring face normals. The y- and z-dimension of the scope are set to zero and the x-dimension is the length of the edge. The pivot is positioned at one of the endpoints of the edge. The indexing of edges is as follows: Index 0 is the first edge of the first face, index 1 the second edge of the first face etc. Shared edges are skipped on second encounter. See an <a href="#edgeDetails">example</a>.</td></tr>
-<tr><td><span class="codelight">fe</span></td><td>In contrast to edges, face edges are considered separate for each face. Similarly, indexing is done firstly per face and secondly per edge, but shared edges are not skipped. Furthermore, contrary to edges, face edges have a unique direction determined by the orientation of the face they belong to. The x-axes of the pivot and the scope are directed in face orientation and the z-axes point out of the face orthogonally to the edge and the face normal. The pivot is positioned at the first vertex of the face edge. See an <a href="#edgeDetails">example</a>.</td></tr>
+<tr><td><span class="codelight">fe</span></td><td>In contrast to edges, face edges are considered separately for each face. Indexing is done firstly per face and secondly per edge, but shared edges are not skipped. Furthermore, contrary to edges, face edges have a unique direction determined by the orientation of the face they belong to. The x-axes of the pivot and the scope are directed in face orientation and the z-axes point out of the face orthogonally to the edge and the face normal. The pivot is positioned at the first vertex of the face edge. See an <a href="#edgeDetails">example</a>.</td></tr>
 <tr><td><span class="codelight">v</span></td><td>In case of a vertex component split, the pivot is positioned at the vertex, the z-axes points along the average of the neighboring face normals and all scope dimensions are set to zero. See an <a href="#vertexDetails">example</a>.</td></tr>
+<tr><td><span class="codelight">fv</span></td><td>In contrast to vertices, face vertices are considered separately for each face. Indexing is done firstly per face and secondly per vertex. The x-axes of the pivot and the scope are directed in face orientation (i.e., tangential) and the z-axes point out of the face orthogonally to the tangent and the face normal. The y-axes are along the face normal. The pivot is positioned at the vertex. If applied on an edge component the tangent/x-axis point along the edge direction. See an <a href="#vertexDetails">example</a>.</td></tr>
 </table>
 
 <h3 class="text">Comp shape attributes</h3>
@@ -106,7 +116,7 @@ The components can be selected using either their <i>index</i> or a set of selec
 
 <p>According to the direction of the shared edge, trim planes are classified into horizontal and vertical planes. They can be switched on or off by <a class="normw" href="op_set.html">setting</a> the <a class="normw" href="attr_trim.html">trim attribute</a> to true or false. By default, trimming is activated for vertical trim planes and deactivated for horizontal trim planes. Check the trim planes examples <a class="normw" href="#trimExamples">below</a>.</p>
 
-<p class="notes"><em>Trim planes are only generated if the : operator is used!</em></p>
+<p class="notes"><em>Trim planes are only generated if the <span class="codelight">:</span> operator is used!</em></p>
 
 <p>Trim planes can be configured in the <a href="https://doc.arcgis.com/en/cityengine/latest/help/get-started-preferences-prt.htm" target="_blank">Procedural Runtime preferences</a>.</p>
 
@@ -172,22 +182,34 @@ The components can be selected using either their <i>index</i> or a set of selec
 
 <table summary="" class="twocol">
 <tr>
-	<td class="twocol_l"><br/><img src="images/comp-facade-a.png" alt="Facade selection a" width="298"/> </td>
-	<td><i>Let us split the mass model of a building into the main facade and a number of side facades.</i><em><i><br>Note the orientation of the pivot (the annotated axes).</i><br></em></td>
+<td class="twocol_l"><img src="images/comp-facade-a.png" alt="Facade selection a"/></td>
+<td class="twocol_r"><pre class="codecga">
+Lot -->
+   extrude(5)
+   color(1,1,1,0.75)</pre>
+<em>Let us split a mass model into its facades. Note the position and orientation of the pivot and scope (the annotated axes).</em>
+</td>
 </tr>
 <tr>
-	<td class="twocol_l"><br/><img src="images/comp-facade-b.png" alt="Facade selection b" width="298" height="140"/></td>
-	<td><pre class="code3">
-Building -->	
-   comp(f) { 
-      front : color("#ff0000") Main. | 
-      side  : color("#0000ff") Side. 
-   }
-   </pre><em></em></td>
+<td class="twocol_l"><img src="images/comp-facade-b.png" alt="Facade selection b"/></td>
+<td class="twocol_r"><pre class="codecga">
+Lot -->
+   extrude(5)
+   comp(f) { right : color(1,1,0,0.75) Right. | 
+             side  : color(1,1,1,0.75) Side.  }
+</pre>
+<em>Each face is now the geometry of a new shape. The scope and pivot depend on the face orientation. The x-axis points along the first edge and the z-axis points along the face normal. The z-dimension of the scope is zero.</em>
+</td>
 </tr>
 <tr>
-	<td class="twocol_l"><br/><img src="images/comp-facade-c.png" alt="Facade selection c" width="298"/></td>
-	<td><em>Each face is now the geometry of a new shape; the new shapes' scopes and pivots depend on the faces' orientation. The x-axis points along the first edge and the z-axis points along the face normal. The scope's z-dimension is zero.</em></td>
+<td class="twocol_l"><img src="images/comp-facade-c.png" alt="Facade selection c"/></td>
+<td class="twocol_r"><pre class="codecga">
+Lot -->
+   extrude(5)
+   comp(f,noAlign) { right : color(1,1,0,0.75) Right. | 
+                     side  : color(1,1,1,0.75) Side.  }</pre>
+<em>The pivot is kept when using the <span class="codelight">noAlign</span> mode. The scope orientation does not change.</em>
+</td>
 </tr>
 </table>
 
@@ -195,18 +217,19 @@ Building -->
 
 <table summary="" class="twocol">
 <tr>
-	<td class="twocol_l"><br/><img src="images/comp-selectors1.png" alt="comp split selectors 1" width="298"/></td>
-	<td><pre class="code3">
+	<td class="twocol_l"><img src="images/comp-selectors1.png" alt="comp split selectors 1"/></td>
+	<td class="twocol_r"><pre class="codecga">
 Sphere -->
    comp(f) {
-      top:    color("#0000ff") X. |	
-      bottom: color("#ffff00") X. |	
-      front:  color("#ff0000") X. | 
-      back:   color("#ff00ff") X. |
-      left:   color("#00ffff") X. |
-      right:  color("#00ff00") X.	
+      top    : color("#0000ff") X. |	
+      bottom : color("#ffff00") X. |	
+      front  : color("#ff0000") X. | 
+      back   : color("#ff00ff") X. |
+      left   : color("#00ffff") X. |
+      right  : color("#00ff00") X.	
    }
-   </pre><em>Selectors are demonstrated by using them to color the faces of a spherical geometry. The selection is relative to the local coordinate system (the shown scope).</em></td>
+</pre>
+<em>Selectors are demonstrated by using them to color the faces of a spherical geometry. The selection is relative to the local coordinate system (the shown scope).</em></td>
 </tr>
 </table>
                               
@@ -214,16 +237,17 @@ Sphere -->
 
 <table summary="" class="twocol">
 <tr>
-	<td class="twocol_l"><br/><img src="images/comp-selectors2.png" alt="comp split selectors 2" width="298"/></td>
-	<td><pre class="code3">
+	<td class="twocol_l"><img src="images/comp-selectors2.png" alt="comp split selectors 2"/></td>
+	<td class="twocol_r"><pre class="codecga">
 Sphere -->
-      comp(f) {
-      horizontal: color("#0000ff") X. |	
-      aslant:     color("#ff0000") X. | 
-      vertical:   color("#ffff00") X. |	
-      nutant:     color("#ff00ff") X. 
+   comp(f) {
+      horizontal : color("#0000ff") X. |	
+      aslant     : color("#ff0000") X. | 
+      vertical   : color("#ffff00") X. |	
+      nutant     : color("#ff00ff") X. 
    }
-	</pre><em>Note the horizontal areas (blue) on the sphere's poles.</em></td>
+</pre>
+<em>Note the horizontal areas (blue) on the sphere's poles.</em></td>
 </tr>
 </table>
                               
@@ -231,27 +255,27 @@ Sphere -->
 
 <table summary="" class="twocol">
 <tr>
-	<td class="twocol_l"><br/><img src="images/comp_selExpr_1.png" alt="comp_selExpr_1" width="298"/></td>
-	<td><pre class="code3">
+	<td class="twocol_l"><img src="images/comp_selExpr_1.png" alt="comp_selExpr_1"/></td>
+	<td class="twocol_r"><pre class="codecga">
 Sphere --> comp(f) { top || front = X. }
-	</pre><em>Static selectors can be used in a logical selector expression. Here both the top and front faces are combined into a single shape. </em></td>
+</pre>
+<em>Static selectors can be used in a logical selector expression. Here both the top and front faces are combined into a single shape. </em></td>
 <tr>
-<td class="twocol_l"><br/><img src="images/comp_selExpr_2.png" alt="comp_selExpr_2" width="298"/></td>
-	<td><pre class="code3">
-
+<td class="twocol_l"><img src="images/comp_selExpr_2.png" alt="comp_selExpr_2"/></td>
+	<td class="twocol_r"><pre class="codecga">
 Triangle -->
    comp(f) { geometry.area() > 1 && !inside : X. }
-   </pre><em>Here, only faces with a surface area greater than 1 and that are not inside are selected. </em></td>
+</pre><em>Here, only faces with a surface area greater than 1 and that are not inside are selected. </em></td>
 </tr>
-<td class="twocol_l"><br/><img src="images/comp_selExpr_3.png" alt="comp_selExpr_3" width="298"/></td>
-	<td><pre class="code3">
-
+<td class="twocol_l"><img src="images/comp_selExpr_3.png" alt="comp_selExpr_3"/></td>
+	<td class="twocol_r"><pre class="codecga">
 mySelectorFunc = 
     geometry.isOriented(top) || geometry.nVertices==3
 
 Sphere -->
    comp(f) { mySelectorFunc : X. }
-   </pre><em>Here, a custom function is used to select the top faces and all faces with exactly 3 vertices. </em></td>
+</pre>
+<em>Here, a custom function is used to select the top faces and all faces with exactly 3 vertices. </em></td>
 </tr>
 </table>
                               
@@ -259,19 +283,20 @@ Sphere -->
 
 <table summary="" class="twocol">
 <tr>
-	<td class="twocol_l"><br/><img src="images/comp-index-selectors-a.png" alt="Index selectors a" width="298"/></td>
+	<td class="twocol_l"><img src="images/comp-index-selectors-a.png" alt="Index selectors a"/></td>
 	<td><em>A mesh can also be disassembled into its components by addressing them directly by their index.<br>The indexing scheme is inherently encoded in the model itself!</em></td>
 </tr>
 <tr>
-<td class="twocol_l"><br/><img src="images/comp-index-selectors-b.png" alt="Index selectors b" width="298"/></td>
-	<td><pre class="code3">
+<td class="twocol_l"><img src="images/comp-index-selectors-b.png" alt="Index selectors b"/></td>
+	<td class="twocol_r"><pre class="codecga">
 Tube -->
    comp(f) { 
       0 : X. | 
       2 : X. | 
       4 : X. 
    }
-   </pre><em>Here, only faces 0, 2 and 4 of the cylinder are selected.</em></td>
+</pre>
+<em>Here, only faces 0, 2 and 4 of the cylinder are selected.</em></td>
 </tr>
 </table>
                               
@@ -279,108 +304,135 @@ Tube -->
 
 <table summary="" class="twocol">
 <tr>
-	<td class="twocol_l"><br/><img src="images/comp-trimplanes-a.png" alt="Trim Planes a" width="298"/></td>
-	<td><pre class="code3">
+	<td class="twocol_l"><img src="images/comp-trimplanes-a.png" alt="Trim Planes a"/></td>
+	<td class="twocol_r"><pre class="codecga">
 Start -->
    s(10,10,10)
    primitiveCube()
    comp(f) { 5 : X. }
-	</pre><em>At shared edges, trim planes (green) are inserted.</em></td>
+</pre><em>At shared edges, trim planes (green) are inserted.</em></td>
 </tr>
 <tr>
-	<td class="twocol_l"><br/><img src="images/comp-trimplanes-b.png" alt="Trim Planes b" width="298"/></td>
-	<td><pre class="code3">
+	<td class="twocol_l"><img src="images/comp-trimplanes-b.png" alt="Trim Planes b"/></td>
+	<td class="twocol_r"><pre class="codecga">
 X -->
    s(15,'1, 2)
    center(xyz)
    primitiveCube()
-	</pre><em>Inserted geometry is cut with the trim planes.</em></td>
+</pre><em>Inserted geometry is cut with the trim planes.</em></td>
 </tr>
 <tr>
-	<td class="twocol_l"><br/><img src="images/comp-trimplanes-c.png" alt="Trim Planes c" width="298"/></td>
-	<td><pre class="code3">
+	<td class="twocol_l"><img src="images/comp-trimplanes-c.png" alt="Trim Planes c"/></td>
+	<td class="twocol_r"><pre class="codecga">
 Start -->
    s(10,10,10)
    primitiveCube()
    set(trim.horizontal, true)
    comp(f) { 5 : X. }
-	</pre><em><strong>By default, horizontal trim planes are off.</strong> Enabling them before inserting the geometry gives a different result.</em></td>
+</pre><em><strong>By default, horizontal trim planes are off.</strong> Enabling them before inserting the geometry gives a different result.</em></td>
 </tr>
 </table>
 
 <h3>The Operator</h3>
 
+<h4>Separating operator <span class="code_std">:</span></h4>
+
 <table summary="" class="twocol">
 <tr>
-	<td class="twocol_l" style="width:298px" ><br/><img src="images/comp_operator-a.png" alt="Comp Operator :" /></td>
-	<td><pre class="code3">
-            
-            
-            
+<td class="twocol_l"><img src="images/comp-operator-sep.png" alt="comp-operator-sep"/><br/><img src="images/comp-operator-sep-st.png" alt="comp-operator-sep-st"/></td>
+<td class="twocol_r"><pre class="codecga">
 Lot -->
-   extrude(20)
-   comp(f) { side : Sides. }
-	</pre><br><p><em>Using the ":" operator results in a new shape for each component selected by the selector.<br>In the example above, a shape is created for each side of the extruded geometry. Therefore, the Lot Shape has five successors (one for each side). Each successor shape has its pivot and scope set up differently.</em></p></td>
+   extrude(10)
+   comp(f) { front :  color(rand,rand,rand)
+                      Front.
+           | all   =  Mass. }
+</pre>
+<p><em>Using the <span class="codelight">:</span> operator results in a new shape for each component selected by the <span class="cga_opparam">selector</span>. In the example above, a shape is created for each <span class="codelight">front</span> face of the extruded geometry. Therefore, the <span class="codelight">Lot</span> shape has six <span class="codelight">Front</span> successors (plus one successor for the remaining faces in <span class="codelight">Mass</span>). Each <span class="codelight">Front</span> successor shape has its pivot and scope set up differently.</em></p>
+</td>
+</tr>
+</table>
 
-</tr>          
+<h4>Combining operator <span class="code_std">=</span></h4>
+
+<table summary="" class="twocol">
 <tr>
-	<td class="twocol_l" style="width:298px"><br/><img src="images/comp_operator-b.png" alt="Comp Operator :" /></td>
-	<td><pre class="code3">
-            
-            
-            
+<td class="twocol_l"><img src="images/comp-operator-com.png" alt="comp-operator-com"/><br/><img src="images/comp-operator-com-st.png" alt="comp-operator-com-st"/></td>
+<td class="twocol_r"><pre class="codecga">
 Lot -->
-   extrude(20)
-   comp(f) { side = Sides. }
-	</pre><br><p><em>In contrast, using the "=" operator results in exactly one new shape for all component selected by the selector.<br>In the example above, one shape is created for all five sides of the extruded geometry. Thje new shape's geometry contains all five faces, and the pivot and scope are set up relative to the first selected face.</em></p></td>
+   extrude(10)
+   comp(f) { front =  color(rand,rand,rand)
+                      Front.
+           | all   =  Mass. }
+</pre>
+<p><em>Using the <span class="codelight">=</span> operator results in exactly one new shape for all components selected by the <span class="cga_opparam">selector</span>. In the example above, one <span class="codelight">Front</span> shape is created for all six <span class="codelight">front</span> faces of the extruded geometry. Therefore, the <span class="codelight">Lot</span> shape has one <span class="codelight">Front</span> successor. The pivot and scope are set up relative to the first selected <span class="codelight">front</span> face.</em></p>
+</td>
+</tr>
+</table>
+
+<h4>Connecting operator <span class="code_std">=:</span></h4>
+
+<table summary="" class="twocol">
+<tr>
+<td class="twocol_l"><img src="images/comp-operator-con.png" alt="comp-operator-con"/><br/><img src="images/comp-operator-con-st.png" alt="comp-operator-con-st"/></td>
+<td class="twocol_r"><pre class="codecga">
+Lot -->
+   extrude(10)
+   comp(f) { front =: color(rand,rand,rand)
+                      Front.
+           | all   =  Mass. }
+</pre>
+<p><em>Using the <span class="codelight">=:</span> operator results in a new shape for each connected subset of all components selected by the <span class="cga_opparam">selector</span>. In the example above, two <span class="codelight">Front</span> shapes are created for all six <span class="codelight">front</span> faces of the extruded geometry. In each <span class="codelight">Front</span> shape all faces are connected via shared edges. Therefore, the <span class="codelight">Lot</span> shape has two <span class="codelight">Front</span> successors. The pivot and scope in each successor shape is set up relative to its first face.</em></p>
+</td>
+</tr>
 </table>
 
 <h3><em>Border</em> and <em>Inside</em> Selectors</h3>
 
 <table summary="" class="twocol">
 <tr>
-	<td class="twocol_l"><br/><img src="images/comp-border-a.png" alt="Border Selector Initial Shape" width="298"/></td>
+	<td class="twocol_l"><img src="images/comp-border-a.png" alt="Border Selector Initial Shape"/></td>
 	<td><br><br><br><p><em>The picture on the left shows the initial shape. It is a subdivided plane, consisting of a number of faces.</em></p></td>
 </tr>  
 <tr>
-	<td class="twocol_l"><br/><img src="images/comp-border-b.png" alt="Border Selector Face Split" width="298"/></td>
-	<td><pre class="code3">
+	<td class="twocol_l"><img src="images/comp-border-b.png" alt="Border Selector Face Split"/></td>
+	<td class="twocol_r"><pre class="codecga">
 Init -->
-   comp(f) { border : FBorder | inside : FInside  }
+   comp(f) { border : FBorder | inside : FInside }
    
 FBorder -->
    color("#ff0000")
 	
 FInside -->
    color("#00ff00")
-	</pre><p><em>The example selects the border and inside faces and colors them.</em></p></td>
+</pre>
+<p><em>The example selects the border and inside faces and colors them.</em></p></td>
 </tr>          
 <tr>
-	<td class="twocol_l"><br/><img src="images/comp-border-c.png" alt="Border Selector Edge Split" width="298"/></td>
-	<td><pre class="code3">
+	<td class="twocol_l"><img src="images/comp-border-c.png" alt="Border Selector Edge Split"/></td>
+	<td class="twocol_r"><pre class="codecga">
 Init-->
-   comp(e) { border : EBorder | inside : EInside  }
+   comp(e) { border : EBorder | inside : EInside }
 
 EBorder --> s('1, 0.05, 0.05) t(0, '-0.5, 0)
             color("#ff0000") primitiveCube()
 	
 EInside --> s('1, 0.01, 0.01) t(0, '-0.5, 0)
             color("#00ff00") primitiveCube()
-	</pre><p><em>Here, there border and inside edges are selected and colored cubes are inserted.</em></p></td>
+</pre>
+<p><em>Here, there border and inside edges are selected and colored cubes are inserted.</em></p></td>
 </tr>          
 <tr>
-	<td class="twocol_l"><br/><img src="images/comp-border-d.png" alt="Border Selector Vertex Split" width="298"/></td>
-	<td><pre class="code3">
-            
+	<td class="twocol_l"><img src="images/comp-border-d.png" alt="Border Selector Vertex Split"/></td>
+	<td class="twocol_r"><pre class="codecga">           
 Init -->
-   comp(v) { border : VBorder | inside : VInside  }
+   comp(v) { border : VBorder | inside : VInside }
    
 VBorder --> s(0.05, 0.05, 0.05) t(-0.025, -0.025, -0.025)
             color("#ff0000") primitiveCube()
    
 VInside --> s(0.05, 0.05, 0.05) t(-0.025, -0.025, -0.025)
             color("#00ff00") primitiveCube()
-	</pre><p><em>Finally, the border and inside vertices are used to insert colored cubes.</em></p></td>
+</pre><p><em>Finally, the border and inside vertices are used to insert colored cubes.</em></p></td>
 </tr>          
 </table>
 
@@ -388,8 +440,8 @@ VInside --> s(0.05, 0.05, 0.05) t(-0.025, -0.025, -0.025)
 
 <table summary="" class="twocol">
 <tr>
-	<td class="twocol_l"><br/><img src="images/comp-isTagged-faces.png" alt="Comp isTagged Faces" width="298"/></td>
-	<td><pre class="code3">
+	<td class="twocol_l"><img src="images/comp-isTagged-faces.png" alt="Comp isTagged Faces"/></td>
+	<td class="twocol_r"><pre class="codecga">
 Init --> envelope(normal,4, 0,45, 3,45, 2.5,50, 2,50)
          ShowEnvelopeAutoTags
          
@@ -399,75 +451,67 @@ ShowEnvelopeAutoTags -->
             | isTagged("envelope.side.slope") : Orange
             | isTagged("envelope.side.inner") : Red
             | isTagged("envelope.top")        : Green } 
-	</pre><em>This example colors the face components based on the face tags applied by the <a class="cga_op" href="op_envelope.html">envelope</a> operation.</em></p></td></td>
+</pre>
+<em>This example colors the face components based on the face tags applied by the <a class="cga_op" href="op_envelope.html">envelope</a> operation.</em></p></td></td>
 </tr>  
 <tr>
-	<td class="twocol_l"><br/><img src="images/comp-isTagged-faces-2.png" alt="Comp isTagged Faces 2" width="298"/></td>
-	<td><pre class="code3">
-
-
+	<td class="twocol_l"><img src="images/comp-isTagged-faces-2.png" alt="Comp isTagged Faces 2"/></td>
+	<td class="twocol_r"><pre class="codecga">
 Init --> envelope(normal,4, 0,45, 3,45, 2.5,50, 2,50)
          comp(f) { isTagged("envelope.side") : Yellow }
 	</pre><p><em>Here, the <a href="cga_componentTags.html#tagQueries" class="xref">tag query</a> <span class="codelight">"envelope.side"</span> is used to select and color all base, slope and inner side faces at once.</em></p></td>
 </tr>  
 <tr>
-	<td class="twocol_l"><br/><img src="images/comp-isTagged-edges.png" alt="Comp isTagged Edges" width="298"/></td>
-	<td><pre class="code3">
-
-
+	<td class="twocol_l"><img src="images/comp-isTagged-edges.png" alt="Comp isTagged Edges"/></td>
+	<td class="twocol_r"><pre class="codecga">
 Init --> envelope(normal,4, 0,45, 3,45, 2.5,50, 2,50)
          comp(e) { isTagged("envelope.top") : Edge }
          
 Edge --> s('1, 0.5, 0.5) center(yz)
          color("#09de1f") primitiveCube()
-	</pre><p><em>Here, the edges of the face tagged <span class="codelight">"envelope.top"</span> are selected and colored cubes are inserted.</p>.</em></p></td>
+</pre><p><em>Here, the edges of the face tagged <span class="codelight">"envelope.top"</span> are selected and colored cubes are inserted.</p>.</em></p></td>
 </tr>          
 <tr>
-	<td class="twocol_l"><br/><img src="images/comp-isTagged-vertices.png" alt="Comp isTagged Vertices" width="298"/></td>
-	<td><pre class="code3">
-
-
+	<td class="twocol_l"><img src="images/comp-isTagged-vertices.png" alt="Comp isTagged Vertices"/></td>
+	<td class="twocol_r"><pre class="codecga">
 Init --> envelope(normal,4, 0,45, 3,45, 2.5,50, 2,50)
          comp(v) { isTagged("envelope.top") : Edge }
          
 Edge --> s(0.5, 0.5, 0.5) center(xyz)
          color("#09de1f") primitiveSphere(8,6)
-	</pre><p><em>Here, the vertices of the face tagged <span class="codelight">"envelope.top"</span> are selected and colored spheres are inserted.</em></p></td>
+</pre><p><em>Here, the vertices of the face tagged <span class="codelight">"envelope.top"</span> are selected and colored spheres are inserted.</em></p></td>
 </tr>  
 </table>
 <p class="notes">By default, edges can be selected based on the tags of adjacent faces, while vertices can be selected based on the tags of adjacent faces and edges. However, to select faces based on the tags of their edges or vertices, the <span class="cga_opparam">subcomponent</span> parameter must be provided, as demonstrated in the <a href="op_comp.html#isTagged_advanced" class="xref">section below</a>.</p>
 <h3 id="isTagged_advanced">Advanced Tag Selection</h3>
 <table>        
 <tr>
-	<td class="twocol_l"><br/><img src="images/comp-isTagged-subcomp1.png" alt="Comp isTagged With Subcomp1" width="298"/></td>
-	<td><pre class="code3">
-            
+	<td class="twocol_l"><img src="images/comp-isTagged-subcomp1.png" alt="Comp isTagged With Subcomp1"/></td>
+	<td class="twocol_r"><pre class="codecga">
 Init --> envelope(normal,4, 0,45, 3,45, 2.5,50, 2,50)
          comp(f) { isTagged("envelope.bottom", e) 
             : ShowEnvelopeAutoTags }
-	</pre><p><em>By using the <span class="codelight">e</span> subcomponent selector, all faces that share an edge with a face tagged <span class="codelight">"envelope.bottom"</span> or have an edge tagged as such, are selected. <br> <br> Note that the face tagged <span class="codelight">"envelope.bottom"</span> (blue) is selected as well.</em></p></td>
+</pre><p><em>By using the <span class="codelight">e</span> subcomponent selector, all faces that share an edge with a face tagged <span class="codelight">"envelope.bottom"</span> or have an edge tagged as such, are selected. <br> <br> Note that the face tagged <span class="codelight">"envelope.bottom"</span> (blue) is selected as well.</em></p></td>
 </tr> 
 <tr>
-	<td class="twocol_l"><br/><img src="images/comp-isTagged-subcomp2.png" alt="BComp isTagged With Subcomp2" width="298"/></td>
-	<td><pre class="code3">
-            
+	<td class="twocol_l"><img src="images/comp-isTagged-subcomp2.png" alt="BComp isTagged With Subcomp2"/></td>
+	<td class="twocol_r"><pre class="codecga">
 Init --> envelope(normal,4, 0,45, 3,45, 2.5,50, 2,50)
          comp(f) { isTagged("envelope.bottom", e) &&
                    isTagged("envelope.side.slope") 
             : ShowEnvelopeAutoTags }
-	</pre><p><em>This example selects all slope faces that are edge-adjacent to the bottom face.</em></p></td>
+</pre><p><em>This example selects all slope faces that are edge-adjacent to the bottom face.</em></p></td>
 </tr>
 <tr>
-	<td class="twocol_l"><br/><img src="images/comp-isTagged-subcomp3.png" alt="BComp isTagged With Subcomp2" width="298"/></td>
-	<td><pre class="code3">
-            
+	<td class="twocol_l"><img src="images/comp-isTagged-subcomp3.png" alt="BComp isTagged With Subcomp2"/></td>
+	<td class="twocol_r"><pre class="codecga">
 Init --> envelope(normal,4, 0,45, 3,45, 2.5,50, 2,50)
          comp(e) { isTagged("envelope.bottom", v)
             : Edge }
             
 Edge --> s('1, 0.5, 0.5) center(yz)
          color("#09de1f") primitiveCube()
-	</pre><p><em>This example selects all edges that share a vertex with the bottom face and inserts colored cubes.</em></p></td>
+</pre><p><em>This example selects all edges that share a vertex with the bottom face and inserts colored cubes.</em></p></td>
 </tr>           
 </table>
 
@@ -475,22 +519,18 @@ Edge --> s('1, 0.5, 0.5) center(yz)
 
 <table summary="" class="twocol">
 <tr>
-	<td class="twocol_l"><br/><img src="images/comp-edges.png" alt="Edge Split" width="298"/></td>
-	<td><pre class="code3">
-	
+	<td class="twocol_l"><img src="images/comp-edges.png" alt="Edge Split"/></td>
+	<td class="twocol_r"><pre class="codecga">
 Lot --> extrude(3) 
         comp(e) { all : primitiveCube() s('1, 0.25, 1) X. }
-	</pre><p><em>A building mass model is split into its edges, and the built-in cube model is inserted into each edge shape. The <span class="codelight">pivot</span> of the new shape is positioned at one of the edge's vertices, and the alignment is as follows: the x-axis is parallel to the edge, the z-axis is the average of the neighboring face normals and the y-axis is normal to the two former ones. The <span class="codelight">scope</span> has zero translation and rotation, and the sizes are (edge-length, 0, 0).</em></p></td>
+</pre><p><em>A building mass model is split into its edges, and the built-in cube model is inserted into each edge shape. The <span class="codelight">pivot</span> of the new shape is positioned at one of the edge's vertices, and the alignment is as follows: the x-axis is parallel to the edge, the z-axis is the average of the neighboring face normals and the y-axis is normal to the two former ones. The <span class="codelight">scope</span> has zero translation and rotation, and the sizes are (edge-length, 0, 0).</em></p></td>
 </tr>
 <tr>
-	<td class="twocol_l"><br/><img src="images/comp-face-edges.png" alt="Edge Split" width="298"/></td>
-	<td><pre class="code3">
-	
-	
-	
+	<td class="twocol_l"><img src="images/comp-face-edges.png" alt="Edge Split"/></td>
+	<td class="twocol_r"><pre class="codecga">
 Lot --> extrude(3) 
         comp(fe) { all : primitiveCube() s('1, 0.25, 1) X. }
-	</pre><p><em>A split into face edges creates more components, for each face the edges are considered separately. Edges are oriented wrt. face orientations. The <span class="codelight">pivot</span> is now set to the edge's start vertex and the x-axis points in face orientation, the z-axis is pointing out of the face orthogonally to the edge and the face normal.</em></p></td>
+</pre><p><em>A split into face edges creates more components, for each face the edges are considered separately. Edges are oriented wrt. face orientations. The <span class="codelight">pivot</span> is now set to the edge's start vertex and the x-axis points in face orientation, the z-axis is pointing out of the face orthogonally to the edge and the face normal.</em></p></td>
 </tr>          
 
 </table>
@@ -499,13 +539,23 @@ Lot --> extrude(3)
 
 <table summary="" class="twocol">
 <tr>
-	<td class="twocol_l"><br/><img src="images/comp-vertices.png" alt="Edge Split" width="298"/></td>
-	<td><pre class="code3">
+	<td class="twocol_l"><img src="images/comp-vertices.png" alt="Vertex Split"/></td>
+	<td class="twocol_r"><pre class="codecga">
 Lot -->
    extrude(10) 
    MassModel
    comp(v) { all : VShapes. }
-	</pre><p><em>A building mass model is split into its vertices.<br>The <span class="codelight">pivot</span> of the new shape (the VShapes in the rule above) is set to the vertex position, and the alignment is as follows: the z-axis is the average of the neighboring face normals and the x- and y-axes are chosen such that they are all normal to each other.<br>The <span class="codelight">scope</span> has zero translation, rotation and size.</em></p></td>
+</pre><p><em>A building mass model is split into its vertices.<br>The <span class="codelight">pivot</span> of the new shape (the VShapes in the rule above) is set to the vertex position, and the alignment is as follows: the z-axis is the average of the neighboring face normals and the x- and y-axes are chosen such that they are all normal to each other.<br>The <span class="codelight">scope</span> has zero translation, rotation and size.</em></p></td>
+</tr>          
+</table>
+
+<table summary="" class="twocol">
+<tr>
+	<td class="twocol_l"><img src="images/comp-face-vertices.png" alt="Face Vertex Split"/></td>
+	<td class="twocol_r"><pre class="codecga">
+Lot -->
+	comp(fv) { all : VShapes. }
+</pre><p><em>A polygon is split into its face vertices.<br>The <span class="codelight">pivot</span> of the new shape (the VShapes in the rule above) is set to the vertex position, and the alignment is as follows: the x-axis is the tangent to the polygon, the z-axis points outside of the polygon and the y-axis is the face normal of the polygon.<br>The <span class="codelight">scope</span> has zero translation, rotation and size.</em></p></td>
 </tr>          
 </table>
 
@@ -513,16 +563,13 @@ Lot -->
 
 <table summary="" class="twocol">
 <tr>
-	<td class="twocol_l"><br/><img src="images/comp-group.png" alt="Group Split" height="200"/></td>
-	<td><pre class="code3">
-
-
-
+	<td class="twocol_l"><img src="images/comp-group.png" alt="Group Split" height="200"/></td>
+	<td class="twocol_r"><pre class="codecga">
 Lot -->
    i("Orange_Tree.obj") 
    comp(g) { findFirst(geometry.materials,"Bark") : Trunk.
            | all = set(material.opacity, 0.2) Foliage. }
-	</pre><p><em>A tree model is split into its groups.</em></p></td>
+</pre><p><em>A tree model is split into its groups.</em></p></td>
 </tr>          
 </table>
 
@@ -530,20 +577,17 @@ Lot -->
 
 <table summary="" class="twocol">
 <tr>
-	<td class="twocol_l"><br/><img src="images/comp-material.png" alt="Material Split" height="200"/></td>
-	<td><pre class="code3">
-
-
-
+	<td class="twocol_l"><img src="images/comp-material.png" alt="Material Split" height="200"/></td>
+	<td class="twocol_r"><pre class="codecga">
 Lot -->
    i("Orange_Tree.obj") 
    comp(m) { findFirst(geometry.materials,"Foliage") : Oranges. 
            | findFirst(geometry.materials,"Bark")    : Trunk. }
-	</pre><p><em>A tree model is split into its materials. In this case groups and materials are the same.</em></p></td>
+</pre><p><em>A tree model is split into its materials. In this case groups and materials are the same.</em></p></td>
 </tr>
 </table>
                               
-<p class="foot">Copyright &copy;2008-2024 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
+<p class="foot">Copyright &copy;2008-2025 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
 
 </div>
 </body>

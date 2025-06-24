@@ -25,16 +25,25 @@
 
 <p class="code2">deleteTags()</p>
 <p class="code2">deleteTags(<span class="cga_opparam">tagQuery</span>)</p>
+<p class="code2">deleteTags(<span class="cga_opparam">tagQuery</span>, <span class="cga_opparam">components</span>)</p>
 
 <h2>Parameters</h2>
 
 <ul>
-	<li><span class="cga_opparam">tagQuery</span> (string)<br>The query defining which tags to delete</li>
+	<li><span class="cga_opparam">tagQuery</span> (string)<br>The query defining which tags to delete. See also <a class="normw" href="cga_componentTags.html">Geometry Tagging: Essential Knowledge</a>.</li>
+	<li><span class="cga_opparam">components</span> (selector)<br>
+		<table cellspacing="5">
+			<tr><td width="15%"><span class="codelight">all</span></td><td>Default. Deletes tags from all components.</td></tr>
+			<tr><td><span class="codelight">faces</span></td><td>Only deletes face tags.</td></tr>
+			<tr><td><span class="codelight">edges</span></td><td>Only deletes edge tags.</td></tr>
+			<tr><td><span class="codelight">vertices</span></td><td>Only deletes vertex tags.</td></tr>
+		</table>
+	</li>
 </ul>
 
 <h2>Description</h2>
 
-<p>The <span class="code_std">deleteTags</span> operation deletes all tags stored on the geometry, i.e., from all face, edge, and vertex components. If a <span class="cga_opparam">tagQuery</span> is provided, only matching tags are deleted. </p>
+<p>The <span class="code_std">deleteTags</span> operation deletes tags from the geometry. If a <span class="cga_opparam">tagQuery</span> is provided, only matching tags are deleted. If <span class="cga_opparam">components</span> are specified, only their tags are deleted.</p>
 		
 <h2>Related</h2>
 
@@ -47,7 +56,7 @@
 </ul>
                 
 <!-- FOOTER -->
-<p class="foot">Copyright &copy;2008-2024 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
+<p class="foot">Copyright &copy;2008-2025 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
 
 <!-- END CENTERED CONTENT -->
 
