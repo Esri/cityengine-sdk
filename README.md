@@ -99,7 +99,7 @@ Please note that the individual example READMEs may include further requirements
 
 A detailed list of changes to the API, CGA language and built-in codecs can be found in the [Changelog](changelog.md).
 
-* [v3.3.11172 (2025-XX-XX, CityEngine 2025.0)](https://github.com/Esri/cityengine-sdk/releases/tag/3.3.11172)
+* [v3.3.11173 (2025-06-24, CityEngine 2025.0)](https://github.com/Esri/cityengine-sdk/releases/tag/3.3.11173)
 * [v3.2.10824 (2025-02-25, ArcGIS Pro 3.5, Enterprise 11.5)](https://github.com/Esri/cityengine-sdk/releases/tag/3.2.10824)
 * [v3.2.10650 (2024-11-20, CityEngine 2024.1)](https://github.com/Esri/cityengine-sdk/releases/tag/3.2.10650)
 * [v3.2.10352 (2024-08-23, ArcGIS Pro 3.4, Enterprise 11.4)](https://github.com/Esri/cityengine-sdk/releases/tag/3.2.10352)
