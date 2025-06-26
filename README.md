@@ -141,7 +141,7 @@ A detailed list of changes to the API, CGA language and built-in codecs can be f
 * [CityEngine Integrations (Urban, Plugins)](https://www.esri.com/en-us/arcgis/products/arcgis-cityengine/integrations)
 * Youtube: <https://www.youtube.com/c/CityEngineTV>
 * Facebook: <https://www.facebook.com/CityEngine>
-* Twitter: <https://twitter.com/CityEngine>
+* X: <https://x.com/CityEngine>
 
 ## Issues and Contributions
 
