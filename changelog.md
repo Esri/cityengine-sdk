@@ -43,10 +43,10 @@ This section lists changes compared to CityEngine SDK 3.3.11173.
 * The focus of this release is to fix some issues which are important for certain client applications such as ArcGIS Pro. There is no CityEngine version using this version of the SDK.
 
 ## PRT API
-* No changes.
+* `prt::ResolveMap::addEntry` now correctly handles nested URIs when `EEM_INSPECT_AND_ADD` is passed.
 
 ## PRTX API
-* `prt::ResolveMap::addEntry` now correctly handles nested URIs when `EEM_INSPECT_AND_ADD` is passed.
+* No changes.
 
 ## CGA
 * New annotations:
