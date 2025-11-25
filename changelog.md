@@ -1,9 +1,9 @@
-# CITYENGINE SDK SDK 3.3.11666 CHANGELOG
+# CITYENGINE SDK SDK 3.3.11669 CHANGELOG
 
 This section lists changes compared to CityEngine SDK 3.3.11351.
 
 ## General Info
-* CityEngine SDK 3.3.11666 is used in CityEngine 2025.1.11666.
+* CityEngine SDK 3.3.11669 is used in CityEngine 2025.1.11669.
 
 ## PRT API
 * No changes.
@@ -34,6 +34,16 @@ This section lists changes compared to CityEngine SDK 3.3.11351.
 ## Built-In Codecs
 * Alembic and VUE encoders:
   * Deprecated, they will be removed in the future. 
+
+# CITYENGINE SDK SDK 3.3.11352 CHANGELOG
+
+This section lists changes compared to CityEngine SDK 3.3.11351.
+
+## General Info
+* The focus of this release is to fix some issues which are important for certain client applications such as ArcGIS Pro. There is no CityEngine version using this version of the SDK.
+
+## Misc Changes and Fixes
+* Applied security updates for libxml (2.15.1).
 
 # CITYENGINE SDK SDK 3.3.11351 CHANGELOG
 
