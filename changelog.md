@@ -1,3 +1,96 @@
+# CITYENGINE SDK SDK 3.3.11669 CHANGELOG
+
+This section lists changes compared to CityEngine SDK 3.3.11352.
+
+## General Info
+* CityEngine SDK 3.3.11669 is used in CityEngine 2025.1.11669.
+
+## PRT API
+* No changes.
+
+## PRTX API
+* No changes.
+
+## CGA
+* New features:
+  * inline keyword: Added recompose strategy that topologically reconnects subdivided shapes.
+* New operations:
+  * modify operation.
+* Changes to existing features:
+  * split operation:
+     * When the first face is split away the face used to close hollow geometries becomes the new first face. This helps to preserve the first edge of the geometry.
+     * Previously, extruded geometries were only scaled and not split. Now, an actual split is performed. As a consequence, the resulting face and vertex indices and the first edges of faces can change. This can have an effect on the aligned scope or the result of probabilistic functions after a subsequent component split.
+  * offset operation: Improved performance. This slightly changed numerical accuracy.
+  * The initialization phase (attr and const evaluation) has been sped up, resulting in improved dynamic import performance.
+* Bugfixes:
+  * split operation: Fixed a bug where splitting extruded shapes led to a wrong result.
+  * extrude operation: Fixed a bug where existing vertex tags would not be propagated to the new side edges when extruding edge shapes.
+  * convexify operation:
+    * Fixed a bug where faces were not convexified at holes with only 3 vertices.
+    * Fixed a bug where zero-length edges were constructed.
+  * offset operation: Fixed a bug where a positive offset did not create holes correctly.
+  * inline(unify), union, subtract, intersect operations: Improved robustness when combining shapes with overlapping holes.
+ 
+## Built-In Codecs
+* Alembic and VUE encoders:
+  * Deprecated, they will be removed in the future. 
+
+# CITYENGINE SDK SDK 3.3.11352 CHANGELOG
+
+This section lists changes compared to CityEngine SDK 3.3.11351.
+
+## General Info
+* The focus of this release is to fix some issues which are important for certain client applications such as ArcGIS Pro. There is no CityEngine version using this version of the SDK.
+
+## Misc Changes and Fixes
+* Applied security updates for libxml (2.15.1).
+
+# CITYENGINE SDK SDK 3.3.11351 CHANGELOG
+
+This section lists changes compared to CityEngine SDK 3.3.11173.
+
+## General Info
+* The focus of this release is to fix some issues which are important for certain client applications such as ArcGIS Pro. There is no CityEngine version using this version of the SDK.
+
+## PRT API
+* `prt::ResolveMap::addEntry` now correctly handles nested URIs when `EEM_INSPECT_AND_ADD` is passed.
+
+## PRTX API
+* No changes.
+
+## CGA
+* New annotations:
+    * @RuleFileDescription annotation.
+* Bugfixes:
+  * geometry.nVertices function: Fixed incorrect return value when applied to a shape with face vertices (created with comp(fv)).
+  * comp operation, comp function:
+    * comp(v): Fixed incorrect number and wrong order of components when applied to a shape with face vertices (created with comp(fv)).
+    * Fixed numerically unstable selectors in rare cases.
+  * cleanupGeometry operation: Fixed a rare crash for meshes with holes and multiple groups.
+  * split operation: Fixed a bug where duplicate vertices could be created when splitting edge shapes created with comp(fe).
+  * Improved numerical accuracy of scope calculation.
+
+## Built-In Codecs
+* USD decoder:
+  * Made it more stable: It now ignores problematic meshes instead of ignoring the whole asset.
+  * Fixed a bug where preview materials were ignored. 
+  * Fixed a bug where the USD decoder wrongly percent-encoded keys of referenced assets when no ResolveMap was provided which lead to missing textures.
+  * Added support for generic ResolveMap keys.
+* JPG codecs:
+  * Improved multithreading performance.
+* Shapebuffer decoder:
+  * Fixed wrong embedded texture resolve map keys.
+* CityGML encoder:
+  * Allow setting of the the spatial reference of the geometry ("srsName" attribute).
+  * Added options for vertex merging ("mergeVertices") and precision ("vertexPrecision").
+  * Only export initial shape attributes with "/enc/metaData" metadata prefix.
+* DWG and IFC codecs:
+  * Updated to ODA 26.5 library.
+* IFC decoder:
+  * Fixed a bug where IFC4 files with geo-referencing and a scale would be scaled wrongly.
+ 
+## Misc Changes and Fixes
+* Applied security updates for libxml (2.14.5).
 
 # CITYENGINE SDK 3.3.11173 CHANGELOG
 

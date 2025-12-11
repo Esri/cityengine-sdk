@@ -1,6 +1,6 @@
 # CityEngine SDK
 
-This is the official site for the SDK of [CityEngine](https://www.esri.com/en-us/arcgis/products/esri-cityengine/overview), a 3D city modeling software for urban design, visual effects, and VR/AR production. Using the CityEngine SDK, a number of [open source plugins and APIs](https://www.esri.com/en-us/arcgis/products/arcgis-cityengine/integrations) have been built, allowing to integrate CityEngine technology into other tools.
+This is the official site for the SDK of [CityEngine](https://www.esri.com/en-us/arcgis/products/arcgis-cityengine/overview), a 3D city modeling software for urban design, visual effects, and VR/AR production. Using the CityEngine SDK, a number of [open source plugins and APIs](https://www.esri.com/en-us/arcgis/products/arcgis-cityengine/integrations) have been built, allowing to integrate CityEngine technology into other tools.
 
 The CityEngine SDK can be used for the development of:
 
@@ -71,7 +71,6 @@ Read the [whitepaper](https://esri.github.io/cityengine-sdk/arcgis_prt_whitepape
 * [ArcGIS CityEngine for Houdini](https://esri.github.io/cityengine/houdini): CityEngine plugin for SideFX Houdini
 * [ArcGIS CityEngine for Rhino](https://esri.github.io/cityengine/rhino): CityEngine plugin for McNeel Rhino3d
 * [ArcGIS CityEngine for Unreal Engine](https://esri.github.io/cityengine/vitruvio): CityEngine plugin for Epic Unreal Engine
-* [Serlio](https://esri.github.io/cityengine/serlio): CityEngine plugin for Autodesk Maya
 
 ## General Software Requirements
 
@@ -79,8 +78,8 @@ Please note that the individual example READMEs may include further requirements
 
 ### All Platforms
 
-* To load custom encoders built with the latest SDK, CityEngine 2025.0 is required. For older versions of CityEngine an older version of the SDK might have to be used, see [Release History](#release-history-and-changelog). Some SDK versions don't have a matching CityEngine.
-* A license for the corresponding CityEngine version. For example, a license for CityEngine 2025.0 to author Rule Packages for the current SDK release.
+* To load custom encoders built with the latest SDK, CityEngine 2025.1 is required. For older versions of CityEngine an older version of the SDK might have to be used, see [Release History](#release-history-and-changelog). Some SDK versions don't have a matching CityEngine.
+* A license for the corresponding CityEngine version. For example, a license for CityEngine 2025.1 to author Rule Packages for the current SDK release.
 * CMake 3.19 or later (<https://www.cmake.org>)
 
 ### Windows
@@ -99,6 +98,9 @@ Please note that the individual example READMEs may include further requirements
 
 A detailed list of changes to the API, CGA language and built-in codecs can be found in the [Changelog](changelog.md).
 
+* [v3.3.11669 (2025-12-11, CityEngine 2025.1)](https://github.com/Esri/cityengine-sdk/releases/tag/3.3.11669)
+* [v3.3.11352 (2025-12-11, ArcGIS Pro 3.6.2, Enterprise 12.0)](https://github.com/Esri/cityengine-sdk/releases/tag/3.3.11352)
+* [v3.3.11351 (2025-11-13, ArcGIS Pro 3.6, Enterprise 12.0)](https://github.com/Esri/cityengine-sdk/releases/tag/3.3.11351)
 * [v3.3.11173 (2025-06-24, CityEngine 2025.0)](https://github.com/Esri/cityengine-sdk/releases/tag/3.3.11173)
 * [v3.2.10824 (2025-02-25, ArcGIS Pro 3.5, Enterprise 11.5)](https://github.com/Esri/cityengine-sdk/releases/tag/3.2.10824)
 * [v3.2.10650 (2024-11-20, CityEngine 2024.1)](https://github.com/Esri/cityengine-sdk/releases/tag/3.2.10650)
@@ -141,7 +143,7 @@ A detailed list of changes to the API, CGA language and built-in codecs can be f
 * [CityEngine Integrations (Urban, Plugins)](https://www.esri.com/en-us/arcgis/products/arcgis-cityengine/integrations)
 * Youtube: <https://www.youtube.com/c/CityEngineTV>
 * Facebook: <https://www.facebook.com/CityEngine>
-* Twitter: <https://twitter.com/CityEngine>
+* X: <https://x.com/CityEngine>
 
 ## Issues and Contributions
 
