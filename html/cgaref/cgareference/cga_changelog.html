@@ -30,6 +30,67 @@
 		<td><strong>Changes</strong></td>
 	</tr>
 	<tr>
+		<td>2025.1<br>CGAC 2.10</td>
+		<td>
+			New features:
+			<ul>
+				<li><a href="op_inline.html"><span class="code_std">inline</span></a> keyword: Added <span class="codelight">recompose</span> strategy that topologically reconnects subdivided shapes.</li> <!-- CE-13156 -->
+			</ul>
+			New operations:
+			<ul>
+				<li><a href="op_modify.html"><span class="code_std">modify</span></a> operation.</li>
+			</ul>
+			Changes to existing features:
+			<ul>
+				<li><a href="op_split.html"><span class="code_std">split</span></a> operation:</li>
+				<ul>
+					<li>When the first face is split away the face used to close hollow geometries becomes the new first face. This helps to preserve the first edge of the geometry.</li> <!-- CE-12931 -->
+					<li>Previously, extruded geometries were only scaled and not split. Now, an actual split is performed. As a consequence, the resulting face and vertex indices and the first edges of faces can change. This can have an effect on the aligned scope or the result of probabilistic functions after a subsequent <a href="op_comp.html">component split</a>.</li> <!-- CE-12931 -->
+				</ul>
+                <li><a href="op_offset.html"><span class="code_std">offset</span></a> operation: Improved performance. This slightly changed numerical accuracy.</li> <!-- CE-13278 --> 
+                <li>The initialization phase (attr and const evaluation) has been sped up, resulting in improved <a href="import.html#dynamic">dynamic import</a> performance.</li>  <!-- CE-13159, CE-13194, CE-13208  -->
+			</ul>
+			Bugfixes:
+			<ul>
+				<li><a href="op_split.html"><span class="code_std">split</span></a> operation: Fixed a bug where splitting extruded shapes led to a wrong result.</li> <!-- CE-12959 -->
+				<li><a href="op_extrude.html"><span class="code_std">extrude</span></a> operation: Fixed a bug where existing vertex tags would not be propagated to the new side edges when extruding edge shapes.</li> 
+				<li><a href="op_convexify.html"><span class="code_std">convexify</span></a> operation:</li>
+				<ul>
+					<li>Fixed a bug where faces were not convexified at holes with only 3 vertices.</li> <!-- CE-13256 -->
+					<li>Fixed a bug where zero-length edges were constructed.</li> <!-- CE-13192 -->
+				</ul>
+				<li><a href="op_offset.html"><span class="code_std">offset</span></a> operation: Fixed a bug where a positive offset did not create holes correctly.</li> <!-- CE-13182 --> 
+				<li><a href="op_inline.html"><span class="code_std">inline(unify)</span></a>, <a href="op_boolOp.html"><span class="code_std">union</span></a>, <a href="op_boolOp.html"><span class="code_std">subtract</span></a>, <a href="op_boolOp.html"><span class="code_std">intersect</span></a> operations: Improved robustness when combining shapes with overlapping holes.</li> <!-- CE-13103 -->
+            <li>CGA Compiler:</li>
+				<ul>
+					<li>Fixed a bug where overriding a rule file in the navigator while the editor is open led to a state where the content of a rule file did not correspond to the generated model.</li> <!-- CE-13080 -->
+					<li>Fixed a bug where changing the case of a folder name that contains the rule file led to a state where the compilation persistently failed and changes were not effective anymore (Windows only).</li> <!-- CE-13003 -->
+				</ul>
+			</ul>
+		</td>
+	</tr>
+	<tr>
+		<td>SDK&nbsp;3.3.11351<br>CGAC 2.9</td>
+		<td>
+			New annotations:
+			<ul>
+				<li><a href="cga_annotations.html#rulefiledescription"><span class="code_std">@RuleFileDescription</span></a> annotation.</li> <!-- CE-13102 -->
+			</ul>
+			Bugfixes:
+			<ul>
+			    <li><a href="func_geometry.html#nVertices"><span class="code_std">geometry.nVertices</span></a> function: Fixed incorrect return value when applied to a shape with face vertices (created with <span class="codelight">comp(fv)</span>).</li> <!-- CE-12799 -->
+				<li><a href="op_comp.html"><span class="code_std">comp</span></a> operation, <a href="func_comp.html"><span class="code_std">comp</span></a> function:</li>
+				<ul>
+				    <li><span class="codelight">comp(v)</span>: Fixed incorrect number and wrong order of components when applied to a shape with face vertices (created with <span class="codelight">comp(fv)</span>).</li> <!-- CE-12799 -->
+					<li>Fixed numerically unstable selectors in rare cases.</li> <!-- CE-12926 -->
+				</ul>
+   				<li><a href="op_cleanupGeometry.html"><span class="code_std">cleanupGeometry</span></a> operation: Fixed a rare crash for meshes with holes and multiple groups.</li> <!-- CE-13320 -->
+                <li><a href="op_split.html"><span class="code_std">split</span></a> operation: Fixed a bug where duplicate vertices could be created when splitting edge shapes created with <span class="codelight">comp(fe)</span>.</li>
+				<li>Improved numerical accuracy of scope calculation.</li> <!-- CE-12926 -->
+			</ul>
+		</td>
+	</tr>
+	<tr>
 		<td>2025.0<br>CGAC 2.8</td>
 		<td>
   			New features:

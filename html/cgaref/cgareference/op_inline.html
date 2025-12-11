@@ -31,10 +31,11 @@
 
 <ul>
     <li><span class="cga_opparam">geometryMergeStrategy</span> (selector)
-    <br>Defines how the geometry of the resulting shapes are combined:  
+    <br>Defines how the geometries of the resulting shapes are combined:  
 	<table cellspacing="5">
 		<tr><td width="20%"><span class="codelight">append</span></td><td>Default. Appends the geometry as is.</td></tr>
 		<tr><td width="20%"><span class="codelight">unify</span></td><td>Uses the Boolean union operation.</td></tr>	
+		<tr><td width="20%"><span class="codelight">recompose</span></td><td>Reconnects subdivided shapes (see <a href="cga_shapeRecomposition.html">Shape Recomposition</a>).</td></tr>
 	</table>
 	</li>
 	<li>Syntax options: 
@@ -106,10 +107,11 @@ Init -->
 </table>
 
 <h3>Geometry merge strategy</h3>
-The correct <span class="codelight">geometryMergeStrategy</span> depends on the modeling objective. Currently, two strategies are offered:
+The correct <span class="codelight">geometryMergeStrategy</span> depends on the modeling objective:
 <table cellspacing="5">
 	<tr><td width="20%"><span class="codelight">append</span></td><td>Default. Used to simply collect the geometries of multiple shapes and put them into a single mesh. No geometry cleanup is performed and all components are kept as is.</td></tr>
-	<tr><td width="20%"><span class="codelight">unify</span></td><td>Used to combine the geometries of intersecting shapes with Boolean operations. Intersecting faces get topologically connected and inner faces are removed.</td></tr>	
+	<tr><td width="20%"><span class="codelight">unify</span></td><td>Used to combine the geometries of intersecting shapes with Boolean operations. Intersecting faces get topologically connected and inner faces are removed.</td></tr>
+	<tr><td width="20%"><span class="codelight">recompose</span></td><td>Used to topologically recombine the geometries of subdivided shapes. Shapes are automatically reconnected at shared vertices and edges, see <a href="cga_shapeRecomposition.html">Shape Recomposition</a>. The strategy can be used to recombine shapes created with, for example, the <a class="normw" href="op_split.html">split</a> or <a class="normw" href="op_comp.html">comp</a> operations.</td></tr>	
 </table>
 
 </p>
@@ -117,15 +119,17 @@ The correct <span class="codelight">geometryMergeStrategy</span> depends on the 
 <h2>Related</h2>
 <ul>
     <li><a class="normw" href="op_boolOp.html">union, subtract, intersect operations</a></li>
+	<li><a class="normw" href="op_modify.html">modify operation</a></li>
 	<li><a class="normw" href="op_tag.html">tag operation</a></li>
     <li><a class="normw" href="cga_componentTags.html">Geometry Tagging: Essential Knowledge</a></li>
+	<li><a class="normw" href="cga_shapeRecomposition.html">Shape Recomposition: Essential Knowledge</a></li>
 </ul>
 
 <h2><a name="examples"></a>Examples</h2>
 
 <h3>Mesh Topology</h3>
 
-</table>
+
 <br><br>
 <table>
 <tr>
@@ -136,21 +140,73 @@ Init -->
     primitiveCube
     print("start: " + geometry.nVertices)
     inline comp(f) { all: SetColor }
-    print("inlined: " + geometry.nVertices)
-    cleanupGeometry(vertices, 0)
-    print("cleanup: " + geometry.nVertices)
+    print("inline: " + geometry.nVertices)
     
 rampValue = comp.index/comp.total
 SetColor -->
     set(material.opacity, 0.9)
     color(colorRamp("spectrum", rampValue))
 </pre>
-	<em>Inlining is used to combine the colored faces of a cube back into a single shape. The faces are simply appended and thus do not share vertices. This can be fixed using <a class="normw" href="op_cleanupGeometry.html">cleanupGeometry</a>.</em>
+	<em>Inlining is used to combine the colored faces of a cube back into a single shape. By default, the faces are simply appended and do not share vertices, resulting in three times as many vertices as before.</em>
+	</td>
+</tr>
+<tr>
+	<td class="twocol_l"><img src="images/inline_recompose_topology.png" alt="Inline recompose topology." width="298"/></td>
+	<td class="twocol_r">
+<pre class="codecga">
+Init -->
+    primitiveCube
+    print("start: " + geometry.nVertices)
+    inline(recompose) comp(f) { all: SetColor }
+    print("inline(recompose): " + geometry.nVertices)
+</pre>
+	<em>
+		<p>Using the <span class="codelight">recompose</span> strategy, vertices are automatically merged, restoring the original topology.</p>
+		<p>Alternatively, the <a class="normw" href="op_modify.html">modify</a> operation can be used instead of an inlined <span class="codelight">comp</span>.</p>
+	</em>
 	</td>
 </tr>
 </table>
 
-<h3>F-Shaped Building</h3>
+<h3>Best of Two Alternatives (append)</h3>
+
+<table>
+<tr>
+	<td class="twocol_l"><img src="images/inline_best_alternative.png" alt="Best of several alternatives" width="298"/></td>
+	<td class="twocol_r">
+<pre class="codecga">
+Init --> 
+    inline { LayoutA LayoutB }
+    ChooseLayout
+
+LayoutA --> offset(-15, border) tag("LayoutA")
+LayoutB --> split(x) { 15: tag("LayoutB") Lot. 
+                     | ~10: NIL }*
+
+taggedArea(name) = 
+    sum(comp(f) { isTagged(name): geometry.area })
+
+ChooseLayout -->
+    case taggedArea("LayoutA") > taggedArea("LayoutB"):
+          inline Extract("LayoutA")
+          Mass
+    else: 
+          inline Extract("LayoutB")
+          Mass
+
+Extract(name) --> 
+    comp(f, noAlign) { isTagged(name)= Extract. }
+	
+Mass --> extrude(30)
+</pre>
+	<em>Two different and tagged layouts are generated. Using <span class="codelight">inline</span> they are combined into a single shape. 
+	The <a class="normw" href="func_comp.html">comp</a> function and tags are then used to compare the area of both layouts and continue only with the larger one. 
+	</em>
+	</td>
+</tr>
+</table>
+
+<h3>F-Shaped Building (recompose)</h3>
 <table>
 <tr>
 	<td class="twocol_l"><img src="images/inline_fshape_before.png" alt="F-Shaped Building traditionally" width="298"/></td>
@@ -158,7 +214,7 @@ SetColor -->
 <pre class="codecga">
 Init -->
     split(z, noAdjust) 
-        {  7: split(x) { ~7: House | 7: House }*
+        {  7: House
         | ~1: split(x) { ~7: NIL   | 7: House }* }
 
 House --> 
@@ -176,55 +232,58 @@ House -->
 	<td class="twocol_r">
 <pre class="codecga">
 Init -->
-    inline FShapePieces
-    cleanupGeometry(all, 0)
+    inline(recompose) FShapePieces
+    cleanupGeometry(all, 0) // removes inner edges
     House
 	
 FShapePieces -->
     split(z, noAdjust) 
-        {  7: split(x) { ~7: Done. | 7: Done. }*
+        {  7: Done.
         | ~1: split(x) { ~7: NIL   | 7: Done. }* }
 </pre>
-	<em>With inlining: The <span class="codelight">FShapePieces</span> rule is inlined, which combines all pieces into a single shape. With <span class="codelight">append</span> the geometry is kept as is, which means the pieces are not connected via shared edges. To connect them and merge them into a single footprint polygon, the <a class="normw" href="op_cleanupGeometry.html">cleanupGeometry</a> operation is used. This results in a single extruded mass and a single joint roof. </em>
+	<em>With inlining: The <span class="codelight">FShapePieces</span> rule is inlined, which combines all pieces into a single shape. With <span class="codelight">recompose</span> the geometries of the subdivded shapes are automatically reconnected and the <a class="normw" href="op_cleanupGeometry.html">cleanupGeometry</a> operation can be used to merge the pieces into a single footprint polygon. This results in a single extruded mass and a single joint roof. </em>
 	</td>
 </tr>
 </table>
 
-<h3>Best of Two Alternatives</h3>
-
+<h3>Twist and Taper (recompose)</h3>
 <table>
 <tr>
-	<td class="twocol_l"><img src="images/inline_best_alternative.png" alt="Best of several alternatives" width="298"/></td>
+	<td class="twocol_l"><img src="images/inline_twist_and_taper.png" alt="Twist and Taper Example" width="298"/></td>
 	<td class="twocol_r">
 <pre class="codecga">
-Init --> 
-    inline {
-        [ tag("LayoutA") LayoutA ]
-        [ tag("LayoutB") LayoutB ]
-    }
-    ChooseLayout
+attr Twist_Angle = 180
+attr Taper_Factor = 0.5
+attr Resolution = 24
 
-LayoutA --> offset(-15, border)
-LayoutB --> split(x) { 15: Lot. | ~10: NIL }*
+Init -->
+    extrude(100)
+    tag("Mass")
+    inline(recompose) split(y) { '1/Resolution: Slice }*
+    
+    // delete inner faces created by the split: 
+    modify(f) { !isTagged("Mass"): NIL } 
+	
+Slice --> modify(f,noAlign) { top: RotateRescale }
 
-taggedArea(name) = 
-    sum(comp(f) { isTagged(name): geometry.area })
-
-ChooseLayout -->
-    case taggedArea("LayoutA") > taggedArea("LayoutB"):
-          comp(f) { isTagged("LayoutA")= Mass }
-    else: comp(f) { isTagged("LayoutB")= Mass }
-
-Mass --> extrude(30)
+RotateRescale with(
+    a := split.index / (Resolution-1)
+    f := (1-a) + a*Taper_Factor
+)-->
+    r(0,(split.index+1)*Twist_Angle/Resolution,0)  
+    s('f,'1,'f) 
+    center(xz)
 </pre>
-	<em>Two different and tagged layouts are generated. Using <span class="codelight">inline(append)</span> they are combined into a single shape. 
-	The <a class="normw" href="func_comp.html">comp</a> function and tags are then used to compare the area of both layouts and continue only with the larger one. 
+	<em>
+		<p>The extruded mass is split into slices, and the top of each slice is rotated and scaled using <a class="normw" href="op_modify.html">modify</a>. Because the split operation is inlined using <span class="codelight">recompose</span>, the slices are reconnected, forming a continuous twist and taper.</p>
+		<p>To remove the inner faces, which are created by the split operation to close the volumes, the extruded mass is first <a class="normw" href="op_tag.html">tagged</a>, and afterwards, all faces without this tag are deleted. </p>
 	</em>
+	
 	</td>
 </tr>
 </table>
 
-<h3>Unify Spiral Steps</h3>
+<h3>Spiral Steps (unify)</h3>
 
 <table>
 <tr>
@@ -272,6 +331,10 @@ B --> t(-1, 0.5, 0.75)
       primitiveCube
       tag("B")
 C --> primitiveSphere tag("C")
+
+Blue -->   color("#0399F5")
+Yellow --> color("#FADB19")
+Red -->    color("#FF360A")
 </pre>
 	<em>The initial shape is split into three parts, with a different primitive geometry asset inserted into each part and then <a class="normw" href="op_tag.html">tagged</a>. Inlining the <span class="codelight">split</span> using <span class="codelight">unify</span> merges them into a single watertight mesh while preserving the tags on the individual face components.</em>
 	</td>

@@ -1,0 +1,224 @@
+<html>
+
+<head>
+    <title>Shape Recomposition: Essential Knowledge</title>
+    <link rel="stylesheet" href="../manual_style.css" type="text/css" />
+</head>
+
+<body>
+<div class="content">
+
+<table summary="" class="header">
+	<tr>
+		<td align="left" class="helphead_l"><a href="../toc.html"><div class="helplink">&nbsp;</div></a></td>
+		<td align="right" class="helphead_r"></td>
+	</tr>
+</table>
+
+<h1>Shape Recomposition: Essential Knowledge</h1>
+<p>This section explains in more detail how shape recomposition in the <a class="normw" href="op_inline.html">inline(recompose)</a> and <a class="normw" href="op_modify.html">modify</a> operations work.</p>
+
+<p>In a nutshell, shape recomposition restores the connectivity of subdivided shapes, merging the independent pieces of geometry back into one single continuous mesh. 
+
+
+<h2>Illustrative Explanation</h2>
+<h3>Merging Subdivided Shapes</h3>
+<p>Many modeling objectives require splitting a shape into parts, after which further operations should continue on a single unified shape. For example, creating an F-shaped building footprint from a parcel polygon:</p>
+<p class="piccaptioncentered"><img src="images/recomp_purpose_split.png"></p>
+<p>The <a class="normw" href="op_inline.html">inline</a> keyword using the <span class="codelight">recompose</span> parameter enables this. It collects the subdivided shapes back into a single shape and rebuilds adjacency between the separate parts to create one continuous mesh:
+<ul> 
+	<li>Shared vertices (yellow) are merged.</li>
+	<li>Vertices (red) are inserted on polygon boundaries to create shared edges between the parts.</li>
+</ul>
+</p>
+<p class="piccaptioncentered"><img src="images/recomp_add_vertices.png"></p>
+<p>With the connecivity restored through recomposition, we can use <a class="normw" href="op_cleanupGeometry.html">cleanupGeometry</a> to remove the shared edges between coplanar faces and create the F-shaped polygon. Full example code: </p>
+<pre class="codecga">
+Init -->
+    inline(recompose) split(x) { 10: X.
+                               | ~1: split(z) { 10: X. | 10: NIL }* }
+    cleanupGeometry(all,0)
+</pre>
+
+<h4>Connectivity Tracking</h4>
+Reconnecting subdivided shapes depends only on topological relations.
+When deriving shapes using <span class="codelight">inline</span> with the <span class="codelight">recompose</span> strategy, CGA remembers their connectivity. For example, the rule above generates the following intermediate shapes, where CGA keeps track of shared vertices (yellow and green) and new vertices (red) inserted along shared edges (orange):
+<p class="piccaptioncentered"><img src="images/recomp_geometry_tracking.png"></p>
+
+Adjacency is rebuilt solely based on these tracked relations, and regardless of the vertex positions in space. For example, if the lower part is translated sideways, the upper part follows suit:
+<p class="piccaptioncentered"><img src="images/recomp_fshape_moved.png"></p>
+<pre class="codecga">Init -->
+    inline(recompose) split(x) { 10: t(0,0,8) X.
+                               | ~1: split(z) { 10: X. | 10: NIL }* }
+    cleanupGeometry(all,0)
+</pre>
+See <a href="cga_shapeRecomposition.html#vertexMerging">Vertex Merging</a> on how the vertex positions are determined.
+
+
+<h3>Geometry Modifications</h3>
+Another important use case is to modify (transform, split, delete, tag, extrude, etc.) parts of the current geometry. For example, creating a tapered mass or moving the ridge of a roof:
+<p class="piccaptioncentered"><img src="images/recomp_modify_examples.png"></p>
+This is enabled with the <a class="normw" href="op_modify.html">modify</a> operation:
+<pre class="codecga">
+TaperedMassExample --> 
+    extrude(5)
+    modify(f) { top: s('0.5,'0.5,0) X. }
+
+RoofExample --> 
+    roofHip(45)
+    modify(e) { ridge: t(0,0,2) X. }
+</pre>
+<p>The <span class="codelight">modify</span> operation works the same as <span class="codelight">inline(recompose)</span>. In fact, to modify face components, the following two lines of code are equivalent:</p>
+<ul>
+	<li><span class="codelight">modify(f/m/g) { ... }</span></li>
+	<li><span class="codelight">inline(recompose) comp(f/m/g) { ... | all= Keep. }</span></li>
+</ul>
+<p>The <span class="codelight">modify</span> operation implicitly performs recomposition and always restores the full geometry. Key distinction:</p>
+<ul>
+  <li><span class="codelight">inline(recompose) comp</span> — recomposes only what it generates. If edge or vertex shapes have been created (e.g. using <span class="codelight">comp(e/fe)</span> or <span class="codelight">comp(v/fv)</span>), faces are lost.</li>
+  <li><span class="codelight">modify</span> — recomposes the modified parts <i>and</i> adds the untouched geometry back, integrating edits on edges and vertices into the original faces.</li>
+</ul>
+<p>In the following example, the edges of the input polygon are modified to create insets:</p>
+<p class="piccaptioncentered"><img src="images/recomp_insets.png"></p>
+<p>
+Each edge is first split into five parts, and the middle segment is moved inward.
+Shape recomposition then automatically reconnects the modified edges and merges them back into the original polygon.
+</p>
+<pre class="codecga">
+InsetExample -->
+    modify(fe) { all: split(x) { ~1: X.| 1: X. | 3: t(0,0,-2) X. | 1: X. | ~1: X. } }
+</pre>
+
+<h3><a name="vertexMerging"></a>Vertex Merging</h3>
+<p>Shape recomposition reconnects shapes by merging shared vertices (that is, vertices in subdivided shapes that originated from the same source vertex). It respects all applied transformations: shared vertices are merged by summing their individual offsets from the original vertex position.</p>
+<p>In the following example, the bottom and right edges are rescaled. This adds two offsets to the shared purple vertex, which are summed and applied to the original position to place the merged vertex. The red and yellow vertices each have a single offset, so their final positions match their positions before recomposition.</p>
+<p class="piccaptioncentered"><img src="images/recomp_vertex_move.png"></p>
+<pre class="codecga">
+Init -->
+    modify(fe) { 0: s('0.5,0,0) center(x) X. 
+               | 1: s('0.6,0,0) center(x) X. }
+</pre>
+
+<h4>Merging Along Shared Edges</h4>
+<p>Transformations applied to shared edges are respected by the new vertices inserted along those edges.</p>
+<p>In the following example, the shape is split into a bottom and top part. The bottom is scaled and subdivided into thirds, while the top is subdivided into sixths. During recomposition, the new vertices from the top part are interpolated along the transformed edge (red, purple). Shared vertices (yellow, green) and vertices that split the edge at the same relative position (purple) are automatically merged.</p>
+<p class="piccaptioncentered"><img src="images/recomp_vertex_move_split_1.png"></p>
+<pre class="codecga">
+Init   --> inline(recompose) split(x) { '0.5: Bottom | '0.5: Top }
+Bottom --> s('1,'1,'1.5) center(z) split(z) { '1/3: X. }*
+Top    --> split(z) { '1/6: X. }* 
+</pre>
+<br> 
+<p>Similarly, in this example the bottom is rescaled and the top part is split vertically. The new vertices (red) follow the transformation of the shared vertex (green).</p>
+<p class="piccaptioncentered"><img src="images/recomp_vertex_move_split_2.png"></p>
+<pre class="codecga">
+Init   --> inline(recompose) split(x) { '0.5: Bottom | '0.5: Top }
+Bottom --> s('1,'1,'1.5)
+Top    --> split(x) { '0.2: X. }*
+</pre>
+
+<h4>Accumulating Offsets</h4>
+<p>When transforming adjacent shapes separately, shape recomposition accumulates these transformations at shared vertices and edges.</p>
+<table>
+<tr>
+	<td class="twocol_l"><img src="images/recomp_vertex_move_2.png" width="298"/></td>
+	<td class="twocol_r">
+	<em>In this illustration, each of the four faces is translated upward in a separate shape. When recomposed, the translations of shared vertices are summed: the center vertex accumulates four offsets (one from each shape), the middle border vertices accumulate two, and the corner vertices only one.</em>
+<pre class="codecga">
+FourFaces --> modify(f,noAlign) { all: t(0,1,0) X. }
+</pre>
+	</td>
+</tr>
+</table>
+
+<p class="notes">To avoid offset accumulation, apply transformations directly to vertices instead of faces or edges, or use multiple consecutive non-conflicting <span class="codelight">modify</span> operations.</p>
+
+<h3>Currently Unsupported Operations</h3>
+Connectivity tracking - and therefore shape recompositions - is <b>not yet supported</b> for the following operations:
+<ul>
+	<li><a class="normw" href="op_setback.html">setback</a>, <a class="normw" href="op_splitAndSetbackPerimeter.html">splitAndSetbackPerimeter</a>, <a class="normw" href="op_shapeLUO.html">shapeLUO</a>, <a class="normw" href="op_setbackToArea.html">setbackToArea</a> operations</li>
+	<li><a class="normw" href="op_innerRectangle.html">innerRectangle</a> operation</li>
+	<li><a class="normw" href="op_splitArea.html">splitArea</a> operation</li>
+	<li><a class="normw" href="op_envelope.html">envelope</a> operation</li>
+	<li><a class="normw" href="op_boolOp.html">union, subtract, intersect</a> operations</li>
+</ul>
+These operations can still be used inside <span class="codelight">modify</span> or <span class="codelight">inline(recompose)</span>, however the resulting shapes will not be automatically reconnected with the rest of the geometry; they are simply appended.
+
+<h2>Related</h2>
+<ul>
+	<li><a class="normw" href="op_inline.html">Rule Inlining</a></li>
+	<li><a class="normw" href="op_modify.html">modify operation</a></li>
+	<li><a class="normw" href="op_comp.html">comp operation</a></li>
+	<li><a class="normw" href="op_split.html">split operation</a></li>
+</ul>
+
+<h2>Examples</h2>
+<h3>Shifted Plane</h3>
+<table>
+<tr>
+	<td class="twocol_l"><img src="images/recomp_examples_1_0.png" width="298"/></td>
+	<td class="twocol_r">
+	<em>The input plane is split into three equal parts, and the right part is moved upward. Shape recomposition reconnects the pieces, creating a slanted middle section.</em>
+<pre class="codecga">
+Init -->
+    inline(recompose) SplitAndTranslate
+
+SplitAndTranslate --> 
+    split(x) { ~1: X. | ~1: X. | ~1: t(0,2,0) X. }
+</pre>
+	</td>
+</tr>
+<tr>
+	<td class="twocol_l"><img src="images/recomp_examples_1_1.png" width="298"/></td>
+	<td class="twocol_r">
+	<em><p>Here, the input plane is first extruded, then the top face is modified with the same rule. Shape recomposition reconnects the split parts and reintegrates the modified top face with the side faces.<p>
+		<p>Note: <span class="codelight">inline(recompose)</span> is not required anymore, because shape recomposition is always implicitly performed by the <span class="codelight">modify</span> operation.</p>
+	</em>
+<pre class="codecga">
+Init -->
+    extrude(5)
+    modify(f,noAlign) { top: SplitAndTranslate }
+
+SplitAndTranslate --> 
+    split(x) { ~1: X. | ~1: X. | ~1: t(0,2,0) X. }
+</pre>
+	</td>
+</tr>
+<tr>
+	<td class="twocol_l"><img src="images/recomp_examples_1_2.png" width="298"/></td>
+	<td class="twocol_r">
+	<em>In this variant, all split pieces are deleted (using NIL), yet the modifications are still applied to the side faces.</em>
+<pre class="codecga">
+Init -->
+    extrude(5)
+    modify(f,noAlign) { top: SplitAndTranslateNIL }
+
+SplitAndTranslateNIL --> 
+    split(x) { ~1: NIL | ~1: NIL | ~1: t(0,2,0) NIL }
+</pre>
+	</td>
+</tr>
+</table>
+
+<h3>Random Split And Transform</h3>
+<table>
+<tr>
+	<td class="twocol_l"><img src="images/recomp_examples_2.png" width="298"/></td>
+	<td class="twocol_r">
+	<em>In this example, the input polygon is randomly split and each cell translated by a random amount. Shape recomposition reconnects all pieces, forming a continuous surface.</em>
+<pre class="codecga">
+Init -->
+    inline(recompose) RandomSplitX
+
+RandomSplitX --> split(x) { rand(0.5,1): RandomSplitZ | ~1: RandomSplitX }
+RandomSplitZ --> split(z) { rand(0.5,1): Cell | ~1: RandomSplitZ }
+Cell         --> t(0, rand(-0.2,0.2), 0)
+</pre>
+	</td>
+</tr>
+</table>
+<p class="foot">Copyright &copy;2008-2025 Esri R&amp;D Center Zurich. All rights reserved.</p>
+
+</div>
+</body>
+</html>

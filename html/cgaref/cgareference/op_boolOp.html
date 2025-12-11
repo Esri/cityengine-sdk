@@ -19,9 +19,9 @@
 
 <h2>Syntax</h2>
 
-<p class="code2"><span class="cga_op">union</span>&nbsp&nbsp&nbsp&nbsp&nbsp{ <span class="cga_opparam">operationsA</span> | <span class="cga_opparam">operationsB</span> }</p>
-<p class="code2"><span class="cga_op">subtract</span>&nbsp&nbsp{ <span class="cga_opparam">operationsA</span> | <span class="cga_opparam">operationsB</span> }</p>
-<p class="code2"><span class="cga_op">intersect</span>&nbsp{ <span class="cga_opparam">operationsA</span> | <span class="cga_opparam">operationsB</span> }</p>
+<p class="code2"><span class="cga_op">union</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ <span class="cga_opparam">operationsA</span> | <span class="cga_opparam">operationsB</span> }</p>
+<p class="code2"><span class="cga_op">subtract</span>&nbsp;&nbsp;{ <span class="cga_opparam">operationsA</span> | <span class="cga_opparam">operationsB</span> }</p>
+<p class="code2"><span class="cga_op">intersect</span>&nbsp;{ <span class="cga_opparam">operationsA</span> | <span class="cga_opparam">operationsB</span> }</p>
 
 <h2>Parameters</h2>
 
@@ -37,7 +37,7 @@
 <h3><a name="componentTags"></a>Component tags</h3>
 The operations automatically apply semantic <a href="cga_componentTags.html">component tags</a> to the resulting face and edge components:
 
-<p class="piccaptioncentered"><img src="images/autotag-boolOps.png">
+<p class="piccaptioncentered"><img src="images/autotag-boolOps.png"></p>
 
 <table summary="" class="twocol">
 <tr>
@@ -58,7 +58,7 @@ Left   --> union { Cube | Sphere }
 Cube   --> primitiveCube
 Sphere --> t(0.3,0.3,0.3) primitiveSphere
 
-Middle --> subtract&nbsp&nbsp{ Cube | Sphere } ...
+Middle --> subtract&nbsp;&nbsp;{ Cube | Sphere } ...
 Right  --> intersect { Cube | Sphere } ...</pre> </td></tr>
 </table>
 <p class="notes">For overlapping faces (2D intersection) both <span class="codelight">"bool.A"</span> and <span class="codelight">"bool.B"</span> are applied.</p>
@@ -123,10 +123,10 @@ Right  --> intersect { Cube | Sphere } ...</pre> </td></tr>
     <thead>
         <tr>
         <td></td>
-        <td style="padding:10px;"><em><p>Both operands closed</p></em></td>
-        <td style="padding:10px;"><em><p>Open and closed operand</p> <p>Plane normal pointing up</p></em></td>
-        <td style="padding:10px;"><em><p>Open and closed operand</p> <p>Plane normal pointing down</p></em></td>
-        <td style="padding:10px;"><em><p>Open and closed operand</p> <p>Only partially intersecting</p></em></td>
+        <td style="padding:10px;"><p><em>Both operands closed</em></p></td>
+        <td style="padding:10px;"><p><em>Open and closed operand</em></p> <p><em>Plane normal pointing up</em></p></td>
+        <td style="padding:10px;"><p><em>Open and closed operand</em></p> <p><em>Plane normal pointing down</em></p></td>
+        <td style="padding:10px;"><p><em>Open and closed operand</em></p> <p><em>Only partially intersecting</em></p></td>
         </tr>
     </thead>
     
@@ -500,9 +500,8 @@ Init -->
     primitiveDisk(5)
     deleteUV(0)
     union { HouseFootprint. | FrontyardFootprint }
-    inline comp(f) { isTagged("bool.B")= B
-                   | isTagged("bool.A")= A }
-    cleanupGeometry(vertices, 0) // reconnect faces
+    modify(f) { isTagged("bool.B")= B
+              | isTagged("bool.A")= A }
     ShowTags
    
 A --> tag("eHouse", edges)
@@ -517,7 +516,7 @@ ShowTags -->
                   && isTagged("eHouse"): YellowEdge
             | isTagged("eHouse")       : BlueEdge
             | isTagged("eFrontyard")   : GreenEdge }</pre>
-<em>Step 2: The goal is to merge the yellow and green faces and tag the edges in preparation for Step 3. The <a class="normw" href="op_comp.html">comp</a> is used to modify the respective faces and then <a class="normw" href="op_inline.html">inlining</a> and <a class="normw" href="op_cleanupGeometry.html">cleanupGeometry</a> is used to merge the modified pieces back together.<br><br>Note: In order to use <a class="normw" href="op_cleanupGeometry.html">cleanupGeometry</a> to merge the faces in rule <span class="codelight">B</span>, <a class="normw" href="op_deleteUV.html">deleteUV</a> is needed to remove the UV coordinates on the inserted asset, and <a class="normw" href="op_deleteTags.html">deleteTags</a> is required to remove <span class="codelight">"bool.A"</span> and <span class="codelight">"bool.cut"</span>, which would otherwise prevent the process.</em>
+<em>Step 2: The goal is to merge the yellow and green faces and tag the edges in preparation for Step 3. The <a class="normw" href="op_modify.html">modify</a> operation is used to edit the respective parts.<br><br>Note: In order to use <a class="normw" href="op_cleanupGeometry.html">cleanupGeometry</a> to merge the faces in rule <span class="codelight">B</span>, <a class="normw" href="op_deleteUV.html">deleteUV</a> is needed to remove the UV coordinates on the inserted asset, and <a class="normw" href="op_deleteTags.html">deleteTags</a> is required to remove <span class="codelight">"bool.A"</span> and <span class="codelight">"bool.cut"</span>, which would otherwise prevent the process.</em>
 </td>
 </tr>
 </table>
@@ -533,9 +532,8 @@ Init -->
     primitiveDisk(5)
     deleteUV(0)
     union { HouseFootprint. | FrontyardFootprint }
-    inline comp(f) { isTagged("bool.B")= B
-                   | isTagged("bool.A")= A }
-    cleanupGeometry(vertices, 0) // reconnect faces
+    modify(f) { isTagged("bool.B")= B
+              | isTagged("bool.A")= A }
     comp(f) { isTagged("bool.A"): House
             | isTagged("bool.B"): Frontyard }
             

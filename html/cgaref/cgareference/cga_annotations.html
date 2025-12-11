@@ -20,7 +20,7 @@
 <!-- CONTENT -->
 <h1>Annotations</h1>
              
-<p>Annotations are used to add additional information to a rule or an attribute. Annotations are optional and do not affect the semantics of a rule and thus have no influence on the model generation. Annotations are mostly used to give additional hints for user interface elements such as the Inspector on how to present attributes or rules.</p>
+<p>Annotations are used to add additional information, in most cases for a rule or an attribute. Annotations are optional and do not affect the semantics of a rule and thus have no influence on the model generation. Annotations are mostly used to give additional hints for user interface elements such as the Inspector on how to present attributes or rules.</p>
  
 <h2>Syntax</h2>
  
@@ -31,32 +31,33 @@
 			<tr>
 				<td>
 					<ul style="list-style-type   : none; margin-left : 10px; padding-left: 20px; ">
-						<li><code><a class="erdz-api-anchor" href="#angle"       >@Angle</a></code></li>
-						<li><code><a class="erdz-api-anchor" href="#color"       >@Color</a></code></li>
-						<li><code><a class="erdz-api-anchor" href="#desc"        >@Description("description")</a></code></li>
-						<li><code><a class="erdz-api-anchor" href="#dir"         >@Directory</a></code></li>
-						<li><code><a class="erdz-api-anchor" href="#displayname" >@DisplayName("name")</a></code></li>
-						<li><code><a class="erdz-api-anchor" href="#dist"        >@Distance</a></code></li>
-						<li><code><a class="erdz-api-anchor" href="#enum1"       >@Enum(value_1, value_2, ..., restricted=true)</a></code></li>
-						<li><code><a class="erdz-api-anchor" href="#enum2"       >@Enum(valuesAttr=name, restricted=true)</a></code></li>
-						<li><code><a class="erdz-api-anchor" href="#file1"       >@File</a></code></li>
-						<li><code><a class="erdz-api-anchor" href="#file2"       >@File("ext_1", ..., "ext_n")</a></code></li>
-						<li><code><a class="erdz-api-anchor" href="#group1"      >@Group("level_1-group", ..., "level_n-group")</a></code></li>
-						<li><code><a class="erdz-api-anchor" href="#group2"      >@Group("level_1-group", ..., "level_n-group, order")</a></code></li>
-						<li><code><a class="erdz-api-anchor" href="#handle"      >@Handle(handle_params)</a></code></li>
-						<li><code><a class="erdz-api-anchor" href="#hidden1"     >@Hidden</a></code></li>
-						<li><code><a class="erdz-api-anchor" href="#hidden2"     >@Hidden(attribute_1, ... , attribute_n)</a></code></li>
-						<li><code><a class="erdz-api-anchor" href="#inmesh"      >@InLine</a></code></li>
-						<li><code><a class="erdz-api-anchor" href="#inmesh"      >@InMesh</a></code></li>
-						<li><code><a class="erdz-api-anchor" href="#inmesh"      >@InPoint</a></code></li>
-						<li><code><a class="erdz-api-anchor" href="#inmesh"      >@InPointCloud</a></code></li>
-						<li><code><a class="erdz-api-anchor" href="#inmesh"      >@InPolygon</a></code></li>
-						<li><code><a class="erdz-api-anchor" href="#materialfile">@MaterialFile</a></code></li>
-						<li><code><a class="erdz-api-anchor" href="#order"       >@Order(order)</a></code></li>
-						<li><code><a class="erdz-api-anchor" href="#out"         >@Out(granularity=separatedShapes|combinedShape)</a></code></li>
-						<li><code><a class="erdz-api-anchor" href="#percent"     >@Percent</a></code></li>
-						<li><code><a class="erdz-api-anchor" href="#range"       >@Range(min=value, max=value, stepsize=0, restricted=true)</a></code></li>
-						<li><code><a class="erdz-api-anchor" href="#startrule"   >@StartRule</a></code></li>
+						<li><code><a class="erdz-api-anchor" href="#angle"              >@Angle</a></code></li>
+						<li><code><a class="erdz-api-anchor" href="#color"              >@Color</a></code></li>
+						<li><code><a class="erdz-api-anchor" href="#desc"               >@Description("description")</a></code></li>
+						<li><code><a class="erdz-api-anchor" href="#dir"                >@Directory</a></code></li>
+						<li><code><a class="erdz-api-anchor" href="#displayname"        >@DisplayName("name")</a></code></li>
+						<li><code><a class="erdz-api-anchor" href="#dist"               >@Distance</a></code></li>
+						<li><code><a class="erdz-api-anchor" href="#enum1"              >@Enum(value_1, value_2, ..., restricted=true)</a></code></li>
+						<li><code><a class="erdz-api-anchor" href="#enum2"              >@Enum(valuesAttr=name, restricted=true)</a></code></li>
+						<li><code><a class="erdz-api-anchor" href="#file1"              >@File</a></code></li>
+						<li><code><a class="erdz-api-anchor" href="#file2"              >@File("ext_1", ..., "ext_n")</a></code></li>
+						<li><code><a class="erdz-api-anchor" href="#group1"             >@Group("level_1-group", ..., "level_n-group")</a></code></li>
+						<li><code><a class="erdz-api-anchor" href="#group2"             >@Group("level_1-group", ..., "level_n-group, order")</a></code></li>
+						<li><code><a class="erdz-api-anchor" href="#handle"             >@Handle(handle_params)</a></code></li>
+						<li><code><a class="erdz-api-anchor" href="#hidden1"            >@Hidden</a></code></li>
+						<li><code><a class="erdz-api-anchor" href="#hidden2"            >@Hidden(attribute_1, ... , attribute_n)</a></code></li>
+						<li><code><a class="erdz-api-anchor" href="#inmesh"             >@InLine</a></code></li>
+						<li><code><a class="erdz-api-anchor" href="#inmesh"             >@InMesh</a></code></li>
+						<li><code><a class="erdz-api-anchor" href="#inmesh"             >@InPoint</a></code></li>
+						<li><code><a class="erdz-api-anchor" href="#inmesh"             >@InPointCloud</a></code></li>
+						<li><code><a class="erdz-api-anchor" href="#inmesh"             >@InPolygon</a></code></li>
+						<li><code><a class="erdz-api-anchor" href="#materialfile"       >@MaterialFile</a></code></li>
+						<li><code><a class="erdz-api-anchor" href="#order"              >@Order(order)</a></code></li>
+						<li><code><a class="erdz-api-anchor" href="#out"                >@Out(granularity=separatedShapes|combinedShape)</a></code></li>
+						<li><code><a class="erdz-api-anchor" href="#percent"            >@Percent</a></code></li>
+						<li><code><a class="erdz-api-anchor" href="#range"              >@Range(min=value, max=value, stepsize=0, restricted=true)</a></code></li>
+						<li><code><a class="erdz-api-anchor" href="#rulefiledescription">@RuleFileDescription("description")</a></code></li>
+						<li><code><a class="erdz-api-anchor" href="#startrule"          >@StartRule</a></code></li>
 					</ul>
 				</td>
 			</tr>
@@ -85,7 +86,7 @@ attr angle = 180
 				<th class="erdz-api-proto"><code>@Color</code></th>
 			</tr>
 			<tr>
-				<td class="erdz-api-text">Mark an attribute as a color attribute which will present a color picker in the inspector.</td>
+				<td class="erdz-api-text">Mark an attribute as a color attribute which will present a color picker in the Inspector.</td>
 			</tr>
 			<tr>
 				<td class="erdz-api-example">Example:
@@ -102,7 +103,7 @@ attr userColor = "#000000"
 				<th class="erdz-api-proto"><code>@Description("description")</code></th>
 			</tr>
 			<tr>
-				<td class="erdz-api-text">Adds a description to an attribute or rule which will be displayed as tooltip in the inspector or as description in the start rule chooser or style manager. Use <code>\n</code> for linebreaks.</td>
+				<td class="erdz-api-text">Adds a description to an attribute or rule which will be displayed as tooltip in the Inspector and Visual CGA Editor or as description in the start rule chooser or style manager. Use <code>\n</code> for line breaks.</td>
 			</tr>
 			<tr>
 				<td class="erdz-api-example">Example:
@@ -119,7 +120,7 @@ attr width = 40
 				<th class="erdz-api-proto"><code>@Directory</code></th>
 			</tr>
 			<tr>
-				<td class="erdz-api-text">Mark an attribute as a directory name. The inspector will present a directory chooser.</td>
+				<td class="erdz-api-text">Mark an attribute as a directory name. The Inspector will present a directory chooser.</td>
 			</tr>
 			<tr>
 				<td class="erdz-api-example">Example:
@@ -136,7 +137,7 @@ attr assets = "/assets/lod" + lod
 				<th class="erdz-api-proto"><code>@DisplayName("name")</code></th>
 			</tr>
 			<tr>
-				<td class="erdz-api-text">Adds a descriptive name to an attribute which will be displayed in the inspector instead of the attribute name.</td>
+				<td class="erdz-api-text">Adds a descriptive name to an attribute which will be displayed in the Inspector instead of the attribute name.</td>
 			</tr>
 			<tr>
 				<td class="erdz-api-example">Example:
@@ -170,7 +171,7 @@ attr distance = 1852
 				<th class="erdz-api-proto"><code>@Enum(value_1, value_2, ..., restricted=true)</code></th>
 			</tr>
 			<tr>
-				<td class="erdz-api-text">Sets an enumeration with specific values. Values can be <code>float</code> or <code>string</code>. Parameter <code>restricted</code> is optional (default is <code>true</code>). If <code>true</code> no other values can be entered in the inspector or set by a handle.</td>
+				<td class="erdz-api-text">Sets an enumeration with specific values. Values can be <code>float</code> or <code>string</code>. Parameter <code>restricted</code> is optional (default is <code>true</code>). If <code>true</code> no other values can be entered in the Inspector or set by a handle.</td>
 			</tr>
 			<tr>
 				<td class="erdz-api-example">Examples:<br>
@@ -201,7 +202,7 @@ attr floorUsage = ["Residential"]
 				<th class="erdz-api-proto"><code>@Enum(valuesAttr=name, restricted=true)</code></th>
 			</tr>
 			<tr>
-				<td class="erdz-api-text">Sets an enumeration with specific values. The values are dynamically set by an attribute with name <code>valuesAttr</code> (of type <code>float</code>, <code>float[]</code>, <code>string</code> or <code>string[]</code>). Parameter <code>restricted</code> is optional (default is <code>true</code>). If <code>true</code> no other values can be entered in the inspector or set by a handle.</td>
+				<td class="erdz-api-text">Sets an enumeration with specific values. The values are dynamically set by an attribute with name <code>valuesAttr</code> (of type <code>float</code>, <code>float[]</code>, <code>string</code> or <code>string[]</code>). Parameter <code>restricted</code> is optional (default is <code>true</code>). If <code>true</code> no other values can be entered in the Inspector or set by a handle.</td>
 			</tr>
 			<tr>
 				<td class="erdz-api-example">Examples:
@@ -238,7 +239,7 @@ attr usage = ["Residential", "Commercial"]
 				<th class="erdz-api-proto"><code>@File</code></th>
 			</tr>
 			<tr>
-				<td class="erdz-api-text">Mark an attribute as a file name. The inspector will present a file chooser.</td>
+				<td class="erdz-api-text">Mark an attribute as a file name. The Inspector will present a file chooser.</td>
 			</tr>
 			<tr>
 				<td class="erdz-api-example">Example:
@@ -255,7 +256,7 @@ attr asset = "myfile.obj"
 				<th class="erdz-api-proto"><code>@File("ext_1", ... , "ext_n")</code></th>
 			</tr>
 			<tr>
-				<td class="erdz-api-text">Mark an attribute as a file name. The inspector will present a file chooser for the given file extensions ("ext_1", ... , "ext_n").</td>
+				<td class="erdz-api-text">Mark an attribute as a file name. The Inspector will present a file chooser for the given file extensions ("ext_1", ... , "ext_n").</td>
 			</tr>
 			<tr>
 				<td class="erdz-api-example">Example:
@@ -273,7 +274,7 @@ attr texture = "tex0.tiff"
 				<th class="erdz-api-proto"><code>@Group(&quot;level_1-group&quot;, ..., &quot;level_n-group&quot;)</code></th>
 			</tr>
 			<tr>
-				<td class="erdz-api-text">Set the group of the following attributes (the inspector will group attributes accordingly). The current group is maintained accross imports. To leave the current group, use <span class="codelight">@Group</span>.</td>
+				<td class="erdz-api-text">Set the group of the following attributes (the Inspector will group attributes accordingly). The current group is maintained accross imports. To leave the current group, use <span class="codelight">@Group</span>.</td>
 			</tr>
 			<tr>
 				<td class="erdz-api-example">Example:
@@ -290,7 +291,7 @@ attr grouped = 0
 				<th class="erdz-api-proto"><code>@Group(&quot;level_1-group&quot;,..., &quot;level_n-group&quot;, order)</code></th>
 			</tr>
 			<tr>
-				<td class="erdz-api-text">Set the group and the sort order for groups/subgroups in the inspector (similar to <code>@Order</code> for attributes). Where <code>order</code> is a numeric value.</td>
+				<td class="erdz-api-text">Set the group and the sort order for groups/subgroups in the Inspector (similar to <code>@Order</code> for attributes). Where <code>order</code> is a numeric value.</td>
 			</tr>
 			<tr>
 				<td class="erdz-api-example">Example:
@@ -324,7 +325,7 @@ attr dimension = 40
 				<th class="erdz-api-proto"><code>@Hidden</code></th>
 			</tr>
 			<tr>
-				<td class="erdz-api-text">Mark an attribute or rule as hidden. Hidden attributes won't appear in CityEngine's inspector, but they will still be connected to matching object attributes automatically. Hidden rules won't appear in the start rule chooser. <code>@Hidden</code> before an <a href="import.html"><span class="code_std">import</span></a> statement will hide all imported attributes in the inspector. All attributes imported in the hidden import will also be hidden.</td>
+				<td class="erdz-api-text">Mark an attribute or rule as hidden. Hidden attributes won't appear in CityEngine's Inspector, but they will still be connected to matching object attributes automatically. Hidden rules won't appear in the start rule chooser. <code>@Hidden</code> before an <a href="import.html"><span class="code_std">import</span></a> statement will hide all imported attributes in the Inspector. All attributes imported in the hidden import will also be hidden.</td>
 			</tr>
 			<tr>
 				<td class="erdz-api-example">Examples:
@@ -370,7 +371,7 @@ import rule: "rule.cga"
 				<th class="erdz-api-proto"><code>@MaterialFile</code></th>
 			</tr>
 			<tr>
-				<td class="erdz-api-text">Mark an attribute as a material file name. The inspector will present a specific material file chooser.</td>
+				<td class="erdz-api-text">Mark an attribute as a material file name. The Inspector will present a specific material file chooser.</td>
 			</tr>
 			<tr>
 				<td class="erdz-api-example">Example:
@@ -387,7 +388,7 @@ attr mat = "myMaterial.cgamat"
 				<th class="erdz-api-proto"><code>@Order(order)</code></th>
 			</tr>
 			<tr>
-				<td class="erdz-api-text">Sets the sort order for an attribute in the Inspector, where <code>order</code> is a numeric value.</td>
+				<td class="erdz-api-text">Sets numeric order for an attribute in the Inspector. Further, sets the order for attributes and extension rules of a component node in the Visual CGA Editor.</td>
 			</tr>
 			<tr>
 				<td class="erdz-api-example">Example:
@@ -417,7 +418,7 @@ attr i_m_3rd = 0
 				<th class="erdz-api-proto"><code>@Percent</code></th>
 			</tr>
 			<tr>
-				<td class="erdz-api-text">Adds a % unit in Inspector and an unrestricted [0,1] range that displays as [0,100]. Use <code>@Range</code> to specify a different range. In the CGA File, the value has to be initialized to the real value (e.g. 0.1 for 10%). The Inspector will display the value in percent (e.g. 10%). The user has to enter the value in percent in the inspector.</td>
+				<td class="erdz-api-text">Adds a % unit in Inspector and an unrestricted [0,1] range that displays as [0,100]. Use <code>@Range</code> to specify a different range. In the CGA File, the value has to be initialized to the real value (e.g. 0.1 for 10%). The Inspector will display the value in percent (e.g. 10%). The user has to enter the value in percent in the Inspector.</td>
 			</tr>
 			<tr>
 				<td class="erdz-api-example">Example:
@@ -459,6 +460,22 @@ attr floorHeights = [4, 5.5, 5.5]
 				</td>
 			</tr>
 
+	</table>
+	
+	<table id="rulefiledescription" class="w3-table erdz-api-table">
+			<tr>
+				<th class="erdz-api-proto"><code>@RuleFileDescription("description")</code></th>
+			</tr>
+			<tr>
+				<td class="erdz-api-text">Adds a description for the whole rule file which will be displayed for components in the Visual CGA Editor. Supports <a href="https://en.wikipedia.org/wiki/Markdown">markdown</a> syntax.</td>
+			</tr>
+			<tr>
+				<td class="erdz-api-example">Example:
+				<pre class="codecga">
+@RuleFileDescription("Creates a building mass from a lot.")
+</pre>
+				</td>
+			</tr>
 	</table>
 	
 	<table id="startrule" class="w3-table erdz-api-table">

@@ -1,0 +1,242 @@
+<html>
+
+<head>
+	<title>modify Operation</title>
+	<link rel="stylesheet" href="../manual_style.css" type="text/css" />
+</head>
+
+<body>
+<div class="content">
+
+<table summary="" class="header">
+	<tr>
+		<td align="left" class="helphead_l"><a href="../toc.html"><div class="helplink">&nbsp;</div></a></td>
+		<td align="right" class="helphead_r"></td>
+	</tr>
+</table>
+
+<h1>modify Operation</h1>
+
+<h2>Syntax</h2>
+
+<p class="code2">modify(<span class="cga_opparam">component</span>)&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{ <span class="cga_opparam">selector</span> <span class="cga_opparam">operator</span> <span class="cga_opparam">operations</span> | ... }</p>
+<p class="code2">modify(<span class="cga_opparam">component</span>, <span class="cga_opparam">scopeAlignment</span>) { <span class="cga_opparam">selector</span> <span class="cga_opparam">operator</span> <span class="cga_opparam">operations</span> | ... }</p>
+
+
+<h2>Parameters</h2>
+
+<ul>
+	<li><span class="cga_opparam">component, scopeAlignment, selector, operator, operations</span><br>These parameters are the same as for the  <a class="cga_op" href="op_comp.html#params">comp</a> operation.</li>
+</ul>
+
+<h2>Description</h2>
+
+<p>The <span class="codelight">modify</span> operation edits selected parts of the current geometry. Like the <a class="cga_op" href="op_comp.html">comp</a> operation, it divides a shape into topological components (defined by <span class="cga_opparam">component</span>, <span class="cga_opparam">selector</span>, <span class="cga_opparam">operator</span>) that results in new shapes that are modified according to the specified <span class="cga_opparam">operations</span>.</p> 
+<p>Unlike the <span class="codelight">comp</span> operation, the <span class="codelight">modify</span> operation always performs <em>shape recomposition</em> implicitly (see <a href="cga_shapeRecomposition.html">Shape Recomposition</a>), i.e., recombining the edited components with the remaining geometry. For face components, the following two lines are therefore equivalent:
+	<ul>
+	<li><span class="codelight">modify(f) { ... }</span></li>
+	<li><span class="codelight">inline(recompose) comp(f) { ... | all: X. }</span></li>
+</ul>
+
+In contrast to an <a class="cga_op" href="op_inline.html">inlined</a> <span class="codelight">comp</span> operation, <span class="codelight">modify</span> automatically restores the untouched geometry, removing the need for the "<span class="codelight">| all: X.</span>" clause. It also enables modifying edge and vertex components while returning to the full geometry after the operation.</p>
+
+
+<p class="notes">The <span class="codelight">modify</span> operation only changes the current shape's geometry and does not add successor shapes to the shape tree.</p>
+
+<h3 class="text">Comp shape attributes</h3>
+
+<p class="text">Each generated shape has a number of comp shape attributes set. For more information see <a class="normw" href="attr_comp.html">comp attribute</a>.</p>
+
+<h2>Related</h2>
+
+<ul>
+	<li><a href="op_comp.html">comp operation</a></li>
+	<li><a href="op_inline.html">Rule Inlining</a></li>
+	<li><a href="op_tag.html">tag operation</a></li>
+	<li><a href="op_deleteTags.html">deleteTags operation</a></li>
+	<li><a href="attr_comp.html">comp attribute</a></li>
+	<li><a href="cga_shapeRecomposition.html">Shape Recomposition: Essential Knowledge</a></li>
+</ul>
+
+<h2>Examples</h2>
+<h3>Modified Roof Ridge</h3>
+<table>
+<tr>
+	<td class="twocol_l"><img src="images/modify_ridge.png" alt="Modified Roof Ridge" width="298"/></td>
+	<td class="twocol_r">
+<pre class="codecga">
+Init -->
+    extrude(5)
+    comp(f) { top: ModifiedRoof | side: Facade. }
+
+ModifiedRoof --> 
+    roofHip(45)
+    modify(e) { ridge: t(0,2,0) X. }
+</pre>
+	<em>The ridge of the roof is moved 2 meters to the side.</em>
+	</td>
+</tr>
+</table>
+
+<h3>Tapered Mass</h3>
+<table>
+<tr>
+	<td class="twocol_l"><img src="images/modify_cube.png" alt="Tapered Cube" width="298"/></td>
+	<td class="twocol_r">
+<pre class="codecga">
+Init -->
+    extrude(5)
+    modify(f) { top: s('0.5, '0.5, '0.5) X. }
+</pre>
+	<em>The top of a extruded mass is rescaled to create slanted facades.</em>
+	</td>
+</tr>
+</table>
+
+<h3>Corrugated Facade</h3>
+<table>
+<tr>
+	<td class="twocol_l"><img src="images/modify_outsets_1.png" alt="Outsets" width="298"/></td>
+	<td class="twocol_r">
+<pre class="codecga">
+const OpeningL = 2
+const Depth = 0.75
+const InnerL = 1	
+
+Init -->
+    inline(recompose) split(x) { 5:  tag("Front") F. 
+                               | ~1: tag("House") H. }
+    modify(e) { isTagged("Front") && isTagged("House"): 
+        split(x) { ~4: CreateOutset }* }
+
+CreateOutset -->
+    split(x) { ~1      : Wall. 
+             | 0.01    : tag("Side") Side.
+             | OpeningL: tag("Outset") Outset
+             | 0.01    : tag("Side") Side.
+             | ~1      : Wall. }
+
+Outset --> t(0,-Depth,0) s(InnerL,0,0) center(x)
+</pre>
+	<em>The input shape is first divided into the house and front footprint, tagged, and recombined using <a class="cga_op" href="op_inline.html">inline(recompose)</a>. The connecting edge is then modified and split into repeated outsets. Each outset is built by subdividing the edge, tagging reference parts, and transforming the center segment. Shape recomposition automatically merges the modified edges with the footprints, producing the corrugated pattern.</em>
+	</td>
+</tr>
+<tr>
+	<td class="twocol_l"><img src="images/modify_outsets_2.png" alt="Outsets" width="298"/></td>
+	<td class="twocol_r">
+<pre class="codecga">
+Init -->
+    ...
+    comp(f) { isTagged("House"): BuildHouse }
+
+BuildHouse -->
+    extrude(3)
+    cleanupGeometry(all,0)
+    comp(f) { isTagged("Side")  : Blue
+            | isTagged("Outset"): Green
+            | all               = White. }
+
+Blue -->   color("#0399F5")
+Green -->  color("#09DE1F")
+</pre>
+	<em>The <a class="cga_op" href="op_extrude.html">extrude</a> operation automatically propagates the previously appied edge tags to the corresponding facades. The tags are used to color the facades. The <a class="cga_op" href="op_cleanupGeometry.html">cleanupGeometry</a> operation is used to merge adjacent coplanar wall polygons.</em>
+	</td>
+</tr>
+</table>
+
+
+<h3>Hyperbolic Grid</h3>
+<table>
+<tr>
+	<td class="twocol_l"><img src="images/modify_paraboloid.png" alt="Tapered Cube" width="298"/></td>
+	<td class="twocol_r">
+<pre class="codecga">
+attr Max_Height = scope.sx/2
+
+Paraboloid with(
+    center := getPivotCoord(scope.sx/2, 0, scope.sz/2) 
+    cenX   := center[0]
+    cenZ   := center[2]
+    a      := getDampingFac(scope.sx/2)
+    b      := getDampingFac(scope.sz/2)
+    yPos   := scope.ty
+)-->
+    inline(recompose) Grid
+    modify(v, noAlign) { all: Move(cenX, cenZ, a, b) }
+    set(scope.ty, yPos)
+
+Grid -->
+    split(x,noAdjust) { '0.1: split(z) { '0.1: Cell. }* }*
+		
+Move(centerX, centerZ, a, b) with(
+    x := scope.tx - centerX
+    z := scope.tz - centerZ
+)-->
+    t(0,hyperbolic(x,z,a,b),0)
+
+hyperbolic(x,z,a,b) = (z*z)/(b*b) - (x*x)/(a*a)
+
+getPivotCoord(x,y,z) = convert(scope,pivot,pos,[x,y,z])
+getDampingFac(l) = l / sqrt(Max_Height*0.5)
+</pre>
+	<em>
+		<p>The example first splits the input shape into a 10x10 grid using <a class="cga_op" href="op_inline.html">inline(recompose)</a>. Then, each vertex is moved to create a hyperbolic surface. Finally, we set <a class="cga_op" href="attr_scope.html">scope.ty</a> back to its original value to ensure the new shape is fully above the input shape.</p>
+		<p>The rule uses the <span class="codelight">Max_Height</span> attribute to control the height of the hyperbolic surface (preventing the quadratic function to explode on large input shapes).</p>
+		<p>The <span class="codelight">noAlign</span> parameter ensures that all vertex scopes share the same coordinate system. It keeps the original <a class="cga_op" href="attr_pivot.html">pivot</a>, so each vertex’s scope remains relative to that reference, allowing its position to be read directly from the <a class="cga_op" href="attr_scope.html">scope translation</a>.</p>
+	</em>
+	</td>
+</tr>
+</table>
+<h3>Hyperbolic Roof</h3>
+<table>
+<tr>
+	<td class="twocol_l"><img src="images/modify_paraboloid_roof.png" alt="Tapered Cube" width="298"/></td>
+	<td class="twocol_r">
+<pre class="codecga">
+Init --> 
+    extrude(5)
+    modify(f,noAlign) { top: Paraboloid }
+</pre>
+	<em>The <span class="codelight">Paraboloid</span> rule can be used directly to modify the top of an extruded mass. </em>
+	</td>
+</tr>
+</table>
+<h3>Chaikin's Corner Cutting Algorithm</h3>
+<p class="piccaptioncentered"><img src="images/modify_smooth_steps.png"></p>
+<table>
+<tr>
+	<td class="twocol_l"><img src="images/modify_smooth_example.png" alt="Tapered Cube" width="298"/></td>
+	<td class="twocol_r">
+<pre class="codecga">
+Init -->
+    ChaikinSmoothing(3)
+	
+ChaikinSmoothing(n) -->
+    case n > 0:
+        modify(fe) { all: SplitEdge }
+        modify(fe) { isTagged("Collapse"): s(0,0,0) X. }
+        cleanupGeometry(vertices,0)
+        ChaikinSmoothing(n-1)
+    else:
+        Done.
+
+SplitEdge --> 
+    split(x) { '0.25: CornerCut. 
+             | ~1: Fixed. 
+             | '0.25: tag("Collapse") Collapse. }
+</pre>
+	<em>
+		<p>This example implements Chaikin's corner cutting algorithm to smooth the polygon boundary. Each iteration splits every edge into three parts and collapses the last segment. By collapsing the end of each edge, the start of the following edge is also collapsed, gradually cutting the corners and producing an even smoothing effect. </p>
+		<p>The <a class="cga_op" href="op_cleanupGeometry.html">cleanupGeometry</a> operation merges the vertices of the collapsed edge.</p>
+	</em>
+	
+	</td>
+</tr>
+</table>
+
+<table>
+<p class="foot">Copyright &copy;2008-2025 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
+
+</div>
+</body>
+</html>

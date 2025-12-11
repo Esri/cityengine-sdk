@@ -5,7 +5,7 @@
 </head>
 <body>
 <h1>ArcGIS Procedural Runtime Encoder/Decoder Reference</h1>
-<small>(Automatically generated from PRT 3.3.11173; Build Date: Tue 06/10/2025 03:53 PM; Build Configuration: PRT_BC_REL)</small><p>This is the PRT reference documentation for all built-in encoders and decoders.</p>
+<small>(Automatically generated from PRT 3.3.11669; Build Date: Fri 10/31/2025 02:38 PM; Build Configuration: PRT_BC_REL)</small><p>This is the PRT reference documentation for all built-in encoders and decoders.</p>
 <p>The encoder documentation lists for each encoder its supported encoder options. In PRT, the encoder options
 	are stored in an object of type prt::AttributeMap, therefore the term "attribute" is used synonymously in this
 	document for a single encoder option. Each attribute consists of a type, a default value and (optional)
@@ -18,7 +18,7 @@
 <ul>
 <li>
 <a href="#aEncoders">Built-In Encoders</a><ul>
-<li><a href="#com.esri.prt.codecs.AlembicEncoder">ALEMBIC</a></li>
+<li><a href="#com.esri.prt.codecs.AlembicEncoder">ALEMBIC (deprecated)</a></li>
 <li><a href="#com.esri.prt.codecs.CGAMatEncoder">CityEngine CGA Material Encoder</a></li>
 <li><a href="#com.esri.prt.codecs.CityGMLEncoder">CityGML</a></li>
 <li><a href="#com.esri.prt.codecs.ColladaEncoder">COLLADA</a></li>
@@ -38,7 +38,7 @@
 <li><a href="#com.esri.prt.codecs.ShapeBufferEncoder">Esri Shapebuffer Encoder</a></li>
 <li><a href="#com.esri.prt.codecs.TIFFEncoder">TIFF Encoder</a></li>
 <li><a href="#com.esri.prt.codecs.USDEncoder">Universal Scene Description (USD)</a></li>
-<li><a href="#com.esri.prt.codecs.VOBEncoder">E-On Software Vue</a></li>
+<li><a href="#com.esri.prt.codecs.VOBEncoder">E-On Software Vue (deprecated)</a></li>
 <li><a href="#com.esri.prt.core.AttributeEvalEncoder">Attribute Eval Encoder</a></li>
 <li><a href="#com.esri.prt.core.CGAErrorEncoder">CGA Error Encoder</a></li>
 <li><a href="#com.esri.prt.core.CGAPrintEncoder">CGA Print Encoder</a></li>
@@ -109,7 +109,7 @@
 </ul>
 <h2><a name="aEncoders">Built-In Encoders</a></h2>
 <table class="doxtable">
-<tr><td colspan="4"><h3><a name="com.esri.prt.codecs.AlembicEncoder">ALEMBIC (com.esri.prt.codecs.AlembicEncoder)</a></h3></td></tr>
+<tr><td colspan="4"><h3><a name="com.esri.prt.codecs.AlembicEncoder">ALEMBIC (deprecated) (com.esri.prt.codecs.AlembicEncoder)</a></h3></td></tr>
 <tr><td colspan="4">Encodes geometry into the alembic format.</td></tr>
 <tr><td colspan="4"><h4>Known Initial Shape Attributes</h4></td></tr>
 <tr>
@@ -727,7 +727,6 @@
 </tr>
 	</table></td>
 </tr>
-	
 	<tr>
 <td>errorFallback</td>
 <td>bool</td>
@@ -741,11 +740,105 @@
 </tr>
 	
 	<tr>
+<td>vertexPrecision</td>
+<td>float</td>
+<td>0.001</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Vertex Precision<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 9010<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Geometry<br>order:float = 1<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Specifies the minimal distance between vertices.<br>
+</td>
+</tr>
+		<tr>
+<td>@Range</td>
+<td>0:float = 1e-10<br>1:float = 1<br>
+</td>
+</tr>
+	</table></td>
+</tr>
+	<tr>
 <td>globalOffset</td>
 <td>float_array</td>
 <td></td>
 <td><table class="doxtable"></table></td>
 </tr>
+	<tr>
+<td>mergeVertices</td>
+<td>bool</td>
+<td>true</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Merge Vertices Within Precision<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 9040<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Geometry<br>order:float = 1<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Finds co-incidental vertices (using the precision distance) and shares their index.<br>
+</td>
+</tr>
+	</table></td>
+</tr>
+	<tr>
+<td>srsName</td>
+<td>str</td>
+<td></td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Spatial Reference System Name<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 2<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = General Settings<br>order:float = 0<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Sets the name of the Spatial Reference System referenced in Envelope tags. This string must be correctly escaped for XML.<br>
+</td>
+</tr>
+		<tr>
+<td>@Hidden</td>
+<td></td>
+</tr>
+	</table></td>
+</tr>
+	
+	
+	
+	
 	
 <tr><td colspan="4"></td></tr>
 <tr><td colspan="4"><h3><a name="com.esri.prt.codecs.ColladaEncoder">COLLADA (com.esri.prt.codecs.ColladaEncoder)</a></h3></td></tr>
@@ -8049,7 +8142,7 @@
 	
 	
 <tr><td colspan="4"></td></tr>
-<tr><td colspan="4"><h3><a name="com.esri.prt.codecs.VOBEncoder">E-On Software Vue (com.esri.prt.codecs.VOBEncoder)</a></h3></td></tr>
+<tr><td colspan="4"><h3><a name="com.esri.prt.codecs.VOBEncoder">E-On Software Vue (deprecated) (com.esri.prt.codecs.VOBEncoder)</a></h3></td></tr>
 <tr><td colspan="4">Encodes geometry into the E-On Software Vue VOB format.</td></tr>
 <tr><td colspan="4"><h4>Known Initial Shape Attributes</h4></td></tr>
 <tr>

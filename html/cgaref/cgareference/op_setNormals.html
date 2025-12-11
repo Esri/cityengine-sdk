@@ -32,7 +32,7 @@
 		<tr><td width="15%"><span class="codelight">hard</span></td><td>Use the face normals. This is equivalent to <span class="codelight"><a href="op_softenNormals.html">softenNormals</a>(0)</span>.</td></tr>
 		<tr><td><span class="codelight">conform</span></td><td>Same as <span class="codelight">hard</span>. Computes consistent normals using the connectivity and a heuristic that favors the world's up direction.</td></tr>
 		<tr><td><span class="codelight">soft</span></td><td>For each vertex, use the average of the adjacent face normals. This is equivalent to <span class="codelight"><a href="op_softenNormals.html">softenNormals</a>(180)</span>.</td></tr>
-		<tr><td><span class="codelight">auto</span></td><td>Same as <span class="codelight">soft</span>. Edges where face normals meet at an angle greater than or equal to 30 degrees are shaded as hard edges. This is equivalent to <span class="codelight"><a href="op_softenNormals.html">softenNormals</a>(30)</span>.</td></tr>
+		<tr><td><span class="codelight">auto</span></td><td>Same as <span class="codelight">soft</span> except that for edges where face normals meet at an angle greater than or equal to 30 degrees are shaded as hard edges. This is equivalent to <span class="codelight"><a href="op_softenNormals.html">softenNormals</a>(30)</span>.</td></tr>
 	</table>
 	</li>
 </ul>
