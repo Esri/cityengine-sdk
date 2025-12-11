@@ -2,7 +2,7 @@
 
 T="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 R="$(dirname "${T}")"
-U="https://github.com/Esri/cityengine-sdk/releases/download/3.3.11173/esri_ce_sdk-example_data-v3.zip"
+U="https://github.com/Esri/cityengine-sdk/releases/download/3.3.11669/esri_ce_sdk-example_data-v3.zip"
 D="${R}/data"
 O="${R}/output"
 

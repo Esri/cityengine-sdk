@@ -1,6 +1,6 @@
 # CITYENGINE SDK SDK 3.3.11669 CHANGELOG
 
-This section lists changes compared to CityEngine SDK 3.3.11351.
+This section lists changes compared to CityEngine SDK 3.3.11352.
 
 ## General Info
 * CityEngine SDK 3.3.11669 is used in CityEngine 2025.1.11669.
