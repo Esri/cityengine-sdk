@@ -1,6 +1,6 @@
-# CITYENGINE SDK SDK 3.3.11669 CHANGELOG
+# CITYENGINE SDK 3.3.11669 CHANGELOG
 
-This section lists changes compared to CityEngine SDK 3.3.11352.
+This section lists changes compared to CityEngine SDK 3.3.11351.
 
 ## General Info
 * CityEngine SDK 3.3.11669 is used in CityEngine 2025.1.11669.
@@ -35,7 +35,7 @@ This section lists changes compared to CityEngine SDK 3.3.11352.
 * Alembic and VUE encoders:
   * Deprecated, they will be removed in the future. 
 
-# CITYENGINE SDK SDK 3.3.11352 CHANGELOG
+# CITYENGINE SDK 3.3.11352 CHANGELOG
 
 This section lists changes compared to CityEngine SDK 3.3.11351.
 
@@ -45,7 +45,7 @@ This section lists changes compared to CityEngine SDK 3.3.11351.
 ## Misc Changes and Fixes
 * Applied security updates for libxml (2.15.1).
 
-# CITYENGINE SDK SDK 3.3.11351 CHANGELOG
+# CITYENGINE SDK 3.3.11351 CHANGELOG
 
 This section lists changes compared to CityEngine SDK 3.3.11173.
 
