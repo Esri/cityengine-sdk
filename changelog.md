@@ -1,3 +1,94 @@
+# CITYENGINE SDK 3.4.XXXXX CHANGELOG
+
+This section lists changes compared to CityEngine SDK 3.3.11885.
+
+## General Info
+* CityEngine SDK 3.4.XXXXX is used in CityEngine 2026.0.XXXXX.
+
+## PRT API
+* `prt::InitialShapeBuilder`: Optimized performance and memory consumption for construction of large meshes with many faces.
+
+## PRTX API
+* `prtx::MeshBuilder`: 
+  * Optimized memory consumption and performance. Especially sequential (face-after-face) mesh building is faster now.
+  * Added batch setter functions `setFacesVertexIndices()`, `setFacesNormalIndices()`, `setFacesUVIndices()`, `setFacesMaterialIndices()` and `setFacesHoleIndices()` for even faster mesh construction.
+* `prtx::Mesh::getUsedMem()`: Fixed a small bug (the `prtx::BoundingBox` was counted twice). 
+* `prtx::EncodePreparator::PreparationFlags::meshMerging()`: Fixed a bug where texture coordinates on layers other than 0 (colormap) were merged incorrectly. For those layers, if no texture coordinates are present, the coordinates from layer 0 are used if available (see "Texturing: Essential knowledge" in the CGA documentation). When meshes with and without texture coordinates on layer 0 were merged, these texture coordinates were sometimes wrongly set to (0,0).
+* `prtx::StreamAdaptor::resolve()`: Changed exception thrown by underlying com.esri.prt.adaptors.FileSystemAdaptor for nonexistent files from `std::invalid_argument` to `prtx::StatusException`. The new exception has its status set to `prt::STATUS_FILE_NOT_FOUND`.
+
+## CGA
+* Changes to existing features:
+  * inline keyword: Geometry tracking is now preserved when using inline(append) inside modify or inline(recompose), enabling reconnection of edited geometries if the inlined rule leads to a single leaf shape.
+* Bugfixes:
+  * dynamic import feature:
+      * The random number behaviour is now consistent with static imports. For example, changing unrelated code or overriding an attr does not lead to different random values.
+      * Fixed greying-out of unused attrs in the inspector.
+  * inline(unify), union, subtract, intersect operations:
+    * Fixed unwanted collinear points in some cases.
+    * Fixed a memory leak on self-unified shapes which could lead to a crash on exit.
+  * modify operation: Fixed an out-of-memory error if shapes with uv coordinates were split recursively.
+  * r operation: Fixed a bug where scopeCenter did not correctly preserve the scope center if scope.r was already non-zero.
+ 
+## Built-In Codecs
+* Collada, FBX, GLTF, OBJ, VUE encoders:
+  * "meshGranularity" option: Fixed a bug where texture coordinates on other layers than 0 (colormap) were merged wrongly. In some cases (0,0) was taken instead of a fallback to the texture coordinate on layer 0.
+* USD, Unreal encoders:
+  * "meshMerging" option: Fixed a bug where texture coordinates on other layers than 0 (colormap) were merged wrongly. In some cases (0,0) was taken instead of a fallback to the texture coordinate on layer 0.
+
+## Misc Changes and Fixes
+* RPKs larger than 2GB are supported now.
+* Adaptor "com.esri.prt.adaptors.SevenZipStreamAdaptor" was renamed to "com.esri.prt.adaptors.RPKFileStreamAdaptor".
+
+# CITYENGINE SDK 3.3.11885 CHANGELOG
+
+This section lists changes compared to CityEngine SDK 3.3.11669.
+
+## General Info
+* The focus of this release is to fix some issues which are important for certain client applications such as ArcGIS Pro. There is no CityEngine version using this version of the SDK.
+
+## PRT API
+* `prt::Callbacks`: Added function `cgaGetCoords()` for bulk conversion. The default implementation just repeatedly calls `cgaGetCoord()`.
+
+## PRTX API
+* `prtx::MeshBuilder`: Added functions `resetVertexCoords()`, `resetNormalCoords()`, `resetUVCoords()` and `resetFaces()`.
+
+## CGA
+* Bugfixes:
+    * inline(unify), union, subtract, intersect operations: Improved robustness and fixed missing "bool.cut" auto tag on edges in rare cases.
+
+## Built-In Codecs
+* PNG decoder:
+  * Improved multithreading performance.
+* JPG decoder:
+  * Fixed a regression where redundant jpgs were not detected by `prt::NonRedundantCache`.
+  * Fixed a regression where single-channel textures had NODATA metadata value set on non-existing channels.
+* CityGML codecs:
+   * Updated to libcitygml 2.5.2.e5
+* CityGML encoder:
+  * Reduced file size by reducing precision of uv coordinates to 4 digits after the decimal point.
+  * Reduced file size by optimizing internal identifiers.
+  * Fixed name of texture files in some cases (sometimes hex numbers were used instead of the real name).
+  * Fixed non-deterministic file size when re-encoding CityGML files.
+  * Added the "convertVerticesTo" option which calls the `prt::Callbacks::cgaGetCoords()` function.
+  * Fixed a bug where the XML tags could be in an invalid order.
+* CityGML decoder:
+  * Fixed a bug where attributes were not UTF-8 encoded.
+  * Fixed a bug where all LOD levels were imported, leading to duplicate meshes and z-fighting. Now only the highest available LOD is imported.
+  * Made it independent of system locale.
+* Shapebuffer encoder:
+  * Added the "convertVerticesTo" option which calls the `prt::Callbacks::cgaGetCoords()` function.
+* IFC encoder:
+  * Added options for vertex merging ("mergeVertices") and precision ("vertexPrecision").
+* DWG encoder:
+  * Added options for vertex merging ("mergeVertices") and precision ("vertexPrecision").
+* TextureWithoutExtensionDecoder:
+  * New decoder that reads textures that have no file extension (based on auto detection).
+
+## Misc Changes and Fixes
+* Applied security updates for libxml2 (2.15.1), libjpeg-turbo (3.1.2), libpng (1.6.55), tbb(usd) (2021.10.0), libtiff (4.7.1), zlib (1.3.2).
+* Windows: Switched to MSVC 14.44.
+* Linux: Switched to GCC 14.2.
+
 # CITYENGINE SDK 3.3.11669 CHANGELOG
 
 This section lists changes compared to CityEngine SDK 3.3.11351.
