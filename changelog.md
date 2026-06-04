@@ -72,9 +72,9 @@ This section lists changes compared to CityEngine SDK 3.3.11669.
   * Added the "convertVerticesTo" option which calls the `prt::Callbacks::cgaGetCoords()` function.
   * Fixed a bug where the XML tags could be in an invalid order.
 * CityGML decoder:
-  * Fixed a bug where attributes were not UTF-8 encoded.
+  * Fixed a bug where text attributes were not read as UTF-8 strings.
   * Fixed a bug where all LOD levels were imported, leading to duplicate meshes and z-fighting. Now only the highest available LOD is imported.
-  * Made it independent of system locale.
+  * Made number parsing independent of system locale.
 * Shapebuffer encoder:
   * Added the "convertVerticesTo" option which calls the `prt::Callbacks::cgaGetCoords()` function.
 * IFC encoder:
