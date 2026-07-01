@@ -1,9 +1,9 @@
-# CITYENGINE SDK 3.4.XXXXX CHANGELOG
+# CITYENGINE SDK 3.4.12206 CHANGELOG
 
 This section lists changes compared to CityEngine SDK 3.3.11885.
 
 ## General Info
-* CityEngine SDK 3.4.XXXXX is used in CityEngine 2026.0.XXXXX.
+* CityEngine SDK 3.4.12206 is used in CityEngine 2026.0.12206.
 
 ## PRT API
 * `prt::InitialShapeBuilder`: Optimized performance and memory consumption for construction of large meshes with many faces.
