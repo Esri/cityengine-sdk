@@ -1,82 +1,97 @@
+<!doctype html>
 <html>
 
 <head>
-    <title>findFirst Function (builtin)</title>
-    <link rel="stylesheet" href="../manual_style.css" type="text/css" />
+    <meta charset="UTF-8">
+    <title>findFirst function</title>
+    <link rel="stylesheet" href="../cgareference_style.css" type="text/css">
 </head>
 
 <body>
-<div class="content">
+<article class="content">
 
-<!-- HEADER (use only on bookchapters) -->
+    <header class="section">
+        <h1>
+            <span class="name">findFirst</span>
+            <span class="kind">function</span>
+        </h1>
 
-<table summary="" class="header">
-	<tr>
-		<td align="left" class="helphead_l"><a href="../toc.html"><div class="helplink">&nbsp;</div></a></td>
-		<td align="right" class="helphead_r"></td>
-	</tr>
-</table>
+        <div class="signatures">
+            <div><span class="type-tag">float</span> <span class="func">findFirst</span>(<span class="param">array</span>, <span class="param">value</span>)</div>
+            <div><span class="type-tag">float</span> <span class="func">findFirst</span>(<span class="param">array</span>, <span class="param">value</span>, <span class="param">epsilon</span>)</div>
+        </div>
+    </header>
 
-<h1>findFirst function (builtin)</h1>
+    <section class="section">
+        <div class="param-list">
+            <div class="param-item">
+                <div class="indent-body">
+                    <p><span class="param">array</span> <span class="type-tag">float[]</span><span class="type-tag">string[]</span><span class="type-tag">bool[]</span> Array for which an index of a value is requested. For float arrays an <span class="param">epsilon</span> must be specified.</p>
+                </div>
+            </div>
+            <div class="param-item">
+                <div class="indent-body">
+                    <p><span class="param">value</span> <span class="type-tag">float</span><span class="type-tag">string</span><span class="type-tag">bool</span> Value to look for.</p>
+                </div>
+            </div>
+            <div class="param-item">
+                <div class="indent-body">
+                    <p><span class="param">epsilon</span> <span class="type-tag">float</span> Only applicable for float arrays. Float values within this tolerance are considered equal.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<h2>Syntax</h2>
+    <section class="section">
+        <div class="return-list">
+            <div class="return-item">
+                <div class="indent-body">
+                        <p>Returns the zero-based index of the first occurrence of <span class="param">value</span> in <span class="param">array</span>. If <span class="param">value</span> is not found, <span class="inlinecode">-1</span> is returned.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<p class="code2"><span class="codelight">float</span> findFirst(<span class="cga_opparam">array</span>, <span class="cga_opparam">value</span>)</p>
-<p class="code2"><span class="codelight">float</span> findFirst(<span class="cga_opparam">array</span>, <span class="cga_opparam">value</span>, <span class="cga_opparam">epsilon</span>)</p>
+    <section class="section">
+        <h2>Related</h2>
+        <div class="related">
+            <a href="arrayTypes.html"><span class="related-name">Array types operators</span></a>
+            <a class="func" href="celib/findFirst.html"><span class="related-name">findFirst</span><span class="related-kind">function</span></a>
+            <a class="func" href="func_array.html"><span class="related-name">array initialization</span><span class="related-kind">function</span></a>
+            <a class="func" href="func_sortIndices.html"><span class="related-name">sortIndices</span><span class="related-kind">function</span></a>
+            <a class="func" href="func_sortRowIndices.html"><span class="related-name">sortRowIndices</span><span class="related-kind">function</span></a>
+        </div>
+    </section>
 
-<h2>Parameters</h2>
-
-<ul>
-	<li><span class="cga_opparam">array</span> (float[], string[], bool[])<br>Array for which an index of a value is requested.<br>For float arrays an <span class="cga_opparam">epsilon</span> must be specified.</li>
-	<li><span class="cga_opparam">value</span> (float, string, bool)<br>Value to look for.</li>
-	<li><span class="cga_opparam">epsilon</span> (float)<br>(only applicable for float arrays)<br>A tolerance in which float values are considered to be equal. Can be specified in order to deal with floating point imprecision.</li>
-</ul>
-
-<h2>Returns</h2>
-
-<p>Zero-based index of the first occurrence of <span class="cga_opparam">value</span> in <span class="cga_opparam">array</span>. If <span class="cga_opparam">value</span> is not found, -1 is returned.</p> 
-
-<h2>Related</h2>
-
-<ul>
-	<li><a href="arrayTypes.html">Array types operators</a></li>
-	<li><a href="celib/findFirst.html"><span class="code_std">findFirst</span></a> function (utility library)</li>
-    <li><a href="func_array.html">array initialization</a> function</li>
-	<li><a href="func_sortIndices.html"><span class="code_std">sortIndices</span></a> function</li>
-	<li><a href="func_sortRowIndices.html"><span class="code_std">sortRowIndices</span></a> function</li>
-</ul>
-
-<h2>Examples</h2>
-
-<h3>Basic example</h3>
-
-<p class="example">	
-<pre class="codecga">
+    <section class="section">
+        <h2>Examples</h2>
+        <section class="example">
+            <h3>Basic example</h3>
+            <pre class="code-block">
 const array1d = [1,2,3,4]
 const array2d = [1,2,3;4,5,6]
 
 Example --> print(         findFirst(array1d, 2, 0)  )  // 1
             print(array1d[ findFirst(array1d, 2, 0) ])  // 2
-			
+
             print(         findFirst(array2d, 4, 0)  )  // 3
             print(array2d[ findFirst(array2d, 4, 0) ])  // 4
 </pre>
-</p>
+        </section>
 
-<h3>Use float epsilon</h3>
-
-<p class="example">	
-<pre class="codecga">
+        <section class="example">
+            <h3>Use float epsilon</h3>
+            <pre class="code-block">
 const indices = comp(e) { all : scope.sx }
 
 Example --> print(indices)                     // (4)[6,8.1,6,8.1]
             print(findFirst(indices, 8, 0.5))  // 1
 </pre>
-</p>
+        </section>
+    </section>
 
-<!-- FOOTER -->
-<p class="foot">Copyright &copy;2008-2025 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
+    <footer class="footer">Copyright &copy;2008-2026 Esri R&amp;D Center Zurich. All rights reserved.</footer>
 
-</div>
+</article>
 </body>
 </html>

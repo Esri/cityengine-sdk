@@ -1,118 +1,168 @@
+﻿<!doctype html>
 <html>
 
 <head>
-	<title>assetApproxSize</title>
-    <link rel="stylesheet" href="../../manual_style.css" type="text/css" />
-	</head>
+    <meta charset="UTF-8">
+    <title>assetApproxSize function</title>
+    <link rel="stylesheet" href="../../cgareference_style.css" type="text/css">
+</head>
+
 <body>
-<div class="content">
+<article class="content">
 
-<!-- Don't touch -->
+    <header class="section">
+        <h1>
+            <span class="name">assetApproxSize</span>
+            <span class="kind">function</span>
+        </h1>
 
-<table summary="" class="header">
-	<tr>
-		<td align="left" class="helphead_l"><a href="../../toc.html"><div class="helplink">&nbsp;</div></a></td>
-		<td align="right" class="helphead_r"></td>
-	</tr>
-</table>
+        <div class="signatures">
+            <div><span class="type-tag">string</span> <span class="func">assetApproxSize</span>(<span class="param">searchQuery</span>, <span class="param">axisSize</span>, <span class="param">n</span>)</div>
+        </div>
+    </header>
 
-<h1>assetApproxSize</h1>
+    <section class="section">
+        <div class="param-list">
+            <div class="param-item">
+                <div class="indent-body">
+                    <p><span class="param">searchQuery</span> <span class="type-tag">string</span> Search query to apply on list of all files in the workspace. See <a href="../func_fileSearch.html">fileSearch / filesSearch</a> for details about the syntax.</p>
+                </div>
+            </div>
 
-<h2>Syntax</h2>
+            <div class="param-item">
+                <div class="indent-body">
+                    <p><span class="param">axisSize</span> <span class="type-tag">string</span></p>
+                    <table class="option-table">
+                        <tbody>
+                            <tr>
+                                <td><span class="inlinecode">"x"</span>, <span class="inlinecode">"y"</span>, <span class="inlinecode">"z"</span>, <span class="inlinecode">"xy"</span>, <span class="inlinecode">"xz"</span>, <span class="inlinecode">"yz"</span>, <span class="inlinecode">"xyz"</span></td>
+                                <td>Axes for the currect scope.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
 
-<p class="code2"><span class="codelight">string</span> assetApproxSize(<span class="cga_opparam">searchQuery</span>, <span class="cga_opparam">axisSize</span>, <span class="cga_opparam">n</span>)</p>
+            <div class="param-item">
+                <div class="indent-body">
+                    <p><span class="param">n</span> <span class="type-tag">float</span> Number (integer &gt;= 1) of possible returned result strings (1 returned randomly out of <span class="param">n</span> possibilities)</p>
+                </div>
+            </div>
+        </div>
 
-<h2> Parameters </h2>
-<ul>
-	<li><span class="cga_opparam">searchQuery</span> (string)<br>Search query to apply on list of all files in the workspace. See <a class="normw" href="../func_fileSearch.html">fileSearch / filesSearch</a> for details about the syntax.</li>
-    <li><span class="cga_opparam">axisSize</span> (string)
-	<table cellspacing="5">
-		<tr><td width="60%"><span class="codelight">"x"</span>, <span class="codelight">"y"</span>, <span class="codelight">"z"</span>, <span class="codelight">"xy"</span>, <span class="codelight">"xz"</span>, <span class="codelight">"yz"</span>, <span class="codelight">"xyz"</span></td><td>Axes for the currect scope.</td></tr>
-	</table>
-	</li>
-	<li><span class="cga_opparam">n</span> (float)<br>Number (integer >= 1) of possible returned result strings (1 returned randomly out of <span class="cga_opparam">n</span> possibilities)</li>
-</ul>
+        <div class="return-list">
+            <div class="return-item">
+                <div class="indent-body">
+                        <p>Returns an asset with one of the best <span class="param">n</span> size fits (according to <span class="param">axisSize</span>).</p>
+                </div>
+            </div>
+        </div>
 
-<h2>Returns</h2>
+        <p>This function returns one of the <span class="param">n</span> best size fitting assets, from the files specified by <span class="param">searchQuery</span>, according to the specified <span class="param">axisSize</span> string.</p>
 
-<p>Asset with one of the best <span class="cga_opparam">n</span> size fits (according to <span class="cga_opparam">axisSize</span>).</p> 
+        <div class="note"><span class="func">assetApproxSize</span>(<span class="param">searchQuery</span>, <span class="param">axisSize</span>, 1) == <span class="func">assetBestSize</span>(<span class="param">searchQuery</span>, <span class="param">axisSize</span>)</div>
+    </section>
 
-<h2>Description</h2>
+    <section class="section">
+        <h2>Related</h2>
+        <div class="related">
+            <a class="func" href="assetApproxRatio.html"><span class="related-name">assetApproxRatio</span><span class="related-kind">function</span></a>
+            <a class="func" href="assetBestRatio.html"><span class="related-name">assetBestRatio</span><span class="related-kind">function</span></a>
+            <a class="func" href="assetBestSize.html"><span class="related-name">assetBestSize</span><span class="related-kind">function</span></a>
+            <a class="func" href="assetFitSize.html"><span class="related-name">assetFitSize</span><span class="related-kind">function</span></a>
+            <a class="func" href="fileBasename.html"><span class="related-name">fileBasename</span><span class="related-kind">function</span></a>
+            <a class="func" href="fileDirectory.html"><span class="related-name">fileDirectory</span><span class="related-kind">function</span></a>
+            <a class="func" href="fileExtension.html"><span class="related-name">fileExtension</span><span class="related-kind">function</span></a>
+            <a class="func" href="fileName.html"><span class="related-name">fileName</span><span class="related-kind">function</span></a>
+            <a class="func" href="fileRandom.html"><span class="related-name">fileRandom</span><span class="related-kind">function</span></a>
+            <a class="func" href="imageApproxRatio.html"><span class="related-name">imageApproxRatio</span><span class="related-kind">function</span></a>
+            <a class="func" href="imageBestRatio.html"><span class="related-name">imageBestRatio</span><span class="related-kind">function</span></a>
+        </div>
+    </section>
 
-<p>This function returns one of the <span class="cga_opparam">n</span> best size fitting assets, from the files specified by <span class="cga_opparam">searchQuery</span>, according to the specified <span class="cga_opparam">axisSize</span> string.</p>
+    <section class="section">
+        <h2>Examples</h2>
 
-<p class="notes"><span class="codelight">assetApproxSize(<span class="cga_opparam">searchQuery</span>, <span class="cga_opparam">axisSize</span>, 1) == assetBestSize(<span class="cga_opparam">searchQuery</span>, <span class="cga_opparam">axisSize</span>)</span></p>
+        <section class="example">
+            <h3>Inserting assets based on their (physical) size</h3>
 
-<h2>Related</h2>
-<ul>
-    <li><a href="assetApproxRatio.html"><span class="code_std">assetApproxRatio</span></a> function</li>
-    <li><a href="assetBestRatio.html"><span class="code_std">assetBestRatio</span></a> function</li>
-    <li><a href="assetBestSize.html"><span class="code_std">assetBestSize</span></a> function</li>
-    <li><a href="assetFitSize.html"><span class="code_std">assetFitSize</span></a> function</li>
-    <li><a href="fileBasename.html"><span class="code_std">fileBasename</span></a> function</li>
-    <li><a href="fileDirectory.html"><span class="code_std">fileDirectory</span></a> function</li>
-    <li><a href="fileExtension.html"><span class="code_std">fileExtension</span></a> function</li>
-    <li><a href="fileName.html"><span class="code_std">fileName</span></a> function</li>
-    <li><a href="fileRandom.html"><span class="code_std">fileRandom</span></a> function</li>
-    <li><a href="imageApproxRatio.html"><span class="code_std">imageApproxRatio</span></a> function</li>
-    <li><a href="imageBestRatio.html"><span class="code_std">imageBestRatio</span></a> function</li>
-</ul>
-		
-<h2>Examples</h2>
+            <p>The goal is to insert assets from a pool, depending on their (physical) size. The pool of assets is seen in the following image. Colors are (only) used to visually emphasize the size ratio.</p>
 
-<h3>Inserting assets based on their (physical) size</h3>
+            <figure class="media">
+                <img src="images/assetRatioPool.jpg" alt="Asset pool showing size ratio variations">
+            </figure>
 
-<p>The goal is to insert assets from a pool, depending on their (physical) size. The pool of assets is seen in the following image. Colors are (only) used to visually emphasize the size ratio.</p>
+            <p>Note the geometry variations in the next 3 images by using only the <span class="param">n</span> parameter.</p>
+            <p>Note that small parts get blue assets while large parts get red assets.</p>
+        </section>
 
-<img src="images/assetRatioPool.jpg"></img>
+        <section class="example">
+            <h3>n=1: "best fit"</h3>
 
-<p class="notes">Note the geometry variations in the next 3 images by using only the <span class="cga_opparam">n</span> parameter.</p>
+            <div class="example-row">
+                <figure class="media media-example">
+                    <img src="images/assetApproxSize_n1.jpg" alt="Best fit assetApproxSize example with n equal to 1">
+                </figure>
 
-<p class="notes">Note that small parts get blue assets while large parts get red assets.</p>
-
-<h3>n=1: "best fit"</h3>
-
-<pre class="codecga">
-Lot -->
+                <div class="example-content">
+<pre class="code-block">
+Lot --&gt;
     s('0.9,'0.9,'0.9)
     center(xz)
     RecursiveSplit
 
-RecursiveSplit -->
-    case scope.sx >= 1.5 && scope.sz >= 1.5:
+RecursiveSplit --&gt;
+    case scope.sx &gt;= 1.5 &amp;&amp; scope.sz &gt;= 1.5:
         split(x) { ~scope.sx/3 : split(z) { ~scope.sz/3 : RecursiveSplit }* }*
     else: innerRectangle(scope) { shape : Insert }
 
-Insert -->
+Insert --&gt;
     alignScopeToAxes(y)
     i(assetApproxSize("/myProject/assets/cube_*.obj", "xz", 1))
 </pre>
+                </div>
+            </div>
+        </section>
 
-<img src="images/assetApproxSize_n1.jpg"></img>
+        <section class="example">
+            <h3>n=2: "choose randomly one of the best two fits"</h3>
 
-<h3>n=2: "choose randomly one of the best two fits"</h3>
+            <div class="example-row">
+                <figure class="media media-example">
+                    <img src="images/assetApproxSize_n2.jpg" alt="assetApproxSize example with n equal to 2">
+                </figure>
 
-<pre class="codecga">
-Insert -->
+                <div class="example-content">
+<pre class="code-block">
+Insert --&gt;
     alignScopeToAxes(y)
     i(assetApproxSize("/myProject/assets/cube_*.obj", "xz", 2))
 </pre>
+                </div>
+            </div>
+        </section>
 
-<img src="images/assetApproxSize_n2.jpg"></img>
+        <section class="example">
+            <h3>n=3: "choose randomly one of the best three fits"</h3>
 
-<h3>n=3: "choose randomly one of the best three fits"</h3>
+            <div class="example-row">
+                <figure class="media media-example">
+                    <img src="images/assetApproxSize_n3.jpg" alt="assetApproxSize example with n equal to 3">
+                </figure>
 
-<pre class="codecga">
-Insert -->
+                <div class="example-content">
+<pre class="code-block">
+Insert --&gt;
     alignScopeToAxes(y)
     i(assetApproxSize("/myProject/assets/cube_*.obj", "xz", 3))
 </pre>
+                </div>
+            </div>
+        </section>
+    </section>
 
-<img src="images/assetApproxSize_n3.jpg"></img>
+    <footer class="footer">Copyright &copy;2008-2026 Esri R&amp;D Center Zurich. All rights reserved.</footer>
 
-<!-- FOOTER -->
-<p class="foot">Copyright &copy;2008-2025 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
-
-</div>
+</article>
 </body>
 </html>

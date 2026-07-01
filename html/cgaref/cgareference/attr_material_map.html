@@ -1,79 +1,73 @@
+<!doctype html>
 <html>
 
 <head>
-<title>material.map Shape Attribute</title>
-<link rel="stylesheet" href="../manual_style.css" type="text/css" />
+	<meta charset="UTF-8">
+	<title>material.map attribute</title>
+	<link rel="stylesheet" href="../cgareference_style.css" type="text/css">
 </head>
 
 <body>
-<div class="content"><!-- HEADER (use only on bookchapters) -->
+<article class="content">
 
-<table summary="" class="header">
-	<tr>
-		<td align="left" class="helphead_l"><a href="../toc.html">
-		<div class="helplink">&nbsp;</div>
-		</a></td>
-		<td align="right" class="helphead_r"></td>
-	</tr>
-</table>
+	<header class="section">
+		<h1>
+			<span class="name">material.map</span>
+			<span class="kind">attribute</span>
+		</h1>
 
-<h1>material.map shape attribute</h1>
+		<div class="signatures">
+			<div><span class="type-tag">string</span> <span class="attr">material.colormap</span></div>
+			<div><span class="type-tag">string</span> <span class="attr">material.bumpmap</span></div>
+			<div><span class="type-tag">string</span> <span class="attr">material.dirtmap</span></div>
+			<div><span class="type-tag">string</span> <span class="attr">material.specularmap</span></div>
+			<div><span class="type-tag">string</span> <span class="attr">material.opacitymap</span></div>
+			<div><span class="type-tag">string</span> <span class="attr">material.normalmap</span></div>
+			<div><span class="type-tag">string</span> <span class="attr">material.emissivemap</span></div>
+			<div><span class="type-tag">string</span> <span class="attr">material.occlusionmap</span></div>
+			<div><span class="type-tag">string</span> <span class="attr">material.roughnessmap</span></div>
+			<div><span class="type-tag">string</span> <span class="attr">material.metallicmap</span></div>
+			<div><span class="type-tag">float</span> <span class="attr">material.{colormap|...|metallicmap}.s{u|v}</span></div>
+			<div><span class="type-tag">float</span> <span class="attr">material.{colormap|...|metallicmap}.t{u|v}</span></div>
+			<div><span class="type-tag">float</span> <span class="attr">material.{colormap|...|metallicmap}.rw</span></div>
+		</div>
+	</header>
 
-<h2>Syntax</h2>
+	<section class="section">
+		<p>The material shape attribute consists of 10 texture layers.</p>
 
-<p class="code2"><span class="codelight">string</span> material.colormap</p>
-<p class="code2"><span class="codelight">string</span> material.bumpmap</p>
-<p class="code2"><span class="codelight">string</span> material.dirtmap</p>
-<p class="code2"><span class="codelight">string</span> material.specularmap</p>
-<p class="code2"><span class="codelight">string</span> material.opacitymap</p>
-<p class="code2"><span class="codelight">string</span> material.normalmap</p>
-<p class="code2"><span class="codelight">string</span> material.emissivemap</p>
-<p class="code2"><span class="codelight">string</span> material.occlusionmap</p>
-<p class="code2"><span class="codelight">string</span> material.roughnessmap</p>
-<p class="code2"><span class="codelight">string</span> material.metallicmap</p>
-<p class="code2"><span class="codelight">float</span> material.{colormap|...|metallicmap}.s{u|v}</p>
-<p class="code2"><span class="codelight">float</span> material.{colormap|...|metallicmap}.t{u|v}</p>
-<p class="code2"><span class="codelight">float</span> material.{colormap|...|metallicmap}.rw</p>
+		<p>Each texture layer consists of the file name of the associated texture, that is <span class="attr">material.{colormap|...|metallicmap}</span>, scaling factors in u and v directions, that is <span class="attr">material.{colormap|...|metallicmap}.s{u|v}</span>, offsets in u and v directions, that is <span class="attr">material.{colormap|...|metallicmap}.t{u|v}</span>, and rotation around the w-axis, that is <span class="attr">material.{colormap|...|metallicmap}.rw</span>.</p>
 
-<h2>Description</h2>
+		<p>All these attributes can be set and read.</p>
 
-<p>The material shape attribute consists of 10 texture layers.</p>
+		<div class="note">Each texture layer has a corresponding uv-set, that is texture coordinates, in the shape's geometry. More information can be found in <a href="cga_texturing.html">Texturing: Essential Knowledge</a>.</div>
 
-<p class="text">Each texture layer consists of the file name of the
-associated texture <br>(<span class="cga_keyword">material</span><span class="code2">.{</span><span
-	class="cga_keyword">colormap|...|metallicmap}</span>), <br> scaling factors in u and v
-directions (<span class="cga_keyword">material.{colormap|...|metallicmap}.s{u|v}</span>), <br>
-offsets in u and v directions (<span class="cga_keyword">float material.{colormap|...|metallicmap}.t{u|v}</span>)<br> and rotation around the w-axis (<span
-	class="cga_keyword">material.{colormap|...|metallicmap}.rw</span>).</p>
-<p class="text">All these attributes can be set and read.</p>
+		<p>All maps with color information are expected to be in non-linear sRGB. All other maps are expected to be in linear space.</p>
 
-<p class="notes">Each texture layer has a corresponding uv-set (texture coordinates) in the shape's geometry. More information can be found in <a class="normw" href="cga_texturing.html">Texturing: Essential Knowledge</a></p>
+		<p>The bump map is interpreted as luminance map (CCIR 601).</p>
+		<p>The normal map is interpreted as normals in tangent space encoded as rgb colors.</p>
+		<p>The roughness map only uses the green channel.</p>
+		<p>The metallic map only uses the blue channel.</p>
+		<p>The occlusion map only uses the red channel.</p>
 
-<class="text">All maps with color information are expected to be in (non-linear) sRGB. All other maps are expected to be in linear space.</p>
+		<p>See <a href="cga_assetSearch.html">Asset Search</a> for information about where the texture is searched and <a href="cga_builtinAssets.html">Built-in Assets</a> for a list of built-in textures.</p>
+	</section>
 
-<p class="text">The bump map is interpreted as luminance map (CCIR 601).</p>
-<p class="text">The normal map is interpreted as normals in tangent space encoded as rgb colors.</p>
-<p class="text">The roughness map only uses the green channel.</p>
-<p class="text">The metallic map only uses the blue channel.</p>
-<p class="text">The occlusion map only uses the red channel.</p>
+	<section class="section">
+		<h2>Related</h2>
+		<div class="related">
+			<a class="op" href="op_set.html"><span class="related-name">set</span><span class="related-kind">operation</span></a>
+			<a class="op" href="op_setupProjection.html"><span class="related-name">setupProjection</span><span class="related-kind">operation</span></a>
+			<a class="op" href="op_projectUV.html"><span class="related-name">projectUV</span><span class="related-kind">operation</span></a>
+			<a class="op" href="op_resetMaterial.html"><span class="related-name">resetMaterial</span><span class="related-kind">operation</span></a>
+			<a class="op" href="op_setMaterial.html"><span class="related-name">setMaterial</span><span class="related-kind">operation</span></a>
+			<a class="attr" href="attr_material.html"><span class="related-name">material</span><span class="related-kind">attribute</span></a>
+			<a href="cga_texturing.html"><span class="related-name">Texturing: Essential Knowledge</span></a>
+		</div>
+	</section>
 
-<p>See <a class="normw" href="cga_assetSearch.html">Asset Search</a> for information about where the texture is searched and <a class="normw" href="cga_builtinAssets.html">Built-in Assets</a> for a list of built-in textures.</p>
+	<footer class="footer">Copyright &copy;2008-2026 Esri R&amp;D Center Zurich. All rights reserved.</footer>
 
-<h2>Related</h2>
-
-<ul>
-	<li><a class="normw" href="op_set.html">set operation</a></li>
-	<li><a class="normw" href="op_setupProjection.html">setupProjection operation</a></li>
-	<li><a class="normw" href="op_projectUV.html">projectUV operation</a></li>
-	<li><a class="normw" href="op_resetMaterial.html">resetMaterial operation</a></li>
-	<li><a class="normw" href="op_setMaterial.html">setMaterial operation</a></li>
-	<li><a class="normw" href="attr_material.html">material attributes</a></li>
-	<li><a class="normw" href="cga_texturing.html">Texturing: Essential Knowledge</a></li>
-</ul>
-
-<p><!-- FOOTER --></p>
-<p class="foot">Copyright &copy;2008-2025 Esri R&amp;D Center Zurich. All rights reserved.</p>
-
-<!-- END CENTERED CONTENT --></div>
+</article>
 </body>
 </html>

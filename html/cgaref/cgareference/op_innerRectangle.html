@@ -1,155 +1,182 @@
+<!doctype html>
 <html>
 
 <head>
-    <title>innerRectangle Operation</title>
-    <link rel="stylesheet" href="../manual_style.css" type="text/css" />
+	<meta charset="UTF-8">
+	<title>innerRectangle operation</title>
+	<link rel="stylesheet" href="../cgareference_style.css" type="text/css">
 </head>
 
 <body>
-<div class="content">
+<article class="content">
 
-<!-- HEADER (use only on bookchapters) -->
+	<header class="section">
+		<h1>
+			<span class="name">innerRectangle</span>
+			<span class="kind">operation</span>
+		</h1>
 
-<table summary="" class="header">
-	<tr>
-		<td align="left" class="helphead_l"><a href="../toc.html"><div class="helplink">&nbsp;</div></a></td>
-		<td align="right" class="helphead_r"></td>
-	</tr>
-</table>
+		<div class="signatures">
+			<div><span class="op">innerRectangle</span>(<span class="param">alignment</span>) { <span class="param">selector</span> <span class="param">operator</span> <span class="param">operations</span> | <span class="param">selector</span> <span class="param">operator</span> <span class="param">operations</span> }</div>
+		</div>
+	</header>
 
+	<section class="section">
+		<div class="param-list">
+			<div class="param-item">
+				<div class="indent-body">
+					<p><span class="param">alignment</span> <span class="type-tag">selector</span></p>
+					<table class="option-table">
+						<tr><td><span class="inlinecode">scope</span></td><td>The largest inner rectangle is found that has sides parallel to the scope's axes.</td></tr>
+						<tr>
+							<td><span class="inlinecode">edge</span></td>
+							<td>
+								<p>The largest inner rectangle is found that has a side parallel to one edge. Per outer polygon/hole only edges with length greater than quarter the maximum length are considered.</p>
+								<div class="note">The resulting shape is a rectangle seen from the predominant scope axis of the face normal. The scope's orientation is the same as in the initial shape.</div>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
 
-<!-- CONTENT -->
+			<div class="param-item">
+				<div class="indent-body">
+					<p><span class="param">selector</span> <span class="type-tag">selector</span></p>
+					<table class="option-table">
+						<tr><td><span class="inlinecode">shape</span></td><td>The inner rectangle polygon.</td></tr>
+						<tr><td><span class="inlinecode">remainder</span></td><td>Selects the remainder of the polygon.</td></tr>
+					</table>
+				</div>
+			</div>
 
-<h1>innerRectangle operation</h1>
-	
-<h2>Syntax</h2>
-	
-<p class="code2"><span class="cga_op">innerRectangle</span>(<span class="cga_opparam">alignment</span>) { <span class="cga_opparam">selector</span> <span class="cga_opparam">operator</span> <span class="cga_opparam">operations</span> | <span class="cga_opparam">selector</span> <span class="cga_opparam">operator</span> <span class="cga_opparam">operations</span> }</p>
+			<div class="param-item">
+				<div class="indent-body">
+					<p><span class="param">operator</span></p>
+					<p>The operator defines how the inner rectangle polygons are used to generate successor shapes. This also applies to shapes with more than one faces.</p>
+					<table class="option-table">
+						<tr><td><span class="inlinecode">:</span></td><td>Each polygon is put into a new shape.</td></tr>
+						<tr><td><span class="inlinecode">=</span></td><td>All polygons corresponding to the selector are combined into one new shape.</td></tr>
+					</table>
+				</div>
+			</div>
 
-<h2>Parameters</h2>
+			<div class="param-item">
+				<div class="indent-body">
+					<p><span class="param">operations</span> A sequence of shape operations to execute on the newly created shape.</p>
+				</div>
+			</div>
+		</div>
+	</section>
 
-<ul>
-	<li><span class="cga_opparam">alignment</span> (selector)
-	<table cellspacing="5">
-		<tr><td width="10%"><span class="codelight">scope</span></td><td>The largest inner rectangle is found that has sides parallel to the scope's axes.</td></tr>
-		<tr><td><span class="codelight">edge</span></td><td>The largest inner rectangle is found that has a side parallel to one edge. Per outer polygon/hole only edges with length greater than quarter the maximum length are considered.<p class="notes">The resulting shape is a rectangle seen from the predominant scope axis of the face normal. The scope's orientation is the same as in the initial shape.</p></td></tr>
-	</table>
-	</li>
-	<li><span class="cga_opparam">selector</span> (selector)<br>
-	<table cellspacing="5">
-		<tr><td width="25%"><span class="codelight">shape</span></td><td>The inner rectangle polygon.</td></tr>
-		<tr><td><span class="codelight">remainder</span></td><td>Selects the remainder of the polygon.</td></tr>
-	</table>
-	</li>
-	<li><span class="cga_opparam">operator</span><br>The operator defines how the inner rectangle polygons are used to generate successor shapes. This also applies to shapes with more than one faces.
-	<table cellspacing="5">
-		<tr><td width="10%"><span class="codelight">:</span></td><td>Each polygon is put into a new shape.</td></tr>
-		<tr><td><span class="codelight">=</span></td><td>All polygons corresponding to the selector are combined into one new shape.</td></tr>
-	</table>
-	</li>
-	<li><span class="cga_opparam">operations</span><br>A sequence of shape operations to execute on the newly created shape.</li>
-</ul>
+	<section class="section">
+		<p>The <span class="op">innerRectangle</span> operation finds for each face of the current shape's geometry the largest rectangle which is fully inside the face.</p>
+		<div class="note">The face must not have self-intersections.</div>
+	</section>
 
-<h2>Description</h2>
+	<section class="section">
+		<h2>Related</h2>
+		<div class="related">
+			<a class="op" href="op_convexify.html"><span class="related-name">convexify</span><span class="related-kind">operation</span></a>
+			<a class="op" href="op_offset.html"><span class="related-name">offset</span><span class="related-kind">operation</span></a>
+		</div>
+	</section>
 
-<p>The <span class="cga_keyword">innerRectangle</span> operation finds for each face of the current shape's geometry the largest rectangle which is fully inside the face.</p>
+	<section class="section">
+		<h2>Examples</h2>
 
-<p class="notes">The face must not have self-intersections.</p>
-        
-<!--  Sample Code Formatting -->
-</p>
-<p class="text">&nbsp;</p>
-<h2>Related</h2>
+		<section class="example">
+			<h3>Inner Rectangles of Lot Shapes</h3>
 
-<ul>
-	<li><a class="normw" href="op_convexify.html">convexify operation</a></li>
-	<li><a class="normw" href="op_offset.html">offset operation</a></li>       
-</ul>
+			<div class="example-row">
+				<figure class="media media-example">
+					<img src="images/innerRectangle_scope.png" alt="InnerRectangle Scope" width="298">
+				</figure>
 
-<h2>Examples</h2>
+				<div class="example-content">
+<pre class="code-block">
+Lot-->
+   innerRectangle(scope) { shape : Color | remainder : Color }
 
-<h3>Inner Rectangles of Lot Shapes</h3>
-<table summary="" class="twocol">
-	<tr>
-		<td class="twocol_l">
-			<img src="images/innerRectangle_scope.png" alt="InnerRectangle Scope" width="298"/>
-		</td>
-		<td class="twocol_r">
-<pre class="codecga">
-Lot-->	
-   innerRectangle(scope) {shape : Color | remainder : Color}
 Color-->
    color(rand(1),rand(1),rand(1))
 </pre>
-			<em>This example shows the largest inner rectangle aligned to the scope axes. Each polygon is a separate shape.</em>
-		</td>
-	</tr>
-	<tr>
-		<td class="twocol_l">
-			<img src="images/innerRectangle_edge.png" alt="InnerRectangle Edge" width="298"/>
-		</td>
-		<td class="twocol_r">
-<pre class="codecga">
+					<p>This example shows the largest inner rectangle aligned to the scope axes. Each polygon is a separate shape.</p>
+				</div>
+			</div>
+
+			<div class="example-row">
+				<figure class="media media-example">
+					<img src="images/innerRectangle_edge.png" alt="InnerRectangle Edge" width="298">
+				</figure>
+
+				<div class="example-content">
+<pre class="code-block">
 Lot-->
-   innerRectangle(edge) {shape : Color | remainder = Color}
+   innerRectangle(edge) { shape : Color | remainder = Color }
 </pre>
-			<em>This example shows the largest inner rectangle aligned to one edge. All polygons corresponding to the remainder are combined into one shape.</em>
-		</td>
-	</tr>
-	<tr>
-		<td class="twocol_l">
-			<img src="images/innerRectangle_lot1.png" alt="InnerRectangle Lot 1" width="298"/>
-		</td>
-		<td class="twocol_r">
-<pre class="codecga">
+					<p>This example shows the largest inner rectangle aligned to one edge. All polygons corresponding to the remainder are combined into one shape.</p>
+				</div>
+			</div>
+
+			<div class="example-row">
+				<figure class="media media-example">
+					<img src="images/innerRectangle_lot1.png" alt="InnerRectangle Lot 1" width="298">
+				</figure>
+
+				<div class="example-content">
+<pre class="code-block">
 Lot-->
    innerRectangle(scope) { shape : Extrude | remainder : Color }
+
 Extrude-->
    extrude(5)
+
 Color-->
    color(0,1,0)
 </pre>
-			<em>This example shows how to use innerRectangle to place mass volumes in planar lots. Each rectangle has sides parallel to the scope axes.</em>
-		</td>
-	</tr>
-	<tr>
-		<td class="twocol_l">
-			<img src="images/innerRectangle_lot2.png" alt="InnerRectangle Lot 2" width="298"/>
-		</td>
-		<td class="twocol_r">
-<pre class="codecga">
+					<p>This example shows how to use innerRectangle to place mass volumes in planar lots. Each rectangle has sides parallel to the scope axes.</p>
+				</div>
+			</div>
+
+			<div class="example-row">
+				<figure class="media media-example">
+					<img src="images/innerRectangle_lot2.png" alt="InnerRectangle Lot 2" width="298">
+				</figure>
+
+				<div class="example-content">
+<pre class="code-block">
 Lot-->
    comp(f) { all : Rectangle }
+
 Rectangle-->
    innerRectangle(scope) { shape : Extrude | remainder : Color }
 </pre>
-			<em>In this example the component split is used to generate a separate scope for each slanting face. Each generated inner shape is a rectangle seen from the face normal.</em>
-		</td>
-	</tr>
-	<tr>
-		<td class="twocol_l">
-			<img src="images/innerRectangle_lot3.png" alt="InnerRectangle Lot 3" width="298"/>
-		</td>
-		<td class="twocol_r">
-<pre class="codecga">
+					<p>In this example the component split is used to generate a separate scope for each slanting face. Each generated inner shape is a rectangle seen from the face normal.</p>
+				</div>
+			</div>
+
+			<div class="example-row">
+				<figure class="media media-example">
+					<img src="images/innerRectangle_lot3.png" alt="InnerRectangle Lot 3" width="298">
+				</figure>
+
+				<div class="example-content">
+<pre class="code-block">
 Lot-->
-   alignScopeToAxes()
+   alignScopeToAxes
    innerRectangle(scope) { shape : Extrude | remainder : Color }
+
 Extrude-->
    extrude(world.up.flatTop, 10)
 </pre>
-			<em>When the scope is aligned to the world coordinate system each inner shape is a rectangle seen from the world's y axis.</em>
-		</td>
-	</tr>
-</table>
+					<p>When the scope is aligned to the world coordinate system each inner shape is a rectangle seen from the world's y axis.</p>
+				</div>
+			</div>
+		</section>
+	</section>
 
-               
-<!-- FOOTER -->
+	<footer class="footer">Copyright &copy;2008-2026 Esri R&amp;D Center Zurich. All rights reserved.</footer>
 
-<p class="foot">Copyright &copy;2008-2025 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
-
-<!-- END CENTERED CONTENT -->
-
-</div>
+</article>
 </body>
 </html>

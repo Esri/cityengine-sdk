@@ -1,127 +1,145 @@
+<!doctype html>
 <html>
 
 <head>
-	<title>edgeAttr Functions</title>
-	<link rel="stylesheet" href="../manual_style.css" type="text/css" />
+    <meta charset="UTF-8">
+    <title>edgeAttr functions</title>
+    <link rel="stylesheet" href="../cgareference_style.css" type="text/css">
 </head>
 
 <body>
-<div class="content">
+<article class="content">
 
-<table summary="" class="header">
-	<tr>
-		<td align="left" class="helphead_l"><a href="../toc.html"><div class="helplink">&nbsp;</div></a></td>
-		<td align="right" class="helphead_r"></td>
-	</tr>
-</table>
+    <header class="section">
+        <h1>
+            <span class="name">edgeAttr</span>
+            <span class="kind">functions</span>
+        </h1>
 
-<h1>edgeAttr functions</h1>
+        <div class="signatures">
+            <div><span class="type-tag">float</span> <span class="func">edgeAttr.getFloat</span>(<span class="param">attributeName</span>)</div>
+            <div><span class="type-tag">string</span> <span class="func">edgeAttr.getString</span>(<span class="param">attributeName</span>)</div>
+            <div><span class="type-tag">bool</span> <span class="func">edgeAttr.getBool</span>(<span class="param">attributeName</span>)</div>
+        </div>
+    </header>
 
-<h2>Syntax</h2>
+    <section class="section">
+        <div class="param-list">
+            <div class="param-item">
+                <div class="indent-body">
+                    <p><span class="param">attributeName</span> <span class="type-tag">string</span> Name of the edge attribute array: <span class="inlinecode">/edgeattr/</span><span class="param">attributeName</span>.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<p class="code2"><span class="codelight">float</span>&nbsp&nbspedgeAttr.getFloat(<span class="cga_opparam">attributeName</span>)</p>
-<p class="code2"><span class="codelight">string</span>&nbspedgeAttr.getString(<span class="cga_opparam">attributeName</span>)</p>
-<p class="code2"><span class="codelight">bool</span>&nbsp&nbsp&nbspedgeAttr.getBool(<span class="cga_opparam">attributeName</span>)</p>
+    <section class="section">
+        <div class="return-list">
+            <div class="return-item">
+                <div class="indent-body">
+                    <p>Returns one sampled element of the edge attribute array. If no attribute <span class="inlinecode">/edgeattr/</span><span class="param">attributeName</span> exists, or if the requested type does not match, a default value is returned: <span class="inlinecode">0</span>, <span class="inlinecode">""</span>, or <span class="kw">false</span>.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<h2>Parameters</h2>
+    <section class="section">
+        <p>The <span class="func">edgeAttr</span> functions return the element of an edge attribute array that best corresponds to the current shape geometry.</p>
 
-<ul>
-	<li><span class="cga_opparam">attributeName</span> (string)<br>Name of edge attribute array: <span class="codelight">/edgeattr/</span><span class="cga_opparam">attributeName</span></li>
-</ul>
+        <h3 id="edgeAttr">Edge attributes</h3>
+        <p>Edge attributes allow information to be stored on the face edges of an initial shape. They are specified as arrays in face order. The first element sets an attribute for the first edge of the first face, the second element sets an attribute for the second edge of the first face, and so on. Shared edges are considered separately on later encounters. Edge attribute arrays start with the prefix <span class="inlinecode">/edgeattr/</span> followed by <span class="param">attributeName</span>. In CityEngine these arrays are set as object attributes on an initial shape.</p>
 
-<h2>Returns</h2>
+        <h3 id="sampling">Sampling via edgeAttr functions</h3>
+        <p>Edge attributes can be sampled in CGA. The current shape geometry is projected on the outline of the initial shape. The edge attribute with the highest projected coverage is returned as the result of an <span class="func">edgeAttr</span> function. The projection works in 2D with respect to the average plane of the initial shape, and its direction follows the general orientation of the current shape geometry.</p>
+    </section>
 
-<p>One sampled element of the edge attribute array. If no attribute <span class="codelight">/edgeattr/</span><span class="cga_opparam">attributeName</span> exists or if the requested type does not match a default value is returned (<span class="codelight">0</span>, <span class="codelight">""</span>, <span class="codelight">false</span> respectively).</p>
+    <section class="section">
+        <h2>Related</h2>
+        <div class="related">
+            <a class="op" href="op_comp.html"><span class="related-name">comp</span><span class="related-kind">operation</span></a>
+            <a class="func" href="func_comp.html"><span class="related-name">comp</span><span class="related-kind">function</span></a>
+            <a class="op" href="op_setback.html"><span class="related-name">setback</span><span class="related-kind">operation</span></a>
+            <a class="op" href="op_setbackPerEdge.html"><span class="related-name">setbackPerEdge</span><span class="related-kind">operation</span></a>
+            <a class="op" href="op_setTagsFromEdgeAttrs.html"><span class="related-name">setTagsFromEdgeAttrs</span><span class="related-kind">operation</span></a>
+        </div>
+    </section>
 
-<h2>Description</h2>
+    <section class="section">
+        <h2>Examples</h2>
 
-<p>The <span class="codelight">edgeAttr</span> functions return the element of an edge attribute array that best corresponds to the current shape geometry.</p>
+        <section class="example">
+            <h3>Edge attribute array</h3>
+            <div class="example-row">
+                <figure class="media media-example">
+                    <img src="images/edgeAttr-objAttr.png" alt="edge attribute object attributes">
+                </figure>
+                <div class="example-content">
+                    <figure class="media media-example">
+                        <img src="images/edgeAttr-array.png" alt="edge attribute array">
+                    </figure>
+                    <p><em>A rectangular shape has a string array with colors set as edge attributes.</em></p>
+                </div>
+            </div>
+        </section>
 
-<h3><a name="edgeAttr"></a>Edge attributes</h3>
-
-<p>Edge attributes allow to store information on face edges of an initial shape. They are specified as arrays in face-order. The first element sets an attribute for the first edge of the first face, the second element sets an attribute for the second edge of the first face, and so on. Shared edges are considered separately on following encounters. Edge attribute arrays start with a prefix <span class="codelight">/edgeattr/</span> followed by an <span class="cga_opparam">attributeName</span>. In CityEngine these arrays are set as object attributes on an initial shape.</p>  
-
-<h3><a name="sampling"></a>Sampling via edgeAttr functions</h3>
-
-<p>Edge attributes can be sampled in CGA. The current shape geometry is projected on the outline of the initial shape. The edge attribute with the highest projected coverage is returned as the result of a <span class="codelight">edgeAttr</span> function. The projection only works in 2D wrt. the average plane of the initial shape. The projection direction follows the general orientation of current shape geometry (average normal).<p/>
-
-<h2>Related</h2>
-
-<ul>
-    <li><a href="op_comp.html">comp operation</a></li>
-	<li><a href="func_comp.html">comp function</a></li>
-	<li><a href="op_setback.html">setback operation</a></li>
-	<li><a href="op_setbackPerEdge.html">setbackPerEdge operation</a></li>
-	<li><a href="op_setTagsFromEdgeAttrs.html">setTagsFromEdgeAttrs operation</a></li>
-</ul>
-    
-    
-<h2>Examples</h2>
-
-<h3>Edge attribute array</h3>
-
-<table summary="" class="twocol">
-<tr>
-	<td class="twocol_l"><br><img src="images/edgeAttr-objAttr.png" alt="edgeAttr-objattr"/></td>
-	<td><br><br><center><img src="images/edgeAttr-array.png" alt="edgeAttr-array"/></center><br><br>
-	<em>A rectangular shape has a string array with colors set as edge attributes.</em>
-	</td>
-</tr>
-</table>
-
-<h3>Sampling on faces</h3>
-
-<table summary="" class="twocol">
-<tr>
-	<td class="twocol_l"><img src="images/edgeAttr-faces.png" alt="edgeAttr-faces"/></td>
-	<td class="twocol_r"><pre class="codecga">
+        <section class="example">
+            <h3>Sampling on faces</h3>
+            <div class="example-row">
+                <figure class="media media-example">
+                    <img src="images/edgeAttr-faces.png" alt="edge attribute faces">
+                </figure>
+                <div class="example-content">
+                    <pre class="code-block">
 getColor = edgeAttr.getString("colors")
-	
+
 Lot --> primitiveCube(10, 10, 10)
         comp(f) { side : color(getColor) Face. }
 </pre>
-	<em>The <span class="codelight">side</span> faces of a cube are projected along their normals onto the face edges of the initial shape.</em>
-	</td>
-</tr>
-</table>
+                    <p><em>The <span class="inlinecode">side</span> faces of a cube are projected along their normals onto the face edges of the initial shape.</em></p>
+                </div>
+            </div>
+        </section>
 
-<h3>Sampling on edges</h3>
-
-<table summary="" class="twocol">
-<tr>
-	<td class="twocol_l"><img src="images/edgeAttr-edges.png" alt="edgeAttr-faces"/></td>
-	<td class="twocol_r"><pre class="codecga">
+        <section class="example">
+            <h3>Sampling on edges</h3>
+            <div class="example-row">
+                <figure class="media media-example">
+                    <img src="images/edgeAttr-edges.png" alt="edge attribute edges">
+                </figure>
+                <div class="example-content">
+                    <pre class="code-block">
 Edge --> s('1,0,1)
          primitiveQuad
 
 Lot --> primitiveCylinder(22, 5, 10)
         comp(e) { vertical : color(getColor) Edge }
 </pre>
-	<em>The <span class="codelight">vertical</span> edges of a cylinder are projected along their normals onto the face edges of the initial shape. Note that also edges (<span class="codelight">e</span>) have a normal set that points along the average of the neighboring face normals. After a component split the normal coincides with the z-axis of the component scopes.</em>
-	</td>
-</tr>
-</table>
+                    <p><em>The <span class="inlinecode">vertical</span> edges of a cylinder are projected along their normals onto the face edges of the initial shape. Edges also have a normal defined by the average of neighboring face normals. After a component split, the normal coincides with the z-axis of the component scope.</em></p>
+                </div>
+            </div>
+        </section>
 
-<h3><a name="samplingFE"></a>Sampling on face edges</h3>
-
-<table summary="" class="twocol">
-<tr>
-	<td class="twocol_l"><img src="images/edgeAttr-faceedges.png" alt="edgeAttr-faces"/></td>
-	<td class="twocol_r"><pre class="codecga">
+        <section class="example">
+            <h3 id="samplingFE">Sampling on face edges</h3>
+            <div class="example-row">
+                <figure class="media media-example">
+                    <img src="images/edgeAttr-faceedges.png" alt="edge attribute face edges">
+                </figure>
+                <div class="example-content">
+                    <pre class="code-block">
 Lot --> primitiveQuad(10, 10)
         comp(fe) { all : color(getColor) Edge }
 </pre>
-	<em><span class="codelight">All</span> face edges of a quad are projected along their normals onto the face edges of the initial shape. Note that also face edges (<span class="codelight">fe</span>) have a normal set that points out of the face orthogonally to the edge and the face normal. After a component split the normal coincides with the z-axis of the component scopes.</em>
-	</td>
-</tr>
-</table>
+                    <p><em>All face edges of a quad are projected along their normals onto the face edges of the initial shape. Face edges also have a normal that points out of the face orthogonally to the edge and face normal. After a component split, the normal coincides with the z-axis of the component scope.</em></p>
+                </div>
+            </div>
+        </section>
 
-<br>
+        <p>See the <a href="op_setbackPerEdge.html#examples">setbackPerEdge operation</a> for further applications.</p>
+    </section>
 
-<p>See for example the <a class="cga_op" href="op_setbackPerEdge.html#examples">setbackPerEdge</a> operation for applications.</p>
+    <footer class="footer">Copyright &copy;2008-2026 Esri R&amp;D Center Zurich. All rights reserved.</footer>
 
-<p class="foot">Copyright &copy;2008-2025 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
-
-</div>
+</article>
 </body>
 </html>

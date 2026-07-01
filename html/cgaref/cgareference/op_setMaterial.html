@@ -1,116 +1,133 @@
+<!doctype html>
 <html>
 
 <head>
-<title>setMaterial Operation</title>
-<link rel="stylesheet" href="../manual_style.css" type="text/css" />
+    <meta charset="UTF-8">
+    <title>setMaterial operation</title>
+    <link rel="stylesheet" href="../cgareference_style.css" type="text/css">
 </head>
 
 <body>
-<div class="content">
+<article class="content">
 
-<table summary="" class="header">
-	<tr>
-		<td align="left" class="helphead_l"><a href="../toc.html"><div class="helplink">&nbsp;</div></a></td>
-		<td align="right" class="helphead_r"></td>
-	</tr>
-</table>
+    <header class="section">
+        <h1>
+            <span class="name">setMaterial</span>
+            <span class="kind">operation</span>
+        </h1>
 
-<h1>setMaterial operation</h1>
+        <div class="signatures">
+            <div><span class="op">setMaterial</span>(<span class="param">material</span>)</div>
+        </div>
+    </header>
 
-<h2>Syntax</h2>
+    <section class="section">
+        <div class="param-list">
+            <div class="param-item">
+                <div class="indent-body">
+                    <p><span class="param">material</span> <span class="type-tag">string[]</span> A string array containing key-value pairs in the form of [ attr-name0, value0, attr-name1, value1, ... ]. The names of the <a href="attr_material.html">material attributes</a> are <strong>without</strong> the <span class="inlinecode">"material."</span> prefix.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<p class="code2"><span class="cga_op">setMaterial(<span class="cga_opparam">material</span>)</span></p>
+    <section class="section">
+        <p>Sets the <a href="attr_material.html">material attributes</a> of the current shape's material according to <span class="param">material</span>. This operation allows for setting of multiple (all) material attributes in one operation.</p>
+        <p>The result will be the same as using <a href="op_set.html">set()</a> to set each material attribute individually.</p>
+    </section>
 
-<h2>Parameters</h2>
-<ul>
-	<li><span class="cga_opparam">material</span> (string[])<br>A string array containing key-value pairs in the form of [ attr-name0, value0, attr-name1, value1, ... ]. The names of the <a class="normw" href="attr_material.html">material attributes</a> are <stong>without</strong> the <span class="code_std">"material."</span> prefix.</li>
-</ul>
+    <section class="section">
+        <h2>Related</h2>
+        <div class="related">
+            <a class="func" href="func_getMaterial.html"><span class="related-name">getMaterial</span><span class="related-kind">function</span></a>
+            <a class="func" href="func_readMaterial.html"><span class="related-name">readMaterial</span><span class="related-kind">function</span></a>
+            <a class="op" href="op_resetMaterial.html"><span class="related-name">resetMaterial</span><span class="related-kind">operation</span></a>
+            <a class="op" href="op_set.html"><span class="related-name">set</span><span class="related-kind">operation</span></a>
+            <a class="attr" href="attr_material.html"><span class="related-name">material</span><span class="related-kind">attributes</span></a>
+            <a class="attr" href="attr_material_color.html"><span class="related-name">material.color</span><span class="related-kind">attribute</span></a>
+            <a class="attr" href="attr_material_map.html"><span class="related-name">material.map</span><span class="related-kind">attributes</span></a>
+            <a class="op" href="op_color.html"><span class="related-name">color</span><span class="related-kind">operation</span></a>
+            <a class="op" href="op_texture.html"><span class="related-name">texture</span><span class="related-kind">operation</span></a>
+            <a href="cga_texturing.html"><span class="related-name">Texturing: Essential Knowledge</span></a>
+        </div>
+    </section>
 
+    <section class="section">
+        <h2>Examples</h2>
 
-<h2>Description</h2>
+        <section class="example">
+            <h3>Example 1</h3>
 
-<p>Sets the <a class="normw" href="attr_material.html">material attributes</a> of the current shape's material according to <span class="cga_opparam">material</span>. This operation allows for setting of multiple (all) material attributes in one operation.<br>
-The result will be the same as using <a class="normw" href="op_set.html">set()</a> to set each material attribute individually.</p>
+            <div class="example-row">
+                <figure class="media media-example">
+                    <img src="images/setMaterial-example.png" alt="setMaterial-example">
+                </figure>
 
-<h2>Related</h2>
-<ul>
-	<li><a class="normw" href="func_getMaterial.html">getMaterial function</a></li>
-	<li><a class="normw" href="func_readMaterial.html">readMaterial function</a></li>
-	<li><a class="normw" href="op_resetMaterial.html">resetMaterial operation</a></li>
-	<li><a class="normw" href="op_set.html">set operation</a></li>
-	<li><a class="normw" href="attr_material.html">material attributes</a></li>
-	<li><a class="normw" href="attr_material_color.html">material.color attribute</a></li>
-    <li><a class="normw" href="attr_material_map.html">material.map texture layers</a></li> 
-	<li><a class="normw" href="op_color.html">color operation</a></li>
-	<li><a class="normw" href="op_texture.html">texture operation</a></li>
-	<li><a class="normw" href="cga_texturing.html">Texturing: Essential Knowledge</a></li>
-</ul>
-
-<h2>Example 1</h2>
-
-<table summary="" class="twocol">
-<tr>
-	<td class="twocol_l"><img src="images/setMaterial-example.png" alt="setMaterial-example"/></td>
-	<td class="twocol_r"><pre class="codecga">
-myMaterial = [ "color.r",    "1.0", 
-               "color.g",    "0.0", 
-               "color.b",    "0.0", 
+                <div class="example-content">
+<pre class="code-block">
+myMaterial = [ "color.r",    "1.0",
+               "color.g",    "0.0",
+               "color.b",    "0.0",
                "opacitymap", "builtin:default" ]
 
-Lot --> primitiveCube() 
+Lot --> primitiveCube
         scaleUV(0,0.25,0.25)
         setMaterial(myMaterial)
 </pre>
-    
-    </pre> <em>Using <span class="code_std">setMaterial()</span> to set a number of material attributes in one operation.</em></td>
-	</td>
-</tr>
-</table>
+                    <p>Using <span class="inlinecode">setMaterial()</span> to set a number of material attributes in one operation.</p>
+                </div>
+            </div>
+        </section>
 
+        <section class="example">
+            <h3>Example 2: loading a .cgamat file</h3>
 
-<h2>Example 2: loading a .cgamat file</h2>
-<table summary="" class="twocol">
-<tr>
-	<td class="twocol_l"><img src="images/setMaterial-example2.png" alt="setMaterial-example"/></td>
-	<td class="twocol_r"><pre class="codecga">
-Lot --> primitiveSphere()
-        setMaterial(readMaterial("materials/Metal2/Metal2.cgamat"))
+            <div class="example-row">
+                <figure class="media media-example">
+                    <img src="images/setMaterial-example2.png" alt="setMaterial-example">
+                </figure>
+
+                <div class="example-content">
+<pre class="code-block">
+Lot --> 
+    primitiveSphere
+    setMaterial(readMaterial("materials/Metal2/Metal2.cgamat"))
 </pre>
-    
-    </pre> <em>Using <span class="code_std">setMaterial()</span> and <span class="code_std">readMaterial()</span> to load a .cgamat material description (including textures) from disk.</em>
-    <p class="notes">CityEngine's CGA Material Encoder allows for writing cgamat files via model export.</p>
-    
-    </td>
-	</td>
-</tr>
-</table>
+                    <p>Using <span class="inlinecode">setMaterial()</span> and <span class="inlinecode">readMaterial()</span> to load a .cgamat material description (including textures) from disk.</p>
+                    <div class="note">CityEngine's CGA Material Encoder allows for writing cgamat files via model export.</div>
+                </div>
+            </div>
+        </section>
 
+        <section class="example">
+            <h3>Example 3: using a CSV file to define a material</h3>
 
-<h2>Example 3: using a CSV file to define a material</h2>
+            <div class="example-row">
+                <figure class="media media-example">
+                    <img src="images/setMaterial-example3.png" alt="setMaterial-example">
+                </figure>
 
-<table summary="" class="twocol">
-<tr>
-	<td class="twocol_l"><img src="images/setMaterial-example3.png" alt="setMaterial-example"/></td>
-	<td class="twocol_r"><pre class="codecga">
+                <div class="example-content">
+<pre class="code-block">
 RefExampleCSV-->
-	primitiveCube()
-	setMaterial(readStringTable("exampleMaterial.csv"))    
-</pre> 
-<pre>
-<em>exampleMaterial.csv:</em>    
+    primitiveCube
+    setMaterial(readStringTable("exampleMaterial.csv"))
+</pre>
+                    <p><span class="inlinecode">exampleMaterial.csv:</span></p>
+<pre class="code-block">
 color.r,1
 color.g,0.5
 color.b,0
 colormap,builtin:default
-</pre> 
-<em>Material descriptions in CSV files can be used via <span class="code_std">readStringTable()</span>.</em>    
-    </td>
-</tr>
-</table>
+</pre>
+                    <p>Material descriptions in CSV files can be used via <span class="inlinecode">readStringTable()</span>.</p>
+                </div>
+            </div>
+        </section>
+    </section>
 
+    <footer class="footer">Copyright &copy;2008-2026 Esri R&amp;D Center Zurich. All rights reserved.</footer>
 
-<p class="foot">Copyright &copy;2008-2025 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
-
-</div>
+</article>
 </body>
 </html>

@@ -1,584 +1,1034 @@
+<!doctype html>
 <html>
 
 <head>
+    <meta charset="UTF-8">
     <title>geometry Functions</title>
-    <link rel="stylesheet" href="../manual_style.css" type="text/css" />
+    <link rel="stylesheet" href="../cgareference_style.css" type="text/css">
 </head>
 
 <body>
-<div class="content">
+<article class="content">
 
-<!-- HEADER (use only on bookchapters) -->
+    <section id="angle">
+        <header class="section">
+            <h1>
+            <span class="name">geometry.angle</span>
+            <span class="kind">function</span>
+            </h1>
 
-<table summary="" class="header">
-	<tr>
-		<td align="left" class="helphead_l"><a href="../toc.html"><div class="helplink">&nbsp;</div></a></td>
-		<td align="right" class="helphead_r"></td>
-	</tr>
-</table>
+            <div class="signatures">
+            <div><span class="type-tag">float</span> <span class="func">geometry.angle</span>(<span class="param">angleType</span>)</div>
+            </div>
+        </header>
 
-<!-- CONTENT -->
+        <section class="section">
 
-<h1><a name="angle"></a>geometry.angle function</h1>
+        <div class="param-list">
+            <div class="param-item">
+                <div class="indent-body">
+                    <p><span class="param">angleType</span> <span class="type-tag">selector</span> Selector for the angle calculation.</p>
+                    <table class="option-table">
+                        <tbody>
+                            <tr>
+                                <td><span class="inlinecode">maxSlope</span></td>
+                                <td>Calculates the maximum slope of the shape, relative to the xz-plane, in degrees.</td>
+                            </tr>
+                            <tr>
+                                <td><span class="inlinecode">azimuth</span></td>
+                                <td>Calculates the azimuth of the direction of the current shape's maximum slope, in degrees.</td>
+                            </tr>
+                            <tr>
+                                <td><span class="inlinecode">zenith</span></td>
+                                <td>Calculates the difference between 90 degrees (zenith) and the maximum slope.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
 
-<h2>Syntax</h2>
+        <div class="return-list">
+            <div class="return-item">
+                <div class="indent-body">
+                        <p>Returns the angle of the current shape's geometry, depending on the selector, in degrees.</p>
+                </div>
+            </div>
+        </div>
+		</section>
 
-<p class="code2"><span class="codelight">float</span> geometry.angle(<span class="cga_opparam">angleType</span>)</p>
+		<section class="section">
+        <p><span class="inlinecode">azimuth</span> is the horizontal angle measured clockwise from the north, that is, 90 degrees is east, 180 degrees is south and 270 degrees is west. Azimuth is in the range [0, 360[.</p>
+        <p>The <span class="func">geometry.angle</span>(<span class="inlinecode">zenith</span>) function returns the same value as <span class="inlinecode">90 - geometry.angle(maxSlope)</span>.</p>
+		</section>
 
-<h2>Parameters</h2>
-
-<ul>
-	<li><span class="cga_opparam">angleType</span> (selector)<br>Selector for the angle calculation.
-	<table cellspacing="5">
-		<tr><td width="15%"><span class="codelight">maxSlope</span></td><td>Calculates the maximum slope of the shape, relative to the xz-plane, in degrees.</td></tr>
-		<tr><td><span class="codelight">azimuth</span></td><td>Calculates the azimuth of the direction of the current shape's maximum slope, in degrees.</td></tr>
-		<tr><td><span class="codelight">zenith</span></td><td>Calculates the difference between 90 degrees (zenith) and the maximum slope.</td></tr>
-	</table>
-	</li>
-</ul>
-
-<h2>Returns</h2>
-         
-<p>Angle of the current shape's geometry, depending on the selector, in degrees.</p>
-
-<h2>Description</h2>
-
-<p><span class="codelight">azimuth</span> is the horizontal angle measured clockwise from the north, i.e. 90 degrees is east, 180 degrees is south and 270 degrees is west. Azimuth is in the range [0, 360[.<br>The geometry.angle(zenith) function returns the same value as <span class="codelight">90 - geometry.angle(maxSlope)</span>.</p>
-        
-<h2>Examples </h2>
-
-<img src="images/angle_maxSlope.jpg" alt="nada" width="298" >
-<pre class="code">
+		<section class="section">
+        <h2>Examples</h2>
+        <section class="example">
+            <div class="example-row">
+                <figure class="media media-example">
+                    <img src="images/angle_maxSlope.jpg" alt="Example coloring faces by geometry maximum slope">
+                </figure>
+                <div class="example-content">
+<pre class="code-block">
 Cone--&gt;
-    comp(f) { all : color(geometry.angle(maxSlope) / 90, 0.0, 0.0) Shape. }
+    comp(f) {
+        all : color(geometry.angle(maxSlope) / 90, 0.0, 0.0) X. 
+    }
 </pre>
-<img src="images/angle_azimuth.jpg" alt="nada" width="298" >
-<pre class="code">
-Cone--&gt;
-    comp(f) { all : color(0.5, geometry.angle(azimuth) / 360, 0.5) Shape. }
+                </div>
+            </div>
+
+            <div class="example-row">
+                <figure class="media media-example">
+                    <img src="images/angle_azimuth.jpg" alt="Example coloring faces by geometry azimuth">
+                </figure>
+                <div class="example-content">
+<pre class="code-block">
+Cone--&gt; 
+    comp(f) { 
+        all : color(0.5, geometry.angle(azimuth) / 360, 0.5) X. 
+    }
 </pre>
-
-<br><br><br><br><br>
-
-<h1><a name="area"></a>geometry.area function</h1>
-
-<h2>Syntax</h2>
-
-<p class="code2"><span class="codelight">float</span> geometry.area()</p>
-<p class="code2"><span class="codelight">float</span> geometry.area(<span class="cga_opparam">faceOrientation</span>)</p>
-
-<h2>Parameters</h2>
-
-<ul>
-	<li><span class="cga_opparam">faceOrientation</span> (selector)<br>Selector for the faces to include in the area calculation.
-	<table cellspacing="5">
-		<tr><td><span class="codelight">all/surface</span> (default)</td></tr>
-		<tr><td><span class="codelight">back, bottom, front, top, left, right, side</span></td></tr>
-		<tr><td><span class="codelight">object.front, object.back, object.bottom, object.top, object.left, object.right, object.side</span></td></tr>
-		<tr><td><span class="codelight">world.north, world.south, world.west, world.east, world.up, world.down, world.side</span></td></tr>
-		<tr><td><span class="codelight">street.front, street.back, street.right, street.left, street.side</span></td></tr>
-	</table>
-	</li>
-</ul>
-</li>
-
-<h2>Returns</h2>
-
-<p>Surface area of the current shape's geometry, depending on the provided <span class="cga_opparam">faceOrientation</span> selector.</p>
-
-<h2>Description</h2>
-
-<p>The surface area of the geometry is the sum of the area of all its faces.</p>
-        
-<br><br><br><br><br>
-
-<h1><a name="boundaryLength"></a>geometry.boundaryLength function</h1>
-
-<h2>Syntax</h2>
-
-<p class="code2"><span class="codelight">float</span> geometry.boundaryLength()</p>
-
-<h2>Returns</h2>
-
-<p class="content">The sum of all boundary edge lengths. An edge is considered a boundary edge if it belongs to no more than one face.</p>
-
-<h2>Related</h2>
-<ul>
-	<li><a class="normw" href="func_geometry.html#isClosedSurface">geometry.isClosedSurface function</a></li>
-</ul>
-
-<br><br><br><br><br>
-
-<h1><a name="du"></a><a name="dv"></a>geometry.du/dv functions</h1>
-
-<h2>Syntax</h2>
-
-<p class="code2"><span class="codelight">float</span> geometry.du(<span class="cga_opparam">uvSet, surfaceParameterization</span>)</p>
-<p class="code2"><span class="codelight">float</span> geometry.dv(<span class="cga_opparam">uvSet, surfaceParameterization</span>)</p>
-
-<h2>Parameters</h2>
-
-<ul>
-	<li><span class="cga_opparam">uvSet</span> (float)<br>Number of texture coordinates set (integer number in [0,9]). The numbering corresponds to the texture layers of the <a href="attr_material.html">material attribute</a>, see also <a href="cga_texturing.html"> Texturing: Essential Knowledge</a>.</li>
-	<li><span class="cga_opparam">surfaceParameterization</span> (selector)<br>The surface parameter space.
-	<table cellspacing="5">
-		<tr><td width="15%"><span class="codelight">uvSpace</span></td><td>Selects the actual texture coordinates (typically in the range [0,1]).</td></tr>
-		<tr><td><span class="codelight">unitSpace</span></td><td>Calculates the geometry-dependent surface stretch along the u- or v- axis and calculates an approximation in world coordinate units (e.g. meters).</td></tr>
-	</table>
-	</li>
-</ul>
-
-<h2>Returns</h2>
-
-<p>The range (i.e. max - min) spanned by the u- or the v-coordinate, respectively, of the selected <span class="cga_opparam">uvSet</span>.</p>
-
-<h2>Related</h2>
-
-<ul>
-	<li><a class="normw" href="op_split.html">split operation</a></li>
-</ul>
-
-<br/><br/><br/><br/><br/>
-
-<h1><a name="groups"></a>geometry.groups function</h1>
-
-<h2>Syntax</h2>
-
-<p class="code2"><span class="codelight">string[]</span> geometry.groups()</p>
-
-<h2>Returns</h2>
-
-<p>An array with group names.</p>
-
-<p class="notes">The order of groups in the array corresponds to the order given by the <a class="normw" href="op_comp.html">indexed component split</a> for groups. In other words, the index of an element in the array corresponds to the <a class="normw" href="attr_comp.html">component index</a>.</p>
-
-<h2>Related</h2>
-
-<ul>
-	<li><a class="normw" href="op_comp.html">comp operation</a></li>
-	<li><a class="normw" href="func_comp.html">comp function</a></li>
-	<li><a class="normw" href="attr_comp.html">comp attribute</a></li>
-	<li><a class="normw" href="func_assetNamingInfo.html">assetNamingInfo / assetNamingInfos function</a></li>
-	<li><a class="normw" href="func_geometry.html#materials">geometry.materials function</a></li>
-</ul>
-
-<br><br><br><br><br>
-
-<h1><a name="hasTags"></a>geometry.hasTags function</h1>
-
-<h2>Syntax</h2>
-
-<p class="code2"><span class="codelight">bool</span> geometry.hasTags()</p>
-<p class="code2"><span class="codelight">bool</span> geometry.hasTags(<span class="cga_opparam">tagQuery</span>)</p>
-<p class="code2"><span class="codelight">bool</span> geometry.hasTags(<span class="cga_opparam">tagQuery</span>, <span class="cga_opparam">components</span>)</p>
-
-<h2>Parameters </h2>
-
-<ul>
-	<li><span class="cga_opparam">tagQuery</span> (string)<br>The query defining which tags to consider. See also <a class="normw" href="cga_componentTags.html">Geometry Tagging: Essential Knowledge</a>.</li>
-	<li><span class="cga_opparam">components</span> (selector)<br>
-		<table cellspacing="5">
-			<tr><td width="15%"><span class="codelight">all</span></td><td>Default. Checks tags on all components.</td></tr>
-			<tr><td><span class="codelight">faces</span></td><td>Only checks face tags.</td></tr>
-			<tr><td><span class="codelight">edges</span></td><td>Only checks edge tags.</td></tr>
-			<tr><td><span class="codelight">vertices</span></td><td>Only checks vertex tags.</td></tr>
-		</table>
-	</li>
-</ul>
-
-<h2>Returns</h2>
-
-<p class="content"><span class="cga_keyword">true</span> if there are any tags, <span class="cga_keyword">false</span> otherwise. If a <span class="cga_opparam">tagQuery</span> is provided, only matching tags are considered. If <span class="cga_opparam">components</span> are specified, only their tags are considered.</p>
-
-<h2>Related</h2>
-
-<ul>
-	<li><a class="normw" href="op_tag.html">tag operation</a></li>
-	<li><a class="normw" href="op_deleteTags.html">deleteTags operation</a></li>
-	<li><a class="normw" href="func_geometry.html#tags">geometry.tags function</a></li>
-	<li><a class="normw" href="op_setTagsFromEdgeAttrs.html">setTagsFromEdgeAttrs operation</a></li>
-</ul>
-
-<br/><br/><br/><br/><br/>
-
-<h1><a name="hasUVs"></a>geometry.hasUVs function</h1>
-
-<h2>Syntax</h2>
-
-<p class="code2"><span class="codelight">bool</span> geometry.hasUVs()</p>
-<p class="code2"><span class="codelight">bool</span> geometry.hasUVs(<span class="cga_opparam">uvSet</span>)</p>
-
-<h2>Parameters </h2>
-
-<ul>
-	<li><span class="cga_opparam">uvSet</span> (float)<br>Number of texture coordinates set (integer number in [0,9]). The numbering corresponds to the texture layers of the <a href="attr_material.html">material attribute</a>, see also <a href="cga_texturing.html"> Texturing: Essential Knowledge</a>.</li>
-</ul>
-
-<h2>Returns</h2>
-
-<p><span class="cga_keyword">true</span> if the geometry has UVs, <span class="cga_keyword">false</span> otherwise. If a <span class="cga_opparam">uvSet</span> is provided, only the respective UVs are considered.</p>
-
-<br/><br/><br/><br/><br/>
-
-<h1 id="height">geometry.height function</h1>
-
-<h2>Syntax</h2>
-
-<p class="code2"><span class="codelight">float</span> geometry.height()</p>
-
-<h2>Returns</h2>
-
-<p class="content">The height of the geometry in world coordinates.</p>
-
-<h2>Related</h2>
-
-<ul>
-	<li><a class="normw" href="attr_scope.html">scope attribute</a></li>
-</ul>
-
-<br><br><br><br><br>
-		
-<h1><a name="isClosedSurface"></a>geometry.isClosedSurface function</h1>
-
-<h2>Syntax</h2>
-
-<p class="code2"><span class="codelight">bool</span> geometry.isClosedSurface()</p>
-
-<h2>Returns</h2>
-
-<p class="content"><span class="cga_keyword">true</span> if the geometry contains at least one face and all edges belong to exactly 2 faces, <span class="cga_keyword">false</span> otherwise.</p>
-
-<h2>Related</h2>
-
-<ul>
-	<li><a class="normw" href="func_geometry.html#isConcave">geometry.isConcave function</a></li>
-	<li><a class="normw" href="func_geometry.html#isRectangular">geometry.isRectangular function</a></li>
-	<li><a class="normw" href="func_geometry.html#isPlanar">geometry.isPlanar function</a></li>
-</ul>
-
-<br><br><br><br><br>
-
-<h1><a name="isConcave"></a>geometry.isConcave function</h1>
-		
-<h2>Syntax</h2>
-        
-<p class="code2"><span class="codelight">bool</span> geometry.isConcave()</p>
-
-<h2>Returns</h2>
-
-<p class="content"><span class="cga_keyword">true</span> if the geometry contains at least one concave face, <span class="cga_keyword">false</span> otherwise.</p>
-
-<h2>Related</h2>
-
-<ul>
-	<li><a class="normw" href="func_geometry.html#isClosedSurface">geometry.isClosedSurface function</a></li>
-	<li><a class="normw" href="func_geometry.html#isRectangular">geometry.isRectangular function</a></li>
-	<li><a class="normw" href="func_geometry.html#isPlanar">geometry.isPlanar function</a></li>
-</ul>
-
-<br><br><br><br><br>
-
-<h1><a name="isInstanced"></a>geometry.isInstanced function</h1>
-
-<h2>Syntax</h2>
-
-<p class="code2"><span class="codelight">bool</span> geometry.isInstanced()</p>
-
-<h2>Returns</h2>
-         
-<p><span class="code_std">True</span> if the current shape's geometry is the instance of an asset, i.e. the geometry has not been altered since the <a class="normw" href="op_i.html">insert operation</a>, <span class="code_std">false</span> otherwise.</p>
-
-<h2>Description</h2>
-
-<p>The <span class="code_std">geometry.isInstanced</span> function can be used to e.g. check if an inserted asset was trimmed.</p>
-
-<h2>Related</h2>
-
-<ul>
-	<li><a class="normw" href="op_i.html">insert operation</a></li>
-	<li><a class="normw" href="op_trim.html">trim operation</a></li>
-	<li><a class="normw" href="attr_trim.html">trim attribute</a></li>
-</ul>
-
-<br><br><br><br><br>
-
-<h1><a name="isOriented"></a>geometry.isOriented function</h1>
-		
-<h2>Syntax</h2>
-        
-<p class="code2"><span class="codelight">bool</span> geometry.isOriented(<span class="cga_opparam">orientation</span>)</p>
-
-<h2>Parameters</h2>
-
-<ul>
-	<li><span class="cga_opparam">orientation</span> (selector)<br>Selector for the faces to check for.
-	<table cellspacing="5">
-		<tr><td><span class="codelight">back, bottom, front, top, left, right, side</span></td></tr>
-		<tr><td><span class="codelight">object.front, object.back, object.bottom, object.top, object.left, object.right, object.side</span></td></tr>
-		<tr><td><span class="codelight">world.north, world.south, world.west, world.east, world.up, world.down, world.side</span></td></tr>
-		<tr><td><span class="codelight">street.front, street.back, street.right, street.left, street.side</span></td></tr>
-	</table>
-	</li>
-</ul>
-		
-<h2>Returns</h2>
-
-<p><span class="code_std">True</span> if at least one of the geometry's faces matches the <span class="cga_opparam">orientation</span> selector, <span class="code_std">false</span> otherwise.</p>
-
-<h2>Description</h2>
-
-<p>The <span class="code_std">geometry.isOriented</span> function can be used to determine a shape's orientation.</p>
-        
-<h2>Related</h2>
-<ul>
-	<li><a class="normw" href="op_comp.html">comp operation</a></li>
-</ul>
-
-<br><br><br><br><br>
-
-<h1><a name="isPlanar"></a>geometry.isPlanar function</h1>
-		
-<h2>Syntax</h2>
-
-<p class="code2"><span class="codelight">bool</span> geometry.isPlanar(<span class="cga_opparam">tolerance</span>)</p>
-
-<h2>Parameters </h2>
-
-<ul>
-	<li><span class="cga_opparam">tolerance</span> (float)<br>The tolerance in degrees for deciding if an face is planar or not. The face normal is compared to the edges' crossproduct (''local normal'') at every vertex; if the angle between a ''local normal'' and the face normal is larger than the tolerance the face is non-planar. A reasonable value is 0.25 degrees.</li>
-</ul>
-
-<h2>Returns</h2>
-
-<p><span class="cga_keyword">true</span> if the geometry contains at least one face and all faces of are planar (within <span class="cga_opparam">tolerance</span>), <span class="cga_keyword">false</span> otherwise.</p>
-  
-<h2>Related</h2>
-
-<ul>
-	<li><a class="normw" href="func_geometry.html#isClosedSurface">geometry.isClosedSurface function</a></li>
-	<li><a class="normw" href="func_geometry.html#isConcave">geometry.isConcave function</a></li>
-	<li><a class="normw" href="func_geometry.html#isRectangular">geometry.isRectangular function</a></li>
-</ul>
-
-<br><br><br><br><br>
-
-<h1><a name="isRectangular"></a>geometry.isRectangular function</h1>
-		
-<h2>Syntax</h2>
-        
-<p class="code2"><span class="codelight">bool</span> geometry.isRectangular(<span class="cga_opparam">tolerance</span>)</p>
-
-<h2>Parameters</h2>
-
-<ul>
-	<li><span class="cga_opparam">tolerance</span> (float)<br>The tolerance in degrees for deciding if an angle is a right one or not.</li>
-</ul>
-
-<h2>Returns</h2>
-
-<p class="content"><span class="cga_keyword">true</span> if the geometry contains at least one face and all faces consist of 4 vertices and contain only right angles, <span class="cga_keyword">false</span> otherwise. Angles in the range [90-<span class="cga_opparam">tolerance</span>, 90+<span class="cga_opparam">tolerance</span>] are considered to be &quot;right&quot;.</p>  
-
-<h2>Related</h2>
-
-<ul>
-	<li><a class="normw" href="func_geometry.html#isClosedSurface">geometry.isClosedSurface function</a></li>
-	<li><a class="normw" href="func_geometry.html#isConcave">geometry.isConcave function</a></li>
-	<li><a class="normw" href="func_geometry.html#isPlanar">geometry.isPlanar function</a></li>
-</ul>
-
-<br><br><br><br><br>
-
-<h1><a name="materials"></a>geometry.materials function</h1>
-
-<h2>Syntax</h2>
-
-<p class="code2"><span class="codelight">string[]</span> geometry.materials()</p>
-
-<h2>Returns</h2>
-
-<p>An array with material names.</p>
-
-<p class="notes">The order of materials in the array corresponds to the order given by the <a class="normw" href="op_comp.html">indexed component split</a> for materials. In other words, the index of an element in the array corresponds to the <a class="normw" href="attr_comp.html">component index</a>.</p>
-
-<h2>Related</h2>
-
-<ul>
-	<li><a class="normw" href="op_comp.html">comp operation</a></li>
-	<li><a class="normw" href="func_comp.html">comp function</a></li>
-	<li><a class="normw" href="attr_comp.html">comp attribute</a></li>
-	<li><a class="normw" href="func_assetNamingInfo.html">assetNamingInfo / assetNamingInfos function</a></li>
-	<li><a class="normw" href="func_geometry.html#groups">geometry.groups function</a></li>
-</ul>
-
-<br/><br/><br/><br/><br/>
-
-<h1><a name="nEdges"></a>geometry.nEdges function</h1>
-		
-<h2>Syntax</h2>
-        
-<p class="code2"><span class="codelight">float</span> geometry.nEdges()</p>
-
-<h2>Returns</h2>
-
-<p class="content">The (integral) number of edges of the current shape's geometry.</p>
-
-<h2>Related</h2>
-
-<ul>
-	<li><a class="normw" href="func_geometry.html#nFaces">geometry.nFaces function</a></li>
-	<li><a class="normw" href="func_geometry.html#nHoles">geometry.nHoles function</a></li>
-	<li><a class="normw" href="func_geometry.html#nVertices">geometry.nVertices function</a></li>
-</ul>
-
-<br><br><br><br>
-
-<h1><a name="nFaces"></a>geometry.nFaces function</h1>
-		
-<h2>Syntax</h2>
-        
-<p class="code2"><span class="codelight">float</span> geometry.nFaces()</p>
-
-<h2>Returns</h2>
-
-<p class="content">The (integral) number of faces of the current shape's geometry.</p>
-
-<h2>Related</h2>
-
-<ul>
-	<li><a class="normw" href="func_geometry.html#nEdges">geometry.nEdges function</a></li>
-	<li><a class="normw" href="func_geometry.html#nHoles">geometry.nHoles function</a></li>
-	<li><a class="normw" href="func_geometry.html#nVertices">geometry.nVertices function</a></li>
-</ul>
-
-<br><br><br><br>
-
-<h1><a name="nHoles"></a>geometry.nHoles function</h1>
-
-<h2>Syntax</h2>
-
-<p class="code2"><span class="codelight">float</span> geometry.nHoles()</p>
-
-<h2>Returns</h2>
-
-<p class="content">The (integral) number of holes (i.e holes in faces) of the current shape's geometry.</p>
-
-<h2>Related</h2>
-
-<ul>
-	<li><a class="normw" href="func_geometry.html#nEdges">geometry.nEdges function</a></li>
-	<li><a class="normw" href="func_geometry.html#nFaces">geometry.nFaces function</a></li>
-	<li><a class="normw" href="func_geometry.html#nVertices">geometry.nVertices function</a></li>
-</ul>
-
-<br><br><br><br><br>
-
-<h1><a name="nVertices"></a>geometry.nVertices function</h1>
-		
-<h2>Syntax</h2>
-        
-<p class="code2"><span class="codelight">float</span> geometry.nVertices()</p>
-
-<h2>Returns</h2>
-
-<p class="content">The (integral) number of vertices of the current shape's geometry.</p>
-
-<h2>Related</h2>
-
-<ul>
-	<li><a class="normw" href="func_geometry.html#nEdges">geometry.nEdges function</a></li>
-	<li><a class="normw" href="func_geometry.html#nHoles">geometry.nHoles function</a></li>
-	<li><a class="normw" href="func_geometry.html#nFaces">geometry.nFaces function</a></li>
-</ul>
-
-<br><br><br><br><br>
-
-<h1><a name="tags"></a>geometry.tags function</h1>
-
-<h2>Syntax</h2>
-
-<p class="code2"><span class="codelight">string[]</span> geometry.tags()</p>
-<p class="code2"><span class="codelight">string[]</span> geometry.tags(<span class="cga_opparam">tagQuery</span>)</p>
-<p class="code2"><span class="codelight">string[]</span> geometry.tags(<span class="cga_opparam">tagQuery</span>, <span class="cga_opparam">components</span>)</p>
-
-<h2>Parameters </h2>
-
-<ul>
-	<li><span class="cga_opparam">tagQuery</span> (string)<br>The query defining which tags to include in the result. See also <a class="normw" href="cga_componentTags.html">Geometry Tagging: Essential Knowledge</a>.</li>
-	<li><span class="cga_opparam">components</span> (selector)<br>
-		<table cellspacing="5">
-			<tr><td width="15%"><span class="codelight">all</span></td><td>Default. Includes tags from all components.</td></tr>
-			<tr><td><span class="codelight">faces</span></td><td>Only includes face tags.</td></tr>
-			<tr><td><span class="codelight">edges</span></td><td>Only includes edge tags.</td></tr>
-			<tr><td><span class="codelight">vertices</span></td><td>Only includes vertex tags.</td></tr>
-		</table>
-	</li>
-</ul>
-
-<h2>Returns</h2>
-
-<p>An array with alphabetically sorted tags. If a <span class="cga_opparam">tagQuery</span> is provided, only matching tags are included.If <span class="cga_opparam">components</span> are specified, only their tags are included.</p>
-
-<h2>Related</h2>
-
-<ul>
-	<li><a class="normw" href="op_tag.html">tag operation</a></li>
-	<li><a class="normw" href="op_deleteTags.html">deleteTags operation</a></li>
-	<li><a class="normw" href="op_comp.html">comp operation</a></li>
-	<li><a class="normw" href="op_setback.html">setback operation</a></li>
-	<li><a class="normw" href="func_geometry.html#hasTags">geometry.hasTags function</a></li>
-	<li><a class="normw" href="op_setTagsFromEdgeAttrs.html">setTagsFromEdgeAttrs operation</a></li>
-	<li><a class="normw" href="func_geometry.html#groups">geometry.groups function</a></li>
-	<li><a class="normw" href="func_geometry.html#materials">geometry.materials function</a></li>
-</ul>
-
-<br><br><br><br><br>
-
-<h1><a name="uMin"></a><a name="uMax"></a><a name="vMin"></a><a name="vMax"></a>geometry.{uMin|uMax|vMin|vMax} functions</h1>
-
-<h2>Syntax</h2>
-
-<p class="code2"><span class="codelight">float</span> geometry.uMin()</p>
-<p class="code2"><span class="codelight">float</span> geometry.uMax()</p>
-<p class="code2"><span class="codelight">float</span> geometry.vMin()</p>
-<p class="code2"><span class="codelight">float</span> geometry.vMax()</p>
-<p class="code2"><span class="codelight">float</span> geometry.uMin(<span class="cga_opparam">uvSet</span>)</p>
-<p class="code2"><span class="codelight">float</span> geometry.uMax(<span class="cga_opparam">uvSet</span>)</p>
-<p class="code2"><span class="codelight">float</span> geometry.vMin(<span class="cga_opparam">uvSet</span>)</p>
-<p class="code2"><span class="codelight">float</span> geometry.vMax(<span class="cga_opparam">uvSet</span>)</p>
-
-<h2>Parameters </h2>
-
-<ul>
-	<li><span class="cga_opparam">uvSet</span> (float)<br>Number of texture coordinates set (integer number in [0,9]). The numbering corresponds to the texture layers of the <a href="attr_material.html">material attribute</a>, see also <a href="cga_texturing.html"> Texturing: Essential Knowledge</a>.</li>
-</ul>
-
-<h2>Returns</h2>
-
-<p>The minimal or maximal u or v value of the selected <span class="cga_opparam">uvSet</span> (the versions without parameter use uv set 0).</p>
-
-<br><br><br><br><br>
-
-<h1><a name="volume"></a>geometry.volume function</h1>
-
-<h2>Syntax</h2>
-
-<p class="code2"><span class="codelight">float</span> geometry.volume()</p>
-
-<h2>Returns</h2>
-
-<p>Volume of the current shape's geometry.</p>
-
-<h2>Related</h2>
-
-<ul>
-	<li><a class="normw" href="func_geometry.html#area">geometry.area function</a></li>
-</ul>
-
-<!-- FOOTER -->
-<p class="foot">Copyright &copy;2008-2025 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
-
-<!-- END CENTERED CONTENT -->
-
-</div>
+                </div>
+            </div>
+        </section>
+        </section>
+    </section>
+
+    <br><br><br><br><br>
+
+    <section id="area">
+        <header class="section">
+            <h1>
+            <span class="name">geometry.area</span>
+            <span class="kind">function</span>
+            </h1>
+
+            <div class="signatures">
+            <div><span class="type-tag">float</span> <span class="func">geometry.area</span>()</div>
+            <div><span class="type-tag">float</span> <span class="func">geometry.area</span>(<span class="param">faceOrientation</span>)</div>
+            </div>
+        </header>
+
+        <section class="section">
+
+        <div class="param-list">
+            <div class="param-item">
+                <div class="indent-body">
+                    <p><span class="param">faceOrientation</span> <span class="type-tag">selector</span> Selector for the faces to include in the area calculation.</p>
+                    <table class="option-table">
+                        <tbody>
+                            <tr>
+                                <td><span class="inlinecode">all, surface</span></td>
+                                <td>Default. Selects all faces.</td>
+                            </tr>
+                            <tr>
+                                <td><span class="inlinecode">back, bottom, front, top, left, right, side</span></td>
+                                <td>The y-normals of the faces are analyzed by classifying their directions into the corresponding quadrants (in relation to the scope coordinate system of the current shape).</td>
+                            </tr>
+                            <tr>
+                                <td><span class="inlinecode">object.front, object.back, object.bottom, object.top, object.left, object.right, object.side</span></td>
+                                <td>The y-normals of the faces are analyzed by classifying their directions into the corresponding quadrants (in relation to the object coordinate system of the current shape).</td>
+                            </tr>
+                            <tr>
+                                <td><span class="inlinecode">world.north, world.south, world.west, world.east, world.up, world.down, world.side</span></td>
+                                <td>The y-normals of the faces are analyzed by classifying their directions into the corresponding quadrants (in relation to the world coordinate system).</td>
+                            </tr>
+                            <tr>
+                                <td><span class="inlinecode">street.front, street.back, street.right, street.left, street.side</span></td>
+                                <td>If the streetWidth attribute is available on the initial shape, these selectors can be used to identify street-facing faces. See the <a href="op_comp.html#streetSelectors">section below</a> for more details.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="return-list">
+            <div class="return-item">
+                <div class="indent-body">
+                        <p>Returns the surface area of the current shape's geometry, depending on the provided <span class="param">faceOrientation</span> selector.</p>
+                </div>
+            </div>
+        </div>
+		</section>
+
+		<section class="section">
+        <p>The surface area of the geometry is the sum of the area of all its faces.</p>
+        </section>
+    </section>
+
+    <br><br><br><br><br>
+
+    <section id="boundaryLength">
+        <header class="section">
+            <h1>
+            <span class="name">geometry.boundaryLength</span>
+            <span class="kind">function</span>
+            </h1>
+
+            <div class="signatures">
+            <div><span class="type-tag">float</span> <span class="func">geometry.boundaryLength</span>()</div>
+            </div>
+        </header>
+
+        <section class="section">
+
+        <div class="return-list">
+            <div class="return-item">
+                <div class="indent-body">
+                        <p>Returns the sum of all boundary edge lengths. An edge is considered a boundary edge if it belongs to no more than one face.</p>
+                </div>
+            </div>
+        </div>
+		</section>
+
+		<section class="section">
+        <h2>Related</h2>
+        <div class="related">
+            <a class="func" href="func_geometry.html#isClosedSurface"><span class="related-name">geometry.isClosedSurface</span><span class="related-kind">function</span></a>
+        </div>
+        </section>
+    </section>
+
+    <br><br><br><br><br>
+
+    <a id="du"></a><a id="dv"></a>
+    <section>
+        <header class="section">
+            <h1>
+            <span class="name">geometry.{du|dv}</span>
+            <span class="kind">functions</span>
+            </h1>
+
+            <div class="signatures">
+            <div><span class="type-tag">float</span> <span class="func">geometry.du</span>(<span class="param">uvSet</span>, <span class="param">surfaceParameterization</span>)</div>
+            <div><span class="type-tag">float</span> <span class="func">geometry.dv</span>(<span class="param">uvSet</span>, <span class="param">surfaceParameterization</span>)</div>
+            </div>
+        </header>
+
+        <section class="section">
+
+        <div class="param-list">
+            <div class="param-item">
+                <div class="indent-body">
+                    <p><span class="param">uvSet</span> <span class="type-tag">float</span> Number of texture coordinates set, integer number in [0,9]. The numbering corresponds to the texture layers of the <a href="attr_material.html">material attribute</a>, see also <a href="cga_texturing.html">Texturing: Essential Knowledge</a>.</p>
+                </div>
+            </div>
+            <div class="param-item">
+                <div class="indent-body">
+                    <p><span class="param">surfaceParameterization</span> <span class="type-tag">selector</span> The surface parameter space.</p>
+                    <table class="option-table">
+                        <tbody>
+                            <tr>
+                                <td><span class="inlinecode">uvSpace</span></td>
+                                <td>Selects the actual texture coordinates, typically in the range [0,1].</td>
+                            </tr>
+                            <tr>
+                                <td><span class="inlinecode">unitSpace</span></td>
+                                <td>Calculates the geometry-dependent surface stretch along the u- or v-axis and calculates an approximation in world coordinate units, for example meters.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="return-list">
+            <div class="return-item">
+                <div class="indent-body">
+                        <p>Returns the range, that is <span class="inlinecode">max - min</span>, spanned by the u- or v-coordinate, respectively, of the selected <span class="param">uvSet</span>.</p>
+                </div>
+            </div>
+        </div>
+		</section>
+
+		<section class="section">
+        <h2>Related</h2>
+        <div class="related">
+            <a class="op" href="op_split.html"><span class="related-name">split</span><span class="related-kind">operation</span></a>
+        </div>
+        </section>
+    </section>
+
+    <br><br><br><br><br>
+
+    <section id="groups">
+        <header class="section">
+            <h1>
+            <span class="name">geometry.groups</span>
+            <span class="kind">function</span>
+            </h1>
+
+            <div class="signatures">
+            <div><span class="type-tag">string[]</span> <span class="func">geometry.groups</span>()</div>
+            </div>
+        </header>
+
+        <section class="section">
+
+        <div class="return-list">
+            <div class="return-item">
+                <div class="indent-body">
+                        <p>Returns an array with group names.</p>
+                </div>
+            </div>
+        </div>
+		</section>
+
+		<section class="section">
+        <div class="comment-box">
+            <p>The order of groups in the array corresponds to the order given by the <a href="op_comp.html">indexed component split</a> for groups. In other words, the index of an element in the array corresponds to the <a href="attr_comp.html">component index</a>.</p>
+        </div>
+		</section>
+
+		<section class="section">
+        <h2>Related</h2>
+        <div class="related">
+            <a class="op" href="op_comp.html"><span class="related-name">comp</span><span class="related-kind">operation</span></a>
+            <a class="func" href="func_comp.html"><span class="related-name">comp</span><span class="related-kind">function</span></a>
+            <a class="attr" href="attr_comp.html"><span class="related-name">comp</span><span class="related-kind">attribute</span></a>
+            <a class="func" href="func_assetNamingInfo.html"><span class="related-name">assetNamingInfo / assetNamingInfos</span><span class="related-kind">functions</span></a>
+            <a class="func" href="func_geometry.html#materials"><span class="related-name">geometry.materials</span><span class="related-kind">function</span></a>
+        </div>
+        </section>
+    </section>
+
+    <br><br><br><br><br>
+
+    <section id="hasTags">
+        <header class="section">
+            <h1>
+            <span class="name">geometry.hasTags</span>
+            <span class="kind">function</span>
+            </h1>
+
+            <div class="signatures">
+            <div><span class="type-tag">bool</span> <span class="func">geometry.hasTags</span>()</div>
+            <div><span class="type-tag">bool</span> <span class="func">geometry.hasTags</span>(<span class="param">tagQuery</span>)</div>
+            <div><span class="type-tag">bool</span> <span class="func">geometry.hasTags</span>(<span class="param">tagQuery</span>, <span class="param">components</span>)</div>
+            </div>
+        </header>
+
+        <section class="section">
+
+        <div class="param-list">
+            <div class="param-item">
+                <div class="indent-body">
+                    <p><span class="param">tagQuery</span> <span class="type-tag">string</span> The query defining which tags to consider. See also <a href="cga_componentTags.html">Geometry Tagging: Essential Knowledge</a>.</p>
+                </div>
+            </div>
+            <div class="param-item">
+                <div class="indent-body">
+                    <p><span class="param">components</span> <span class="type-tag">selector</span></p>
+                    <table class="option-table">
+                        <tbody>
+                            <tr>
+                                <td><span class="inlinecode">all</span></td>
+                                <td>Default. Checks tags on all components.</td>
+                            </tr>
+                            <tr>
+                                <td><span class="inlinecode">faces</span></td>
+                                <td>Only checks face tags.</td>
+                            </tr>
+                            <tr>
+                                <td><span class="inlinecode">edges</span></td>
+                                <td>Only checks edge tags.</td>
+                            </tr>
+                            <tr>
+                                <td><span class="inlinecode">vertices</span></td>
+                                <td>Only checks vertex tags.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="return-list">
+            <div class="return-item">
+                <div class="indent-body">
+                        <p>Returns <span class="kw">true</span> if there are any tags, <span class="kw">false</span> otherwise. If a <span class="param">tagQuery</span> is provided, only matching tags are considered. If <span class="param">components</span> are specified, only their tags are considered.</p>
+                </div>
+            </div>
+        </div>
+		</section>
+
+		<section class="section">
+        <h2>Related</h2>
+        <div class="related">
+            <a class="op" href="op_tag.html"><span class="related-name">tag</span><span class="related-kind">operation</span></a>
+            <a class="op" href="op_deleteTags.html"><span class="related-name">deleteTags</span><span class="related-kind">operation</span></a>
+            <a class="func" href="func_geometry.html#tags"><span class="related-name">geometry.tags</span><span class="related-kind">function</span></a>
+            <a class="op" href="op_setTagsFromEdgeAttrs.html"><span class="related-name">setTagsFromEdgeAttrs</span><span class="related-kind">operation</span></a>
+        </div>
+        </section>
+    </section>
+
+    <br><br><br><br><br>
+
+    <section id="hasUVs">
+        <header class="section">
+            <h1>
+            <span class="name">geometry.hasUVs</span>
+            <span class="kind">function</span>
+            </h1>
+
+            <div class="signatures">
+            <div><span class="type-tag">bool</span> <span class="func">geometry.hasUVs</span>()</div>
+            <div><span class="type-tag">bool</span> <span class="func">geometry.hasUVs</span>(<span class="param">uvSet</span>)</div>
+            </div>
+        </header>
+
+        <section class="section">
+
+        <div class="param-list">
+            <div class="param-item">
+                <div class="indent-body">
+                    <p><span class="param">uvSet</span> <span class="type-tag">float</span> Number of texture coordinates set, integer number in [0,9]. The numbering corresponds to the texture layers of the <a href="attr_material.html">material attribute</a>, see also <a href="cga_texturing.html">Texturing: Essential Knowledge</a>.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="return-list">
+            <div class="return-item">
+                <div class="indent-body">
+                        <p>Returns <span class="kw">true</span> if the geometry has UVs, <span class="kw">false</span> otherwise. If a <span class="param">uvSet</span> is provided, only the respective UVs are considered.</p>
+                </div>
+            </div>
+        </div>
+        </section>
+    </section>
+
+    <br><br><br><br><br>
+
+    <section id="height">
+        <header class="section">
+            <h1>
+            <span class="name">geometry.height</span>
+            <span class="kind">function</span>
+            </h1>
+
+            <div class="signatures">
+            <div><span class="type-tag">float</span> <span class="func">geometry.height</span>()</div>
+            </div>
+        </header>
+
+        <section class="section">
+
+        <div class="return-list">
+            <div class="return-item">
+                <div class="indent-body">
+                        <p>Returns the height of the geometry in world coordinates.</p>
+                </div>
+            </div>
+        </div>
+		</section>
+
+		<section class="section">
+        <h2>Related</h2>
+        <div class="related">
+            <a class="attr" href="attr_scope.html"><span class="related-name">scope</span><span class="related-kind">attribute</span></a>
+        </div>
+        </section>
+    </section>
+
+    <br><br><br><br><br>
+
+    <section id="isClosedSurface">
+        <header class="section">
+            <h1>
+            <span class="name">geometry.isClosedSurface</span>
+            <span class="kind">function</span>
+            </h1>
+
+            <div class="signatures">
+            <div><span class="type-tag">bool</span> <span class="func">geometry.isClosedSurface</span>()</div>
+            </div>
+        </header>
+
+        <section class="section">
+
+        <div class="return-list">
+            <div class="return-item">
+                <div class="indent-body">
+                        <p>Returns <span class="kw">true</span> if the geometry contains at least one face and all edges belong to exactly 2 faces, <span class="kw">false</span> otherwise.</p>
+                </div>
+            </div>
+        </div>
+		</section>
+
+		<section class="section">
+        <h2>Related</h2>
+        <div class="related">
+            <a class="func" href="func_geometry.html#isConcave"><span class="related-name">geometry.isConcave</span><span class="related-kind">function</span></a>
+            <a class="func" href="func_geometry.html#isRectangular"><span class="related-name">geometry.isRectangular</span><span class="related-kind">function</span></a>
+            <a class="func" href="func_geometry.html#isPlanar"><span class="related-name">geometry.isPlanar</span><span class="related-kind">function</span></a>
+        </div>
+        </section>
+    </section>
+
+    <br><br><br><br><br>
+
+    <section id="isConcave">
+        <header class="section">
+            <h1>
+            <span class="name">geometry.isConcave</span>
+            <span class="kind">function</span>
+            </h1>
+
+            <div class="signatures">
+            <div><span class="type-tag">bool</span> <span class="func">geometry.isConcave</span>()</div>
+            </div>
+        </header>
+
+        <section class="section">
+
+        <div class="return-list">
+            <div class="return-item">
+                <div class="indent-body">
+                        <p>Returns <span class="kw">true</span> if the geometry contains at least one concave face, <span class="kw">false</span> otherwise.</p>
+                </div>
+            </div>
+        </div>
+		</section>
+
+		<section class="section">
+        <h2>Related</h2>
+        <div class="related">
+            <a class="func" href="func_geometry.html#isClosedSurface"><span class="related-name">geometry.isClosedSurface</span><span class="related-kind">function</span></a>
+            <a class="func" href="func_geometry.html#isRectangular"><span class="related-name">geometry.isRectangular</span><span class="related-kind">function</span></a>
+            <a class="func" href="func_geometry.html#isPlanar"><span class="related-name">geometry.isPlanar</span><span class="related-kind">function</span></a>
+        </div>
+        </section>
+    </section>
+
+    <br><br><br><br><br>
+
+    <section id="isInstanced">
+        <header class="section">
+            <h1>
+            <span class="name">geometry.isInstanced</span>
+            <span class="kind">function</span>
+            </h1>
+
+            <div class="signatures">
+            <div><span class="type-tag">bool</span> <span class="func">geometry.isInstanced</span>()</div>
+            </div>
+        </header>
+
+        <section class="section">
+
+        <div class="return-list">
+            <div class="return-item">
+                <div class="indent-body">
+                        <p>Returns <span class="kw">true</span> if the current shape's geometry is the instance of an asset, that is, the geometry has not been altered since the <a href="op_i.html">insert operation</a>, <span class="kw">false</span> otherwise.</p>
+                </div>
+            </div>
+        </div>
+		</section>
+
+		<section class="section">
+        <p>The <span class="func">geometry.isInstanced</span> function can be used to e.g. check if an inserted asset was trimmed.</p>
+		</section>
+
+		<section class="section">
+        <h2>Related</h2>
+        <div class="related">
+            <a class="op" href="op_i.html"><span class="related-name">i</span><span class="related-kind">operation</span></a>
+            <a class="op" href="op_trim.html"><span class="related-name">trim</span><span class="related-kind">operation</span></a>
+            <a class="attr" href="attr_trim.html"><span class="related-name">trim</span><span class="related-kind">attribute</span></a>
+        </div>
+        </section>
+    </section>
+
+    <br><br><br><br><br>
+
+    <section id="isOriented">
+        <header class="section">
+            <h1>
+            <span class="name">geometry.isOriented</span>
+            <span class="kind">function</span>
+            </h1>
+
+            <div class="signatures">
+            <div><span class="type-tag">bool</span> <span class="func">geometry.isOriented</span>(<span class="param">orientation</span>)</div>
+            </div>
+        </header>
+
+        <section class="section">
+
+        <div class="param-list">
+            <div class="param-item">
+                <div class="indent-body">
+                    <p><span class="param">orientation</span> <span class="type-tag">selector</span> Selector for the faces to check for.</p>
+                    <table class="option-table">
+                        <tbody>
+                            <tr>
+                                <td><span class="inlinecode">back, bottom, front, top, left, right, side</span></td>
+                                <td>The y-normals of the faces are analyzed by classifying their directions into the corresponding quadrants (in relation to the scope coordinate system of the current shape).</td>
+                            </tr>
+                            <tr>
+                                <td><span class="inlinecode">object.front, object.back, object.bottom, object.top, object.left, object.right, object.side</span></td>
+                                <td>The y-normals of the faces are analyzed by classifying their directions into the corresponding quadrants (in relation to the object coordinate system of the current shape).</td>
+                            </tr>
+                            <tr>
+                                <td><span class="inlinecode">world.north, world.south, world.west, world.east, world.up, world.down, world.side</span></td>
+                                <td>The y-normals of the faces are analyzed by classifying their directions into the corresponding quadrants (in relation to the world coordinate system).</td>
+                            </tr>
+                            <tr>
+                                <td><span class="inlinecode">street.front, street.back, street.right, street.left, street.side</span></td>
+                                <td>If the streetWidth attribute is available on the initial shape, these selectors can be used to identify street-facing faces. Refer to <a href="op_comp.html#streetSelectors">comp</a> for more details.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="return-list">
+            <div class="return-item">
+                <div class="indent-body">
+                        <p>Returns <span class="kw">true</span> if at least one of the geometry's faces matches the <span class="param">orientation</span> selector, <span class="kw">false</span> otherwise.</p>
+                </div>
+            </div>
+        </div>
+		</section>
+
+		<section class="section">
+        <p>The <span class="func">geometry.isOriented</span> function can be used to determine a shape's orientation.</p>
+		</section>
+
+		<section class="section">
+        <h2>Related</h2>
+        <div class="related">
+            <a class="op" href="op_comp.html"><span class="related-name">comp</span><span class="related-kind">operation</span></a>
+        </div>
+        </section>
+    </section>
+
+    <br><br><br><br><br>
+
+    <section id="isPlanar">
+        <header class="section">
+            <h1>
+            <span class="name">geometry.isPlanar</span>
+            <span class="kind">function</span>
+            </h1>
+
+            <div class="signatures">
+            <div><span class="type-tag">bool</span> <span class="func">geometry.isPlanar</span>(<span class="param">tolerance</span>)</div>
+            </div>
+        </header>
+
+        <section class="section">
+
+        <div class="param-list">
+            <div class="param-item">
+                <div class="indent-body">
+                    <p><span class="param">tolerance</span> <span class="type-tag">float</span> The tolerance in degrees for deciding if a face is planar or not. The face normal is compared to the edges' crossproduct, <span class="inlinecode">"local normal"</span>, at every vertex. If the angle between a <span class="inlinecode">"local normal"</span> and the face normal is larger than the tolerance the face is non-planar. A reasonable value is 0.25 degrees.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="return-list">
+            <div class="return-item">
+                <div class="indent-body">
+                        <p>Returns <span class="kw">true</span> if the geometry contains at least one face and all faces are planar within <span class="param">tolerance</span>, <span class="kw">false</span> otherwise.</p>
+                </div>
+            </div>
+        </div>
+		</section>
+
+		<section class="section">
+        <h2>Related</h2>
+        <div class="related">
+            <a class="func" href="func_geometry.html#isClosedSurface"><span class="related-name">geometry.isClosedSurface</span><span class="related-kind">function</span></a>
+            <a class="func" href="func_geometry.html#isConcave"><span class="related-name">geometry.isConcave</span><span class="related-kind">function</span></a>
+            <a class="func" href="func_geometry.html#isRectangular"><span class="related-name">geometry.isRectangular</span><span class="related-kind">function</span></a>
+        </div>
+        </section>
+    </section>
+
+    <br><br><br><br><br>
+
+    <section id="isRectangular">
+        <header class="section">
+            <h1>
+            <span class="name">geometry.isRectangular</span>
+            <span class="kind">function</span>
+            </h1>
+
+            <div class="signatures">
+            <div><span class="type-tag">bool</span> <span class="func">geometry.isRectangular</span>(<span class="param">tolerance</span>)</div>
+            </div>
+        </header>
+
+        <section class="section">
+
+        <div class="param-list">
+            <div class="param-item">
+                <div class="indent-body">
+                    <p><span class="param">tolerance</span> <span class="type-tag">float</span> The tolerance in degrees for deciding if an angle is a right one or not.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="return-list">
+            <div class="return-item">
+                <div class="indent-body">
+                        <p>Returns <span class="kw">true</span> if the geometry contains at least one face and all faces consist of 4 vertices and contain only right angles, <span class="kw">false</span> otherwise. Angles in the range [90-<span class="param">tolerance</span>, 90+<span class="param">tolerance</span>] are considered to be <em>"right"</em>.</p>
+                </div>
+            </div>
+        </div>
+		</section>
+
+		<section class="section">
+        <h2>Related</h2>
+        <div class="related">
+            <a class="func" href="func_geometry.html#isClosedSurface"><span class="related-name">geometry.isClosedSurface</span><span class="related-kind">function</span></a>
+            <a class="func" href="func_geometry.html#isConcave"><span class="related-name">geometry.isConcave</span><span class="related-kind">function</span></a>
+            <a class="func" href="func_geometry.html#isPlanar"><span class="related-name">geometry.isPlanar</span><span class="related-kind">function</span></a>
+        </div>
+        </section>
+    </section>
+
+    <br><br><br><br><br>
+
+    <section id="materials">
+        <header class="section">
+            <h1>
+            <span class="name">geometry.materials</span>
+            <span class="kind">function</span>
+            </h1>
+
+            <div class="signatures">
+            <div><span class="type-tag">string[]</span> <span class="func">geometry.materials</span>()</div>
+            </div>
+        </header>
+
+        <section class="section">
+
+        <div class="return-list">
+            <div class="return-item">
+                <div class="indent-body">
+                        <p>Returns an array with material names.</p>
+                </div>
+            </div>
+        </div>
+		</section>
+
+		<section class="section">
+        <div class="comment-box">
+            <p>The order of materials in the array corresponds to the order given by the <a href="op_comp.html">indexed component split</a> for materials. In other words, the index of an element in the array corresponds to the <a href="attr_comp.html">component index</a>.</p>
+        </div>
+		</section>
+
+		<section class="section">
+        <h2>Related</h2>
+        <div class="related">
+            <a class="op" href="op_comp.html"><span class="related-name">comp</span><span class="related-kind">operation</span></a>
+            <a class="func" href="func_comp.html"><span class="related-name">comp</span><span class="related-kind">function</span></a>
+            <a class="attr" href="attr_comp.html"><span class="related-name">comp</span><span class="related-kind">attribute</span></a>
+            <a class="func" href="func_assetNamingInfo.html"><span class="related-name">assetNamingInfo / assetNamingInfos</span><span class="related-kind">functions</span></a>
+            <a class="func" href="func_geometry.html#groups"><span class="related-name">geometry.groups</span><span class="related-kind">function</span></a>
+        </div>
+        </section>
+    </section>
+
+    <br><br><br><br><br>
+
+    <section id="nEdges">
+        <header class="section">
+            <h1>
+            <span class="name">geometry.nEdges</span>
+            <span class="kind">function</span>
+            </h1>
+
+            <div class="signatures">
+            <div><span class="type-tag">float</span> <span class="func">geometry.nEdges</span>()</div>
+            </div>
+        </header>
+
+        <section class="section">
+
+        <div class="return-list">
+            <div class="return-item">
+                <div class="indent-body">
+                        <p>Returns the number of edges of the current shape's geometry.</p>
+                </div>
+            </div>
+        </div>
+		</section>
+
+		<section class="section">
+        <h2>Related</h2>
+        <div class="related">
+            <a class="func" href="func_geometry.html#nFaces"><span class="related-name">geometry.nFaces</span><span class="related-kind">function</span></a>
+            <a class="func" href="func_geometry.html#nHoles"><span class="related-name">geometry.nHoles</span><span class="related-kind">function</span></a>
+            <a class="func" href="func_geometry.html#nVertices"><span class="related-name">geometry.nVertices</span><span class="related-kind">function</span></a>
+        </div>
+        </section>
+    </section>
+
+    <br><br><br><br><br>
+
+    <section id="nFaces">
+        <header class="section">
+            <h1>
+            <span class="name">geometry.nFaces</span>
+            <span class="kind">function</span>
+            </h1>
+
+            <div class="signatures">
+            <div><span class="type-tag">float</span> <span class="func">geometry.nFaces</span>()</div>
+            </div>
+        </header>
+
+        <section class="section">
+
+        <div class="return-list">
+            <div class="return-item">
+                <div class="indent-body">
+                        <p>Returns the number of faces of the current shape's geometry.</p>
+                </div>
+            </div>
+        </div>
+		</section>
+
+		<section class="section">
+        <h2>Related</h2>
+        <div class="related">
+            <a class="func" href="func_geometry.html#nEdges"><span class="related-name">geometry.nEdges</span><span class="related-kind">function</span></a>
+            <a class="func" href="func_geometry.html#nHoles"><span class="related-name">geometry.nHoles</span><span class="related-kind">function</span></a>
+            <a class="func" href="func_geometry.html#nVertices"><span class="related-name">geometry.nVertices</span><span class="related-kind">function</span></a>
+        </div>
+        </section>
+    </section>
+
+    <br><br><br><br><br>
+
+    <section id="nHoles">
+        <header class="section">
+            <h1>
+            <span class="name">geometry.nHoles</span>
+            <span class="kind">function</span>
+            </h1>
+
+            <div class="signatures">
+            <div><span class="type-tag">float</span> <span class="func">geometry.nHoles</span>()</div>
+            </div>
+        </header>
+
+        <section class="section">
+
+        <div class="return-list">
+            <div class="return-item">
+                <div class="indent-body">
+                        <p>Returns the number of holes in the faces of the current shape's geometry.</p>
+                </div>
+            </div>
+        </div>
+		</section>
+
+		<section class="section">
+        <h2>Related</h2>
+        <div class="related">
+            <a class="func" href="func_geometry.html#nEdges"><span class="related-name">geometry.nEdges</span><span class="related-kind">function</span></a>
+            <a class="func" href="func_geometry.html#nFaces"><span class="related-name">geometry.nFaces</span><span class="related-kind">function</span></a>
+            <a class="func" href="func_geometry.html#nVertices"><span class="related-name">geometry.nVertices</span><span class="related-kind">function</span></a>
+        </div>
+        </section>
+    </section>
+
+    <br><br><br><br><br>
+
+    <section id="nVertices">
+        <header class="section">
+            <h1>
+            <span class="name">geometry.nVertices</span>
+            <span class="kind">function</span>
+            </h1>
+
+            <div class="signatures">
+            <div><span class="type-tag">float</span> <span class="func">geometry.nVertices</span>()</div>
+            </div>
+        </header>
+
+        <section class="section">
+
+        <div class="return-list">
+            <div class="return-item">
+                <div class="indent-body">
+                        <p>Returns the number of vertices of the current shape's geometry.</p>
+                </div>
+            </div>
+        </div>
+		</section>
+
+		<section class="section">
+        <h2>Related</h2>
+        <div class="related">
+            <a class="func" href="func_geometry.html#nEdges"><span class="related-name">geometry.nEdges</span><span class="related-kind">function</span></a>
+            <a class="func" href="func_geometry.html#nHoles"><span class="related-name">geometry.nHoles</span><span class="related-kind">function</span></a>
+            <a class="func" href="func_geometry.html#nFaces"><span class="related-name">geometry.nFaces</span><span class="related-kind">function</span></a>
+        </div>
+        </section>
+    </section>
+
+    <br><br><br><br><br>
+
+    <section id="tags">
+        <header class="section">
+            <h1>
+            <span class="name">geometry.tags</span>
+            <span class="kind">function</span>
+            </h1>
+
+            <div class="signatures">
+            <div><span class="type-tag">string[]</span> <span class="func">geometry.tags</span>()</div>
+            <div><span class="type-tag">string[]</span> <span class="func">geometry.tags</span>(<span class="param">tagQuery</span>)</div>
+            <div><span class="type-tag">string[]</span> <span class="func">geometry.tags</span>(<span class="param">tagQuery</span>, <span class="param">components</span>)</div>
+            </div>
+        </header>
+
+        <section class="section">
+
+        <div class="param-list">
+            <div class="param-item">
+                <div class="indent-body">
+                    <p><span class="param">tagQuery</span> <span class="type-tag">string</span> The query defining which tags to include in the result. See also <a href="cga_componentTags.html">Geometry Tagging: Essential Knowledge</a>.</p>
+                </div>
+            </div>
+            <div class="param-item">
+                <div class="indent-body">
+                    <p><span class="param">components</span> <span class="type-tag">selector</span></p>
+                    <table class="option-table">
+                        <tbody>
+                            <tr>
+                                <td><span class="inlinecode">all</span></td>
+                                <td>Default. Includes tags from all components.</td>
+                            </tr>
+                            <tr>
+                                <td><span class="inlinecode">faces</span></td>
+                                <td>Only includes face tags.</td>
+                            </tr>
+                            <tr>
+                                <td><span class="inlinecode">edges</span></td>
+                                <td>Only includes edge tags.</td>
+                            </tr>
+                            <tr>
+                                <td><span class="inlinecode">vertices</span></td>
+                                <td>Only includes vertex tags.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="return-list">
+            <div class="return-item">
+                <div class="indent-body">
+                        <p>Returns an array with alphabetically sorted tags. If a <span class="param">tagQuery</span> is provided, only matching tags are included. If <span class="param">components</span> are specified, only their tags are included.</p>
+                </div>
+            </div>
+        </div>
+		</section>
+
+		<section class="section">
+        <h2>Related</h2>
+        <div class="related">
+            <a class="op" href="op_tag.html"><span class="related-name">tag</span><span class="related-kind">operation</span></a>
+            <a class="op" href="op_deleteTags.html"><span class="related-name">deleteTags</span><span class="related-kind">operation</span></a>
+            <a class="op" href="op_comp.html"><span class="related-name">comp</span><span class="related-kind">operation</span></a>
+            <a class="op" href="op_setback.html"><span class="related-name">setback</span><span class="related-kind">operation</span></a>
+            <a class="func" href="func_geometry.html#hasTags"><span class="related-name">geometry.hasTags</span><span class="related-kind">function</span></a>
+            <a class="op" href="op_setTagsFromEdgeAttrs.html"><span class="related-name">setTagsFromEdgeAttrs</span><span class="related-kind">operation</span></a>
+            <a class="func" href="func_geometry.html#groups"><span class="related-name">geometry.groups</span><span class="related-kind">function</span></a>
+            <a class="func" href="func_geometry.html#materials"><span class="related-name">geometry.materials</span><span class="related-kind">function</span></a>
+        </div>
+        </section>
+    </section>
+
+    <br><br><br><br><br>
+
+    <a id="uMin"></a><a id="uMax"></a><a id="vMin"></a><a id="vMax"></a>
+    <section>
+        <header class="section">
+            <h1>
+            <span class="name">geometry.{uMin|uMax|vMin|vMax}</span>
+            <span class="kind">functions</span>
+            </h1>
+
+            <div class="signatures">
+            <div><span class="type-tag">float</span> <span class="func">geometry.uMin</span>()</div>
+            <div><span class="type-tag">float</span> <span class="func">geometry.uMax</span>()</div>
+            <div><span class="type-tag">float</span> <span class="func">geometry.vMin</span>()</div>
+            <div><span class="type-tag">float</span> <span class="func">geometry.vMax</span>()</div>
+            <div><span class="type-tag">float</span> <span class="func">geometry.uMin</span>(<span class="param">uvSet</span>)</div>
+            <div><span class="type-tag">float</span> <span class="func">geometry.uMax</span>(<span class="param">uvSet</span>)</div>
+            <div><span class="type-tag">float</span> <span class="func">geometry.vMin</span>(<span class="param">uvSet</span>)</div>
+            <div><span class="type-tag">float</span> <span class="func">geometry.vMax</span>(<span class="param">uvSet</span>)</div>
+            </div>
+        </header>
+
+        <section class="section">
+
+        <div class="param-list">
+            <div class="param-item">
+                <div class="indent-body">
+                    <p><span class="param">uvSet</span> <span class="type-tag">float</span> Number of texture coordinates set, integer number in [0,9]. The numbering corresponds to the texture layers of the <a href="attr_material.html">material attribute</a>, see also <a href="cga_texturing.html">Texturing: Essential Knowledge</a>.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="return-list">
+            <div class="return-item">
+                <div class="indent-body">
+                        <p>Returns the minimal or maximal u or v value of the selected <span class="param">uvSet</span>. Default <span class="param">uvSet</span> is 0.</p>
+                </div>
+            </div>
+        </div>
+        </section>
+    </section>
+
+    <br><br><br><br><br>
+
+    <section id="volume">
+        <header class="section">
+            <h1>
+            <span class="name">geometry.volume</span>
+            <span class="kind">function</span>
+            </h1>
+
+            <div class="signatures">
+            <div><span class="type-tag">float</span> <span class="func">geometry.volume</span>()</div>
+            </div>
+        </header>
+
+        <section class="section">
+
+        <div class="return-list">
+            <div class="return-item">
+                <div class="indent-body">
+                        <p>Returns the volume of the current shape's geometry.</p>
+                </div>
+            </div>
+        </div>
+		</section>
+
+		<section class="section">
+        <h2>Related</h2>
+        <div class="related">
+            <a class="func" href="func_geometry.html#area"><span class="related-name">geometry.area</span><span class="related-kind">function</span></a>
+        </div>
+        </section>
+    </section>
+
+    <footer class="footer">Copyright &copy;2008-2026 Esri R&amp;D Center Zurich. All rights reserved.</footer>
+
+</article>
 </body>
 </html>

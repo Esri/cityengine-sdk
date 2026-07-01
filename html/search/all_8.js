@@ -14,7 +14,7 @@ var searchData=
   ['initialshapeiterator',['InitialShapeIterator',['../classprtx_1_1_initial_shape_iterator.html',1,'prtx']]],
   ['insertandgettransientblob',['insertAndGetTransientBlob',['../classprt_1_1_cache.html#ad2948bd4bbfb48d86f2b6e532bbc32ca',1,'prt::Cache']]],
   ['insertpersistentblobandlock',['insertPersistentBlobAndLock',['../classprt_1_1_cache.html#aff97c1c7936e43ef9f91a6b51bb424fe',1,'prt::Cache']]],
-  ['instance',['instance',['../classprtx_1_1_extension_manager.html#a8a8c3f3befafd05f80995c151a57807e',1,'prtx::ExtensionManager']]],
+  ['instance',['instance',['../classprtx_1_1_extension_manager.html#a8a8c3f3befafd05f80995c151a57807e',1,'prtx::ExtensionManager::instance()'],['../classprtx_1_1_singleton.html#a72ad437a7fe020dfc2b9d726eb058343',1,'prtx::Singleton::instance()']]],
   ['instancing',['instancing',['../classprtx_1_1_encode_preparator_1_1_preparation_flags.html#a9cc9153f80bd66b5763c04e9213a2d43',1,'prtx::EncodePreparator::PreparationFlags']]],
   ['int32vector',['Int32Vector',['../namespaceprtx.html#a997ead27a2a1a9b685b1e57f1e0188a2',1,'prtx']]],
   ['iscached',['isCached',['../namespaceprtx_1_1_data_backend.html#a776e499499fb353b63e65800e6a3d1ea',1,'prtx::DataBackend']]],

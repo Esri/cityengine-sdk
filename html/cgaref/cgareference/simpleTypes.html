@@ -1,178 +1,170 @@
+<!doctype html>
 <html>
 
 <head>
+    <meta charset="UTF-8">
     <title>Simple types operators</title>
-    <link rel="stylesheet" href="../manual_style.css" type="text/css" />
+    <link rel="stylesheet" href="../cgareference_style.css" type="text/css">
 </head>
 
 <body>
-<div class="content">
+<article class="content">
 
-<!-- HEADER (use only on bookchapters) -->
+    <header class="section">
+        <h1>Simple types operators</h1>
+    </header>
 
-<table summary="" class="header">
-	<tr>
-		<td align="left" class="helphead_l"><a href="../toc.html"><div class="helplink">&nbsp;</div></a></td>
-		<td align="right" class="helphead_r"></td>
-	</tr>
-</table>
+    <section class="section">
+        <h3 id="logical">Logical operators</h3>
+        <p>Logical operations on <span class="inlinecode">bool</span>.</p>
+        <p>Return type: <span class="type-tag">bool</span></p>
 
+        <table summary="Logical operators" width="100%" cellspacing="16">
+            <tr>
+                <td width="10%" valign="top"><span class="inlinecode">!</span></td>
+                <td width="17%" valign="top">Negation</td>
+                <td valign="top"><pre class="code-block">case !a</pre></td>
+            </tr>
+            <tr>
+                <td valign="top"><span class="inlinecode">||</span></td>
+                <td valign="top">Logical Or</td>
+                <td valign="top"><pre class="code-block">case a || b || f(x)</pre></td>
+            </tr>
+            <tr>
+                <td valign="top"><span class="inlinecode">&amp;&amp;</span></td>
+                <td valign="top">Logical And</td>
+                <td valign="top"><pre class="code-block">case a &amp;&amp; f(x)</pre></td>
+            </tr>
+        </table>
+    </section>
 
-<!-- CONTENT -->
+    <section class="section">
+        <h3 id="arithmetic">Arithmetic operators</h3>
+        <p>Arithmetic operations on <span class="inlinecode">float</span>.</p>
+        <p>Return type: <span class="type-tag">float</span></p>
 
-<h1>Simple types operators</h1>
+        <table summary="Arithmetic operators" width="100%" cellspacing="16">
+            <tr>
+                <td width="10%" valign="top"><span class="inlinecode">+</span></td>
+                <td width="17%" valign="top">Plus</td>
+                <td valign="top"><pre class="code-block">a = c + b</pre></td>
+            </tr>
+            <tr>
+                <td valign="top"></td>
+                <td valign="top">Unary plus</td>
+                <td valign="top"><pre class="code-block">a = +b</pre></td>
+            </tr>
+            <tr>
+                <td valign="top"><span class="inlinecode">-</span></td>
+                <td valign="top">Minus</td>
+                <td valign="top"><pre class="code-block">a = b - c</pre></td>
+            </tr>
+            <tr>
+                <td valign="top"></td>
+                <td valign="top">Unary minus</td>
+                <td valign="top"><pre class="code-block">a = -b</pre></td>
+            </tr>
+            <tr>
+                <td valign="top"><span class="inlinecode">*</span></td>
+                <td valign="top">Multiplication</td>
+                <td valign="top"><pre class="code-block">x = y * f(x)</pre></td>
+            </tr>
+            <tr>
+                <td valign="top"><span class="inlinecode">/</span></td>
+                <td valign="top">Division</td>
+                <td valign="top"><pre class="code-block">x = 4 / d</pre></td>
+            </tr>
+            <tr>
+                <td valign="top"><span class="inlinecode">%</span></td>
+                <td valign="top">Modulus (remainder)</td>
+                <td valign="top"><pre class="code-block">a = b % 10</pre></td>
+            </tr>
+        </table>
+    </section>
 
-<h2>Logical operators</h2>
+    <section class="section">
+        <h3 id="equality">Equality operators</h3>
+        <p>Check <span class="inlinecode">float</span>, <span class="inlinecode">bool</span> or <span class="inlinecode">string</span> for equality.</p>
+        <p>Return type: <span class="type-tag">bool</span></p>
 
-<p>Logical operations on <span class="code_std">bool</span>.</p>
+        <table summary="Equality operators" width="100%" cellspacing="16">
+            <tr>
+                <td width="10%" valign="top"><span class="inlinecode">==</span></td>
+                <td width="17%" valign="top">Equality</td>
+                <td valign="top"><pre class="code-block">case a == b</pre></td>
+            </tr>
+            <tr>
+                <td valign="top"><span class="inlinecode">!=</span></td>
+                <td valign="top">Inequality</td>
+                <td valign="top"><pre class="code-block">case a != b</pre></td>
+            </tr>
+        </table>
+    </section>
 
-<p>Return type: <span class="code_std">bool</span></p>
+    <section class="section">
+        <h3 id="relational">Relational operators</h3>
+        <p>Compare <span class="inlinecode">float</span> or <span class="inlinecode">string</span>.</p>
+        <p>Return type: <span class="type-tag">bool</span></p>
 
-<table class="twocol" cellspacing=20>
-<tr>
-	<td width="10%"><span class="code_std">!</span></td>
-	<td width="17%">Negation</td>
-	<td><pre class="code3">case !a</pre></td>
-</tr>
-<tr>
-	<td><span class="code_std">||</span></td>
-	<td>Logical Or</td>
-	<td><pre class="code3">case a || b || f(x)</pre></td>
-</tr>
-<tr>
-	<td><span class="code_std">&amp;&amp;</span></td>
-	<td>Logical And</td>
-	<td><pre class="code3">case a &amp;&amp; f(x)</pre></td>
-</tr>
-</table>
+        <table summary="Relational operators" width="100%" cellspacing="16">
+            <tr>
+                <td width="10%" valign="top"><span class="inlinecode">&lt;</span></td>
+                <td width="17%" valign="top">Less</td>
+                <td valign="top"><pre class="code-block">case a &lt;  b</pre></td>
+            </tr>
+            <tr>
+                <td valign="top"><span class="inlinecode">&lt;=</span></td>
+                <td valign="top">Less or equal</td>
+                <td valign="top"><pre class="code-block">case a &lt;= b</pre></td>
+            </tr>
+            <tr>
+                <td valign="top"><span class="inlinecode">&gt;</span></td>
+                <td valign="top">Greater</td>
+                <td valign="top"><pre class="code-block">case a &gt;  b</pre></td>
+            </tr>
+            <tr>
+                <td valign="top"><span class="inlinecode">&gt;=</span></td>
+                <td valign="top">Greater or equal</td>
+                <td valign="top"><pre class="code-block">case a &gt;= b</pre></td>
+            </tr>
+        </table>
+    </section>
 
-<h2>Arithmetic operators</h2>
+    <section class="section">
+        <h3 id="string">String concatenation operators</h3>
+        <p>Concatenate <span class="inlinecode">string</span> with <span class="inlinecode">string</span>, <span class="inlinecode">float</span> or <span class="inlinecode">bool</span>.</p>
+        <p>Return type: <span class="type-tag">string</span></p>
 
-<p>Arithmetic operations on <span class="code_std">float</span>.</p>
+        <table summary="String concatenation operators" width="100%" cellspacing="16">
+            <tr>
+                <td width="10%" valign="top"><span class="inlinecode">+</span></td>
+                <td width="17%" valign="top">String-string concatenation</td>
+                <td valign="top"><pre class="code-block">a = "City" + "Engine"</pre></td>
+            </tr>
+            <tr>
+                <td valign="top"></td>
+                <td valign="top">String-float concatenation</td>
+                <td valign="top"><pre class="code-block">a = "Rule: " + 1
+a = 1 + "th Rule"</pre></td>
+            </tr>
+            <tr>
+                <td valign="top"></td>
+                <td valign="top">String-boolean concatenation</td>
+                <td valign="top"><pre class="code-block">a = "Result: " + true
+a = true + " is the result"</pre></td>
+            </tr>
+        </table>
+    </section>
 
-<p>Return type: <span class="code_std">float</span></p>
+    <section class="section">
+        <h2>Related</h2>
+        <div class="related">
+            <a href="arrayTypes.html"><span class="related-name">Array types operators</span></a>
+        </div>
+    </section>
 
-<table class="twocol" cellspacing=20>
-<tr>
-	<td width="10%"><span class="code_std">+</span></td>
-	<td width="17%">Plus</td>
-	<td><pre class="code3">a = c + b</pre></td>
-</tr>
-<tr>
-	<td> </td>
-	<td>Unary plus</td>
-	<td><pre class="code3">a = +b</pre></td>
-</tr>
-<tr>
-	<td><span class="code_std">-</span></td>
-	<td>Minus</td>
-	<td><pre class="code3">a = b - c</pre></td>
-</tr>
-<tr>
-	<td> </td>
-	<td>Unary minus</td>
-	<td><pre class="code3">a = -b</pre></td>
-</tr>
+    <footer class="footer">Copyright &copy;2008-2026 Esri R&amp;D Center Zurich. All rights reserved.</footer>
 
-<tr>
-	<td><span class="code_std">*</span></td>
-	<td>Multiplication</td>
-	<td><pre class="code3">x = y * f(x)</pre></td>
-</tr>
-<tr>
-	<td><span class="code_std">/</span></td>
-	<td>Division</td>
-	<td><pre class="code3">x = 4 / d</pre></td>
-</tr>
-<tr>
-	<td><span class="code_std">%</span></td>
-	<td>Modulus (remainder)</td>
-	<td><pre class="code3">a = b % 10</pre></td>
-</tr>
-</table>
-
-<h2>Equality operators</h2>
-
-<p>Check <span class="code_std">float</span>, <span class="code_std">bool</span> or <span class="code_std">string</span> for equality.</p>
-
-<p>Return type: <span class="code_std">bool</span></p>
-
-<table class="twocol" cellspacing=20>
-<tr>
-	<td width="10%"><span class="code_std">==</span></td>
-	<td width="17%">Equality</td>
-	<td><pre class="code3">case a == b</pre></td>
-</tr>
-<tr>
-	<td><span class="code_std">!=</span></td>
-	<td>Inequality</td>
-	<td><pre class="code3">case a != b</pre></td>
-</tr>
-</table>
-
-<h2>Relational operators</h2>
-
-<p>Compare <span class="code_std">float</span> or <span class="code_std">string</span>.</p>
-
-<p>Return type: <span class="code_std">bool</span></p>
-
-<table class="twocol" cellspacing=20>
-<tr>
-	<td width="10%"><span class="code_std"><</span></td>
-	<td width="17%">Less</td>
-	<td><pre class="code3">case a <  b</pre></td>
-</tr>
-<tr>
-	<td><span class="code_std"><=</span></td>
-	<td>Less or equal</td>
-	<td><pre class="code3">case a <= b</pre></td>
-</tr>
-<tr>
-	<td><span class="code_std">></span></td>
-	<td>Greater</td>
-	<td><pre class="code3">case a >  b</pre></td>
-</tr>
-<tr>
-	<td><span class="code_std">>=</span></td>
-	<td>Greater or equal</td>
-	<td><pre class="code3">case a >= b</pre></td>
-</tr>
-</table>
-
-<h2>String concatenation operators</h2>
-
-<p>Concatenate <span class="code_std">string</span> with <span class="code_std">string</span>, <span class="code_std">float</span> or <span class="code_std">bool</span>.</p>
-
-<p>Return type: <span class="code_std">string</span></p>
-
-<table class="twocol" cellspacing=20>
-<tr>
-	<td width="10%"><span class="code_std">+</span></td>
-	<td width="17%">String-string concatenation</td>
-	<td><pre class="code3">a = "City" + "Engine"</pre></td>
-</tr>
-<tr>
-	<td> </td>
-	<td>String-float concatenation</td>
-	<td><pre class="code3">a = "Rule: " + 1<br>a = 1 + "th Rule"</pre></td>
-</tr>
-<tr>
-	<td> </td>
-	<td>String-boolean concatenation</td>
-	<td><pre class="code3">a = "Result: " + true<br>a = true + " is the result"</pre></td>
-</tr>
-</table>
-
-<h2>Related</h2>
-<ul>
-	<li><a href="arrayTypes.html">Array types operators</a></li>
-</ul>
-
-<!-- FOOTER -->
-<p class="foot">Copyright &copy;2008-2025 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
-
-<!-- END CENTERED CONTENT -->
-
-</div>
+</article>
 </body>
 </html>

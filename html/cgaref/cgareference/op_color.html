@@ -1,79 +1,92 @@
+<!doctype html>
 <html>
 
 <head>
-	<title>color Operation</title>
-	<link rel="stylesheet" href="../manual_style.css" type="text/css" />
+    <meta charset="UTF-8">
+    <title>color operation</title>
+    <link rel="stylesheet" href="../cgareference_style.css" type="text/css">
 </head>
 
 <body>
-<div class="content"><!-- HEADER (use only on bookchapters) -->
+<article class="content">
 
-<table summary="" class="header">
-	<tr>
-		<td align="left" class="helphead_l"><a href="../toc.html">
-		<div class="helplink">&nbsp;</div>
-		</a></td>
-		<td align="right" class="helphead_r"></td>
-	</tr>
-</table>
+    <header class="section">
+        <h1>
+            <span class="name">color</span>
+            <span class="kind">operation</span>
+        </h1>
 
-<!-- CONTENT -->
+        <div class="signatures">
+            <div><span class="op">color</span>(<span class="param">hexValue</span>)</div>
+            <div><span class="op">color</span>(<span class="param">red</span>, <span class="param">green</span>, <span class="param">blue</span>)</div>
+            <div><span class="op">color</span>(<span class="param">red</span>, <span class="param">green</span>, <span class="param">blue</span>, <span class="param">opacity</span>)</div>
+        </div>
+    </header>
 
-<h1>color operation</h1>
+    <section class="section">
+        <div class="param-list">
+            <div class="param-item">
+                <div class="indent-body">
+                    <p><span class="param">hexValue</span> <span class="type-tag">string</span> Color to set, in the format "#rrggbb" or "#rrggbboo" (hex).</p>
+                </div>
+            </div>
 
-<h2>Syntax</h2>
+            <div class="param-item">
+                <div class="indent-body">
+                    <p><span class="param">red</span>, <span class="param">green</span>, <span class="param">blue</span>, <span class="param">opacity</span> <span class="type-tag">float</span> Color to set in red, green, blue, opacity components (range is 0.0 to 1.0).</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<p class="code2">color(<span class="cga_opparam">hexValue</span>)</p>
-<p class="code2">color(<span class="cga_opparam">red</span>, <span class="cga_opparam">green</span>, <span class="cga_opparam">blue</span>)</p>
-<p class="code2">color(<span class="cga_opparam">red</span>, <span class="cga_opparam">green</span>, <span class="cga_opparam">blue</span>, <span class="cga_opparam">opacity</span>)</p>
+    <section class="section">
+        <p>The <span class="op">color</span> operation sets the color of the current shape's <span class="inlinecode">material</span>. Input parameter values for <span class="param">red</span>, <span class="param">green</span>, <span class="param">blue</span>, or <span class="param">opacity</span> that are outside the range [0,1] are clamped to [0,1].</p>
 
-<h2>Parameters</h2>
-<ul>
-	<li><span class="cga_opparam">hexValue</span> (string)<br>Color to set, in the format "#rrggbb" or "#rrggbboo" (hex).</li>
-	<li><span class="cga_opparam">red</span>, <span class="cga_opparam">green</span>, <span class="cga_opparam">blue</span>, <span class="cga_opparam">opacity</span> (float)<br>Color to set in red, green, blue, opacity components (range is 0.0 to 1.0).</li>
-</ul>
+        <p>In CGA, colors are always in (non-linear) sRGB.</p>
 
-<h2>Description</h2>
+        <div class="note">This command has the same effect as <span class="inlinecode">set(material.color.{r|g|b}, val)</span>, it is a shortcut for convenience.</div>
+    </section>
 
-<p>The <span class="codelight">color</span> operation sets the color of the current shape's <span class="codelight">material</span>.  Input parameter values for <span class="cga_opparam">red</span>, <span class="cga_opparam">green</span>, <span class="cga_opparam">blue</span>, or <span class="cga_opparam">opacity</span> that are outside the range [0,1] are clamped to [0,1].<br>
-In CGA, colors are always in (non-linear) sRGB.<br>
-<br>
-Note: this command has the same effect as <span class="codelight">set(material.color.{r|g|b}, </span><span class="cga_opparam">val</span><span class="codelight">)</span>, it is a shortcut for convenience.</p>
+    <section class="section">
+        <h2>Related</h2>
+        <div class="related">
+            <a class="attr" href="attr_material_color.html"><span class="related-name">material.color</span><span class="related-kind">attribute</span></a>
+            <a class="op" href="op_set.html"><span class="related-name">set</span><span class="related-kind">operation</span></a>
+            <a class="op" href="op_resetMaterial.html"><span class="related-name">resetMaterial</span><span class="related-kind">operation</span></a>
+            <a class="op" href="op_setMaterial.html"><span class="related-name">setMaterial</span><span class="related-kind">operation</span></a>
+            <a class="func" href="func_getMaterial.html"><span class="related-name">getMaterial</span><span class="related-kind">function</span></a>
+        </div>
+    </section>
 
-<h2>Related</h2>
+    <section class="section">
+        <h2>Examples</h2>
 
-<ul>
-	<li><a class="normw" href="attr_material_color.html">material.color attribute</a></li>
-	<li><a class="normw" href="op_set.html"> set operation</a></li>
-	<li><a class="normw" href="op_resetMaterial.html">resetMaterial operation</a></li>
-	<li><a class="normw" href="op_setMaterial.html">setMaterial operation</a></li>
-	<li><a class="normw" href="func_getMaterial.html">getMaterial function</a></li>
-</ul>
+        <section class="example">
+            <h3>Three ways to set a shape's color</h3>
 
-<h2>Examples <!-- 2 Column Formatting (for Tutorials) --></h2>
-<h3>Three ways to set a shape's color</h3>
-<table summary="" class="twocol">
-	<tr>
-		<td class="twocol_l">
-		<img src="images/color-3ways.png" alt="3 ways to set color">
-		</td>
-		<td class="twocol_r"><pre class="codecga">
+            <div class="example-row">
+                <figure class="media media-example">
+                    <img src="images/color-3ways.png" alt="3 ways to set color">
+                </figure>
+
+                <div class="example-content">
+<pre class="code-block">
 Lot-->
    extrude(20)
-   split(x) { 
-      2 : color("#ff0000") X |
-      2 : color(1, 0, 0) X |
-      2 : set(material.color.r, 1.0) 
-          set(material.color.g, 0) 
-          set(material.color.b, 0) X 
-   }
-</pre> <em>Three ways to set a shape's color. The results are identical.</em></td>
-	</tr>
-</table>
+   split(x) { 2: color("#ff0000") X.
+            | 2: color(1, 0, 0) X.
+            | 2: set(material.color.r, 1.0)
+                 set(material.color.g, 0)
+                 set(material.color.b, 0) X. }
+</pre>
+                    <p>Three ways to set a shape's color. The results are identical.</p>
+                </div>
+            </div>
+        </section>
+    </section>
 
-<p><!-- FOOTER --> <!-- FOOTER --></p>
-<p class="foot">Copyright &copy;2008-2025 Esri R&amp;D Center Zurich. All rights reserved.</p>
+    <footer class="footer">Copyright &copy;2008-2026 Esri R&amp;D Center Zurich. All rights reserved.</footer>
 
-<!-- END CENTERED CONTENT --></div>
+</article>
 </body>
 </html>

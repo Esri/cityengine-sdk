@@ -1,58 +1,65 @@
+<!doctype html>
 <html>
 
 <head>
-	<title>resetGeometry Operation</title>
-	<link rel="stylesheet" href="../manual_style.css" type="text/css" />
+    <meta charset="UTF-8">
+    <title>resetGeometry operation</title>
+    <link rel="stylesheet" href="../cgareference_style.css" type="text/css">
 </head>
 
 <body>
-<div class="content">
+<article class="content">
 
-<table summary="" class="header">
-	<tr>
-		<td align="left" class="helphead_l"><a href="../toc.html"><div class="helplink">&nbsp;</div></a></td>
-		<td align="right" class="helphead_r"></td>
-	</tr>
-</table>
+    <header class="section">
+        <h1>
+            <span class="name">resetGeometry</span>
+            <span class="kind">operation</span>
+        </h1>
 
-<h1>resetGeometry operation</h1>
+        <div class="signatures">
+            <div><span class="op">resetGeometry</span></div>
+        </div>
+    </header>
 
-<h2>Syntax</h2>
+    <section class="section">
+        <p>Resets the geometry to the initial shape's state. Further,</p>
 
-<p class="code2"><span class="cga_op">resetGeometry()</span></p>
+        <ul>
+            <li>trim planes are removed,</li>
+            <li>shape attributes remain unchanged, but <a href="attr_scope.html">scope</a> and <a href="attr_pivot.html">pivot</a> are reset to the initial shape's state,</li>
+            <li>rule attributes remain unchanged (see <a href="https://doc.arcgis.com/en/cityengine/latest/help/help-rules-attributes.htm" target="_blank">CGA attributes</a>),</li>
+            <li>projection matrices remain unchanged (see <a href="op_setupProjection.html">setupProjection</a>)</li>
+        </ul>
+    </section>
 
-<h2>Description</h2>
+    <section class="section">
+        <h2>Related</h2>
+        <div class="related">
+            <a class="op" href="op_i.html"><span class="related-name">i</span><span class="related-kind">operation</span></a>
+            <a class="op" href="op_comp.html"><span class="related-name">comp</span><span class="related-kind">operation</span></a>
+            <a class="op" href="op_trim.html"><span class="related-name">trim</span><span class="related-kind">operation</span></a>
+            <a class="op" href="op_setupProjection.html"><span class="related-name">setupProjection</span><span class="related-kind">operation</span></a>
+            <a class="op" href="op_set.html"><span class="related-name">set</span><span class="related-kind">operation</span></a>
+            <a class="attr" href="attr_scope.html"><span class="related-name">scope</span><span class="related-kind">attribute</span></a>
+            <a class="attr" href="attr_pivot.html"><span class="related-name">pivot</span><span class="related-kind">attribute</span></a>
+        </div>
+    </section>
 
-<p>Resets the geometry to the initial shape's state. Further,</p>
-<ul>
-	<li>trim planes are <em>removed</em>,</li>
-	<li>shape attributes remain <em>unchanged</em>, but <a class="normw" href="attr_scope.html">scope</a> and <a class="normw" href="attr_pivot.html">pivot</a> are <em>reset</em> to the initial shape's state,</li>
-	<li>generic attributes, which are declared as rule attributes, remain <em>unchanged</em> (see <a href="https://doc.arcgis.com/en/cityengine/latest/help/help-rules-attributes.htm" target="_blank">CGA attributes</a>),</li>
-	<li>projection matrices remain <em>unchanged</em>.</li>
-</ul>
+    <section class="section">
+        <h2>Examples</h2>
 
-<h2>Related</h2>
-<ul>
-    <li><a class="normw" href="op_i.html">i operation</a></li>
-	<li><a class="normw" href="op_comp.html">comp operation</a></li>
-	<li><a class="normw" href="op_trim.html">trim operation</a></li>
-	<li><a class="normw" href="op_setupProjection.html">setupProjection operation</a></li>
-	<li><a class="normw" href="op_set.html">set operation</a></li>
-	<li><a class="normw" href="attr_scope.html">scope attribute</a></li>
-	<li><a class="normw" href="attr_pivot.html">pivot attribute</a></li>
-</ul>
+        <section class="example">
+            <h3>Recursive setbacks</h3>
 
-<h2>Examples</h2>
-
-<h3>Recursive setbacks</h3>
-
-<table summary="" class="twocol">
-<tr>
-	<td class="twocol_l"><img src="images/resetGeometry-setback.png" alt="resetGeometry-setback"/></td>
-	<td class="twocol_r"><pre class="codecga">
+            <div class="example-row">
+                <figure class="media media-example">
+                    <img src="images/resetGeometry-setback.png" alt="Recursive setbacks with resetGeometry">
+                </figure>
+                <div class="example-content">
+                    <pre class="code-block">
 const maxGFA      = 5000
 const floorHeight = 10
-	
+
 Example -->
     color("#FFAA00")
     SetBackRec(0, 0)
@@ -67,20 +74,20 @@ SetBackRec(sumGFA, iFloor) -->
 Floor(sumGFA, iFloor) -->
     CreateFloor(sumGFA, iFloor)
     SetBackRec(sumGFA, iFloor + 1)
-    
+
 CreateFloor(sumGFA, iFloor) -->
-    set(material.opacity,
-        case sumGFA > maxGFA : 0.1 else : 1) 
+    set(material.opacity, case sumGFA > maxGFA : 0.1 else : 1)
     t(0, iFloor*floorHeight, 0)
     extrude(floorHeight)
 </pre>
-	<em>Setbacks are applied recursively in order to create a sum of floor areas (gross floor area). Each setback shall be applied wrt. the initial shape. Therefore, the geometry is reset before the setback is applied. Note how shape attributes (here the color) are not changed.</em>
-	</td>
-</tr>
-</table>
+                    <p>Setbacks are applied recursively in order to create a sum of floor areas (gross floor area). Each setback shall be applied with respect to the initial shape. Therefore, the geometry is reset before the setback is applied. Note how shape attributes (here the color) are not changed.</p>
+                </div>
+            </div>
+        </section>
+    </section>
 
-<p class="foot">Copyright &copy;2008-2025 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
+    <footer class="footer">Copyright &copy;2008-2026 Esri R&amp;D Center Zurich. All rights reserved.</footer>
 
-</div>
+</article>
 </body>
 </html>

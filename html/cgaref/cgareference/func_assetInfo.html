@@ -1,70 +1,91 @@
+<!doctype html>
 <html>
 
 <head>
-    <title>assetInfo Function</title>
-    <link rel="stylesheet" href="../manual_style.css" type="text/css" />
+    <meta charset="UTF-8">
+    <title>assetInfo function</title>
+    <link rel="stylesheet" href="../cgareference_style.css" type="text/css">
 </head>
 
 <body>
-<div class="content">
+<article class="content">
 
-<!-- HEADER (use only on bookchapters) -->
+    <header class="section">
+        <h1>
+            <span class="name">assetInfo</span>
+            <span class="kind">function</span>
+        </h1>
 
-<table summary="" class="header">
-	<tr>
-		<td align="left" class="helphead_l"><a href="../toc.html"><div class="helplink">&nbsp;</div></a></td>
-		<td align="right" class="helphead_r"></td>
-	</tr>
-</table>
+        <div class="signatures">
+            <div><span class="type-tag">float</span> <span class="func">assetInfo</span>(<span class="param">filePath</span>, <span class="param">attribute</span>)</div>
+        </div>
+    </header>
 
-<h1>assetInfo function</h1>
+    <section class="section">
+        <div class="param-list">
+            <div class="param-item">
+                <div class="indent-body">
+                    <p><span class="param">filePath</span> <span class="type-tag">string</span> Path to asset. See <a href="cga_assetSearch.html">Asset Search</a> for information about search locations.</p>
+                </div>
+            </div>
+            <div class="param-item">
+                <div class="indent-body">
+                    <p><span class="param">attribute</span> <span class="type-tag">selector</span></p>
+                    <table class="option-table">
+                        <tbody>
+                            <tr>
+                                <td><span class="inlinecode">sx</span>, <span class="inlinecode">sy</span>, <span class="inlinecode">sz</span>, <span class="inlinecode">tx</span>, <span class="inlinecode">ty</span>, <span class="inlinecode">tz</span></td>
+                                <td>Specifies asset dimension or translation.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<h2>Syntax</h2>
+    <section class="section">
+        <div class="return-list">
+            <div class="return-item">
+                <div class="indent-body">
+                        <p>Returns the asset size or translation.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<p class="code2"><span class="codelight">float</span> assetInfo(<span class="cga_opparam">filePath</span>, <span class="cga_opparam">attribute</span>)</p>
+    <section class="section">
+        <p>This function returns the sizes or translations of the asset defined in <span class="param">filePath</span>, depending on the specified <span class="param">attribute</span> selector.</p>
+    </section>
 
-<h2>Parameters</h2>
+    <section class="section">
+        <h2>Related</h2>
+        <div class="related">
+            <a class="func" href="func_assetMetadata.html"><span class="related-name">assetMetadata</span><span class="related-kind">function</span></a>
+            <a class="func" href="func_assetNamingInfo.html"><span class="related-name">assetNamingInfo / assetNamingInfos</span><span class="related-kind">functions</span></a>
+        </div>
+    </section>
 
-<ul>
-    <li><span class="cga_opparam">filePath</span> (string)<br>Path to asset. See <a class="normw" href="cga_assetSearch.html">Asset Search</a> for information about search locations.</li>
-	<li><span class="cga_opparam">attribute</span> (selector)
-	<table cellspacing="5">
-		<tr><td width="40%"><span class="codelight">sx</span>, <span class="codelight">sy</span>, <span class="codelight">sz</span>, <span class="codelight">tx</span>, <span class="codelight">ty</span>, <span class="codelight">tz</span></td><td>Specifies asset dimension or translation.</td></tr>
-	</table>
-	</li>
-</ul>
+    <section class="section">
+        <h2>Examples</h2>
+        <div class="note">The translation values are calculated by CityEngine based on the corner of the asset's bounding box, using the corner with the lowest possible x, y, and z coordinates (XYZmin).</div>
+        <div class="note">Any specific 3D transformations in the source asset, such as Maya translations, are not the same as the translations CityEngine computes here.</div>
 
-<h3>Returns</h3>
-
-<p>Returns asset sizes or translation.</p> 
-
-<h2>Description</h2>
-
-<p>This function returns the sizes or translations of the asset defined in the <span class="cga_opparam">filePath</span>, depending on the specified <span class="cga_opparam">attribute</span> selector.</p>	
-
-<h2>Related</h2>
-
-<ul>
-	<li><a class="normw" href="func_assetMetadata.html">assetMetadata function</a></li>
-	<li><a class="normw" href="func_assetNamingInfo.html">assetNamingInfo / assetNamingInfos function</a></li>
-</ul>
-
-<h2>Examples</h2>
-
-<p class="notes">Note.1: The translation values are calculated by the CityEngine based on the corner of the asset's bounding box, by using the corner with the lowest possible x, y and z coordinates (XYZmin).</p>
-<p class="notes">Note.2: Note that any specific 3d transformations (in this example maya's translations X = 0.6, Y = 0.7, Z = 0.8) are not to be confused accidentally with the translations the CityEngine computes.</p>
-
-<img src="images/assetInfo.jpg"></img>
-
-<pre class="codecga">
-print(assetInfo(&quot;assets/unitCube.obj&quot;, sx))
-print(assetInfo(&quot;assets/unitCube.obj&quot;, sy))
-print(assetInfo(&quot;assets/unitCube.obj&quot;, sz))
-print(assetInfo(&quot;assets/unitCube.obj&quot;, tx))
-print(assetInfo(&quot;assets/unitCube.obj&quot;, ty))
-print(assetInfo(&quot;assets/unitCube.obj&quot;, tz))
+        <section class="example">
+            <div class="example-row">
+                <figure class="media media-example">
+                    <img src="images/assetInfo.jpg" alt="assetInfo" width="220">
+                </figure>
+                <div class="example-content">
+                    <pre class="code-block">
+print(assetInfo("assets/unitCube.obj", sx))
+print(assetInfo("assets/unitCube.obj", sy))
+print(assetInfo("assets/unitCube.obj", sz))
+print(assetInfo("assets/unitCube.obj", tx))
+print(assetInfo("assets/unitCube.obj", ty))
+print(assetInfo("assets/unitCube.obj", tz))
 </pre>
-<pre>
+<pre class="code-block">
 # results =
 # 0.2
 # 0.3
@@ -73,10 +94,13 @@ print(assetInfo(&quot;assets/unitCube.obj&quot;, tz))
 # 0.55
 # 0.6
 </pre>
+                </div>
+            </div>
+        </section>
+    </section>
 
-<!-- FOOTER -->
-<p class="foot">Copyright &copy;2008-2025 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
+    <footer class="footer">Copyright &copy;2008-2026 Esri R&amp;D Center Zurich. All rights reserved.</footer>
 
-</div>
+</article>
 </body>
 </html>

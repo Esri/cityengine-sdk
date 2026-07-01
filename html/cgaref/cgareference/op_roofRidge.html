@@ -1,157 +1,186 @@
+<!doctype html>
 <html>
 
 <head>
-    <title>roofRidge Operation</title>
-    <link rel="stylesheet" href="../manual_style.css" type="text/css" />
+	<meta charset="UTF-8">
+	<title>roofRidge Operation</title>
+	<link rel="stylesheet" href="../cgareference_style.css" type="text/css">
 </head>
 
 <body>
-<div class="content">
+<article class="content">
 
-<table summary="" class="header">
-    <tr>
-        <td align="left" class="helphead_l"><a href="../toc.html"><div class="helplink">&nbsp;</div></a></td>
-        <td align="right" class="helphead_r"></td>
-    </tr>
-</table>
+	<header class="section">
+		<h1>
+			<span class="name">roofRidge</span>
+			<span class="kind">operation</span>
+		</h1>
 
-<!-- CONTENT -->
+		<div class="signatures">
+			<div><span class="op">roofRidge</span>(<span class="param">valueType</span>, <span class="param">value</span>)</div>
+		</div>
+	</header>
 
-<h1>roofRidge operation</h1>
+	<section class="section" id="params">
+		<div class="param-list">
+			<div class="param-item">
+				<div class="indent-body">
+					<p><span class="param">valueType</span> <span class="type-tag">selector</span> <span class="inlinecode">{ byAngle | byHeight }</span> Type of roof generation.</p>
+				</div>
+			</div>
 
-<h2>Syntax</h2>
+			<div class="param-item">
+				<div class="indent-body">
+					<p><span class="param">value</span> <span class="type-tag">float</span> Angle or height of the roof-planes as specified by <span class="param">valueType</span>.</p>
+				</div>
+			</div>
+		</div>
+	</section>
 
-<p class="code2">roofRidge(<span class="cga_opparam">valueType, value</span>)</p>
+	<section class="section">
+		<p>The <span class="op">roofRidge</span> operation builds a roof perpendicular to each face of the current shape's geometry. In contrast to the <a href="op_roofHip.html"><span class="op">roofHip</span></a> operation and the <a href="op_roofGable.html"><span class="op">roofGable</span></a> operation only one ridge is constructed. On arbitrary shapes no hips or gables are created but the shape outline becomes part of two angled roof planes.</p>
 
-<h2>Parameters</h2>
-<ul>
-	<li><span class="cga_opparam">valueType</span> (selector)
-	<table cellspacing="5">
-		<tr><td width="50%"><span class="codelight">byAngle, byHeight</span></td><td>Type of roof generation</td></tr>
-	</table>
-	</li>
-	<li><span class="cga_opparam">value</span> (float)<br>Angle or height of the roof-planes as specified by <span class="cga_opparam">valueType</span>.</li>
-</ul>
+		<p>The ridge is oriented wrt. the x-axis of the scope. Namely, the resulting ridge is parallel to the scope's x-axis projected to the face plane. To orient the ridge align the scope using operations like <a href="op_alignScopeToGeometry.html"><span class="op">alignScopeToGeometry</span></a>, <a href="op_alignScopeToGeometryBBox.html"><span class="op">alignScopeToGeometryBBox</span></a> or <a href="op_rotateScope.html"><span class="op">rotateScope</span></a>.</p>
 
-<h2>Description</h2>
-	
-<p>The <span class="code_std">roofRidge</span> operation builds a roof perpendicular to each face of the current shape's geometry. In contrast to the <a class="normw" href="op_roofHip.html"><span class="code_std">roofHip</span></a> operation and the <a class="normw" href="op_roofGable.html"><span class="code_std">roofGable</span></a> operation only one ridge is constructed. On arbitrary shapes no hips or gables are created but the shape outline becomes part of two angled roof planes.</p>
+		<div class="note">The connectivity of the roof mesh is optimized for trim plane generation to cut bricks inserted into the roof planes (see examples below).</div>
 
-<p>The ridge is oriented wrt. the x-axis of the scope. Namely, the resulting ridge is parallel to the scope's x-axis projected to the face plane. To orient the ridge align the scope using operations like <a class="normw" href="op_alignScopeToGeometry.html"><span class="code_std">alignScopeToGeometry</span></a>, <a class="normw" href="op_alignScopeToGeometryBBox.html"><span class="code_std">alignScopeToGeometryBBox</span></a> or <a class="normw" href="op_rotateScope.html"><span class="code_std">rotateScope</span></a>.</p>
-
-<p class="notes">The connectivity of the roof mesh is optimized for trim plane generation to cut bricks inserted into the roof planes (see examples below).</p>
-
-<h3>Scope</h3>
-
-<p class="text">The scope orientation is set in the following way:</p> 
-<ul>
-	<li>x-axis direction is kept as much as possible (old x-axis is projected to the plane of the first face)</li>
-	<li>y-axis along the face normal of the first face</li>
-	<li>z-axis normal to the two above</li>
-</ul>
-<p>The scope's sizes are adjusted to tighly fit the extruded geometry.</p>
-
-<h3>Component tags</h3>
-
-<table summary="" class="twocol">
-<tr>
-    <td class="twocol_r">
-		The operation automatically applies semantic <a href="cga_componentTags.html">component tags</a> to the resulting face components:
-		<table cellspacing="5">
-			<tr><td width="25%"><span class="codelight">"roof.bottom"</span></td><td>Blue: original face.</td></tr>
-			<tr><td><span class="codelight">"roof.side.outer"</span></td><td>Yellow: side faces.</td></tr>
-			<tr><td><span class="codelight">"roof.side.inner"</span></td><td>Red: side faces from holes.</td></tr>
-			<tr><td><span class="codelight">"roof.top"</span></td><td>Green: roof faces.</p></td></tr>
-		</table>
-		<br>
-		For more information on working with component tags, refer to:
+		<h4>Scope</h4>
+		<p>The scope orientation is set in the following way:</p>
 		<ul>
-			<li><a href="cga_componentTags.html#autoTags">Auto-tags</a></li>
-			<li><a href="cga_componentTags.html#tagPropagation">Tag propagation</a></li> 
+			<li>x-axis direction is kept as much as possible (old x-axis is projected to the plane of the first face)</li>
+			<li>y-axis along the face normal of the first face</li>
+			<li>z-axis normal to the two above</li>
 		</ul>
-	</td>
-	<td class="twocol_l"><img src="images/autotag-roofRidge.png" alt="autotag-roofRidge"/></td></tr>
-</table>
+		<p>The scope's sizes are adjusted to tighly fit the extruded geometry.</p>
 
-<h2>Related</h2>
-<ul>
-    <li><a class="normw" href="op_envelope.html">envelope operation</a></li>
-    <li><a class="normw" href="op_extrude.html">extrude operation</a></li>
-    <li><a class="normw" href="op_offset.html">offset operation</a></li>
-    <li><a class="normw" href="op_roofGable.html">roofGable operation</a></li>
-	<li><a class="normw" href="op_roofHip.html">roofHip operation</a></li>
-    <li><a class="normw" href="op_roofPyramid.html">roofPyramid operation</a></li>
-	<li><a class="normw" href="op_roofShed.html">roofShed operation</a></li>
-	<li><a class="normw" href="op_taper.html">taper operation</a></li>	
-</ul>
+		<h4>Component tags</h4>
+		<div class="example-row">
+			<figure class="media media-example">
+				<img src="images/autotag-roofRidge.png" alt="autotag-roofRidge">
+			</figure>
 
-<h2>Examples</h2>
+			<div>
+				<p>The operation automatically applies semantic <a href="cga_componentTags.html">component tags</a> to the resulting face components:</p>
 
-<h3>Scope and trim planes</h3>
+				<table class="option-table">
+					<tr><td><span class="inlinecode">"roof.bottom"</span></td><td>Blue: original face.</td></tr>
+					<tr><td><span class="inlinecode">"roof.side.outer"</span></td><td>Yellow: side faces.</td></tr>
+					<tr><td><span class="inlinecode">"roof.side.inner"</span></td><td>Red: side faces from holes.</td></tr>
+					<tr><td><span class="inlinecode">"roof.top"</span></td><td>Green: roof faces.</td></tr>
+				</table>
 
-<table summary="" class="twocol">
-<tr>
-<td class="twocol_l"><img src="images/roofRidge_scope.png"></td>
-<td class="twocol_r">
-<pre class="codecga">
+				<p>For more information on working with component tags, refer to:</p>
+				<ul>
+					<li><a href="cga_componentTags.html#autoTags">Auto-tags</a></li>
+					<li><a href="cga_componentTags.html#tagPropagation">Tag propagation</a></li>
+				</ul>
+			</div>
+		</div>
+	</section>
+
+	<section class="section">
+		<h2>Related</h2>
+		<div class="related">
+			<a class="op" href="op_envelope.html"><span class="related-name">envelope</span><span class="related-kind">operation</span></a>
+			<a class="op" href="op_extrude.html"><span class="related-name">extrude</span><span class="related-kind">operation</span></a>
+			<a class="op" href="op_offset.html"><span class="related-name">offset</span><span class="related-kind">operation</span></a>
+			<a class="op" href="op_roofGable.html"><span class="related-name">roofGable</span><span class="related-kind">operation</span></a>
+			<a class="op" href="op_roofHip.html"><span class="related-name">roofHip</span><span class="related-kind">operation</span></a>
+			<a class="op" href="op_roofPyramid.html"><span class="related-name">roofPyramid</span><span class="related-kind">operation</span></a>
+			<a class="op" href="op_roofShed.html"><span class="related-name">roofShed</span><span class="related-kind">operation</span></a>
+			<a class="op" href="op_taper.html"><span class="related-name">taper</span><span class="related-kind">operation</span></a>
+		</div>
+	</section>
+
+	<section class="section">
+		<h2>Examples</h2>
+
+		<section class="example">
+			<h3>Scope and trim planes</h3>
+
+			<div class="example-row">
+				<figure class="media media-example">
+					<img src="images/roofRidge_scope.png">
+				</figure>
+
+				<div class="example-content">
+<pre class="code-block">
 Lot  --> extrude(10) Mass
 Mass --> comp(f) { top : Top | side = Sides. }
 Top  --> roofRidge(byAngle, 30) Roof
 </pre>
-<em>A roof with roof slope 30 degrees is built on top of an extruded lot. Note the setting of the pivot and scope.</em>
-</td>
-</tr>
-<tr>
-<td class="twocol_l"><img src="images/roofRidge_tp.png"></td>
-<td class="twocol_r">
-<pre class="codecga">
+					<p>A roof with roof slope 30 degrees is built on top of an extruded lot. Note the setting of the pivot and scope.</p>
+				</div>
+			</div>
+
+			<div class="example-row">
+				<figure class="media media-example">
+					<img src="images/roofRidge_tp.png">
+				</figure>
+
+				<div class="example-content">
+<pre class="code-block">
 Roof --> set(trim.horizontal, true)
          comp(f) { all : Face. }
 </pre>
-<em>After a component split, each roof face contains <a class="normw" href="op_comp.html#trimPlanes">trim planes</a> to cut bricks on insertion.</em>
-<p class="notes">Note that per default there are no horizontal trim planes at the ridges. To enable them, <span class="code">set(trim.horizontal, true)</span> is used in front of the component split (<a class="normw" href="attr_trim.html">details</a>).</p> 
-</td>
-</tr>
-</table>
+					<p>After a component split, each roof face contains <a href="op_comp.html#trimPlanes">trim planes</a> to cut bricks on insertion.</p>
+					<div class="note">Note that per default there are no horizontal trim planes at the ridges. To enable them, <span class="inlinecode">set(trim.horizontal, <span class="kw">true</span>)</span> is used in front of the component split (<a href="attr_trim.html">details</a>).</div>
+				</div>
+			</div>
+		</section>
 
-<h3>Ridge orientation</h3>
+		<section class="example">
+			<h3>Ridge orientation</h3>
 
-<table summary="" class="twocol">
-<tr>
-<td class="twocol_l"><img src="images/roofRidge_along.png"></td>
-<td class="twocol_r"><pre class="codecga">
+			<div class="example-row">
+				<figure class="media media-example">
+					<img src="images/roofRidge_along.png">
+				</figure>
+
+				<div class="example-content">
+<pre class="code-block">
 Lot  --> extrude(10) Mass
 Mass --> comp(f) { top : Top | side = Sides. }
 Top  --> alignScopeToGeometryBBox(xy)
          roofRidge(byAngle, 30)
 </pre>
-<em>The scope is aligned to the <span class="codelight">top</span> face using <a class="normw" href="op_alignScopeToGeometryBBox.html"><span class="code_std">alignScopeToGeometryBBox</span></a> with the <span class="codelight">xy</span> selector. As a result the x-axis of the scope is the longer extent of the minimum area bounding rectangle. The resulting ridge is oriented "along" the shape.</em>
-</td>
-</tr>
-<tr>
-<td class="twocol_l"><img src="images/roofRidge_across.png"></td>
-<td class="twocol_r"><pre class="codecga">
+					<p>The scope is aligned to the <span class="inlinecode">top</span> face using <a href="op_alignScopeToGeometryBBox.html"><span class="op">alignScopeToGeometryBBox</span></a> with the <span class="inlinecode">xy</span> selector. As a result the x-axis of the scope is the longer extent of the minimum area bounding rectangle. The resulting ridge is oriented "along" the shape.</p>
+				</div>
+			</div>
+
+			<div class="example-row">
+				<figure class="media media-example">
+					<img src="images/roofRidge_across.png">
+				</figure>
+
+				<div class="example-content">
+<pre class="code-block">
 Top  --> alignScopeToGeometryBBox(yx)
          roofRidge(byAngle, 30)
 </pre>
-<em>Using a different selector <span class="codelight">yx</span> will align the scope such that the scope x-axis is the shorter extent. The resulting ridge is oriented "across" the shape.</em>
-</td>
-</tr>
-<tr>
-<td class="twocol_l"><img src="images/roofRidge_rotated.png"></td>
-<td class="twocol_r"><pre class="codecga">
+					<p>Using a different selector <span class="inlinecode">yx</span> will align the scope such that the scope x-axis is the shorter extent. The resulting ridge is oriented "across" the shape.</p>
+				</div>
+			</div>
+
+			<div class="example-row">
+				<figure class="media media-example">
+					<img src="images/roofRidge_rotated.png">
+				</figure>
+
+				<div class="example-content">
+<pre class="code-block">
 Top  --> alignScopeToGeometryBBox(xy)
          rotateScope(0, 0, 45)
          roofRidge(byAngle, 30)
 </pre>
-<em>The scope is rotated by 45 degress. The resulting ridge is oriented "diagonally" to the shape.</em>
-</td>
-</tr>
-</table>
+					<p>The scope is rotated by 45 degress. The resulting ridge is oriented "diagonally" to the shape.</p>
+				</div>
+			</div>
+		</section>
+	</section>
 
-<!-- FOOTER -->
-<p class="foot">Copyright &copy;2008-2025 Esri R&amp;D Center Zurich. All rights reserved.</p>                  
+	<footer class="footer">Copyright &copy;2008-2026 Esri R&amp;D Center Zurich. All rights reserved.</footer>
 
-</div>
+</article>
 </body>
 </html>

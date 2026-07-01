@@ -5,7 +5,7 @@
 </head>
 <body>
 <h1>ArcGIS Procedural Runtime Encoder/Decoder Reference</h1>
-<small>(Automatically generated from PRT 3.3.11669; Build Date: Fri 10/31/2025 02:38 PM; Build Configuration: PRT_BC_REL)</small><p>This is the PRT reference documentation for all built-in encoders and decoders.</p>
+<small>(Automatically generated from PRT 3.4.12206; Build Date: Fri 06/12/2026 09:24 PM; Build Configuration: PRT_BC_REL)</small><p>This is the PRT reference documentation for all built-in encoders and decoders.</p>
 <p>The encoder documentation lists for each encoder its supported encoder options. In PRT, the encoder options
 	are stored in an object of type prt::AttributeMap, therefore the term "attribute" is used synonymously in this
 	document for a single encoder option. Each attribute consists of a type, a default value and (optional)
@@ -87,7 +87,7 @@
 <li><a href="#com.esri.prt.codecs.NTFDecoder">National Imagery Transmission Format Image Decoder</a></li>
 <li><a href="#com.esri.prt.codecs.OBJDecoder">Wavefront OBJ Decoder</a></li>
 <li><a href="#com.esri.prt.codecs.PIXDecoder">PCIDSK Database File Image Decoder</a></li>
-<li><a href="#com.esri.prt.codecs.PNGDecoder">Portable Network Graphics Image Decoder</a></li>
+<li><a href="#com.esri.prt.codecs.PNGDecoder">PNG Image Decoder</a></li>
 <li><a href="#com.esri.prt.codecs.PNMDecoder">Portable Pixmap Format (netpbm) Image Decoder</a></li>
 <li><a href="#com.esri.prt.codecs.RDADecoder">R Object Data Store Image Decoder</a></li>
 <li><a href="#com.esri.prt.codecs.RSTDecoder">Idrisi Raster A.1 Image Decoder</a></li>
@@ -96,6 +96,7 @@
 <li><a href="#com.esri.prt.codecs.ShapeBufferDecoder">Esri Shape Buffer Decoder</a></li>
 <li><a href="#com.esri.prt.codecs.TGADecoder">TGA/TARGA Image File Format Image Decoder</a></li>
 <li><a href="#com.esri.prt.codecs.TIFDecoder">GeoTIFF Image Decoder</a></li>
+<li><a href="#com.esri.prt.codecs.TextureWithoutExtensionDecoder">Texture Decoder (no file extension)</a></li>
 <li><a href="#com.esri.prt.codecs.USDDecoder">Universal Scene Description (USD)</a></li>
 <li><a href="#com.esri.prt.codecs.VRTDecoder">Virtual Raster Image Decoder</a></li>
 <li><a href="#com.esri.prt.codecs.XPMDecoder">X11 PixMap Format Image Decoder</a></li>
@@ -699,7 +700,6 @@
 </tr>
 	</table></td>
 </tr>
-	
 	<tr>
 <td>LOD</td>
 <td>int</td>
@@ -805,6 +805,43 @@
 	</table></td>
 </tr>
 	<tr>
+<td>convertVerticesTo</td>
+<td>str</td>
+<td>NONE</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Convert Coordinates to<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 9050<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Geometry<br>order:float = 1<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Converts all coordinates to the specified coordinate system.<br>
+</td>
+</tr>
+		<tr>
+<td>@Range</td>
+<td>:str = <br>:str = <br>
+</td>
+</tr>
+		<tr>
+<td>@Hidden</td>
+<td></td>
+</tr>
+	</table></td>
+</tr>
+	
+	<tr>
 <td>srsName</td>
 <td>str</td>
 <td></td>
@@ -835,6 +872,7 @@
 </tr>
 	</table></td>
 </tr>
+	
 	
 	
 	
@@ -1961,6 +1999,7 @@
 <th>Default Value</th>
 <th>Annotations</th>
 </tr>
+	
 	<tr>
 <td>baseName</td>
 <td>str</td>
@@ -2000,7 +2039,42 @@
 </tr>
 	</table></td>
 </tr>
-	
+	<tr>
+<td>vertexPrecision</td>
+<td>float</td>
+<td>0.001</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Vertex Precision<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 3<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Geometry Settings<br>order:float = 1<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Specifies the minimal distance between vertices.<br>
+</td>
+</tr>
+		<tr>
+<td>@Range</td>
+<td>0:float = 1e-05<br>1:float = 1<br>
+</td>
+</tr>
+		<tr>
+<td>@Hidden</td>
+<td></td>
+</tr>
+	</table></td>
+</tr>
 	<tr>
 <td>globalOffset</td>
 <td>float_array</td>
@@ -2032,7 +2106,37 @@
 </tr>
 	</table></td>
 </tr>
-	
+	<tr>
+<td>mergeVertices</td>
+<td>bool</td>
+<td>true</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Merge Vertices Within Precision<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 2<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Geometry Settings<br>order:float = 1<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Finds co-incidental vertices (using the precision distance) and shares their index.<br>
+</td>
+</tr>
+		<tr>
+<td>@Hidden</td>
+<td></td>
+</tr>
+	</table></td>
+</tr>
 	<tr>
 <td>flipV</td>
 <td>bool</td>
@@ -2060,6 +2164,9 @@
 </tr>
 	</table></td>
 </tr>
+	
+	
+	
 	
 <tr><td colspan="4"></td></tr>
 <tr><td colspan="4"><h3><a name="com.esri.prt.codecs.DxtEncoder">DXT Encoder (com.esri.prt.codecs.DxtEncoder)</a></h3></td></tr>
@@ -4560,28 +4667,33 @@
 </tr>
 	
 	<tr>
-<td>applicationVendor</td>
-<td>str</td>
-<td></td>
+<td>vertexPrecision</td>
+<td>float</td>
+<td>0.001</td>
 <td><table class="doxtable">
 		<tr>
 <td>@Label</td>
-<td>:str = Application Vendor<br>
+<td>:str = Vertex Precision<br>
 </td>
 </tr>
 		<tr>
 <td>@Order</td>
-<td>:float = 0.104<br>
+<td>:float = 3<br>
 </td>
 </tr>
 		<tr>
 <td>@Group</td>
-<td>name:str = General Settings<br>order:float = 1<br>
+<td>name:str = Geometry Settings<br>order:float = 1<br>
 </td>
 </tr>
 		<tr>
 <td>@Description</td>
-<td>:str = Vendor of application.<br>
+<td>:str = Specifies the minimal distance between vertices.<br>
+</td>
+</tr>
+		<tr>
+<td>@Range</td>
+<td>0:float = 1e-05<br>1:float = 1<br>
 </td>
 </tr>
 		<tr>
@@ -4622,28 +4734,28 @@
 	</table></td>
 </tr>
 	<tr>
-<td>author</td>
-<td>str</td>
-<td></td>
+<td>mergeVertices</td>
+<td>bool</td>
+<td>true</td>
 <td><table class="doxtable">
 		<tr>
 <td>@Label</td>
-<td>:str = Author<br>
+<td>:str = Merge Vertices Within Precision<br>
 </td>
 </tr>
 		<tr>
 <td>@Order</td>
-<td>:float = 0.11<br>
+<td>:float = 2<br>
 </td>
 </tr>
 		<tr>
 <td>@Group</td>
-<td>name:str = General Settings<br>order:float = 0<br>
+<td>name:str = Geometry Settings<br>order:float = 1<br>
 </td>
 </tr>
 		<tr>
 <td>@Description</td>
-<td>:str = Author of data.<br>
+<td>:str = Finds co-incidental vertices (using the precision distance) and shares their index.<br>
 </td>
 </tr>
 		<tr>
@@ -4652,7 +4764,6 @@
 </tr>
 	</table></td>
 </tr>
-	
 	<tr>
 <td>applicationName</td>
 <td>str</td>
@@ -4747,6 +4858,71 @@
 </tr>
 	</table></td>
 </tr>
+	<tr>
+<td>applicationVendor</td>
+<td>str</td>
+<td></td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Application Vendor<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 0.104<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = General Settings<br>order:float = 1<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Vendor of application.<br>
+</td>
+</tr>
+		<tr>
+<td>@Hidden</td>
+<td></td>
+</tr>
+	</table></td>
+</tr>
+	<tr>
+<td>author</td>
+<td>str</td>
+<td></td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Author<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 0.11<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = General Settings<br>order:float = 0<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Author of data.<br>
+</td>
+</tr>
+		<tr>
+<td>@Hidden</td>
+<td></td>
+</tr>
+	</table></td>
+</tr>
+	
+	
+	
 	
 	
 	
@@ -7489,6 +7665,43 @@
 </tr>
 	
 	<tr>
+<td>convertVerticesTo</td>
+<td>str</td>
+<td>NONE</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Convert Coordinates to<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Converts all coordinates to the specified coordinate system.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 9090<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Geometry Settings<br>order:float = 2<br>
+</td>
+</tr>
+		<tr>
+<td>@Range</td>
+<td>NONE:str = Do not convert vertices.<br>WGS84:str = Convert vertices to WGS84.<br>
+</td>
+</tr>
+		<tr>
+<td>@Hidden</td>
+<td></td>
+</tr>
+	</table></td>
+</tr>
+	
+	<tr>
 <td>shapeNameDelimiter</td>
 <td>str</td>
 <td>_</td>
@@ -9754,8 +9967,8 @@
 <h3><a name="com.esri.prt.codecs.PIXDecoder">PCIDSK Database File Image Decoder (com.esri.prt.codecs.PIXDecoder)</a></h3>
 <p>Reads PCIDSK Database File images into textures</p>
 <p>Supported URI extensions: .pix;</p>
-<h3><a name="com.esri.prt.codecs.PNGDecoder">Portable Network Graphics Image Decoder (com.esri.prt.codecs.PNGDecoder)</a></h3>
-<p>Reads Portable Network Graphics images into textures</p>
+<h3><a name="com.esri.prt.codecs.PNGDecoder">PNG Image Decoder (com.esri.prt.codecs.PNGDecoder)</a></h3>
+<p>Reads PNG images into textures</p>
 <p>Supported URI extensions: .png;</p>
 <h3><a name="com.esri.prt.codecs.PNMDecoder">Portable Pixmap Format (netpbm) Image Decoder (com.esri.prt.codecs.PNMDecoder)</a></h3>
 <p>Reads Portable Pixmap Format (netpbm) images into textures</p>
@@ -9781,6 +9994,9 @@
 <h3><a name="com.esri.prt.codecs.TIFDecoder">GeoTIFF Image Decoder (com.esri.prt.codecs.TIFDecoder)</a></h3>
 <p>Reads GeoTIFF images into textures</p>
 <p>Supported URI extensions: .tif;.tiff;</p>
+<h3><a name="com.esri.prt.codecs.TextureWithoutExtensionDecoder">Texture Decoder (no file extension) (com.esri.prt.codecs.TextureWithoutExtensionDecoder)</a></h3>
+<p>Reads textures that have no file extension (auto detection)</p>
+<p>Supported URI extensions: </p>
 <h3><a name="com.esri.prt.codecs.USDDecoder">Universal Scene Description (USD) (com.esri.prt.codecs.USDDecoder)</a></h3>
 <p>Decodes geometry from the Universal Scene Description.</p>
 <p>Supported URI extensions: .usd;.usda;.usdc;.usdz;</p>

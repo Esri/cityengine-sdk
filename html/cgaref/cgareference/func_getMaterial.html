@@ -1,101 +1,109 @@
+<!doctype html>
 <html>
 
 <head>
-    <title>getMaterial Function</title>
-    <link rel="stylesheet" href="../manual_style.css" type="text/css" />
+   <meta charset="UTF-8">
+   <title>getMaterial function</title>
+   <link rel="stylesheet" href="../cgareference_style.css" type="text/css">
 </head>
 
 <body>
-<div class="content">
+<article class="content">
 
-<!-- HEADER (use only on bookchapters) -->
+   <header class="section">
+      <h1>
+         <span class="name">getMaterial</span>
+         <span class="kind">function</span>
+      </h1>
 
-<table summary="" class="header">
-	<tr>
-		<td align="left" class="helphead_l"><a href="../toc.html"><div class="helplink">&nbsp;</div></a></td>
-		<td align="right" class="helphead_r"></td>
-	</tr>
-</table>
+      <div class="signatures">
+         <div><span class="type-tag">string[]</span> <span class="func">getMaterial</span>(<span class="param">source</span>, <span class="param">mode</span>)</div>
+      </div>
+   </header>
 
-<!-- CONTENT -->
+   <section class="section">
+      <div class="param-list">
+         <div class="param-item">
+            <div class="indent-body">
+               <p><span class="param">source</span> <span class="type-tag">selector</span> Specifies which material to read.</p>
+               <table class="option-table">
+                  <tr><td><span class="inlinecode">used</span></td><td>The currently used material which is a combination of the shape material and the material of the shape's geometry. Shape material attributes explicitly <a href="op_set.html">set</a> in CGA override the geometry's material.</td></tr>
+                  <tr><td><span class="inlinecode">shape</span></td><td>The material of the current shape, independent of the geometry.</td></tr>
+                  <tr><td><span class="inlinecode">geometry</span></td><td>The material of the geometry of the current shape. If the geometry has several materials the first one is taken.</td></tr>
+               </table>
+            </div>
+         </div>
+         <div class="param-item">
+            <div class="indent-body">
+               <p><span class="param">mode</span> <span class="type-tag">selector</span> Specifies which attributes to consider.</p>
+               <table class="option-table">
+                  <tr><td><span class="inlinecode">changed</span></td><td>Only material attributes which are actually set i.e., attributes which are left on the default value are skipped.</td></tr>
+                  <tr><td><span class="inlinecode">all</span></td><td>All material attributes.</td></tr>
+               </table>
+            </div>
+         </div>
+      </div>
+   </section>
 
-<h1>getMaterial function</h1>
+   <section class="section">
+      <div class="return-list">
+         <div class="return-item">
+            <div class="indent-body">
+                  <p>Returns the selected material as a 2D string array. Each row contains two columns: the attribute name and its value.</p>
+            </div>
+         </div>
+      </div>
 
-<h2>Syntax</h2>
+      <p>The <span class="func">getMaterial</span> function returns the current material as a string array. This allows for conveniently capturing all material attributes in one function. The result can then be used to set material attributes with the <a href="op_setMaterial.html">setMaterial</a> operation.</p>
+      <p>Note that the "current material" is actually a combination of the current shape's material and the material of the curent shape's geometry. Printing the material array to the console is a good way to inspect these materials.</p>
+   </section>
 
-<p class="code2"><span class="codelight">string[]</span> getMaterial(<span class="cga_opparam">source</span>, <span class="cga_opparam">mode</span>)</p>
-        
-<h2>Parameters</h2>
+   <section class="section">
+      <h2>Related</h2>
+      <div class="related">
+         <a class="func" href="func_readMaterial.html"><span class="related-name">readMaterial</span><span class="related-kind">function</span></a>
+         <a class="op" href="op_setMaterial.html"><span class="related-name">setMaterial</span><span class="related-kind">operation</span></a>
+         <a class="op" href="op_resetMaterial.html"><span class="related-name">resetMaterial</span><span class="related-kind">operation</span></a>
+         <a class="op" href="op_color.html"><span class="related-name">color</span><span class="related-kind">operation</span></a>
+         <a class="op" href="op_texture.html"><span class="related-name">texture</span><span class="related-kind">operation</span></a>
+         <a class="op" href="op_set.html"><span class="related-name">set</span><span class="related-kind">operation</span></a>
+         <a class="attr" href="attr_material.html"><span class="related-name">material</span><span class="related-kind">attributes</span></a>
+         <a class="attr" href="attr_material_color.html"><span class="related-name">material.color</span><span class="related-kind">attribute</span></a>
+         <a class="attr" href="attr_material_map.html"><span class="related-name">material.map</span><span class="related-kind">attributes</span></a>
+         <a href="cga_texturing.html"><span class="related-name">Texturing: Essential Knowledge</span></a>
+      </div>
+   </section>
 
-<ul>
-	<li><span class="cga_opparam">source</span> (selector)<br>Specifies which material to read.
-    	<table cellspacing="5">
-			<tr><td width="25%"><span class="codelight">used</span></td><td>The currently used material which is a combination of the shape material and the material of the shape's geometry. Shape material attributes explicitly <a class="normw" href="op_set.html"><span class="code_std">set</span></a> in CGA override the geometry's material.</td></tr>
-			<tr><td><span class="codelight">shape</span></td><td>The material of the current shape, independent of the geometry.</td></tr>
-			<tr><td><span class="codelight">geometry</span></td><td>The material of the geometry of the current shape. If the geometry has several materials the first one is taken.</td></tr>
-		</table>
-	</li>
-	<li><span class="cga_opparam">mode</span> (selector)<br>Specifies which attributes to consider.
-    	<table cellspacing="5">
-			<tr><td width="25%"><span class="codelight">changed</span></td><td>Only material attributes which are actually set i.e., attributes which are left on the default value are skipped.</td></tr>
-			<tr><td><span class="codelight">all</span></td><td>All material attributes.</td></tr>
-		</table>
-    </li>
-</ul>
+   <section class="section">
+      <h2>Examples</h2>
 
-<h2>Returns</h2>
-
-<p>The selected material as a 2D string array. Each row contains two columns: the attribute name and its value.</p>
-
-<h2>Description</h2>
-
-<p>The <span class="cga_keyword">getMaterial</span> function returns the current material as a string array. This allows for conveniently capturing all material attributes in one function. The result can then be used to set material attributes with the <a class="normw" href="op_setMaterial.html"><span class="code_std">setMaterial</span></a> operation.</br>
-Note that the "current material" is actually a combination of the current shape's material and the material of the curent shape's geometry. Printing the material array to the console is a good way to inspect these materials.
-</p>
-
-<h2>Related</h2>
-
-<ul>
-	<li><a class="normw" href="func_readMaterial.html">readMaterial function</a></li>
-	<li><a class="normw" href="op_setMaterial.html">setMaterial operation</a></li>
-	<li><a class="normw" href="op_resetMaterial.html">resetMaterial operation</a></li>
-	<li><a class="normw" href="op_color.html">color operation</a></li>
-	<li><a class="normw" href="op_texture.html">texture operation</a></li>
-	<li><a class="normw" href="op_set.html">set operation</a></li>
-	<li><a class="normw" href="attr_material.html">material attributes</a></li>
-	<li><a class="normw" href="attr_material_color.html">material.color attribute</a></li>
-    <li><a class="normw" href="attr_material_map.html">material.map texture layers</a></li> 
-	<li><a class="normw" href="cga_texturing.html">Texturing: Essential Knowledge</a></li>
-</ul>
-
-<h2>Examples</h2>
-<h3>Example 1: material after setting individual attributes</h3>
-<p class="example">	
-CGA Code:
-<pre class="codecga">
-RefExample1-->
+      <section class="example">
+         <h3>Example 1: material after setting individual attributes</h3>
+         <p>CGA Code:</p>
+<pre class="code-block">
+RefExample1--&gt;
    color(0.5, 0.6, 0.7)
    print(getMaterial(used, changed))
 </pre>
-Result:
-<pre class="codecga">
+         <p>Result:</p>
+<pre class="code-block">
 (3x2)
    color.b   0.7
    color.g   0.6
    color.r   0.5
 </pre>
-</p>
+      </section>
 
-<p class="example">	
-<h3>Example 2: material after inserting an asset</h3>
-CGA Code:
-<pre class="codecga">
-RefExample2-->
+      <section class="example">
+         <h3>Example 2: material after inserting an asset</h3>
+         <p>CGA Code:</p>
+<pre class="code-block">
+RefExample2--&gt;
    i("/ESRI.lib/assets/Webstyles/Vegetation/Realistic/AcerPlatanoides.glb")
    print(getMaterial(used, changed))
 </pre>
-Result:
-<pre class="codecga">
+         <p>Result:</p>
+<pre class="code-block">
 (15x2)
             metallic                                                                          0
              opacity                                                                          1
@@ -113,42 +121,49 @@ Result:
           opacitymap   /ESRI.lib/assets/Webstyles/Vegetation/Realistic/AcerPlatanoides.glb/img0
               shader                                                        CityEnginePBRShader
 </pre>
-</p>
+      </section>
 
+      <section class="example">
+         <h3>Example 3: applying a geometry asset's material on a primitive geometry</h3>
 
+         <div class="example-row">
+            <figure class="media media-example">
+               <img src="images/getMaterial_example_3.png" alt="Insert a">
+            </figure>
 
-
-<h3>Example 3: applying a geometry asset's material on a primitive geometry</h3>
-<table summary="" class="twocol">
-<tr>
-	<td class="twocol_l"><img src="images/getMaterial_example_3.png" alt="Insert a" width="298"/></td>
-	<td class="twocol_r"><pre class="codecga">
-RefExample3-->
+            <div class="example-content">
+<pre class="code-block">
+RefExample3--&gt;
    i("/ESRI.lib/assets/Webstyles/StreetScene/Fire_Hydrant.glb")
    X.
    t('-1.5, 0, 0)
    CreateCylAndSetMaterial(getMaterial(geometry, changed))
-    
-CreateCylAndSetMaterial(m)-->
-   primitiveCylinder(16)
-    X.
-    t('-1.5, 0, 0)
-    setMaterial(m)
-    X.
-</pre>
-	<em>The Fire_Hydrant asset is inserted (left). This geometry has various material attributes set. Next, a cylinder is created, which uses the CGA default material (middle). Finally, the Fire_Hydrant material is applied on the cylinder (right).</em>
-	</td>
-</tr>
-</table>
 
-<h3>Example 4: shape material vs. geometry material</h3>
-<table summary="" class="twocol">
-<tr>
-	<td class="twocol_l"><img src="images/getMaterial_example_4.png" alt="Insert a" width="298"/></td>
-	<td class="twocol_r"><pre class="codecga">
+CreateCylAndSetMaterial(m)--&gt;
+   primitiveCylinder(16)
+   X.
+   t('-1.5, 0, 0)
+   setMaterial(m)
+   X.
+</pre>
+               <p>The Fire_Hydrant asset is inserted (left). This geometry has various material attributes set. Next, a cylinder is created, which uses the CGA default material (middle). Finally, the Fire_Hydrant material is applied on the cylinder (right).</p>
+            </div>
+         </div>
+      </section>
+
+      <section class="example">
+         <h3>Example 4: shape material vs. geometry material</h3>
+
+         <div class="example-row">
+            <figure class="media media-example">
+               <img src="images/getMaterial_example_4.png" alt="Insert a">
+            </figure>
+
+            <div class="example-content">
+<pre class="code-block">
 const defaultMaterial = getMaterial(shape, all)
 
-RefExample4-->
+RefExample4--&gt;
    i("/ESRI.lib/assets/Webstyles/StreetScene/Fire_Hydrant.glb")
    X.
    t('-1.5, 0, 0)
@@ -162,20 +177,14 @@ RefExample4-->
    setMaterial(defaultMaterial)
    X.
 </pre>
-	<em>The Fire_Hydrant asset is inserted (left). This geometry has various material attributes set. Then some shape material attributes are set to override the geometry material, resulting in a blue, untextured model. Next the changes to the shape material are reset which gives the original material setup of the asset again. Finally, the full default CGA material, which is captured in a const function, is explicitly set, resulting in all shape material attributes being set and thus override the geometry's material.</em>
-	</td>
-</tr>
-</table>
+               <p>The Fire_Hydrant asset is inserted (left). This geometry has various material attributes set. Then some shape material attributes are set to override the geometry material, resulting in a blue, untextured model. Next the changes to the shape material are reset which gives the original material setup of the asset again. Finally, the full default CGA material, which is captured in a const function, is explicitly set, resulting in all shape material attributes being set and thus override the geometry's material.</p>
+            </div>
+         </div>
+      </section>
+   </section>
 
+   <footer class="footer">Copyright &copy;2008-2026 Esri R&amp;D Center Zurich. All rights reserved.</footer>
 
-
-
-
-<!-- FOOTER -->
-<p class="foot">Copyright &copy;2008-2025 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
-
-<!-- END CENTERED CONTENT -->
-
-</div>
+</article>
 </body>
 </html>

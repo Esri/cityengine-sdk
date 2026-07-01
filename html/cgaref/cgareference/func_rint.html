@@ -1,56 +1,59 @@
+<!doctype html>
 <html>
 
 <head>
-    <title>rint Function</title>
-    <link rel="stylesheet" href="../manual_style.css" type="text/css" />
+    <meta charset="UTF-8">
+    <title>rint function</title>
+    <link rel="stylesheet" href="../cgareference_style.css" type="text/css">
 </head>
 
 <body>
-<div class="content">
+<article class="content">
 
-<!-- HEADER (use only on bookchapters) -->
+    <header class="section">
+        <h1>
+            <span class="name">rint</span>
+            <span class="kind">function</span>
+        </h1>
 
-<table summary="" class="header">
-	<tr>
-		<td align="left" class="helphead_l"><a href="../toc.html"><div class="helplink">&nbsp;</div></a></td>
-		<td align="right" class="helphead_r"></td>
-	</tr>
-</table>
+        <div class="signatures">
+            <div><span class="type-tag">float</span> <span class="func">rint</span>(<span class="param">x</span>)</div>
+            <div><span class="type-tag">float[]</span> <span class="func">rint</span>(<span class="param">x</span>)</div>
+        </div>
+    </header>
 
-<!-- CONTENT -->
+    <section class="section">
+        <div class="param-list">
+            <div class="param-item">
+                <div class="indent-body">
+                    <p><span class="param">x</span> <span class="type-tag">float</span><span class="type-tag">float[]</span></p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<h1>rint function</h1>
+    <section class="section">
+        <div class="return-list">
+            <div class="return-item">
+                <div class="indent-body">
+                        <p>Returns <span class="param">x</span> rounded to the nearest integer. Integral values remain unchanged. For arrays, the function is applied element-wise and returns a new array with the rounded values.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<h2>Syntax</h2>
+    <section class="section">
+        <h2>Related</h2>
+        <div class="related">
+            <a class="func" href="func_abs.html"><span class="related-name">abs</span><span class="related-kind">function</span></a>
+            <a class="func" href="func_ceil.html"><span class="related-name">ceil</span><span class="related-kind">function</span></a>
+            <a class="func" href="celib/clamp.html"><span class="related-name">clamp</span><span class="related-kind">function</span></a>
+            <a class="func" href="func_floor.html"><span class="related-name">floor</span><span class="related-kind">function</span></a>
+        </div>
+    </section>
 
-<p class="code2"><span class="codelight">float</span>&nbsp&nbsp&nbsprint(<span class="cga_opparam">x</span>)</p>
+    <footer class="footer">Copyright &copy;2008-2026 Esri R&amp;D Center Zurich. All rights reserved.</footer>
 
-<p class="code2"><span class="codelight">float[]</span>&nbsprint(<span class="cga_opparam">x</span>)</p>
-
-<h2>Parameters</h2>
-
-<ul>
-   	<li><span class="cga_opparam">x</span> (float, float[])</li>
-</ul>
-
-<h2>Returns</h2>
-
-<p>The floating point number <span class="cga_opparam">x</span>, rounded to the nearest integer, or a new array containing rounded integer values of elements of <span class="cga_opparam">x</span>. Integral values remain unchanged.</p>
-
-<h2>Related</h2>
-
-<ul>
-	<li><a class="normw" href="func_abs.html">abs function</a></li>
-	<li><a class="normw" href="func_ceil.html">ceil function</a></li>
-	<li><a class="normw" href="celib/clamp.html">clamp function</a></li>
-	<li><a class="normw" href="func_floor.html">floor function</a></li>
-</ul>
-
-<!-- FOOTER -->
-<p class="foot">Copyright &copy;2008-2025 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
-
-<!-- END CENTERED CONTENT -->
-
-</div>
+</article>
 </body>
 </html>

@@ -1,487 +1,443 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!doctype html>
 <html>
 
 <head>
-	<title>split Operation</title>
-	<link rel="stylesheet" href="../manual_style.css" type="text/css" />
+    <meta charset="UTF-8">
+    <title>split operation</title>
+    <link rel="stylesheet" href="../cgareference_style.css" type="text/css">
 </head>
 
 <body>
-<div class="content">
+<article class="content">
 
-<!-- HEADER (use only on bookchapters) -->
+    <header class="section">
+        <h1>
+            <span class="name">split</span>
+            <span class="kind">operation</span>
+        </h1>
 
-<table summary="" class="header">
-	<tr>
-		<td align="left" class="helphead_l"><a href="../toc.html"></a><div class="helplink">&nbsp;</div></td>
-		<td align="right" class="helphead_r"></td>
-	</tr>
-</table>
+        <div class="signatures">
+            <div><span class="op">split</span>(<span class="param">axis</span>) { <span class="param">size</span> : <span class="param">operations</span> | ... }</div>
+            <div><span class="op">split</span>(<span class="param">axis</span>) { <span class="param">size</span> : <span class="param">operations</span> | ... }<span class="param">*</span></div>
+            <div><span class="op">split</span>(<span class="param">axis</span>, <span class="param">adjustMode</span>) { <span class="param">size</span> : <span class="param">operations</span> | ... }</div>
+            <div><span class="op">split</span>(<span class="param">axis</span>, <span class="param">adjustMode</span>) { <span class="param">size</span> : <span class="param">operations</span> | ... }<span class="param">*</span></div>
+        </div>
+        <div class="signatures">
+            <div><span class="op">split</span>(<span class="param">direction</span>, <span class="param">surfaceParameterization</span>, <span class="param">uvSet</span>) { <span class="param">size</span> : <span class="param">operations</span> | ... }<span class="param"></span></div>
+            <div><span class="op">split</span>(<span class="param">direction</span>, <span class="param">surfaceParameterization</span>, <span class="param">uvSet</span>) { <span class="param">size</span> : <span class="param">operations</span> | ... }<span class="param">*</span></div>
+        </div>
+    </header>
 
-<!-- CONTENT -->
+    <section class="section">
+        <h4>XYZ Split (Cartesian Space)</h4>
+        <div class="param-list">
+            <div class="param-item">
+                <div class="indent-body">
+                    <p><span class="param">axis</span> <span class="type-tag">selector</span></p>
+                    <table class="option-table">
+                        <tr><td><span class="inlinecode">x, y, z</span></td><td>Scope axis to split along.</td></tr>
+                    </table>
+                </div>
+            </div>
 
-<h1>split operation</h1>
+            <div class="param-item">
+                <div class="indent-body">
+                    <p><span class="param">adjustMode</span> <span class="type-tag">selector</span></p>
+                    <table class="option-table">
+                        <tr><td><span class="inlinecode">adjust</span></td><td>Default. Adjusts each resulting scope to the geometry's bounding box.</td></tr>
+                        <tr><td><span class="inlinecode">noAdjust</span></td><td>The scopes of the resulting shapes fill the parent scope without gaps.</td></tr>
+                    </table>
+                </div>
+            </div>
+        </div>
 
-<h2>Syntax</h2>
+        <h4>UV Split (Texture Space)</h4>
+        <div class="param-list">
+            <div class="param-item">
+                <div class="indent-body">
+                    <p><span class="param">direction</span> <span class="type-tag">selector</span></p>
+                    <table class="option-table">
+                        <tr><td><span class="inlinecode">u, v</span></td><td>Texture-space axis to split along.</td></tr>
+                    </table>
+                </div>
+            </div>
 
-<h5>XYZ Split (Cartesian Space)</h5>
+            <div class="param-item">
+                <div class="indent-body">
+                    <p><span class="param">surfaceParameterization</span> <span class="type-tag">selector</span></p>
+                    <table class="option-table">
+                        <tr><td><span class="inlinecode">uvSpace</span></td><td>Planar texture space, defined by the uv coordinates.</td></tr>
+                        <tr><td><span class="inlinecode">unitSpace</span></td><td>2d space on the 3d geometry surface, measured in units (e.g. meters).</td></tr>
+                    </table>
+                </div>
+            </div>
 
-<p class="code2">split(<span class="cga_opparam">axis</span>) { <span class="cga_opparam">size<span class="style2">1</span></span> : <span class="cga_opparam">operations<span class="style2">1</span></span> | <span class="cga_opparam">size<span class="style2">2</span></span> : <span class="cga_opparam">operations<span class="style2">2</span></span> | ... | <span class="cga_opparam">size<span class="style2">n-1</span></span> : <span class="cga_opparam">operations<span class="style2">n-1</span></span> }</p>
+            <div class="param-item">
+                <div class="indent-body">
+                    <p><span class="param">uvSet</span> <span class="type-tag">float</span> Number of texture a set/layer (integer number in [0,9]). The numbering corresponds to the texture layers of the material attribute.</p>
+                </div>
+            </div>
+        </div>
 
-<p class="code2">split(<span class="cga_opparam">axis</span>) { <span class="cga_opparam">size<span class="style2">1</span></span> : <span class="cga_opparam">operations<span class="style2">1</span></span> | <span class="cga_opparam">size<span class="style2">2</span></span> : <span class="cga_opparam">operations<span class="style2">2</span></span> | ... | <span class="cga_opparam">size<span class="style2">n-1</span></span> : <span class="cga_opparam">operations<span class="style2">n-1</span></span> }<span class="cga_opparam">*</span></p>
+        <p>See <a href="cga_texturing.html">Texturing</a> for information about the texture layer IDs.</p>
 
-<p class="code2">split(<span class="cga_opparam">axis</span>, <span class="cga_opparam">adjustMode</span>) { <span class="cga_opparam">size<span class="style2">1</span></span> : <span class="cga_opparam">operations<span class="style2">1</span></span> | ... | <span class="cga_opparam">size<span class="style2">n-1</span></span> : <span class="cga_opparam">operations<span class=
-"style2">n-1</span></span> }</p>
+        <h4>General</h4>
+        <div class="param-list">
+            <div class="param-item">
+                <div class="indent-body">
+                    <p><span class="param">size</span> <span class="type-tag">float</span> Split width. Depending on the prefix, the widths along <span class="param">axis</span> are interpreted in the following way:</p>
+                    <table class="option-table">
+                        <tr><td>no prefix (absolute)</td><td>The new shape will have exactly size <span class="param">size</span>.</td></tr>
+                        <tr><td><span class="inlinecode">'</span> (relative)</td><td>The new shape's size will be <span class="param">size</span> * current scope size.</td></tr>
+                        <tr><td><span class="inlinecode">~</span> (floating)</td><td>With the <span class="inlinecode">~</span> prefix, the remaining spaces between the split parts with absolute dimensions are automatically adapted. If multiple floating parts are defined within a split, the dimensions are weighed proportionally.</td></tr>
+                    </table>
+                </div>
+            </div>
 
-<p class="code2">split(<span class="cga_opparam">axis</span>, <span class="cga_opparam">adjustMode</span>) { <span class="cga_opparam">size<span class="style2">1</span></span> : <span class="cga_opparam">operations<span class="style2">1</span></span> | ... | <span class="cga_opparam">size<span class="style2">n-1</span></span> : <span class="cga_opparam">operations<span class=
-"style2">n-1</span></span> }<span class="cga_opparam">*</span></p>
+            <div class="param-item">
+                <div class="indent-body">
+                    <p><span class="param">operations</span> A sequence of shape operations to execute on the newly created shape.</p>
+                </div>
+            </div>
 
-<h5>UV Split (Texture Space)</h5>
+            <div class="param-item">
+                <div class="indent-body">
+                    <p><span class="param">*</span> Repeat switch: the repeat switch triggers the repetition of the defined split into the current shape's <span class="inlinecode">scope</span>, as many times as possible. The number of repetitions and floating dimensions are adapted to the best solution (best number of repetitions and least stretching).</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<p class="code2">split(<span class="cga_opparam">direction</span>, <span class="cga_opparam">surfaceParameterization</span>, <span class="cga_opparam">uvSet</span>) { <span class="cga_opparam">size<span class="style2">1</span></span> : <span class="cga_opparam">operations<span class="style2">1</span></span> | ... | <span class="cga_opparam">size<span class="style2">n-1</span></span> : <span class="cga_opparam">operations<span class="style2">n-1</span></span> }<span class="cga_opparam">*</span></p>
+    <section class="section">
+        <h4>XYZ Split (Cartesian Space)</h4>
+        <p>The split operation subdivides the current shape along the specified <span class="inlinecode">scope</span> axis into a set of smaller shapes. For each <span class="param">size</span>-<span class="param">operation</span> block inside the curly brackets, a new shape is pushed onto the shape stack, a number of shape operations is executed and the shape on top of the shape stack is popped again.</p>
 
-<h2>Parameters</h2>
+        <p>If the optional repeat switch <span class="param">*</span> is appended to the split operation, the content of {...} is repeated as often as it fully fits into the <span class="inlinecode">scope</span>'s dimension along the selected axis.</p>
 
-<h5>XYZ Split (Cartesian Space)</h5>
+        <p>The <span class="inlinecode">geometry</span> of the current shape is cut with a plane perpendicular to the split axis at every intersection between two blocks (i.e. at <span class="param">size</span><span class="inlinecode">1</span>, <span class="param">size</span><span class="inlinecode">2</span>, ... <span class="param">size</span><span class="inlinecode">n-1</span>). Hollow meshes are closed after the cut, i.e. cutting planes introduce new surfaces to preserve the volume.</p>
 
-<ul>
-	<li><span class="cga_opparam">axis</span> (selector)
-	<table cellspacing="5">
-		<tr><td width="10%"><span class="codelight">x, y, z</span></td><td>Name of axis to split along. This is relative to the local coordinate system (i.e. the <span class="cga_keyword">scope</span>).</td></tr>
-	</table>
-	</li>
-	<li><span class="cga_opparam">adjustMode</span>
-	<table cellspacing="5">
-		<tr><td width="20%"><span class="codelight">adjust, noAdjust</span></td><td>Optional selector to control scope calculation of the calculated shapes: the default is to adjust the scope to the geometry's bounding box; <span class="codelight">noAdjust</span> avoids this, therefore the scopes of the resulting shapes fill the parent's scope without gaps.</td></tr>
-	</table>
-	</li>
-</ul>
+        <p>Splits can be nested, i.e. a <span class="param">size : operation</span> block can be replaced by a {...} block. In theory, the nested level is unlimited.</p>
 
-<h5>UV Split (Texture Space)</h5>
+        <h4>UV Split (Texture Space)</h4>
+        <p>Splits can also be applied in the 2d uv texture domain. Texture coordinates define a 2d parameter space on a 3d surface. Examples of such parameterizations are streets (u along thew street direction, v along the width) and facades (generated with <span class="inlinecode">setupProjection()</span> and <span class="inlinecode">projectUV()</span>, u along the width and v along the height). This permits to operate directly on the surface. In general, uv coordinates are in the [0,1] range and not connected to a unit like meters or yards on the surface (defined by the underlying mesh). Setting the split <span class="param">direction</span> parameter to <span class="inlinecode">unitSpace</span> permits to operate directly on the surface, i.e. work in units (e.g. meters or yards). Depending on the geometry and type of parameterization there is some inherent distortion in this conversion.</p>
 
-<ul>
-	<li><span class="cga_opparam">direction</span> (selector)
-	<table cellspacing="5">
-		<tr><td width="25%"><span class="codelight">u, v</span></td><td>Name of axis to split along.</td></tr>
-	</table>
-	</li>
-	<li><span class="cga_opparam">surfaceParameterization</span> (selector)
-	<table cellspacing="5">
-		<tr><td width="15%"><span class="codelight">uvSpace</span></td><td>Planar texture space, defined by the uv coordinates.</td></tr>
-		<tr><td><span class="codelight">unitSpace</span></td><td>2d space on the 3d geometry surface, measured in units (e.g. meters).</td></tr>
-	</table>
-	</li> 
-	<li><span class="cga_opparam">uvSet</span> (float)<br>Number of texture a set/layer (integer number in [0,9]). The numbering corresponds to the texture layers of the material attribute.</li> 
-</ul>
+        <p>Borders (start, end) of the uv split are defined by the minimal and maximal values found in the selected uv coordinates. The genral syntax of the split is the same as in the cartesian case described above, i.e. relative and floating operators (' and ~) can be used as well as the repeat operator (*). Please check out the <a href="#uvsplitbasic">examples below</a>.</p>
 
-<p>See <a class="normw" href="cga_texturing.html">Texturing</a> for information about the texture layer IDs.</p>
+        <h4>Shape attributes</h4>
+        <p>Each generated shape will have a number of attributes set:</p>
 
-<h5>General</h5>
+        <ul>
+            <li>split.index: The zero-based index of the selected component.</li>
+            <li>split.total: The total number of components selected by the selector.</li>
+        </ul>
 
-<ul>
-	<li><span class="cga_opparam">size</span> (float)<br>Split width. Depending on the prefix, the widths along <span class="cga_opparam">axis</span> are interpreted in the following way:
-	<table cellspacing="5">
-		<tr><td width="25%">no prefix (absolute)</td><td>The new shape will have exactly size <span class="cga_opparam">size</span>.</td></tr>
-		<tr><td><span class="codelight">'</span> (relative)</td><td>The new shape's size will be <span class="cga_opparam">size</span> <i>* current scope size.</i>.</td></tr>
-		<tr><td><span class="codelight">~</span> (floating)</td><td>With the <span class="codelight">~</span> prefix, the remaining spaces between the split parts with absolute dimensions are automatically adapted. If multiple floating parts are defined within a split, the dimensions are weighed proportionally.</td></tr>
-	</table>
-	</li>
-	<li><span class="cga_opparam">operations</span><br>A sequence of shape operations to execute on the newly created shape.</li>
-	<li><span class="cga_opparam">*</span><br>Repeat switch: the repeat switch triggers the repetition of the defined split into the current shape's <span class="cga_keyword">scope</span>, as many times as possible. The number of repetitions and floating dimensions are adapted to the best solution (best number of repetitions and least stretching).</li>
-</ul>
+        <p>Index and total are global; for instance</p>
 
-<h2>Description</h2>
-
-<h5>XYZ Split (Cartesian Space)</h5>
-
-<p>The split operation subdivides the current shape along the specified <span class="cga_keyword">scope</span> axis into a set of smaller shapes. For each <span class="cga_opparam">size</span>-<span class="cga_opparam">operation</span> block inside the curly brackets, a new shape is pushed onto the shape stack, a number of shape operations is executed and the shape on top of the shape stack is popped again.</p>
-
-<p class="text">If the optional repeat switch <span class="cga_opparam">*</span> is appended to the split operation, the content of {...} is repeated as often as it fully fits into the <span class="cga_keyword">scope</span>'s dimension along the selected axis.</p>
-
-<p class="text">The <span class="cga_keyword">geometry</span> of the current shape is cut with a plane perpendicular to the split axis at every intersection between two blocks (i.e. at <span class="cga_opparam">size</span><span class="style2">1</span>, <span class="cga_opparam">size</span><span class="style2">2</span>, ... <span class="cga_opparam">size</span><span class="style2">n-1</span>). Hollow meshes are closed after the cut, i.e. cutting planes introduce new surfaces to preserve the volume.</p>
-
-<p>Splits can be nested, i.e. a <span class="cga_opparam">size : operation</span> block can be replaced by a {...} block. In theory, the nested level is unlimited.</p>
-
-<h5>UV Split (Texture Space)</h5>
-
-<p>Splits can also be applied in the 2d uv texture domain. Texture coordinates define a 2d parameter space on a 3d surface. Examples of such parameterizations are streets (u along thew street direction, v along the width) and facades (generated with <span class="cga_keyword">setupProjection()</span> and <span class="cga_keyword">projectUV()</span>, u along the width and v along the height). This permits to operate directly on the surface. In general, uv coordinates are in the [0,1] range and not connected to a unit like meters or yards on the surface (defined by the underlying mesh). Setting the split <span class="cga_opparam">direction</span> parameter to <span class="cga_codelight">unitSpace</span> permits to operate directly on the surface, i.e. work in units (e.g. meters or yards). Depending on the geometry and type of parameterization there is some inherent distortion in this conversion.<br>
-Borders (start, end) of the uv split are defined by the minimal and maximal values found in the selected uv coordinates. The genral syntax of the split is the same as in the cartesian case described above, i.e. relative and floating operators (' and ~) can be used as well as the repeat operator (*). Please check out the <a href="#uvsplitbasic">examples below</a>.</p>
-
-<h3 class="text">Shape attributes</h3>
-
-<p class="text">Each generated shape will have a number of attributes set:</p>
-
-<ul>
-	<li>split.index: The zero-based index of the selected component.</li>
-	<li>split.total: The total number of components selected by the selector.</li>
-</ul>
-
-<p>Index and total are global; for instance</p>
-
-<pre class="codecga">
-     ...
-     primitiveCube()
-     split(x) { '0.1 : A | '0.1 : B }*
+<pre class="code-block">
+...
+primitiveCube()
+split(x) { '0.1 : A | '0.1 : B }*
 </pre>
 
-<p>will create 5 shapes with rule A interleaved with 5 shapes with rule B where split.index goes from 0 to 9 with all even numbers on rule A and all odd numbers on rule B while split.total will be 10.</p>
+        <p>will create 5 shapes with rule A interleaved with 5 shapes with rule B where split.index goes from 0 to 9 with all even numbers on rule A and all odd numbers on rule B while split.total will be 10.</p>
 
-<p>For more information see <a class="normw" href="attr_split.html">split attribute</a>.</p>
+        <p>For more information see <a href="attr_split.html">split attribute</a>.</p>
+    </section>
 
-<h2>Related</h2>
+    <section class="section">
+        <h2>Related</h2>
+        <div class="related">
+            <a class="attr" href="attr_scope.html"><span class="related-name">scope</span><span class="related-kind">attribute</span></a>
+            <a class="attr" href="attr_pivot.html"><span class="related-name">pivot</span><span class="related-kind">attribute</span></a>
+            <a class="attr" href="attr_split.html"><span class="related-name">split</span><span class="related-kind">attribute</span></a>
+            <a class="op" href="op_splitArea.html"><span class="related-name">splitArea</span><span class="related-kind">operation</span></a>
+            <a class="op" href="op_splitAndSetbackPerimeter.html"><span class="related-name">splitAndSetbackPerimeter</span><span class="related-kind">operation</span></a>
+        </div>
+    </section>
 
-<ul>
-	<li><a class="normw" href="attr_scope.html">scope attribute</a></li>
-	<li><a class="normw" href="attr_pivot.html">pivot attribute</a></li>
-	<li><a class="normw" href="attr_split.html">split attribute</a></li>
-	<li><a class="normw" href="op_splitArea.html">splitArea operation</a></li>
-	<li><a class="normw" href="op_splitAndSetbackPerimeter.html">splitAndSetbackPerimeter operation</a></li>
-</ul>
+    <section class="section">
+        <h2>Examples</h2>
 
-<h2>Examples</h2>
-<!-- 2 Column Formatting (for Tutorials) -->
-
-<h3>Setup</h3>
-
-<table summary="" class="twocol">
-<tr>
-<td class="twocol_l">
-<img src="images/split-initial.png"></td>
-<td class="twocol_r">
-<em>
-This is the initial shape before the split. We will present a number of split examples
-along the x axis, the current shape's <span class="cga_keyword">scope.sx</span> is 10.<br>
-</em>
-<p>
-Below are the rules used to color and size the shapes created in the split:
-</p>
-<pre class="codecga">
+        <section class="example">
+            <h3>Setup</h3>
+            <div class="example-row">
+                <figure class="media media-example">
+                    <img src="images/split-initial.png" alt="split initial">
+                </figure>
+                <div class="example-content">
+                    <p>This is the initial shape before the split. We will present a number of split examples along the x axis, the current shape's <span class="inlinecode">scope.sx</span> is 10.</p>
+                    <p>Below are the rules used to color and size the shapes created in the split:</p>
+<pre class="code-block">
 X(h)-->
-	s('1,'h,'1)
-	color("#0000ff")
-	
+    s('1,'h,'1)
+    color("#0000ff")
+
 Y(h)-->
-	s('1,'h,'1)
-	color("#ffff00")
-	
+    s('1,'h,'1)
+    color("#ffff00")
+
 Z(h)-->
-	s('1,'h,'1)
-	color("#00ff00")
+    s('1,'h,'1)
+    color("#00ff00")
 </pre>
-</td>
-</tr>
-</table>
+                </div>
+            </div>
+        </section>
 
-<h3>Relative Sizes</h3>
-
-<table summary="" class="twocol">
-<tr>
-<td class="twocol_l">
-<img src="images/split-relative1.png"></td>
-<td class="twocol_r">
-<pre class="codecga">
+        <section class="example">
+            <h3>Relative Sizes</h3>
+            <div class="example-row">
+                <figure class="media media-example">
+                    <img src="images/split-relative1.png" alt="split relative sizes">
+                </figure>
+                <div class="example-content">
+<pre class="code-block">
 A-->
-   split(x){ '0.5 : Z |
-             '0.1 : Y(2) | 
-             '0.2 : X(1) }
+   split(x) { '0.5 : Z 
+            | '0.1 : Y(2) 
+            | '0.2 : X(1) }
 </pre>
-<em>
+                    <p>This example shows the usage of the relative prefix. The green Z shape takes half of the initial shape's size (5 units) and so on. The total sum of all shape sizes in x-direction is 8, therefore the gap at the end.</p>
+                </div>
+            </div>
+        </section>
 
-This example shows the usage of the relative prefix. The green Z shape takes half of the
-initial shape's  size (5 units) and so on. The total sum of all shape sizes in x-direction is 8, 
-therefore the gap at the end.
-</em>
-</td>
-</tr>
-</table><h3> Floating Sizes only: Ratios</h3>
-<table summary="" class="twocol">
-<tr>
-<td class="twocol_l">
-<img src="images/split-ratio1.png"></td>
-<td class="twocol_r">
-<pre class="codecga">
+        <section class="example">
+            <h3>Floating Sizes only: Ratios</h3>
+            <div class="example-row">
+                <figure class="media media-example">
+                    <img src="images/split-ratio1.png" alt="split floating sizes ratios">
+                </figure>
+                <div class="example-content">
+<pre class="code-block">
 A-->
-   split(x){ ~0.5 : Z |
-             ~0.1 : Y(2) | 
-             ~0.2 : X(1) }
+   split(x) { ~0.5 : Z 
+            | ~0.1 : Y(2) 
+            | ~0.2 : X(1) }
 </pre>
-<em>
-The same example as above, but all sizes with the floating prefix. 
-Note how the whole initial scope is filled (no gap at the end), and the ratios are kept.
-</em>
-</td>
-</tr>
-</table>
+                    <p>The same example as above, but all sizes with the floating prefix. Note how the whole initial scope is filled (no gap at the end), and the ratios are kept.</p>
+                </div>
+            </div>
+        </section>
 
-<h3>Absolute and Floating Sizes</h3>
-
-<table summary="" class="twocol">
-<tr>
-<td class="twocol_l">
-<img src="images/split-floating1.png"></td>
-<td class="twocol_r">
-<pre class="codecga">
+        <section class="example">
+            <h3>Absolute and Floating Sizes</h3>
+            <div class="example-row">
+                <figure class="media media-example">
+                    <img src="images/split-floating1.png" alt="split absolute and floating sizes">
+                </figure>
+                <div class="example-content">
+<pre class="code-block">
 A-->
-   split(x){ 3.3 : Z(1) |
-            ~3   : Y(2) | 
-             5   : X(1) }			  
+   split(x) {  3.3 : Z(1) 
+            | ~3   : Y(2) 
+            |  5   : X(1) }
 </pre>
-<em>
-Here, a floating sized shape is framed between two absolute sized shapes. Its size is adjusted
-from 3 to 1.7 to fulfill the absolute constraints.
-</em>
-</td>
-</tr>
-</table>
+                    <p>Here, a floating sized shape is framed between two absolute sized shapes. Its size is adjusted from 3 to 1.7 to fulfill the absolute constraints.</p>
+                </div>
+            </div>
+        </section>
 
-<h3>Oversized</h3>
-
-<table summary="" class="twocol">
-<tr>
-<td class="twocol_l">
-<img src="images/split-oversized.png"></td>
-<td class="twocol_r">
-<pre class="codecga">
+        <section class="example">
+            <h3>Oversized</h3>
+            <div class="example-row">
+                <figure class="media media-example">
+                    <img src="images/split-oversized.png" alt="split oversized">
+                </figure>
+                <div class="example-content">
+<pre class="code-block">
 A-->
-   split(x){ '0.5 : Z(1) |
-             '0.6 : Y(2) | 
-                3 : X(1) }
+   split(x) { '0.5 : Z(1) 
+            | '0.6 : Y(2) 
+            |    3 : X(1) }
 </pre>
-<em>
-<p>
-The first shape Z (green) fits in, but the second one Y (yellow) is cut at size 5. 
-The X never gets created because there is no space left.
-</p>
-</em>
-</td>
-</tr>
-</table>
+                    <p>The first shape Z (green) fits in, but the second one Y (yellow) is cut at size 5. The X never gets created because there is no space left.</p>
+                </div>
+            </div>
+        </section>
 
-<h3>Repeat Split with Absolute Sizes</h3>
-
-<table summary="" class="twocol">
-<tr>
-<td class="twocol_l">
-<img src="images/split-repeat1.png"></td>
-<td class="twocol_r">
-<pre class="codecga">
-A--> 
-   split(x){ 2 : X(2) | 
-             1 : Y(1) }*
-</pre>
-<em>
-A repeat split example. All sizes are absolute. The XY pattern is repeated 3 times, and the remaining unit is 
-filled with half a X, i.e. the geometry of the last X is cut off.
-</em>
-</td>
-</tr>
-</table>
-
-<h3>Repeat Split with Floating Sizes</h3>
-
-<table summary="" class="twocol">
-<tr>
-<td class="twocol_l">
-<img src="images/split-repeat-floating.png"></td>
-<td class="twocol_r">
-<pre class="codecga">
-A--> 
-   split(x){ ~2 : X(2) | 
-             ~1 : Y(1) }*
-</pre>
-<em>
-<p>
-If floating sizes are used in the repeat split, no shape is cut but the sizes are
-adjusted such that the ratio between the elements is kept and the whole scope can
-be filled.
-</p>
-</em>
-</td>
-</tr>
-</table>
-
-<h3>Interleaved Repeat Split</h3>
-
-<table summary="" class="twocol">
-<tr>
-<td class="twocol_l">
-<img src="images/split-interleaved1.png"></td>
-<td class="twocol_r">
-<pre class="codecga">
+        <section class="example">
+            <h3>Repeat Split with Absolute Sizes</h3>
+            <div class="example-row">
+                <figure class="media media-example">
+                    <img src="images/split-repeat1.png" alt="split repeat absolute sizes">
+                </figure>
+                <div class="example-content">
+<pre class="code-block">
 A-->
-   split(x){ 1 : X(3) | 
-                 {  ~1 : Y(2) | 
-                   0.2 : Z(1) | 
-                    ~1 : Y(2) }* | 
-             1 : X(3) }
+   split(x) { 2 : X(2) 
+            | 1 : Y(1) }*
 </pre>
-<p>
-<em>
-A interleaved split consisting of two absolute-sized shapes at both ends and 
-a repeat split in-between. Note: the green shapes Z have absolute sizes, while the yellow 
-Y shapes have floating sizes which turn out to be 0.9.
-</em>
+                    <p>A repeat split example. All sizes are absolute. The XY pattern is repeated 3 times, and the remaining unit is filled with half a X, i.e. the geometry of the last X is cut off.</p>
+                </div>
+            </div>
+        </section>
 
-</td>
-</tr>
-</table>
-
-<h3>Rhythm</h3>
-
-<table summary="" class="twocol">
-<tr>
-<td class="twocol_l">
-<img src="images/split-rhythm.png"></td>
-<td class="twocol_r">
-<pre class="codecga">
+        <section class="example">
+            <h3>Repeat Split with Floating Sizes</h3>
+            <div class="example-row">
+                <figure class="media media-example">
+                    <img src="images/split-repeat-floating.png" alt="split repeat floating sizes">
+                </figure>
+                <div class="example-content">
+<pre class="code-block">
 A-->
-   split(x){ {  1   : X(3) | 
-               ~2.7 : Y(1) }* |
-                1   : X(3) }
+   split(x) { ~2 : X(2)
+            | ~1 : Y(1) }*
 </pre>
-<p>
-<em>
-Here it is demonstrated how a pattern ABABABA etc. can be achieved. Note the floating 
-size of the yellow Y shapes.
-</em>
+                    <p>If floating sizes are used in the repeat split, no shape is cut but the sizes are adjusted such that the ratio between the elements is kept and the whole scope can be filled.</p>
+                </div>
+            </div>
+        </section>
 
-</td>
-</tr>
-</table>
-
-<h3>Cutting Geometry</h3>
-
-<table summary="" class="twocol">
-<tr>
-<td class="twocol_l">
-<img src="images/split-cylinder-initial.png"></td>
-<td class="twocol_r">
-<pre class="codecga">
+        <section class="example">
+            <h3>Interleaved Repeat Split</h3>
+            <div class="example-row">
+                <figure class="media media-example">
+                    <img src="images/split-interleaved1.png" alt="split interleaved repeat split">
+                </figure>
+                <div class="example-content">
+<pre class="code-block">
 A-->
-   i("cylinder.hor.obj")
-   t(0,'0.5,0)	
+   split(x) { 1 : X(3) 
+            | { ~1   : Y(2)
+              |  0.2 : Z(1)
+              | ~1   : Y(2) }* 
+            | 1 : X(3) }
 </pre>
-<p>
-<em>
-Here it is demonstrated how a the geometry of the current shape is cut into a number
-of smaller shapes. A cylinder model is inserted into the current shape.
-</em>
+                    <p>A interleaved split consisting of two absolute-sized shapes at both ends and a repeat split in-between. Note: the green shapes Z have absolute sizes, while the yellow Y shapes have floating sizes which turn out to be 0.9.</p>
+                </div>
+            </div>
+        </section>
 
-</td>
-</tr>
+        <section class="example">
+            <h3>Rhythm</h3>
+            <div class="example-row">
+                <figure class="media media-example">
+                    <img src="images/split-rhythm.png" alt="split rhythm">
+                </figure>
+                <div class="example-content">
+<pre class="code-block">
+A-->
+   split(x) { { 1 : X(3) | ~2.7 : Y(1) }* | 1 : X(3) }
+</pre>
+                    <p>Here it is demonstrated how a pattern ABABABA etc. can be achieved. Note the floating size of the yellow Y shapes.</p>
+                </div>
+            </div>
+        </section>
 
-<tr>
-<td class="twocol_l">
-<img src="images/split-cylinder-cut.png"></td>
-<td class="twocol_r">
-<pre class="codecga">
+        <section class="example">
+            <h3>Cutting Geometry</h3>
+
+            <div class="example-row">
+                <figure class="media media-example">
+                    <img src="images/split-cylinder-initial.png" alt="split cylinder initial">
+                </figure>
+                <div class="example-content">
+<pre class="code-block">
 A-->
    i("cylinder.hor.obj")
    t(0,'0.5,0)
-   split(x) { { ~0.75 : XX | ~1 : NIL }*  | ~0.5 : XX }
 </pre>
-<p>
-<em>
-Splitting the shape and using NIL in the split rule results in holes. Note how the cut surfaces
-are closed.
-</em>
+                    <p>Here it is demonstrated how a the geometry of the current shape is cut into a number of smaller shapes. A cylinder model is inserted into the current shape.</p>
+                </div>
+            </div>
 
-</td>
-</tr>
-</table>
+            <div class="example-row">
+                <figure class="media media-example">
+                    <img src="images/split-cylinder-cut.png" alt="split cylinder cut">
+                </figure>
+                <div class="example-content">
+<pre class="code-block">
+A-->
+   i("cylinder.hor.obj")
+   t(0,'0.5,0)
+   split(x) { { ~0.75 : X. | ~1 : NIL }*  | ~0.5 : X. }
+</pre>
+                    <p>Splitting the shape and using NIL in the split rule results in holes. Note how the cut surfaces are closed.</p>
+                </div>
+            </div>
+        </section>
 
-<a name="uvsplitbasic"></a><h3>UV Split Basics</h3>
-<table summary="" class="twocol">
-<tr>
-<td class="twocol_l">
-<img src="images/split-uv-example-1-1.png"></td>
-<td class="twocol_r">
-<pre class="codecga">
+        <section class="example">
+            <h3 id="uvsplitbasic">UV Split Basics</h3>
+
+            <div class="example-row">
+                <figure class="media media-example">
+                    <img src="images/split-uv-example-1-1.png" alt="split uv example 1 1">
+                </figure>
+                <div class="example-content">
+<pre class="code-block">
 Init-->
-	extrude(scope.sx * 0.5)
-	comp(f) { front : Facade }
-	
+    extrude(scope.sx * 0.5)
+    comp(f) { front : Facade }
+
 Facade-->
-	setupProjection(0, scope.xy, '1, '1)
-	projectUV(0)
-	texture("builtin:uvtest.png")
-	split(u, uvSpace, 0) { 0.5 : X }* 
+    setupProjection(0, scope.xy, '1, '1)
+    projectUV(0)
+    texture("builtin:uvtest.png")
+    split(u, uvSpace, 0) { 0.5 : X. }*
 </pre>
-<p>
-<em>
-u split in uvSpace - the split happens at u = 0.5, independent of facade size.
-</em>
+                    <p>u split in uvSpace - the split happens at u = 0.5, independent of facade size.</p>
+                </div>
+            </div>
 
-</td>
-</tr>
-
-<tr>
-<td class="twocol_l">
-<img src="images/split-uv-example-1-2.png"></td>
-<td class="twocol_r">
-<pre class="codecga">
+            <div class="example-row">
+                <figure class="media media-example">
+                    <img src="images/split-uv-example-1-2.png" alt="split uv example 1 2">
+                </figure>
+                <div class="example-content">
+<pre class="code-block">
 Init-->
-	extrude(scope.sx * 0.5)
-	comp(f) { front : Facade }
-	
+    extrude(scope.sx * 0.5)
+    comp(f) { front : Facade }
+
 Facade-->
-	setupProjection(0, scope.xy, '1, '1)
-	projectUV(0)
-	texture("builtin:uvtest.png")
-	split(u, unitSpace, 0) { 5 : X }* 
+    setupProjection(0, scope.xy, '1, '1)
+    projectUV(0)
+    texture("builtin:uvtest.png")
+    split(u, unitSpace, 0) { 5 : X. }*
 </pre>
-<p>
-<em>
-u split in unitSpace - the splits happen at u = 5, dependent of facade size.
-</em>
+                    <p>u split in unitSpace - the splits happen at u = 5, dependent of facade size.</p>
+                </div>
+            </div>
+        </section>
 
-</td>
-</tr>
+        <section class="example">
+            <h3>UV Split on Streets</h3>
 
-</table>
-
-<h3>UV Split on Streets</h3>
-
-<table summary="" class="twocol">
-<tr>
-<td class="twocol_l">
-<img src="images/split-uv-example-2-1.png"></td>
-<td class="twocol_r">
-<pre class="codecga">
+            <div class="example-row">
+                <figure class="media media-example">
+                    <img src="images/split-uv-example-2-1.png" alt="split uv example 2 1">
+                </figure>
+                <div class="example-content">
+<pre class="code-block">
 Street-->
-	texture("builtin:uvtest.png")
+    texture("builtin:uvtest.png")
 </pre>
-<p>
-<em>
-The test texture on a street with two segments.  The street's texture coordinates 
-are automatically generated; note that the two street segments have different lenghts 
-but are both covered by a [0,1] uv space, the u axis following the street direction
-and the v axis, perpendicular to u, along the width.
-</em>
+                    <p>The test texture on a street with two segments. The street's texture coordinates are automatically generated; note that the two street segments have different lenghts but are both covered by a [0,1] uv space, the u axis following the street direction and the v axis, perpendicular to u, along the width.</p>
+                </div>
+            </div>
 
-</td>
-</tr>
-
-<tr>
-<td class="twocol_l">
-<img src="images/split-uv-example-2-2.png"></td>
-<td class="twocol_r">
-<pre class="codecga">
+            <div class="example-row">
+                <figure class="media media-example">
+                    <img src="images/split-uv-example-2-2.png" alt="split uv example 2 2">
+                </figure>
+                <div class="example-content">
+<pre class="code-block">
 Street-->
-	split(u, unitSpace, 0) { ~10 : NIL | ~3 : color("#ff0000") X  |  ~10 : NIL}*
+    split(u, unitSpace, 0) { ~10 : NIL 
+                           | ~3 : color("#ff0000") X. 
+                           | ~10 : NIL }*
 </pre>
-<p>
-<em>
-The same street after a u-split in unitSpace. Every 20 meters a 3 meter wide band is drawn accross the street. 
-</em>
+                    <p>The same street after a u-split in unitSpace. Every 20 meters a 3 meter wide band is drawn accross the street.</p>
+                </div>
+            </div>
+        </section>
+    </section>
 
-</td>
-</tr>
+    <footer class="footer">Copyright &copy;2008-2026 Esri R&amp;D Center Zurich. All rights reserved.</footer>
 
-</table>
-
-<!-- FOOTER -->
-<p class="foot">Copyright &copy;2008-2025 Esri R&amp;D Center Zurich. All rights reserved.</p>
-<!-- END CENTERED CONTENT --></div>
+</article>
 </body>
 </html>

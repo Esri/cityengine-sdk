@@ -1,73 +1,81 @@
+<!doctype html>
 <html>
 
 <head>
-	<title>Rule inlining</title>
-	<link rel="stylesheet" href="../manual_style.css" type="text/css" />
+    <meta charset="UTF-8">
+    <title>inline keyword</title>
+    <link rel="stylesheet" href="../cgareference_style.css" type="text/css">
 </head>
 
 <body>
-<div class="content">
+<article class="content">
 
-<table summary="" class="header">
-	<tr>
-		<td align="left" class="helphead_l"><a href="../toc.html"><div class="helplink">&nbsp;</div></a></td>
-		<td align="right" class="helphead_r"></td>
-	</tr>
-</table>
+    <header class="section">
+        <h1><span class="name">inline</span><span class="kind">keyword</span></h1>
 
-<h1>Rule inlining</h1>
+        <div class="signatures">
+            <div><span class="kw">inline</span> <span class="param">Rule</span></div>
+            <div><span class="kw">inline</span> <span class="param">subdivision</span></div>
+            <div><span class="kw">inline</span> { <span class="param">operations</span> }</div>
+            <div><span class="kw">inline</span>(<span class="param">geometryMergeStrategy</span>) <span class="param">Rule</span></div>
+            <div><span class="kw">inline</span>(<span class="param">geometryMergeStrategy</span>) <span class="param">subdivision</span></div>
+            <div><span class="kw">inline</span>(<span class="param">geometryMergeStrategy</span>) { <span class="param">operations</span> }</div>
+        </div>
+    </header>
 
-<h2>Syntax</h2>
+    <section class="section">
+        <div class="param-list">
+            <div class="param-item">
+                <div class="indent-body">
+                    <p><span class="param">geometryMergeStrategy</span> <span class="type-tag">selector</span></p>
+                    <p>Defines how the geometries of the resulting shapes are combined:</p>
+                    <table class="option-table">
+                        <tr><td><span class="inlinecode">append</span></td><td>Default. Appends the geometry as is.</td></tr>
+                        <tr><td><span class="inlinecode">unify</span></td><td>Uses the Boolean union operation.</td></tr>
+                        <tr><td><span class="inlinecode">recompose</span></td><td>Reconnects subdivided shapes (see <a href="cga_shapeRecomposition.html">Shape Recomposition</a>).</td></tr>
+                    </table>
+                </div>
+            </div>
 
-<p class="code2"><span class="cga_op">inline</span> <span class="cga_opparam">Rule</span></p>
-<p class="code2"><span class="cga_op">inline</span> <span class="cga_opparam">subdivision</span></p>
-<p class="code2"><span class="cga_op">inline</span> { <span class="cga_opparam">operations</span> }</p>
+            <div class="param-item">
+                <div class="indent-body">
+                    <p>Syntax options</p>
+                    <table class="option-table">
+                        <tr><td><span class="param">Rule</span></td><td>Name of a rule.</td></tr>
+                        <tr><td><span class="param">subdivision</span></td><td>A subdivison operation (see <a href="cgaindex.html#geometrysubdivision">Geometry Subdivision</a>).</td></tr>
+                        <tr><td><span class="param">{ operations }</span></td><td>A sequence of shape operations in curly brackets.</td></tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<p class="code2"><span class="cga_op">inline</span>(<span class="cga_opparam">geometryMergeStrategy</span>) <span class="cga_opparam">Rule</span></p>
-<p class="code2"><span class="cga_op">inline</span>(<span class="cga_opparam">geometryMergeStrategy</span>) <span class="cga_opparam">subdivision</span></p>
-<p class="code2"><span class="cga_op">inline</span>(<span class="cga_opparam">geometryMergeStrategy</span>) { <span class="cga_opparam">operations</span> }</p>
+    <section class="section">
+        <p>The <span class="kw">inline</span> keyword triggers the immediate derivation of the specified rule, subdivision operation, or shape operation sequence. The resulting shapes are then automatically merged into a single shape that replaces the current shape.</p>
+        <p>In case it results in a single shape, it is taken as is. If it results in multiple shapes, their geometries are combined according to the <span class="inlinecode">geometryMergeStrategy</span>. By default (if no strategy is specified) the geometries are just appended.</p>
+        <p>If the inlined shapes have conflicting material attributes, each shape's material is written to the geometry, meaning that all materials are preserved. For other attributes, the value of the current shape is kept if the inlined shapes have conflicting values or if more than one <a href="op_set.html">set</a> operation has occurred.</p>
 
-<h2>Parameters</h2>
+        <h4>Concept</h4>
 
-<ul>
-    <li><span class="cga_opparam">geometryMergeStrategy</span> (selector)
-    <br>Defines how the geometries of the resulting shapes are combined:  
-	<table cellspacing="5">
-		<tr><td width="20%"><span class="codelight">append</span></td><td>Default. Appends the geometry as is.</td></tr>
-		<tr><td width="20%"><span class="codelight">unify</span></td><td>Uses the Boolean union operation.</td></tr>	
-		<tr><td width="20%"><span class="codelight">recompose</span></td><td>Reconnects subdivided shapes (see <a href="cga_shapeRecomposition.html">Shape Recomposition</a>).</td></tr>
-	</table>
-	</li>
-	<li>Syntax options: 
-	<table cellspacing="5">
-		<tr><td width="20%"><span class="codelight">Rule</span></td><td>Name of a rule.</td></tr>
-		<tr><td width="20%"><span class="codelight">subdivision</span></td><td>A subdivison operation (see <a class="normw" href="cgaindex.html#geometrysubdivision">Geometry Subdivision</a>).</td></tr>
-		<tr><td width="20%"><span class="codelight">operations</span></td><td>A sequence of shape operations in curly brackets.</td></tr>
-		
-	</table>
-	</li>
-</ul>
+        <div class="example-row">
+            <figure class="media media-example">
+                <img src="images/inline_concept_initialShape.png" alt="Initial shape">
+            </figure>
 
-<h2>Description</h2>
-The <span class="codelight">inline</span> keyword triggers the immediate derivation of the specified rule, subdivision operation, or shape operation sequence. The resulting shapes are then automatically merged into a single shape that replaces the current shape.
-In case it results in a single shape, it is taken as is. If it results in multiple shapes, their geometries are combined according to the <span class="codelight">geometryMergeStrategy</span>. By default (if no strategy is specified) the geometries are just appended.
-<br>If the inlined shapes have conflicting material attributes, each shape's material is written to the geometry, meaning that all materials are preserved. For other attributes, the value of the current shape is kept if the inlined shapes have conflicting values or if more than one <a class="normw" href="op_set.html">set</a> operation has occurred.
-<h3>Concept</h3>
-<table>
-<tr>
-	<td class="twocol_l"><img src="images/inline_concept_initialShape.png" alt="Initial shape"/></td>
-    <td class="twocol_r">
-        <em>This is the initial shape.</em>
-    </td>
-</tr>
-<tr>
-    <td class="twocol_l"><img src="images/inline_concept_before.png" alt="Shape tree normal"/></td>
-    <td class="twocol_r">
-        <em><p>Two rules are applied to the initial shape: <span class="codelight">Volumes</span> splits the shape and inserts different assets, while <span class="codelight">Colorize</span> sets a yellow color.
-        The rules modify the input shape independently and do not affect each other. </p>
-        <p>This can be observed in the Model Hierarchy where both rules represent the root of a separate shape subtree. The leaf shapes in the full shape tree collectively form the visible model.</p></em>
-	
-	<pre class="codecga">
+            <div class="example-content">
+                <p>This is the initial shape.</p>
+            </div>
+        </div>
+
+        <div class="example-row">
+            <figure class="media media-example">
+                <img src="images/inline_concept_before.png" alt="Shape tree normal">
+            </figure>
+
+            <div class="example-content">
+                <p>Two rules are applied to the initial shape: <span class="inlinecode">Volumes</span> splits the shape and inserts different assets, while <span class="inlinecode">Colorize</span> sets a yellow color. The rules modify the input shape independently and do not affect each other.</p>
+                <p>This can be observed in the Model Hierarchy where both rules represent the root of a separate shape subtree. The leaf shapes in the full shape tree collectively form the visible model.</p>
+<pre class="code-block">
 Init -->
     Volumes
     Colorize
@@ -75,183 +83,197 @@ Init -->
 Colorize --> color(1,1,0) Yellow.
 
 Volumes --> split(x) { '0.5: A | '0.5: B }
-    
+
 A --> split(z) { '0.5: Sphere   | '0.5: Beethoven }
 B --> split(z) { '0.5: Cylinder | '0.5: Cone }
-    
+
 Sphere    --> primitiveSphere
 Cylinder  --> primitiveCylinder
 Cone      --> primitiveCone
 Beethoven --> i("beethoven.obj")
 </pre>
-	</td>
-</tr>
-</table>
-<br><br>
-<table>
-<tr>
-	<td class="twocol_l"><img src="images/inline_concept_after.png" alt="Shape tree after inline"/></td>
-	<td class="twocol_r">
-        <em>
-            <p>Inlining <span class="codelight">Volumes</span> enables the two rules to be sequentialized, allowing <span class="codelight">Colorize</span> to take the combined result of <span class="codelight">Volumes</span> as input.</p>
-            <p>Essentially, an inlined rule can be used like a built-in shape operation (e.g., <a class="normw" href="op_extrude.html">extrude</a>) to directly modify the current shape.</p>
-        </em>
-<pre class="codecga">
+            </div>
+        </div>
+
+        <div class="example-row">
+            <figure class="media media-example">
+                <img src="images/inline_concept_after.png" alt="Shape tree after inline">
+            </figure>
+
+            <div class="example-content">
+                <p>Inlining <span class="inlinecode">Volumes</span> enables the two rules to be sequentialized, allowing <span class="inlinecode">Colorize</span> to take the combined result of <span class="inlinecode">Volumes</span> as input.</p>
+                <p>Essentially, an inlined rule can be used like a built-in shape operation (e.g., <a href="op_extrude.html">extrude</a>) to directly modify the current shape.</p>
+<pre class="code-block">
 Init -->
     inline Volumes
     Colorize
 </pre>
-        <em>The subtree generated by an inlined rule (e.g., <span class="codelight">Volumes</span>) is collapsed and removed from the Model Hierarchy, providing control over the derivation order as well as the structure of the shape tree.</em>
-	</td>
-</tr>
-</table>
+                <p>The subtree generated by an inlined rule (e.g., <span class="inlinecode">Volumes</span>) is collapsed and removed from the Model Hierarchy, providing control over the derivation order as well as the structure of the shape tree.</p>
+            </div>
+        </div>
 
-<h3>Geometry merge strategy</h3>
-The correct <span class="codelight">geometryMergeStrategy</span> depends on the modeling objective:
-<table cellspacing="5">
-	<tr><td width="20%"><span class="codelight">append</span></td><td>Default. Used to simply collect the geometries of multiple shapes and put them into a single mesh. No geometry cleanup is performed and all components are kept as is.</td></tr>
-	<tr><td width="20%"><span class="codelight">unify</span></td><td>Used to combine the geometries of intersecting shapes with Boolean operations. Intersecting faces get topologically connected and inner faces are removed.</td></tr>
-	<tr><td width="20%"><span class="codelight">recompose</span></td><td>Used to topologically recombine the geometries of subdivided shapes. Shapes are automatically reconnected at shared vertices and edges, see <a href="cga_shapeRecomposition.html">Shape Recomposition</a>. The strategy can be used to recombine shapes created with, for example, the <a class="normw" href="op_split.html">split</a> or <a class="normw" href="op_comp.html">comp</a> operations.</td></tr>	
-</table>
+        <h4>Geometry merge strategy</h4>
+        <p>The correct <span class="inlinecode">geometryMergeStrategy</span> depends on the modeling objective:</p>
+        <table class="option-table">
+            <tr><td><span class="inlinecode">append</span></td><td>Default. Used to simply collect the geometries of multiple shapes and put them into a single mesh. No geometry cleanup is performed and all components are kept as is.</td></tr>
+            <tr><td><span class="inlinecode">unify</span></td><td>Used to combine the geometries of intersecting shapes with Boolean operations. Intersecting faces get topologically connected and inner faces are removed.</td></tr>
+            <tr><td><span class="inlinecode">recompose</span></td><td>Used to topologically recombine the geometries of subdivided shapes. Shapes are automatically reconnected at shared vertices and edges, see <a href="cga_shapeRecomposition.html">Shape Recomposition</a>. The strategy can be used to recombine shapes created with, for example, the <a href="op_split.html">split</a> or <a href="op_comp.html">comp</a> operations.</td></tr>
+        </table>
+    </section>
 
-</p>
+    <section class="section">
+        <h2>Related</h2>
+        <div class="related">
+            <a class="op" href="op_boolOp.html"><span class="related-name">union, subtract, intersect</span><span class="related-kind">operations</span></a>
+            <a class="op" href="op_modify.html"><span class="related-name">modify</span><span class="related-kind">operation</span></a>
+            <a class="op" href="op_tag.html"><span class="related-name">tag</span><span class="related-kind">operation</span></a>
+            <a href="cga_componentTags.html"><span class="related-name">Geometry Tagging: Essential Knowledge</span></a>
+            <a href="cga_shapeRecomposition.html"><span class="related-name">Shape Recomposition: Essential Knowledge</span></a>
+        </div>
+    </section>
 
-<h2>Related</h2>
-<ul>
-    <li><a class="normw" href="op_boolOp.html">union, subtract, intersect operations</a></li>
-	<li><a class="normw" href="op_modify.html">modify operation</a></li>
-	<li><a class="normw" href="op_tag.html">tag operation</a></li>
-    <li><a class="normw" href="cga_componentTags.html">Geometry Tagging: Essential Knowledge</a></li>
-	<li><a class="normw" href="cga_shapeRecomposition.html">Shape Recomposition: Essential Knowledge</a></li>
-</ul>
+    <section class="section">
+        <a name="examples"></a>
+        <h2>Examples</h2>
 
-<h2><a name="examples"></a>Examples</h2>
+        <section class="example">
+            <h3>Mesh Topology</h3>
 
-<h3>Mesh Topology</h3>
+            <div class="example-row">
+                <figure class="media media-example">
+                    <img src="images/inline_append_topology.png" alt="Inline append topology." width="298">
+                </figure>
 
-
-<br><br>
-<table>
-<tr>
-	<td class="twocol_l"><img src="images/inline_append_topology.png" alt="Inline append topology." width="298"/></td>
-	<td class="twocol_r">
-<pre class="codecga">
+                <div class="example-content">
+<pre class="code-block">
 Init -->
     primitiveCube
     print("start: " + geometry.nVertices)
     inline comp(f) { all: SetColor }
     print("inline: " + geometry.nVertices)
-    
+
 rampValue = comp.index/comp.total
 SetColor -->
     set(material.opacity, 0.9)
     color(colorRamp("spectrum", rampValue))
 </pre>
-	<em>Inlining is used to combine the colored faces of a cube back into a single shape. By default, the faces are simply appended and do not share vertices, resulting in three times as many vertices as before.</em>
-	</td>
-</tr>
-<tr>
-	<td class="twocol_l"><img src="images/inline_recompose_topology.png" alt="Inline recompose topology." width="298"/></td>
-	<td class="twocol_r">
-<pre class="codecga">
+                    <p>Inlining is used to combine the colored faces of a cube back into a single shape. By default, the faces are simply appended and do not share vertices, resulting in three times as many vertices as before.</p>
+                </div>
+            </div>
+
+            <div class="example-row">
+                <figure class="media media-example">
+                    <img src="images/inline_recompose_topology.png" alt="Inline recompose topology." width="298">
+                </figure>
+
+                <div class="example-content">
+<pre class="code-block">
 Init -->
     primitiveCube
     print("start: " + geometry.nVertices)
     inline(recompose) comp(f) { all: SetColor }
     print("inline(recompose): " + geometry.nVertices)
 </pre>
-	<em>
-		<p>Using the <span class="codelight">recompose</span> strategy, vertices are automatically merged, restoring the original topology.</p>
-		<p>Alternatively, the <a class="normw" href="op_modify.html">modify</a> operation can be used instead of an inlined <span class="codelight">comp</span>.</p>
-	</em>
-	</td>
-</tr>
-</table>
+                    <p>Using the <span class="inlinecode">recompose</span> strategy, vertices are automatically merged, restoring the original topology.</p>
+                    <p>Alternatively, the <a href="op_modify.html">modify</a> operation can be used instead of an inlined <span class="inlinecode">comp</span>.</p>
+                </div>
+            </div>
+        </section>
 
-<h3>Best of Two Alternatives (append)</h3>
+        <section class="example">
+            <h3>Best of Two Alternatives (append)</h3>
 
-<table>
-<tr>
-	<td class="twocol_l"><img src="images/inline_best_alternative.png" alt="Best of several alternatives" width="298"/></td>
-	<td class="twocol_r">
-<pre class="codecga">
-Init --> 
+            <div class="example-row">
+                <figure class="media media-example">
+                    <img src="images/inline_best_alternative.png" alt="Best of several alternatives" width="298">
+                </figure>
+
+                <div class="example-content">
+<pre class="code-block">
+Init -->
     inline { LayoutA LayoutB }
     ChooseLayout
 
 LayoutA --> offset(-15, border) tag("LayoutA")
-LayoutB --> split(x) { 15: tag("LayoutB") Lot. 
+LayoutB --> split(x) { 15: tag("LayoutB") Lot.
                      | ~10: NIL }*
 
-taggedArea(name) = 
+taggedArea(name) =
     sum(comp(f) { isTagged(name): geometry.area })
 
 ChooseLayout -->
     case taggedArea("LayoutA") > taggedArea("LayoutB"):
-          inline Extract("LayoutA")
-          Mass
-    else: 
-          inline Extract("LayoutB")
-          Mass
+        inline Extract("LayoutA")
+        Mass
+    else:
+        inline Extract("LayoutB")
+        Mass
 
-Extract(name) --> 
+Extract(name) -->
     comp(f, noAlign) { isTagged(name)= Extract. }
-	
+
 Mass --> extrude(30)
 </pre>
-	<em>Two different and tagged layouts are generated. Using <span class="codelight">inline</span> they are combined into a single shape. 
-	The <a class="normw" href="func_comp.html">comp</a> function and tags are then used to compare the area of both layouts and continue only with the larger one. 
-	</em>
-	</td>
-</tr>
-</table>
+                    <p>Two different and tagged layouts are generated. Using <span class="inlinecode">inline</span> they are combined into a single shape. The <a href="func_comp.html">comp</a> function and tags are then used to compare the area of both layouts and continue only with the larger one.</p>
+                </div>
+            </div>
+        </section>
 
-<h3>F-Shaped Building (recompose)</h3>
-<table>
-<tr>
-	<td class="twocol_l"><img src="images/inline_fshape_before.png" alt="F-Shaped Building traditionally" width="298"/></td>
-	<td class="twocol_r">
-<pre class="codecga">
+        <section class="example">
+            <h3>F-Shaped Building (recompose)</h3>
+
+            <div class="example-row">
+                <figure class="media media-example">
+                    <img src="images/inline_fshape_before.png" alt="F-Shaped Building traditionally" width="298">
+                </figure>
+
+                <div class="example-content">
+<pre class="code-block">
 Init -->
-    split(z, noAdjust) 
+    split(z, noAdjust)
         {  7: House
         | ~1: split(x) { ~7: NIL   | 7: House }* }
 
-House --> 
+House -->
     extrude(5)
     comp(f) { side: Fac. | top: roofGable(40) Roof. }
 </pre>
-	<em>Without inlining: The initial shape is split into an F-shape. Each piece is separately extruded and a separate detached roof is built on top.</em>
-	</td>
-</tr>
-</table>
-<br><br>
-<table>
-<tr>
-	<td class="twocol_l"><img src="images/inline_fshape_after.png" alt="F-Shaped Building with inlining" width="298"/></td>
-	<td class="twocol_r">
-<pre class="codecga">
+                    <p>Without inlining: The initial shape is split into an F-shape. Each piece is separately extruded and a separate detached roof is built on top.</p>
+                </div>
+            </div>
+
+            <div class="example-row">
+                <figure class="media media-example">
+                    <img src="images/inline_fshape_after.png" alt="F-Shaped Building with inlining" width="298">
+                </figure>
+
+                <div class="example-content">
+<pre class="code-block">
 Init -->
     inline(recompose) FShapePieces
     cleanupGeometry(all, 0) // removes inner edges
     House
-	
+
 FShapePieces -->
-    split(z, noAdjust) 
+    split(z, noAdjust)
         {  7: Done.
         | ~1: split(x) { ~7: NIL   | 7: Done. }* }
 </pre>
-	<em>With inlining: The <span class="codelight">FShapePieces</span> rule is inlined, which combines all pieces into a single shape. With <span class="codelight">recompose</span> the geometries of the subdivded shapes are automatically reconnected and the <a class="normw" href="op_cleanupGeometry.html">cleanupGeometry</a> operation can be used to merge the pieces into a single footprint polygon. This results in a single extruded mass and a single joint roof. </em>
-	</td>
-</tr>
-</table>
+                    <p>With inlining: The <span class="inlinecode">FShapePieces</span> rule is inlined, which combines all pieces into a single shape. With <span class="inlinecode">recompose</span> the geometries of the subdivded shapes are automatically reconnected and the <a href="op_cleanupGeometry.html">cleanupGeometry</a> operation can be used to merge the pieces into a single footprint polygon. This results in a single extruded mass and a single joint roof.</p>
+                </div>
+            </div>
+        </section>
 
-<h3>Twist and Taper (recompose)</h3>
-<table>
-<tr>
-	<td class="twocol_l"><img src="images/inline_twist_and_taper.png" alt="Twist and Taper Example" width="298"/></td>
-	<td class="twocol_r">
-<pre class="codecga">
+        <section class="example">
+            <h3>Twist and Taper (recompose)</h3>
+
+            <div class="example-row">
+                <figure class="media media-example">
+                    <img src="images/inline_twist_and_taper.png" alt="Twist and Taper Example" width="298">
+                </figure>
+
+                <div class="example-content">
+<pre class="code-block">
 attr Twist_Angle = 180
 attr Taper_Factor = 0.5
 attr Resolution = 24
@@ -260,73 +282,74 @@ Init -->
     extrude(100)
     tag("Mass")
     inline(recompose) split(y) { '1/Resolution: Slice }*
-    
-    // delete inner faces created by the split: 
-    modify(f) { !isTagged("Mass"): NIL } 
-	
+
+    // delete inner faces created by the split:
+    modify(f) { !isTagged("Mass"): NIL }
+
 Slice --> modify(f,noAlign) { top: RotateRescale }
 
 RotateRescale with(
     a := split.index / (Resolution-1)
     f := (1-a) + a*Taper_Factor
 )-->
-    r(0,(split.index+1)*Twist_Angle/Resolution,0)  
-    s('f,'1,'f) 
+    r(0,(split.index+1)*Twist_Angle/Resolution,0)
+    s('f,'1,'f)
     center(xz)
 </pre>
-	<em>
-		<p>The extruded mass is split into slices, and the top of each slice is rotated and scaled using <a class="normw" href="op_modify.html">modify</a>. Because the split operation is inlined using <span class="codelight">recompose</span>, the slices are reconnected, forming a continuous twist and taper.</p>
-		<p>To remove the inner faces, which are created by the split operation to close the volumes, the extruded mass is first <a class="normw" href="op_tag.html">tagged</a>, and afterwards, all faces without this tag are deleted. </p>
-	</em>
-	
-	</td>
-</tr>
-</table>
+                    <p>The extruded mass is split into slices, and the top of each slice is rotated and scaled using <a href="op_modify.html">modify</a>. Because the split operation is inlined using <span class="inlinecode">recompose</span>, the slices are reconnected, forming a continuous twist and taper.</p>
+                    <p>To remove the inner faces, which are created by the split operation to close the volumes, the extruded mass is first <a href="op_tag.html">tagged</a>, and afterwards, all faces without this tag are deleted.</p>
+                </div>
+            </div>
+        </section>
 
-<h3>Spiral Steps (unify)</h3>
+        <section class="example">
+            <h3>Spiral Steps (unify)</h3>
 
-<table>
-<tr>
-	<td class="twocol_l"><img src="images/inline_spiral_stairs.png" alt="Spiral Stairs" width="298"/></td>
-	<td class="twocol_r">
-<pre class="codecga">
-Init --> 
+            <div class="example-row">
+                <figure class="media media-example">
+                    <img src="images/inline_spiral_stairs.png" alt="Spiral Stairs" width="298">
+                </figure>
+
+                <div class="example-content">
+<pre class="code-block">
+Init -->
     inline(unify) StepsRec(18)
     color(0, 1, 0, 0.8)
 
 StepsRec(nSteps) -->
-    case nSteps > 0: 
+    case nSteps > 0:
         Step
         r(0, 20, 0)
         t(0, 0.18, 0)
         StepsRec(nSteps-1)
-    else: 
+    else:
         NIL
-        
+
 Step -->  s(0.4, 0.3, 1) primitiveCube
 </pre>
-	<em>The <span class="codelight">StepsRec(nSteps)</span> rule recursively generates the steps of the spiral stairs. 
-	When the rule is inlined using <span class="codelight">unify</span>, the steps are combined into a single shape and their geometries merged into a single watertight mesh using Boolean 3D union operations. 
-	</em>
-	</td>
-</tr>
-</table>
+                    <p>The <span class="inlinecode">StepsRec(nSteps)</span> rule recursively generates the steps of the spiral stairs. When the rule is inlined using <span class="inlinecode">unify</span>, the steps are combined into a single shape and their geometries merged into a single watertight mesh using Boolean 3D union operations.</p>
+                </div>
+            </div>
+        </section>
 
-<h3>Inline and Tags</h3>
+        <section class="example">
+            <h3>Inline and Tags</h3>
 
-<table>
-<tr>
-	<td class="twocol_l"><img src="images/inline_unify_tags_3D.png" alt="Example of inline with tags 3D" width="298"/></td>
-	<td class="twocol_r">
-<pre class="codecga">
+            <div class="example-row">
+                <figure class="media media-example">
+                    <img src="images/inline_unify_tags_3D.png" alt="Example of inline with tags 3D" width="298">
+                </figure>
+
+                <div class="example-content">
+<pre class="code-block">
 Init -->
     inline(unify) split(x) { 3: A | 4: B | 3: C }
     comp(f) { isTagged("A"): Blue
             | isTagged("B"): Yellow
             | isTagged("C"): Red }
-	
+
 A --> primitiveCylinder tag("A")
-B --> t(-1, 0.5, 0.75)  
+B --> t(-1, 0.5, 0.75)
       s(6, 2, 1.5)
       primitiveCube
       tag("B")
@@ -336,26 +359,27 @@ Blue -->   color("#0399F5")
 Yellow --> color("#FADB19")
 Red -->    color("#FF360A")
 </pre>
-	<em>The initial shape is split into three parts, with a different primitive geometry asset inserted into each part and then <a class="normw" href="op_tag.html">tagged</a>. Inlining the <span class="codelight">split</span> using <span class="codelight">unify</span> merges them into a single watertight mesh while preserving the tags on the individual face components.</em>
-	</td>
-</tr>
-</table>
-<br><br>
-<table>
-<tr>
-	<td class="twocol_l"><img src="images/inline_unify_tags_2D.png" alt="Example of inline with tags 2D" width="298"/></td>
-	<td class="twocol_r">
-<pre class="codecga">
+                    <p>The initial shape is split into three parts, with a different primitive geometry asset inserted into each part and then <a href="op_tag.html">tagged</a>. Inlining the <span class="inlinecode">split</span> using <span class="inlinecode">unify</span> merges them into a single watertight mesh while preserving the tags on the individual face components.</p>
+                </div>
+            </div>
+
+            <div class="example-row">
+                <figure class="media media-example">
+                    <img src="images/inline_unify_tags_2D.png" alt="Example of inline with tags 2D" width="298">
+                </figure>
+
+                <div class="example-content">
+<pre class="code-block">
 Init -->
     inline(unify) split(x) { 3: A | 4: B | 3: C }
-    comp(f) { isTagged("A") && isTagged("B"): Green 
+    comp(f) { isTagged("A") && isTagged("B"): Green
             | isTagged("B") && isTagged("C"): Orange
             | isTagged("A")                 : Blue
             | isTagged("B")                 : Yellow
             | isTagged("C")                 : Red }
 
 A --> primitiveDisk tag("A")
-B --> t(-1, 0, 0.75)  
+B --> t(-1, 0, 0.75)
       s(6, 0, 1.5)
       tag("B")
 C --> tag("C")
@@ -366,19 +390,14 @@ Yellow --> color("#FADB19")
 Red -->    color("#FF360A")
 Orange --> color("#FA9100")
 </pre>
-	<em>The same example in 2D. All original edges and tags are preserved, allowing to identify the intersecting parts using tags.</em>
-	</td>
-</tr>
-</table>
+                    <p>The same example in 2D. All original edges and tags are preserved, allowing to identify the intersecting parts using tags.</p>
+                </div>
+            </div>
+        </section>
+    </section>
 
+    <footer class="footer">Copyright &copy;2008-2026 Esri R&amp;D Center Zurich. All rights reserved.</footer>
 
-
-<!-- FOOTER -->
-
-<p class="foot">Copyright &copy;2008-2025 Esri R&D Center Zurich. All rights reserved.</p>				  
-
-<!-- END CENTERED CONTENT -->
-
-</div>
+</article>
 </body>
 </html>

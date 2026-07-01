@@ -1,52 +1,40 @@
+<!doctype html>
 <html>
 
 <head>
-    <title>
-    Asset Search
-    </title>
-    <link rel="stylesheet" href="../manual_style.css" type="text/css" /></head>
+    <meta charset="UTF-8">
+    <title>Asset Search</title>
+    <link rel="stylesheet" href="../cgareference_style.css" type="text/css">
+</head>
 
 <body>
-<div class="content">
+<article class="content">
 
-<!-- HEADER (use only on bookchapters) -->
+    <header class="section">
+        <h1>Asset and Texture Search</h1>
+        <p>The search for an inserted asset or texture is always relative to the rule file in which the concerning operation is invoked. This is also the case for imported rule files.</p>
+        <p>The search order is as follows:</p>
+        <ol>
+            <li>If <span class="param">filePath</span> is an absolute workspace path, that is, starts with <span class="inlinecode">"/"</span>, then no searching is done and <span class="param">filePath</span> must match a file.</li>
+            <li>Try to resolve relative to <span class="inlinecode">assets</span> in the project where the rule file resides.</li>
+            <li>Try to resolve relative to the root of the project where the rule file resides.</li>
+        </ol>
+    </header>
 
-    <table summary="" class="header">
-        <tr>
-            <td align="left" class="helphead_l"><a href="../toc.html"><div class="helplink">&nbsp;</div></a></td>
-            <td align="right" class="helphead_r"></td>
-        </tr>
-    </table>
+    <section class="section">
+        <h2>Examples</h2>
+        <p>The standard use case is the one where geometry assets and image files are stored in the project's asset folder. The example below shows an expanded folder structure.</p>
 
+        <figure class="media media--centered">
+            <img src="images/assetSearch_candlerassets.png" alt="Example asset folder structure">
+        </figure>
 
-<!-- CONTENT -->
-<h1>Asset and Texture Search</h1>
+        <p>Below are excerpts from the corresponding rule file. First, some file paths are set up in the attr section; these attributes are then used in the rules to insert the obj and tif files. Note that the whole path relative to the project's assets folder has to be passed.</p>
 
-The search for an inserted asset (or texture) is always relative to the rule file in which the concerning operation is invoked. This is also the case for imported rule files. <br>
-The search order is as follows: 
-<ol>
-<li>If <span class="cga_opparam">filePath</span> is an absolute workspace path (i.e., starts with "/") then no searching is done, <span class="cga_opparam">filePath</span> must match a file.</li>
-<li>Try to resolve relative to "assets" in the project where the rule file resides.</li> 
-<li>Try to resolve relative to the root of the project where the rule file resides.</li>
-</ol> 
-
-<h2>Examples</h2>
-The standard use case is the one where geometry assets and image files are stored in the project's asset folder. The example below shows an example of an expanded folder structure<br>
-<br>
-<center>
-  
-  <img src="images/assetSearch_candlerassets.png"></img>
-</center>
-
-And below is are some excerpts from the corresponding rule file. First, some file paths are set up in the attr section; these attributes are then used in the rules to insert the obj and tif files. Note that the whole path relative to the projects assets folder has to be passed.
-
-<p class="example">	
-<pre class="codecga">
-
-...
+        <pre class="code-block">...
 // models
 attr windowAsset        = "facade/windows/win.single.05.sashwindow.obj"
-attr ledgeAsset         = "facade/ledges/ledge.02.twopart.obj" 
+attr ledgeAsset         = "facade/ledges/ledge.02.twopart.obj"
 attr corniceAsset       = "facade/ledges/ledge.05.cornice_ledge_closed.obj"
 attr modillionAsset     = "facade/ledges/ledge_modillion.03.for_cornice_ledge.obj"
 attr windowOpeningAsset = "general/primitives/cube.nofrontnoback.notex.obj"
@@ -63,22 +51,18 @@ windowTexture(nr)       = "facade/windows/tiles/1_rollo_" + nr + "_brown.tif"
 
 ...
 
-WindowAsset -->
-	set(material.colormap, windowTexture(ceil(rand(7)))) i(windowAsset)
-	set(material.specular.r, 0.5) set(material.specular.g, 0.5) set(material.specular.b, 0.5)
-	set(material.shininess, 4)
-...
+WindowAsset --&gt;
+    set(material.colormap, windowTexture(ceil(rand(7))))
+    i(windowAsset)
+    set(material.specular.r, 0.5)
+    set(material.specular.g, 0.5)
+    set(material.specular.b, 0.5)
+    set(material.shininess, 4)
+...</pre>
+    </section>
 
-</pre>
-</p>
+    <footer class="footer">Copyright &copy;2008-2026 Esri R&amp;D Center Zurich. All rights reserved.</footer>
 
-
-
-<!-- FOOTER -->
-<p class="foot">Copyright &copy;2008-2025 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
-
-<!-- END CENTERED CONTENT -->
-
-</div>
+</article>
 </body>
 </html>

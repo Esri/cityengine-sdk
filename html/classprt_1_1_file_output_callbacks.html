@@ -23,7 +23,7 @@
   <td id="projectlogo"><img alt="Logo" src="esri_prt_55px.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ArcGIS Procedural Runtime
-   &#160;<span id="projectnumber">3.3.11669</span>
+   &#160;<span id="projectnumber">3.4.12206</span>
    </div>
   </td>
  </tr>
@@ -145,6 +145,15 @@ Additional Inherited Members</h2></td></tr>
 <br />
  }</td></tr>
 <tr class="separator:a5d293cfb6f32162d77094834208137e3 inherit pub_types_classprt_1_1_callbacks"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acdbaa7c4f8999d7ed2def7ff6efdef51 inherit pub_types_classprt_1_1_callbacks"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprt_1_1_callbacks.html#acdbaa7c4f8999d7ed2def7ff6efdef51">CoordSystemSelector</a> { <br />
+&#160;&#160;<a class="el" href="classprt_1_1_callbacks.html#acdbaa7c4f8999d7ed2def7ff6efdef51a01897a38d761228205a24a0aec7d8d3e">PROJ</a>, 
+<br />
+&#160;&#160;<a class="el" href="classprt_1_1_callbacks.html#acdbaa7c4f8999d7ed2def7ff6efdef51a6adf3a266f3cba329d4090b94e2257f1">WGS84</a>, 
+<br />
+&#160;&#160;<a class="el" href="classprt_1_1_callbacks.html#acdbaa7c4f8999d7ed2def7ff6efdef51a5e3bc1d94fd45127cf35ecff31c7accd">LAYER</a>
+<br />
+ }</td></tr>
+<tr class="separator:acdbaa7c4f8999d7ed2def7ff6efdef51 inherit pub_types_classprt_1_1_callbacks"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classprt_1_1_simple_output_callbacks"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classprt_1_1_simple_output_callbacks')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classprt_1_1_simple_output_callbacks.html">prt::SimpleOutputCallbacks</a></td></tr>
 <tr class="memitem:a446e9486b28e31359cc595e89caaa6df inherit pub_methods_classprt_1_1_simple_output_callbacks"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprt_1_1_simple_output_callbacks.html#a446e9486b28e31359cc595e89caaa6df">canSeek</a> () const =0</td></tr>
 <tr class="separator:a446e9486b28e31359cc595e89caaa6df inherit pub_methods_classprt_1_1_simple_output_callbacks"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -196,6 +205,8 @@ virtual <a class="el" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4"
 <tr class="separator:a3f9de9c73e577bb786771c3fa6dec6b7 inherit pub_methods_classprt_1_1_callbacks"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a074a2514cedbdc6de84d432a55057313 inherit pub_methods_classprt_1_1_callbacks"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprt_1_1_callbacks.html#a074a2514cedbdc6de84d432a55057313">cgaGetCoord</a> (size_t isIndex, <a class="el" href="classprt_1_1_callbacks.html#a5d293cfb6f32162d77094834208137e3">CoordSelector</a> sel, double x, double y, double z, <a class="el" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a> *stat=0)</td></tr>
 <tr class="separator:a074a2514cedbdc6de84d432a55057313 inherit pub_methods_classprt_1_1_callbacks"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeffbc282ab9d9f123606b0283dc80b7c inherit pub_methods_classprt_1_1_callbacks"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprt_1_1_callbacks.html#aeffbc282ab9d9f123606b0283dc80b7c">cgaGetCoords</a> (size_t isIndex, <a class="el" href="classprt_1_1_callbacks.html#acdbaa7c4f8999d7ed2def7ff6efdef51">CoordSystemSelector</a> sel, double *coords, size_t vertexCount)</td></tr>
+<tr class="separator:aeffbc282ab9d9f123606b0283dc80b7c inherit pub_methods_classprt_1_1_callbacks"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae504df21a5904899cfd494936cd75609 inherit pub_methods_classprt_1_1_callbacks"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprt_1_1_callbacks.html#ae504df21a5904899cfd494936cd75609">cgaPrint</a> (size_t isIndex, int32_t shapeID, const wchar_t *txt)=0</td></tr>
 <tr class="separator:ae504df21a5904899cfd494936cd75609 inherit pub_methods_classprt_1_1_callbacks"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a642feab6a9ecb1c9e0be66a4484b1c47 inherit pub_methods_classprt_1_1_callbacks"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprt_1_1_callbacks.html#a642feab6a9ecb1c9e0be66a4484b1c47">cgaReportBool</a> (size_t isIndex, int32_t shapeID, const wchar_t *key, bool value)=0</td></tr>
@@ -288,7 +299,7 @@ virtual <a class="el" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4"
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Oct 31 2025 14:30:25 for ArcGIS Procedural Runtime by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Jun 12 2026 19:58:54 for ArcGIS Procedural Runtime by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.14
 </small></address>

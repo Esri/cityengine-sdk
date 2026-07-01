@@ -1,94 +1,98 @@
+<!doctype html>
 <html>
 
 <head>
-	<title>trim Shape Attribute</title>
-    <link rel="stylesheet" href="../manual_style.css" type="text/css" />
+<meta charset="UTF-8">
+<title>trim attribute</title>
+<link rel="stylesheet" href="../cgareference_style.css" type="text/css">
 </head>
 
 <body>
-<div class="content">
+<article class="content">
 
-<!-- HEADER (use only on bookchapters) -->
+<header class="section">
+<h1>
+<span class="name">trim</span>
+<span class="kind">attribute</span>
+</h1>
 
-<table summary="" class="header">
-	<tr>
-		<td align="left" class="helphead_l"><a href="../toc.html"><div class="helplink">&nbsp;</div></a></td>
-		<td align="right" class="helphead_r"></td>
-	</tr>
-</table>
+<div class="signatures">
+<div><a name="horizontal"></a><a name="vertical"></a><span class="type-tag">bool</span> <span class="attr">trim.{horizontal | vertical}</span></div>
+</div>
+</header>
 
-<!-- CONTENT -->
-
-<h1>trim shape attribute</h1>
-
-<h2>Syntax</h2>
-
-<p class="code2"><a name="horizontal"></a><a name="vertical"></a><span class="codelight">bool</span> trim.{horizontal | vertical}</p>
-
-<h2>Description</h2>
-
+<section class="section">
 <p>The trim shape attribute consists of two booleans. It is used to control the application of trim planes to the current shape and its successors. Classification of the trim planes depends on the orientation of the edge which was used to define the trim plane (i.e. the shared edge between two pre-component split faces): if the angle to the xz-plane of the pivot is less than 40 degrees, the trim plane is <em>horizontal</em>, otherwise <em>vertical</em>.</p>
 
-<p class="piccaptioncentered"><img src="images/trim-plane_classification.png"><br>Classification of a trim planes depends on the angle between the ''generating'' edge (pink) and the xz plane of the pivot.</p>
+<figure class="media">
+<img src="images/trim-plane_classification.png" alt="Classification of trim planes by generating edge angle">
+<figcaption>Classification of a trim planes depends on the angle between the ''generating'' edge (pink) and the xz plane of the pivot.</figcaption>
+</figure>
 
-<p><a class="normw" href="op_set.html">Set</a> the attribute to enable or disable the trim planes in the <span class="codelight">horizontal</span> or <span class="codelight">vertical</span> direction.</p>
+<p><a href="op_set.html">Set</a> the attribute to enable or disable the trim planes in the <span class="inlinecode">horizontal</span> or <span class="inlinecode">vertical</span> direction.</p>
 
-<p class="notes">Note: Horizontal trim planes are disabled by default. To enable them, use <span class="codelight">set(trim.horizontal, true)</span>.</p>
+<div class="note">Note: Horizontal trim planes are disabled by default. To enable them, use <span class="inlinecode">set(trim.horizontal, <span class="kw">true</span>)</span>.</div>
 
-<p>Trim planes are created by a <a class="normw" href="op_comp.html#trimPlanes">component split</a> and applied using the <a class="normw" href="op_i.html#trim">insert operation</a>, <a class="normw" href="op_primitive.html">primitive operations</a>, or the <a class="normw" href="op_trim.html">trim</a> operation.</a>
-        
-<!--  Sample Code Formatting -->
-	
+<p>Trim planes are created by a <a href="op_comp.html#trimPlanes">component split</a> and applied using the <a href="op_i.html#trim">insert operation</a>, <a href="op_primitive.html">primitive operations</a>, or the <a href="op_trim.html">trim</a> operation.</p>
+</section>
+
+<section class="section">
 <h2>Related</h2>
+<div class="related">
+<a class="op" href="op_comp.html"><span class="related-name">comp</span><span class="related-kind">operation</span></a>
+<a class="op" href="op_i.html"><span class="related-name">insert</span><span class="related-kind">operation</span></a>
+<a class="op" href="op_set.html"><span class="related-name">set</span><span class="related-kind">operation</span></a>
+<a class="op" href="op_trim.html"><span class="related-name">trim</span><span class="related-kind">operation</span></a>
+<a class="func" href="func_geometry.html#isInstanced"><span class="related-name">geometry.isInstanced</span><span class="related-kind">function</span></a>
+</div>
+</section>
 
-<ul>
-	<li><a class="normw" href="op_comp.html">comp operation</a></li>
-	<li><a class="normw" href="op_i.html">insert operation</a></li>
-	<li><a class="normw" href="op_set.html">set operation</a></li>
-	<li><a class="normw" href="op_trim.html">trim operation</a></li>
-	<li><a class="normw" href="func_geometry.html#isInstanced">geometry.isInstanced function</a></li>
-</ul>
-
+<section class="section">
 <h2>Examples</h2>
 
+<section class="example">
 <h3>Vertical trim planes</h3>
 
-<table summary="" class="twocol">
-<tr>
-	<td class="twocol_l">
-	<img src="images/trim-planes-vertical.png" alt="trim-planes-vertical"/> </td>
-    <td class="twocol_r"><pre class="codecga">
-Roof--> 
+<div class="example-row">
+<figure class="media media-example">
+<img src="images/trim-planes-vertical.png" alt="trim-planes-vertical">
+</figure>
+
+<div class="example-content">
+<pre class="code-block">
+Roof-->
     roofHip(45)
     comp(f) { all : Face. }
 </pre>
-	<em>Vertical trim planes are enabled by default. Trim planes are shown in green but not applied.</em></td>
-</tr>
-</table>
+<p>Vertical trim planes are enabled by default. Trim planes are shown in green but not applied.</p>
+</div>
+</div>
+</section>
 
+<section class="example">
 <h3>Horizontal trim planes</h3>
 
-<table summary="" class="twocol">
-<tr>
-	<td class="twocol_l">
-	<img src="images/trim-planes-horizontal.png" alt="trim-planes-horizontal"/> </td>
-    <td class="twocol_r"><pre class="codecga">
-Roof--> 
+<div class="example-row">
+<figure class="media media-example">
+<img src="images/trim-planes-horizontal.png" alt="trim-planes-horizontal">
+</figure>
+
+<div class="example-content">
+<pre class="code-block">
+Roof-->
     roofHip(45)
     set(trim.horizontal, true)
     set(trim.vertical, false)
     comp(f) { all : Face. }
 </pre>
-	<em>Horizontal trim planes are enabled by switching the trim plane attribute. Trim planes are shown in green but not applied.</em></td>
-</tr>
-</table>
-
-<!-- FOOTER -->
-
-<p class="foot">Copyright &copy;2008-2025 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
-
-<!-- END CENTERED CONTENT -->
-
+<p>Horizontal trim planes are enabled by switching the trim plane attribute. Trim planes are shown in green but not applied.</p>
 </div>
+</div>
+</section>
+</section>
+
+<footer class="footer">Copyright &copy;2008-2026 Esri R&amp;D Center Zurich. All rights reserved.</footer>
+
+</article>
 </body>
 </html>

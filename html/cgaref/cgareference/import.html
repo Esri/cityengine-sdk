@@ -1,348 +1,331 @@
+<!doctype html>
 <html>
 
 <head>
-    <title>import</title>
-    <link rel="stylesheet" href="../manual_style.css" type="text/css" />
+    <meta charset="UTF-8">
+    <title>import keyword</title>
+    <link rel="stylesheet" href="../cgareference_style.css" type="text/css">
 </head>
 
 <body>
-<div class="content">
+<article class="content">
 
-<!-- HEADER (use only on bookchapters) -->
-<table summary="" class="header">
-	<tr>
-		<td align="left" class="helphead_l"><a href="../toc.html"><div class="helplink">&nbsp;</div></a></td>
-		<td align="right" class="helphead_r"></td>
-	</tr>
-</table>
+    <header class="section">
+        <h1>
+            <span class="name">import</span>
+            <span class="kind">keyword</span>
+        </h1>
 
-<!-- CONTENT -->
+        <div class="signatures">
+            <div><span class="kw">import</span> <span class="param">id</span> : <span class="param">filePath</span></div>
+            <div><span class="kw">import</span> <span class="param">id</span> ( <span class="param">styleId</span>, ... , <span class="param">styleId</span> ) : <span class="param">filePath</span></div>
+            <div><span class="kw">import</span> <span class="param">id</span> : <span class="param">filePath</span> ( <span class="param">attrId</span>, ... , <span class="param">attrId</span> )</div>
+            <div><span class="kw">import</span> <span class="param">id</span> : <span class="param">filePath</span> ( )</div>
+            <div><span class="kw">import</span> <span class="param">id</span> : <span class="param">filePath</span> ( <span class="param">attrId</span> = <span class="param">expression</span>, ... , <span class="param">attrId</span> = <span class="param">expression</span> )</div>
+            <div><span class="kw">import</span> <span class="param">id</span> : <span class="param">filePath</span> ( <span class="param">extensionId</span> --&gt; <span class="param">operations</span>, ... , <span class="param">extensionId</span> --&gt; <span class="param">operations</span> )</div>
+        </div>
 
-<h1>import</h1>
+        <p>Notations can be combined with each other.</p>
+    </header>
 
-<h2>Syntax</h2>
+    <section class="section">
+        <div class="param-list">
+            <div class="param-item">
+                <div class="indent-body">
+                    <p><span class="param">id</span> <span class="type-tag">identifier</span> Unique prefix for imported rules, attributes and functions.</p>
+                </div>
+            </div>
+            <div class="param-item">
+                <div class="indent-body">
+                    <p><span class="param">filePath</span> <span class="type-tag">string</span> Absolute or relative path to a CGA rule file, e.g. <span class="inlinecode">"file.cga"</span>. See <a href="cga_assetSearch.html">Asset Search</a> for details about the supported syntax.</p>
+                </div>
+            </div>
+            <div class="param-item">
+                <div class="indent-body">
+                    <p><span class="param">styleId</span> <span class="type-tag">identifier</span> <a href="style.html">style</a> to import.</p>
+                </div>
+            </div>
+            <div class="param-item">
+                <div class="indent-body">
+                    <p><span class="param">attrId</span> <span class="type-tag">identifier</span> <a href="attr.html">attr</a> to protect or override.</p>
+                </div>
+            </div>
+            <div class="param-item">
+                <div class="indent-body">
+                    <p><span class="param">expression</span> <span class="type-tag">float</span><span class="type-tag">string</span><span class="type-tag">bool</span><span class="type-tag">float[]</span><span class="type-tag">string[]</span><span class="type-tag">bool[]</span> Attribute value.</p>
+                </div>
+            </div>
+            <div class="param-item">
+                <div class="indent-body">
+                    <p><span class="param">extensionId</span> <span class="type-tag">identifier</span> <a href="extension.html">extension</a> rule to override.</p>
+                </div>
+            </div>
+            <div class="param-item">
+                <div class="indent-body">
+                    <p><span class="param">operations</span> A sequence of shape operations to execute.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<ol>
-	<li><p class="code2">import <span class="cga_opparam">id</span> : <span class="cga_opparam">filePath</span></p></li>
-	<li><p class="code2">import <span class="cga_opparam">id</span> ( <span class="cga_opparam">styleId</span>, ... , <span class="cga_opparam">styleId</span> ) : <span class="cga_opparam">filePath</span></p></li>
-	<li><p class="code2">import <span class="cga_opparam">id</span> : <span class="cga_opparam">filePath</span> ( <span class="cga_opparam">attrId</span>, ... , <span class="cga_opparam">attrId</span> )</p></li>
-	<li><p class="code2">import <span class="cga_opparam">id</span> : <span class="cga_opparam">filePath</span> ( )</p></li>
-	<li><p class="code2">import <span class="cga_opparam">id</span> : <span class="cga_opparam">filePath</span> ( <span class="cga_opparam">attrId</span> = <span class="cga_opparam">expression</span>, ... , <span class="cga_opparam">attrId</span> = <span class="cga_opparam">expression</span> )</p></li>
-	<li><p class="code2">import <span class="cga_opparam">id</span> : <span class="cga_opparam">filePath</span> ( <span class="cga_opparam">extensionId</span> --> <span class="cga_opparam">operations</span>, ... , <span class="cga_opparam">extensionId</span> --> <span class="cga_opparam">operations</span> )</p></li>
-</ol>
+    <section class="section">
+        <h4>Import and reference rule files (Syntax 1 and 2)</h4>
 
-(notations can be combined with each other)
+        <p>Rule files can be imported by the <span class="kw">import</span> keyword. Importing a rule file makes all rules, attributes and functions of the imported rule file available in the importing rule file prefixed by <span class="param">id</span>. In the following example <span class="inlinecode">main.cga</span> imports the rule file <span class="inlinecode">imp.cga</span>. The rule <span class="inlinecode">Lot</span> references the rule <span class="inlinecode">Lot</span> of <span class="inlinecode">imp.cga</span> using the prefix identifier <span class="inlinecode">imp</span>.</p>
 
-<h2>Parameters</h2>
-<ul>
-	<li><span class="cga_opparam">id</span> (identifier)<br/>Unique prefix for imported rules, attributes and functions.</li>
-	<li><span class="cga_opparam">filePath</span> (string)<br/>Absolute or relative path to a CGA rule file (e.g. <span class="codelight">"file.cga"</span>). See <a href="cga_assetSearch.html">Asset Search</a> for details about the supported syntax.</li>
-	<li><span class="cga_opparam">styleId</span> (identifier)<br/><a href="style.html">Style</a> to import.</li>
-	<li><span class="cga_opparam">attrId</span> (identifier)<br/><a href="attr.html">Attribute</a> to protect or override.</li>
-	<li><span class="cga_opparam">expression</span> (float, string, bool, float[], string[], bool[])<br>Attribute value.</li>
-	<li><span class="cga_opparam">extensionId</span> (identifier)<br/><a href="extension.html">Extension rule</a> to override.</li>
-	<li><span class="cga_opparam">operations</span><br>A sequence of shape operations to execute.</li>
-</ul>
-
-<h2>Description</h2>
-
-<h4>Import and reference rule files (Syntax 1 and 2)</h4>
-
-<ul>
-<li><p>Rule files can be imported by the <span class="codelight">import</span> keyword. Importing a rule file makes all rules, attributes and functions of the <i>imported</i> rule file available in the <i>importing</i> rule file prefixed by <span class="cga_opparam">id</span>. In the following example <span class="codelight">main.cga</span> imports the rule file <span class="codelight">imp.cga</span>. The rule <span class="codelight">Lot</span> references the rule <span class="codelight">Lot</span> of <span class="codelight">imp.cga</span> using the prefix identifier <span class="codelight">imp</span>.</p>
-<table summary="" class="twocol">
-<tr>
-<td width="60%">
-<pre class="codecga"><font color="#009900">// main.cga</font>
-<strong>import imp : "imp.cga"</strong>
-Lot --> <strong>imp.Lot</strong>
-</pre>
-</td>
-<td>
-<pre class="codecga"><font color="#009900">// imp.cga</font>
-Lot --> extrude(10)
-</pre>
-</td>
-</tr>
-</table></li>
-
-<li><p>If the <i>imported</i> rule file contains multiple styles, by default all styles are imported and visible in the style manager. In order to limit the styles available in an <i>importing</i> rule file, the set of imported styles can be specified by enumerating the imported styles in parenthesis after the import <span class="cga_opparam">id</span>. In the following example the extrusion will be of height <span class="codelight">20</span>.</p>
-<table summary="" class="twocol">
-<tr>
-<td width="60%">
-<pre class="codecga"><font color="#009900">// main.cga</font>
-import imp<strong> ( mystyle )</strong> : "imp.cga"
-Lot --> imp.Lot
-</pre>
-</td>
-<td>
-<pre class="codecga"><font color="#009900">// imp.cga</font>
-Lot --> extrude(10)
-<strong>style mystyle</strong>
-<strong>Lot --> extrude(20)</strong>
-</pre>
-</td>
-</tr>
-</table></li>
-</ul>
-
-<p>Imports can be annotated to control their attribute presentation in the Inspector. See <a href="cga_annotations.html">Annotations</a>.</p>
-
-<h2>Attribute and rule override</h2>
-
-<h4>Attribute redefinition by propagation</h4>
-
-<ul>
-<li><p>By default, attribute values from an <i>importing</i> rule file are propagated to the <i>imported</i> rule file. In the following example the extrusion height in <span class="codelight">imp.cga</span> is specifed by the attribute <span class="codelight">height</span>. If <span class="codelight">imp.cga</span> is used stand-alone, the extrusion will be of height <span class="codelight">10</span>. If <span class="codelight">imp.cga</span> is imported, <span class="codelight">height</span> will potentially have a different value. In <span class="codelight">main.cga</span> an attribute <span class="codelight">height</span> is defined which potentially overrides the same attribute in imported rule files. Because an attribute <span class="codelight">height</span> is also defined in <span class="codelight">imp.cga</span> the value is propagated and the extrusion will be of height <span class="codelight">20</span>.</p>
-<table summary="" class="twocol">
-<tr>
-<td width="60%">
-<pre class="codecga"><font color="#009900">// main.cga</font>
+        <section class="example">
+<pre class="code-block">
+// main.cga
 import imp : "imp.cga"
-<strong>attr height = 20</strong>
 Lot --> imp.Lot
 </pre>
-</td>
-<td>
-<pre class="codecga"><font color="#009900">// imp.cga</font>
-<strong>attr height = 10 // set to 20</strong>
-Lot --> extrude(height)
+<pre class="code-block">
+// imp.cga
+Lot --> extrude(10)
 </pre>
-</td>
-</tr>
-</table></li>
-</ul>
+        </section>
 
-<h4>Attribute protection (Syntax 3 and 4)</h4>
+        <p>If the imported rule file contains multiple styles, by default all styles are imported and visible in the style manager. In order to limit the styles available in an importing rule file, the set of imported styles can be specified by enumerating the imported styles in parenthesis after the import <span class="param">id</span>. In the following example the extrusion will be of height <span class="inlinecode">20</span>.</p>
 
-<ul>
-<li><p>In order to disable this default behavior (e.g. because an attribute in an <i>imported</i> rule file has the same name but a different semantic and should therefore not be overwritten), the attributes in an <i>imported</i> rule file can be protected by enumerating them after <span class="cga_opparam">filePath</span> in the <i>importing</i> rule file.</p>
-<table summary="" class="twocol">
-<tr>
-<td width="60%">
-<pre class="codecga"><font color="#009900">// main.cga</font>
-import imp : "imp.cga"<strong> ( height )</strong>
+        <section class="example">
+<pre class="code-block">
+// main.cga
+import imp ( mystyle ) : "imp.cga"
+Lot --> imp.Lot
+</pre>
+<pre class="code-block">
+// imp.cga
+Lot --> extrude(10)
+style mystyle
+Lot --> extrude(20)
+</pre>
+        </section>
+
+        <p>Imports can be annotated to control their attribute presentation in the Inspector. See <a href="cga_annotations.html">Annotations</a>.</p>
+    </section>
+
+    <section class="section">
+        <h2>Attribute and rule override</h2>
+
+        <h4>Attribute redefinition by propagation</h4>
+        <p>By default, attribute values from an importing rule file are propagated to the imported rule file. In the following example the extrusion height in <span class="inlinecode">imp.cga</span> is specified by the attribute <span class="inlinecode">height</span>. If <span class="inlinecode">imp.cga</span> is used stand-alone, the extrusion will be of height <span class="inlinecode">10</span>. If <span class="inlinecode">imp.cga</span> is imported, <span class="inlinecode">height</span> will potentially have a different value. In <span class="inlinecode">main.cga</span> an attribute <span class="inlinecode">height</span> is defined which potentially overrides the same attribute in imported rule files. Because an attribute <span class="inlinecode">height</span> is also defined in <span class="inlinecode">imp.cga</span> the value is propagated and the extrusion will be of height <span class="inlinecode">20</span>.</p>
+
+        <section class="example">
+<pre class="code-block">
+// main.cga
+import imp : "imp.cga"
 attr height = 20
 Lot --> imp.Lot
 </pre>
-</td>
-<td>
-<pre class="codecga"><font color="#009900">// imp.cga</font>
-attr height = 10 <strong>// not changed</strong>
+<pre class="code-block">
+// imp.cga
+attr height = 10 // set to 20
 Lot --> extrude(height)
 </pre>
-</td>
-</tr>
-</table></li>
+        </section>
 
-<li><p>Using empty parentheses conveniently protects all imported attributes.</p>
+        <h4>Attribute protection (Syntax 3 and 4)</h4>
+        <p>In order to disable this default behavior, e.g. because an attribute in an imported rule file has the same name but a different semantic and should therefore not be overwritten, the attributes in an imported rule file can be protected by enumerating them after <span class="param">filePath</span> in the importing rule file.</p>
 
-<table summary="" class="twocol">
-<tr>
-<td width="60%">
-<pre class="codecga"><font color="#009900">// main.cga</font>
-import imp : "imp.cga" <strong>( )</strong>
+        <section class="example">
+<pre class="code-block">
+// main.cga
+import imp : "imp.cga" ( height )
 attr height = 20
 Lot --> imp.Lot
 </pre>
-</td>
-<td>
-<pre class="codecga"><font color="#009900">// imp.cga</font>
-attr height = 10 <strong>// not changed</strong>
+<pre class="code-block">
+// imp.cga
+attr height = 10 // not changed
 Lot --> extrude(height)
 </pre>
-</td>
-</tr>
-</table></li>
-</ul>
+        </section>
 
-<h4>Explicit attribute and rule override (Syntax 5 and 6)</h4>
-		
-<ul>
-<li><p>Instead of using attribute propagation, an <i>importing</i> rule file can specify a new value for an imported attribute by redefining the attribute explicitly inside the import statement. The right-hand side <span class="cga_opparam">expression</span> is evaluated in the scope of the <i>importing</i> rule file.</p>
-<table summary="" class="twocol">
-<tr>
-<td width="60%">
-<pre class="codecga"><font color="#009900">// main.cga</font>
-import imp:"imp.cga" <strong>( height = 20 )</strong>
+        <p>Using empty parentheses conveniently protects all imported attributes.</p>
+
+        <section class="example">
+<pre class="code-block">
+// main.cga
+import imp : "imp.cga" ( )
+attr height = 20
 Lot --> imp.Lot
 </pre>
-</td>
-<td>
-<pre class="codecga"><font color="#009900">// imp.cga</font>
-attr height = 10 <strong>// set to 20</strong>
+<pre class="code-block">
+// imp.cga
+attr height = 10 // not changed
 Lot --> extrude(height)
 </pre>
-</td>
-</tr>
-</table></li>
+        </section>
 
-<li><p>Similarly to attributes, rules can be redefined with a sequence of <span class="cga_opparam">operations</span> which is evaluated in the scope of the <i>importing</i> rule file. The redefined rule in the <i>imported</i> rule file must be an <a href="extension.html">extension rule</a>. In the following example a gable roof is replaced with a hip roof which is put on top of the extruded geometry.</p>
-<table summary="" class="twocol">
-<tr>
-<td width="60%">
-<pre class="codecga"><font color="#009900">// main.cga</font>
-import imp : "imp.cga" <strong>( Roof --> roofHip(30) )</strong>
+        <h4>Explicit attribute and rule override (Syntax 5 and 6)</h4>
+        <p>Instead of using attribute propagation, an importing rule file can specify a new value for an imported attribute by redefining the attribute explicitly inside the import statement. The right-hand side <span class="param">expression</span> is evaluated in the scope of the importing rule file.</p>
+
+        <section class="example">
+<pre class="code-block">
+// main.cga
+import imp:"imp.cga" ( height = 20 )
 Lot --> imp.Lot
 </pre>
-</td>
-<td>
-<pre class="codecga"><font color="#009900">// imp.cga</font>
+<pre class="code-block">
+// imp.cga
+attr height = 10 // set to 20
+Lot --> extrude(height)
+</pre>
+        </section>
+
+        <p>Similarly to attributes, rules can be redefined with a sequence of <span class="param">operations</span> which is evaluated in the scope of the importing rule file. The redefined rule in the imported rule file must be an <a href="extension.html">extension</a> rule. In the following example a gable roof is replaced with a hip roof which is put on top of the extruded geometry.</p>
+
+        <section class="example">
+<pre class="code-block">
+// main.cga
+import imp : "imp.cga" ( Roof --> roofHip(30) )
+Lot --> imp.Lot
+</pre>
+<pre class="code-block">
+// imp.cga
 attr height = 10
-Lot --> extrude(height)
-        comp(f) { top = Roof
-                | side = Side. }
-<strong>extension Roof --> roofGable(30)</strong>
-</pre>
-</td>
-</tr>
-</table>
-<p>Within <span class="cga_opparam">operations</span> any operation, any rule in the current rule file and <a href="start.html">start rules</a> of imported rule files can be used. Another example is given <a href="import.html#exRuleOverride">below</a>.</p></li>
-</ul>
-
-<p class="notes">Attribute propagation and explicit overrides only redefine attributes and rules in the <span class="codelight">Default</span> style.</p>
-
-<p class="notes">Setting the attribute source of an imported attribute in the Inspector to something else than "Rule default" will disable any redefining behavior for that attribute and the value will be taken from the designated source instead.</p>
-
-<a name="dynamic"></a><h2>Dynamic imports</h2>
-
-<h4>Dynamic attribute and rule override</h4>
-
-<ul>
-<li><p>Attributes and rules can also be redefined dynamically at the time of rule invocation. In the following example the static import statement does not redefine <span class="codelight">height</span>. The redefinition of <span class="codelight">height</span> only happens for the invocation of <span class="codelight">imp.Lot</span>.</p>
-<table summary="" class="twocol">
-<tr>
-<td width="60%">
-<pre class="codecga"><font color="#009900">// main.cga</font>
-import imp : "imp.cga"
-Lot --> imp<strong>( height = 20 )</strong>.Lot
-</pre>
-</td>
-<td>
-<pre class="codecga"><font color="#009900">// imp.cga</font>
-<strong>attr height = 10 // set to 20</strong>
 Lot --> extrude(height)
         comp(f) { top = Roof
                 | side = Side. }
 extension Roof --> roofGable(30)
 </pre>
-</td>
-</tr>
-</table></li>
+            <p>Within <span class="param">operations</span> any operation, any rule in the current rule file and <a href="start.html">start</a> rules of imported rule files can be used. Another example is given <a href="#exRuleOverride">below</a>.</p>
+        </section>
 
-<li><p>Any explicit attribute or rule override or attribute propagation of the static import will be considered for the dynamic import. Existing overrides can be redefined again. In the following example both the extrusion <span class="codelight">height</span> and the <span class="codelight">Roof</span> rule are redefined in the static import. The dynamic import redefines <span class="codelight">height</span> again and takes over the <span class="codelight">Roof</span> override from the static import.</p>
-<table summary="" class="twocol">
-<tr>
-<td width="60%">
-<pre class="codecga"><font color="#009900">// main.cga</font>
-import imp : "imp.cga"<strong>( height = 20,</strong>
-                        <strong>Roof --> roofHip(30) )</strong>
-Lot --> imp<strong>( height = 30 )</strong>.Lot
+        <div class="note">
+            <p>Attribute propagation and explicit overrides only redefine attributes and rules in the <span class="inlinecode">Default</span> style.</p>
+        </div>
+
+        <div class="note">
+            <p>Setting the attribute source of an imported attribute in the Inspector to something else than "Rule default" will disable any redefining behavior for that attribute and the value will be taken from the designated source instead.</p>
+        </div>
+    </section>
+
+    <section class="section" id="dynamic">
+        <h2>Dynamic imports</h2>
+
+        <h4>Dynamic attribute and rule override</h4>
+        <p>Attributes and rules can also be redefined dynamically at the time of rule invocation. In the following example the static import statement does not redefine <span class="inlinecode">height</span>. The redefinition of <span class="inlinecode">height</span> only happens for the invocation of <span class="inlinecode">imp.Lot</span>.</p>
+
+        <section class="example">
+<pre class="code-block">
+// main.cga
+import imp : "imp.cga"
+Lot --> imp( height = 20 ).Lot
 </pre>
-</td>
-<td>
-<pre class="codecga"><font color="#009900">// imp.cga</font>
-<strong>attr height = 10 // set to 30</strong>
+<pre class="code-block">
+// imp.cga
+attr height = 10 // set to 20
 Lot --> extrude(height)
         comp(f) { top = Roof
                 | side = Side. }
-<strong>extension Roof --> roofGable(30)</strong>
+extension Roof --> roofGable(30)
 </pre>
-</td>
-</tr>
-</table></li>
+        </section>
 
-<li><p>Attribute and rule overrides can be configured with at-runtime evaluated values. In the following example the static import <span class="codelight">imp</span> is used several times where the attribute <span class="codelight">height</span> is redefined with a randomly evaluated value.</p> 
-<table summary="" class="twocol">
-<tr>
-<td width="60%">
-<pre class="codecga"><font color="#009900">// main.cga</font>
+        <p>Any explicit attribute or rule override or attribute propagation of the static import will be considered for the dynamic import. Existing overrides can be redefined again. In the following example both the extrusion <span class="inlinecode">height</span> and the <span class="inlinecode">Roof</span> rule are redefined in the static import. The dynamic import redefines <span class="inlinecode">height</span> again and takes over the <span class="inlinecode">Roof</span> override from the static import.</p>
+
+        <section class="example">
+<pre class="code-block">
+// main.cga
+import imp : "imp.cga"( height = 20,
+                        Roof --> roofHip(30) )
+Lot --> imp( height = 30 ).Lot
+</pre>
+<pre class="code-block">
+// imp.cga
+attr height = 10 // set to 30
+Lot --> extrude(height)
+        comp(f) { top = Roof
+                | side = Side. }
+extension Roof --> roofGable(30)
+</pre>
+        </section>
+
+        <p>Attribute and rule overrides can be configured with at-runtime evaluated values. In the following example the static import <span class="inlinecode">imp</span> is used several times where the attribute <span class="inlinecode">height</span> is redefined with a randomly evaluated value.</p>
+
+        <section class="example">
+<pre class="code-block">
+// main.cga
 import imp : "imp.cga"
 Lot --> split(x) { ~10 : Building(5) }*
-Building(h) --> imp<strong>( height = h + rand(10) )</strong>.Lot
+Building(h) --> imp( height = h + rand(10) ).Lot
 </pre>
-</td>
-<td>
-<pre class="codecga"><font color="#009900">// imp.cga</font>
-<strong>attr height = 10 // set to 5+rand</strong>
+<pre class="code-block">
+// imp.cga
+attr height = 10 // set to 5+rand
 Lot --> extrude(height)
         comp(f) { top = Roof
                 | side = Side. }
 Roof --> roofGable(30)
 </pre>
-</td>
-</tr>
-</table></li>
-</ul>
+        </section>
 
-<h4>Re-initialization of attributes</h4>
+        <h4>Re-initialization of attributes</h4>
+        <p>Dynamic imports re-initialize all attributes of the imported ruleset at the time of rule invocation. In the following example the value of <span class="inlinecode">angle</span> is dependent on the value of <span class="inlinecode">height</span>. For each invocation of <span class="inlinecode">imp.Lot</span> the attribute <span class="inlinecode">angle</span> is re-evaluated wrt. the new value of <span class="inlinecode">height</span>. Another example is given <a href="#exDynamic">below</a>.</p>
 
-<ul>
-<li><p>Dynamic imports re-initialize all attributes of the imported ruleset at the time of rule invocation. In the following example the value of <span class="codelight">angle</span> is dependent on the value of <span class="codelight">height</span>. For each invocation of <span class="codelight">imp.Lot</span> the attribute <span class="codelight">angle</span> is re-evaluated wrt. the new value of <span class="codelight">height</span>. Another example is given <a href="import.html#exDynamic">below</a>.</p> 
-<table summary="" class="twocol">
-<tr>
-<td width="60%">
-<pre class="codecga"><font color="#009900">// main.cga</font>
+        <section class="example">
+<pre class="code-block">
+// main.cga
 import imp : "imp.cga"
 Lot --> split(x) { ~10 : Building(5) }*
-Building(h) --> imp<strong>( height = h + rand(10) )</strong>.Lot
+Building(h) --> imp( height = h + rand(10) ).Lot
 </pre>
-</td>
-<td>
-<pre class="codecga"><font color="#009900">// imp.cga</font>
+<pre class="code-block">
+// imp.cga
 attr height = 10
-<strong>attr angle = case height > 10 : 0</strong>
-<strong>             else : 30</strong>
+attr angle = case height > 10 : 0
+             else : 30
 Lot --> extrude(height)
         comp(f) { top = Roof
                 | side = Side. }
-Roof --> roofGable(<strong>angle</strong>)
+Roof --> roofGable(angle)
 </pre>
-</td>
-</tr>
-</table></li>
+        </section>
 
-<li><p>The following example uses an "empty" ruleset initialization. Any preceeding change to imported attributes will not be effective for the dynamic import because all attributes are re-initialized from the static import.</p> 
-<table summary="" class="twocol">
-<tr>
-<td width="60%">
-<pre class="codecga"><font color="#009900">// main.cga</font>
+        <p>The following example uses an empty ruleset initialization. Any preceding change to imported attributes will not be effective for the dynamic import because all attributes are re-initialized from the static import.</p>
+
+        <section class="example">
+<pre class="code-block">
+// main.cga
 import imp : "imp.cga"
-Lot --> <strong>set(imp.height, 20)</strong>
-        imp<strong>( )</strong>.Lot
+Lot --> set(imp.height, 20)
+        imp( ).Lot
 </pre>
-</td>
-<td>
-<pre class="codecga"><font color="#009900">// imp.cga</font>
-<strong>attr height = 10 // not changed</strong>
+<pre class="code-block">
+// imp.cga
+attr height = 10 // not changed
 Lot --> extrude(height)
 </pre>
-</td>
-</tr>
-</table></li>
-</ul>
+        </section>
 
-<p class="notes">For dynamic imports, attributes are redefined in any case, independent from the current attribute source of the imported attribute in the Inspector.</p>
+        <div class="note">
+            <p>For dynamic imports, attributes are redefined in any case, independent from the current attribute source of the imported attribute in the Inspector.</p>
+        </div>
+    </section>
 
-<h2>Related</h2>
-<ul>
-    <li><a href="attr.html"><span class="code_std">attr</span></a> keyword</li>
-	<li><a href="extension.html"><span class="code_std">extension</span></a> keyword</li>
-	<li><a href="start.html"><span class="code_std">start</span></a> keyword</li>
-	<li><a href="style.html"><span class="code_std">style</span></a> keyword</li>
-</ul>
+    <section class="section">
+        <h2>Related</h2>
+        <div class="related">
+            <a class="kw" href="attr.html"><span class="related-name">attr</span><span class="related-kind">keyword</span></a>
+            <a class="kw" href="extension.html"><span class="related-name">extension</span><span class="related-kind">keyword</span></a>
+            <a class="kw" href="start.html"><span class="related-name">start</span><span class="related-kind">keyword</span></a>
+            <a class="kw" href="style.html"><span class="related-name">style</span><span class="related-kind">keyword</span></a>
+        </div>
+    </section>
 
-<h2>Examples</h2>
+    <section class="section">
+        <h2>Examples</h2>
 
-<a name="exRuleOverride"></a><h3>Extension rule override</h3>
+        <a id="exRuleOverride"></a>
+        <section class="example">
+            <h3>Extension rule override</h3>
+            <p>This example illustrates how <a href="extension.html">extension</a> rules can be redefined in an <span class="kw">import</span> statement and how <a href="start.html">start</a> rules can be used in overrides.</p>
 
-<p>This example illustrates how <a href="extension.html">extension rules</a> can be redefined in an <span class="codelight">import</span> statement and how <a href="start.html">start rules</a> can be used in overrides.</p>
-
-<h4>Simple temple model</h4>
-
-<p>In the following rule file <span class="codelight">temple.cga</span> the start rule <span class="codelight">Temple</span> generates a simple temple model. Each column is generated by the extension rule <span class="codelight">Column</span>. The roof is generated by the extension rule <span class="codelight">Roof</span>. The height of the columns is set by the attribute <span class="codelight">columnHeight</span>. Both extension rules and attributes can be redefined in import statements in order to customize the temple model.</p>
-
-<pre class="codecga"><font color="#009900">// temple.cga</font>
+            <h4>Simple temple model</h4>
+            <p>In the following rule file <span class="inlinecode">temple.cga</span> the start rule <span class="inlinecode">Temple</span> generates a simple temple model. Each column is generated by the extension rule <span class="inlinecode">Column</span>. The roof is generated by the extension rule <span class="inlinecode">Roof</span>. The height of the columns is set by the attribute <span class="inlinecode">columnHeight</span>. Both extension rules and attributes can be redefined in import statements in order to customize the temple model.</p>
+<pre class="code-block">
+// temple.cga
 
 attr columnHeight = 12
 start Temple --> CreateColumns
@@ -352,7 +335,7 @@ extension Roof --> roofHip(22)
 
 const columnWidth = columnHeight/9
 CreateColumns -->
-    offset(-columnWidth, border) 
+    offset(-columnWidth, border)
     comp(f) { all :
         extrude(columnHeight)
         split(x) {
@@ -361,84 +344,81 @@ CreateColumns -->
     }
 CreateRoof --> t(0,columnHeight,0) Roof
 </pre>
+            <p>The resulting model looks like this:</p>
+            <figure class="media media-example">
+                <img src="images/import-temple.png" alt="import-temple">
+            </figure>
 
-<p>The resulting model looks like this:</p>
+            <h4>Customized columns</h4>
+            <p>In the following rule files <span class="inlinecode">corinthianColumn.cga</span> and <span class="inlinecode">ionicColumn.cga</span> the rules <span class="inlinecode">CorinthianColumn</span> and <span class="inlinecode">IonicColumn</span> generate columns in a different manner as the default behavior defined by the rule <span class="inlinecode">Column</span> in <span class="inlinecode">temple.cga</span>. Both <span class="inlinecode">CorinthianColumn</span> and <span class="inlinecode">IonicColumn</span> are defined as a start rule and can therefore be used in rule overrides of import statements.</p>
+<pre class="code-block">
+// corinthianColumn.cga
 
-<img src="images/import-temple.png" alt="import-temple" width="298"/>
+start CorinthianColumn --> split(y) { ~1 : Shaft | '0.1 : Base }
 
-<h4>Customized columns</h4>
-
-<p>In the following rule files <span class="codelight">corinthianColumn.cga</span> and <span class="codelight">ionicColumn.cga</span> the rules <span class="codelight">CorinthianColumn</span> and <span class="codelight">IonicColumn</span> generate columns in a different manner as the default behavior defined by the rule <span class="codelight">Column</span> in <span class="codelight">temple.cga</span>. Both <span class="codelight">CorinthianColumn</span> and <span class="codelight">IonicColumn</span> are defined as a start rule and can therefore be used in rule overrides of import statements.</p>
-
-<pre class="codecga"><font color="#009900">// corinthianColumn.cga</font>
-
-start CorinthianColumn --> split(y) { ~1 : Shaft | '0.1 : Base } 
-	
 Base --> primitiveCube
 Shaft --> s('0.8, '1,'0.8) center(xz) primitiveCube
 </pre>
-<pre class="codecga"><font color="#009900">// ionicColumn.cga</font>
+<pre class="code-block">
+// ionicColumn.cga
 
-start IonicColumn --> split(y) { '0.1: Base | ~1 : Shaft | '0.1: Base } 
+start IonicColumn --> split(y) { '0.1: Base | ~1 : Shaft | '0.1: Base }
 
 Base --> primitiveCube
 Shaft --> primitiveCylinder
 </pre>
 
-<h4>Customized temple model</h4>
+            <h4>Customized temple model</h4>
+            <p>The following rule file <span class="inlinecode">myTemple.cga</span> imports the rule file <span class="inlinecode">temple.cga</span> using the prefix identifier <span class="inlinecode">CorinthianTemple</span> and the prefix identifier <span class="inlinecode">IonicTemple</span>. In each <span class="kw">import</span> statement the attribute <span class="inlinecode">columnHeight</span> and extension rules are redefined. The redefinitions of <span class="inlinecode">Column</span> invoke the start rules of <span class="inlinecode">corinthianColumn.cga</span> and <span class="inlinecode">ionicColumn.cga</span> respectively. The redefinition of the <span class="inlinecode">Roof</span> rule sets a color and invokes the rule <span class="inlinecode">MyRoof</span> in the current ruleset, in the same rule file. Within the <span class="inlinecode">Init</span> rule the start rule of <span class="inlinecode">temple.cga</span> is invoked. Depending on which prefix identifier is used a different temple model is generated.</p>
+<pre class="code-block">
+// myTemple.cga
 
-<p>The following rule file <span class="codelight">myTemple.cga</span> imports the rule file <span class="codelight">temple.cga</span> using the prefix identifier <span class="codelight">CorinthianTemple</span> and the prefix identifier <span class="codelight">IonicTemple</span>. In each <span class="codelight">import</span> statement the attribute <span class="codelight">columnHeight</span> and extension rules are redefined. The redifinitions of <span class="codelight">Column</span> invoke the start rules of <span class="codelight">corinthianColumn.cga</span> and <span class="codelight">ionicColumn.cga</span> respectively. The redefinition of the <span class="codelight">Roof</span> rule sets a color and invokes the rule <span class="codelight">MyRoof</span> in the current ruleset (in the same rule file). Within the <span class="codelight">Init</span> rule the start rule of <span class="codelight">temple.cga</span> is invoked. Depending on which prefix identifier is used a different temple model is generated.</p>
-
-<pre class="codecga"><font color="#009900">// myTemple.cga</font>
-
-import CorinthianColumn : "corinthianColumn.cga" 
-import CorinthianTemple : "temple.cga" ( 
+import CorinthianColumn : "corinthianColumn.cga"
+import CorinthianTemple : "temple.cga" (
     columnHeight = 8,
-    Column --> CorinthianColumn.start,  
+    Column --> CorinthianColumn.start,
     Roof --> color(1,0.5,0.5) MyRoof )
 
-import IonicColumn : "ionicColumn.cga" 
-import IonicTemple : "temple.cga" ( 
+import IonicColumn : "ionicColumn.cga"
+import IonicTemple : "temple.cga" (
     columnHeight = 16,
-    Column --> IonicColumn.start,  
+    Column --> IonicColumn.start,
     Roof --> color(1,0.5,0) MyRoof )
 
 @Enum("Corinthian", "Ionic")
 attr type = "Corinthian"
-Init --> case type == "Corinthian" : CorinthianTemple.start   
+Init --> case type == "Corinthian" : CorinthianTemple.start
          else                      : IonicTemple.start
 MyRoof --> roofGable(22)
 </pre>
+            <p>The resulting models look like this:</p>
+            <figure class="media">
+                <img src="images/import-corinthian-temple.png" alt="type == Corinthian">
+                <figcaption><span class="inlinecode">type == "Corinthian"</span></figcaption>
+            </figure>
+            <figure class="media">
+                <img src="images/import-ionic-temple.png" alt="type == Ionic">
+                <figcaption><span class="inlinecode">type == "Ionic"</span></figcaption>
+            </figure>
+        </section>
 
-<p>The resulting models look like this:</p>
+        <a id="exDynamic"></a>
+        <section class="example">
+            <h3>Using plant loader with dynamic import</h3>
+            <p>In the following example ESRI.lib's plant loader is used to randomly insert three different trees. The attribute <span class="inlinecode">plant.Name</span> is redefined in a static import. For each customization of the plant loader we use a separate import statement. The dimensions of a tree are defined by attributes <span class="inlinecode">plant.Height</span> and <span class="inlinecode">plant.Radius</span> and automatically adjusted in <span class="inlinecode">Plant_Loader.cga</span> according to <span class="inlinecode">plant.Name</span>.</p>
 
-<table>
-<tr>	
-	<td>
-	<img src="images/import-corinthian-temple.png"></img><br>
-	<center><span class="codelight">type == "Corinthian"</span></center>
-	</td>
-	<td>
-	<img src="images/import-ionic-temple.png"></img><br>
-	<center><span class="codelight">type == "Ionic"</span></center>
-	</td>
-</tr>
-</table>
-
-<a name="exDynamic"></a><h3>Using plant loader with dynamic import</h3>
-
-<em>In the following example ESRI.lib's plant loader is used to randomly insert three different trees. The attribute <span class="codelight">plant.Name</span> is redefined in a static import. For each customization of the plant loader we use a separate import statement. The dimensions of a tree are defined by attributes <span class="codelight">plant.Height</span> and <span class="codelight">plant.Radius</span> and automatically adjusted in <span class="codelight">Plant_Loader.cga</span> according to <span class="codelight">plant.Name</span>.</em>
-
-<table summary="" class="twocol">
-<tr>
-<td class="twocol_l"><img src="images/import-plants.png"></td>
-<td class="twocol_r"><pre class="codecga">
+            <div class="example-row">
+                <figure class="media media-example">
+                    <img src="images/import-plants.png" alt="import-plants">
+                </figure>
+                <div class="example-content">
+<pre class="code-block">
 import bay    : "/ESRI.lib/rules/Plants/Plant_Loader.cga"
                 ( Name = "California Bay" )
-				
+
 import cedar  : "/ESRI.lib/rules/Plants/Plant_Loader.cga"
                 ( Name = "California Incense Cedar" )
-				
+
 import walnut : "/ESRI.lib/rules/Plants/Plant_Loader.cga"
                 ( Name = "California Walnut" )
 
@@ -448,18 +428,17 @@ Plant -->  33% : bay.Generate
            33% : cedar.Generate
           else : walnut.Generate
 </pre>
-</td>
-</tr>
-</table>
+                </div>
+            </div>
 
-<br>
+            <p>Instead of defining several static imports, the attribute <span class="inlinecode">plant.Name</span> can be redefined in a dynamic import. This provides the flexibility to set values dynamically at runtime. All dependent attributes such as <span class="inlinecode">plant.Height</span> and <span class="inlinecode">plant.Radius</span> are re-initialized depending on <span class="inlinecode">plant.Name</span> resulting in correct tree dimensions.</p>
 
-<em>Instead of defining several static imports, the attribute <span class="codelight">plant.Name</span> can be redefined in a dynamic import. This provides the flexibilty to set values dynamically at runtime. All dependent attributes such as <span class="codelight">plant.Height</span> and <span class="codelight">plant.Radius</span> are re-initialized depending on <span class="codelight">plant.Name</span> resulting in correct tree dimensions.</em>
-
-<table summary="" class="twocol">
-<tr>
-<td class="twocol_l"><img src="images/import-plants.png"></td>
-<td class="twocol_r"><pre class="codecga">
+            <div class="example-row">
+                <figure class="media media-example">
+                    <img src="images/import-plants.png" alt="import-plants dynamic">
+                </figure>
+                <div class="example-content">
+<pre class="code-block">
 import plant:"/ESRI.lib/rules/Plants/Plant_Loader.cga"
 
 getName =  33% : "California Bay"
@@ -470,13 +449,13 @@ Lot --> scatter(surface, 10, uniform) { Plant }
 
 Plant --> plant( Name = getName ).Generate
 </pre>
-</td>
-</tr>
-</table>
+                </div>
+            </div>
+        </section>
+    </section>
 
-<p class="foot">Copyright &copy;2008-2025 Esri R&amp;D Center Zurich. All rights reserved.</p>
+    <footer class="footer">Copyright &copy;2008-2026 Esri R&amp;D Center Zurich. All rights reserved.</footer>
 
-</div>
+</article>
 </body>
-
 </html>

@@ -1,100 +1,122 @@
+<!doctype html>
 <html>
+
 <head>
-	<title>setPivot Operation</title>
-	<link rel="stylesheet" href="../manual_style.css" type="text/css" />
+  <meta charset="UTF-8">
+  <title>setPivot Operation</title>
+  <link rel="stylesheet" href="../cgareference_style.css" type="text/css">
 </head>
 
 <body>
-<div class="content">
+<article class="content">
 
-<!-- HEADER (use only on bookchapters) -->
+  <header class="section">
+    <h1>
+      <span class="name">setPivot</span>
+      <span class="kind">operation</span>
+    </h1>
 
-<table summary="" class="header">
-	<tr>
-		<td align="left" class="helphead_l"><a href="../toc.html"><div class="helplink">&nbsp;</div></a></td>
-		<td align="right" class="helphead_r"></td>
-	</tr>
-</table>
+    <div class="signatures">
+      <div><span class="op">setPivot</span>(<span class="param">axisMap</span>, <span class="param">cornerIndex</span>)</div>
+    </div>
+  </header>
 
-<!-- CONTENT -->
+  <section class="section">
+    <div class="param-list">
+      <div class="param-item">
+        <div class="indent-body">
+          <p><span class="param">axisMap</span> <span class="type-tag">selector</span> Selector which defines the mapping of the old scope axes to the new pivot (and scope) axes.</p>
+          <table class="option-table">
+            <tr>
+              <td><span class="inlinecode">xyz</span></td>
+              <td>Keeps the current orientation, i.e. in corner 0 (the origin, see visual guide below), the new x-axis will point along the old scope's x-axis, the new y-axis will point along the old scope's y-axis and the new z-axis will point along the old scope's z-axis.</td>
+            </tr>
+            <tr>
+              <td><span class="inlinecode">yzx</span></td>
+              <td>In corner 0, the new x-axis will point along the old scope's z-axis, the new y-axis will point along the old scope's x-axis and the new z-axis will point along the old scope's x-axis.</td>
+            </tr>
+            <tr>
+              <td><span class="inlinecode">zxy</span></td>
+              <td>In corner 0, the new x-axis will point along the old scope's y-axis, the new y-axis will point along the old scope's z-axis and the new z-axis will point along the old scope's x-axis.</td>
+            </tr>
+          </table>
+        </div>
+      </div>
 
-<h1> setPivot operation</h1>
+      <div class="param-item">
+        <div class="indent-body">
+          <p><span class="param">cornerIndex</span> <span class="type-tag">float</span> <span class="inlinecode">Integer</span> value in [0, 7] to select one of the scope's corners to become the new <span class="inlinecode">pivot.p</span>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<h2>Syntax</h2>
+  <section class="section">
+    <p>The <span class="op">setPivot</span> operation lets you re-position and re-orient the current shape's pivot. The new orientation will be based on the current shape's scope axes, the <span class="param">axisMap</span> selector and the <span class="param">cornerIndex</span>.</p>
 
-<p class="code2"><span class="cga_op">setPivot</span>(<span class="cga_opparam">axisMap</span>, <span class="cga_opparam">cornerIndex</span>)</p>
+    <p>The new <span class="inlinecode">pivot.p</span> will lie at a selected corner (<span class="param">cornerIndex</span>) of the current shape's scope, and the pivot will be rotated such that all axes point inside the scope.</p>
 
-<h2>Parameters</h2>
+    <p>The new scope will have zero translation and rotation (relative to the pivot), and will stay at the same place (in world coordinates), but with different axes. The geometry is projected to the new scope (i.e. stays at the same place in world coordinates).</p>
 
-<ul>
-    <li><span class="cga_opparam">axisMap</span> (selector)<br>Selector which defines the mapping of the old scope axes to the new pivot (and scope) axes.
-	<table cellspacing="5">
-		<tr><td width="8%"><span class="codelight">xyz</span></td><td>Keeps the current orientation, i.e. in corner 0 (the origin, see visual guide below), the new x-axis will point along the old scope's x-axis, the new y-axis will point along the old scope's y-axis and the new z-axis will point along the old scope's z-axis.</td></tr>
-		<tr><td><span class="codelight">yzx</span></td><td>In corner 0, the new x-axis will point along the old scope's z-axis, the new y-axis will point along the old scope's x-axis and the new z-axis will point along the old scope's x-axis.</td></tr>
-		<tr><td><span class="codelight">zxy</span></td><td>In corner 0, the new x-axis will point along the old scope's y-axis, the new y-axis will point along the old scope's z-axis and the new z-axis will point along the old scope's x-axis.</td></tr>
-	</table>
-    </li>
-    <li><span class="cga_opparam">cornerIndex</span> (float)<br/><span class="text">Integer</span> value in [0, 7] to select one of the <span class="cga_op">scope</span>'s corners to become the new <span class="cga_op">pivot.p</span><span class="text">.</span></li>
-</ul>
+    <h4>Visual Guide</h4>
 
-<h2>Description</h2>
+    <div class="example-row">
+      <figure class="media media-example">
+        <img src="images/setPivot-initialscope.png" alt="The initial scope.">
+      </figure>
 
-<p>The <span class="cga_keyword">setPivot</span> operation lets you re-position and re-orient the current shape's <span class="cga_keyword">pivot</span>. The new orientation will be based on the current shape's <span class="codelight">scope</span> axes, the <span class="cga_opparam">axisMap</span> selector and the <span class="cga_opparam">cornerIndex</span>.</p>
+      <div class="example-content">
+        <p>The scope of the current shape prior to the <span class="inlinecode">setPivot</span> operation is depicted in the picture on the left. The numbers depict the cornerIndices.</p>
+      </div>
+    </div>
 
-<p class="text">The new <span class="cga_keyword">pivot.p </span>will lie at a selected corner (<span class="cga_opparam">cornerIndex</span>) of the current shape's<span class="codelight">scope</span>, and the pivot will be rotated such that all axes point inside the scope.</p>
+    <div class="example-row">
+      <figure class="media media-example">
+        <img src="images/setPivot-xyz.png" alt="XYZ">
+      </figure>
 
-<p class="text">The new <span class="cga_op">scope</span> will have zero translation and rotation (relative to the pivot), and will stay at the same place (in world coordinates), but with different axes. The <span class="cga_keyword">geometry</span> is projected to the new <span class="cga_keyword">scope</span> (i.e. stays at the same place in world coordinates).</p>
+      <div class="example-content">
+        <p>The pivots after <span class="inlinecode">setPivot(<strong>xyz</strong>, v)</span> with v = <span class="param">cornerIndex</span>.</p>
+        <p>Note the orientation of the pivots: in corner 0, the axes are the same as the original scope axes; at all other corners, the direction of y is the same (or the negative) of the y axis of the original scope. The other axes are oriented such that they conicide with a scope axis.</p>
+      </div>
+    </div>
 
-<h3>Visual Guide</h3>
+    <div class="example-row">
+      <figure class="media media-example">
+        <img src="images/setPivot-yzx.png" alt="XYZ">
+      </figure>
 
-  <table summary="" class="twocol">
-    <tr>
-      <td class="twocol_l">
-        <img src="images/setPivot-initialscope.png" alt="The initial scope." /> </td>
-  <td class="twocol_l"><em>The scope of the current shape prior to the <span class="codelight">setPivot</span> operation is depicted in the picture on the left. The numbers depict the cornerIndices.</em></td>
-  </tr>
-    <tr>
-      <td class="twocol_l">
-        <img src="images/setPivot-xyz.png" alt="XYZ" /> </td>
-  <td class="twocol_l">
-        <p><em>The pivots after setPivot(<strong>xyz</strong>, v) with v = <span class="cga_opparam">cornerIndex</span>.</em></p>
-        <p>Note the orientation of the pivots: in corner 0, the axes are the same as the original scope axes; at all other corners, the direction of y is the same (or the negative) of the y axis of the original scope. The other axes are oriented such that they conicide with a scope axis.</p></td>
-  </tr>
-  
-  
-      <tr>
-      <td class="twocol_l">
-        <img src="images/setPivot-yzx.png" alt="XYZ" /> </td>
-  <td class="twocol_l">
-        <p><em>The pivots after setPivot(<strong>yzx</strong>, v) with v = <span class="cga_opparam">cornerIndex</span>.</em></p>
+      <div class="example-content">
+        <p>The pivots after <span class="inlinecode">setPivot(<strong>yzx</strong>, v)</span> with v = <span class="param">cornerIndex</span>.</p>
         <p>Note the orientation of the pivots: in corner 0, the scope axes xyz are replaced by the axes yzx.</p>
-        <p>&nbsp;</p></td>
-  </tr>
+      </div>
+    </div>
 
-      <tr>
-      <td class="twocol_l">
-        <img src="images/setPivot-zxy.png" alt="XYZ" /> </td>
-  <td class="twocol_l">
-        <p><em>The pivots after setPivot(<strong>zxy</strong>, v) with v = <span class="cga_opparam">cornerIndex</span>.</em></p>
+    <div class="example-row">
+      <figure class="media media-example">
+        <img src="images/setPivot-zxy.png" alt="XYZ">
+      </figure>
+
+      <div class="example-content">
+        <p>The pivots after <span class="inlinecode">setPivot(<strong>zxy</strong>, v)</span> with v = <span class="param">cornerIndex</span>.</p>
         <p>Note the orientation of the pivots: in corner 0, the scope axes xyz are replaced by the axes zxy.</p>
-        <p>&nbsp;</p></td>
-  </tr>
+      </div>
+    </div>
+  </section>
 
-  </table>
+  <section class="section">
+    <h2>Related</h2>
+    <div class="related">
+      <a class="op" href="op_alignScopeToAxes.html"><span class="related-name">alignScopeToAxes</span><span class="related-kind">operation</span></a>
+      <a class="op" href="op_alignScopeToGeometry.html"><span class="related-name">alignScopeToGeometry</span><span class="related-kind">operation</span></a>
+      <a class="op" href="op_alignScopeToGeometryBBox.html"><span class="related-name">alignScopeToGeometryBBox</span><span class="related-kind">operation</span></a>
+      <a class="attr" href="attr_scope.html"><span class="related-name">scope</span><span class="related-kind">attribute</span></a>
+      <a class="attr" href="attr_pivot.html"><span class="related-name">pivot</span><span class="related-kind">attribute</span></a>
+    </div>
+  </section>
 
-<h2>Related</h2>
-  
-<ul>
-	<li><a class="normw" href="op_alignScopeToAxes.html">alignScopeToAxes operation</a></li>
-	<li><a class="normw" href="op_alignScopeToGeometry.html">alignScopeToGeometry operation</a></li>
-	<li><a class="normw" href="op_alignScopeToGeometryBBox.html">alignScopeToGeometryBBox operation</a></li>
-	<li><a class="normw" href="attr_scope.html">scope attribute</a></li>
-	<li><a class="normw" href="attr_pivot.html">pivot attribute</a></li>
-</ul>
-  
-<!-- FOOTER -->
-<p class="foot">Copyright &copy;2008-2025 Esri R&amp;D Center Zurich. All rights reserved.</p>
-<!-- END CENTERED CONTENT -->
-</div>
+  <footer class="footer">Copyright &copy;2008-2026 Esri R&amp;D Center Zurich. All rights reserved.</footer>
+
+</article>
 </body>
 </html>

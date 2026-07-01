@@ -1,0 +1,95 @@
+<!doctype html>
+<html>
+
+<head>
+   <meta charset="UTF-8">
+   <title>NIL Operation</title>
+   <link rel="stylesheet" href="../cgareference_style.css" type="text/css">
+</head>
+
+<body>
+<article class="content">
+
+   <header class="section">
+      <h1>
+         <span class="name">NIL</span>
+         <span class="kind">operation</span>
+      </h1>
+
+      <div class="signatures">
+         <div><span class="kw">NIL</span></div>
+      </div>
+   </header>
+
+   <section class="section">
+      <p>The <span class="kw">NIL</span> operation deletes the current shape from the shape tree. It can be used e.g. to create holes in <span class="inlinecode">split</span> operations or to terminate recursive rules.</p>
+   </section>
+
+   <section class="section">
+      <h2>Related</h2>
+      <div class="related">
+         <a class="op" href="op_pushpop.html"><span class="related-name">push / pop</span><span class="related-kind">operation</span></a>
+      </div>
+   </section>
+
+   <section class="section">
+      <h2>Examples</h2>
+
+      <section class="example">
+         <h3>Using NIL to create Holes</h3>
+
+         <div class="example-row">
+            <figure class="media media-example">
+               <img src="images/nil-a.png" alt="NIL a" width="298">
+            </figure>
+
+            <div class="example-content">
+<pre class="code-block">
+Lot-->
+   extrude(10)
+   split(x){ { ~1 : X | ~1 : NIL }* | ~1 : X } }
+</pre>
+            </div>
+         </div>
+      </section>
+
+      <section class="example">
+         <h3>Using NIL to stop a Recursion</h3>
+
+         <div class="example-row">
+            <figure class="media media-example">
+               <img src="images/nil-b.png" alt="NIL a" width="298">
+            </figure>
+
+            <div class="example-content">
+<pre class="code-block">
+attr ErkerFact = 0.8
+attr ErkerDepth = 0.8
+attr ErkerStop = 2
+
+Lot-->
+   extrude(10)
+   X
+   comp(f) { all : Erker }
+
+Erker-->
+   case(scope.sx > ErkerStop) :
+     s('ErkerFact, 'ErkerFact, 0)
+     center(xy)
+     alignScopeToGeometry(yUp, 0)
+     extrude(ErkerDepth)
+     X
+     comp(f){top : Erker}
+   else:
+     NIL
+</pre>
+            </div>
+         </div>
+      </section>
+   </section>
+
+   <footer class="footer">Copyright &copy;2008-2026 Esri R&amp;D Center Zurich. All rights reserved.</footer>
+
+</article>
+</body>
+</html>

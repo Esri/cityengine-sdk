@@ -1,1240 +1,1280 @@
+<!doctype html>
 <html>
 
 <head>
-<title>Material Shape Attribute</title>
-<link rel="stylesheet" href="../manual_style.css" type="text/css" />
+    <meta charset="UTF-8">
+    <title>Material Attribute</title>
+    <link rel="stylesheet" href="../cgareference_style.css" type="text/css">
+    <style>
+        .option-table td:first-child { white-space: nowrap; }
+        .option-table td:first-child > div + div { margin-top: 0.35rem; }
+
+        .material-matrix-wrap {
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+
+        .material-matrix {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+        }
+
+        .material-matrix th,
+        .material-matrix td {
+            padding: 6px 8px;
+            border: 1px solid var(--border);
+            vertical-align: middle;
+        }
+
+        .material-matrix th,
+        .material-matrix .matrix-corner {
+            background: var(--surface-subtle);
+            color: var(--text-strong);
+        }
+
+        .material-matrix th {
+            font-family: var(--font-mono);
+            font-weight: 600;
+            text-align: left;
+        }
+
+        .material-matrix .matrix-col-header,
+        .material-matrix td { text-align: center; }
+        .material-matrix .matrix-row-header { text-align: left; }
+        .material-matrix td { background: var(--surface); }
+    </style>
 </head>
 
 <body>
-<div class="content"><!-- HEADER (use only on bookchapters) -->
+<article class="content">
 
-<table summary="" class="header">
-	<tr>
-		<td align="left" class="helphead_l"><a href="../toc.html">
-		<div class="helplink">&nbsp;</div>
-		</a></td>
-		<td align="right" class="helphead_r"></td>
-	</tr>
-</table>
+    <header class="section">
+        <h1>
+            <span class="name">material</span>
+            <span class="kind">attribute</span>
+        </h1>
 
-<!-- CONTENT -->
+        <p>The material shape attributes control the shading, texturing and export of the shape's geometry. CityEngine supports ten texture channels with a fixed semantic.</p>
 
-<h1>Material Shape Attributes</h1>
+        <p>All of these attributes can be changed using the <a href="op_set.html">set</a> or <a href="op_setMaterial.html">setMaterial</a> operations. You can use the <a href="op_print.html">print</a> operation to output the value of a certain material attribute, eg. <span class="inlinecode">print(material.color.r)</span>.</p>
+    </header>
 
-<p>The material shape attributes control the shading, texturing
-and export of the shape's geometry. CityEngine supports ten texture
-channels with a fixed semantic.</p>
+    <section class="section">
+        <table class="option-table">
+            <tr>
+                <td style="background: var(--surface-subtle); color: var(--text-muted); font-weight: 700;">Attribute</td>
+                <td style="background: var(--surface-subtle); color: var(--text-muted); font-weight: 700;">Description</td>
+            </tr>
+            <tr>
+                <td><span class="type-tag">string</span> <span class="inlinecode">material.name</span></td>
+                <td>The name of the material.</td>
+            </tr>
+            <tr>
+                <td><span class="type-tag">string</span> <span class="inlinecode">material.shader</span></td>
+                <td>The shader name.<br>Default is <span class="inlinecode">"CityEngineShader"</span>. Setting it to <span class="inlinecode">"CityEnginePBRShader"</span> signals that the physically-based rendering attributes should be used, see <a href="#PBRMaterialAttributes">below.</a></td>
+            </tr>
+            <tr>
+                <td><span class="type-tag">float</span> <span class="inlinecode">material.color.{r|g|b}</span></td>
+                <td>Diffuse color (non-linear sRGB). Individual access to each color component. Default is white. <a href="attr_material_color.html">More details.</a></td>
+            </tr>
+            <tr>
+                <td><span class="type-tag">string</span> <span class="inlinecode">material.color.rgb</span></td>
+                <td>Diffuse color. Access to the complete color as hex-formatted string, eg. <span class="inlinecode">RED = "#ff0000"</span>. Default is <span class="inlinecode">"#ffffff"</span>. <a href="attr_material_color.html">More details.</a></td>
+            </tr>
+            <tr>
+                <td><span class="type-tag">float</span> <span class="inlinecode">material.ambient.{r|g|b}</span></td>
+                <td>Ambient color (non-linear sRGB). Individual access to each color component. Default is black.</td>
+            </tr>
+            <tr>
+                <td><span class="type-tag">float</span> <span class="inlinecode">material.specular.{r|g|b}</span></td>
+                <td>Specular color (non-linear sRGB). Individual access to each color component. Default is black.</td>
+            </tr>
+            <tr>
+                <td><span class="type-tag">float</span> <span class="inlinecode">material.emissive.{r|g|b}</span></td>
+                <td>Emissive color (non-linear sRGB). Individual access to each color component. Default is black.</td>
+            </tr>
+            <tr>
+                <td><span class="type-tag">float</span> <span class="inlinecode">material.opacity</span></td>
+                <td>Opacity factor. 1 is fully opaque, 0 is fully transparent. Default is 1.</td>
+            </tr>
+            <tr>
+                <td><span class="type-tag">float</span> <span class="inlinecode">material.reflectivity</span></td>
+                <td>Reflectivity factor. 0 is no reflection, 1 is full reflection (of the Reflection Map set in the <a href="https://doc.arcgis.com/en/cityengine/latest/help/help-scene-light-panorama.htm" target="_blank">Scene light and panorama settings</a>). Note that reflection depends on the specular color: the default black color means no reflection!</td>
+            </tr>
+            <tr>
+                <td><span class="type-tag">float</span> <span class="inlinecode">material.shininess</span></td>
+                <td>Phong specular exponent in the range [0, 128]. Default is 1.</td>
+            </tr>
+            <tr>
+                <td><span class="type-tag">float</span> <span class="inlinecode">material.bumpValue</span></td>
+                <td>Controls the bump scaling factor (if <span class="inlinecode">material.bumpmap</span> is set). Default is 1.</td>
+            </tr>
+            <tr>
+                <td><span class="type-tag">float</span> <span class="inlinecode">material.metallic</span></td>
+                <td>Controls the metallic factor (if <span class="inlinecode">material.metallicmap</span> is set). 0 is a dielectric material, 1 is a metallic material. Default is 0.</td>
+            </tr>
+            <tr>
+                <td><span class="type-tag">float</span> <span class="inlinecode">material.roughness</span></td>
+                <td>Controls the roughness factor (if <span class="inlinecode">material.roughnessmap</span> is set). 0 is a completely smooth material, 1 is a completely rough material. Default is 1.</td>
+            </tr>
+            <tr>
+                <td><span class="type-tag">bool</span> <span class="inlinecode">material.doubleSided</span></td>
+                <td>Controls if the material is supposed to be seen from both sides of a polygon. If set to <span class="kw">false</span> the material is supposed to only be seen from the side the normal points to. Default is <span class="kw">true</span>.</td>
+            </tr>
+            <tr>
+                <td>
+                    <div><span class="type-tag">string</span> <span class="inlinecode">material.colormap</span></div>
+                    <div><span class="type-tag">string</span> <span class="inlinecode">material.bumpmap</span></div>
+                    <div><span class="type-tag">string</span> <span class="inlinecode">material.dirtmap</span></div>
+                    <div><span class="type-tag">string</span> <span class="inlinecode">material.specularmap</span></div>
+                    <div><span class="type-tag">string</span> <span class="inlinecode">material.opacitymap</span></div>
+                    <div><span class="type-tag">string</span> <span class="inlinecode">material.normalmap</span></div>
+                    <div><span class="type-tag">string</span> <span class="inlinecode">material.emissivemap</span></div>
+                    <div><span class="type-tag">string</span> <span class="inlinecode">material.occlusionmap</span></div>
+                    <div><span class="type-tag">string</span> <span class="inlinecode">material.roughnessmap</span></div>
+                    <div><span class="type-tag">string</span> <span class="inlinecode">material.metallicmap</span></div>
+                </td>
+                <td>Texture file paths for the texture channels. <a href="attr_material_map.html">More details.</a></td>
+            </tr>
+            <tr>
+                <td><span class="type-tag">float</span> <span class="inlinecode">material.{colormap|...|metallicmap}.s{u|v}</span></td>
+                <td>Per-channel texture scaling factors.</td>
+            </tr>
+            <tr>
+                <td><span class="type-tag">float</span> <span class="inlinecode">material.{colormap|...|metallicmap}.t{u|v}</span></td>
+                <td>Per-channel texture translation factors.</td>
+            </tr>
+            <tr>
+                <td><span class="type-tag">float</span> <span class="inlinecode">material.{colormap|...|metallicmap}.rw</span></td>
+                <td>Per-channel texture rotation factors. The texture is rotated around the w-axis (w is the cross product of u and v).</td>
+            </tr>
+            <tr>
+                <td><span class="type-tag">string</span> <span class="inlinecode">material.opacitymap.mode</span></td>
+                <td>Controls how the opacitymap is combined with the colormap. Valid values are <span class="inlinecode">"blend"</span>, <span class="inlinecode">"mask"</span> and <span class="inlinecode">"opaque"</span>. Default is <span class="inlinecode">"blend"</span>.</td>
+            </tr>
+            <tr>
+                <td><span class="type-tag">float</span> <span class="inlinecode">material.opacitymap.cutoff</span></td>
+                <td>When <span class="inlinecode">material.opacitymap.mode</span> is set to <span class="inlinecode">"mask"</span>, the <span class="inlinecode">material.opacitymap.cutoff</span> attribute specifies the cutoff threshold. If the alpha value is greater than or equal to the cutoff value then it is rendered as fully opaque, otherwise it is rendered as fully transparent. This attribute is ignored for other modes than <span class="inlinecode">"mask"</span>. Default is 0.5.</td>
+            </tr>
+        </table>
+    </section>
 
-<p>All of these attributes can be changed using the <a href="op_set.html">set</a> or <a href="op_setMaterial.html">setMaterial</a> operations. You can use the <a href="op_print.html">print</a> operation to output the value of a certain material attribute, eg. <span class="inlinedcode">print(material.color.r)</span>.</p>
+    <section class="section">
+        <h2 id="PBRMaterialAttributes">PBR Material Attributes</h2>
 
-<h2>Syntax</h2>
+        <p>Some material attributes are designed to be exclusively used for physically-based rendering (PBR) shaders. These are:</p>
+        <ul>
+            <li><span class="inlinecode">material.emissivemap</span></li>
+            <li><span class="inlinecode">material.occlusionmap</span></li>
+            <li><span class="inlinecode">material.roughnessmap</span></li>
+            <li><span class="inlinecode">material.metallicmap</span></li>
+            <li><span class="inlinecode">material.emissive.{r|g|b}</span></li>
+            <li><span class="inlinecode">material.metallic</span></li>
+            <li><span class="inlinecode">material.roughness</span></li>
+        </ul>
 
-<table class="twocol">
-  <thead>
-    <th class="params">Attribute</th>
-    <th class="params">Description</th>
-  </thead>
-  <tr>
-    <td><pre class="code_std"><a name="name"></a><span class="codelight">string</span> material.name</pre></td>
-    <td>The name of the material.</td>
-  </tr>  
-  <tr>
-    <td><pre class="code_std"><a name="shader"></a><span class="codelight">string</span> material.shader</pre></td>
-    <td>The shader name.<br>
-    Default is "CityEngineShader". Setting it to "CityEnginePBRShader" signals that the physically-based rendering attributes should be used, see <a href="#PBRMaterialAttributes">below.</a></td>
-  </tr>  
-  <tr>
-    <td><pre class="code_std"><a name="color"></a><span class="codelight">float</span> material.color.{r|g|b}</pre></td>
-    <td>Diffuse color (non-linear sRGB). Individual access to each color component. Default is white. <a href="attr_material_color.html">More details.</a></td>
-  </tr>  
-  <tr>
-    <td><pre class="code_std"><span class="codelight">string</span> material.color.rgb</pre></td>
-    <td>Diffuse color. Access to the complete color as hex-formatted string, eg. <span class="inlinedcode">RED = "#ff0000"</span>. Default is <span class="inlinedcode">"#ffffff"</span>. <a href="attr_material_color.html">More details.</a></td>
-  </tr>  
-  <tr>
-    <td><pre class="code_std"><a name="ambient"></a><span class="codelight">float</span> material.ambient.{r|g|b}</pre></td>
-    <td>Ambient color (non-linear sRGB). Individual access to each color component. Default is black.</td>
-  </tr>  
-  <tr>
-    <td><pre class="code_std"><a name="specular"></a><span class="codelight">float</span> material.specular.{r|g|b}</pre></td>
-    <td>Specular color (non-linear sRGB). Individual access to each color component. Default is black.</td>
-  </tr>  
-  <tr>
-    <td><pre class="code_std"><a name="emissive"></a><span class="codelight">float</span> material.emissive.{r|g|b}</pre></td>
-    <td><p>Emissive color (non-linear sRGB). Individual access to each color component. Default is black.</p></td>
-  </tr>
-  <tr>
-    <td><pre class="code_std"><a name="opacity"></a><span class="codelight">float</span> material.opacity</pre></td>
-    <td>Opacity factor. 1 is fully opaque, 0 is fully transparent. Default is 1.</td>
-  </tr>  
-  <tr>
-    <td><pre class="code_std"><a name="reflectivity"></a><span class="codelight">float</span> material.reflectivity</pre></td>
-    <td>Reflectivity factor. 0 is no reflection, 1 is full reflection (of the Reflection Map set in the <a href="https://doc.arcgis.com/en/cityengine/latest/help/help-scene-light-panorama.htm" target="_blank">Scene light and panorama settings</a>). Note that reflection depends on the specular color: the default black color means no reflection!</td>
-  </tr>  
-  <tr>
-    <td><pre class="code_std"><a name="shininess"></a><span class="codelight">float</span> material.shininess</pre></td>
-    <td>Phong specular exponent in the range [0, 128]. Default is 1.</td>
-  </tr>
-  <tr>
-    <td><pre class="code_std"><a name="bumpValue"></a><span class="codelight">float</span> material.bumpValue</pre></td>
-    <td><p>Controls the bump scaling factor (if <span class="codelight">material.bumpmap</span> is set). Default is 1.</p></td>
-  </tr>
-  
-  <tr>
-    <td><pre class="code_std"><a name="metallic"></a><span class="codelight">float</span> material.metallic<pre></td>
-    <td><p>Controls the metallic factor (if <span class="codelight">material.metallicmap</span> is set). 0 is a dielectric material, 1 is a metallic material. Default is 0.</p></td>
-  </tr>
-  <tr>
-    <td><pre class="code_std"><a name="roughness"></a><span class="codelight">float</span> material.roughness<pre></td>
-    <td><p>Controls the roughness factor (if <span class="codelight">material.roughnessmap</span> is set). 0 is a completely smooth material, 1 is a completely rough material. Default is 1.</p></td>
-  </tr>
-  <tr>
-    <td><pre class="code_std"><a name="doubleSided"></a><span class="codelight">bool</span> material.doubleSided<pre></td>
-    <td><p>Controls if the material is supposed to be seen from both sides of a polygon. If set to false the material is supposed to only be seen from the side the normal points to. Default is true.</p></td>
-  </tr>
-  <tr>
-    <td>
-    	<pre class="code_std"><a name="colormap"></a><span class="codelight">string</span> material.colormap</pre>
-    	<pre class="code_std"><a name="bumpmap"></a><span class="codelight">string</span> material.bumpmap</pre>
-        <pre class="code_std"><a name="dirtmap"></a><span class="codelight">string</span> material.dirtmap</pre>
-        <pre class="code_std"><a name="specularmap"></a><span class="codelight">string</span> material.specularmap</pre>
-        <pre class="code_std"><a name="opacitymap"></a><span class="codelight">string</span> material.opacitymap</pre>
-        <pre class="code_std"><a name="normalmap"></a><span class="codelight">string</span> material.normalmap</pre>
-        <pre class="code_std"><a name="emissivemap"></a><span class="codelight">string</span> material.emissivemap</pre>
-        <pre class="code_std"><a name="occlusionmap"></a><span class="codelight">string</span> material.occlusionmap</pre>
-        <pre class="code_std"><a name="roughnessmap"></a><span class="codelight">string</span> material.roughnessmap</pre>
-        <pre class="code_std"><a name="metallicmap"></a><span class="codelight">string</span> material.metallicmap</pre>
-   </td>
-    <td>Texture file paths for the texture channels. <a href="attr_material_map.html">More details.</a></td>
-  </tr>  
-  <tr>
-    <td><pre class="code_std"><span class="codelight">float</span> material.{colormap|...|metallicmap}.s{u|v}</pre></td>
-    <td>Per-channel texture scaling factors.</td>
-  </tr>  
-  <tr>
-    <td><pre class="code_std"><span class="codelight">float</span> material.{colormap|...|metallicmap}.t{u|v}</pre></td>
-    <td>Per-channel texture translation factors.</td>
-  </tr>  
-  <tr>
-    <td><pre class="code_std"><span class="codelight">float</span> material.{colormap|...|metallicmap}.rw</pre></td>
-    <td>Per-channel texture rotation factors. The texture is rotated around the w-axis (w is the cross product of u and v).</td>
-  </tr>  
-  <tr>
-    <td><pre class="code_std"><span class="codelight">string</span> material.opacitymap.mode</pre></td>
-    <td>Controls how the opacitymap is combined with the colormap. Valid values are "blend", "mask" and "opaque". Default is "blend".</td>
-  </tr>  
-  <tr>
-    <td><pre class="code_std"><span class="codelight">float</span> material.opacitymap.cutoff</pre></td>
-    <td>When <span class="code_std">material.opacitymap.mode</span> is set to "mask", the <span class="code_std">material.opacitymap.cutoff</span> attribute specifies the cutoff threshold. If the alpha value is greater than or equal to the cutoff value then it is rendered as fully opaque, otherwise it is rendered as fully transparent. This attribute is ignored for other modes than "mask". Default is 0.5.</td>
-  </tr>  
+        <p>If the shader name is set to <span class="inlinecode">"CityEnginePBRShader"</span>, the CityEngine viewport and encoders which support PBR materials use those attributes as well as the following attributes.</p>
+        <ul>
+            <li><span class="inlinecode">material.color.{r|g|b}</span></li>
+            <li><span class="inlinecode">material.colormap</span></li>
+            <li><span class="inlinecode">material.normalmap</span></li>
+            <li><span class="inlinecode">material.opacity</span></li>
+            <li><span class="inlinecode">material.opacitymap</span></li>
+            <li><span class="inlinecode">material.opacitymap.mode</span></li>
+            <li><span class="inlinecode">material.opacitymap.cutoff</span></li>
+        </ul>
 
-</table>
+        <p>Here is how the CGA material attributes correspond to the GLTF material specification, which is based on Physically-Based Rendering (PBR).</p>
 
- <h2 id="PBRMaterialAttributes">PBR Material Attributes</h2>
- <p>Some material attributes are designed to be exclusively used for physically-based rendering (PBR) shaders. These are:
-	<ul>
-	 	<li><pre class="code_std">material.emissivemap</pre></li>
- 		<li><pre class="code_std">material.occlusionmap</pre></li>
- 		<li><pre class="code_std">material.roughnessmap</pre></li>
- 		<li><pre class="code_std">material.metallicmap</pre></li>
- 		<li><pre class="code_std">material.emissive.{r|g|b}</pre></li>
- 		<li><pre class="code_std">material.metallic</pre></li>
- 		<li><pre class="code_std">material.roughness</pre></li>
-   </ul>
- 
- If the shader name is set to "CityEnginePBRShader", the CityEngine viewport and encoders which support PBR materials use those attributes as well as the
-	<ul>
-		<li><pre class="code_std">material.color.{r|g|b}</pre></li>
- 		<li><pre class="code_std">material.colormap</pre></li>
- 		<li><pre class="code_std">material.normalmap</pre></li>
-  	    <li><pre class="code_std">material.opacity</pre></li>
-   	    <li><pre class="code_std">material.opacitymap</pre></li>
-   	    <li><pre class="code_std">material.opacitymap.mode</pre></li>
-   	    <li><pre class="code_std">material.opacitymap.cutoff</pre></li>
-   </ul>
- attributes.
- </p>
+        <table class="option-table" style="grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);">
+            <tr>
+                <td style="background: var(--surface-subtle); color: var(--text-muted); font-weight: 700;">CGA material attributes</td>
+                <td style="background: var(--surface-subtle); color: var(--text-muted); font-weight: 700;">GLTF material specification</td>
+            </tr>
+            <tr>
+                <td><span class="inlinecode">material.color.{r|g|b}</span></td>
+                <td><span class="inlinecode">pbrMetallicRoughness.baseColorFactor</span>, RGB components</td>
+            </tr>
+            <tr>
+                <td><span class="inlinecode">material.opacity</span></td>
+                <td><span class="inlinecode">pbrMetallicRoughness.baseColorFactor</span>, A component</td>
+            </tr>
+            <tr>
+                <td><span class="inlinecode">material.colormap</span></td>
+                <td><span class="inlinecode">pbrMetallicRoughness.baseColorTexture</span>, RGB channels</td>
+            </tr>
+            <tr>
+                <td><span class="inlinecode">material.opacitymap</span></td>
+                <td><span class="inlinecode">pbrMetallicRoughness.baseColorTexture</span>, A channel</td>
+            </tr>
+            <tr>
+                <td><span class="inlinecode">material.metallic</span></td>
+                <td><span class="inlinecode">pbrMetallicRoughness.metallicFactor</span></td>
+            </tr>
+            <tr>
+                <td><span class="inlinecode">material.roughness</span></td>
+                <td><span class="inlinecode">pbrMetallicRoughness.roughnessFactor</span></td>
+            </tr>
+            <tr>
+                <td><span class="inlinecode">material.metallicmap</span>, B channel</td>
+                <td><span class="inlinecode">pbrMetallicRoughness.metallicRoughnessTexture</span>, B channel</td>
+            </tr>
+            <tr>
+                <td><span class="inlinecode">material.roughnessmap</span>, G channel</td>
+                <td><span class="inlinecode">pbrMetallicRoughness.metallicRoughnessTexture</span>, G channel</td>
+            </tr>
+            <tr>
+                <td><span class="inlinecode">material.normalmap</span></td>
+                <td><span class="inlinecode">normalTexture</span></td>
+            </tr>
+            <tr>
+                <td><span class="inlinecode">material.occlusionmap</span>, R channel</td>
+                <td><span class="inlinecode">occlusionTexture</span>, R channel</td>
+            </tr>
+            <tr>
+                <td><span class="inlinecode">material.emissivemap</span></td>
+                <td><span class="inlinecode">emissiveTexture</span>, RGB channels</td>
+            </tr>
+            <tr>
+                <td><span class="inlinecode">material.emissive.{r|g|b}</span></td>
+                <td><span class="inlinecode">emissiveFactor</span>, RGB components</td>
+            </tr>
+            <tr>
+                <td><span class="inlinecode">material.opacitymap.mode</span></td>
+                <td><span class="inlinecode">alphaMode</span></td>
+            </tr>
+            <tr>
+                <td><span class="inlinecode">material.opacitymap.cutoff</span></td>
+                <td><span class="inlinecode">alphaCutoff</span></td>
+            </tr>
+        </table>
+    </section>
 
-<p>Here is how the CGA material attributes correspond to the GLTF material specification, which is based on Physically-Based Rendering (PBR).</p>
+    <section class="section">
+        <a name="RenderingImportAndExport"></a>
+        <h2>Rendering, Import, and Export</h2>
 
-<table class="twocol">
-  <thead>
-    <th class="params">CGA material attributes</th>
-    <th class="params">GLTF material specification</th>
-  </thead>
-  <tr>
-    <td><span class="code_std">material.color.{r|g|b}</span></td>
-    <td><span class="code_std">pbrMetallicRoughness.baseColorFactor</span>, RGB components</td>
-  </tr>
-  <tr>
-    <td><span class="code_std">material.opacity</span></td>
-    <td><span class="code_std">pbrMetallicRoughness.baseColorFactor</span>, A component</td>
-  </tr>
-  <tr>
-    <td><span class="code_std">material.colormap</span></td>
-    <td><span class="code_std">pbrMetallicRoughness.baseColorTexture</span>, RGB channels</td>
-  </tr>
-  <tr>
-    <td><span class="code_std">material.opacitymap</span></td>
-    <td><span class="code_std">pbrMetallicRoughness.baseColorTexture</span>, A channel</td>
-  </tr>
-  <tr>
-    <td><span class="code_std">material.metallic</span></td>
-    <td><span class="code_std">pbrMetallicRoughness.metallicFactor</span></td>
-  </tr>
-  <tr>
-    <td><span class="code_std">material.roughness</span></td>
-    <td><span class="code_std">pbrMetallicRoughness.roughnessFactor</span></td>
-  </tr>
-  <tr>
-    <td><span class="code_std">material.metallicmap</span>, B channel</td>
-    <td><span class="code_std">pbrMetallicRoughness.metallicRoughnessTexture</span>, B channel</td>
-  </tr>
-  <tr>
-    <td><span class="code_std">material.roughnessmap</span>, G channel</td>
-    <td><span class="code_std">pbrMetallicRoughness.metallicRoughnessTexture</span>, G channel</td>
-  </tr>
-  <tr>
-    <td><span class="code_std">material.normalmap</span></td>
-    <td><span class="code_std">normalTexture</span></td>
-  </tr>
-  <tr>
-    <td><span class="code_std">material.occlusionmap</span>, R channel</td>
-    <td><span class="code_std">occlusionTexture</span>, R channel</td>
-  </tr>
-  <tr>
-    <td><span class="code_std">material.emissivemap</span></td>
-    <td><span class="code_std">emissiveTexture</span>, RGB channels</td>
-  </tr>
-  <tr>
-    <td><span class="code_std">material.emissive.{r|g|b}</span></td>
-    <td><span class="code_std">emissiveFactor</span>, RGB components</td>
-  </tr>
-  <tr>
-    <td><span class="code_std">material.opacitymap.mode</span></td>
-    <td><span class="code_std">alphaMode</span></td>
-  </tr>
-  <tr>
-    <td><span class="code_std">material.opacitymap.cutoff</span></td>
-    <td><span class="code_std">alphaCutoff</span></td>
-  </tr>
-</table>
- 
+        <p>For asset &amp; generated model preview, importing and exporting the generated models, the material attributes need to be mapped to and from the respective format. The following table shows what format implements which feature. Please note that this table only lists the formats relevant for CGA, not general CityEngine.</p>
 
- <a name="RenderingImportAndExport"></a><h2>Rendering, Import, and Export</h2>
-<p>For asset &amp; generated model preview, importing and exporting the generated
-	models, the material attributes need to be mapped to and from the
-	respective format. The following table shows what format implements
-	which feature. Please note that this table only lists the formats
-	relevant for CGA, not general CityEngine.</p>
-<h3>Basic Material Attributes</h3>
-<table cellpadding="3">
-	<tr>
-		<td colspan="2"></td>
-		<th>Extensions</th>
-		<th>name</th>
-		<th>shader</th>
-		<th>color</th>
-		<th>colormap</th>
-		<th>dirtmap</th>
-	</tr>
-	<tr>
-		<th>Display</th>
-		<th>Asset Preview / 3D Viewport</th>
-		<th></th>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:green;">&#10004;</span> (1)</td>
-		<td><span style="color:green;">&#10004;</span> (2)</td>
-		<td><span style="color:green;">&#10004;</span> (2)</td>
-		<td><span style="color:green;">&#10004;</span> (2)</td>
-	</tr>
-	<tr>
-		<th rowspan="7">Import</th>
-		<th>Khronos Collada</th>
-		<th>.dae/.kml/.kmz</th>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:green;">&#10004;</span> (3)</td>
-		<td><span style="color:green;">&#10004;</span> (3)</td>
-		<td><span style="color:green;">&#10004;</span></td>
-	</tr>
-	<tr>
-		<th>Autodesk DWG</th>
-		<th>.dwg</th>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-	</tr>
-	<tr>
-		<th>Autodesk FBX</th>
-		<th>.fbx</th>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-	</tr>
-	<tr>
-		<th>Khronos glTF</th>
-		<th>.gltf/.glb</th>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-	</tr>
-	<tr>
-		<th>buildingSMART IFC</th>
-		<th>.ifc</th>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-	</tr>
-	<tr>
-		<th>Wavefront OBJ</th>
-		<th>.obj</th>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-	</tr>
-	<tr>
-		<th>Universal Scene Description (USD)</th>
-		<th>.usda/.usdc/.usdz</th>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-	</tr>
-	<tr>
-		<th rowspan="12">Export</th>
-		<th>Alembic</th>
-		<th>.abc</th>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-	</tr>
-	<tr>
-		<th>Khronos Collada</th>
-		<th>.dae/.kml/.kmz</th>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:green;">&#10004;</span> (3)</td>
-		<td><span style="color:green;">&#10004;</span> (3)</td>
-		<td><span style="color:green;">&#10004;</span></td>
-	</tr>
-	<tr>
-		<th>Autodesk DWG</th>
-		<th>.dwg</th>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-	</tr>
-	<tr>
-		<th>Autodesk FBX</th>
-		<th>.fbx</th>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-	</tr>
-	<tr>
-		<th>Esri FileGDB</th>
-		<th>.gdb</th>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-	</tr>
-	<tr>
-		<th>Khronos glTF</th>
-		<th>.gltf/.glb</th>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-	</tr>
-	<tr>
-		<th>buildingSMART IFC</th>
-		<th>.ifc</th>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-	</tr>
-	<tr>
-		<th>Wavefront OBJ</th>
-		<th>.obj</th>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-	</tr>
-	<tr>
-		<th>Scene Layer Package (SLPK)</th>
-		<th>.slpk</th>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-	</tr>
-	<tr>
-		<th>Unreal Datasmith</th>
-		<th>.udatasmith</th>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-	</tr>
-	<tr>
-		<th>Universal Scene Description (USD)</th>
-		<th>.usdc/.usdz</th>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span> (4)</td>
-		<td><span style="color:green;">&#10004;</span> (5)</td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-	</tr>
-	<tr>
-		<th>Vue</th>
-		<th>.vob</th>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-	</tr>
-</table>
-<ol>
-	<li>For the CityEngine viewport, the shader name is used to switch between standard and PBR rendering, see the <a href="#PBRMaterialAttributes">PBR Material Attributes</a> section above.</li>
-	<li>In the CityEngine viewport, the colormap and dirtmap values are multiplied with the (diffuse) color.</li>
-	<li>The official COLLADA standard does not support a diffuse solid color and a diffuse texture at the same time.</li>
-	<li>The USD exporter always creates an <a href="https://graphics.pixar.com/usd/docs/UsdPreviewSurface-Proposal.html#UsdPreviewSurfaceProposal-PreviewSurface" target="_blank">USDPreviewSurface</a> shader. If the shader name is set to PBR, the PBR attributes will be exported as well (see <a href="#PBRMaterialAttributes">PBR Material Attributes</a> above).</li>
-	<li>If a map is present the corresponding scalar value is ignored.</li>
-</ol>
+        <h3>Basic Material Attributes</h3>
+        <div class="material-matrix-wrap">
+            <table class="material-matrix material-matrix--with-extensions">
+                <tr>
+                    <td class="matrix-corner" colspan="2"></td>
+                    <th class="matrix-row-header">Extensions</th>
+                    <th class="matrix-col-header">name</th>
+                    <th class="matrix-col-header">shader</th>
+                    <th class="matrix-col-header">color</th>
+                    <th class="matrix-col-header">colormap</th>
+                    <th class="matrix-col-header">dirtmap</th>
+                </tr>
+                <tr>
+                    <th>Display</th>
+                    <th>Asset Preview / 3D Viewport</th>
+                    <th></th>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:green;">&#10004;</span> (1)</td>
+                    <td><span style="color:green;">&#10004;</span> (2)</td>
+                    <td><span style="color:green;">&#10004;</span> (2)</td>
+                    <td><span style="color:green;">&#10004;</span> (2)</td>
+                </tr>
+                <tr>
+                    <th rowspan="7">Import</th>
+                    <th>Khronos Collada</th>
+                    <th>.dae/.kml/.kmz</th>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:green;">&#10004;</span> (3)</td>
+                    <td><span style="color:green;">&#10004;</span> (3)</td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                </tr>
+                <tr>
+                    <th>Autodesk DWG</th>
+                    <th>.dwg</th>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                </tr>
+                <tr>
+                    <th>Autodesk FBX</th>
+                    <th>.fbx</th>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                </tr>
+                <tr>
+                    <th>Khronos glTF</th>
+                    <th>.gltf/.glb</th>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                </tr>
+                <tr>
+                    <th>buildingSMART IFC</th>
+                    <th>.ifc</th>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                </tr>
+                <tr>
+                    <th>Wavefront OBJ</th>
+                    <th>.obj</th>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                </tr>
+                <tr>
+                    <th>Universal Scene Description (USD)</th>
+                    <th>.usda/.usdc/.usdz</th>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                </tr>
+                <tr>
+                    <th rowspan="12">Export</th>
+                    <th>Alembic</th>
+                    <th>.abc</th>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                </tr>
+                <tr>
+                    <th>Khronos Collada</th>
+                    <th>.dae/.kml/.kmz</th>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:green;">&#10004;</span> (3)</td>
+                    <td><span style="color:green;">&#10004;</span> (3)</td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                </tr>
+                <tr>
+                    <th>Autodesk DWG</th>
+                    <th>.dwg</th>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                </tr>
+                <tr>
+                    <th>Autodesk FBX</th>
+                    <th>.fbx</th>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                </tr>
+                <tr>
+                    <th>Esri FileGDB</th>
+                    <th>.gdb</th>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                </tr>
+                <tr>
+                    <th>Khronos glTF</th>
+                    <th>.gltf/.glb</th>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                </tr>
+                <tr>
+                    <th>buildingSMART IFC</th>
+                    <th>.ifc</th>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                </tr>
+                <tr>
+                    <th>Wavefront OBJ</th>
+                    <th>.obj</th>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                </tr>
+                <tr>
+                    <th>Scene Layer Package (SLPK)</th>
+                    <th>.slpk</th>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                </tr>
+                <tr>
+                    <th>Unreal Datasmith</th>
+                    <th>.udatasmith</th>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                </tr>
+                <tr>
+                    <th>Universal Scene Description (USD)</th>
+                    <th>.usdc/.usdz</th>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span> (4)</td>
+                    <td><span style="color:green;">&#10004;</span> (5)</td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                </tr>
+                <tr>
+                    <th>Vue</th>
+                    <th>.vob</th>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                </tr>
+            </table>
+        </div>
+        <ol>
+            <li>For the CityEngine viewport, the shader name is used to switch between standard and PBR rendering, see the <a href="#PBRMaterialAttributes">PBR Material Attributes</a> section above.</li>
+            <li>In the CityEngine viewport, the colormap and dirtmap values are multiplied with the (diffuse) color.</li>
+            <li>The official COLLADA standard does not support a diffuse solid color and a diffuse texture at the same time.</li>
+            <li>The USD exporter always creates an <a href="https://graphics.pixar.com/usd/docs/UsdPreviewSurface-Proposal.html#UsdPreviewSurfaceProposal-PreviewSurface" target="_blank">USDPreviewSurface</a> shader. If the shader name is set to PBR, the PBR attributes will be exported as well (see <a href="#PBRMaterialAttributes">PBR Material Attributes</a> above).</li>
+            <li>If a map is present the corresponding scalar value is ignored.</li>
+        </ol>
 
-<h3>Advanced Material Attributes</h3>
-<table cellpadding="3">
-	<tr>
-		<td colspan="2"></td>
-		<th>opacity</th>
-		<th>opacitymap</th>
-		<th>opacitymap.mode</th>
-		<th>opacitymap.cutoff</th>
-		<th>normalmap</th>
-		<th>doubleSided</th>
-	</tr>
-	<tr>
-		<th>Display</th>
-		<th>Viewport</th>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-	</tr>
-	<tr>
-		<th rowspan="7">Import</th>
-		<th>Collada</th>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span> (7)</td>
-	</tr>
-	<tr>
-		<th>DWG</th>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-	</tr>
-	<tr>
-		<th>FBX</th>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-	</tr>
-	<tr>
-		<th>glTF</th>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-	</tr>
-	<tr>
-		<th>IFC</th>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-	</tr>
-	<tr>
-		<th>OBJ</th>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-	</tr>
-	<tr>
-		<th>USD</th>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-	</tr>
-	<tr>
-		<th rowspan="12">Export</th>
-		<th>Alembic</th>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-	</tr>
-	<tr>
-		<th>Collada</th>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-	</tr>
-	<tr>
-		<th>DWG</th>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-	</tr>
-	<tr>
-		<th>FBX</th>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-	</tr>
-	<tr>
-		<th>FileGDB</th>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-	</tr>
-	<tr>
-		<th>glTF</th>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-	</tr>
-	<tr>
-		<th>IFC</th>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-	</tr>
-	<tr>
-		<th>OBJ</th>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-	</tr>
-	<tr>
-		<th>SLPK</th>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-	</tr>
-	<tr>
-		<th>Unreal</th>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-	</tr>
-	<tr>
-		<th>USD</th>
-		<td><span style="color:green;">&#10004;</span> (5)</td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-	</tr>
-	<tr>
-		<th>Vue</th>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-	</tr>
-</table>
-<ol>
-	<li value="5">If a map is present the corresponding scalar value is ignored.</li>
-	<li value="7">Collada does not support the "doubleSided" parameter directly. The importer only sets it to false if the Collada file was written by "SketchUp" with the "two-sided" export option enabled (= all faces are duplicated).</li>
-</ol>
+        <h3>Advanced Material Attributes</h3>
+        <div class="material-matrix-wrap">
+            <table class="material-matrix">
+                <tr>
+                    <td class="matrix-corner" colspan="2"></td>
+                    <th class="matrix-col-header">opacity</th>
+                    <th class="matrix-col-header">opacitymap</th>
+                    <th class="matrix-col-header">opacitymap.mode</th>
+                    <th class="matrix-col-header">opacitymap.cutoff</th>
+                    <th class="matrix-col-header">normalmap</th>
+                    <th class="matrix-col-header">doubleSided</th>
+                </tr>
+                <tr>
+                    <th>Display</th>
+                    <th>Viewport</th>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                </tr>
+                <tr>
+                    <th rowspan="7">Import</th>
+                    <th>Collada</th>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span> (7)</td>
+                </tr>
+                <tr>
+                    <th>DWG</th>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                </tr>
+                <tr>
+                    <th>FBX</th>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                </tr>
+                <tr>
+                    <th>glTF</th>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                </tr>
+                <tr>
+                    <th>IFC</th>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                </tr>
+                <tr>
+                    <th>OBJ</th>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                </tr>
+                <tr>
+                    <th>USD</th>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                </tr>
+                <tr>
+                    <th rowspan="12">Export</th>
+                    <th>Alembic</th>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                </tr>
+                <tr>
+                    <th>Collada</th>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                </tr>
+                <tr>
+                    <th>DWG</th>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                </tr>
+                <tr>
+                    <th>FBX</th>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                </tr>
+                <tr>
+                    <th>FileGDB</th>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                </tr>
+                <tr>
+                    <th>glTF</th>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                </tr>
+                <tr>
+                    <th>IFC</th>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                </tr>
+                <tr>
+                    <th>OBJ</th>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                </tr>
+                <tr>
+                    <th>SLPK</th>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                </tr>
+                <tr>
+                    <th>Unreal</th>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                </tr>
+                <tr>
+                    <th>USD</th>
+                    <td><span style="color:green;">&#10004;</span> (5)</td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                </tr>
+                <tr>
+                    <th>Vue</th>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                </tr>
+            </table>
+        </div>
+        <ol>
+            <li value="5">If a map is present the corresponding scalar value is ignored.</li>
+            <li value="7">Collada does not support the "doubleSided" parameter directly. The importer only sets it to <span class="kw">false</span> if the Collada file was written by "SketchUp" with the "two-sided" export option enabled (= all faces are duplicated).</li>
+        </ol>
 
+        <h3>Legacy Material Attributes</h3>
+        <div class="material-matrix-wrap">
+            <table class="material-matrix">
+                <tr>
+                    <td class="matrix-corner" colspan="2"></td>
+                    <th class="matrix-col-header">ambient</th>
+                    <th class="matrix-col-header">specular</th>
+                    <th class="matrix-col-header">specularmap</th>
+                    <th class="matrix-col-header">reflectivity</th>
+                    <th class="matrix-col-header">shininess</th>
+                    <th class="matrix-col-header">bumpValue</th>
+                    <th class="matrix-col-header">bumpMap</th>
+                </tr>
+                <tr>
+                    <th>Display</th>
+                    <th>Viewport</th>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                </tr>
+                <tr>
+                    <th rowspan="7">Import</th>
+                    <th>Collada</th>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                </tr>
+                <tr>
+                    <th>DWG</th>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                </tr>
+                <tr>
+                    <th>FBX</th>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                </tr>
+                <tr>
+                    <th>glTF</th>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                </tr>
+                <tr>
+                    <th>IFC</th>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                </tr>
+                <tr>
+                    <th>OBJ</th>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                </tr>
+                <tr>
+                    <th>USD</th>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                </tr>
+                <tr>
+                    <th rowspan="12">Export</th>
+                    <th>Alembic</th>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                </tr>
+                <tr>
+                    <th>Collada</th>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                </tr>
+                <tr>
+                    <th>DWG</th>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                </tr>
+                <tr>
+                    <th>FBX</th>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                </tr>
+                <tr>
+                    <th>FileGDB</th>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                </tr>
+                <tr>
+                    <th>glTF</th>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                </tr>
+                <tr>
+                    <th>IFC</th>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                </tr>
+                <tr>
+                    <th>OBJ</th>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                </tr>
+                <tr>
+                    <th>SLPK</th>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                </tr>
+                <tr>
+                    <th>Unreal</th>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                </tr>
+                <tr>
+                    <th>USD</th>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                </tr>
+                <tr>
+                    <th>Vue</th>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                </tr>
+            </table>
+        </div>
 
-<h3>Legacy Material Attributes</h3>
-<table cellpadding="3">
-	<tr>
-		<td colspan="2"></td>
-		<th>ambient</th>
-		<th>specular</th>
-		<th>specularmap</th>
-		<th>reflectivity</th>
-		<th>shininess</th>
-		<th>bumpValue</th>
-		<th>bumpMap</th>
-	</tr>
-	<tr>
-		<th>Display</th>
-		<th>Viewport</th>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-	</tr>
-	<tr>
-		<th rowspan="7">Import</th>
-		<th>Collada</th>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-	</tr>
-	<tr>
-		<th>DWG</th>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-	</tr>
-	<tr>
-		<th>FBX</th>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-	</tr>
-	<tr>
-		<th>glTF</th>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-	</tr>
-	<tr>
-		<th>IFC</th>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-	</tr>
-	<tr>
-		<th>OBJ</th>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-	</tr>
-	<tr>
-		<th>USD</th>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-	</tr>
-	<tr>
-		<th rowspan="12">Export</th>
-		<th>Alembic</th>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-	</tr>
-	<tr>
-		<th>Collada</th>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-	</tr>
-	<tr>
-		<th>DWG</th>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-	</tr>
-	<tr>
-		<th>FBX</th>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-	</tr>
-	<tr>
-		<th>FileGDB</th>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-	</tr>
-	<tr>
-		<th>glTF</th>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-	</tr>
-	<tr>
-		<th>IFC</th>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-	</tr>
-	<tr>
-		<th>OBJ</th>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-	</tr>
-	<tr>
-		<th>SLPK</th>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-	</tr>
-	<tr>
-		<th>Unreal</th>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-	</tr>
-	<tr>
-		<th>USD</th>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-	</tr>
-	<tr>
-		<th>Vue</th>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-	</tr>
-</table>
+        <h3>Physically-Based Rendering Material Attributes</h3>
+        <div class="material-matrix-wrap">
+            <table class="material-matrix">
+                <tr>
+                    <td class="matrix-corner" colspan="2"></td>
+                    <th class="matrix-col-header">emissive</th>
+                    <th class="matrix-col-header">emissivemap</th>
+                    <th class="matrix-col-header">metallic</th>
+                    <th class="matrix-col-header">metallicmap</th>
+                    <th class="matrix-col-header">roughness</th>
+                    <th class="matrix-col-header">roughnessmap</th>
+                    <th class="matrix-col-header">occlusionmap</th>
+                </tr>
+                <tr>
+                    <th>Display</th>
+                    <th>Viewport</th>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                </tr>
+                <tr>
+                    <th rowspan="7">Import</th>
+                    <th>Collada</th>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                </tr>
+                <tr>
+                    <th>DWG</th>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                </tr>
+                <tr>
+                    <th>FBX</th>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                </tr>
+                <tr>
+                    <th>glTF</th>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                </tr>
+                <tr>
+                    <th>IFC</th>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                </tr>
+                <tr>
+                    <th>OBJ</th>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                </tr>
+                <tr>
+                    <th>USD</th>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                </tr>
+                <tr>
+                    <th rowspan="12">Export</th>
+                    <th>Alembic</th>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                </tr>
+                <tr>
+                    <th>Collada</th>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                </tr>
+                <tr>
+                    <th>DWG</th>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                </tr>
+                <tr>
+                    <th>FBX</th>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                </tr>
+                <tr>
+                    <th>FileGDB</th>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                </tr>
+                <tr>
+                    <th>glTF</th>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                </tr>
+                <tr>
+                    <th>IFC</th>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                </tr>
+                <tr>
+                    <th>OBJ</th>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                </tr>
+                <tr>
+                    <th>SLPK</th>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                </tr>
+                <tr>
+                    <th>Unreal</th>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                </tr>
+                <tr>
+                    <th>USD</th>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span> (5)</td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span> (5)</td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                </tr>
+                <tr>
+                    <th>Vue</th>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                </tr>
+            </table>
+        </div>
+        <ol>
+            <li value="5">If a map is present the corresponding scalar value is ignored.</li>
+        </ol>
 
-<h3>Physically-Based Rendering Material Attributes</h3>
-<table cellpadding="3">
-	<tr>
-		<td colspan="2"></td>
-		<th>emissive</th>
-		<th>emissivemap</th>
-		<th>metallic</th>
-		<th>metallicmap</th>
-		<th>roughness</th>
-		<th>roughnessmap</th>
-		<th>occlusionmap</th>
-	</tr>
-	<tr>
-		<th>Display</th>
-		<th>Viewport</th>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-	</tr>
-	<tr>
-		<th rowspan="7">Import</th>
-		<th>Collada</th>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-	</tr>
-	<tr>
-		<th>DWG</th>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-	</tr>
-	<tr>
-		<th>FBX</th>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-	</tr>
-	<tr>
-		<th>glTF</th>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-	</tr>
-	<tr>
-		<th>IFC</th>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-	</tr>
-	<tr>
-		<th>OBJ</th>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-	</tr>
-	<tr>
-		<th>USD</th>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-	</tr>
-	<tr>
-		<th rowspan="12">Export</th>
-		<th>Alembic</th>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-	</tr>
-	<tr>
-		<th>Collada</th>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-	</tr>
-	<tr>
-		<th>DWG</th>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-	</tr>
-	<tr>
-		<th>FBX</th>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-	</tr>
-	<tr>
-		<th>FileGDB</th>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-	</tr>
-	<tr>
-		<th>glTF</th>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-	</tr>
-	<tr>
-		<th>IFC</th>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-	</tr>
-	<tr>
-		<th>OBJ</th>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-	</tr>
-	<tr>
-		<th>SLPK</th>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-	</tr>
-	<tr>
-		<th>Unreal</th>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-	</tr>
-	<tr>
-		<th>USD</th>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span> (5)</td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span> (5)</td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-	</tr>
-	<tr>
-		<th>Vue</th>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-	</tr>
-</table>
-<ol>
-	<li value="5">If a map is present the corresponding scalar value is ignored.</li>
-</ol>
+        <h3>Map Transform Material Attributes</h3>
+        <div class="material-matrix-wrap">
+            <table class="material-matrix">
+                <tr>
+                    <td class="matrix-corner" colspan="2"></td>
+                    <th class="matrix-col-header">map.tu/.tv</th>
+                    <th class="matrix-col-header">map.su/.sv</th>
+                    <th class="matrix-col-header">map.rw</th>
+                </tr>
+                <tr>
+                    <th>Display</th>
+                    <th>Viewport</th>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                </tr>
+                <tr>
+                    <th rowspan="7">Import</th>
+                    <th>Collada</th>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                </tr>
+                <tr>
+                    <th>DWG</th>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                </tr>
+                <tr>
+                    <th>FBX</th>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                </tr>
+                <tr>
+                    <th>glTF</th>
+                    <td><span style="color:green;">&#10004;</span> (6)</td>
+                    <td><span style="color:green;">&#10004;</span> (6)</td>
+                    <td><span style="color:green;">&#10004;</span> (6)</td>
+                </tr>
+                <tr>
+                    <th>IFC</th>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                </tr>
+                <tr>
+                    <th>OBJ</th>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                </tr>
+                <tr>
+                    <th>USD</th>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                </tr>
+                <tr>
+                    <th rowspan="12">Export</th>
+                    <th>Alembic</th>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                </tr>
+                <tr>
+                    <th>Collada</th>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                </tr>
+                <tr>
+                    <th>DWG</th>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                </tr>
+                <tr>
+                    <th>FBX</th>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                </tr>
+                <tr>
+                    <th>FileGDB</th>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                </tr>
+                <tr>
+                    <th>glTF</th>
+                    <td><span style="color:green;">&#10004;</span> (6)</td>
+                    <td><span style="color:green;">&#10004;</span> (6)</td>
+                    <td><span style="color:green;">&#10004;</span> (6)</td>
+                </tr>
+                <tr>
+                    <th>IFC</th>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                </tr>
+                <tr>
+                    <th>OBJ</th>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                </tr>
+                <tr>
+                    <th>SLPK</th>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                </tr>
+                <tr>
+                    <th>Unreal</th>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                </tr>
+                <tr>
+                    <th>USD</th>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                </tr>
+                <tr>
+                    <th>Vue</th>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
+                </tr>
+            </table>
+        </div>
+        <ol>
+            <li value="6">Transforms are read and written using the KHR_texture_transform extension.</li>
+        </ol>
+    </section>
 
+    <section class="section">
+        <h2>Related</h2>
+        <div class="related">
+            <a class="op" href="op_set.html"><span class="related-name">set</span><span class="related-kind">operation</span></a>
+            <a class="op" href="op_setupProjection.html"><span class="related-name">setupProjection</span><span class="related-kind">operation</span></a>
+            <a class="op" href="op_projectUV.html"><span class="related-name">projectUV</span><span class="related-kind">operation</span></a>
+            <a class="op" href="op_print.html"><span class="related-name">print</span><span class="related-kind">operation</span></a>
+            <a class="op" href="op_resetMaterial.html"><span class="related-name">resetMaterial</span><span class="related-kind">operation</span></a>
+            <a class="op" href="op_setMaterial.html"><span class="related-name">setMaterial</span><span class="related-kind">operation</span></a>
+            <a class="func" href="func_getMaterial.html"><span class="related-name">getMaterial</span><span class="related-kind">function</span></a>
+            <a href="cga_texturing.html"><span class="related-name">Texturing: Essential Knowledge</span></a>
+            <a href="https://doc.arcgis.com/en/cityengine/latest/help/help-export-models-overview.htm" target="_blank"><span class="related-name">Export models section in the CityEngine manual</span></a>
+        </div>
+    </section>
 
-<h3>Map Transform Material Attributes</h3>
-<table cellpadding="3">
-	<tr>
-		<td colspan="2"></td>
-		<th>map.tu/.tv</th>
-		<th>map.su/.sv</th>
-		<th>map.rw</th>
-	</tr>
-	<tr>
-		<th>Display</th>
-		<th>Viewport</th>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-	</tr>
-	<tr>
-		<th rowspan="7">Import</th>
-		<th>Collada</th>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-	</tr>
-	<tr>
-		<th>DWG</th>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-	</tr>
-	<tr>
-		<th>FBX</th>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-	</tr>
-	<tr>
-		<th>glTF</th>
-		<td><span style="color:green;">&#10004;</span> (6)</td>
-		<td><span style="color:green;">&#10004;</span> (6)</td>
-		<td><span style="color:green;">&#10004;</span> (6)</td>
-	</tr>
-	<tr>
-		<th>IFC</th>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-	</tr>
-	<tr>
-		<th>OBJ</th>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-	</tr>
-	<tr>
-		<th>USD</th>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-	</tr>
-	<tr>
-		<th rowspan="12">Export</th>
-		<th>Alembic</th>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-	</tr>
-	<tr>
-		<th>Collada</th>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-	</tr>
-	<tr>
-		<th>DWG</th>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-	</tr>
-	<tr>
-		<th>FBX</th>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-	</tr>
-	<tr>
-		<th>FileGDB</th>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-	</tr>
-	<tr>
-		<th>glTF</th>
-		<td><span style="color:green;">&#10004;</span> (6)</td>
-		<td><span style="color:green;">&#10004;</span> (6)</td>
-		<td><span style="color:green;">&#10004;</span> (6)</td>
-	</tr>
-	<tr>
-		<th>IFC</th>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-	</tr>
-	<tr>
-		<th>OBJ</th>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-	</tr>
-	<tr>
-		<th>SLPK</th>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-	</tr>
-	<tr>
-		<th>Unreal</th>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-	</tr>
-	<tr>
-		<th>USD</th>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-	</tr>
-	<tr>
-		<th>Vue</th>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:green;">&#10004;</span></td>
-		<td><span style="color:red;">&#10008;</span></td>
-	</tr>
-</table>
-<ol>
-	<li value="6">Transforms are read and written using the KHR_texture_transform extension.</li>
-</ol>
-
-<h2>Related</h2>
-
-<ul>
-	<li><a class="normw" href="op_set.html">set operation</a></li>
-	<li><a class="normw" href="op_setupProjection.html">setupProjection operation</a></li>
-	<li><a class="normw" href="op_projectUV.html">projectUV operation</a></li>
-	<li><a class="normw" href="op_print.html">print operation</a></li>
-	<li><a class="normw" href="op_resetMaterial.html">resetMaterial operation</a></li>
-	<li><a class="normw" href="op_setMaterial.html">setMaterial operation</a></li>
-	<li><a class="normw" href="func_getMaterial.html">getMaterial function</a></li>
-	<li><a class="normw" href="cga_texturing.html">Texturing: Essential Knowledge</a></li>
-	<li><a class="normw" href="https://doc.arcgis.com/en/cityengine/latest/help/help-export-models-overview.htm">Export models section in the CityEngine manual</a></li>
-</ul>
-
-<h2>Example</h2>
-
-<pre class="codecga">
+    <section class="section">
+        <h2>Example</h2>
+<pre class="code-block">
 attr wallC       = "#FFFFFF"
 attr wallTexture = "facade/walls/wall.c.09.tif"
 attr dirtTexture = "dirtmaps/dirtmap.16.tif"
 ...
-Wall --> 
+Wall -->
     primitiveCube() color(wallC)
     set(material.colormap, wallTexture) projectUV(0)
     set(material.dirtmap, dirtTexture) projectUV(2)
 </pre>
+    </section>
 
-<!-- FOOTER -->
-<p class="foot">Copyright &copy;2008-2025 Esri R&amp;D Center Zurich. All rights reserved.</p>                  
+    <footer class="footer">Copyright &copy;2008-2026 Esri R&amp;D Center Zurich. All rights reserved.</footer>
 
-</div>
+</article>
 </body>
 </html>

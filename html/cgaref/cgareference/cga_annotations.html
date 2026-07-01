@@ -1,212 +1,243 @@
+<!doctype html>
 <html>
 
 <head>
+    <meta charset="UTF-8">
     <title>Annotations</title>
-    <link rel="stylesheet" href="../manual_style.css" type="text/css" />
+    <link rel="stylesheet" href="../cgareference_style.css" type="text/css">
+    <style>
+        .annotation-index {
+            padding: 0.95rem 1rem;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            background: var(--surface-subtle);
+        }
+
+        .annotation-index > :first-child {
+            margin-top: 0;
+        }
+
+        .annotation-index > :last-child {
+            margin-bottom: 0;
+        }
+
+        .annotation-index ul {
+            columns: 2;
+            column-gap: 1.5rem;
+            margin: 0;
+            padding-left: 1.2rem;
+        }
+
+        .annotation-index li {
+            break-inside: avoid;
+            margin: 0.2rem 0;
+        }
+
+        .annotation-card {
+            margin: 1rem 0 0;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            background: var(--surface);
+            overflow: hidden;
+        }
+
+        .annotation-card + .annotation-card {
+            margin-top: 1rem;
+        }
+
+        .annotation-card h3 {
+            margin: 0;
+            padding: 0.45rem 0.9rem;
+            background: var(--surface-subtle);
+            border-bottom: 1px solid var(--border);
+            font-size: 0.96rem;
+            font-weight: 400;
+            line-height: 1.35;
+            text-transform: none;
+        }
+
+        .annotation-card h3 .inlinecode {
+            font-size: inherit;
+        }
+
+        .annotation-card > p,
+        .annotation-card > .code-block {
+            margin-left: 3rem;
+            margin-right: 0.95rem;
+        }
+
+        .annotation-card > p:first-of-type,
+        .annotation-card > .code-block:first-of-type {
+            margin-top: 0.55rem;
+        }
+
+        .annotation-card > :last-child {
+            margin-bottom: 0.75rem;
+        }
+
+        .annotation-card .annotation-example-label {
+            margin-bottom: 0.35rem;
+            color: var(--text-strong);
+            font-weight: 600;
+        }
+
+        .annotation-card .annotation-example-label + .code-block {
+            margin-top: 0;
+        }
+
+        .annotation-card .code-block {
+            margin-bottom: 0.75rem;
+        }
+
+        @media (max-width: 640px) {
+            .annotation-index ul {
+                columns: 1;
+            }
+
+            .annotation-card > p,
+            .annotation-card > .code-block {
+                margin-left: 0.95rem;
+            }
+        }
+    </style>
 </head>
 
 <body>
-<div class="content">
+<article class="content">
 
-<!-- HEADER (use only on bookchapters) -->
+    <header class="section">
+        <h1>Annotations</h1>
+        <p>Annotations are used to add additional information, in most cases for a rule or an attribute. Annotations are optional and do not affect the semantics of a rule and thus have no influence on the model generation. Annotations are mostly used to give additional hints for user interface elements such as the Inspector on how to present attributes or rules.</p>
+    </header>
 
-<table summary="" class="header">
-	<tr>
-		<td align="left" class="helphead_l"><a href="../toc.html"><div class="helplink">&nbsp;</div></a></td>
-		<td align="right" class="helphead_r"></td>
-	</tr>
-</table>
+    <section class="section">
+        <div class="annotation-index">
+            <p><strong>Annotations</strong></p>
+            <ul>
+                <li><a href="#Angle"><span class="inlinecode">@Angle</span></a></li>
+                <li><a href="#Color"><span class="inlinecode">@Color</span></a></li>
+                <li><a href="#Description"><span class="inlinecode">@Description("description")</span></a></li>
+                <li><a href="#Directory"><span class="inlinecode">@Directory</span></a></li>
+                <li><a href="#DisplayName"><span class="inlinecode">@DisplayName("name")</span></a></li>
+                <li><a href="#Distance"><span class="inlinecode">@Distance</span></a></li>
+                <li><a href="#Enum"><span class="inlinecode">@Enum(value_1, value_2, ..., restricted=true)</span></a></li>
+                <li><a href="#Enum2"><span class="inlinecode">@Enum(valuesAttr=name, restricted=true)</span></a></li>
+                <li><a href="#File"><span class="inlinecode">@File</span></a></li>
+                <li><a href="#File2"><span class="inlinecode">@File("ext_1", ..., "ext_n")</span></a></li>
+                <li><a href="#Group"><span class="inlinecode">@Group("level_1-group", ..., "level_n-group")</span></a></li>
+                <li><a href="#Group2"><span class="inlinecode">@Group("level_1-group", ..., "level_n-group", order)</span></a></li>
+                <li><a href="#Handle"><span class="inlinecode">@Handle(handle_params)</span></a></li>
+                <li><a href="#Hidden"><span class="inlinecode">@Hidden</span></a></li>
+                <li><a href="#Hidden2"><span class="inlinecode">@Hidden(attribute_1, ... , attribute_n)</span></a></li>
+                <li><a href="#InLine"><span class="inlinecode">@InLine</span></a></li>
+                <li><a href="#InMesh"><span class="inlinecode">@InMesh</span></a></li>
+                <li><a href="#InPoint"><span class="inlinecode">@InPoint</span></a></li>
+                <li><a href="#InPointCloud"><span class="inlinecode">@InPointCloud</span></a></li>
+                <li><a href="#InPolygon"><span class="inlinecode">@InPolygon</span></a></li>
+                <li><a href="#MaterialFile"><span class="inlinecode">@MaterialFile</span></a></li>
+                <li><a href="#Order"><span class="inlinecode">@Order(order)</span></a></li>
+                <li><a href="#Out"><span class="inlinecode">@Out(granularity=<wbr>separatedShapes|combinedShape)</span></a></li>
+                <li><a href="#Percent"><span class="inlinecode">@Percent</span></a></li>
+                <li><a href="#Range"><span class="inlinecode">@Range(min=value, max=value, stepsize=0, restricted=true)</span></a></li>
+                <li><a href="#RuleFileDescription"><span class="inlinecode">@RuleFileDescription("description")</span></a></li>
+                <li><a href="#StartRule"><span class="inlinecode">@StartRule</span></a></li>
+            </ul>
+        </div>
+    </section>
 
-<!-- CONTENT -->
-<h1>Annotations</h1>
-             
-<p>Annotations are used to add additional information, in most cases for a rule or an attribute. Annotations are optional and do not affect the semantics of a rule and thus have no influence on the model generation. Annotations are mostly used to give additional hints for user interface elements such as the Inspector on how to present attributes or rules.</p>
- 
-<h2>Syntax</h2>
- 
- 	<table class="w3-table erdz-api-table">
-			<tr style="border:0px">
-				<th class="erdz-api-proto">Annotations</th>
-			</tr>
-			<tr>
-				<td>
-					<ul style="list-style-type   : none; margin-left : 10px; padding-left: 20px; ">
-						<li><code><a class="erdz-api-anchor" href="#angle"              >@Angle</a></code></li>
-						<li><code><a class="erdz-api-anchor" href="#color"              >@Color</a></code></li>
-						<li><code><a class="erdz-api-anchor" href="#desc"               >@Description("description")</a></code></li>
-						<li><code><a class="erdz-api-anchor" href="#dir"                >@Directory</a></code></li>
-						<li><code><a class="erdz-api-anchor" href="#displayname"        >@DisplayName("name")</a></code></li>
-						<li><code><a class="erdz-api-anchor" href="#dist"               >@Distance</a></code></li>
-						<li><code><a class="erdz-api-anchor" href="#enum1"              >@Enum(value_1, value_2, ..., restricted=true)</a></code></li>
-						<li><code><a class="erdz-api-anchor" href="#enum2"              >@Enum(valuesAttr=name, restricted=true)</a></code></li>
-						<li><code><a class="erdz-api-anchor" href="#file1"              >@File</a></code></li>
-						<li><code><a class="erdz-api-anchor" href="#file2"              >@File("ext_1", ..., "ext_n")</a></code></li>
-						<li><code><a class="erdz-api-anchor" href="#group1"             >@Group("level_1-group", ..., "level_n-group")</a></code></li>
-						<li><code><a class="erdz-api-anchor" href="#group2"             >@Group("level_1-group", ..., "level_n-group, order")</a></code></li>
-						<li><code><a class="erdz-api-anchor" href="#handle"             >@Handle(handle_params)</a></code></li>
-						<li><code><a class="erdz-api-anchor" href="#hidden1"            >@Hidden</a></code></li>
-						<li><code><a class="erdz-api-anchor" href="#hidden2"            >@Hidden(attribute_1, ... , attribute_n)</a></code></li>
-						<li><code><a class="erdz-api-anchor" href="#inmesh"             >@InLine</a></code></li>
-						<li><code><a class="erdz-api-anchor" href="#inmesh"             >@InMesh</a></code></li>
-						<li><code><a class="erdz-api-anchor" href="#inmesh"             >@InPoint</a></code></li>
-						<li><code><a class="erdz-api-anchor" href="#inmesh"             >@InPointCloud</a></code></li>
-						<li><code><a class="erdz-api-anchor" href="#inmesh"             >@InPolygon</a></code></li>
-						<li><code><a class="erdz-api-anchor" href="#materialfile"       >@MaterialFile</a></code></li>
-						<li><code><a class="erdz-api-anchor" href="#order"              >@Order(order)</a></code></li>
-						<li><code><a class="erdz-api-anchor" href="#out"                >@Out(granularity=separatedShapes|combinedShape)</a></code></li>
-						<li><code><a class="erdz-api-anchor" href="#percent"            >@Percent</a></code></li>
-						<li><code><a class="erdz-api-anchor" href="#range"              >@Range(min=value, max=value, stepsize=0, restricted=true)</a></code></li>
-						<li><code><a class="erdz-api-anchor" href="#rulefiledescription">@RuleFileDescription("description")</a></code></li>
-						<li><code><a class="erdz-api-anchor" href="#startrule"          >@StartRule</a></code></li>
-					</ul>
-				</td>
-			</tr>
-				
-	</table>
-	
-  	<table id="angle" class="w3-table erdz-api-table">
-			<tr>
-				<th class="erdz-api-proto"><code>@Angle</code></th>
-			</tr>
-			<tr>
-				<td class="erdz-api-text">Adds a &#xb0; (degree) unit in Inspector and an unrestricted [0,360] range by default with slider.  Use <code>@Range</code> to specify a different range.</td>
-			</tr>
-			<tr>
-				<td class="erdz-api-example">Example:
-				<pre class="codecga">
+    <section class="section">
+        <section class="annotation-card">
+            <a id="Angle"></a>
+            <h3><span class="inlinecode">@Angle</span></h3>
+            <p>Adds a ° (degree) unit in Inspector and an unrestricted [0,360] range by default with slider. Use <span class="inlinecode">@Range</span> to specify a different range.</p>
+            <p class="annotation-example-label">Example:</p>
+<pre class="code-block">
 @Angle
 attr angle = 180
 </pre>
-				</td>
-			</tr>
-	</table>
-	
-	<table id="color" class="w3-table erdz-api-table">
-			<tr>
-				<th class="erdz-api-proto"><code>@Color</code></th>
-			</tr>
-			<tr>
-				<td class="erdz-api-text">Mark an attribute as a color attribute which will present a color picker in the Inspector.</td>
-			</tr>
-			<tr>
-				<td class="erdz-api-example">Example:
-				<pre class="codecga">
+        </section>
+
+        <section class="annotation-card">
+            <a id="Color"></a>
+            <h3><span class="inlinecode">@Color</span></h3>
+            <p>Mark an attribute as a color attribute which will present a color picker in the Inspector.</p>
+            <p class="annotation-example-label">Example:</p>
+<pre class="code-block">
 @Color
 attr userColor = "#000000"
 </pre>
-				</td>
-			</tr>
-	</table>
-	
-	<table id="desc" class="w3-table erdz-api-table">
-			<tr>
-				<th class="erdz-api-proto"><code>@Description("description")</code></th>
-			</tr>
-			<tr>
-				<td class="erdz-api-text">Adds a description to an attribute or rule which will be displayed as tooltip in the Inspector and Visual CGA Editor or as description in the start rule chooser or style manager. Use <code>\n</code> for line breaks.</td>
-			</tr>
-			<tr>
-				<td class="erdz-api-example">Example:
-				<pre class="codecga">
+        </section>
+
+        <section class="annotation-card">
+            <a id="Description"></a>
+            <h3><span class="inlinecode">@Description("description")</span></h3>
+            <p>Adds a description to an attribute or rule which will be displayed as tooltip in the Inspector and Visual CGA Editor or as description in the start rule chooser or style manager. Use <span class="inlinecode">\n</span> for line breaks.</p>
+            <p class="annotation-example-label">Example:</p>
+<pre class="code-block">
 @Description("The building width")
 attr width = 40
 </pre>
-				</td>
-			</tr>
-	</table>
-	
-	<table id="dir" class="w3-table erdz-api-table">
-			<tr>
-				<th class="erdz-api-proto"><code>@Directory</code></th>
-			</tr>
-			<tr>
-				<td class="erdz-api-text">Mark an attribute as a directory name. The Inspector will present a directory chooser.</td>
-			</tr>
-			<tr>
-				<td class="erdz-api-example">Example:
-				<pre class="codecga">
+        </section>
+
+        <section class="annotation-card">
+            <a id="Directory"></a>
+            <h3><span class="inlinecode">@Directory</span></h3>
+            <p>Mark an attribute as a directory name. The Inspector will present a directory chooser.</p>
+            <p class="annotation-example-label">Example:</p>
+<pre class="code-block">
 @Directory
 attr assets = "/assets/lod" + lod
 </pre>
-				</td>
-			</tr>
-	</table>
-	
-	<table id="displayname" class="w3-table erdz-api-table">
-			<tr>
-				<th class="erdz-api-proto"><code>@DisplayName("name")</code></th>
-			</tr>
-			<tr>
-				<td class="erdz-api-text">Adds a descriptive name to an attribute which will be displayed in the Inspector instead of the attribute name.</td>
-			</tr>
-			<tr>
-				<td class="erdz-api-example">Example:
-				<pre class="codecga">
+        </section>
+
+        <section class="annotation-card">
+            <a id="DisplayName"></a>
+            <h3><span class="inlinecode">@DisplayName("name")</span></h3>
+            <p>Adds a descriptive name to an attribute which will be displayed in the Inspector instead of the attribute name.</p>
+            <p class="annotation-example-label">Example:</p>
+<pre class="code-block">
 @DisplayName("Building height")
 attr height = 20
 </pre>
-				</td>
-			</tr>
-	</table>
-		
-	<table id="dist" class="w3-table erdz-api-table">
-			<tr>
-				<th class="erdz-api-proto"><code>@Distance</code></th>
-			</tr>
-			<tr>
-				<td class="erdz-api-text">Adds a meter or foot unit (depending on the Coordinate System used by the scene) in Inspector.</td>
-			</tr>
-			<tr>
-				<td class="erdz-api-example">Example:
-				<pre class="codecga">
+        </section>
+
+        <section class="annotation-card">
+            <a id="Distance"></a>
+            <h3><span class="inlinecode">@Distance</span></h3>
+            <p>Adds a meter or foot unit (depending on the Coordinate System used by the scene) in Inspector.</p>
+            <p class="annotation-example-label">Example:</p>
+<pre class="code-block">
 @Distance
 attr distance = 1852
 </pre>
-				</td>
-			</tr>
-	</table>
-	
-	<table id="enum1" class="w3-table erdz-api-table">
-			<tr>
-				<th class="erdz-api-proto"><code>@Enum(value_1, value_2, ..., restricted=true)</code></th>
-			</tr>
-			<tr>
-				<td class="erdz-api-text">Sets an enumeration with specific values. Values can be <code>float</code> or <code>string</code>. Parameter <code>restricted</code> is optional (default is <code>true</code>). If <code>true</code> no other values can be entered in the Inspector or set by a handle.</td>
-			</tr>
-			<tr>
-				<td class="erdz-api-example">Examples:<br>
-				<pre class="codecga">
+        </section>
+
+        <section class="annotation-card">
+            <a id="Enum"></a>
+            <h3><span class="inlinecode">@Enum(value_1, value_2, ..., restricted=true)</span></h3>
+            <p>Sets an enumeration with specific values. Values can be <span class="inlinecode">float</span> or <span class="inlinecode">string</span>. Parameter <span class="inlinecode">restricted</span> is optional (default is <span class="inlinecode">true</span>). If <span class="inlinecode">true</span> no other values can be entered in the Inspector or set by a handle.</p>
+            <p class="annotation-example-label">Examples:</p>
+<pre class="code-block">
 @Enum("low", "mid", "high")
 attr lod = "low"
 
 @Enum(10, 20, 30, restricted = false)
 attr height = 20
 </pre>
-				</td>
-			</tr>
-			<tr>
-				<td class="erdz-api-text">If the <code>@Enum</code> annotation is applied to an array attribute, the enumeration is defined for the elements of the array.</td>
-			</tr>
-			<tr>
-				<td class="erdz-api-example">Example:<br>
-				<pre class="codecga">
+            <p>If the <span class="inlinecode">@Enum</span> annotation is applied to an array attribute, the enumeration is defined for the elements of the array.</p>
+            <p class="annotation-example-label">Example:</p>
+<pre class="code-block">
 @Enum("Residential", "Commercial")
 attr floorUsage = ["Residential"]
 </pre>
-				</td>
-			</tr>
-	</table>
-	
-	<table id="enum2" class="w3-table erdz-api-table">
-			<tr>
-				<th class="erdz-api-proto"><code>@Enum(valuesAttr=name, restricted=true)</code></th>
-			</tr>
-			<tr>
-				<td class="erdz-api-text">Sets an enumeration with specific values. The values are dynamically set by an attribute with name <code>valuesAttr</code> (of type <code>float</code>, <code>float[]</code>, <code>string</code> or <code>string[]</code>). Parameter <code>restricted</code> is optional (default is <code>true</code>). If <code>true</code> no other values can be entered in the Inspector or set by a handle.</td>
-			</tr>
-			<tr>
-				<td class="erdz-api-example">Examples:
-				<pre class="codecga">
+        </section>
+
+        <section class="annotation-card">
+            <a id="Enum2"></a>
+            <h3><span class="inlinecode">@Enum(valuesAttr=name, restricted=true)</span></h3>
+            <p>Sets an enumeration with specific values. The values are dynamically set by an attribute with name <span class="inlinecode">valuesAttr</span> (of type <span class="inlinecode">float</span>, <span class="inlinecode">float[]</span>, <span class="inlinecode">string</span> or <span class="inlinecode">string[]</span>). Parameter <span class="inlinecode">restricted</span> is optional (default is <span class="inlinecode">true</span>). If <span class="inlinecode">true</span> no other values can be entered in the Inspector or set by a handle.</p>
+            <p class="annotation-example-label">Examples:</p>
+<pre class="code-block">
 @Enum(valuesAttr = lods)
 attr lod = lods[0]
 @Hidden
@@ -217,182 +248,119 @@ attr height = heights[1]
 @Hidden
 attr heights = [10, 20, 30]
 </pre>
-				</td>
-			</tr>
-			<tr>
-				<td class="erdz-api-text">If the <code>@Enum</code> annotation is applied to an array attribute, the enumeration is defined for the elements of the array.</td>
-			</tr>
-			<tr>
-				<td class="erdz-api-example">Example:<br>
-				<pre class="codecga">
+            <p>If the <span class="inlinecode">@Enum</span> annotation is applied to an array attribute, the enumeration is defined for the elements of the array.</p>
+            <p class="annotation-example-label">Example:</p>
+<pre class="code-block">
 @Enum(valuesAttr = usage)
 attr floorUsage = [usage[0]]
 @Hidden
 attr usage = ["Residential", "Commercial"]
 </pre>
-				</td>
-			</tr>
-	</table>
+        </section>
 
-	<table id="file1" class="w3-table erdz-api-table">
-			<tr>
-				<th class="erdz-api-proto"><code>@File</code></th>
-			</tr>
-			<tr>
-				<td class="erdz-api-text">Mark an attribute as a file name. The Inspector will present a file chooser.</td>
-			</tr>
-			<tr>
-				<td class="erdz-api-example">Example:
-				<pre class="codecga">
+        <section class="annotation-card">
+            <a id="File"></a>
+            <h3><span class="inlinecode">@File</span></h3>
+            <p>Mark an attribute as a file name. The Inspector will present a file chooser.</p>
+            <p class="annotation-example-label">Example:</p>
+<pre class="code-block">
 @File
 attr asset = "myfile.obj"
 </pre>
-				</td>
-			</tr>
-	</table>
-	
-	<table id="file2" class="w3-table erdz-api-table">
-			<tr>
-				<th class="erdz-api-proto"><code>@File("ext_1", ... , "ext_n")</code></th>
-			</tr>
-			<tr>
-				<td class="erdz-api-text">Mark an attribute as a file name. The Inspector will present a file chooser for the given file extensions ("ext_1", ... , "ext_n").</td>
-			</tr>
-			<tr>
-				<td class="erdz-api-example">Example:
-				<pre class="codecga">
+        </section>
+
+        <section class="annotation-card">
+            <a id="File2"></a>
+            <h3><span class="inlinecode">@File("ext_1", ... , "ext_n")</span></h3>
+            <p>Mark an attribute as a file name. The Inspector will present a file chooser for the given file extensions (<span class="inlinecode">"ext_1"</span>, ... , <span class="inlinecode">"ext_n"</span>).</p>
+            <p class="annotation-example-label">Example:</p>
+<pre class="code-block">
 @File("tif", "tiff")
 attr texture = "tex0.tiff"
 </pre>
-				</td>
-			</tr>
-	</table>
+        </section>
 
-
- 	<table id="group1" class="w3-table erdz-api-table">
-			<tr>
-				<th class="erdz-api-proto"><code>@Group(&quot;level_1-group&quot;, ..., &quot;level_n-group&quot;)</code></th>
-			</tr>
-			<tr>
-				<td class="erdz-api-text">Set the group of the following attributes (the Inspector will group attributes accordingly). The current group is maintained accross imports. To leave the current group, use <span class="codelight">@Group</span>.</td>
-			</tr>
-			<tr>
-				<td class="erdz-api-example">Example:
-				<pre class="codecga">
+        <section class="annotation-card">
+            <a id="Group"></a>
+            <h3><span class="inlinecode">@Group("level_1-group", ..., "level_n-group")</span></h3>
+            <p>Set the group of the following attributes (the Inspector will group attributes accordingly). The current group is maintained accross imports. To leave the current group, use <span class="inlinecode">@Group</span>.</p>
+            <p class="annotation-example-label">Example:</p>
+<pre class="code-block">
 @Group("First", "Second", "Third")
 attr grouped = 0
 </pre>
-				</td>
-			</tr>
-	</table>
-	
-	<table id="group2" class="w3-table erdz-api-table" >
-			<tr>
-				<th class="erdz-api-proto"><code>@Group(&quot;level_1-group&quot;,..., &quot;level_n-group&quot;, order)</code></th>
-			</tr>
-			<tr>
-				<td class="erdz-api-text">Set the group and the sort order for groups/subgroups in the Inspector (similar to <code>@Order</code> for attributes). Where <code>order</code> is a numeric value.</td>
-			</tr>
-			<tr>
-				<td class="erdz-api-example">Example:
-				<pre class="codecga">
-@Group("First", "Second", "Third",1)
+        </section>
+
+        <section class="annotation-card">
+            <a id="Group2"></a>
+            <h3><span class="inlinecode">@Group("level_1-group", ..., "level_n-group", order)</span></h3>
+            <p>Set the group and the sort order for groups/subgroups in the Inspector (similar to <span class="inlinecode">@Order</span> for attributes). Where <span class="inlinecode">order</span> is a numeric value.</p>
+            <p class="annotation-example-label">Example:</p>
+<pre class="code-block">
+@Group("First", "Second", "Third", 1)
 attr grouped = 0
 </pre>
-				</td>
-			</tr>
-	</table>	
-	
-	<table id="handle" class="w3-table erdz-api-table">
-			<tr>
-				<th class="erdz-api-proto"><code>@Handle(handle_params)</code></th>
-			</tr>
-			<tr>
-				<td class="erdz-api-text">Adds an <a href="https://doc.arcgis.com/en/cityengine/latest/help/help-handles-overview.htm" target="_blank">interactive handle</a> to the following attribute.</td>
-			</tr>
-			<tr>
-				<td class="erdz-api-example">Example:
-				<pre class="codecga">
+        </section>
+
+        <section class="annotation-card">
+            <a id="Handle"></a>
+            <h3><span class="inlinecode">@Handle(handle_params)</span></h3>
+            <p>Adds an <a href="https://doc.arcgis.com/en/cityengine/latest/help/help-handles-overview.htm" target="_blank">interactive handle</a> to the following attribute.</p>
+            <p class="annotation-example-label">Example:</p>
+<pre class="code-block">
 @Handle(shape=Solid, align=right)
 attr dimension = 40
 </pre>
-				</td>
-			</tr>
-	</table>
-	
-	<table id="hidden1" class="w3-table erdz-api-table">
-			<tr style="border:0px">
-				<th class="erdz-api-proto"><code>@Hidden</code></th>
-			</tr>
-			<tr>
-				<td class="erdz-api-text">Mark an attribute or rule as hidden. Hidden attributes won't appear in CityEngine's Inspector, but they will still be connected to matching object attributes automatically. Hidden rules won't appear in the start rule chooser. <code>@Hidden</code> before an <a href="import.html"><span class="code_std">import</span></a> statement will hide all imported attributes in the Inspector. All attributes imported in the hidden import will also be hidden.</td>
-			</tr>
-			<tr>
-				<td class="erdz-api-example">Examples:
-				<pre class="codecga">
+        </section>
+
+        <section class="annotation-card">
+            <a id="Hidden"></a>
+            <h3><span class="inlinecode">@Hidden</span></h3>
+            <p>Mark an attribute or rule as hidden. Hidden attributes won't appear in CityEngine's Inspector, but they will still be connected to matching object attributes automatically. Hidden rules won't appear in the start rule chooser. <span class="inlinecode">@Hidden</span> before an <a href="import.html">import</a> statement will hide all imported attributes in the Inspector. All attributes imported in the hidden import will also be hidden.</p>
+            <p class="annotation-example-label">Examples:</p>
+<pre class="code-block">
 @Hidden
 attr hide_me = 0
 
 @Hidden
 import hide_me: "rule.cga"
 </pre>
-				</td>
-			</tr>
-	</table>
+        </section>
 
-	<table id="hidden2" class="w3-table erdz-api-table">
-			<tr style="border:0px">
-				<th class="erdz-api-proto"><code>@Hidden(attribute_1, ... , attribute_n)</code></th>
-			</tr>
-			<tr>
-				<td class="erdz-api-text"><code>@Hidden</code> can also be used to hide a set of imported attributes before an <a href="import.html"><span class="code_std">import</span></a> statement.</td>
-			</tr>
-			<tr>
-				<td class="erdz-api-example">Example:
-				<pre class="codecga">
+        <section class="annotation-card">
+            <a id="Hidden2"></a>
+            <h3><span class="inlinecode">@Hidden(attribute_1, ... , attribute_n)</span></h3>
+            <p><span class="inlinecode">@Hidden</span> can also be used to hide a set of imported attributes before an <a href="import.html">import</a> statement.</p>
+            <p class="annotation-example-label">Example:</p>
+<pre class="code-block">
 @Hidden(attribute_1, attribute_2)
 import rule: "rule.cga"
 </pre>
-				</td>
-			</tr>
-	</table>
+        </section>
 
-	<table id="inmesh" class="w3-table erdz-api-table">
-			<tr>
-				<th class="erdz-api-proto"><code>@In{Mesh|Polygon|Line|Point|PointCloud}</code></th>
-			</tr>
-			<tr>
-				<td class="erdz-api-text">These annotations can be used to communicate the expected geometry type of the start shape. While these annotations currently have no effect in CityEngine, ArcPro expects each start rule (see above) to be annotated with the expected input type (as of ArcPro 2.4, only <code>@InMesh</code>, <code>@InPolygon</code>, <code>@InLine</code> and <code>@InPoint</code> are supported). If there is none, it defaults to <code>@InPolygon</code>. So if you export a rpk to be used with different geometry types in ArcPro, make sure you add one of these annotations.</td>
-			</tr>
-	</table>
-	
-	<table id="materialfile" class="w3-table erdz-api-table">
-			<tr>
-				<th class="erdz-api-proto"><code>@MaterialFile</code></th>
-			</tr>
-			<tr>
-				<td class="erdz-api-text">Mark an attribute as a material file name. The Inspector will present a specific material file chooser.</td>
-			</tr>
-			<tr>
-				<td class="erdz-api-example">Example:
-				<pre class="codecga">
+        <section class="annotation-card">
+            <a id="InMesh"></a><a id="InPolygon"></a><a id="InLine"></a><a id="InPoint"></a><a id="InPointCloud"></a>
+            <h3><span class="inlinecode">@In{Mesh|Polygon|Line|Point|PointCloud}</span></h3>
+            <p>These annotations can be used to communicate the expected geometry type of the start shape. While these annotations currently have no effect in CityEngine, ArcPro expects each start rule (see above) to be annotated with the expected input type (as of ArcPro 2.4, only <span class="inlinecode">@InMesh</span>, <span class="inlinecode">@InPolygon</span>, <span class="inlinecode">@InLine</span> and <span class="inlinecode">@InPoint</span> are supported). If there is none, it defaults to <span class="inlinecode">@InPolygon</span>. So if you export a rpk to be used with different geometry types in ArcPro, make sure you add one of these annotations.</p>
+        </section>
+
+        <section class="annotation-card">
+            <a id="MaterialFile"></a>
+            <h3><span class="inlinecode">@MaterialFile</span></h3>
+            <p>Mark an attribute as a material file name. The Inspector will present a specific material file chooser.</p>
+            <p class="annotation-example-label">Example:</p>
+<pre class="code-block">
 @MaterialFile
 attr mat = "myMaterial.cgamat"
 </pre>
-				</td>
-			</tr>
-	</table>
-	
-	<table id="order" class="w3-table erdz-api-table">
-			<tr>
-				<th class="erdz-api-proto"><code>@Order(order)</code></th>
-			</tr>
-			<tr>
-				<td class="erdz-api-text">Sets numeric order for an attribute in the Inspector. Further, sets the order for attributes and extension rules of a component node in the Visual CGA Editor.</td>
-			</tr>
-			<tr>
-				<td class="erdz-api-example">Example:
-				<pre class="codecga">
+        </section>
+
+        <section class="annotation-card">
+            <a id="Order"></a>
+            <h3><span class="inlinecode">@Order(order)</span></h3>
+            <p>Sets numeric order for an attribute in the Inspector. Further, sets the order for attributes and extension rules of a component node in the Visual CGA Editor.</p>
+            <p class="annotation-example-label">Example:</p>
+<pre class="code-block">
 @Order(1)
 attr i_m_1st = 0
 @Order(2)
@@ -400,106 +368,69 @@ attr i_m_2nd = 0
 @Order(13)
 attr i_m_3rd = 0
 </pre>
-				</td>
-			</tr>
-	</table>
-	
-	<table id="out" class="w3-table erdz-api-table">
-			<tr>
-				<th class="erdz-api-proto"><code>@Out(granularity=separatedShapes|combinedShape)</code></th>
-			</tr>
-			<tr>
-				<td class="erdz-api-text">This annotation can be used to communicate the suggested granularity of the output geometry. The default is combinedShape. While this annotation currently has no effect in CityEngine, it is essential to trigger leaf shape generation in ArcPro. Add it to the start rule in that case.</td>
-			</tr>
-	</table>
-	
-	<table id="percent" class="w3-table erdz-api-table">
-			<tr>
-				<th class="erdz-api-proto"><code>@Percent</code></th>
-			</tr>
-			<tr>
-				<td class="erdz-api-text">Adds a % unit in Inspector and an unrestricted [0,1] range that displays as [0,100]. Use <code>@Range</code> to specify a different range. In the CGA File, the value has to be initialized to the real value (e.g. 0.1 for 10%). The Inspector will display the value in percent (e.g. 10%). The user has to enter the value in percent in the Inspector.</td>
-			</tr>
-			<tr>
-				<td class="erdz-api-example">Example:
-				<pre class="codecga">
+        </section>
+
+        <section class="annotation-card">
+            <a id="Out"></a>
+            <h3><span class="inlinecode">@Out(granularity=separatedShapes|combinedShape)</span></h3>
+            <p>This annotation can be used to communicate the suggested granularity of the output geometry. The default is <span class="inlinecode">combinedShape</span>. While this annotation currently has no effect in CityEngine, it is essential to trigger leaf shape generation in ArcPro. Add it to the start rule in that case.</p>
+        </section>
+
+        <section class="annotation-card">
+            <a id="Percent"></a>
+            <h3><span class="inlinecode">@Percent</span></h3>
+            <p>Adds a % unit in Inspector and an unrestricted [0,1] range that displays as [0,100]. Use <span class="inlinecode">@Range</span> to specify a different range. In the CGA File, the value has to be initialized to the real value (e.g. 0.1 for 10%). The Inspector will display the value in percent (e.g. 10%). The user has to enter the value in percent in the Inspector.</p>
+            <p class="annotation-example-label">Example:</p>
+<pre class="code-block">
 @Percent
 attr inflation = 0.012
 </pre>
-				</td>
-			</tr>
-	</table>
-	
-	<table id="range" class="w3-table erdz-api-table" >
-			<tr>
-				<th class="erdz-api-proto"><code>@Range(min=value, max=value, stepsize=0, restricted=true)</code></th>
-			</tr>
-			<tr>
-				<td class="erdz-api-text">Sets the numeric range of an attribute by parameters <code>min</code> and <code>max</code> (inclusive). Parameter <code>stepsize</code> is optional (default is 0). If set to >0, possible values are set in respective steps starting from the minimum value. Sliders in the Inspector respect the step size. Parameter <code>restricted</code> is optional (default is true). If set to true, any numerical input value is set to the nearest possible value in the Inspector.</td>
-			</tr>
-			<tr>
-				<td class="erdz-api-example">Examples:
-				<pre class="codecga">
+        </section>
+
+        <section class="annotation-card">
+            <a id="Range"></a>
+            <h3><span class="inlinecode">@Range(min=value, max=value, stepsize=0, restricted=true)</span></h3>
+            <p>Sets the numeric range of an attribute by parameters <span class="inlinecode">min</span> and <span class="inlinecode">max</span> (inclusive). Parameter <span class="inlinecode">stepsize</span> is optional (default is 0). If set to &gt;0, possible values are set in respective steps starting from the minimum value. Sliders in the Inspector respect the step size. Parameter <span class="inlinecode">restricted</span> is optional (default is true). If set to true, any numerical input value is set to the nearest possible value in the Inspector.</p>
+            <p class="annotation-example-label">Examples:</p>
+<pre class="code-block">
 @Range(min=5, max=50)
 attr height = 20
 
 @Range(min=0, max=45, stepsize=15, restricted=false)
 attr angle = 30
 </pre>
-				</td>
-			</tr>
-			<tr>
-				<td class="erdz-api-text">If the <code>@Range</code> annotation is applied to an array attribute, the range is defined for the elements of the array.</td>
-			</tr>
-			<tr>
-				<td class="erdz-api-example">Example:<br>
-				<pre class="codecga">
+            <p>If the <span class="inlinecode">@Range</span> annotation is applied to an array attribute, the range is defined for the elements of the array.</p>
+            <p class="annotation-example-label">Example:</p>
+<pre class="code-block">
 @Range(min=2.5, max=7)
 attr floorHeights = [4, 5.5, 5.5]
 </pre>
-				</td>
-			</tr>
+        </section>
 
-	</table>
-	
-	<table id="rulefiledescription" class="w3-table erdz-api-table">
-			<tr>
-				<th class="erdz-api-proto"><code>@RuleFileDescription("description")</code></th>
-			</tr>
-			<tr>
-				<td class="erdz-api-text">Adds a description for the whole rule file which will be displayed for components in the Visual CGA Editor. Supports <a href="https://en.wikipedia.org/wiki/Markdown">markdown</a> syntax.</td>
-			</tr>
-			<tr>
-				<td class="erdz-api-example">Example:
-				<pre class="codecga">
+        <section class="annotation-card">
+            <a id="RuleFileDescription"></a>
+            <h3><span class="inlinecode">@RuleFileDescription("description")</span></h3>
+            <p>Adds a description for the whole rule file which will be displayed for components in the Visual CGA Editor. Supports <a href="https://en.wikipedia.org/wiki/Markdown" target="_blank">markdown</a> syntax.</p>
+            <p class="annotation-example-label">Example:</p>
+<pre class="code-block">
 @RuleFileDescription("Creates a building mass from a lot.")
 </pre>
-				</td>
-			</tr>
-	</table>
-	
-	<table id="startrule" class="w3-table erdz-api-table">
-			<tr style="border:0px">
-				<th class="erdz-api-proto"><code>@StartRule</code></th>
-			</tr>
-			<tr>
-				<td class="erdz-api-text">Mark a rule as a start rule for the start rule chooser.</td>
-			</tr>
-			<tr>
-				<td class="erdz-api-example">Example:
-				<pre class="codecga">
+        </section>
+
+        <section class="annotation-card">
+            <a id="StartRule"></a>
+            <h3><span class="inlinecode">@StartRule</span></h3>
+            <p>Mark a rule as a start rule for the start rule chooser.</p>
+            <p class="annotation-example-label">Example:</p>
+<pre class="code-block">
 @StartRule
 Start-->NIL
 </pre>
-				</td>
-			</tr>		
-	</table>
+        </section>
+    </section>
 
-<!-- FOOTER -->
-<p class="foot">Copyright &copy;2008-2025 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
+    <footer class="footer">Copyright &copy;2008-2026 Esri R&amp;D Center Zurich. All rights reserved.</footer>
 
-<!-- END CENTERED CONTENT -->
-
-</div>
+</article>
 </body>
 </html>

@@ -1,216 +1,217 @@
+<!doctype html>
 <html>
 
 <head>
-    <title>roofGable Operation</title>
-    <link rel="stylesheet" href="../manual_style.css" type="text/css" />
+	<meta charset="UTF-8">
+	<title>roofGable Operation</title>
+	<link rel="stylesheet" href="../cgareference_style.css" type="text/css">
 </head>
 
 <body>
-<div class="content">
+<article class="content">
 
-<table summary="" class="header">
-    <tr>
-        <td align="left" class="helphead_l"><a href="../toc.html"><div class="helplink">&nbsp;</div></a></td>
-        <td align="right" class="helphead_r"></td>
-    </tr>
-</table>
+	<header class="section">
+		<h1>
+			<span class="name">roofGable</span>
+			<span class="kind">operation</span>
+		</h1>
 
-<!-- CONTENT -->
+		<div class="signatures">
+			<div><span class="op">roofGable</span>(<span class="param">angle</span>)</div>
+			<div><span class="op">roofGable</span>(<span class="param">angle</span>, <span class="param">overhangX</span>)</div>
+			<div><span class="op">roofGable</span>(<span class="param">angle</span>, <span class="param">overhangX</span>, <span class="param">overhangY</span>)</div>
+			<div><span class="op">roofGable</span>(<span class="param">angle</span>, <span class="param">overhangX</span>, <span class="param">overhangY</span>, <span class="param">even</span>)</div>
+			<div><span class="op">roofGable</span>(<span class="param">angle</span>, <span class="param">overhangX</span>, <span class="param">overhangY</span>, <span class="param">even</span>, <span class="param">index</span>)</div>
+			<div><span class="op">roofGable</span>(<span class="param">valueType</span>, <span class="param">value</span>)</div>
+			<div><span class="op">roofGable</span>(<span class="param">valueType</span>, <span class="param">value</span>, <span class="param">overhangX</span>)</div>
+			<div><span class="op">roofGable</span>(<span class="param">valueType</span>, <span class="param">value</span>, <span class="param">overhangX</span>, <span class="param">overhangY</span>)</div>
+			<div><span class="op">roofGable</span>(<span class="param">valueType</span>, <span class="param">value</span>, <span class="param">overhangX</span>, <span class="param">overhangY</span>, <span class="param">even</span>)</div>
+		</div>
+	</header>
 
-<h1>roofGable operation</h1>
+	<section class="section">
+		<div class="param-list">
+			<div class="param-item">
+				<div class="indent-body">
+					<p><span class="param">valueType</span> <span class="type-tag">selector</span> <span class="inlinecode">{ byAngle | byHeight }</span> Type of roof generation.</p>
+				</div>
+			</div>
 
-<h2>Syntax</h2>
+			<div class="param-item">
+				<div class="indent-body">
+					<p><span class="param">value</span> <span class="type-tag">float</span> Angle or height of the roof-planes as specified by <span class="param">valueType</span>.</p>
+				</div>
+			</div>
 
-<p class="code2">roofGable(<span class="cga_opparam">angle</span>)</p>
-<p class="code2">roofGable(<span class="cga_opparam">angle, overhangX</span>)</p>
-<p class="code2">roofGable(<span class="cga_opparam">angle, overhangX, overhangY</span>)</p>
-<p class="code2">roofGable(<span class="cga_opparam">angle, overhangX, overhangY, even</span>)</p>
-<p class="code2">roofGable(<span class="cga_opparam">angle, overhangX, overhangY, even, index</span>)</p>
-<p class="code2">roofGable(<span class="cga_opparam">valueType, value</span>)</p>
-<p class="code2">roofGable(<span class="cga_opparam">valueType, value, overhangX</span>)</p>
-<p class="code2">roofGable(<span class="cga_opparam">valueType, value, overhangX, overhangY</span>)</p>
-<p class="code2">roofGable(<span class="cga_opparam">valueType, value, overhangX, overhangY, even</span>)</p>
+			<div class="param-item">
+				<div class="indent-body">
+					<p><span class="param">angle</span> <span class="type-tag">float</span> Angle of the roof-planes (generation <span class="inlinecode">byAngle</span>).</p>
+				</div>
+			</div>
 
-<h2>Parameters</h2>
-<ul>
-	<li><span class="cga_opparam">valueType</span> (selector)
-	<table cellspacing="5">
-		<tr><td width="50%"><span class="codelight">byAngle, byHeight</span></td><td>Type of roof generation</td></tr>
-	</table>
-	</li>
-	<li><span class="cga_opparam">value</span> (float)<br>Angle or height of the roof-planes as specified by <span class="cga_opparam">valueType</span>.</li>
-	<li><span class="cga_opparam">angle</span> (float)<br>Angle of the roof-planes (generation <span class="codelight">byAngle).</li>
-	<li><span class="cga_opparam">overhangX</span> (float)<br>Overhang distance for overhangs perpendicular to ridges, measured perpendicular to the shape edges (on the roof).</li>
-    <li><span class="cga_opparam">overhangY</span> (float)<br>Overhang distance for overhangs in the direction of the ridges, measured perpendicular to the shape edges (on the roof).</li>
-	<li><span class="cga_opparam">even</span> (bool)<br>Whether to make the roof gable even or not. If true, non-planar faces originate.</li>
-	<li><span class="cga_opparam">index</span> (float)<br>Edge index to control the orientation of the ridge. Use with caution!</li>
-</ul>
+			<div class="param-item">
+				<div class="indent-body">
+					<p><span class="param">overhangX</span> <span class="type-tag">float</span> Overhang distance for overhangs perpendicular to ridges, measured perpendicular to the shape edges (on the roof).</p>
+				</div>
+			</div>
 
-<h2>Description</h2>
-	
-<p>The roofGable operation builds a gable roof perpendicular to each face of the current shape's geometry. The orientation of the ridges is automatically computed (except in the indexed case). At all non-ridge (eave) edges, a plane is generated with a given angle or height 
-wrt. the polygon plane. The planes are cut with each other to form the roof faces.</p>
+			<div class="param-item">
+				<div class="indent-body">
+					<p><span class="param">overhangY</span> <span class="type-tag">float</span> Overhang distance for overhangs in the direction of the ridges, measured perpendicular to the shape edges (on the roof).</p>
+				</div>
+			</div>
 
-<p>If <span class="cga_opparam">overhangX</span> is set, the roof faces overlap along the eave edges by this distance. Overhang distances are measured perpendicular to the edges (on the roof planes).</p>  
+			<div class="param-item">
+				<div class="indent-body">
+					<p><span class="param">even</span> <span class="type-tag">bool</span> Whether to make the roof gable even or not. If <span class="kw">true</span>, non-planar faces originate.</p>
+				</div>
+			</div>
 
-<p>If <span class="cga_opparam">overhangY</span> is set, the roof faces overlap in the direction of the riges by this distance. Overhang distances are measured perpendicular to the shape edges (on the roof planes).</p>
+			<div class="param-item">
+				<div class="indent-body">
+					<p><span class="param">index</span> <span class="type-tag">float</span> Edge index to control the orientation of the ridge. Use with caution!</p>
+				</div>
+			</div>
+		</div>
+	</section>
 
-<p>If <span class="cga_opparam">even</span> is set to true, the gable edges are forced to be horizontal. In this case, non-planar roof faces originate.</p>
+	<section class="section">
+		<p>The <span class="op">roofGable</span> operation builds a gable roof perpendicular to each face of the current shape's geometry. The orientation of the ridges is automatically computed (except in the indexed case). At all non-ridge (eave) edges, a plane is generated with a given angle or height wrt. the polygon plane. The planes are cut with each other to form the roof faces.</p>
 
-<p>If <span class="cga_opparam">index</span> is set, the ridge is forced to be oriented in the direction of the edge <span class="cga_opparam">index</span>. Warning: This only works on convex shapes with a single face! The <span class="cga_opparam">even</span> parameter is neglected.</p> 
+		<p>If <span class="param">overhangX</span> is set, the roof faces overlap along the eave edges by this distance. Overhang distances are measured perpendicular to the edges (on the roof planes).</p>
 
-<p class="notes">The connectivity of the roof mesh is optimized for trim plane
-generation to cut bricks inserted into the roof planes (see examples
-below).</p>
+		<p>If <span class="param">overhangY</span> is set, the roof faces overlap in the direction of the riges by this distance. Overhang distances are measured perpendicular to the shape edges (on the roof planes).</p>
 
-<h3>Scope</h3>
+		<p>If <span class="param">even</span> is set to <span class="kw">true</span>, the gable edges are forced to be horizontal. In this case, non-planar roof faces originate.</p>
 
-<p class="text">The scope orientation is set in the following way:</p> 
-<ul>
-	<li>x-axis direction is kept as much as possible (old x-axis is projected to the plane of the first face)</li>
-	<li>y-axis along the face normal of the first face</li>
-	<li>z-axis normal to the two above</li>
-</ul>
-<p>The scope's sizes are adjusted to tighly fit the extruded geometry.</p>
+		<p>If <span class="param">index</span> is set, the ridge is forced to be oriented in the direction of the edge <span class="param">index</span>. Warning: This only works on convex shapes with a single face! The <span class="param">even</span> parameter is neglected.</p>
 
-<h3>Component tags</h3>
+		<div class="note">The connectivity of the roof mesh is optimized for trim plane generation to cut bricks inserted into the roof planes (see examples below).</div>
 
-<table summary="" class="twocol">
-<tr>
-    <td class="twocol_r">
-		The operation automatically applies semantic <a href="cga_componentTags.html">component tags</a> to the resulting face components:
-		<table cellspacing="5">
-			<tr><td width="25%"><span class="codelight">"roof.bottom"</span></td><td>Blue: original face.</td></tr>
-			<tr><td><span class="codelight">"roof.side"</span></td><td>Yellow: pediment faces.</td></tr>
-			<tr><td><span class="codelight">"roof.top"</span></td><td>Green: roof faces.</p></td></tr>
-		</table>
-		<br>
-		For more information on working with component tags, refer to:
+		<h4>Scope</h4>
+		<p>The scope orientation is set in the following way:</p>
 		<ul>
-			<li><a href="cga_componentTags.html#autoTags">Auto-tags</a></li>
-			<li><a href="cga_componentTags.html#tagPropagation">Tag propagation</a></li> 
+			<li>x-axis direction is kept as much as possible (old x-axis is projected to the plane of the first face)</li>
+			<li>y-axis along the face normal of the first face</li>
+			<li>z-axis normal to the two above</li>
 		</ul>
-	</td>
-	<td class="twocol_l"><img src="images/autotag-roofGable.png" alt="autotag-roofGable"/></td></tr>
-</table>
+		<p>The scope's sizes are adjusted to tighly fit the extruded geometry.</p>
 
-<h2>Related</h2>
+		<h4>Component tags</h4>
+		<div class="example-row">
+			<div>
+				<p>The operation automatically applies semantic <a href="cga_componentTags.html">component tags</a> to the resulting face components:</p>
+				<table class="option-table">
+					<tr><td><span class="inlinecode">"roof.bottom"</span></td><td>Blue: original face.</td></tr>
+					<tr><td><span class="inlinecode">"roof.side"</span></td><td>Yellow: pediment faces.</td></tr>
+					<tr><td><span class="inlinecode">"roof.top"</span></td><td>Green: roof faces.</td></tr>
+				</table>
 
-<ul>
-    <li><a class="normw" href="op_envelope.html">envelope operation</a> </li>
-    <li><a class="normw" href="op_extrude.html">extrude operation</a>
-    <li><a class="normw" href="op_roofHip.html">roofHip operation</a></li>
-	<li><a class="normw" href="op_roofPyramid.html">roofPyramid operation</a></li>
-	<li><a class="normw" href="op_roofRidge.html">roofRidge operation</a></li>
-    <li><a class="normw" href="op_roofShed.html">roofShed operation</a></li>
-    <li><a class="normw" href="op_taper.html">taper operation</a></li>
-</ul>
+				<p>For more information on working with component tags, refer to:</p>
+				<ul>
+					<li><a href="cga_componentTags.html#autoTags">Auto-tags</a></li>
+					<li><a href="cga_componentTags.html#tagPropagation">Tag propagation</a></li>
+				</ul>
+			</div>
 
-<h2>Examples</h2>
+			<figure class="media media-example">
+				<img src="images/autotag-roofGable.png" alt="autotag-roofGable"/>
+			</figure>
+		</div>
+	</section>
 
-<h3>Simple Gable Roof</h3>
+	<section class="section">
+		<h2>Related</h2>
+		<div class="related">
+			<a class="op" href="op_envelope.html"><span class="related-name">envelope</span><span class="related-kind">operation</span></a>
+			<a class="op" href="op_extrude.html"><span class="related-name">extrude</span><span class="related-kind">operation</span></a>
+			<a class="op" href="op_roofHip.html"><span class="related-name">roofHip</span><span class="related-kind">operation</span></a>
+			<a class="op" href="op_roofPyramid.html"><span class="related-name">roofPyramid</span><span class="related-kind">operation</span></a>
+			<a class="op" href="op_roofRidge.html"><span class="related-name">roofRidge</span><span class="related-kind">operation</span></a>
+			<a class="op" href="op_roofShed.html"><span class="related-name">roofShed</span><span class="related-kind">operation</span></a>
+			<a class="op" href="op_taper.html"><span class="related-name">taper</span><span class="related-kind">operation</span></a>
+		</div>
+	</section>
 
-A basic gable roof is generated on top of an extruded L-lot.
+	<section class="section">
+		<h2>Examples</h2>
 
-<table summary="" class="twocol">
-<tr>
-<td class="twocol_l">
-		
-<p class="piccentered"><img src="images/roofGable_L.png"></p>
-				
-<td class="twocol_r">
+		<section class="example">
+			<h3>Simple Gable Roof</h3>
+			<p>A basic gable roof is generated on top of an extruded L-lot.</p>
 
-<pre class="codecga">
+			<div class="example-row">
+				<figure class="media media-example">
+					<img src="images/roofGable_L.png">
+				</figure>
+
+				<div class="example-content">
+<pre class="code-block">
 Lot  --> extrude(10) Mass
 Mass --> comp(f) { top: Top | all: X }
 Top  --> roofGable(30, 2, 1) Roof
 </pre>
- 
-<em>A gable roof with roof slope 30 degrees is built on top of
-	an extruded L-lot. The overhangX distance is set to 2 and the overhangY distance is set to 1. Note the different overlap distances at the eaves (X) and in the direction of the ridges (Y). Also note the setting of the pivot and scope. </em>
+					<p>A gable roof with roof slope 30 degrees is built on top of an extruded L-lot. The overhangX distance is set to 2 and the overhangY distance is set to 1. Note the different overlap distances at the eaves (X) and in the direction of the ridges (Y). Also note the setting of the pivot and scope.</p>
+				</div>
+			</div>
 
-</td>
+			<div class="example-row">
+				<figure class="media media-example">
+					<img src="images/roofGable_L_tp.png">
+				</figure>
 
-</tr>
-
-<tr>
-<td class="twocol_l">
-		
-<p class="piccentered"><img src="images/roofGable_L_tp.png"></p>
-		
-<td class="twocol_r">
-		
-<pre class="codecga">
+				<div class="example-content">
+<pre class="code-block">
 Roof --> set(trim.horizontal, true)
          comp(f) { all : X }
 </pre>
-  
-<em>After a component split, each roof face contains <a class="normw" href="op_comp.html#trimPlanes">trim planes</a> to cut bricks on insertion. </em>
- 
-<p class="notes">Note that per default there are no horizontal trim planes at the ridges. To enable them, <span class="code">set(trim.horizontal, true)</span> is used in front of the component split (<a class="normw" href="attr_trim.html">details</a>).</p> 
+					<p>After a component split, each roof face contains <a href="op_comp.html#trimPlanes">trim planes</a> to cut bricks on insertion.</p>
+					<div class="note">Note that per default there are no horizontal trim planes at the ridges. To enable them, <span class="inlinecode">set(trim.horizontal, <span class="kw">true</span>)</span> is used in front of the component split (<a href="attr_trim.html">details</a>).</div>
+				</div>
+			</div>
 
-</td>
+			<div class="note"> Note that there is exactly one roof face per<span class="inlinecode">Top</span> shape edge. Unfortunately in the images it seems like the overlap is in a separate face. However, the simple reason for this is that the edges of the faces in behind bleed through.</div>
+		</section>
 
-</tr>
+		<section class="example">
+			<h3>Even Gable Roof</h3>
+			<p>This example demonstrates the difference between a standard and an even gable roof built on a trapezoid-lot.</p>
 
-</table>
+			<div class="example-row">
+				<figure class="media media-example">
+					<img src="images/roofGable_trapezoid.png">
+				</figure>
 
-<p class="notes"> Note that there is exactly one roof face per<span class="code">Top</span> shape edge. Unfortunately in the images it seems like the overlap is in a separate face. However, the simple reason for this is that the edges of the faces in behind bleed through.</p> 
-
-<h3>Even Gable Roof</h3>
-
-This example demonstrates the difference between a standard and an even gable roof built on a trapezoid-lot.
-
-<table summary="" class="twocol">
-<tr>
-<td class="twocol_l">
-        
-<p class="piccentered"><img src="images/roofGable_trapezoid.png"></p>
-                
-<td class="twocol_r">
-
-<pre class="codecga">
+				<div class="example-content">
+<pre class="code-block">
 Lot  --> extrude(10) Mass
 Mass --> comp(f) { top: Top | all: X }
 Top  --> roofGable(30, 1, 1, false) Roof
 </pre>
- 
-<em>A gable roof with roof slope 30 degrees is built on top of
-    an extruded trapezoid-lot. The overhangs (X and Y) are both set to 1. Note that the ridge is uneven. </em>
+					<p>A gable roof with roof slope 30 degrees is built on top of an extruded trapezoid-lot. The overhangs (X and Y) are both set to 1. Note that the ridge is uneven.</p>
+				</div>
+			</div>
 
-</td>
+			<div class="example-row">
+				<figure class="media media-example">
+					<img src="images/roofGable_trapezoid_even.png">
+				</figure>
 
-</tr>
-
-<tr>
-<td class="twocol_l">
-        
-<p class="piccentered"><img src="images/roofGable_trapezoid_even.png"></p>
-        
-<td class="twocol_r">
-
-<pre class="codecga">
+				<div class="example-content">
+<pre class="code-block">
 Top  --> roofGable(30, 1, 1, true) Roof
 </pre>
+					<p>When using the above rule for the<span class="inlinecode">Top</span> shape, the ridge vertices are set to the average height, making the gable roof even.</p>
+					<div class="note"> The roof faces are non-planar now.</div>
+				</div>
+			</div>
 
-When using the above rule for the<span class="code">Top</span> shape, the ridge vertices are set to the average height, making the gable roof even.
+			<p class="info"> For many shapes, ridges get implicitly even and hence the even option doesn't change anything.</p>
+		</section>
+	</section>
 
-<p class="notes"> The roof faces are non-planar now.</p>
+	<footer class="footer">Copyright &copy;2008-2026 Esri R&amp;D Center Zurich. All rights reserved.</footer>
 
-</td>
-
-</tr>
-
-</table>
-
-
-<p class="info"> For many shapes, ridges get implicitly even and hence the even option doesn't change anything.</p>
-
-
-
-<!-- FOOTER -->
-<p class="foot">Copyright &copy;2008-2025 Esri R&amp;D Center Zurich. All rights reserved.</p>                  
-
-</div>
+</article>
 </body>
 </html>

@@ -1,99 +1,111 @@
+<!doctype html>
 <html>
 
 <head>
-    <title>s Operation</title>
-    <link rel="stylesheet" href="../manual_style.css" type="text/css" />
+	<meta charset="UTF-8">
+	<title>s Operation</title>
+	<link rel="stylesheet" href="../cgareference_style.css" type="text/css">
 </head>
 
 <body>
-<div class="content">
+<article class="content">
 
-<!-- HEADER (use only on bookchapters) -->
+	<header class="section">
+		<h1>
+			<span class="name">s</span>
+			<span class="kind">operation</span>
+		</h1>
 
-<table summary="" class="header">
-	<tr>
-		<td align="left" class="helphead_l"><a href="../toc.html"><div class="helplink">&nbsp;</div></a></td>
-		<td align="right" class="helphead_r"></td>
-	</tr>
-</table>
+		<div class="signatures">
+			<div><span class="op">s</span>(<span class="param">xSize</span>, <span class="param">ySize</span>, <span class="param">zSize</span>)</div>
+		</div>
+	</header>
 
-<!-- CONTENT -->
+	<section class="section">
+		<div class="param-list">
+			<div class="param-item">
+				<div class="indent-body">
+					<p><span class="param">xSize</span>, <span class="param">ySize</span>, <span class="param">zSize</span> <span class="type-tag">float</span> Sizes of the new scope dimensions.</p>
+				</div>
+			</div>
+		</div>
+	</section>
 
-<h1>s operation</h1>
+	<section class="section">
+		<p>The <span class="op">s</span> operation resizes the current shape (it sets the size vector <span class="inlinecode">scope.s</span>).</p>
+		<p>The relative operator ' permits a convenient notation relative to the current shape's scope size. <span class="inlinecode">s('sx,0,0)</span> is equivalent to <span class="inlinecode">s(sx*scope.sx, 0, 0)</span>.</p>
+		<p>Negative sizes result in mirroring along the corresponding axes; this means the normals are inverted.</p>
+	</section>
 
-<h2>Syntax</h2>
+	<section class="section">
+		<h2>Related</h2>
+		<div class="related">
+			<a class="op" href="op_r.html"><span class="related-name">r</span><span class="related-kind">operation</span></a>
+			<a class="op" href="op_rotate.html"><span class="related-name">rotate</span><span class="related-kind">operation</span></a>
+			<a class="op" href="op_t.html"><span class="related-name">t</span><span class="related-kind">operation</span></a>
+			<a class="op" href="op_reverseNormals.html"><span class="related-name">reverseNormals</span><span class="related-kind">operation</span></a>
+			<a class="op" href="op_translate.html"><span class="related-name">translate</span><span class="related-kind">operation</span></a>
+			<a class="attr" href="attr_scope.html"><span class="related-name">scope</span><span class="related-kind">attribute</span></a>
+		</div>
+	</section>
 
-<p class="code2">s(<span class="cga_opparam">xSize</span>, <span class="cga_opparam">ySize</span>, <span class="cga_opparam">zSize</span>)</p>
-        
-<h2>Parameters</h2>
+	<section class="section">
+		<h2>Examples</h2>
 
-<ul>
-	<li><span class="cga_opparam">xSize</span>, <span class="cga_opparam">ySize</span>,<span class="cga_opparam"> zSize</span> (float)<br>Sizes of the new scope dimensions.</li>
-</ul>
+		<section class="example">
+			<h3>Basic Usage</h3>
 
-<h2>Description</h2>
+			<div class="example-row">
+				<figure class="media media-example">
+					<img src="images/s-initialshape.png" alt="Initial Shape">
+				</figure>
 
-<p>The <span class="code_std">s</span> operation sets the size vector <span class="code_std">scope.s.</span><br>The relative operator ' permits a convenient notation relative to the current shape's scope size:<br><span class="code">s('sx,0,0)</span> is equivalent to <span class="code">s(sx*scope.sx, 0, 0)</span><br><em>Negative sizes</em> result in mirroring along the corresponding axes; this means the normals are inverted!</p>
-
-<h2>Related</h2>
-
-<ul>
-	<li><a class="normw" href="op_r.html">r operation</a></li>
-	<li><a class="normw" href="op_rotate.html">rotate operation</a></li>
-	<li><a class="normw" href="op_t.html">t operation</a></li>        
-	<li><a class="normw" href="op_reverseNormals.html">reverseNormals operation</a></li>        
-	<li><a class="normw" href="op_translate.html">translate operation</a></li>        
-	<li><a class="normw" href="attr_scope.html">scope attribute</a></li>
-</ul>
-                
-<h2>Examples</h2>
-
-<h3>Basic Usage</h3>
-<table summary="" class="twocol">
-	<tr>
-		<td class="twocol_l">
-		<img src="images/s-initialshape.png" alt="Initial Shape"/></td>
-		<td class="twocol_r">
-		<pre class="codecga">
+				<div class="example-content">
+<pre class="code-block">
 Lot-->
    extrude(10)
-</pre> <em>The initial shape with its scope highlighted. </em></td>
-	</tr>
+</pre>
+					<p>The initial shape with its scope highlighted.</p>
+				</div>
+			</div>
 
+			<div class="example-row">
+				<figure class="media media-example">
+					<img src="images/s-scaled-a.png" alt="Absolut Resize">
+				</figure>
 
-	<tr>
-		<td class="twocol_l">
-		<img src="images/s-scaled-a.png"
-			alt="Absolut Resize"/></td>
-		<td class="twocol_r"><pre class="codecga">
+				<div class="example-content">
+<pre class="code-block">
 Lot-->
    extrude(10)
    s(5,5,5)
-</pre> <em>Here, all scope sizes are set to the absolute value 5.</em></td>
-	</tr>
-	
-		<tr>
-		<td class="twocol_l">
-		<img src="images/s-scaled-b.png"
-			alt="Absolut Resize"/></td>
-		<td class="twocol_r"><pre class="codecga">
+</pre>
+					<p>Here, all scope sizes are set to the absolute value 5.</p>
+				</div>
+			</div>
+
+			<div class="example-row">
+				<figure class="media media-example">
+					<img src="images/s-scaled-b.png" alt="Absolut Resize">
+				</figure>
+
+				<div class="example-content">
+<pre class="code-block">
 Lot-->
    extrude(10)
    s('0.5,'1,'1.5)
-</pre> <em>This example demonstrates the usage of the relative operator '. The s operation above is equivalent to</em>
-<pre class="codecga">
+</pre>
+					<p>This example demonstrates the usage of the relative operator '. The s operation above is equivalent to</p>
+<pre class="code-block">
    s(0.5*scope.sx, scope.sy, 1.5*scope.sz)
-</pre>	
-	 </td>
-	 </tr>
-	
-</table>
+</pre>
+				</div>
+			</div>
+		</section>
+	</section>
 
-<!-- FOOTER -->
-<p class="foot">Copyright &copy;2008-2025 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
+	<footer class="footer">Copyright &copy;2008-2026 Esri R&amp;D Center Zurich. All rights reserved.</footer>
 
-<!-- END CENTERED CONTENT -->
-
-</div>
+</article>
 </body>
 </html>

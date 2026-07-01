@@ -1,71 +1,70 @@
+<!doctype html>
 <html>
 
 <head>
-    <title>tag Operation</title>
-    <link rel="stylesheet" href="../manual_style.css" type="text/css" />
+	<meta charset="UTF-8">
+	<title>tag operation</title>
+	<link rel="stylesheet" href="../cgareference_style.css" type="text/css" />
 </head>
 
 <body>
-<div class="content">
+<article class="content">
 
-<!-- HEADER (use only on bookchapters) -->
+	<header class="section">
+		<h1>
+			<span class="name">tag</span>
+			<span class="kind">operation</span>
+		</h1>
 
-<table summary="" class="header">
-	<tr>
-		<td align="left" class="helphead_l"><a href="../toc.html"><div class="helplink">&nbsp;</div></a></td>
-		<td align="right" class="helphead_r"></td>
-	</tr>
-</table>
+		<div class="signatures">
+			<div><span class="op">tag</span>(<span class="param">name</span>)</div>
+			<div><span class="op">tag</span>(<span class="param">name</span>, <span class="param">components</span>)</div>
+		</div>
+	</header>
 
-<!-- CONTENT -->
+	<section class="section">
+		<div class="param-list">
+			<div class="param-item">
+				<div class="indent-body">
+					<p><span class="param">name</span> <span class="type-tag">string</span> A string that defines the tag.</p>
+				</div>
+			</div>
 
-<h1>tag operation</h1>
+			<div class="param-item">
+				<div class="indent-body">
+					<p><span class="param">components</span> <span class="type-tag">selector</span></p>
+					<table class="option-table">
+						<tr><td><span class="inlinecode">auto</span></td><td>Default. Tags the highest-dimensional components available, normally faces.</td></tr>
+						<tr><td><span class="inlinecode">faces</span></td><td>Tags all faces.</td></tr>
+						<tr><td><span class="inlinecode">edges</span></td><td>Tags all edges.</td></tr>
+						<tr><td><span class="inlinecode">vertices</span></td><td>Tags all vertices.</td></tr>
+					</table>
+				</div>
+			</div>
+		</div>
+	</section>
 
-<h2>Syntax</h2>
+	<section class="section">
+		<p>The <span class="op">tag</span> operation assigns the specified <span class="param">name</span> as a tag to all <span class="param">components</span>. Any valid string is supported as <span class="param">name</span>, except reserved wildcards characters (?, *), which are filtered out. Tags can be hierarchically grouped using the name separator ".".</p>
 
-<p class="code2">tag(<span class="cga_opparam">name</span>)</p>
-<p class="code2">tag(<span class="cga_opparam">name</span>, <span class="cga_opparam">components</span>)</p>
+		<p>For examples using tags refer to <a href="op_boolOp.html">Boolean 3D</a> and <a href="op_inline.html">Rule inlining</a>.</p>
+	</section>
 
-<h2>Parameters</h2>
+	<section class="section">
+		<h2>Related</h2>
+		<div class="related">
+			<a href="cga_componentTags.html"><span class="related-name">Geometry Tagging: Essential Knowledge</span></a>
+			<a class="op" href="op_deleteTags.html"><span class="related-name">deleteTags</span><span class="related-kind">operation</span></a>
+			<a class="op" href="op_setTagsFromEdgeAttrs.html"><span class="related-name">setTagsFromEdgeAttrs</span><span class="related-kind">operation</span></a>
+			<a href="op_inline.html"><span class="related-name">inline</span><span class="related-kind">keyword</span></a>
+			<a class="op" href="op_boolOp.html"><span class="related-name">union, subtract, intersect</span><span class="related-kind">operations</span></a>
+			<a class="func" href="func_geometry.html#hasTags"><span class="related-name">geometry.hasTags</span><span class="related-kind">function</span></a>
+			<a class="func" href="func_geometry.html#tags"><span class="related-name">geometry.tags</span><span class="related-kind">function</span></a>
+		</div>
+	</section>
 
-<ul>
-	<li><span class="cga_opparam">name</span> (string)<br>A string that defines the tag.</li>
-	<li><span class="cga_opparam">components</span> (selector)<br>
-	<table cellspacing="5">
-		<tr><td width="15%"><span class="codelight">auto</span></td><td>Default. Tags the highest-dimensional components available, normally faces.</td></tr>
-		<tr><td><span class="codelight">faces</span></td><td>Tags all faces.</td></tr>
-		<tr><td><span class="codelight">edges</span></td><td>Tags all edges.</td></tr>
-		<tr><td><span class="codelight">vertices</span></td><td>Tags all vertices.</td></tr>
-	</table>
-	</li>
-</ul>
+	<footer class="footer">Copyright &copy;2008-2026 Esri R&amp;D Center Zurich. All rights reserved.</footer>
 
-<h2>Description</h2>
-
-<p>
-The <span class="code_std">tag</span> operation assigns the specified <span class="cga_opparam">name</span> as a tag to all <span class="cga_opparam">components</span>.  
-	Any valid string is supported as <span class="cga_opparam">name</span>, except reserved wildcards characters (?, *), which are filtered out. Tags can be hierarchically grouped using the name separator "." 
-
-<br> <br>
-For examples using tags refer to <a class="normw" href="op_boolOp.html">Boolean 3D</a> and <a class="normw" href="op_inline.html">Rule inlining</a>.
-
-<h2>Related</h2>
-
-<ul>
-	<li><a class="normw" href="cga_componentTags.html">Geometry Tagging: Essential Knowledge</a></li>
-	<li><a class="normw" href="op_deleteTags.html">deleteTags operation</a></li>
-	<li><a class="normw" href="op_setTagsFromEdgeAttrs.html">setTagsFromEdgeAttrs operation</a></li>
-	<li><a class="normw" href="op_inline.html">Rule inlining</a></li>
-	<li><a class="normw" href="op_boolOp.html">union, subtract, intersect operations</a></li>
-	<li><a class="normw" href="func_geometry.html#hasTags">geometry.hasTags function</a></li>
-	<li><a class="normw" href="func_geometry.html#tags">geometry.tags function</a></li>
-</ul>
-                
-<!-- FOOTER -->
-<p class="foot">Copyright &copy;2008-2025 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
-
-<!-- END CENTERED CONTENT -->
-
-</div>
+</article>
 </body>
 </html>

@@ -1,92 +1,108 @@
+<!doctype html>
 <html>
 
 <head>
-	<title>colon Operator</title>
-	<link rel="stylesheet" href="../manual_style.css" type="text/css" />
+    <meta charset="UTF-8">
+    <title>colon operator</title>
+    <link rel="stylesheet" href="../cgareference_style.css" type="text/css">
 </head>
 
 <body>
-<div class="content">
+<article class="content">
 
-<!-- HEADER (use only on bookchapters) -->
+    <header class="section">
+        <h1>
+            <span class="name">colon</span>
+            <span class="kind">operator</span>
+        </h1>
 
-<table summary="" class="header">
-	<tr>
-		<td align="left" class="helphead_l"><a href="../toc.html"><div class="helplink">&nbsp;</div></a></td>
-		<td align="right" class="helphead_r"></td>
-	</tr>
-</table>
+        <div class="signatures">
+            <div><span class="type-tag">float[]</span> <span class="param">base</span> : <span class="param">limit</span></div>
+            <div><span class="type-tag">float[]</span> <span class="param">base</span> : <span class="param">increment</span> : <span class="param">limit</span></div>
+        </div>
+    </header>
 
-<!-- CONTENT -->
+    <section class="section">
+        <div class="note">The colon operator is only available as a parameter for the <a href="func_array.html">array initialization</a> function and the <a href="func_index.html">index</a> operator inside bracket notation <span class="inlinecode">[]</span>.</div>
+    </section>
 
-<h1>colon operator</h1>
-		
-<h2>Syntax</h2>
+    <section class="section">
+        <div class="param-list">
+            <div class="param-item">
+                <div class="indent-body">
+                    <p><span class="param">base</span> <span class="type-tag">float</span> Starting value of the sequence.</p>
+                </div>
+            </div>
+            <div class="param-item">
+                <div class="indent-body">
+                    <p><span class="param">increment</span> <span class="type-tag">float</span> Successively added value to <span class="param">base</span>. It must be positive for an ascending sequence with <span class="inlinecode">base &lt;= limit</span>, or negative for a descending sequence with <span class="inlinecode">base &gt;= limit</span>. The default is <span class="inlinecode">1</span>.</p>
+                </div>
+            </div>
+            <div class="param-item">
+                <div class="indent-body">
+                    <p><span class="param">limit</span> <span class="type-tag">float</span> Maximum or minimum value which is not exceeded.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<p class="code2"><span class="codelight">float[]</span>&nbsp&nbsp<span class="cga_opparam">base</span> : <span class="cga_opparam">limit</span></p>
-<p class="code2"><span class="codelight">float[]</span>&nbsp&nbsp<span class="cga_opparam">base</span> : <span class="cga_opparam">increment</span> : <span class="cga_opparam">limit</span></p>
-		
-<p class="notes">The colon operator is only available as a parameter for the <a href="func_array.html">array initialization</a> function and the <a href="func_index.html">index</a> operator (inside a bracket <span class="codelight">[]</span> notation).</p>
+    <section class="section">
+        <div class="return-list">
+            <div class="return-item">
+                <div class="indent-body">
+                        <p>Returns an array containing the sequence <span class="inlinecode">[base, base + increment, base + 2 * increment, ...]</span>, where the last element does not exceed <span class="param">limit</span>.</p>
+                    <p><span class="param">base</span>, <span class="param">increment</span>, and <span class="param">limit</span> are given in colon-separated notation.</p>
+                </div>
+            </div>
+        </div>
+        <div class="note">The size of the returned array is limited. It can be configured in the <a href="https://doc.arcgis.com/en/cityengine/latest/help/get-started-preferences-prt.htm" target="_blank">Procedural Runtime preferences</a>. The default is <span class="inlinecode">100000</span>.</div>
+    </section>
 
-<h2>Parameters</h2>
+    <section class="section">
+        <h2>Related</h2>
+        <div class="related">
+            <a href="arrayTypes.html"><span class="related-name">Array types operators</span></a>
+            <a class="func" href="func_array.html"><span class="related-name">array initialization</span><span class="related-kind">function</span></a>
+        </div>
+    </section>
 
-<ul>
-	<li><span class="cga_opparam">base</span> (float)<br>Starting value of sequence.</li>
-	<li><span class="cga_opparam">increment</span> (float)<br>Successively added value to <span class="cga_opparam">base</span>. Must be positive for an ascending sequence <span class="codelight"><span class="cga_opparam">base</span><=<span class="cga_opparam">limit</span></span> or negative for a descending sequence <span class="codelight"><span class="cga_opparam">base</span>>=<span class="cga_opparam">limit</span></span>. Default is 1.</li>
-	<li><span class="cga_opparam">limit</span> (float)<br>Maximum/minimum value which is not exceeded.</li>
-</ul>
-		
-<h2>Returns</h2>
-
-<p>An array containing a sequence of float values <pre class="code3">[ <span class="cga_opparam">base</span>, <span class="cga_opparam">base</span> + <span class="cga_opparam">increment</span>, <span class="cga_opparam">base</span> + 2*<span class="cga_opparam">increment</span>, ... ]</pre> where the last element does not exceed <span class="cga_opparam">limit</span>.</p>
-
-<p>Parameters <span class="cga_opparam">base</span>, <span class="cga_opparam">increment</span> and <span class="cga_opparam">limit</span> are given in a <em>colon</em>-separated notation.</p>
-
-<p class="notes">The size of the returned array is limited. It can be configured in the <a href="https://doc.arcgis.com/en/cityengine/latest/help/get-started-preferences-prt.htm" target="_blank">Procedural Runtime preferences</a> (Default: 100000).</p>
-
-<h2>Related</h2>
-
-<ul>
-	<li><a href="arrayTypes.html">Array types operators</a></li>
-    <li><a href="func_array.html">array initialization</a> function</li>
-</ul>
-
-<h2>Examples</h2>
-
-<h3>Binary colon operator</h3>
-
-<pre class="codecga">
+    <section class="section">
+        <h2>Examples</h2>
+        <section class="example">
+            <h3>Binary colon operator</h3>
+            <pre class="code-block">
 const a = [2   : 4]      // (3)[2,3,4]
 const b = [0.5 : 3]      // (3)[0.5,1.5,2.5]
 const c = [4   : 2]      // (0)[]
 </pre>
+        </section>
 
-<h3>Ternary colon operator</h3>
-
-<pre class="codecga">
+        <section class="example">
+            <h3>Ternary colon operator</h3>
+            <pre class="code-block">
 const a = [1 :  0.5 : 3] // (5)[1,1.5,2,2.5,3]
 const b = [4 :   -1 : 2] // (3)[4,3,2]
 const c = [1 : -0.5 : 2] // (0)[]
 const d = [1 : -0.5 : 1] // (1)[1]
 const e = [1 :    0 : 1] // (0)[]
 </pre>
+        </section>
 
-<h3>Floating point imprecision</h3>
-
-<pre class="codecga">
+        <section class="example">
+            <h3>Floating point imprecision</h3>
+            <pre class="code-block">
 const a = [0 : 0.15 : 0.5]
 
 Init --> print(a)                        // (4)[0,0.15,0.3,0.45]
          print(a[3] == 0.45)             // false
          print(abs(a[3] - 0.45) < 1e-10) // true
 </pre>
-<em>The computation of sequence values <span class="codelight"><span class="cga_opparam">base</span>+i*<span class="cga_opparam">increment</span></span> suffers from floating point imprecision. Their exact values might be unexpected. This is not always noticable when printing values due to an implicit rounding.</em>
+            <p><em>The computation of sequence values <span class="inlinecode">base + i * increment</span> suffers from floating point imprecision. Exact values can therefore be unexpected, even if the printed value looks rounded.</em></p>
+        </section>
+    </section>
 
-<!-- FOOTER -->
-<p class="foot">Copyright &copy;2008-2025 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
+    <footer class="footer">Copyright &copy;2008-2026 Esri R&amp;D Center Zurich. All rights reserved.</footer>
 
-<!-- END CENTERED CONTENT -->
-
-</div>
+</article>
 </body>
 </html>

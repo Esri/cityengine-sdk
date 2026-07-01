@@ -1,84 +1,84 @@
+<!doctype html>
 <html>
 
 <head>
-    <title>softenNormals Operation</title>
-    <link rel="stylesheet" href="../manual_style.css" type="text/css" />
+	<meta charset="UTF-8">
+	<title>softenNormals operation</title>
+	<link rel="stylesheet" href="../cgareference_style.css" type="text/css">
 </head>
 
 <body>
-<div class="content">
+<article class="content">
 
-<!-- HEADER (use only on bookchapters) -->
+	<header class="section">
+		<h1>
+			<span class="name">softenNormals</span>
+			<span class="kind">operation</span>
+		</h1>
 
-<table summary="" class="header">
-	<tr>
-		<td align="left" class="helphead_l"><a href="../toc.html"><div class="helplink">&nbsp;</div></a></td>
-		<td align="right" class="helphead_r"></td>
-	</tr>
-</table>
+		<div class="signatures">
+			<div><span class="op">softenNormals</span>(<span class="param">angle</span>)</div>
+		</div>
+	</header>
 
-<!-- CONTENT -->
+	<section class="section" id="params">
+		<div class="param-list">
+			<div class="param-item">
+				<div class="indent-body">
+					<p><span class="param">angle</span> <span class="type-tag">float</span> For each vertex, use the average of the adjacent face normals. Edges where face normals meet at an angle greater than or equal as specified are shaded as hard edges. Setting an angle of</p>
+					<table class="option-table">
+						<tr><td><span class="inlinecode">0</span> degrees</td><td>Equivalent to <span class="inlinecode"><a href="op_setNormals.html">setNormals</a>(hard)</span>.</td></tr>
+						<tr><td><span class="inlinecode">30</span> degrees</td><td>Equivalent to <span class="inlinecode"><a href="op_setNormals.html">setNormals</a>(auto)</span>.</td></tr>
+						<tr><td><span class="inlinecode">180</span> degrees</td><td>Equivalent to <span class="inlinecode"><a href="op_setNormals.html">setNormals</a>(soft)</span>.</td></tr>
+					</table>
+					<div class="note">Disconnected shapes must be combined and duplicate vertices must be merged in order to compute vertex normals using adjacent face normals.</div>
+				</div>
+			</div>
+		</div>
+	</section>
 
-<h1>softenNormals operation</h1>
+	<section class="section">
+		<p>The <span class="op">softenNormals</span> operation sets the normals of the current shapes' geometry to the desired mode.</p>
+	</section>
 
-<h2>Syntax</h2>
+	<section class="section">
+		<h2>Related</h2>
+		<div class="related">
+			<a class="op" href="op_setNormals.html"><span class="related-name">setNormals</span><span class="related-kind">operation</span></a>
+			<a class="op" href="op_cleanupGeometry.html"><span class="related-name">cleanupGeometry</span><span class="related-kind">operation</span></a>
+			<a class="op" href="op_convexify.html"><span class="related-name">convexify</span><span class="related-kind">operation</span></a>
+			<a class="op" href="op_innerRectangle.html"><span class="related-name">innerRectangle</span><span class="related-kind">operation</span></a>
+			<a class="op" href="op_mirror.html"><span class="related-name">mirror</span><span class="related-kind">operation</span></a>
+			<a class="op" href="op_reduceGeometry.html"><span class="related-name">reduceGeometry</span><span class="related-kind">operation</span></a>
+			<a class="op" href="op_reverseNormals.html"><span class="related-name">reverseNormals</span><span class="related-kind">operation</span></a>
+		</div>
+	</section>
 
-<p class="code2">softenNormals(<span class="cga_opparam">angle</span>)</p>
+	<section class="section">
+		<h2>Examples</h2>
 
-<h2>Parameters</h2>
-<ul>
-	<li><span class="cga_opparam">angle</span> (float)<br>
-		For each vertex, use the average of the adjacent face normals. Edges where face normals meet at an angle greater than or equal as specified are shaded as hard edges. Setting an angle of 
-		<ul>
-			<li>0 degrees is equivalent to <span class="codelight"><a href="op_setNormals.html">setNormals</a>(hard)</span>,</li>
-			<li>30 degrees is equivalent to <span class="codelight"><a href="op_setNormals.html">setNormals</a>(auto)</span> and</li>
-			<li>180 degrees is equivalent to <span class="codelight"><a href="op_setNormals.html">setNormals</a>(soft)</span>.</li>
-		</ul>
-		<p class="notes">Disconnected shapes must be combined and duplicate vertices must be merged in order to compute vertex normals using adjacent face normals.</p>
-	</li>
-</ul>		
+		<section class="example">
+			<h3>Shaded Hemisphere</h3>
 
-<h2>Description</h2>
+			<div class="example-gallery example-gallery--compact">
+				<figure class="media media-example media-example--gallery">
+					<img src="images/softenNormals_angle0.png" alt="Shaded hemisphere with angle 0" width="300">
+					<figcaption>Shaded hemisphere with angle 0 (hard normals).</figcaption>
+				</figure>
+				<figure class="media media-example media-example--gallery">
+					<img src="images/softenNormals_angle30.png" alt="Shaded hemisphere with angle 30" width="300">
+					<figcaption>Shaded hemisphere with angle 30 (auto normals).</figcaption>
+				</figure>
+				<figure class="media media-example media-example--gallery">
+					<img src="images/softenNormals_angle180.png" alt="Shaded hemisphere with angle 180" width="300">
+					<figcaption>Shaded hemisphere with angle 180 (soft normals).</figcaption>
+				</figure>
+			</div>
+		</section>
+	</section>
 
-<p>The <span class="codelight">softenNormals()</span> operation sets the normals of the current shapes' geometry to the desired mode.</p>
+	<footer class="footer">Copyright &copy;2008-2026 Esri R&amp;D Center Zurich. All rights reserved.</footer>
 
-<h2>Related</h2>
-<ul>
-	<li><a class="normw" href="op_setNormals.html">setNormals operation</a></li>
-	<li><a class="normw" href="op_cleanupGeometry.html">cleanupGeometry operation</a></li>
-	<li><a class="normw" href="op_convexify.html">convexify operation</a></li>
-	<li><a class="normw" href="op_innerRectangle.html">innerRectangle operation</a></li>
-	<li><a class="normw" href="op_mirror.html">mirror operation</a></li>
-	<li><a class="normw" href="op_reduceGeometry.html">reduceGeometry operation</a></li>
-	<li><a class="normw" href="op_reverseNormals.html">reverseNormals operation</a></li>
-</ul>
-
-<h2>Examples</h2>
-<h3>Shaded Hemisphere</h3>
-<table>
-	<tr>
-		<td>
-			<img src="images/softenNormals_angle0.png" alt="Envelope example a" width="300"/> 
-			<br><br>
-			<center><em>Shaded hemisphere with angle 0</br>(hard normals).</em></center>
-		</td>
-		<td>
-			<img src="images/softenNormals_angle30.png" alt="Envelope example a" width="300"/> 
-			<br><br>
-			<center><em>Shaded hemisphere with angle 30</br>(auto normals).</em></center>
-		 </td>
-		 <td>
-			<img src="images/softenNormals_angle180.png" alt="Envelope example a" width="300"/> 
-			<br><br>
-			<center><em>Shaded hemisphere with angle 180</br>(soft normals).</em></center>
-		 </td>
-	</tr>
-</table>     
-
-
-<!-- FOOTER -->
-<p class="foot">Copyright &copy;2008-2025 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
-
-</div>
+</article>
 </body>
 </html>

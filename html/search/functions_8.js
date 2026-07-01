@@ -4,7 +4,7 @@ var searchData=
   ['init',['init',['../classprtx_1_1_encoder.html#ad354a15d21c18920da7a9b208482db5c',1,'prtx::Encoder::init()'],['../namespaceprt.html#ac11b9812a98def24f4ad792bf5be2371',1,'prt::init()']]],
   ['insertandgettransientblob',['insertAndGetTransientBlob',['../classprt_1_1_cache.html#ad2948bd4bbfb48d86f2b6e532bbc32ca',1,'prt::Cache']]],
   ['insertpersistentblobandlock',['insertPersistentBlobAndLock',['../classprt_1_1_cache.html#aff97c1c7936e43ef9f91a6b51bb424fe',1,'prt::Cache']]],
-  ['instance',['instance',['../classprtx_1_1_extension_manager.html#a8a8c3f3befafd05f80995c151a57807e',1,'prtx::ExtensionManager']]],
+  ['instance',['instance',['../classprtx_1_1_extension_manager.html#a8a8c3f3befafd05f80995c151a57807e',1,'prtx::ExtensionManager::instance()'],['../classprtx_1_1_singleton.html#a72ad437a7fe020dfc2b9d726eb058343',1,'prtx::Singleton::instance()']]],
   ['instancing',['instancing',['../classprtx_1_1_encode_preparator_1_1_preparation_flags.html#a9cc9153f80bd66b5763c04e9213a2d43',1,'prtx::EncodePreparator::PreparationFlags']]],
   ['iscached',['isCached',['../namespaceprtx_1_1_data_backend.html#a776e499499fb353b63e65800e6a3d1ea',1,'prtx::DataBackend']]],
   ['iscomposite',['isComposite',['../classprtx_1_1_u_r_i.html#a40678c585cdf947916ce8551b96cdabe',1,'prtx::URI']]],

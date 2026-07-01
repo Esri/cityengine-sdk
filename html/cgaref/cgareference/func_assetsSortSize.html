@@ -1,66 +1,77 @@
+<!doctype html>
 <html>
 
 <head>
-    <title>assetsSortSize Function</title>
-    <link rel="stylesheet" href="../manual_style.css" type="text/css" />
+    <meta charset="UTF-8">
+    <title>assetsSortSize function</title>
+    <link rel="stylesheet" href="../cgareference_style.css" type="text/css">
 </head>
 
 <body>
-<div class="content">
+<article class="content">
 
-<!-- HEADER (use only on bookchapters) -->
+    <header class="section">
+        <h1>
+            <span class="name">assetsSortSize</span>
+            <span class="kind">function</span>
+        </h1>
 
-<table summary="" class="header">
-	<tr>
-		<td align="left" class="helphead_l"><a href="../toc.html"><div class="helplink">&nbsp;</div></a></td>
-		<td align="right" class="helphead_r"></td>
-	</tr>
-</table>
+        <div class="signatures">
+            <div><span class="type-tag">string</span> <span class="func">assetsSortSize</span>(<span class="param">filePathList</span>, <span class="param">axisSize</span>, <span class="param">maxScaleError</span>)</div>
+            <div><span class="type-tag">string[]</span> <span class="func">assetsSortSize</span>(<span class="param">filePaths</span>, <span class="param">axisSize</span>, <span class="param">maxScaleError</span>)</div>
+        </div>
+    </header>
 
-<!-- CONTENT -->
+    <section class="section">
+        <div class="param-list">
+            <div class="param-item">
+                <div class="indent-body">
+                    <p><span class="param">filePathList</span> <span class="type-tag">string</span> String list with geometry files, separated with <span class="inlinecode">;</span> including after the last entry.</p>
+                </div>
+            </div>
+            <div class="param-item">
+                <div class="indent-body">
+                    <p><span class="param">filePaths</span> <span class="type-tag">string[]</span> String array with geometry files.</p>
+                </div>
+            </div>
+            <div class="param-item">
+                <div class="indent-body">
+                    <p><span class="param">axisSize</span> <span class="type-tag">selector</span> <span class="inlinecode">x</span>, <span class="inlinecode">y</span>, <span class="inlinecode">z</span>, <span class="inlinecode">xy</span>, <span class="inlinecode">xz</span>, <span class="inlinecode">yz</span>, <span class="inlinecode">xyz</span> define which scope axis size is used as a reference.</p>
+                </div>
+            </div>
+            <div class="param-item">
+                <div class="indent-body">
+                    <p><span class="param">maxScaleError</span> <span class="type-tag">float</span> Controls file selection. If it is 0, all files are returned, sorted depending on their size. If the value is greater than 0, only a subset of the input files is returned. For example, <span class="inlinecode">0.1</span> means that maximum plus or minus 10% scaling is allowed.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<h1>assetsSortSize function</h1>
+    <section class="section">
+        <div class="return-list">
+            <div class="return-item">
+                <div class="indent-body">
+                        <p>Returns a string list or string array with all or a subset of the files in the input <span class="param">filePathList</span> or <span class="param">filePaths</span>, sorted by how well they match the reference size, from best to worst. The <span class="param">maxScaleError</span> parameter can be used to limit results to geometry assets that match a certain size range.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<h2>Syntax</h2>
+    <section class="section">
+        <p>Looks at all geometry files in the input <span class="param">filePathList</span> or <span class="param">filePaths</span> and sorts them depending on their size relative to the size of the scope axes defined by <span class="param">axisSize</span>.</p>
+    </section>
 
-<p class="code2"><span class="codelight">string</span>&nbsp&nbsp&nbspassetsSortSize(<span class="cga_opparam">filePathList</span>, <span class="cga_opparam">axisSize</span>, <span class="cga_opparam">maxScaleError</span>)</p>
+    <section class="section">
+        <h2>Related</h2>
+        <div class="related">
+            <a class="func" href="func_assetsSortRatio.html"><span class="related-name">assetsSortRatio</span><span class="related-kind">function</span></a>
+            <a class="func" href="func_imageInfo.html"><span class="related-name">imageInfo</span><span class="related-kind">function</span></a>
+            <a class="func" href="func_imagesSortRatio.html"><span class="related-name">imagesSortRatio</span><span class="related-kind">function</span></a>
+        </div>
+    </section>
 
-<p class="code2"><span class="codelight">string[]</span>&nbspassetsSortSize(<span class="cga_opparam">filePaths</span>, <span class="cga_opparam">axisSize</span>, <span class="cga_opparam">maxScaleError</span>)</p>
+    <footer class="footer">Copyright &copy;2008-2026 Esri R&amp;D Center Zurich. All rights reserved.</footer>
 
-<h2>Parameters</h2>
-
-<ul>
-	<li><span class="cga_opparam">filePathList</span> (string)<br>String list with geometry files, seperated with ";" (also after the last entry).</li>
-	<li><span class="cga_opparam">filePaths</span> (string[])<br>String array with geometry files.</li>
-	<li><span class="cga_opparam">axisSize</span> (selector)
-	<table cellspacing="5">
-		<tr><td width="35%"><span class="codelight">x</span>, <span class="codelight">y</span>, <span class="codelight">z</span>, <span class="codelight">xy</span>, <span class="codelight">xz</span>, <span class="codelight">yz</span>, <span class="codelight">xyz</span></td><td>Defines which scope axis size is used as a reference.</td></tr>
-	</table>
-	</li>
-	<li><span class="cga_opparam">maxScaleError</span> (float)<br>Float value to control file selection. If it is 0 all files are returned, sorted depending on their size. If the value is &gt; 0, only a subset of the input files is returned: 0.1  means that maximum +-10% scaling is allowed.</li>
-</ul>
-
-<h2>Returns</h2>
-
-<p>A string list or a string array with all or a subset of the files in the input <span class="cga_opparam">filePathList</span> / <span class="cga_opparam">filePaths</span>, sorted in order how good they match the reference size (first is best, last is worst). The <span class="cga_opparam">maxScaleError</span> parameter can be used to only take the geometry assets matching a certain size range.</p>
-        
-<h2>Description</h2>
-
-<p>Looks at all geometry files in the input <span class="cga_opparam">filePathList</span> / <span class="cga_opparam">filePaths</span> and sorts them depending on their size relative to the size of the scope axes defined by <span class="cga_opparam">maxScaleError</span>.</p>
-      
-<h2>Related</h2>
-
-<ul>
-	<li><a class="normw" href="func_assetsSortRatio.html">assetsSortRatio</a> function</li>
-	<li><a class="normw" href="func_imageInfo.html">imageInfo</a> function</li>
-	<li><a class="normw" href="func_imagesSortRatio.html">imagesSortRatio</a> function</li>
-</ul>
-
-<!-- FOOTER -->
-<p class="foot">Copyright &copy;2008-2025 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
-
-<!-- END CENTERED CONTENT -->
-
-</div>
+</article>
 </body>
 </html>

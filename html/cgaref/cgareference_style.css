@@ -1,0 +1,627 @@
+/* =========================================================
+   CGA Reference — Page Styles
+   ========================================================= */
+
+.no-scroll {
+  overflow: hidden;
+}
+
+/* =========================================================
+   TOKENS
+   ========================================================= */
+
+:root {
+  color-scheme: light;
+
+  /* surfaces */
+  --bg:             #ffffff;
+  --surface:        #ffffff;
+  --surface-subtle: #f2f2f2;
+  --surface-soft:   #eef4fb;
+  --surface-note:   #fffbe6;
+  --code-bg:        #f2f2f2;
+
+  /* text */
+  --text:           #575757;
+  --text-strong:    #000000;
+  --text-muted:     #555555;
+  --text-note:      #6a4e00;
+
+  /* borders */
+  --border:         #d4d4d4;
+  --border-note:    #d9b21f;
+  --border-comment: #7fa7d0;
+
+  /* shadows */
+  --shadow-sm:      0 1px 3px rgba(0, 0, 0, 0.08);
+  --shadow-md:      0 4px 10px rgba(0, 0, 0, 0.14);
+
+  /* links */
+  --link:           #0000c0;
+  --link-hover:     #000080;
+
+  /* syntax — CGA semantic colors */
+  --col-default:    rgb(0, 0, 0);
+  --col-attr:       rgb(0, 0, 192);
+  --col-func:       rgb(0, 0, 192);
+  --col-op:         rgb(96, 0, 96);
+  --col-kw:         rgb(127, 0, 85);
+
+  --font-body: "Segoe UI", Arial, Helvetica, sans-serif;
+  --font-mono: Consolas, "Liberation Mono", "DejaVu Sans Mono", monospace;
+
+  --radius-md:   5px;
+  --radius-pill: 999px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+
+    /* surfaces */
+    --bg:             #242424;
+    --surface:        #2b2b2b;
+    --surface-subtle: #353535;
+    --surface-soft:   #454a56;
+    --surface-note:   #4a3f16;
+    --code-bg:        #353535;
+
+    /* text */
+    --text:           #f2f2f2;
+    --text-strong:    #ffffff;
+    --text-muted:     #b6b6b6;
+    --text-note:      #f2e0a2;
+
+    /* borders */
+    --border:         #555555;
+    --border-note:    #d8b54b;
+    --border-comment: #6a7dc0;
+
+    /* shadows */
+    --shadow-sm:      0 1px 3px rgba(0, 0, 0, 0.28);
+    --shadow-md:      0 4px 10px rgba(0, 0, 0, 0.4);
+
+    /* links */
+    --link:           #a9c2ff;
+    --link-hover:     #c8dbff;
+
+    /* syntax */
+    --col-default:    rgb(218, 218, 218);
+    --col-attr:       rgb(78, 201, 176);
+    --col-func:       rgb(220, 220, 170);
+    --col-op:         rgb(156, 220, 254);
+    --col-kw:         rgb(197, 134, 192);
+  }
+}
+
+
+/* =========================================================
+   RESET / BASE
+   ========================================================= */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { font-size: 0.9rem; } 
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.55;
+}
+
+
+/* =========================================================
+   TYPOGRAPHY
+   ========================================================= */
+
+p, ul, ol, table, figure, pre { margin: 0.75em 0; }
+
+ul, ol { padding-left: 1.35em; }
+li     { margin: 0.2em 0; }
+
+img { display: block; max-width: 100%; height: auto; }
+
+a, a:link, a:visited, a:active {
+  color: var(--link);
+  text-decoration: none;
+  text-underline-offset: 2px;
+  text-decoration-thickness: 1px;
+}
+a:hover { color: var(--link-hover); text-decoration: underline; }
+
+em { font-style: italic; }
+
+/* =========================================================
+   TITLES — default h1 with optional mono name + kicker kind
+   ========================================================= */
+
+h1 {
+  margin: 0 0 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border);
+  gap: 1rem;
+  align-items: baseline;
+  display: flex;
+  flex-wrap: wrap;
+  font-family: var(--font-body);
+  font-size: 1.6rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--text-strong);
+}
+
+h1 .name {
+  font-family: var(--font-mono);
+  letter-spacing: -0.01em;
+}
+
+h1 .kind {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+h2 {
+  margin: 2.2rem 0 0.9rem;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--border);
+  font-size: 0.78rem;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+h3 {
+  margin: 1.6rem 0 0.55rem;
+  font-size: 1.15rem;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--text-strong);
+}
+
+h4 {
+  margin: 1.5rem 0 0.55rem;
+  font-weight: 600;
+  line-height: 1.2;
+  text-transform: capitalize;
+  color: var(--text-strong);
+}
+
+/* =========================================================
+   LAYOUT
+   ========================================================= */
+
+.content {
+  max-width: 760px;
+  padding: 1rem 0 1rem 1rem;
+}
+
+.section + .section { margin-top: 1rem; }
+
+
+/* =========================================================
+   INLINE CODE / SYNTAX COLOURS
+   ========================================================= */
+
+code, .inlinecode,
+.op, .func, .kw, .attr, .param, .value {
+  font-family: var(--font-mono);
+  font-size: 0.92rem;
+}
+
+code, .inlinecode, .value { color: var(--col-default); }
+
+.attr       { color: var(--col-attr); }
+.func       { color: var(--col-func); }
+.op         { color: var(--col-op); }
+.kw         { color: var(--col-kw); font-weight: 600; }
+.param      { color: var(--col-default); font-style: italic; }
+
+
+/* =========================================================
+   SIGNATURES
+   ========================================================= */
+
+.signatures {
+  font-family: var(--font-mono);
+  font-size: 1.08rem;
+  line-height: 1.7;
+  padding-left: 2em;
+  color: var(--text-strong);
+}
+
+.signatures > div {
+  margin: 0;
+  text-indent: -2em;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+
+
+/* =========================================================
+   SHARED: INDENT BODY  (params + returns)
+   ========================================================= */
+
+.indent-body {
+  min-width: 0;
+  padding-left: 0.85rem;
+  border-left: 2px solid var(--border);
+}
+
+.indent-body > p:first-child { margin-top: 0; }
+.indent-body > :last-child  { margin-bottom: 0.25em; }
+
+/* =========================================================
+   PARAMETERS & RETURNS — aligned shared grid
+   ========================================================= */
+
+.param-list,
+.return-list { margin: 0.5rem 0 1.4rem; }
+
+.param-list { counter-reset: param-counter; }
+
+.param-item,
+.return-item {
+  display: grid;
+  grid-template-columns: 1.3rem minmax(0, 1fr);
+  column-gap: 0.55rem;
+  align-items: start;
+}
+
+.param-item + .param-item,
+.return-item + .return-item { margin-top: 0.9rem; }
+
+.param-item::before {
+  content: counter(param-counter);
+  counter-increment: param-counter;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  line-height: 1.55;
+  text-align: right;
+}
+
+.return-item::before {
+  content: "→";
+  color: var(--text-strong);
+  font-family: var(--font-mono);
+  font-size: 1.15rem;
+  font-weight: 700;
+  line-height: 1.4;
+  text-align: right;
+}
+
+
+.type-tag {
+  align-items: center;
+  padding: 2px 8px;
+  margin-left: 0.25rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  background: var(--surface);
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  line-height: 1.55;
+  vertical-align: 1px;
+}
+
+.type-tag + .type-tag { margin-left: 4px; }
+
+
+/* =========================================================
+   OPTION TABLE
+   ========================================================= */
+
+.option-table {
+  display: grid;
+  grid-template-columns: fit-content(42%) minmax(0, 1fr);
+  background: var(--surface);
+  font-size: inherit;
+}
+
+.option-table tbody,
+.option-table tr {
+  display: contents;
+}
+
+.option-table td {
+  padding: 6px 10px;
+  border-top: 1px solid var(--border);
+}
+
+.option-table tr:first-child td { border-top: none; }
+
+.option-table td:first-child {
+  background: var(--surface-subtle);
+  color: var(--text-strong);
+  font-size: inherit;
+}
+
+
+/* =========================================================
+   GENERIC CONTENT GRIDS
+   ========================================================= */
+
+.two_cols {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.two_cols > div > :first-child { margin-top: 0; }
+.two_cols > div > :last-child { margin-bottom: 0; }
+
+
+/* =========================================================
+   NOTES
+   ========================================================= */
+
+.note, .comment-box {
+  margin: 1em 0;
+  padding: 0.7rem 0.95rem;
+  border-left: 3px solid transparent;
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+}
+
+.note {
+  background: var(--surface-note);
+  border-left-color: var(--border-note);
+  color: var(--text-note);
+}
+
+.comment-box {
+  background: var(--surface-soft);
+  border-left-color: var(--border-comment);
+  color: var(--text);
+}
+
+.note em, .comment-box em { color: inherit; }
+
+.note > :first-child,        .comment-box > :first-child { margin-top: 0; }
+.note > :last-child,         .comment-box > :last-child  { margin-bottom: 0; }
+
+
+/* =========================================================
+   RELATED — typed pills with neutral kind label
+   ========================================================= */
+
+.related {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  margin: 0.4rem 0 0.2rem;
+}
+
+.related a {
+  --related-accent: var(--text-strong);
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.45rem;
+  padding: 2px 10px;
+  border-radius: var(--radius-pill);
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  line-height: 1.45;
+  color: var(--related-accent);
+  white-space: nowrap;
+  transition: box-shadow 0.16s ease;
+}
+
+.related a:hover {
+  box-shadow: var(--shadow-md);
+  text-decoration: none;
+}
+
+.related a .related-name {
+  color: inherit;
+}
+
+.related a .related-kind {
+  color: var(--text-muted);
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+}
+
+.related a.op   { --related-accent: var(--col-op); }
+.related a.func { --related-accent: var(--col-func); }
+.related a.kw   { --related-accent: var(--col-kw); }
+.related a.attr { --related-accent: var(--col-attr); }
+
+
+/* =========================================================
+  EXAMPLES — natural media by default, fixed 298px examples
+  ========================================================= */
+
+.example + .example {
+  margin-top: 1.7rem;
+  padding-top: 1.15rem;
+  border-top: 1px solid var(--border);
+}
+
+.example-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 298px;
+  grid-template-areas: "content media";
+  gap: 1.1rem;
+  align-items: center;
+  margin: 1rem 0;
+}
+
+.example-row + .example-row {
+  padding-top: 0.95rem;
+  border-top: 1px solid var(--border);
+}
+
+.example-row--stack {
+  grid-template-columns: 1fr;
+  grid-template-areas: "content";
+}
+
+.example-row > .media {
+  grid-area: media;
+  justify-self: center;
+}
+
+.example-row > .example-content {
+  grid-area: content;
+}
+
+.example-content {
+  min-width: 0;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.media {
+  margin: 0;
+}
+
+.media-example {
+  max-width: 298px;
+}
+
+.example-gallery {
+  --gallery-item-width: 298px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.1rem;
+  align-items: flex-start;
+  justify-content: center;
+  margin: 1rem 0;
+}
+
+.example-gallery--compact {
+  --gallery-item-width: 220px;
+}
+
+.example-gallery--wide {
+  --gallery-item-width: 350px;
+}
+
+.media-example--gallery {
+  flex: 0 1 var(--gallery-item-width);
+  max-width: var(--gallery-item-width);
+  text-align: center;
+}
+
+.media img {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  background: var(--surface);
+}
+
+@media (prefers-color-scheme: dark) {
+  .media img {
+     background: #ffffff;
+  }
+}
+
+.media-example img {
+  max-width: 298px;
+}
+
+.media-example--gallery img {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.media--centered {
+  text-align: center;
+}
+
+.media--centered > img {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.media--centered > img + img {
+  margin-left: 0.85rem;
+}
+
+.media figcaption {
+  margin-top: 0.45rem;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+
+.media-example--gallery figcaption {
+  text-align: center;
+}
+
+.example-content > :first-child { margin-top: 0; }
+.example-content > :last-child  { margin-bottom: 0; }
+
+
+/* =========================================================
+   CODE BLOCK
+   ========================================================= */
+
+.code-block {
+  padding: 10px;
+  border-radius: var(--radius-md);
+  background: var(--code-bg);
+  color: var(--text-strong);
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.footer {
+  margin-top: 2.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+  color: var(--text-muted);
+  font-size: 0.82rem;
+}
+
+
+/* =========================================================
+   RESPONSIVE — widget-friendly collapse
+   ========================================================= */
+
+@media (max-width: 640px) {
+  .two_cols {
+    grid-template-columns: 1fr;
+  }
+
+  .example-row {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "media"
+      "content";
+    gap: 0.6rem;
+  }
+  .example-row > .media,
+  .example-row > .example-content {
+    justify-self: stretch;
+  }
+  .example-content {
+    min-height: 0;
+    padding-right: 0;
+    padding-left: 0;
+    padding-top: 0;
+    border-right: none;
+    border-top: none;
+  }
+}

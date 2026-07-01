@@ -1,142 +1,175 @@
+<!doctype html>
 <html>
 
 <head>
-	<title>Texturing: Essential Knowledge</title>
-    <link rel="stylesheet" href="../manual_style.css" type="text/css" />
+    <meta charset="UTF-8">
+    <title>Texturing: Essential Knowledge</title>
+    <link rel="stylesheet" href="../cgareference_style.css" type="text/css">
+    <style>
+        .texturing-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: inherit;
+        }
+
+        .texturing-table thead th {
+            padding: 8px 10px;
+            border-bottom: 1px solid var(--border);
+            background: var(--surface-subtle);
+            color: var(--text-muted);
+            font-size: inherit;
+            font-weight: 600;
+            text-align: left;
+        }
+
+        .texturing-table td {
+            padding: 8px 10px;
+            border-top: 1px solid var(--border);
+            font-size: inherit;
+            vertical-align: top;
+        }
+
+        .texturing-table td:first-child {
+            width: 32%;
+            white-space: nowrap;
+            background: var(--surface-subtle);
+            color: var(--text-strong);
+        }
+    </style>
 </head>
 
 <body>
-<div class="content">
+<article class="content">
 
-<!-- HEADER (use only on bookchapters) -->
+    <header class="section">
+        <h1>Texturing: Essential Knowledge</h1>
+        <p>This section explains concepts fundamental to a successful texturing experience.</p>
+    </header>
 
-<table summary="" class="header">
-	<tr>
-		<td align="left" class="helphead_l"><a href="../toc.html"><div class="helplink">&nbsp;</div></a></td>
-		<td align="right" class="helphead_r"></td>
-	</tr>
-</table>
+    <section class="section">
+        <h3>Correspondence of uv-sets to texture layers</h3>
+        <p>There is a 1:1 correspondence between uv-sets (texture coordinates sets) and texture layers (maps):</p>
 
-<!-- CONTENT -->
-<h1>Texturing: Essential Knowledge</h1>
-This section explains concepts fundamental to a successful texturing experience. 
+        <table class="texturing-table">
+            <thead>
+                <tr>
+                    <th>uv-set</th>
+                    <th>Texture Layer</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>0</td>
+                    <td><span class="inlinecode">colormap</span></td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td><span class="inlinecode">bumpmap</span></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td><span class="inlinecode">dirtmap</span></td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td><span class="inlinecode">specularmap</span></td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td><span class="inlinecode">opacitymap</span></td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td><span class="inlinecode">normalmap</span></td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td><span class="inlinecode">emissivemap</span></td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td><span class="inlinecode">occlusionmap</span></td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td><span class="inlinecode">roughnessmap</span></td>
+                </tr>
+                <tr>
+                    <td>9</td>
+                    <td><span class="inlinecode">metallicmap</span></td>
+                </tr>
+            </tbody>
+        </table>
 
-<h2>Correspondence of uv-sets to texture layers</h2>
-<p>There is a 1:1 correspondence between uv-sets (texture coordinates sets) and texture layers (maps):</p>
+        <p>For more details about the texture layers see <a href="attr_material.html">Material Shape Attributes</a> and <a href="attr_material_map.html">material.map: Texture Layers</a>.</p>
+    </section>
 
-<table class="twocol">
-  <thead>
-    <th class="params">uv-set</th>
-    <th class="params">Texture Layer</th>
-  </thead>
-  <tr>
-    <td>0</td>
-    <td>colormap</td>
-  </tr>  
-  <tr>
-    <td>1</td>
-    <td>bumpmap</td>
-  </tr>  
-  <tr>
-    <td>2</td>
-    <td>dirtmap</td>
-  </tr>  
-  <tr>
-    <td>3</td>
-    <td>specularmap</td>
-  </tr>  
-  <tr>
-    <td>4</td>
-    <td>opacitymap</td>
-  </tr>  
-  <tr>
-    <td>5</td>
-    <td>normalmap</td>
-  </tr>  
-    <tr>
-    <td>6</td>
-    <td>emissivemap</td>
-  </tr>  
-  </tr>  
-    <tr>
-    <td>7</td>
-    <td>occlusionmap</td>
-  </tr>  
-  </tr>  
-    <tr>
-    <td>8</td>
-    <td>roughnessmap</td>
-  </tr>  
-  </tr>  
-    <tr>
-    <td>9</td>
-    <td>metallicmap</td>
-  </tr>  
+    <section class="section">
+        <h3>Defaults if no uv-set present</h3>
+        <p>For rendering and export, each defined texture layer needs to be matched with a uv-set.</p>
+        <p>If a texture layer has a texture assigned, but the corresponding uv-set is not defined, the texture coordinates from uv-set 0 are used. If uv-set 0 is undefined, the texture layer is ignored.</p>
+    </section>
 
-</table>
+    <section class="section">
+        <h3>Supported Image Formats</h3>
+        <p>A large number of image formats are supported, the most popular ones are:</p>
 
-For more details about the texture layers see <a href="attr_material.html">Material Shape Attributes.</a> and <a class="normw" href="attr_material_map.html">material.map: Texture Layers</a>. </p>
+        <table class="texturing-table">
+            <thead>
+                <tr>
+                    <th>Extension</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="inlinecode">bmp</span></td>
+                    <td>Microsoft's classic bitmap format.</td>
+                </tr>
+                <tr>
+                    <td><span class="inlinecode">gif</span></td>
+                    <td>The legendary Graphics Interchange Format.</td>
+                </tr>
+                <tr>
+                    <td><span class="inlinecode">jpg / jpeg</span></td>
+                    <td>JPEG compressed images.</td>
+                </tr>
+                <tr>
+                    <td><span class="inlinecode">png</span></td>
+                    <td>The popular Portable Network Graphics format.</td>
+                </tr>
+                <tr>
+                    <td><span class="inlinecode">tif / tiff</span></td>
+                    <td>The flexible Tagged Image File Format.</td>
+                </tr>
+            </tbody>
+        </table>
 
-<h2>Defaults if no uv-set present</h2>
-For rendering and export, each defined texture layer needs to be matched with a uv-set.  
-If a texture layer has a texture assigned, but the corresponding uv-set is not defined, the texture coordinates from uv-set 0 are used. If uv-set 0 is undefined, the texture layer is ignored. 
+        <p>See the <a href="https://esri.github.io/cityengine-sdk/html/esri_prt_codecs.html#aDecoders" target="_blank">PRT built-in decoder documentation</a> for the complete list.</p>
+    </section>
 
+    <section class="section">
+        <h2>Related</h2>
+        <div class="related">
+            <a class="attr" href="attr_material.html"><span class="related-name">material</span><span class="related-kind">attributes</span></a>
+            <a class="attr" href="attr_material_map.html"><span class="related-name">material.map</span><span class="related-kind">attributes</span></a>
+            <a class="op" href="op_copyUV.html"><span class="related-name">copyUV</span><span class="related-kind">operation</span></a>
+            <a class="op" href="op_deleteUV.html"><span class="related-name">deleteUV</span><span class="related-kind">operation</span></a>
+            <a class="op" href="op_normalizeUV.html"><span class="related-name">normalizeUV</span><span class="related-kind">operation</span></a>
+            <a class="op" href="op_projectUV.html"><span class="related-name">projectUV</span><span class="related-kind">operation</span></a>
+            <a class="op" href="op_rotateUV.html"><span class="related-name">rotateUV</span><span class="related-kind">operation</span></a>
+            <a class="op" href="op_scaleUV.html"><span class="related-name">scaleUV</span><span class="related-kind">operation</span></a>
+            <a class="op" href="op_translateUV.html"><span class="related-name">translateUV</span><span class="related-kind">operation</span></a>
+            <a class="op" href="op_setupProjection.html"><span class="related-name">setupProjection</span><span class="related-kind">operation</span></a>
+            <a class="op" href="op_texture.html"><span class="related-name">texture</span><span class="related-kind">operation</span></a>
+            <a class="op" href="op_resetMaterial.html"><span class="related-name">resetMaterial</span><span class="related-kind">operation</span></a>
+            <a class="op" href="op_setMaterial.html"><span class="related-name">setMaterial</span><span class="related-kind">operation</span></a>
+            <a class="func" href="func_getMaterial.html"><span class="related-name">getMaterial</span><span class="related-kind">function</span></a>
+        </div>
+    </section>
 
-<h2>Supported Image Formats</h2>
-<p>A large number of image formats are supported, the most popular ones are:</p>
-<table class="twocol">
-  <thead>
-    <th class="params">Extension</th>
-    <th class="params">Description</th>
-  </thead>
-  <tr>
-    <td>bmp</td>
-    <td>Microsoft's classic bitmap format.</td>
-  </tr>  
-  <tr>
-    <td>gif</td>
-    <td>The legendary Graphics Interchange Format.</td>
-  </tr>  
-  <tr>
-    <td>jpg / jpeg</td>
-    <td>JPEG compressed images.</td>
-  </tr>  
-  <tr>
-    <td>png</td>
-    <td>The popular Portable Network Graphics format.</td>
-  </tr>  
-  <tr>
-    <td>tif / tiff</td>
-    <td>The flexible Tagged Image File Format.</td>
-  </tr>  
-</table>
+    <footer class="footer">Copyright &copy;2008-2026 Esri R&amp;D Center Zurich. All rights reserved.</footer>
 
-<p>See the <a href="https://esri.github.io/cityengine-sdk/html/esri_prt_codecs.html#aDecoders" target="_blank">PRT built-in decoder documentation</a> for the complete list.</p>
-
-<h2>Related</h2>
-<ul>
-    <li><a class="normw" href="attr_material.html">material shape attributes</a></li>    
-    <li><a class="normw" href="attr_material_map.html">material.map texture layers</a></li>
-	<li><a class="normw" href="op_copyUV.html">copyUV operation</a></li>
-    <li><a class="normw" href="op_deleteUV.html">deleteUV operation</a></li>
-    <li><a class="normw" href="op_normalizeUV.html">normalizeUV operation</a></li>
-    <li><a class="normw" href="op_projectUV.html">projectUV operation</a></li>
-    <li><a class="normw" href="op_rotateUV.html">rotateUV operation</a></li>
-    <li><a class="normw" href="op_scaleUV.html">scaleUV operation</a></li>
-    <li><a class="normw" href="op_translateUV.html">translateUV operation</a></li>
-    <li><a class="normw" href="op_setupProjection.html">setupProjection operation</a></li>
-    <li><a class="normw" href="op_texture.html">texture operation</a></li>
-	<li><a class="normw" href="op_resetMaterial.html">resetMaterial operation</a></li>
-	<li><a class="normw" href="op_setMaterial.html">setMaterial operation</a></li>
-	<li><a class="normw" href="func_getMaterial.html">getMaterial function</a></li>
-</ul>
-
-
-<!-- FOOTER -->
-<p class="foot">Copyright &copy;2008-2025 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
-
-<!-- END CENTERED CONTENT -->
-
-</div>
+</article>
 </body>
 </html>

@@ -1,69 +1,88 @@
+﻿<!doctype html>
 <html>
 
 <head>
-    <title>findFirst (utility library)</title>
-    <link rel="stylesheet" href="../../manual_style.css" type="text/css" />
+    <meta charset="UTF-8">
+    <title>findFirst function</title>
+    <link rel="stylesheet" href="../../cgareference_style.css" type="text/css">
 </head>
 
 <body>
-<div class="content">
+<article class="content">
 
-<!-- Don't touch -->
+    <header class="section">
+        <h1>
+            <span class="name">findFirst</span>
+            <span class="kind">function</span>
+        </h1>
 
-<table summary="" class="header">
-    <tr>
-        <td align="left" class="helphead_l"><a href="../../toc.html"><div class="helplink">&nbsp;</div></a></td>
-        <td align="right" class="helphead_r"></td>
-    </tr>
-</table>
+        <div class="signatures">
+            <div><span class="type-tag">float</span> <span class="func">findFirst</span>(<span class="param">inputString</span>, <span class="param">matchString</span>)</div>
+        </div>
+    </header>
 
-<h1>findFirst (utility library)</h1>
+    <section class="section">
+        <div class="param-list">
+            <div class="param-item">
+                <div class="indent-body">
+                    <p><span class="param">inputString</span> <span class="type-tag">string</span></p>
+                </div>
+            </div>
+            <div class="param-item">
+                <div class="indent-body">
+                    <p><span class="param">matchString</span> <span class="type-tag">string</span></p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<h2>Syntax</h2>
+    <section class="section">
+        <div class="return-list">
+            <div class="return-item">
+                <div class="indent-body">
+                        <p>Returns the first occurrence (position/index) of <span class="param">matchString</span> in the <span class="param">inputString</span>, or -1 if it is not found.</p>
+                </div>
+            </div>
+        </div>
 
-<p class="code2"><span class="codelight">float</span> findFirst(<span class="cga_opparam">inputString</span>, <span class="cga_opparam">matchString</span>)</p>
+        <p>This function returns the index of the first occurrence of the <span class="param">matchString</span> in the <span class="param">inputString</span>.</p>
 
-<h2>Parameters</h2>
+        <div class="note">Note: Indices are 0 - based.</div>
+    </section>
 
-<ul>
-       <li><span class="cga_opparam">inputString</span> (string)</li>
-    <li><span class="cga_opparam">matchString</span> (string)</li>
-</ul>
+    <section class="section">
+        <h2>Related</h2>
 
-<h2>Returns</h2>
+        <div class="related">
+            <a class="func" href="../func_findFirst.html"><span class="related-name">findFirst</span><span class="related-kind">function</span></a>
+            <a class="func" href="findLast.html"><span class="related-name">findLast</span><span class="related-kind">function</span></a>
+            <a class="func" href="getPrefix.html"><span class="related-name">getPrefix</span><span class="related-kind">function</span></a>
+            <a class="func" href="getRange.html"><span class="related-name">getRange</span><span class="related-kind">function</span></a>
+            <a class="func" href="getSuffix.html"><span class="related-name">getSuffix</span><span class="related-kind">function</span></a>
+            <a class="func" href="replace.html"><span class="related-name">replace</span><span class="related-kind">function</span></a>
+        </div>
+    </section>
 
-<p>First occurrence (position/index) of <span class="cga_opparam">matchString</span> in the <span class="cga_opparam">inputString</span> or -1 if it is not found.</p>
+    <section class="section">
+        <h2>Examples</h2>
 
-<h2>Description</h2>
+        <section class="example">
+            <h3>Example</h3>
 
-<p>This function returns the index of the first occurrence of the <span class="cga_opparam">matchString</span> in the <span class="cga_opparam">inputString</span>.</p>
-
-<p class="notes">Note: Indices are 0 - based.</p>
-        
-<h2>Related</h2>
-
-<ul>
-    <li><a href="../func_findFirst.html"><span class="code_std">findFirst</span></a> function (builtin)</li>
-    <li><a href="findLast.html"><span class="code_std">findLast</span></a> function</li>
-    <li><a href="getPrefix.html"><span class="code_std">getPrefix</span></a> function</li>
-    <li><a href="getRange.html"><span class="code_std">getRange</span></a> function</li>
-    <li><a href="getSuffix.html"><span class="code_std">getSuffix</span></a> function</li>
-    <li><a href="replace.html"><span class="code_std">replace</span></a> function</li>
-</ul>
-                
-<h2>Examples</h2>
-
-<p class="example">	
-<pre class="codecga">
+            <div class="example-row">
+                <div class="example-content">
+<pre class="code-block">
 findFirst("rule your city with cityengine","city")
 # result = 10
 # "rule your " = 10 characters; then the match string starts
 </pre>
-</p>
+                </div>
+            </div>
+        </section>
+    </section>
 
-<!-- FOOTER -->
-<p class="foot">Copyright &copy;2008-2025 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
+    <footer class="footer">Copyright &copy;2008-2026 Esri R&amp;D Center Zurich. All rights reserved.</footer>
 
-</div>
+</article>
 </body>
 </html>

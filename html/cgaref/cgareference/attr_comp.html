@@ -1,78 +1,86 @@
+<!doctype html>
 <html>
 
 <head>
-<title>comp Shape Attribute</title>
-<link rel="stylesheet" href="../manual_style.css" type="text/css" />
+<meta charset="UTF-8">
+<title>comp attribute</title>
+<link rel="stylesheet" href="../cgareference_style.css" type="text/css">
 </head>
 
 <body>
-<div class="content">
+<article class="content">
 
-<table summary="" class="header">
-	<tr>
-		<td align="left" class="helphead_l"><a href="../toc.html"><div class="helplink">&nbsp;</div></a></td>
-		<td align="right" class="helphead_r"></td>
-	</tr>
-</table>
+<header class="section">
+<h1>
+<span class="name">comp</span>
+<span class="kind">attribute</span>
+</h1>
 
-<h1>comp shape attribute</h1>
+<div class="signatures">
+<div><a name="sel"></a><span class="type-tag">string</span> <span class="attr">comp.sel</span></div>
+<div><a name="index"></a><span class="type-tag">float</span> <span class="attr">comp.index</span></div>
+<div><a name="total"></a><span class="type-tag">float</span> <span class="attr">comp.total</span></div>
+</div>
+</header>
 
-<h2>Syntax</h2>
-
-<p class="code2"><a name="sel"></a><span class="codelight">string</span> comp.sel</p>
-<p class="code2"><a name="index"></a><span class="codelight">float</span> comp.index</p>
-<p class="code2"><a name="total"></a><span class="codelight">float</span> comp.total</p>
-
-<h2>Description</h2>
-
+<section class="section">
 <p>The comp shape attributes give information about the last component split in the chain of the shape's predecessors.</p>
 
-<p class="text">
-<table cellspacing="10">
-<tr><td><span class="codelight">comp.sel</span></td><td>A string containing the component split selector which selected the current shape (or it's predecessor, respectively) in the last component split.</td></tr>
-<tr><td><span class="codelight">comp.index</span></td><td>The zero-based index into the group of shapes generated in the last component split.</td></tr>
-<tr><td><span class="codelight">comp.total</span></td><td>The total number of components generated in the last component split.</td></tr>
+<table class="option-table">
+<tr><td><span class="attr">comp.sel</span></td><td>A string containing the component split selector which selected the current shape (or it's predecessor, respectively) in the last component split.</td></tr>
+<tr><td><span class="attr">comp.index</span></td><td>The zero-based index into the group of shapes generated in the last component split.</td></tr>
+<tr><td><span class="attr">comp.total</span></td><td>The total number of components generated in the last component split.</td></tr>
 </table>
-</p>
+</section>
 
-<h2>Example</h2>
+<section class="section">
+<h2>Examples</h2>
 
-<p>Index and total are per selector; for instance
-<pre class="codecga">
+<section class="example">
+<h3>Example</h3>
+
+<div class="example-row example-row--stack">
+<div class="example-content">
+<p>Index and total are per selector; for instance</p>
+<pre class="code-block">
 ...
 primitiveCube()
-comp(f) { front : Front | side : Side | all = All }  
+comp(f) { front : Front | side : Side | all = All }
 </pre>
-creates one <span class="codelight">Front</span> shape with
+<p>creates one <span class="inlinecode">Front</span> shape with</p>
 <ul>
-	<li><span class="codelight">comp.sel: front</span></li>
-	<li><span class="codelight">comp.index: 0</span></li>
-	<li><span class="codelight">comp.total: 1</span></li>
+<li><span class="inlinecode">comp.sel: front</span></li>
+<li><span class="inlinecode">comp.index: 0</span></li>
+<li><span class="inlinecode">comp.total: 1</span></li>
 </ul>
-and 3 <span class="codelight">Side</span> shapes with
+<p>and 3 <span class="inlinecode">Side</span> shapes with</p>
 <ul>
-	<li><span class="codelight">comp.sel: side</span></li>
-	<li><span class="codelight">comp.index: 0,1,2</span></li>
-	<li><span class="codelight">comp.total: 3</span></li>
+<li><span class="inlinecode">comp.sel: side</span></li>
+<li><span class="inlinecode">comp.index: 0,1,2</span></li>
+<li><span class="inlinecode">comp.total: 3</span></li>
 </ul>
-and 1 <span class="codelight">All</span> shape with
+<p>and 1 <span class="inlinecode">All</span> shape with</p>
 <ul>
-	<li><span class="codelight">comp.sel: all</span></li>
-	<li><span class="codelight">comp.index: 0</span></li>
-	<li><span class="codelight">comp.total: 1</span></li>
+<li><span class="inlinecode">comp.sel: all</span></li>
+<li><span class="inlinecode">comp.index: 0</span></li>
+<li><span class="inlinecode">comp.total: 1</span></li>
 </ul>
-</p>
-
-<h2>Related</h2>
-
-<ul>
-	<li><a class="normw" href="op_comp.html">comp operation</a></li>
-	<li><a class="normw" href="func_comp.html">comp function</a></li>
-	<li><a class="normw" href="op_setbackPerEdge.html">setbackPerEdge operation</a></li>
-</ul>
-
-<p class="foot">Copyright &copy;2008-2025 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
-
 </div>
+</div>
+</section>
+</section>
+
+<section class="section">
+<h2>Related</h2>
+<div class="related">
+<a class="op" href="op_comp.html"><span class="related-name">comp</span><span class="related-kind">operation</span></a>
+<a class="func" href="func_comp.html"><span class="related-name">comp</span><span class="related-kind">function</span></a>
+<a class="op" href="op_setbackPerEdge.html"><span class="related-name">setbackPerEdge</span><span class="related-kind">operation</span></a>
+</div>
+</section>
+
+<footer class="footer">Copyright &copy;2008-2026 Esri R&amp;D Center Zurich. All rights reserved.</footer>
+
+</article>
 </body>
 </html>

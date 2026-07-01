@@ -23,7 +23,7 @@
   <td id="projectlogo"><img alt="Logo" src="esri_prt_55px.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ArcGIS Procedural Runtime
-   &#160;<span id="projectnumber">3.3.11669</span>
+   &#160;<span id="projectnumber">3.4.12206</span>
    </div>
   </td>
  </tr>
@@ -114,6 +114,15 @@ Public Types</h2></td></tr>
 <br />
  }</td></tr>
 <tr class="separator:a5d293cfb6f32162d77094834208137e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acdbaa7c4f8999d7ed2def7ff6efdef51"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprt_1_1_callbacks.html#acdbaa7c4f8999d7ed2def7ff6efdef51">CoordSystemSelector</a> { <br />
+&#160;&#160;<a class="el" href="classprt_1_1_callbacks.html#acdbaa7c4f8999d7ed2def7ff6efdef51a01897a38d761228205a24a0aec7d8d3e">PROJ</a>, 
+<br />
+&#160;&#160;<a class="el" href="classprt_1_1_callbacks.html#acdbaa7c4f8999d7ed2def7ff6efdef51a6adf3a266f3cba329d4090b94e2257f1">WGS84</a>, 
+<br />
+&#160;&#160;<a class="el" href="classprt_1_1_callbacks.html#acdbaa7c4f8999d7ed2def7ff6efdef51a5e3bc1d94fd45127cf35ecff31c7accd">LAYER</a>
+<br />
+ }</td></tr>
+<tr class="separator:acdbaa7c4f8999d7ed2def7ff6efdef51"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -135,6 +144,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a3f9de9c73e577bb786771c3fa6dec6b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a074a2514cedbdc6de84d432a55057313"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprt_1_1_callbacks.html#a074a2514cedbdc6de84d432a55057313">cgaGetCoord</a> (size_t isIndex, <a class="el" href="classprt_1_1_callbacks.html#a5d293cfb6f32162d77094834208137e3">CoordSelector</a> sel, double x, double y, double z, <a class="el" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a> *stat=0)</td></tr>
 <tr class="separator:a074a2514cedbdc6de84d432a55057313"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeffbc282ab9d9f123606b0283dc80b7c"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprt_1_1_callbacks.html#aeffbc282ab9d9f123606b0283dc80b7c">cgaGetCoords</a> (size_t isIndex, <a class="el" href="classprt_1_1_callbacks.html#acdbaa7c4f8999d7ed2def7ff6efdef51">CoordSystemSelector</a> sel, double *coords, size_t vertexCount)</td></tr>
+<tr class="separator:aeffbc282ab9d9f123606b0283dc80b7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae504df21a5904899cfd494936cd75609"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprt_1_1_callbacks.html#ae504df21a5904899cfd494936cd75609">cgaPrint</a> (size_t isIndex, int32_t shapeID, const wchar_t *txt)=0</td></tr>
 <tr class="separator:ae504df21a5904899cfd494936cd75609"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a642feab6a9ecb1c9e0be66a4484b1c47"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprt_1_1_callbacks.html#a642feab6a9ecb1c9e0be66a4484b1c47">cgaReportBool</a> (size_t isIndex, int32_t shapeID, const wchar_t *key, bool value)=0</td></tr>
@@ -189,13 +200,13 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>Geographical coordinates which might be looked up by cga. </p>
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a5d293cfb6f32162d77094834208137e3a5b5b6d40e045117487d205468dd1627a"></a>PROJ_X&#160;</td><td class="fielddoc"><p>The x coordinate of the projected coordinate system (i.e. cga's x axis). </p>
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a5d293cfb6f32162d77094834208137e3a5b5b6d40e045117487d205468dd1627a"></a>PROJ_X&#160;</td><td class="fielddoc"><p>The x coordinate of the projected coordinate system (i.e. along cga's x axis). The unit is defined by the client's projected coordinate system. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a5d293cfb6f32162d77094834208137e3ad8f03fafcf98bab7ea994c0c5bd6a5a6"></a>PROJ_Y&#160;</td><td class="fielddoc"><p>The y coordinate of the projected coordinate system (i.e. cga's z axis). </p>
+<tr><td class="fieldname"><a id="a5d293cfb6f32162d77094834208137e3ad8f03fafcf98bab7ea994c0c5bd6a5a6"></a>PROJ_Y&#160;</td><td class="fielddoc"><p>The y coordinate of the projected coordinate system (i.e. along cga's negative z axis). The unit is defined by the client's projected coordinate system. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a5d293cfb6f32162d77094834208137e3a3c7420ecdaa2a0b91de620b0659ebde1"></a>WGS84_LAT&#160;</td><td class="fielddoc"><p>The WGS84 latitude coordinates. </p>
+<tr><td class="fieldname"><a id="a5d293cfb6f32162d77094834208137e3a3c7420ecdaa2a0b91de620b0659ebde1"></a>WGS84_LAT&#160;</td><td class="fielddoc"><p>The WGS84 latitude coordinates in degrees. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a5d293cfb6f32162d77094834208137e3aa560b198c2c45f8576d000f5087a1c27"></a>WGS84_LON&#160;</td><td class="fielddoc"><p>The WGS84 longitude coordinates. </p>
+<tr><td class="fieldname"><a id="a5d293cfb6f32162d77094834208137e3aa560b198c2c45f8576d000f5087a1c27"></a>WGS84_LON&#160;</td><td class="fielddoc"><p>The WGS84 longitude coordinates in degrees. </p>
 </td></tr>
 <tr><td class="fieldname"><a id="a5d293cfb6f32162d77094834208137e3a8bc44270839ee1cdefb8ba3a2e1c72c1"></a>WGS84_ALT_METER&#160;</td><td class="fielddoc"><p>The WGS84 altitude in meters. </p>
 </td></tr>
@@ -204,6 +215,29 @@ Public Member Functions</h2></td></tr>
 <tr><td class="fieldname"><a id="a5d293cfb6f32162d77094834208137e3a8e1b51804d289f4c3d28071f40f15668"></a>LAYER_Y&#160;</td><td class="fielddoc"><p>The layer y coordinate. </p>
 </td></tr>
 <tr><td class="fieldname"><a id="a5d293cfb6f32162d77094834208137e3a82b6afc38f8ecb7030d065102888a6b5"></a>LAYER_Z&#160;</td><td class="fielddoc"><p>The layer z coordinate. </p>
+</td></tr>
+</table>
+
+</div>
+</div>
+<a id="acdbaa7c4f8999d7ed2def7ff6efdef51"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acdbaa7c4f8999d7ed2def7ff6efdef51">&#9670;&nbsp;</a></span>CoordSystemSelector</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="classprt_1_1_callbacks.html#acdbaa7c4f8999d7ed2def7ff6efdef51">prt::Callbacks::CoordSystemSelector</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Geographical coordinate triples which might be looked up by cga or encoders. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="acdbaa7c4f8999d7ed2def7ff6efdef51a01897a38d761228205a24a0aec7d8d3e"></a>PROJ&#160;</td><td class="fielddoc"><p>The coordinates of the projected coordinate system (i.e. along cga's x/-z/y axes). </p>
+</td></tr>
+<tr><td class="fieldname"><a id="acdbaa7c4f8999d7ed2def7ff6efdef51a6adf3a266f3cba329d4090b94e2257f1"></a>WGS84&#160;</td><td class="fielddoc"><p>The WGS84 (longitude / latitude / altitude in meters) coordinates. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="acdbaa7c4f8999d7ed2def7ff6efdef51a5e3bc1d94fd45127cf35ecff31c7accd"></a>LAYER&#160;</td><td class="fielddoc"><p>The layer coordinates. Layer coordinates are not used internally by cga but some encoders might rely on this. </p>
 </td></tr>
 </table>
 
@@ -804,8 +838,9 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Function to convert world coordinates from the cga coordinate system (right handed y-up, meters) to a Cartesian scene coordinate system, geographical WGS84 coordinates or client-dependent layer coordinates. <b>Note:</b> The conversion to WGS84 coordinates is only correct if the input is in Web Mercator coordinates.</p>
-<p>Some cga functions (getGeoCord) rely on this. Additionally, some encoders use this functioanlity as well.</p>
+<p>Function to convert world coordinates from the cga coordinate system (right handed y-up, meters) to a Cartesian scene coordinate system, geographical WGS84 coordinates or client-dependent layer coordinates.</p>
+<p>For convenience there is a default implementation which performs a conversion from Web Mercator.</p>
+<p>Some cga functions (<a href="cgaref/cgareference/func_getGeoCord.html">getGeoCord()</a>) rely on this. Additionally, some encoders use this functionality as well.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir"></td><td class="paramname">isIndex</td><td>Initial shape index (relative to the initialShapes array in the <a class="el" href="namespaceprt.html#a310381e586ced8f4b08efd472a6f0782">generate()</a> call) </td></tr>
@@ -818,6 +853,67 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The desired coordinate. </dd></dl>
+
+</div>
+</div>
+<a id="aeffbc282ab9d9f123606b0283dc80b7c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeffbc282ab9d9f123606b0283dc80b7c">&#9670;&nbsp;</a></span>cgaGetCoords()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="namespaceprt.html#acf0b3066b48a14bccb756bee9a4700e4">Status</a> prt::Callbacks::cgaGetCoords </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>isIndex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classprt_1_1_callbacks.html#acdbaa7c4f8999d7ed2def7ff6efdef51">CoordSystemSelector</a>&#160;</td>
+          <td class="paramname"><em>sel</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double *&#160;</td>
+          <td class="paramname"><em>coords</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>vertexCount</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Function to convert world coordinates from the cga coordinate system (right handed y-up, meters) to a Cartesian scene coordinate system, geographical WGS84 coordinates or client-dependent layer coordinates.</p>
+<p>This function provides an efficient interface to <a class="el" href="classprt_1_1_callbacks.html#a074a2514cedbdc6de84d432a55057313">cgaGetCoord()</a> for bulk conversions. Encoders might use it for batch-converting arrays of vertex coordinates.</p>
+<p>For convenience there is a default implementation which just calls the <a class="el" href="classprt_1_1_callbacks.html#a074a2514cedbdc6de84d432a55057313">cgaGetCoord()</a> function in a loop.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir"></td><td class="paramname">isIndex</td><td>Initial shape index (relative to the initialShapes array in the <a class="el" href="namespaceprt.html#a310381e586ced8f4b08efd472a6f0782">generate()</a> call) </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">sel</td><td>Selector for the desired coordinate system. </td></tr>
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">coords</td><td>Array of coordinates to convert. The array must contain 3*vertexCount doubles. Each triple will be converted and overwritten in-place. </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">vertexCount</td><td>Number of vertices (triples) in the coords array. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>status. </dd></dl>
 
 </div>
 </div>
@@ -1143,7 +1239,7 @@ Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Oct 31 2025 14:30:25 for ArcGIS Procedural Runtime by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Jun 12 2026 19:58:54 for ArcGIS Procedural Runtime by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.14
 </small></address>

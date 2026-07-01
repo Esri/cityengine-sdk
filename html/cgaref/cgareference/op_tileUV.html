@@ -1,118 +1,133 @@
+<!doctype html>
 <html>
 
 <head>
-    <title>tileUV Operation</title>
-    <link rel="stylesheet" href="../manual_style.css" type="text/css" />
+  <meta charset="UTF-8">
+  <title>tileUV operation</title>
+  <link rel="stylesheet" href="../cgareference_style.css" type="text/css">
 </head>
 
 <body>
-<div class="content">
+<article class="content">
 
-<!-- HEADER (use only on bookchapters) -->
+  <header class="section">
+    <h1>
+      <span class="name">tileUV</span>
+      <span class="kind">operation</span>
+    </h1>
 
-<table summary="" class="header">
-	<tr>
-		<td align="left" class="helphead_l"><a href="../toc.html"><div class="helplink">&nbsp;</div></a></td>
-		<td align="right" class="helphead_r"></td>
-	</tr>
-</table>
+    <div class="signatures">
+      <div><span class="op">tileUV</span>(<span class="param">uvSet</span>, <span class="param">textureWidth</span>, <span class="param">textureHeight</span>)</div>
+    </div>
+  </header>
 
-<!-- CONTENT -->
+  <section class="section">
+    <div class="param-list">
+      <div class="param-item">
+        <div class="indent-body">
+          <p><span class="param">uvSet</span> <span class="type-tag">float</span> Number of texture coordinates set (integer number in [0,9]). The numbering corresponds to the texture layers of the <a href="attr_material.html">material attribute</a>, see also <a href="cga_texturing.html"> Texturing: Essential Knowledge</a>.</p>
+        </div>
+      </div>
 
-<h1>tileUV operation</h1>
+      <div class="param-item">
+        <div class="indent-body">
+          <p><span class="param">textureWidth</span> <span class="type-tag">float</span> The texture width in world coordinate system units (e.g. meters). Values &lt; 0 are allowed and mirror the texture. The operators ~ (floating) and &rsquo; (relative) can be used, see below. 0 is allowed and means &#8220;don't touch this axis&#8221;.</p>
+        </div>
+      </div>
 
-<h2>Syntax</h2>
+      <div class="param-item">
+        <div class="indent-body">
+          <p><span class="param">textureHeight</span> <span class="type-tag">float</span> The texture height in world coordinate system units (e.g. meters). Values &lt; 0 are allowed and mirror the texture. The operators ~ (floating) and &rsquo; (relative) can be used, see below. 0 is allowed and means &#8220;don't touch this axis&#8221;.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<p class="code2">tileUV(<span class="cga_opparam">uvSet</span>, <span class="cga_opparam">textureWidth</span>, <span class="cga_opparam">textureHeight</span>)</p>
+  <section class="section">
+    <p>The <span class="op">tileUV</span> operation rescales the texture coordinates of the selected uv-set such that the uv space gets tiled with tiles of a given width and height. The <span class="param">textureWidth</span> and <span class="param">textureHeight</span> parameters support usage of the floating and relative operators to avoid complex calculations with the texture space dimension. For example, if the parameter <span class="param">textureWidth</span> is set to ~20, the projection matrix is initialized such that the surface of the current shape's geometry is exactly spanned with texture tiles of approximately size 20 along the u direction. Or if the paramter <span class="param">textureHeight</span> is set to &rsquo;0.5, the texture will be repeated twice along the height.</p>
+  </section>
 
-<h2>Parameters</h2>
-<ul>
-	<li><span class="cga_opparam">uvSet</span> (float)<br>Number of texture coordinates set (integer number in [0,9]). The numbering corresponds to the texture layers of the <a href="attr_material.html">material attribute</a>, see also <a href="cga_texturing.html"> Texturing: Essential Knowledge</a>.</li>
-	<li><span class="cga_opparam">textureWidth</span> (float)<br>The texture width in world coordinate system units (e.g. meters). Values < 0 are allowed and mirror the texture. The operators ~ (floating) and &rsquo; (relative) can be used, see below. 0 is allowed and means &#8220;don't touch this axis&#8221;.</li>
-	<li><span class="cga_opparam">textureHeight</span> (float)<br>The texture height in world coordinate system units (e.g. meters). Values < 0 are allowed and mirror the texture. The operators ~ (floating) and &rsquo; (relative) can be used, see below. 0 is allowed and means &#8220;don't touch this axis&#8221;.</li>
-</ul>
+  <section class="section">
+    <h2>Related</h2>
+    <div class="related">
+      <a class="op" href="op_copyUV.html"><span class="related-name">copyUV</span><span class="related-kind">operation</span></a>
+      <a class="op" href="op_deleteUV.html"><span class="related-name">deleteUV</span><span class="related-kind">operation</span></a>
+      <a class="op" href="op_normalizeUV.html"><span class="related-name">normalizeUV</span><span class="related-kind">operation</span></a>
+      <a class="op" href="op_projectUV.html"><span class="related-name">projectUV</span><span class="related-kind">operation</span></a>
+      <a class="op" href="op_rotateUV.html"><span class="related-name">rotateUV</span><span class="related-kind">operation</span></a>
+      <a class="op" href="op_scaleUV.html"><span class="related-name">scaleUV</span><span class="related-kind">operation</span></a>
+      <a class="op" href="op_texture.html"><span class="related-name">texture</span><span class="related-kind">operation</span></a>
+      <a class="op" href="op_translateUV.html"><span class="related-name">translateUV</span><span class="related-kind">operation</span></a>
+      <a class="op" href="op_setupProjection.html"><span class="related-name">setupProjection</span><span class="related-kind">operation</span></a>
+      <a class="attr" href="attr_scope.html"><span class="related-name">scope</span><span class="related-kind">attribute</span></a>
+      <a class="attr" href="attr_material_map.html"><span class="related-name">material.map</span><span class="related-kind">attribute</span></a>
+    </div>
+  </section>
 
-<h2>Description</h2>
+  <section class="section">
+    <h2>Examples</h2>
 
-<p>The <span class="codelight">tileUV</span> operation rescales the texture coordinates of the selected uv-set such that the uv space gets tiled with tiles of a given width and height. The <span class="cga_opparam">textureWidth</span> and <span class="cga_opparam">textureHeight</span> parameters support usage of the floating and relative operators to avoid complex calculations with the texture space dimension. For example, if the parameter <span class="cga_opparam">textureWidth</span> is set to ~20, the projection matrix is initialized such that the surface of the current shape's geometry is exactly spanned with texture tiles of approximately size 20 along the u direction. Or if the paramter <span class="cga_opparam">textureHeight</span> is set to &rsquo;0.5, the texture will be repeated twice along the height.</p>
+    <section class="example">
+      <h3>Street Tiling</h3>
 
-<h2>Related</h2>
-<ul>
-	<li><a class="normw" href="op_copyUV.html">copyUV operation</a></li>
-	<li><a class="normw" href="op_deleteUV.html">deleteUV operation</a></li>
-	<li><a class="normw" href="op_normalizeUV.html">normalizeUV operation</a></li>
-	<li><a class="normw" href="op_projectUV.html">projectUV operation</a></li>
-	<li><a class="normw" href="op_rotateUV.html">rotateUV operation</a></li>
-	<li><a class="normw" href="op_scaleUV.html">scaleUV operation</a></li>
-	<li><a class="normw" href="op_texture.html">texture operation</a></li>
-	<li><a class="normw" href="op_translateUV.html">translateUV operation</a></li>
-	<li><a class="normw" href="op_setupProjection.html">setupProjection operation</a></li>
-	<li><a class="normw" href="attr_scope.html">scope attribute</a></li>
-	<li><a class="normw" href="attr_material_map.html">material.map attribute</a></li>
-</ul>
+      <div class="example-row">
+        <figure class="media media-example">
+          <img src="images/tileuv-street-shape.png" alt="Street shape">
+        </figure>
 
-<h2>Examples</h2>
+        <div class="example-content">
+          <p>A multi-face street shape.</p>
+        </div>
+      </div>
 
-<h3>Street Tiling</h3>
-        <table summary="" class="twocol">
-          <tr>
-            <td class="twocol_l">
-            <img src="images/tileuv-street-shape.png" alt="Street shape"/> </td>
-             <td class="twocol_r">
-            <br>
-            <br>
+      <div class="example-row">
+        <figure class="media media-example">
+          <img src="images/tileuv-street-default_uv.png" alt="Street shape">
+        </figure>
 
-            <em>A multi-face street shape.</em>
-			</td>
-          </tr>
-
-          <tr>
-            <td class="twocol_l">
-            <img src="images/tileuv-street-default_uv.png" alt="Street shape"/> </td>
-<td class="twocol_r">
-<pre class="codecga">
+        <div class="example-content">
+<pre class="code-block">
 Street-->
-    texture("builtin:uvtest.png")
+  texture("builtin:uvtest.png")
 </pre>
-            <em>The default texture coordinates.</em>
-			</td>
-          </tr>
+          <p>The default texture coordinates.</p>
+        </div>
+      </div>
 
-          <tr>
-            <td class="twocol_l">
-            <img src="images/tileuv-street-tiled_uv_bad.png" alt="Street shape"/> </td>
-<td class="twocol_r">
-<pre class="codecga">
+      <div class="example-row">
+        <figure class="media media-example">
+          <img src="images/tileuv-street-tiled_uv_bad.png" alt="Street shape">
+        </figure>
+
+        <div class="example-content">
+<pre class="code-block">
 Street-->
-    texture("builtin:uvtest.png")
-    tileUV(0, 20, 10)
+  texture("builtin:uvtest.png")
+  tileUV(0, 20, 10)
 </pre>
-            <em>The tiled texture coordinates. The tile width (in u-direction) is exactly 20 meters and the tile height is exaclty 10 meters. Some tiles are cut.</em>
-			</td>
-          </tr>
+          <p>The tiled texture coordinates. The tile width (in u-direction) is exactly 20 meters and the tile height is exaclty 10 meters. Some tiles are cut.</p>
+        </div>
+      </div>
 
+      <div class="example-row">
+        <figure class="media media-example">
+          <img src="images/tileuv-street-tiled_uv.png" alt="Street shape">
+        </figure>
 
-          <tr>
-            <td class="twocol_l">
-            <img src="images/tileuv-street-tiled_uv.png" alt="Street shape"/> </td>
-<td class="twocol_r">
-<pre class="codecga">
+        <div class="example-content">
+<pre class="code-block">
 Street-->
-    texture("builtin:uvtest.png")
-    tileUV(0, ~20, '0.5)
+  texture("builtin:uvtest.png")
+  tileUV(0, ~20, '0.5)
 </pre>
-            <em>Usage of the ~ and ' operators. The tile width is roughly 20 meters, such that the whole available space is exactly filled, and the tile height is half of the available space sucht that exaclty two tiles fit in.</em>
-			</td>
-          </tr>
-          
-                    
-  </table>
+          <p>Usage of the ~ and ' operators. The tile width is roughly 20 meters, such that the whole available space is exactly filled, and the tile height is half of the available space sucht that exaclty two tiles fit in.</p>
+        </div>
+      </div>
+    </section>
+  </section>
 
-<!-- FOOTER -->
-<p class="foot">Copyright &copy;2008-2025 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
+  <footer class="footer">Copyright &copy;2008-2026 Esri R&amp;D Center Zurich. All rights reserved.</footer>
 
-<!-- END CENTERED CONTENT -->
-
-</div>
+</article>
 </body>
 </html>

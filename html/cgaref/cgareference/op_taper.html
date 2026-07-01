@@ -1,110 +1,116 @@
+<!doctype html>
 <html>
 
 <head>
-    <title>taper Operation</title>
-    <link rel="stylesheet" href="../manual_style.css" type="text/css" />
+	<meta charset="UTF-8">
+	<title>taper Operation</title>
+	<link rel="stylesheet" href="../cgareference_style.css" type="text/css">
 </head>
 
 <body>
-<div class="content">
+<article class="content">
 
-<!-- HEADER (use only on bookchapters) -->
+	<header class="section">
+		<h1>
+			<span class="name">taper</span>
+			<span class="kind">operation</span>
+		</h1>
 
-<table summary="" class="header">
-	<tr>
-		<td align="left" class="helphead_l"><a href="../toc.html"><div class="helplink">&nbsp;</div></a></td>
-		<td align="right" class="helphead_r"></td>
-	</tr>
-</table>
+		<div class="signatures">
+			<div><span class="op">taper</span>(<span class="param">height</span>)</div>
+		</div>
+	</header>
 
-<!-- CONTENT -->
+	<section class="section">
+		<div class="param-list">
+			<div class="param-item">
+				<div class="indent-body">
+					<p><span class="param">height</span> <span class="type-tag">float</span> How many units to extrude.</p>
+				</div>
+			</div>
+		</div>
+	</section>
 
-<h1>taper operation</h1>
-        
-<h2>Syntax</h2>
-        
-<p class="code2">taper(<span class="cga_opparam">height</span>)</p>
-
-<h2>Parameters</h2>
-
-<ul>
-	<li><span class="cga_opparam">height</span> (float)<br>How many units to extrude.</li>
-</ul>
-
-<h2>Description</h2>
-
-<p>Tapers the shape (i.e. forms a pyramid over a polygon). The first polygon of the first mesh in the geometry asset is taken and tapered along the face normal through the the polygon's center of gravity.  The scope orientation is set in the following way:</p> 
-<ul>
-	<li>x-axis direction is kept as much as possible (old x-axis is projected to the face plane)</li>
-	<li>y-axis along the face normal (taper direction)</li>
-	<li>z-axis normal to the two above</li>
-</ul>
-
-<p>The scope's sizes are adjusted to tighly fit the extruded geometry.</p> 
-        
-<p>If <span class="cga_opparam">height</span> is &lt; 0, the scope.sy attribute will be &lt; 0 and the taper will be down-wards.</p> 
-                
-<h3>Component tags</h3>
-
-<table summary="" class="twocol">
-<tr>
-    <td>
-		The operation automatically applies semantic <a href="cga_componentTags.html">component tags</a> to the resulting face components:
-		<table cellspacing="5">
-			<tr><td width="25%"><span class="codelight">"taper.bottom"</span></td><td>Blue: original face.</td></tr>
-			<tr><td><span class="codelight">"taper.side"</span></td><td>Yellow: side faces.</td></tr>
-		</table>
-		<br>
-		For more information on working with component tags, refer to:
+	<section class="section">
+		<p>Tapers the shape (i.e. forms a pyramid over a polygon). The first polygon of the first mesh in the geometry asset is taken and tapered along the face normal through the the polygon's center of gravity. The scope orientation is set in the following way:</p>
 		<ul>
-			<li><a href="cga_componentTags.html#autoTags">Auto-tags</a></li>
-			<li><a href="cga_componentTags.html#tagPropagation">Tag propagation</a></li> 
+			<li>x-axis direction is kept as much as possible (old x-axis is projected to the face plane)</li>
+			<li>y-axis along the face normal (taper direction)</li>
+			<li>z-axis normal to the two above</li>
 		</ul>
-	</td>
-	<td class="twocol_l"><img src="images/autotag-taper.png" alt="autotag-taper"/></td></tr>
-</table>
-                
-<h2>Related</h2>
 
-<ul>
-	<li><a class="normw" href="op_envelope.html">envelope operation</a></li>
-	<li><a class="normw" href="op_extrude.html">extrude operation</a></li>
-	<li><a class="normw" href="op_offset.html">offset operation</a></li>
-	<li><a class="normw" href="op_roofGable.html">roofGable operation</a></li>
-	<li><a class="normw" href="op_roofHip.html">roofHip operation</a></li>
-	<li><a class="normw" href="op_roofPyramid.html">roofPyramid operation</a></li>
-	<li><a class="normw" href="op_roofRidge.html">roofRidge operation</a></li>
-	<li><a class="normw" href="op_roofShed.html">roofShed operation</a></li>
-</ul>
-               
-<h2>Examples</h2>
+		<p>The scope's sizes are adjusted to tighly fit the extruded geometry.</p>
 
-<table summary="" class="twocol">
-	<tr>
-		<td class="twocol_l"><br />
-		<img src="images/taper-a.png" alt="Initial Shape"/></td>
-		<td>
-<em>The initial shape which is a lot (= geometry with 1 face). </em></td>
-	</tr>
+		<p>If <span class="param">height</span> is &lt; 0, the scope.sy attribute will be &lt; 0 and the taper will be down-wards.</p>
 
-	<tr>
-		<td class="twocol_l"><br />
-		<img src="images/taper-b.png" alt="Tapered Shape"/></td>
-		<td class="twocol_r">
-<pre class="codecga">
-Lot -->	taper(10)
-</pre> 
-<em>The tapered shape. </em></td>
-	</tr>
+		<h4>Component tags</h4>
+		<div class="example-row">
+			<figure class="media media-example">
+				<img src="images/autotag-taper.png" alt="autotag-taper">
+			</figure>
 
-</table>
-         
-<!-- FOOTER -->
+			<div>
+				<p>The operation automatically applies semantic <a href="cga_componentTags.html">component tags</a> to the resulting face components:</p>
 
-<p class="foot">Copyright &copy;2008-2025 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
+				<table class="option-table">
+					<tr><td><span class="inlinecode">"taper.bottom"</span></td><td>Blue: original face.</td></tr>
+					<tr><td><span class="inlinecode">"taper.side"</span></td><td>Yellow: side faces.</td></tr>
+				</table>
 
-<!-- END CENTERED CONTENT -->
+				<p>For more information on working with component tags, refer to:</p>
+				<ul>
+					<li><a href="cga_componentTags.html#autoTags">Auto-tags</a></li>
+					<li><a href="cga_componentTags.html#tagPropagation">Tag propagation</a></li>
+				</ul>
+			</div>
+		</div>
+	</section>
 
-</div>
+	<section class="section">
+		<h2>Related</h2>
+		<div class="related">
+			<a class="op" href="op_envelope.html"><span class="related-name">envelope</span><span class="related-kind">operation</span></a>
+			<a class="op" href="op_extrude.html"><span class="related-name">extrude</span><span class="related-kind">operation</span></a>
+			<a class="op" href="op_offset.html"><span class="related-name">offset</span><span class="related-kind">operation</span></a>
+			<a class="op" href="op_roofGable.html"><span class="related-name">roofGable</span><span class="related-kind">operation</span></a>
+			<a class="op" href="op_roofHip.html"><span class="related-name">roofHip</span><span class="related-kind">operation</span></a>
+			<a class="op" href="op_roofPyramid.html"><span class="related-name">roofPyramid</span><span class="related-kind">operation</span></a>
+			<a class="op" href="op_roofRidge.html"><span class="related-name">roofRidge</span><span class="related-kind">operation</span></a>
+			<a class="op" href="op_roofShed.html"><span class="related-name">roofShed</span><span class="related-kind">operation</span></a>
+		</div>
+	</section>
+
+	<section class="section">
+		<h2>Examples</h2>
+
+		<section class="example">
+			<div class="example-row">
+				<figure class="media media-example">
+					<img src="images/taper-a.png" alt="Initial Shape">
+				</figure>
+
+				<div class="example-content">
+					<p>The initial shape which is a lot (= geometry with 1 face). </p>
+				</div>
+			</div>
+
+			<div class="example-row">
+				<figure class="media media-example">
+					<img src="images/taper-b.png" alt="Tapered Shape">
+				</figure>
+
+				<div class="example-content">
+<pre class="code-block">
+Lot --> taper(10)
+</pre>
+					<p>The tapered shape. </p>
+				</div>
+			</div>
+		</section>
+	</section>
+
+	<footer class="footer">Copyright &copy;2008-2026 Esri R&amp;D Center Zurich. All rights reserved.</footer>
+
+</article>
 </body>
 </html>

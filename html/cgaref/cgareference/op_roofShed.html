@@ -1,149 +1,159 @@
+<!doctype html>
 <html>
 
 <head>
-    <title>roofShed Operation</title>
-    <link rel="stylesheet" href="../manual_style.css" type="text/css" />
+	<meta charset="UTF-8">
+	<title>roofShed operation</title>
+	<link rel="stylesheet" href="../cgareference_style.css" type="text/css">
 </head>
 
 <body>
-<div class="content">
+<article class="content">
 
-<table summary="" class="header">
-    <tr>
-        <td align="left" class="helphead_l"><a href="../toc.html"><div class="helplink">&nbsp;</div></a></td>
-        <td align="right" class="helphead_r"></td>
-    </tr>
-</table>
+	<header class="section">
+		<h1>
+			<span class="name">roofShed</span>
+			<span class="kind">operation</span>
+		</h1>
 
-<!-- CONTENT -->
+		<div class="signatures">
+			<div><span class="op">roofShed</span>(<span class="param">angle</span>)</div>
+			<div><span class="op">roofShed</span>(<span class="param">angle</span>, <span class="param">index</span>)</div>
+			<div><span class="op">roofShed</span>(<span class="param">valueType</span>, <span class="param">value</span>)</div>
+			<div><span class="op">roofShed</span>(<span class="param">valueType</span>, <span class="param">value</span>, <span class="param">index</span>)</div>
+		</div>
+	</header>
 
-<h1>roofShed operation</h1>
+	<section class="section">
+		<div class="param-list">
+			<div class="param-item">
+				<div class="indent-body">
+					<p><span class="param">valueType</span> <span class="type-tag">selector</span> <span class="inlinecode">{ byAngle | byHeight }</span> Type of roof generation.</p>
+				</div>
+			</div>
 
-<h2>Syntax</h2>
+			<div class="param-item">
+				<div class="indent-body">
+					<p><span class="param">value</span> <span class="type-tag">float</span> Angle or height of the roof-planes as specified by <span class="param">valueType</span>.</p>
+				</div>
+			</div>
 
-<p class="code2">roofShed(<span class="cga_opparam">angle</span>)</p>
-<p class="code2">roofShed(<span class="cga_opparam">angle, index</span>)</p>
-<p class="code2">roofShed(<span class="cga_opparam">valueType, value</span>)</p>
-<p class="code2">roofShed(<span class="cga_opparam">valueType, value, index</span>)</p>
+			<div class="param-item">
+				<div class="indent-body">
+					<p><span class="param">angle</span> <span class="type-tag">float</span> Angle of the roof plane (generation <span class="inlinecode">byAngle</span>).</p>
+				</div>
+			</div>
 
-<h2>Parameters</h2>
-<ul>
-	<li><span class="cga_opparam">valueType</span> (selector)
-	<table cellspacing="5">
-		<tr><td width="50%"><span class="codelight">byAngle, byHeight</span></td><td>Type of roof generation</td></tr>
-	</table>
-	</li>
-	<li><span class="cga_opparam">value</span> (float)<br>Angle or height of the roof-planes as specified by <span class="cga_opparam">valueType</span>.</li>
-    <li><span class="cga_opparam">angle</span> (float)<br>Angle of the roof plane (generation <span class="codelight">byAngle).</li>
-    <li><span class="cga_opparam">index</span> (float)<br>Edge index (thus integral value) to specify the orientation of the shed roof.
-</ul>
-    
-<h2>Description</h2>
+			<div class="param-item">
+				<div class="indent-body">
+					<p><span class="param">index</span> <span class="type-tag">float</span> Edge index (thus integral value) to specify the orientation of the shed roof.</p>
+				</div>
+			</div>
+		</div>
+	</section>
 
-<p>The roofShed operation builds a shed roof perpendicular to each face of the current shape's geometry. At edge <span class="cga_opparam">index</span> (default value 0), a plane is generated with a given angle or height wrt. 
-the polygon plane.</p>
+	<section class="section">
+		<p>The <span class="op">roofShed</span> operation builds a shed roof perpendicular to each face of the current shape's geometry. At edge <span class="param">index</span> (default value 0), a plane is generated with a given angle or height wrt. the polygon plane.</p>
 
-<p>If <span class="cga_opparam">index</span> is set, the roof plane is oriented to the specified edge.  
+		<p>If <span class="param">index</span> is set, the roof plane is oriented to the specified edge.</p>
 
-<p class="notes">The connectivity of the roof mesh is optimized for trim plane
-generation to cut bricks inserted into the roof planes (see examples
-below).</p>
+		<div class="note">The connectivity of the roof mesh is optimized for trim plane generation to cut bricks inserted into the roof planes (see examples below).</div>
 
-<h3>Scope</h3>
+		<h4>Scope</h4>
 
-<p class="text">The scope orientation is set in the following way:</p> 
-<ul>
-	<li>x-axis direction is kept as much as possible (old x-axis is projected to the plane of the first face)</li>
-	<li>y-axis along the face normal of the first face</li>
-	<li>z-axis normal to the two above</li>
-</ul>
-
-<p>The scope's sizes are adjusted to tighly fit the extruded geometry.</p>
-
-<h3>Component tags</h3>
-
-<table summary="" class="twocol">
-<tr>
-    <td class="twocol_r">
-		The operation automatically applies semantic <a href="cga_componentTags.html">component tags</a> to the resulting face components:
-		<table cellspacing="5">
-			<tr><td width="25%"><span class="codelight">"roof.bottom"</span></td><td>Blue: original face.</td></tr>
-			<tr><td><span class="codelight">"roof.side.outer"</span></td><td>Yellow: side faces.</td></tr>
-			<tr><td><span class="codelight">"roof.side.inner"</span></td><td>Red: side faces from holes.</td></tr>
-			<tr><td><span class="codelight">"roof.top"</span></td><td>Green: roof faces.</p></td></tr>
-		</table>
-		<br>
-		For more information on working with component tags, refer to:
+		<p>The scope orientation is set in the following way:</p>
 		<ul>
-			<li><a href="cga_componentTags.html#autoTags">Auto-tags</a></li>
-			<li><a href="cga_componentTags.html#tagPropagation">Tag propagation</a></li> 
+			<li>x-axis direction is kept as much as possible (old x-axis is projected to the plane of the first face)</li>
+			<li>y-axis along the face normal of the first face</li>
+			<li>z-axis normal to the two above</li>
 		</ul>
-	</td>
-	<td class="twocol_l"><img src="images/autotag-roofShed.png" alt="autotag-roofShed"/></td></tr>
-</table>
 
+		<p>The scope's sizes are adjusted to tighly fit the extruded geometry.</p>
 
-<h2>Related</h2>
-<ul>
-    <li><a class="normw" href="op_envelope.html">envelope operation</a> </li>
-    <li><a class="normw" href="op_extrude.html"> extrude operation</a></li>
-    <li><a class="normw" href="op_offset.html"> offset operation</a></li>
-    <li><a class="normw" href="op_roofGable.html"> roofGable operation</a></li>
-    <li><a class="normw" href="op_roofHip.html"> roofHip operation</a></li>
-    <li><a class="normw" href="op_roofPyramid.html"> roofPyramid operation</a></li>
-	<li><a class="normw" href="op_roofRidge.html">roofRidge operation</a></li>
-    <li><a class="normw" href="op_taper.html"> taper operation</a></li> 
-</ul>
+		<h4>Component tags</h4>
 
-<h2>Examples</h2>
+		<div class="example-row">
+			<figure class="media media-example">
+				<img src="images/autotag-roofShed.png" alt="autotag-roofShed">
+			</figure>
 
-<h3>Simple Shed Roof</h3>
+			<div>
+				<p>The operation automatically applies semantic <a href="cga_componentTags.html">component tags</a> to the resulting face components:</p>
 
-A basic shed roof is generated on top of an extruded L-lot.<table summary="" class="twocol">
-<tr>
-<td class="twocol_l">
-        
-<p class="piccentered"><img src="images/roofShed_L.png"></p>
-                
-<td class="twocol_r">
+				<table class="option-table">
+					<tr><td><span class="inlinecode">"roof.bottom"</span></td><td>Blue: original face.</td></tr>
+					<tr><td><span class="inlinecode">"roof.side.outer"</span></td><td>Yellow: side faces.</td></tr>
+					<tr><td><span class="inlinecode">"roof.side.inner"</span></td><td>Red: side faces from holes.</td></tr>
+					<tr><td><span class="inlinecode">"roof.top"</span></td><td>Green: roof faces.</td></tr>
+				</table>
 
-<pre class="codecga">
+				<p>For more information on working with component tags, refer to:</p>
+				<ul>
+					<li><a href="cga_componentTags.html#autoTags">Auto-tags</a></li>
+					<li><a href="cga_componentTags.html#tagPropagation">Tag propagation</a></li>
+				</ul>
+			</div>
+		</div>
+	</section>
+
+	<section class="section">
+		<h2>Related</h2>
+		<div class="related">
+			<a class="op" href="op_envelope.html"><span class="related-name">envelope</span><span class="related-kind">operation</span></a>
+			<a class="op" href="op_extrude.html"><span class="related-name">extrude</span><span class="related-kind">operation</span></a>
+			<a class="op" href="op_offset.html"><span class="related-name">offset</span><span class="related-kind">operation</span></a>
+			<a class="op" href="op_roofGable.html"><span class="related-name">roofGable</span><span class="related-kind">operation</span></a>
+			<a class="op" href="op_roofHip.html"><span class="related-name">roofHip</span><span class="related-kind">operation</span></a>
+			<a class="op" href="op_roofPyramid.html"><span class="related-name">roofPyramid</span><span class="related-kind">operation</span></a>
+			<a class="op" href="op_roofRidge.html"><span class="related-name">roofRidge</span><span class="related-kind">operation</span></a>
+			<a class="op" href="op_taper.html"><span class="related-name">taper</span><span class="related-kind">operation</span></a>
+		</div>
+	</section>
+
+	<section class="section">
+		<h2>Examples</h2>
+
+		<section class="example">
+			<h3>Simple Shed Roof</h3>
+
+			<p>A basic shed roof is generated on top of an extruded L-lot.</p>
+
+			<div class="example-row">
+				<figure class="media media-example">
+					<img src="images/roofShed_L.png" alt="">
+				</figure>
+
+				<div class="example-content">
+<pre class="code-block">
 Lot  --> extrude(10) Mass
 Mass --> comp(f) { top: Top | all: X }
 Top  --> roofShed(10, 3) Roof
 </pre>
- 
-<em>A shed roof with roof slope 10 degrees is built on top of an extruded L-lot.
-The edge index is set to 3. Note the roof orientation and the setting of the pivot and scope. </em>
 
-</td>
+					<p>A shed roof with roof slope 10 degrees is built on top of an extruded L-lot. The edge index is set to 3. Note the roof orientation and the setting of the pivot and scope.</p>
+				</div>
+			</div>
 
-</tr>
+			<div class="example-row">
+				<figure class="media media-example">
+					<img src="images/roofShed_L_tp.png" alt="">
+				</figure>
 
-<tr>
-<td class="twocol_l">
-        
-<p class="piccentered"><img src="images/roofShed_L_tp.png"></p>
-        
-<td class="twocol_r">
-        
-<pre class="codecga">
+				<div class="example-content">
+<pre class="code-block">
 Roof --> comp(f) { all : X }
 </pre>
-  
-<em>After a component split, roof side faces contain <a class="normw" href="op_comp.html#trimPlanes">trim planes</a> to cut bricks on insertion. </em>
 
-</td>
+					<p>After a component split, roof side faces contain <a href="op_comp.html#trimPlanes">trim planes</a> to cut bricks on insertion.</p>
+				</div>
+			</div>
 
-</tr>
+			<p>There is exactly one side roof face per<span class="inlinecode">Top</span> shape edge.</p>
+		</section>
+	</section>
 
-</table>
+	<footer class="footer">Copyright &copy;2008-2026 Esri R&amp;D Center Zurich. All rights reserved.</footer>
 
-<p class="info"> There is exactly one side roof face per<span class="code">Top</span> shape edge. </p> 
-
-<!-- FOOTER -->
-<p class="foot">Copyright &copy;2008-2025 Esri R&amp;D Center Zurich. All rights reserved.</p>                  
-
-</div>
+</article>
 </body>
 </html>

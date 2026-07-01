@@ -1,6 +1,7 @@
 var searchData=
 [
   ['label',['LABEL',['../namespaceprtx_1_1_annotations.html#a59e058e6a632b4c0d3da0afab37a4e0a',1,'prtx::Annotations']]],
+  ['layer',['LAYER',['../classprt_1_1_callbacks.html#acdbaa7c4f8999d7ed2def7ff6efdef51a5e3bc1d94fd45127cf35ecff31c7accd',1,'prt::Callbacks']]],
   ['layer_5fx',['LAYER_X',['../classprt_1_1_callbacks.html#a5d293cfb6f32162d77094834208137e3a0b211f3460354aff804a13dd23639311',1,'prt::Callbacks']]],
   ['layer_5fy',['LAYER_Y',['../classprt_1_1_callbacks.html#a5d293cfb6f32162d77094834208137e3a8e1b51804d289f4c3d28071f40f15668',1,'prt::Callbacks']]],
   ['layer_5fz',['LAYER_Z',['../classprt_1_1_callbacks.html#a5d293cfb6f32162d77094834208137e3a82b6afc38f8ecb7030d065102888a6b5',1,'prt::Callbacks']]],

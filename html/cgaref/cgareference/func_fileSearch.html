@@ -1,269 +1,295 @@
+<!doctype html>
 <html>
 
 <head>
-    <title>fileSearch / filesSearch Functions</title>
-    <link rel="stylesheet" href="../manual_style.css" type="text/css" />
+    <meta charset="UTF-8">
+    <title>fileSearch / filesSearch functions</title>
+    <link rel="stylesheet" href="../cgareference_style.css" type="text/css">
+    <style>
+        .filesearch-example-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: inherit;
+        }
+
+        .filesearch-example-table td {
+            padding: 10px 12px;
+            border-top: 1px solid var(--border);
+            vertical-align: top;
+            font-size: inherit;
+        }
+
+        .filesearch-example-table tr:first-child td {
+            border-top: none;
+        }
+
+        .filesearch-example-table td:first-child {
+            width: 50%;
+            background: var(--surface-subtle);
+        }
+
+        .filesearch-workspace {
+            margin: 1rem 0 0;
+            text-align: center;
+        }
+
+        .filesearch-workspace img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
 </head>
 
 <body>
-<div class="content">
+<article class="content">
 
-<!-- HEADER (use only on bookchapters) -->
+    <header class="section">
+        <h1>
+            <span class="name">fileSearch / filesSearch</span>
+            <span class="kind">functions</span>
+        </h1>
 
-<table summary="" class="header">
-	<tr>
-		<td align="left" class="helphead_l"><a href="../toc.html"><div class="helplink">&nbsp;</div></a></td>
-		<td align="right" class="helphead_r"></td>
-	</tr>
-</table>
+        <div class="signatures">
+            <div><span class="type-tag">string</span> <span class="func">fileSearch</span>(<span class="param">searchQuery</span>)</div>
+            <div><span class="type-tag">string[]</span> <span class="func">filesSearch</span>(<span class="param">searchQuery</span>)</div>
+        </div>
+    </header>
 
-<!-- CONTENT -->
+    <section class="section">
+        <div class="param-list">
+            <div class="param-item">
+                <div class="indent-body">
+                    <p><span class="param">searchQuery</span> <span class="type-tag">string</span> Search query to apply on all files in the workspace. See below for details.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<h1>fileSearch / filesSearch functions</h1>
+    <section class="section">
+        <div class="return-list">
+            <div class="return-item">
+                <div class="indent-body">
+                        <p>Returns an alphabetically sorted list with all files in the workspace matching <span class="param">searchQuery</span>.</p>
+                    <p><span class="func">fileSearch</span> returns a string list where each entry is terminated with <span class="inlinecode">;</span>. <span class="func">filesSearch</span> returns a string array.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<h2>Syntax</h2>
+    <section class="section">
+        <p>The <span class="func">fileSearch</span> and <span class="func">filesSearch</span> functions list all files in the workspace whose absolute path matches <span class="param">searchQuery</span>. Search queries are relative to the current project, that is, the project in which the current rule file resides, except if <span class="param">searchQuery</span> is based on an absolute workspace path, meaning it starts with <span class="inlinecode">/</span> or a wildcard such as <span class="inlinecode">*</span> or <span class="inlinecode">?</span>.</p>
 
-<p class="code2"><span class="codelight">string</span>&nbsp&nbsp&nbspfileSearch(<span class="cga_opparam">searchQuery</span>)</p>
-
-<p class="code2"><span class="codelight">string[]</span>&nbspfilesSearch(<span class="cga_opparam">searchQuery</span>)</p>
-        
-<h2>Parameters</h2>
-
-<ul>
-	<li><span class="cga_opparam">searchQuery</span> (string)<br>Search query to apply on all files in the workspace. See below for details.</li>
-</ul>
-      
-<h2>Returns</h2>
-
-<p>An alphabetically sorted list with all files in the workspace matching the <span class="cga_opparam">searchQuery</span>.</p>
-
-<p><span class="code_std">fileSearch</span> returns a string list - each entry is terminated with a &quot;;&quot; (semicolon).<br><span class="code_std">filesSearch</span> returns a string array.</p>
-        
-<h2>Description</h2>
-
-<p>The <span class="cga_keyword">fileSearch</span> and <span class="cga_keyword">filesSearch</span> functions list all files in the workspace which match their absolute path with the <span class="cga_opparam">searchQuery</span>. Search queries are relative to the current project (i.e. the project in which the current rule file resides) except if the <span class="cga_opparam">searchQuery</span> is based on an absolute workspace path (i.e. starts with a slash (&quot;/&quot;) or a wildcard (* or ?). Pseudocode of the matching algorithm:</p>
-
-<pre>
+        <p>Pseudocode of the matching algorithm:</p>
+        <pre class="code-block">
 result = ""
 for all open projects in workspace :
    if project == current project:
-	  result +=  all matching files in project, relative to assets folder
-	  result +=  all matching files in project, relative to project folder
+      result += all matching files in project, relative to assets folder
+      result += all matching files in project, relative to project folder
    fi
-   
+
    result += all matching files in project, relative to workspace root
    sort result
 end
 </pre>
+    </section>
 
-<h3>Search Queries</h3>
+    <section class="section">
+        <h3>Search Queries</h3>
+        <p>CityEngine supports advanced search queries with wildcards, regular expressions, and file properties such as file type. All files in the workspace are filtered with the query and the absolute workspace path is returned. Whitespace means AND, so queries with file paths containing a space character need special treatment.</p>
 
-<p>The CityEngine features advanced search queries supporting wildcards, regular expressions and file properties such as filetype. All files in the workspace are filtered with the query and the absolute workspace path is returned. Whitespace means AND; queries with filepaths containing a space character need special treatment.
- 
-<h4>Wildcards</h4>
+        <h4>Wildcards</h4>
+        <p>The common wildcard characters <span class="inlinecode">*</span> and <span class="inlinecode">?</span> are supported. The asterisk substitutes any series of characters, including none, and the question mark substitutes any single character.</p>
 
-<p>The common wildcards characters '*' (asterisk character) and '?' (question mark) are supported. The asterisk substitutes for any series of characters (including no characters), and the question mark substitutes any single character.</p>
- 
-<h4>Regular Expressions</h4>
+        <h4>Regular Expressions</h4>
+        <p>Regular expressions allow complex string pattern descriptions. A comprehensive introduction to regular expressions is out of scope here. Refer to other sources such as <a href="http://en.wikipedia.org/wiki/Regular_expression" target="_blank">Wikipedia</a> or the <a href="http://www.opengroup.org/onlinepubs/007908799/xbd/re.html" target="_blank">Open Group specification</a>.</p>
+        <p>Regular expressions start with <span class="inlinecode">$</span>. Always put <span class="inlinecode">$</span> as the first character if <span class="param">searchQuery</span> is a regular expression. Note that with regular expressions the semantics of <span class="inlinecode">*</span> and <span class="inlinecode">?</span> change. For example, <span class="inlinecode">*</span> matches the preceding element zero or more times, therefore use <span class="inlinecode">.*</span> to emulate the usual match-anything behavior.</p>
 
-<p>Regular expressions allow for complex string patterns descriptions. A comprehensive introduction to regular expressions is out of scope for this manual, please refer to other sources such as <a class="normw" href="http://en.wikipedia.org/wiki/Regular_expression" target="_blank">Wikipedia</a> or the specification from the <a class="normw" href="http://www.opengroup.org/onlinepubs/007908799/xbd/re.html" target="_blank">Open Group</a>.<br>
-Regular expressions start with '$'. Always put the '$' as the FIRST character if your <span class="cga_opparam">searchQuery</span> is a regular expression! Note that with regular expressions, the semantics of the wildcards "*" and "?" changes. "*" matches the preceding element zero or more times, therefore use ".*" to emulate the "match anything" behaviour.</p>
+        <h4>Whitespace Characters</h4>
+        <p>Because whitespace means AND, search queries containing an actual space need to be enclosed in single quotes.</p>
+        <pre class="code-block">filesSearch("'facade pictures/greek style *.png'")</pre>
+        <p>Alternatively, spaces can be escaped in regular expressions with <span class="inlinecode">\s</span> or <span class="inlinecode">\x20</span>:</p>
+        <pre class="code-block">filesSearch("$facade\\spictures/greek\\sstyle\\s.*.png")</pre>
+        <div class="comment-box">Note the double backslashes. This is needed because the CGA compiler also interprets the <span class="inlinecode">\</span> character during compilation.</div>
 
-<h4>Whitespace Characters</h4>
-Because whitespace means AND, searchqueries containing an actual space need to be put into single quotes.
-For example
-<pre class="code3">filesSearch("'facade pictures/greek style *.png'")</pre> 
-Alternatively, spaces can be escaped in regexps with "\s" or "\x20":
-<pre class="code3">filesSearch("$facade\\spictures/greek\\sstyle\\s.*.png")</pre> 
-<em>Note the double backslashes - this is needed because the CGA compiler also interpretes the '\' character on compilation.
-</em> 
-<h4>File Properties</h4>
+        <h4>File Properties</h4>
+        <p>The following file properties can be queried:</p>
+        <table class="option-table">
+            <tbody>
+                <tr><td><span class="inlinecode">Name</span></td><td>Filename</td></tr>
+                <tr><td><span class="inlinecode">Ext</span></td><td>File extension</td></tr>
+                <tr><td><span class="inlinecode">Project</span></td><td>Project name</td></tr>
+                <tr><td><span class="inlinecode">Path</span></td><td>File path</td></tr>
+            </tbody>
+        </table>
+    </section>
 
-<p>Following file properties can be querried:
-<ul>
-	<li><strong>Name</strong>: Filename</li>
-	<li><strong>Ext</strong>: File extension</li>
-	<li><strong>Project</strong>: Project name</li>
-	<li><strong>Path</strong>: Filepath</li>
-</ul>
-</p>  
-            
-<h2>Related</h2>
-<ul>
-	<li><a href="func_splitString.html"><span class="code_std">splitString</span></a> function</li>
-</ul>
+    <section class="section">
+        <h2>Related</h2>
+        <div class="related">
+            <a class="func" href="func_splitString.html"><span class="related-name">splitString</span><span class="related-kind">function</span></a>
+        </div>
+    </section>
 
-<h2>Examples</h2>
+    <section class="section">
+        <h2>Examples</h2>
+        <p>In the following examples, a basic workspace with two projects and a few files is used. The examples are in <span class="inlinecode">rule.cga</span>, so <span class="inlinecode">MyProject</span> is the current project.</p>
 
-In the following examples, we use a basic workspace with two projects and a few files. The examples are in rule.cga, i.e. MyProject is the current project.
+        <figure class="filesearch-workspace">
+            <img src="images/fileSearchWorkspace.png" alt="fileSearch workspace overview">
+        </figure>
 
-<center>
-<img src="images/fileSearchWorkspace.png"></img>
-</center>
+        <section class="example">
+            <h3>Wildcards</h3>
+            <table class="filesearch-example-table">
+                <tbody>
+                    <tr>
+                        <td><pre class="code-block">filesSearch("*.png")</pre></td>
+                        <td><pre class="code-block">[/MyProject/assets/textures/1.png,
+/MyProject/assets/textures/2.png,
+/MyProject/assets/textures/4.png,
+/MyProject/assets/tower.png,
+/OtherProject/assets/glass.png]</pre></td>
+                    </tr>
+                </tbody>
+            </table>
+            <p><em>Because the search query starts with an asterisk, all projects are included in the search.</em></p>
 
-<h3>Wildcards</h3>
+            <table class="filesearch-example-table">
+                <tbody>
+                    <tr>
+                        <td><pre class="code-block">filesSearch("?.png")</pre></td>
+                        <td><pre class="code-block">[]</pre></td>
+                    </tr>
+                </tbody>
+            </table>
+            <p><em>There is no png file with a 1-character name in the root directory or the asset directory of the current project.</em></p>
 
-<table class="twocol" cellspacing=5>
-<tr>
-	<td width="50%"><pre class="code3">filesSearch("*.png")</pre></td>
-	<td><pre class="code3">
-[/MyProject/assets/textures/1.png,
- /MyProject/assets/textures/2.png,
- /MyProject/assets/textures/4.png,
- /MyProject/assets/tower.png,
- /OtherProject/assets/glass.png]</pre></td>
-</tr>
-</table>
+            <table class="filesearch-example-table">
+                <tbody>
+                    <tr>
+                        <td><pre class="code-block">filesSearch("*/?.png")</pre></td>
+                        <td><pre class="code-block">[/MyProject/assets/textures/1.png,
+/MyProject/assets/textures/2.png,
+/MyProject/assets/textures/4.png]</pre></td>
+                    </tr>
+                </tbody>
+            </table>
+            <p><em>Because of the leading asterisk, all folders are searched for a png file with a 1-character name.</em></p>
 
-<i>Because the searchQuery starts with an asterisk, all projects are included in the search.</i>
+            <table class="filesearch-example-table">
+                <tbody>
+                    <tr>
+                        <td><pre class="code-block">filesSearch("textures/*")</pre></td>
+                        <td><pre class="code-block">[/MyProject/assets/textures/1.png,
+/MyProject/assets/textures/2.png,
+/MyProject/assets/textures/4.png]</pre></td>
+                    </tr>
+                </tbody>
+            </table>
+            <p><em>All files in the <span class="inlinecode">textures</span> subfolder of the asset folder in the current project match.</em></p>
+        </section>
 
-<br><br>
+        <section class="example">
+            <h3>Regular Expression to Select Specific Characters</h3>
+            <table class="filesearch-example-table">
+                <tbody>
+                    <tr>
+                        <td><pre class="code-block">filesSearch("$[12].png")</pre></td>
+                        <td><pre class="code-block">[]</pre></td>
+                    </tr>
+                </tbody>
+            </table>
+            <p><em>There is no png file with name <span class="inlinecode">1</span> or <span class="inlinecode">2</span> in the root directory or the asset directory of the current project.</em></p>
+        </section>
 
-<table class="twocol" cellspacing=5>
-<tr>
-	<td width="50%"><pre class="code3">filesSearch("?.png")</pre></td>
-	<td><pre class="code3">[]</pre></td>
-</tr>
-</table>
+        <section class="example">
+            <h3>Regular Expression to Select Specific Characters, Part 2</h3>
+            <table class="filesearch-example-table">
+                <tbody>
+                    <tr>
+                        <td><pre class="code-block">filesSearch("$textures/[12].png")</pre></td>
+                        <td><pre class="code-block">[/MyProject/assets/textures/1.png,
+/MyProject/assets/textures/2.png]</pre></td>
+                    </tr>
+                </tbody>
+            </table>
+            <p><em>All png files with name <span class="inlinecode">1</span> or <span class="inlinecode">2</span> in the <span class="inlinecode">textures</span> subfolder of the asset folder in the current project match.</em></p>
+        </section>
 
-<i>There is no png file with a 1-character-name in the root directory or the asset directory of the current project.</i>
+        <section class="example">
+            <h3>Regular Expression Plus Wildcard</h3>
+            <table class="filesearch-example-table">
+                <tbody>
+                    <tr>
+                        <td><pre class="code-block">filesSearch("$.*/[12].png")</pre></td>
+                        <td><pre class="code-block">[/MyProject/assets/textures/1.png,
+/MyProject/assets/textures/2.png]</pre></td>
+                    </tr>
+                </tbody>
+            </table>
+            <p><em>All png files with name <span class="inlinecode">1</span> or <span class="inlinecode">2</span> match. Note the period before the asterisk.</em></p>
+        </section>
 
-<br><br>
+        <section class="example">
+            <h3>Regular Expression to Select a Range of Characters</h3>
+            <table class="filesearch-example-table">
+                <tbody>
+                    <tr>
+                        <td><pre class="code-block">filesSearch("$textures/[2-5].png")</pre></td>
+                        <td><pre class="code-block">[/MyProject/assets/textures/2.png,
+/MyProject/assets/textures/4.png]</pre></td>
+                    </tr>
+                </tbody>
+            </table>
+            <p><em>All png files with name <span class="inlinecode">2</span>, <span class="inlinecode">3</span>, <span class="inlinecode">4</span>, or <span class="inlinecode">5</span> in the <span class="inlinecode">textures</span> subfolder of the asset folder in the current project match.</em></p>
+        </section>
 
-<table class="twocol" cellspacing=5>
-<tr>
-	<td width="50%"><pre class="code3">filesSearch("*/?.png")</pre></td>
-	<td><pre class="code3">
-[/MyProject/assets/textures/1.png;
- /MyProject/assets/textures/2.png,
- /MyProject/assets/textures/4.png]</pre></td>
-</tr>
-</table>
+        <section class="example">
+            <h3>Regular Expression Plus OR</h3>
+            <table class="filesearch-example-table">
+                <tbody>
+                    <tr>
+                        <td><pre class="code-block">filesSearch("$textures/[12].png|.*.obj")</pre></td>
+                        <td><pre class="code-block">[/MyProject/assets/textures/1.png,
+/MyProject/assets/textures/2.png,
+/MyProject/assets/tower.obj,
+/OtherProject/assets/brick.obj]</pre></td>
+                    </tr>
+                </tbody>
+            </table>
+            <p><em>All png files with name <span class="inlinecode">1</span> or <span class="inlinecode">2</span> in the <span class="inlinecode">textures</span> subfolder of the asset folder in the current project and all obj files in the workspace match.</em></p>
+        </section>
 
-<i>Because of the leading asterisk, all folders are searched for a png file with a 1-character-name.</i>
+        <section class="example">
+            <h3>File Properties</h3>
+            <table class="filesearch-example-table">
+                <tbody>
+                    <tr>
+                        <td><pre class="code-block">filesSearch("Name=1.png")</pre></td>
+                        <td><pre class="code-block">[/MyProject/assets/textures/1.png]</pre></td>
+                    </tr>
+                </tbody>
+            </table>
+            <p><em>Only one file matches the name exactly.</em></p>
+        </section>
 
-<br><br>
+        <section class="example">
+            <h3>File Properties, AND</h3>
+            <table class="filesearch-example-table">
+                <tbody>
+                    <tr>
+                        <td><pre class="code-block">filesSearch("Project=OtherProject Ext=obj")</pre></td>
+                        <td><pre class="code-block">[/OtherProject/assets/brick.obj]</pre></td>
+                    </tr>
+                </tbody>
+            </table>
+            <p><em>Using whitespace, two or more queries can be combined. Here, a file must match both the project name and the file extension.</em></p>
+        </section>
+    </section>
 
-<table class="twocol" cellspacing=5>
-<tr>
-	<td width="50%"><pre class="code3">filesSearch("textures/*")</pre></td>
-	<td><pre class="code3">
-[/MyProject/assets/textures/1.png,
- /MyProject/assets/textures/2.png,
- /MyProject/assets/textures/4.png]</pre></td>
-</tr>
-</table>
+    <footer class="footer">Copyright &copy;2008-2026 Esri R&amp;D Center Zurich. All rights reserved.</footer>
 
-<i>All files in the "textures" subfolder of the asset folder in the current project match.</i>
-
-<br><br>
-
-<h3>Regular Expression to select specific characters</h3>
-
-<table class="twocol" cellspacing=5>
-<tr>
-	<td width="50%"><pre class="code3">filesSearch("$[12].png")</pre></td>
-	<td><pre class="code3">[]</pre></td>
-</tr>
-</table>
-
-<i>There is no png file with name "1" or "2" in the root directory or the asset directory of the current project.</i>
-
-<br><br>
-
-<h3>Regular Expression to select specific characters, part 2</h3>
-
-<table class="twocol" cellspacing=5>
-<tr>
-	<td width="50%"><pre class="code3">filesSearch("$textures/[12].png")</pre></td>
-	<td><pre class="code3">
-[/MyProject/assets/textures/1.png,
- /MyProject/assets/textures/2.png]</pre></td>
-</tr>
-</table>
-
-<i>All png files with name "1" or "2" in the "textures" subfolder of the asset folder in the current project match.</i>
-
-<br><br>
-
-<h3>Regular Expression + Wildcard</h3>
-
-<table class="twocol" cellspacing=5>
-<tr>
-	<td width="50%"><pre class="code3">filesSearch("$.*/[12].png")</pre></td>
-	<td><pre class="code3">
-[/MyProject/assets/textures/1.png,
- /MyProject/assets/textures/2.png]</pre></td>
-</tr>
-</table>
-
-<i>All png files with name "1" or "2" match. Note the period before the asterisk!</i>
-
-<br><br>
-
-<h3>Regular Expression to select a range of characters</h3>
-
-<table class="twocol" cellspacing=5>
-<tr>
-	<td width="50%"><pre class="code3">filesSearch("$textures/[2-5].png")</pre></td>
-	<td><pre class="code3">
-[/MyProject/assets/textures/2.png,
- /MyProject/assets/textures/4.png]</pre></td>
-</tr>
-</table>
-
-<i>All png files with name "2", "3, "4" or "5" in the "textures" subfolder of the asset folder in the current project match.</i>
-
-<br><br>
-
-<h3>Regular Expression + OR</h3>
-
-<table class="twocol" cellspacing=5>
-<tr>
-	<td width="50%"><pre class="code3">filesSearch("$textures/[12].png|.*.obj")</pre></td>
-	<td><pre class="code3">
-[/MyProject/assets/textures/1.png,
- /MyProject/assets/textures/2.png,
- /MyProject/assets/tower.obj,
- /OtherProject/assets/brick.obj]</pre></td>
-</tr>
-</table>
-
-<i>All png files with name "1" or "2" in the "textures" subfolder of the asset folder in the current project and all obj files in the workspace match.</i>
-
-<br><br>
-
-<h3>File Properties</h3>
-
-<table class="twocol" cellspacing=5>
-<tr>
-	<td width="50%"><pre class="code3">filesSearch("Name=1.png")</pre></td>
-	<td><pre class="code3">
-[/MyProject/assets/textures/1.png]</pre></td>
-</tr>
-</table>
-
-<i>Only one file matches the name excatly.</i>
-
-<br><br>
-
-<h3>File Properties, AND</h3>
-
-<table class="twocol" cellspacing=5>
-<tr>
-	<td width="50%"><pre class="code3">filesSearch("Project=OtherProject Ext=obj")</pre></td>
-	<td><pre class="code3">
-[/OtherProject/assets/brick.obj]</pre></td>
-</tr>
-</table>
-
-<i>Using whitespace, two or more queries can be combined. Here, a file must match both the project name and the file extension.</i>
-
-<!-- FOOTER -->
-<p class="foot">Copyright &copy;2008-2025 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
-
-<!-- END CENTERED CONTENT -->
-
-</div>
+</article>
 </body>
 </html>

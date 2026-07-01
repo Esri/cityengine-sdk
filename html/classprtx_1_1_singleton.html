@@ -23,7 +23,7 @@
   <td id="projectlogo"><img alt="Logo" src="esri_prt_55px.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ArcGIS Procedural Runtime
-   &#160;<span id="projectnumber">3.3.11669</span>
+   &#160;<span id="projectnumber">3.4.12206</span>
    </div>
   </td>
  </tr>
@@ -80,10 +80,7 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a2b444deb4d7b9ab9e928967d3634ddd8"><td class="memItemLeft" align="right" valign="top">static S *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_singleton.html#a2b444deb4d7b9ab9e928967d3634ddd8">createInstance</a> ()</td></tr>
-<tr class="separator:a2b444deb4d7b9ab9e928967d3634ddd8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a72ad437a7fe020dfc2b9d726eb058343"><td class="memItemLeft" align="right" valign="top"><a id="a72ad437a7fe020dfc2b9d726eb058343"></a>
-static S *&#160;</td><td class="memItemRight" valign="bottom"><b>instance</b> ()</td></tr>
+<tr class="memitem:a72ad437a7fe020dfc2b9d726eb058343"><td class="memItemLeft" align="right" valign="top">static S *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_singleton.html#a72ad437a7fe020dfc2b9d726eb058343">instance</a> ()</td></tr>
 <tr class="separator:a72ad437a7fe020dfc2b9d726eb058343"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
@@ -102,8 +99,8 @@ class prtx::Singleton&lt; S &gt;</h3>
 <p><a class="el" href="classprtx_1_1_singleton.html">Singleton</a> helper template typically used by subclasses of <a class="el" href="classprtx_1_1_extension_factory.html">ExtensionFactory</a>. This class uses the static mix-in pattern (a.k.a. CRTP) to let subclasses implement their own singleton creation in createInstance. See <a class="el" href="classprtx_1_1_encoder_factory.html">EncoderFactory</a> for a usage example.</p>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="classprtx_1_1_encoder_factory.html">EncoderFactory</a> </dd></dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a2b444deb4d7b9ab9e928967d3634ddd8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2b444deb4d7b9ab9e928967d3634ddd8">&#9670;&nbsp;</a></span>createInstance()</h2>
+<a id="a72ad437a7fe020dfc2b9d726eb058343"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a72ad437a7fe020dfc2b9d726eb058343">&#9670;&nbsp;</a></span>instance()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -114,7 +111,7 @@ template&lt;typename S &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static S* <a class="el" href="classprtx_1_1_singleton.html">prtx::Singleton</a>&lt; S &gt;::createInstance </td>
+          <td class="memname">static S* <a class="el" href="classprtx_1_1_singleton.html">prtx::Singleton</a>&lt; S &gt;::instance </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -122,12 +119,11 @@ template&lt;typename S &gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Subclasses must implement this static member function to create the factory singletons.</p>
-<dl class="section return"><dt>Returns</dt><dd>The single instance of factory class S. </dd></dl>
+<p>Subclass S must implement S::createInstance() static member function. </p><dl class="section return"><dt>Returns</dt><dd>A new instance of S*. </dd></dl>
 
 </div>
 </div>
@@ -137,7 +133,7 @@ template&lt;typename S &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Oct 31 2025 14:30:26 for ArcGIS Procedural Runtime by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Jun 12 2026 19:58:54 for ArcGIS Procedural Runtime by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.14
 </small></address>

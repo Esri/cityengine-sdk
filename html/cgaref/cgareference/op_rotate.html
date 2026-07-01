@@ -1,69 +1,92 @@
+<!doctype html>
 <html>
 
 <head>
-    <title>rotate Operation</title>
-    <link rel="stylesheet" href="../manual_style.css" type="text/css" />
+<meta charset="UTF-8">
+<title>rotate Operation</title>
+<link rel="stylesheet" href="../cgareference_style.css" type="text/css">
 </head>
 
 <body>
-<div class="content">
+<article class="content">
 
-<!-- HEADER (use only on bookchapters) -->
+	<header class="section">
+		<h1>
+			<span class="name">rotate</span>
+			<span class="kind">operation</span>
+		</h1>
 
-<table summary="" class="header">
-	<tr>
-		<td align="left" class="helphead_l"><a href="../toc.html"><div class="helplink">&nbsp;</div></a></td>
-		<td align="right" class="helphead_r"></td>
-	</tr>
-</table>
+		<div class="signatures">
+			<div><span class="op">rotate</span>(<span class="param">mode</span>, <span class="param">coordSystem</span>, <span class="param">xAngle</span>, <span class="param">yAngle</span>, <span class="param">zAngle</span>)</div>
+		</div>
+	</header>
 
-<!-- CONTENT -->
+	<section class="section">
+		<div class="param-list">
+			<div class="param-item">
+				<div class="indent-body">
+					<p><span class="param">mode</span> <span class="type-tag">selector</span></p>
+					<table class="option-table">
+						<tr>
+							<td><span class="inlinecode">abs</span></td>
+							<td>Absolute mode. The angles are set to the given values.</td>
+						</tr>
+						<tr>
+							<td><span class="inlinecode">rel</span></td>
+							<td>Relative mode. The angles are added to the current orientation.</td>
+						</tr>
+					</table>
+				</div>
+			</div>
 
-<h1>rotate operation</h1>
-		
-<h2>Syntax</h2>
+			<div class="param-item">
+				<div class="indent-body">
+					<p><span class="param">coordSystem</span> <span class="type-tag">selector</span></p>
+					<table class="option-table">
+						<tr>
+							<td><span class="inlinecode">scope, pivot, object, world</span></td>
+							<td>Name of the coordinate system in which the following angles are given.</td>
+						</tr>
+					</table>
+				</div>
+			</div>
 
-<p class="code2">rotate(<span class="cga_opparam">mode, coordSystem, xAngle, yAngle, zAngle</span>)</p>
+			<div class="param-item">
+				<div class="indent-body">
+					<p><span class="param">xAngle</span>, <span class="param">yAngle</span>,<span class="param"> zAngle</span> <span class="type-tag">float</span> Angles in degrees to rotate about each axis.</p>
+				</div>
+			</div>
+		</div>
+	</section>
 
-<h2>Parameters</h2>
+	<section class="section">
+		<p>The <span class="op">rotate</span> operation rotates the current shape (it manipulates the scope orientation <span class="inlinecode">scope.r</span>). The angles can be defined in any coordinate system, and the rotation can either be absolute (= set the angles) or relative (= add the angles).</p>
+	</section>
 
-<ul>
-	<li><span class="cga_opparam">mode</span> (selector)
-	<table cellspacing="5">
-		<tr><td width="15%"><span class="codelight">abs, rel</span></td><td>Absolute or relative mode. Absolute means the angles are set to the given value, relative means the angles are added.</td></tr>
-	</table>
-	</li>
-	<li><span class="cga_opparam">coordSystem</span> (selector)
-	<table cellspacing="5">
-		<tr><td width="35%"><span class="codelight">scope, pivot, object, world</span></td><td>Name of the coordinate system in which the following angles are given.</td></tr>
-	</table>
-	</li>
-	<li><span class="cga_opparam">xAngle</span>, <span class="cga_opparam">yAngle</span>,<span class="cga_opparam"> zAngle</span> (float)<br>Angles in degrees to rotate about each axis.</li>
-</ul>
+	<section class="section">
+		<h2>Related</h2>
+		<div class="related">
+			<a class="func" href="func_convert.html"><span class="related-name">convert</span><span class="related-kind">function</span></a>
+			<a class="op" href="op_r.html"><span class="related-name">r</span><span class="related-kind">operation</span></a>
+			<a class="op" href="op_t.html"><span class="related-name">t</span><span class="related-kind">operation</span></a>
+			<a class="op" href="op_translate.html"><span class="related-name">translate</span><span class="related-kind">operation</span></a>
+			<a class="attr" href="attr_scope.html"><span class="related-name">scope</span><span class="related-kind">attribute</span></a>
+		</div>
+	</section>
 
-<h2>Description</h2>
+	<section class="section">
+		<h2>Examples</h2>
 
-<p>The <span class="code_std">rotate</span> operation rotates the scope around the scope origin. The angles can be defined in any coordinate system, and the rotation can either be absolute (= set the angles) or relative (= add the angles). This operation manipulates the scope orientation (<span class="code_std">scope.r</span> attribute).</p>
+		<section class="example">
+			<h3>Set scope orientation to world coordinate system angles</h3>
 
-<h2>Related</h2>
+			<div class="example-row">
+				<figure class="media media-example">
+					<img src="images/rotate-a.png" alt="rotate a">
+				</figure>
 
-<ul>
-	<li><a class="normw" href="func_convert.html">convert function</a></li>
-	<li><a class="normw" href="op_r.html">r operation</a></li>
-	<li><a class="normw" href="op_t.html">t operation</a></li>        
-	<li><a class="normw" href="op_translate.html">translate operation</a></li>        
-	<li><a class="normw" href="attr_scope.html">scope attribute</a></li>
-</ul>          
-
-<h2>Examples</h2>
-
-<h3>Set scope orientation to world coordinate system angles</h3>
-<table summary="" class="twocol">
-	<tr>
-		<td class="twocol_l">
-		<img src="images/rotate-a.png" alt="rotate a" /></td>
-		<td class="twocol_r">
-		<pre class="codecga">
+				<div class="example-content">
+<pre class="code-block">
 Init -->
    extrude(10)
    t('0.2, 0, '0.3)
@@ -71,19 +94,14 @@ Init -->
    rotate(abs, world, 0, 90, 0)
 </pre>
 
-    <em>
-    Using the absolute mode, the scope orientation can be set to an orientation relative to the world origin. 
-    </em>
-    
-    </td>
-	</tr>
-</table>
+					<p>Using the absolute mode, the scope orientation can be set to an orientation relative to the world origin.</p>
+				</div>
+			</div>
+		</section>
+	</section>
 
-<!-- FOOTER -->
-<p class="foot">Copyright &copy;2008-2025 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
+	<footer class="footer">Copyright &copy;2008-2026 Esri R&amp;D Center Zurich. All rights reserved.</footer>
 
-<!-- END CENTERED CONTENT -->
-
-</div>
+</article>
 </body>
 </html>

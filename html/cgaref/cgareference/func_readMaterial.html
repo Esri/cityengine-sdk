@@ -1,60 +1,60 @@
+<!doctype html>
 <html>
 
 <head>
-    <title>readMaterial Functions</title>
-    <link rel="stylesheet" href="../manual_style.css" type="text/css" />
+    <meta charset="UTF-8">
+    <title>readMaterial function</title>
+    <link rel="stylesheet" href="../cgareference_style.css" type="text/css">
 </head>
 
 <body>
-<div class="content">
+<article class="content">
 
-<!-- HEADER (use only on bookchapters) -->
+    <header class="section">
+        <h1>
+            <span class="name">readMaterial</span>
+            <span class="kind">function</span>
+        </h1>
 
-<table summary="" class="header">
-	<tr>
-		<td align="left" class="helphead_l"><a href="../toc.html"><div class="helplink">&nbsp;</div></a></td>
-		<td align="right" class="helphead_r"></td>
-	</tr>
-</table>
+        <div class="signatures">
+            <div><span class="type-tag">string[]</span> <span class="func">readMaterial</span>(<span class="param">filePath</span>)</div>
+        </div>
+    </header>
 
-<!-- CONTENT -->
+    <section class="section">
+        <div class="param-list">
+            <div class="param-item">
+                <div class="indent-body">
+                    <p><span class="param">filePath</span> <span class="type-tag">string</span> Name of the material file to read. See <a href="cga_assetSearch.html">Asset Search</a> for information about search locations. Supported extensions are .cgamat and .mtl.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<h1>readMaterial function</h1>
+    <section class="section">
+        <div class="return-list">
+            <div class="return-item">
+                <div class="indent-body">
+                        <p>Returns the decoded material in <span class="param">filePath</span> as 2D string array of cga material attributes.</p>
+                </div>
+            </div>
+        </div>
+		<div class="note">
+            <p>CityEngine's CGA Material Encoder allows for writing cgamat files via model export.</p>
+        </div>
+        <p>The <span class="func">readMaterial</span> functions reads the material file <span class="param">filePath</span> into a 2D array of material attributes, similar to the one returned from <a href="func_getMaterial.html"><span class="func">getMaterial()</span></a>. Referenced textures are resolved. The returned array can be used to set the current shape's material with the <a href="op_setMaterial.html"><span class="op">setMaterial()</span></a> operation.</p>
+    </section>
 
-<h2>Syntax</h2>
+    <section class="section">
+        <h2>Related</h2>
+        <div class="related">
+            <a class="func" href="func_getMaterial.html"><span class="related-name">getMaterial</span><span class="related-kind">function</span></a>
+            <a class="op" href="op_setMaterial.html"><span class="related-name">setMaterial</span><span class="related-kind">operation</span></a>
+        </div>
+    </section>
 
-<p class="code2"><span class="codelight">string[]</span> readMaterial(<span class="cga_opparam">filePath</span>)</p>
-        
-<h2>Parameters</h2>
+    <footer class="footer">Copyright &copy;2008-2026 Esri R&amp;D Center Zurich. All rights reserved.</footer>
 
-<ul>
-	<li><span class="cga_opparam">filePath</span> (string)<br>Name of the material file to read. See <a class="normw" href="cga_assetSearch.html"> Asset Search</a> for information about search locations. Supported extensions are .cgamat and .mtl.</li>
-</ul>
-
-<p class="notes">CityEngine's CGA Material Encoder allows for writing cgamat files via model export.</p>
-
-<h2>Returns</h2>
-
-<p>The decoded material in <span class="cga_opparam">filePath</span> as 2D string array of cga material attributes.</p>
-
-<h2>Description</h2>
-
-<p>The <span class="cga_keyword">readMaterial</span> functions reads the material file <span class="cga_opparam">filePath</span> into a 2D array of material attributes, similar to the one returned from 
-<a class="normw" href="func_getMaterial.html"><span class="code_std">getMaterial()</span></a>. Referenced textures are resolved. The returned array can be used to set the current shape's material with the <a class="normw" href="op_setMaterial.html"><span class="code_std">setMaterial()</span></a> operation.</p>
-
-<h2>Related</h2>
-
-<ul>
-	<li><a class="normw" href="func_getMaterial.html"><span class="code_std">getMaterial</span></a> function</li>
-	<li><a class="normw" href="op_setMaterial.html"><span class="code_std">setMaterial</span></a> operation</li>
-</ul>
-
-
-<!-- FOOTER -->
-<p class="foot">Copyright &copy;2008-2025 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
-
-<!-- END CENTERED CONTENT -->
-
-</div>
+</article>
 </body>
 </html>

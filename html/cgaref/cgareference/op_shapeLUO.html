@@ -1,141 +1,194 @@
+<!doctype html>
 <html>
 
 <head>
-	<title>shapeL, shapeU, shapeO operations</title>
-	<link rel="stylesheet" href="../manual_style.css" type="text/css" />
+    <meta charset="UTF-8">
+    <title>shapeL, shapeU, shapeO operations</title>
+    <link rel="stylesheet" href="../cgareference_style.css" type="text/css">
 </head>
 
 <body>
-<div class="content">
+<article class="content">
 
-<table summary="" class="header">
-	<tr>
-		<td align="left" class="helphead_l"><a href="../toc.html"><div class="helplink">&nbsp;</div></a></td>
-		<td align="right" class="helphead_r"></td>
-	</tr>
-</table>
+    <header class="section">
+        <h1>
+            <span class="name">shapeL, shapeU, shapeO</span>
+            <span class="kind">operations</span>
+        </h1>
 
-<h1>shapeL, shapeU, shapeO operations</h1>
+        <div class="signatures">
+            <div><span class="op">shapeL</span>(<span class="param">frontWidth</span>, <span class="param">leftWidth</span>) { <span class="param">selector</span> <span class="param">operator</span> <span class="param">operations</span> | ... }</div>
+            <div><span class="op">shapeU</span>(<span class="param">frontWidth</span>, <span class="param">rightWidth</span>, <span class="param">leftWidth</span>) { <span class="param">selector</span> <span class="param">operator</span> <span class="param">operations</span> | ... }</div>
+            <div><span class="op">shapeO</span>(<span class="param">frontWidth</span>, <span class="param">rightWidth</span>, <span class="param">backWidth</span>, <span class="param">leftWidth</span>) { <span class="param">selector</span> <span class="param">operator</span> <span class="param">operations</span> | ... }</div>
+        </div>
+    </header>
 
-<h2>Syntax</h2>
+    <section class="section">
+        <div class="param-list">
+            <div class="param-item">
+                <div class="indent-body">
+                    <p><span class="param">frontWidth</span>, <span class="param">leftWidth</span>, <span class="param">rightWidth</span>, <span class="param">backWidth</span> <span class="type-tag">float</span> Width of the corresponding wing.</p>
+                </div>
+            </div>
 
-<p class="code2"><span class="cga_op">shapeL</span>(<span class="cga_opparam">frontWidth</span>, <span class="cga_opparam">leftWidth</span>) { <span class="cga_opparam">selector</span> <span class="cga_opparam">operator</span> <span class="cga_opparam">operations</span> | <span class="cga_opparam">selector</span> <span class="cga_opparam">operator</span> <span class="cga_opparam">operations</span> }</p>
-<p class="code2"><span class="cga_op">shapeU</span>(<span class="cga_opparam">frontWidth</span>, <span class="cga_opparam">rightWidth</span>, <span class="cga_opparam">leftWidth</span>) { <span class="cga_opparam">selector</span> <span class="cga_opparam">operator</span> <span class="cga_opparam">operations</span> | <span class="cga_opparam">selector</span> <span class="cga_opparam">operator</span> <span class="cga_opparam">operations</span> }</p>
-<p class="code2"><span class="cga_op">shapeO</span>(<span class="cga_opparam">frontWidth</span>, <span class="cga_opparam">rightWidth</span>, <span class="cga_opparam">backWidth</span>, <span class="cga_opparam">leftWidth</span>) { <span class="cga_opparam">selector</span> <span class="cga_opparam">operator</span> <span class="cga_opparam">operations</span> | <span class="cga_opparam">selector</span> <span class="cga_opparam">operator</span> <span class="cga_opparam">operations</span> }</p>
+            <div class="param-item">
+                <div class="indent-body">
+                    <p><span class="param">selector</span> <span class="type-tag">selector</span></p>
+                    <table class="option-table">
+                        <tr><td><span class="inlinecode">shape</span></td><td>The setback polygon (i.e. the L,U or O shape).</td></tr>
+                        <tr><td><span class="inlinecode">remainder</span></td><td>Selects the remainder of the polygon.</td></tr>
+                    </table>
+                </div>
+            </div>
 
-<h2>Parameters</h2>
+            <div class="param-item">
+                <div class="indent-body">
+                    <p><span class="param">operator</span> The operator defines how the setback polygons are used to generate successor shapes. This also applies to shapes with more than one face.</p>
+                    <table class="option-table">
+                        <tr><td><span class="inlinecode">:</span></td><td>Each polygon is put into a new shape.</td></tr>
+                        <tr><td><span class="inlinecode">=</span></td><td>All polygons corresponding to the selector are combined into one new shape.</td></tr>
+                    </table>
+                </div>
+            </div>
 
-<ul>
-    <li><span class="cga_opparam">frontWidth</span> (float)<br>Depth of front wing.</li>
-	<li><span class="cga_opparam">leftWidth</span> (float)<br>Width of left wing.</li>
-	<li><span class="cga_opparam">rightWidth</span> (float)<br>Width of right wing.</li>
-	<li><span class="cga_opparam">backWidth</span> (float)<br>Depth of rear wing.</li>
-    <li><span class="cga_opparam">selector</span> (selector)
-	<table cellspacing="5">
-		<tr><td width="25%"><span class="codelight">shape</span></td><td>The setback polygon (i.e. the L,U or O shape).</td></tr>
-		<tr><td><span class="codelight">remainder</span></td><td>Selects the remainder of the polygon.</td></tr>
-	</table>
-	</li>
-	<li><span class="cga_opparam">operator</span><br>The operator defines how the setback polygons are used to generate successor shapes. This also applies to shapes with more than one face.
-	<table cellspacing="5">
-		<tr><td width="10%"><span class="codelight">:</span></td><td>Each polygon is put into a new shape.</td></tr>
-		<tr><td><span class="codelight">=</span></td><td>All polygons corresponding to the selector are combined into one new shape.</td></tr>
-	</table>
-	</li>
-	<li><span class="cga_opparam">operations</span><br>A sequence of shape operations to execute on the newly created shape.</li>
-</ul>
+            <div class="param-item">
+                <div class="indent-body">
+                    <p><span class="param">operations</span> A sequence of shape operations to execute on the newly created shape.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<h2>Description</h2>
+    <section class="section">
+        <p>The <span class="op">shapeL</span>, <span class="op">shapeU</span>, <span class="op">shapeO</span> operations select a number of edges, depending on predefined spatial selectors, and set them back by a user-defined distance.</p>
 
-<p>The <span class="codelight">shapeL, shapeU, shapeO</span> operations select a number of edges, depending on predefined spatial selectors, and set them back by a user-defined distance.</p>
+        <div class="note">
+            <p>These operations are another way of applying setbacks. For example</p>
+<pre class="code-block">
+shapeL(frontWidth, leftWidth) { selector operator operations  | ... }
+</pre>
+            <p>can also be achieved with the <a class="op" href="op_setback.html">setback</a> operation and the <a class="func" href="func_comp.html">comp</a> function:</p>
+<pre class="code-block">
+setback( comp(fe) { front=frontWidth | left=leftWidth } ) { selector operator operations | ... }
+</pre>
+        </div>
 
-<p class="notes">These operations are another way of applying setbacks. For example<br>
-<span class="codelight">shapeL(frontWidth, leftWidth) { selector operator operations  | ... }</span><br>
-can also be achieved with the <a class="cga_op" href="op_setback.html">setback</a> operation and the <a class="cga_op" href="func_comp.html">comp</a> function:<br>
-<span class="codelight">setback( comp(fe) { front=frontWidth | left=leftWidth } ) { selector operator operations | ... }</span>
-</p>
+        <h4><a name="componentTags"></a>Component tags</h4>
+        <p>The operations automatically apply semantic <a href="cga_componentTags.html">component tags</a> to the resulting edge components (exactly like the <a class="op" href="op_setback.html">setback</a> operation):</p>
 
-<h3><a name="componentTags"></a>Component tags</h3>
-The operations automatically apply semantic <a href="cga_componentTags.html">component tags</a> to the resulting edge components (exactly like the <a class="cga_op" href="op_setback.html">setback</a> operation):
+        <figure class="media media--centered">
+                <img src="images/autotag-shapeLUO.png" alt="Component tags for shapeL, shapeU, shapeO">
+        </figure>
 
-<p class="piccaptioncentered"><img src="images/autotag-shapeLUO.png">
+        <div class="two_cols">
+            <div>
+                <table class="option-table">
+                    <tr><td><span class="inlinecode">"setback.front"</span></td><td>Blue: original edges in <span class="inlinecode">shape</span>.</td></tr>
+                    <tr><td><span class="inlinecode">"setback.back"</span></td><td>Green: new setback edges.</td></tr>
+                    <tr><td><span class="inlinecode">"setback.side"</span></td><td>Yellow: side edges.</td></tr>
+                    <tr><td><span class="inlinecode">"setback.remainder"</span></td><td>Purple: original edges in <span class="inlinecode">remainder</span>.</td></tr>
+                </table>
+            </div>
 
-<table summary="" class="twocol">
-<tr>
-    <td class="twocol_r">
-		<table cellspacing="5">
-			<tr><td width="25%"><span class="codelight">"setback.front"</span></td><td>Blue: original edges in <span class="codelight">shape</span>.</td></tr>
-			<tr><td><span class="codelight">"setback.back"</span></td><td>Green: new setback edges.</td></tr>
-			<tr><td><span class="codelight">"setback.side"</span></td><td>Yellow: side edges.</td></tr>
-			<tr><td><span class="codelight">"setback.remainder"</span></td><td>Purple: original edges in <span class="codelight">remainder</span>.</td></tr>
-		</table>
-	</td>
-	<td class="twocol_l">
-<pre class="codecga">
+            <div>
+<pre class="code-block">
 Left   --> shapeL(4,4) { shape    : Shape
                        | remainder: Remainder }
 
 Middle --> shapeU(4,4,4) { ... }
-Right  --> shapeO(4,4,4,4) { ... }</pre>
-	</td>
-	</tr>
-</table>
-<p>For more information on working with component tags, refer to <a href="cga_componentTags.html#autoTags">Auto-tags</a> and <a href="cga_componentTags.html#tagPropagation">Tag propagation</a>.</p>
+Right  --> shapeO(4,4,4,4) { ... }
+</pre>
+            </div>
+        </div>
 
+        <p>For more information on working with component tags, refer to <a href="cga_componentTags.html#autoTags">Auto-tags</a> and <a href="cga_componentTags.html#tagPropagation">Tag propagation</a>.</p>
+    </section>
 
-<h2>Related</h2>
-<ul>
-	<li><a class="normw" href="op_comp.html">comp operation</a></li>
-    <li><a class="normw" href="op_offset.html">offset operation</a></li>
-	<li><a class="normw" href="op_setback.html">setback operation</a></li>
-	<li><a class="normw" href="op_setbackPerEdge.html">setbackPerEdge operation</a></li>
-	<li><a class="normw" href="op_setbackToArea.html">setbackToArea operation</a></li>
-	<li><a class="normw" href="func_comp.html">comp function</a></li>
-</ul>
+    <section class="section">
+        <h2>Related</h2>
+        <div class="related">
+            <a class="op" href="op_comp.html"><span class="related-name">comp</span><span class="related-kind">operation</span></a>
+            <a class="op" href="op_offset.html"><span class="related-name">offset</span><span class="related-kind">operation</span></a>
+            <a class="op" href="op_setback.html"><span class="related-name">setback</span><span class="related-kind">operation</span></a>
+            <a class="op" href="op_setbackPerEdge.html"><span class="related-name">setbackPerEdge</span><span class="related-kind">operation</span></a>
+            <a class="op" href="op_setbackToArea.html"><span class="related-name">setbackToArea</span><span class="related-kind">operation</span></a>
+            <a class="func" href="func_comp.html"><span class="related-name">comp</span><span class="related-kind">function</span></a>
+        </div>
+    </section>
 
-<h2>Examples</h2>
+    <section class="section">
+        <h2>Examples</h2>
 
-<h3>L-Shapes </h3>
+        <section class="example">
+            <h3>L-Shapes</h3>
 
-<p class="piccaptioncentered"><img src="images/shapeL-example.png"><br>A block filled with L-shapes.</p>
-<pre class="codecga">
+            <div class="example-row">
+                <figure class="media media-example">
+                    <img src="images/shapeL-example.png" alt="A block filled with L-shapes.">
+                    <figcaption>A block filled with L-shapes.</figcaption>
+                </figure>
+
+                <div class="example-content">
+<pre class="code-block">
 attr myFrontDepth = 5
 attr myLeftWidth = 11
 
 LotInner -->
     Lot
-		
+
 Lot -->
     offset(-3, inside)
-    shapeL(myFrontDepth,myLeftWidth) { shape : Footprint | remainder: NIL }
-	
+    shapeL(myFrontDepth,myLeftWidth) 
+        { shape : Footprint | remainder: NIL }
+
 Footprint -->
     extrude(rand(10,20)) color(1,0,0)
 </pre>
+                </div>
+            </div>
+        </section>
 
-<h3>U-Shapes </h3>
+        <section class="example">
+            <h3>U-Shapes</h3>
 
-<p class="piccaptioncentered"><img src="images/shapeU-example.png"><br>A block filled with U-shapes.</p>
-<pre class="codecga">
+            <div class="example-row">
+                <figure class="media media-example">
+                    <img src="images/shapeU-example.png" alt="A block filled with U-shapes.">
+                    <figcaption>A block filled with U-shapes.</figcaption>
+                </figure>
+
+                <div class="example-content">
+<pre class="code-block">
 attr myFrontDepth = 5
 attr myRightWidth = 3
 attr myLeftWidth = 11
 
 LotInner -->
     Lot
-		
+
 Lot -->
     offset(-3, inside)
-    shapeU(myFrontDepth,myRightWidth,myLeftWidth) { shape : Footprint | remainder: NIL }
-	
+    shapeU(myFrontDepth,myRightWidth,myLeftWidth) 
+        { shape : Footprint | remainder: NIL }
+
 Footprint -->
     extrude(rand(10,20)) color(1,0,0)
 </pre>
+                </div>
+            </div>
+        </section>
 
-<h3>O-Shapes </h3>
+        <section class="example">
+            <h3>O-Shapes</h3>
 
-<p class="piccaptioncentered"><img src="images/shapeO-example.png"><br>A block filled with O-shapes.</p>
-<pre class="codecga">
+            <div class="example-row">
+                <figure class="media media-example">
+                    <img src="images/shapeO-example.png" alt="A block filled with O-shapes.">
+                    <figcaption>A block filled with O-shapes.</figcaption>
+                </figure>
+
+                <div class="example-content">
+<pre class="code-block">
 attr myFrontDepth = 5
 attr myRightWidth = 3
 attr myBackDepth = 2
@@ -143,17 +196,22 @@ attr myLeftWidth = 11
 
 LotInner -->
     Lot
-        
+
 Lot -->
     offset(-3, inside)
-    shapeO(myFrontDepth,myRightWidth,myBackDepth,myLeftWidth) { shape : Footprint | remainder: NIL }
+    shapeO(myFrontDepth,myRightWidth,myBackDepth,myLeftWidth) 
+        { shape : Footprint | remainder: NIL }
 
 Footprint -->
     extrude(rand(10,20)) color(1,0,0)
 </pre>
+                </div>
+            </div>
+        </section>
+    </section>
 
-<p class="foot">Copyright &copy;2008-2025 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
+    <footer class="footer">Copyright &copy;2008-2026 Esri R&amp;D Center Zurich. All rights reserved.</footer>
 
-</div>
+</article>
 </body>
 </html>

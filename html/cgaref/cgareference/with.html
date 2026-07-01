@@ -1,44 +1,45 @@
+<!doctype html>
 <html>
 
 <head>
-    <title>with</title>
-    <link rel="stylesheet" href="../manual_style.css" type="text/css" />
+    <meta charset="UTF-8">
+    <title>with keyword</title>
+    <link rel="stylesheet" href="../cgareference_style.css" type="text/css">
 </head>
 
 <body>
-<div class="content">
+<article class="content">
 
-<!-- HEADER (use only on bookchapters) -->
+    <header class="section">
+        <h1>
+            <span class="name">with</span>
+            <span class="kind">keyword</span>
+        </h1>
 
-<table summary="" class="header">
-	<tr>
-		<td align="left" class="helphead_l"><a href="../toc.html"><div class="helplink">&nbsp;</div></a></td>
-		<td align="right" class="helphead_r"></td>
-	</tr>
-</table>
+        <div class="signatures">
+            <div><span class="kw">with</span> ( <span class="param">id</span> := <span class="param">expression</span>  <span class="param">id</span> := <span class="param">expression</span>  ... )</div>
+        </div>
+    </header>
 
-<!-- CONTENT -->
+    <section class="section">
+        <div class="param-list">
+            <div class="param-item">
+                <div class="indent-body">
+                    <p><span class="param">id</span> <span class="type-tag">identifier</span> Unique identifier for the local variable.</p>
+                </div>
+            </div>
+            <div class="param-item">
+                <div class="indent-body">
+                    <p><span class="param">expression</span> <span class="type-tag">float</span><span class="type-tag">string</span><span class="type-tag">bool</span><span class="type-tag">float[]</span><span class="type-tag">string[]</span><span class="type-tag">bool[]</span> Value to be stored.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<h1>with</h1>
-
-<h2>Syntax</h2>
-
-<p class="code2">with ( <span class="cga_opparam">id</span> := <span class="cga_opparam">expression</span>&nbsp&nbsp<span class="cga_opparam">id</span> := <span class="cga_opparam">expression</span>&nbsp&nbsp... )</p>
-
-<h2>Parameters</h2>
-
-<ul>
-	<li><span class="cga_opparam">id</span> (identifier)<br>Unique identifier for the local variable.</li>
-	<li><span class="cga_opparam">expression</span> (float, string, bool, float[], string[], bool[])<br>Value to be stored.</li>
-</ul>
-
-<h2>Description</h2>        
-
-<p>The <span class="code_std">with</span> keyword successively defines a set of local variables for a definition. Within the scope of a definition local variables can be referenced using their identider <span class="cga_opparam">id</span>. They are not accessible outside the scope of the definition.</p>
-
-<p>Local variables can be defined for functions, const functions, attributes and rules. The <span class="cga_opparam">expression</span> may reference functions, const functions and attributes which are defined outside the scope of the current definition as well as parameters and local variables which are defined prior in the list of local variables.</p>
-
-<pre class="codecga">
+    <section class="section">
+        <p>The <span class="kw">with</span> keyword successively defines a set of local variables for a definition. Within the scope of a definition local variables can be referenced using their identifier <span class="param">id</span>. They are not accessible outside the scope of the definition.</p>
+        <p>Local variables can be defined for functions, const functions, attributes and rules. The <span class="param">expression</span> may reference functions, const functions and attributes which are defined outside the scope of the current definition as well as parameters and local variables which are defined prior in the list of local variables.</p>
+<pre class="code-block">
 attr  a  with ( x := "example" )        = x
 
 const b  with ( x := [0,1,2]  y := 0 )  = x[y]
@@ -47,37 +48,33 @@ f(a)     with ( x := a  y := x )        = y
 
 Lot      with ( x := f(1) )             --> extrude(x)
 </pre>
-
-<p>The <span class="cga_opparam">expression</span> of a local variable is evaluated and its value is stored as soon as the definition is called.  The <span class="cga_opparam">expression</span> is not beeing re-evaluated when a local variable is referenced.</p>
-
-<p>In the following simple example a function computes and stores intermediate results in local variables <span class="code_std">d1</span> and <span class="code_std">d2</span> at the time the function is called. Each local variable is then referenced twice in order to compute the distance between 2 points.</p>
-
-<pre class="codecga">
-dist2d(x1, y1, x2, y2) with ( d1 := x2-x1  
+        <p>The <span class="param">expression</span> of a local variable is evaluated and its value is stored as soon as the definition is called. The <span class="param">expression</span> is not being re-evaluated when a local variable is referenced.</p>
+        <p>In the following simple example a function computes and stores intermediate results in local variables <span class="inlinecode">d1</span> and <span class="inlinecode">d2</span> at the time the function is called. Each local variable is then referenced twice in order to compute the distance between 2 points.</p>
+<pre class="code-block">
+dist2d(x1, y1, x2, y2) with ( d1 := x2-x1
                               d2 := y2-y1 )
-= sqrt(d1*d1 + d2*d2) 
+= sqrt(d1*d1 + d2*d2)
 
 Lot --> print("distance: " + dist2d(1,1,2,2)) // 1.414
 </pre>
-
-<p>The following rule computes the area of the current shape and stores it in a local variable. The value does not change despite the area of the shape is altered.</p>
-
-<pre class="codecga">
+        <p>The following rule computes the area of the current shape and stores it in a local variable. The value does not change despite the area of the shape is altered.</p>
+<pre class="code-block">
 Lot with ( area := geometry.area() ) --> s('2,0,'2)
                                          print("initial area: " + area)
                                          print("altered area: " + geometry.area())
 </pre>
+    </section>
 
-<h2>Related</h2>
-<ul>
-    <li><a href="attr.html"><span class="code_std">attr</span></a> keyword</li>
-	<li><a href="const.html"><span class="code_std">const</span></a> keyword</li>
-</ul>
+    <section class="section">
+        <h2>Related</h2>
+        <div class="related">
+            <a class="kw" href="attr.html"><span class="related-name">attr</span><span class="related-kind">keyword</span></a>
+            <a class="kw" href="const.html"><span class="related-name">const</span><span class="related-kind">keyword</span></a>
+        </div>
+    </section>
 
-<p class="foot">Copyright &copy;2008-2025 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
+    <footer class="footer">Copyright &copy;2008-2026 Esri R&amp;D Center Zurich. All rights reserved.</footer>
 
-<!-- END CENTERED CONTENT -->
-
-</div>
+</article>
 </body>
 </html>

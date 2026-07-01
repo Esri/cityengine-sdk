@@ -1,80 +1,99 @@
+﻿<!doctype html>
 <html>
 
 <head>
-	<title>listRange</title>
-    <link rel="stylesheet" href="../../manual_style.css" type="text/css" />
+    <meta charset="UTF-8">
+    <title>listRange function</title>
+    <link rel="stylesheet" href="../../cgareference_style.css" type="text/css">
 </head>
 
 <body>
-<div class="content">
+<article class="content">
 
-<!-- Don't touch -->
+    <header class="section">
+        <h1>
+            <span class="name">listRange</span>
+            <span class="kind">function</span>
+        </h1>
 
-<table summary="" class="header">
-	<tr>
-		<td align="left" class="helphead_l"><a href="../../toc.html"><div class="helplink">&nbsp;</div></a></td>
-		<td align="right" class="helphead_r"></td>
-	</tr>
-</table>
+        <div class="signatures">
+            <div><span class="type-tag">string</span> <span class="func">listRange</span>(<span class="param">stringList</span>, <span class="param">leftIndex</span>, <span class="param">rightIndex</span>)</div>
+        </div>
+    </header>
 
-<h1>listRange</h1>
+    <section class="section">
+        <div class="param-list">
+            <div class="param-item">
+                <div class="indent-body">
+                    <p><span class="param">stringList</span> <span class="type-tag">string</span></p>
+                </div>
+            </div>
 
-<h2>Syntax</h2>
+            <div class="param-item">
+                <div class="indent-body">
+                    <p><span class="param">leftIndex</span> <span class="type-tag">float</span></p>
+                </div>
+            </div>
 
-<p class="code2"><span class="codelight">string</span> listRange(<span class="cga_opparam">stringList</span>, <span class="cga_opparam">leftIndex</span>, <span class="cga_opparam">rightIndex</span>)</p>
+            <div class="param-item">
+                <div class="indent-body">
+                    <p><span class="param">rightIndex</span> <span class="type-tag">float</span></p>
+                </div>
+            </div>
+        </div>
 
-<h2>Parameters</h2>
+        <div class="return-list">
+            <div class="return-item">
+                <div class="indent-body">
+                        <p>Returns the items from <span class="param">leftIndex</span> to <span class="param">rightIndex</span> (<span class="param">rightIndex</span> excluded).</p>
+                </div>
+            </div>
+        </div>
 
-<ul>
-   	<li><span class="cga_opparam">stringList</span> (string)</li>
-	<li><span class="cga_opparam">leftIndex</span> (float)</li>
-	<li><span class="cga_opparam">rightIndex</span> (float)</li>
-</ul>
+        <p>This function returns all items in the <span class="param">stringList</span> from <span class="param">leftIndex</span> to <span class="param">rightIndex</span> (the <span class="param">rightIndex</span> item is not included in the resulting list).</p>
 
-<h2>Returns</h2>
+        <div class="note">Note.1: Indices are 0 - based.</div>
 
-<p>Returns items from <span class="cga_opparam">leftIndex</span> to <span class="cga_opparam">rightIndex</span> (<span class="cga_opparam">rightIndex</span> excluded).</p> 
+        <div class="note">Note.2: String lists are a series of strings stored inside one string. The elements are separated by a semicolon (";"). Each item must be followed by a semicolon, also the last one! The data type is "string", thus it is not an array as used in other scripting languages.</div>
+    </section>
 
-<h2>Description</h2>
+    <section class="section">
+        <h2>Related</h2>
+        <div class="related">
+            <a class="func" href="listAdd.html"><span class="related-name">listAdd</span><span class="related-kind">function</span></a>
+            <a class="func" href="listClean.html"><span class="related-name">listClean</span><span class="related-kind">function</span></a>
+            <a class="func" href="listCount.html"><span class="related-name">listCount</span><span class="related-kind">function</span></a>
+            <a class="func" href="listFirst.html"><span class="related-name">listFirst</span><span class="related-kind">function</span></a>
+            <a class="func" href="listIndex.html"><span class="related-name">listIndex</span><span class="related-kind">function</span></a>
+            <a class="func" href="listItem.html"><span class="related-name">listItem</span><span class="related-kind">function</span></a>
+            <a class="func" href="listLast.html"><span class="related-name">listLast</span><span class="related-kind">function</span></a>
+            <a class="func" href="listRandom.html"><span class="related-name">listRandom</span><span class="related-kind">function</span></a>
+            <a class="func" href="listRemove.html"><span class="related-name">listRemove</span><span class="related-kind">function</span></a>
+            <a class="func" href="listRemoveAll.html"><span class="related-name">listRemoveAll</span><span class="related-kind">function</span></a>
+            <a class="func" href="listRetainAll.html"><span class="related-name">listRetainAll</span><span class="related-kind">function</span></a>
+            <a class="func" href="listSize.html"><span class="related-name">listSize</span><span class="related-kind">function</span></a>
+            <a class="func" href="listTerminate.html"><span class="related-name">listTerminate</span><span class="related-kind">function</span></a>
+        </div>
+    </section>
 
-<p>This function returns all items in the <span class="cga_opparam">stringList</span> from <span class="cga_opparam">leftIndex</span> to <span class="cga_opparam">rightIndex</span> (the <span class="cga_opparam">rightIndex</span> item is not included in the resulting list).</p>
+    <section class="section">
+        <h2>Examples</h2>
 
-<p class="notes">Note.1: Indices are 0 - based.</p>
+        <section class="example">
+            <h3>Example</h3>
 
-<p class="notes">Note.2: String lists are a series of strings stored inside one string. The elements are separated by a semicolon (";"). Each item must be followed by a semicolon, also the last one! The data type is "string", thus it is not an array as used in other scripting languages.</p>
-
-<h2>Related</h2>
-<ul>
-    <li><a href="listAdd.html"><span class="code_std">listAdd</span></a> function</li>
-    <li><a href="listClean.html"><span class="code_std">listClean</span></a> function</li>
-    <li><a href="listCount.html"><span class="code_std">listCount</span></a> function</li>
-    <li><a href="listFirst.html"><span class="code_std">listFirst</span></a> function</li>
-    <li><a href="listIndex.html"><span class="code_std">listIndex</span></a> function</li>
-    <li><a href="listItem.html"><span class="code_std">listItem</span></a> function</li>
-    <li><a href="listLast.html"><span class="code_std">listLast</span></a> function</li>
-    <li><a href="listRandom.html"><span class="code_std">listRandom</span></a> function</li>
-    <li><a href="listRemove.html"><span class="code_std">listRemove</span></a> function</li>
-    <li><a href="listRemoveAll.html"><span class="code_std">listRemoveAll</span></a> function</li>
-    <li><a href="listRetainAll.html"><span class="code_std">listRetainAll</span></a> function</li>
-    <li><a href="listSize.html"><span class="code_std">listSize</span></a> function</li>
-    <li><a href="listTerminate.html"><span class="code_std">listTerminate</span></a> function</li>
-</ul>
-		
-<h2>Examples</h2>
-
-<p class="example">	
-<pre class="codecga">
-listRange("rule;your;city;with;cityengine;",0,3)
+<pre class="code-block">
+listRange("rule;your;city;with;cityengine;", 0, 3)
 # result = "rule;your;city;"
 
-listRange("texture_1;texture_2;texture_3;texture_4;texture_5;texture_6;",2,3)
+listRange("texture_1;texture_2;texture_3;texture_4;texture_5;texture_6;", 2, 3)
 # result = "texture_3"
 </pre>
-</p>
+        </section>
+    </section>
 
-<!-- FOOTER -->
-<p class="foot">Copyright &copy;2008-2025 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
+    <footer class="footer">Copyright &copy;2008-2026 Esri R&amp;D Center Zurich. All rights reserved.</footer>
 
-</div>
+</article>
 </body>
 </html>

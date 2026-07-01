@@ -1,61 +1,60 @@
+<!doctype html>
 <html>
 
 <head>
-    <title>fileExists Function</title>
-    <link rel="stylesheet" href="../manual_style.css" type="text/css" />
+    <meta charset="UTF-8">
+    <title>fileExists function</title>
+    <link rel="stylesheet" href="../cgareference_style.css" type="text/css">
 </head>
 
 <body>
-<div class="content">
+<article class="content">
 
-<!-- HEADER (use only on bookchapters) -->
+    <header class="section">
+        <h1>
+            <span class="name">fileExists</span>
+            <span class="kind">function</span>
+        </h1>
 
-<table summary="" class="header">
-	<tr>
-		<td align="left" class="helphead_l"><a href="../toc.html"><div class="helplink">&nbsp;</div></a></td>
-		<td align="right" class="helphead_r"></td>
-	</tr>
-</table>
+        <div class="signatures">
+            <div><span class="type-tag">bool</span> <span class="func">fileExists</span>(<span class="param">filePath</span>)</div>
+        </div>
+    </header>
 
-<!-- CONTENT -->
+    <section class="section">
+        <div class="param-list">
+            <div class="param-item">
+                <div class="indent-body">
+                    <p><span class="param">filePath</span> <span class="type-tag">string</span></p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<h1>fileExists function</h1>
+    <section class="section">
+        <div class="return-list">
+            <div class="return-item">
+                <div class="indent-body">
+                        <p>Returns <span class="kw">true</span> if file <span class="param">filePath</span> exists and is a supported format, <span class="kw">false</span> otherwise.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<h2>Syntax</h2>
+    <section class="section">
+        <p>The <span class="func">fileExists</span> function checks whether the file <span class="param">filePath</span> exists in the workspace.</p>
+        <p>The function only checks files with supported format, that is, files that can be used in CGA operations and functions. This includes asset formats (see <a href="op_i.html"><span class="func">i</span> operation</a>), image formats (see <a href="cga_texturing.html">texturing</a>), material formats (see <a href="func_readMaterial.html"><span class="func">readMaterial</span></a>), text formats (see <a href="func_readTextFile.html"><span class="func">readTextFile</span></a>), and table formats (see <a href="func_readTable.html"><span class="func">readStringTable</span></a> and <a href="func_readTable.html"><span class="func">readFloatTable</span></a>). The same search order as for asset insertion and texture lookups is used.</p>
+    </section>
 
-<p class="code2"><span class="codelight">bool</span> fileExists(<span class="cga_opparam">filePath</span>)</p>
+    <section class="section">
+        <h2>Related</h2>
+        <div class="related">
+            <a href="cga_assetSearch.html"><span class="related-name">Asset and Texture Search</span></a>
+        </div>
+    </section>
 
-<h2>Parameters</h2>
+    <footer class="footer">Copyright &copy;2008-2026 Esri R&amp;D Center Zurich. All rights reserved.</footer>
 
-<ul>
-   	<li><span class="cga_opparam">filePath</span> (string)</li>
-</ul>
-
-<h2>Returns</h2>
-
-<p>true if file <span class="cga_opparam">filePath</span> exists and is a supported format, false otherwise.</p>
-
-<h2>Description</h2>
-
-<p>The <span class="cga_keyword">fileExists</span> function checks whether the file <span class="cga_opparam">filePath</span> exists in the workspace. 
-The function only checks files with supported format, i.e., files that can be used in CGA operations and functions. 
-This includes asset formats (see <a href="op_i.html"><span class="code_std">i operation</span></a>), 
-image formats (see <a href="cga_texturing.html"><span class="code_std">texturing</span></a>), 
-material formats (see <a href="func_readMaterial.html"><span class="code_std">readMaterial</span></a>), 
-text formats (see <a href="func_readTextFile.html"><span class="code_std">readTextFile</span></a>),
-and table formats (see <a href="func_readTable.html"><span class="code_std">readTable</span></a>). The same search order as for asset insertion and texture lookups is used. </p>
-      
-<h2>Related</h2>
-
-<ul>
-	<li><a href="cga_assetSearch.html"><span class="code_std">Asset search</span></a></li>
-</ul>
-
-<!-- FOOTER -->
-<p class="foot">Copyright &copy;2008-2025 Esri R&amp;D Center Zurich. All rights reserved.</p>				  
-
-<!-- END CENTERED CONTENT -->
-
-</div>
+</article>
 </body>
 </html>
