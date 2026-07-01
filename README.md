@@ -78,26 +78,28 @@ Please note that the individual example READMEs may include further requirements
 
 ### All Platforms
 
-* To load custom encoders built with the latest SDK, CityEngine 2025.1 is required. For older versions of CityEngine an older version of the SDK might have to be used, see [Release History](#release-history-and-changelog). Some SDK versions don't have a matching CityEngine.
-* A license for the corresponding CityEngine version. For example, a license for CityEngine 2025.1 to author Rule Packages for the current SDK release.
-* CMake 3.19 or later (<https://www.cmake.org>)
+* To load custom encoders built with the latest SDK, CityEngine 2026.0 is required. For older versions of CityEngine an older version of the SDK might have to be used, see [Release History](#release-history-and-changelog). Some SDK versions don't have a matching CityEngine.
+* A license for the corresponding CityEngine version. For example, a license for CityEngine 2026.0 to author Rule Packages for the current SDK release.
+* CMake 3.27 or later (<https://www.cmake.org>)
 
 ### Windows
 
-* Windows 10 or 11 (64bit)
-* Required C++ compiler: Visual Studio 2022 with Toolset MSVC 14.38 or later
+* Windows 11 (64bit)
+* Required C++ compiler: Visual Studio 2022 with Toolset MSVC 14.44 or later
 * Required flags for extension libraries release mode: `/std:c++20 /bigobj /GR /EHsc /MD`
 
 ### Linux
 
 * RedHat Enterprise Linux 8.x or 9.x and compatible (e.g. Alma Linux or Rocky Linux)
-* Required C++ compiler: GCC 11.2 or later (RedHat Enterprise Linux DevToolSet 11)
+* Required C++ compiler: GCC 14.2 or later (RedHat Enterprise Linux DevToolSet 14)
 * Required flags for extension libraries: `-std=c++20 -march=nocona -fvisibility=hidden -fvisibility-inlines-hidden -Wl,--exclude-libs,ALL`
 
 ## Release History and Changelog
 
 A detailed list of changes to the API, CGA language and built-in codecs can be found in the [Changelog](changelog.md).
 
+* [v3.4.12206 (2026-07-01, CityEngine 2026.0)](https://github.com/Esri/cityengine-sdk/releases/tag/3.4.12206)
+* [v3.3.11885 (2026-05-14, ArcGIS Pro 3.7, Enterprise 12.1)](https://github.com/Esri/cityengine-sdk/releases/tag/3.3.11885)
 * [v3.3.11669 (2025-12-11, CityEngine 2025.1)](https://github.com/Esri/cityengine-sdk/releases/tag/3.3.11669)
 * [v3.3.11352 (2025-12-11, ArcGIS Pro 3.6.2)](https://github.com/Esri/cityengine-sdk/releases/tag/3.3.11352)
 * [v3.3.11351 (2025-11-13, ArcGIS Pro 3.6, Enterprise 12.0)](https://github.com/Esri/cityengine-sdk/releases/tag/3.3.11351)
