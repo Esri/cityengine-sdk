@@ -78,8 +78,8 @@ Please note that the individual example READMEs may include further requirements
 
 ### All Platforms
 
-* To load custom encoders built with the latest SDK, CityEngine 2026.0 is required. For older versions of CityEngine an older version of the SDK might have to be used, see [Release History](#release-history-and-changelog). Some SDK versions don't have a matching CityEngine.
-* A license for the corresponding CityEngine version. For example, a license for CityEngine 2026.0 to author Rule Packages for the current SDK release.
+* To load custom encoders built with the latest SDK, CityEngine 2026.1 is required. For older versions of CityEngine an older version of the SDK might have to be used, see [Release History](#release-history-and-changelog). Some SDK versions don't have a matching CityEngine.
+* A license for the corresponding CityEngine version. For example, a license for CityEngine 2026.1 to author Rule Packages for the current SDK release.
 * CMake 3.27 or later (<https://www.cmake.org>)
 
 ### Windows
@@ -98,6 +98,8 @@ Please note that the individual example READMEs may include further requirements
 
 A detailed list of changes to the API, CGA language and built-in codecs can be found in the [Changelog](changelog.md).
 
+* [v3.5.XXXXX (2026-11-XX, CityEngine 2026.1)](https://github.com/Esri/cityengine-sdk/releases/tag/3.4.XXXXX)
+* [v3.4.12352 (2026-XX-XX, ArcGIS Pro 3.8, Enterprise 12.2)](https://github.com/Esri/cityengine-sdk/releases/tag/3.4.12352)
 * [v3.4.12206 (2026-07-01, CityEngine 2026.0)](https://github.com/Esri/cityengine-sdk/releases/tag/3.4.12206)
 * [v3.3.11885 (2026-05-14, ArcGIS Pro 3.7, Enterprise 12.1)](https://github.com/Esri/cityengine-sdk/releases/tag/3.3.11885)
 * [v3.3.11669 (2025-12-11, CityEngine 2025.1)](https://github.com/Esri/cityengine-sdk/releases/tag/3.3.11669)

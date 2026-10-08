@@ -1,3 +1,63 @@
+# CITYENGINE SDK 3.5.XXXXX CHANGELOG
+
+This section lists changes compared to CityEngine SDK 3.4.12352.
+
+## General Info
+* CityEngine SDK 3.5.XXXXX is used in CityEngine 2026.1.XXXXX.
+
+## PRT API
+* XXX
+
+## PRTX API
+* XXX
+
+## CGA
+* Changes to existing features:
+  * setback, setbackToArea, setbackPerEdge operations:
+    * Added a new selector hole that allows to select edges at holes.
+    * Breaking change on shapes with holes:  
+    All selectors now also select hole edges. In order to revert to the prior behavior, use the logical expression selector&&!hole.
+  * splitAndSetbackPerimeter operation: The resulting shapes are now topologically reconnected with inline(recompose) or inside modify.
+* Bugfixes:
+  * dynamic import feature: A bug was fixed where attrs in an inlined dynamic import evaluated to a wrong value.
+  * setback, setbackToArea, setbackPerEdge, and shapeLUO operations: Tags on the recomposed geometry after inline(recompose) or inside modify are now correct.
+  * splitAndSetbackPerimeter operation:
+    * Fixed a bug where the remainder for a single face contained the full mesh when no edges were selected.
+    * Fixed a crash that occurred when setback distance evaluation produced a runtime error.
+  * set and setMaterial operations: Added configurable inf/nan checks for all float shape attributes such as scope, pivot, seedian and material attributes. This fixes rare crashes if e.g. the scope translation was set to inf.
+  * offset operation: Fixed a bug where the offset geometry contained zero-length edges in rare cases.
+
+## Built-In Codecs
+* XXX
+
+## Misc Changes and Fixes
+* XXX
+
+
+# CITYENGINE SDK 3.4.12352 CHANGELOG
+
+This section lists changes compared to CityEngine SDK 3.4.12206.
+
+## General Info
+* The focus of this release is to fix some issues which are important for certain client applications such as ArcGIS Pro. There is no CityEngine version using this version of the SDK.
+
+## PRT API
+* XXX
+
+## PRTX API
+* XXX
+
+## CGA
+* Changes to existing features:
+  * setback, setbackToArea, setbackPerEdge, and shapeLUO operations: The resulting shapes are now topologically reconnected with inline(recompose) or inside modify.
+
+## Built-In Codecs
+* XXX
+
+## Misc Changes and Fixes
+* XXX
+
+
 # CITYENGINE SDK 3.4.12206 CHANGELOG
 
 This section lists changes compared to CityEngine SDK 3.3.11885.
