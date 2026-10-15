@@ -6,10 +6,11 @@ This section lists changes compared to CityEngine SDK 3.4.12352.
 * CityEngine SDK 3.5.XXXXX is used in CityEngine 2026.1.XXXXX.
 
 ## PRT API
-* XXX
+* No changes.
 
 ## PRTX API
-* XXX
+* `prtx::EncodePreparator`: Added `PreparationFlags::bakeTextureTrafos()`, enabled by default. When enabled, texture transformations are baked into the mesh uv coordinates, and the corresponding `prtx::Material` attributes are reset to their defaults: scale (`su`, `sv`) to 1, translation (`tu`, `tv`) and rotation (`rw`) to 0. This preserves the texture mapping while allowing materials that differ only in those transformations to be shared.
+Baking can prevent geometry instancing for affected meshes. Set `bakeTextureTrafos(false)` to preserve the prior behavior.
 
 ## CGA
 * Changes to existing features:
@@ -28,10 +29,16 @@ This section lists changes compared to CityEngine SDK 3.4.12352.
   * offset operation: Fixed a bug where the offset geometry contained zero-length edges in rare cases.
 
 ## Built-In Codecs
-* XXX
+* Collada, FBX, GLTF encoders:
+  * Added the "bakeTextureTrafos" option to bake material texture transformations into mesh uv coordinates. Enabled by default. Set to false to preserve the prior behavior.
+* CityGML, DWG, I3S, OBJ, Shapebuffer encoders:
+  * Material texture transformations are now baked into mesh uv coordinates.
+* Unreal encoder:
+  * Texture transformations are now baked into mesh uv coordinates when "twinmotionCompatible" or "useUnrealBaseMaterials" is enabled.
 
 ## Misc Changes and Fixes
-* XXX
+* Fixed a memory leak when using inline.
+* Fixed crashes during cleanup after model generation was aborted by a runtime error, e.g. in scatter or splitArea.
 
 
 # CITYENGINE SDK 3.4.12352 CHANGELOG
@@ -42,20 +49,42 @@ This section lists changes compared to CityEngine SDK 3.4.12206.
 * The focus of this release is to fix some issues which are important for certain client applications such as ArcGIS Pro. There is no CityEngine version using this version of the SDK.
 
 ## PRT API
-* XXX
+* `prt::FileOutputCallbacks`: Added support for long output paths on Windows, including UNC paths.
 
 ## PRTX API
-* XXX
+* `prtx::EncodePreparator::PreparationFlags`:
+  * Added `instancingMode()` and the `prtx::Instancing::Action` enum. The new `NO_SMALL_CGA_PRIMITIVES` mode excludes small CGA primitives from instancing so they can be merged by material.
+  * Deprecated `instancing()` in favor of `instancingMode()`. The existing boolean setter remains supported: true corresponds to `prtx::Instancing::ALL`, false to `prtx::Instancing::NONE`.
+  * Documented the default values of all preparation flags in the API reference.
 
 ## CGA
 * Changes to existing features:
   * setback, setbackToArea, setbackPerEdge, and shapeLUO operations: The resulting shapes are now topologically reconnected with inline(recompose) or inside modify.
 
 ## Built-In Codecs
-* XXX
+* GLTF codecs:
+  * Added support for GLB files larger than 4GB.
+  * Improved encoding and decoding performance.
+* GLTF encoder:
+  * "meshGranularity" option: Added "INSTANCED_NO_SMALL_CGA_PRIMITIVES" and made it the default. This reuses asset instances while merging generated meshes and small CGA primitives by material.
+* Collada decoder:
+  * Fixed missing textures when image definitions are stored in "library_effects" instead of "library_images".
+  * Fixed a crash when an extra technique has no profile name.
+* OBJ codecs:
+  * Improved encoding and decoding performance.
+* OBJ encoder:
+  * Made number formatting independent of system locale.
+* OBJ decoder:
+  * Fixed handling of invalid face definitions.
+  * The non-standard "Tr" material attribute is now ignored to avoid incorrect transparency. Use the "d" attribute to specify opacity.
+* Shapebuffer encoder:
+  * Replaced the "triangulate" option with "faceRepresentation". Supported values are "TRIANGLES" (default), "TRIANGLES_AND_RINGS" and "RINGS". Use "TRIANGLES_AND_RINGS" for the previous "triangulate=false" behavior.
+* Unreal encoder:
+  * Fixed a potential crash when writing export warnings for landscapes with non-uniform scaling.
 
 ## Misc Changes and Fixes
-* XXX
+* Applied security updates for giflib (6.1.3), libpng (1.6.58), libxml2 (2.15.3 with an additional security patch) and xerces-c (3.3.0).
+* Performance improvements to asset loading and triangulation of meshes with holes.
 
 
 # CITYENGINE SDK 3.4.12206 CHANGELOG
