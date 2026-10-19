@@ -9,7 +9,7 @@ This section lists changes compared to CityEngine SDK 3.4.12352.
 * No changes.
 
 ## PRTX API
-* `prtx::EncodePreparator`: Added `PreparationFlags::bakeTextureTrafos()`, enabled by default. When enabled, texture transformations are baked into the mesh uv coordinates, and the corresponding `prtx::Material` attributes are reset to their defaults: scale (`su`, `sv`) to 1, translation (`tu`, `tv`) and rotation (`rw`) to 0. This preserves the texture mapping while allowing materials that differ only in those transformations to be shared.
+* `prtx::EncodePreparator`: Added `PreparationFlags::bakeTextureTrafos()`, enabled by default. This allows materials to retain their intended appearance when exported to formats that do not support texture transformations. When enabled, texture transformations are baked into the mesh uv coordinates, and the corresponding `prtx::Material` attributes are reset to their defaults: scale (`su`, `sv`) to 1, translation (`tu`, `tv`) and rotation (`rw`) to 0. This preserves the texture mapping while allowing materials that differ only in those transformations to be shared.
 Baking can prevent geometry instancing for affected meshes. Set `bakeTextureTrafos(false)` to preserve the prior behavior.
 
 ## CGA
@@ -38,7 +38,7 @@ Baking can prevent geometry instancing for affected meshes. Set `bakeTextureTraf
 
 ## Misc Changes and Fixes
 * Fixed a memory leak when using inline.
-* Fixed crashes during cleanup after model generation was aborted by a runtime error, e.g. in scatter or splitArea.
+* Fixed potential crashes when a runtime error interrupts the execution of a successor of scatter, splitArea, or splitAndSetbackPerimeter.
 
 
 # CITYENGINE SDK 3.4.12352 CHANGELOG
@@ -80,11 +80,11 @@ This section lists changes compared to CityEngine SDK 3.4.12206.
 * Shapebuffer encoder:
   * Replaced the "triangulate" option with "faceRepresentation". Supported values are "TRIANGLES" (default), "TRIANGLES_AND_RINGS" and "RINGS". Use "TRIANGLES_AND_RINGS" for the previous "triangulate=false" behavior.
 * Unreal encoder:
-  * Fixed a potential crash when writing export warnings for landscapes with non-uniform scaling.
+  * Fixed a potential crash when writing export warnings for terrains with non-uniform scaling.
 
 ## Misc Changes and Fixes
 * Applied security updates for giflib (6.1.3), libpng (1.6.58), libxml2 (2.15.3 with an additional security patch) and xerces-c (3.3.0).
-* Performance improvements to asset loading and triangulation of meshes with holes.
+* Improved performance when loading assets and triangulating meshes with holes.
 
 
 # CITYENGINE SDK 3.4.12206 CHANGELOG
