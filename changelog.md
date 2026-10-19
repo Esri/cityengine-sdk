@@ -9,7 +9,8 @@ This section lists changes compared to CityEngine SDK 3.4.12352.
 * No changes.
 
 ## PRTX API
-* `prtx::EncodePreparator`: Added `PreparationFlags::bakeTextureTrafos()`, enabled by default. This allows materials to retain their intended appearance when exported to formats that do not support texture transformations. When enabled, texture transformations are baked into the mesh uv coordinates, and the corresponding `prtx::Material` attributes are reset to their defaults: scale (`su`, `sv`) to 1, translation (`tu`, `tv`) and rotation (`rw`) to 0. This preserves the texture mapping while allowing materials that differ only in those transformations to be shared.
+* `prtx::EncodePreparator`: Added `PreparationFlags::bakeTextureTrafos()`, enabled by default. When enabled, texture transformations are baked into the mesh uv coordinates, and the corresponding `prtx::Material` attributes are reset to their defaults: scale (`su`, `sv`) to 1, translation (`tu`, `tv`) and rotation (`rw`) to 0.
+This allows materials to retain their intended appearance when exported to formats that do not support texture transformations. Further, materials that otherwise differ only in their texture transformations can now be shared.
 Baking can prevent geometry instancing for affected meshes. Set `bakeTextureTrafos(false)` to preserve the prior behavior.
 
 ## CGA
@@ -24,7 +25,8 @@ Baking can prevent geometry instancing for affected meshes. Set `bakeTextureTraf
   * setback, setbackToArea, setbackPerEdge, and shapeLUO operations: Tags on the recomposed geometry after inline(recompose) or inside modify are now correct.
   * splitAndSetbackPerimeter operation:
     * Fixed a bug where the remainder for a single face contained the full mesh when no edges were selected.
-    * Fixed a crash that occurred when setback distance evaluation produced a runtime error.
+    * Fixed a crash that occurred when setback distance evaluation or execution of an operation sequence produced a runtime error.
+  * scatter and splitArea operations: Fixed a crash that occurred when execution of an operation sequence produced a runtime error.
   * set and setMaterial operations: Added configurable inf/nan checks for all float shape attributes such as scope, pivot, seedian and material attributes. This fixes rare crashes if e.g. the scope translation was set to inf.
   * offset operation: Fixed a bug where the offset geometry contained zero-length edges in rare cases.
 
@@ -38,8 +40,6 @@ Baking can prevent geometry instancing for affected meshes. Set `bakeTextureTraf
 
 ## Misc Changes and Fixes
 * Fixed a memory leak when using inline.
-* Fixed potential crashes when a runtime error interrupts the execution of a successor of scatter, splitArea, or splitAndSetbackPerimeter.
-
 
 # CITYENGINE SDK 3.4.12352 CHANGELOG
 
