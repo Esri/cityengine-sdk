@@ -1,9 +1,9 @@
-# CITYENGINE SDK 3.5.XXXXX CHANGELOG
+# CITYENGINE SDK 3.5.12540 CHANGELOG
 
 This section lists changes compared to CityEngine SDK 3.4.12352.
 
 ## General Info
-* CityEngine SDK 3.5.XXXXX is used in CityEngine 2026.1.XXXXX.
+* CityEngine SDK 3.5.12540 is used in CityEngine 2026.1.12540.
 
 ## PRT API
 * No changes.
