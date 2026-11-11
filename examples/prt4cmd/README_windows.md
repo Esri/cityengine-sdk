@@ -32,6 +32,8 @@ Before you start working with this example, please make sure you follow the main
    bin\prt4cmd.exe -l 3 -g ..\..\..\data\candler_footprint.obj -p ..\..\..\data\candler.rpk -e com.esri.prt.codecs.OBJEncoder -z baseName:string=theCandler
    ```
 
+   _Note:_ A warning is displayed when runtime dependencies for the Unreal Encoder have not been installed on your PC. This can be ignored.
+
 1. The result is placed in a new `output` directory inside the `install` directory:
     * `theCandler_0.obj`
     * `theCandler.mtl`
