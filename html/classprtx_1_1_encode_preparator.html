@@ -23,7 +23,7 @@
   <td id="projectlogo"><img alt="Logo" src="esri_prt_55px.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ArcGIS Procedural Runtime
-   &#160;<span id="projectnumber">3.4.12206</span>
+   &#160;<span id="projectnumber">3.5.12540</span>
    </div>
   </td>
  </tr>
@@ -94,8 +94,7 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:af38aa4248780560f723df56acdffbf68"><td class="memItemLeft" align="right" valign="top"><a id="af38aa4248780560f723df56acdffbf68"></a>
-typedef std::vector&lt; <a class="el" href="classprtx_1_1_encode_preparator_1_1_finalized_instance.html">FinalizedInstance</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>InstanceVector</b></td></tr>
+<tr class="memitem:af38aa4248780560f723df56acdffbf68"><td class="memItemLeft" align="right" valign="top">typedef std::vector&lt; <a class="el" href="classprtx_1_1_encode_preparator_1_1_finalized_instance.html">FinalizedInstance</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_encode_preparator.html#af38aa4248780560f723df56acdffbf68">InstanceVector</a></td></tr>
 <tr class="separator:af38aa4248780560f723df56acdffbf68"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3851fbecbcaea1ece14e355a90877ecd"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_encode_preparator.html#a3851fbecbcaea1ece14e355a90877ecd">MeshProperties</a> { <br />
 &#160;&#160;<a class="el" href="classprtx_1_1_encode_preparator.html#a3851fbecbcaea1ece14e355a90877ecdad1f4213aca4ac1f37702c12a203ebd33">ALL_MESH_FACES_CONVEX</a> = 1 &lt;&lt; 0, 
@@ -113,7 +112,7 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a6dee76569c8f6ae7b5c05b85fc3470a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad8e97471c7584457b3fcdfe3000bb032"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_encode_preparator.html#ad8e97471c7584457b3fcdfe3000bb032">clear</a> ()=0</td></tr>
 <tr class="separator:ad8e97471c7584457b3fcdfe3000bb032"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac590db9fbdaf2c81bf972a9da974843c"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_encode_preparator.html#ac590db9fbdaf2c81bf972a9da974843c">fetchFinalizedInstances</a> (InstanceVector &amp;instances, const <a class="el" href="classprtx_1_1_encode_preparator_1_1_preparation_flags.html">PreparationFlags</a> &amp;flags, <a class="el" href="classprt_1_1_simple_output_callbacks.html">prt::SimpleOutputCallbacks</a> *cbForLogStats=nullptr)=0</td></tr>
+<tr class="memitem:ac590db9fbdaf2c81bf972a9da974843c"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_encode_preparator.html#ac590db9fbdaf2c81bf972a9da974843c">fetchFinalizedInstances</a> (<a class="el" href="classprtx_1_1_encode_preparator.html#af38aa4248780560f723df56acdffbf68">InstanceVector</a> &amp;instances, const <a class="el" href="classprtx_1_1_encode_preparator_1_1_preparation_flags.html">PreparationFlags</a> &amp;flags, <a class="el" href="classprt_1_1_simple_output_callbacks.html">prt::SimpleOutputCallbacks</a> *cbForLogStats=nullptr)=0</td></tr>
 <tr class="separator:ac590db9fbdaf2c81bf972a9da974843c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abb1616d359df5e58ac6171effc78c08e"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprtx_1_1_encode_preparator.html#abb1616d359df5e58ac6171effc78c08e">getBoundingBox</a> (<a class="el" href="classprtx_1_1_bounding_box.html">prtx::BoundingBox</a> &amp;bbox)=0</td></tr>
 <tr class="separator:abb1616d359df5e58ac6171effc78c08e"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -151,7 +150,23 @@ static <a class="el" href="structprtx_1_1_encode_preparator_1_1_finalized_instan
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The <a class="el" href="classprtx_1_1_encode_preparator.html">EncodePreparator</a> is the most important tool for encoder authors. It implements common geometry encoding tasks. Its main purpose is to gather <a class="el" href="classprtx_1_1_shape.html">prtx::Shape</a> objects from the generated shape tree and create exportable groups of <a class="el" href="classprtx_1_1_geometry.html">prtx::Geometry</a> objects with associated <a class="el" href="classprtx_1_1_mesh.html">prtx::Mesh</a>, <a class="el" href="classprtx_1_1_material.html">prtx::Material</a> and <a class="el" href="classprtx_1_1_texture.html">prtx::Texture</a> objects. It identifies identical geometry, material and texture instances and allows for their efficient sharing (e.g. to implement instancing).</p>
 <p>The preparation process is triggered by calling fetchFinalizedInstances and can be controlled by setting the appropriate <a class="el" href="classprtx_1_1_encode_preparator_1_1_preparation_flags.html">PreparationFlags</a>.</p>
-<p>A simple usage example looks like this: </p><div class="fragment"><div class="line"><span class="preprocessor">#include &quot;prtx/EncodePreparator.h&quot;</span></div><div class="line"></div><div class="line">prtx::DefaultNamePreparator namePrep;</div><div class="line"></div><div class="line"><span class="comment">// create two namespaces for mesh and material names</span></div><div class="line">prtx::NamePreparator::NamespacePtr nsMesh = namePrep.newNamespace();</div><div class="line">prtx::NamePreparator::NamespacePtr nsMaterial = namePrep.newNamespace();</div><div class="line"></div><div class="line"><span class="comment">// create the preparator</span></div><div class="line">prtx::EncodePreparatorPtr encPrep = <a class="code" href="classprtx_1_1_encode_preparator.html#a86462a22db572405f2e4aec97f313239">prtx::EncodePreparator::create</a>(<span class="keyword">true</span>, namePrep, nsMesh, nsMaterial);</div><div class="line"></div><div class="line"><span class="comment">// add any number of shapes</span></div><div class="line">encPrep-&gt;add(...);</div><div class="line"><span class="comment">// ...</span></div><div class="line"></div><div class="line"><span class="comment">// setup some simple preparation flags</span></div><div class="line"><a class="code" href="classprtx_1_1_encode_preparator_1_1_preparation_flags.html">prtx::EncodePreparator::PreparationFlags</a> flags;</div><div class="line">flags.<a class="code" href="classprtx_1_1_encode_preparator_1_1_preparation_flags.html#a9cc9153f80bd66b5763c04e9213a2d43">instancing</a>(<span class="keyword">false</span>).<a class="code" href="classprtx_1_1_encode_preparator_1_1_preparation_flags.html#a076b40152243fe5e5e29e723e20b7c95">mergeByMaterial</a>(<span class="keyword">true</span>).<a class="code" href="classprtx_1_1_encode_preparator_1_1_preparation_flags.html#af324c399740cba5abf69214f60fb8a04">triangulate</a>(<span class="keyword">true</span>);</div><div class="line"></div><div class="line"><span class="comment">// trigger the preparation of the shapes added so far</span></div><div class="line">prtx::EncodePreparator::InstanceVector instances;</div><div class="line">encPrep-&gt;fetchFinalizedInstances(instances, flags);</div><div class="line"></div><div class="line"><span class="comment">// the instances are now ready for the actual encoding...</span></div></div><!-- fragment --> </div><h2 class="groupheader">Member Enumeration Documentation</h2>
+<p>A simple usage example looks like this: </p><div class="fragment"><div class="line"><span class="preprocessor">#include &quot;prtx/EncodePreparator.h&quot;</span></div><div class="line"></div><div class="line">prtx::DefaultNamePreparator namePrep;</div><div class="line"></div><div class="line"><span class="comment">// create two namespaces for mesh and material names</span></div><div class="line">prtx::NamePreparator::NamespacePtr nsMesh = namePrep.newNamespace();</div><div class="line">prtx::NamePreparator::NamespacePtr nsMaterial = namePrep.newNamespace();</div><div class="line"></div><div class="line"><span class="comment">// create the preparator</span></div><div class="line">prtx::EncodePreparatorPtr encPrep = <a class="code" href="classprtx_1_1_encode_preparator.html#a86462a22db572405f2e4aec97f313239">prtx::EncodePreparator::create</a>(<span class="keyword">true</span>, namePrep, nsMesh, nsMaterial);</div><div class="line"></div><div class="line"><span class="comment">// add any number of shapes</span></div><div class="line">encPrep-&gt;add(...);</div><div class="line"><span class="comment">// ...</span></div><div class="line"></div><div class="line"><span class="comment">// setup some simple preparation flags</span></div><div class="line"><a class="code" href="classprtx_1_1_encode_preparator_1_1_preparation_flags.html">prtx::EncodePreparator::PreparationFlags</a> flags;</div><div class="line">flags.<a class="code" href="classprtx_1_1_encode_preparator_1_1_preparation_flags.html#a45fd0b21dba92ab5977535476206b099">instancingMode</a>(<a class="code" href="structprtx_1_1_instancing.html#a6d5b1911bbe098bcf37f6700ef701d5aa24b7f2a1d59d101e8e0fcb773b1067d5">prtx::Instancing::NONE</a>).<a class="code" href="classprtx_1_1_encode_preparator_1_1_preparation_flags.html#acde13835fe12c9384a51e71673a7b68b">meshMerging</a>(<a class="code" href="structprtx_1_1_mesh_merging.html#ae3077b2d3d870b037c504f60d3e05c5da3442824c21151488c7ee413f9d24fe44">prtx::MeshMerging::ALL_OF_SAME_MATERIAL_AND_TYPE</a>).<a class="code" href="classprtx_1_1_encode_preparator_1_1_preparation_flags.html#af324c399740cba5abf69214f60fb8a04">triangulate</a>(<span class="keyword">true</span>);</div><div class="line"></div><div class="line"><span class="comment">// trigger the preparation of the shapes added so far</span></div><div class="line"><a class="code" href="classprtx_1_1_encode_preparator.html#af38aa4248780560f723df56acdffbf68">prtx::EncodePreparator::InstanceVector</a> instances;</div><div class="line">encPrep-&gt;fetchFinalizedInstances(instances, flags);</div><div class="line"></div><div class="line"><span class="comment">// the instances are now ready for the actual encoding...</span></div></div><!-- fragment --> </div><h2 class="groupheader">Member Typedef Documentation</h2>
+<a id="af38aa4248780560f723df56acdffbf68"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af38aa4248780560f723df56acdffbf68">&#9670;&nbsp;</a></span>InstanceVector</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef std::vector&lt;<a class="el" href="classprtx_1_1_encode_preparator_1_1_finalized_instance.html">FinalizedInstance</a>&gt; <a class="el" href="classprtx_1_1_encode_preparator.html#af38aa4248780560f723df56acdffbf68">prtx::EncodePreparator::InstanceVector</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Collection of finalized instances returned by <a class="el" href="classprtx_1_1_encode_preparator.html#ac590db9fbdaf2c81bf972a9da974843c">fetchFinalizedInstances()</a>. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Enumeration Documentation</h2>
 <a id="a3851fbecbcaea1ece14e355a90877ecd"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3851fbecbcaea1ece14e355a90877ecd">&#9670;&nbsp;</a></span>MeshProperties</h2>
 
@@ -317,7 +332,7 @@ AttributeMap </dd>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Resets the preparator </p>
+<p>Resets the preparator. </p>
 
 </div>
 </div>
@@ -399,7 +414,7 @@ AttributeMap </dd>
         <tr>
           <td class="memname">virtual void prtx::EncodePreparator::fetchFinalizedInstances </td>
           <td>(</td>
-          <td class="paramtype">InstanceVector &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classprtx_1_1_encode_preparator.html#af38aa4248780560f723df56acdffbf68">InstanceVector</a> &amp;&#160;</td>
           <td class="paramname"><em>instances</em>, </td>
         </tr>
         <tr>
@@ -426,7 +441,7 @@ AttributeMap </dd>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Create geometry instances with corresponding transformations from the accumulated shapes and resets the preparator. Please note that a material and texture pool is kept during the whole lifetime of the preparator in order to detect identical materials and textures.</p>
+<p>Creates geometry instances with corresponding transformations from the accumulated shapes and resets the preparator. Please note that a material and texture pool is kept during the whole lifetime of the preparator in order to detect identical materials and textures.</p>
 <p>Any unused vertex attribute data (e.g. unused vertex coordinates) are removed from the meshes regardless of the preparator flags.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -536,7 +551,7 @@ AttributeMap </dd>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Jun 12 2026 19:58:54 for ArcGIS Procedural Runtime by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Oct 22 2026 21:43:37 for ArcGIS Procedural Runtime by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.14
 </small></address>

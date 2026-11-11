@@ -65,11 +65,11 @@
         <div class="note">
             <p>These operations are another way of applying setbacks. For example</p>
 <pre class="code-block">
-shapeL(frontWidth, leftWidth) { selector operator operations  | ... }
+shapeL(frontWidth, leftWidth) { shape = ShapeL. | remainder = Remainder. }
 </pre>
             <p>can also be achieved with the <a class="op" href="op_setback.html">setback</a> operation and the <a class="func" href="func_comp.html">comp</a> function:</p>
 <pre class="code-block">
-setback( comp(fe) { front=frontWidth | left=leftWidth } ) { selector operator operations | ... }
+setback( comp(fe) { front = frontWidth | left = leftWidth } ) { !hole = Setback. | remainder = Remainder. }
 </pre>
         </div>
 

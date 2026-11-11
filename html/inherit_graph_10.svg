@@ -8,9 +8,9 @@
  viewBox="0.00 0.00 589.00 332.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 328)">
 <title>Graphical Class Hierarchy</title>
-<!-- Node134 -->
+<!-- Node135 -->
 <g id="node1" class="node">
-<title>Node134</title>
+<title>Node135</title>
 <g id="a_node1"><a xlink:href="classprtx_1_1_attributable.html" target="_top" xlink:title="prtx::Attributable">
 <polygon fill="none" stroke="#000000" points="347,-76.5 347,-95.5 436,-95.5 436,-76.5 347,-76.5"/>
 <text text-anchor="middle" x="391.5" y="-83.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">prtx::Attributable</text>
@@ -26,9 +26,9 @@
 </a>
 </g>
 </g>
-<!-- Node134&#45;&gt;Node7 -->
+<!-- Node135&#45;&gt;Node7 -->
 <g id="edge1" class="edge">
-<title>Node134&#45;&gt;Node7</title>
+<title>Node135&#45;&gt;Node7</title>
 <path fill="none" stroke="#191970" d="M445.7629,-95.8962C451.8797,-98.2998 457.7798,-101.2871 463,-105 483.0464,-119.2581 520.6898,-184.3871 534.6296,-209.2842"/>
 <polygon fill="#191970" stroke="#191970" points="446.6333,-92.4951 436.0388,-92.5793 444.3734,-99.1203 446.6333,-92.4951"/>
 </g>
@@ -41,24 +41,24 @@
 </a>
 </g>
 </g>
-<!-- Node134&#45;&gt;Node3 -->
+<!-- Node135&#45;&gt;Node3 -->
 <g id="edge2" class="edge">
-<title>Node134&#45;&gt;Node3</title>
+<title>Node135&#45;&gt;Node3</title>
 <path fill="none" stroke="#191970" d="M438.8329,-73.8879C459.5146,-68.5956 483.4188,-62.4787 502.7966,-57.5201"/>
 <polygon fill="#191970" stroke="#191970" points="437.793,-70.5411 428.9728,-76.411 439.5284,-77.3226 437.793,-70.5411"/>
 </g>
-<!-- Node124 -->
+<!-- Node125 -->
 <g id="node4" class="node">
-<title>Node124</title>
+<title>Node125</title>
 <g id="a_node4"><a xlink:href="classprtx_1_1_shape.html" target="_top" xlink:title="prtx::Shape">
 <polygon fill="none" stroke="#000000" points="506.5,-114.5 506.5,-133.5 573.5,-133.5 573.5,-114.5 506.5,-114.5"/>
 <text text-anchor="middle" x="540" y="-121.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">prtx::Shape</text>
 </a>
 </g>
 </g>
-<!-- Node134&#45;&gt;Node124 -->
+<!-- Node135&#45;&gt;Node125 -->
 <g id="edge3" class="edge">
-<title>Node134&#45;&gt;Node124</title>
+<title>Node135&#45;&gt;Node125</title>
 <path fill="none" stroke="#191970" d="M438.7428,-98.0891C460.6342,-103.6909 486.1519,-110.2207 506.094,-115.3237"/>
 <polygon fill="#191970" stroke="#191970" points="439.5284,-94.6774 428.9728,-95.589 437.793,-101.4589 439.5284,-94.6774"/>
 </g>
@@ -71,75 +71,75 @@
 </a>
 </g>
 </g>
-<!-- Node134&#45;&gt;Node5 -->
+<!-- Node135&#45;&gt;Node5 -->
 <g id="edge4" class="edge">
-<title>Node134&#45;&gt;Node5</title>
+<title>Node135&#45;&gt;Node5</title>
 <path fill="none" stroke="#191970" d="M446.3032,-86C465.7165,-86 487.0379,-86 504.4306,-86"/>
 <polygon fill="#191970" stroke="#191970" points="446.0549,-82.5001 436.0549,-86 446.0549,-89.5001 446.0549,-82.5001"/>
 </g>
-<!-- Node120 -->
+<!-- Node121 -->
 <g id="node6" class="node">
-<title>Node120</title>
+<title>Node121</title>
 <g id="a_node6"><a xlink:href="classprtx_1_1_builtin_attributes.html" target="_top" xlink:title="prtx::BuiltinAttributes">
 <polygon fill="none" stroke="#000000" points="0,-57.5 0,-76.5 108,-76.5 108,-57.5 0,-57.5"/>
 <text text-anchor="middle" x="54" y="-64.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">prtx::BuiltinAttributes</text>
 </a>
 </g>
 </g>
-<!-- Node121 -->
+<!-- Node122 -->
 <g id="node7" class="node">
-<title>Node121</title>
+<title>Node122</title>
 <g id="a_node7"><a xlink:href="classprtx_1_1_builtin_attributes_getters.html" target="_top" xlink:title="prtx::BuiltinAttributesGetters">
 <polygon fill="none" stroke="#000000" points="144,-57.5 144,-76.5 284,-76.5 284,-57.5 144,-57.5"/>
 <text text-anchor="middle" x="214" y="-64.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">prtx::BuiltinAttributesGetters</text>
 </a>
 </g>
 </g>
-<!-- Node120&#45;&gt;Node121 -->
+<!-- Node121&#45;&gt;Node122 -->
 <g id="edge5" class="edge">
-<title>Node120&#45;&gt;Node121</title>
+<title>Node121&#45;&gt;Node122</title>
 <path fill="none" stroke="#191970" d="M118.2458,-67C126.6263,-67 135.2469,-67 143.7198,-67"/>
 <polygon fill="#191970" stroke="#191970" points="118.1687,-63.5001 108.1687,-67 118.1687,-70.5001 118.1687,-63.5001"/>
 </g>
-<!-- Node122 -->
+<!-- Node123 -->
 <g id="node8" class="node">
-<title>Node122</title>
+<title>Node123</title>
 <g id="a_node8"><a xlink:href="classprtx_1_1_builtin_material_attributes.html" target="_top" xlink:title="prtx::BuiltinMaterialAttributes">
 <polygon fill="none" stroke="#000000" points="320,-.5 320,-19.5 463,-19.5 463,-.5 320,-.5"/>
 <text text-anchor="middle" x="391.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">prtx::BuiltinMaterialAttributes</text>
 </a>
 </g>
 </g>
-<!-- Node121&#45;&gt;Node122 -->
+<!-- Node122&#45;&gt;Node123 -->
 <g id="edge6" class="edge">
-<title>Node121&#45;&gt;Node122</title>
+<title>Node122&#45;&gt;Node123</title>
 <path fill="none" stroke="#191970" d="M248.2356,-53.8967C268.8773,-46.2046 295.7793,-36.5448 320,-29 330.6687,-25.6767 342.3438,-22.4178 353.1091,-19.5634"/>
 <polygon fill="#191970" stroke="#191970" points="246.7767,-50.7058 238.6445,-57.4968 249.2367,-57.2593 246.7767,-50.7058"/>
 </g>
-<!-- Node123 -->
+<!-- Node124 -->
 <g id="node9" class="node">
-<title>Node123</title>
+<title>Node124</title>
 <g id="a_node9"><a xlink:href="classprtx_1_1_builtin_shape_attributes.html" target="_top" xlink:title="prtx::BuiltinShapeAttributes">
 <polygon fill="none" stroke="#000000" points="323.5,-114.5 323.5,-133.5 459.5,-133.5 459.5,-114.5 323.5,-114.5"/>
 <text text-anchor="middle" x="391.5" y="-121.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">prtx::BuiltinShapeAttributes</text>
 </a>
 </g>
 </g>
-<!-- Node121&#45;&gt;Node123 -->
+<!-- Node122&#45;&gt;Node124 -->
 <g id="edge8" class="edge">
-<title>Node121&#45;&gt;Node123</title>
+<title>Node122&#45;&gt;Node124</title>
 <path fill="none" stroke="#191970" d="M248.2356,-80.1033C268.8773,-87.7954 295.7793,-97.4552 320,-105 330.6687,-108.3233 342.3438,-111.5822 353.1091,-114.4366"/>
 <polygon fill="#191970" stroke="#191970" points="249.2367,-76.7407 238.6445,-76.5032 246.7767,-83.2942 249.2367,-76.7407"/>
 </g>
-<!-- Node122&#45;&gt;Node3 -->
+<!-- Node123&#45;&gt;Node3 -->
 <g id="edge7" class="edge">
-<title>Node122&#45;&gt;Node3</title>
+<title>Node123&#45;&gt;Node3</title>
 <path fill="none" stroke="#191970" d="M438.8329,-22.1121C459.5146,-27.4044 483.4188,-33.5213 502.7966,-38.4799"/>
 <polygon fill="#191970" stroke="#191970" points="439.5284,-18.6774 428.9728,-19.589 437.793,-25.4589 439.5284,-18.6774"/>
 </g>
-<!-- Node123&#45;&gt;Node124 -->
+<!-- Node124&#45;&gt;Node125 -->
 <g id="edge9" class="edge">
-<title>Node123&#45;&gt;Node124</title>
+<title>Node124&#45;&gt;Node125</title>
 <path fill="none" stroke="#191970" d="M469.9169,-124C482.6918,-124 495.3017,-124 506.2276,-124"/>
 <polygon fill="#191970" stroke="#191970" points="469.6653,-120.5001 459.6653,-124 469.6652,-127.5001 469.6653,-120.5001"/>
 </g>

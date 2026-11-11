@@ -48,28 +48,53 @@
                 <div class="indent-body">
                     <p><span class="param">selector</span> <span class="type-tag">selector</span></p>
                     <table class="option-table">
-                        <tr><td><span class="inlinecode">front, back, left, right, top, bottom, side</span></td><td>The edges' outwards normals in the polygon plane are analyzed by classifying their directions into the corresponding scope quadrants.</td></tr>
-                        <tr><td><span class="inlinecode">object.front, object.back, object.left, object.right, object.top, object.bottom, object.side</span></td><td>The edges' outwards normals in the polygon plane are analyzed by classifying their directions into the corresponding object coordinate system quadrants.</td></tr>
-                        <tr><td><span class="inlinecode">world.south, world.north, world.west, world.east, world.up, world.down, world.side</span></td><td>The edges' outwards normals in the polygon plane are analyzed by classifying their directions into the corresponding world coordinate system quadrants.</td></tr>
-                        <tr><td><span class="inlinecode">street.front, street.back, street.left, street.right, street.side</span></td><td>Edges adjacent to a street can be selected with the <span class="inlinecode">street.front</span> selector, rear edges can be selected with the <span class="inlinecode">street.back</span> selector, and edges in between front and back can be selected with the <span class="inlinecode">street.left</span> and <span class="inlinecode">street.right</span> selectors. <span class="inlinecode">street.side</span> combines left and right edges. These selectors depend on the availability of the streetWidth attribute map; see <a href="https://doc.arcgis.com/en/cityengine/latest/help/help-layers-block-parameters.htm#ESRI_SECTION2_5A91A7408D2240929B5EDA53D6B21FA3" target="_blank">Auto-generated street width attributes</a>. If the attribute is not available, component selection falls back to the <span class="inlinecode">object.xxx</span> selectors.</td></tr>
-                        <tr><td><span class="inlinecode">uv.left, uv.right, uv.bottom, uv.top</span></td><td>Selects edges based on their uv-coordinates. The outwards-pointing normal of each edge is analyzed to classify the edge with (<span class="inlinecode">left, right</span>) being the negative and positive u-axis and (<span class="inlinecode">bottom, top</span>) being the negative and positive v-axis.</td></tr>
-                        <tr><td><span class="inlinecode">uv.uMin, uv.uMax, uv.vMin, uv.vMax</span></td><td>Selects edges based on their uv-coordinates. An edge is selected if both endpoints have the geometry's minimal (<span class="inlinecode">uMin, vMin</span>) or maximal (<span class="inlinecode">uMax, vMax</span>) value of the respective uv-axis assigned.</td></tr>
-                        <tr><td><span class="inlinecode">all</span></td><td>Selects all edges.</td></tr>
+                        <tr>
+                            <td><span class="inlinecode">front, back, left, right, top, bottom, side</span></td>
+                            <td>The edges' outwards normals in the polygon plane are analyzed by classifying their directions into the corresponding scope quadrants.</td>
+                        </tr>
+                        <tr>
+                            <td><span class="inlinecode">object.front, object.back, object.left, object.right, object.top, object.bottom, object.side</span></td>
+                            <td>The edges' outwards normals in the polygon plane are analyzed by classifying their directions into the corresponding object coordinate system quadrants.</td>
+                        </tr>
+                        <tr>
+                            <td><span class="inlinecode">world.south, world.north, world.west, world.east, world.up, world.down, world.side</span></td>
+                            <td>The edges' outwards normals in the polygon plane are analyzed by classifying their directions into the corresponding world coordinate system quadrants.</td>
+                        </tr>
+                        <tr>
+                            <td><span class="inlinecode">street.front, street.back, street.left, street.right, street.side</span></td>
+                            <td>Edges adjacent to a street can be selected with the <span class="inlinecode">street.front</span> selector, rear edges can be selected with the <span class="inlinecode">street.back</span> selector, and edges in between front and back can be selected with the <span class="inlinecode">street.left</span> and <span class="inlinecode">street.right</span> selectors. <span class="inlinecode">street.side</span> combines left and right edges. These selectors depend on the availability of the streetWidth attribute map; see <a href="https://doc.arcgis.com/en/cityengine/latest/help/help-layers-block-parameters.htm#ESRI_SECTION2_5A91A7408D2240929B5EDA53D6B21FA3" target="_blank">Auto-generated street width attributes</a>. If the attribute is not available, component selection falls back to the <span class="inlinecode">object.xxx</span> selectors.</td>
+                        </tr>
+                        <tr>
+                            <td><span class="inlinecode">uv.left, uv.right, uv.bottom, uv.top</span></td>
+                            <td>Selects edges based on their uv-coordinates. The outwards-pointing normal of each edge is analyzed to classify the edge with (<span class="inlinecode">left, right</span>) being the negative and positive u-axis and (<span class="inlinecode">bottom, top</span>) being the negative and positive v-axis.</td>
+                        </tr>
+                        <tr>
+                            <td><span class="inlinecode">uv.uMin, uv.uMax, uv.vMin, uv.vMax</span></td>
+                            <td>Selects edges based on their uv-coordinates. An edge is selected if both endpoints have the geometry's minimal (<span class="inlinecode">uMin, vMin</span>) or maximal (<span class="inlinecode">uMax, vMax</span>) value of the respective uv-axis assigned.</td>
+                        </tr>
+						<tr>
+                            <td><span class="inlinecode">hole</span></td>
+                            <td>Selects edges at holes.</td>
+                        </tr>
+                        <tr>
+                            <td><span class="inlinecode">all</span></td>
+                            <td>Selects all edges.</td>
+                        </tr>
                         <tr>
                             <td><span class="inlinecode">isTagged(<span class="param">tagQuery</span>)</span></td>
-                            <td>
-                                <p>Selects tagged edges. See also <a href="op_setTagsFromEdgeAttrs.html#setbackExample">this section</a> for more details.</p>
-                                <div class="note">Edges can also be selected based on the tags of adjacent faces.</div>
-                            </td>
+                            <td><p>Selects tagged edges. See also <a href="op_setTagsFromEdgeAttrs.html#setbackExample">this section</a> for more details.</p><div class="note">Edges can also be selected based on the tags of adjacent faces.</div></td>
                         </tr>
-                        <tr><td><span class="param">logical expression</span> <span class="type-tag">bool</span></td><td>Selects all edges for which the expression evaluates to <span class="kw">true</span>. User-defined functions as well as the above selectors can be used in the expression.</td></tr>
-                        <tr><td><span class="param">index</span> <span class="type-tag">float</span></td><td>Selects the <span class="param">index</span>-th component (0-based). Too large and negative indices are modulo wrapped to a correct index.</td></tr>
+                        <tr>
+                            <td><span class="param">logical expression</span> <span class="type-tag">bool</span></td>
+                            <td>Selects all edges for which the expression evaluates to <span class="kw">true</span>. User-defined functions as well as the above selectors can be used in the expression.</td>
+                        </tr>
+                        <tr>
+                            <td><span class="param">index</span> <span class="type-tag">float</span></td>
+                            <td>Selects the <span class="param">index</span>-th component (0-based). Too large and negative indices are modulo wrapped to a correct index.</td>
+                        </tr>
                         <tr>
                             <td><span class="inlinecode">remainder</span></td>
-                            <td>
-                                <p>Selects the remainder of the polygon.</p>
-                                <div class="note">The remainder depends on the selected edges but is always the same, independent of the position of the <span class="inlinecode">remainder</span> selector in the selector-operator sequence!</div>
-                            </td>
+                            <td><p>Selects the remainder of the polygon.</p><div class="note">The remainder depends on the selected edges but is always the same, independent of the position of the <span class="inlinecode">remainder</span> selector in the selector-operator sequence!</div></td>
                         </tr>
                     </table>
                 </div>

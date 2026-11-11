@@ -1106,6 +1106,11 @@
         </ol>
 
         <h3>Map Transform Material Attributes</h3>
+        <p>
+            On export, map transformations can alternatively be applied to the mesh texture coordinates.
+            The last column indicates whether this is done by default. Where available, this behavior is controlled by the
+            <span class="inlinecode">Apply Texture Transformations</span> export option.
+        </p>
         <div class="material-matrix-wrap">
             <table class="material-matrix">
                 <tr>
@@ -1113,6 +1118,7 @@
                     <th class="matrix-col-header">map.tu/.tv</th>
                     <th class="matrix-col-header">map.su/.sv</th>
                     <th class="matrix-col-header">map.rw</th>
+                    <th class="matrix-col-header">Applied to UVs</th>
                 </tr>
                 <tr>
                     <th>Display</th>
@@ -1120,6 +1126,7 @@
                     <td><span style="color:green;">&#10004;</span></td>
                     <td><span style="color:green;">&#10004;</span></td>
                     <td><span style="color:green;">&#10004;</span></td>
+                    <td>&mdash;</td>
                 </tr>
                 <tr>
                     <th rowspan="7">Import</th>
@@ -1127,46 +1134,54 @@
                     <td><span style="color:red;">&#10008;</span></td>
                     <td><span style="color:red;">&#10008;</span></td>
                     <td><span style="color:red;">&#10008;</span></td>
+                    <td>&mdash;</td>
                 </tr>
                 <tr>
                     <th>DWG</th>
                     <td><span style="color:red;">&#10008;</span></td>
                     <td><span style="color:red;">&#10008;</span></td>
                     <td><span style="color:red;">&#10008;</span></td>
+                    <td>&mdash;</td>
                 </tr>
                 <tr>
                     <th>FBX</th>
                     <td><span style="color:red;">&#10008;</span></td>
                     <td><span style="color:red;">&#10008;</span></td>
                     <td><span style="color:red;">&#10008;</span></td>
+                    <td>&mdash;</td>
                 </tr>
                 <tr>
                     <th>glTF</th>
                     <td><span style="color:green;">&#10004;</span> (6)</td>
                     <td><span style="color:green;">&#10004;</span> (6)</td>
                     <td><span style="color:green;">&#10004;</span> (6)</td>
+                    <td>&mdash;</td>
                 </tr>
                 <tr>
                     <th>IFC</th>
                     <td><span style="color:red;">&#10008;</span></td>
                     <td><span style="color:red;">&#10008;</span></td>
                     <td><span style="color:red;">&#10008;</span></td>
+                    <td>&mdash;</td>
                 </tr>
                 <tr>
                     <th>OBJ</th>
                     <td><span style="color:red;">&#10008;</span></td>
                     <td><span style="color:green;">&#10004;</span></td>
                     <td><span style="color:red;">&#10008;</span></td>
+                    <td>&mdash;</td>
                 </tr>
                 <tr>
                     <th>USD</th>
                     <td><span style="color:green;">&#10004;</span></td>
                     <td><span style="color:green;">&#10004;</span></td>
                     <td><span style="color:green;">&#10004;</span></td>
+                    <td>&mdash;</td>
                 </tr>
                 <tr>
                     <th rowspan="12">Export</th>
                     <th>Alembic</th>
+                    <td><span style="color:red;">&#10008;</span></td>
                     <td><span style="color:red;">&#10008;</span></td>
                     <td><span style="color:red;">&#10008;</span></td>
                     <td><span style="color:red;">&#10008;</span></td>
@@ -1176,15 +1191,18 @@
                     <td><span style="color:red;">&#10008;</span></td>
                     <td><span style="color:red;">&#10008;</span></td>
                     <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
                 </tr>
                 <tr>
                     <th>DWG</th>
                     <td><span style="color:red;">&#10008;</span></td>
                     <td><span style="color:red;">&#10008;</span></td>
                     <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
                 </tr>
                 <tr>
                     <th>FBX</th>
+                    <td><span style="color:green;">&#10004;</span></td>
                     <td><span style="color:green;">&#10004;</span></td>
                     <td><span style="color:green;">&#10004;</span></td>
                     <td><span style="color:green;">&#10004;</span></td>
@@ -1194,15 +1212,18 @@
                     <td><span style="color:red;">&#10008;</span></td>
                     <td><span style="color:red;">&#10008;</span></td>
                     <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
                 </tr>
                 <tr>
                     <th>glTF</th>
                     <td><span style="color:green;">&#10004;</span> (6)</td>
                     <td><span style="color:green;">&#10004;</span> (6)</td>
                     <td><span style="color:green;">&#10004;</span> (6)</td>
+                    <td><span style="color:green;">&#10004;</span></td>
                 </tr>
                 <tr>
                     <th>IFC</th>
+                    <td><span style="color:red;">&#10008;</span></td>
                     <td><span style="color:red;">&#10008;</span></td>
                     <td><span style="color:red;">&#10008;</span></td>
                     <td><span style="color:red;">&#10008;</span></td>
@@ -1212,29 +1233,34 @@
                     <td><span style="color:red;">&#10008;</span></td>
                     <td><span style="color:red;">&#10008;</span></td>
                     <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
                 </tr>
                 <tr>
                     <th>SLPK</th>
                     <td><span style="color:red;">&#10008;</span></td>
                     <td><span style="color:red;">&#10008;</span></td>
                     <td><span style="color:red;">&#10008;</span></td>
+                    <td><span style="color:green;">&#10004;</span></td>
                 </tr>
                 <tr>
                     <th>Unreal</th>
                     <td><span style="color:green;">&#10004;</span></td>
                     <td><span style="color:green;">&#10004;</span></td>
                     <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
                 </tr>
                 <tr>
                     <th>USD</th>
                     <td><span style="color:green;">&#10004;</span></td>
                     <td><span style="color:green;">&#10004;</span></td>
                     <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
                 </tr>
                 <tr>
                     <th>Vue</th>
                     <td><span style="color:green;">&#10004;</span></td>
                     <td><span style="color:green;">&#10004;</span></td>
+                    <td><span style="color:red;">&#10008;</span></td>
                     <td><span style="color:red;">&#10008;</span></td>
                 </tr>
             </table>

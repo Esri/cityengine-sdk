@@ -5,7 +5,7 @@
 </head>
 <body>
 <h1>ArcGIS Procedural Runtime Encoder/Decoder Reference</h1>
-<small>(Automatically generated from PRT 3.4.12206; Build Date: Fri 06/12/2026 09:24 PM; Build Configuration: PRT_BC_REL)</small><p>This is the PRT reference documentation for all built-in encoders and decoders.</p>
+<small>(Automatically generated from PRT 3.5.12540; Build Date: Thu 10/22/2026 10:39 PM; Build Configuration: PRT_BC_REL)</small><p>This is the PRT reference documentation for all built-in encoders and decoders.</p>
 <p>The encoder documentation lists for each encoder its supported encoder options. In PRT, the encoder options
 	are stored in an object of type prt::AttributeMap, therefore the term "attribute" is used synonymously in this
 	document for a single encoder option. Each attribute consists of a type, a default value and (optional)
@@ -1298,6 +1298,33 @@
 </tr>
 	
 	<tr>
+<td>bakeTextureTrafos</td>
+<td>bool</td>
+<td>true</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Bake Texture Transformations<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Bakes texture transformations into the mesh UV coordinates.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 4025<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Texture Settings<br>order:float = 4<br>
+</td>
+</tr>
+	</table></td>
+</tr>
+	<tr>
 <td>createShapeGroups</td>
 <td>bool</td>
 <td>false</td>
@@ -1699,7 +1726,6 @@
 	</table></td>
 </tr>
 	
-	
 	<tr>
 <td>colladaVersion</td>
 <td>str</td>
@@ -1913,6 +1939,7 @@
 	</table></td>
 </tr>
 	
+	
 	<tr>
 <td>mergeTexcoords</td>
 <td>bool</td>
@@ -1967,6 +1994,7 @@
 </tr>
 	</table></td>
 </tr>
+	
 	
 	
 	
@@ -2685,7 +2713,6 @@
 </tr>
 	</table></td>
 </tr>
-	
 	<tr>
 <td>texcoordPrecision</td>
 <td>float</td>
@@ -2835,6 +2862,33 @@
 </tr>
 	
 	
+	<tr>
+<td>bakeTextureTrafos</td>
+<td>bool</td>
+<td>true</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Bake Texture Transformations<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Bakes texture transformations into the mesh UV coordinates.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 4025<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Texture Settings<br>order:float = 4<br>
+</td>
+</tr>
+	</table></td>
+</tr>
 	<tr>
 <td>createShapeGroups</td>
 <td>bool</td>
@@ -3323,6 +3377,7 @@
 	</table></td>
 </tr>
 	
+	
 	<tr>
 <td>mergeTexcoords</td>
 <td>bool</td>
@@ -3377,6 +3432,7 @@
 </tr>
 	</table></td>
 </tr>
+	
 	
 	
 	
@@ -3472,7 +3528,7 @@
 	<tr>
 <td>meshGranularity</td>
 <td>str</td>
-<td>INSTANCED</td>
+<td>INSTANCED_NO_SMALL_CGA_PRIMITIVES</td>
 <td><table class="doxtable">
 		<tr>
 <td>@Label</td>
@@ -3496,7 +3552,7 @@
 </tr>
 		<tr>
 <td>@Range</td>
-<td>AS_GENERATED:str = Do not merge any meshes<br>PER_MATERIAL:str = Merge meshes by material<br>INSTANCED:str = Reuse asset instances, merge generated meshes by material<br>
+<td>AS_GENERATED:str = Do not merge any meshes<br>PER_MATERIAL:str = Merge meshes by material<br>INSTANCED:str = Reuse asset instances, merge generated meshes by material<br>INSTANCED_NO_SMALL_CGA_PRIMITIVES:str = Reuse asset instances, merge generated meshes and small CGA primitives by material<br>
 </td>
 </tr>
 	</table></td>
@@ -3795,6 +3851,34 @@
 		<tr>
 <td>@Group</td>
 <td>name:str = Material Settings<br>order:float = 3<br>
+</td>
+</tr>
+	</table></td>
+</tr>
+	
+	<tr>
+<td>bakeTextureTrafos</td>
+<td>bool</td>
+<td>true</td>
+<td><table class="doxtable">
+		<tr>
+<td>@Label</td>
+<td>:str = Bake Texture Transformations<br>
+</td>
+</tr>
+		<tr>
+<td>@Description</td>
+<td>:str = Bakes texture transformations into the mesh UV coordinates.<br>
+</td>
+</tr>
+		<tr>
+<td>@Order</td>
+<td>:float = 4025<br>
+</td>
+</tr>
+		<tr>
+<td>@Group</td>
+<td>name:str = Texture Settings<br>order:float = 4<br>
 </td>
 </tr>
 	</table></td>
@@ -7604,23 +7688,23 @@
 	</table></td>
 </tr>
 	<tr>
-<td>triangulateMeshes</td>
-<td>bool</td>
-<td>true</td>
+<td>faceRepresentation</td>
+<td>str</td>
+<td>TRIANGLES</td>
 <td><table class="doxtable">
 		<tr>
 <td>@Label</td>
-<td>:str = Triangulate Meshes<br>
+<td>:str = Face Representation<br>
 </td>
 </tr>
 		<tr>
 <td>@Description</td>
-<td>:str = Triangulate resulting meshes.<br>
+<td>:str = Specifies how faces are exported<br>
 </td>
 </tr>
 		<tr>
 <td>@Order</td>
-<td>:float = 9070<br>
+<td>:float = 9075<br>
 </td>
 </tr>
 		<tr>
@@ -7628,9 +7712,13 @@
 <td>name:str = Geometry Settings<br>order:float = 2<br>
 </td>
 </tr>
+		<tr>
+<td>@Range</td>
+<td>TRIANGLES:str = Triangulate Faces<br>TRIANGLES_AND_RINGS:str = Size optimized<br>RINGS:str = Single Representation<br>
+</td>
+</tr>
 	</table></td>
 </tr>
-	
 	<tr>
 <td>facesWithHoles</td>
 <td>str</td>
@@ -7792,6 +7880,7 @@
 </tr>
 	</table></td>
 </tr>
+	
 	
 	
 	

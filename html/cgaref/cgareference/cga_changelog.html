@@ -40,6 +40,43 @@ a .value {
 		<td valign="top"><strong>Changes</strong></td>
 	</tr>
 	<tr>
+		<td valign="top">2026.1<br>CGAC 2.11</td>
+		<td valign="top">
+			Changes to existing features:
+			<ul>
+				<li><a href="op_setback.html"><span class="inlinecode">setback</span></a>, <a href="op_setbackToArea.html"><span class="inlinecode">setbackToArea</span></a>, <a href="op_setbackPerEdge.html"><span class="inlinecode">setbackPerEdge</span></a> operations:</li>
+				<ul>
+					<li>Added a new selector <span class="inlinecode">hole</span> that allows to select edges at holes.</li> <!-- CEI-207 -->
+					<li><strong>Breaking change on shapes with holes:</strong><br>All selectors now also select hole edges. In order to revert to the prior behavior, use the logical expression <span class="inlinecode">selector&&!hole</span>.</li> <!-- CEI-207 -->
+				</ul>
+				<li><a href="op_splitAndSetbackPerimeter.html"><span class="inlinecode">splitAndSetbackPerimeter</span></a> operation: The resulting shapes are now topologically reconnected with <a href="op_inline.html"><span class="inlinecode">inline(recompose)</span></a> or inside <a href="op_modify.html"><span class="inlinecode">modify</span></a>.</li> <!-- CEI-194 -->
+			</ul>
+            Bugfixes:
+			<ul>
+				<li><a href="import.html#dynamic">dynamic import</a> feature: A bug was fixed where attrs in an inlined dynamic import evaluated to a wrong value.</li> <!-- CEI-213 -->
+                <li><a href="op_setback.html"><span class="inlinecode">setback</span></a>, <a href="op_setbackToArea.html"><span class="inlinecode">setbackToArea</span></a>, <a href="op_setbackPerEdge.html"><span class="inlinecode">setbackPerEdge</span></a>, and <a href="op_shapeLUO.html"><span class="inlinecode">shapeLUO</span></a> operations: Tags on the recomposed geometry after <a href="op_inline.html"><span class="inlinecode">inline(recompose)</span></a> or inside <a href="op_modify.html"><span class="inlinecode">modify</span></a> are now correct.</li> <!-- CEI-201 -->
+				<li><a href="op_splitAndSetbackPerimeter.html"><span class="inlinecode">splitAndSetbackPerimeter</span></a> operation: 
+                <ul>
+                   <li>Fixed a bug where the remainder for a single face contained the full mesh when no edges were selected.</li> <!-- CEI-194 -->  
+                   <li>Fixed a crash that occurred when setback distance evaluation or execution of an operation sequence produced a runtime error.</li> <!-- CEI-194 -->  
+                </ul>
+                <li><a href="op_scatter.html"><span class="inlinecode">scatter</span></a> and <a href="op_splitArea.html"><span class="inlinecode">splitArea</span></a> operations: Fixed a crash that occurred when execution of an operation sequence produced a runtime error.</li> <!-- CEI-194 --> 
+                <li><a href="op_set.html"><span class="inlinecode">set</span></a> and <a href="op_setMaterial.html"><span class="inlinecode">setMaterial</span></a> operations: Added configurable inf/nan checks for all float shape attributes such as <a href="attr_scope.html"><span class="inlinecode">scope</span></a>, <a href="attr_pivot.html"><span class="inlinecode">pivot</span></a>, <a href="attr_seedian.html"><span class="inlinecode">seedian</span></a> and <a href="attr_material.html"><span class="inlinecode">material</span></a> attributes. This fixes rare crashes if e.g. the scope translation was set to inf.</li> <!-- CEI-165-->
+				<li><a href="op_offset.html"><span class="inlinecode">offset</span></a> operation: Fixed a bug where the offset geometry contained zero-length edges in rare cases.</li> <!-- CEI-211 -->
+			</ul>
+		</td>
+        
+	</tr>
+    <tr>
+		<td valign="top">SDK&nbsp;3.4.12352<br>CGAC 2.10</td>
+		<td valign="top">
+			Changes to existing features:
+			<ul>
+				<li><a href="op_setback.html"><span class="inlinecode">setback</span></a>, <a href="op_setbackToArea.html"><span class="inlinecode">setbackToArea</span></a>, <a href="op_setbackPerEdge.html"><span class="inlinecode">setbackPerEdge</span></a>, and <a href="op_shapeLUO.html"><span class="inlinecode">shapeLUO</span></a> operations: The resulting shapes are now topologically reconnected with <a href="op_inline.html"><span class="inlinecode">inline(recompose)</span></a> or inside <a href="op_modify.html"><span class="inlinecode">modify</span></a>.</li> <!-- CEI-201 -->
+			</ul>
+		</td>
+	</tr>    
+	<tr>
 		<td valign="top">2026.0<br>CGAC 2.10</td>
 		<td valign="top">
 			Changes to existing features:
